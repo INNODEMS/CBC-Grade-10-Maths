@@ -1,0 +1,491 @@
+<subsection xml:id="subsec-enlargement">
+    <title>Enlargement</title>
+    <p>
+        Enlargement is a transformation that increases the size of a shape. The shape is enlarged by a scale factor. The scale factor is used to multiply the length of each side of the shape to get the length of the corresponding side of the enlarged shape.
+    </p>
+
+    <activity>
+        <statement>
+            <p>
+                 <m>{\color{blue} \text{Work in groups.}}</m>
+            </p>
+
+            <p>
+                In the figure 3.1, <m>ABC</m> is a triangle in which <m>AB=2.2</m> <m>cm</m>, <m>BC=1.8</m> <m>cm</m> and <m>AC=4.5</m> <m>cm</m>.<m>O</m> is a point such that <m>OA=4.5</m> <m>cm</m>, <m>OB=3</m> <m>cm</m> and <m>OC=4</m> <m>cm</m>.
+            </p>
+
+            <image width="50%">
+                <shortdescription>Fig 3.1</shortdescription>
+                <latex-image label="Triangle2">
+                    \begin{tikzpicture}
+                        
+                        % Define coordinates
+                        \coordinate (O) at (0,0);
+                        \coordinate (C) at (3,0);
+                        \coordinate (B) at (2.2,1.1);  
+                        \coordinate (A) at (2.5,3);
+                        
+                        \coordinate (C') at (6,0);
+                        \coordinate (B') at (4.4,2.2);  
+                        \coordinate (A') at (5,6);
+                        
+                        % Draw base triangles
+                        \draw (O) -- (C);
+                        \draw (O) -- (C');
+                        \draw (C) -- (B) -- (A) -- cycle;
+                        \draw (C') -- (B') -- (A') -- cycle;
+                        
+                        % Draw ONE straight line passing through O, Q, and Q'
+                        \draw (O) -- (B) -- (B');
+
+                        % Draw straight line from O to P and P'
+                        \draw (O) -- (A) -- (A');
+
+                        % Shade the inner triangles with different colors
+                        \fill[blue!50,opacity=0.6] (C) -- (B) -- (A) -- cycle;  % Blue triangle
+                        \fill[cyan!50,opacity=0.6] (C') -- (B') -- (A') -- cycle; % Cyan triangle
+                        
+                        % Label points
+                        \node[above left] at (O) {O};
+                        \node[below] at (C) {C};
+                        \node[below] at (C') {C'};
+                        \node[above] at (A) {A};
+                        \node[above] at (A') {A'};
+                        \node[left] at (B) {B};
+                        \node[right] at (B') {B'};
+
+                    \end{tikzpicture}
+                </latex-image>
+                
+            </image>
+
+            <p>
+                Triangle <m>A'B'C'</m> has been obtained from triangle <m>ABC</m> as follows:
+            </p>
+
+            <p>
+                <m>OA</m>, <m>OB</m> and <m>OC</m> are produced such that <m>OA'=13.5</m> <m>cm</m>, <m>OB'=9</m> <m>cm</m> and <m>OC'=12</m> <m>cm</m>.
+            </p>
+
+            <p>
+                The process of obtaining triangle <m>A'B'C'</m> from triangle <m>ABC</m> is known as <m>{\color{blue} \text{enlargement.}}</m>
+            </p>
+
+            <p>
+                Triangle <m>ABC</m> is said to be object and triangle <m>A'B'C'</m>, its image under enlargement.The point <m>O</m> is known as the <m>{\color{blue} \text{centre of enlargement.}}</m>
+            </p>
+
+            <p>
+                <m>{\color{blue} \text{Point to note.}}</m>
+            </p>
+
+            <p>
+                <ol>
+                    <li>
+                        <p>
+                            <me>
+                                \frac{OA'}{OA} = \frac{OB'}{OB} = \frac{OC'}{OC} =3
+                            </me>
+                            
+                        </p>
+                    </li>
+
+                    <li>
+                        <p>
+                            <me>
+                                 \frac{A'B'}{AB} = \frac{A'C'}{AC} = \frac{B'C'}{BC} =3
+                            </me>
+                            
+                        </p>
+                    </li>
+                </ol>
+            </p>
+
+            <p>
+                The scale factor of this enlargement is <m>3</m>.In an enlargement, the object and its image remain similar. The linear scale factor of the enlargement determines the proportional transformation.
+            </p>
+        </statement>
+    </activity>
+
+    <p>
+        To determine the scale factor, divide the length of the enlarged image by the corresponding length of the original object.
+    </p>
+
+    <example>
+        <statement>
+            <p>
+                In the figure below, Triangle <m>P'Q'R'</m> is  the enlarged image of triangle <m>PQR</m>, with center <m>O</m>
+            </p>
+
+            <p>
+                (a). Given that <m>OP=6</m> <m>cm</m> and <m>PP'=9</m> <m>cm</m>, determine the scale factor of the enlargement.
+            </p>
+
+            <p>
+                (b). If <m>QR=4</m> <m>cm</m>, find the length of <m>Q'R'</m>
+            </p>
+
+            <image width="50%">
+                <shortdescription></shortdescription>
+                <latex-image label="Triangle1">
+                    \begin{tikzpicture}
+                    \coordinate (O) at (0,0);
+                    \coordinate (R) at (3,0);
+                    \coordinate (Q) at (2.2,1.1);  
+                    \coordinate (P) at (2.5,3);
+
+                    \coordinate (R') at (6,0);
+                    \coordinate (Q') at (4.4,2.2);  
+                    \coordinate (P') at (5,6);
+
+                    % Draw base triangles
+                    \draw (O) -- (R);
+                    \draw (O) -- (R');
+                    \draw (R) -- (Q) -- (P) -- cycle;
+                    \draw (R') -- (Q') -- (P') -- cycle;
+
+                    % Draw ONE straight line passing through O, Q, and Q'
+                    \draw (O) -- (Q) -- (Q');
+
+                    % Draw straight line from O to P and P'
+                    \draw (O) -- (P) -- (P');
+
+                    % Shade the inner triangles with different colors
+                    \fill[blue!50,opacity=0.6] (R) -- (Q) -- (P) -- cycle;  % Blue triangle
+                    \fill[cyan!50,opacity=0.6] (R') -- (Q') -- (P') -- cycle; % Cyan triangle
+
+                    % Label points
+                    \node[above left] at (O) {O};
+                    \node[below] at (R) {R};
+                    \node[below] at (R') {R'};
+                    \node[above] at (P) {P};
+                    \node[above] at (P') {P'};
+                    \node[left] at (Q) {Q};
+                    \node[right] at (Q') {Q'};
+                    \end{tikzpicture}
+                </latex-image>
+                
+            </image>
+        </statement>
+
+        <solution>
+            <p>
+                <md>
+                    <mrow>\text {(a). Linear scale factor is:} \amp </mrow>
+                    <mrow> \frac {OP'}{OP} =\amp \frac{(6+9)}{6}</mrow>
+                    <mrow>= \amp \frac{15}{6}</mrow>
+                    <mrow>= \amp \frac {5}{2}</mrow>
+                </md>
+            </p>
+
+            <p>
+                <md>
+                    <mrow>\text {(b).Lenear scale factor } =\amp \frac {Q'R'}{QR}</mrow>
+                    <mrow>\text {But QR}  =\amp 4\, cm </mrow>
+                    <mrow>\text {Therefore,} \frac {Q'R'}{QR}= \amp \frac {5}{2}</mrow>
+                    <mrow>Q'P' =\amp \frac{(4 \times 5)}{2} </mrow>
+                    <mrow>= \amp \frac{20}{2}</mrow>
+                    <mrow> Q'P' = \amp 10\, cm</mrow>
+
+                </md>
+            </p>
+            
+        </solution>
+    </example>
+
+    <example>
+        <statement>
+            <p>
+                Construct any triangle <m>XYZ</m> and choose a point <m>O</m> outside the triangle. Using <m>O</m> as the center of enlargement and a scale factor of <m>4</m>, construct the enlarged image of triangle <m>XYZ</m> under the enlargement.
+            </p>
+
+        </statement>
+
+        <solution>
+            <p>
+                
+            </p>
+
+            <image width="50%">
+                <shortdescription></shortdescription>
+                <latex-image label="Triangle3">
+                    \begin{tikzpicture}
+                        % Define coordinates
+                        \coordinate (O) at (0,0);
+                        \coordinate (Z) at (3,0);
+                        \coordinate (Y) at (2.2,1.1);  
+                        \coordinate (X) at (2.5,3);
+
+                        \coordinate (Z') at (6,0);
+                        \coordinate (Y') at (4.4,2.2);  
+                        \coordinate (X') at (5,6);
+
+                        % Draw base triangles
+                        \draw (O) -- (Z);
+                        \draw (O) -- (Z');
+                        \draw (Z) -- (Y) -- (X) -- cycle;
+                        \draw (Z') -- (Y') -- (X') -- cycle;
+
+                        % Draw ONE straight line passing through O, Y, and Y'
+                        \draw (O) -- (Y) -- (Y');
+
+                        % Draw straight line from O to X and X'
+                        \draw (O) -- (X) -- (X');
+
+                        % Shade the inner triangles with different colors
+                        \fill[yellow!60,opacity=0.6] (Z) -- (Y) -- (X) -- cycle;  % Yellow triangle
+                        \fill[orange!60,opacity=0.6] (Z') -- (Y') -- (X') -- cycle; % Orange triangle
+
+                        % Draw right angle signs inside triangles at Y and Y'
+                        \draw (Y) ++(0.2,0) -- ++(0,0.2) -- ++(-0.2,0);
+                        \draw (Y') ++(0.2,0) -- ++(0,0.2) -- ++(-0.2,0);
+
+                        % Label points
+                        \node[above left] at (O) {O};
+                        \node[below] at (Z) {Z};
+                        \node[below] at (Z') {Z'};
+                        \node[above] at (X) {X};
+                        \node[above] at (X') {X'};
+                        \node[left] at (Y) {Y};
+                        \node[right] at (Y') {Y'};
+                    \end{tikzpicture}
+                </latex-image>
+                
+            </image>
+
+            <p>
+                By measurement;
+            </p>
+
+            <p>
+                <m>OX=1.8</m> <m>cm</m>, <m>OY=3.2</m> <m>cm</m> and <m>OZ=2.7</m> <m>cm</m>.
+            </p>
+
+            <p>
+                <md>
+                    <mrow>\text{To determine X', the image of X, We follow these steps:} \amp </mrow>
+                    <mrow>OX= \amp 1.8\, cm</mrow>
+                    <mrow>\frac {OX'}{OX}= \amp \text{scale factor}</mrow>
+                    <mrow>\frac{OX'}{1.8} =4\amp </mrow>
+                    <mrow>OX'= \amp 4 \times 1.8\, cm</mrow>
+                    <mrow>= \amp 7.2\, cm</mrow>
+                </md>
+            </p>
+
+            <p>
+                Extend <m>OX</m> and measure <m>7.2</m> <m>cm</m> from <m>O</m> to get <m>X'</m>.
+            </p>
+
+            <p>
+                <md>
+                    <mrow>\text{To determine Y', the image of Y, We follow these steps:} \amp </mrow>
+                     <mrow>OY= \amp 3.2\, cm</mrow>
+                    <mrow>\frac {OY'}{OY}= \amp \text{scale factor}</mrow>
+                    <mrow>\frac{OY'}{3.2} =4\amp </mrow>
+                    <mrow>OX'= \amp 4 \times 3.2\, cm</mrow>
+                    <mrow>= \amp 12.8\, cm</mrow>
+                </md>
+            </p>
+
+            <p>
+                Extend <m>OY</m> and measure <m>12.8</m> <m>cm</m> from <m>O</m> to get <m>Y'</m>.
+            </p>
+
+            <p>
+                <md>
+                    <mrow>\text{To determine Z', the image of Z, We follow these steps:} \amp </mrow>
+                     <mrow>OZ= \amp 2.7\, cm</mrow>
+                    <mrow>\frac {OZ'}{OZ}= \amp \text{scale factor}</mrow>
+                    <mrow>\frac{OZ'}{2.7} =4\amp </mrow>
+                    <mrow>OX'= \amp 4 \times 2.7\, cm</mrow>
+                    <mrow>= \amp 10.8\, cm</mrow>
+                </md>
+            </p>
+
+            <p>
+                Extend <m>OZ</m> and measure <m>10.8</m> <m>cm</m> from <m>O</m> to get <m>Z'</m>.
+            </p>
+        </solution>
+    </example>
+
+    <example>
+        <statement>
+            <p>
+                
+            </p>
+
+            <image>
+                <shortdescription></shortdescription>
+                <latex-image>
+                    \begin{tikzpicture}
+                        % Grid for reference
+    \draw[help lines, color=gray!30] (-4,-4) grid (4,4);
+
+    % Larger Triangle (Orange) - With Transparency
+    \fill[orange!70, opacity=0.6] (-2,-3) -- (2,3) -- (4,0) -- cycle;
+    \draw[orange, thick] (-2,-3) -- (2,3) -- (4,0) -- cycle;
+    
+    % Label vertices of larger triangle
+    \node[left] at (-2,-3) {A};
+    \node[above] at (2,3) {B};
+    \node[right] at (4,0) {C};
+
+    % Smaller Triangle (Blue) - Aligned Below with Transparency
+    \fill[blue!70, opacity=0.6] (0,-2.5) -- (1.5,1) -- (3,-1) -- cycle;
+    \draw[blue, thick] (0,-2.5) -- (1.5,1) -- (3,-1) -- cycle;
+
+    % Label vertices of smaller triangle
+    \node[left] at (0,-2.5) {P};
+    \node[above] at (1.5,1) {Q};
+    \node[right] at (3,-1) {R};
+                    \end{tikzpicture}
+                </latex-image>
+                
+            </image>
+        </statement>
+    </example>
+
+    <p>
+         <m>{\color{blue} \text{Note.}}</m>
+    </p>
+
+    <p>
+        Lines connecting object points to their corresponding image points intersect at the center of enlargement. 
+        This property helps in determining the center of enlargement when both the object and its image are given.
+    </p>
+
+    <example>
+        <statement>
+            <p>
+                Given that <m>A\, (6,8)</m>, <m>B\, (8,8)</m>, <m>C\, (12,8)</m>, <m>D\, (14,2)</m> and <m>E\, (10,0)</m> are the verticies of the pentagon, find the verticies of its image after an enlargement with origin as the centre and scale factor of:
+            </p>
+
+            <p>
+                (a).<m>2</m>
+            </p>
+
+            <p>
+                (b).<m>\frac{1}{2}</m>
+            </p>
+
+            <p>
+                (c). <m>-3</m>
+            </p>
+        </statement>
+    </example>
+
+    <exercises xml:id="exercises-enlargement">
+
+      <exercise>
+        <statement>
+            <p>
+                A triangle with the verticies <m>X\, (4,0)</m>, <m>Y\, (6,3)</m> and <m>Z\, (5,4)</m> is enlarged.If the centre of enlargment is <m>(1,1)</m>, find the co-ordinates of the image of the triangle when the scale factor is:
+            </p>
+
+            <p>
+                (a).<m>-2</m>
+            </p>
+
+            <p>
+                (b).<m>\frac{1}{2}</m>
+            </p>
+        </statement>
+      </exercise>
+        
+    </exercises>
+
+    <subsubsection xml:id="subsubsec-negative-scale-factor">
+        <title>Negative Scale Factor</title>
+
+        <p>
+            In the provided diagram, rectangle <m>ABCD</m> has been enlarged to form rectangle <m>A'B'C'D'</m>, with point <m>O</m> as the center of the enlargement.
+        </p>
+
+        <image>
+            <shortdescription></shortdescription>
+            <latex-image label="rectangle">
+                \begin{tikzpicture}
+                      % Axes
+                    \draw[->] (-4,0) -- (7,0) node[right] {\footnotesize $x$};
+                    \draw[->] (0,-3) -- (0,5) node[above] {\footnotesize $y$};
+
+                    % Origin
+                    \node[circle,draw,inner sep=1pt] (O) at (0,0) {};
+
+                    % Large rectangle (ABCD) - Orange with fill
+                    \coordinate (A) at (1,1);
+                    \coordinate (B) at (1,4);
+                    \coordinate (C) at (6,4);
+                    \coordinate (D) at (6,1);
+                    
+                    \filldraw[thick, orange, fill=orange!30] (A) -- (B) -- (C) -- (D) -- cycle;
+                    
+                    % Small rectangle (A'B'C'D') - Yellow with fill
+                    \coordinate (A') at (-1,-1);
+                    \coordinate (B') at (-1,-2);
+                    \coordinate (C') at (-3,-2);
+                    \coordinate (D') at (-3,-1);
+                    
+                    \filldraw[thick, yellow, fill=yellow!30] (A') -- (B') -- (C') -- (D') -- cycle;
+
+                    % Projection lines from the origin with different colors
+                    \draw[dashed, red] (O) -- (A);
+                    \draw[dashed, blue] (O) -- (B);
+                    \draw[dashed, green] (O) -- (C);
+                    \draw[dashed, purple] (O) -- (D);
+                    
+                    \draw[dashed, red!80!black] (O) -- (A');
+                    \draw[dashed, blue!80!black] (O) -- (B');
+                    \draw[dashed, green!80!black] (O) -- (C');
+                    \draw[dashed, purple!80!black] (O) -- (D');
+
+                    % Points Labels
+                    \node[above right] at (A) {\footnotesize A};
+                    \node[above left] at (B) {\footnotesize B};
+                    \node[above right] at (C) {\footnotesize C};
+                    \node[below right] at (D) {\footnotesize D};
+                    
+                    \node[below right] at (A') {\footnotesize A'};
+                    \node[below left] at (B') {\footnotesize B'};
+                    \node[below left] at (C') {\footnotesize C'};
+                    \node[below right] at (D') {\footnotesize D'};
+                \end{tikzpicture}
+            </latex-image>
+        </image>
+
+        <p>
+             <m>{\color{blue} \text{Note:}}</m>
+        </p>
+
+        <p>
+            If an enlargement has a negative scale factor, the image is formed on the opposite side of the center and is inverted (Upside down).
+        </p>
+
+        <p>
+            The rectangle <m>ABCD</m> has been enlarged by a scale factor of <m>\frac{-1}{2}</m>.
+.
+        </p>
+
+        <example>
+            <statement>
+                <p>
+                    
+                </p>
+            </statement>
+        </example>
+
+        <exercises xml:id="exercises-scale-factor">
+
+        <exercise>
+            <statement>
+                <p>
+                    Points <m>A\, (2,6)</m>, <m>B\, (4,6)</m>, and  <m>C\, (4,2)</m> are the vertices of a triangle. Taking point <m>(0,2)</m> as the centre of enlargement, find the coordinates of its image when the scale factor is <m>-1</m>.
+                </p>
+            </statement>
+        </exercise>
+            
+        </exercises>
+        
+    </subsubsection>
+    
+</subsection>
