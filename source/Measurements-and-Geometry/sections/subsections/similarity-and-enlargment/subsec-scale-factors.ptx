@@ -1,0 +1,335 @@
+<subsection xml:id="subsec-scale-factor">
+    <title>Scale Factors</title>
+    <p>
+        <ul>
+            <li>
+                <p>
+                    Scale factor is a fundamental concept in mathematics, especially in geometry, where it is used to describe the proportional relationship between similar figures.
+                </p>
+            </li>
+
+            <li>
+                <p>
+                    It is defined as the ratio of corresponding side lengths in two similar shapes.
+                </p>
+            </li>
+
+            <li>
+                <p>
+                    Understanding scale factor helps students grasp how objects are enlarged or reduced while maintaining their shape and proportions.
+                </p>
+            </li>
+        </ul>
+    </p>
+
+    <subsubsection xml:id="subsubsec-area-scale-factor">
+        <title>Area Scale Factor</title>
+
+        <p>
+            Area scale factor is the ratio of the area of the image to area of the object.
+        </p>
+        <p>
+            In the Figures below, the parallelogram <m>P'Q'R'S'</m> represents the enlarged image of paralellogram <m>PQRS</m>, transformed by a scale factor of <m>2</m>.
+        </p>
+        <sidebyside>
+        <image width="30%">
+            <shortdescription></shortdescription>
+            <latex-image label="parallelogram">
+                \begin{tikzpicture}
+                    \coordinate (P) at (0,0);
+                    \coordinate (Q) at (4,0);
+                    \coordinate (R) at (6,3);
+                    \coordinate (S) at (2,3);
+
+                    % Draw parallelogram with yellow fill
+                    \fill[yellow!80] (P) -- (Q) -- (R) -- (S) -- cycle;
+                    \draw[purple, thick] (P) -- (Q) -- (R) -- (S) -- cycle;
+
+                    % Label vertices
+                    \node[below left] at (P) {\textbf{P}};
+                    \node[below right] at (Q) {\textbf{Q}};
+                    \node[above right] at (R) {\textbf{R}};
+                    \node[above left] at (S) {\textbf{S}};
+
+                        % Add dimension lines
+                    
+                    \node[below] at (2,-0.3) {\textbf{5 cm}};
+                    \node[left] at (3,1.5) {\textbf{7 cm}}; % Height label
+                ;
+
+                    % Define the foot of the perpendicular
+                    \coordinate (T) at (2,0);
+
+                    % Draw perpendicular line from S to PQ
+                    \draw[blue, thick] (S) -- (T);
+
+                    % Label the new point
+                    \node[below] at (T) {\textbf{T}};
+
+                    % Add right-angle symbol
+                    \draw (2,0.3) -- (2.3,0.3) -- (2.3,0);
+                \end{tikzpicture}
+            </latex-image>
+            
+        </image>
+
+        <image>
+            <shortdescription></shortdescription>
+            <latex-image label="parallelogram1">
+                \begin{tikzpicture}
+             % Define coordinates
+                    \coordinate (P') at (0,0);
+                    \coordinate (Q') at (8,0);
+                    \coordinate (R') at (12,6);
+                    \coordinate (S') at (4,6);
+                    \coordinate (T') at (4,0); % Foot of perpendicular
+
+                    % Draw parallelogram with blue fill
+                    \fill[blue!30] (P') -- (Q') -- (R') -- (S') -- cycle;
+                    \draw[blue, thick] (P') -- (Q') -- (R') -- (S') -- cycle;
+
+                    % Label vertices with larger, bold text
+                    \node[below left, scale=1.2] at (P') {\textbf{P'}};
+                    \node[below right, scale=1.2] at (Q') {\textbf{Q'}};
+                    \node[above right, scale=1.2] at (R') {\textbf{R'}};
+                    \node[above left, scale=1.2] at (S') {\textbf{S'}};
+
+                    % Draw perpendicular line from S to PQ
+                    \draw[blue, thick, dashed] (S') -- (T');
+
+                    % Label perpendicular foot
+                    \node[below, scale=1.2] at (T') {\textbf{T}};
+
+                    % Right-angle symbol
+                    \draw[thick] (4,0.6) -- (4.6,0.6) -- (4.6,0);
+
+                    % Dimension labels with larger text
+                    \node[below, scale=1.4] at (4,-0.6) {\textbf{10 cm}};
+                    \node[left, scale=1.4] at (5.8,3) {\textbf{14 cm}}; % Height label
+                \end{tikzpicture}
+            </latex-image>
+            
+        </image>
+
+        </sidebyside>
+
+        <p>
+            <md>
+                <mrow>\text{Area of a parallelogram}= \amp base \times height </mrow>
+                <mrow>\text{Area of PQRS} =\amp 5\, cm \times 7\, cm </mrow>
+                <mrow>= \amp 35\, cm^2</mrow>
+                <mrow>\text{Area of P'Q'R'S'}= \amp 10\, cm \times 14\, cm</mrow>
+                <mrow>= \amp 140\, cm^2</mrow>
+                <mrow>\text{Area scale factor}= \amp \frac{\text{Area of the image}}{\text{area of the object}}</mrow>
+                <mrow>\frac{\text{Area of P'Q'R'S'}}{\text{Area of PQRS}}= \amp \frac{140\, cm^2}{35\, cm^2}</mrow>
+                <mrow>= \amp 4</mrow>
+            </md>
+        </p>
+
+        <p>
+            <m>{\color{blue} \text{Note:}}</m>
+        </p>
+
+        <p>
+            Area scale factor is the square of linear scale factor.
+        </p>
+
+        <example>
+            <statement>
+                <p>
+                    A square whose area is <m>28</m> <m>cm^2</m> is given
+                    an enlargement with a linear scale factor of <m>4</m>.Find the area of the image.
+                </p>
+            </statement>
+
+            <solution>
+                <p>
+                    <md>
+                    <mrow>\text{Area scale factor}= \amp \frac{\text{Area of image}}{\text{area of object}}</mrow>
+                        <mrow>\text{Linear scale factor (L.S.F)}= \amp 4</mrow>
+                        <mrow>\text{Area scale factor(A.S.F)} =\amp (L.S.F)^2</mrow>
+                        <mrow>= \amp4^2 =16 </mrow>
+                        <mrow>\frac{\text{Area of image}}{28} =\amp 16 </mrow>
+                        <mrow>\text{Area of image}= \amp 16 \times 28</mrow>
+                        <mrow>= \amp 448\, cm^2</mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+
+        <example>
+            <statement>
+                <p>
+                    Given that the ratio of the area of two circles is <m>\frac{25}{64}</m>.
+                </p>
+
+                <p>
+                    (a). Find the ratio of their radii
+                </p>
+
+                <p>
+                    (b). If the smaller one has a radius of <m>15</m> <m>\, cm</m>, find the radius of the larger one.
+                </p>
+            </statement>
+
+            <solution>
+                <p>
+                    <md>
+                        <mrow>\text{(a)Area scale factor} =\amp \frac{25}{64}</mrow>
+                        <mrow>\text{Lenear scale factor}= \amp \sqrt \frac {25}{64}</mrow>
+                        <mrow>= \amp \frac{5}{8}</mrow>
+                        <mrow>\text{Therefore the ratio of two radii}= \amp 5:8</mrow>
+                    </md>
+                </p>
+                <p>
+                    (b).If the radius of the smaller circle is <m>15 \, cm</m>, then
+                </p>
+
+                <p>
+                    <md>
+                        <mrow>\frac{\text{Radius of smaller circle}}{\text{Radius of larger circle}}= \amp \frac{5}{8}</mrow>
+                        <mrow> \frac{15}{\text{radius of larger circle}} =\amp \frac{5}{8} </mrow>
+                        <mrow>\text{radius of larger circle}= \amp \frac{(8 \times 15)}{5} </mrow>
+                        <mrow>= \amp 24\, cm</mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+
+        <exercises xml:id="exercises-area-scale-factor">
+
+        <exercise>
+            <statement>
+                <p>
+                    The corresponding sides of two similar regular hexagons are <m>4\, cm</m> and <m>9\, cm</m> respectively.
+                </p>
+
+                <p>
+                    (a).Find the ratio of their areas.
+                </p>
+
+                <p>
+                    (b).Calculate the area of the larger hexagon if the area of the smaller hexagon is <m>64\, cm^2</m>.
+                </p>
+            </statement>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    The ratio of the area of two similar cones is <m>\frac{9}{36}</m>.
+                </p>
+
+                <p>
+                    (a).Find the area of the smaller cone if the area of the bigger cone is <m>320\, m^2</m>
+
+                </p>
+
+                <p>
+                   (b). Find the ratio of their base radii.
+                </p>
+
+                <p>
+                   (c). If the slanting height of the smaller cone is <m>7\, m</m>, find the slanting height of the larger cone.
+                </p>
+            </statement>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    The length of a parallelogram is <m>15\, cm</m> and its area is <m>240\, cm^2</m>. Calculate the length of a similar parallelogram whose area is <m>375\, cm^2</m>.
+                </p>
+            </statement>
+        </exercise>
+            
+        </exercises>
+
+    </subsubsection>
+
+    <subsubsection xml:id="subsubsec-volume-scale-factor">
+        <title>Volume Scale Factor</title>
+        <activity>
+            <statement>
+                <p>
+                    
+                </p>
+            </statement>
+        </activity>
+
+        <example>
+            <statement>
+                <p>
+                    The corresponding heights of two similar cylinders are <m>4\, m</m> and <m>5\, m</m>.
+                </p>
+
+                <p>
+                    (a). Find the ratio of their corresponding volumes.
+                </p>
+
+                <p>
+                    (b).If the smaller cylinder has a volume of <m>1536\, m^3</m>, find the volume of the larger cylinder.
+                </p>
+            </statement>
+
+            <solution>
+                <p>
+                    <md>
+                        <mrow>\text{(a).The ratio of the heights}= \amp \frac{4}{5}</mrow>
+                        <mrow>\text{Linear scale factor}= \amp \frac{4}{5}</mrow>
+                        <mrow>\text{Volume scale factor} =\amp (L.S.F)^3</mrow>
+                        <mrow>= \amp \frac[{4}{5}]^3</mrow>
+                        <mrow>= \amp \frac{64}{125}</mrow>
+                        <mrow>\text{Therefore ratio of the volumes } =\amp 64:125</mrow>
+                        <mrow>\text{(b). Volume of larger cylinder;} \amp </mrow>
+                        <mrow>\frac{\text{Volume of smaller cylinder}}{\text{volume of larger cylinder}} =\amp \text{volume scale factor}</mrow>
+                        <mrow> \frac{1536}{\text{Volume of larger cylinder}}= \amp \frac{64}{125}</mrow>
+                        <mrow>\text{Volume of larger cylinder}= \amp \frac{(125 \times 1546)}{64}</mrow>
+                        <mrow>= \amp 3000\, m^3</mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+
+        <example>
+            <statement>
+                <p>
+                    The capacity of two similar containers are <m>288\, cm^3</m> and <m>4500\, cm^3</m>.Find the ratio of their:
+                </p>
+
+                <p>
+                    (a). Heights
+                </p>
+
+                <p>
+                    (b). If the area of the smaller container is <m>140\, cm^2</m>, find the area of the larger container.
+                </p>
+            </statement>
+
+            <solution>
+                <p>
+                    <md>
+                        <mrow>\text{Volume scale factor} =\amp \frac{288\, cm^3}{4500\, cm^3}=\frac{8}{125}</mrow>
+                        <mrow>\text{Lenear scale factor}= \amp \frac \curt {8}{125}</mrow>
+                        <mrow>= \amp \frac{2}{5}</mrow>
+                        <mrow>\text{Therefore the ratio of the heights} =\amp 2:5</mrow>
+                    </md>
+                </p>
+
+                <p>
+                    <md>
+                        <mrow>\text{Area scale factor} =\amp \frac[{2}{5}]^2</mrow>
+                        <mrow>= \amp \frac{4}{25}</mrow>
+                        <mrow>\text{Area scale factor} =\amp \frac{\text{Area of the smaller container}}{\text{Area of the larger container}}</mrow>
+                        <mrow>\frac{4}{25} =\amp \frac{140}{\text{Area of larger container}}</mrow>
+                        <mrow>\text{Area of larger container} =\amp \frac{(25 \times 140)}{4}</mrow>
+                        <mrow>= \amp 875</mrow>
+                        <mrow>\text{The area of larger container}= \amp 875\, cm^2</mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        
+    </subsubsection>
+    
+</subsection>
