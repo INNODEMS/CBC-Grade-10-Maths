@@ -1,5 +1,66 @@
 <subsection xml:id="subsec-midpoint-of-a-vector">
     <title>Midpoint of a Vector</title>
+    <!-- <p>
+        To determine the coordinates of the midpoint <m>\mathbf{M}</m> 
+        of the line segment <m>\mathbf{AB}</m> , we can utilize vector operations.
+    </p> -->
+    <p>
+        Consider the cordinates of point <m>\mathbf{P}</m> given as <m>(x_1,y_1)</m> 
+        and point <m>\mathbf{Q}</m> given as <m>(x_2,y_2)</m> and <m>\mathbf{M}</m>
+        is the midpoint of <m>\mathbf{PQ}</m> as shown in figure below.
+    </p>
+    <figure xml:id="midpoint-vector-111">
+        <caption></caption>
+        <image width="70%">
+            <shortdescription></shortdescription>
+            <latex-image>
+                \begin{tikzpicture}
+                    % Draw fine grid (10x smaller squares)
+        \draw[gray!30, very thin, step=0.1] (-7,-3) grid (9,8);
+
+        % Draw main grid (original)
+        \draw[gray!70, thin, step=1] (-7,-3) grid (9,8);
+
+        % Define points
+        \coordinate (O) at (0,0);
+        \coordinate (P) at (-3,4);
+        \coordinate (N) at (3,4);
+        \coordinate (M) at (0,4);
+        
+        \node[below] at (O) {\small $\mathbf{O}$};
+        \node[left] at (P) {\small $\mathbf{P}$};
+        \node[right] at (N) {\small $\mathbf{N}$};
+        \node[above] at (M) {\small $\mathbf{M}$};
+        
+        \draw [-{Latex[scale=2]}] (O) -- (-1.5,2) ;
+        \draw [-{Latex[scale=2]}] (O) -- (1.5,2) ;
+        
+        % Draw vectors
+        \draw[thick] (O) -- (P) node[midway, left] {\large $\mathbf{a}$};
+        \draw[thick] (O) -- (N) node[midway, right] {\large $\mathbf{b}$};
+        \draw[thick] (N) -- (P);
+        \draw[thick] (O) -- (M);
+                \end{tikzpicture}
+            </latex-image>
+        </image>
+    </figure>
+    <p>
+        <md>
+            <mrow> \mathbf{OM} \amp = \mathbf{OP} + \mathbf{PM} </mrow>
+            <mrow> \amp =  \mathbf{a} + \frac{1}{2} \mathbf{PN}</mrow>
+            <mrow> \amp =  \mathbf{a} + \frac{1}{2} (\mathbf{b} - \mathbf{a})</mrow>
+            <mrow> \amp =  \mathbf{a} + \frac{1}{2}\mathbf{b} - \frac{1}{2}\mathbf{a}</mrow>
+            <mrow> \amp =  \mathbf{a}  - \frac{1}{2}\mathbf{a} + \frac{1}{2}\mathbf{b}</mrow>
+            <mrow> \amp =  \frac{\mathbf{a} + \mathbf{b}}{2} </mrow>
+        </md>
+    </p>
+    <p>
+        But <m> \mathbf{a} = \begin{pmatrix} x_1 \\ y_1 \end{pmatrix}</m> and 
+        <m> \mathbf{b} = \begin{pmatrix} x_2 \\ y_2 \end{pmatrix}</m>
+    </p>
+    <p>
+        Thus midpoint <m>\mathbf{M} = \left( \frac{ x_1 + x_2 }{ 2}, \frac{ y_1 + y_2 }{ 2}\right)</m>
+    </p>
     <activity>
         <introduction>
             <p>
