@@ -8,10 +8,10 @@
     </p>
     <activity>
         <p>
-            <m>{\color{red} \textbf{Work in Groups}}</m>
+            <m>{\color{black} \textbf{Work in Groups}}</m>
         </p>
         <p>
-            A student at Kenyaoni Senior School flips a coin and then spins a spinner with two equal sections, <m>Yes</m> and <m>No</m>.
+            A student at Kenyaoni Senior School flips a coin and then spins a spinner with two equal sections, <m>\text{Yes}</m> and <m>\textbf{No}</m>.
         </p>
         <p>
             <ol marker="i.">
@@ -22,7 +22,7 @@
                 </li>
                 <li>
                     <p>
-                        What is the probability that the coin lands on heads and the spinner lands on <m>No</m>?
+                        What is the probability that the coin lands on heads and the spinner lands on <m>\text{No}</m>?
                     </p>
                 </li>
             </ol>
@@ -32,18 +32,342 @@
     <example>
         <statement>
             <p>
+                A fair coin is tossed twice.
+            </p>
+            <p>
+                <ol marker="a).">
+                    <li>
+                        <p>
+                            Draw a tree diagram showing all possible outcomes.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            What is the probability of getting exactly one head?
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            What is the probability of getting at least one tail?
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            What is the probability of getting two heads?
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </statement>
+        <solution>
+            <p>
+                <ol marker="a.)">
+                    <li>
+                        <p>
+                            Tree diagram showing all possible outcomes.
+                        </p>
+                        <image>
+                            <latex-image label="tree-diagram-head">
+                                \begin{tikzpicture}[
+                                    grow=right,
+                                    sibling distance=4cm,
+                                    level distance=2cm,
+                                    edge from parent/.style={draw,thick},
+                                    every node/.style={font=\large, inner sep=3pt}
+                                ]
+
+                                    % Root node
+                                    \node[circle, draw, thick] (Start) {Start}
+                                        child { node[circle, draw] (H1) {H} 
+                                            child { node[circle, draw] (HH) {HH} }
+                                            child { node[circle, draw, xshift=1mm, yshift=0.015mm] (HT) {HT} }
+                                            edge from parent node[above, midway] {\(\frac{1}{2}\)}
+                                        }
+                                        child { node[circle, draw] (T1) {T} 
+                                            child { node[circle, draw, xshift=7mm, yshift=9mm] (TH) {TH} } % Shifted to prevent overlap
+                                            child { node[circle, draw] (TT) {TT} }
+                                            edge from parent node[below, midway] {\(\frac{1}{2}\)}
+                                        };
+
+                                    % Adjusted positions to prevent crossing
+                                    \path (H1) -- (HH) node[midway, above] {\(\frac{1}{2}\)};
+                                    \path (H1) -- (HT) node[midway, below] {\(\frac{1}{2}\)};
+                                    \path (T1) -- (TH) node[midway, above] {\(\frac{1}{2}\)};
+                                    \path (T1) -- (TT) node[midway, below] {\(\frac{1}{2}\)};
+
+                                \end{tikzpicture}
+                            </latex-image>
+                            
+                        </image>
+                    </li>
+                    <li>
+                        <p>
+                            Probability of getting exactly one head
+                        </p>
+                        <p>
+                            The favorable outcomes are <m>\textbf{HT and TH}</m>.
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> \textbf{P(HT) + P(TH)} </mrow>
+                            </md>
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> \frac{1}{4} \, + \, \frac{1}{4} \, = \frac{2}{4} </mrow>
+                            </md>
+                        </p>
+                        <p>
+                            <md>
+                                <mrow>\frac{2}{4} \,= \, \frac{1}{2} </mrow>
+                            </md>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Probability of getting at least one tail
+                        </p>
+                        <p>
+                            The favorable outcomes are <m>\textbf{ HT, TH, TT (all outcomes except HH)}</m>.
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> \textbf{P(at least one tail) = P(HT) + P(TH) + P(TT)} </mrow>
+                            </md>
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> \frac{1}{4} \, + \, \frac{1}{4} \, + \, \frac{1}{4}</mrow>
+                            </md>
+                        </p>
+                        <p>
+                            <md>
+                                <mrow>= \frac{3}{4} </mrow>
+                            </md>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Probability of getting two heads
+                        </p>
+                        <p>
+                            Only one outcome satisfies this condition: <m>HH</m>.
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> \textbf{P(HH) = } \frac{1}{4} </mrow>
+                            </md>
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </solution>
+    </example>
+    <example>
+        <statement>
+            <p>
+                A bag contains 3 red and 2 blue balls. A ball is drawn without replacement.
+            </p>
+            <p>
+                <ol marker="a).">
+                    <li>
+                        <p>
+                            Draw a tree diagram showing the possible outcomes.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            What is the probability of drawing a red ball followed by a blue ball?
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            What is the probability of drawing two red balls?
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            What is the probability of drawing at least one blue ball?
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </statement>
+        <solution>
+            <p>
+                Here is the tree diagram
+            </p>
+            <image>
+                <latex-image label="Tree-diagram-red">
+                    \begin{tikzpicture}[
+                        grow=right,
+                        sibling distance=2cm, % Reduced sibling distance
+                        level distance=1.5cm, % Reduced level distance
+                        edge from parent/.style={draw,thick},
+                        every node/.style={font=\footnotesize, inner sep=2pt} % Reduced font size and inner sep
+                    ]
+
+                        % Root node
+                        \node[circle, draw, thick] (Start) {}
+                        child { node[circle, draw] (R1) {R} 
+                            child { node[circle, draw] (RR) {RR} }
+                            child { node[circle, draw,  xshift=1mm] (RB) {RB} }
+                            edge from parent node[above, midway, font=\scriptsize] {\(\frac{3}{5}\)}
+                        }
+                        child { node[circle, draw] (B1) {B} 
+                            child { node[circle, draw, xshift=7mm, yshift=9mm] (BR) {BR} }
+                            child { node[circle, draw] (BB) {BB} }
+                            edge from parent node[below, midway, font=\scriptsize] {\(\frac{2}{5}\)}
+                        };
+
+                        % Probabilities on second level
+                        \path (R1) -- (RR) node[midway, above, font=\scriptsize] {\(\frac{2}{4}\)};
+                        \path (R1) -- (RB) node[midway, below, font=\scriptsize] {\(\frac{2}{4}\)};
+                        \path (B1) -- (BR) node[midway, above, font=\scriptsize] {\(\frac{3}{4}\)};
+                        \path (B1) -- (BB) node[midway, below, font=\scriptsize] {\(\frac{1}{4}\)};
+
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+            <p>
+                Assign Probabilities
+                <ol marker="a).">
+                    <li>
+                        <p>
+                            The probability of drawing a red ball first is
+                        </p>
+                        <p>
+                            <md>
+                                <mrow>\textbf{P(R)} = \frac{3}{5} </mrow>
+                            </md>
+                        </p>
+                        <p>
+                            <ul>
+                                <li>
+                                    <p>
+                                        If the first ball is red, the probability of drawing a red ball second is;
+                                    </p>
+                                    <p>
+                                        <md>
+                                            <mrow>\textbf{P(R/R)} = \frac{2}{4} \,= \, \frac{1}{2} </mrow>
+                                        </md>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        If the first ball is red, the probability of drawing a blue ball second is
+                                    </p>
+                                    <p>
+                                        <md>
+                                            <mrow>\textbf{P(B/R)} = \frac{2}{4} \,= \, \frac{1}{2} </mrow>
+                                        </md>
+                                    </p>
+                                </li>
+                            </ul>
+                        </p>
+                        <p>
+                            The probability of drawing a blue ball first is:
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> \textbf{P(B)} = \frac{2}{5}  </mrow>
+                            </md>
+                        </p>
+                        <p>
+                            <ul>
+                                <li>
+                                    <p>
+                                        If the first ball is blue, the probability of drawing a red ball second is:
+                                    </p>
+                                    <p>
+                                        <md>
+                                            <mrow> \textbf{P(R/B)} = \frac{3}{4} </mrow>
+                                        </md>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        If the first ball is blue, the probability of drawing another blue ball is:
+                                    </p>
+                                    <p>
+                                        <md>
+                                            <mrow> \textbf{P(B/B)} = \frac{1}{4} </mrow>
+                                        </md>
+                                    </p>
+                                </li>
+                            </ul>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Probability of drawing a red ball followed by a blue ball
+                        </p>
+                        <p>
+                            Favorable outcome: RB
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> \textbf{P(RB)} = \textbf{P(R)} \, \times \, \textbf{P(B/R)}  </mrow>
+                            </md>
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> = \frac{3}{5} \,\times \, \frac{2}{4} = \frac{6}{20} = \frac{3}{10}</mrow>
+                            </md>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Probability of drawing two red balls
+                        </p>
+                        <p>
+                            Favorable outcome: RR
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> \textbf{P(RR)} = \textbf{P(R)} \, \times \, \textbf{P(R/R)} </mrow>
+                            </md>
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> = \frac{3}{5} \,\times \, \frac{2}{4} = \frac{6}{20} = \frac{3}{10} </mrow>
+                            </md>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                             Probability of drawing at least one blue ball
+                        </p>
+                        <p>
+                            <md>
+                                <mrow>\text{P(at least one blue)} \, = \, \textbf{1 - P(two red)} </mrow>
+                            </md>
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> 1 - \frac{3}{10} \, = \, \frac{7}{10} </mrow>
+                            </md>
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </solution>
+    </example>
+    <example>
+        <statement>
+            <p>
                 A student at a shop is choosing a meal and a drink. This is what is available
             </p>
             <p>
                 <ul>
                     <li>
                         <p>
-                           <m> Meals</m> ; Bread (B), Andazi (A), Chapati (Ch)
+                           <m>\textbf{ Meals}</m> ; Bread (B), Andazi (A), Chapati (Ch)
                         </p>
                     </li>
                     <li>
                         <p>
-                            <m>Drinks</m> ; Juice (J), Soda (S)
+                            <m>\textbf{Drinks}</m> ; Juice (J), Soda (S)
                         </p>
                     </li>
                 </ul>
