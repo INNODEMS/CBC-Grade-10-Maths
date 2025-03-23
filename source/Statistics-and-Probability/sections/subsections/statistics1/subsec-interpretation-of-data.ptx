@@ -1,0 +1,536 @@
+<subsection xml:id="subsec-interpretation-of-data">
+    <title>Interpretation of data</title>
+    <introduction>
+        <p>
+            Interpretation of data is the process of analyzing, organizing, and making sense of collected information to extract meaningful insights. It involves identifying patterns, relationships, and trends to support decision-making and problem-solving.
+        </p>
+    </introduction>
+    
+    <subsubsection xml:id="subsubsec-interpreting-histograms-and-frequency-polygons">
+        <title>Interpreting histograms and frequency polygons</title>
+        <p>
+            
+        </p>
+        <activity>
+        <p>
+            Work in groups
+        </p>
+        <p>
+            The histogram below represent a household's daily water consumption (in liters) recorded over a month.
+        </p>
+        <image>
+            <latex-image>
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        ybar interval,
+                        bar width=15pt, % Increased bar width for longer bars
+                        xlabel={Working Hours (Hours)},
+                        ylabel={Frequency (Number of Employees)},
+                        xtick={20,25,30,35,40,45}, % Bin edges
+                        ymin=0, ymax=12,
+                        enlarge x limits=0, % No extra space
+                        grid=major
+                    ]
+    
+                    % Histogram data
+                    \addplot[fill=blue] coordinates {
+                        (20,4)  % 20-25 hours
+                        (25,8)  % 25-30 hours
+                        (30,10) % 30-35 hours
+                        (35,6)  % 35-40 hours
+                        (40,2)  % 40-45 hours
+                        (45,0)  % Closing the last bin
+                    };
+    
+                \end{axis}
+                \end{tikzpicture}
+            </latex-image>
+        </image>
+        <p>
+            <ol>
+                <li>
+                    <p>
+                        Determine the day when the water consumption was high.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                         Determine the day when the water consumption was low.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Discuss and share with other group.
+                    </p>
+                </li>
+            </ol>
+        </p>
+    </activity>
+    <example>
+        <statement>
+            <p>
+                Use the histogram shown below to answer the questions that follows:
+            </p>
+            <image>
+                <latex-image>
+                    \begin{tikzpicture}
+                        % Draw fine grid (10x smaller squares)
+                        \draw[gray!30, very thin, step=0.1] (0,0) grid (12,8);
+
+                        % Draw main grid (original)
+                        \draw[gray!70, thin, step=1] (0,0) grid (12,8);
+
+                        % Draw axes
+                        \draw[thick,->] (0,0) -- (12,0) node[right] {\small $x$};
+                        \draw[thick,->] (0,0) -- (0,8.5) node[above] {\small $y$};
+
+                        % Label x-axis
+                        \foreach \x in {1,2,3,4,5,6,7,8,9,10} {
+                            \node[below] at (\x,0) {\x0};
+                        }
+
+                        % Label y-axis
+                        \foreach \y in {0,1,2,3,4,5,6,7,8} {
+                           \node[left] at (0,\y) {\small \y};
+                        }
+                        \draw[thick,fill=blue] (5.5,0) -- (5.5,2) --(6,2) -- (6,0);
+                        \draw[thick,fill=blue] (6,0) -- (6,3) --(6.5,3) -- (6.5,0);
+                        \draw[thick,fill=blue] (6.5,0) -- (6.5,6) --(7,6) -- (7,0);
+                        \draw[thick,fill=blue] (7,0) -- (7,5) --(7.5,5) -- (7.5,0);
+                        \draw[thick,fill=blue] (7.5,0) -- (7.5,4) --(8,4) -- (8,0);
+                        \draw[thick,fill=blue] (8,0) -- (8,5) --(8.5,5) -- (8.5,0);
+                        \draw[thick,fill=blue] (8.5,0) -- (8.5,6) --(9,6) -- (9,0);
+                        \draw[thick,fill=blue] (9,0) -- (9,7) --(9.5,7) -- (9.5,0);
+                        \draw[thick,fill=blue] (9.5,0) -- (9.5,1) --(10,1) -- (10,0);
+        
+       
+                        \node[] at (4.5,-1) {$\text{Speed (km/h)}$};
+                        \node[rotate=90] at (-1,4) {$\text{Frequency}$};
+                        \node[above] at (7,8) {\Large \textbf{Histogram of Vehicle Speeds}};
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+            <p>
+                <ol marker="a)">
+                    <li>
+                        <p>
+                            Which speed range (class interval) had the highest frequency of vehicles?
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Describe the shape of the histogram. Is it symmetrical, skewed.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            What does the y-axis represent?
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            What is the lowest frequency recorded, and for which speed range does it occur?
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            If the speed limit is 80 km/h, how many vehicles exceeded this limit based on the histogram?
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Based on the histogram, what conclusions can you draw about vehicle speeds on this highway?
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </statement>
+        <solution>
+            <p>
+                <ol marker="a)">
+                    <li>
+                        <p>
+                            The speed range with the highest frequency is 90 km/h.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The histogram is skewed right (positively skewed). The tail extends further to the right (higher speeds).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The y-axis represents the frequency, which is the number of vehicles recorded in each speed category.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The lowest frequency recorded is 1, and it occurs for the speed range 100 km/h.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            To find this, we need to add the frequencies of all the bars to the right of 80 km/h.
+                        </p>
+                        <p>
+                            The frequencies are:
+                        </p>
+                        <p>
+                            <ul>
+                                <li>
+                                    <p>
+                                        80-89 km/h: 6
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        90-99 km/h: 7
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        100 km/h: 1
+                                    </p>
+                                </li>
+                            </ul>
+                        </p>
+                        <p>
+                            Total vehicles exceeding 80 km/h: <m>6  + 7 + 1</m> = <m>14</m> vehicles.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <ul>
+                                <li>
+                                    <p>
+                                        Most Common Speed: The most common speed range is around 90 km/h.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        Right Skew: There's a tendency for vehicles to travel at higher speeds, as indicated by the right skew.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        Speed Limit Violations: A significant number of vehicles are exceeding the 80 km/h speed limit.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        Lower Speeds: There is a very low frequency of cars travelling at lower speeds. (Below 60km/h)
+                                    </p>
+                                </li>
+                            </ul>
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </solution>
+    </example>
+    <example>
+        <statement>
+            <p>
+                The histogram below represents the ages of attendees recorded by the organizers at a community event.
+            </p>
+            <image>
+                <latex-image>
+                    \begin{tikzpicture}
+                        % Draw fine grid (10x smaller squares)
+                        \draw[gray!30, very thin, step=0.1] (0,0) grid (12,11);
+
+                        % Draw main grid (original)
+                        \draw[gray!70, thin, step=1] (0,0) grid (12,11);
+
+                        % Draw axes
+                        \draw[thick,->] (0,0) -- (12,0) node[right] {\small $x$};
+                        \draw[thick,->] (0,0) -- (0,11) node[above] {\small $y$};
+
+                        % Label x-axis
+                        \foreach \x in {1,2,3,4,5,6,7,8,9,10} {
+                            \node[below] at (\x,0) {\x0};
+                        }
+
+                        % Label y-axis
+                        \foreach \y in {10,15,20,25,30,35,40,45,50,55} {
+                            \node[left] at (0,\y/5) {\y};  % Scale by 1/5 if needed for alignment
+                        }
+                        \draw[thick,fill=blue] (1.0,0) -- (1.0,10) --(1.5,10) -- (1.5,0);
+                        \draw[thick,fill=blue] (1.5,0) -- (1.5,5) --(2.5,5) -- (2.5,0);
+                        \draw[thick,fill=blue] (2.5,0) -- (2.5,8) --(4.0,8) -- (4.0,0);
+                        \draw[thick,fill=blue] (4.0,0) -- (4.0,7) --(7.0,7) -- (7.0,0);
+                        \draw[thick,fill=blue] (7.0,0) -- (7.0,3) --(9.0,3) -- (9.0,0);
+                        
+                    
+                        \node[] at (4.5,-1) {$\text{Speed (km/h)}$};
+                        \node[rotate=90] at (-1,4) {$\text{Frequency}$};
+                        \node[above] at (7,11) {\Large \textbf{Histogram of the ages of attendees}};
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+            <p>
+                <ol marker="a)">
+                    <li>
+                        <p>
+                            How many age groups are represented in the histogram?
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            What is the total number of attendees recorded in the histogram?
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Which age group has the highest number of attendees?
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </statement>
+        <solution>
+            <p>
+                <ol marker="a)">
+                    <li>
+                        <p>
+                            By counting the number of bars in the histogram, we can determine the number of age groups.
+                        </p>
+                        <p>
+                            The bars are <m>5</m>
+                        </p>
+                        <p>
+                            Therefore, there were five age groups that attended the event.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The total number of attendees is the sum of all frequencies (heights of the bars).
+                        </p>
+                        <p>
+                            <m>50+25+40+35+15</m> = <m>165</m>
+                        </p>
+                        <p>
+                            Therefore, the number of attendees were <m>165</m>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The age group corresponding to the tallest bar has the highest number of attendees.
+                        </p>
+                        <p>
+                            Therefore, the age group <m>10 - 15</m> had the highest number of attendees, with a total of <m>50</m> participants.
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </solution>
+        
+    </example>
+    <exercises xml:id="exercises-interpretation-of-histogram-and-frequency-polygon">
+        <exercise>
+            <statement>
+                <p>
+                    The following histogram shows sales of milk (in litres) sold by Akiru.
+                </p>
+                <image>
+                    <latex-image>
+                        \begin{tikzpicture}
+                            % Draw fine grid (10x smaller squares)
+                        
+                            \draw[gray!30, very thin, step=0.1] (0,0) grid (12,13);
+
+                            % Draw main grid (original)
+                            \draw[gray!70, thin, step=1] (0,0) grid (12,13);
+
+                            % Draw axes
+                            \draw[thick,->] (0,0) -- (12,0) node[right] {\small $x$};
+                            \draw[thick,->] (0,0) -- (0,13) node[above] {\small $y$};
+
+                            % Label x-axis
+                            \foreach \x in {1,2,3,4,5,6,7,8,9,10} {
+                                \node[below] at (\x,0) {\x0};
+                            }
+
+                            % Label y-axis
+                            \foreach \y in {0,1,2,3,4,5,6,7,8,9,10,11,12,13} {
+                                \node[left] at (0,\y) {\small \y};
+                            }
+                            \draw[thick,fill=blue!60] (1.0,0) -- (1.0,5) --(2.0,5) -- (2.0,0);
+                            \draw[thick,fill=blue!60] (2.0,0) -- (2.0,8) --(3.0,8) -- (3.0,0);
+                            \draw[thick,fill=blue!60] (3.0,0) -- (3.0,12) --(4.0,12) -- (4.0,0);
+                            \draw[thick,fill=blue!60] (4.0,0) -- (4.0,7) --(5.0,7) -- (5.0,0);
+                            \draw[thick,fill=blue!60] (5.0,0) -- (5.0,3) --(6.0,3) -- (6.0,0);
+                            \draw[thick,fill=blue!60] (6.0,0) -- (6.0,2) --(7.0,2) -- (7.0,0);
+                            \draw[thick,fill=blue!60] (7.0,0) -- (7.0,1) --(8.0,1) -- (8.0,0);
+                            
+                                
+                            
+                            \node[] at (4.5,-1) {$\text{sales of milk(in litres)}$};
+                            \node[rotate=90] at (-1,4) {$\text{Frequency}$};
+                            \node[above] at (7,13) {\Large \textbf{Histogram showing sales of milk}};
+                        \end{tikzpicture}
+                    </latex-image>
+                </image>
+                <p>
+                    <ol marker="a)">
+                        <li>
+                            <p>
+                                What does the y-axis represent?
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                What does the x-axis represent?
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Which day did Akiru  
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                What does the shape of the histogram tell you about the sales pattern of milk?
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Describe the shape of the histogram. Is it symmetrical or skewed? If skewed, is it skewed left or right?
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
+                    The following histogram shows the height of students in a grade 10 class.
+                </p>
+                <image>
+                    <latex-image>
+                        \begin{tikzpicture}
+                            % Draw fine grid (10x smaller squares)
+                            \draw[gray!30, very thin, step=0.1] (0,0) grid (7,4.0);
+
+                            % Draw main grid
+                            \draw[gray!70, thin, step=1] (0,0) grid (7,4.0);
+
+                            % Draw axes with extended y-axis
+                            \draw[thick,->] (0,0) -- (7,0);
+                            \draw[thick,->] (0,0) -- (0,4.0);
+
+                            % Label x-axis (representing height intervals)
+                            \foreach \x/\label in {1/140, 2/145, 3/155, 4/170, 5/190, 6/200} {
+                                \node[below] at (\x,0) {\label};
+                            }
+
+                            % Label y-axis (scaled up to 4.0)
+                            \foreach \y in {0,1.0,2.0,3.0,4.0} {
+                                \node[left] at (0,\y) {\small \y};
+                            }
+
+                            % Draw histogram bars (taller bars for better visibility)
+                            \draw[thick,fill=blue!60] (1,0) rectangle (1.5,1.6);  % 140-145, density 1.6
+                            \draw[thick,fill=blue!60] (1.5,0) rectangle (2.5,2.0); % 145-155, density 2.0
+                            \draw[thick,fill=blue!60] (2.5,0) rectangle (4,2.0);  % 155-170, density 2.0
+                            \draw[thick,fill=blue!60] (4,0) rectangle (6,0.9);   % 170-190, density 0.9
+                            \draw[thick,fill=blue!60] (6,0) rectangle (6.5,1.0);  % 190-200, density 1.0
+
+                            % Axis Labels
+                            \node[below] at (3.5,-0.3) {\textbf{Height (cm)}};
+                            \node[rotate=90] at (-0.8,2) {\textbf{Frequency Density}};
+                            \node[above] at (3.5,4.0) {\Large \textbf{Histogram of Heights}};
+                        \end{tikzpicture}
+                    </latex-image>
+                </image>
+                <p>
+                    Use the information from the graph to answer the following questions:
+                </p>
+                <ol marker="a)">
+                    <li>
+                        <p>
+                            Calculate the frequency of individuals with heights between <m>145 \textbf{ cm}</m> and <m>155 \textbf{ cm}</m> Show your working
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Identify the modal class.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Estimate the total number of individuals represented in the histogram.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Explain one difference between a histogram and a bar graph.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Describe the overall shape of the height distribution shown in the histogram.
+                        </p>
+                    </li>
+                </ol>
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
+                    The following graph shows a histogram and frequenxy polygon of the weight of girls in a class.
+                </p>
+                <image>
+                    <latex-image>
+                        \begin{tikzpicture}
+                            % Draw fine grid (10x smaller squares)
+                            \draw[gray!30, very thin, step=0.1] (0,0) grid (7,5.0);
+
+                            % Draw main grid
+                            \draw[gray!70, thin, step=1] (0,0) grid (7,5.0);
+
+                            % Draw axes
+                            \draw[thick,->] (0,0) -- (7,0);
+                            \draw[thick,->] (0,0) -- (0,5.0);
+
+                            % Label x-axis (Weight categories)
+                            \foreach \x/\label in {1/40, 2/50, 3/55, 4/65, 5/80, 6/90} {
+                                \node[below] at (\x,0) {\label};
+                            }
+
+                            % Label y-axis (Scaled up to 5.0)
+                            \foreach \y in {0,1.0,2.0,3.0,4.0,5.0} {
+                                \node[left] at (0,\y) {\small \y};
+                            }
+
+                            % Draw histogram bars (Unequal Class Widths)
+                            \draw[thick,fill=blue!60] (1,0) rectangle (2,0.8);  % 40-50, density 0.8
+                            \draw[thick,fill=blue!60] (2,0) rectangle (2.5,2.4); % 50-55, density 2.4
+                            \draw[thick,fill=blue!60] (2.5,0) rectangle (4,1.5);  % 55-65, density 1.5
+                            \draw[thick,fill=blue!60] (4,0) rectangle (5.5,0.67); % 65-80, density 0.67
+                            \draw[thick,fill=blue!60] (5.5,0) rectangle (6,0.5);  % 80-90, density 0.5
+
+                            % Frequency Polygon (Connecting Midpoints)
+                            \draw[thick,black] (0.75,0) -- (1.5,0.8) -- (2.25,2.4) -- (3.25,1.5) -- (4.75,0.67) -- (5.75,0.5) -- (6.25,0);
+
+                            % Mark Midpoints
+                            \foreach \x/\y in {1.5/0.8, 2.25/2.4, 3.25/1.5, 4.75/0.67, 5.75/0.5} {
+                                \fill[black] (\x,\y) circle (2pt);  % Red dots at midpoints
+                            }
+
+                            % Axis Labels
+                            \node[below] at (3.5,-0.5) {\textbf{Weight (kg)}};
+                            \node[rotate=90] at (-0.8,2.5) {\textbf{Frequency Density}};
+                            \node[above] at (3.5,5.0) {\Large \textbf{Histogram and Frequency Polygon}};
+                        \end{tikzpicture}
+                    </latex-image>
+                </image>
+            </statement>
+        </exercise>
+    </exercises>
+
+    </subsubsection>
+    
+    
+</subsection>

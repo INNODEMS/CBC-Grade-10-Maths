@@ -1,0 +1,355 @@
+<subsection xml:id="subsec-translation-vectors">
+    <title>Translation Vectors</title>
+    <!-- <p>
+        <alert>Translation</alert> 
+    </p> -->
+    <!-- <p>
+        A square <m>\mathbf{ABCD}</m> is said to have undergone translation 
+        if point <m>\mathbf{A}</m>,<m>\mathbf{B}</m>,<m>\mathbf{C}</m> and 
+        <m>\mathbf{D}</m> move in the <alert>same direction</alert> also 
+        move the same distance.
+    </p> -->
+    <p>
+        A square <m>\mathbf{ABCD}</m> undergoes a translation when each of its 
+        vertices (<m>\mathbf{A}</m>,<m>\mathbf{B}</m>,<m>\mathbf{C}</m> and 
+        <m>\mathbf{D}</m>) is moved the same distance and in the same direction.
+        A translation vector, denoted by <m>\mathbf{T}</m>, 
+        describes this movement.
+    </p>
+    <p>
+        Using <m>\mathbf{T}</m> to represent a translation, the notation 
+        <m>\mathbf{T}(\mathbf{P})</m>
+        indicates the application of the translation <m>\mathbf{T}</m> 
+        on <m>\mathbf{P}</m>. In <xref ref="translation-shape-1"/>, shows <m>\Delta</m><m>\mathbf{A'B'C'D'}</m>
+        is the image of <m>\Delta</m><m>\mathbf{ABCD}</m> under a translation
+    </p>
+    <figure xml:id="translation-shape-1">
+        <caption></caption>
+        <image width="90%">
+            <shortdescription></shortdescription>
+            <latex-image>
+                \begin{tikzpicture}
+                    
+                    % Draw fine grid (10x smaller squares)
+                    \draw[gray!30, very thin, step=0.1] (-6,-6) grid (6,6);
+
+                    % Draw main grid (original)
+                    \draw[gray!70, thin, step=1] (-6,-6) grid (6,6);
+
+                    % Draw axes
+                    \draw[thick, &lt; - &gt;] (-5.5,0) -- (5.5,0) node[below] {$x$};
+                    \draw[thick, &lt; - &gt;] (0,-5.5) -- (0,5.5) node[left] {$y$};
+
+                    % Draw axis labels
+                    \foreach \x in {-5,...,5} {
+                        \draw[thick] (\x,0.2) -- (\x,-0.2) node[below] {\x};
+                    }
+                    \foreach \y in {-5,...,5} {
+                        \draw[thick] (0.2,\y) -- (-0.2,\y) node[left] {\y};
+                    }
+
+                    % Define points for square ABCD in 2nd quadrant
+                    \coordinate (A) at (-4,4);
+                    \coordinate (B) at (-5,2);
+                    \coordinate (C) at (-3,1);
+                    \coordinate (D) at (-2,3);
+
+                    \node[above] at (A) {\small $\mathbf{A}$};
+                    \node[below left] at (B) {\small $\mathbf{B}$};
+                    \node[below right] at (C) {\small $\mathbf{C}$};
+                    \node[above] at (D) {\small $\mathbf{D}$};
+
+                    % Draw square ABCD
+                    \draw[very thick] (A) -- (B) -- (C) -- (D) -- cycle;
+
+                    % Define translated points A'B'C'D' in 1st quadrant
+                    \coordinate (Ap) at (2,4);
+                    \coordinate (Bp) at (1,2);
+                    \coordinate (Cp) at (3,1);
+                    \coordinate (Dp) at (4,3);
+
+                    \node[above] at (Ap) {\small $\mathbf{A'}$};
+                    \node[below left] at (Bp) {\small $\mathbf{B'}$};
+                    \node[below right] at (Cp) {\small $\mathbf{C'}$};
+                    \node[right] at (Dp) {\small $\mathbf{D'}$};
+
+                    % Draw translated square A'B'C'D'
+                    \draw[very thick] (Ap) -- (Bp) -- (Cp) -- (Dp) -- cycle;
+
+                    % Draw dashed lines connecting corresponding points
+                    \draw[dashed] (A) -- (Ap);
+                    \draw[dashed] (B) -- (Bp);
+                    \draw[dashed] (C) -- (Cp);
+                    \draw[dashed] (D) -- (Dp);
+
+                    % Draw arrows to indicate transformation
+                    \draw[dashed, -{Latex[scale=1.5]}] (A) -- (-1,4);
+                    \draw[dashed, -{Latex[scale=1.5]}] (B) -- (-1,2);
+                    \draw[dashed, -{Latex[scale=1.5]}] (C) -- (0,1);
+                    \draw[dashed, -{Latex[scale=1.5]}] (D) -- (1,3);
+                \end{tikzpicture}
+            </latex-image>
+        </image>
+    </figure>
+    <!-- <p>
+        Given <m>\mathbf{T}</m> to be a <m>translation</m> vector,
+        We say, square <m>\mathbf{ABCD}</m> has undergone translation if 
+        every point of the square moves the same distance in the same direction.
+    </p>
+    <p>
+        When we use the letter <m>\mathbf{T}</m> to represent a translation. 
+        If we write <m>(\mathbf{TP})</m>, it means we are applying the 
+        translation <m>\mathbf{T}</m> to the point <m>\mathbf{P}</m>.
+    </p>
+    <p>
+        For instance, if we have a translation 
+        <m>\mathbf{T} = (5, 2)</m> and a point <m>\mathbf{P}</m> at <m>(3, 1)</m>, 
+        we can find the new location of <m>\mathbf{P}</m> (which we'll call <m>\mathbf{P}'</m>) 
+        after the translation.
+    </p> -->
+    <activity>
+        <introduction>
+            <p>
+                <alert>Work in groups</alert>
+            </p>
+        </introduction>
+        <task>
+            <statement>
+                <p>
+                    
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    
+                </p>
+            </statement>
+        </task>
+    </activity>
+    <example>
+        <statement>
+            <p>
+                Triangle <m>\mathbf{ABC}</m> has vertices <m>\mathbf{A}(1,3)</m>, <m>\mathbf{B}(3,0)</m>
+                 and <m>\mathbf{C}(4,4)</m>.The triangle undergoes a translation <m>\mathbf{T}</m> 
+                defined by the vector <m>\begin{pmatrix} 4 \\ 3 \end{pmatrix}</m>.
+            </p>
+            <p>
+                <ol marker="(a)">
+                    <li>
+                        <p>
+                            Determine the coordinates of the translated
+                            vertices <m>\mathbf{A'}</m>, <m>\mathbf{B'}</m> , and <m>\mathbf{C'}</m> '.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Draw the triangle <m>\mathbf{ABC}</m> and its image under <m>\mathbf{T}</m>.
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </statement>
+        <solution>
+            <p>
+                <md>
+                    <mrow> \mathbf{OA'} \amp = \mathbf{OA} + \mathbf{T}</mrow>
+                    <mrow> \mathbf{OB'} \amp = \mathbf{OB} + \mathbf{T}</mrow>
+                    <mrow> \mathbf{OC'} \amp = \mathbf{OC} +  \mathbf{T} </mrow>
+                </md>
+            </p>
+            <p>
+                <md>
+                    <mrow> \mathbf{OA'} \amp = \binom{3}{0} + \binom{4}{3} = \binom{3+4}{0+3} = \binom{7}{3} </mrow>
+                    <mrow> \mathbf{OB'} \amp = \binom{1}{3} + \binom{4}{3} = \binom{1+4}{3+3} = \binom{5}{6}  </mrow>
+                    <mrow> \mathbf{OC'} \amp = \binom{4}{4} + \binom{4}{3} = \binom{4+4}{4+3} = \binom{8}{7} </mrow>
+                </md>
+            </p>
+            <figure xml:id="translation-vector-1">
+                <caption></caption>
+                <image width="90%">
+                    <shortdescription></shortdescription>
+                    <latex-image>
+                        \begin{tikzpicture}
+                            
+                            % Draw fine grid (10x smaller squares)
+                            \draw[gray!30, very thin, step=0.1] (-4,-3) grid (10,9);
+
+                            % Draw main grid (original)
+                            \draw[gray!70, thin, step=1] (-4,-3) grid (10,9);
+                            
+                            \foreach \x in {-3,...,9}{
+                                \draw[thick](\x,0.2) -- (\x,-0.2) node[below] {\x};
+                            }
+                            \draw[thick ,&lt; - &gt;] (-3.5,0) -- (9.5,0) node[below] {$x$};
+                            
+                            \foreach \y in {-3,-2,-1,1,2,3,4,5,6,7,8}{
+                                \draw[thick](0.2,\y) -- (-0.2,\y) node[left] {\y};
+                            }
+                            \draw[thick ,&lt; - &gt;] (0,-3) -- (0,9) node[left] {$y$};
+                            
+                            % Define points
+                            \coordinate (A) at (1,3);
+                            \coordinate (B) at (3,0);
+                            \coordinate (C) at (4,4);
+                            
+                            \node[left,above,rotate=90] at (A) {\small $\mathbf{A}(1,3)$};
+                            \node[above,left] at (B) {\small $\mathbf{B}(3,0)$};
+                            \node[above] at (C) {\small $\mathbf{C}(4,4)$};
+                            
+                            % % Draw vectors
+                            \draw[very thick] (A) -- (B) -- (C) -- cycle;
+                            
+                            % Define points
+                            \coordinate (A1) at (5,6);
+                            \coordinate (B1) at (7,3);
+                            \coordinate (C1) at (8,7);
+                            
+                            \node[left] at (A1) {\small $\mathbf{A}'(5,6)$};
+                            \node[right] at (B1) {\small $\mathbf{B}'(7,3)$};
+                            \node[above] at (C1) {\small $\mathbf{C}'(8,7)$};
+                            
+                            % % Draw vectors
+                            \draw[very thick] (A1) -- (B1) -- (C1) -- cycle;
+                            
+                            \draw[dashed] (A) -- (A1);
+                            \draw[dashed] (B) -- (B1);
+                            \draw[dashed] (C) -- (C1);
+                            
+                            \draw [dashed,-{Latex[scale=2]}] (B) -- (5,1.5) ;
+                            \draw [dashed, -{Latex[scale=2]}] (C) -- (5.5,5.1) ;
+                            \draw [dashed, -{Latex[scale=2]}] (A) -- (3,4.5) ;
+                            
+                        \end{tikzpicture}
+                    </latex-image>
+                </image>
+            </figure>
+        </solution>
+    </example>
+    <exercises xml:id="exercises-translation-vector">
+        <exercise>
+            <statement>
+                <p>
+                    Draw triangle <m>\mathbf{XYZ}</m> with vertices <m>\mathbf{X(1, 4)}</m>, <m>\mathbf{Y(6, 2)}</m>, 
+                    and <m>\mathbf{Z(5, 3)}</m>. On the same axes, plot <m>\mathbf{X'Y'Z'}</m>, 
+                    the image of triangle <m>\mathbf{XYZ}</m> under a translation given by <m>\binom{4}{9}.</m>
+                </p>
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
+                    The following points have been translated using
+                    the given vectors. Determine their original positions:
+                </p>
+                <p>
+                    <ol marker="(a)" cols="3">
+                        <li>
+                            <p>
+                                <m>(4,-1); \, \, \binom{2}{3}</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>(0,-3); \, \, \binom{1}{3}</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>(-3,8); \, \, \binom{-2}{7}</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>(11,-5); \,\, \binom{5}{-1}</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>(-12,5); \,\, \binom{3}{-10}</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>(2,-7); \,\, \binom{-10}{15}</m>
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
+                    A point <m>\mathbf{P(5, -3)}</m> is mapped to a new position after 
+                    a translation. If the new coordinates are <m>\mathbf{(9, 1)}</m>, 
+                    determine the translation vector used.
+                </p>
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
+                    A point <m>\mathbf{M(1, -4)}</m> undergoes a translation by 
+                    <m>\binom{3}{5}.</m> Determine the coordinates of <m>\mathbf{M'}</m>,
+                    the transformed point.  If <m>\mathbf{M'}</m> is then translated by
+                    <m>\binom{-4}{2},</m> find the final position <m>\mathbf{M''}</m>. 
+                    What is the single translation vector that maps 
+                    <m>\mathbf{M'}</m> to <m>\mathbf{M''}</m> directly?
+                </p>
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
+                    Translate each of the following points using the given vector:
+                </p>
+                <p>
+                    <ol marker="(a)" cols="2">
+                        <li>
+                            <p>
+                                <m>(10,1); \, \, \binom{-11}{2}</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>(-2,-5); \, \, \binom{6}{14}</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>(3,-15); \, \, \binom{-16}{11}</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>(-11,4); \, \, \binom{-15}{10}</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>(1,10); \, \, \binom{7}{2}</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>(4,-9); \, \, \binom{5}{-8}</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>(-2,13); \, \, \binom{-3}{1}</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>(-6,5); \, \, \binom{-1}{2}</m>
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+            </statement>
+        </exercise>
+    </exercises>
+</subsection>
