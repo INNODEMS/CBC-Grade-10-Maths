@@ -318,31 +318,78 @@
                 <shortdescription></shortdescription>
                 <latex-image>
                     \begin{tikzpicture}
-                        % Grid for reference
-    \draw[help lines, color=gray!30] (-4,-4) grid (4,4);
+                       % Grid for reference
+                        \draw[help lines, color=gray!30] (-5,-5) grid (5,5);
 
-    % Larger Triangle (Orange) - With Transparency
-    \fill[orange!70, opacity=0.6] (-2,-3) -- (2,3) -- (4,0) -- cycle;
-    \draw[orange, thick] (-2,-3) -- (2,3) -- (4,0) -- cycle;
-    
-    % Label vertices of larger triangle
-    \node[left] at (-2,-3) {A};
-    \node[above] at (2,3) {B};
-    \node[right] at (4,0) {C};
+                        % Larger Triangle (Pink)
+                        \fill[pink!70, opacity=0.6] (-3,-1) -- (2,3) -- (3,-2) -- cycle;
+                        \draw[pink, thick] (-3,-1) -- (2,3) -- (3,-2) -- cycle;
 
-    % Smaller Triangle (Blue) - Aligned Below with Transparency
-    \fill[blue!70, opacity=0.6] (0,-2.5) -- (1.5,1) -- (3,-1) -- cycle;
-    \draw[blue, thick] (0,-2.5) -- (1.5,1) -- (3,-1) -- cycle;
+                        % Label vertices of larger triangle
+                        \node[left] at (-3,-1) {A};
+                        \node[above] at (2,3) {B};
+                        \node[right] at (3,-2) {C};
 
-    % Label vertices of smaller triangle
-    \node[left] at (0,-2.5) {P};
-    \node[above] at (1.5,1) {Q};
-    \node[right] at (3,-1) {R};
+                        % Adjusted Smaller Triangle (Blue) - Moved slightly up and inside the larger triangle
+                        \fill[blue!70, opacity=0.6] (-1.8,-2.5) -- (1,0) -- (2.3,-2.5) -- cycle;
+                        \draw[blue, thick] (-1.8,-2.5) -- (1,0) -- (2.3,-2.5) -- cycle;
+
+                        % Label vertices of the smaller triangle
+                        \node[left] at (-1.8,-2.5) {P};
+                        \node[above] at (1,0) {Q};
+                        \node[right] at (2.3,-2.5) {R};
                     \end{tikzpicture}
                 </latex-image>
                 
             </image>
         </statement>
+        
+        <solution>
+            <p>
+                
+            </p>
+
+            <image>
+                <shortdescription></shortdescription>
+                <latex-image>
+                    \begin{tikzpicture}
+                         % Grid for reference
+                        \draw[help lines, color=gray!30] (-5,-5) grid (5,5);
+
+                        % Larger Triangle (Pink)
+                        \fill[pink!70, opacity=0.6] (-3,-1) -- (2,3) -- (3,-2) -- cycle;
+                        \draw[pink, thick] (-3,-1) -- (2,3) -- (3,-2) -- cycle;
+
+                        % Label vertices of larger triangle
+                        \node[left] at (-3,-1) {A};
+                        \node[above] at (2,3) {B};
+                        \node[right] at (3,-2) {C};
+
+                        % Adjusted Smaller Triangle (Blue) - Moved slightly up and inside the larger triangle
+                        \fill[blue!70, opacity=0.6] (-1.8,-2.5) -- (1,0) -- (2.3,-2.5) -- cycle;
+                        \draw[blue, thick] (-1.8,-2.5) -- (1,0) -- (2.3,-2.5) -- cycle;
+
+                        % Label vertices of the smaller triangle
+                        \node[left] at (-1.8,-2.5) {P};
+                        \node[above] at (1,0) {Q};
+                        \node[right] at (2.3,-2.5) {R};
+
+                        % Define the Centre of Enlargement
+                        \coordinate (X) at (0,-4.2); 
+
+                        % Continuous dashed lines passing through corresponding points until they meet
+                        \draw[red, dashed, thick] (-3,-1) -- (-1.8,-2.5) -- (X); % A to P extended to X
+                        \draw[red, dashed, thick] (2,3) -- (1,0) -- (X); % B to Q extended to X
+                        \draw[red, dashed, thick] (3,-2) -- (2.3,-2.5) -- (X); % C to R extended to X
+
+                        % Mark and label the Centre of Enlargement
+                        \fill[black] (X) circle (2pt);
+                        \node[below] at (X) {Centre of Enlargement};
+                    \end{tikzpicture}
+                </latex-image>
+                
+            </image>
+        </solution>
     </example>
 
     <p>
