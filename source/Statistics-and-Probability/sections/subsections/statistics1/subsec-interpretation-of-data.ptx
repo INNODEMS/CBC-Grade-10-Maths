@@ -21,28 +21,37 @@
         <image>
             <latex-image>
                 \begin{tikzpicture}
-                    \begin{axis}[
-                        ybar interval,
-                        bar width=15pt, % Increased bar width for longer bars
-                        xlabel={Working Hours (Hours)},
-                        ylabel={Frequency (Number of Employees)},
-                        xtick={20,25,30,35,40,45}, % Bin edges
-                        ymin=0, ymax=12,
-                        enlarge x limits=0, % No extra space
-                        grid=major
-                    ]
-    
-                    % Histogram data
-                    \addplot[fill=blue] coordinates {
-                        (20,4)  % 20-25 hours
-                        (25,8)  % 25-30 hours
-                        (30,10) % 30-35 hours
-                        (35,6)  % 35-40 hours
-                        (40,2)  % 40-45 hours
-                        (45,0)  % Closing the last bin
-                    };
-    
-                \end{axis}
+                    % Draw fine grid (10 smaller squares per main grid unit)
+                    \draw[gray!30, very thin, step=0.1] (0,0) grid (7,7);
+
+                    % Draw main grid
+                    \draw[gray!70, thin, step=1] (0,0) grid (7,7);
+
+                    % Draw axes
+                    \draw[thick,->] (0,0) -- (7,0);
+                    \draw[thick,->] (0,0) -- (0,7);
+                    \node[below] at (4,-0.8) {\textbf{Water Consumption (Liters)}};
+                    \node[rotate=90] at (-1,4) {\textbf{Frequency (Days)}};
+
+                    % X-axis labels (Now first bar starts at grid 1)
+                    \foreach \x/\label in {1/20, 2/25, 3/30, 4/35, 5/40} {
+                        \node[below] at (\x,0) {\label};
+                    }
+
+                    % Y-axis labels
+                    \foreach \y in {1,2,3,4,5,6} {
+                        \node[left] at (0,\y) {\y};
+                    }
+
+                    % Histogram bars (starting from x=1)
+                    \draw[fill=blue!60] (1,0) rectangle (2,2);  % 20 - Frequency 2
+                    \draw[fill=blue!60] (2,0) rectangle (3,4);  % 25 - Frequency 4
+                    \draw[fill=blue!60] (3,0) rectangle (4,6);  % 30 - Frequency 6
+                    \draw[fill=blue!60] (4,0) rectangle (5,5);  % 35 - Frequency 5
+                    \draw[fill=blue!60] (5,0) rectangle (6,3);  % 40 - Frequency 3
+
+                    % Graph Title
+                    \node[above] at (3.5,7) {\textbf{Daily Household Water Consumption Over a Month}};
                 \end{tikzpicture}
             </latex-image>
         </image>
@@ -326,6 +335,102 @@
         </solution>
         
     </example>
+    <example>
+        <statement>
+            <p>
+                The graph below represents a histogram and frequency polygon of the distribution of exam scores of students in a Grade 10 class.
+            </p>
+            <image>
+                <latex-image>
+                    \begin{tikzpicture}
+                        % Draw fine grid (10 smaller squares per main grid)
+                        \draw[gray!30, very thin, step=0.1] (0,0) grid (10,10);
+                        % Draw main grid (every 1 unit)
+                        \draw[gray!70, thin, step=1] (0,0) grid (10,10);
+                        
+                        % Draw axes
+                        \draw[thick,->] (0,0) -- (10,0); % X-axis
+                        \draw[thick,->] (0,0) -- (0,10); % Y-axis
+                        
+                        % Label x-axis (Exam Score Ranges)
+                        \foreach \x/\label in {1/40, 2.5/55, 4/70, 6/85, 8.5/95} {
+                            \node[below] at (\x,0) {\label};
+                        }
+                        
+                        % Label y-axis (Frequency Density)
+                        \foreach \y in {0,2,4,6,8,10} {
+                            \node[left] at (0,\y) {\small \pgfmathparse{\y/10*2}\pgfmathprintnumber{\pgfmathresult}};
+                        }
+
+                        % Draw histogram bars (Unequal Class Widths with Frequency Density)
+                        \draw[thick,fill=blue!60] (1,0) rectangle (2.5,8);  % 30-50, density 0.08
+                        \draw[thick,fill=blue!60] (2.5,0) rectangle (4,6);  % 50-70, density 0.06
+                        \draw[thick,fill=blue!60] (4,0) rectangle (6,5);  % 70-85, density 0.05
+                        \draw[thick,fill=blue!60] (6,0) rectangle (8.5,3);  % 85-95, density 0.03
+
+                        % Frequency Polygon (Connecting Midpoints)
+                        \draw[thick,black] 
+                            (0.5,0) -- 
+                            (1.75,8) -- 
+                            (3.25,6) -- 
+                            (5,5) -- 
+                            (7.25,3) -- 
+                            (9,0);
+                        
+                        % Mark Midpoints with Points
+                        \foreach \x/\y in {1.75/8, 3.25/6, 5/5, 7.25/3} {
+                            \fill[black] (\x,\y) circle (3pt);  % Dots at midpoints
+                        }
+
+                        % Axis Labels
+                        \node[below] at (5,-0.5) {\textbf{Exam Scores}};
+                        \node[rotate=90] at (-1,5) {\textbf{Frequency Density}};
+                        \node[above] at (5,10) {\Large \textbf{Distribution of Exam Scores}};
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+            <p>
+                <ol marker="a)">
+                    <li>
+                        <p>
+                            Describe the shape of the distribution of exam scores.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            What is the midpoint of the class interval <m>70 - 85</m>?
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Compare the height of the first bar (<m>40 - 55</m> score range) to the height of the last bar (<m>85 - 95</m> score range). What does this tell you about the number of students in those score ranges?
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </statement>
+        <solution>
+            <p>
+                <ol marker="a)">
+                    <li>
+                        <p>
+                            The distribution is skewed to the right (positively skewed). 
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <m>77.5</m>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The first bar is much taller than the last bar. This means that many more students got scores in the <m>40 - 55</m> range than in the <m>85 - 95</m> range.
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </solution>
+    </example>
     <exercises xml:id="exercises-interpretation-of-histogram-and-frequency-polygon">
         <exercise>
             <statement>
@@ -479,7 +584,7 @@
         <exercise>
             <statement>
                 <p>
-                    The following graph shows a histogram and frequenxy polygon of the weight of girls in a class.
+                    The following graph shows a histogram and frequency polygon of the weight of girls in a class.
                 </p>
                 <image>
                     <latex-image>
