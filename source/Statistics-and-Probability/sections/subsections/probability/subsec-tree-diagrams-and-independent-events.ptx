@@ -70,31 +70,32 @@
                             <latex-image label="tree-diagram-head">
                                 \begin{tikzpicture}[
                                     grow=right,
-                                    sibling distance=4cm,
-                                    level distance=2cm,
+                                    sibling distance=1.5cm,
+                                    level distance=1cm,
                                     edge from parent/.style={draw,thick},
-                                    every node/.style={font=\large, inner sep=3pt}
-                                ]
+                                    scale=2.4,
+                                    every node/.style={font=\footnotesize, inner sep=2pt}
+                                    ]
 
-                                    % Root node
-                                    \node[circle, draw, thick] (Start) {Start}
-                                        child { node[circle, draw] (H1) {H} 
-                                            child { node[circle, draw] (HH) {HH} }
-                                            child { node[circle, draw, xshift=1mm, yshift=0.015mm] (HT) {HT} }
-                                            edge from parent node[above, midway] {\(\frac{1}{2}\)}
+                                    \node[circle, draw, thick] (Start) {}
+                                    child { node[circle, draw] (H) {H}
+                                        child { node[circle, draw, yshift=0.8cm] (HT_H) {HT}
+                                        edge from parent node[below, midway, font=\scriptsize] {$\frac{1}{2}$}
                                         }
-                                        child { node[circle, draw] (T1) {T} 
-                                            child { node[circle, draw, xshift=7mm, yshift=9mm] (TH) {TH} } % Shifted to prevent overlap
-                                            child { node[circle, draw] (TT) {TT} }
-                                            edge from parent node[below, midway] {\(\frac{1}{2}\)}
-                                        };
-
-                                    % Adjusted positions to prevent crossing
-                                    \path (H1) -- (HH) node[midway, above] {\(\frac{1}{2}\)};
-                                    \path (H1) -- (HT) node[midway, below] {\(\frac{1}{2}\)};
-                                    \path (T1) -- (TH) node[midway, above] {\(\frac{1}{2}\)};
-                                    \path (T1) -- (TT) node[midway, below] {\(\frac{1}{2}\)};
-
+                                        child { node[circle, draw, yshift=-0.8cm] (HH_H) {HH}
+                                        edge from parent node[above, midway, font=\scriptsize] {$\frac{1}{2}$}
+                                        }
+                                        edge from parent node[below, midway, font=\scriptsize] {$\frac{1}{2}$}
+                                    }
+                                    child { node[circle, draw] (T) {T}
+                                        child { node[circle, draw, yshift=0.8cm] (TT_T) {TT}
+                                        edge from parent node[below, midway, font=\scriptsize] {$\frac{1}{2}$}
+                                        }
+                                        child { node[circle, draw, yshift=-0.8cm] (TH_T) {TH}
+                                        edge from parent node[above, midway, font=\scriptsize] {$\frac{1}{2}$}
+                                        }
+                                        edge from parent node[above, midway, font=\scriptsize] {$\frac{1}{2}$}
+                                    };
                                 \end{tikzpicture}
                             </latex-image>
                             
@@ -201,30 +202,32 @@
                 <latex-image label="Tree-diagram-red">
                     \begin{tikzpicture}[
                         grow=right,
-                        sibling distance=2cm, % Reduced sibling distance
-                        level distance=1.5cm, % Reduced level distance
+                        sibling distance=1.5cm,
+                        level distance=1cm,
                         edge from parent/.style={draw,thick},
-                        every node/.style={font=\footnotesize, inner sep=2pt} % Reduced font size and inner sep
-                    ]
+                        scale=2.5,
+                        every node/.style={font=\footnotesize, inner sep=2pt}
+                        ]
 
-                        % Root node
                         \node[circle, draw, thick] (Start) {}
-                        child { node[circle, draw] (R1) {R} 
-                            child { node[circle, draw] (RR) {RR} }
-                            child { node[circle, draw,  xshift=1mm] (RB) {RB} }
-                            edge from parent node[above, midway, font=\scriptsize] {\(\frac{3}{5}\)}
+                        child { node[circle, draw] (B) {B}
+                            child { node[circle, draw, yshift=0.8cm] (BB_B) {BB}
+                            edge from parent node[below, midway, font=\scriptsize] {$\frac{1}{4}$}
+                            }
+                            child { node[circle, draw, yshift=-0.8cm] (BR_B) {BR}
+                            edge from parent node[above, midway, font=\scriptsize] {$\frac{3}{4}$}
+                            }
+                            edge from parent node[below, midway, font=\scriptsize] {$\frac{2}{5}$}
                         }
-                        child { node[circle, draw] (B1) {B} 
-                            child { node[circle, draw, xshift=7mm, yshift=9mm] (BR) {BR} }
-                            child { node[circle, draw] (BB) {BB} }
-                            edge from parent node[below, midway, font=\scriptsize] {\(\frac{2}{5}\)}
+                        child { node[circle, draw] (R) {R}
+                            child { node[circle, draw, yshift=0.8cm] (RR_R) {RR}
+                            edge from parent node[below, midway, font=\scriptsize] {$\frac{2}{4}$}
+                            }
+                            child { node[circle, draw, yshift=-0.8cm] (BR_R) {BR}
+                            edge from parent node[above, midway, font=\scriptsize] {$\frac{2}{4}$}
+                            }
+                            edge from parent node[above, midway, font=\scriptsize] {$\frac{3}{5}$}
                         };
-
-                        % Probabilities on second level
-                        \path (R1) -- (RR) node[midway, above, font=\scriptsize] {\(\frac{2}{4}\)};
-                        \path (R1) -- (RB) node[midway, below, font=\scriptsize] {\(\frac{2}{4}\)};
-                        \path (B1) -- (BR) node[midway, above, font=\scriptsize] {\(\frac{3}{4}\)};
-                        \path (B1) -- (BB) node[midway, below, font=\scriptsize] {\(\frac{1}{4}\)};
 
                     \end{tikzpicture}
                 </latex-image>
@@ -400,7 +403,7 @@
                         </p>
                         <p>
                             <md>
-                                <mrow> \textbf{S = { (B,J), (B,S), (A,J), (A,S), (C,J), (C,S)} } </mrow>
+                                <mrow> \textbf{S = { (B,J), (B,S), (A,J), (A,S), (Ch,J), (Ch,S)} } </mrow>
                             </md>
                         </p>
                         <p>
@@ -413,22 +416,39 @@
                         </p>
                         <image>
                             <latex-image label="Tree diagram">
-                                \begin{tikzpicture}[scale=1, level distance=1.5cm, sibling distance=2.5cm,
-                                every node/.style={draw, circle, minimum size=1cm, inner sep=2pt}]
-                                     % Root node (Start)
-                                    \node {Start}
-                                        child { node {B} % Burger
-                                            child { node {J} } % Juice
-                                            child { node {S} } % Soda
-                                        }
-                                        child { node {A} % Pizza
-                                            child { node {S} } % Soda
-                                            child { node {J} } % Juice
-                                        }
-                                        child { node {Ch} % Pasta
-                                            child { node {J} } % Juice
-                                            child { node {S} } % Soda
-                                        };
+                                \begin{tikzpicture}[
+                                    grow=right,
+                                    sibling distance=1.2cm, % Increased sibling distance
+                                    level distance=1cm, % Increased level distance
+                                    edge from parent/.style={draw,thick},
+                                    scale=2.0,
+                                    every node/.style={font=\footnotesize, inner sep=2pt}
+                                    ]
+
+                                    \node[circle, draw, thick] (Start) {}
+                                    child { node[circle, draw] (B) {B}
+                                        child { node[circle, draw, xshift=0.5cm, yshift=0.5cm] (J_B) {J} }
+                                        child { node[circle, draw, xshift=0.5cm, yshift=-0.5cm] (S_B) {S} }
+                                        edge from parent node[below, midway, font=\scriptsize] {$\frac{1}{3}$}
+                                    }
+                                    child { node[circle, draw] (A) {A}
+                                        child { node[circle, draw, xshift=0.5cm, yshift=0.5cm] (J_A) {J} }
+                                        child { node[circle, draw, xshift=0.5cm, yshift=-0.5cm] (S_A) {S} }
+                                        edge from parent node[above, midway, font=\scriptsize] {$\frac{1}{3}$}
+                                    }
+                                    child { node[circle, draw] (Ch) {Ch}
+                                        child { node[circle, draw, xshift=0.5cm, yshift=0.5cm] (J_Ch) {J} }
+                                        child { node[circle, draw, xshift=0.5cm, yshift=-0.5cm] (S_Ch) {S} }
+                                        edge from parent node[above, midway, font=\scriptsize] {$\frac{1}{3}$}
+                                    };
+
+                                    \path (B) -- (J_B) node[midway, below, font=\scriptsize] {$\frac{1}{2}$};
+                                    \path (B) -- (S_B) node[midway, above, font=\scriptsize] {$\frac{1}{2}$};
+                                    \path (A) -- (J_A) node[midway, below, font=\scriptsize] {$\frac{1}{2}$};
+                                    \path (A) -- (S_A) node[midway, above, font=\scriptsize] {$\frac{1}{2}$};
+                                    \path (Ch) -- (J_Ch) node[midway, below, font=\scriptsize] {$\frac{1}{2}$};
+                                    \path (Ch) -- (S_Ch) node[midway, above, font=\scriptsize] {$\frac{1}{2}$};
+
                                 \end{tikzpicture}
                             </latex-image>
                             
