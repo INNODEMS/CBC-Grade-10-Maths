@@ -1,0 +1,176 @@
+<subsection xml:id="subsec-area-of-common-region-between-two-intersecting-circles">
+    <title>Area of common region between two intersecting circles</title>
+    <p>
+        The common region between two intersecting circles refers to the overlapping area shared by both circles.
+    </p>
+    <p>
+        It is formed when two circles of different or equal radii intersect at two distinct points.
+    </p>
+    <image width="50%">
+    <latex-image label="Intersecting1">
+        \begin{tikzpicture}
+            % Define the circles
+            \draw[thick] (0,0) circle (2cm);
+            \draw[thick] (2,0) circle (2cm);
+            
+            % Fully shade the common region
+            \begin{scope}
+                \clip (0,0) circle (2cm);
+                \clip (2,0) circle (2cm);
+                \fill[blue!50] (-2,-2) rectangle (4,2);
+            \end{scope}
+            
+            % Label the circles
+            \node[below] at (0, -2) {Circle 1};
+            \node[below] at (2, -2) {Circle 2};
+            
+            % Label the common region
+            \node [rotate=90]at (1, 0.2) {\textbf{Common Region}};
+            
+            % Label centers
+            \filldraw[black] (0,0) circle (1.5pt);
+            \filldraw[black] (2,0) circle (1.5pt);
+            \node[left] at (0, 0) {$O_1$};
+            \node[right] at (2, 0) {$O_2$};
+        \end{tikzpicture}
+    </latex-image>
+        
+    </image>
+    <p>
+        Mathematically, the area of the common region can be found by:
+    </p>
+    <p>
+        <ol>
+            <li>
+                <p>
+                    Calculating the area of the two circular segments formed by 
+                    the chord joining the intersection points.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Using the formula:
+                </p>
+                <p>
+                    <md>
+                        <mrow>A= \amp A_\text{segment 1}+ A_\text{segment 2}</mrow>
+                    </md>
+                    as shown below;
+                </p>
+                <image width="50%">
+                <latex-image label="Intersecting2">
+                    \begin{tikzpicture}
+                        % Define points
+                        \coordinate (P) at (-1.5,0);
+                        \coordinate (Q) at (1.5,0);
+                        \coordinate (A) at (0,1.5);
+                        \coordinate (B) at (0,-1.3);
+
+                        % Shade the overlapping region in cyan
+                        \begin{scope}
+                            \clip (P) circle (2);
+                            \clip (Q) circle (2);
+                            \fill[cyan!50] (P) circle (2);
+                        \end{scope}
+
+                        % Draw the circles
+                        \draw (P) circle (2);
+                        \draw (Q) circle (2);
+
+                        % Draw quadrilateral APBQ
+                        \draw [very thick](0,1.3) -- (P) -- (0,-1.3) -- (Q) -- cycle;
+                        \draw [very thick](0,1.3)-- (B);
+
+                        % Labels
+                        \node[left] at (P) {P};
+                        \node[right] at (1.7,0) {Q};
+                        \node[above] at (A) {A};
+                        \node[below] at (B) {B};
+                        
+                        \draw [-&gt;,very thick] (0.2,0)--(2,3.5);
+                        \draw [-&gt;,very thick] (-0.2,0)--(-2,3.5);
+                        
+                        \node [blue,above] at (-2,3.5)  {$\textbf{Segment}_1$};
+                        \node [blue,above] at (2,3.5)  {$\textbf{Segment}_2$};
+
+                        % Angle arcs
+                        \draw[thick](P) ++(180:0.5) arc[start angle=180, end angle=-180, radius=0.4];
+                        \draw[thick](Q) ++(180:0.5) arc[start angle=-180, end angle=180, radius=0.4];
+
+                        % Angle labels
+                        \node [below] at (-0.9,0.3) {$\theta$};
+                        \node [below]at (0.8,0.3) {$\alpha$};
+
+                    \end{tikzpicture}
+                </latex-image>
+                    
+                </image>
+            </li>
+
+        </ol>
+    </p>
+    <activity>
+        <p>
+            <m>\textbf{work in groups}</m>
+        </p>
+        <p>
+            <term>What you require;</term> Compass, ruler, pencil, graph paper and Calculator.
+        </p>
+        <p>
+            <ol>
+                <li>
+                    <p>
+                        Use a compass to draw a circle with a radius of
+                        <m>5\,cm</m> centered at point <m>O</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        From a point <m>2 \,cm</m> to the right of <m>O</m>, 
+                        draw another circle with the same radius (<m>5 cm</m>).
+                    </p>
+                    <p>
+                        This should create an overlapping region.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Name the intersection points of the two circles as P and Q.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Lightly shade the overlapping region between the two circles.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Finding the area of the common region.
+                    </p>
+                    <p>
+                        How does the distance between centers affect the common area?
+                    </p>
+
+                    
+                </li>
+                <li>
+                    <p>
+                        Discuss your result with other learners in class. 
+                    </p>
+                </li>
+            </ol>
+        </p>
+        
+        
+    </activity>
+    
+   
+
+    
+    
+
+
+
+
+    
+</subsection>
