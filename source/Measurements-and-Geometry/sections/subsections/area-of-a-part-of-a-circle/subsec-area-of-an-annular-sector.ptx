@@ -1,0 +1,497 @@
+<subsection xml:id="subsec-area-of-an-annular-sector">
+    <title>Area of an annular sector</title>
+    <definition xml:id="def-Annular-sector">
+        <statement>
+            <p>
+                An annular sector is the region enclosed between two concentric sectors of a circle with different radii but
+                the same central angle. It is similar to a sector but with a smaller sector removed from a larger one.
+            </p>
+            <image width="60%">
+            <latex-image label="Ann1">
+                \begin{tikzpicture}
+                      % Define radii and angle
+                    \def\R{3}  % Outer radius
+                    \def\r{2}  % Inner radius
+                    \def\a{40} % Half of the total angle theta
+
+                    % Draw concentric circles
+                    \draw[dashed,very thick] (0,0) circle (\R);
+                    \draw[dashed,very thick] (0,0) circle (\r);
+                    
+                    % Draw annular sector
+                    \fill[green!30,very thick] (\a:\r) arc (\a:-\a:\r) -- (-\a:\R) arc (-\a:\a:\R) -- cycle;
+
+                    % Draw sector boundaries
+                    \draw[very thick, blue] (0,0) -- (\a:\R);
+                    \draw[thick, red] (0,0) -- (-\a:\R);
+                    \draw[thick] (\a:\R) arc (\a:-\a:\R);
+                    \draw[thick] (\a:\r) arc (\a:-\a:\r);
+
+                    % Draw angle arc (theta) touching both red radii
+                    \draw[thick, blue] (\a:1) arc (\a:-\a:1);
+                    
+                    % Label for theta
+                    \node[blue,right] at (1,0.3) {\Large $\theta$};
+
+                    % L
+                    \node at (\a+5:\R-0.3) {\Large $R$}; % Outer radius label
+                    \node[below] at (0.5,-0.7) {\Large $r$}; % Inner radius label
+                    \draw [very thick,blue,&lt;-&gt;]  (0,-0.1)--(1.4,-1.4);
+                \end{tikzpicture}
+            </latex-image>
+               
+            </image>
+
+            <p>
+                Having the knowledge of the area of a sector and the area of an annulus it is very easy to identify the area of an 
+                annular sector.
+            </p>
+            
+        </statement>
+    </definition>
+    <p>
+        <m>\textbf{Area of an annular sector}</m>
+    </p>
+    <p>
+        <ol>
+            <li>
+                <p>
+                    Recall: The area of an annulus which is given by:
+                </p>
+                <p>
+                    <md>
+                        <mrow> \text{Area of an annular}=\amp \pi(R^2-r^2)</mrow>
+                    </md>
+                </p>
+            </li>
+            <li>
+                <p>
+                    Multiply the area of an annulus by <m>\frac{\theta}{360}</m> to get;
+                </p>
+                <p>
+                    <md>
+                        <mrow> =\amp \frac{\theta}{360} \times \pi(R^2-r^2)</mrow>
+                    </md>
+                </p>
+                <p>
+                    Therefore, area of an annular sector is:
+                </p>
+                <p>
+                    <md>
+                        <mrow>A= \amp \frac{\theta}{360} \times \pi(R^2-r^2)</mrow>
+                    </md>
+                </p>
+            </li>
+        </ol>
+    </p>
+    <activity>
+        <p>
+            <m>\text{Work in groups}</m>
+        </p>
+        <p>
+            <term>What you require;</term> 
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <p>
+                        Two circular paper cutouts (one smaller, one larger),
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Scissors,
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Protractor,
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Ruler,
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Colored markers.
+                    </p>
+                </li>
+            </ul>
+        </p>
+        <p>
+            <ol>
+                <li>
+                    <p>
+                        Take two circular cutouts of different sizes but with 
+                        the same center.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Use a protractor to mark the same central 
+                        angle <m>\theta</m> on both circles.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Cut out the corresponding sectors from both circles.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Place the smaller sector on the larger 
+                        one and observe the remaining shape.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Measure and calculate the area of each sector using the 
+                        formula and compare with your actual cutout.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Discuss with other groups how to get the area of the figure you have formed.
+                    </p>
+                </li>
+            </ol>
+        </p>
+    </activity>
+    <activity>
+        <p>
+            <m>\textbf{Work as groups}</m>
+        </p>
+        <p>
+            <term>Materials Needed:</term>
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <p>
+                        A car wiper blade (or a picture of one) like the one drawn below;
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        A protractor
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        A ruler
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        A notebook and calculator
+                    </p>
+                </li>
+            </ul>
+        </p>
+        <image width="60%">
+        <latex-image label="Ann2">
+            \begin{tikzpicture}[scale=0.5]
+                % Sector (area swept by wiper)
+                \fill[pattern=north east lines] (0,0) -- (100:16) arc (100:0:16) -- cycle;
+                
+                \fill[fill=white,very thick] (0,0) -- (100:14) arc (100:0:14) -- cycle;
+                
+                \fill[fill=blue] (0,0) -- (100:1) arc (100:0:1) -- cycle;
+
+                
+
+                % Lines for sector
+                \draw [very thick] (0,0) -- (100:16);
+                \draw [very thick] (0,0) -- (0:16);
+                \draw  [very thick] (100:16) arc (100:0:16);
+
+                % Angle label
+                \node [right] at (0.9, 0.8) {$\theta$};
+                \draw[&lt;-&gt;,below,blue,very thick] (0,-0.2)--(14,-0.2);
+                \draw[&lt;-&gt;,below,blue,very thick] (14,-0.2)--(16,-0.2);
+
+
+                % Wiper label
+                \node[left] at (100:16) {Wiper};
+            \end{tikzpicture}
+        </latex-image>
+           
+            
+        </image>
+        <p>
+            <ol>
+                <li>
+                    <p>
+                        Find the dimensions of the following;
+                    </p>
+                    <p>
+                        The length of the wiper blade.
+                    </p>
+                    <p>
+                        The pivot point to the base of the wiper blade.
+                    </p>
+                    <p>
+                        The angle <m>\theta</m> is the angle through which the wiper moves.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Use the formula:
+                    </p>
+                    <p>
+                        <md>
+                            <mrow>A= \amp \frac{\theta}{360} \times \pi(R^2-r^2) </mrow>
+                        </md>
+                        to calculate the area cleaned by the wiper.
+                    </p>
+                    <p>
+                        
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Ask students in your group to observe whether the wiper 
+                        covers all parts of the windshield equally.
+                    </p>
+                </li>
+            </ol>
+        </p>
+    </activity>
+    <example>
+        <statement>
+            <p>
+                A car wiper has:
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            Outer radius <m>=40 \,cm</m>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Inner radius <m>r=10\,cm</m>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Central angle <m>=120^\circ</m>
+                        </p>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                Find the area cleaned by the wiper.
+            </p>
+        </statement>
+        <solution>
+            <p>
+                You have;
+            </p>
+            <p>
+                <m>R=40 \,cm\, r=10\,cm \text{and} \, \theta=120^\circ</m>
+            </p>
+            <p>
+                The above information is for an annular sector so we use formula;
+            </p>
+            <p>
+               
+                    <m>A=  \frac{\theta}{360} \times \pi(R^2-r^2) </m>
+                
+            </p>
+            <p>
+                Substituting values:
+            </p>
+            <p>
+                <md>
+                    <mrow>A= \amp \frac{120}{360} \times \pi(40^2-10^2) </mrow>
+                    <mrow> =\amp \frac{120}{360} \times \frac{22}{7}(1\,600-100)</mrow>
+                    <mrow> =\amp \frac{1}{3} \times \frac{22}{7}\times \,1\,500</mrow>
+                    <mrow> =\amp 1\,571.428571</mrow>
+                    <mrow> ≈\amp 1\,571.4 \,cm^2 </mrow>
+                </md>
+            </p>
+            <p>
+                The wiper cleans approximately <m> 1\,571.4 \,cm^2</m> of the windshield.
+            </p>
+        </solution>
+    </example>
+    <example>
+        <statement>
+            <p>
+                A wind turbine blade sweeps through a central angle of <m>140^\circ</m>. The length 
+                of the blade is <m>50\, m</m>, and the inner radius (distance from the 
+                pivot to the base of the blade) is <m>10\, m</m>. Find the swept area.
+            </p>
+            
+        </statement>
+        <solution>
+            <p>
+                The learger radius (<m>R</m>) <m>=50\,m</m>
+            </p>
+            <p>
+                The inner radius (<m>r</m>)  <m>=10\,m</m>
+            </p>
+            <p>
+                Angle subtended <m>=140^\circ</m>
+            </p>
+            <p>
+                <md>
+                    <mrow>A= \amp \frac {140}{360} \times \pi (50^2-10^2)</mrow>
+                    <mrow>= \amp \frac{7}{18} \times \frac{22}{7} (2\,500-100) </mrow>
+                    <mrow> =\amp   \frac{7}{18} \times \frac{22}{7} \times 2\,400</mrow>
+                    <mrow>= \amp 2933.333333 </mrow>
+                    <mrow> ≈\amp 2\,933.3 \,m^2 </mrow>
+                </md>
+            </p>
+            <p>
+                The turbine sweeps an area of approximately <m>2\,933.3 \,m^2</m>.
+            </p>
+        </solution>
+    </example>
+    <example>
+        <statement>
+            <p>
+                Find the area of the annular shown belo. (Use <m>\pi= 3.142</m>)
+            </p>
+            <image width="60%">
+            <latex-image label="Ann3">
+                \begin{tikzpicture}
+                     % Draw the outer sector (R = 12 cm)
+                    \filldraw[cyan!30 ,very thick] (0,0) -- (60:12) arc (60:0:12) -- cycle;
+                    
+                    % Draw the inner sector (r = 8 cm)
+                    \filldraw[white] (0,0) -- (60:8) arc (60:0:8) -- cycle;
+                    
+                    % Draw the outer arc
+                    \draw[thick] (0,0) -- (0:12);
+                    \draw[thick] (0,0) -- (60:12);
+                    \draw[thick] (0:12) arc (0:60:12);
+
+                    % Draw the inner arc
+                    \draw[thick] (0,0) -- (0:8);
+                    \draw[thick] (0,0) -- (60:8);
+                    \draw[thick] (0:8) arc (0:60:8);
+
+                
+                    
+
+                    % Label the angle
+                    \draw[thick] (1,0) arc (0:60:1);
+                    \node at (20:1.5) {  $60^\circ$};
+                    
+                    \node [above] at (3,0.1) { $8$ cm};
+                    
+                    \node [below] at (3,-0.2) { $12$ cm};
+                    \draw [below,&lt;-&gt;,blue,very thick] (0,-0.2)--(12,-0.2);
+                    
+                    \draw [below,&lt;-&gt;,blue,very thick] (0,0.1)--(8,0.1);
+                \end{tikzpicture}
+            </latex-image>
+                
+                
+            </image>
+        </statement>
+        <solution>
+            <p>
+                <m>A= \frac{\theta}{360} \times \pi(R^2-r^2)</m>
+            </p>
+            <p>
+                <md>
+                    <mrow> A=\amp \frac{60}{360} \times \pi(12^2-8^2) </mrow>
+                    <mrow> =\amp \frac{60}{360} \times 3.142 (144-64)</mrow>
+                    <mrow> =\amp \frac{1}{6} \times 3.142\times 80 </mrow>
+                    <mrow> =\amp  \frac{1}{3} \times 3.142 \times  40</mrow>
+                    <mrow>= \amp 41.89333333 </mrow>
+                    <mrow> ≈\amp 41.89\,cm^2 </mrow>
+                    
+                </md>
+            </p>
+        </solution>
+    </example>
+
+    
+    <p>
+        <m>\textbf{Exercise}</m>
+    </p>
+    <p>
+        <ol>
+            <li>
+                <p>
+                    A clock's minute hand moves <m>150^\circ </m> in <m>25</m> minutes. The minute 
+                    hand is <m>15 \,cm</m> long, and the inner radius is <m>5 \,cm</m> Calculate the cleaned area.
+                </p>
+                
+            </li>
+            <li>
+                <p>
+                    A windshield wiper moves through <m>110^\circ</m>. 
+                    The blade is <m>45 \,cm</m> long, and the pivot distance is <m>15\, cm</m>.  Calculate the cleaned area.
+                </p>
+                
+            </li>
+            <li>
+                <p>
+                    A mechanical arm sweeps through 180°. 
+                    The outer radius is <m>8\, m</m>, and the inner radius is 
+                    <m>2 \,m</m>. Determine the area covered.
+                </p>
+            </li>
+            <li>
+                <p>
+                The shaded region in the figure
+                below shows the area swept out on a
+                flat windscreen by a wiper.
+                Calculate the area of this region.
+            </p>
+            <image width="60%">
+            <latex-image  label="Ann4">
+                \begin{tikzpicture}[scale=0.5]
+                    % Sector (area swept by wiper)
+                    \fill[pattern=north east lines] (0,0) -- (100:16) arc (100:0:16) -- cycle;
+                    
+                    \fill[fill=white,very thick] (0,0) -- (100:14) arc (100:0:14) -- cycle;
+                    
+                    \fill[fill=blue] (0,0) -- (100:1) arc (100:0:1) -- cycle;
+
+                    
+
+                    % Lines for sector
+                    \draw [very thick] (0,0) -- (100:16);
+                    \draw [very thick] (0,0) -- (0:16);
+                    \draw  [very thick] (100:16) arc (100:0:16);
+
+                    % Angle label
+                    \node [right] at (0.9, 0.8) {$120^\circ$};
+                    \draw[&lt;-&gt;,below,blue,very thick] (0,-0.2)--(14,-0.2);
+                    \draw[&lt;-&gt;,below,blue,very thick] (14,-0.2)--(16,-0.2);
+
+                    % Length labels
+                    \node[below] at (0:9) {16 cm};
+                    \node[above left] at (100:14.5) {4 cm};
+
+                    % Wiper label
+                    \node[left] at (100:16) {Wiper};
+                \end{tikzpicture}
+            </latex-image>
+                
+                
+            </image>
+            </li>
+        </ol>
+    </p>
+    
+
+
+
+    
+    
+
+
+
+
+    
+</subsection>
