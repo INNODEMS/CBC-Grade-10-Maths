@@ -1,0 +1,682 @@
+<subsection xml:id="subsec-area-of-a-segment-of-a-circle">
+    <title>Area of a segment of a circle</title>
+    <p>
+        A <m>\textbf{segment} </m> is the region of a circle bounded by a chord and an arc as shown in the figure below.
+    </p>
+    <image width="50%">
+    <latex-image label="Segment1">
+        \begin{tikzpicture}
+            % Draw the circle
+            \draw[thick] (0,0) circle (3);
+            
+            % Define points for the chord
+            \coordinate (A) at (3,0);
+            \coordinate (B) at (-1.5,2.598);
+            \coordinate (O) at (0,0);
+            
+            % Draw the chord
+            \draw[thick] (A) -- (B);
+            
+            % Draw the radii
+            \draw[thick] (O) -- (A);
+            \draw[thick] (O) -- (B);
+            
+            % Shade the segment (Use a darker blue)
+            \fill[blue!60, opacity=0.7] (A) arc[start angle=0, end angle=120, radius=3cm] -- (B) -- cycle;
+            
+            % Draw the arc (on top for visibility)
+            \draw[thick] (A) arc[start angle=0, end angle=120, radius=3cm];
+            
+            % Label the points
+            \node[right] at (3,0) {A};
+            \node[above] at (B) {B};
+            \node[below] at (O) {O};
+            
+            % Mark the angle
+            \draw[thick] (0.8,0) arc[start angle=0, end angle=120, radius=0.8cm];
+            \node at (0.7,0.6) {\(\theta\)};
+            
+            \draw [very thick,-&gt;](1,2.8)--(2,3) ;
+            \draw [very thick,-&gt;](1,1.15)--(3.5,1);
+            
+            
+            \node [right] at (2,3){\textbf{Arc}};
+            \node [right] at (3.5,1){\textbf{Chord}};
+            \node [below] at (1.5,0){$r=q$};
+        \end{tikzpicture}
+    </latex-image>
+        
+        
+    </image>
+    <p>
+        The shaded region is a segment of the circle with centre <m>O</m> and the radius <m>q</m>
+    </p>
+    <p>
+        <m>\textbf{Area of a segment of a circle.}</m>
+    </p>
+    <p>
+        The area of a segment is given by;
+    </p>
+    <p>
+        <m> \text{Area of a segment}=\text{Area of sector}-\text{Area of  triangle}</m>
+    </p>
+    <p>
+        <term>Note:</term>
+    </p>
+    
+    <p>
+        Area of triangle used should be <m>A=\frac{1}{2}bh</m> or any other formular you have interacted with.
+    </p>
+    <activity>
+        <p>
+            <m>\textbf{Work in groups}</m>
+        </p>
+        <p>
+            <term>What you require;</term> 
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <p>
+                        A compass,
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        A ruler,
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        A protractor,
+                    </p>
+                </li>
+                
+                <li>
+                    <p>
+                        A scientific calculator,
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        A worksheet with given radii and angles
+                    </p>
+                </li>
+            </ul>
+        </p>
+        <p>
+            <ol>
+                <li>
+                    <p>
+                         Use a compass to draw a circle of radius <m>r</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Draw a chord across the circle using a ruler.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Use a protractor to measure the angle subtended at the center by the chord.
+                    </p>
+                    <p>
+                        Shade the segment formed
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Find the area of the segment part and record your results.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Perform the same process for different chords and angles eg <m>70^\circ, \,90^\circ,\,120^\circ,\,150^\circ...</m>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Discuss your work with other learners in your class.
+                    </p>
+                </li>
+            </ol>
+        </p>
+    </activity>
+    <example>
+        <statement>
+            <p>
+                A chord in a circle of radius <m>7\, cm</m> subtends an angle of<m> 75^\circ</m> at the center as shown below. Find the area of the segment.
+            </p>
+            <image width="50%">
+            <latex-image label="Segment2">
+                \begin{tikzpicture}
+                    % Draw the circle
+                    \draw[thick] (0,0) circle (3);
+                    
+                    % Define points for the chord
+                    \coordinate (A) at (3,0);
+                    \coordinate (B) at (0,3);
+                    \coordinate (O) at (0,0);
+                    
+                    % Draw the chord
+                    \draw[thick] (A) -- (B);
+                    
+                    % Draw the radii
+                    \draw[thick] (O) -- (A);
+                    \draw[thick] (O) -- (B);
+                    
+                    % Shade the segment (darker blue for visibility)
+                    \fill[very thick,green!60, opacity=0.7] (A) arc[start angle=0, end angle=90, radius=3cm] -- (B) -- cycle;
+                    
+                    % Draw the arc
+                    \draw[thick] (A) arc[start angle=0, end angle=90, radius=3cm];
+                    
+                
+                    
+                    % Mark the angle
+                    \draw[very thick] (0.7,0) arc[start angle=0, end angle=90, radius=0.7cm];
+                    \node [right]at (0.7,0.5) {\(75^\circ\)};
+                    \node[left] at (0,1.5){\textbf{7 cm}};
+                \end{tikzpicture}
+            </latex-image>
+            
+                
+            </image>
+        </statement>
+        <solution>
+            <p>
+                To find the area of the segment, you the area of the triangle and subtract from the area of the sector.
+            </p>
+            <p>
+                <m>\textbf{Area of sector }</m>
+            </p>
+            <p>
+                <m>A= \frac{\theta}{ 360} \times \pi r^2</m>
+            </p>
+            <p>
+                <md>
+                    <mrow> A=\amp \frac{75^\circ}{ 360} \times \frac{22}{7} \times  7^2 </mrow>
+                    <mrow> =\amp \frac{5}{24} \times \frac{22}{7} \times 49</mrow>
+                    <mrow> =\amp \frac{385}{12} </mrow>
+                    <mrow> =\amp 32.0833 \cm^2 </mrow>
+                    
+
+                
+                </md>
+            </p>
+            <p>
+                <m>\texttbf{Area of a triangle }</m>
+            </p>
+            <p>
+                <m>A= \frac{1}{2} ab sin \,\theta</m>
+            </p>
+            <p>
+                Where <m>a=7\,cm \,\text{and} \,b= 7 \,cm</m>
+            </p>
+            <p>
+                <md>
+                    <mrow> A=\amp  </mrow>
+                    <mrow> =\amp \frac{1}{2} \times  7 \times 7\times \times  sin \,75^\circ</mrow>
+                    <mrow> =\amp  \frac{1}{2} \times  49 \times  sin \,75^\circ</mrow>
+                    <mrow> =\amp  23.6652 \,cm^2</mrow>
+                    
+                    
+
+                
+                </md>
+            </p>
+            <p>
+                Therefor,
+            </p>
+            <p>
+                <md>
+                    <mrow>A= \amp 32.0833 \,cm^2- 23.6652 \,cm^2 </mrow>
+                    <mrow>= \amp 8.4181\,cm^2</mrow>
+                </md>
+            </p>
+        </solution>
+    </example>
+    <example>
+        <statement>
+            <p>
+                A chord XY of length <m>14 \,cm</m> is
+                drawn in a circle with centre O and
+                radius <m>8 cm</m>, as in the figure below
+            </p>
+            <image width="50%">
+            <latex-image label="Segment3">
+                \begin{tikzpicture}
+                    % Draw the circle
+                    \draw [very thick] (0,0) circle (6.4cm);
+                    
+                    % Define points
+                    \coordinate (O) at (0,0);
+                    \coordinate (X) at (-6,-2);
+                    \coordinate (Y) at (6,-2);
+                    \coordinate (N) at (0,-2);
+                    \coordinate (P) at (0,-6.4);
+                    
+                    % Draw triangle
+                    \draw [very thick] (O) -- (X) -- (Y) -- cycle;
+                    \draw [thick] (O) -- (N);
+                    \draw [thick] (N) -- (X);
+                    \draw [thick] (N) -- (Y);
+
+                    
+                    
+                
+                    
+                    % Right angle marker at N
+                    \draw [very thick](N) ++(-0.3,0) -- ++(0,0.3) -- ++(0.3,0);
+                    
+                
+
+                    % Shaded segment
+                    % Draw labels
+                    \node[above] at (O) {\textbf{O}};
+                    \node[left] at (X) {\textbf{X}};
+                    \node[right] at (Y) {\textbf{Y}};
+                    \node[below] at (P) {\textbf{P}};
+                    \node[below] at (N) {\textbf{N}};
+                    
+                    % Length labels
+                    \node[left] at (-2,0) {\huge 8 cm};
+                    \node[below] at (0,-2.3) {\huge 14 cm};
+
+                \end{tikzpicture}
+            </latex-image>
+                
+                
+            </image>
+            <p>
+                Calculate:
+            </p>
+            <p>
+                <ol marker="(a)">
+                    <li>
+                        <p>
+                            the distance ON.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            the area of the sector OXPY.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            the area of triangle OXY
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            the area of the minor segment.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            the area of the major segment.
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </statement>
+        <solution>
+            <p>Given a circle with center <m>O</m>, radius 
+            <m>8</m> cm, and a chord <m>XY</m> of length <m>14\,cm</m> , 
+            we find the required values step by step.</p>
+            <p>
+                <ol marker="(a)">
+                    <li>
+                        <p>Finding the Distance <m>\text{ON}</m></p>
+                        <p>
+                            Since ON is the perpendicular bisector of XY, 
+                            we use the right triangle ONX where:
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> \text{OX}=\amp 8\,cm (\text{radius}) </mrow>
+                                <mrow> \text{NX}=\amp \frac{\text{XY}}{2} </mrow>
+                                <mrow>= \amp \frac{12}{2} </mrow>
+                                <mrow>= \amp 7\,cm</mrow>
+                            </md>
+                        </p>
+                        <p>
+                            Using Pythagoras' Theorem in <m>\triangle</m> ONX:
+                        </p>
+                        <p>
+                            <md>
+                                <mrow>\text{ON}^2+ \text{NX}^2 =\amp \text{OX}^2</mrow>
+                                <mrow> \text{ON}^2+ 7^2= \amp 8^2 </mrow>
+                                <mrow> \text{ON}^2+ 49= \amp 64 </mrow>
+                                <mrow> \text{ON}^2=\amp 64-49</mrow>
+                                <mrow>\text{ON}^2= \amp 15 </mrow>
+                                <mrow> \text{ON} =\amp \sqrt{15} </mrow>
+                                <mrow> ​≈\amp  3.87 \,cm</mrow>
+                            </md>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Finding the area of sector OXPY.
+                        </p>
+                        <p>
+                            Finding the <m>\angle</m> XOY which is given by:
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> cos\,\theta= \amp  (\frac{\text{XN}}{\text{XO}} )</mrow>
+                                <mrow> =\amp \frac{7}{8} </mrow>
+                                <mrow> =\amp 0.875 </mrow>
+                                <mrow> \theta=\amp cos^{-1}(0.875) </mrow>
+                                <mrow> =\amp 28.9550^\circ </mrow>
+                            </md>
+                        </p>
+                        <p>therefor, <m>\angle \text{XOY}= 28.9550^\circ\times 2</m> </p>
+                        <p>
+                            <me>=57.9100^\circ</me>
+                        </p>
+                        <p>
+                            The area of a sector is:
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> A=\amp  \frac{\theta}{360} \times \pi r^2</mrow>
+                                <mrow> =\amp \frac{57.9100}{360} \times \pi 8^2 </mrow>
+                                <mrow> =\amp  \frac{57.9100}{360} \times \frac{22}{7} \times 64</mrow>
+
+                                <mrow> =\amp 32.3561 \,cm^2 </mrow>
+                                
+                            </md>
+                        </p>
+                        <p>
+                            Therefore, area of sector OXPY <m>=  32.3561 \,cm^2</m>
+                        </p>
+
+                    </li>
+                    <li>
+                        <p>
+                            Finding the area of triangle OXY
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> \text{Area}= \amp \frac{1}{2} \times \text{base} \times \text{height} </mrow>
+                                <mrow> =\amp  \frac{1}{2} \times 14 \times 3.87 \,cm </mrow>
+                                <mrow>= \amp 7 \times 3.87 \,cm  </mrow>
+                                <mrow> =\amp  27.09 \,cm^2</mrow>
+                            </md>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Finding the area of the minor segment.
+                        </p>
+                        <p>
+                            <m>\text{Area of minor segment}=\text{Area of sector}- \text{Area of} \triangle \text{OXY}</m>
+                        </p>
+                        <p>
+                            <md>
+                                <mrow> \text{Area of minor segment}=\amp  </mrow>
+                                <mrow> =\amp 32.3561 \,cm^2-27.09 \,cm^2 </mrow>
+                                <mrow> =\amp 5.2661\,cm^2 </mrow>
+                            </md>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Finding the area of the major segment
+                        </p>
+                        <p>
+                            Area of major segment <m>=</m> Total circle area<m>-</m>Area of minor segment
+                        </p>
+                        <p>
+                            Area of a circle.
+                        </p>
+                        <p>
+                            <md>
+                                <mrow>A=  \amp \pi r^2 </mrow>
+                                <mrow> =\amp \frac{22}{7} \times 8^2 </mrow>
+                                <mrow> =\amp \frac{22}{7} \times 64 </mrow>
+                                <mrow> =\amp 201.1429 \,cm^2 </mrow>
+                                
+                            </md>
+                        </p>
+                        <p>
+                            Therefore, Area of major segment is 
+                        </p>
+                        <p>
+                            <md>
+                                <mrow>= \amp 201.1429 \,cm^2- 5.2661\,cm^2</mrow>
+                                <mrow> =\amp 195.8768\,cm^2 </mrow>
+                            </md>
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </solution>
+
+    </example>
+    <example>
+        <statement>
+            <p>
+                A chord XY subtends an angle of
+                <m>120^\circ</m> at the centre of a circle of
+                radius <m>13\, cm</m>. Calculate the area of
+                the minor segment.
+            </p>
+            
+        </statement>
+        <solution>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            Radius of the circle: <m>r=13\,cm</m>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Angle subtended at the center:<m>\theta=120^\circ</m>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Formula for area of the minor segment:
+                        </p>
+                        <p>
+                            <m>\text{Area of minor segment}=\text{Area of sector}-\text{Area of triangle}</m>
+                        </p>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                Find the Area of the Sector
+            </p>
+            <p>
+                <m>\text{Area of sector}=\frac{\theta}{360} \times \pi r^2</m>
+            </p>
+            <p>
+                Substituting the given values:
+            </p>
+            <p>
+                <md>
+                    <mrow> \text{Area of sector}=\amp \frac{120}{360} \times \frac{22}{7} \times 13^2</mrow>
+                    <mrow>= \amp \frac{1}{3} \times  \frac{22}{7} \times 169 </mrow>
+                    <mrow> =\amp 177.0476\,cm^2 </mrow>
+                   
+                </md>
+            </p>
+            <p>
+                Find the Area of Triangle OXY.
+            </p>
+            <p>
+                The triangle 0XY is isosceles with two equal
+                sides <m>r=3\,cm</m> and an included angle of <m>120^\circ</m>>
+            </p>
+            <p>
+                Area of <m>\triangle \text{OXY}=frac{1}{2}absin\,\theta</m>
+            </p>
+            <p>
+                Substituting the values:
+            </p>
+            <p>
+                <md> 
+                    <mrow>\text{Area of } \triangle \text{OXY}=\amp  \frac{1}{2}\times 13\times 13 \times sin\,120^\circ</mrow>
+                    <mrow> =\amp \frac{1}{2} \times 13^2 \times sin\,120</mrow>
+                    <mrow> = \amp \frac{1}{2} \times 169 \times  sin\,120</mrow>
+                    <mrow> =\amp  \frac{169}{2} \times0.8660 </mrow>
+                    <mrow> =\amp 73.2 cm^2 </mrow>
+                    
+                </md>
+            </p>
+            <p>
+                Find the Area of the Minor Segment
+            </p>
+            <p>
+                <md>
+                    <mrow> =\amp 177.0476\,cm^2- 73.2 cm^2</mrow>
+                    <mrow> =\amp 103.8476 \,cm^2</mrow>
+                    
+                </md>
+            </p>
+        </solution>
+    </example>
+
+
+
+    <p>
+        <m>\textbf{Exercise}</m>
+    </p>
+    <p>
+        <ol>
+            <li>
+                <p>
+                    In the figure below, ADC is a chord
+                    of a circle with centre O passing
+                    through A, B and C. BD is a
+                    perpendicular bisector of AC. AD <m>=
+                    4 \,cm</m> and BD <m>= 2 \,cm</m>.
+                </p>
+                <image width="50%">
+                <latex-image label="Segment4">
+                    \begin{tikzpicture}[scale=1.2]
+                        egin{tikzpicture}[scale=1.2] 
+                        % Coordinates
+                        \coordinate (O) at (0,3);
+                        \coordinate (A) at (-2,0);
+                        \coordinate (C) at (2,0);
+                        \coordinate (D) at (0,0);
+                        \coordinate (B) at (0,-1);
+
+                        % Lines
+                        \draw [fill=blue,very thick](O) -- (A) -- (C) -- cycle; % Triangle OAC
+                        \draw (A) -- (C);
+                        \draw [very thick](D) -- (B);
+
+                        % Arc
+                        \draw  (A) to[out=-60,in=-120] (C);
+
+                        % Right angle mark
+                        \draw (0,-0.2) -- (0.2,-0.2) -- (0.2,0);
+
+                        % Labels
+                        \node[above] at (O) {O};
+                        \node[left] at (A) {A};
+                        \node[right] at (C) {C};
+                        \node[above] at (D) {D};
+                        \node[below] at (B) {B};
+                        \node[above right] at (-1,0) {4 cm};
+                        \node[right] at (0,-0.5) {2 cm};
+                    \end{tikzpicture}
+                </latex-image>
+                    
+                </image>
+
+
+                <p>
+                    Calculate:
+                </p>
+                <p>
+                    <ol marker="(a)">
+                        <li>
+                            <p>
+                                the radius OA of the circle.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                the area of the sector OABC.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                the area of the segment ABCD
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+            </li>
+            <li>
+                <p>
+                    A circular table has a radius of <m>15 \,cm</m>. A slice of cake is cut out, forming a <m>75^\circ </m> segment. 
+                    Find the area of the cake slice not covered by the straight cut
+                </p>
+            </li>
+            <li>
+                <p>
+                    A wheel of a car has a radius of <m>30 \,cm</m>. A mudguard covers a <m>60^\circ</m> segment of the wheel. 
+                    Find the area of the covered segment.
+                </p>
+            </li>
+            <li>
+                <p>
+                    A circular park has a radius of <m>20</m> meters. A walking path cuts across the park, 
+                    forming a chord that subtends an angle of <m>120^\circ</m> at the center as shown below.
+                </p>
+                <image width="50%">
+                <latex-image label="Segment5">
+                    \begin{tikzpicture}
+                        % Draw the circle
+                        \draw[very thick] (0,0) circle (3);
+                        
+                        % Define points for the chord
+                        \coordinate (A) at (3,0);
+                        \coordinate (B) at (-1.5,2.598);
+                        \coordinate (O) at (0,0);
+                        
+                        % Draw the chord
+                        \draw[thick] (A) -- (B);
+                        
+                        % Draw the radii
+                        \draw[thick] (O) -- (A);
+                        \draw[thick] (O) -- (B);
+                        
+                        % Shade the segment (darker for visibility)
+                        \fill[cyan!60, opacity=0.7] (A) arc[start angle=0, end angle=120, radius=3cm] -- (B) -- cycle;
+                        
+                        % Draw the arc
+                        \draw[thick] (A) arc[start angle=0, end angle=120, radius=3cm];
+                        
+                    
+                        % Mark the angle
+                        \draw[thick] (0.7,0) arc[start angle=0, end angle=120, radius=0.7cm];
+                        \node [right]at (0.5,0.3) {\(120^\circ\)};
+    
+                    \end{tikzpicture}
+                </latex-image>
+                   
+                </image>
+            </li>
+        </ol>
+    </p>
+    
+
+
+    
+    
+
+
+
+
+    
+</subsection>
