@@ -1,5 +1,74 @@
 <subsection xml:id="subsec-magnitude-of-a-vector">
     <title>Magnitude of a Vector</title>
+    <p>
+        The <alert>magnitude</alert> of vector <m>\mathbf{AB}</m> in 
+        <xref ref="magnitude-vect-1"/> can be denoted as <m>|\mathbf{AB}|</m>.
+        The magnitude of vector <m>\mathbf{AB}</m> represents the distance between
+        point <m>\mathbf{A}</m> and point <m>\mathbf{B}</m>.
+    </p>
+    <p>
+        We can represent the components of vector <m>\mathbf{AB}</m> as 
+        <m>\begin{pmatrix} x \\ y \end{pmatrix}</m>, where 
+        <m>x</m> represents the horizontal displacement and <m>y</m> 
+        represents the vertical displacement.
+    </p>
+    <p>
+        We calculate the magnitude of vector <m>\mathbf{AB}</m>
+        by applying <alert>Pythagorean theorem</alert> as shown below.
+    </p>
+    <p>
+        <me>
+            |\mathbf{AB}| =  \sqrt{x^2 + y^2}
+        </me>
+    </p>
+    <figure xml:id="magnitude-vect-1">
+        <caption></caption>
+        <image width="60%">
+            <shortdescription></shortdescription>
+            <latex-image>
+                \begin{tikzpicture}
+                    \draw[gray!30, very thin, step=0.1] (-1,-1) grid (6,6);
+                    \draw[step=1cm,black!40,thick] (-1,-1) grid (6,6);
+       
+                    % Draw x and y axes
+                    \draw[- &gt;] (-1,0) -- (5,0) node[right] {$x \, axis$};
+                    \draw[- &gt;] (0,-1) -- (0,5) node[above] {$y \, axis$};
+
+                    % Define points
+                    \coordinate (A) at (1,1);
+                    \coordinate (B) at (4,5);
+                    \coordinate (C) at (4,1);
+
+                    % Draw vector
+                    \draw[very thick](A)-- (B);
+                    \draw[thin,dashed] (A) -- (C) node[midway, below] {\small $x$};
+                    \draw[thin,dashed] (C) -- (B) node[midway, right] {\small $y$};
+
+                    % Draw vector
+                    \draw [-{Latex[scale=2]}] (1,1) -- (2.8,3.4); 
+                    
+                    %draw the right angle
+                    \tkzMarkRightAngle[draw=black,size=.2](A,C,B);
+
+                    % Labels
+                    \node[left] at (A) {$A$};
+                    \node[above] at (B) {$B$};
+                \end{tikzpicture}
+            </latex-image>
+        </image>
+    </figure>
+    <!-- <p>
+        We use pythagorean formula to find the magnitude of a column vector.
+        A vector <m>\mathbf{AB}</m> represented as 
+        <m>\begin{pmatrix}x \\ y \end{pmatrix}</m> where <m>x</m> is the horizontal
+        displacement and <m>y</m> is vertical displacement, we find its magnitude by 
+        applying <m>\sqrt{x^2 + y^2}</m>.
+    </p> -->
+    <p>
+        The magnitude of a vector is always <alert>positive</alert>
+        since <m>x</m> and <m>y</m> components are squared, 
+        resulting in <m>x^2</m> and <m>y^2</m>, both of which are <alert>non-negative</alert>.
+    </p>
     <activity>
         <introduction>
             <p>
