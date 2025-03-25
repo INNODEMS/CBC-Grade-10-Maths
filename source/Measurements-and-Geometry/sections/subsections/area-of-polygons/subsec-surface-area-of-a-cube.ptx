@@ -1,0 +1,196 @@
+<subsection xml:id="subsec-surface-area-of-a-cube">
+    <title>Surface area of a cube</title>
+    
+
+   
+        <p>
+          A cube is unfolded to into a net made up of 6 identical squares.  
+        </p>
+        <sidebyside>
+        <image width="40%">
+    <latex-image>
+        \begin{tikzpicture}
+            % Define cube vertices
+            \coordinate (A) at (0,0,0);
+            \coordinate (B) at (4,0,0);
+            \coordinate (C) at (4,4,0);
+            \coordinate (D) at (0,4,0);
+            \coordinate (E) at (0,0,4);
+            \coordinate (F) at (4,0,4);
+            \coordinate (G) at (4,4,4);
+            \coordinate (H) at (0,4,4);
+
+            % Draw cube faces with colors
+            \fill[yellow!20, opacity=0.8] (A) -- (B) -- (C) -- (D) -- cycle; % Bottom face
+            \fill[green!10, opacity=0.8] (E) -- (F) -- (G) -- (H) -- cycle; % Top face
+            \fill[blue!20, opacity=0.8] (A) -- (B) -- (F) -- (E) -- cycle; % Front face
+            \fill[orange!20, opacity=0.8] (B) -- (C) -- (G) -- (F) -- cycle; % Right face
+            \fill[cyan!20, opacity=0.8] (C) -- (D) -- (H) -- (G) -- cycle; % Back face
+            \fill[purple!20, opacity=0.8] (D) -- (A) -- (E) -- (H) -- cycle; % Left face
+
+            % Draw cube edges
+            \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
+            \draw[thick] (E) -- (F) -- (G) -- (H) -- cycle;
+            \draw[thick] (A) -- (E);
+            \draw[thick] (B) -- (F);
+            \draw[thick] (C) -- (G);
+            \draw[thick] (D) -- (H);
+
+            % Add dimensions without angle brackets
+            \draw (E) -- (F) node[midway, below] {8 cm};
+            \draw (C) -- (G) node[midway, above] {8 cm};
+            \draw (B) -- (F) node[midway, left] {8 cm};
+        \end{tikzpicture}
+    </latex-image>
+    </image>
+    <image>
+                <latex-image>
+                    \begin{tikzpicture}
+                        % Drawing the vertical part of the net with different colors
+                        \fill[yellow!10] (0,-8) -- (0,-4) -- (0,0) -- (0,4) -- (0,8) -- (4,8) -- (4,4) -- (4,0) -- (4,-4) -- (4,-8) -- (0,-8) -- cycle;
+                        
+                        % Missing line
+                        \draw (0,4) -- (4,4);
+                        
+                        % Drawing the horizontal part of the net with different colors
+                        \fill[green!20] (-4,0) -- (0,0) -- (4,0) -- (8,0) -- (8,-4) -- (4,-4) -- (0,-4) -- (-4,-4) -- (-4,0);
+                        
+                        \fill[blue!20] (0,0) -- (0,4) -- (4,4) -- (4,0) -- cycle;
+                        \fill[orange!20] (0,-4) -- (0,0) -- (4,0) -- (4,-4) -- cycle;
+                        \fill[cyan!20] (-4,-4) -- (0,-4) -- (0,0) -- (-4,0) -- cycle;
+                        \fill[purple!20] (4,-4) -- (8,-4) -- (8,0) -- (4,0) -- cycle;
+                        
+                        % Drawing the edges
+                        \draw (0,-8) -- (0,-4) -- (0,0) -- (0,4) -- (0,8) -- (4,8) -- (4,4) -- (4,0) -- (4,-4) -- (4,-8) -- (0,-8) -- cycle;
+                        \draw (-4,0) -- (0,0) -- (4,0) -- (8,0) -- (8,-4) -- (4,-4) -- (0,-4) -- (-4,-4) -- (-4,0);
+                        
+                        % Adding dimension labels
+                        \node[left] at (0,6) {8 cm};
+                        \node[right] at (4,6) {8 cm};
+                        \node[right] at (4,2) {8 cm};
+                        \node[left] at (0,2) {8 cm};
+                        \node[above] at (2,8) {8 cm};
+                        \node[below] at (2,-8) {8 cm};
+                        \node[below] at (6,0) {8 cm};
+                        \node[below] at (-2,0) {8 cm};
+                        
+                        % Adding rectangle labels
+                        \node at (2,6) {A};
+                        \node at (2,2) {B};
+                        \node at (2,-2) {C};
+                        \node at (2,-6) {D};
+                        \node at (-2,-2) {E};
+                        \node at (6,-2) {F};
+
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+    </sidebyside>
+        <example>
+          <statement>
+        
+          <p>
+                (a). Sketch the net of the cube
+            </p>
+
+            <p>
+                (b). Work out the surface area of the cube from its net.
+            </p>
+                    
+        </statement>
+
+        <solution>
+
+            <p>
+                (a).   <m>{\color{blue} \text{The net of the cube is as shown.}}</m>
+            </p>
+                <image>
+                <latex-image>
+                    \begin{tikzpicture}
+                        % Drawing the vertical part of the net with different colors
+                        \fill[yellow!10] (0,-8) -- (0,-4) -- (0,0) -- (0,4) -- (0,8) -- (4,8) -- (4,4) -- (4,0) -- (4,-4) -- (4,-8) -- (0,-8) -- cycle;
+                        
+                        % Missing line
+                        \draw (0,4) -- (4,4);
+                        
+                        % Drawing the horizontal part of the net with different colors
+                        \fill[green!20] (-4,0) -- (0,0) -- (4,0) -- (8,0) -- (8,-4) -- (4,-4) -- (0,-4) -- (-4,-4) -- (-4,0);
+                        
+                        \fill[blue!20] (0,0) -- (0,4) -- (4,4) -- (4,0) -- cycle;
+                        \fill[orange!20] (0,-4) -- (0,0) -- (4,0) -- (4,-4) -- cycle;
+                        \fill[cyan!20] (-4,-4) -- (0,-4) -- (0,0) -- (-4,0) -- cycle;
+                        \fill[purple!20] (4,-4) -- (8,-4) -- (8,0) -- (4,0) -- cycle;
+                        
+                        % Drawing the edges
+                        \draw (0,-8) -- (0,-4) -- (0,0) -- (0,4) -- (0,8) -- (4,8) -- (4,4) -- (4,0) -- (4,-4) -- (4,-8) -- (0,-8) -- cycle;
+                        \draw (-4,0) -- (0,0) -- (4,0) -- (8,0) -- (8,-4) -- (4,-4) -- (0,-4) -- (-4,-4) -- (-4,0);
+                        
+                        % Adding dimension labels
+                        \node[left] at (0,6) {8 cm};
+                        \node[right] at (4,6) {8 cm};
+                        \node[right] at (4,2) {8 cm};
+                        \node[left] at (0,2) {8 cm};
+                        \node[above] at (2,8) {8 cm};
+                        \node[below] at (2,-8) {8 cm};
+                        \node[below] at (6,0) {8 cm};
+                        \node[below] at (-2,0) {8 cm};
+                        
+                        % Adding rectangle labels
+                        \node at (2,6) {A};
+                        \node at (2,2) {B};
+                        \node at (2,-2) {C};
+                        \node at (2,-6) {D};
+                        \node at (-2,-2) {E};
+                        \node at (6,-2) {F};
+
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+
+             <p>
+                (b).   <m>{\color{blue} \text{The surface area of the cube.}}</m>
+             </p>   
+                   <p>
+                    <m>{\color{green} \text{Method 1.}}</m> 
+                   </p>
+                    <p>
+                    <md>
+                        <mrow>\text{The area of one face=} \amp 8 cm \times 8 cm</mrow>
+                        <mrow>= \amp 64 cm^2</mrow>
+                        <mrow>\text {There are 6 surfaces.Therefore the surface area of the cube is;} \amp </mrow>
+                        <mrow>= \amp  6 \times 64 cm^2</mrow>
+                        <mrow>= \amp 384 cm^2</mrow>
+                    </md> 
+                    </p>
+                    <p>
+                       <m>{\color{green} \text{Method 2.}}</m> 
+                    </p>
+                    <p>
+                        <md>
+                            <mrow>\text {Area of a square=} \amp length \times width</mrow>
+                            <mrow>\text {Area of square A}= \amp8cm \times 8 cm </mrow>
+                            <mrow>= \amp64 cm^2 </mrow>
+                             <mrow>\text {Area of square B}= \amp8cm \times 8 cm </mrow>
+                            <mrow>= \amp64 cm^2 </mrow>
+                             <mrow>\text {Area of square C}= \amp8cm \times 8 cm </mrow>
+                            <mrow>= \amp64 cm^2 </mrow>
+                             <mrow>\text {Area of square D}= \amp8cm \times 8 cm </mrow>
+                            <mrow>= \amp64 cm^2 </mrow>
+                             <mrow>\text {Area of square E}= \amp8cm \times 8 cm </mrow>
+                            <mrow>= \amp64 cm^2 </mrow>
+                             <mrow>\text {Area of square F}= \amp8cm \times 8 cm </mrow>
+                            <mrow>= \amp64 cm^2 </mrow>
+                            <mrow>\text{ surface area}=\amp64 cm^2 +64 cm^2 +64 cm^2 +64 cm^2 +64 cm^2 +64 cm^2  </mrow>
+                            <mrow>= \amp  384 cm^2</mrow>
+                        </md>
+                    </p>
+               
+        </solution>
+      </example>
+    
+
+
+
+
+    
+</subsection>
