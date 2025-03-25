@@ -135,7 +135,7 @@
             <ul>
                 <li>
                     <p>
-                        A histogram represents data using adjacent bars to show frequency distribution, while a frequency polygon connects midpoints of class intervals with a line to display trends and comparisons.
+                        A histogram uses adjacent bars to show frequency distribution, while a frequency polygon connects the midpoints of the bars with a line to show patterns.
                     </p>
                 </li>
             </ul>
@@ -197,49 +197,37 @@
                 <image>
                     <latex-image>
                         \begin{tikzpicture}
-                        \begin{axis}[
-                           width=12cm,
-                            height=8cm,
-                            xlabel={Number of Fruits Sold},
-                            ylabel={Frequency (Days)},
-                            xmin=5,
-                            xmax=75,
-                            ymin=0,
-                            ymax=16,
-                            xtick={10,20,30,40,50,60,70},
-                            ytick={0,3,6,9,12,15},
-                            axis lines=left,
-                            ymajorgrids=true,
-                            grid style=dashed,
-                            title={Histogram of Fruits Sold per Day},
-                            bar width=10,  % Set to exactly the width of each bin
-                            ybar interval,  % This is key - it draws bars between x coordinates
-                        ]
+                            % Draw fine grid (each main grid square has 10x10 subdivisions)
+                            \draw[gray!30, very thin, step=0.1] (0,0) grid (8,10); % Adjusted for proper scaling
 
-                        % Draw the histogram bars - note the coordinates are the bin edges
-                        \addplot[
-                            fill=blue!70,
-                            draw=black,
-                            opacity=0.7
-                        ] coordinates {
-                            (10, 3)
-                            (20, 7)
-                            (30, 12)
-                            (40, 15)
-                            (50, 8)
-                            (60, 5)
-                            (70, 0)  % Need one more point than we have bars
-                        };
+                            % Draw main grid
+                            \draw[gray!70, thin, step=1] (0,0) grid (8,10);
 
-                        % Add frequency labels
-                        \node[above] at (axis cs:15,3) {3};
-                        \node[above] at (axis cs:25,7) {7};
-                        \node[above] at (axis cs:35,12) {12};
-                        \node[above] at (axis cs:45,15) {15};
-                        \node[above] at (axis cs:55,8) {8};
-                        \node[above] at (axis cs:65,5) {5};
+                            % Draw axes
+                            \draw[thick,->] (0,0) -- (8,0);
+                            \draw[thick,->] (0,0) -- (0,10);
+                            \node[below] at (5,-0.8) {\textbf{Number of Fruits Sold}};
+                            \node[rotate=90] at (-1,5.5) {\textbf{Frequency (Days)}};
 
-                        \end{axis}
+                            % X-axis labels
+                            \foreach \x/\label in {1/10, 2/20, 3/30, 4/40, 5/50, 6/60, 7/70}
+                                \node[below] at (\x,-0.3) {\label};
+
+                            % Y-axis labels (2 grid units = 3 frequency units)
+                            \foreach \y/\label in {0/0, 2/3, 4/6, 6/9, 8/12, 10/15}
+                                \node[left] at (-0.3,\y) {\label};
+
+                            % Bars for the histogram (Color changed to blue!60, heights adjusted)
+                            \draw[fill=blue!60] (1,0) rectangle (2,2);  % Frequency = 3 -> 2 grid units
+                            \draw[fill=blue!60] (2,0) rectangle (3,4.67);  % Frequency = 7 -> 4.67 grid units
+                            \draw[fill=blue!60] (3,0) rectangle (4,8);  % Frequency = 12 -> 8 grid units
+                            \draw[fill=blue!60] (4,0) rectangle (5,10);  % Frequency = 15 -> 10 grid units
+                            \draw[fill=blue!60] (5,0) rectangle (6,5.33);  % Frequency = 8 -> 5.33 grid units
+                            \draw[fill=blue!60] (6,0) rectangle (7,3.33);  % Frequency = 5 -> 3.33 grid units
+
+                            % Graph Title
+                            \node[above] at (4,10) {\textbf{Histogram of Number of Fruits Sold}};
+                            
                         \end{tikzpicture}
                     </latex-image>
                 </image>
@@ -332,29 +320,189 @@
                         <image>
                             <latex-image>
                                 \begin{tikzpicture}
-                                \begin{axis}[
-                                    xlabel={Distance Traveled (km)},
-                                    ylabel={Frequency (Vehicles)},
-                                    xmin=90, xmax=210,
-                                    ymin=0, ymax=16, % Increased ymax for better visibility
-                                    xtick={100, 120, 140, 160, 180, 200},
-                                    ytick={0, 5, 10, 15},
-                                    grid=major
-                                ]
-                                  
-                                % Frequency Polygon
-                                \addplot[
-                                    color=blue,
-                                    mark=*,
-                                    thick
-                                ] coordinates {
-                                    (90,0) (110,4) (130,9) (150,14) (170,11) (190,6) (210,0)
-                                };
+                                % Draw fine grid (each main grid square has 10x10 subdivisions)
+                                    \draw[gray!30, very thin, step=0.1] (0,0) grid (8,7); % Now each main grid square has 10x10 smaller squares
 
-                                \end{axis}
+                                    % Draw main grid
+                                    \draw[gray!70, thin, step=1] (0,0) grid (8,7);
+
+                                    % Draw axes
+                                    \draw[thick,->] (0,0) -- (8,0);
+                                    \draw[thick,->] (0,0) -- (0,7);
+                                    \node[below] at (5,-0.8) {\textbf{Distance Travelled (km)}};
+                                    \node[rotate=90] at (-1,2.5) {\textbf{Frequency (Vehicles)}};
+
+                                    % X-axis labels
+                                    \foreach \x/\label in {1/90, 2/110, 3/130, 4/150, 5/170, 6/190, 7/210}
+                                        \node[below] at (\x,-0.3) {\label};
+
+                                    % Y-axis labels (2 grid units = 5 frequency units)
+                                    \foreach \y/\label in {0/0, 2/5, 4/10, 6/15}
+                                        \node[left] at (-0.3,\y) {\label};
+
+                                    % Frequency polygon (blue line with adjusted Y-coordinates)
+                                    \draw[thick, blue] (1,0) -- (2,1.6) -- (3,3.6) -- (4,5.6) -- (5,4.4) -- (6,2.4) -- (7,0);
+
+                                    % Mark points on the polygon
+                                    \foreach \x/\y in {2/1.6, 3/3.6, 4/5.6, 5/4.4, 6/2.4} {
+                                        \fill[blue] (\x,\y) circle (3pt);
+                                    }
+
+                                    % Graph Title
+                                    \node[above] at (4,7) {\textbf{Frequency Polygon of Distance Traveled}};
                                 \end{tikzpicture}
                             </latex-image>
                         </image>
+            </solution>
+        </example>
+        <example>
+            <statement>
+                <p>
+                    The table below presents the salary distribution of employees in a company.
+                </p>
+                <table>
+                    <title></title>
+                    <tabular left="medium" right="medium" top="medium" bottom="medium">
+                        <row halign="left" header="yes">
+                            <cell>Salary Range (KSh)</cell>
+                            <cell>Frequency</cell>
+                        </row>
+                        <row >
+                            <cell><m>1000 - 1500</m></cell>
+                            <cell><m>42</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>1500 - 2000</m></cell>
+                            <cell><m>35</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>2000 - 2500</m></cell>
+                            <cell><m>20</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>2500 - 3000</m></cell>
+                            <cell><m>15</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>3000 - 4000</m></cell>
+                            <cell><m>18</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>4000 - 5000</m></cell>
+                            <cell><m>42</m></cell>
+                        </row>
+                    </tabular>
+                </table>
+                <p>
+                    Draw a histogram and a frequency polygon to represent the data.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    To draw a histogram and a frequency polygon, we need to find the frequency density and the midpoint of each class interval.
+                </p>
+                <table>
+                    <title></title>
+                    <tabular left="medium" right="medium" top="medium" bottom="medium">
+                        <row halign="left" header="yes">
+                            <cell>Salary range(Ksh.)</cell>
+                            <cell>Frequency</cell>
+                            <cell>Frequency density</cell>
+                            <cell>Midpoint</cell>
+                        </row>
+                        <row >
+                            <cell><m>1000 - 1500</m></cell>
+                            <cell><m>42</m></cell>
+                            <cell><m>0.084</m></cell>
+                            <cell><m>1250</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>1500 - 2000</m></cell>
+                            <cell><m>35</m></cell>
+                            <cell><m>0.070</m></cell>
+                            <cell><m>1750</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>2000 - 2500</m></cell>
+                            <cell><m>20</m></cell>
+                            <cell><m>0.040</m></cell>
+                            <cell><m>2250</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>2500 - 3000</m></cell>
+                            <cell><m>15</m></cell>
+                            <cell><m>0.030</m></cell>
+                            <cell><m>2750</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>3000 - 4000</m></cell>
+                            <cell><m>18</m></cell>
+                            <cell><m>0.018</m></cell>
+                            <cell><m>3500</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>4000 - 5000</m></cell>
+                            <cell><m>42</m></cell>
+                            <cell><m>0.010</m></cell>
+                            <cell><m>4500</m></cell>
+                        </row>
+
+                    </tabular>
+                </table>
+                <image>
+                    <latex-image>
+                        \begin{tikzpicture}
+                            % Draw fine grid (10 smaller squares per main grid unit)
+                            \draw[gray!30, very thin, step=0.1] (0,0) grid (10,10);
+
+                            % Draw main grid
+                            \draw[gray!70, thin, step=1] (0,0) grid (10,10);
+
+                            % Draw axes
+                            \draw[thick,->] (0,0) -- (10,0);
+                            \draw[thick,->] (0,0) -- (0,10);
+                            \node[below] at (5,-0.8) {\textbf{Salary (KSh)}};
+                            \node[rotate=90] at (-1,4) {\textbf{Frequency Density}};
+
+                            % X-axis labels (Salary ranges in KSh)
+                            \foreach \x/\label in {1/1000, 2/1500, 3/2000, 4/2500, 5/3000, 7/4000, 9/5000} {
+                                \node[below] at (\x,0) {\label};
+                            }
+
+                            % Y-axis labels (2 grid = 0.02, so 1 grid = 0.01)
+                            \foreach \y/\label in {0/0, 2/0.02, 4/0.04, 6/0.06, 8/0.08, 10/0.10} {
+                                \node[left] at (0,\y) {\label};
+                            }
+
+                            % Draw histogram bars (Unequal Class Widths with frequency density)
+                            \draw[fill=blue!60] (1,0) rectangle (2,4.2*2);  % 1000-1500, density 0.084
+                            \draw[fill=blue!60] (2,0) rectangle (3,3.5*2);  % 1500-2000, density 0.070
+                            \draw[fill=blue!60] (3,0) rectangle (4,2.0*2);  % 2000-2500, density 0.040
+                            \draw[fill=blue!60] (4,0) rectangle (5,1.5*2);  % 2500-3000, density 0.030
+                            \draw[fill=blue!60] (5,0) rectangle (7,0.9*2);  % 3000-4000, density 0.018
+                            \draw[fill=blue!60] (7,0) rectangle (9,0.5*2);  % 4000-5000, density 0.010
+
+                            % Frequency Polygon (Connecting Midpoints)
+                            \draw[thick,black] 
+                                (0.5,0) -- 
+                                (1.5,4.2*2) -- 
+                                (2.5,3.5*2) -- 
+                                (3.5,2.0*2) -- 
+                                (4.5,1.5*2) -- 
+                                (6,0.9*2) -- 
+                                (8,0.5*2) -- 
+                                (9.5,0);
+
+                            % Mark Midpoints with dots
+                            \foreach \x/\y in {1.5/4.2, 2.5/3.5, 3.5/2.0, 4.5/1.5, 6/0.9, 8/0.5} {
+                                \fill[black] (\x,\y*2) circle (3pt);
+                            }
+
+                            % Title
+                            \node[above] at (5,10) {\Large \textbf{Salary Distribution: Histogram and Frequency Polygon}};
+                        \end{tikzpicture}
+                    </latex-image>
+                </image>
             </solution>
         </example>
         <exercises xml:id="exercises-drawing-histograms-and-frequency-plogons-of-data">
@@ -567,6 +715,62 @@
                     </p>
                     <p>
                         Draw a histogram to represent the rainfall data. 
+                    </p>
+                </statement>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A teacher at Katilu primary school asks students to find out whether Grade 10 students have enough textbooks and suggest ways to improve the situation.
+                    </p>
+                    <p>
+                        <ol marker="a)">
+                            <li>
+                                <p>
+                                    Students should gather data on:  
+                                </p>
+                                <p>
+                                    <ul>
+                                        <li>
+                                            <p>
+                                                Total number of students in Grade 10.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>
+                                                Number of textbooks available for each subject.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>
+                                                Which specific subjects lack sufficient textbooks.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>
+                                                How often students share textbooks?
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Draw a histogram and frequency polygon to represent the data.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Calculate the mean and median.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Identify the Modal Class of the dataset.
+                                </p>
+                            </li>
+
+                        </ol>
                     </p>
                 </statement>
             </exercise>
