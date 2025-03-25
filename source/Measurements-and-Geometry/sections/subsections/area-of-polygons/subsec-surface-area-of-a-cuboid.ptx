@@ -366,7 +366,132 @@
                 </p>
             </solution>
         </example>
+        <example>
+            <statement>
+                <p>
+                   Find the surface area of the following rectangular prism:
+                </p>   
+                   <image>
+                    <shortdescription> Rectangular Prism</shortdescription>
+                    <latex-image>
+                        \begin{tikzpicture}
+                            % Set background color
+                            \fill[green!50] (-1, -0.5) rectangle (8, 3.5);
+
+                            % Draw the front face
+                            \draw[thick] (0,0) -- (5,0) -- (5,2) -- (0,2) -- cycle;
+
+                            % Draw the top face
+                            \draw[thick] (0,2) -- (2,3) -- (7,3) -- (5,2);
+                            \draw[dashed] (2,3) -- (2,1);
+
+                            % Draw the side face
+                            \draw[thick] (5,0) -- (7,1) -- (7,3);
+                            \draw[dashed] (2,1) -- (7,1);
+                            \draw[dashed] (0,0) -- (2,1);
+                            % Dimension labels
+                            \node[below] at (2.5,0) {8 cm};
+                            \node[below] at (7,0.8) {14 cm};
+                            \node[left] at (0,1) {3 cm};
+                        \end{tikzpicture}
+                    </latex-image>
+                   </image> 
+            </statement>
+            <solution>
+                <p>
+                    Step 1: Sketch and label the net of the prism.
+                </p>
+                <image>
+                <latex-image>
+                    \begin{tikzpicture}
+                        % Set background color
+                        \fill[green!30] (-5, -2) rectangle (8, 12.5);
+
+                        % Draw main rectangle
+                        \draw[thick] (-5,0) rectangle (8,10);
+
+                        % Vertical overlapping rectangle
+                        \draw[thick] (2,-2) --(2,10);
+                        \draw[thick] (-3,0) --(-3,-2) --(2,-2) --(2,0);
+                        % Vertical division lines
+                        \draw[thick] (-3,10) -- (-3,0);
+                        \draw[thick] (4,10) -- (4,0);
+                        \draw[thick] (-3,10) --(-3,12) --(2,12) --(2,10);
+
+                        % Dimension labels
+                        \node[above] at (3,10) {2 cm};
+                        \node[above] at (0,12) {8 cm};
+                        \node[above] at (5,10) {8 cm};
+                        \node[right] at (7,5) {14 cm};
+                        \node[above] at (-4, 10) {2 cm};
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+                <p>
+                    Step 2: Find the areas of the different shapes in the ne
+                </p>
+                <p>
+                    <md>
+                        <mrow>\text{large rectangle} = \amp \text{ perimeter of small rectangle} \times \text{length} </mrow>
+                        <mrow> = \amp (3+8+3+8)\text{cm} \times 14\text{cm} </mrow>
+                        <mrow> = \amp 22\text{cm}  \times 14\text{cm}  </mrow>
+                        <mrow> = \amp 308\text{cm}^2  </mrow>
+                    </md>
+                    <md>
+                        <mrow> 2 \text{small rectangle} \amp = 2(8 \text{cm} \times 3\text{cm} ) </mrow>
+                        <mrow> = \amp 2(18\text{cm} ) </mrow>
+                        <mrow> = \amp 36\text{cm}^2 </mrow>
+                    </md>
+                </p>
+                <p>
+                    Step 3: Find the sum of the areas of the faces
+                </p>
+                <p>
+                    <md>
+                    <mrow>\text{large rectangle}  + \text{small rectangle} = \amp (308 + 36)\text{cm}^2 </mrow>
+                        <mrow> = \amp 344 \text{cm}^2</mrow>
+                    </md> 
+                </p>
+                <p>
+                    The surface area of the rectangular prism is <m>160 \text{cm}^2</m>>
+                </p>
+            </solution>
+        </example>
     </subsubsection>
+<subsubsection xml:id="subsubsec-triangular-prism">
+    <title>Triangular Prism</title>
+    <p>
+        
+    </p>
+    <image>
+        <shortdescription></shortdescription>
+        <latex-image>
+            \begin{tikzpicture}
+                % Define vertices of the triangular prism
+                \coordinate (A) at (0,0,0);
+                \coordinate (B) at (3,0,0);
+                \coordinate (C) at (1.5,2,0);
+                \coordinate (D) at (0,0,2);
+                \coordinate (E) at (3,0,2);
+                \coordinate (F) at (1.5,2,2);
+
+                % Draw base triangle
+                \draw[thick] (A) -- (B) -- (C) -- cycle;
+                % Draw top triangle
+                \draw[thick] (D) -- (E) -- (F) -- cycle;
+                % Connect top and bottom faces
+                \draw[thick] (A) -- (D);
+                \draw[thick] (B) -- (E);
+                \draw[thick] (C) -- (F);
+                \draw[dashed] (F) -- (1.5,0);
+                % Label faces
+                \node at (1.5,-0.5,0) {Base};
+                \node at (1.5,1,2.2) {Top};
+            \end{tikzpicture}
+        </latex-image>
+    
+    </image>
+</subsubsection>
         
     
 </subsection>
