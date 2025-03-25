@@ -201,9 +201,26 @@
         <example>
             <statement>
                 <p>
-                    Given that the following two figures below are similar, and the area of the first figure <m>A</m> is <m>120\, cm^2</m>, calculate the area of the second figure <m>B</m>.
+                    Given that the following two hexagons below are similar, and the area of the first hexagon <m>A</m> is <m>450\, cm^2</m>, calculate the area of the second hexagon <m>B</m>.
                 </p>
+
+                <image source="/hexagon.png">
+                    <shortdescription></shortdescription>
+                </image>
             </statement>
+
+            <solution>
+                <p>
+                    <md>
+                        <mrow>\text{Linear scale factor}= \amp \frac{9}{6}</mrow>
+                        <mrow>\text{Area scale factor}= \amp (\frac{9}{6})^2=\frac{81}{36}</mrow>
+                        <mrow>\frac{\text{Area of hexagon A}}{\text{Area of hexagon B}} =\amp\frac{81}{36} </mrow>
+                        <mrow>\frac{\text{450}}{\text{Area of hexagon B}} =\amp\frac{81}{36} </mrow>
+                        <mrow>\text{Area of hexagon B}  =\amp \frac{36\times 450}{81}</mrow>
+                        <mrow>= \amp 200 cm^2</mrow>
+                    </md>
+                </p>
+            </solution>
         </example>
 
         <exercises xml:id="exercises-area-scale-factor">
@@ -268,6 +285,14 @@
 
     <subsubsection xml:id="subsubsec-volume-scale-factor">
         <title>Volume Scale Factor</title>
+
+        <p>
+            The volume scale factor refers to the ratio by which the volume of a three-dimensional object is scaled when the object's dimensions (length, width, height) are scaled by a certain factor.
+        </p>
+
+        <p>
+            If the linear dimensions of an object are scaled by a factor of <m>K</m>, the volume of the object will be scaled by a factor of <m>K^3</m>. This is because volume is a cubic measurement.
+        </p>
         <activity>
             <statement>
                 <p>
@@ -352,7 +377,7 @@
         <example>
             <statement>
                 <p>
-                    Given that shape A and shape B are similar solids, and the volume of A is 400 cm³, calculate the volume of B.
+                    Given that cone <m>A</m> and cone <m>B</m> are similar cones, and the volume of cone <m>A</m> is <m>150 cm^3</m>, calculate the volume of cone <m>B</m>.
                 </p>
 
                 <sidebyside>
@@ -360,16 +385,20 @@
                         <shortdescription></shortdescription>
                         <latex-image label="cone1">
                             \begin{tikzpicture}
+                               % First cone (on the left) - Blue (larger size)
                                 \fill[blue!30] (-2,0) arc (180:360:2 and 0.7) -- (2,0) arc (0:180:2 and 0.7) -- cycle;
                                 \fill[blue!30] (-2,0) -- (0,4) -- (2,0) -- cycle;
                                 \draw[thick] (-2,0) arc (180:360:2 and 0.7);
                                 \draw[dashed] (2,0) arc (0:180:2 and 0.7);
                                 \draw[thick] (-2,0) -- (0,4);
                                 \draw[thick] (2,0) -- (0,4);
-                                \draw[dashed] (0,0) -- (0,4);
-                                \node[left] at (0,2) {8 cm};
+
                                 \draw[dashed] (0,0) -- (2,0);
-                                \node[below] at (1,0) {7 cm};
+                                \draw[dashed] (0,0) -- (0,4);
+                                \node[below] at (0.5,0) {7 cm};
+
+                                % Adding label A below the dashed horizontal line
+                                 \node[below] at (0,-1) {A};  % Label "A" at the center of the base
                             \end{tikzpicture}
                         </latex-image>
                         
@@ -379,23 +408,42 @@
                         <shortdescription></shortdescription>
                         <latex-image label="cone2">
                             \begin{tikzpicture}
-                                % First cone (on the left) - Red
-                                \fill[red!30] (-2,0) arc (180:360:2 and 0.7) -- (2,0) arc (0:180:2 and 0.7) -- cycle;
-                                \fill[red!30] (-2,0) -- (0,4) -- (2,0) -- cycle;
-                                \draw[thick] (-2,0) arc (180:360:2 and 0.7);
-                                \draw[dashed] (2,0) arc (0:180:2 and 0.7);
-                                \draw[thick] (-2,0) -- (0,4);
-                                \draw[thick] (2,0) -- (0,4);
-                                \draw[dashed] (0,0) -- (0,4);
-                                \node[left] at (0,2) {15 cm};
-                                \draw[dashed] (0,0) -- (2,0);
-                                \node[below] at (1,0) {14 cm};
+
+                    % Second cone (on the right) - Red (smaller size)
+                    \fill[red!30] (-1,0) arc (180:360:1 and 0.35) -- (1,0) arc (0:180:1 and 0.35) -- cycle;
+                    \fill[red!30] (-1,0) -- (0,3) -- (1,0) -- cycle;
+                    \draw[thick] (-1,0) arc (180:360:1 and 0.35);
+                    \draw[dashed] (1,0) arc (0:180:1 and 0.35);
+                    \draw[thick] (-1,0) -- (0,3);
+                    \draw[thick] (1,0) -- (0,3);
+                    \draw[dashed] (0,0) -- (0,3);
+
+                    % Dotted lines and labels
+                    \draw[dashed] (0,0) -- (1,0);
+                    \node[below] at (0.5,0.2) {21 cm}; 
+                    
+                    % Adding label A below the dashed horizontal line
+                     \node[below] at (0,-0.5) {B};  % Label "B" at the center of the base
+                    
                             \end{tikzpicture}
                         </latex-image>
                         
                     </image>
                 </sidebyside>
             </statement>
+
+            <solution>
+                <p>
+                    <md>
+                        <mrow>\text{Lenear scale factor} =\amp \frac{7}{21}=\frac{1}{3}</mrow>
+                        <mrow>\text{Volume scale factor}= \amp(\frac{1}{3})^3=\frac{1}{27} </mrow>
+                        <mrow>\frac{\text{Volume of cone A}}{\text{Volume of cone B}} =\amp\frac{1}{27} </mrow>
+                        <mrow>\frac{150}{\text{Volume of cone B}}= \amp \frac{1}{27}</mrow>
+                        <mrow>\text{Volume of cone B}= \amp 27 \times 150</mrow>
+                        <mrow>= \amp 4050 cm^3</mrow>
+                    </md>
+                </p>
+            </solution>
         </example>
 
         <exercises xml:id="exercises-volume-scale-factor">

@@ -1,0 +1,497 @@
+<subsection xml:id="subsec-surface-area-of-a-cuboid">
+    <title>Surface area of Prisms</title>
+    <introduction>
+    <p>
+        🔹 A prism is a Geometric object with two identical, parallel bases and straight sides connecting them.
+    </p>
+        
+    <p>
+        🔹A right prism is a geometric solid that has a polygon as its base and vertical faces perpendicular to the base.
+        The base and top surface are the same shape and size. It is called a “right” prism because the angles between
+        the base and faces are right angles.
+    </p>
+    <p>
+        🔹 Recall our defination for surface area which is the total area of the exposed or outer surfaces of a prism.
+    </p>
+    <p>
+        <m>\textbf{Types of Prisms}</m>
+    </p>
+    <sidebyside>
+    <p>
+        <m>\textbf{ Triangular Prism;}</m> It has a triangle at its base. 
+    </p>
+    <image width="50%">
+        <shortdescription>Triangular Prism</shortdescription>
+     <latex-image>
+        \begin{tikzpicture}  
+            % Define points
+            \coordinate (A) at (0,0,0);
+            \coordinate (B) at (3,0,0);
+            \coordinate (C) at (1.5,2,0);
+            \coordinate (D) at (0,0,3);
+            \coordinate (E) at (3,0,3);
+            \coordinate (F) at (1.5,2,3);
+
+            % Draw the base (now at the bottom) with shading
+            \fill[gray!30] (A) -- (B) -- (C) -- cycle;
+
+            % Draw the base edges
+            \draw[thick] (A) -- (B) -- (C) -- cycle;
+
+            % Draw vertical edges
+            \draw[thick] (A) -- (D);
+            \draw[thick] (B) -- (E);
+            \draw[thick] (C) -- (F);
+
+            % Draw top face
+            \draw[thick] (D) -- (E) -- (F) -- cycle;
+
+            % Draw hidden lines
+            \draw[dashed] (D) -- (F);
+            \draw[dashed] (D) -- (E);
+            \draw[dashed] (E) -- (F);
+        \end{tikzpicture}
+     </latex-image>
+    </image>
+    </sidebyside>
+    <sidebyside>
+    <p>
+        <m>\textbf{Rectangular Prism;}</m> It has a rectangle at its base. A cube is a rectangular prism with all sides of equal length.
+    </p>
+    <image width="30%">
+    <shortdescription> Rectangular Prism</shortdescription>
+        <latex-image>
+            \begin{tikzpicture}
+                 % Define cuboid dimensions
+                \def\cubex{3} % Length
+                \def\cubey{2} % Width
+                \def\cubez{1.5} % Height
+
+                % Draw the base face with grey fill
+                \fill[gray!30] (0,0,0) -- ++(\cubex,0,0) -- ++(0,\cubey,0) -- ++(-\cubex,0,0) -- cycle;
+
+                % Draw the front face
+                \draw[thick,fill=gray!30] (0,0,0) -- ++(\cubex,0,0) -- ++(0,\cubey,0) -- ++(-\cubex,0,0) -- cycle;
+
+                % Draw the top face
+                \draw[thick] (0,0,\cubez) -- ++(\cubex,0,0) -- ++(0,\cubey,0) -- ++(-\cubex,0,0) -- cycle;
+
+                % Draw the side face
+                \draw[thick] (\cubex,0,0) -- ++(0,0,\cubez);
+                \draw[thick] (0,\cubey,0) -- ++(0,0,\cubez);
+                \draw[thick] (\cubex,\cubey,0) -- ++(0,0,\cubez);
+
+                % Draw hidden lines
+                \draw[dashed] (0,0,0) -- ++(0,0,\cubez);
+                \draw[dashed] (0,0,\cubez) -- ++(0,\cubey,0);
+                \draw[dashed] (0,\cubey,\cubez) -- ++(\cubex,0,0);
+            \end{tikzpicture}
+        </latex-image>
+    </image>
+    <image width="40%">
+        <shortdescription>Rectangular (CUBE) Prism</shortdescription>
+        <latex-image>
+            \begin{tikzpicture}
+                            % Define points for the cube
+                \coordinate (A) at (-1,-1,0);
+                \coordinate (B) at (1,-1,0);
+                \coordinate (C) at (1,1,0);
+                \coordinate (D) at (-1,1,0);
+                \coordinate (E) at (-1,-1,2);
+                \coordinate (F) at (1,-1,2);
+                \coordinate (G) at (1,1,2);
+                \coordinate (H) at (-1,1,2);
+                
+                % Fill the base of the cube accurately
+                \fill[gray!30] (A) -- (B) -- (C) -- (D) -- cycle; 
+
+                % Draw edges of the cube
+                \draw (A) -- (B) -- (C) -- (D) -- cycle; % Bottom face (Base)
+                \draw (E) -- (F) -- (G) -- (H) -- cycle; % Top face
+                \draw (A) -- (E);
+                \draw (B) -- (F);
+                \draw (C) -- (G);
+            \end{tikzpicture}
+        </latex-image>
+    </image>
+    </sidebyside>
+   <sidebyside>
+    <p>
+        <m>\textbf{Cylindrical Prism}</m> A cylinder has a circle as its base
+    </p>
+    <image width="30%">
+        <shortdescription>Cylindrical prism</shortdescription>
+     <latex-image>
+        \begin{tikzpicture}
+            % Draw the top ellipse
+            \draw (0,4) ellipse (1.5 and 0.5);
+
+            % Draw the vertical sides of the cylinder (height doubled)
+            \draw (-1.5,4) -- (-1.5,0);
+            \draw (1.5,4) -- (1.5,0);
+
+            % Draw the bottom ellipse (partially hidden)
+            \fill[gray!30] (0,0) ellipse (1.5 and 0.5); % Shaded bottom base
+            \draw[dashed] (0,0) ellipse (1.5 and 0.5);  % Dashed for hidden portion
+        \end{tikzpicture}
+     </latex-image>
+    </image>
+    </sidebyside>
+    <p>
+        🔹Examples of right prisms are; a cylinder, a rectangular prism, a cube and a triangular prism.
+    </p>
+     
+    </introduction>
+    <subsubsection xml:id="subsubsec-Surface-area-of-a-cuboid">
+        <title> Surface Area of a Cuboid.</title>
+        <p>
+        The surface area of a cuboid is the total area of all six faces of the cuboid. 
+       
+        </p>
+
+        <p>
+            When learning about area, we calculated the surface area of a cuboid.
+             Since the opposite faces of a cuboid are identical, the surface area of a cuboid can be calculated by finding the area of each face and then adding them together.
+        </p>
+
+        <p>
+            In this section, we will calculate the surface area of a cuboid from their nets.
+        </p>
+
+        <activity>
+        
+        
+            <statement>
+
+                <p>
+                    Surface area of Cube and Cuboid
+                </p>
+                <p>
+                    View the net of a cuboid in order to understand how to find the surface area of the cuboid.
+                </p>
+
+                 <image source="/cuboid-net.png">
+                    <shortdescription>(for accessibility)</shortdescription>
+                 </image>
+            </statement>
+        </activity>
+
+        <activity>
+        
+            <statement>
+                <p>
+                    Surface area of Cuboid
+                </p>
+                <p>
+                    To explore the net and formula to find the surface area of cuboid. 
+                </p>
+
+                <p>
+                    
+                </p>
+
+                    
+            </statement>
+        </activity> 
+
+        <example>
+            <statement>
+                <p>
+                    The figure below shows a cuboid.
+                </p>
+
+                <image>
+                <latex-image>
+                    \begin{tikzpicture}
+                          % Define points for the cuboid
+                        \coordinate (A) at (0,0,0);
+                        \coordinate (B) at (6,0,0);
+                        \coordinate (C) at (6,4,0);
+                        \coordinate (D) at (0,4,0);
+                        \coordinate (E) at (0,0,5);
+                        \coordinate (F) at (6,0,5);
+                        \coordinate (G) at (6,4,5);
+                        \coordinate (H) at (0,4,5);
+                        
+                        % Draw the front face
+                        \fill[blue!50, opacity=0.5] (A) -- (B) -- (C) -- (D) -- cycle;
+                        % Draw the back face
+                        \fill[blue!50, opacity=0.5] (E) -- (F) -- (G) -- (H) -- cycle;
+                        % Draw the top face
+                        \fill[blue!50, opacity=0.5] (D) -- (C) -- (G) -- (H) -- cycle;
+                        % Draw the side face
+                        \fill[blue!50, opacity=0.5] (B) -- (C) -- (G) -- (F) -- cycle;
+                        
+                        % Draw the edges
+                        \draw[blue!50] (A) -- (B) -- (C) -- (D) -- cycle;
+                        \draw[blue!50] (E) -- (F) -- (G) -- (H) -- cycle;
+                        \draw[blue!50] (A) -- (E);
+                        \draw[blue!50] (B) -- (F);
+                        \draw[blue!50] (C) -- (G);
+                        \draw[blue!50] (D) -- (H);
+                        
+                        % Adding labels
+                        \node[below left] at (A) {L};
+                        \node[below right] at (B) {K};
+                        \node[above right] at (C) {J};
+                        \node[above left] at (D) {I};
+                        \node[above left] at (E) {L};
+                        \node[above right] at (F) {K};
+                        \node[above right] at (G) {J};
+                        \node[above left] at (H) {I};
+                        
+                        % Adding dimensions
+                        \draw (-0.5,0,0) -- (-0.5,4,0);
+                        \node[left] at (-0.5,2,0) {4 cm};
+                        
+                        \draw (0,-0.5,0) -- (6,-0.5,0);
+                        \node[below] at (3,-0.5,0) {6 cm};
+                        
+                        \draw (6.5,0,0) -- (6.5,0,5);
+                        \node[right] at (6.5,0,2.5) {5 cm};
+                    \end{tikzpicture}
+                </latex-image>
+                 </image>
+
+                <p>
+                    (a). Sketch the net of the cuboid.
+                </p>
+
+                <p>
+                    (b). Work out the surface area of the cuboid from its net.
+                </p>
+            </statement>
+
+            <solution>
+                <p>
+                    (a).The figure below shows the net of the cuboid.
+                </p>
+
+                <image>
+                <latex-image>
+                    \begin{tikzpicture}
+                         % Coloring different rectangles
+                        \fill[red!20] (0,-4) -- (0,-2) -- (0,0) -- (0,2) -- (0,4) -- (2,4) -- (2,2) -- (2,0) -- (2,-2) -- (2,-4) -- (0,-4) -- cycle; % A, B, C, D
+                        
+                        \fill[green!20] (-2,0) -- (0,0) -- (0,-2) -- (-2,-2) -- (-2,0); % E
+                        
+                        \fill[blue!20] (2,0) -- (4,0) -- (4,-2) -- (2,-2) -- (2,0); % F
+                        
+                        \fill[yellow!20] (0,2) -- (2,2) -- (2,4) -- (0,4) -- cycle; % A
+                        
+                        \fill[orange!20] (0,0) -- (2,0) -- (2,2) -- (0,2) -- cycle; % B
+                        
+                        \fill[cyan!20] (0,-2) -- (2,-2) -- (2,0) -- (0,0) -- cycle; % C
+                        
+                        \fill[purple!20] (0,-4) -- (2,-4) -- (2,-2) -- (0,-2) -- cycle; % D
+
+                        % Drawing the edges
+                        \draw (0,-4) -- (0,4);
+                        \draw (2,-4) -- (2,4);
+                        \draw (0,4) -- (2,4);
+                        \draw (0,2) -- (2,2);
+                        \draw (0,0) -- (2,0);
+                        \draw (0,-2) -- (2,-2);
+                        \draw (-2,0) -- (0,0) -- (2,0) -- (4,0);
+                        \draw (-2,-2) -- (0,-2) -- (2,-2) -- (4,-2);
+                        \draw (-2,0) -- (-2,-2);
+                        \draw (4,0) -- (4,-2);
+
+                        % Adding dimension labels
+                        \node[left] at (0,3) {5 cm};
+                        \node[right] at (2,3) {5 cm};
+                        \node[right] at (2,1) {4 cm};
+                        \node[left] at (0,1) {4 cm};
+                        \node[above] at (1,4) {6 cm};
+                        \node[below] at (1,-4) {6 cm};
+                        \node[below] at (3,0) {4 cm};
+                        \node[below] at (-1,0) {4 cm};
+                        \node[right] at (-3,-1) {5 cm};
+                        \node[right] at (4,-1) {5 cm};
+                        \node[right] at (2,-3) {4 cm};
+                        \node[right] at (-1,-3) {4 cm};
+
+                        % Adding rectangle labels
+                        \node at (1,3) {A};
+                        \node at (1,1) {B};
+                        \node at (1,-1) {C};
+                        \node at (1,-3) {D};
+                        \node at (-1,-1) {E};
+                        \node at (3,-1) {F};
+
+                        
+                        <!-- % Adding vertex labels
+                        \node[above left] at (0,4) {L};
+                        \node[above right] at (2,4) {K};
+                        \node[above right] at (4.1,-2) {K};
+                        \node[left] at (0,2) {I};
+                        \node[right] at (2,2) {J};
+                        \node[left] at (0.2,0) {H};
+                        \node[right] at (4.1,0) {J};
+                        \node[left] at (0,-2.1) {E};
+                        \node[right] at (2,-2) {L};
+                        \node[below left] at (0,-4) {L};
+                        \node[below right] at (2,-4) {K};
+                        \node[below left] at (-2.1,0.1) {I};
+                        \node[below left] at (-2.1,-2.1) {I};
+                        \node[below right] at (4,0) {K};
+                        \node[below] at (-1,0) {L};
+                        \node[below] at (3,0) {J};
+                        \node[below] at (1,-2) {E};
+                        \node[below] at (2.1,-2.1) {F}; -->
+                    \end{tikzpicture}
+                </latex-image>
+                    <shortdescription></shortdescription>
+                    
+                </image>
+
+                <p>
+                    <md>
+                        <mrow>\text {(a). Area of a rectangle} = \amp length \times width</mrow>
+                        <mrow>\text {Area of rectangle A}= \amp6 cm \times 5 cm </mrow>
+                        <mrow>= \amp 30 cm^2</mrow>
+                         <mrow>\text{Area of rectangle B}= \amp6 cm \times 4 cm </mrow>
+                        <mrow>= \amp 24 cm^2</mrow>
+                         <mrow>\text{Area of rectangle C}= \amp6 cm \times 5 cm </mrow>
+                        <mrow>= \amp 30 cm^2</mrow>
+                         <mrow>\text{Area of rectangle D}= \amp6 cm \times 4 cm </mrow>
+                        <mrow>= \amp 24 cm^2</mrow>
+                         <mrow>\text{Area of rectangle E}= \amp4 cm \times 5 cm </mrow>
+                        <mrow>= \amp 20 cm^2</mrow>
+                         <mrow>\text{Area of rectangle F}= \amp4 cm \times 5 cm </mrow>
+                        <mrow>= \amp 20 cm^2</mrow>
+                        <mrow>\text{Surface area}= \amp30 cm^2+24 cm^2+30 cm^2+24 cm^2+20 cm^2+20 cm^2 </mrow>
+                        <mrow>= \amp148 cm^2 </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <example>
+            <statement>
+                <p>
+                   Find the surface area of the following rectangular prism:
+                </p>   
+                   <image>
+                    <shortdescription> Rectangular Prism</shortdescription>
+                    <latex-image>
+                        \begin{tikzpicture}
+                            % Set background color
+                            \fill[green!50] (-1, -0.5) rectangle (8, 3.5);
+
+                            % Draw the front face
+                            \draw[thick] (0,0) -- (5,0) -- (5,2) -- (0,2) -- cycle;
+
+                            % Draw the top face
+                            \draw[thick] (0,2) -- (2,3) -- (7,3) -- (5,2);
+                            \draw[dashed] (2,3) -- (2,1);
+
+                            % Draw the side face
+                            \draw[thick] (5,0) -- (7,1) -- (7,3);
+                            \draw[dashed] (2,1) -- (7,1);
+                            \draw[dashed] (0,0) -- (2,1);
+                            % Dimension labels
+                            \node[below] at (2.5,0) {8 cm};
+                            \node[below] at (7,0.8) {14 cm};
+                            \node[left] at (0,1) {3 cm};
+                        \end{tikzpicture}
+                    </latex-image>
+                   </image> 
+            </statement>
+            <solution>
+                <p>
+                    Step 1: Sketch and label the net of the prism.
+                </p>
+                <image>
+                <latex-image>
+                    \begin{tikzpicture}
+                        % Set background color
+                        \fill[green!30] (-5, -2) rectangle (8, 12.5);
+
+                        % Draw main rectangle
+                        \draw[thick] (-5,0) rectangle (8,10);
+
+                        % Vertical overlapping rectangle
+                        \draw[thick] (2,-2) --(2,10);
+                        \draw[thick] (-3,0) --(-3,-2) --(2,-2) --(2,0);
+                        % Vertical division lines
+                        \draw[thick] (-3,10) -- (-3,0);
+                        \draw[thick] (4,10) -- (4,0);
+                        \draw[thick] (-3,10) --(-3,12) --(2,12) --(2,10);
+
+                        % Dimension labels
+                        \node[above] at (3,10) {2 cm};
+                        \node[above] at (0,12) {8 cm};
+                        \node[above] at (5,10) {8 cm};
+                        \node[right] at (7,5) {14 cm};
+                        \node[above] at (-4, 10) {2 cm};
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+                <p>
+                    Step 2: Find the areas of the different shapes in the ne
+                </p>
+                <p>
+                    <md>
+                        <mrow>\text{large rectangle} = \amp \text{ perimeter of small rectangle} \times \text{length} </mrow>
+                        <mrow> = \amp (3+8+3+8)\text{cm} \times 14\text{cm} </mrow>
+                        <mrow> = \amp 22\text{cm}  \times 14\text{cm}  </mrow>
+                        <mrow> = \amp 308\text{cm}^2  </mrow>
+                    </md>
+                    <md>
+                        <mrow> 2 \text{small rectangle} \amp = 2(8 \text{cm} \times 3\text{cm} ) </mrow>
+                        <mrow> = \amp 2(18\text{cm} ) </mrow>
+                        <mrow> = \amp 36\text{cm}^2 </mrow>
+                    </md>
+                </p>
+                <p>
+                    Step 3: Find the sum of the areas of the faces
+                </p>
+                <p>
+                    <md>
+                    <mrow>\text{large rectangle}  + \text{small rectangle} = \amp (308 + 36)\text{cm}^2 </mrow>
+                        <mrow> = \amp 344 \text{cm}^2</mrow>
+                    </md> 
+                </p>
+                <p>
+                    The surface area of the rectangular prism is <m>160 \text{cm}^2</m>>
+                </p>
+            </solution>
+        </example>
+    </subsubsection>
+<subsubsection xml:id="subsubsec-triangular-prism">
+    <title>Triangular Prism</title>
+    <p>
+        
+    </p>
+    <image>
+        <shortdescription></shortdescription>
+        <latex-image>
+            \begin{tikzpicture}
+                % Define vertices of the triangular prism
+                \coordinate (A) at (0,0,0);
+                \coordinate (B) at (3,0,0);
+                \coordinate (C) at (1.5,2,0);
+                \coordinate (D) at (0,0,2);
+                \coordinate (E) at (3,0,2);
+                \coordinate (F) at (1.5,2,2);
+
+                % Draw base triangle
+                \draw[thick] (A) -- (B) -- (C) -- cycle;
+                % Draw top triangle
+                \draw[thick] (D) -- (E) -- (F) -- cycle;
+                % Connect top and bottom faces
+                \draw[thick] (A) -- (D);
+                \draw[thick] (B) -- (E);
+                \draw[thick] (C) -- (F);
+                \draw[dashed] (F) -- (1.5,0);
+                % Label faces
+                \node at (1.5,-0.5,0) {Base};
+                \node at (1.5,1,2.2) {Top};
+            \end{tikzpicture}
+        </latex-image>
+    
+    </image>
+</subsubsection>
+        
+    
+</subsection>
