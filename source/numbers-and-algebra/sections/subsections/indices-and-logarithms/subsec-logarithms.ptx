@@ -19,7 +19,13 @@
             <term>Why Are Logarithms Important?</term>
         </p>
         <p>
-            Logarithms help in solving equations with exponents, especially in finance (compound interest) and Science and Engineering (radioactive decay, sound intensity, etc.)
+            <ul>
+                <li>
+                    <p>
+                        Logarithms help in solving equations with exponents, especially in finance (compound interest) and Science and Engineering (radioactive decay, sound intensity, etc.)
+                    </p>
+                </li>
+            </ul>
         </p>
     </introduction>
 
@@ -47,17 +53,21 @@
                         <latex-image>
                             \begin{tikzpicture}
                                 % Draw nodes
-                                \node (n8) at (0,0) { $8$};
-                                \node (n2a) at (-1,-1.5) { $2$};
-                                \node (n4) at (1,-1.5) { $4$};
-                                \node (n2b) at (0,-3) { $2$};
-                                \node (n2c) at (2,-3) { $2$};
+                                \node (a) at (0,4) {8};      % Root node
+                                \node (b1) at (-1.5,3) {2};  % Left child
+                                \node (b2) at (1.5,3) {4};   % Right child
+                                \node (c1) at (1,2) {2};     % Left grandchild (aligned)
+                                \node (c2) at (2,2) {2};     % Right grandchild (aligned)
+                                \node (d1) at (1.7,1) {2};   % Final breakdown (two, shifted left)
+                                \node (d2) at (2.3,1) {1};   % Final breakdown (one, aligned below 2)
 
-                                % Draw branches
-                                \draw (n8) -- (n2a);
-                                \draw (n8) -- (n4);
-                                \draw (n4) -- (n2b);
-                                \draw (n4) -- (n2c);
+                                % Connecting Lines (Aligned Correctly)
+                                \draw (a) -- (b1);
+                                \draw (a) -- (b2);
+                                \draw (b2) -- (c1);
+                                \draw (b2) -- (c2);
+                                \draw (c2) -- (d1);
+                                \draw (c2) -- (d2);  % Connecting last 1
                             \end{tikzpicture}
                         </latex-image>
                     </image>
@@ -202,20 +212,40 @@
                                     </li>
                                     <li>
                                         <p>
-                                            <m>5^3 = 125 \qquad \qquad \qquad \qquad \text{f)}\,\, </m>
+                                            <m>5^3 = 125 \qquad \qquad \qquad \qquad \text{f)}\,\, 6^y = 216</m>
                                         </p>
                                     </li>
                                     <li>
                                         <p>
-                                            <m> \qquad \qquad \qquad \qquad \text{g)}\,\, </m>
+                                            <m>3^x = 81 \qquad \qquad \qquad \qquad \text{g)}\,\, 9^{\frac {1}{2}} = 3</m>
                                         </p>
                                     </li>
                                     <li>
                                         <p>
-                                            <m> \qquad \qquad \qquad \qquad \text{h)}\,\, </m>
+                                            <m>8^{\frac {2}{3}} = 4 \qquad \qquad \qquad \qquad \text{h)}\,\, 4^{-2} = \frac {1}{16}</m>
                                         </p>
                                     </li>
                                 </ol>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Express <m>10^4 = 10000</m> in logarithmic form.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Find the value of <m>y</m> given that <m>\log_y 81 = 4</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Solve for <m>x</m> if <m>\log_2 x = 5</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Convert <m>8^x = 512</m> to logarithmic form and solve for <m>x</m>.
                             </p>
                         </li>
                     </ol>
