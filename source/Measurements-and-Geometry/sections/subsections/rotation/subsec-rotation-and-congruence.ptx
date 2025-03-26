@@ -1,8 +1,198 @@
 <subsection xml:id="subsec-rotation-and-congruence">
     <title>Rotation and Congruence</title>
-
     <p>
-        
+      Congruence refers to a relationship between two figures or objects, whereby, they are identical in size and shape.
     </p>
+    <p>
+      Rotation is a type of transformation that repositions an object but preserves the shape and size of the object.
+       Thus, rotation produces congruent figures.
+    </p>
+
+    <example>
+      <statement>
+        <p>
+          Triangle <m>ABC</m> is mapped onto <m>A'B'C'</m> after a rotation of <m>-45^\circ</m> and centre of rotation <m>D.</m>
+        </p>
+
+        <image>
+          <latex-image label="congruence_rotation_example">
+            \begin{tikzpicture}
+            % Define vertices of the triangle object
+            \coordinate (A) at (-2,1); 
+            \coordinate (B) at (0,4);
+            \coordinate (C) at (0,-1);
+            \coordinate (D) at (1,-2);
+
+            % Draw edges of the triangle object
+            \draw[blue,thick] (A) -- (B) -- (C) -- cycle;
+            \fill[blue!30,opacity=0.5] (A) -- (B) -- (C) -- cycle;
+
+            %Label the object vertices
+            \node[left] at (A) {A};
+            \node[above] at (B) {B};
+            \node[below] at (C) {C};
+            \node[below] at (D)  {D};
+
+            % Define vertices of the triangle image
+            \coordinate (A') at (1,2.2); 
+            \coordinate (B') at (4.6,3);
+            \coordinate (C') at (1,-.8);
+
+            % Draw edges of the triangle image
+            \draw[blue,thick] (A') -- (B') -- (C') -- cycle;
+            \fill[blue!30,opacity=0.5] (A') -- (B') -- (C') -- cycle;
+
+            %Label the image vertices
+            \node[above] at (A') {A'};
+            \node[above] at (B') {B'};
+            \node[below right] at (C') {C'};
+
+            %Transformation dotted lines
+            \draw[style=dashed,thick,red] (A) -- (D) -- (A');
+            \draw[style=dashed,thick,orange] (B) -- (D) -- (B');
+            \draw[style=dashed,thick,purple] (C) -- (D) -- (C');
+
+            \end{tikzpicture}
+          </latex-image>  
+        </image>
+        <p>
+          <ul>
+            <li>
+              <p>
+                <m>\Delta ABC \text{ and } \Delta A'B'C'</m> have the same shape and size.
+              </p>
+            </li>
+            <li>
+              <p>
+                The length of the corresponding sides of <m>\Delta ABC \text{ and } \Delta A'B'C'</m> are the same.
+              </p>
+            </li>
+            <li>
+              <p>
+                Every corresponding internal angle for the triangles remain the same.
+              </p>
+            </li>
+          </ul>
+        </p>
+        <p>
+          Therefore, <m>\Delta ABC \text{ and } \Delta A'B'C'</m> are said to be <term>directly congruent.</term> 
+        </p>
+      </statement>
+    </example>
+
+    <exercises xml:id="exercises-identifying-congruence-in-rotation-using-objects-and-images">
+      <exercise>
+        <statement>
+          <p>
+            Identify the axes of rotational symmetry and their respective order in the following:
+          </p>
+          <p>
+            <ul>
+              <li>
+                <p>
+                  Cylinder
+                </p>
+              </li>
+              <li>
+                <p>
+                  Rectangular pyramid
+                </p>
+              </li>
+              <li>
+                <p>
+                  Sphere
+                </p>
+              </li>
+              <li>
+                <p>
+                  Cube
+                </p>
+              </li>
+            </ul>
+          </p>
+        </statement>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            Identify the axes of rotational symmetry and their respective order for the following figures:
+          </p>
+          <sidebyside>
+            <image width="50%">
+            <latex-image label="square_base_pyramid_axis_of_rotation">
+              \begin{tikzpicture}
+                % Define vertices of the square base
+                \coordinate (A) at (-2,-1);
+                \coordinate (B) at (0,-1);
+                \coordinate (C) at (1,0);  
+                \coordinate (D) at (-1,0);  
+
+                % Define the apex of the pyramid
+                \coordinate (E) at (0,3);  % Center above the square base
+                
+                % Draw the square base
+                \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
+                
+                % Draw edges connecting the apex to the base
+                \draw[thick] (E) -- (A);
+                \draw[thick] (E) -- (B);
+                \draw[thick] (E) -- (C);
+                \draw[style=dashed,thick] (E) -- (D);
+                
+                % Optional: Add shading for clarity
+                \fill[blue!20,opacity=0.5] (A) -- (B) -- (C) -- (D) -- cycle;  % Shade one face
+                \fill[red!20,opacity=0.5] (B) -- (C) -- (E) -- cycle; % Shade another face
+                \fill[orange!20,opacity=0.5] (D) -- (C) -- (E) -- cycle; % Shade another face
+                \fill[yellow!20,opacity=0.5] (A) -- (D) -- (E) -- cycle; % Shade another face
+
+                \node[below] at (A) {square-base pyramid};
+
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+
+          <image width="50%">
+            <latex-image label="pentagonal_base_pyramid_axis_of_rotation">
+              \begin{tikzpicture}
+                % Define vertices of the square base
+                \coordinate (A) at (0,0.4);
+                \coordinate (B) at (-1,0);
+                \coordinate (C) at (-.8,-1);  
+                \coordinate (D) at (.8,-1); 
+                \coordinate (E) at (1,0);  
+
+                % Define the apex of the pyramid
+                \coordinate (F) at (0,4);  % Center above the pentagon base
+                
+                % Draw the pentagon base
+                \draw[thick] (A) -- (B) -- (C) -- (D) -- (E) -- cycle;
+                
+                % Draw edges connecting the apex to the base
+                \draw[style=dashed,thick] (F) -- (A);
+                \draw[thick] (F) -- (B);
+                \draw[thick] (F) -- (C);
+                \draw[thick] (F) -- (D);
+                \draw[thick] (F) -- (E);
+                
+                % Optional: Add shading for clarity
+                \fill[blue!20,opacity=0.5] (A) -- (B) -- (C) -- (D) -- (E) -- cycle;  % Shade one face
+                \fill[red!20,opacity=0.5] (A) -- (F) -- (E) -- cycle; % Shade another face
+                \fill[orange!20,opacity=0.5] (D) -- (F) -- (E) -- cycle; % Shade another face
+                \fill[white!20,opacity=0.5] (C) -- (F) -- (D) -- cycle; % Shade another face
+                \fill[brown!20,opacity=0.5] (B) -- (F) -- (C) -- cycle; % Shade another face
+                \fill[purple!20,opacity=0.5] (B) -- (F) -- (A) -- cycle; % Shade another face
+
+                \node[below] at (C) {pentagonal-base pyramid};
+
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+          </sidebyside>
+          
+        </statement>
+      </exercise>
+    </exercises>
+
     
 </subsection>

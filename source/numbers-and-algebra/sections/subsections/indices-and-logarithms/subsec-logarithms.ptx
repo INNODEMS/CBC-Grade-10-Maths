@@ -1,6 +1,256 @@
 <subsection xml:id="subsec-logarithms">
     <title>Logarithms</title>
-    <p>
-        
-    </p>
+    <introduction>
+    <title>Why Logarithms?</title>
+
+        <p>
+            In the previous section indices allowed us to express large or small numbers using powers. However, sometimes we need to reverse this process. Instead of finding the result of a power, we need to determine the exponent itself, this is where logarithms come in.
+        </p>
+        <p>
+            A <m>logarithm</m> is the inverse of an exponent (index). It tells us the power to which a number must be raised to get another number.
+        </p>
+        <p>
+            A <m>logarithm</m> answers the question:
+        </p>
+        <p>
+            "To what power must a given base be raised to produce a certain number?"
+        </p>
+        <p>
+            <term>Why Are Logarithms Important?</term>
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <p>
+                        Logarithms help in solving equations with exponents, especially in finance (compound interest) and Science and Engineering (radioactive decay, sound intensity, etc.)
+                    </p>
+                </li>
+            </ul>
+        </p>
+    </introduction>
+
+
+    <subsubsection xml:id="subsubsec-logarithms-notation">
+        <title>Logarithms notation</title>
+        <activity>
+            <statement>
+                <p>
+                    <term>Materials:</term> A Paper/book and a pen
+                </p>
+                <p>
+                    <term>Instructions:</term>
+                </p>
+                <p>
+                     Pick a number from the set: <m>81, 243, 512, 1000</m>
+                </p>
+                <p>
+                    Break it down into prime factors using the Tree Factor Method
+                </p>
+                <p>
+                    <term>e.g</term>
+                </p>
+                    <image width="40%">
+                        <latex-image>
+                            \begin{tikzpicture}
+                                % Draw nodes
+                                \node (a) at (0,4) {8};      % Root node
+                                \node (b1) at (-1.5,3) {2};  % Left child
+                                \node (b2) at (1.5,3) {4};   % Right child
+                                \node (c1) at (1,2) {2};     % Left grandchild (aligned)
+                                \node (c2) at (2,2) {2};     % Right grandchild (aligned)
+                                \node (d1) at (1.7,1) {2};   % Final breakdown (two, shifted left)
+                                \node (d2) at (2.3,1) {1};   % Final breakdown (one, aligned below 2)
+
+                                % Connecting Lines (Aligned Correctly)
+                                \draw (a) -- (b1);
+                                \draw (a) -- (b2);
+                                \draw (b2) -- (c1);
+                                \draw (b2) -- (c2);
+                                \draw (c2) -- (d1);
+                                \draw (c2) -- (d2);  % Connecting last 1
+                            \end{tikzpicture}
+                        </latex-image>
+                    </image>
+                <p>
+                    Express your final result in index form
+                </p>
+            </statement>
+        </activity>
+        <p>
+            <term>Reflection:</term>
+        </p>
+        <p>
+            Every logarithm is simply another way of writing an exponent.
+        </p>
+        <p>
+            <m>e.g</m>  <me>8 = 2 \times 2 \times 2 = 2^3</me>
+        </p>
+        <p>
+            <me>
+                4 = 2 \times 2 = 2^2
+            </me>
+        </p>
+        <p>
+            <me>
+                2 = 2^1
+            </me>
+        </p>
+        <p>
+            The powers/ indices <m>3, 2, 1</m> are the <m>logarithms</m>
+        </p>
+        <p>
+            For <m>2^3 = 8</m> is written as <m>log_2 8 = 3</m>
+        </p>
+        <p>
+            And is read as: logarithm of <m>8</m> to base <m>2</m> is equal to <m>3</m>
+        </p>
+        <p>
+            The general form is:
+        </p>
+        <p>
+            <me>
+                 a^b = c  ⟺  log_a c = b
+            </me>
+        </p>
+        <p>
+            <m>a^b = c</m> represent the Index notation
+        </p>
+        <p>
+            <m>log_a c = b</m> represent the Logarithmic notation
+        </p>
+
+        <example>
+            <statement>
+                <p>
+                    The table below contains numbers in <term>index form</term> and <term>logarithm form</term>. Fill and complete the table.
+                </p>
+                <table>
+                    <title></title>
+                    <tabular top="medium" bottom="medium" left="medium" right="medium">
+                        <row>
+                            <cell><term>Exponential Form</term></cell>
+                            <cell><term>Logarithmic Form</term></cell>
+                        </row>
+                        <row>
+                            <cell>__</cell>
+                            <cell><m>\log_2 32 = 5</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>10^4 = 10,000</m></cell>
+                            <cell>__</cell>
+                        </row>
+                        <row>
+                            <cell><m>3^3 = 27</m></cell>
+                            <cell>__</cell>
+                        </row>
+                        <row>
+                            <cell><m>5^2 = 25</m></cell>
+                            <cell>__</cell>
+                        </row>
+                        <row>
+                            <cell>__</cell>
+                            <cell><m>\log_7 7 = 1</m></cell>
+                        </row>
+                        <row>
+                            <cell>__</cell>
+                            <cell><m>\log_4 64 = 3</m></cell>
+                        </row>
+                    </tabular>
+                </table>
+            </statement>
+        </example>
+        <example>
+            <statement>
+                <p>
+                    What is the logarithmic form of the following exponents:
+                </p>
+                <p>
+                    <ol marker = "a)">
+                        <li>
+                            <p>
+                                <m>6^2 = 36</m>
+                            </p>
+                            <p>
+                                When <m>6^2 = 36</m> then,<m>\log_6 36 = 2</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>9^3 = 729</m>
+                            </p>
+                            <p>
+                                When <m>9^3 = 729</m> then,<m>\log_9 729 = 3</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>4^5 = 1024</m>
+                            </p>
+                            <p>
+                                When <m>4^5 = 1024</m> then, <m>\log_4 1024 = 5</m>
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+            </statement>
+        </example>
+
+        <exercise>
+            <statement>
+                <p>
+                    <ol>
+                        <li>
+                            <p>
+                                What are the logarithmic form of:
+                            </p>
+                            <p>
+                                <ol marker = "a)">
+                                    <li>
+                                        <p>
+                                            <m>2^6 = 64 \qquad \qquad \qquad \qquad \text{e)}\,\,8^4 = 4096 </m>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <m>5^3 = 125 \qquad \qquad \qquad \qquad \text{f)}\,\, 6^y = 216</m>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <m>3^x = 81 \qquad \qquad \qquad \qquad \text{g)}\,\, 9^{\frac {1}{2}} = 3</m>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <m>8^{\frac {2}{3}} = 4 \qquad \qquad \qquad \qquad \text{h)}\,\, 4^{-2} = \frac {1}{16}</m>
+                                        </p>
+                                    </li>
+                                </ol>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Express <m>10^4 = 10000</m> in logarithmic form.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Find the value of <m>y</m> given that <m>\log_y 81 = 4</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Solve for <m>x</m> if <m>\log_2 x = 5</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Convert <m>8^x = 512</m> to logarithmic form and solve for <m>x</m>.
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+            </statement>
+        </exercise>
+    </subsubsection>
 </subsection>
