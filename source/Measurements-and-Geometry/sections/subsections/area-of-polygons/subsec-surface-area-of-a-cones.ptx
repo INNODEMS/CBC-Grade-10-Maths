@@ -143,19 +143,27 @@
            <sidebyside> 
             <image width="40%">
                <latex-image label="cone-sketch">
-                \begin{tikzpicture}
-                    \draw[thick] (0,0) --(2,3) --(4,0) --cycle;
+                 \begin{tikzpicture}
+                    \definecolor{circlecolor}{RGB}{255, 140, 0}  % Orange
+                    \definecolor{semicirclecolor}{RGB}{135, 206, 250} % Light Blue
+                    \draw[thick,fill=semicirclecolor] (0,0) --(2,3) --(4,0) --cycle;
                     \draw[dashed](2,0) --(2,3);
                     \draw[thin] (1.8,0) --(1.8,0.2) --(2,0.2);
+                    \node at (2.2,1.){h};
+                    \node at (3,-0.3){r};
+
                 \end{tikzpicture}
                </latex-image>
                </image>
                <image width="40%">
                <latex-image label="cone-stkeches">
                 \begin{tikzpicture}
+                    \definecolor{circlecolor}{RGB}{255, 140, 0}  % Orange
+                    \definecolor{semicirclecolor}{RGB}{135, 206, 250} % Light Blue
+
                      % Draw the entire cone with one uniform color
-                    \fill[blue!30] (-2,0) arc (180:360:2 and 0.7) -- (2,0) arc (0:180:2 and 0.7) -- cycle;
-                    \fill[blue!30] (-2,0) -- (0,4) -- (2,0) -- cycle;
+                    \fill[semicirclecolor] (-2,0) arc (180:360:2 and 0.7) -- (2,0) arc (0:180:2 and 0.7) -- cycle;
+                    \fill[semicirclecolor] (-2,0) -- (0,4) -- (2,0) -- cycle;
                     
                     % Draw the base ellipse
                     \draw[thick] (-2,0) arc (180:360:2 and 0.7);
@@ -167,7 +175,7 @@
                     
                     % Draw the height
                     \draw[dashed] (0,0) -- (0,4);
-                    \node[left] at (4.2,2) {h};
+                    \node[left] at (0,2) {h};
                     
                     % Draw the radius
                     \draw[dashed] (0,0) -- (2,0);
@@ -184,25 +192,24 @@
             <latex-image label="faces-of-a-cone">
                 \begin{tikzpicture}
                    % Define colors
-                    \definecolor{coneColor}{rgb}{0.3, 0.6, 1}  % Light blue
-                    \definecolor{circleColor}{rgb}{1, 0.6, 0}  % Orange
-                    
+                    \definecolor{circlecolor}{RGB}{255, 140, 0}  % Orange
+                    \definecolor{semicirclecolor}{RGB}{135, 206, 250} % Light Blue
                     % Draw the sector representing the curved surface of the cone
-                    \fill[coneColor] (0,0) -- (-2.5,2.5) arc (150:390:2.5) -- cycle;
+                    \fill[semicirclecolor] (0,0) -- (-2.5,2.5) arc (150:390:2.5) -- cycle;
                     \draw[thick] (0,0) -- (-2.5,2.5);
-                    \draw[thick] (0,0) -- (2.5,3);
+                    \draw[thick] (0,0) -- (1.85,2.5);
                     \draw[thick] (-2.5,2.5) arc (150:390:2.5);
                     
                     % Draw the base circle so its top touches the bottom of the sector
-                    \fill[circleColor] (0,-2.7) circle (1.5);
+                    \fill[circlecolor] (0,-2.7) circle (1.5);
                     \draw[thick] (0,-2.7) circle (1.5);
                     
                     % Indicate the radius of the base
-                    \draw[dashed] (0,-1.5) -- (1.5,-1.5);
+                    \draw[dashed] (0,-2.7) -- (1.5,-2.7);
                     \node[above] at (0.75,-2.5) {r};
                     
                     % Indicate the slant height of the sector
-                    \draw[dashed] (0,0) -- (0,2.5);
+                    \draw[dashed] (0,0) -- (0,2.7);
                     \node[left] at (0,1.25) {h};
                 \end{tikzpicture}
             </latex-image>
@@ -214,7 +221,7 @@
             <p>
                 <md>
                     <mrow> \text{Area} \amp = \frac{1}{2} \times \text{base} \text{height of a small triangle}</mrow>
-                    <mrow> = \amp \frac {1}{2} \tiimes 2 \pi r \times \ell </mrow>
+                    <mrow> = \amp \frac {1}{2} \times 2 \pi r \times \ell </mrow>
                     <mrow> = \amp \pi r \ell </mrow>
                 </md>
             </p>
@@ -231,7 +238,7 @@
             <p>
                 Calculate the area of the curved walls
                 <m> C_2 = \pi r \ell</m>
-                <m> = \pi r sqrt{r^2 + h^2}</m>
+                <m> = \pi r \sqrt{r^2 + h^2}</m>
             </p>
             <p>
                 To find the surface area we sum up all the areas that is:
@@ -240,7 +247,7 @@
             <p>
                 <md>
                     <mrow>A = \amp C_1 + C_2</mrow>
-                    <mrow> = \amp  \pi r^2  + \pi r sqrt{r^2 + h^2}</mrow>
+                    <mrow> = \amp  \pi r^2  + \pi r \sqrt{r^2 + h^2}</mrow>
                     <mrow> = \amp \pi (r + \sqrt{r^2 + h^2})</mrow>
                 </md>
             </p>
