@@ -1,0 +1,189 @@
+<subsection xml:id="subsec-volume-of-a-sphere">
+    <title>Volume of a Sphere</title>
+       <p>
+        A sphere is a perfectly round object.
+       </p>
+       <activity>
+        <statement>
+            <p>
+              <m>\textbf{Orange Peeling Experiment}</m>  
+            </p>
+            <sidebyside>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                           Materials Needed:  
+                        </p>
+                        <p>
+                            📌 An orange (or any round fruit)
+                        </p>
+                        <p>
+                            📌 A knife
+                        </p>
+                        <p>
+                            📌 A flat surface
+                        </p>
+                    </li>
+                </ul>
+            </p>
+            <image>
+            <latex-image>
+                \begin{tikzpicture}
+                    % Define colors
+                    \definecolor{orange}{rgb}{1,0.5,0}
+                    \definecolor{green}{rgb}{0,0.6,0}
+
+                    % Function to draw an orange with a single black dot near the leaf
+                    \newcommand{\draworange}[2]{
+                    % Draw the main orange
+                    \filldraw[fill=orange,draw=black] (#1,#2) circle(1);
+                    
+                    % Add a black dot near the leaf
+                    \fill[black] (#1+0.3,#2+0.8) circle(0.12);
+
+                    % Add a green leaf
+                    \filldraw[fill=green,draw=black,rotate around={30:(#1,#2+1)}] 
+                    (#1,#2+1) ellipse (0.5 and 0.2);
+                    }
+
+                    % Bottom layer (4 oranges)
+                    \foreach \x in {0,2,4,6} {
+                        \draworange{\x}{0}
+                    }
+
+                    % Second layer (3 oranges)
+                    \foreach \x in {1,3,5} {
+                        \draworange{\x}{1.7}
+                    }
+
+                    % Third layer (2 oranges)
+                    \foreach \x in {2,4} {
+                        \draworange{\x}{3.4}
+                    }
+
+                    % Top layer (1 orange)
+                    \draworange{3}{5.1}
+
+                    % Ground surface
+                    \draw[thick] (-1,-1) -- (7,-1);
+                    
+                    % Labels
+                    \node at (3,-1.5) {Pyramidal Stack of Oranges};
+                \end{tikzpicture}
+            </latex-image>
+            </image>
+                
+            </sidebyside>
+            <p>
+                <ul>
+                    
+                    <li>
+                        <p>
+                            Cut the orange in half and carefully peel the skin off in small sections.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Try flattening the peels and arrange them to see how they approximate a circle’s area.
+                        </p>
+                        <p>
+                           📌 When you peel an orange and flatten the pieces, you can see that the peels cover a large area.
+                        </p>
+                        <p>
+                            📌 This helps visualize why increasing the radius increases the overall amount of space the fruit takes up (its volume).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                           Cutting the Orange into Sections. 
+                        </p>
+                        <p>
+                            📌 If you cut an orange in half, you can see its cross-section.
+                        </p>
+                        <p>
+                           📌  If you keep slicing it into smaller spheres, their individual radii determine their volumes.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Why do yopu think oranges or tomatoes or apples etc. are stacking in pyramidal stacks in the market?
+                        </p>
+                        <p>
+                            📌 Oranges in a fruit market are often packed in pyramidal stacks because spheres fit together efficiently.
+                        </p>
+                        <p>
+                            📌 The larger the radius, the more space each orange occupies, which directly affects storage and packaging.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Key takeaways 
+                        </p>
+
+                        <p>
+                            📌 The radius is the most important factor in determining the volume of a sphere.
+                        </p>
+                        <p>
+                            📌 If the radius doubles, the volume increases by <m>2^3 = 8</m> times!
+                        </p>
+                        <p>
+                            📌 This explains why a slightly bigger orange holds significantly more juice compared to a smaller one.
+                        </p>
+                    </li>
+                </ul>
+            </p>    
+        </statement>
+       </activity>
+       <example>
+       <statement>
+        <p>
+             A sphere has a radius of 6 cm. Find its volume.
+        </p>  
+        <p>
+          <md>
+            <mrow> \text{V} =\amp \frac{4}{3} \times r^3</mrow>
+            <mrow>  = \amp 3.142 \frac{4}{3} \times (6)^3</mrow>
+            <mrow> = \amp \frac {864}{3} \times 3.142 </mrow>
+            <mrow> = \amp 904.32 \text{cm}^3</mrow>
+          </md>  
+        </p>
+       </statement>
+        
+       </example>
+       <example>
+        <statement>
+            <p>
+                A football has a radius of 9 cm. What is the volume of the ball?
+            </p>
+
+        </statement>
+        <solution>
+            <p>
+                <md>
+                    <mrow> \text{V} =\amp \frac{4}{3} \times r^3</mrow>
+                    <mrow>  = \amp 3.142 \frac{4}{3} \times (9)^3</mrow>
+                    <mrow> = \amp 3053.63 \text{cm}^3</mrow>
+                </md>  
+            </p>
+        </solution>
+       </example>
+       <example>
+        <statement>
+            <p>
+                A planet has a radius of 1000 km. What's it's volume?
+            </p>
+        </statement>
+        <solution>
+            <p>
+                <md>
+                    <mrow> \text{V} =\amp \frac{4}{3} \times r^3</mrow>
+                    <mrow>  = \amp 3.142 \frac{4}{3} \times (1000)^3</mrow>
+                    <mrow> = \amp 4.19 \times 10^9 \text{km}^3</mrow>
+                </md>  
+                
+            </p>
+        </solution>
+       </example>
+          
+</subsection>

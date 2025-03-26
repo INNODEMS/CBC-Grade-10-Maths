@@ -1,0 +1,133 @@
+<subsection xml:id="subsec-surface-area-of-a-triangular-prism">
+    <title>Surface Area of a Triangular Prism</title>
+    <p>
+        <m>\textbf{ Triangular Prism;}</m> It has a triangle at its base. 
+    </p>
+    <p>
+        A triangular prism is a geometric object with two identical triangular bases and three rectangular lateral faces. Its surface area is the total area of all its faces, measured in square units (cm², m², etc.).
+    </p>
+    <p>
+        Formula of the surface area of a triangular prism is the sum of:
+    </p>
+    <p>
+        1. Two triangular bases
+        <md>
+            <mrow> \text{Area of a triangle} = \amp \frac{1}{2} \times \text{base} \times \text{height} </mrow>
+            <mrow> \text{Total area for two triangles} </mrow>
+            <mrow> = \amp 2 \times (\frac{1}{2} \times \text{base} \times \text{height}) </mrow>
+            <mrow> = \amp b \times h </mrow>
+        </md>
+    </p>
+    <p>
+        2.Two rectangular lateral faces
+    </p>
+    <p>
+    The three faces depend on the perimeter of the triangular base and the prism length <m> L</m>
+    <md>
+        <mrow> \text{Lateral Area} = \amp \text{Base Area} \times \text{Lateral Area} </mrow>
+        <mrow> =\amp (b \times h) + (\text{Perimeter} \times L) </mrow>
+    </md>
+    </p>
+    <p>
+       Total Surface Area formula: 
+    </p>
+    <p>
+        <md>
+            <mrow> S.A =\amp \text{Base Area}  \times \text{Lateral Area}</mrow>
+        </md>
+    </p>
+    <sidebyside>
+    <image width="50%">
+        <shortdescription>Triangular Prism</shortdescription>
+     <latex-image label="surface-area-triangular-prism">
+        \begin{tikzpicture}  
+            % Define points
+            \coordinate (A) at (0,0,0);
+            \coordinate (B) at (3,0,0);
+            \coordinate (C) at (1.5,2,0);
+            \coordinate (D) at (0,0,3);
+            \coordinate (E) at (3,0,3);
+            \coordinate (F) at (1.5,2,3);
+
+            % Draw the base (now at the bottom) with shading
+            \fill[gray!30] (A) -- (B) -- (C) -- cycle;
+
+            % Draw the base edges
+            \draw[thin] (A) -- (B) -- (C) -- cycle;
+
+            % Draw vertical edges
+            \draw[thin] (A) -- (D);
+            \draw[thin] (B) -- (E);
+            \draw[thin] (C) -- (F);
+
+            % Draw top face
+            \draw[thin] (D) -- (E) -- (F) -- cycle;
+
+            % Draw hidden lines
+            \draw[dashed] (D) -- (F);
+            \draw[dashed] (D) -- (E);
+            \draw[dashed] (E) -- (F);
+        \end{tikzpicture}
+     </latex-image>
+    </image>
+   
+         <image width="50%"> 
+        <shortdescription> Net of a triangular prism.</shortdescription>
+        <latex-image label="surface-area-triangular-prism1">
+            \begin{tikzpicture}
+                % Define base rectangle
+                \draw[dashed] (0,0) rectangle (8,8);
+
+                % Triangular faces
+                \draw[thick] (0,0) -- (4,-4) -- (8,0);
+                \draw[thick] (0,8) -- (4,12) -- (8,8);
+
+                % Fold lines (dashed)
+                \draw[dashed] (4,12) -- (4,8);
+                \draw[dashed] (4,-4) -- (4,0);
+                \draw[thick] (8,0) --(12,0) --(12,8) --(8,8);
+                \draw[thick] (0,0) --(-4,0) --(-4,8) --(0,8);
+                
+                % Labels
+                \node[above] at (4,10) {\small 3 cm};
+                \node[below] at (4,-2) {\small 3 cm};
+                \node[below] at (4,0.5) {\small 8 cm};
+                \node[right] at (8,4) {\small 12 cm};
+            \end{tikzpicture}
+        </latex-image>
+    </image>
+    </sidebyside>
+    <example>
+     <statement>
+        <p>
+           Find the Surface area of the triangular prism above. 
+        </p> 
+     </statement>
+     <solution>
+        <p>
+           Step 1: Find the area of the base. 
+        </p>
+        <p>
+            <md>
+                <mrow> \text{area of a triangle} = \amp \frac{1}{2} bh</mrow>
+                <mrow> = \amp (\frac{1}{2} \times 8 \text{cm} ) \times 12 \text{cm} \times</mrow>
+                <mrow> = \amp 48 \text{cm}^2</mrow>
+            </md>
+        </p>
+        <p>
+           Step 2: Multiply the area of the base by the height of the solid to find the volume 
+        </p>
+        <p>
+            <md>
+                <mrow>\text{volume} = \amp  \text{area of base} \times \text{height}</mrow>
+                <mrow> = \amp \frac{1}{2} b \times h \times H</mrow>
+                <mrow> = \amp 48 \text{cm}^2 \times 12 \text{cm} </mrow>
+                <mrow> \amp 576 \text{cm}^3</mrow>
+            </md>
+        </p>
+        <p>
+            The volume of the triangular prism is <m>576 \text{cm}^3</m>.
+        </p>
+     </solution>
+    </example>    
+</subsection>

@@ -164,12 +164,51 @@
     <example>
         <statement>
             <p>
-                
+                In <xref ref="example-vector-addition"/> below, find vector <m>\mathbf{AD}</m> in terms of <m>\mathbf{a}</m> and <m>\mathbf{b}</m>.
             </p>
+            <figure xml:id="example-vector-addition">
+                <caption></caption>
+                <image width="40%">
+                    <shortdescription></shortdescription>
+                    <latex-image>
+                        \begin{tikzpicture}
+                        \coordinate (A) at (2,1);
+                        \coordinate (B) at (4,5);
+                        \coordinate (C) at (8,6);
+                        \coordinate (D) at (9,3);
+                        
+                        \draw[thick] (A) -- (B) -- (C) -- (D);
+                        
+                        \node[below left] at (A) {A};
+                        \node[above] at (B) {B};
+                        \node[above] at (C) {C};
+                        \node[right] at (D) {D};
+                        
+                        \draw[-{Latex[scale=1.5]}] (A) -- (3,3);
+                        \draw[-{Latex[scale=1.5]}] (B) -- (6,5.5);
+                        \draw[-{Latex[scale=1.5]}] (C) -- (8.5,4.5);
+                        
+                        % \node[midway above] (A) -- (B) {a};
+                        % \node[midway above] (B) -- (C) {b};
+                        % \node[midway above] (C) -- (D) {c};
+                        
+                        \path (A) -- (B) node[midway, left] {$\mathbf{a}$};
+                        \path (B) -- (C) node[midway, above] {$\mathbf{b}$};
+                        \path (C) -- (D) node[midway, right] {$\mathbf{c}$};
+                        \end{tikzpicture}
+                    </latex-image>
+                </image>
+            </figure>
         </statement>
         <solution>
             <p>
-                
+                <md>
+                    <mrow> \overrightarrow{AD}  \amp = \overrightarrow{AB} + \overrightarrow{BC} + \overrightarrow{CD}</mrow>
+                    <mrow> \amp = \mathbf{a} + \mathbf{b} + \mathbf{c}</mrow>
+                </md>
+            </p>
+            <p>
+                Thus, vector <m>\overrightarrow{AD} = \mathbf{a} + \mathbf{b} + \mathbf{c} </m>
             </p>
         </solution>
     </example>
