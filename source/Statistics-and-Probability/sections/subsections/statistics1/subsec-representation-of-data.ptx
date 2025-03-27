@@ -71,7 +71,63 @@
         </ol>
         </p>
         <p>
-            Equal class width means all bars have the same width, while unequal class width means bars have different widths to better represent uneven data.
+            <m>\textbf{Frequency density}</m> is a measure used in histograms to ensure that the area of each bar represents the actual frequency of observations, especially when class widths are unequal.
+        </p>
+        <p>
+            Frequency density is calculated using the formula:
+        </p>
+        <p>
+            <md>
+                <mrow>\textbf{Frequency density} =  \amp \frac{\textbf{Frequency}}{\textbf{Class width}} </mrow>
+            </md>
+        </p>
+        <p>
+            Where;
+        </p>
+        <p>
+            <m>\textbf{Frequency}</m> is the number of observations in a class interval.
+        </p>
+        <p>
+            <m>\textbf{Class Width}</m> is the difference between the upper and lower boundaries of a class.
+        </p>
+        <p>
+            <m>\textbf{Why Use Frequency Density Instead of Frequency?}</m>
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <p>
+                        In a histogram, the area of each bar (not just the height) represents the frequency.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        If class widths are unequal, simply plotting frequency would distort the representation.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Using frequency density ensures that the area of each bar remains proportional to the actual frequency.
+                    </p>
+                </li>
+            </ul>
+        </p>
+        <p>
+            <m>\textbf{Equal class width}</m> means all bars have the same width. 
+        </p>
+        <p>
+            <m>\textbf{unequal class width}</m> means bars have different widths to better represent uneven data.
+        </p>
+        <p>
+            <m>\textbf{Midpoint}</m> of a class interval represents the central value of that range. It is the average of the lower and upper boundaries of the class.
+        </p>
+        <p>
+            Formula for midpoint:
+        </p>
+        <p>
+            <md>
+                <mrow>\textbf{Midpoint} = \amp \frac{\textbf{Lower bound + Upper bound}}{2}</mrow>
+            </md>
         </p>
         <activity>
             <p>
@@ -205,7 +261,7 @@
                     
                 </p>
                 <image>
-                    <latex-image>
+                    <latex-image label = "Histogram 1">
                         \begin{tikzpicture}
                             % Draw fine grid (each main grid square has 10x10 subdivisions)
                             \draw[gray!30, very thin, step=0.1] (0,0) grid (8,10); % Adjusted for proper scaling
@@ -237,7 +293,6 @@
 
                             % Graph Title
                             \node[above] at (4,10) {\textbf{Histogram of Number of Fruits Sold}};
-                            
                         \end{tikzpicture}
                     </latex-image>
                 </image>
@@ -328,9 +383,9 @@
                             </tabular>
                         </table>
                         <image>
-                            <latex-image>
+                            <latex-image label = "Frequency polygon 1">
                                 \begin{tikzpicture}
-                                % Draw fine grid (each main grid square has 10x10 subdivisions)
+                                    % Draw fine grid (each main grid square has 10x10 subdivisions)
                                     \draw[gray!30, very thin, step=0.1] (0,0) grid (8,7); % Now each main grid square has 10x10 smaller squares
 
                                     % Draw main grid
@@ -411,6 +466,25 @@
                 <p>
                     To draw a histogram and a frequency polygon, we need to find the frequency density and the midpoint of each class interval.
                 </p>
+                <p>
+                    We use frequency density instead of frequency to draw the histogram because the class widths are unequal.
+                </p>
+                <p>
+                    The formula for frequency density:
+                </p>
+                <p>
+                    <md>
+                        <mrow>\textbf{Frequency density} = \amp \frac{\textbf{Frequency}}{\textbf{Class width}}</mrow>
+                    </md>
+                </p>
+                <p>
+                    The formula for Midpoint:
+                </p>
+                <p>
+                    <md>
+                        <mrow>\textbf{Midpoint} = \amp \frac{\textbf{Lower bound + Upper bound}}{2}</mrow>
+                    </md>
+                </p>
                 <table>
                     <title></title>
                     <tabular left="medium" right="medium" top="medium" bottom="medium">
@@ -460,14 +534,14 @@
                             <cell><m>4000 - 5000</m></cell>
                             <cell><m>42</m></cell>
                             <cell><m>1000</m></cell>
-                            <cell><m>0.010</m></cell>
+                            <cell><m>0.042</m></cell>
                             <cell><m>4500</m></cell>
                         </row>
 
                     </tabular>
                 </table>
                 <image>
-                    <latex-image>
+                    <latex-image label = "Histogram 2"> 
                         \begin{tikzpicture}
                             % Draw fine grid (10 smaller squares per main grid unit)
                             \draw[gray!30, very thin, step=0.1] (0,0) grid (10,10);
@@ -476,28 +550,28 @@
                             \draw[gray!70, thin, step=1] (0,0) grid (10,10);
 
                             % Draw axes
-                            \draw[thick,->] (0,0) -- (10,0);
-                            \draw[thick,->] (0,0) -- (0,10);
-                            \node[below] at (5,-0.8) {\textbf{Salary (KSh)}};
-                            \node[rotate=90] at (-1,4) {\textbf{Frequency Density}};
+                            \draw[thick,->] (0,0) -- (10.5,0); % X-axis
+                            \draw[thick,->] (0,0) -- (0,10.5); % Y-axis
+                            \node[below] at (5,-0.8) {\textbf{Salary (KSh)}}; % X-axis label
+                            \node[rotate=90] at (-1,4) {\textbf{Frequency Density}}; % Y-axis label
 
-                            % X-axis labels (Salary ranges in KSh)
+                            % X-axis labels (Salary Ranges)
                             \foreach \x/\label in {1/1000, 2/1500, 3/2000, 4/2500, 5/3000, 7/4000, 9/5000} {
                                 \node[below] at (\x,0) {\label};
                             }
 
-                            % Y-axis labels (2 grid = 0.02, so 1 grid = 0.01)
+                            % Y-axis labels (2 grid units = 0.02)
                             \foreach \y/\label in {0/0, 2/0.02, 4/0.04, 6/0.06, 8/0.08, 10/0.10} {
                                 \node[left] at (0,\y) {\label};
                             }
 
-                            % Draw histogram bars (Unequal Class Widths with frequency density)
+                            % Draw histogram bars (using frequency density values)
                             \draw[fill=blue!60] (1,0) rectangle (2,4.2*2);  % 1000-1500, density 0.084
                             \draw[fill=blue!60] (2,0) rectangle (3,3.5*2);  % 1500-2000, density 0.070
                             \draw[fill=blue!60] (3,0) rectangle (4,2.0*2);  % 2000-2500, density 0.040
                             \draw[fill=blue!60] (4,0) rectangle (5,1.5*2);  % 2500-3000, density 0.030
                             \draw[fill=blue!60] (5,0) rectangle (7,0.9*2);  % 3000-4000, density 0.018
-                            \draw[fill=blue!60] (7,0) rectangle (9,0.5*2);  % 4000-5000, density 0.010
+                            \draw[fill=blue!60] (7,0) rectangle (9,2.1*2);  % 4000-5000, density 0.042 (Fixed from 0.010)
 
                             % Frequency Polygon (Connecting Midpoints)
                             \draw[thick,black] 
@@ -507,16 +581,16 @@
                                 (3.5,2.0*2) -- 
                                 (4.5,1.5*2) -- 
                                 (6,0.9*2) -- 
-                                (8,0.5*2) -- 
+                                (8,2.1*2) -- 
                                 (9.5,0);
 
                             % Mark Midpoints with dots
-                            \foreach \x/\y in {1.5/4.2, 2.5/3.5, 3.5/2.0, 4.5/1.5, 6/0.9, 8/0.5} {
+                            \foreach \x/\y in {1.5/4.2, 2.5/3.5, 3.5/2.0, 4.5/1.5, 6/0.9, 8/2.1} {
                                 \fill[black] (\x,\y*2) circle (3pt);
                             }
 
-                            % Title
-                            \node[above] at (5,10) {\Large \textbf{Salary Distribution: Histogram and Frequency Polygon}};
+                            % Graph Title
+                            \node[above] at (5,10.5) {\Large \textbf{Salary Distribution: Histogram and Frequency Polygon}};
                         \end{tikzpicture}
                     </latex-image>
                 </image>
