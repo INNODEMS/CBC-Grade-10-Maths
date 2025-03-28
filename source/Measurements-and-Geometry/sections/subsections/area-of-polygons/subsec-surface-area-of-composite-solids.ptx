@@ -2,7 +2,7 @@
     <title>Surface Area of Composite solids</title>
 
      <p>
-		 A<m>\text{Solid}</m> is a three dimensional shape. <m> \text{Solids}</m> are objects with three dimensions i.e Width, Length and Height and they have surface area and volumes.. 
+		 A <m>\text{Solid}</m> is a three dimensional shape. <m> \text{Solids}</m> are objects with three dimensions i.e Width, Length and Height and they have surface area and volumes.. 
 	 </p>
     <p>
       Area of Compound shapes 
@@ -11,49 +11,7 @@
 		When two or more different solids are placed together, the result is compound solids. The surface area of a compound shape can be found by adding areas of the parts of the solids.
 	</p>
 	<p> A tree trunk was cut and this is the shape formed after cutting it. </p>
-     <image>
-     <latex-image label="truncated-cone">
-        \begin{tikzpicture}
-            	\pgfmathsetmacro{\r}{2}
-		       % Base of the truncated cylinder
-		        \draw[thick,fill=cyan!35,opacity=0.75] plot[domain=0:6.2832,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{0.0});
-		        \draw[red,thick,dashed] plot[domain=1.570796327:4.71238898,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{0.0}); 
-		        % Vertical wall (back, external radius)
-		        \fill[gray!35,opacity=0.5] (0,\r,0) 
-		        	-- plot[domain=1.571:4.71238898,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{0})
-		        	-- (0,-\r,4) 
-		        	-- plot[domain=4.71238898:1.571,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{4.0-\r*sin(\t r)})
-		        	-- (0,\r,0);	
-		        % Vertical wall (front, external radius)
-		        \fill[cyan!35,opacity=0.5] (0,-\r,0) 
-                -- plot[domain=-1.571:1.571,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{0}) 
-		        	-- (0,\r,2.0) 
-		        	-- plot[domain=1.571:-1.571,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{4.0-\r*sin(\t r)}) 
-		        	-- (0,-\r,0);
-		        % section of the plane (cut by a plane)
-		        \draw[thick] plot[domain=0:6.2832,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{4.0-\r*sin(\t r)});
-		        % The cylinder (vertical wall
-		        \foreach \angulo in {0,0.05,...,6.3}{
-				\pgfmathparse{2.0*cos(\angulo r)}
-				\pgfmathsetmacro{\px}{\pgfmathresult}
-				\pgfmathparse{2.0*sin(\angulo r)}
-				\pgfmathsetmacro{\py}{\pgfmathresult}
-				\draw[cyan] (\px,\py,0) -- (\px,\py,4.0-\py);
-			}
-		        \fill[cyan!35,opacity=0.75] plot[domain=0:6.2832,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{4.0-\r*sin(\t r)});
-		        % Circumferences bounding the cylinder
-		        \draw[red,thick] plot[domain=0:6.2831853,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{4.0-\r*sin(\t r)}); 
-		        \draw[red,thick] plot[domain=-1.570796327:1.570796327,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{0.0}); 
-		        % lengths and indication of points
-		        \draw[dashed] (0,0,-1) -- (0,0,6);
-		        
-		        \draw[thick] (0,0,5) -- (0,\r,5) node [midway,fill=white] {$r$};
-		        \draw[thick] (0,\r+0.5,0) -- (0,\r+0.5,2) node [midway,fill=white] {$h_{1}$};
-		        \draw[thick] (0,-\r-0.5,0) -- (0,-\r-0.5,6) node [midway,fill=white] {$h_{2}$};
-		        \draw[thick] (0,\r+1.0,0) -- (0,\r+1.0,4) node [midway,fill=white] {$h$};
-            \end{tikzpicture}
-     </latex-image>
-     </image>
+     
     
     
 <example>
@@ -61,10 +19,10 @@
 		<sidebyside>
 
 		 <p>
-			
+			Finf the surface area of the figure alongside.
 		 </p>
         </sidebyside>	
-		<image>
+		<image width="50%">
 		<latex-image label="truncate">
 			\begin{tikzpicture}
 				% Set background color
@@ -225,7 +183,7 @@
 		\node[right] at (-1.6,0.5) { $r=5$};
 		\node[right] at (0,2) { $h =10$};
 		<!-- \node[right] at (-3,2.5) {Slanted height }; -->
-		\node[below] at (-1.7,2.3) {$\ell = 15 cm$};
+		\node[below,rotate=50] at (-1.7,2.3) {$\ell = 15 cm$};
 	 \end{tikzpicture}
    </latex-image>
    </image>
