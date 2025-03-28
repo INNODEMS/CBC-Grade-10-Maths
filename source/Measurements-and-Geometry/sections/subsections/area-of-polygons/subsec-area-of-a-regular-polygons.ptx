@@ -1,9 +1,196 @@
 <subsection xml:id="subsec-area-of-regular-polygons">
     <title>Area of Regular Polygons</title>
      <introduction>
+     <p>
+        🔸There are several ways to describe polygons. One is the regularity or irregularity of sides and angles.
+     </p>
+     <p>
+        🔸A polygon is <m>\textbf{regular}</m> when all of it's sides and angles are equal. All the sides and all the angles are equal making it regular.
+     </p>
+     <p>
+        In a regular polygon we can work out the area of the polgon by working out the area of one triangle then multiply by the number of similar triangles formed by the polygon. For example how many triangles can we have from an hexagon? 
+     </p>
+     <p>
+        The area of a regular polygon can be found using this formula, where <m>P</m>
+        is the perimeter and <m>a</m>
+        is the apothem
+     </p>
+      <p>
+        The <m>\textbf{apothem}</m> is the distance from the center of a regular polygon to <m>a </m>side. Where a is the half <m>\frac{1}{2} \text{side.}</m>
+     </p>
+     <image width="60%">
+     <latex-image label="polgon-triangle">
+        \begin{tikzpicture}
+                    
+            % Define colors
+            \definecolor{hexcolor}{RGB}{135, 206, 250} % Light blue fill
+            \definecolor{edgecolor}{RGB}{30, 144, 255}  % Blue outline
+
+            % Define hexagon vertices
+            \def\R{3} % Radius of hexagon
+            \foreach \i in {0,60,...,300} {
+                \coordinate (P\i) at (\i:\R);
+            }
+
+            % Draw the hexagon
+            \filldraw[fill=hexcolor, draw=edgecolor, thick] 
+                (P0) -- (P60) -- (P120) -- (P180) -- (P240) -- (P300) -- cycle;
+
+            % Define center
+            \coordinate (C) at (0,0);
+            
+            % Draw the perpendicular segment
+            \draw[dashed] (C) -- (0,-2.62) node[midway,left] {\Large $a$};
+
+            % Right angle marker
+            \draw[thick] (0,-2.35) -- (0.2,-2.35) -- (0.2,-2.62);
+            % \draw (0,-\R)++(0,0) -- ++(0.2,0) -- ++(0,0.);
+
+            % Mark the center point
+            \filldraw[black] (C) circle (2pt);
+        \end{tikzpicture}
+     </latex-image>
+     </image>
+    
+     <p>
+        You want to find the area of the triangle. You can see it has an apothem of
+        <m>\sqrt{3}</m> meters and a side length of 10 meters.
+
+     </p>
+     <image width="60%">
+        <latex-image label="polgon-hexagon">
+            \begin{tikzpicture}
+                            % Define triangle vertices
+                \coordinate (A) at (-3,0);
+                \coordinate (B) at (3,0);
+                \coordinate (C) at (0,6); % Height of an equilateral triangle with side 6
+
+                % Draw the equilateral triangle
+                \draw[thick, blue] (A) -- (B) -- (C) -- cycle;
+            
+                % Label the side length
+                \draw[thick,blue] (A) -- node[left] {\Large 6 m} (C);
+            
+                % Define point E inside the triangle
+                \coordinate (E) at (0,2.2);
+                \coordinate (E1) at (1.5,3);
+            
+                % Draw perpendicular segment from E to side BC
+                \draw[dashed] (E) -- (E1) node[above ,midway,rotate=40] {\large $\sqrt{3}$ m};
+            
+                %draw the right angle
+                \tkzMarkRightAngle[draw=black,size=.2](B,E1,E);
+            
+                % Label the perpendicular length
+            
+                % Label point E
+                \node[left] at (E) {\Large $A$};
+                \filldraw[black] (E) circle (2pt);
+            \end{tikzpicture}
+        </latex-image>
+     </image>
         <p>
-           A quadrilateral is a four-sided polygon with four angles,the sum of its interior angles is <m>360^\circ</m>. It is a closed shape formed by four straight line segments.
+            If you also find the perimeter, P
+,
+        then you can use the formula A= <m> \frac{1}{2} \textbf{P}a</m> to find the area.
         </p>
+        <p>
+            <me>
+                \textbf{P} = \text{length of each side } \times a \text{, where } a = h
+            </me>
+            
+            <me>
+                P = 10 \, m \times 3
+            </me>
+            <me>
+                = 30 m
+            </me>
+            Now, use the formula for the area of a regular polygon is :
+        </p>
+        <p>
+            <md>
+                <mrow> A = \amp \frac{1}{2} \times 30 \times \sqrt{3} </mrow>
+                <mrow> = \amp 125.98 m^2 </mrow>
+            </md>
+        </p>
+        <example>
+            <statement>
+                <p>
+                    A regular hexagon with center h is shown below
+                </p>
+                <p>
+                 Similarly you can use <m>A = \frac{1}{2} n \times S \times a</m>
+                </p>   
+               
+                <image width="60%">
+     <latex-image label="polgon-hexagon-example">
+        \begin{tikzpicture}
+             \definecolor{hexcolor}{RGB}{102, 255, 102} % Light blue fill
+            \definecolor{edgecolor}{RGB}{30, 144, 255}  % Blue outline
+
+            % Define hexagon vertices
+            \def\R{3} % Radius of hexagon
+            \foreach \i in {0,60,...,300} {
+                \coordinate (P\i) at (\i:\R);
+            }
+
+            % Draw the hexagon
+            \filldraw[fill=hexcolor, draw=edgecolor, thick] 
+                (P0) -- (P60) -- (P120) -- (P180) -- (P240) -- (P300) -- cycle;
+
+            % Define center
+            \coordinate (C) at (0,0) node[above] {\Large h};
+            
+            % Draw the perpendicular segment
+            \draw[dashed] (C) -- (0,-2.62) node[midway,left] {\Large $14$ cm};
+
+            % Right angle marker
+            \draw[thick] (0,-2.35) -- (0.2,-2.35) -- (0.2,-2.62) node[below]{20 cm};
+            % \draw (0,-\R)++(0,0) -- ++(0.2,0) -- ++(0,0.);
+
+            % Mark the center point
+            \filldraw[black] (C) circle (2pt);
+           
+        \end{tikzpicture}
+     </latex-image>
+     </image>
+            </statement>
+            <solution>
+                     <p>Find the perimeter P, Then use the formula A= <m> \frac{1}{2} \textbf{P}a</m> to find the area.
+        </p>
+        <p>
+            <me>
+                \textbf{P} = \text{length of each side } \times a
+            </me>
+            
+            <me>
+                P = 20 \, cm \times 6
+            </me>
+            <me>
+                = 120
+            </me>
+            Now, use the formula for the area of a regular polygon is :
+        </p>
+        <p>
+            <md>
+                <mrow> A = \amp \frac{1}{2} \times 120 \times 14 \, cm</mrow>
+                <mrow> = \amp 840 cm^2 </mrow>
+            </md>
+        </p>
+         <p>
+                    Where <m>n = \text{number of sides,} S = \text{length of each side and } a = \frac{S}{2}  </m>
+                    
+                </p>
+                <p>
+                    <md>
+                        <mrow>A = \amp  \frac{1}{2} n \times S \times a</mrow>
+                        <mrow> = \amp  \frac{1}{2} \times 6 \times 20 \, cm \times 14 \, </mrow>
+                        <mrow> = \amp \frac{1,680}{2} cm^2</mrow>
+                        <mrow> = \amp 840 cm^2 </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
       </introduction> 
 
 <subsubsection xml:id="subsec-area-of-an-Heptagon">
@@ -231,13 +418,68 @@
         <m>\textbf{Study Questions}</m>
     </p>
     <p>
-        1️⃣ What is the sum of all interior angles of an octagon ?    </p>
+        1️⃣ What is the sum of all interior angles of a heptagon ?    </p>
     <p>
-        2️⃣ How do we calculate the measure of one interior angle of a regular octagon?
-    </p>
+        2️⃣ How do we calculate the measure of one interior angle of a regular heptagon ?    </p>
     <p>
        3️⃣ Can you find heptagons in real life? 
     </p>
+      <example>
+        <statement>
+            <sidebyside>
+             <p>
+                A regular heptagon  measures 10 cm as indicated in the figure below, find its area given the sum of it's interior angles is<m> 900^\circ?</m>
+            </p>
+             <image>
+            <latex-image label="regular-heptagon-example">
+                \begin{tikzpicture}
+                    % Define the heptagon
+                    \foreach \i in {0,1,...,6} {
+                        \coordinate (P\i) at ({360/7*\i}:2);
+                    }
+                    
+                    % Fill the heptagon with pink color
+                    \fill[blue!45] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- cycle;
+                    
+                    % Draw the heptagon
+                    \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- cycle;
+                    \coordinate(0,0);
+                    \draw[thick] (P0) --(0,0) node[midway, above left]{10 cm};
+                    \draw[fill=black](0,0) circle(2pt);
+                    % Label the vertices
+                    \foreach \i in {0,1,...,6} {
+                        \node[font=\small] at ({360/7*\i}:2.2) {$P_{\i}$};
+                    }
+                \end{tikzpicture}
+            </latex-image>
+           </image>
+            </sidebyside>
+           
+        </statement>
+        <solution>
+            <p>
+                There are 7 triangles since a heptagon has 7 sides.
+                Area of Triangle <m>AOB = \frac{1}{2} ab \text{sin } 51.43^\circ </m> 
+            </p>
+            <p>
+                <md>
+                    <mrow>  \triangle AOB = \amp \frac{1}{2}\times 10\times 10\, \text{ sin} 51.43^\circ </mrow>
+                    <mrow> = \amp \frac{1}{2}\times 100\,cm^2 \times \text{ sin } 51,43^\circ</mrow>
+                    <mrow> = \amp \frac{1}{2}\times 100\,cm^2 \times 0.7818 </mrow>
+                    <mrow> = \amp 39.0923 \,cm^2 </mrow>
+                    
+                </md>
+            </p>
+            <p>
+                Therefore the total area 
+                <md>
+                    <mrow> = \amp 7 \times 39.0923 \,cm^2 </mrow>
+                    <mrow> = \amp 273.65 cm^2 </mrow>
+                </md>
+            </p>
+        </solution>
+     
+    </example>
 
 </subsubsection>
       <subsubsection xml:id="subsec-area-of-an-octagon">
@@ -317,6 +559,7 @@
     <p>
        3️⃣ Have you ever seen octagon-shaped objects in real life?
     </p>
+  
     
     <image width="50%">
     <latex-image label="regular-octagon">
@@ -331,7 +574,6 @@
             
             % Draw the octagon
             \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7) -- cycle;
-            
             % Label the vertices
             \foreach \i in {0,1,...,7} {
                 \node[font=\small] at ({360/8*\i}:2.2) {$P_{\i}$};
@@ -339,24 +581,155 @@
         \end{tikzpicture}
     </latex-image>
     </image>
+        <example>
+        <statement>
+            <sidebyside>
+             <p>
+                A regular octagon  with O as its centre.
+               If OA is 8 cm, find its area.
+            </p>
+                   <image>
+        <latex-image>
+            \begin{tikzpicture}
+                % Define heptagon properties
+                \def\R{3} % Radius of heptagon
+                \def\angle{360/8} % Angle between vertices for an octagon
+
+                % Define heptagon vertices counterclockwise
+                \foreach \i in {0,1,2,3,4,5,6,7} {
+                    \coordinate (P\i) at (\i*\angle:\R);
+                }
+
+                % Define center
+                \coordinate (O) at (0,0);
+
+                % Draw the heptagon
+                \draw[thick,fill=pink!20] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7) -- cycle;
+
+                % % Label the vertices
+                % \foreach \i/\name in {0/A, 1/B, 2/C, 3/D, 4/E, 5/F, 6/G, 7/H} {
+                %     \node[scale=1.1] at (P\i) {\textbf{\name}};
+                % }
+
+                % Draw dashed lines from O to A and B
+                \draw[dashed] (O) -- (P0) node[midway, below left] { 8 cm};
+                \draw[dashed] (O) -- (P1) node[midway,  right] {8 cm};
+                 % % Label the vertices
+                % \foreach \i/\name in {0/A, 1/B, 2/C, 3/D, 4/E, 5/F, 6/G, 7/H} {
+                %     \node[scale=1.1] at (P\i) {\textbf{\name}};
+                % }
+                % Draw arc for 45° angle
+                \draw[thick] (9:0.5) arc (9:50:0.5);
+                \node at (20:1) {\small $45^\circ$};
+
+                % Mark center point
+                \filldraw[black] (O) circle (2pt) node[above left] {\textbf{O}};
+            \end{tikzpicture}
+        </latex-image>
+        </image>
+            </sidebyside>
+           
+        </statement>
+        <solution>
+            <p>
+                There are 8 triangles since an octagon has 8 sides.
+                Area of Triangle <m>AOB = \frac{1}{2} ab \text{sin} 45^\circ </m> 
+            </p>
+            <p>
+                <md>
+                    <mrow>  \triangle AOB = \amp \frac{1}{2}\times 8\times 8\, \text{sin} 45^\circ </mrow>
+                    <mrow> = \amp \frac{1}{2}\times 64\,cm^2 \times \text{sin} 45^\circ</mrow>
+                    <mrow> = \amp \frac{1}{2}\times 64\,cm^2 \times 0.7071 </mrow>
+                    <mrow> = \amp 22.6274 \,cm^2 </mrow>
+                    
+                </md>
+            </p>
+            <p>
+                Therefore the total area 
+                <md>
+                    <mrow> = \amp 8 \times 22.6274 \,cm^2 </mrow>
+                    <mrow> = \amp 181.02 cm^2 </mrow>
+                </md>
+            </p>
+        </solution>
+     
+    </example>
+    
     <example>
         <statement>
             <p>
                 The figure below represents a regular octagon ABCDEFGH with O as its centre.
                 If OA is 7cm, find its area
             </p>
+                       <image>
+        <latex-image label="octagon-example-two">
+            \begin{tikzpicture}
+                % Define heptagon properties
+                \def\R{3} % Radius of heptagon
+                \def\angle{360/8} % Angle between vertices for an octagon
+
+                % Define heptagon vertices counterclockwise
+                \foreach \i in {0,1,2,3,4,5,6,7} {
+                    \coordinate (P\i) at (\i*\angle:\R);
+                }
+
+                % Define center
+                \coordinate (O) at (0,0);
+
+                % Draw the heptagon
+                \draw[thick,fill=yellow!10] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7) -- cycle;
+
+                % % Label the vertices
+                % \foreach \i/\name in {0/A, 1/B, 2/C, 3/D, 4/E, 5/F, 6/G, 7/H} {
+                %     \node[scale=1.1] at (P\i) {\textbf{\name}};
+                % }
+
+                % Draw dashed lines from O to A and B
+                \draw[dashed] (O) -- (P4) node[midway, below left] {7cm};
+                \draw[dashed] (O) -- (P3) node[midway,  right] {7 cm};
+                 % % Label the vertices
+                % \foreach \i/\name in {0/A, 1/B, 2/C, 3/D, 4/E, 5/F, 6/G, 7/H} {
+                %     \node[scale=1.1] at (P\i) {\textbf{\name}};
+                % }
+                % Draw arc for 45° angle
+                \draw[thick] (9:0.5) arc (9:50:0.5);
+                \node at (20:1) {\small $45^\circ$};
+
+                % Mark center point
+                \filldraw[black] (O) circle (2pt) node[above left] {\textbf{O}};
+            \end{tikzpicture}
+        </latex-image>
+        </image>
         </statement>
-        <solution>
+                <solution>
             <p>
-                Area of a triangle <m>AOB</m>
+                There are 8 triangles since an octagon has 8 sides and the sum of interior angles is <m>360 ^\circ</m>.
+                Area of Triangle <m>AOB = \frac{1}{2} ab \text{sin} 45^\circ </m> 
+            </p>
+            <p>
+                The angle of <m>\triangle AOB = \frac{360}{8} = 45^\circ </m>
+                <md>
+                    <mrow>  \triangle AOB = \amp \frac{1}{2}\times 7\times 7\, \text{sin} 45^\circ </mrow>
+                    <mrow> = \amp \frac{1}{2}\times 49\,cm^2 \times \text{sin} 45^\circ</mrow>
+                    <mrow> = \amp \frac{1}{2}\times 49\,cm^2 \times 0.7071 </mrow>
+                    <mrow> = \amp 17.3241 \,cm^2 </mrow>
+                    
+                </md>
+            </p>
+            <p>
+                Therefore the total area 
+                <md>
+                    <mrow> = \amp 8 \times 17.3241 \,cm^2 </mrow>
+                    <mrow> = \amp 138.59 cm^2 </mrow>
+                </md>
             </p>
         </solution>
     </example>
 </subsubsection>
 <subsubsection xml:id="subsubsec-area-of-a-nenagon">
-    <title>Area of a Nenagon</title>
+    <title>Area of a Nonagon</title>
     <p>
-         A decagon is a nine-sided polygon with nine vertices (corners) and nine edges (sides).
+         A nonagon is a nine-sided polygon with nine vertices (corners) and nine edges (sides).
     </p>
     <activity>
         <statement>
@@ -374,7 +747,7 @@
                 ✅ Graph paper (optional) 
             </p>
             <p>
-             <m>\textbf{ Drawing a Regular nenagon (9-sided Polygon)}</m>   
+             <m>\textbf{ Drawing a Regular nonagon (9-sided Polygon)}</m>   
             </p>
              <p>
                 1️⃣ Draw a Circle:
@@ -409,15 +782,18 @@
         <m>\textbf{Study Questions}</m>
     </p>
     <p>
-        1️⃣ What is the sum of all interior angles of an nenagon ?    </p>
+        1️⃣ What is the sum of all interior angles of an nonagon ?    </p>
     <p>
-        2️⃣ How do we calculate the measure of one interior angle of a regular nenagon?
+        2️⃣ How do we calculate the measure of one interior angle of a regular nonagon?
     </p>
     <p>
-       3️⃣ Have you ever seen nenagon-shaped objects in real life? 
+       3️⃣ Have you ever seen nonagon-shaped objects in real life? 
     </p>
     <example>
         <statement>
+            <p>
+                Nonagon example.
+            </p>
             <p>
                 One of the angles of a regular polygon is 40° and its sides are 15 cm long. Sketch the polygon and
                 then find the area of the polygon.
@@ -431,24 +807,24 @@
                🔹 To find the number of sides of a triangle we use the formula <m>\frac{360}{\text{Interior angle}} = \text{Number of sides}</m>. Where <m>n</m> is the number opf sides.
             </p>
             <p> <md>
-                    <mrow> \frac{360^ \circ}{\text{interior angle}} = \amp \text{Number of sides} </mrow>
-                    <mrow> \frac{360^\circ}{40} = \amp 9 \text{sides}</mrow>
+                    <mrow> \frac{360^ \circ}{\text{interior angle}} = \amp \text{ Number of sides} </mrow>
+                    <mrow> \frac{360^\circ}{40} = \amp 9 \text{ sides }</mrow>
                 </md>
             </p>
             <p>
-                🔹Finding the area of the nenagon we use the formula:
+                🔹Finding the area of the nonagon we use the formula:
             </p>
             <p>
-                Area of a tringle using sine rule <m>\times the number of sides </m> Where our ab is the radii..
+                Area of a tringle using sine rule <m>\times \text{the number of sides} </m> Where our <m>ab </m> is the radii.
             </p>
             <p>
                 <md>
-                    <mrow> \frac{1}{2}absin 40^\circ \theta = \amp \frac {1}{2} \times 15\text{cm} \times 15\text{cm} \times  sin 40^\circ \theta </mrow>
-                    <mrow> = \amp \frac{1}{2} \times 225 \times 0.6428 \text{cm}^2 </mrow>
+                    <mrow> \frac{1}{2}ab \, sin 40^\circ \theta = \amp \frac {1}{2} \times 15\text{cm} \times 15\text{cm} \times  sin \, 40^\circ \theta </mrow>
+                    <mrow> = \amp \frac{1}{2} \times 225 \times 0.6428 \text{ cm}^2 </mrow>
                 </md> 
             </p>
             <p>
-               🔹 There are 9 triangles since a nenagon has 9 sides.
+               🔹 There are 9 triangles since a nonagon has 9 sides.
             </p>
             <p>
                 🔹Therefore, total area is:
@@ -457,7 +833,7 @@
                 <md>
                     <mrow>  = \amp 9 \times  (\frac{1}{2} \times 225 \times 0.6428 ) </mrow>
                     <mrow> = \amp 9 \times 225 \times 0.3214 </mrow>
-                    <mrow> = \amp 73.6006 \text{cm}^2</mrow>
+                    <mrow> = \amp 73.6006 \text{ cm}^2</mrow>
                 </md>
             </p>
         </solution>
@@ -535,7 +911,7 @@
        3️⃣ Can you find decagons in real life? 
     </p>
     <p>
-         4️⃣ What is the sum of all interior angles of a heptagon? 
+         4️⃣ What is the sum of all interior angles of a decagon? 
     </p>
     <image width="50%">
     <latex-image label="regular-decagon">
@@ -558,7 +934,126 @@
         \end{tikzpicture}
     </latex-image>
     </image>
-    
+        <example>
+           
+            <statement>
+                 <sidebyside>
+            <p>
+                A regular decagon has an apothem <m>a</m> of 7.5 cm and a side length S of 15 cm. Find its area.
+            </p>
+            <image>
+        <latex-image>
+            \begin{tikzpicture}
+                    % Define decagon properties
+                    \def\R{3} % Radius of decagon
+                    \def\angle{360/10} % Angle between vertices
+
+                    % Define decagon vertices
+                    \foreach \i in {0,1,2,3,4,5,6,7,8,9} {
+                        \coordinate (P\i) at (\i*\angle:\R);
+                    }
+
+                    % Define center
+                    \coordinate (O) at (0,0);
+
+                    % Draw the decagon
+                    \draw[thick, blue] 
+                        (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- 
+                        (P5) -- (P6) -- (P7) -- (P8) -- (P9) -- cycle;
+
+                    % Label the vertices
+                    \foreach \i/\name in {0/A, 1/B, 2/C, 3/D, 4/E, 5/F, 6/G, 7/H, 8/I, 9/J} {
+                        \node[scale=1.1, font=\bfseries] at (P\i) {\name};
+                    }
+
+                    % Draw a dashed triangle passing through the center
+                    \draw[dashed, thick] (P6) -- (O) -- (P5) -- cycle;
+                    
+                    % Mark center point
+                    \filldraw[black] (O) circle (2pt) node[above] {\textbf{O}};
+            \end{tikzpicture}
+        </latex-image>
+        </image>
+         </sidebyside>
+        </statement>
+        <solution>
+                     <p>Find the perimeter P, Then use the formula A= <m> \frac{1}{2} \textbf{P}a</m> to find the area.
+        </p>
+        <p>
+            <me>
+                \textbf{P} = \text{length of each side } \times a
+            </me>
+            
+            <me>
+                P = 15 \, cm \times 10
+            </me>
+            <me>
+                = 150 \, cm
+            </me>
+            Now, use the formula for the area of a regular polygon is :
+        </p>
+        <p>
+            <md>
+                <mrow> A = \amp \frac{1}{2} \times 50 \times 7.5 \, cm</mrow>
+                 <mrow> = \amp \frac{375}{2} cm^2</mrow>
+                <mrow> = \amp 1125 cm^2 </mrow>
+            </md>
+        </p>
+         <p>
+                    Where <m>n = \text{number of sides,} S = \text{length of each side and } a = \frac{S}{2}  </m>
+                    
+                </p>
+                <p>
+                    <md>
+                        <mrow>A = \amp  \frac{1}{2} n \times S \times a</mrow>
+                        <mrow> = \amp  \frac{1}{2} \times 10 \times 5 \, cm \times 7.5 \, </mrow>
+                        <mrow> = \amp \frac{375}{2} cm^2</mrow>
+                        <mrow> = \amp 187.5 cm^2 </mrow>
+                    </md>
+                </p>
+            </solution>
+       
+        </example>
+        <example>
+            <statement>
+                <sidebyside>
+                    <image>
+                    <latex-image>
+                        \begin{tikzpicture}
+                            % Define decagon properties
+                            \def\R{3} % Radius of decagon
+                            \def\angle{360/10} % Angle between vertices
+
+                            % Define decagon vertices
+                            \foreach \i in {0,1,2,3,4,5,6,7,8,9} {
+                                \coordinate (P\i) at (\i*\angle:\R);
+                            }
+
+                            % Define center
+                            \coordinate (O) at (0,0);
+
+                            % Draw the decagon
+                            \draw[thick, blue] 
+                                (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- 
+                                (P5) -- (P6) -- (P7) -- (P8) -- (P9) -- cycle;
+<!-- 
+                            % Label the vertices
+                            \foreach \i/\name in {0/A, 1/B, 2/C, 3/D, 4/E, 5/F, 6/G, 7/H, 8/I, 9/J} {
+                                \node[scale=1.1, font=\bfseries] at (P\i) {\name};
+                            } -->
+
+                            % Draw a dashed triangle passing through the center
+                            \draw[dashed, thick] (P6) -- (O) -- (P5) -- cycle;
+                            
+                            % Mark center point
+                            \filldraw[black] (O) circle (2pt) node[above] {\textbf{O}};
+
+                        \end{tikzpicture}
+                    </latex-image>
+                    </image>
+                </sidebyside>
+            </statement>
+        </example>
 </subsubsection>
     
     

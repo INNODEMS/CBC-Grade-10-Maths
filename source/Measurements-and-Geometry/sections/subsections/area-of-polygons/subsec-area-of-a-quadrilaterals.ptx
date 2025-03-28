@@ -2,7 +2,7 @@
     <title>Area of Quadrilaterals.</title>
     <introduction>
         <p>
-           A quadrilateral is a four-sided polygon with four angles,the sum of its interior angles is <m>360^\circ</m>. It is a closed shape formed by four straight line segments.
+           🔸A quadrilateral is a four-sided polygon with four angles,the sum of its interior angles is <m>360^\circ</m>. It is a closed shape formed by four straight line segments.
         </p>
        
            <p> <m> {\color{blue}\textbf{Properties of Quadrilaterals.}}</m></p>
@@ -257,11 +257,11 @@
                             \draw[thick] (H) ++(0,0) -- ++(0,0.3) -- ++(0.3,0) -- ++(0,-0.3) -- cycle;
                             
                             % Label the vertices
-                            \node[above left] at (A) {A};
-                            \node[above right] at (B) {B};
-                            \node[below right] at (C) {C};
-                            \node[below left] at (D) {D};
-                            \node[below] at (H) {H};
+                            \node[above left] at (A) {P};
+                            \node[above right] at (B) {Q};
+                            \node[below right] at (C) {R};
+                            \node[below left] at (D) {S};
+                            \node[below] at (H) {T};
                         \end{tikzpicture}
                     </latex-image>
                     </image>
@@ -269,11 +269,16 @@
             </statement>
             <solution>
                 <p>
-                    From P drop a perpendicular to meet QR at T considering <m>\angle PQR</m>.
+                    
                 </p>
                 <p>
+                    From Q drop a perpendicular to meet RS at T considering <m>\angle QRS</m>.
+                </p>
+                <p>
+                    <m>\text{Height (QT)} = \text{Hypotenuse(BC)} \times \text{sin} \theta</m>
                     <md>
-                        <mrow> PT =  \amp 7 sin 75^\circ </mrow>
+                        <mrow> QT =  \amp 7 /, sin 75^\circ </mrow>
+                        <mrow> = \amp 6.76 cm </mrow>
                         
                     </md>
                 </p>
@@ -281,21 +286,92 @@
                     b. 
                     <md>
                          
-                        <mrow> = \amp \text{Area of PQRS} \= QR \times PT </mrow>
-                        <mrow> = \amp 18 \times  </mrow>
-                        <mrow> = \amp </mrow>
+                        <mrow> \text{Area of PQRS} = \amp  RS \times PT </mrow>
+                        <mrow> = \amp 28 \times 7 /, sin  /, 75^\circ </mrow>
+                        <mrow> = \amp 189.32 \text{cm}^2</mrow>
                         <mrow> \amp </mrow>
                     </md>
                 </p>
-
+                 <p>
+                    The area of the parallelogram is <m>189.32 \text{cm}^2.</m>
+                 </p>
             </solution>
         </example>
     </subsubsection>
 <subsubsection xml:id="subsec-area-of-a-rhombus">
     <title>Area of a Rhombus</title>
-    <p>
-        A <m>\textbf{rhombus}</m> is a quadrilateral with all four sides of <m>\textbf{equal length}</m>.. All its sides are equal and the diagnols bisect at <m>90 ^\circ</m>. Which other quadrilateral has all its sides equal?
+        <p>
+        A <m>\textbf{rhombus}</m> is an equilateral quadrilateral. All it's sides are of <m>\textbf{equal length}</m>, But all it's angles are not. All its sides are equal and the diagnols bisect at <m>90 ^\circ</m>. Which other quadrilateral has all its sides equal?
     </p>
+    <image>
+    <latex-image label="rhombus-figure">
+        \begin{tikzpicture}
+            % Define the coordinates of the rhombus
+            \coordinate (A) at (0,0);
+            \coordinate (B) at (3.5,1.5);
+            \coordinate (C) at (3,5);
+            \coordinate (D) at (-0.5,3.5);
+
+            % Draw the rhombus
+            \filldraw[fill=red!40, draw=black, thick] (A) -- (B) -- (C) -- (D) -- cycle;
+            
+            % Mark equal sides with double dashes extending inside
+            \draw[thick] (2,0.75) --++(0.3,0) --++(-0.6,0);
+            \draw[thick] (3.5,3.25) --++(0.3,0.3) --++(-0.6,-0.6);
+            \draw[thick] (1,4.25) --++(-0.3,0.3) --++(0.6,-0.6);
+            \draw[thick] (-0.5,1.75) --++(-0.3,-0.3) --++(0.6,0.6);
+            
+            % Add labels for vertices
+            \node[below left] at (A) {A};
+            \node[below right] at (B) {B};
+            \node[above right] at (C) {C};
+            \node[above left] at (D) {D};
+            
+            % Add label for equal sides
+            \node[left] at (-1.2,2.5) {\small \textit{all sides the same}};
+            \draw[-&lt;] (-1,2.5) -- (-0.5,3.3);
+            
+            % Add text description
+            \node[right] at (5,3) {\textbf{Equilateral}};
+            \node[right] at (5,2.5) {A rhombus is an equilateral quadrilateral.};
+            \node[right] at (5,2) {All its sides are equal, but};
+            \node[right] at (5,1.5) {all its angles are not.};
+        \end{tikzpicture}
+    </latex-image>
+    </image>
+    <p>
+        Compare the rhombus with the rectangle below.
+    </p>
+    <image >
+    <latex-image label="rectangle-figure">
+        \begin{tikzpicture}
+             % Define the coordinates of the rectangle (doubled in size)
+            \coordinate (A) at (-9.0,0);
+            \coordinate (B) at (0,0);
+            \coordinate (C) at (0,6);
+            \coordinate (D) at (-9.0,6);
+
+            % Draw the rectangle
+            \filldraw[fill=red!40, draw=black, thick] (A) -- (B) -- (C) -- (D) -- cycle;
+            
+            % Mark right angles at the corners (scaled up)
+            \draw[thick] (A) -- ++(1,0) -- ++(0,1) -- ++(-1,0);
+            \draw[thick] (B) -- ++(-1,0) -- ++(0,1) -- ++(1,0);
+            \draw[thick] (C) -- ++(-1,0) -- ++(0, -1) -- ++(1,0);
+            \draw[thick] (D) -- ++(1,0) -- ++(0,-1) -- ++(-1,0);
+            
+            % Add label for angles (positioned below the rectangle)
+            \node[below] at (-7,-1) {\huge \textit{all angles the same}};
+            \draw[-&gt;] (-6,-0.8) -- (-8.5,0.6);
+            
+            % Add txt description (adjusted positioning)
+            \node[right] at (-7,-4) {\huge \textit{\textbf{Equiangular}}};
+            \node[right] at (-8,-5) {\huge \textit{- A rectangle is an equiangular quadrilateral.}};
+            \node[right] at (-8,-6) {\huge \textit{-Its angles are all equal, but not all}};
+            \node[right] at (-8,-7) {\huge \textit{ its sides are equal.}};
+        \end{tikzpicture}
+    </latex-image>
+    </image>
     <p>
         <m>{\color{blue}\textbf{ Properties of a Rhombus}}</m>
     </p>
@@ -519,6 +595,15 @@
                 <p>
                   <m>c</m>  A rectangle 
                 </p>
+                <p>
+                    <ul marker="square">
+                        <li>
+                            <p>
+                                In the images provided below read the question and tick the appropriate answer.
+                            </p>
+                        </li>
+                    </ul>
+                </p>
             <sidebyside>
                 <image width="50%">
                 <latex-image label="trapezium-yees">
@@ -658,19 +743,21 @@
         <m>\text{Exercise}</m>
     </p>
     <p>
-        <m>  1 /, i. </m>A trapezium has a height of 5 cm, the top base is 8 cm, and the bottom base is 14 cm. Find its area.
+        <m>  1. </m>A trapezium has a height of 5 cm, the top base is 8 cm, and the bottom base is 14 cm. Find its area.
     </p>
     <p>
-        <m>ii.</m> The bases of a trapezium are 12 cm and 6 cm, and its area is 45 cm². Find the height.
+      2. 
+      a)  <m>
+        </m> The bases of a trapezium are 12 cm and 6 cm, and its area is 45 cm². Find the height.
     </p>
     <p>
-    <m> iii.</m> Find the missing angle in a trapezium where three angles are 70°, 85°, and 95°.
+   b) Find the missing angle in a trapezium where three angles are 70°, 85°, and 95°.
     </p> 
     <p>
-       <m>iv.</m> A trapezium has equal non-parallel sides (legs). What special type of trapezium is this?
+       c) A trapezium has equal non-parallel sides (legs). What special type of trapezium is this?
     </p>
     <p>
-     <m>  v. </m> The parallel sides of a trapezium are 20 m and 30 m, and its height is 12 m. Find its area.
+    d) The parallel sides of a trapezium are 20 m and 30 m, and its height is 12 m. Find its area.
     </p>
     <p>
      <m> 2.</m> A trapezium-shaped farm has a shorter base of 150 m, a longer base of 300 m, and a height of 200 m. Find the area of the farm.

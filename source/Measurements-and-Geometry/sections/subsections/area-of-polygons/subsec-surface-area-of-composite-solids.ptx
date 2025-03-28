@@ -1,62 +1,201 @@
 <subsection xml:id="subsec-surface-area-of-composite-solids">
     <title>Surface Area of Composite solids</title>
 
+     <p>
+		 A <m>\text{Solid}</m> is a three dimensional shape. <m> \text{Solids}</m> are objects with three dimensions i.e Width, Length and Height and they have surface area and volumes.. 
+	 </p>
     <p>
-        algebra
-    </p>
-     <image>
-     <latex-image label="truncated-cone">
-        \begin{tikzpicture}
-            	\pgfmathsetmacro{\r}{2}
-		       % Base of the truncated cylinder
-		        \draw[thick,fill=cyan!35,opacity=0.75] plot[domain=0:6.2832,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{0.0});
-		        \draw[red,thick,dashed] plot[domain=1.570796327:4.71238898,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{0.0}); 
-		        % Vertical wall (back, external radius)
-		        \fill[gray!35,opacity=0.5] (0,\r,0) 
-		        	-- plot[domain=1.571:4.71238898,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{0})
-		        	-- (0,-\r,4) 
-		        	-- plot[domain=4.71238898:1.571,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{4.0-\r*sin(\t r)})
-		        	-- (0,\r,0);	
-		        % Vertical wall (front, external radius)
-		        \fill[cyan!35,opacity=0.5] (0,-\r,0) 
-                -- plot[domain=-1.571:1.571,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{0}) 
-		        	-- (0,\r,2.0) 
-		        	-- plot[domain=1.571:-1.571,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{4.0-\r*sin(\t r)}) 
-		        	-- (0,-\r,0);
-		        % section of the plane (cut by a plane)
-		        \draw[thick] plot[domain=0:6.2832,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{4.0-\r*sin(\t r)});
-		        % The cylinder (vertical wall
-		        \foreach \angulo in {0,0.05,...,6.3}{
-				\pgfmathparse{2.0*cos(\angulo r)}
-				\pgfmathsetmacro{\px}{\pgfmathresult}
-				\pgfmathparse{2.0*sin(\angulo r)}
-				\pgfmathsetmacro{\py}{\pgfmathresult}
-				\draw[cyan] (\px,\py,0) -- (\px,\py,4.0-\py);
-			}
-		        \fill[cyan!35,opacity=0.75] plot[domain=0:6.2832,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{4.0-\r*sin(\t r)});
-		        % Circumferences bounding the cylinder
-		        \draw[red,thick] plot[domain=0:6.2831853,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{4.0-\r*sin(\t r)}); 
-		        \draw[red,thick] plot[domain=-1.570796327:1.570796327,smooth,variable=\t] ({\r*cos(\t r)},{\r*sin(\t r)},{0.0}); 
-		        % lengths and indication of points
-		        \draw[dashed] (0,0,-1) -- (0,0,6);
-		        \draw[dashed] (0,-\r,6) -- (0,\r,2);
-		        \draw[dashed] (-\r,0,4) -- (\r,0,4);
-		        \draw[dashed] (0,0,4) -- (0,\r+1.5,4);
-		        \draw[dashed] (-\r,0,0) -- (\r,0,0);
-		        \draw[dashed] (0,-\r-1.0,0) -- (0,\r+1.5,0);
-		        \draw[dashed] (0,-\r-1.0,6) -- (0,-\r,6);
-		        \draw[dashed] (0,\r,5.5) -- (0,\r,2) -- (0,\r+1,2);
-		        \draw[thick] (0,0,5) -- (0,\r,5) node [midway,fill=white] {$r$};
-		        \draw[thick] (0,\r+0.5,0) -- (0,\r+0.5,2) node [midway,fill=white] {$h_{1}$};
-		        \draw[thick] (0,-\r-0.5,0) -- (0,-\r-0.5,6) node [midway,fill=white] {$h_{2}$};
-		        \draw[thick] (0,\r+1.0,0) -- (0,\r+1.0,4) node [midway,fill=white] {$h$};
-            \end{tikzpicture}
-     </latex-image>
-     </image>
+      Area of Compound shapes 
+	</p>
+	<p>
+		When two or more different solids are placed together, the result is compound solids. The surface area of a compound shape can be found by adding areas of the parts of the solids.
+	</p>
+	<p> A tree trunk was cut and this is the shape formed after cutting it. </p>
+     
     
     
+<example>
+	<statement>
+		<sidebyside>
 
+		 <p>
+			Finf the surface area of the figure alongside.
+		 </p>
+        </sidebyside>	
+		<image width="50%">
+		<latex-image label="truncate">
+			\begin{tikzpicture}
+				% Set background color
+				<!-- \fill[cyan!30] (-3,-1) rectangle (3,9); -->
+				
+				% Fill the cylinder with a light blue shade
+				\fill[blue!30] (-2,0) rectangle (2,5);
+				\filldraw[fill=blue!30, draw=black] (0,5) ellipse (2cm and 0.5cm);
+				\filldraw[fill=blue!30, draw=black, dashed] (0,0) ellipse (2cm and 0.5cm);
+				% Draw the base ellipse
+				\draw[dashed] (0,0) ellipse (2cm and 0.5cm);
+				
+				% Draw the vertical sides of the cylinder
+				\fill[blue!30] (-2,0) -- (-2,5);
+				\fill[blue!30] (2,0) -- (2,5);
+				
+				% Draw the top ellipse of the cylinder
+				\draw (0,5) ellipse (2cm and 0.5cm);
+				
+				% Draw the conical top
+				\draw (-2,5) -- (0,8);
+				\draw (2,5) -- (0,8);
+				
+				% Dashed line for height of cone
+				\draw[dashed] (0,8) -- (0,5);
+				\draw[dashed] (0,5)--(2,5);
+				\draw[dashed] (0,0) --(2,0);
+				
+				% Label dimensions
+				\node[right] at (2,2.5) {\large 50 cm};
+				\node[below] at (1,-0.5) {\large 40 cm};
+				\node[left] at (0,6.5) {\large 30 cm};
+    
+			\end{tikzpicture}
+		</latex-image>
+		</image>
+	</statement>
+	
+</example>
+<p>
+	<m>\textbf{Exercise}</m>
+</p>
+<sidebyside>
+	<p>
+	1. The solid below is made of a cube and a square pyramid whose height is 33cm and cube sides measures 14cm. Answer the following
+   <ol marker="a)">
+	<li>
+		<p>
+			Find the surface area of the solid shown. Give your answers to two decimal places.
+		</p>
+	</li>
+	<li>
+		<p>
+			Now determine the volume of the compound shape.
+		</p>
+	</li>
+   </ol>
+   </p>
+   <image width="160%">
+   <latex-image label="trun">
+	\begin{tikzpicture}
+		% Define colors
+		\definecolor{mycube}{RGB}{144, 202, 249} % Light Blue for cube
+		\definecolor{mypyramid}{RGB}{255, 183, 77} % Orange for pyramid
+		
+		% Draw Cube (Base)
+		\fill[mycube] (-1,-1,0) -- (1,-1,0) -- (1,1,0) -- (-1,1,0) -- cycle;
+		\fill[mycube] (-1,-1,2) -- (1,-1,2) -- (1,1,2) -- (-1,1,2) -- cycle;
+		\fill[mycube,opacity=0.7] (-1,-1,0) -- (-1,-1,2) -- (-1,1,2) -- (-1,1,0) -- cycle;
+		\fill[mycube,opacity=0.7] (1,-1,0) -- (1,-1,2) -- (1,1,2) -- (1,1,0) -- cycle;
 
+		% Draw Cube (Outline)
+		\draw (-1,-1,0) -- (1,-1,0) -- (1,1,0) -- (-1,1,0) -- cycle;
+		\draw (-1,-1,2) -- (1,-1,2) -- (1,1,2) -- (-1,1,2) -- cycle;
+		\draw (-1,-1,0) -- (-1,-1,2);
+		\draw (1,-1,0) -- (1,-1,2);
+		\draw (1,1,0) -- (1,1,2);
+		\draw (-1,1,0) -- (-1,1,2);
+
+		% Draw Pyramid (on top of cube)
+		\fill[mypyramid] (-1,-1,2) -- (0,0,6) -- (1,-1,2) -- cycle;
+		\fill[mypyramid,opacity=0.7] (-1,1,2) -- (0,0,6) -- (1,1,2) -- cycle;
+		\fill[mypyramid,opacity=0.7] (-1,-1,2) -- (0,0,6) -- (-1,1,2) -- cycle;
+		\fill[mypyramid,opacity=0.7] (1,-1,2) -- (0,0,6) -- (1,1,2) -- cycle;
+
+		% Draw Pyramid (Outline)
+		\draw (-1,-1,2) -- (0,0,6) -- (1,-1,2);
+		\draw (-1,1,2) -- (0,0,6) -- (1,1,2);
+		\draw[dashed] (0,0,6) -- (0,0,2);
+
+		% Dimension labels
+		\draw[&lt;-&gt;] (1.5,-1,0) -- (1.5,1,0);
+		\node[right] at (1.5,0,0) {\large 14 cm};
+
+		\draw[&lt;-&gt;] (1.5,1,1) -- (1.5,1,9);
+		\node[right] at (1.5,0.8,5.5) {\large 33 cm};
+
+	\end{tikzpicture}
+   </latex-image>
+   </image>
+</sidebyside>
+<sidebyside>
+	<p>
+	2. Calculate the volume and surface area of the solid below.
+   </p>
+   
+   
+   <image>
+   <latex-image>
+	\begin{tikzpicture}
+		% Bottom hemisphere (correct semicircle)
+			\draw[thick] (-3,0) arc (180:360:3 and 1.5);
+			
+			% Cylinder body
+			\draw[thick] (-3,0) -- (-3,4);
+			\draw[thick] (3,0) -- (3,4);
+			\draw[thick] (-3,4) -- (3,4);
+			\draw[thick] (-3,0) -- (3,0);
+			
+			% Top hemisphere (correct semicircle)
+			\draw[thick] (3,4) arc (0:180:3 and 1.5);
+			
+			% Total height dimension
+			\draw[&lt;-&gt;] (-3.5,0) -- node[left] {11 m} (-3.5,4);
+			
+			% Lower diameter dimension
+			\draw[&lt;-&gt;] (-3,-0.2) -- node[below] {6 m} (3,-0.2);
+	\end{tikzpicture}
+   </latex-image>
+   </image>
+</sidebyside>
+<p>
+	3. A right circular icecream cone with a radius of 3 cm and a height of 12 cm holds a half scoop of ice cream in the shape of a hemisphere on top. If the ice cream melts completely, will it fit inside the cone? Show all calculations to justify your answer.
+   </p>
+<p>
+	4. A lampshade is in the shape of a frustum of a cone. The top and bottom circular openings have diameters of 12 cm and 20 cm, respectively. 
+	If the slant height is 15 cm, find the lateral surface area of the lampshade.
+</p>
+<sidebyside>
+	<p>
+	5. Mogaka a grade 10 student was trying to sketch an image of a ice cream cone container with icecream. Find the surface area of the sketched image alongside.
+</p>
+<image>
+   <latex-image label="truncated-cone-exercise">
+     \begin{tikzpicture}
+		% Draw the base circle (equator)
+		\draw[thick] (0,0) ellipse (2 and 1);
+		
+		% Draw the semicircle (hemisphere) starting from -2
+		\draw[thick, fill=gray!30] (-2,0) arc (180:360:2);
+		
+		% Vertical radius
+		\draw[dashed] (-2,0) --(0,0) -- (0,5);
+		\draw[thick]  (-1.99,0.2) --(0,5) --(2,0);
+		
+		% Labeling
+		<!-- \node[below] at (0,-1.2) {Base semi-Circle}; -->
+		\node[right] at (-1.6,0.5) { $r=5$};
+		\node[right] at (0,2) { $h =10$};
+		<!-- \node[right] at (-3,2.5) {Slanted height }; -->
+		\node[below,rotate=50] at (-1.7,2.3) {$\ell = 15 cm$};
+	 \end{tikzpicture}
+   </latex-image>
+   </image>
+   </sidebyside>
+   <p>
+	6.A birthday cake has a cylindrical base of radius 10 cm and height 15 cm. The top is shaped like a hemisphere with the same radius. Find the total volume of the cake.
+   </p>
+<p>
+	7.A goblet consists of a hemisphere on top of a cylindrical base. 
+	The hemisphere has a radius of 5 cm, and the cylinder has the same radius with a height of 12 cm.
+	 Find the surface of the goblet and determine how much liquid it can hold.
+</p>
 
 
     
