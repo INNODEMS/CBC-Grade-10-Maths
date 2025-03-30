@@ -88,13 +88,21 @@
             <shortdescription></shortdescription>
             <latex-image>
                 \begin{tikzpicture}
-                    \draw[gray!30, very thin, step=0.1] (-1,-1) grid (6,6);
-                    \draw[step=1cm,black!40,thick] (-1,-1) grid (6,6);
-       
-                    % Draw x and y axes
-                    \draw[- &gt;] (-1,0) -- (5,0) node[right] {$x \, axis$};
-                    \draw[- &gt;] (0,-1) -- (0,5) node[above] {$y \, axis$};
+                    \draw[gray!30, very thin, step=0.1] (-2,-2) grid (6,7);
+                    \draw[step=1cm,black!40,thick] (-2,-2) grid (6,7);
 
+                    % Draw x and y axes
+                    \draw[- &gt;] (-2,0) -- (5,0) node[right] {$x \,\, axis$};
+                    \draw[- &gt;] (0,-2) -- (0,6) node[above] {$y \,\, axis$};
+                    
+                    \foreach \x in {-1,1,2,3,4,5}{
+                        \draw(\x,0.15)--(\x,-0.15) node[below] {\x};
+                    }
+                        
+                    \foreach \y in {-1,1,2,3,4,5}{
+                        \draw(0.15,\y)--(-0.15,\y) node[left] {\y};
+                    }
+                    \node[below,left] at (-0.01,-0.2) {0};
                     % Define points
                     \coordinate (A) at (1,1);
                     \coordinate (B) at (4,5);
@@ -186,6 +194,49 @@
             </p>
             <p>
                 Hence, the magnitude of AB represented as <m>|AB|</m> is <m>25.</m>
+            </p>
+        </solution>
+    </example>
+    <example>
+        <statement>
+            <p>
+                
+            </p>
+            <p>
+                Given that <m>a=\binom{2}{4}</m>, <m>b=\binom{-2}{2.5}</m>, <m>c=\binom{6}{-4}</m> and <m>r=a+2b-c</m>. Find <m>|r|</m>
+            </p>
+        </statement>
+        <solution>
+            <p>
+                <m>r=a+2b-c</m>.
+            </p>
+
+            <p>
+                Substituting the values of <m>a</m>, <m>b</m> and <m>c</m> into the equation;
+            </p>
+
+            <p>
+                <m>r=\binom{2}{4}+ 2\binom{-2}{2.5}-\binom{6}{-4}</m>
+            </p>
+
+            <p>
+                <m>r=\binom{2}{4}+ \binom{-4}{5}-\binom{6}{-4}</m>
+            </p>
+
+            <p>
+                <m>r=\binom{2+(-4)-6}{4+5-(-4)}</m>
+            </p>
+
+            <p>
+                <m>r=\binom{-8}{13}</m>
+            </p>
+
+            <p>
+                <m>|r|=\sqrt{(-8)^2+13^2}=\sqrt{64+169}=\sqrt{233}</m>
+            </p>
+
+            <p>
+                <m>r=15.26</m>
             </p>
         </solution>
     </example>
