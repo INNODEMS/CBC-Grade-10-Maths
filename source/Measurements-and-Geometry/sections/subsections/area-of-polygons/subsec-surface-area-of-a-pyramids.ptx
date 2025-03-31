@@ -69,19 +69,19 @@
                                 Steps.
                             </p>
                             <p>
-                               🔸 Observe the net of the pyramid shown alongside.
+                               ♦ Observe the net of the pyramid shown alongside.
                             </p>
                             <p>
-                              🔸  Draw on the Colored paper or cardstocks the net of a pyramid that is one square and four triangles. Note that the base of the triangle should be equal to the sides of the square.
+                              ♦  Draw on the Colored paper or cardstocks the net of a pyramid that is one square and four triangles. Note that the base of the triangle should be equal to the sides of the square.
                             </p>
                             <p>
-                             🔸 Cut off the extra paper to remain with the pyramid net.
+                             ♦ Cut off the extra paper to remain with the pyramid net.
                             </p>  
                             <p>
-                              🔸  Fold along the edges to form a pyramid. Hold the triangles in position using a tape.
+                              ♦  Fold along the edges to form a pyramid. Hold the triangles in position using a tape.
                             </p>
                             <p>
-                              🔸  Using a ruler, measure the base length and slant height of the triangular faces.
+                              ♦  Using a ruler, measure the base length and slant height of the triangular faces.
                             </p>
                         </li>
                         <li>
@@ -99,13 +99,13 @@
         
             <statement>
                 <p>
-                    🔸 Identify pyramid-shaped objects around school/home e.g., tent, roof, food container, toys etc.
+                    ♦ Identify pyramid-shaped objects around school/home e.g., tent, roof, food container, toys etc.
                 </p>
                 <p>
-                    🔸 Measure dimensions or use estimated values.
+                    ♦ Measure dimensions or use estimated values.
                 </p>
                 <p>
-                  🔸 Find their surface area using the formula and compare with classmates.
+                  ♦ Find their surface area using the formula and compare with classmates.
                 </p>
             </statement>
         </activity>
@@ -146,7 +146,7 @@
                     \coordinate (P) at (2,4);  % Centered above the rectangle
 
                     % Fill the shapes with different colors
-                    \fill[cyan!60] (A) -- (B) -- (C) -- (D) -- cycle; (D) -- (A) -- (P) -- cycle; % Left triangle
+                    \fill[cyan!60] (A) -- (B) -- (C) -- (D) -- cycle;
 
                     % Draw the outlines of the pyramid
                     \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle; % Base rectangle
@@ -175,17 +175,13 @@
             <latex-image label="square-pyramid-net">
                 \begin{tikzpicture}
                     % Define colors
-                    \definecolor{basecolor}{RGB}{255, 215, 0}  % Gold for the base
-                    \definecolor{facecolor}{RGB}{135, 206, 250} % Light blue for the triangular faces
+                    \definecolor{basecolor}{RGB}{135, 206, 250}  % Gold for the base
+                    \definecolor{facecolor}{RGB}{135, 206, 255} % Light blue for the triangular faces
 
                     % Base (square)
-                    \fill[basecolor] (2,2) -- (4,4) -- (2,6) -- (0,4) -- cycle;
+                    \fill[basecolor] (2,2) -- (4,4) -- (2,6) -- (0,4) -- cycle;  (D) -- (A) -- (P) -- cycle; % Left triangle
 
-                    % Triangular faces
-                    \fill[facecolor] (2,6) -- (2,8) -- (4,4) -- cycle;
-                    \fill[facecolor] (4,4) -- (2,8) -- (2,2) -- cycle;
-                    \fill[facecolor] (2,2) -- (2,8) -- (0,4) -- cycle;
-                    \fill[facecolor] (0,4) -- (2,8) -- (2,6) -- cycle;
+                   
 
                     % Base outline
                     \draw[thick] (2,2) -- (4,4) -- (2,6) -- (0,4) -- cycle;
@@ -195,7 +191,7 @@
                     \draw[thick] (4,4) -- (2,8) -- (2,2);
                     \draw[thick] (2,2) -- (2,8) -- (0,4);
                     \draw[thick] (0,4) -- (2,8) -- (2,6);
-                    \node at (0,-0.5){ Square Pyramid};
+                    \node at (0,1.5){ Square Pyramid};
                 \end{tikzpicture}
             </latex-image>
             </image>
@@ -208,7 +204,7 @@
             </p>
 
             <image>
-            <latex-image>
+            <latex-image label="triangular-prism-one">
                 \begin{tikzpicture}
                                     % Define colors
                     \definecolor{basecolor}{RGB}{255, 165, 0}  % Orange (Base)
@@ -217,13 +213,11 @@
                     % Draw the base (square)
                     \fill[basecolor] (0,0) -- (4,0) -- (4,4) -- (0,4) -- cycle;
                     \draw (0,0) -- (4,0) -- (4,4) -- (0,4) -- cycle;
-
-                    % Draw triangular faces
-                    \fill[facecolor] (0,0) -- (2,-3) -- (4,0) -- cycle; % Bottom triangle
-                    \fill[facecolor] (4,0) -- (7,2) -- (4,4) -- cycle; % Right triangle
-                    \fill[facecolor] (0,4) -- (2,7) -- (4,4) -- cycle; % Left triangle
-                    \fill[facecolor] (0,0) -- (-3,2) -- (0,4) -- cycle; % Top triangle
-
+                    \fill[facecolor](0,0) --(2,-3) --(4,0) -- cycle;
+                    \fill[facecolor](4,0) --(7,2) --(4,4)-- cycle;
+                    \fill[facecolor](0,4) --(2,7) --(4,4) -- cycle;
+                    \fill[facecolor] (0,0) --(-3,2) --(0,4) -- cycle;
+                    
                     % Draw triangle outlines
                     \draw (0,0) -- (2,-3) -- (4,0) -- cycle;
                     \draw (4,0) -- (7,2) -- (4,4) -- cycle;
@@ -263,7 +257,7 @@
             </p>
 
             <image width="50%">
-            <latex-image>
+            <latex-image label="triangular-prism-two">
                 \begin{tikzpicture}
                             
                 % Define the coordinates of the rectangular base (4 cm × 2 cm)
@@ -277,11 +271,7 @@
 
                     % Fill the shapes with different colors
                     \fill[cyan!60] (A) -- (B) -- (C) -- (D) -- cycle; % Base rectangle
-                    \fill[orange!60] (A) -- (B) -- (P) -- cycle; % Front triangle
-                    \fill[green!60] (B) -- (C) -- (P) -- cycle; % Right triangle
-                    \fill[yellow!60] (C) -- (D) -- (P) -- cycle; % Back triangle
-                    \fill[blue!60] (D) -- (A) -- (P) -- cycle; % Left triangle
-
+                   
                     % Draw the outlines of the pyramid
                     \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle; % Base rectangle
                     \draw[thick] (A) -- (P) -- (B); % Front triangle
@@ -310,11 +300,11 @@
 
         <solution>
             <p>
-                 <m>{\color{orange} \text{First we form the net of the pyramid.}}</m>
+                 <m>\text{First we form the net of the pyramid.}</m>
             </p>
 
             <image>
-            <latex-image>
+            <latex-image label="triangular-prism-three">
                 \begin{tikzpicture}
                                  % Define the coordinates of the main rectangle (5 cm × 3 cm)
                     \coordinate (A) at (0,0);
@@ -329,12 +319,8 @@
                     \coordinate (V4) at (-3,1.5); % Left triangle peak
 
                     % Draw and fill the shapes with different colors
-                    \fill[gray!50] (A) -- (B) -- (C) -- (D) -- cycle; % Rectangle (grayish)
-                    \fill[blue] (D) -- (C) -- (V1) -- cycle; % Top triangle
-                    \fill[orange] (C) -- (B) -- (V2) -- cycle; % Right triangle
-                    \fill[green] (A) -- (B) -- (V3) -- cycle; % Bottom triangle
-                    \fill[yellow] (A) -- (D) -- (V4) -- cycle; % Left triangle
-
+                    \fill[cyan!60] (A) -- (B) -- (C) -- (D) -- cycle; % Rectangle (grayish)
+                   
                     % Draw the outlines
                     \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
                     \draw[thick] (D) -- (C) -- (V1) -- cycle;
@@ -359,10 +345,14 @@
                     \node[left] at (-1.8,2.4) {6 cm};
 
                     % Vertex Labels
-                    \node[above] at (V1) {V};
-                    \node[right] at (V2) {V};
-                    \node[below] at (V3) {V};
-                    \node[left] at (V4) {V};
+                    \node[above] at (V1) {P};
+                    \node[right] at (V2) {P};
+                    \node[below] at (V3) {P};
+                    \node[left] at (V4) {P};
+                    \node[below left ] at (A) {A};
+                    \node[below right] at (B) {B};
+                    \node[above left ] at (C) {C};
+                    \node[above right] at (D) {D};
 
                 \end{tikzpicture}
             </latex-image>
@@ -411,7 +401,7 @@
                 Step 1: Sketch and label the pyramid
             </p>
             <image >
-            <latex-image>
+            <latex-image label="triangular-prism-four">
                 \begin{tikzpicture}
                      \coordinate (A) at (0,0);
                     \coordinate (B) at (5,0);

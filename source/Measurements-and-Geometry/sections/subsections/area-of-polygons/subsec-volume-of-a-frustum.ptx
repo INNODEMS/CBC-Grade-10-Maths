@@ -77,86 +77,81 @@
         
     </sidebyside>
     <p>
-        Pyramid cone
+        Pyramid Frustum
     </p>
     <sidebyside>
         <image>
         <latex-image label="frustum-full-pyramid">
             \begin{tikzpicture}
-                % Define the base coordinates
-                \coordinate (A) at (-2,-1);
-                \coordinate (B) at (2,-1);
-                \coordinate (C) at (1,2);
-                \coordinate (D) at (-1,2);               
-                % Define the top coordinates
-                \coordinate (E) at (-1.5,-0.5);
-                \coordinate (F) at (1.5,-0.5);
-                \coordinate (G) at (0.8,1.5);
-                \coordinate (H) at (-0.8,1.5);
-                \coordinate(I) at (-0.2,5);
-                % Draw the base square
-                \draw (A) -- (B) -- (C) -- (D) -- cycle;
-                
-                % Draw the top square
-                \draw (E) -- (F) -- (G) -- (H) -- cycle;
-                
-                % Connect base and top
-                \draw (A) -- (E);
-                \draw (B) -- (F);
-                \draw (C) -- (G);
-                \draw (D) -- (H);
-                % \draw (E) -- (I);
-                % \draw (F) -- (I);
-                \draw (G) -- (I);
-                % \draw (A) -- (I);
-                % \draw (B) -- (I);
-                \draw (C) -- (I);
-                \draw (D) -- (I);
-                \draw (H) -- (I);
-                \draw[dashed] (I) --(0,-0.5);
-                \draw[dashed] (B) --(0,-0.5);    
-                % Label the parts
-                \node[left] at (A) {$A_1$};
-                \node[above] at (-0.5,2.65) {$r$};
-               \node[below] at (-1,0.5) {$R$};
-               \node[left] at (0,1.5) {H};
-                \node[left] at (E) {$A_2$};
-                <!-- \node[midway,left] at (I) {$h$}; -->
+                        %Coordinates for the cone and frustrum
+                \coordinate (A) at (-1,0);
+                \coordinate (B) at (1,1);
+                \coordinate (C) at (4,1);
+                \coordinate (D) at (2,0);
+                \coordinate (E) at (1.52,5.01);
+                \coordinate (F) at (0,2);
+                \coordinate (G) at (1.8,2);
+                \coordinate (H) at (3,2.6);
+                \coordinate (I) at (1.2,2.5);
+                \coordinate (J) at (1.4,.5);
+                \coordinate (K) at (3,.5);
+
+                %Cone and frustum
+                \draw[blue,thick] (A)--(D)--(C);
+                \draw[dashed,blue,thick] (A)--(B)--(C);
+                \draw[blue,thick] (E)--(A);
+                \draw[dashed,blue,thick] (E)--(B);
+                \draw[blue,thick] (E)--(C);
+                \draw[blue,thick] (E)--(D);
+                \draw[blue,thick] (F)--(G)--(H);
+                \draw[dashed,blue,thick] (H)--(I)--(F);
+
+                %Hight
+                \draw[dashed,red,thick] (E)--(J)--(K);
+                \node at (1.5,1.5) {H};
+
+                \fill[red,opacity=0.5] (A)--(B)--(C)--(D)--cycle;
+                \fill[cyan,opacity=0.5] (E)--(B)--(A)--cycle;
+                \fill[brown,opacity=0.5] (E)--(B)--(C)--cycle;
+                \fill[orange,opacity=0.5] (E)--(C)--(D)--cycle;
             \end{tikzpicture}
         </latex-image>
         </image>
         <image>
         <latex-image  label="frustum-truncated-pyramid">
             \begin{tikzpicture}
-               % Define the base coordinates
-                \coordinate (A) at (-2,-1);
-                \coordinate (B) at (2,-1);
-                \coordinate (C) at (1,2);
-                \coordinate (D) at (-1,2);
+                    \begin{scope}[yshift=-2cm]
+        %Coordinates for the frustrum
+        \coordinate (A) at (-1,0);
+        \coordinate (B) at (1,1);
+        \coordinate (C) at (4,1);
+        \coordinate (D) at (2,0);
+        \coordinate (F) at (0,2);
+        \coordinate (G) at (1.8,2);
+        \coordinate (H) at (3,2.6);
+        \coordinate (I) at (1.2,2.5);
 
-                % Define the top coordinates
-                \coordinate (E) at (-1.5,-0.5);
-                \coordinate (F) at (1.5,-0.5);
-                \coordinate (G) at (0.8,1.5);
-                \coordinate (H) at (-0.8,1.5);
+        %frustum
+        \draw[blue,thick] (A)--(D)--(C);
+        \draw[blue,thick] (A)--(F);
+        \draw[dashed,blue,thick] (B)--(I);
+        \draw[blue,thick] (C)--(H);
+        \draw[blue,thick] (D)--(G);
 
-                % Draw the base square
-                \draw (A) -- (B) -- (C) -- (D) -- cycle;
-                
-                % Draw the top square
-                \draw (E) -- (F) -- (G) -- (H) -- cycle;
-                
-                % Connect base and top
-                \draw (A) -- (E);
-                \draw (B) -- (F);
-                \draw (C) -- (G);
-                \draw (D) -- (H);
-                
-                % Label the parts
-                \node[left] at (A) {$A_1$};
-                \node[left] at (E) {$A_2$};
-               \node at (-1,-2) {Truncated Pyramid Frustum};
-                \node[right] at (F) {$h$};
+        \draw[dashed,blue,thick] (A)--(B)--(C);
+
+        \draw[blue,thick] (F)--(G)--(H)--(I)--cycle;
+
+        \fill[red,opacity=0.5] (A)--(B)--(C)--(D)--cycle;
+        \fill[yellow,opacity=0.5] (F)--(G)--(H)--(I)--cycle;
+        \fill[orange,opacity=0.5] (G)--(H)--(C)--(D)--cycle;
+        \fill[brown,opacity=0.5] (B)--(C)--(H)--(I)--cycle;
+        \fill[cyan,opacity=0.5] (A)--(B)--(I)--(F)--cycle;
+
+        \node at (1,-1) {Truncated pyramid frustrum};
+
+      \end{scope}
+        
             \end{tikzpicture}
         </latex-image>
         </image>
@@ -237,8 +232,8 @@
             1. Shell petrol station has the shape of an inverted right circular cone of the height 15m 
             dug underground in the shape of the figure shown below. Calculate the volume of petrol it holds when full in litre.
         </p>
-        <image>
-        <latex-image>
+        <image width="50%">
+        <latex-image label="example-petrol-station-frustum">
             \begin{tikzpicture}
                % Define a light purple color
                 \definecolor{lightpurple}{RGB}{230,230,250}
