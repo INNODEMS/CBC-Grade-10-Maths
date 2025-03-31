@@ -1,0 +1,281 @@
+<subsection xml:id="subsec-magnitude-of-a-vector">
+    <title>Magnitude of a Vector</title>
+    <activity>
+        <introduction>
+            <p>
+               <alert> Work in groups</alert>
+            </p>
+        </introduction>
+        <task>
+            <statement>
+                <p>
+                    Draw the <m>x</m> axis and <m>y</m> axis on your graph paper.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    Mark the coordinate <m>(0,0)</m> as the initial point <m>O</m>.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    From Point <m>O</m>, move <m>3</m> units to the <alert>right</alert> along 
+                    the <m>x</m> axis and <m>4</m> units upward along the <m>y</m> axis.
+                     Mark this new position as Point <m>A</m>.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    Draw a line from Point <m>O</m> to Point <m>A</m>, 
+                    add an arrow in the middle of the line 
+                    pointing to <m>A</m> to represent vector <m>OA</m>.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    Use a ruler to measure the length of vector <m>OA</m>.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    Analyze the relationship between the <m>x</m> displacement, 
+                    <m>y</m> displacement, and the length of vector <m>OA</m>.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    Discuss and share your findings with your classmates in the class.
+                </p>
+            </statement>
+        </task>
+    </activity>
+    <p>
+        The <alert>magnitude</alert> of vector <m>\mathbf{AB}</m> in 
+        <xref ref="magnitude-vect-1"/> can be denoted as <m>|\mathbf{AB}|</m>.
+        The magnitude of vector <m>\mathbf{AB}</m> represents the distance between
+        point <m>\mathbf{A}</m> and point <m>\mathbf{B}</m>.
+    </p>
+    <p>
+        We can represent the components of vector <m>\mathbf{AB}</m> as 
+        <m>\begin{pmatrix} x \\ y \end{pmatrix}</m>, where 
+        <m>x</m> represents the horizontal displacement and <m>y</m> 
+        represents the vertical displacement.
+    </p>
+    <p>
+        We calculate the magnitude of vector <m>\mathbf{AB}</m>
+        by applying <alert>Pythagorean theorem</alert> as shown below.
+    </p>
+    <p>
+        <me>
+            |\mathbf{AB}| =  \sqrt{x^2 + y^2}
+        </me>
+    </p>
+    <figure xml:id="magnitude-vect-1">
+        <caption></caption>
+        <image width="60%">
+            <shortdescription></shortdescription>
+            <latex-image>
+                \begin{tikzpicture}
+                    \draw[gray!30, very thin, step=0.1] (-2,-2) grid (6,7);
+                    \draw[step=1cm,black!40,thick] (-2,-2) grid (6,7);
+
+                    % Draw x and y axes
+                    \draw[- &gt;] (-2,0) -- (5,0) node[right] {$x \,\, axis$};
+                    \draw[- &gt;] (0,-2) -- (0,6) node[above] {$y \,\, axis$};
+                    
+                    \foreach \x in {-1,1,2,3,4,5}{
+                        \draw(\x,0.15)--(\x,-0.15) node[below] {\x};
+                    }
+                        
+                    \foreach \y in {-1,1,2,3,4,5}{
+                        \draw(0.15,\y)--(-0.15,\y) node[left] {\y};
+                    }
+                    \node[below,left] at (-0.01,-0.2) {0};
+                    % Define points
+                    \coordinate (A) at (1,1);
+                    \coordinate (B) at (4,5);
+                    \coordinate (C) at (4,1);
+
+                    % Draw vector
+                    \draw[very thick](A)-- (B);
+                    \draw[thin,dashed] (A) -- (C) node[midway, below] {\small $x$};
+                    \draw[thin,dashed] (C) -- (B) node[midway, right] {\small $y$};
+
+                    % Draw vector
+                    \draw [-{Latex[scale=2]}] (1,1) -- (2.8,3.4); 
+                    
+                    %draw the right angle
+                    \tkzMarkRightAngle[draw=black,size=.2](A,C,B);
+
+                    % Labels
+                    \node[left] at (A) {$A$};
+                    \node[above] at (B) {$B$};
+                \end{tikzpicture}
+            </latex-image>
+        </image>
+    </figure>
+    <!-- <p>
+        We use pythagorean formula to find the magnitude of a column vector.
+        A vector <m>\mathbf{AB}</m> represented as 
+        <m>\begin{pmatrix}x \\ y \end{pmatrix}</m> where <m>x</m> is the horizontal
+        displacement and <m>y</m> is vertical displacement, we find its magnitude by 
+        applying <m>\sqrt{x^2 + y^2}</m>.
+    </p> -->
+    <p>
+        The magnitude of a vector is always <alert>positive</alert>
+        since <m>x</m> and <m>y</m> components are squared, 
+        resulting in <m>x^2</m> and <m>y^2</m>, both of which are <alert>non-negative</alert>.
+    </p>
+    <example>
+        <statement>
+            <p>
+                Determine the magnitude of vector AB as shown in the <xref ref="magnitude-of-vect"/> below
+            </p>
+            <figure xml:id="magnitude-of-vect">
+                <caption></caption>
+                <image width="50%">
+                    <shortdescription></shortdescription>
+                    <latex-image label="magnitude-of-vectors">
+                        \begin{tikzpicture}
+                            \usetikzlibrary{arrows.meta}
+                            % Draw x and y axes
+                            \draw[-&gt;] (-1,0) -- (5,0) node[right] {$x$};
+                            \draw[-&gt;] (0,-1) -- (0,5) node[above] {$y$};
+
+                            % Define points
+                            \coordinate (A) at (0,0);
+                            \coordinate (B) at (3,4);
+                            \coordinate (C) at (3,0);
+
+                            % Draw triangle
+                            \draw[very thick](A)-- (B) -- (C) -- cycle;
+
+                            % Draw vector
+                            \draw [-{Latex[scale=2]}] (1.49,2) -- (1.55,2.1); 
+
+                            % Right angle marker
+                            \draw[very thick](C) ++(-0.3,0) -- ++(0,0.3) -- ++(0.3,0);
+
+                            % Labels
+                            \node[left] at (-0.02,0.2) {$A$};
+                            \node[right] at (B) {$B$};
+                            \node[below] at (C) {$C$};
+                            \node[below] at (1.5,0) {$7$};
+                            \node[right] at (3,2) {$24$};
+                        \end{tikzpicture}
+                    </latex-image>
+                </image>
+            </figure>
+        </statement>
+        <solution>
+            <p>
+                To find the magnitude of vector AB, we use pythagora's theorem to find the length AB.
+            </p>
+            <p>
+                <md>
+                    <mrow> AB \amp = \sqrt{\text{(AC)}^2 + \text{(CB)}^2 } </mrow>
+                    <mrow> \amp = \sqrt{7^2 + 24^2} </mrow>
+                    <mrow> \amp = \sqrt{49 + 576}</mrow>
+                    <mrow> \amp = \sqrt{625}</mrow>
+                    <mrow> \amp = 25 </mrow>
+                </md>
+            </p>
+            <p>
+                Hence, the magnitude of AB represented as <m>|AB|</m> is <m>25.</m>
+            </p>
+        </solution>
+    </example>
+    <example>
+        <statement>
+            <p>
+                
+            </p>
+            <p>
+                Given that <m>a=\binom{2}{4}</m>, <m>b=\binom{-2}{2.5}</m>, <m>c=\binom{6}{-4}</m> and <m>r=a+2b-c</m>. Find <m>|r|</m>
+            </p>
+        </statement>
+        <solution>
+            <p>
+                <m>r=a+2b-c</m>.
+            </p>
+
+            <p>
+                Substituting the values of <m>a</m>, <m>b</m> and <m>c</m> into the equation;
+            </p>
+
+            <p>
+                <m>r=\binom{2}{4}+ 2\binom{-2}{2.5}-\binom{6}{-4}</m>
+            </p>
+
+            <p>
+                <m>r=\binom{2}{4}+ \binom{-4}{5}-\binom{6}{-4}</m>
+            </p>
+
+            <p>
+                <m>r=\binom{2+(-4)-6}{4+5-(-4)}</m>
+            </p>
+
+            <p>
+                <m>r=\binom{-8}{13}</m>
+            </p>
+
+            <p>
+                <m>|r|=\sqrt{(-8)^2+13^2}=\sqrt{64+169}=\sqrt{233}</m>
+            </p>
+
+            <p>
+                <m>r=15.26</m>
+            </p>
+        </solution>
+    </example>
+    <exercises xml:id="exercises-magnitude-of-vectors">
+        <introduction>
+            <p>
+                <!-- Find the magnitude of each of the following vectors: -->
+            </p>
+        </introduction>
+        <exercise>
+            <statement>
+                <p>
+                    Find the magnitude of each of the following vectors:
+                </p>
+                <p>
+                    <ol marker="(a)" cols="4"> 
+                        <li>
+                            <p>
+                                <m>\left( \begin{matrix} -6 \\ 8 \end{matrix}\right)</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>\left( \begin{matrix}  8 \\ 15 \end{matrix}\right)</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>\left( \begin{matrix}  -5 \\ 12 \end{matrix}\right)</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>\left( \begin{matrix}  3 \\ 7 \end{matrix}\right)</m>
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+            </statement>
+        </exercise>
+    </exercises>
+</subsection>
