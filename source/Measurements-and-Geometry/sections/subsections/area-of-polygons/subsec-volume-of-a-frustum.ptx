@@ -77,164 +77,154 @@
         
     </sidebyside>
     <p>
-        Pyramid cone
+        Pyramid Frustum
     </p>
     <sidebyside>
         <image>
         <latex-image label="frustum-full-pyramid">
             \begin{tikzpicture}
-                % Define the base coordinates
-                \coordinate (A) at (-2,-1);
-                \coordinate (B) at (2,-1);
-                \coordinate (C) at (1,2);
-                \coordinate (D) at (-1,2);               
-                % Define the top coordinates
-                \coordinate (E) at (-1.5,-0.5);
-                \coordinate (F) at (1.5,-0.5);
-                \coordinate (G) at (0.8,1.5);
-                \coordinate (H) at (-0.8,1.5);
-                \coordinate(I) at (-0.2,5);
-                % Draw the base square
-                \draw (A) -- (B) -- (C) -- (D) -- cycle;
-                
-                % Draw the top square
-                \draw (E) -- (F) -- (G) -- (H) -- cycle;
-                
-                % Connect base and top
-                \draw (A) -- (E);
-                \draw (B) -- (F);
-                \draw (C) -- (G);
-                \draw (D) -- (H);
-                % \draw (E) -- (I);
-                % \draw (F) -- (I);
-                \draw (G) -- (I);
-                % \draw (A) -- (I);
-                % \draw (B) -- (I);
-                \draw (C) -- (I);
-                \draw (D) -- (I);
-                \draw (H) -- (I);
-                \draw[dashed] (I) --(0,-0.5);
-                \draw[dashed] (B) --(0,-0.5);    
-                % Label the parts
-                \node[left] at (A) {$A_1$};
-                \node[above] at (-0.5,2.65) {$r$};
-               \node[below] at (-1,0.5) {$R$};
-               \node[left] at (0,1.5) {H};
-                \node[left] at (E) {$A_2$};
-                <!-- \node[midway,left] at (I) {$h$}; -->
+                        %Coordinates for the cone and frustrum
+                \coordinate (A) at (-1,0);
+                \coordinate (B) at (1,1);
+                \coordinate (C) at (4,1);
+                \coordinate (D) at (2,0);
+                \coordinate (E) at (1.52,5.01);
+                \coordinate (F) at (0,2);
+                \coordinate (G) at (1.8,2);
+                \coordinate (H) at (3,2.6);
+                \coordinate (I) at (1.2,2.5);
+                \coordinate (J) at (1.4,.5);
+                \coordinate (K) at (3,.5);
+
+                %Cone and frustum
+                \draw[blue,thick] (A)--(D)--(C);
+                \draw[dashed,blue,thick] (A)--(B)--(C);
+                \draw[blue,thick] (E)--(A);
+                \draw[dashed,blue,thick] (E)--(B);
+                \draw[blue,thick] (E)--(C);
+                \draw[blue,thick] (E)--(D);
+                \draw[blue,thick] (F)--(G)--(H);
+                \draw[dashed,blue,thick] (H)--(I)--(F);
+
+                %Hight
+                \draw[dashed,red,thick] (E)--(J)--(K);
+                \node at (1.5,1.5) {H};
+
+                \fill[red,opacity=0.5] (A)--(B)--(C)--(D)--cycle;
+                \fill[cyan,opacity=0.5] (E)--(B)--(A)--cycle;
+                \fill[brown,opacity=0.5] (E)--(B)--(C)--cycle;
+                \fill[orange,opacity=0.5] (E)--(C)--(D)--cycle;
             \end{tikzpicture}
         </latex-image>
         </image>
         <image>
         <latex-image  label="frustum-truncated-pyramid">
             \begin{tikzpicture}
-               % Define the base coordinates
-                \coordinate (A) at (-2,-1);
-                \coordinate (B) at (2,-1);
-                \coordinate (C) at (1,2);
-                \coordinate (D) at (-1,2);
+                    \begin{scope}[yshift=-2cm]
+        %Coordinates for the frustrum
+        \coordinate (A) at (-1,0);
+        \coordinate (B) at (1,1);
+        \coordinate (C) at (4,1);
+        \coordinate (D) at (2,0);
+        \coordinate (F) at (0,2);
+        \coordinate (G) at (1.8,2);
+        \coordinate (H) at (3,2.6);
+        \coordinate (I) at (1.2,2.5);
 
-                % Define the top coordinates
-                \coordinate (E) at (-1.5,-0.5);
-                \coordinate (F) at (1.5,-0.5);
-                \coordinate (G) at (0.8,1.5);
-                \coordinate (H) at (-0.8,1.5);
+        %frustum
+        \draw[blue,thick] (A)--(D)--(C);
+        \draw[blue,thick] (A)--(F);
+        \draw[dashed,blue,thick] (B)--(I);
+        \draw[blue,thick] (C)--(H);
+        \draw[blue,thick] (D)--(G);
 
-                % Draw the base square
-                \draw (A) -- (B) -- (C) -- (D) -- cycle;
-                
-                % Draw the top square
-                \draw (E) -- (F) -- (G) -- (H) -- cycle;
-                
-                % Connect base and top
-                \draw (A) -- (E);
-                \draw (B) -- (F);
-                \draw (C) -- (G);
-                \draw (D) -- (H);
-                
-                % Label the parts
-                \node[left] at (A) {$A_1$};
-                \node[left] at (E) {$A_2$};
-               \node at (-1,-2) {Truncated Pyramid Frustum};
-                \node[right] at (F) {$h$};
+        \draw[dashed,blue,thick] (A)--(B)--(C);
+
+        \draw[blue,thick] (F)--(G)--(H)--(I)--cycle;
+
+        \fill[red,opacity=0.5] (A)--(B)--(C)--(D)--cycle;
+        \fill[yellow,opacity=0.5] (F)--(G)--(H)--(I)--cycle;
+        \fill[orange,opacity=0.5] (G)--(H)--(C)--(D)--cycle;
+        \fill[brown,opacity=0.5] (B)--(C)--(H)--(I)--cycle;
+        \fill[cyan,opacity=0.5] (A)--(B)--(I)--(F)--cycle;
+
+        \node at (1,-1) {Truncated pyramid frustrum};
+
+      \end{scope}
+        
             \end{tikzpicture}
         </latex-image>
         </image>
-    </sidebyside> 
-        <p>
-            Find the surface area of the truncated cone below.
-        </p>
-        <image>
+        </sidebyside> 
 
-        <latex-image>
+        <example>
+            <statement>
+                <p>
+                    A frustum of a cone has a top radius of 4 cm, a bottom radius of 8 cm, and a height of 10 cm.
+                </p>
+                <p>
+                   a. Find the slant height of the frustum.
+                </p>
+                <p>
+                   b. Find the volume of the frustum.
+                </p>
+                <image width="50%">
+        <latex-image label="frustum-full-cone-example">
             \begin{tikzpicture}
-                 % Define a light purple color
-                \definecolor{lightpurple}{RGB}{230,230,250}
-                
-                % Bottom ellipse (wider)
-                \draw[thick] (0,0) ellipse (3 and 1.5);
-                \fill[lightpurple, opacity=0.7] (0,0) ellipse (3 and 1.5);
-                
-                % Top ellipse (narrower)
-                \draw[thick] (0,5) ellipse (1.5 and 0.75);
-                \fill[lightpurple, opacity=0.7] (0,5) ellipse (1.5 and 0.75);
-                
-                % Side surfaces
-                \fill[lightpurple, opacity=0.5] 
-                    (-3,0) -- (-1.5,5) -- (1.5,5) -- (3,0) -- cycle;
-                
-                % Outline of side lines
-                \draw[thick] (-3,0) -- (-1.5,5);
-                \draw[thick] (3,0) -- (1.5,5);
-                \draw[thick] (-3,0) -- (3,0);
-                \draw[thick] (-1.5,5) -- (1.5,5);
-                
-                % Height line (dashed)
-                \draw[dashed, blue] (0,0) -- (0,5);
-                
-                % Dimension lines and labels
-                \draw[&lt;-&gt;] (-3.5,0) -- node[left] {50 cm} (-3.5,5);
-                \draw[&lt;-&gt;] (-2,5) -- node[left] {30 cm} (-2,0);
-                \draw[&lt;-&gt;] (-3.2,0) -- node[below] {40 cm} (3.2,0);
-            \end{tikzpicture}
-        </latex-image>
-        </image>
-        <image>
-
-        <latex-image>
-            \begin{tikzpicture}
-                  % Define a light purple color
-                    \definecolor{lightpurple}{RGB}{230,230,250}
-                    
-                    % Bottom ellipse (full width)
-                    \draw[thick] (0,0) ellipse (4 and 2);
-                    \fill[lightpurple, opacity=0.7] (0,0) ellipse (4 and 2);
-                    
-                    % Top ellipse (narrower)
-                    \draw[thick] (0,5) ellipse (2 and 1);
-                    \fill[lightpurple, opacity=0.7] (0,5) ellipse (2 and 1);
-                    
-                    % Side surfaces
-                    \fill[lightpurple, opacity=0.5] 
-                        (-4,0) -- (-2,5) -- (2,5) -- (4,0) -- cycle;
-                    
-                    % Outline of side lines
-                    \draw[thick] (-4,0) -- (-2,5);
-                    \draw[thick] (4,0) -- (2,5);
-                    \draw[thick] (-4,0) -- (4,0);
-                    \draw[thick] (-2,5) -- (2,5);
-                    
-                    % Height line (dashed)
-                    \draw[dashed, blue] (0,0) -- (0,5);
-                    
-                    % Dimension lines and labels
-                    \draw[&lt;-&gt;] (-4.5,0) -- node[left] {50 cm} (-4.5,5);
-                    \draw[&lt;-&gt;] (-2,5) -- node[left] {30 cm} (-2,0);
-                    \draw[&lt;-&gt;] (-4.2,0) -- node[below] {40 cm} (4.2,0);
+                % Draw the bottom base (larger circle)
+                \draw (-2,0) arc (180:360:2 and 0.6);
+                \draw[dashed] (2,0) arc (0:180:2 and 0.6);
     
+                 % Draw the top base (smaller circle)
+                \draw (-1,3) arc (180:360:1 and 0.3);
+                \draw[dashed] (1,3) arc (0:180:1 and 0.3);
+    
+                % Draw the slant height lines for frustum
+                \draw (-2,0) -- (-1,3);
+                \draw (2,0) -- (1,3);
+    
+                % Draw slant height lines for full pyramid (to the apex)
+                \draw (-2,0) -- (0,6);
+                \draw (2,0) -- (0,6);
+                \draw (-1,3) -- (0,6);
+                \draw (1,3) -- (0,6);
+
+                % Draw height lines
+                \draw[dashed] (0,0) -- (0,6); % Total height H
+                \draw[dashed] (0,0) -- (0,3); % Height of the frustum h
+
+                % Labeling the diagram
+                \node[left] at (0,4) {$h$}; % Total height
+                \node[above] at (0.5,2.9) {$4 cm$}; % Small radius
+                \node[below] at (-1.2,0) {$ 8 cm$}; % Large radius
+                \node[left] at (0,1.5) {H};
+                \draw[dashed] (-2,0) --(0,0);
+                \draw[dashed] (0,3) --(1,3);
             \end{tikzpicture}
         </latex-image>
         </image>
+            </statement>
+            <solution>
+                <p>
+                    Using the Pythagoras theorem, the slant height <m>\ell</m> is given by:
+                    <md>
+                      <mrow>  \ell = \amp \sqrt{8^2 + 10^2}</mrow>
+                      <mrow> = \amp 12.80 \text{cm}</mrow>
+                    </md>
+                    Slant height <m>\ell = 12.80 \text{cm}</m>
+                </p>
+                <p>
+                    Finding the volume.
+                  <m>V = \frac{1}{3}\pi h (r^2+ R^2 + Rr)</m>
+                  <md>
+                    <mrow> V = \amp \frac{1}{3} \times \frac{22}{7} \times 10 \times (4^2 + 8^2 + (8\times 4)) </mrow>
+                    <mrow> = \amp \frac {22}{21}  \times 10 \times (16+64+32) </mrow>
+                    <mrow> = \amp \frac{220}{21} \times 112</mrow>
+                    <mrow> = \amp 1173.33 \, \text{cm}^3</mrow>
+                  </md>
+                </p>
+            </solution>
+        </example>
         <p>
             <m>\textbf{Exercise}</m>
         </p>
@@ -242,8 +232,8 @@
             1. Shell petrol station has the shape of an inverted right circular cone of the height 15m 
             dug underground in the shape of the figure shown below. Calculate the volume of petrol it holds when full in litre.
         </p>
-        <image>
-        <latex-image>
+        <image width="50%">
+        <latex-image label="example-petrol-station-frustum">
             \begin{tikzpicture}
                % Define a light purple color
                 \definecolor{lightpurple}{RGB}{230,230,250}
@@ -276,9 +266,20 @@
         </latex-image>
         </image>
       <p>
-        2. 
+        2. A frustum of a cone has a base radius of 8 cm, a top radius of 5 cm, and a height of 12 cm.
+        Find its volume.
       </p>
-      
+      <p>
+        3. A square pyramid is cut into a frustum, where the original height was 18 cm, and the truncated top part has a height of 6 cm. The base side length is 12 cm, and the top side length is 6 cm.
+        Find the volume of the frustum.
+      </p>
+      <p>
+        4. A frustum of a cone has a volume of 900 cm³, a base radius of 10 cm, and a top radius of 6 cm. Find its height.
+      </p>
+      <p>
+       5. An A improvised jerrycan shaped like a frustum of a cone with a top radius of 20 cm, a bottom radius of 15 cm, and a height of 30 cm.
+         How many liters of water can the bucket hold?
+      </p>
 
 
 
