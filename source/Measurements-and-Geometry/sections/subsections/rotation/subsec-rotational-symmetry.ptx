@@ -1,8 +1,402 @@
 <subsection xml:id="subsec-rotational-symmetry">
     <title>Rotational Symmetry</title>
-
+    <introduction>
     <p>
-        
+    <term>Rotational symmetry</term> refers to the property of an object where it can be rotated (turned) around a central point and
+     still look the same. In other words, if you spin the shape around its center, 
+    it matches its original position multiple times in a full <m>360^\circ</m> rotation.
     </p>
+  </introduction>
+
+  <subsubsection xml:id="subsubsec-determining-the-order-of-rotational-symmetry-of-plane-figures">
+    <title>Determining the order of rotational symmetry of plane figures</title>
+    <activity>
+    <p>
+      Here is a fun activity to introduce you to rotatonal symmetry. 
+    </p>
+    <p>
+      <term>Materials</term>
+    </p>
+    <p>
+      <ul>
+        <li>
+          <p>
+            A printed copy of the figure.
+          </p>
+        </li>
+        <li>
+          <p>
+            Pencils, push pin. 
+          </p>
+        </li>
+        <li>
+          <p>
+            Constuction paper.
+          </p>
+        </li>
+        <li>
+          <p>
+            Pair of scissors.
+          </p>
+        </li>
+      </ul>
+    </p>
+    <image>
+        <latex-image label="object_star">
+          \begin{tikzpicture}
+
+            % Draw the star
+            \fill[purple!50, even odd rule]
+             (90:3) -- (234:3) -- (18:3) -- (162:3)   -- (306:3) -- cycle;
+
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    <p>
+      <term>Instructions</term>
+    </p>
+    <p>
+      <ul>
+        <li>
+          <p>
+             On a construction paper, trace and cut the figure above. 
+          </p>
+        </li>
+        <li>
+          <p>
+            Place the tracing on top the printed copy and place a pin through their centre such that the tracing can rotate.
+          </p>
+        </li>
+        <li>
+          <p>
+            Manually rotate the tracing around the centre and note how many times the shape looks exactly the same in one full turn <m>(360^\circ).</m>
+          </p>
+        </li>
+      </ul>
+    </p>
+    <p>
+      <term>Discussion</term>
+    </p>
+    <p>
+      The number of times the tracing of the star fits onto the printed copy in one complete turn is <m>5 </m> times.
+       This is called the <term>order of symmetry,</term> that is, the number of times the figure fits onto itself in one complete turn.
+    </p>
+    <p>
+      When given a figure with the measure of the angle between the identical parts, the order of rotational symmetry can be computed as shown.
+    </p>
+    <p>
+      <me>
+        \text{ Order of rotational symmetry} = \frac{360^\circ}{\text{angle between the identical parts}}
+      </me>
+    </p>
+  </activity>
+
+  <example>
+    <statement>
+      <p>
+        Find the order of rotational symmetry in the figure below.
+      </p>
+      <image>
+        <latex-image label="order_of_rotational_symmetry_example">
+          \begin{tikzpicture}
+          \usetikzlibrary{angles,quotes} % Required for angle annotations
+            \draw(-3.4,3.4) -- (-0.6,0.6);
+            \draw(-2,4) -- (-2,0);
+            \draw(-0.6,3.4) -- (-3.4,0.6);
+            \draw(-4,2) -- (0,2);
+            \coordinate (D) at (-2,2);
+            \coordinate (I) at (0,2);
+            \coordinate (C) at (-0.6,3.4);
+
+            \draw[thick] (-2,2) circle[radius=2];
+
+          \draw[draw=black] plot coordinates{(I)(D)(C)} pic["$45^\circ$", draw=black, angle eccentricity=1.2, angle radius=.5cm]
+          {angle=I--D--C};; 
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </statement>
+    <solution>
+      <p>
+        <me>
+        \text{ Order of rotational symmetry} = \frac{360^\circ}{\text{angle between the identical parts}}
+      </me>
+      </p>
+      <p>
+        <me>
+        \text{ Order of rotational symmetry} = \frac{360^\circ}{45^\circ}
+      </me>
+      </p>
+      <p>
+        <me>
+        \text{ Order of rotational symmetry} = 8
+      </me>
+        
+      </p>
+    </solution>
+  </example>
+
+  <exercises xml:id="exercises-determining-the-order-of-rotational-symmetry-of-plane-figures">
+    <exercise>
+      <statement>
+        <p>
+          State the order of symmetry in the figures below.
+        </p>
+        <sidebyside>
+          <image>
+          <latex-image label="triangle_rotational_symmetry">
+            \begin{tikzpicture}
+              \draw[thick,red] (0:.8cm) \foreach \x in {120,240} {
+                -- (\x:.8cm)
+                } -- cycle (90:.8cm);
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+
+        <image>
+          <latex-image label="pentagon_rotational_symmetry">
+              \begin{tikzpicture}
+              \draw[thick,orange] (0:.8cm) \foreach \x in {72,144,...,359} {
+                -- (\x:.8cm)
+               } -- cycle (90:.8cm) ;  
+              \end{tikzpicture}
+          </latex-image>
+          </image>
+
+          <image>
+          <latex-image label="octagon_rotaional_symmetry">
+            \begin{tikzpicture}
+              \draw[thick,purple] (0:.8cm) \foreach \x in {45,90,...,359} {
+               -- (\x:.8cm)
+               } -- cycle (90:.8cm);
+            \end{tikzpicture}
+          </latex-image>
+          </image>
+        </sidebyside>
+
+        <sidebyside>
+          <image>
+          <latex-image label="circle_rotational_symmetry">
+            \begin{tikzpicture}
+              \draw[thick,purple] (0:.8cm) \foreach \x in {10,20,...,359} {
+               -- (\x:.8cm)
+               } -- cycle (90:.8cm);
+            \end{tikzpicture}
+          </latex-image>
+          </image>
+
+          <image>
+            <latex-image label="Circle_triangle_rotational_symmetry">
+              \begin{tikzpicture}
+                \fill[black!20] circle (2pt);
+                \draw (0:.8cm) \foreach \x in {120,240} {
+                    -- (\x:.8cm)
+                  } -- cycle (90:.8cm) ;
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+
+          <image>
+          <latex-image label="rhombus_rotational_symmetry">
+            \begin{tikzpicture}
+                \usetikzlibrary{quotes,angles}
+                \draw[blue,thick](0,2) coordinate (D)-- (0,0) coordinate (A)-- (4,0) coordinate (B)--(2,2)coordinate(C)--(0,2)coordinate(D);
+                \draw[blue](0,0)--(0,0.3)--(0.3,0.3)--(0.3,0);
+                \draw[blue](0,2)--(0.3,2)--(0.3,1.7)--(0,1.7);
+                \draw[blue](0.9,2.1)--(1,2)--(0.9,1.9);
+                \draw[blue](0.9,0.1)--(1,0)--(0.9,-0.1);
+                \end{tikzpicture}
+          </latex-image>
+          </image>
+        </sidebyside>
+      </statement>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Find the order of rotational symmetry in the letters of the alphabet.
+        </p>
+      </statement>
+    </exercise>
+  </exercises>
+    
+  </subsubsection>
+
+  <subsubsection xml:id="subsubsec-determining-the-axis-of-rotation-and-order-of-rotational-symmetry-in-solids">
+    <title>Determining the axis of rotation and order of rotational symmetry in solids</title>
+    <p>
+      <term>1. Triangular prism</term>  
+    </p>
+      <p>
+        A solid has rotational symmetry if it can be rotated about a fixed straight line and still appears to be the same.  
+      </p>
+      <p>
+        The straight line around which the object is rotated is called <term>axis of rotation.</term>
+      </p>
+      <p>
+        The figure below shows a triangular prism whose cross-section is an equialteral triangle.
+      </p>
+      <p>
+        The axis of rotation passes through the traingular face. Therefore, the order of rotation through this axis is <m>3.</m>
+      </p>
+      <image width="50%">
+        <latex-image label="triangular_prism_1_axis_of_rotation">
+          \begin{tikzpicture}
+            
+            
+            % Define vertices of the upright triangular prism
+            \coordinate (A) at (0,0,0);  % Bottom front vertex
+            \coordinate (B) at (3,0,0);  % Bottom back vertex
+            \coordinate (C) at (1.5,3,0); % Top vertex
+            \coordinate (A') at (0,0,-3); % Bottom front (back face)
+            \coordinate (B') at (3,0,-3); % Bottom back (back face)
+            \coordinate (C') at (1.5,3,-3); % Top (back face)
+
+            % Draw edges of the front triangle
+            \draw[thick] (A) -- (B) -- (C) -- cycle;
+            
+            % Draw edges of the back triangle
+            \draw[thick] (A') -- (B') -- (C') -- cycle;
+
+            % Connect corresponding vertices of the front and back triangles
+            \draw[thick] (A) -- (A');
+            \draw[thick] (B) -- (B');
+            \draw[thick] (C) -- (C');
+
+            % Axis of rotation through the triangular cross-section
+            \draw[dashed,red,thick] (1.5,1.5,-3.5) -- (1.5,1.5,1)
+            node[above,red] {Axis of Rotation};
+
+            % Shade one side
+            \fill[blue!30,opacity=0.5] (A) -- (B) -- (B') -- (A') -- cycle; % Side face shading
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+
+      <p>
+        The prism also has other <m>3</m> axes of rotation  with each axis having <m>2</m> orders of rotational symmetry as shown in the figure below:
+      </p>
+
+      <image>
+        <latex-image label="triangular_prism_2_axis_of_rotation">
+          \begin{tikzpicture}
+            \draw[thick,black](-5,3)--(-6,0)--(-3,0)--cycle;
+            \draw[thick,black](-5,3)--(-2,4)--(0,2)--(-3,0)--cycle;
+            \draw[style=dashed,thick,gray](-6,0)--(-2.32,2.25);
+            \draw[style=dashed,thick,gray](-2.32,2.25)--(0,2);
+            \draw[style=dashed,thick,gray](-2.32,2.25)--(-2,4);
+            \draw(-4,4)--(-3.6,3.5);
+            \draw(-1,0)--(-1.9,0.9) node[right,blue]{Axis of Rotation};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+
+      <p>
+        <term>2. Cone</term>
+      </p>
+      <p>
+        A cone has one axis of rotation with infinite numbers of order of rotational symmetry since its base is circular.
+      </p>
+      <image width="50%">
+        <latex-image label="cone_axis_of_rotation">
+          \begin{tikzpicture}
+           
+
+            % Draw the slant edges of the cone
+            \draw[thick] (0,4) -- (-2,0); % Left slant edge
+            \draw[thick] (0,4) -- (2,0);  % Right slant edge
+
+            \draw[very thick](-2,0) arc (180:360:2 and 1);
+            \draw[dashed,very thick](-1.95,0) arc (180:0:1.95 and .95);
+
+            % Draw the axis of rotation
+            \draw[dashed,blue,thick] (0,0) -- (0,5)
+              node[above,blue] {Axis of Rotation};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+
+      <p>
+        <term>3. Regular tetrahedron</term>
+      </p>
+      <p>
+        A regular tetrahedron has 3 axes of rotational symmetry. These axes pass through each vertex and the centroid of the opposite face.
+      </p>
+      <p>
+        For the regular tetrahedron below, the axis of rotational symmetry are as follows:
+      </p>
+      <p>
+        <ul>
+          <li>
+            <p>
+              An axis through <m>A</m> and passing at the center of the face <m>BDC.</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              An axis through <m>B</m> and passing at the center of the face <m>ACD.</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              An axis through <m>C</m> and passing at the center of the face <m>ABD.</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              An axis through <m>D</m> and passing at the center of the face <m>ABC.</m>
+            </p>
+          </li>
+        </ul>
+      </p>
+      <p>
+        For each axis of rotation in the tetrahedron, the tetrahedrom fits the original position <m>3</m>
+         times in one full rotation.
+      </p>
+      <sidebyside>
+      <image width="50%">
+        <latex-image label="regular_tetrahedron_axis_of_rotation">
+          \begin{tikzpicture}
+            % Define vertices of the tetrahedron
+            \coordinate (A) at (0,2); 
+            \coordinate (B) at (-2,0);
+            \coordinate (C) at (2,0);
+            \coordinate (D) at (0,1); 
+
+            % Draw edges of the tetrahedron
+            \draw[thick] (A) -- (B) -- (C) -- cycle; % Base triangle
+            \draw[style=dashed,thick] (A) -- (D);
+            \draw[style=dashed,thick] (B) -- (D);
+            \draw[style=dashed,thick] (C) -- (D);
+
+            % Draw the axis of rotation
+            % The axis goes through one vertex (D) and the centroid of the opposite face (triangle ABC)
+            \coordinate (Centroid) at (0,.4); % Centroid of the base triangle
+            \draw[dashed,purple,thick] (0,.4) -- (0,2.5);
+            \draw[purple,thick](0,0)--(0,-.4);
+
+            % Label the axis of rotation
+            \node[below,purple] at (0,-.4) {Axis of rotation};
+
+            %Label the vertices
+            \node[above] at (A) {A};
+            \node[below left] at (B) {B};
+            \node[right] at (C) {C};
+            \node[below] at (D) {D};
+
+            % Shade one side
+            \fill[blue!30,opacity=0.5] (B) -- (D) -- (C) -- cycle; % Side face shading
+
+            \fill[red!30,opacity=0.5] (A) -- (B) -- (D) -- cycle; % Side face shading
+
+            \fill[brown!30,opacity=0.5] (A) -- (D) -- (C) -- cycle; % Side face shading
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+      </sidebyside>
+    
+  </subsubsection>
+
     
 </subsection>
