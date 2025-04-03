@@ -99,6 +99,9 @@
         
             <statement>
                 <p>
+                    
+                </p>
+                <p>
                     ♦ Identify pyramid-shaped objects around school/home e.g., tent, roof, food container, toys etc.
                 </p>
                 <p>
@@ -115,13 +118,113 @@
                 <p>
                     Find the surface area of the following triangular pyramid (correct to 1 d.p)
                 </p>
+                <image>
+                <latex-image>
+                    \begin{tikzpicture}
+                             % Define vertices
+                                \coordinate (A) at (0, 0);
+                                \coordinate (B) at (4, 0);
+                                \coordinate (C) at (2, 3);
+                                \coordinate (D) at (2, 1.5);
+
+                                % Draw edges of the triangular pyramid
+                                \draw[thick,fill=blue!30] (A) -- (B) -- (C) -- cycle; % Base triangle
+                                \draw[thick,fill=blue!30] (A) -- (D);
+                                \draw[thick,fill=blue!30] (B) -- (D);
+                                \draw[thick,fill=blue!30] (C) -- (D);
+
+                                % Dashed lines for hidden edges
+                                \draw[dashed] (D) -- (A);
+
+                                % Label vertices
+                                \node[left] at (A) {\textbf{A}};
+                                \node[right] at (B) {\textbf{B}};
+                                \node[above] at (C) {\textbf{C}};
+                                \node[below] at (D) {\textbf{D}};
+
+                                % Label side lengths
+                                \node[below] at (2, 0) {\small $ 4$};
+                                \node[above left] at (1.5, 2) {\small $ 3$};
+                                \node[above right] at (2.5, 0.9) {\small $ 7$};
+                                \node[left] at (1.5, 0.8) {\small $ 6$};
+                                \node[right] at (3, 1.5) {\small $ 5$};
+                                \node[right] at (2, 2) {\small $ 6$};
+                            \end{tikzpicture}
+                </latex-image>
+                </image>
             </statement>
+            <solution>
+                <p>
+                    The surface area of a triangular pyramid is the sum of the areas of all <m>\textbf{four triangular faces}</m>
+                </p>
+            </solution>
         </example>
         <p>
             In finding the surface area we need to recall the definations of a net and a prism.
         </p>
         <p>
-            The net of a pyramid consists of a base, which is a polygon that represents the base of the pyramid, and triangular faces that represent the sides of the pyramid.
+            The net of a pyramid consists of a base triangle <m>ABC</m>, which is a polygon that represents the base of the pyramid, and triangular faces<m> \angle \, ABD,\, \angle \, BCD, \, \angle ACD</m> that represent the sides of the pyramid.
+            </p>
+            <p>
+                Each triangle's area will be found using Heron’s Formula:
+        <md>
+            <mrow>  A =\amp \sqrt{S(S-a)(S-b)(S-c)} </mrow>
+        </md>
+        Where <m>S</m> is the semi perimeter.
+        <md>
+            <mrow> S = \amp \frac{a+b+c}{2} </mrow>
+        </md>
+        </p>
+        <p>
+            Find the Area of the Base Triangle <m>ABC</m>. Given sides <m>AB = 4, \, BC = 5 , \,AC = 3</m>
+        </p>
+        <p>
+            Calculate the semi-perimeter:
+            <md>
+                <mrow> S = \amp \frac{4+5+3}{2} = 6 \, \text{cm} </mrow>
+                
+            </md>
+            Apply Hero’s Formula:
+            <md>
+                <mrow>A_{ABC} = \amp  \sqrt{6(6-4)(6-5)(6-3)}  </mrow>
+                <mrow> = \amp \sqrt{6 \times(2)\times(1)\times(3)} </mrow>
+                <mrow> = \amp \sqrt{36} </mrow>
+
+                <mrow> = \amp 6 \, \text{cm}^2 </mrow>
+            </md>
+            Find the Area of Side Triangle<m> Abd</m> Given sides <m>AB = 4, \, AD = 6 , \, BD = 7 </m>
+            <md>
+            <mrow> S = \amp \frac{4+6+7}{2} =  8.5 \, \text{cm} </mrow>
+                <mrow>A_{ABD} = \amp  \sqrt{8.5(8.5-4)(8.5-6)(8.5-7)}  </mrow>
+                <mrow> = \amp \sqrt{8.5 \times(4.5)\times(2.5)\times(1.5)} </mrow>
+                <mrow> = \amp \sqrt{143.44} </mrow>
+
+                <mrow> = \amp 11.97 \, cm^2</mrow>
+            </md>
+               Find the Area of Side Triangle<m> Abd</m> Given sides <m>BC = 5, \, CD = 6 , \, BD = 7 </m>
+            <md>
+            <mrow> S = \amp \frac{5+6+7}{2} =  9 \, \text{cm} </mrow>
+                <mrow>A_{BCD} = \amp  \sqrt{9(9-4)(9-6)(9-7)}  </mrow>
+                <mrow> = \amp \sqrt{9 \times(4)\times(2)\times(3)} </mrow>
+                <mrow> = \amp \sqrt{216} </mrow>
+
+                <mrow> = \amp 14.7 \, cm^2</mrow>
+            </md>
+               Find the Area of Side Triangle<m> Abd</m> Given sides <m>AC = 3, \, AD = 6 , \, CD = 6 </m>
+            <md>
+            <mrow> S = \amp \frac{3+6+6}{2} =  7.5 \, \text{cm} </mrow>
+                <mrow>A_{ACD} = \amp  \sqrt{7.5(7.5-4)(7.5-6)(7.5-7)}  </mrow>
+                <mrow> = \amp \sqrt{7.5 \times(4.5)\times(1.5)\times(1.5)} </mrow>
+                <mrow> = \amp \sqrt{75.94} </mrow>
+
+                <mrow> = \amp 8.71 \, cm^2</mrow>
+            </md>
+            Find the Total Surface Area.
+            Surface Area = <m>A_{ABC} + A_{ABD} +A_{BCD} + A_{ACD}</m>
+            <md>
+               <mrow>=  \amp 6 \, cm^2 + 11.97  \, cm^2 + 14.7 \, cm^2 + 8.71 \, cm^2 </mrow>
+               <mrow> = \amp 41.38 \, cm^2</mrow>
+            </md>
         </p>
         
        <example>
