@@ -41,6 +41,11 @@
                                 The height of each bar represents the frequency (number of occurrences) of data within that range.
                             </p>
                         </li>
+                        <li>
+                            <p>
+                                In a histogram, the bars can have equal or unequal class widths.
+                            </p>
+                        </li>
                     </ul>
                 </p>
             </li>
@@ -71,6 +76,64 @@
         </ol>
         </p>
         <p>
+            <m>\textbf{Class Width}</m> is the difference between the upper and lower boundaries of a class.
+        </p>
+        <p>
+            When creating histograms, there are valid reasons to use both equal and unequal class widths, depending on your specific needs.
+        </p>
+        <p>
+            <ol>
+                <li>
+                    <p>
+                        <m>\textbf{Equal class width}</m> means all bars have the same width. It can be beneficial when:
+                    </p>
+                    <p>
+                        <ul>
+                            <li>
+                                <p>
+                                    You want a  representation that's easy to interpret.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    The data is relatively evenly distributed.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    You need to compare frequencies across different classes.
+                                </p>
+                            </li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <m>\textbf{Unequal class width}</m> means bars have different widths to better represent uneven data. Can be beneficial when:
+                    </p>
+                    <p>
+                        <ul>
+                            <li>
+                                <p>
+                                    Your data has uneven distribution.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    You have some very large or small values that would make the chart hard to read.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    You need more detail in some ranges than others.
+                                </p>
+                            </li>
+                        </ul>
+                    </p>
+                </li>
+            </ol>
+        </p>
+        <p>
             <m>\textbf{Frequency density}</m> is a measure used in histograms to ensure that the area of each bar represents the actual frequency of observations, especially when class widths are unequal.
         </p>
         <p>
@@ -87,9 +150,7 @@
         <p>
             <m>\textbf{Frequency}</m> is the number of observations in a class interval.
         </p>
-        <p>
-            <m>\textbf{Class Width}</m> is the difference between the upper and lower boundaries of a class.
-        </p>
+        
         <p>
             <m>\textbf{Why Use Frequency Density Instead of Frequency?}</m>
         </p>
@@ -112,12 +173,7 @@
                 </li>
             </ul>
         </p>
-        <p>
-            <m>\textbf{Equal class width}</m> means all bars have the same width. 
-        </p>
-        <p>
-            <m>\textbf{unequal class width}</m> means bars have different widths to better represent uneven data.
-        </p>
+        
         <p>
             <m>\textbf{Midpoint}</m> of a class interval represents the central value of that range. It is the average of the lower and upper boundaries of the class.
         </p>
@@ -260,7 +316,7 @@
                 <p>
                     
                 </p>
-                <image>
+                <image width="50%">
                     <latex-image label = "Histogram 1">
                         \begin{tikzpicture}
                             % Draw fine grid (each main grid square has 10x10 subdivisions)
@@ -272,8 +328,8 @@
                             % Draw axes
                             \draw[thick,->] (0,0) -- (8,0);
                             \draw[thick,->] (0,0) -- (0,10);
-                            \node[below] at (5,-0.8) {\textbf{Number of Fruits Sold}};
-                            \node[rotate=90] at (-1,5.5) {\textbf{Frequency (Days)}};
+                            \node[below] at (5,-0.8) {\footnotesize {Number of Fruits Sold}};
+                            \node[rotate=90] at (-1,5.5) {\footnotesize {Frequency (Days)}};
 
                             % X-axis labels
                             \foreach \x/\label in {1/10, 2/20, 3/30, 4/40, 5/50, 6/60, 7/70}
@@ -292,7 +348,7 @@
                             \draw[fill=blue!60] (6,0) rectangle (7,3.33);  % Frequency = 5 -> 3.33 grid units
 
                             % Graph Title
-                            \node[above] at (4,10) {\textbf{Histogram of Number of Fruits Sold}};
+                            \node[above] at (4,10) {\scriptsize {Histogram of Number of Fruits Sold}};
                         \end{tikzpicture}
                     </latex-image>
                 </image>
@@ -394,8 +450,8 @@
                                     % Draw axes
                                     \draw[thick,->] (0,0) -- (8,0);
                                     \draw[thick,->] (0,0) -- (0,7);
-                                    \node[below] at (5,-0.8) {\textbf{Distance Travelled (km)}};
-                                    \node[rotate=90] at (-1,2.5) {\textbf{Frequency (Vehicles)}};
+                                    \node[below] at (5,-0.8) {\footnotesize \textbf{Distance Travelled (km)}};
+                                    \node[rotate=90] at (-1,2.5) {\footnotesize \textbf{Frequency (Vehicles)}};
 
                                     % X-axis labels
                                     \foreach \x/\label in {1/90, 2/110, 3/130, 4/150, 5/170, 6/190, 7/210}
@@ -414,7 +470,7 @@
                                     }
 
                                     % Graph Title
-                                    \node[above] at (4,7) {\textbf{Frequency Polygon of Distance Traveled}};
+                                    \node[above] at (4,7) {\footnotesize \textbf{Frequency Polygon of Distance Traveled}};
                                 \end{tikzpicture}
                             </latex-image>
                         </image>
@@ -540,7 +596,7 @@
 
                     </tabular>
                 </table>
-                <image>
+                <image width="50%">
                     <latex-image label = "Histogram 2"> 
                         \begin{tikzpicture}
                             % Draw fine grid (10 smaller squares per main grid unit)
@@ -550,10 +606,10 @@
                             \draw[gray!70, thin, step=1] (0,0) grid (10,10);
 
                             % Draw axes
-                            \draw[thick,->] (0,0) -- (10.5,0); % X-axis
-                            \draw[thick,->] (0,0) -- (0,10.5); % Y-axis
-                            \node[below] at (5,-0.8) {\textbf{Salary (KSh)}}; % X-axis label
-                            \node[rotate=90] at (-1,4) {\textbf{Frequency Density}}; % Y-axis label
+                            \draw[thick,->] (0,0) -- (10,0); % X-axis
+                            \draw[thick,->] (0,0) -- (0,10); % Y-axis
+                            \node[below] at (5,-0.8) {\small {Salary (KSh)}}; % X-axis label
+                            \node[rotate=90] at (-1,4) {\small {Frequency Density}}; % Y-axis label
 
                             % X-axis labels (Salary Ranges)
                             \foreach \x/\label in {1/1000, 2/1500, 3/2000, 4/2500, 5/3000, 7/4000, 9/5000} {
@@ -575,14 +631,14 @@
 
                             % Frequency Polygon (Connecting Midpoints)
                             \draw[thick,black] 
-                                (0.5,0) -- 
+                                (1,0) -- 
                                 (1.5,4.2*2) -- 
                                 (2.5,3.5*2) -- 
                                 (3.5,2.0*2) -- 
                                 (4.5,1.5*2) -- 
                                 (6,0.9*2) -- 
                                 (8,2.1*2) -- 
-                                (9.5,0);
+                                (9,0);
 
                             % Mark Midpoints with dots
                             \foreach \x/\y in {1.5/4.2, 2.5/3.5, 3.5/2.0, 4.5/1.5, 6/0.9, 8/2.1} {
@@ -590,7 +646,136 @@
                             }
 
                             % Graph Title
-                            \node[above] at (5,10.5) {\Large \textbf{Salary Distribution: Histogram and Frequency Polygon}};
+                            \node[above] at (5,10) {\normalsize {Salary Distribution: Histogram and Frequency Polygon}};
+                        \end{tikzpicture}
+                    </latex-image>
+                </image>
+            </solution>
+        </example>
+        <example>
+            <statement>
+                <p>
+                    The following frequency distribution shows the daily rainfall amounts (in mm) recorded at a weather station over a <m>60</m> day period.
+                </p>
+                <table>
+                    <title></title>
+                    <tabular left="medium" right="medium" top="medium" bottom="medium">
+                        <row halign="left" header="yes">
+                            <cell>Rainfall(mm)</cell>
+                            <cell>Frequency</cell>
+                        </row>
+                        <row>
+                            <cell><m>0 - 5</m></cell>
+                            <cell><m>22</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>6 - 10</m></cell>
+                            <cell><m>15</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>11 - 15</m></cell>
+                            <cell><m>12</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>16 - 25</m></cell>
+                            <cell><m>8</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>26 - 40</m></cell>
+                            <cell><m>3</m></cell>
+                        </row>
+                    </tabular>
+                </table>
+                <p>
+                    Create a histogram to represent this data.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    To draw a histogram we need to find the frequency density because class width are unequal.
+                </p>
+                <p>
+                    The formula for frequency density:
+                </p>
+                <p>
+                    <md>
+                        <mrow>\textbf{Frequency density} = \amp \frac{\textbf{Frequency}}{\textbf{Class width}}</mrow>
+                    </md>
+                </p>
+                <table>
+                    <title></title>
+                    <tabular left="medium" right="medium" top="medium" bottom="medium">
+                        <row halign="left" header="yes">
+                            <cell>Rainfall(mm)</cell>
+                            <cell>Frequency</cell>
+                            <cell>Class width</cell>
+                            <cell>Frequency density</cell>
+                        </row>
+                        <row>
+                            <cell><m>5 - 10</m></cell>
+                            <cell><m>22</m></cell>
+                            <cell><m>5</m></cell>
+                            <cell><m>4.4</m></cell>
+
+                        </row>
+                        <row>
+                            <cell><m>10 - 15</m></cell>
+                            <cell><m>15</m></cell>
+                            <cell><m>5</m></cell>
+                            <cell><m>3.0</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>15 - 20</m></cell>
+                            <cell><m>12</m></cell>
+                            <cell><m>5</m></cell>
+                            <cell><m>2.4</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>20 - 30</m></cell>
+                            <cell><m>8</m></cell>
+                            <cell><m>10</m></cell>
+                            <cell><m>0.8</m></cell>
+                        </row>
+                        <row>
+                            <cell><m>30 - 45</m></cell>
+                            <cell><m>3</m></cell>
+                            <cell><m>15</m></cell>
+                            <cell><m>0.2</m></cell>
+                        </row>
+                    </tabular>
+                </table>
+                <image width="50%">
+                    <latex-image label = "histogram 3">
+                        \begin{tikzpicture}
+                            % Draw fine grid (10 smaller squares per main grid unit)
+                            \draw[gray!30, very thin, step=0.1] (0,0) grid (10,6);
+                            % Draw main grid
+                            \draw[gray!70, thin, step=1] (0,0) grid (10,6);
+                            % Draw axes
+                            \draw[thick,->] (0,0) -- (10,0); % X-axis
+                            \draw[thick,->] (0,0) -- (0,6); % Y-axis
+                            \node[below] at (5,-0.8) {\small {Rainfall (mm)}}; % X-axis label
+                            \node[rotate=90] at (-0.8,3) {\small {Frequency Density}}; % Y-axis label
+                        
+                            % X-axis labels
+                            \foreach \x/\label in {1/5, 2/10, 3/15, 4/20, 6/30, 9/45} {
+                                \node[below] at (\x,0) {\label};
+                            }
+                        
+                            % Y-axis labels
+                            \foreach \y/\label in {1/1, 2/2, 3/3, 4/4, 5/5} {
+                                \node[left] at (0,\y) {\label};
+                            }
+                        
+                            % Draw histogram bars based on the density values from the table
+                            \draw[fill=blue!70] (1,0) rectangle (2,4.4);  % 5-10mm, density 4.4
+                            \draw[fill=blue!70] (2,0) rectangle (3,3.0);  % 10-15mm, density 3.0
+                            \draw[fill=blue!70] (3,0) rectangle (4,2.4);  % 15-20mm, density 2.4
+                            \draw[fill=blue!70] (4,0) rectangle (6,0.8);  % 20-30mm, density 0.8
+                            \draw[fill=blue!70] (6,0) rectangle (9,0.2);  % 30-45mm, density 0.2
+                        
+                            % Graph Title
+                            \node[above] at (5,6) {\normalsize {Histogram of Rainfall Data}};
                         \end{tikzpicture}
                     </latex-image>
                 </image>
