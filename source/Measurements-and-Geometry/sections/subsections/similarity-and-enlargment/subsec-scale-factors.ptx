@@ -42,14 +42,15 @@
                         <latex-image label="squarea">
                             \begin{tikzpicture}
                                   % Draw the square
-                        \draw[thick, brown, fill=yellow!20] (0,0) rectangle (2,2);
-                        
-                        % Add labels for the sides
-                        \node[below, brown] at (1,0) {\small $4 cm$};
-                        \node[left, brown] at (0,1) {\small 4 cm};
-                        
-                        % Label the center of the square as A
-                        \node at (1,1) {\small A};
+                            \draw[thick, fill=none] (0,0) rectangle (2,2);
+                            
+                            % Add labels for the sides
+                            \node[below] at (1,0) {\small $4 cm$};
+                            \node[left] at (0,1) {\small $4 cm$};
+                            
+                            % Label the center of the square as A
+                            \node at (1,1) {\small A};
+
                             \end{tikzpicture}
                         </latex-image>
                         
@@ -65,15 +66,16 @@
                         <shortdescription></shortdescription>
                         <latex-image label="squareb">
                             \begin{tikzpicture}
-                                 % Draw the square with a blue border and light green fill
-                            \draw[thick, draw=blue, fill=green!20] (0,0) rectangle (4,4);
+                                  % Draw the square
+                            \draw[thick, fill=none] (0,0) rectangle (2,2);
                             
                             % Add labels for the sides
-                            \node[below, blue] at (2,0) {\small $8 cm$};
-                            \node[left, blue] at (0,2) {\small 8 cm};
+                            \node[below] at (1,0) {\small $8 cm$};
+                            \node[left] at (0,1) {\small $8 cm$};
                             
                             % Label the center of the square as A
-                            \node at (2,2) {\small B};
+                            \node at (1,1) {\small B};
+
                             \end{tikzpicture}
                         </latex-image>
                         
@@ -233,7 +235,7 @@
                 </p>
                 <p>
                     A square whose area is <m>28</m> <m>cm^2</m> is given
-                    an enlargement with a linear scale factor of <m>4</m>.Find the area of the image.
+                    an enlargement with a linear scale factor of <m>4</m>. Find the area of the image.
                 </p>
             </statement>
 
@@ -400,37 +402,37 @@
                         <shortdescription></shortdescription>
                         <latex-image label="cuboid1vsf">
                             \begin{tikzpicture}
-                                 % Define coordinates
-                            \coordinate (A) at (0,0);
-                            \coordinate (B) at (8,0);
-                            \coordinate (C) at (8,4);
-                            \coordinate (D) at (0,4);
-                            \coordinate (E) at (1.5,1.5);
-                            \coordinate (F) at (9.5,1.5);
-                            \coordinate (G) at (9.5,5.5);
-                            \coordinate (H) at (1.5,5.5);
-                            
-                            % Fill with blue color
-                            \fill[blue!30] (A) -- (B) -- (C) -- (D) -- cycle;
-                            \fill[blue!30] (E) -- (F) -- (G) -- (H) -- cycle;
-                            \fill[blue!30] (A) -- (E) -- (H) -- (D) -- cycle;
-                            
-                            % Draw visible edges
-                            \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
-                            \draw[thick] (A) -- (E);
-                            \draw[thick] (B) -- (F);
-                            \draw[thick] (C) -- (G);
-                            \draw[thick] (D) -- (H);
-                            \draw[thick] (E) -- (F) -- (G) -- (H) -- cycle;
-                            
-                            % Draw hidden edges
-                            \draw[thick, dashed] (E) -- (H);
-                            \draw[thick, dashed] (F) -- (G);
+                               % Define coordinates
+                                \coordinate (A) at (0,0);
+                                \coordinate (B) at (8,0);
+                                \coordinate (C) at (8,4);
+                                \coordinate (D) at (0,4);
+                                \coordinate (E) at (1.5,1.5);
+                                \coordinate (F) at (9.5,1.5);
+                                \coordinate (G) at (9.5,5.5);
+                                \coordinate (H) at (1.5,5.5);
 
-                            \node at (4,0) [below] {\textbf{8 cm}};
-                            \node at (0,2) [left] {\textbf{5cm}};
-                            \node at (1.5,3) [above] {\textbf{4 cm}};
-                            \node at (4,3) [below left] {\textbf{A }};
+                                % Remove color fill (colorless version)
+                                % \fill[blue!30] (A) -- (B) -- (C) -- (D) -- cycle;
+                                % \fill[blue!30] (E) -- (F) -- (G) -- (H) -- cycle;
+                                % \fill[blue!30] (A) -- (E) -- (H) -- (D) -- cycle;
+
+                                % Draw visible edges
+                                \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
+                                \draw[thick] (A) -- (E);
+                                \draw[thick] (B) -- (F);
+                                \draw[thick] (C) -- (G);
+                                \draw[thick] (D) -- (H);
+                                \draw[thick] (E) -- (F) -- (G) -- (H) -- cycle;
+
+                                % Draw hidden edges
+                                \draw[thick, dashed] (E) -- (H);
+                                \draw[thick, dashed] (F) -- (G);
+
+                                 \node at (4,0) [below, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{8 cm}};
+                                \node at (11,3) [left, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{5 cm}};
+                                \node at (9.8,0.5) [above, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{4 cm}};
+                                \node at (4,3) [below left, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{A}};
                             \end{tikzpicture}
                         </latex-image>
                         
@@ -455,12 +457,12 @@
                             \coordinate (F) at (9.5,1.5);
                             \coordinate (G) at (9.5,5.5);
                             \coordinate (H) at (1.5,5.5);
-                            
-                            % Fill with blue color
-                            \fill[orange!30] (A) -- (B) -- (C) -- (D) -- cycle;
-                            \fill[orange!30] (E) -- (F) -- (G) -- (H) -- cycle;
-                            \fill[orange!30] (A) -- (E) -- (H) -- (D) -- cycle;
-                            
+
+                            % Remove color fill (colorless version)
+                            % \fill[blue!30] (A) -- (B) -- (C) -- (D) -- cycle;
+                            % \fill[blue!30] (E) -- (F) -- (G) -- (H) -- cycle;
+                            % \fill[blue!30] (A) -- (E) -- (H) -- (D) -- cycle;
+
                             % Draw visible edges
                             \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
                             \draw[thick] (A) -- (E);
@@ -468,15 +470,16 @@
                             \draw[thick] (C) -- (G);
                             \draw[thick] (D) -- (H);
                             \draw[thick] (E) -- (F) -- (G) -- (H) -- cycle;
-                            
+
                             % Draw hidden edges
                             \draw[thick, dashed] (E) -- (H);
                             \draw[thick, dashed] (F) -- (G);
 
-                            \node at (4,0) [below] {\textbf{24 cm}};
-                            \node at (0,2) [left] {\textbf{15cm}};
-                            \node at (1.5,3) [above] {\textbf{12 cm}};
-                            \node at (4,3) [below left] {\textbf{B}};
+                            \node at (4,0) [below, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{24 cm}};
+                            \node at (11.5,3) [left, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{15 cm}};
+                            \node at (9.8,0.5) [above, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{12 cm}};
+                            \node at (4,3) [below left, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{B}};
+
                             \end{tikzpicture}
                         </latex-image>
                         
@@ -630,20 +633,21 @@
                         <shortdescription></shortdescription>
                         <latex-image label="cone1">
                             \begin{tikzpicture}
-                               % First cone (on the left) - Blue (larger size)
-                                \fill[blue!30] (-2,0) arc (180:360:2 and 0.7) -- (2,0) arc (0:180:2 and 0.7) -- cycle;
-                                \fill[blue!30] (-2,0) -- (0,4) -- (2,0) -- cycle;
-                                \draw[thick] (-2,0) arc (180:360:2 and 0.7);
-                                \draw[dashed] (2,0) arc (0:180:2 and 0.7);
-                                \draw[thick] (-2,0) -- (0,4);
-                                \draw[thick] (2,0) -- (0,4);
+                               % First cone (on the left) - Colorless (larger size)
+                            \fill[white] (-2,0) arc (180:360:2 and 0.7) -- (2,0) arc (0:180:2 and 0.7) -- cycle;
+                            \fill[white] (-2,0) -- (0,4) -- (2,0) -- cycle;
+                            \draw[thick] (-2,0) arc (180:360:2 and 0.7);
+                            \draw[dashed] (2,0) arc (0:180:2 and 0.7);
+                            \draw[thick] (-2,0) -- (0,4);
+                            \draw[thick] (2,0) -- (0,4);
 
-                                \draw[dashed] (0,0) -- (2,0);
-                                \draw[dashed] (0,0) -- (0,4);
-                                \node[below] at (0.5,0) {7 cm};
+                            \draw[dashed] (0,0) -- (2,0);
+                            \draw[dashed] (0,0) -- (0,4);
+                            \node[below] at (1,0) {7 cm};
 
-                                % Adding label A below the dashed horizontal line
-                                 \node[below] at (0,-1) {A};  % Label "A" at the center of the base
+                            % Adding label A below the dashed horizontal line
+                            \node[below] at (0,-1) {A};  % Label "A" at the center of the base
+
                             \end{tikzpicture}
                         </latex-image>
                         
@@ -653,23 +657,21 @@
                         <shortdescription></shortdescription>
                         <latex-image label="cone2">
                             \begin{tikzpicture}
+                          % First cone (on the left) - Colorless (larger size)
+                            \fill[white] (-2,0) arc (180:360:2 and 0.7) -- (2,0) arc (0:180:2 and 0.7) -- cycle;
+                            \fill[white] (-2,0) -- (0,4) -- (2,0) -- cycle;
+                            \draw[thick] (-2,0) arc (180:360:2 and 0.7);
+                            \draw[dashed] (2,0) arc (0:180:2 and 0.7);
+                            \draw[thick] (-2,0) -- (0,4);
+                            \draw[thick] (2,0) -- (0,4);
 
-                    % Second cone (on the right) - Red (smaller size)
-                    \fill[red!30] (-1,0) arc (180:360:1 and 0.35) -- (1,0) arc (0:180:1 and 0.35) -- cycle;
-                    \fill[red!30] (-1,0) -- (0,3) -- (1,0) -- cycle;
-                    \draw[thick] (-1,0) arc (180:360:1 and 0.35);
-                    \draw[dashed] (1,0) arc (0:180:1 and 0.35);
-                    \draw[thick] (-1,0) -- (0,3);
-                    \draw[thick] (1,0) -- (0,3);
-                    \draw[dashed] (0,0) -- (0,3);
+                            \draw[dashed] (0,0) -- (2,0);
+                            \draw[dashed] (0,0) -- (0,4);
+                            \node[below] at (1,0) {21 cm};
 
-                    % Dotted lines and labels
-                    \draw[dashed] (0,0) -- (1,0);
-                    \node[below] at (0.5,0.2) {21 cm}; 
-                    
-                    % Adding label A below the dashed horizontal line
-                     \node[below] at (0,-0.5) {B};  % Label "B" at the center of the base
-                    
+                            % Adding label A below the dashed horizontal line
+                            \node[below] at (0,-1) {B};  % Label "A" at the center of the base
+
                             \end{tikzpicture}
                         </latex-image>
                         
@@ -680,7 +682,7 @@
             <solution>
                 <p>
                     <md>
-                        <mrow>\text{Lenear scale factor} =\amp \frac{7}{21}=\frac{1}{3}</mrow>
+                        <mrow>\text{Linear scale factor} =\amp \frac{7}{21}=\frac{1}{3}</mrow>
                         <mrow>\text{Volume scale factor}= \amp(\frac{1}{3})^3=\frac{1}{27} </mrow>
                         <mrow>\frac{\text{Volume of cone A}}{\text{Volume of cone B}} =\amp\frac{1}{27} </mrow>
                         <mrow>\frac{150}{\text{Volume of cone B}}= \amp \frac{1}{27}</mrow>
