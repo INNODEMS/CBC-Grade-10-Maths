@@ -1027,10 +1027,46 @@
         <p>
             <m>\textbf{Mixed Exercise}</m>
         </p>
+        <sidebyside>
         <p>
             1.  A regular octagon has a side length of <m>10 \text{cm}</m>. Calculate its area using the formula for the area of a regular polygon. 
 
         </p>
+            <image>
+        <latex-image label="octagon-exmple-eleven">
+            \begin{tikzpicture}
+                    % Define decagon properties
+                    \def\R{3} % Radius of decagon
+                    \def\angle{360/8} % Angle between vertices
+
+                    % Define decagon vertices
+                    \foreach \i in {0,1,2,3,4,5,6,7,8} {
+                    \coordinate (P\i) at (\i*\angle:\R);
+                    }
+
+                    % Define center
+                    \coordinate (O) at (0,0);
+                    \node at (-3, -1.5) {10 cm};
+                    % Draw the decagon
+                    \draw[thick, pink] 
+                        (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- 
+                        (P5) -- (P6) -- (P7) -- (P8) -- cycle;
+
+                    <!-- % Label the vertices
+                    \foreach \i/\name in {0/A, 1/B, 2/C, 3/D, 4/E, 5/F, 6/G, 7/H, 8/I, 9/J} {
+                        \node[scale=1.1, font=\bfseries] at (P\i) {\name};
+                    }  -->
+
+                    % Draw a dashed triangle passing through the center
+                    \draw[dashed, thick] (P6) -- (O) -- (P5) -- cycle;
+                    
+                    % Mark center point
+                    \filldraw[black] (O) circle (2pt) node[above] {\textbf{O}};
+            \end{tikzpicture}
+        </latex-image>
+        </image>
+        </sidebyside>
+        
        
         <p>
             2.  A regular nonagon is inscribed in a circle of radius<m> 5 \text{cm}</m>. Find its area and perimeter, considering that all sides are equal and the internal angles can be derived using geometric properties.
@@ -1039,10 +1075,47 @@
             3. The perimeter of a regular decagon is <m>50 \text{cm}</m>. Determine the length of each side and use it to calculate the area of the decagon.
 
         </p>
+        
+        
+        <sidebyside>
         <p>
             4. A stop sign is shaped like a regular octagon with a side length of <m>30 \text{cm}</m>. If the material costs are based on area, determine the total surface area needed for manufacturing <m>100</m> signs.
 
         </p>
+             <image>
+        <latex-image label="octagon-exmple-ten">
+            \begin{tikzpicture}
+                    % Define decagon properties
+                    \def\R{3} % Radius of decagon
+                    \def\angle{360/8} % Angle between vertices
+
+                    % Define decagon vertices
+                    \foreach \i in {0,1,2,3,4,5,6,7,8} {
+                    \coordinate (P\i) at (\i*\angle:\R);
+                    }
+
+                    % Define center
+                    \coordinate (O) at (0,0);
+                    \node at (-3, -1.5) {30 cm};
+                    % Draw the decagon
+                    \draw[thick, green] 
+                        (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- 
+                        (P5) -- (P6) -- (P7) -- (P8) -- cycle;
+
+                    <!-- % Label the vertices
+                    \foreach \i/\name in {0/A, 1/B, 2/C, 3/D, 4/E, 5/F, 6/G, 7/H, 8/I, 9/J} {
+                        \node[scale=1.1, font=\bfseries] at (P\i) {\name};
+                    }  -->
+
+                    % Draw a dashed triangle passing through the center
+                    \draw[dashed, thick] (P6) -- (O) -- (P5) -- cycle;
+                    
+                    % Mark center point
+                    \filldraw[black] (O) circle (2pt) node[above] {\textbf{O}};
+            \end{tikzpicture}
+        </latex-image>
+        </image>
+        </sidebyside>
         <p>
             5. A company designs floor tiles shaped like regular decagons with a side length of <m>12 \text{cm}</m>. If a room requires <m>50</m> tiles, calculate the total area covered by the tiles.
     
