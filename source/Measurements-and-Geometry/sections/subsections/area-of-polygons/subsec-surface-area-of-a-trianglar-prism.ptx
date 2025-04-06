@@ -110,16 +110,66 @@
         <p>
            Find the Surface area of the triangular prism below. 
         </p> 
+        <image width="50%">  
+        <latex-image label="tikkz-prism-immage">
+           \begin{tikzpicture}[scale=1.2, font=\small]
+
+                % Define colors
+                \definecolor{faceblue}{RGB}{173, 216, 230}
+                \definecolor{facegray}{RGB}{200, 200, 200}
+                \definecolor{facegreen}{RGB}{180, 238, 180}
+
+                % Coordinates
+                \coordinate (A) at (0,0);
+                \coordinate (B) at (3,0);
+                \coordinate (C) at (1.5,2);
+                \coordinate (D) at (1,-1.2);
+                \coordinate (E) at (4,-1.2);
+                \coordinate (F) at (2.5,0.8);
+
+                % Draw prism faces
+                % Back triangle
+                \filldraw[fill=facegreen, draw=black] (D) -- (E) -- (F) -- cycle;
+                % Bottom rectangle
+                \filldraw[fill=facegreen, draw=black] (A) -- (B) -- (E) -- (D) -- cycle;
+                % Side rectangle
+                \filldraw[fill=facegreen, draw=black] (B) -- (C) -- (F) -- (E) -- cycle;
+                % Top rectangle
+                \filldraw[fill=facegreen!70, draw=black] (C) -- (A) -- (D) -- (F) -- cycle;
+                % Front triangle
+                \filldraw[fill=facegreen!70, draw=black] (A) -- (B) -- (C) -- cycle;
+
+                % Labels on front triangle
+                \node[left] at (A) {A};
+                \node[right] at (B) {B};
+                \node[above] at (C) {C};
+                 \draw[dashed] (A) --(1.5,0);
+                % Labels on back triangle
+                \node[left] at (D) {D};
+                \node[right] at (E) {E};
+                \node[above] at (F) {F};
+
+                % Optional edge labels
+                \node[below] at ($(A)!0.5!(B)$) {8 cm};
+                \node[left] at ($(A)!0.5!(C)$) {3 cm};
+                \node[right] at ($(B)!0.5!(E)$) {12 cm};
+
+                
+            \end{tikzpicture}
+        </latex-image>
+        </image>
      </statement>
      <solution>
         <p>
            Step 1: Find the area of the base. 
         </p>
         <p>
+            The triangle has a slant height of 5 cm and base 8cm. Using pythagorean relationship height i:
             <md>
+                <mrow> = \amp \sqrt{25 \, \text{cm} -16\, \text{cm}} = 3\, \text{cm}</mrow>
                 <mrow> \text{area of a triangle} = \amp \frac{1}{2}\times b \times h</mrow>
-                <mrow> = \amp (\frac{1}{2} \times 8 \,\text{cm} ) \times 12\, \text{cm} </mrow>
-                <mrow> = \amp 48  \,\text{cm}^2</mrow>
+                <mrow> = \amp (\frac{1}{2} \times  3\, \text{cm} \times 8 \,\text{cm} ) \times 12\, \text{cm} </mrow>
+                <mrow> = \amp 144  \,\text{cm}^2</mrow>
             </md>
         </p>
         <p>
@@ -151,18 +201,22 @@
             <p>
         2. 
 
-    A triangular prism has a triangular base with side lengths of 3 cm, 4 cm and 5 cm, and the height of the prism (perpendicular to the base) is 10 cm. Calculate the total surface area by finding the sum of the two triangular bases and the three rectangular lateral faces.
+    A triangular prism has a triangular base of 8 cm,lengths of 12 cm and the height of the prism (perpendicular to the base) is 3 cm. Calculate the total surface area .
     </p>
+    <image source="/prism-exercise.png">
+        <shortdescription></shortdescription>
+    </image>
     <p>
-        3. A prism is constructed with a triangular base of 6 cm height of 8 cm and a prism length of 15 cm. First, determine the area of the triangular base, then use the given dimensions to compute the total surface area.
+        3. A prism is constructed with a triangular base of 8 cm height of 12 cm.. Determine the area of the triangular base, then use the given dimensions to compute the total surface area.
     </p>
+    <image source="/triangular image.png">
+        <shortdescription>${0:}</shortdescription>
+    </image>
     <p>
         4. The total surface area of a triangular prism is measured as 360 cm² and its height is 20 cm. If the triangular base has sides measuring 9 cm, 12 cm and 15 cm, verify that this value is correct by calculating the surface area from scratch.
     </p>
     <p>
-        5. 
-
-       A bridge support structure has the shape of a triangular prism, with a base measuring 10 cm, 17 cm and 21 cm, and a height of 50 cm. Compute the total surface area, which will help determine how much paint is needed to coat its entire surface.
+        5. A bridge support structure has the shape of a triangular prism, with a base measuring 10 cm, 17 cm and 21 cm, and a height of 50 cm. Compute the total surface area, which will help determine how much paint is needed to coat its entire surface.
     </p>
     <p>
         6. A glass showcase is designed in the shape of a triangular prism, with a triangular base of 5 cm, a height of 12 cm, and a prism length of 20 cm. If all faces are to be made of glass, calculate the total glass area required.
