@@ -35,15 +35,51 @@
             <task>
                 <statement>
                     <p>
-                        Draw a square with a side length of <m>4</m> cm and label it as Square <m>A</m>.
+                        Draw a square with a side length of <m>4</m> cm and label it as Square <m>A</m> as shown below.
                     </p>
+                    <image width="50%">
+                        <shortdescription></shortdescription>
+                        <latex-image label="squarea">
+                            \begin{tikzpicture}
+                                  % Draw the square
+                            \draw[thick, fill=none] (0,0) rectangle (2,2);
+                            
+                            % Add labels for the sides
+                            \node[below] at (1,0) {\small $4 cm$};
+                            \node[left] at (0,1) {\small $4 cm$};
+                            
+                            % Label the center of the square as A
+                            \node at (1,1) {\small A};
+
+                            \end{tikzpicture}
+                        </latex-image>
+                        
+                    </image>
                 </statement>
             </task>
             <task>
                 <statement>
                     <p>
-                        Draw another square with a side length of <m>8</m> cm and label it as Square <m>B</m>.
+                        Draw another square with a side length of <m>8</m> cm and label it as Square <m>B</m> as shown below.
                     </p>
+                    <image width="50%">
+                        <shortdescription></shortdescription>
+                        <latex-image label="squareb">
+                            \begin{tikzpicture}
+                                  % Draw the square
+                            \draw[thick, fill=none] (0,0) rectangle (2,2);
+                            
+                            % Add labels for the sides
+                            \node[below] at (1,0) {\small $8 cm$};
+                            \node[left] at (0,1) {\small $8 cm$};
+                            
+                            % Label the center of the square as A
+                            \node at (1,1) {\small B};
+
+                            \end{tikzpicture}
+                        </latex-image>
+                        
+                    </image>
                 </statement>
             </task>
             <task>
@@ -199,7 +235,7 @@
                 </p>
                 <p>
                     A square whose area is <m>28</m> <m>cm^2</m> is given
-                    an enlargement with a linear scale factor of <m>4</m>.Find the area of the image.
+                    an enlargement with a linear scale factor of <m>4</m>. Find the area of the image.
                 </p>
             </statement>
 
@@ -359,15 +395,95 @@
             <task>
                 <statement>
                     <p>
-                        Draw a cuboid with dimensions <m>8</m> cm (length), <m>5</m> cm (width), and <m>4</m> cm (height), and label it as Cuboid <m>A</m>.
+                        Draw a cuboid with dimensions <m>8</m> cm (length), <m>5</m> cm (width), and <m>4</m> cm (height), and label it as Cuboid <m>A</m> as shown below.
                     </p>
+
+                    <image width="50%">
+                        <shortdescription></shortdescription>
+                        <latex-image label="cuboid1vsf">
+                            \begin{tikzpicture}
+                               % Define coordinates
+                                \coordinate (A) at (0,0);
+                                \coordinate (B) at (8,0);
+                                \coordinate (C) at (8,4);
+                                \coordinate (D) at (0,4);
+                                \coordinate (E) at (1.5,1.5);
+                                \coordinate (F) at (9.5,1.5);
+                                \coordinate (G) at (9.5,5.5);
+                                \coordinate (H) at (1.5,5.5);
+
+                                % Remove color fill (colorless version)
+                                % \fill[blue!30] (A) -- (B) -- (C) -- (D) -- cycle;
+                                % \fill[blue!30] (E) -- (F) -- (G) -- (H) -- cycle;
+                                % \fill[blue!30] (A) -- (E) -- (H) -- (D) -- cycle;
+
+                                % Draw visible edges
+                                \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
+                                \draw[thick] (A) -- (E);
+                                \draw[thick] (B) -- (F);
+                                \draw[thick] (C) -- (G);
+                                \draw[thick] (D) -- (H);
+                                \draw[thick] (E) -- (F) -- (G) -- (H) -- cycle;
+
+                                % Draw hidden edges
+                                \draw[thick, dashed] (E) -- (H);
+                                \draw[thick, dashed] (F) -- (G);
+
+                                 \node at (4,0) [below, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{8 cm}};
+                                \node at (11,3) [left, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{5 cm}};
+                                \node at (9.8,0.5) [above, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{4 cm}};
+                                \node at (4,3) [below left, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{A}};
+                            \end{tikzpicture}
+                        </latex-image>
+                        
+                    </image>
                 </statement>
             </task>
             <task>
                 <statement>
                     <p>
-                        Draw another cuboid with dimensions <m>24</m> cm (length), <m>15</m> cm (width), and <m>12</m> cm (height), and label it as Cuboid <m>B</m>.
+                        Draw another cuboid with dimensions <m>24</m> cm (length), <m>15</m> cm (width), and <m>12</m> cm (height), and label it as Cuboid <m>B</m> as shown below.
                     </p>
+                    <image width="50%"> 
+                        <shortdescription></shortdescription>
+                        <latex-image label="cuboid2vsf">
+                            \begin{tikzpicture}
+                               % Define coordinates
+                            \coordinate (A) at (0,0);
+                            \coordinate (B) at (8,0);
+                            \coordinate (C) at (8,4);
+                            \coordinate (D) at (0,4);
+                            \coordinate (E) at (1.5,1.5);
+                            \coordinate (F) at (9.5,1.5);
+                            \coordinate (G) at (9.5,5.5);
+                            \coordinate (H) at (1.5,5.5);
+
+                            % Remove color fill (colorless version)
+                            % \fill[blue!30] (A) -- (B) -- (C) -- (D) -- cycle;
+                            % \fill[blue!30] (E) -- (F) -- (G) -- (H) -- cycle;
+                            % \fill[blue!30] (A) -- (E) -- (H) -- (D) -- cycle;
+
+                            % Draw visible edges
+                            \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
+                            \draw[thick] (A) -- (E);
+                            \draw[thick] (B) -- (F);
+                            \draw[thick] (C) -- (G);
+                            \draw[thick] (D) -- (H);
+                            \draw[thick] (E) -- (F) -- (G) -- (H) -- cycle;
+
+                            % Draw hidden edges
+                            \draw[thick, dashed] (E) -- (H);
+                            \draw[thick, dashed] (F) -- (G);
+
+                            \node at (4,0) [below, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{24 cm}};
+                            \node at (11.5,3) [left, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{15 cm}};
+                            \node at (9.8,0.5) [above, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{12 cm}};
+                            \node at (4,3) [below left, fill=white, rounded corners=2pt, inner sep=2pt] {\Large \textbf{B}};
+
+                            \end{tikzpicture}
+                        </latex-image>
+                        
+                    </image>
                 </statement>
             </task>
             <task>
@@ -387,28 +503,28 @@
             <task>
                 <statement>
                     <p>
-                        Divide the length of Cuboid <m>B</m> by the length of Cuboid <m>A</m>, then cube the result.
+                         Find the ratio of the length of Cuboid <m>B</m> to the length of Cuboid <m>A</m>, then raise the result to the power of three
                     </p>
                 </statement>
             </task>
             <task>
                 <statement>
                     <p>
-                        Divide the width of Cuboid <m>B</m> by the width of Cuboid <m>A</m>, then cube the result.
+                      Calculate the ratio by dividing the width of Cuboid <m>B</m> by the width of Cuboid <m>A</m>, then cube the resulting value
                     </p>
                 </statement>
             </task>
             <task>
                 <statement>
                     <p>
-                        Divide the height of Cuboid <m>B</m> by the height of Cuboid <m>A</m>, then cube the result.
+                        Determine the ratio by dividing the height of Cuboid <m>B</m> by the height of Cuboid <m>A</m>, then cube the resulting value.
                     </p>
                 </statement>
             </task>
             <task>
                 <statement>
                     <p>
-                        Compare the result from step <m>\mathbf{d}</m> with the results from steps <m>\mathbf{e}</m>, <m>\mathbf{f}</m>, and <m>\mathbf{g}</m>. What do you observe?
+                       Compare the result obtained from step <m>\textbf{d}</m> with the values calculated in steps <m>\textbf{e}</m>, <m>\textbf{f}</m>, and <m>\textbf{g}</m>. Note any patterns or relationships you observe among these results.
                     </p>
                 </statement>
             </task>
@@ -421,11 +537,7 @@
             </task>
         </activity>
         <p>
-            The volume scale factor refers to the ratio by which the volume of a three-dimensional object is scaled when the object's dimensions (length, width, height) are scaled by a certain factor.
-        </p>
-
-        <p>
-            If the linear dimensions of an object are scaled by a factor of <m>K</m>, the volume of the object will be scaled by a factor of <m>K^3</m>. This is because volume is a cubic measurement.
+            A volume scale factor is the cube of the linear scale factor, representing the ratio by which the volume of a scaled object changes compared to the original object. 
         </p>
 
         <example>
@@ -521,20 +633,21 @@
                         <shortdescription></shortdescription>
                         <latex-image label="cone1">
                             \begin{tikzpicture}
-                               % First cone (on the left) - Blue (larger size)
-                                \fill[blue!30] (-2,0) arc (180:360:2 and 0.7) -- (2,0) arc (0:180:2 and 0.7) -- cycle;
-                                \fill[blue!30] (-2,0) -- (0,4) -- (2,0) -- cycle;
-                                \draw[thick] (-2,0) arc (180:360:2 and 0.7);
-                                \draw[dashed] (2,0) arc (0:180:2 and 0.7);
-                                \draw[thick] (-2,0) -- (0,4);
-                                \draw[thick] (2,0) -- (0,4);
+                               % First cone (on the left) - Colorless (larger size)
+                            \fill[white] (-2,0) arc (180:360:2 and 0.7) -- (2,0) arc (0:180:2 and 0.7) -- cycle;
+                            \fill[white] (-2,0) -- (0,4) -- (2,0) -- cycle;
+                            \draw[thick] (-2,0) arc (180:360:2 and 0.7);
+                            \draw[dashed] (2,0) arc (0:180:2 and 0.7);
+                            \draw[thick] (-2,0) -- (0,4);
+                            \draw[thick] (2,0) -- (0,4);
 
-                                \draw[dashed] (0,0) -- (2,0);
-                                \draw[dashed] (0,0) -- (0,4);
-                                \node[below] at (0.5,0) {7 cm};
+                            \draw[dashed] (0,0) -- (2,0);
+                            \draw[dashed] (0,0) -- (0,4);
+                            \node[below] at (1,0) {7 cm};
 
-                                % Adding label A below the dashed horizontal line
-                                 \node[below] at (0,-1) {A};  % Label "A" at the center of the base
+                            % Adding label A below the dashed horizontal line
+                            \node[below] at (0,-1) {A};  % Label "A" at the center of the base
+
                             \end{tikzpicture}
                         </latex-image>
                         
@@ -544,23 +657,21 @@
                         <shortdescription></shortdescription>
                         <latex-image label="cone2">
                             \begin{tikzpicture}
+                          % First cone (on the left) - Colorless (larger size)
+                            \fill[white] (-2,0) arc (180:360:2 and 0.7) -- (2,0) arc (0:180:2 and 0.7) -- cycle;
+                            \fill[white] (-2,0) -- (0,4) -- (2,0) -- cycle;
+                            \draw[thick] (-2,0) arc (180:360:2 and 0.7);
+                            \draw[dashed] (2,0) arc (0:180:2 and 0.7);
+                            \draw[thick] (-2,0) -- (0,4);
+                            \draw[thick] (2,0) -- (0,4);
 
-                    % Second cone (on the right) - Red (smaller size)
-                    \fill[red!30] (-1,0) arc (180:360:1 and 0.35) -- (1,0) arc (0:180:1 and 0.35) -- cycle;
-                    \fill[red!30] (-1,0) -- (0,3) -- (1,0) -- cycle;
-                    \draw[thick] (-1,0) arc (180:360:1 and 0.35);
-                    \draw[dashed] (1,0) arc (0:180:1 and 0.35);
-                    \draw[thick] (-1,0) -- (0,3);
-                    \draw[thick] (1,0) -- (0,3);
-                    \draw[dashed] (0,0) -- (0,3);
+                            \draw[dashed] (0,0) -- (2,0);
+                            \draw[dashed] (0,0) -- (0,4);
+                            \node[below] at (1,0) {21 cm};
 
-                    % Dotted lines and labels
-                    \draw[dashed] (0,0) -- (1,0);
-                    \node[below] at (0.5,0.2) {21 cm}; 
-                    
-                    % Adding label A below the dashed horizontal line
-                     \node[below] at (0,-0.5) {B};  % Label "B" at the center of the base
-                    
+                            % Adding label A below the dashed horizontal line
+                            \node[below] at (0,-1) {B};  % Label "A" at the center of the base
+
                             \end{tikzpicture}
                         </latex-image>
                         
@@ -571,7 +682,7 @@
             <solution>
                 <p>
                     <md>
-                        <mrow>\text{Lenear scale factor} =\amp \frac{7}{21}=\frac{1}{3}</mrow>
+                        <mrow>\text{Linear scale factor} =\amp \frac{7}{21}=\frac{1}{3}</mrow>
                         <mrow>\text{Volume scale factor}= \amp(\frac{1}{3})^3=\frac{1}{27} </mrow>
                         <mrow>\frac{\text{Volume of cone A}}{\text{Volume of cone B}} =\amp\frac{1}{27} </mrow>
                         <mrow>\frac{150}{\text{Volume of cone B}}= \amp \frac{1}{27}</mrow>
