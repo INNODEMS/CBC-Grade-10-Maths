@@ -308,7 +308,7 @@ body.pretext > a.assistive:focus {
   display: none;
 }
 .ptx-navbar .index-button {
-  width: 70px;
+  min-width: 70px;
 }
 .ptx-navbar .runestone-profile {
   position: relative;
@@ -1945,16 +1945,26 @@ a[href^="mailto:"] {
 .frontmatter .abstract {
   margin: 4em 2em;
 }
-.frontmatter .abstract > .title {
+.frontmatter .keywords,
+.frontmatter .support {
+  margin-top: 2em;
+}
+.frontmatter .abstract > .title,
+.frontmatter .keywords > .title,
+.frontmatter .support > .title {
   font-size: 1.125em;
   font-weight: 600;
   line-height: 1.125em;
   display: inline;
 }
-.frontmatter .abstract > .title::after {
+.frontmatter .abstract > .title::after,
+.frontmatter .keywords > .title::after,
+.frontmatter .support > .title::after {
   content: ".\2009\2009\2009";
 }
-.frontmatter .abstract > .title + .para {
+.frontmatter .abstract > .title + .para,
+.frontmatter .keywords > .title + .para,
+.frontmatter .support > .title + .para {
   display: inline;
 }
 .frontmatter .colophon .copyright {
@@ -2004,6 +2014,9 @@ a[href^="mailto:"] {
 .ptx-content .summary-links a:hover * {
   color: var(--summary-link-hover-text-color);
   background: var(--summary-link-hover-background);
+}
+.ptx-content .summary-links a:hover .title {
+  font-weight: normal;
 }
 .ptx-content .summary-links a:hover::after {
   border-left: 0.4em solid var(--summary-link-hover-text-color);
@@ -2376,7 +2389,7 @@ pre[class*=language-] .token:is(.operator, .entity, .url) {
 }
 code[class*=language-] .token:is(.atrule, .attr-value, .keyword),
 pre[class*=language-] .token:is(.atrule, .attr-value, .keyword) {
-  color: rgb(18, 137, 201);
+  color: #0679B7;
 }
 code[class*=language-] .token.function,
 code[class*=language-] .token.class-name,
@@ -3592,11 +3605,11 @@ section > h3.heading {
   --link-text-color: var(--primary-color);
   --link-background: var(--primary-color-white-97);
   --link-active-text-color: var(--primary-color-black-20);
-  --link-active-background: #cad2e1;
+  --link-active-background: var(--link-background);
   --link-alt-text-color: var(--secondary-color-black-10);
   --link-alt-background: var(--secondary-color-white-97);
   --link-alt-active-text-color: var(--link-alt-text-color);
-  --link-alt-active-background: var(--secondary-color);
+  --link-alt-active-background: var(--secondary-color-white-97);
   --knowl-link-color: var(--link-text-color);
   --knowl-background: var(--primary-color-white-97);
   --knowl-border-color: var(--primary-color-white-30);
@@ -4039,6 +4052,7 @@ section > h3.heading {
   --primary-color-gray-98: color-mix(in oklab, var(--primary-color), gray 98%);
   --primary-color-gray-99: color-mix(in oklab, var(--primary-color), gray 99%);
 }
+/*! Theme: default-modern */
 /*# sourceMappingURL=theme.css.map */
 
 /* generated from pub variables */
