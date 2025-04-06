@@ -163,12 +163,12 @@
         <p>
             <m>\textbf{Exercise}</m>
         </p>
-        <p>
-            1. A square pyramid has a base length of 10 cm and a height of 15 cm.
-          Find its volume.
+       <sidebyside>
+         <p>
+            1. A pyramid has a square base with a side length of 6 cm. The height of the pyramid is 9 cm.
         </p>
         <image width="50%">
-        <latex-image label="square-pyramid-volume-exercise">
+        <latex-image label="square-pyramid-volume-one-exercise">
             \begin{tikzpicture}
                % Define vertices of the tetrahedron
                 \coordinate (A) at (-1,2,0);  % Bottom-left vertex of the base
@@ -178,23 +178,23 @@
                 \coordinate (H) at (4.5,1.25,5);  % Intersection of line BD with the perpendicular from C
 
                 % Draw base triangle
-                \draw[thick] (A) -- (B) -- (C) -- cycle;
+                \draw[thick,fill=yellow!20] (A) -- (B) -- (C) -- cycle;
                 
                 % Draw edges from the base to the apex
-                \draw[thick] (A) -- (D);
-                \draw[thick] (C) -- (D);
+                \draw[thick,fill=yellow!20] (A) -- (D);
+                \draw[thick,fill=yellow!20] (C) -- (D);
                 
                 % Draw perpendicular from C to BD
                 \draw[dashed] (C) -- (H);
-                \draw[thick] (B) -- (H) -- (D);
+                \draw[thick,fill=yellow!20] (B) -- (H) -- (D);
 
                 
                 % Draw right angle at H
-                \draw (H) ++(0.2,0) -- ++(0,0.2) -- ++(-0.2,0);
+                \draw [thin,magenta](H) ++(0.2,0) -- ++(0,0.2) -- ++(-0.2,0);
                 
                 % Label base side
                 \draw[|&lt;-&gt;|] (H) -- (C) node[midway, below] {6 cm};
-                \draw[|&lt;-&gt;|] (B) -- (D) node[midway, below] {10 cm};
+                \draw[|&lt;-&gt;|] (B) -- (D) node[midway, below] {9 cm};
                 
                 
                 % Label vertices
@@ -204,19 +204,61 @@
                 \node[above] at (D) {D};
             \end{tikzpicture}
         </latex-image>
-        </image>  
-        <p>
+        </image> 
+       </sidebyside> 
+          <p>
           2. A pyramid-shaped tent has a rectangular base of 8 m by 6 m and a height of 5 m.
          Find the volume of air inside the tent.  
         </p>
+   <sidebyside>
+        
+
         <p>
-            3. A frustum of a cone has a base radius of 6 cm, a top radius of 3 cm, and a height of 10 cm.
-          Find its volume.
+            3. A pyramid has a square base with each side measuring 10 cm. The height of the pyramid is 15 cm.
         </p>
-        <p>
-           4. A square pyramid is cut into a frustum, where the original height was 18 cm, and the truncated top part has a height of 6 cm. The base side length is 12 cm, and the top side length is 6 cm.
-          Find the volume of the frustum. 
-          (<em>hint: Find the volumes of the original pyramid and the smaller removed pyramid, then subtract. </em>)
+           <image width="50%">
+        <latex-image label="square-pyramid-exercise-volume-two">
+            \begin{tikzpicture}
+               % Define vertices of the tetrahedron
+                \coordinate (A) at (-1,2,0);  % Bottom-left vertex of the base
+                \coordinate (B) at (6,0,0);  % Bottom-right vertex of the base
+                \coordinate (C) at (3,5,0);  % Top vertex of the base
+                \coordinate (D) at (3,2.5,10);  % Apex of the tetrahedron
+                \coordinate (H) at (4.5,1.25,5);  % Intersection of line BD with the perpendicular from C
+
+                % Draw base triangle
+                \draw[thick,fill=yellow!30] (A) -- (B) -- (C) -- cycle;
+                \draw[thick,fill=yellow!30] (A) --(B) --(D) --cycle;
+                \draw[thick,fill=yellow!30] (B) --(D) --(C) --cycle;
+                % Draw edges from the base to the apex
+                \draw[thick,fill=yellow!30] (A) -- (D);
+                \draw[thick,fill=yellow!30] (C) -- (D);
+                
+                % Draw perpendicular from C to BD
+                \draw[dashed] (C) -- (H);
+                \draw[thick,fill=yellow!30] (B) -- (H) -- (D) --cycle;
+
+                
+                % Draw right angle at H
+                \draw [thin,blue](H) ++(0.2,0) -- ++(0,0.2) -- ++(-0.2,0);
+                
+                % Label base side
+                \draw[|&lt;-&gt;|] (H) -- (C) node[midway, below] {10 cm};
+                \draw[|&lt;-&gt;|] (B) -- (D) node[midway, below] {15 cm};
+                
+                
+                % Label vertices
+                \node[below left] at (A) {A};
+                \node[below right] at (B) {B};
+                \node[above] at (C) {C};
+                \node[above] at (D) {D};
+            \end{tikzpicture}
+        </latex-image>
+        </image> 
+   </sidebyside> 
+     <sidebyside>
+                <p>
+           4. A pyramid has a triangular base where the base of the triangle is 8 cm and the height of the triangle is 6 cm. The height of the pyramid is 10 cm.
         </p>
         <image width="50%">
         <latex-image label="square-pyramid-exercise-volume">
@@ -229,11 +271,13 @@
                 \coordinate (H) at (4.5,1.25,5);  % Intersection of line BD with the perpendicular from C
 
                 % Draw base triangle
-                \draw[thick] (A) -- (B) -- (C) -- cycle;
+                \draw[thick,fill=pink] (A) -- (B) -- (C) -- cycle;
+                \draw[thick,fill=pink] (A) --(B) --(D) --cycle;
+                \draw[thick,fill=pink] (B) --(D) --(C) --cycle;
                 
                 % Draw edges from the base to the apex
-                \draw[thick] (A) -- (D);
-                \draw[thick] (C) -- (D);
+                \draw[thick,fill=pink] (A) -- (D);
+                \draw[thick,fill=pink] (C) -- (D);
                 
                 % Draw perpendicular from C to BD
                 \draw[dashed] (C) -- (H);
@@ -244,7 +288,7 @@
                 \draw (H) ++(0.2,0) -- ++(0,0.2) -- ++(-0.2,0);
                 
                 % Label base side
-                \draw[|&lt;-&gt;|] (H) -- (C) node[midway, below] {6 cm};
+                \draw[|&lt;-&gt;|] (H) -- (C) node[midway, below] {8 cm};
                 \draw[|&lt;-&gt;|] (B) -- (D) node[midway, below] {10 cm};
                 
                 
@@ -255,9 +299,9 @@
                 \node[above] at (D) {D};
             \end{tikzpicture}
         </latex-image>
-        </image>  
+        </image> 
+     </sidebyside> 
         <p>
-          5. A bucket is shaped like a frustum of a cone with a top radius of 15 cm, a bottom radius of 10 cm, and a height of 30 cm.
-          How much water can the bucket hold in liters? 
+          5. A decorative garden pyramid has a square base with each side measuring 4 m. The height of the pyramid is 3 m.
         </p>
 </subsection>
