@@ -177,7 +177,7 @@
             <latex-image label="sphere-example-k">
                 \begin{tikzpicture}
                     % Draw the main circle
-                    \draw [blue!70](0,0) circle (2);
+                    \draw [thick,blue!70](0,0) circle (2);
                     
                     % Draw the dashed ellipse inside the circle
                     \draw[dashed,purple!50] (-2,0) arc (180:360:2 and 0.5);
@@ -187,7 +187,7 @@
                     % Draw and label the center point
                     \fill (0,0) circle (0.05);
                     \node[above right] at (0.5,0) {\small $r = 84 cm$};
-                    \node at (-0.5,2){a)};
+                    \node at (0.5,2){a)};
                     
                     % Draw the radius line
                     \draw[dashed] (0,0) -- (2,0);
@@ -199,7 +199,7 @@
             <latex-image label="sphere-example-m">
                 \begin{tikzpicture}
                     % Draw the main circle
-                    \draw [blue!70](0,0) circle (2);
+                    \draw [thick,blue!70](0,0) circle (2);
                     
                     % Draw the dashed ellipse inside the circle
                     \draw[dashed,gray!50] (-2,0) arc (180:360:2 and 0.5);
@@ -209,7 +209,7 @@
                     % Draw and label the center point
                     \fill (0,0) circle (0.05);
                     \node[above right] at (0.5,0) {\small $r =7 cm$};
-                    \node at (-0.5,2){b)};
+                    \node at (0.5,2){b)};
                 
                     % Draw the radius line
                     \draw[dashed] (0,0) -- (2,0);
@@ -221,7 +221,7 @@
             <latex-image label="sphere-example-d">
                 \begin{tikzpicture}
                     % Draw the main circle
-                    \draw [pink!70](0,0) circle (2);
+                    \draw [thick,pink!70](0,0) circle (2);
                     
                     % Draw the dashed ellipse inside the circle
                     \draw[dashed,purple!50] (-2,0) arc (180:360:2 and 0.5);
@@ -231,7 +231,7 @@
                     % Draw and label the center point
                     \fill (0,0) circle (0.05);
                     \node[above right] at (0.5,0) {\small $r =3.5 cm$};
-                    \node at (-0.5,2){c)};
+                    \node at (0.5,2){c)};
                     % Draw the radius line
                     \draw[dashed] (0,0) -- (2,0);
                 \end{tikzpicture}
@@ -242,7 +242,7 @@
             <latex-image label="sphere-example-a">
                 \begin{tikzpicture}
                     % Draw the main circle
-                    \draw [green!70](0,0) circle (2);
+                    \draw [thick,green!70](0,0) circle (2);
                     
                     % Draw the dashed ellipse inside the circle
                     \draw[dashed,yellow!50] (-2,0) arc (180:360:2 and 0.5);
@@ -252,7 +252,7 @@
                     % Draw and label the center point
                     \fill (0,0) circle (0.05);
                     \node[above right] at (0.5,0) {\small $r =21 cm$};
-                    \node at (-0.5,2){d)};
+                    \node at (0.5,2){d)};
                     
                     % Draw the radius line
                     \draw[dashed] (0,0) -- (2,0);
@@ -261,30 +261,34 @@
         </image>
 
     </sidebyside> 
-    <p>
-        1. A football used in a tournament has a radius of 11 cm. Find the total surface area of the football, assuming it is a perfect sphere.
+    
+     <sidebyside>
+     <p>
+           1. A football used in a tournament has a radius of 11 cm. Find the total surface area of the football, assuming it is a perfect sphere.
     </p>
       <image width="50%">
             <shortdescription> Sphere </shortdescription>
             <latex-image label="sphere-example-b">
                 \begin{tikzpicture}
-                    % Draw the main circle
-                    \draw [blue!70](0,0) circle (2);
+                    \shade[ball color=green!70] (0,0) circle (2cm);
                     
-                    % Draw the dashed ellipse inside the circle
-                    \draw[dashed,gray!50] (-2,0) arc (180:360:2 and 0.5);
-                    \draw[dashed,gray!50] (2,0) arc (0:180:2 and 0.5);
+                    % Draw equator line
+                    \draw[dashed] (-2,0) arc (180:360:2cm and 0.5cm);
+                    \draw (-2,0) arc (180:0:2cm and 0.5cm);
                     
+                    % Draw vertical meridian
+                    \draw[dashed] (0,-2) arc (-90:90:0.5cm and 2cm);
+                    \draw (0,2) arc (90:270:0.5cm and 2cm);
                     
-                    % Draw and label the center point
-                    \fill (0,0) circle (0.05);
-                    \node[above right] at (0.5,0) {\small $r =7 cm$};
+                    % Draw radius
+                    \draw[thick, magenta] (0,0) -- (2,0) node[midway, above] {$r = 11$ cm};
                     
-                    % Draw the radius line
-                    \draw[dashed] (0,0) -- (2,0);
+                    % Label sphere
+                    \node at (0,-2.5) {Sphere with radius \( r = 11cm \)};
                 \end{tikzpicture}
             </latex-image>
         </image>
+     </sidebyside>
     <p>
         2. The surface area of a spherical ornament is measured to be 452.16 cm². Using the formula for the surface area of a sphere, determine the radius of the ornament.
     </p>
@@ -294,6 +298,28 @@
     <p>
         4. A spherical metal ball with a radius of 7 cm is to be coated with a layer of paint. Determine the total area that needs to be covered with paint.
     </p>
+        <image width="50%">
+            <shortdescription> Sphere </shortdescription>
+            <latex-image label="sphere-example-g">
+                \begin{tikzpicture}
+                    \shade[ball color=magenta!70] (0,0) circle (2cm);
+                    
+                    % Draw equator line
+                    \draw[dashed] (-2,0) arc (180:360:2cm and 0.5cm);
+                    \draw (-2,0) arc (180:0:2cm and 0.5cm);
+                    
+                    % Draw vertical meridian
+                    \draw[dashed] (0,-2) arc (-90:90:0.5cm and 2cm);
+                    \draw (0,2) arc (90:270:0.5cm and 2cm);
+                    
+                    % Draw radius
+                    \draw[thick, green] (0,0) -- (2,0) node[midway, above] {$r = 7 $ cm};
+                    
+                    % Label sphere
+                    \node at (0,-2.5) {Sphere with radius \( r =7 cm \)};
+                \end{tikzpicture}
+            </latex-image>
+        </image>
     
     <p>
         5. A company is designing a spherical water tank with a diameter of 24 cm. Compute the total surface area of the tank, which represents the external surface that will be painted.

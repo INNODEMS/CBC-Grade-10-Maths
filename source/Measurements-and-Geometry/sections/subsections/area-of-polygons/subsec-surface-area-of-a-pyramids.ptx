@@ -221,37 +221,37 @@
                 <p>
                     Find the surface area of the following triangular pyramid (correct to 1 d.p)
                 </p>
-                <image width="50%">
+                <image width="70%">
                 <latex-image label="triangle-pyramid">
                     \begin{tikzpicture}
                              % Define vertices
-                                \coordinate (A) at (0, 0);
-                                \coordinate (B) at (4, 0);
-                                \coordinate (C) at (2, 3);
-                                \coordinate (D) at (2, 1.5);
+                                  \coordinate (A) at (0, 0);
+                                    \coordinate (B) at (4, 0);
+                                    \coordinate (C) at (2, 3);
+                                    \coordinate (D) at (2, 1.5);
 
-                                % Draw edges of the triangular pyramid
-                                \draw[thick,fill=blue!30] (A) -- (B) -- (C) -- cycle; % Base triangle
-                                \draw[thick,fill=blue!30] (A) -- (D);
-                                \draw[thick,fill=blue!30] (B) -- (D);
-                                \draw[thick,fill=blue!30] (C) -- (D);
+                                    % Draw edges of the triangular pyramid
+                                    \draw[thick,fill=blue!30] (A) -- (B) -- (C) -- cycle; % Base triangle
+                                    \draw[thick,fill=blue!30] (A) -- (D);
+                                    \draw[thick,fill=blue!30] (B) -- (D);
+                                    \draw[thick,fill=blue!30] (C) -- (D);
 
-                                % Dashed lines for hidden edges
-                                \draw[dashed] (D) -- (A);
+                                    % Dashed lines for hidden edges
+                                    \draw[dashed] (D) -- (A);
 
-                                % Label vertices
-                                \node[left] at (A) {A};
-                                \node[right] at (B) {B};
-                                \node[above] at (C) {C};
-                                \node[below] at (D) {D};
+                                    % Label vertices
+                                    \node[left] at (A) {A};
+                                    \node[right] at (B) {B};
+                                    \node[above] at (C) {C};
+                                    \node[below] at (D) {D};
 
-                                % Label side lengths
-                                \node[below] at (2, 0) { 4 cm};
-                                \node[above left] at (1.5, 2) {3 cm};
-                                \node[above right] at (2.5, 0.9) {7 cm};
-                                \node[left] at (1.5, 0.8) {6 cm};
-                                \node[right] at (3, 1.5) {  5 cm};
-                                \node[right] at (2, 2) {6 cm};
+                                    % Label side lengths
+                                    \node[below] at (2, 0) { 4 cm};
+                                    \node[above left,rotate=50] at (1.2, 1.8) {3 cm};
+                                    \node[above right,rotate=-30] at (2.5, 0.9) {7 cm};
+                                    \node[left,rotate=45] at (1.7, 1.7) {6 cm};
+                                    \node[right] at (3, 1.5) {  5 cm};
+                                    \node[right,rotate=90] at (1.8, 1.6) {6 cm};
                             \end{tikzpicture}
                 </latex-image>
                 </image>
@@ -643,21 +643,102 @@
 <p>
     <m>\textbf{Exercise}</m>
 </p>
+<sidebyside>
+    <image width="70%">
+            <shortdescription>Square pyramid</shortdescription>
+            <latex-image label="square-pyramid-question-net">
+                \begin{tikzpicture}
+                    % Define colors
+                    \definecolor{basecolor}{RGB}{135, 206, 250}  % Gold for the base
+                    \definecolor{facecolor}{RGB}{135, 206, 255} % Light blue for the triangular faces
+
+                    % Base (square)
+                    \fill[basecolor] (2,2) -- (4,4) -- (2,6) -- (0,4) -- cycle;  (D) -- (A) -- (P) -- cycle; % Left triangle
+
+                   
+
+                    % Base outline
+                    \draw[thick] (2,2) -- (4,4) -- (2,6) -- (0,4) -- cycle;
+                    \draw[dashed] (0,4) --(4,4);
+                    % Triangular faces outline
+                    \draw[thick,fill=facecolor] (2,6) -- (2,8) -- (4,4);
+                    \draw[thick,fill=facecolor] (4,4) -- (2,8) -- (2,2);
+                    \draw[thick,fill=facecolor] (2,2) -- (2,8) -- (0,4);
+                    \draw[thick,fill=facecolor] (0,4) -- (2,8) -- (2,6);
+                    \node at (1,2.7){ 10 cm };
+                    \node at(3,6) { 15 cm};
+                \end{tikzpicture}
+            </latex-image>
+            </image>
 <p>
     1. A square-based pyramid has a base with sides measuring 10 cm each, while its triangular faces have a slant height of 15 cm. Determine the total surface area of this pyramid, including the base and all four triangular faces.
 </p>
+</sidebyside>
+ 
+ 
 <p>
     2. A pyramid with a square base has a total surface area of 400 cm², and its base side measures 8 cm. Using the formula for surface area, calculate the slant height of the pyramid.
 </p>
 <p>
-    3. A triangular pyramid (tetrahedron) has a base with sides of 6 cm each, and the slant height of each triangular face is 8 cm. Find the total surface area by summing the areas of all four triangular faces.
+    3. A square pyramid  has a base with sides of 24 cm each, and the height of the triangular face is 18 cm. Find the total surface area of the pyramid.
 </p>
+<image source="/image.png" width="50%">
+    <shortdescription></shortdescription>
+</image>
 <p>
     4. 
 
 A miniature paper pyramid is being designed with a square base of 12 cm by 12 cm and a slant height of 20 cm. How much paper is required to construct the entire pyramid?
 </p>
-<p>
-    5. The roof of a small storage building is in the shape of a square pyramid with a base side length of 5 m and a slant height of 3 m. If the entire roof needs to be covered with wooden shingles, calculate the total area that needs to be covered.
-</p>
+        <sidebyside>
+            <p>
+            5. The roof of a small storage building is in the shape of a rectangular pyramid with a base side length of 5 m and a slant height of 6 m. If the entire roof needs to be covered with wooden shingles, calculate the total area that needs to be covered.
+        </p>
+        <image width="50%">
+                    <shortdescription> Net of square pyramid</shortdescription>
+                
+            <latex-image label="net-square-exercise-pyramid">
+                \begin{tikzpicture}
+                                 
+                % Define the coordinates of the rectangular base (4 cm × 2 cm)
+                    \coordinate (A) at (0,0);
+                    \coordinate (B) at (4,0);
+                    \coordinate (C) at (4,2);
+                    \coordinate (D) at (0,2);
+                    
+                    % Define the peak (apex) of the pyramid
+                    \coordinate (P) at (2,4);  % Centered above the rectangle
+
+                    % Fill the shapes with different colors
+                    \fill[pink!60] (A) -- (B) -- (C) -- (D) -- cycle;
+
+                    % Draw the outlines of the pyramid
+                    \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle; % Base rectangle
+                    \draw[thick] (A) -- (P) -- (B); % Front triangle
+                    \draw[thick] (B) -- (P) -- (C); % Right triangle
+                    \draw[thick] (C) -- (P) -- (D); % Back triangle
+                    \draw[thick] (D) -- (P) -- (A); % Left triangle
+
+                    % Add dashed fold lines
+                    \draw[dashed] (A) -- (P);
+                    \draw[dashed] (B) -- (P);
+                    \draw[dashed] (C) -- (P);
+                    \draw[dashed] (D) -- (P);
+
+                    % Label the points
+                    \node[below left] at (A) {A};
+                    \node[below right] at (B) {B};
+                    \node[above right] at (C) {C};
+                    \node[above left] at (D) {D};
+                    \node[below] at ($(B)!0.5!(A)$) { 5 m};
+                    \node[right] at ($(B)!0.5!(C)$) {3 m};
+                    \node[right] at ($(C)!0.5!(P)$) {6 m};
+
+
+                    \node[above] at (P) {P};
+                \end{tikzpicture}
+            </latex-image>
+            </image>
+
+        </sidebyside>
 </subsection>
