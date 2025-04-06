@@ -2,7 +2,7 @@
     <title>Surface Area of a pyramid</title>
         
            <activity>
-         <title>Net of a Square based Pyramid</title> 
+         <title>Net of a triangle based Pyramid</title> 
             <statement>
                 <p>
                     
@@ -10,6 +10,59 @@
                 <p>
                    Paper Folding to form a Pyramid. 
                 </p>
+                <image>
+                <latex-image>
+                 \begin{tikzpicture}[scale=1, every node/.style={font=\small}]
+                    \definecolor{lightblue}{RGB}{173,216,230}
+
+                    % Net 1
+                    \begin{scope}
+                    % Base triangle
+                    \filldraw[fill=lightblue, draw=black] (0,0) -- (2,0) -- (1,1.732) -- cycle;
+
+                    % Left triangle
+                    \filldraw[fill=lightblue, draw=black] (0,0) -- (-1,1.732) -- (1,1.732) -- cycle;
+
+                    % Right triangle
+                    \filldraw[fill=lightblue, draw=black] (2,0) -- (3,1.732) -- (1,1.732) -- cycle;
+
+                    % Top triangle
+                    \filldraw[fill=lightblue, draw=black] (1,1.732) -- (1,3.464) -- (3,1.732) -- cycle;
+
+                    \node at (1,-1) {Net 1};
+                    \end{scope}
+
+                    % Net 2
+                    \begin{scope}[xshift=3.5cm]
+                    % Four triangles in a row
+                    \foreach \i in {0,1,2,3} {
+                    \filldraw[fill=lightblue, draw=black] 
+                        ({\i*2},0) -- ({\i*2+1},1.732) -- ({\i*2+2},0) -- cycle;
+                    }
+                    \node at (4,-1) {Net 2};
+                    \end{scope}
+
+                    % Arrow
+                    \draw[thick, -&gt;] (6.5,2) -- (10.5,2) node[midway, above] {folds to};
+
+                    % 3D Triangular Pyramid (Tetrahedron)
+                    \begin{scope}[xshift=13cm, yshift=0.5cm]
+                    % Base triangle
+                    \filldraw[fill=lightblue, draw=black] (0,0) -- (2,0) -- (1,1.732) -- cycle;
+                    % Side triangle (left)
+                    \draw[fill=lightblue, draw=black] (0,0) -- (1,1.732) -- (1,3) -- cycle;
+                    % Side triangle (right)
+                    \draw[fill=lightblue, draw=black] (2,0) -- (1,1.732) -- (1,3) -- cycle;
+                    % Hidden edges
+                    \draw[dashed] (1,3) -- (0,0);
+                    \draw[dashed] (1,3) -- (2,0);
+
+                    \node at (0.5,-1) {Triangular Pyramid};
+                    \end{scope}
+
+                \end{tikzpicture}
+                </latex-image>
+                </image>
                 <p>
                     Materials Needed.
                 </p>
@@ -52,10 +105,10 @@
                                 Steps.
                             </p>
                             <p>
-                               ♦ Observe the net of the pyramid shown alongside.
+                               ♦ Observe the net of the pyramid shown above.
                             </p>
                             <p>
-                              ♦  Draw on the Colored paper or cardstocks the net of a pyramid that is one square and four triangles. Note that the base of the triangle should be equal to the sides of the square.
+                              ♦  Draw on the Colored paper or cardstocks the net of a pyramid that is, four triangles. Note the sides of the triangles and height should be equal.
                             </p>
                             <p>
                              ♦ Cut off the extra paper to remain with the pyramid net.
@@ -64,7 +117,7 @@
                               ♦  Fold along the edges to form a pyramid. Hold the triangles in position using a tape.
                             </p>
                             <p>
-                              ♦  Using a ruler, measure the base length and slant height of the triangular faces.
+                              ♦  Using a ruler, measure the base height and slant height of the triangular faces.
                             </p>
                         </li>
                         <li>
@@ -79,23 +132,71 @@
         <activity>
         <title>Observing pyramidal objects in the surrounding environment</title>
         
-        
+              
             <statement>
-                <p>
-                    
-                </p>
-                <p>
-                    ♦ Identify pyramid-shaped objects around school/home e.g., tent, roof, food container, toys etc.
-                </p>
-                <p>
-                    ♦ Measure dimensions or use estimated values.
-                </p>
-                <p>
-                  ♦ Find their surface area using the formula and compare with classmates.
-                </p>
+                <sidebyside>
+                     <p>
+                        <ul>
+                            <li>
+                                <p>
+                                    
+                                </p>
+                                <p>
+                                ♦ Identify pyramid-shaped objects around school/home e.g., tent(Shown alongside), roof, food container, toys etc.
+                            </p>
+                            <p>
+                                ♦ Measure dimensions or use estimated values.
+                            </p>
+                            <p>
+                            ♦ Find their surface area using the formula and compare with classmates.
+                            </p>
+                            </li>
+                        </ul>
+                        </p>
+                <image>
+                <latex-image label="tent-image">
+                    \begin{tikzpicture}[scale=1.2]
+
+                            %
+                            % Define color
+                            \definecolor{tentgreen}{RGB}{102,153,102}
+
+                            % Coordinates for pyramid base
+                            \coordinate (A) at (0,0);
+                            \coordinate (B) at (4,0);
+                            \coordinate (C) at (1.5,-1.5);
+                            \coordinate (O) at (2,2.5); % Apex
+
+                            % Base triangle
+                            \filldraw[fill=tentgreen!60, draw=black] (A) -- (B) -- (C) -- cycle;
+
+                            % Left face
+                            \filldraw[fill=tentgreen!80, draw=black] (A) -- (C) -- (O) -- cycle;
+
+                            % Right face
+                            \filldraw[fill=tentgreen!80!black, draw=black] (B) -- (C) -- (O) -- cycle;
+
+                            % Front face (flap)
+                            \filldraw[fill=tentgreen!70, draw=black] (A) -- (B) -- (O) -- cycle;
+
+                            % Ropes and pegs
+                            \draw[black] (A) -- (-0.7,-0.7);
+                            \filldraw[black] (-0.7,-0.7) circle (1pt);
+                            \draw[black] (B) -- (4.7,-0.7);
+                            \filldraw[black] (4.7,-0.7) circle (1pt);
+
+                            % Ground line
+                            \draw[thick, brown!60!black] (-1,0) -- (5,0);
+                        
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+                </sidebyside>
+                
             </statement>
-        </activity><p>
-           A pyramid is a geometric solid object that has a polygon as its base and faces that converge at a point called the apex.
+        </activity>
+        <p>
+           A <m>\text{pyramid}</m> is a geometric solid object that has a polygon as its base and faces that converge at a point called the apex.
            In other words the faces are not perpendicular to the base
         </p> 
         <p>
@@ -112,107 +213,15 @@
         <p> 
             A right pyramid's line between the apex and the centre of the base is perpendicular to the base.
         </p>
-        <activity>
-         <title>Net of a Square based Pyramid</title> 
-            <statement>
-                <p>
-                    
-                </p>
-                <p>
-                   Paper Folding to form a Pyramid. 
-                </p>
-                <p>
-                    Materials Needed.
-                </p>
-                <p>
-                    <ul marker="disc">
-                        <li>
-                            <p>
-                                Colored paper or cardstocks
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                               Scissors 
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                               Rulers 
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                               Glue or tape 
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                Markers
-                            </p>
-                        </li>
-                    </ul>
-                </p>
-                <p>
-                    
-                </p>
-                <p>
-                    <ul>
-                        <li>
-                            <p>
-                                Steps.
-                            </p>
-                            <p>
-                               ♦ Observe the net of the pyramid shown alongside.
-                            </p>
-                            <p>
-                              ♦  Draw on the Colored paper or cardstocks the net of a pyramid that is one square and four triangles. Note that the base of the triangle should be equal to the sides of the square.
-                            </p>
-                            <p>
-                             ♦ Cut off the extra paper to remain with the pyramid net.
-                            </p>  
-                            <p>
-                              ♦  Fold along the edges to form a pyramid. Hold the triangles in position using a tape.
-                            </p>
-                            <p>
-                              ♦  Using a ruler, measure the base length and slant height of the triangular faces.
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                Find the volume of the pyramid you have constructed.
-                            </p>
-                        </li>
-                    </ul>
-                </p>
-            </statement>
-        </activity>
-        <activity>
-        <title>Observing pyramidal objects in the surrounding environment</title>
         
-        
-            <statement>
-                <p>
-                    
-                </p>
-                <p>
-                    ♦ Identify pyramid-shaped objects around school/home e.g., tent, roof, food container, toys etc.
-                </p>
-                <p>
-                    ♦ Measure dimensions or use estimated values.
-                </p>
-                <p>
-                  ♦ Find their surface area using the formula and compare with classmates.
-                </p>
-            </statement>
-        </activity>
+         
         
         <example>
             <statement>
                 <p>
                     Find the surface area of the following triangular pyramid (correct to 1 d.p)
                 </p>
-                <image>
+                <image width="50%">
                 <latex-image label="triangle-pyramid">
                     \begin{tikzpicture}
                              % Define vertices
@@ -231,18 +240,18 @@
                                 \draw[dashed] (D) -- (A);
 
                                 % Label vertices
-                                \node[left] at (A) {\textbf{A}};
-                                \node[right] at (B) {\textbf{B}};
-                                \node[above] at (C) {\textbf{C}};
-                                \node[below] at (D) {\textbf{D}};
+                                \node[left] at (A) {A};
+                                \node[right] at (B) {B};
+                                \node[above] at (C) {C};
+                                \node[below] at (D) {D};
 
                                 % Label side lengths
-                                \node[below] at (2, 0) {\small $ 4$};
-                                \node[above left] at (1.5, 2) {\small $ 3$};
-                                \node[above right] at (2.5, 0.9) {\small $ 7$};
-                                \node[left] at (1.5, 0.8) {\small $ 6$};
-                                \node[right] at (3, 1.5) {\small $ 5$};
-                                \node[right] at (2, 2) {\small $ 6$};
+                                \node[below] at (2, 0) { 4 cm};
+                                \node[above left] at (1.5, 2) {3 cm};
+                                \node[above right] at (2.5, 0.9) {7 cm};
+                                \node[left] at (1.5, 0.8) {6 cm};
+                                \node[right] at (3, 1.5) {  5 cm};
+                                \node[right] at (2, 2) {6 cm};
                             \end{tikzpicture}
                 </latex-image>
                 </image>
@@ -324,7 +333,7 @@
        <example>
         <statement>
             <p>
-                Draw the net of the pyramid shown below.
+                Draw the net of the pyramid.
             </p>
           <sidebyside>
             <image>
