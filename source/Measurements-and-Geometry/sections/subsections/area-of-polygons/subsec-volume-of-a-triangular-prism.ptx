@@ -25,7 +25,7 @@
                     </ul>
                  </p>
                 
-                <image width="70%">
+                <image width="80%">
                 <latex-image label="build-bridge">
                     \begin{tikzpicture}
                         % Define colors
@@ -114,7 +114,7 @@
             </statement>
         </activity>
         <sidebyside>
-                     <image width="50%">
+                     <image width="30%">
                 <latex-image label="Prism-tria">
                     \begin{tikzpicture}[scale=1.5]
                         % Define points
@@ -133,14 +133,14 @@
                         
                         % Connect front and back faces (rectangular sides)
                         \draw[very thick] (A) -- (D);
-                        \draw[very thick,red] (B) -- (E);
-                        \draw[very thick,red] (C) -- (F);
+                        \draw[very thick,blue] (B) -- (E);
+                        \draw[very thick,blue] (C) -- (F);
                         \draw[very thick,blue] (D) -- (E) -- (F) -- cycle;
                         
                         
                         % Arrows and Labels
-                        \draw[-&gt;, thick, blue] (0,-1,0) -- (-1,-3,0) node[left, black] {\huge{\textbf{Triangular face }}};
-                        \draw[-&gt;, thick, red] (2,1,1.5) -- (1,3,1.5)node[left, black] {\huge{\textbf{Rectangular face}}};
+                        \draw[-&gt;, thick, pink] (0,-1,0) -- (-1,-1.4,0) node[left, black] {\small{\textbf{Triangular face }}};
+                        \draw[-&gt;, thick, pink] (2,1,1.5) -- (1.4,1.5,1.5)node[left, black] {\small{\textbf{Rectangular face}}};
                     \end{tikzpicture}
                 </latex-image>
                     
@@ -176,10 +176,10 @@
                 \draw[thin] (B) -- (E);
                 \draw[thin] (C) -- (F);
                 \draw[dashed] (F) -- (1.5,0,2)  ;
-                \node[right] at (1.8,0.5,2) {12 cm};
+                \node[above] at (1.8,0.8,2) {12 cm};
                 \draw[thick](1.5,0.3,2) --(1.8,0.3,2) --(1.8,0,2);
                 % Label faces
-                \node at (0.5,-1,0) {Base (8 cm)};
+                \node at (0.5,-1,0) {8 cm};
                 <!-- \node at (1.5,1.5) {Top}; -->
             \end{tikzpicture}
         </latex-image>
@@ -193,7 +193,7 @@
         <p>
             <md>
                 <mrow> \text{area of a triangle} = \amp \frac{1}{2} b\, \times \,h</mrow>
-                <mrow> = \amp (\frac{1}{2} \times 8 \text{cm} ) \times 12\, \text{cm} </mrow>
+                <mrow> = \amp \frac{1}{2} \times 8 \text{cm}  \times 12\, \text{cm} </mrow>
                 <mrow> = \amp 48\, \text{cm}^2</mrow>
             </md>
         </p>
@@ -233,19 +233,18 @@
                 \coordinate (F) at (1.5,2,2);
 
                 % Draw base triangle
-                \draw[thick,fill=blue!50] (A) -- (B) -- (C) -- cycle;
+                \draw[thin] (A) -- (B) -- (C) -- cycle;
                 % Draw top triangle
-                \draw[thick,fill=blue!50] (D) -- (E) -- (F) -- cycle;
+                \draw[thin] (D) -- (E) -- (F) -- cycle;
                 % Connect top and bottom faces
-                \draw[thin,magenta] (A) -- (D);
-                \draw[thin,magenta] (B) -- (E);
-                \draw[thin,magenta] (C) -- (F);
-                \draw[dashed,magenta] (F) -- (1.5,0,2)  ;
-                \node[right] at (1.8,0.5,2) {h};
+                \draw[thin] (A) -- (D);
+                \draw[thin] (B) -- (E);
+                \draw[thin] (C) -- (F);
+                \draw[dashed] (F) -- (1.5,0,2)  ;
+                \node[above] at (1.8,0.8,2) {$V = 360 cm^3$};
                 \draw[thick](1.5,0.3,2) --(1.8,0.3,2) --(1.8,0,2);
                 % Label faces
-                \node at (0.5,-1,0) { (b)};
-                \node at (1.5,1.5) {Top};
+                \node at (0.5,-1,0) {8 cm};
             \end{tikzpicture}
         </latex-image>
     
@@ -257,20 +256,48 @@
         How much water can it hold in liters? (Hint: 1 cm³ = 1 mL, and 1,000 mL = 1 L)
     </p>
     <p>
-        3. A triangular prism has a triangular base with a base length of 8 cm and a height of 6 cm. The length of the prism is 15 cm.
-        Find the volume of the prism with a height of 12 cm. A cone with the same radius and a height of 9 cm is placed on top.
-        Find the total volume of the solid.
+        3. A triangular prism has a triangular base with a base length of 8 cm and a height of 6 cm. Find the total volume of the solid.
     </p>
+    <image width="50%">
+        <shortdescription></shortdescription>
+        <latex-image label="Volume-triangle-two-triangular">
+            \begin{tikzpicture}
+                % Define vertices of the triangular prism
+                \coordinate (A) at (0,0,0);
+                \coordinate (B) at (3,0,0);
+                \coordinate (C) at (1.5,2,0);
+                \coordinate (D) at (0,0,2);
+                \coordinate (E) at (3,0,2);
+                \coordinate (F) at (1.5,2,2);
+
+                % Draw base triangle
+                \draw[thin] (A) -- (B) -- (C) -- cycle;
+                % Draw top triangle
+                \draw[thin] (D) -- (E) -- (F) -- cycle;
+                % Connect top and bottom faces
+                \draw[thin] (A) -- (D);
+                \draw[thin] (B) -- (E);
+                \draw[thin] (C) -- (F);
+                \draw[dashed] (F) -- (1.5,0,2)  ;
+                \node[above] at (1.8,0.8,2) {8 cm};
+                \draw[thick](1.5,0.3,2) --(1.8,0.3,2) --(1.8,0,2);
+                % Label faces
+                \node at (0.5,-1,0) {6 cm};
+            \end{tikzpicture}
+        </latex-image>
+    
+    </image> 
+        
     <p>
         
        4. A storage container is shaped like two triangular prisms joined together along their rectangular faces. Each triangular prism has a base of 5 cm, a height of 4 cm, and a length of 20 cm.
       Find the total volume of the container.
     </p>
     <p>
-      5.  A house-shaped block consists of a rectangular prism 10 cm by 8 cm by 12 cm with a triangular prism (with a base of 8 cm and a height of 6 cm) attached on top.
-        Find the total volume of the solid.
+      5.  A house-shaped block consists of a rectangular prism 6 cm by 8 cm by 12 cm with a triangular prism (with a base of 8 cm and a height of 6 cm) attached on top.
+        The figures below shows the blocks whey they are divided into two equal halves. Find the total volume of the solid.
     </p>
-    <p>
+   <p>
       6.  A company manufactures Toblerone-shaped chocolate bars, which are shaped like triangular prisms. Each bar has a triangular cross-section with a base of 5 cm and a height of 4 cm, and the length of the chocolate bar is 30 cm.
         Find the volume of a single chocolate bar.
         If 100 bars are packed into a box, what is the total volume of chocolate in the box?
@@ -279,6 +306,35 @@
       7.  An architect designs a triangular prism-shaped roof for a house. The triangular cross-section has a base of 6 m and a height of 4 m. The length of the roof is 12 m.
        Calculate the total volume of the roof structure.
     </p>
+    <image width="50%">
+        <shortdescription></shortdescription>
+        <latex-image label="Volume-triangular-one-triangular">
+            \begin{tikzpicture}
+                % Define vertices of the triangular prism
+                \coordinate (A) at (0,0,0);
+                \coordinate (B) at (3,0,0);
+                \coordinate (C) at (1.5,2,0);
+                \coordinate (D) at (0,0,2);
+                \coordinate (E) at (3,0,2);
+                \coordinate (F) at (1.5,2,2);
+
+                % Draw base triangle
+                \draw[thin] (A) -- (B) -- (C) -- cycle;
+                % Draw top triangle
+                \draw[thin] (D) -- (E) -- (F) -- cycle;
+                % Connect top and bottom faces
+                \draw[thin] (A) -- (D);
+                \draw[thin] (B) -- (E);
+                \draw[thin] (C) -- (F);
+                \draw[dashed] (F) -- (1.5,0,2) node[right,midway] at (2.5,0.8) {12 m};
+                \node[above] at (1.8,0.8,2) {4 m};
+                \draw[thick](1.5,0.3,2) --(1.8,0.3,2) --(1.8,0,2);
+                % Label faces
+                \node at (0.5,-1,0) {6 m};
+            \end{tikzpicture}
+        </latex-image>
+    
+    </image> 
 
 
    
