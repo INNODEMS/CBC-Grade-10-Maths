@@ -56,11 +56,8 @@ class SlideRevealer {
       this.animatedElement.setAttribute("open","");
       this.triggerElement.setAttribute("open","");
       this.contentElement.style.display = '';
-      // Trigger the animation to expand or collapse the knowl.
-      // Delay the MathJax typesetting until the knowl is visible to ensure proper measurements
-      // are taken, but before the unrolling begins. This helps avoid layout shifts and ensures
-      // smooth animation with correctly sized content.
-      MathJax.typesetPromise().then(() => window.requestAnimationFrame(() => this.toggle(true)));
+      // Wait for the next frame to call the toggle function
+      window.requestAnimationFrame(() => this.toggle(true));
     } else if (this.animationState === SlideRevealer.STATE.EXPANDING || this.animatedElement.hasAttribute("open")) {
       this.toggle(false);
     }
@@ -315,10 +312,8 @@ class LinkKnowl {
           this.outputElement.append(...children);
 
           // render any knowls and mathjax in the knowl
+          MathJax.typesetPromise([this.outputElement]);
           addKnowls(this.outputElement);
-
-          // try prism highlighting
-          Prism.highlightAllUnder(this.outputElement);
 
           // force any scripts (e.g. sagecell) to execute by evaling them
           [...this.outputElement.getElementsByTagName("script")].forEach((s) => {
