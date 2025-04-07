@@ -533,7 +533,7 @@
         <latex-image label="cylinder7">
             \begin{tikzpicture}[rotate=90]
                 % Fill the shape with magenta
-                \fill[magenta] (-2,0) arc (180:360:2 and 0.8) -- (2,4) arc (360:180:2 and 0.8) -- cycle;
+                \fill[cyan] (-2,0) arc (180:360:2 and 0.8) -- (2,4) arc (360:180:2 and 0.8) -- cycle;
                 
                 % Draw the base ellipse
                 \draw[thick] (-2,0) arc (180:360:2 and 0.8); 
@@ -543,7 +543,7 @@
                 \draw[thick] (2,0) -- (2,4);
 
                 % Draw the top semicircle
-                \draw[thick,fill=magenta] (-2,4) arc (180:360:2 and 0.8);
+                \draw[thick,fill=cyan] (-2,4) arc (180:360:2 and 0.8);
 
                 % Draw a line at the top of the semicircle
                 \draw[thick] (-2,4) -- (2,4);
@@ -577,7 +577,7 @@
              \draw[dashed] (0,0) --(0,4);
              \node at (0.2,2.2) {10 cm};
             % Draw the bottom ellipse (partially hidden)
-            \fill[gray!30] (0,0) ellipse (1.5 and 0.5); % Shaded bottom base
+            \draw[thick] (0,0) ellipse (1.5 and 0.5); % Shaded bottom base
             \draw[dashed] (0,0) ellipse (1.5 and 0.5);  % Dashed for hidden portion
         \end{tikzpicture}
      </latex-image>
@@ -648,43 +648,43 @@
         <image width="40%">
             <latex-image label="cylinder-five-two">
                 \begin{tikzpicture}[scale=0.2, rotate=90] % Rotated 90 degrees to lie horizontally
-                    % Define dimensions
+                   % Define dimensions
                     \def\diameter{24} % Diameter of the cylinder
                     \def\radius{12}   % Radius of the cylinder (half of diameter)
                     \def\height{30}   % Length of the cylinder (previously height)
 
                     % Draw and fill the curved surface with green
-                    \fill[blue!20] (-\radius,0) -- (-\radius,-\height)
+                    \draw[thick] (-\radius,0) -- (-\radius,-\height)
                     arc (180:360:\radius cm and 2cm)
                     -- (\radius,0)
                     arc (0:180:\radius cm and 2cm);
 
                     % Fill the front and back cross-sections with white
-                    \fill[blue!20] (-\radius,0) arc (180:360:\radius cm and 2cm)
+                    \draw[thick] (-\radius,0) arc (180:360:\radius cm and 2cm)
                     arc (0:180:\radius cm and 2cm);
                                 
-                    \fill[blue!20] (-\radius,-\height) arc (180:360:\radius cm and 2cm)
+                    \draw[white] (-\radius,-\height) arc (180:360:\radius cm and 2cm)
                     arc (0:180:\radius cm and 2cm);
 
                     % Draw the front ellipse
-                    \draw[thick,magenta] (-\radius,0) arc (180:360:\radius cm and 2cm);
-                    \draw[ thick,magenta] (\radius,0) arc (0:180:\radius cm and 2cm);
+                    \draw[thick] (-\radius,0) arc (180:360:\radius cm and 2cm);
+                    \draw[ thick] (\radius,0) arc (0:180:\radius cm and 2cm);
 
                     % Draw the back ellipse
-                    \draw[thick,magenta] (-\radius,-\height) arc (180:360:\radius cm and 2cm);
-                    \draw[ thick,magenta] (\radius,-\height) arc (0:180:\radius cm and 2cm);
+                    \draw[thick] (-\radius,-\height) arc (180:360:\radius cm and 2cm);
+                    \draw[ thick] (\radius,-\height) arc (0:180:\radius cm and 2cm);
 
                     % Draw the sides
                     \draw[thick,] (-\radius,0) -- (-\radius,-\height);
-                    \draw[thick,magenta] (\radius,0) -- (\radius,-\height);
+                    \draw[thick] (\radius,0) -- (\radius,-\height);
 
                     % Label Diameter (Vertical since cylinder is lying down)
                     \draw[&lt;-&gt;, blue, thick] (-\radius, 4) -- (\radius, 4)
                     node[midway, above, font=\bfseries, blue, rotate=-90] {10 cm};
 
                     % Label Length (formerly height, now horizontal)
-                    \draw[&lt;-&gt;,blue, thick] (\radius + 2, 0) -- (\radius + 2, -\height)
-                    node[midway, above, font=\bfseries, blue] {$h$};
+                    \draw[&lt;-&gt;, blue, thick] (\radius + 2, 0) -- (\radius + 2, -\height)
+                    node[midway, left, font=\bfseries, blue, rotate=-90] {h cm};
                 \end{tikzpicture}
             </latex-image>
             
