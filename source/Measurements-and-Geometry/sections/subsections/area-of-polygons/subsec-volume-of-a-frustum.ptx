@@ -74,6 +74,9 @@
                 </p>
             </statement>
         </activity> 
+        <p>
+            <m>\textbf{Key Takeaway}</m>
+        </p>
     <p>
         A frustum is a cone or pyramid is cut parallel to its base, removing the top portion. This results in a truncated shape with two parallel bases one smaller than the other e.g a lampshade
     </p>
@@ -81,19 +84,19 @@
         <m>\textbf{Types of frustums}</m>
     </p>
     <p>
-       <m>\text{Full cone}</m> 
+        
     </p>
     <sidebyside>
-        <image>
+        <image width="50%">
         <latex-image label="frustum-full-cone">
             \begin{tikzpicture}
                 % Draw the bottom base (larger circle)
-                \draw (-2,0) arc (180:360:2 and 0.6);
-                \draw[dashed] (2,0) arc (0:180:2 and 0.6);
+                \draw[thick,blue!60] (-2,0) arc (180:360:2 and 0.6);
+                \draw[dashed,blue!60] (2,0) arc (0:180:2 and 0.6);
     
                  % Draw the top base (smaller circle)
                 \draw[thick,blue!60]  (-1,3) arc (180:360:1 and 0.3);
-                \draw[dashed] (1,3) arc (0:180:1 and 0.3);
+                \draw[dashed,blue!30] (1,3) arc (0:180:1 and 0.3);
     
                 % Draw the slant height lines for frustum
                 \draw[thick,blue!60]  (-2,0) -- (-1,3);
@@ -106,37 +109,38 @@
                 \draw [thick,blue!60] (1,3) -- (0,6);
 
                 % Draw height lines
-                \draw[dashed] (0,0) -- (0,6); % Total height H
-                \draw[dashed] (0,0) -- (0,3); % Height of the frustum h
+                \draw[dashed,blue!60] (0,0) -- (0,6); % Total height H
+                \draw[dashed,blue!60] (0,0) -- (0,3); % Height of the frustum h
 
                 % Labeling the diagram
                 \node[left] at (0,4) {$h$}; % Total height
                 \node[above] at (0.5,2.9) {$r$}; % Small radius
                 \node[below] at (-1.2,0) {$R$}; % Large radius
                 \node[above] at (0,6) {Apex};
+                \node [above] at (-2,4){Full Cone};
                 \node[left] at (0,1.5) {H};
-                \draw[dashed] (-2,0) --(0,0);
-                \draw[dashed] (0,3) --(1,3);
+                \draw[dashed,blue!60] (-2,0) --(0,0);
+                \draw[dashed,blue!60] (0,3) --(1,3);
             \end{tikzpicture}
         </latex-image>
         </image>
-        <image>
+        <image width="50%">
         <latex-image label="frustum-truncated-cone">
             \begin{tikzpicture}
                 % Draw the bottom base (larger circle)
                \draw [thick,blue!60](-2,0) arc (180:360:2 and 0.6);
-               \draw[dashed] (2,0) arc (0:180:2 and 0.6);
+               \draw[dashed,blue!60] (2,0) arc (0:180:2 and 0.6);
                
                % Draw the top base (smaller circle)
                \draw[thick,blue!60] (-1,3) arc (180:360:1 and 0.3);
-                \draw[dashed] (1,3) arc (0:180:1 and 0.3);
+                \draw[dashed,blue!30] (1,3) arc (0:180:1 and 0.3);
     
                 % Draw the slant height lines
                \draw[thick,blue!60] (-2,0) -- (-1,3);
                \draw[thick,blue!60] (2,0) -- (1,3);
-               \draw[dashed] (0,0) --(0,3) ;
-               \draw[dashed] (0,3) --(-1,3);
-               \draw[dashed] (0,0) --(-2,0);
+               \draw[dashed,blue!30] (0,0) --(0,3) ;
+               \draw[dashed,blue!30] (0,3) --(-1,3);
+               \draw[dashed,blue!30] (0,0) --(-2,0);
     
                % Labeling the diagram
                <!-- \node[left] at (0,1.5) {$h$}; -->
@@ -150,10 +154,10 @@
         
     </sidebyside>
     <p>
-        Pyramid Frustum
+       
     </p>
     <sidebyside>
-        <image>
+        <image width="50%">
         <latex-image label="frustum-full-pyramid">
             \begin{tikzpicture}
                         %Coordinates for the cone and frustrum
@@ -182,7 +186,7 @@
                 %Hight
                 \draw[dashed,red,thick] (E)--(J)--(K);
                 \node at (1.5,1.5) {H};
-
+                \node at (-1, 4.4){ Pyramid Frustum};
                 \fill[red,opacity=0.5] (A)--(B)--(C)--(D)--cycle;
                 \fill[cyan,opacity=0.5] (E)--(B)--(A)--cycle;
                 \fill[brown,opacity=0.5] (E)--(B)--(C)--cycle;
@@ -190,7 +194,7 @@
             \end{tikzpicture}
         </latex-image>
         </image>
-        <image>
+        <image width="50%">
         <latex-image  label="frustum-truncated-pyramid">
             \begin{tikzpicture}
                     \begin{scope}[yshift=-2cm]
@@ -221,7 +225,7 @@
         \fill[brown,opacity=0.5] (B)--(C)--(H)--(I)--cycle;
         \fill[cyan,opacity=0.5] (A)--(B)--(I)--(F)--cycle;
 
-        \node at (1,-1) {Truncated pyramid frustrum};
+        \node at (1,-1) {Truncated Pyramid Frustrum};
 
       \end{scope}
         
@@ -302,7 +306,6 @@
         <p>
             <m>\textbf{Exercise}</m>
         </p>
-        <sidebyside>
             <p>
             1. Shell petrol station has the shape of an inverted right circular cone of the height 15m 
             dug underground in the shape of the figure shown below. Calculate the volume of petrol it holds when full in litre.
@@ -315,14 +318,14 @@
                 
                 % Top ellipse (wider, now at the top)
                 \draw[thick] (0,5) ellipse (3 and 1.5);
-                \fill[lightpurple, opacity=0.7] (0,5) ellipse (3 and 1.5);
+                \draw[thick] (0,5) ellipse (3 and 1.5);
                 
                 % Bottom ellipse (narrower, now at the bottom)
                 \draw[thick] (0,0) ellipse (1.5 and 0.75);
-                \fill[lightpurple, opacity=0.7] (0,0) ellipse (1.5 and 0.75);
+                \draw[thick] (0,0) ellipse (1.5 and 0.75);
                 
                 % Side surfaces
-                \fill[lightpurple, opacity=0.5] 
+                \draw[thick] 
                     (-3,5) -- (-1.5,0) -- (1.5,0) -- (3,5) -- cycle;
                 
                 % Outline of side lines
@@ -332,7 +335,7 @@
                 \draw[thick] (-1.5,0) -- (1.5,0);
                 
                 % Height line (dashed)
-                \draw[dashed, blue] (0,0) -- (0,5);
+                \draw[dashed] (0,0) -- (0,5);
                 
                 % Dimension lines and labels
                 \draw[&lt;-&gt;] (-3.5,0) -- node[left] {15m} (-3.5,5);
@@ -340,7 +343,7 @@
             \end{tikzpicture}
         </latex-image>
         </image>
-        </sidebyside>
+        
         
         
       <p>
@@ -351,16 +354,16 @@
         <latex-image label="frustum-full-exercise-cone">
             \begin{tikzpicture}
                 % Draw the bottom base (larger circle)
-                \draw [thick,fill=blue!50](-2,0) arc (180:360:2 and 0.6)--cycle;
+                \draw [thick](-2,0) arc (180:360:2 and 0.6)--cycle;
                 \draw[dashed] (2,0) arc (0:180:2 and 0.6);
     
                  % Draw the top base (smaller circle)
-                \draw[dashed,blue!60]  (-1,3) arc (180:360:1 and 0.3)--cycle;
+                \draw[dashed]  (-1,3) arc (180:360:1 and 0.3)--cycle;
                 \draw[dashed] (1,3) arc (0:180:1 and 0.3);
     
                 % Draw the slant height lines for frustum
-                \draw[dashed,fill=blue!60]  (-2,0) -- (-1,3) --cycle;
-                \draw[dashed,fill=blue!60]  (2,0) -- (1,3)--cycle;
+                \draw[dashed]  (-2,0) -- (-1,3) --cycle;
+                \draw[dashed]  (2,0) -- (1,3)--cycle;
     
 
                 % Draw height lines
@@ -372,8 +375,6 @@
                 \node[above] at (0.5,2.9) {$5 cm$}; % Small radius
                 \node[below] at (-1.2,0) {$ 8 cm$}; % Large radius
                 \node[left] at (0,1.5) {12cm};
-                \draw[dashed] (-2,0) --(0,0);
-                \draw[dashed] (0,3) --(1,3);
             \end{tikzpicture}
         </latex-image>
         </image>
