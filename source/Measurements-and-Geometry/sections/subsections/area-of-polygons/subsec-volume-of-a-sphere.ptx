@@ -1,8 +1,6 @@
 <subsection xml:id="subsec-volume-of-a-sphere">
     <title>Volume of a Sphere</title>
-       <p>
-        A sphere is a perfectly round object.
-       </p>
+      
        <activity>
         <statement>
             <p>
@@ -28,7 +26,7 @@
                 </ul>
             </p>
             <image>
-            <latex-image>
+            <latex-image label="borders-sphere">
                 \begin{tikzpicture}
                     % Define colors
                     \definecolor{orange}{rgb}{1,0.5,0}
@@ -135,6 +133,9 @@
             </p>    
         </statement>
        </activity>
+        <p>
+        A sphere is a perfectly round object.
+       </p>
        <example>
        <statement>
         <p>
@@ -145,7 +146,7 @@
             <mrow> \text{V} =\amp \frac{4}{3} \times \pi r^3</mrow>
             <mrow>  = \amp 3.142 \times \frac{4}{3} \times (6)^3</mrow>
             <mrow> = \amp \frac {864}{3} \times 3.142 </mrow>
-            <mrow> = \amp 904.9 \text{cm}^3</mrow>
+            <mrow> = \amp 904.9 \, \text{cm}^3</mrow>
           </md>  
         </p>
        </statement>
@@ -162,8 +163,8 @@
             <p>
                 <md>
                     <mrow> \text{V} =\amp \frac{4}{3} \times \pi r^3</mrow>
-                    <mrow>  = \amp 3.142 \times \pi\frac{4}{3} \times (9)^3</mrow>
-                    <mrow> = \amp 3054.02 \text{cm}^3</mrow>
+                    <mrow>  = \amp 3.142 \times \pi\frac{4}{3} \times (9 \,\text{cm})^3</mrow>
+                    <mrow> = \amp 3054.02\, \text{cm}^3</mrow>
                 </md>  
             </p>
         </solution>
@@ -179,7 +180,7 @@
                 <md>
                     <mrow> \text{V} =\amp \frac{4}{3} \times r^3</mrow>
                     <mrow>  = \amp 3.142 \times\frac{4}{3} \times (1000)^3</mrow>
-                    <mrow> = \amp 4,189,333,333 4.19= \times 10^9 \text{km}^3</mrow>
+                    <mrow> = \amp 4,189,333,333 4.19= \ 10^9\, \text{km}^3</mrow>
                 </md>  
                 
             </p>
@@ -188,23 +189,96 @@
        <p>
         <m>\textbf{Exercise}</m>
        </p>
-       <p>
+       <sidebyside>
+        <p>
         1. A solid sphere has a radius of 7 cm. Find its volume.
        </p>
+       <image width="50%">
+            <shortdescription> Sphere </shortdescription>
+            <latex-image label="sphere-example-t">
+                \begin{tikzpicture}
+                    % Draw the main circle
+                    \draw [thick,blue!70](0,0) circle (2);
+                    
+                    % Draw the dashed ellipse inside the circle
+                    \draw[dashed,red!50] (-2,0) arc (180:360:2 and 0.5);
+                    \draw[dashed,red!50] (2,0) arc (0:180:2 and 0.5);
+                    
+                    
+                    % Draw and label the center point
+                    \fill (0,0) circle (0.05);
+                    \node[above right] at (0.5,0) {\small $r =7 cm$};
+                    
+                    % Draw the radius line
+                    \draw[dashed] (0,0) -- (2,0);
+                \end{tikzpicture}
+            </latex-image>
+        </image>
+       </sidebyside>
+    
        <p>
         2. A bowl is in the shape of a hemisphere with a diameter of 12 cm.
        Find the volume of the bowl.
        </p>
-       <p>
+      <sidebyside>
+         <p>
         3. A sphere has a volume of 500 cm³. If the radius is doubled, what will be the new volume?
-       </p>
+       </p><image width="50%">
+            <shortdescription> Sphere </shortdescription>
+            <latex-image label="sphere-example-r">
+                \begin{tikzpicture}
+                    % Draw the main circle
+                    \draw [thick,magenta!70](0,0) circle (2);
+                    
+                    % Draw the dashed ellipse inside the circle
+                    \draw[dashed,cyan!50] (-2,0) arc (180:360:2 and 0.5);
+                    \draw[dashed,cyan!50] (2,0) arc (0:180:2 and 0.5);
+                    
+                    
+                    % Draw and label the center point
+                    \fill (0,0) circle (0.05);
+                    \node[above right] at (0.5,-0.8) {\small $V = 500cm^3$};
+                    
+                    % Draw the radius line
+                    \draw[dashed] (0,0) -- (2,0);
+                \end{tikzpicture}
+            </latex-image>
+        </image>
+      </sidebyside>
        <p>
         4. A raindrop is modeled as a sphere with a radius of 0.2 cm. If a storm produces 1,000,000 raindrops,
         what is the total volume of water in liters?
        </p>
-       <p>
-       5  A basketball has a radius of 12 cm, while a tennis ball has a radius of 4 cm.
+       
+        <sidebyside>
+        <image width="50%">
+           <latex-image label="sphere-purple">
+            \begin{tikzpicture}
+                % Draw the sphere
+                \shade[ball color=purple!70] (0,0) circle (2cm);
+                
+                % Draw equator line
+                \draw[dashed] (-2,0) arc (180:360:2cm and 0.5cm);
+                \draw (-2,0) arc (180:0:2cm and 0.5cm);
+                
+                % Draw vertical meridian
+                \draw[dashed] (0,-2) arc (-90:90:0.5cm and 2cm);
+                \draw (0,2) arc (90:270:0.5cm and 2cm);
+                
+                % Draw radius
+                \draw[thick, yellow] (0,0) -- (2,0) node[midway, above] {$r = 12$ cm};
+                
+                % Label sphere
+                \node at (0,-2.5) {Sphere with radius \( r = 12cm \)};
+            \end{tikzpicture}
+           </latex-image>
+           </image>
+        <p>
+           5  A basketball has a radius of 12 cm, while a tennis ball has a radius of 4 cm.
         How many tennis balls can fit inside the basketball, assuming no empty space?
-       </p>
+       </p> 
+        </sidebyside>
+       
+       
           
 </subsection>

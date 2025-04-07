@@ -42,7 +42,7 @@
                     </p>
                     <p>
                         🔹Compare your answer with the calculated volume using the formula.
-                        <m>length \times width \times height</m>
+                        <m>\textbf{length }\times \textbf{width }\times \textbf{height}</m>
                     </p>
                 </li>
                 <li>
@@ -56,13 +56,6 @@
             </ul>
         </p>    
     </activity>
-    <example>
-        <statement>
-            <p>
-                
-            </p>
-        </statement>
-    </example>
     <activity>
         <statement>
             <p>
@@ -113,7 +106,7 @@
                         ♦ What's the mass of the rice, sand or water that filled the cubical container? Convert to cubic Centimetres. Note down your answer.
                         </p>
                         <p>
-                            Calculate the volume using the formula<m>l \times w \times h</m>
+                            Calculate the volume using the formula <m>l \times w \times h</m>
                         </p>
                     </li>
                     <li>
@@ -143,10 +136,50 @@
         1. A cuboid has a volume of 600 cm³, a length of 10 cm, and a width of 5 cm.
        Find its height.
     </p>
+
+                <image width="50%">
+                <latex-image label="cuboid-example-one-b">
+                    \begin{tikzpicture}
+                          % Define points for the cuboid
+                        \coordinate (A) at (0,0,0);
+                        \coordinate (B) at (6,0,0);
+                        \coordinate (C) at (6,4,0);
+                        \coordinate (D) at (0,4,0);
+                        \coordinate (E) at (0,0,5);
+                        \coordinate (F) at (6,0,5);
+                        \coordinate (G) at (6,4,5);
+                        \coordinate (H) at (0,4,5);
+                        
+                        % Draw the front face
+                        \fill[blue!50, opacity=0.5] (A) -- (B) -- (C) -- (D) -- cycle;
+                        % Draw the back face
+                        \fill[blue!50, opacity=0.5] (E) -- (F) -- (G) -- (H) -- cycle;
+                        % Draw the top face
+                        \fill[blue!50, opacity=0.5] (D) -- (C) -- (G) -- (H) -- cycle;
+                        % Draw the side face
+                        \fill[blue!50, opacity=0.5] (B) -- (C) -- (G) -- (F) -- cycle;
+                        
+                        % Draw the edges
+                        \draw[blue!50] (A) -- (B) -- (C) -- (D) -- cycle;
+                        \draw[blue!50] (E) -- (F) -- (G) -- (H) -- cycle;
+                        \draw[blue!50] (A) -- (E);
+                        \draw[blue!50] (B) -- (F);
+                        \draw[blue!50] (C) -- (G);
+                        \draw[blue!50] (D) -- (H);                      
+                        % Adding dimensions
+                        \node[below] at (1,-2,0) {$V = 5 cm$};
+                        
+                        \node[right] at (7,3,3) {10 cm};
+                        
+                        \node[right] at (6,0,2.5) {?};
+                    \end{tikzpicture}
+                </latex-image>
+                 </image>
     <p>
-        2. A rectangular water tank has a base of 2 m × 3 m and a height of 4 m.
+        2. A rectangular water tank has a base of 2 m by 3 m and a height of 4 m.
       How many liters of water can it hold when full?
     </p>
+
     <p>
         3. A shipping company uses boxes shaped like cuboids. Each box has a length of 40 cm, width of 30 cm, and height of 20 cm.
         If a warehouse has a storage space of 12 m³,
@@ -156,6 +189,65 @@
         4.If the length, width, and height of a cuboid are all doubled,
         by what factor does the volume increase?
     </p>
+    
+          <image width="30%">
+        <latex-image label="cuboid-three-op">
+            \begin{tikzpicture}
+                 % Define cuboid dimensions
+                \def\cubex{1.5} % Length
+                \def\cubey{1} % Width
+                \def\cubez{1.0} % Height
+
+                % Draw the base face with grey fill
+                \fill[red!30] (0,0,0) -- ++(\cubex,0,0) -- ++(0,\cubey,0) -- ++(-\cubex,0,0) -- cycle;
+
+                % Draw the front face
+                \draw[thick,fill=gray!30] (0,0,0) -- ++(\cubex,0,0) -- ++(0,\cubey,0) -- ++(-\cubex,0,0) -- cycle;
+
+                % Draw the top face
+                \draw[thick] (0,0,\cubez) -- ++(\cubex,0,0) -- ++(0,\cubey,0) -- ++(-\cubex,0,0) -- cycle;
+
+                % Draw the side face
+                \draw[thick] (\cubex,0,0) -- ++(0,0,\cubez);
+                \draw[thick] (0,\cubey,0) -- ++(0,0,\cubez);
+                \draw[thick] (\cubex,\cubey,0) -- ++(0,0,\cubez);
+
+                % Draw hidden lines
+                \draw[dashed] (0,0,0) -- ++(0,0,\cubez);
+                \draw[dashed] (0,0,\cubez) -- ++(0,\cubey,0);
+                \draw[dashed] (0,\cubey,\cubez) -- ++(\cubex,0,0);
+            \end{tikzpicture}
+        </latex-image>
+    </image>  <image width="50%">
+        <latex-image label="cuboid-three-o">
+            \begin{tikzpicture}
+                 % Define cuboid dimensions
+                \def\cubex{3} % Length
+                \def\cubey{2} % Width
+                \def\cubez{1.5} % Height
+
+                % Draw the base face with grey fill
+                \fill[red!30] (0,0,0) -- ++(\cubex,0,0) -- ++(0,\cubey,0) -- ++(-\cubex,0,0) -- cycle;
+
+                % Draw the front face
+                \draw[thick,fill=gray!30] (0,0,0) -- ++(\cubex,0,0) -- ++(0,\cubey,0) -- ++(-\cubex,0,0) -- cycle;
+
+                % Draw the top face
+                \draw[thick] (0,0,\cubez) -- ++(\cubex,0,0) -- ++(0,\cubey,0) -- ++(-\cubex,0,0) -- cycle;
+
+                % Draw the side face
+                \draw[thick] (\cubex,0,0) -- ++(0,0,\cubez);
+                \draw[thick] (0,\cubey,0) -- ++(0,0,\cubez);
+                \draw[thick] (\cubex,\cubey,0) -- ++(0,0,\cubez);
+
+                % Draw hidden lines
+                \draw[dashed] (0,0,0) -- ++(0,0,\cubez);
+                \draw[dashed] (0,0,\cubez) -- ++(0,\cubey,0);
+                \draw[dashed] (0,\cubey,\cubez) -- ++(\cubex,0,0);
+            \end{tikzpicture}
+        </latex-image>
+    </image>
+   
     <p>
         5. A brick has dimensions 20 cm by 10 cm by 5 cm.
         A wall is built using 500 such bricks, with no gaps between them.
@@ -167,4 +259,43 @@
        </p>
        <p> (Hint: Convert all dimensions to meters before calculating.)
     </p>
+
+                <image width="50%">
+                <latex-image label="cuboid-example-one-a">
+                    \begin{tikzpicture}
+                          % Define points for the cuboid
+                        \coordinate (A) at (0,0,0);
+                        \coordinate (B) at (6,0,0);
+                        \coordinate (C) at (6,4,0);
+                        \coordinate (D) at (0,4,0);
+                        \coordinate (E) at (0,0,5);
+                        \coordinate (F) at (6,0,5);
+                        \coordinate (G) at (6,4,5);
+                        \coordinate (H) at (0,4,5);
+                        
+                        % Draw the front face
+                        \fill[blue!50, opacity=0.5] (A) -- (B) -- (C) -- (D) -- cycle;
+                        % Draw the back face
+                        \fill[blue!50, opacity=0.5] (E) -- (F) -- (G) -- (H) -- cycle;
+                        % Draw the top face
+                        \fill[blue!50, opacity=0.5] (D) -- (C) -- (G) -- (H) -- cycle;
+                        % Draw the side face
+                        \fill[blue!50, opacity=0.5] (B) -- (C) -- (G) -- (F) -- cycle;
+                        
+                        % Draw the edges
+                        \draw[blue!50] (A) -- (B) -- (C) -- (D) -- cycle;
+                        \draw[blue!50] (E) -- (F) -- (G) -- (H) -- cycle;
+                        \draw[blue!50] (A) -- (E);
+                        \draw[blue!50] (B) -- (F);
+                        \draw[blue!50] (C) -- (G);
+                        \draw[blue!50] (D) -- (H);                      
+                        % Adding dimensions
+                        \node[below] at (1,-2,0) {80 cm};
+                        
+                        \node[right] at (7,3,3) {1.2 m};
+                        
+                        \node[right] at (6,0,2.5) {50 cm};
+                    \end{tikzpicture}
+                </latex-image>
+                 </image>
 </subsection>
