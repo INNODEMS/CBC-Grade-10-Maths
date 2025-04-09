@@ -1,11 +1,8 @@
 <subsection xml:id="subsec-surface-area-of-a-triangular-prism">
     <title>Surface Area of a Triangular Prism</title>
-    <p>
-        <m>\textbf{ Triangular Prism;}</m> It has a triangle at its base. 
-    </p>
-    <p>
-        A triangular prism is a geometric object with two identical triangular bases and three rectangular lateral faces. Its surface area is the total area of all its faces, measured in square units (cm², m², etc.).
-    </p>
+     <activity>
+        <statement>
+        
     <p>
         Formula of the surface area of a triangular prism is the sum of:
     </p>
@@ -36,14 +33,20 @@
             <mrow> S.A =\amp \text{Base Area}  \times \text{Lateral Area}</mrow>
         </md>
     </p>
-    <activity>
-        <statement>
-            <p>
-                
-            </p>
+   
         </statement>
     </activity>
-    <sidebyside>
+    <p>
+        <m>\textbf{Key Takeaway}</m>
+    </p>
+       
+            <p>
+        <m>\textbf{ Triangular Prism;}</m> It has a triangle at its base. 
+    </p>
+    <p>
+        A triangular prism is a geometric object with two identical triangular bases and three rectangular lateral faces. Its surface area is the total area of all its faces, measured in square units (cm², m², etc.).
+    </p>
+    <sidebyside widths="40% 50%">
     <image width="50%">
         <shortdescription>Triangular Prism</shortdescription>
      <latex-image label="surface-area-triangular-prism">
@@ -83,24 +86,24 @@
         <latex-image label="surface-area-triangular-prism1">
             \begin{tikzpicture}
                 % Define base rectangle
-                \draw[dashed] (0,0) rectangle (8,8);
+                \draw[thick,dashed] (0,0) rectangle (8,8);
 
                 % Triangular faces
-                \draw[thick] (0,0) -- (4,-4) -- (8,0);
-                \draw[thick] (0,8) -- (4,12) -- (8,8);
-                \fill[gray!30] (0,8) -- (4,12) -- (8,8);
+                \draw[very thick] (0,0) -- (4,-4) -- (8,0);
+                \draw[very thick] (0,8) -- (4,12) -- (8,8);
+                \fill[gray!50] (0,8) -- (4,12) -- (8,8);
 
                 % Fold lines (dashed)
-                \draw[dashed] (4,12) -- (4,8);
-                \draw[dashed] (4,-4) -- (4,0);
-                \draw[thick] (8,0) --(12,0) --(12,8) --(8,8);
-                \draw[thick] (0,0) --(-4,0) --(-4,8) --(0,8);
+                \draw[thick,dashed] (4,12) -- (4,8);
+                \draw[thick,dashed] (4,-4) -- (4,0);
+                \draw[very thick] (8,0) --(12,0) --(12,8) --(8,8);
+                \draw[very thick] (0,0) --(-4,0) --(-4,8) --(0,8);
                 
                 % Labels
-                \node[above] at (4,10) {\small 3 cm};
-                \node[below] at (4,-2) {\small 3 cm};
-                \node[below] at (4,0.5) {\small 8 cm};
-                \node[right] at (8,4) {\small 12 cm};
+                \node[above] at (4,10) {\huge 5 cm};
+                \node[below] at (4,-2) {\huge 5 cm};
+                \node[above] at (4,0.5) {\huge 16 cm};
+                \node[right] at (8,4) {\huge 19 cm};
             \end{tikzpicture}
         </latex-image>
     </image>
@@ -108,63 +111,52 @@
     <example>
      <statement>
         <p>
-           Find the Surface area of the triangular prism below. 
+           Find the Surface area of the triangular prism below with a slant height of 5 cm, height of the triangular prism 12cm and a base of 8 cm. 
         </p> 
-        <image width="50%">  
-        <latex-image label="tikkz-prism-immage">
-           \begin{tikzpicture}[scale=1.2, font=\small]
+           <image width="40%" >
+    <latex-image label="pyramid-example-y">
+        \begin{tikzpicture}
+            
+            % Define coordinates
+            \coordinate (A) at (0,0);
+            \coordinate (B) at (6,0);
+            \coordinate (C) at (5,3);
+            \coordinate (D) at (1,3);
+            \coordinate (O) at (3,1.8); % center of base
+            \coordinate (S) at (3,6); % apex
 
-                % Define colors
-                \definecolor{faceblue}{RGB}{173, 216, 230}
-                \definecolor{facegray}{RGB}{200, 200, 200}
-                \definecolor{facegreen}{RGB}{180, 238, 180}
+            % Draw base
+            \draw[thick, black!60!black] (A) -- (B) -- (C) -- (D) -- cycle;
 
-                % Coordinates
-                \coordinate (A) at (0,0);
-                \coordinate (B) at (3,0);
-                \coordinate (C) at (1.5,2);
-                \coordinate (D) at (1,-1.2);
-                \coordinate (E) at (4,-1.2);
-                \coordinate (F) at (2.5,0.8);
+            % Draw edges to apex
+            \draw[thick, black!60!black] (A) -- (S);
+            \draw[thick, black!60!black] (B) -- (S);
+            \draw[thick, black!60!black] (C) -- (S);
+            \draw[thick, black!60!black] (D) -- (S);
 
-                % Draw prism faces
-                % Back triangle
-                \filldraw[fill=facegreen, draw=black] (D) -- (E) -- (F) -- cycle;
-                % Bottom rectangle
-                \filldraw[fill=facegreen, draw=black] (A) -- (B) -- (E) -- (D) -- cycle;
-                % Side rectangle
-                \filldraw[fill=facegreen, draw=black] (B) -- (C) -- (F) -- (E) -- cycle;
-                % Top rectangle
-                \filldraw[fill=facegreen!70, draw=black] (C) -- (A) -- (D) -- (F) -- cycle;
-                % Front triangle
-                \filldraw[fill=facegreen!70, draw=black] (A) -- (B) -- (C) -- cycle;
+            % Hidden base diagonal
+            \draw[dashed, black!60!black] (A) -- (C);
+            \draw[dashed, black!60!black] (B) -- (D);
 
-                % Labels on front triangle
-                \node[left] at (A) {A};
-                \node[right] at (B) {B};
-                \node[above] at (C) {C};
-                 \draw[dashed] (A) --(1.5,0);
-                % Labels on back triangle
-                \node[left] at (D) {D};
-                \node[right] at (E) {E};
-                \node[above] at (F) {F};
+            % Height line
+            \draw[dashed, red] (S) -- (O);
 
-                % Optional edge labels
-                \node[below] at ($(A)!0.5!(B)$) {8 cm};
-                \node[left] at ($(A)!0.5!(C)$) {3 cm};
-                \node[right] at ($(B)!0.5!(E)$) {12 cm};
+            % Right angle box
+            \draw[very thick] (3,1.8) -- ++(0.3,0) -- ++(0,0.3) -- ++(-0.3,0);
 
-                
-            \end{tikzpicture}
-        </latex-image>
-        </image>
+            % Labels
+            \node [right]at (3,3.7) {\small\textbf{12 cm}};
+            \node at (3,-0.4) {\small\textbf{8 cm}};
+                    \end{tikzpicture}
+    </latex-image>
+    </image>
      </statement>
      <solution>
         <p>
            Step 1: Find the area of the base. 
         </p>
         <p>
-            The triangle has a slant height of 5 cm and base 8cm. Using pythagorean relationship height i:
+            The triangle has a slant height of 5 cm and base 8 cm. Using pythagorean relationship height i:
             <md>
                 <mrow> = \amp \sqrt{25 \, \text{cm} -16\, \text{cm}} = 3\, \text{cm}</mrow>
                 <mrow> \text{area of a triangle} = \amp \frac{1}{2}\times b \times h</mrow>
@@ -201,15 +193,49 @@
             <p>
         2. 
 
-    A triangular prism has a triangular base of 8 cm,lengths of 12 cm and the height of the prism (perpendicular to the base) is 3 cm. Calculate the total surface area .
+    A triangular prism has a triangular base of 13 cm and the height of the prism 9 cm. Calculate the total surface area .
     </p>
-    <image source="/prism-exercise.png">
-        <shortdescription></shortdescription>
+    <image width="40%" >
+    <latex-image label="pyramid-ex">
+        \begin{tikzpicture}
+            
+            % Define coordinates
+            \coordinate (A) at (0,0);
+            \coordinate (B) at (6,0);
+            \coordinate (C) at (5,3);
+            \coordinate (D) at (1,3);
+            \coordinate (O) at (3,1.8); % center of base
+            \coordinate (S) at (3,6); % apex
+
+            % Draw base
+            \draw[thick, black!60!black] (A) -- (B) -- (C) -- (D) -- cycle;
+
+            % Draw edges to apex
+            \draw[thick, black!60!black] (A) -- (S);
+            \draw[thick, black!60!black] (B) -- (S);
+            \draw[thick, black!60!black] (C) -- (S);
+            \draw[thick, black!60!black] (D) -- (S);
+
+            % Hidden base diagonal
+            \draw[dashed, black!60!black] (A) -- (C);
+            \draw[dashed, black!60!black] (B) -- (D);
+
+            % Height line
+            \draw[dashed, red] (S) -- (O);
+
+            % Right angle box
+            \draw[very thick] (3,1.8) -- ++(0.3,0) -- ++(0,0.3) -- ++(-0.3,0);
+
+            % Labels
+            \node [right]at (3,3.7) {\small\textbf{9 cm}};
+            \node at (3,-0.4) {\small\textbf{13 cm}};
+                    \end{tikzpicture}
+    </latex-image>
     </image>
     <p>
         3. A prism is constructed with a triangular base of 8 cm height of 12 cm.. Determine the area of the triangular base, then use the given dimensions to compute the total surface area.
     </p>
-    <image source="/triangular image.png">
+    <image source="/triangular-prism.png" width="50%">
         <shortdescription>${0:}</shortdescription>
     </image>
     <p>
