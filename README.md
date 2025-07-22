@@ -1,3 +1,47 @@
+# CBC Grade 10 Mathematics Project
+
+This repository contains the source files for the CBC Grade 10 Mathematics book, developed using [PreTeXt](https://pretextbook.org). PreTeXt is a powerful tool for creating high-quality educational materials, including textbooks, in multiple formats.
+
+## Project Overview
+
+The goal of this project is to create a comprehensive and accessible mathematics textbook for Grade 10 students, aligned with the CBC (Competency-Based Curriculum). The book will be available in multiple formats, including web, PDF, and print.
+
+## Getting Started
+
+To contribute to or work on this project, follow these steps:
+
+1. **Clone the Repository**  
+    Use the green `<> Code` button at the top of this page to clone the repository to your local machine or open it in a GitHub Codespace.
+
+2. **Set Up a Codespace**  
+    If you prefer working in the cloud, you can use GitHub Codespaces:
+    - Click the `<> Code` button.
+    - Select the "Codespaces" tab.
+    - Click "Create codespace on main."
+
+    This will open a browser-based VS Code environment with everything pre-configured for this project.
+
+3. **Build the Book**  
+    Use the provided PreTeXt tools to build and preview the book. Instructions for building the book can be found in the documentation within this repository.
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute:
+- Fork this repository.
+- Make your changes in a feature branch.
+- Submit a pull request for review.
+
+Please ensure your contributions align with the project's goals and adhere to the CBC curriculum standards.
+
+## License
+
+This project is licensed under [LICENSE_NAME]. See the `LICENSE` file for details.
+
+## Contact
+
+For questions or feedback, please contact the project maintainer at [EMAIL_ADDRESS].
+
+
 # PreTeXt Codespace
 
 Use this template repository to quickly start a new [PreTeXt](https://pretextbook.org) project entirely in the cloud, using GitHub Codespaces.  

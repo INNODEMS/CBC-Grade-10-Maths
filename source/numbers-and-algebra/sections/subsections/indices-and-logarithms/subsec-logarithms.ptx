@@ -4,25 +4,40 @@
     <title>Why Logarithms?</title>
 
         <p>
-            In the previous section indices allowed us to express large or small numbers using powers. However, sometimes we need to reverse this process. Instead of finding the result of a power, we need to determine the exponent itself, this is where logarithms come in.
+            In the previous section, indices allowed us to simplify very large or small numbers by expressing them in terms of powers. However, there are situations where we need to reverse this process, rather than finding the result of a power, we need to determine the exponent itself. This is where logarithms come into play.
         </p>
         <p>
-            A <m>logarithm</m> is the inverse of an exponent (index). It tells us the power to which a number must be raised to get another number.
+            A <m>logarithm</m> is the inverse of an exponent (index). It tells us the power to which a specific base must be raised to produce a given number.
         </p>
         <p>
-            A <m>logarithm</m> answers the question:
+            For example:
         </p>
         <p>
-            "To what power must a given base be raised to produce a certain number?"
+            Exponent Form: <m>2^3 = 8.</m>
+        </p>
+        <p>
+            Logarithm Form: <m>log_2 8 = 3.</m>
+        </p>
+        
+        <p>
+            In simpler terms, a <m>logarithm</m> answers the question: "To what power must the base be raised to produce a certain number?"
         </p>
         <p>
             <term>Why Are Logarithms Important?</term>
         </p>
         <p>
+            Logarithms are crucial for solving equations involving exponents. They simplify computations and are widely used in fields like:
+        </p>
+        <p>
             <ul>
                 <li>
                     <p>
-                        Logarithms help in solving equations with exponents, especially in finance (compound interest) and Science and Engineering (radioactive decay, sound intensity, etc.)
+                        <term>Finance:</term> calculating compound interest or investment growth.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <term>Science and Engineering:</term> understanding radioactive decay, measuring sound intensity, or modeling population growth.
                     </p>
                 </li>
             </ul>
@@ -35,52 +50,76 @@
         <activity>
             <statement>
                 <p>
+                    <term>Work in groups:</term> Form groups of <m>2-3</m> students
+                </p>
+                <p>
                     <term>Materials:</term> A Paper/book and a pen
                 </p>
                 <p>
                     <term>Instructions:</term>
                 </p>
                 <p>
-                     Pick a number from the set: <m>81, 243, 512, 1000</m>
+                     Pick a number from the set: <m>81, 243, 512</m> or <m>1000</m>
                 </p>
                 <p>
-                    Break it down into prime factors using the Tree Factor Method
+                    Break down the chosen number into its prime factors.
                 </p>
                 <p>
-                    <term>e.g</term>
+                    Start by dividing the number by its smallest prime factor repeatedly until only prime factors remain.
                 </p>
-                    <image width="40%">
+                <p>
+                    <term>e.g.</term> <m>8 = 2 \times 2 \times 2 = 2^3</m>
+                </p>
+                    <image width="50%">
                         <latex-image>
                             \begin{tikzpicture}
                                 % Draw nodes
                                 \node (a) at (0,4) {8};      % Root node
-                                \node (b1) at (-1.5,3) {2};  % Left child
-                                \node (b2) at (1.5,3) {4};   % Right child
-                                \node (c1) at (1,2) {2};     % Left grandchild (aligned)
-                                \node (c2) at (2,2) {2};     % Right grandchild (aligned)
-                                \node (d1) at (1.7,1) {2};   % Final breakdown (two, shifted left)
-                                \node (d2) at (2.3,1) {1};   % Final breakdown (one, aligned below 2)
+                                \node (b1) at (-2,3) {2};    % Left child
+                                \node (b2) at (2,3) {4};     % Right child
+                                \node (c1) at (0.5,2) {2};   % Left grandchild
+                                \node (c2) at (2.5,2) {2};   % Right grandchild
+                                \node (d1) at (1.2,1) {2};   % Left breakdown (shifted left)
+                                \node (d2) at (3,1) {1};     % Right breakdown (aligned below 2)
 
-                                % Connecting Lines (Aligned Correctly)
+                                % Connecting Lines
                                 \draw (a) -- (b1);
                                 \draw (a) -- (b2);
                                 \draw (b2) -- (c1);
                                 \draw (b2) -- (c2);
                                 \draw (c2) -- (d1);
-                                \draw (c2) -- (d2);  % Connecting last 1
+                                \draw (c2) -- (d2);
                             \end{tikzpicture}
                         </latex-image>
                     </image>
                 <p>
                     Express your final result in index form
                 </p>
+                <p>
+                    Reflect on how the indices relate to logarithms:
+                </p>
+                <p>
+                    For example, <m>2^3 =8</m> translates to <m>\log_2 8 = 3.</m>
+                </p>
             </statement>
         </activity>
         <p>
-            <term>Reflection:</term>
+            <term>Key Takeaway:</term>
         </p>
         <p>
-            Every logarithm is simply another way of writing an exponent.
+            Logarithms are simply another way of expressing indices. They bridge the gap between exponential and logarithmic notation:
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <p>
+                        Exponential Form: <m>a^b = c.</m>
+                    </p>
+                    <p>
+                        Logarithmic Form:<m>\log_a c = b.</m>
+                    </p>
+                </li>
+            </ul>
         </p>
         <p>
             <m>e.g</m>  <me>8 = 2 \times 2 \times 2 = 2^3</me>
@@ -195,62 +234,1099 @@
             </statement>
         </example>
 
-        <exercise>
+        <exercises xml:id="exercises-Logarithms-notation">
+            <exercise>
+                <statement>
+                    <p>
+                        What are the logarithmic form of:
+                    </p>
+                    <p>
+                        <ol marker = "a)">
+                            <li>
+                                <p>
+                                    <m>2^6 = 64 \qquad \qquad \qquad \qquad \text{e)}\,\,8^4 = 4096 </m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>5^3 = 125 \qquad \qquad \qquad \qquad \text{f)}\,\, 6^y = 216</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>3^x = 81 \qquad \qquad \qquad \qquad \text{g)}\,\, 9^{\frac {1}{2}} = 3</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>8^{\frac {2}{3}} = 4 \qquad \qquad \qquad \qquad \text{h)}\,\, 4^{-2} = \frac {1}{16}</m>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                </statement>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        Express <m>10^4 = 10000</m> in logarithmic form.
+                    </p>
+                </statement>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        Find the value of <m>y</m> given that <m>\log_y 81 = 4</m>
+                    </p>
+                </statement>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        Solve for <m>x</m> if <m>\log_2 x = 5</m>
+                    </p>
+                </statement>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        Convert <m>8^x = 512</m> to logarithmic form and solve for <m>x</m>.
+                    </p>
+                </statement>
+            </exercise>
+        </exercises>
+    </subsubsection>
+
+
+    <subsubsection xml:id="subsubsec-using-logarithms-with-standard-form">
+        <title>Using Logarithms with Standard Form</title>
+            <p>
+                Standard form is a way of writing very large or very small numbers in a more manageable format. It is expressed as:
+            </p>
+            <p>
+                <me>
+                    B \times 10^x
+                </me>
+            </p>
+            <p>
+                Where:
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            <m>B</m> is a number between <m>1</m> and <m>10</m> <m>(1 \leq B \lt 100)</m>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <m>x</m> is an integer (positive for large numbers and negative for small numbers)
+                        </p>
+                    </li>
+                </ul>
+            </p>
+
+            <activity>
+                <statement>
+                    <p>
+                    <term>Work in groups:</term> Form groups of <m>2-3</m> students
+                        
+                    </p>
+                    <p>
+                        <term>Instruction:</term>
+                    </p>
+                    <p>
+                        <ol marker = "a)">
+                            <li>
+                                <p>
+                                    Write any five digit number in your book
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Identify the first non-zero digit from the left.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Place a decimal point after this digit.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Count how many places the decimal has moved;
+                                </p>
+                                <p>
+                                    <ul>
+                                        <li>
+                                            <p>
+                                                If moved left, the exponent is positive.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>
+                                                If moved right, the exponent is negative.
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Express the number in the form <m>B \times 10^x</m>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                </statement>
+            </activity>
+            <p>
+                <term>Examples:</term>
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            The distance from the Earth to the Sun is approximately <m>149,600,000 \, km. </m>
+                        </p>
+                        <p>
+                            <me>
+                                149,600,000 = 1.496 \times 10^8 \, km
+                            </me>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The size of a red blood cell is about <m>0.000007</m> m
+                        </p>
+                        <p>
+                            <me>
+                                0.000007 = 7.0 \times 10^{-6} m 
+                            </me>
+                        </p>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                <term>Further Activity:</term>
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            The population of Kenya is approximately <m>54,985,698</m>. Express this number in standard form.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The size of a human hair is about <m>0.00008</m> metres. Express the length in standard form.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The charge of an electron is <m>0.00000000000000000016</m> coulombs. Convert this to standard form.
+                        </p>
+                    </li>
+                </ul>
+            </p>
+
+            <p>
+                <term>Finding Logarithms of Numbers in Standard Form:</term>
+            </p>
+            <example>
+                <statement>
+                    <p>
+                        Find <m>\log (4.5 \times 10^5)</m>
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        <me>
+                            \log (4.5 \times 10^5) = \log 4.5 \times 10^5
+                        </me>
+                    </p>
+                    <p>
+                        <me>
+                            \log 4.5 = 0.6535 
+                        </me>
+                    </p>
+                    <p>
+                        <me>
+                            \therefore \log 450000 = 5.6535
+                        </me>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                In this case <m>5</m> is the <term>characteristic</term>. The characteristic is the whole number part of a logarithm. It tells us how large or small the number is based on powers of <m>10</m>.
+            </p>
+            <p>
+                <m>0.6535</m> is the <term>mantissa</term>. The mantissa is the decimal part of the logarithm, found using logarithm tables. It depends on the significant digits of the number but is always positive.
+            </p>
+            <p>
+                <term>Key Takeaway:</term>
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            For numbers greater than <m>1</m>, the characteristic is one less than the number of digits before the decimal point.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            For numbers less than <m>1</m>, the characteristic is negative, often written in bar notation (e.g <m>\overline{3}</m> instead of <m>-3</m>).
+                        </p>
+                    </li>
+                </ul>
+            </p>
+    </subsubsection>
+
+    <subsubsection xml:id="subsubsec-Determining-common-logarithms-using-mathematical-tables-and-calculators">
+        <title>Determining Common Logarithms Using Mathematical Tables and Calculators</title>
+        <p>
+            <term>Common Logarithms</term>
+        </p>
+        <p>
+            Common logarithms, also known as logarithms to base <m>10</m>, are written as <m>\log x</m> instead of <m>\log_{10} x</m>.
+        </p>
+        <p>When
+            <me>
+                10 x = y
+            </me>
+        </p>
+        <p>
+            It means that <m>10</m> must be raised to the power of <m>y</m> to give <m>x</m>, that is:
+        </p>
+        <p>
+            <me>
+                10^y = x
+            </me>
+        </p>
+        <p>
+            <term>For example:</term> <m>\log 100 = 2</m> because <m>10^2 = 100</m>
+        </p>
+        <p>
+            Common logarithms simplify complex multiplications, divisions, and exponentiation by converting them into easier operations using logarithmic laws.
+        </p>
+
+        <p>
+            <term>Using Logarithm Tables</term>
+        </p>
+        <p>
+            In Grade <m>8</m>, you learned how to use mathematical tables to find squares, square roots, and reciprocals of numbers. Here we will use the knowledge to reading tables of logarithm to base <m>10</m>.
+        </p>
+        <p>
+            Here is an extract of a logarithm table to base <m>10</m>
+        </p>
+        <image source="mathstable.png">
+            <shortdescription>Logarithm table to base 10</shortdescription>
+        </image>
+
+        <p>
+            <term>Positive Numbers greater than <m>1</m></term>
+        </p>
+        <example>
             <statement>
                 <p>
                     <ol>
                         <li>
                             <p>
-                                What are the logarithmic form of:
-                            </p>
-                            <p>
-                                <ol marker = "a)">
-                                    <li>
-                                        <p>
-                                            <m>2^6 = 64 \qquad \qquad \qquad \qquad \text{e)}\,\,8^4 = 4096 </m>
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p>
-                                            <m>5^3 = 125 \qquad \qquad \qquad \qquad \text{f)}\,\, 6^y = 216</m>
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p>
-                                            <m>3^x = 81 \qquad \qquad \qquad \qquad \text{g)}\,\, 9^{\frac {1}{2}} = 3</m>
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p>
-                                            <m>8^{\frac {2}{3}} = 4 \qquad \qquad \qquad \qquad \text{h)}\,\, 4^{-2} = \frac {1}{16}</m>
-                                        </p>
-                                    </li>
-                                </ol>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                Express <m>10^4 = 10000</m> in logarithmic form.
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                Find the value of <m>y</m> given that <m>\log_y 81 = 4</m>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                Solve for <m>x</m> if <m>\log_2 x = 5</m>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                Convert <m>8^x = 512</m> to logarithmic form and solve for <m>x</m>.
+                                Find <m>\log (472.8)</m> using a logarithm table.
                             </p>
                         </li>
                     </ol>
                 </p>
             </statement>
-        </exercise>
+            <solution>
+                <p>
+                    Using a logarithm table, follow these steps:
+                </p>
+                <p>
+                    <ol>
+                        <li>
+                            <p>
+                                Identify the characteristic:
+                            </p>
+                            <p>
+                                Write <m>472.8</m> in standard form
+                            </p>
+                            <p>
+                                <me>\log (472.8) = \log (4.728 \times 10^2)</me>
+                            </p>
+                            <p>
+                                The characteristic is <m>2</m> since <m>10^2 \leq 472.8 \lt 10^3</m>.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Find the mantissa from the log table:
+                            </p>
+                            <p>
+                                Locate <m>47</m> in the first column and move to the column labeled <m>2</m>.
+                            </p>
+                            <p>
+                                Read the value: <m>0.6749</m>.
+                            </p>
+                            <p>
+                                <me>
+                                    \log (472) = 0.6749
+                                </me>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Apply the mean difference for <m>8</m>:
+                            </p>
+                            <p>
+                                From the table, the mean difference for <m>8</m> is <m>0.0007</m>.
+                            </p>
+                            <p>
+                                Add this to the mantissa:
+                            </p>
+                            <p>
+                                <me>
+                                    0.6749 + 0.0007 = 0.6756
+                                </me>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Combine with the characteristic
+                            </p>
+                            <p>
+                                Therefore;
+                            </p>
+                            <p>
+                                <me>
+                                    \log (472.8) = 2.6756
+                                </me>
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+                <p>
+                    Using a calculator, we can confirm that <m>\log (472.8) \approx 2.6756</m>, matching the value obtained from the logarithm table.
+                </p>
+            </solution>
+        </example>
+
+        <p>
+            <term>Positive Numbers less than <m>1</m></term>
+        </p>
+        <example>
+            <statement>
+                <p>
+                    Use logarithm tables to solve <m>\log 0.00534</m>
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Since <m>0.00534</m> cannot be read directly from the table, first we need to write it in standard form;
+                </p>
+                <p>Standard form of 
+                    <me>
+                        0.00534 = 5.34 \times 10^{-3}
+                    </me>
+                </p>
+                <p>
+                    Here, the characteristic is <m>-3</m> and the mantissa is the logarithm of <m>5.34</m>.
+                </p>
+                <p>
+                    Using the logarithm table:
+                </p>
+                <p>
+                    <ul>
+                        <li>
+                            Locate <m>53</m> in the first column.
+                        </li>
+                        <li>
+                            Move to the column labeled <m>4</m>.
+                        </li>
+                        <li>
+                            Read the value: <m>\log(5.34) = 0.7272</m>.
+                        </li>
+                    </ul>
+                </p>
+                <p>
+                    Now, apply the logarithm property:
+                </p>
+                <p>
+                    <me>\log(0.00534) = \log(5.34) + \log(10^{-3})</me>
+                </p>
+                <p>
+                    Since <m>\log(10^{-3}) = -3</m>, we substitute:
+                </p>
+                <p>
+                    <me>\log(0.00534) = 0.7272 - 3</me>
+                </p>
+                <p>
+                    <me>= \bar{3}.7272</me>
+                </p>
+                <p>
+                    The bar over <m>3</m> represents a negative characteristic.
+                </p>
+                <p>
+                    <me>\therefore \log 0.00534 = \bar{3}.7272</me>
+                </p>
+            </solution>
+        </example>
+
+        <exercises xml:id="exercises-Determining-common-logarithms-using-mathematical-tables-and-calculators">
+            <exercise>
+                <statement>
+                    <p>
+                        Express the following numbers in standard form.
+                    </p>
+                    <p>
+                        <ol marker="a)">
+                            <li>
+                                <p>
+                                    <m>4820 \qquad \qquad \qquad \qquad \text{e)}\,\, 0.000485</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>37.6 \qquad \qquad \qquad \qquad \text{f)}\,\, 91800</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>672000 \qquad \qquad \qquad \qquad \text{g)}\,\, 5.27 \times 10^5</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>321000 \qquad \qquad \qquad \qquad \text{h)}\,\, 0.000672</m>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                </statement>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        Use a logarithm table to find the logarithm of the following numbers:
+                    </p>
+                    <p>
+                        <ol marker="a)">
+                            <li>
+                                <p>
+                                    <m>0.00893 \qquad \qquad \qquad \qquad \text{e)}\,\, 0.000245</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>3140 \qquad \qquad \qquad \qquad \text{f)}\,\, 6.42 \times 10^3</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>52.7 \qquad \qquad \qquad \qquad \text{g)}\,\, 78900</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>0.000978</m>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                </statement>
+            </exercise>
+        </exercises>
+
+        <activity>
+            <title>Exploring Logarithms in Real-Life Applications</title>
+            <statement>
+                <p>
+                    At individual level, go explore how logarithms are used in different fields such as engineering, finance, and science.
+                </p>
+                <p>
+                    <ol>
+                        <li>
+                            <p>
+                                Research and describe two real-life applications of logarithms. Present your findings to the class.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                The pH scale in chemistry is based on logarithms. Given that pH is defined as <m>\text{pH} = -\log[H^+]</m>, determine the pH of a solution where <m>[H^+] = 3.2 \times 10^{-4}</m>.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                The Richter scale measures earthquake intensity using the formula <m>R = \log \left( \frac{I}{I_0} \right)</m>, where <m>I</m> is the intensity of the earthquake and <m>I_0</m> is the reference intensity. If an earthquake is 1000 times more intense than the reference, what is its magnitude on the Richter scale?
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Use logarithm tables to evaluate <m> \sqrt{ \frac{(6.28 \times 42.5)}{9.81} }</m>.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                A country's population grows exponentially according to the formula <m>P = P_0 e^{rt}</m>, where <m>P_0</m> is the initial population, <m>r</m> is the growth rate, and <m>t</m> is time in years. Solve for <m>t</m> if a population doubles in <m>10</m> years at a growth rate of <m>5\%</m> per year.
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+            </statement>
+        </activity>
+
+        <p>
+            <term>Antilogarithms</term>
+        </p>
+        <p>
+            The antilogarithm (antilog) of a number is the inverse operation of taking a logarithm. If <m>\log x = y</m>, then <m>x</m> is the antilog of <m>y</m>. This means:
+        </p>
+        <p>
+            <me>
+                x = 10^y
+            </me>
+        </p>
+        <p>
+            To find the antilogarithm of a number, we use logarithm tables or a calculator.
+        </p>
+        <p>
+            <term>Finding Antilogarithms Using Logarithm Tables</term>
+        </p>
+        <p>
+            To find the antilogarithm of a given logarithmic value using a logarithm table, follow these steps:
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <p>
+                        Separate the characteristic and mantissa.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Use the logarithm table to find the antilog of the mantissa.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Apply the characteristic as a power of 10.
+                    </p>
+                </li>
+            </ul>
+        </p>
+
+        <example>
+            <statement>
+                <p>
+                    Find the antilogarithm of <m>2.6756</m> using logarithm tables.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Separate the characteristic and mantissa
+                </p>
+                <p>
+                    <me>
+                        2.6756 = 2 + 0.6756
+                    </me>
+                </p>
+                <p>
+                    Find the antilogarithm of <m>0.6756</m> using tables:
+                </p>
+                <p>
+                    <me>
+                        \text{Antilog } (0.6756) = 4.735
+                    </me>
+                </p>
+                <p>
+                    Apply the characteristic:
+                </p>
+                <p>
+                    <me>
+                        10^2 \times 4.735 = 473.5
+                    </me>
+                </p>
+                <p>
+                    Thus, the antilogarithm of <m>2.6756</m> is <m>473.5</m>.
+                </p>
+            </solution>
+        </example>
+
+        <p>
+            <term>Finding Antilogarithms Using a Calculator</term>
+        </p>
+        <p>
+            When using a calculator, simply input the given logarithm value and use the inverse logarithm function:
+        </p>
+        <p>
+            <me>
+                x = 10^y
+            </me>
+        </p>
+        <p>
+            <term>For example,</term> to find <m>\text{Antilog } (1.3562)</m> on a calculator:
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <p>
+                        Press <kbd>10^x</kbd> or <kbd>INV</kbd> + <kbd>LOG</kbd> and enter <m>1.3562</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Record the results
+                    </p>
+                </li>
+            </ul>
+        </p>
+
+        <exercises xml:id="exercises-finding-antilogarithms-using-a-calculator">
+            <exercise>
+                <statement>
+                    <p>
+                        Find the antilogarithms of the following logarithmic values using logarithm tables:
+                    </p>
+                    <p>
+                        <ol marker = "i)">
+                            <li>
+                                <p>
+                                    <m>\log P = 1.3562</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>\log Q = 3.4821</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>\log R = 0.7294</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>\log S = 4.2187</m>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                </statement>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        Solve the following logarithms using a calculator:
+                    </p>
+                    <p>
+                        <ol marker="i)">
+                            <li>
+                                <p>
+                                    <m>\log a = 2.1457</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>\log b = 0.8743</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>\log c = 3.5961</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>\log d = 1.9999</m>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                </statement>
+            </exercise>
+        </exercises>
+    </subsubsection>
+
+
+    <subsubsection xml:id="subsubsec-multiplication-using-logarithm-tables">
+        <title>Multiplying and Dividing Logarithms</title>
+        <p>
+            Logarithms simplify multiplication and division by converting them into addition and subtraction, respectively. This is particularly useful when dealing with large numbers.
+        </p>
+        <example>
+            <statement>
+                <p>
+                    Find <m>236.5 \times 42.8</m> using logarithm table.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Find the logarithm of each number from the logarithm table:
+                </p>
+                <p>
+                    <me>
+                        \log 236.5 = 2.3741, \quad \log 42.8 = 1.6318
+                    </me>
+                </p>
+                <p>
+                    Add the logarithms:
+                </p>
+                <p>
+                    <me>
+                        2.3741 + 1.6318 = 4.0059
+                    </me>
+                </p>
+                <p>
+                    Find the antilogarithm of <m>4.0059</m>:
+                </p>
+                <p>
+                    <me>
+                        \text{Antilog} (4.0059) \approx 10160
+                    </me>
+                </p>
+                <p>
+                    Thus, <m>236.5 \times 42.8 \approx 10160</m>.
+                </p>
+            </solution>
+        </example>
+
+        <example>
+            <statement>
+                <p>
+                    Find <m>\frac{528.6}{24.7}</m> using logarithm tables.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Find the logarithm of each number from the logarithm table:
+                </p>
+                <p>
+                    <me>
+                        \log 528.6 = 2.7233, \quad \log 24.7 = 1.3927
+                    </me>
+                </p>
+                <p>
+                    Subtract the logarithms:
+                </p>
+                <p>
+                    <me>
+                        2.7233 - 1.3927 = 1.3306
+                    </me>
+                </p>
+                <p>
+                    Find the antilogarithm of <m>1.3306</m>:
+                </p>
+                <p>
+                    <me>
+                        \text{Antilog} (1.3306) \approx 21.4
+                    </me>
+                </p>
+                <p>
+                    Thus, <m>\frac{528.6}{24.7} \approx 21.4</m>.
+                </p>
+            </solution>
+        </example>
+    </subsubsection>
+
+    <subsubsection xml:id="subsubsec-applying-logarithms-to-powers-and-roots">
+        <title>Applying Logarithms to Powers and Roots</title>
+        <p>
+            Logarithms can be used to simplify calculations involving powers and roots by converting exponentiation into multiplication and roots into division.
+        </p>
+
+        <activity>
+            <statement>
+                <p>
+                    <term>Material needed:</term> 
+                </p>
+                <p>
+                    <ul>
+                        <li><p>Pen and paper</p></li>
+                        <li><p>A scientific calculator</p></li>
+                    </ul>
+                </p>
+                <p>
+                    <term>Instructions:</term>
+                </p>
+                <p>
+                    Use your calculator and math reasoning to solve the following expressions involving logarithms:
+                </p>
+                <p>
+                    <me>\log(10000)</me>
+                </p>
+                <p>
+                    Now rewrite <m>10000</m> as a power of <m>10</m>:
+                </p>
+                <p>
+                    <me>\log(10000) = \log(10^4)</me>
+                </p>
+                <p>
+                    Apply the logarithmic law: <me>\log(a^b) = b \times \log(a)</me>
+                </p>
+                <p>
+                    <me>\log(10^4) = 4 \times \log(10)</me>
+                </p>
+                <p>
+                    <me>= 4 \times 1 = 4</me>
+                </p>
+                <p>
+                    Try the following:
+                </p>
+                <p>
+                    <ul>
+                        <li><p><me>\log(100)</me></p></li>
+                        <li><p><me>\log(1000000)</me></p></li>
+                        <li><p><me>\log(\sqrt{100})</me></p></li>
+                        <li><p><me>\log(\sqrt[3]{1000})</me></p></li>
+                    </ul>
+                </p>
+                <p>
+                    <ul>
+                        <li><p>What do you observe when applying logarithms to square and cube roots?</p></li>
+                        <li><p>Why does <me>\log(\sqrt{100})</me> give half of <me>\log(100)</me>?</p></li>
+                        <li><p>What general rule can you form for logarithms and powers?</p></li>
+                    </ul>
+                </p>
+                <p>
+                    <term>Key Takeaway:</term>
+                </p>
+                <p>
+                    Logarithms help simplify calculations involving powers and roots.
+                </p>
+                <p>
+                    For example: <m>\log(a^b) = b \times \log(a)</m>, and <m>\log(\sqrt{a}) = \frac{1}{2} \times \log(a)</m>.
+                </p>
+            </statement>
+        </activity>
+        <example>
+            <statement>
+                <p>
+                    Evaluate <m>(23.5)^4</m> using logarithm tables.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Find the logarithm of <m>23.5</m> from the logarithm table:
+                </p>
+                <p>
+                    <me>
+                        \log 23.5 = 1.3711
+                    </me>
+                </p>
+                <p>
+                    Multiply by the exponent <m>4</m>:
+                </p>
+                <p>
+                    <me>
+                        1.3711 \times 4 = 5.4844
+                    </me>
+                </p>
+                <p>
+                    Find the antilogarithm of <m>5.4844</m>:
+                </p>
+                <p>
+                    <me>
+                        \text{Antilog} (5.4844) \approx 304000
+                    </me>
+                </p>
+                <p>
+                    Thus, <m>(23.5)^4 \approx 304000</m>.
+                </p>
+            </solution>
+        </example>
+
+        <example>
+            <statement>
+                <p>
+                    Evaluate <m>\sqrt[3]{524.8}</m> using logarithm tables.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Find the logarithm of <m>524.8</m> from the logarithm table:
+                </p>
+                <p>
+                    <me>
+                        \log 524.8 = 2.7200
+                    </me>
+                </p>
+                <p>
+                    Divide the logarithm by <m>3</m> (since it is a cube root):
+                </p>
+                <p>
+                    <me>
+                        \frac{2.7200}{3} = 0.9067
+                    </me>
+                </p>
+                <p>
+                    Find the antilogarithm of <m>0.9067</m>:
+                </p>
+                <p>
+                    <me>
+                        \text{Antilog} (0.9067) \approx 8.1
+                    </me>
+                </p>
+                <p>
+                    Thus, <m>\sqrt[3]{524.8} \approx 8.1</m>.
+                </p>
+            </solution>
+        </example>
+
+        <exercises xml:id="exercises-applying-logarithms-to-powers-and-roots">
+            <exercise>
+                <statement>
+                    <p>
+                        Use logarithm tables to evaluate the following:
+                    </p>
+                    <p>
+                        <ol marker="a)">
+                            <li>
+                                <p>
+                                    <m>345.6 \times 78.9</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>6284 \times 92.5</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>0.0482 \times 53.7</m>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                </statement>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        Use logarithms to calculate:
+                    </p>
+                    <p>
+                        <ol marker="a)">
+                            <li>
+                                <p>
+                                    <m>652.3 \div 12.7</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>0.0854 \div 3.42</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>4312 \div 58.3</m>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                </statement>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        Solve the following using logarithms:
+                    </p>
+                    <p>
+                        <ol marker="a)">
+                            <li>
+                                <p>
+                                    <m>(78.5)^3</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>(254.6)^4</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>(12.75)^{2.5}</m>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                </statement>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        Compute the following roots using logarithms:
+                    </p>
+                    <p>
+                        <ol marker="a)">
+                            <li>
+                                <p>
+                                    <m>\sqrt[3]{658.4}</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>\sqrt{82.6}</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>\sqrt[4]{3126}</m>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                </statement>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A square field has an area of <m>18432</m> square metres. Use logarithms to determine the length of one side.
+                    </p>
+                </statement>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        Use logarithm tables to evaluate:
+                    </p>
+                    <p>
+                        <ol marker="a)">
+                            <li>
+                                <p>
+                                    <m>\sqrt{ \frac{(4.56 \times 12.3)}{24.7} }</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>\sqrt{ \frac{(2.718 \times 9.81)}{5.432 \times 3.14} }</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>\frac{\sqrt{52.8 \times 24.6}}{\sqrt{31.5}}</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>\sqrt[3]{\frac{(6.75 \times 432)}{0.89}}</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>\sqrt[4]{\frac{(8462 \times 23.7)}{673}}</m>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                </statement>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        The volume of a cube is <m>79507</m> cubic centimetres. Use logarithms to find the length of one side.
+                    </p>
+                </statement>
+            </exercise>
+        </exercises>
     </subsubsection>
 </subsection>

@@ -1,12 +1,258 @@
 <subsection xml:id="subsec-area-of-irregular-polygons">
     <title>Area of Irregular Polygons</title>
+   
+    <activity>
+        <statement>
+            <p>
+               Graph Paper (preferably colored)
+            </p>
+                <p>
+            </p>
+            <p>
+            Scissors
+            </p>
+            <p>
+            Glue or tape
+            </p>
+            <p>
+            Rulers
+            </p>
+            <p>
+            Graph paper (optional)
+            </p>
+            <p>
+            Measuring tape (optional)
+            </p>
+            <p>
+            A variety of irregular polygons (either printed or hand-drawn)
+            </p>
+            <sidebyside>
+                <p>
+                <ul>
+                    <li>
+                        <p>
+                            work with a printed or drawn irregular polygon. The task is to divide the irregular polygon into smaller shapes whose areas are easier to calculate (like triangles, rectangles, or trapeziums).
+
+                            Tip: Use straight lines to cut along the diagonals or through the middle of the shape to create triangles or rectangles.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                                For each smaller shape, ask students to measure the necessary dimensions:
+                        </p>
+                        <p>
+                            For triangles, they need the base and height.
+                        </p>
+                            <p>
+
+                            For rectangles, they need the length and width.
+                        </p>
+                        <p>
+                          For trapeziums, they need the lengths of the two parallel sides and the height.
+                       </p>
+                    </li>
+                    <li>
+                        <p>
+                            Calculate the Area of Each Shape: Once the polygon is broken into smaller shapes, students can calculate the area of each shape using appropriate formulas
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Add the Areas:
+                                Once the area of each smaller shape has been calculated, students should add up all the areas to find the total area of the original irregular polygo
+                        </p>
+                    </li>
+                </ul>
+            </p>
+              <image>
+        <latex-image>
+            \begin{tikzpicture}
+                % Define the coordinates of the irregular heptagon
+                    \coordinate (1) at (0,0);
+                    \coordinate (2) at (3,0);
+                    \coordinate (3) at (4,2);
+                    \coordinate (4) at (2,4);
+                    \coordinate (5) at (5,6);
+                    \coordinate (6) at (0,7);
+                    \coordinate (7) at (-2,3);
+
+                    % Draw the heptagon
+                    \filldraw[thick,cyan!50] 
+                        (1) -- (2) -- (3) -- (4) -- (5) -- (6) -- (7) -- cycle;
+                    
+                    % Draw interior angle arcs in blue
+                    \foreach \p in {1,2,3,4,5,6,7}
+                    \draw[thick,blue] (\p) circle(0.3);
+
+                    % Draw exterior angle arcs in red
+                    \foreach \p in {1,2,3,4,5,6,7}
+                    \draw[thick, dashed,red] (\p) circle(0.5);
+                    
+                    % Add concave angle markers
+                    \draw[-&gt;, thick] (6, 3.5) -- (2,4);
+                    \draw[-&gt;, thick] (7, 4) -- (5,6);
+                    
+                    % Labels and annotations
+                    \node[left] at (1) {1};
+                    \node[below] at (2) {2};
+                    \node[right] at (3) {3};
+                    \node[above] at (4) {4};
+                    \node[right] at (5) {5};
+                    \node[left] at (6) {6};
+                    \node[left] at (7) {7};
+
+                    % Description text
+                    \node[right, text width=6cm] at (6,3) 
+                        {This polygon has several different-sized angles. 
+                        With angles more than 180$^\circ$, this shape is a concave polygon.};
+
+            \end{tikzpicture}
+        </latex-image>
+        </image>
+            </sidebyside>
+        </statement>
+    </activity>
+        <p>
+            Regardless of shape, all polygons are made up of the same parts, sides, vertices, interior angles and exterior angles which may varry in size thus describing why we have irregular polygons versus regular polygons. 
+        </p>
+        
+   
+          <p>
+            An irregular polgon has a set of atleast two sides or angles that are not the same. This heptagon has many different size angles , making it irregular.
+        </p>
+       
 
     <p>
-        algebra
+        The interior angles of an irregular nenagon (9 sides) add up to <m>1,260^\circ</m>. 
+        Because angles are different sizes, individual angles cannot be found the sum of the interior angle. 
+    </p>
+    <image>
+    <latex-image label="irregular-nenagon">
+        \begin{tikzpicture}
+            % Define the coordinates of an irregular nonagon (doubled in size)
+            \coordinate (1) at (0,0);
+            \coordinate (2) at (4,1);
+            \coordinate (3) at (7,3);
+            \coordinate (4) at (8,6);
+            \coordinate (5) at (6,9);
+            \coordinate (6) at (3,10);
+            \coordinate (7) at (-1,8);
+            \coordinate (8) at (-2,5);
+            \coordinate (9) at (-1,2);
+            
+            % Draw the nonagon
+            \filldraw[thick,cyan!60] (1) -- (2) -- (3) -- (4) -- (5) -- (6) -- (7) -- (8) -- (9) -- cycle;
+            
+            % Add text annotations
+            \node[above] at (9) {9 sides};
+            \draw[-&gt;] (0.5,10) -- (0.5,8.5);
+            \draw[-&gt;] (-3,2) -- (-1,2);
+            \draw[-&gt;] (2,4) -- (3,5.7);
+            
+            % \draw[-&gt;] (-1,5.5) -- (0.5,7.5);
+            % \draw[-&gt;] (2,4) -- (3,5.7);
+            \node[above] at (0.5,10) {number of sides};
+            
+            % Label the vertices in the new order
+            \node[left] at (1) {1};
+            \node[below] at (2) {2};
+            \node[right] at (3) {3};
+            \node[right] at (4) {4};
+            \node[above right] at (5) {5};
+            \node[above] at (6) {6};
+            \node[left] at (7) {7};
+            \node[left] at (8) {8};
+            % \node[below left] at (9) {9};
+            
+            % Equation for sum of interior angles
+            \node[right] at (0,8) {\Huge$(9 - 2) \times 180^\circ$};
+            \node[right] at (1,6) {\Huge$= 1,260^\circ$};
+            \node[right] at (2,4) {sum of its interior angles};
+            
+            % Add description
+            \node[below, text width=15cm] at (0,0) {\textbf{Irregular nonagon}\\
+            The interior angles of an irregular nonagon (9 sides) add up to 1,260$^\circ$. 
+            Because the angles are different sizes, individual angles cannot be found from the sum of the interior angles.};
+        \end{tikzpicture}
+    </latex-image>
+    </image>
+    <p>
+        <m> \textbf{ Exercise}
+        </m>
+    </p>
+    <p>
+        1. An irregular pentagon has the following side lengths: <m>5 \text{cm}, 7 \text{cm}, 6 \text{cm}, 8 \text{cm} \text{and} 4 \text{cm}.</m> If its total area is estimated using triangulation, determine its approximate area.
+    </p>
+    <p>
+        2. A garden is shaped like an irregular hexagon with side lengths <m>4 \text{m}, 6 \text{m}, 5 \text{m}, 7 \text{m}, 8 \text{m} \text{and} 3 \text{m}.</m> Calculate its perimeter.
+
+    </p>
+    <p>
+        3.  A farmer's land is shaped like an irregular quadrilateral with sides measuring <m>50 \text{m}, 60 \text{m}, 40 \text{m} \text{and} 30 \text{m}</m>. If the land is divided into two triangles for calculation, estimate its total area.
+
+    </p>
+    <p>
+        4. An office space has an irregular pentagonal shape with different side lengths and angles. The flooring cost is calculated based on the total area. If the room is divided into three triangles for estimation, find the approximate flooring cost given a rate of $25 per square meter.
+
+    </p>
+    <p>
+        5.  A city park is designed in the shape of an irregular hexagon with measured sides of <m>20 \text{m}, 25 \text{m}, 30 \text{m}, 28 \text{m}, 22 \text{m} \text{and} 18 \text{m}.</m> If the park’s area is estimated by splitting it into smaller triangles, find the total area.
+
+    </p>
+    <p>
+        6.  A regular decagon has a side length of <m>12 \text{cm}</m>. Calculate its perimeter and area using the formula for the area of a regular polygon.
+
+    </p>
+    <p>
+        7.  A large conference room has an octagonal shape with a side length of <m>9 \text{m}</m>. If the flooring material costs<m> \text{Ksh}. 30 </m> per square meter, find the total flooring cost.
+
+    </p>
+    <p>
+        8. A heptagonal garden has side lengths of <m>5 \text{m}, 7 \text{m}, 6 \text{m}, 8 \text{m}, 9 \text{m}, 6 \text{m}, \text{and} 10 \text{m}.</m> The owner wants to fence the garden. Calculate the total length of fencing required.
+    </p>
+    <p>
+       9.  A nonagonal water tank has a radius of <m>5 \text{m}</m>. If it is filled with water, determine the total volume assuming the depth is <m>4 \text{m}</m>.
+ 
+    </p>
+    <p>
+        10.  A decorative fountain is designed in the shape of a regular decagon with a side length of <m>15 \text{m}.</m> If the cost of tiling is $40 per square meter, determine the total cost of tiling the fountain area.
+
+    </p>
+    <p>
+        11. A regular nonagon is inscribed in a circle of radius <m>7 \text{cm}.</m> Compute its side length and area.
+
+    </p>
+    <p>
+        12. A heptagonal plot of land has side lengths of <m>8 \text{m}, 10 \text{m}, 12 \text{m}, 9 \text{m}, 11 \text{m}, 13 \text{m} \text{and} 7 \text{m}</m>. Find its perimeter. If the area is approximated by dividing it into triangles, estimate its total area.
     </p>
 
+
+   
     
-    
+<technology>
+<p>"We used to measure with rulers, now we measure with tools that reveal more than the eye can see. Technology is here, not to replace thinking but empower it." Kindly use the links below and explore in these interactive exercises.</p>
+    <p>
+     Interactive triangles.
+     
+    </p>
+    <p>
+        <url href="https://www.mathsisfun.com/geometry/triangles-interactive.html" /> by Math is Fun
+    </p>
+     <p>
+     Interactive Quadrilaterals.
+     
+    </p>
+    <p>
+        <url href="https://www.mathsisfun.com/geometry/quadrilaterals-interactive.html" /> by Math is Fun
+    </p>
+    <p>
+     Interactive polygons.
+     
+    </p>
+    <p>
+        <url href="https://www.mathsisfun.com/geometry/polygons-interactive.html" /> by Math is Fun
+    </p>
+</technology>
 
 
 

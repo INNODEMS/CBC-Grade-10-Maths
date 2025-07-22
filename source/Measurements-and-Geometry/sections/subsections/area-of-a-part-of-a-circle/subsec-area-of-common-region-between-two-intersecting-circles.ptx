@@ -1,114 +1,6 @@
 <subsection xml:id="subsec-area-of-common-region-between-two-intersecting-circles">
-    <title>Area of common region between two intersecting circles</title>
-    <p>
-        The common region between two intersecting circles refers to the overlapping area shared by both circles.
-    </p>
-    <p>
-        It is formed when two circles of different or equal radii intersect at two distinct points.
-    </p>
-    <image width="50%">
-    <latex-image label="Intersecting1">
-        \begin{tikzpicture}
-            % Define the circles
-            \draw[thick] (0,0) circle (2cm);
-            \draw[thick] (2,0) circle (2cm);
-            
-            % Fully shade the common region
-            \begin{scope}
-                \clip (0,0) circle (2cm);
-                \clip (2,0) circle (2cm);
-                \fill[blue!50] (-2,-2) rectangle (4,2);
-            \end{scope}
-            
-            % Label the circles
-            \node[below] at (0, -2) {Circle 1};
-            \node[below] at (2, -2) {Circle 2};
-            
-            % Label the common region
-            \node [rotate=90]at (1, 0.2) {\textbf{Common Region}};
-            
-            % Label centers
-            \filldraw[black] (0,0) circle (1.5pt);
-            \filldraw[black] (2,0) circle (1.5pt);
-            \node[left] at (0, 0) {$O_1$};
-            \node[right] at (2, 0) {$O_2$};
-        \end{tikzpicture}
-    </latex-image>
-        
-    </image>
-    <p>
-        Mathematically, the area of the common region can be found by:
-    </p>
-    <p>
-        <ol>
-            <li>
-                <p>
-                    Calculating the area of the two circular segments formed by 
-                    the chord joining the intersection points.
-                </p>
-            </li>
-            <li>
-                <p>
-                    Using the formula:
-                </p>
-                <p>
-                    <md>
-                        <mrow>A= \amp A_\text{segment 1}+ A_\text{segment 2}</mrow>
-                    </md>
-                    as shown below;
-                </p>
-                <image width="50%">
-                <latex-image label="Intersecting2">
-                    \begin{tikzpicture}
-                        % Define points
-                        \coordinate (P) at (-1.5,0);
-                        \coordinate (Q) at (1.5,0);
-                        \coordinate (A) at (0,1.5);
-                        \coordinate (B) at (0,-1.3);
-
-                        % Shade the overlapping region in cyan
-                        \begin{scope}
-                            \clip (P) circle (2);
-                            \clip (Q) circle (2);
-                            \fill[cyan!50] (P) circle (2);
-                        \end{scope}
-
-                        % Draw the circles
-                        \draw (P) circle (2);
-                        \draw (Q) circle (2);
-
-                        % Draw quadrilateral APBQ
-                        \draw [very thick](0,1.3) -- (P) -- (0,-1.3) -- (Q) -- cycle;
-                        \draw [very thick](0,1.3)-- (B);
-
-                        % Labels
-                        \node[left] at (P) {P};
-                        \node[right] at (1.7,0) {Q};
-                        \node[above] at (A) {A};
-                        \node[below] at (B) {B};
-                        
-                        \draw [-&gt;,very thick] (0.2,0)--(2,3.5);
-                        \draw [-&gt;,very thick] (-0.2,0)--(-2,3.5);
-                        
-                        \node [blue,above] at (-2,3.5)  {$\textbf{Segment}_1$};
-                        \node [blue,above] at (2,3.5)  {$\textbf{Segment}_2$};
-
-                        % Angle arcs
-                        \draw[thick](P) ++(180:0.5) arc[start angle=180, end angle=-180, radius=0.4];
-                        \draw[thick](Q) ++(180:0.5) arc[start angle=-180, end angle=180, radius=0.4];
-
-                        % Angle labels
-                        \node [below] at (-0.9,0.3) {$\theta$};
-                        \node [below]at (0.8,0.3) {$\alpha$};
-
-                    \end{tikzpicture}
-                </latex-image>
-                    
-                </image>
-            </li>
-
-        </ol>
-    </p>
+    <title>Area of Common Region between two Intersecting Circles</title>
+    
     <activity>
         <p>
             <m>\textbf{work in groups}</m>
@@ -163,6 +55,132 @@
         
         
     </activity>
+
+
+    <p>
+        <m>\textbf{Key Takeaway}</m>
+    </p>
+
+    <p>
+        The <m>\textbf{common region between two intersecting circles}</m> refers to the overlapping area shared by both circles.
+    </p>
+    <p>
+        It is formed when two circles of different or equal radii intersect at two distinct points as shown below.
+    </p>
+    <image width="50%">
+    <latex-image label="Intersecting1">
+        \begin{tikzpicture}
+            % Define the circles
+            \draw[thick] (0,0) circle (2cm);
+            \draw[thick] (2,0) circle (2cm);
+            
+            % Fully shade the common region
+            \begin{scope}
+                \clip (0,0) circle (2cm);
+                \clip (2,0) circle (2cm);
+                \fill[blue!50] (-2,-2) rectangle (4,2);
+            \end{scope}
+            
+            % Label the circles
+            \node[below] at (0, -2) {Circle 1};
+            \node[below] at (2, -2) {Circle 2};
+            
+            % Label the common region
+            \node [rotate=90]at (1, 0.2) {\textbf{Common Region}};
+            
+            % Label centers
+            \filldraw[black] (0,0) circle (1.5pt);
+            \filldraw[black] (2,0) circle (1.5pt);
+            \node[left] at (0, 0) {$O_1$};
+            \node[right] at (2, 0) {$O_2$};
+        \end{tikzpicture}
+    </latex-image>
+        
+    </image>
+    <p>
+        The area of the common region can be found by:
+    </p>
+    <p>
+        <ol>
+            <li>
+                <p>
+                    Calculating the area of the two circular segments formed by 
+                    the chord joining the intersection points.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Sum the areas of the two segments.
+                </p>
+                <p>
+                    <md>
+                        <mrow>A= \amp A_\text{segment 1}+ A_\text{segment 2}</mrow>
+                    </md>
+                    
+                </p>
+                <p>
+                    The figure below shows the two segments.
+                </p>
+                <image width="50%">
+                <latex-image label="Intersecting2">
+                    \begin{tikzpicture}
+                        % Define points
+                        \coordinate (P) at (-1.5,0);
+                        \coordinate (Q) at (1.5,0);
+                        \coordinate (A) at (0,1.5);
+                        \coordinate (B) at (0,-1.3);
+
+                        % Shade the overlapping region in cyan
+                        \begin{scope}
+                            \clip (P) circle (2);
+                            \clip (Q) circle (2);
+                            \fill[cyan!50] (P) circle (2);
+                        \end{scope}
+
+                        % Draw the circles
+                        \draw (P) circle (2);
+                        \draw (Q) circle (2);
+
+                        % Draw quadrilateral APBQ
+                        \draw [very thick](0,1.3) -- (P) -- (0,-1.3) -- (Q) -- cycle;
+                        \draw [very thick](0,1.3)-- (B);
+
+                        % Labels
+                        \node[left] at (P) {P};
+                        \node[right] at (1.7,0) {Q};
+                        \node[above] at (A) {A};
+                        \node[below] at (B) {B};
+                        
+                        \draw [-&gt;,very thick] (0.2,0)--(2,3.5);
+                        \draw [-&gt;,very thick] (-0.2,0)--(-2,3.5);
+                        
+                        \node [blue,above] at (-2,3.5)  {$\textbf{Segment}_1$};
+                        \node [blue,above] at (2,3.5)  {$\textbf{Segment}_2$};
+
+                        % Angle arcs
+                        \draw[thick](P) ++(180:0.5) arc[start angle=180, end angle=-180, radius=0.4];
+                        \draw[thick](Q) ++(180:0.5) arc[start angle=-180, end angle=180, radius=0.4];
+
+                        % Angle labels
+                        \node [below] at (-0.9,0.3) {$\theta$};
+                        \node [below]at (0.8,0.3) {$\alpha$};
+
+                    \end{tikzpicture}
+                </latex-image>
+                    
+                </image>
+            </li>
+
+        </ol>
+    </p>
+
+
+
+
+
+
+
+
     <example>
         <statement>
             <p>
@@ -170,7 +188,7 @@
                 cm</m> and <m>6 \,cm</m> with centres <m>O_1</m> and <m>O_2</m>
                 respectively. The circles intersect at
                 points A and B. The lines <m>O_1O_2</m> and AB
-                are perpendicular to each other. If the common chord AB is <m>9 cm</m>, calculate the
+                are perpendicular to each other. If the common chord AB is <m>9 \,cm</m>, calculate the
                 area of the shaded region.
             </p>
             <image source="/Intesection1.png" width="50%">
@@ -562,7 +580,7 @@
     </example>
     
     <p>
-        <m>\textbf{Exercise}</m>
+        <m>\textbf{Exercises}</m>
     </p>
     <p>
         (Take <m>\pi=3.142</m>)
@@ -571,7 +589,7 @@
         <ol>
             <li>
                 <p>
-                    If two circles of radius <m>r</m> overlap such that their centers are at a distance <m>0.5r</m>,
+                    If two circles of radius <m>r</m> overlap such that their centers are at a distance <m>0.5\,r</m>,
                     express the overlapping area in terms of <m>r</m>.
                 </p>
             </li>
@@ -581,22 +599,6 @@
                     overlap so that the centers are <m>12</m> meters apart. The angle subtended at the center of each circle by the
                      chord of intersection is <m>120^\circ</m>. 
                     Find the area of the overlapping region.
-                </p>
-            </li>
-            <li>
-                <p>
-                    In the Olympic symbol, circles of radius <m>5 \,cm</m> overlap,
-                    forming intersections. If the central angle corresponding to the common 
-                    region is <m>90^\circ</m>, find the area of the intersection.
-                </p>
-            </li>
-            <li>
-                <p>
-                    During a rare planetary alignment, two planets appear 
-                    as overlapping circles in the sky. If both have an apparent 
-                    radius of <m>5000\, km</m>, and their centers are <m>6000 \,km</m> apart, with a
-                    central angle of <m>145^\circ</m>,
-                    find the overlapping shadow area visible from Earth.
                 </p>
             </li>
             <li>
@@ -659,42 +661,93 @@
                     
                 </image>
             </li>
+            <li>
+                <p>
+                    In the Olympic symbol, circles of radius <m>5 \,cm</m> overlap,
+                    forming intersections. If the central angle corresponding to the common 
+                    region is <m>90^\circ</m>, find the area of the intersection.
+                </p>
+            </li>
+            <li>
+                <p>
+                    During a rare planetary alignment, two planets appear 
+                    as overlapping circles in the sky. If both have an apparent 
+                    radius of <m>5000\, km</m>, and their centers are <m>6000 \,km</m> apart, with a
+                    central angle of <m>145^\circ</m>,
+                    find the overlapping shadow area visible from Earth.
+                </p>
+            </li>
+            
         </ol>
     </p>
 
-    <technology>
-        <p>
-            Explore from the links below on finding area of part of a circe.
-        </p>
-        <p>
-            <ol>
-                <li>
-                    <p>
-                        <url href="https://youtu.be/r5Pxjp-uZfA"></url> By Shifting Grades Online School.
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <url href="https://youtu.be/Qd4iqL3SMkY" /> By: Anil Kumar.
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <url href="https://www.bbc.co.uk/bitesize/guides/z9hsrdm/revision/4" />  BITSIZE website.
-                    </p>
-                </li>
-            </ol>
-        </p>
-    </technology>
+
     <p>
-        <m>\textbf{Thought}</m>
+        <m>\textbf{Technology Integration: Exploring Areas of Part of a Circle}</m>
     </p>
     <p>
-        Understanding how to calculate the area of a part of a 
-        circle is essential for everyday problem-solving, 
-        engineering designs, scientific research, and data visualization. Mastering these concepts 
-        will <m>\textbf{help you in both academic and practical scenarios! 🚀}</m>
+        To deepen your understanding of how to find the area of different parts of a circle,
+        explore the following interactive and insightful resources:
     </p>
+    <p>
+        <ol>
+            <li>
+                <p>
+                    YouTube – Shifting Grades Online School
+                </p>
+                <p>
+                    This video lesson offers a visual and step-by-step explanation on how to find the area of parts of a circle. It’s 
+                    ideal for learners who prefer guided instruction with examples.
+                </p>
+                <p>
+                    <url href="https://youtu.be/r5Pxjp-uZfA"></url>
+                </p>
+            </li>
+            <li>
+                <p>
+                    YouTube – Anil Kumar
+                </p>
+                <p>
+                    Learn about circle sectors 
+                    and other related topics with this clear and concise 
+                    tutorial. Great for quick revision or reinforcing concepts.
+                </p>
+                <p>
+                    <url href="https://youtu.be/Qd4iqL3SMkY" />
+                </p>
+            </li>
+            <li>
+                <p>
+                    BBC Bitesize – Guide on Circles
+                </p>
+                <p>
+                    This interactive webpage from BBC Bitesize explains how 
+                    to calculate the area of 
+                    parts of a circle using helpful visuals and explanations. 
+                </p>
+                <p>
+                    <url href="https://www.bbc.co.uk/bitesize/guides/z9hsrdm/revision/4" />
+                </p>
+            </li>
+            <li>
+                <p>
+                    GeoGebra – Interactive Geometry Tool
+                </p>
+                <p>
+                    Use GeoGebra to explore and 
+                    manipulate circle diagrams in real time. 
+                    You can adjust radii and angles to see how the area of a sector or annulus 
+                    changes perfect for visual learning and experimentation. 
+                </p>
+                <p>
+                    <url href="https://www.geogebra.org/" />
+                </p>
+            </li>
+        </ol>
+    </p>
+
+    
+    
     
     
     
