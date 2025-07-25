@@ -1,104 +1,22 @@
 <subsection xml:id="subsec-surface-area-of-a-cone">
     <title>Surface area of a Cone</title>
-        <p>
-        The net of a cone is a two-dimensional representation of the three-dimensional shape of the cone. 
-        It is made up of the curved surface of the cone laid out flat, so that you can see the shape of the cone. 
-        The net of a cone is useful for visualizing the shape of the cone and for calculating its surface area and volume.
-    </p>
-
-    <activity>
-    <title>Net of a Cone</title>
-
-        <statement>
-            <p>
-                <ul>
-                    <li>
-                        <p>
-                            Use slide <m>r</m> to change the radius of the base and slider <m>h</m> to change height of the cone.
-                        </p>
-                    </li>
-
-                    <li>
-                        <p>
-                            Use the Net slider or press the play button to show how the cone unraps into its net.
-                        </p>
-                    </li>
-                </ul>
-            </p>
-
-<p>
-    cone
-</p>
-
-        </statement>
-    </activity> 
+      
 
     <activity>
         <statement>
             <p>
-                Net of a cone
+                
             </p>
-            <image>
-            <latex-image>
-                \begin{tikzpicture}
-                    % Define colors
-                    \definecolor{circlecolor}{RGB}{255, 140, 0}  % Orange
-                    \definecolor{semicirclecolor}{RGB}{135, 206, 250} % Light Blue
-
-                    % Left Figure: Circle on top of a properly aligned semicircle
-                    \fill[circlecolor] (0,3) circle (1); % Orange circle
-
-                    % Properly positioned semicircle
-                    \fill[semicirclecolor] (-2,0) arc[start angle=180, end angle=0, radius=2] -- cycle; 
-
-                    % Outline for clarity
-                    \draw (-2,0) arc[start angle=180, end angle=0, radius=2];
-
-                    % Circle radius
-                    \draw[dashed] (0,3) -- (1,3) node[midway, above] {\small $r$};
-
-                    % Semicircle base markings
-                    \draw[&lt;-&gt;] (-2,0) -- (2,0) node[midway, below] {\small $\ell$};
-                    \draw[-&gt;] (-2,-0.3) -- (-0.2,0);
-                    \draw[-&gt;] (2,-0.3) -- (0.2,0);
-
-                    % Right Figure: Cone
-                    \fill[circlecolor] (5,2) ellipse (1.2 and 0.4); % Orange ellipse (top of cone)
-                    \fill[semicirclecolor] (6.2,1.6) -- (5,0) -- (3.8,1.6) -- cycle; % Light blue cone body
-
-                    % Cone labels
-                    \draw[dashed] (5,0) -- (5,2) node[midway, right] {\small $h$}; % Height line
-                    \draw[dashed] (5,2) -- (6.2,1.6) node[midway, above] {\small $r$}; % Radius line
-                    \draw[&lt;-&gt;] (3.8,1.6) -- (5,0) node[midway, left] {\small $\ell$}; % Slant height
-
-                    % Formula checkbox
-                    \draw (7,2.5) rectangle (7.5,3);
-                    \node[right] at (7.5,2.75) {\small Formula};
-                \end{tikzpicture}
-            </latex-image>
-            </image>
-        </statement>
-    </activity>
-
-    <activity>
-        <statement>
-            <p>
-                Net of a Cone
-            </p>
-        </statement>
-    </activity> 
-    <example>
-        <statement>
+        
             <p>
                 If a cone has a height of h and a base of radius r, show that the surface area is: <m>\pi r^2 + \pi r \sqrt{r^2 + h^2}</m>
             </p>
 
-        </statement>
-        <solution>
+       
             <p>
               Sketch and label the cone
             </p>
-            <image>
+            <image width="100%">
             <latex-image label="cone_net">
                 \begin{tikzpicture}
                     % Define colors
@@ -132,7 +50,6 @@
                     \draw[&lt;-&gt;] (3.8,1.6) -- (5,0) node[midway, left] {\small $\ell$}; % Slant height
 
                     % Formula checkbox
-                    \node[right] at (5,3.5) {\huge $ S.A =\pi r^2 + \pi r \sqrt{r^2 + h^2}$};
 
                 \end{tikzpicture}
             </latex-image>
@@ -140,7 +57,7 @@
             <p>
                 Identify the faces that make up the cone
             </p>
-           <sidebyside> 
+           <sidebyside widths="35% 30%"> 
             <image width="40%">
                <latex-image label="cone-sketch">
                  \begin{tikzpicture}
@@ -155,7 +72,7 @@
                 \end{tikzpicture}
                </latex-image>
                </image>
-               <image width="40%">
+               <image width="50%">
                <latex-image label="cone-stkeches">
                 \begin{tikzpicture}
                     \definecolor{circlecolor}{RGB}{255, 140, 0}  % Orange
@@ -188,9 +105,9 @@
                 The cone has two faces: the base and the faces makig up a wall. The base is a circle of radius r and the walls can be opened
                 out to a semi-circle
                </p>
-               <image width ="50%">
+               <image width ="40%">
             <latex-image label="faces-of-a-cone">
-                \begin{tikzpicture}
+                \begin{tikzpicture}[]
                    % Define colors
                     \definecolor{circlecolor}{RGB}{255, 140, 0}  % Orange
                     \definecolor{semicirclecolor}{RGB}{135, 206, 250} % Light Blue
@@ -220,7 +137,7 @@
             </p>
             <p>
                 <md>
-                    <mrow> \text{Area} \amp = \frac{1}{2} \times \text{base} \text{height of a small triangle}</mrow>
+                    <mrow> \text{Area} \amp = \frac{1}{2} \times \text{base} \times \text{height of a small triangle}</mrow>
                     <mrow> = \amp \frac {1}{2} \times 2 \pi r \times \ell </mrow>
                     <mrow> = \amp \pi r \ell </mrow>
                 </md>
@@ -251,18 +168,138 @@
                     <mrow> = \amp \pi (r + \sqrt{r^2 + h^2})</mrow>
                 </md>
             </p>
+        </statement>
+    </activity>  
+      <p>
+        The <m>\textbf{net of a cone} </m> is a two-dimensional representation of the three-dimensional shape of the cone. 
+        It is made up of the curved surface of the cone laid out flat, so that you can see the shape of the cone. 
+        The net of a cone is useful for visualizing the shape of the cone and for calculating its surface area and volume.
+    </p>
+    <example>
+        <statement>
             <p>
-                <!-- <md>
-                    <mrow>\text{Area of sector A}= \amp \frac{ \Theta }{360^\circ} \pi r^2</mrow>
+                Given a cone with the radius <m>r = \, 14\, \text{cm} </m> and an angle of <m>\angle 60^\circ</m>. Find the surface area of the cone.
+
+            </p>
+        </statement>
+        <solution>
+            <p>
+                 <md>
+                    <mrow>\text{Area of sector A}= \amp \frac{ \theta }{360^\circ} \pi r^2</mrow>
                     <mrow>= \amp \frac{60}{360^\circ} \times\frac{22}{7}\times14\times14 </mrow>
-                    <mrow>= \amp102.67 cm^2 </mrow>
+                    <mrow>= \amp102.67 \, \text{cm}^2 </mrow>
                     <mrow>\text{Area of circle B}= \amp\pi r^2 </mrow>
-                    <mrow>= \amp\frac{22}{7} \times14cm \times14cm </mrow>
-                    <mrow>= \amp616 cm^2 </mrow>
-                    <mrow>\text {Surface area}= \amp102.67 cm^2+616 cm^2  </mrow>
-                    <mrow>= \amp 718.67 cm^2</mrow>
-                </md> -->
+                    <mrow>= \amp\frac{22}{7} \times14 \, \text{cm} \times14\, \text{cm}</mrow>
+                    <mrow>= \amp616 \, \text{cm}^2 </mrow>
+                    <mrow>\text {Surface area}= \amp102.67 \, \text{cm}^2+616 \, \text{cm}^2  </mrow>
+                    <mrow>= \amp 718.67 \, \text{cm}^2</mrow>
+                </md> 
             </p>
         </solution>
-    </example>                                                                          
+    </example>  
+    <p>
+        <m>\textbf{Exercise}</m>
+    </p> 
+        <p>
+        1. A circular cone has a base radius of 5 cm and a slant height of 12 cm. Calculate the total surface area of the cone, including both the curved surface and the circular base
+    </p>  
+    <image width="40%">
+               <latex-image label="cone-stkeches-three">
+                \begin{tikzpicture}
+                    \definecolor{circlecolor}{RGB}{255, 140, 0}  % Orange
+                    \definecolor{semicirclecolor}{RGB}{135, 206, 250} % Light Blue
+
+                     % Draw the entire cone with one uniform color
+                    \fill[semicirclecolor] (-2,0) arc (180:360:2 and 0.7) -- (2,0) arc (0:180:2 and 0.7) -- cycle;
+                    \fill[semicirclecolor] (-2,0) -- (0,4) -- (2,0) -- cycle;
+                    
+                    % Draw the base ellipse
+                    \draw[thick] (-2,0) arc (180:360:2 and 0.7);
+                    \draw[dashed] (2,0) arc (0:180:2 and 0.7);
+                    
+                    % Draw the cone's sides
+                    \draw[thick] (-2,0) -- (0,4);
+                    \draw[thick] (2,0) -- (0,4);
+                    
+                    % Draw the height
+                    \draw[dashed] (0,0) -- (0,4);
+                    \node[left] at (0,2) {12 cm};
+                    
+                    % Draw the radius
+                    \draw[dashed] (0,0) -- (2,0);
+                    \node[below] at (1,0) {5 cm};
+                \end{tikzpicture}
+               </latex-image>
+               </image> 
+          <p>
+                    2. A cone is constructed with a base diameter of 16 cm and a height of 15 cm. Before finding the total surface area, determine the slant height of the cone using the Pythagorean theorem. Then, calculate the complete surface area.
+                </p> 
+    <image width="40%">
+               <latex-image label="cone-stkeches-two">
+                \begin{tikzpicture}
+                    \definecolor{circlecolor}{RGB}{255, 140, 0}  % Orange
+                    \definecolor{semicirclecolor}{RGB}{135, 206, 250} % Light Blue
+
+                     % Draw the entire cone with one uniform color
+                    \fill[semicirclecolor] (-2,0) arc (180:360:2 and 0.7) -- (2,0) arc (0:180:2 and 0.7) -- cycle;
+                    \fill[semicirclecolor] (-2,0) -- (0,4) -- (2,0) -- cycle;
+                    
+                    % Draw the base ellipse
+                    \draw[thick] (-2,0) arc (180:360:2 and 0.7);
+                    \draw[dashed] (2,0) arc (0:180:2 and 0.7);
+                    
+                    % Draw the cone's sides
+                    \draw[thick] (-2,0) -- (0,4);
+                    \draw[thick] (2,0) -- (0,4);
+                    
+                    % Draw the height
+                    \draw[dashed] (0,0) -- (0,4);
+                    \node[left] at (0,2) {15 cm};
+                    
+                    % Draw the radius
+                    \draw[dashed] (-2,0) -- (2,0);
+                    \node[below] at (1,0) {16 cm};
+                \end{tikzpicture}
+               </latex-image>
+               </image> 
+               
+     
+    <p>
+        3. A conical container, open at the top, is made of metal and has a base radius of 10 cm and a slant height of 18 cm. Determine the total metal sheet required to construct this container, excluding the base.
+    </p>  
+    <p>
+        4. The total surface area of a cone is given as 314 cm², and its base radius is 10 cm. Using the surface area formula, determine the slant height of the cone.
+    </p>   
+    <image width="40%">
+               <latex-image label="cone-stkeches-one">
+                \begin{tikzpicture}
+                    \definecolor{circlecolor}{RGB}{255, 140, 0}  % Orange
+                    \definecolor{semicirclecolor}{RGB}{135, 206, 250} % Light Blue
+
+                     % Draw the entire cone with one uniform color
+                    \fill[semicirclecolor] (-2,0) arc (180:360:2 and 0.7) -- (2,0) arc (0:180:2 and 0.7) -- cycle;
+                    \fill[semicirclecolor] (-2,0) -- (0,4) -- (2,0) -- cycle;
+                    
+                    % Draw the base ellipse
+                    \draw[thick] (-2,0) arc (180:360:2 and 0.7);
+                    \draw[dashed] (2,0) arc (0:180:2 and 0.7);
+                    
+                    % Draw the cone's sides
+                    \draw[thick] (-2,0) -- (0,4);
+                    \draw[thick] (2,0) -- (0,4);
+                    
+                    % Draw the height
+                    \draw[dashed] (0,0) -- (0,4);
+                    \node[left] at (0,2) {S.A = $314 \, cm^2$};
+                    
+                    % Draw the radius
+                    \draw[dashed] (0,0) -- (2,0);
+                    \node[below] at (1,0) {10 cm};
+                \end{tikzpicture}
+               </latex-image>
+               </image> 
+     
+    <p>
+        5. A conical tent made of waterproof fabric has a radius of 4.2 m and a slant height of 7.5 m. If the tent does not have a base, calculate the area of fabric required to cover the tent completely.
+    </p>                                                        
 </subsection>

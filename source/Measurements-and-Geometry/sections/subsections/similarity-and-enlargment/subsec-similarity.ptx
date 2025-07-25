@@ -1,24 +1,43 @@
 <subsection xml:id="subsec-similarity">
     <title>Similarity</title>
-
-    <p>
-        Similarity refers to a relationship between two shapes or figures where one can be transformed into the other through scaling (enlargement or reduction), without changing its shape. 
-        The two shapes are similar if they have the same shape but may differ in size.
-    </p>
     <activity>
         <introduction>
             <p>
-                <alert>Work in groups</alert>
+                <alert>Work in pairs</alert>
             </p>
         </introduction>
         <task>
             <statement>
                 <p>
-                    Draw triangle <m>ABC</m> with the following side lengths:
+                    Draw triangle <m>ABC</m> with the following side lengths as shown in the figure below:
                 </p>
                 <p>
                     <m>AB = 7</m> cm, <m>AC = 6</m>cm, and <m>BC = 5</m>cm.
                 </p>
+                <image width="50%">
+                    <shortdescription></shortdescription>
+                <latex-image label="triangle-abc1">
+                    \begin{tikzpicture}
+                       % Define triangle vertices
+                    \coordinate (A) at (1,3);
+                    \coordinate (B) at (5,0);
+                    \coordinate (C) at (0,0);
+
+                    % Draw the triangle without fill
+                    \draw[thick] (A) -- (B) -- (C) -- cycle;
+
+                    % Label vertices
+                    \node at (1,3.2) {C};  % Adjust y slightly to position label above A
+                    \node at (-0.1,-0.1) {A};  % Slightly shift left and down
+                    \node at (5.2,-0.1) {B};  % Slightly shift right and down
+
+                    % Label sides
+                    \node at (2.5,-0.3) {7 cm};  % BC
+                    \node at (3.4,1.7) {5 cm};   % AB
+                    \node at (0,1.5) {6 cm};   % AC
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
             </statement>
         </task>
         <task>
@@ -29,16 +48,78 @@
                 <p>
                     <m>\angle ABC = 50^\circ</m>, <m>\angle BAC = 60^\circ</m> ,<m>\angle BCA = 70^\circ</m>
                 </p>
+                <image width="50%">
+                    <shortdescription></shortdescription>
+                    <latex-image label="triangle-abc2">
+                        \begin{tikzpicture}
+                              % Define triangle vertices
+                                \coordinate (C) at (0,0);
+                                \coordinate (B) at (5,0);
+                                \coordinate (A) at (1,3);
+
+                                % Draw the triangle (without fill)
+                                \draw[thick] (C) -- (B) -- (A) -- cycle;
+
+                                % Label vertices close to the vertices
+                                 \node at (1,3.2) {C};  % Adjust y slightly to position label above A
+                                \node at (-0.1,-0.1) {A};  % Slightly shift left and down
+                                \node at (5.2,-0.1) {B};  % Slightly shift right and down
+
+                                % Label sides
+                                \node at (2.5,-0.3) {7 cm};
+                                \node at (3.4,1.7) { 5 cm};
+                                \node at (0,1.5) { 6 cm};
+
+                                % Mark angles using arcs that touch both sides
+                                \draw [thick, blue] pic [draw, "$$", angle radius=8mm, text=black] {angle=B--C--A};
+                                \draw [thick, blue] pic [draw, "$$", angle radius=8mm, text=black] {angle=C--A--B};
+                                \draw [thick, blue] pic [draw, "$$", angle radius=8mm, text=black] {angle=A--B--C};
+
+                                % Angle labels
+                                \node at (1,0.5) { $ 60^\circ$};
+                                \node at (4,0.3) { $ 50^\circ$};
+                                \node at (1.3,2) { $ 70^\circ$};
+                        \end{tikzpicture}
+                    </latex-image>
+                    
+                </image>
             </statement>
         </task>
         <task>
             <statement>
                 <p>
-                    Draw triangle <m>PQR</m> with the following side lengths:
+                    Draw triangle <m>PQR</m> with the following side lengths as shown in the figure below:
                 </p>
                 <p>
                     <m>PQ = 21</m> cm, <m>PR = 18</m>cm, and <m>QR = 15</m>cm.
                 </p>
+                <image width="50%">
+                    <shortdescription></shortdescription>
+                    <latex-image label="triangle-pqr1">
+                        \begin{tikzpicture}
+                                                     % Define triangle vertices
+                                \coordinate (R) at (0,0);
+                                \coordinate (Q) at (5,0);
+                                \coordinate (P) at (1,3);
+
+                                % Draw the triangle (without fill)
+                                \draw[thick] (R) -- (Q) -- (P) -- cycle;
+
+                                % Label vertices close to the vertices
+                                 \node at (1,3.2) {R};  % Adjust y slightly to position label above A
+                                \node at (-0.1,-0.1) {P};  % Slightly shift left and down
+                                \node at (5.2,-0.1) {Q};  % Slightly shift right and down
+
+                                % Label sides
+                                \node at (2.5,-0.3) {21 cm};
+                                \node at (3.4,1.7) { 15 cm};
+                                \node at (-0.1,1.5) { 18 cm};
+
+                               
+                                            \end{tikzpicture}
+                    </latex-image>
+                    
+                </image>
             </statement>
         </task>
         <task>
@@ -47,8 +128,44 @@
                     Label the angles in triangle <m>PQR</m> as follows:
                 </p>
                 <p>
-                    <m>\angle PQR = 50^\circ</m>, <m>\angle QRP = 60^\circ</m> ,<m>\angle QPR = 70^\circ</m>
+                    <m>\angle PQR = 50^\circ</m>, <m>\angle QRP = 70^\circ</m> ,<m>\angle QPR = 60^\circ</m>
                 </p>
+                <image width="50%">
+                    <shortdescription></shortdescription>
+                    <latex-image label="triangle-pqr2">
+                        \begin{tikzpicture}
+                            % Define triangle vertices
+                                \coordinate (R) at (0,0);
+                                \coordinate (Q) at (5,0);
+                                \coordinate (P) at (1,3);
+
+                                % Draw the triangle (without fill)
+                                \draw[thick] (R) -- (Q) -- (P) -- cycle;
+
+                                \node at (1,3.1) {R};  % Adjust y slightly to position label above A
+                                \node at (-0.1,-0.1) {P};  % Slightly shift left and down
+                                \node at (5.1,-0.1) {Q};  % Slightly shift right and down
+
+                                % Label sides
+                                \node at (2.5,-0.3) {21 cm};
+                                \node at (3.4,1.7) { 15 cm};
+                                \node at (-0.1,1.5) { 18 cm};
+
+                                % Mark angles using arcs that touch both sides
+                                \draw [thick, blue] pic [draw, "$$", angle radius=8mm, text=black] {angle=Q--R--P};
+                                \draw [thick, blue] pic [draw, "$$", angle radius=8mm, text=black] {angle=R--P--Q};
+                                \draw [thick, blue] pic [draw, "$$", angle radius=8mm, text=black] {angle=P--Q--R};
+
+                                % Angle labels
+                                \node at (1,0.5) { $ 60^\circ$};
+                                \node at (4,0.3) { $ 50^\circ$};
+                                \node at (1.3,2) { $ 70^\circ$};
+
+                       
+                        \end{tikzpicture}
+                    </latex-image>
+                    
+                </image>
             </statement>
         </task>
         <task>
@@ -114,13 +231,34 @@
             </statement>
         </task>
     </activity>
+
+    <p>
+        <m>\textbf{Key Takeaway }</m>
+    </p>
+
+    <p>
+        <ul>
+            <li>
+                <p>
+                    Two triangles are similar if their corresponding angles are equal and their corresponding sides are in the same ratio.
+                </p>
+            </li>
+
+            <li>
+                <p>
+                     Similarity refers to a relationship between two shapes or figures where one can be transformed into the other through scaling (enlargement or reduction), without changing its shape. 
+                   The two shapes are similar if they have the same shape but may differ in size.
+                </p>
+            </li>
+        </ul>
+    </p>
     <example>
         <statement>
             <p>
                 
             </p>
             <p>
-                In figure below, the triangles <m>PQR</m> and <m>ABC</m> are similar. Calculate the lengths marked with letter <m>x</m> and <m>y</m>.
+                In the figure below, the triangles <m>PQR</m> and <m>ABC</m> are similar. Calculate the lengths marked with letters <m>x</m> and <m>y</m>.
             </p>
 
             <sidebyside>
@@ -128,19 +266,17 @@
                     <shortdescription></shortdescription>
                     <latex-image label="similar-triangle1">
                         \begin{tikzpicture}
-                            % Draw and fill the triangle
-                            \fill[blue!30] (0,0) -- (2,0) -- (1,2) -- cycle;
-                            \draw[blue, thick] (0,0) -- (2,0) -- (1,2) -- cycle;
-                            
-                            % Label vertices
-                            \node[left] at (0,0) {\textbf{A}};
-                            \node[right] at (2,0) {\textbf{B}};
-                            \node[above] at (1,2) {\textbf{C}};
-                            
-                            % Label midpoints with segment lengths
-                            \node[below] at (1,0) {\textbf{6 cm}};
-                            \node[left] at (0.5,1) {\textbf{9 cm}};
-                            \node[right] at (1.5,1) {\textbf{x }};
+                            % Triangle ABC (Blue fill)
+                        \fill[blue!30] (0,0) -- (5,0) -- (2,3.5) -- cycle;  % Light blue fill
+                        \draw[thick, blue] (0,0) -- (5,0) -- (2,3.5) -- cycle;
+                        
+                        % Labels for triangle ABC
+                        \node[left] at (0,0) {A};
+                        \node[right] at (5,0) {B};
+                        \node[above] at (2,3.5) {C};
+                        \node[below] at (2.5,0) {6 cm};
+                        \node[left] at (1,2) {9 cm};
+                        \node[right] at (3.5,2) {x};
                         \end{tikzpicture}
                     </latex-image>
                     
@@ -150,19 +286,23 @@
                     <shortdescription></shortdescription>
                     <latex-image label="similar-triangle2">
                         \begin{tikzpicture}
-                             % triangle (red) with labels
-                            \fill[red!30] (3,0) -- (6,0) -- (4.5,3) -- cycle;
-                            \draw[red, thick] (3,0) -- (6,0) -- (4.5,3) -- cycle;
-                            
-                            % Label vertices for second triangle
-                            \node[left] at (3,0) {\textbf{P}};
-                            \node[right] at (6,0) {\textbf{Q}};
-                            \node[above] at (4.5,3) {\textbf{R}};
-                            
-                            % Label midpoints with segment lengths (second triangle)
-                            \node[below] at (4.5,0) {\textbf{y }};
-                            \node[left] at (3.75,1.5) {\textbf{12 cm}};
-                            \node[right] at (5.25,1.5) {\textbf{14 cm}};
+                              % % Define triangle vertices
+                    \coordinate (P) at (0,0);
+                    \coordinate (Q) at (5,0);
+                    \coordinate (R) at (1,3);
+
+                    % Draw and fill the triangle
+                    \draw[thick, fill=red, opacity=0.5] (P) -- (Q) -- (R) -- cycle;
+
+                    % Label vertices
+                    \node[above] at (R) {R};  
+                    \node[below left] at (P) {P};  
+                    \node[below right] at (Q) {Q};  
+
+                    % Label sides
+                    \node[below] at ($(P)!0.5!(Q)$) {y };  % Midpoint of PQ
+                    \node[right] at ($(Q)!0.5!(R)$) {14 cm};  % Midpoint of QR
+                    \node[left] at ($(P)!0.5!(R)$) {12 cm};  % Midpoint of PR
                         \end{tikzpicture}
                     </latex-image>
                     
@@ -181,13 +321,13 @@
                     <mrow> =\amp \frac{6\, cm}{y}= \frac{9\, cm}{12\, cm}= \frac {x}{14\, cm} </mrow>
                     <mrow> \frac{6\, cm}{y}=\amp \frac{9\, cm}{12\, cm}</mrow>
                     <mrow> y \times 9\, cm= \amp 6\, cm \times 12\, cm </mrow>
-                    <mrow> y= \amp \frac{108\, cm^2}{9\, cm}  </mrow>
-                    <mrow> y =\amp 12\, cm </mrow>
-                    <mrow>\text{Therefore PQ}= \amp 12 cm</mrow>
+                    <mrow> y= \amp \frac{72\, cm^2}{9\, cm}  </mrow>
+                    <mrow> y =\amp 8\, cm </mrow>
+                    <mrow>\text{Therefore PQ}= \amp 8 cm</mrow>
                      <mrow> \frac{9\, cm}{12\, cm}=\amp \frac{x}{14\, cm}</mrow>
                     <mrow> x \times 12\, cm= \amp 9\, cm \times 14\, cm </mrow>
                     <mrow> x= \amp \frac{126\, cm^2}{12\, cm}  </mrow>
-                    <mrow> y =\amp 10.5\, cm </mrow>
+                    <mrow> x =\amp 10.5\, cm </mrow>
                     <mrow>\text{Therefore BC}= \amp 10.5\, cm</mrow>
                 </md>
             </p>
@@ -290,85 +430,6 @@
             </p>
         </solution>
     </example>
-
-    <example>
-        <statement>
-            <p>
-                
-            </p>
-            <p>
-               Triangle <m>ABE</m> is similar to triangle <m>ACD</m>, as shown in the figure below, Given that <m>DC=24\, cm</m> , <m>AE=6\, cm</m><m>ED=12\, cm</m>, determine the length of  <m>BE</m>.
-            </p>
-
-            <figure xml:id="tria">
-                <caption></caption>
-                  <image>
-                <shortdescription></shortdescription>
-                <latex-image label="tria">
-                    \begin{tikzpicture}
-                         % Define points
-                        \coordinate (A) at (0,0);
-                        \coordinate (D) at (4,0);
-                        \coordinate (C) at (4,3);
-                        \coordinate (B) at (2,1.5);
-                        \coordinate (E) at (2,0);
-                        
-                        % Draw shaded triangle in green
-                        \fill[green!50] (A) -- (D) -- (C) -- cycle;
-                        \draw[thick, green] (A) -- (D) -- (C) -- cycle;
-                        
-                        % Draw altitude lines with arrows
-                        \draw[thick, green, -&gt;] (D) -- (C);
-                        \draw[thick, green, -&gt;] (E) -- (B);
-                        
-                        % Draw straight line from B to E in red
-                        \draw[thick, red] (B) -- (E);
-                        
-                        % Label points
-                        \node[below left] at (A) {\textit{A}};
-                        \node[below right] at (D) {\textit{D}};
-                        \node[above right] at (C) {\textit{C}};
-                        \node[above] at (B) {\textit{B}};
-                        \node[below] at (E) {\textit{E}};
-    
-                    \end{tikzpicture}
-                </latex-image>
-            </image>
-          </figure>
-
-        </statement>
-
-        <solution>
-            <p>
-                We first identify the corresponding sides,
-            </p>
-
-            <p>
-                Side <m>AD</m> corresponds with side <m>AE</m>
-            </p>
-
-            <p>
-                Side <m>CD</m> corresponds with side <m>BE</m>
-            </p>
-
-            <p>
-                Side <m>AC</m> corresponds with side <m>AB</m>
-            </p>
-
-            <p>
-                
-                <md>
-                    <mrow>\text{By the concept of similarity,} \amp </mrow>
-                    <mrow>\frac{DC}{BE} =\frac{AD}{AE}=\frac{AC}{AB}\amp </mrow>
-                    <mrow>\text{Given that AE=6 cm, ED=12 cm and DC=24 cm}  \amp </mrow>
-                    <mrow>\text{Therefore,}\frac{DC}{BE} =\amp \frac{AD}{AE}</mrow>
-                    <mrow> \frac{24}{BE}=\amp \frac{18}{6}</mrow>
-                    <mrow>BE= \amp \frac{(24 \times 6)}{18}</mrow>
-                    <mrow>= \amp 8\, cm</mrow>
-                </md>
-            </p>
-        </solution>
-    </example>
     
     <exercises xml:id="exercises-similarity">
      
@@ -376,161 +437,72 @@
         <statement>
             <p>
               In the triangles below, Determine which triangles are similar by comparing their corresponding sides:
-            </p>
-            <p>
-                <ol marker="(a)">
-                    <li>
-                        <p>
-                            
-                        </p>
-                        <sidebyside>
-                            <image width="50%">
-                                <shortdescription></shortdescription>
-                                <latex-image label="similar-triangle3">
-                                    \begin{tikzpicture}
-                                        \fill[blue!30] (0,0) -- (2,0) -- (1,1.5) -- cycle;
-                                            \draw (0,0) -- (2,0) -- (1,1.5) -- cycle;
-                                            \node at (0.2,0.8) {$3x$};
-                                            \node at (1.8,0.8) {$2x$};
-                                            \node at (1,-0.2) {$4x$};
-                                    \end{tikzpicture}
-                                </latex-image>
-                                
-                            </image>
+            </p>  
+            <sidebyside>
+                <image width="50%">
+                    <shortdescription></shortdescription>
+                    <latex-image label="similar-triagle">
+                        \begin{tikzpicture}
+                             % Define triangle vertices
+                        \coordinate (A) at (1,3);
+                        \coordinate (B) at (5,0);
+                        \coordinate (C) at (0,0);
 
-                            <image width="50%">
-                                <shortdescription></shortdescription>
-                                <latex-image label="similar-triangle">
-                                    \begin{tikzpicture}
-                                        \fill[red!30] (4,0) -- (7,0) -- (5.5,2.5) -- cycle;
-                                            \draw (4,0) -- (7,0) -- (5.5,2.5) -- cycle;
-                                            \node at (5.5,-0.3) {$10x$};
-                                            \node at (4.5,1.5) {$\frac{15}{2}x$};
-                                            \node at (6.5,1.5) {$5x$};
-                                    \end{tikzpicture}
-                                </latex-image>
-                                
-                            </image>
+                        % Draw the triangle without fill
+                        \draw[thick] (A) -- (B) -- (C) -- cycle;
 
-                            <image width="50%">
-                                <shortdescription></shortdescription>
-                                <latex-image label="similar-triangle5">
-                                    \begin{tikzpicture}
-                                        
-                                            \fill[green!30] (9,0) -- (12,0) -- (10.5,2) -- cycle;
-                                            \draw (9,0) -- (12,0) -- (10.5,2) -- cycle;
-                                            \node at (10.5,-0.3) {$6$};
-                                            \node at (9.5,1.3) {$4.5$};
-                                            \node at (11.2,1.5) {$3$};
-                                    \end{tikzpicture}
-                                </latex-image>
-                                
-                            </image>
-                        </sidebyside>
-                    </li>
-                    <li>
-                        <p>
-                            
-                        </p>
-                        <sidebyside>
-                        <image width="50%">
-                            <shortdescription></shortdescription>
-                            <latex-image label="similar-triangle6">
-                                \begin{tikzpicture}
-                                    \fill[yellow!30] (1,-4) -- (3,-4) -- (2,-2.5) -- cycle;
-                                            \draw (1,-4) -- (3,-4) -- (2,-2.5) -- cycle;
-                                            \node at (2,-4.3) {$60$};
-                                            \node at (2.8,-3.2) {$80$};
-                                            \node at (1.2,-3.2) {$40$};
-                                \end{tikzpicture}
-                            </latex-image>
-                            
-                        </image>
+                        % Label sides
+                        \node at (2.5,-0.3) {6 cm};  % BC
+                        \node at (3.4,1.7) {4 cm};   % AB
+                        \node at (0,1.5) {3 cm};   % AC
+                        \end{tikzpicture}
+                    </latex-image>
+                </image>
 
-                        <image width="50%">
-                            <shortdescription></shortdescription>
-                            <latex-image label="similar-triangle7">
-                                \begin{tikzpicture}
-                                            \fill[orange!30] (5,-4) -- (8,-4) -- (6.5,-2) -- cycle;
-                                            \draw (5,-4) -- (8,-4) -- (6.5,-2) -- cycle;
-                                            \node at (6.5,-4.3) {$4x$};
-                                            \node at (5.5,-2.8) {$\frac{12}{5}x$};
-                                            \node at (7.5,-2.8) {$8x$};
-                                \end{tikzpicture}
-                            </latex-image>
-                            
-                        </image >
+                <image width="50%">
+                    <shortdescription></shortdescription>
+                    <latex-image label="similar-triange1">
+                        \begin{tikzpicture}
+                    % Define triangle vertices
+                        \coordinate (A) at (1,3);
+                        \coordinate (B) at (5,0);
+                        \coordinate (C) at (0,0);
 
-                        <image width="50%">
-                            <shortdescription></shortdescription>
-                            <latex-image label="similar-triangle8">
-                                \begin{tikzpicture}
-                                            \fill[purple!30] (10,-4) -- (13,-4) -- (11.5,-2) -- cycle;
-                                            \draw (10,-4) -- (13,-4) -- (11.5,-2) -- cycle;
-                                            \node at (11.5,-4.3) {$10y$};
-                                            \node at (10.5,-2.8) {$15y$};
-                                            \node at (12.5,-2.8) {$20y$};
-                                \end{tikzpicture}
-                            </latex-image>
-                            
-                        </image>
-                            
-                        </sidebyside>
-                    </li>
-                    <li>
-                        <p>
-                            
-                        </p>
-                        <sidebyside>
-                        <image width="50%">
-                            <shortdescription></shortdescription>
-                            <latex-image label="similar-triangle9">
-                                \begin{tikzpicture}
-                                    \fill[cyan!30] (0,-8) -- (2,-8) -- (1,-6.5) -- cycle;
-                                            \draw (0,-8) -- (2,-8) -- (1,-6.5) -- cycle;
-                                            \node at (0.3,-7) {$5$};
-                                            \node at (1.7,-7) {$9$};
-                                            \node at (1,-8.3) {$7$};
-                                \end{tikzpicture}
-                            </latex-image>
-                            
-                        </image>
+                        % Draw the triangle without fill
+                        \draw[thick] (A) -- (B) -- (C) -- cycle;
 
-                        <image width="50%">
-                            <shortdescription></shortdescription>
-                            <latex-image label="similar-triangle10">
-                                \begin{tikzpicture}
-                                    
+                        
 
-                                            \fill[magenta!30] (4,-8) -- (7,-8) -- (5.5,-5.5) -- cycle;
-                                            \draw (4,-8) -- (7,-8) -- (5.5,-5.5) -- cycle;
-                                            \node at (5.5,-8.3) {$\frac{7}{2}a$};
-                                            \node at (4.3,-6.5) {$\frac{4}{3}a$};
-                                            \node at (6.7,-6.5) {$\frac{3}{2}a$};
-                                \end{tikzpicture}
-                            </latex-image>
-                            
-                        </image>
+                        % Label sides
+                        \node at (2.5,-0.3) {20 cm};  % BC
+                        \node at (3.4,1.7) {18 cm};   % AB
+                        \node at (0,1.5) {14 cm};   % AC
+                        \end{tikzpicture}
+                    </latex-image>
+                </image>
 
-                        <image width="50%">
-                            <shortdescription></shortdescription>
-                            <latex-image label="similar-triangle11">
-                                \begin{tikzpicture} 
-                                            \fill[gray!30] (9,-8) -- (12,-8) -- (10.5,-6) -- cycle;
-                                            \draw (9,-8) -- (12,-8) -- (10.5,-6) -- cycle;
-                                            \node at (10.5,-8.3) {$14$};
-                                            \node at (9.5,-6.8) {$10$};
-                                            \node at (11.5,-6.8) {$18$};
-                                \end{tikzpicture}
-                            </latex-image>
-                            
-                        </image>
-                            
-                        </sidebyside>
-                    </li>
-                </ol>
-            </p>
-         </statement>
+                <image width="50%">
+                    <shortdescription></shortdescription>
+                    <latex-image label="similar-triangl2">
+                        \begin{tikzpicture}
+                             % Define triangle vertices
+                                    \coordinate (A) at (1,3);
+                        \coordinate (B) at (5,0);
+                        \coordinate (C) at (0,0);
+
+                        % Draw the triangle without fill
+                        \draw[thick] (A) -- (B) -- (C) -- cycle;
+
+                        % Label sides
+                        \node at (2.5,-0.3) {24 cm};  % BC
+                        \node at (3.4,1.7) {16 cm};   % AB
+                        \node at (0,1.5) {12 cm};   % AC
+                        \end{tikzpicture}
+                    </latex-image>
+                    
+                </image>
+            </sidebyside>   
+       </statement>   
     </exercise>
 
     <exercise>
@@ -599,39 +571,34 @@
                 
            <figure xml:id="paralle-lines">
             <caption></caption>
-            <image>
+            <image width="50%">
                 <shortdescription></shortdescription>
                 <latex-image label="paralle-lines">
                     \begin{tikzpicture}
-                        % Define the orange color
-                        \definecolor{mycolor}{RGB}{255, 165, 0}  % Orange color
+                         % Draw the triangle PTQ without fill and in black
+    \draw[thick] (0,0) -- (6,0) -- (2,4) -- cycle;
 
-                        % Fill the triangle with orange and draw the border
-                        \fill[mycolor!30] (0,0) -- (6,0) -- (2,4) -- cycle; % Light orange fill
-                        \draw[thick, mycolor] (0,0) -- (6,0) -- (2,4) -- cycle;
+    % Draw the parallel segment RS
+    \draw[thick] (1,1.5) -- (4.4,1.5);
 
-                        % Draw the parallel segment EB in the same style as AD
-                        \draw[thick, mycolor] (1,1.5) -- (4.4,1.5);
-                        
-                        % Label the vertices
-                        \node[above] at (2,4) {\textbf{T}};
-                        \node[right] at (6,0) {\textbf{Q}};
-                        \node[left] at (0,0) {\textbf{P}};
-                        \node[right] at (4.5,1.5) {\textbf{S}};
-                        \node[left] at (0.8,1.5) {\textbf{R}};
+    % Label vertices
+    \node[above] at (2,4) {T};
+    \node[right] at (6,0) {Q};
+    \node[left] at (0,0) {P};
+    \node[right] at (4.5,1.5) {S};
+    \node[left] at (0.8,1.5) {R};
 
-                        % Side lengths
-                        \node[left] at (1.4,2.75) {\small $8 cm$};
-                        \node[left] at (0.4,0.75) {\small $5 cm$};
-                        \node[above] at (2.8,1.5) {\small $16 cm$};
-                        \node[below] at (3,0) {\small $x$};
+    % Side lengths
+    \node[left] at (1.4,2.75) {\small $8\ \text{cm}$};
+    \node[left] at (0.4,0.75) {\small $5\ \text{cm}$};
+    \node[above] at (2.8,1.5) {\small $16\ \text{cm}$};
+    \node[below] at (3,0) {\small $x$};
 
-                        % Parallel arrows in orange
-                        \draw[-&gt;, thick, mycolor] (0.7,1.5) -- (2,1.5);
-                        \draw[-&gt;, thick, mycolor] (2,1.5) -- (5,1.5);
-                        \draw[-&gt;, thick, mycolor] (1,0) -- (3,0);
-                        \draw[-&gt;, thick, mycolor] (3,0) -- (5,0);
-
+    % Parallel arrows (black)
+    \draw[-&gt;, thick] (0.7,1.5) -- (2,1.5);
+    \draw[-&gt;, thick] (2,1.5) -- (5,1.5);
+    \draw[-&gt;, thick] (1,0) -- (3,0);
+    \draw[-&gt;, thick] (3,0) -- (5,0);
                     \end{tikzpicture}
                 </latex-image>
                 
@@ -644,46 +611,42 @@
     <exercise>
         <statement>
             <p>
-                Given that <m>AB</m> is parallel to <m>CD</m> in the figure below, determine the measurements of line <m>CD</m> and <m>AE</m>.
+               Triangle <m>ABE</m> is similar to triangle <m>ACD</m>, as shown in the figure below, Given that <m>DC=24\, cm</m> , <m>AE=6\, cm</m><m>ED=12\, cm</m>, determine the length of  <m>BE</m>.
             </p>
-             
-          <figure xml:id="similar-triangle4">
-            <caption></caption>
-            <image>
-                <shortdescription></shortdescription>
-                <latex-image label="similar-triangle4">
-                    \begin{tikzpicture}
-              % Draw the quadrilateral
-                        \fill[orange!50] (0,0) -- (12,0) -- (8,6) -- (4,6) -- cycle;
-                        
-                        % Draw edges
-                        \draw (0,0) -- (12,0) -- (8,6) -- (4,6) -- cycle;
-                        
-                        % Draw diagonals
-                        \draw (0,0) -- (8,6);
-                        \draw (12,0) -- (4,6);
-                        
-                        % Label points
-                        \node[left] at (0,0) {A};
-                        \node[right] at (12,0) {B};
-                        \node[above left] at (4,6) {C};
-                        \node[above right] at (8,6) {D};
-                        \node[below] at (6,4.5) {E};
-                        
-                        % Label lengths
-                        \node[below] at (6,0) {12 cm};
-                        \node[left] at (2.3,3.5) {3 cm};
-                        \node[right] at (9.7,3.5) {8 cm};
-                        \node[above] at (7,4.5) {2.7 cm};
-                        
-                        \draw[-stealth] (5.2,6) -- (6.8,6);  % First arrow on CD
-                        \draw[-stealth] (5,0) -- (7,0);  % First arrow on A
 
+            <figure xml:id="tria">
+                <caption></caption>
+                  <image width="50%">
+                <shortdescription></shortdescription>
+                <latex-image label="tria">
+                    \begin{tikzpicture}
+                         % Define points
+                \coordinate (A) at (0,0);
+                \coordinate (D) at (4,0);
+                \coordinate (C) at (4,3);
+                \coordinate (B) at (2,1.5);
+                \coordinate (E) at (2,0);
+                
+                % Draw triangle (no fill, just the outline)
+                \draw[thick] (A) -- (D) -- (C) -- cycle;
+                
+                % Draw altitude lines with arrows
+                \draw[thick, -&gt;] (D) -- (C);
+                \draw[thick, -&gt;] (E) -- (B);
+                
+                % Draw straight line from B to E in red
+                \draw[thick, red] (B) -- (E);
+                
+                % Label points with coordinates
+             \node[below left] at (A) {A};
+            \node[below right] at (D) {D};
+            \node[above right] at (C) {C};
+            \node[above] at (B) {B};
+            \node[below] at (E) {E};
+                    
                     \end{tikzpicture}
                 </latex-image>
-                
             </image>
-
           </figure>
         </statement>
     </exercise>

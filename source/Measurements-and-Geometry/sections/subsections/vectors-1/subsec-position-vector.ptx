@@ -1,0 +1,337 @@
+<subsection xml:id="subsec-position-vector">
+    <title>Position Vectors</title>
+    <activity>
+        <introduction>
+            <p>
+                <alert>Work in groups</alert>
+            </p>
+            <p>
+                <alert>What you require: </alert> Graph paper
+            </p>
+        </introduction>
+        <task>
+            <statement>
+                <p>
+                    Draw the <m>x</m> and <m>y</m> axis on the graph paper as shown below.
+                </p>
+                <image width="50%">
+                    <shortdescription></shortdescription>
+                    <latex-image>
+                        \begin{tikzpicture}
+                            % Draw fine grid (10x smaller squares)
+                            \draw[gray!30, very thin, step=0.1] (-6,-6) grid (6,6);
+
+                            % Draw main grid (original)
+                            \draw[gray!70, thin, step=1] (-6,-6) grid (6,6);
+
+                            % Draw axes
+                            \draw[thick,&lt;-&gt;] (-5.5,0) -- (5.5,0) node[right] {\small $x$};
+                            \draw[thick,&lt;-&gt;] (0,-5.5) -- (0,5.5) node[above] {\small $y$};
+
+                            % Label x-axis
+                            \foreach \x in {-5,-4,-3,-2,-1,1,2,3,4,5} {
+                                \draw (\x,0.2) -- (\x,-0.2) node[below] {\small \x};
+                            }
+
+                            % Label y-axis
+                            \foreach \y in {-5,-4,-3,-2,-1,1,2,3,4,5} {
+                                \draw (0.2,\y) -- (-0.2,\y) node[left]{\small \y};
+                            }
+                            \node[below] at (-0.2,-0.2) {0};
+
+                        \end{tikzpicture}
+                    </latex-image>
+                </image>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    Plot the following points <m>A(1,1),B(3,5),C(2,1),D(4,-3) </m> on the graph.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    Draw a directed line from <m>A</m> to <m>B</m> to represent <m>\overrightarrow{AB}</m>.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    Draw another directed line from <m>D</m> to <m>C</m> to represent <m>\overrightarrow{CD}</m>.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                     Determine the position vector of <m>B</m> relative to point <m>A</m>.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    Determine the position vector of <m>C</m> relative to point <m>D</m>.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    Discuss and share your findings with the rest of the class.
+                </p>
+            </statement>
+        </task>
+    </activity>
+    <p>
+        <m>\textbf{Key Takeaway}</m>
+    </p>
+    <p>
+        In <xref ref="illustration-position-vector-1"/> below, points <m>A(2,3)</m> and 
+        <m>B(5,1)</m> are located in the plane relative to origin point O in the plane.
+    </p>
+    <p>
+        The position vector of <m>A</m> is <m>\textbf{OA} = \begin{pmatrix} 2 - 0 \\ 3 - 0 \end{pmatrix} = \binom{2}{3}</m>
+    </p>
+    <p>
+        The position vector of <m>B</m> is <m>\textbf{OB} = \begin{pmatrix} 5 - 0 \\ 1 - 0 \end{pmatrix} = \binom{5}{1}</m>
+    </p>
+    <p>
+        Similarly, for point <m>A</m> in the plane its position vector <m>\textbf{OA}</m>
+        is denoted by <m>\mathbf{a}</m>. Also for point <m>B</m> in the plane it's position vector 
+        <m>\textbf{OB}</m> is denoted by <m>\mathbf{b}</m>.
+    </p>
+    <figure xml:id="illustration-position-vector-1">
+        <caption></caption>
+        <image width="45%">
+            <shortdescription></shortdescription>
+            <latex-image label="examp-position-vector">
+            \begin{tikzpicture}
+                \usetikzlibrary{arrows.meta}
+                % Draw fine grid (10x smaller squares)
+                \draw[gray!30, very thin, step=0.1] (-3,-3) grid (7,6);
+
+                % Draw main grid (original)
+                \draw[gray!70, thin, step=1] (-3,-3) grid (7,6);
+
+                % Draw axes
+                \draw[thick,-&gt;] (0,0) -- (6.5,0) node[right] {\small $x$};
+                \draw[thick,-&gt;] (0,0) -- (0,5.5) node[above] {\small $y$};
+
+                % Label x-axis
+                \foreach \x in {1,2,3,4,5,6} {
+                    \draw (\x,0.2) -- (\x,-0.2) node[below] {\small \x};
+                }
+
+                % Label y-axis
+                \foreach \y in {1,2,3,4,5} {
+                    \draw (0.2,\y) -- (-0.2,\y) node[left]{\small \y};
+                }
+                \node[below] at (0,-0.1) {0};
+
+                \draw [-{Latex[scale=1.5]}] (1.3,1.96) -- (1.31,1.98);
+                \draw [-{Latex[scale=1.5]}] (2.4,0.48) -- (2.45,0.49);
+
+                % Define points
+                \coordinate (O) at (0,0);
+                \coordinate (A) at (2,3);
+                \coordinate (B) at (5,1);
+
+                % Draw vectors
+                \draw[thick] (O) -- (A) node[midway, left] {\small $\mathbf{a}$};
+                \draw[thick] (O) -- (B) node[midway, below] {\small $\mathbf{b}$};
+                \draw[thick] (A) -- (B);
+
+                % Label points
+                \node[above left] at (A) {\small A(2,3)};
+                \node[right] at (B) {\small B(5,1)};
+                \node[above left] at (-0.1,-0.1) {\large O(0,0)};
+
+            \end{tikzpicture}
+            </latex-image>
+        </image>
+    </figure>
+    <example>
+        <statement>
+            <p>
+                Find the position vector of <m>A</m> and <m>B</m>.
+            </p>
+            <image width="80%">
+                <shortdescription></shortdescription>
+                <latex-image label="example-position-vector">
+                \begin{tikzpicture}
+                    % Draw fine grid (10x smaller squares)
+                    \draw[gray!30, very thin, step=0.1] (-5,-5) grid (7,6);
+
+                    % Draw main grid (original)
+                    \draw[gray!70, thin, step=1] (-5,-5) grid (7,6);
+
+                    % Draw axes
+                    \draw[thick,&lt;-&gt;] (-5,0) -- (6.5,0) node[right] {\small $x$};
+                    \draw[thick,&lt;-&gt;] (0,-5) -- (0,5.5) node[above] {\small $y$};
+
+                    % Label x-axis
+                    \foreach \x in {-4,-3,-2,-1,1,2,3,4,5,6} {
+                        \draw (\x,0.2) -- (\x,-0.2) node[below] {\small \x};
+                    }
+
+                    % Label y-axis
+                    \foreach \y in {-4,-3,-2,-1,1,2,3,4,5} {
+                        \draw (0.2,\y) -- (-0.2,\y) node[left]{\small \y};
+                    }
+                    \node[below] at (-0.2,-0.1) {0};
+                    \draw [-{Latex[scale=1.5]}] (3.4,-1.12) -- (3.5,-1.15);
+                    \draw [-{Latex[scale=1.5]}] (1.9,-1.9) -- (2,-2);
+
+                    % Define points
+                    \coordinate (O) at (0,0);
+                    \coordinate (A) at (6,-2);
+                    \coordinate (B) at (4,-4);
+
+                    % Draw vectors
+                    \draw[thick] (O) -- (A) node[midway, above] {\small $\mathbf{a}$};
+                    \draw[thick] (O) -- (B) node[midway, below] {\small $\mathbf{b}$};
+                    \draw[thick] (A) -- (B);
+
+                    % Label points
+                    \node[right] at (A) {\small A};
+                    \node[below] at (B) {\small B};
+                    \node[above left] at (0,-0.1) {\small O(0,0)};
+
+                \end{tikzpicture}
+                </latex-image>
+            </image>
+        </statement>
+        <solution>
+            <p>
+                
+            </p>
+            <p>
+                The position vector of A is <m>\textbf{OA } = \begin{pmatrix} 6 - 0 \\ -2 - 0\end{pmatrix} = \begin{pmatrix} 6  \\ -2 \end{pmatrix}</m>
+            </p>
+            <p>
+                Similarly the position vector of B is <m> \textbf{OB }= \begin{pmatrix} 4 - 0 \\ -4 - 0\end{pmatrix} = \begin{pmatrix} 4  \\ -4 \end{pmatrix}</m>
+            </p>
+        </solution>
+    </example>
+    <exercises xml:id="exercises-position-vector">
+        <exercise>
+            <statement>
+                <p>
+                    Draw the following position vector on a graph paper:
+                </p>
+                <sidebyside>
+                    <p>
+                        <m>a = \left( \begin{matrix} 10 \\ -2 \end{matrix}\right)</m>
+                    </p>
+                    <p>
+                        <m>b = \left( \begin{matrix} 2 \\ 5 \end{matrix}\right)</m>
+                    </p>
+                    <p>
+                        <m>c = \left( \begin{matrix} -3 \\ 8 \end{matrix}\right)</m>
+                    </p>
+                    <p>
+                        <m>d = \left( \begin{matrix} -11 \\ 6 \end{matrix}\right)</m>
+                    </p>
+                </sidebyside>
+                <sidebyside>
+                    <p>
+                        <m>e = \left( \begin{matrix} 4 \\ 4 \end{matrix}\right)</m>
+                    </p>
+                    <p>
+                        <m>f = \left( \begin{matrix} -1 \\ 12 \end{matrix}\right)</m>
+                    </p>
+                    <p>
+                        <m>g = \left( \begin{matrix} 5 \\ 3 \end{matrix}\right)</m>
+                    </p>
+                    <p>
+                        <m>h = \left( \begin{matrix} 0 \\ 13 \end{matrix}\right)</m>
+                    </p>
+                    
+                </sidebyside>
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
+                    Use <xref ref="example-pos-vect1"/> below to write the position vectors 
+                    of points <m>M,E,D,A</m>.
+                </p>
+                <figure xml:id="example-pos-vect1">
+                    <caption></caption>
+                    <image width="80%">
+                        <shortdescription></shortdescription>
+                        <latex-image label="example-pos1-vector">
+                        \begin{tikzpicture}
+                            \usetikzlibrary{arrows.meta}
+                            % Draw fine grid (10x smaller squares)
+                            \draw[gray!30, very thin, step=0.1] (-5,-7) grid (7,8);
+
+                            % Draw main grid (original)
+                            \draw[gray!70, thin, step=1] (-5,-7) grid (7,8);
+
+                            % Draw axes
+                            \draw[thick,&lt;-&gt;] (-4.5,0) -- (6.5,0) node[right] {\small $x$};
+                            \draw[thick,&lt;-&gt;] (0,-6) -- (0,7.5) node[above] {\small $y$};
+
+                            % Label x-axis
+                            \foreach \x in {-4,-3,-2,-1,1,2,3,4,5,6} {
+                                \draw (\x,0.2) -- (\x,-0.2) node[below] {\small \x};
+                            }
+
+                            % Label y-axis
+                            \foreach \y in {-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7} {
+                                \draw (0.2,\y) -- (-0.2,\y) node[left]{\small \y};
+                            }
+                            \node[below] at (-0.2,-0.2) {0};
+
+                            % Define points
+                            \coordinate (A) at (1,1);
+                            \coordinate (B) at (3,4);
+
+                            \coordinate (E) at (-3,1);
+                            \coordinate (F) at (-3,4);
+
+                            \coordinate (C) at (1,-3);
+                            \coordinate (D) at (3,-6);
+
+                            \coordinate (M) at (-4,-4);
+                            \coordinate (N) at (-2,-2);
+
+                            % Draw vectors
+                            \draw[thick] (A) -- (B);
+                            \draw[thick] (E) -- (F);
+                            \draw[thick] (C) -- (D);
+                            \draw[thick] (M) -- (N);
+
+                            % Label points
+                            \node[left] at (A) {\large A};
+                            \node[above right] at (B) {\large B};
+
+                            \node[above] at (C) {\large C};
+                            \node[below] at (D) {\large D};
+
+                            \node[below] at (E) {\large E};
+                            \node[above] at (F) {\large F};
+
+                            \node[left] at (M) {\large M};
+                            \node[right] at (N) {\large N};
+
+                             % Draw arrows at the middle of the lines
+                             \draw[-{Latex[length=3mm]}] (A) -- (2,2.5);
+                             \draw[-{Latex[length=3mm]}] (E) -- (-3,2.5);
+                             \draw[-{Latex[length=3mm]}] (D) -- (2,-4.5);
+                             \draw[-{Latex[length=3mm]}] (M) -- (-3,-3);
+
+                        \end{tikzpicture}
+                        </latex-image>
+                    </image>
+                </figure>
+            </statement>
+        </exercise>
+    </exercises>
+</subsection>
