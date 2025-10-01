@@ -41,6 +41,15 @@ For questions or feedback, please contact the project maintainer at [contact@inn
 
 # Enablers of the project
 
-Use this template repository to quickly start a new [PreTeXt](https://pretextbook.org) project entirely in the cloud, using GitHub Codespaces.  
+This project was initially supported by a grant from the US Embassy in Nairobi. The initial support enalbed hiring of 10 interns who were trained in authoring the textbook in PreTeXt by [Prof Oscar Levin](https://math.oscarlevin.com/) and trained in STACK authoring by the INNODEMS team. Other enablers of this project are:
+1. **INNODEMS**  
+    This organization supports the interns and coordinates the development of the textbook project locally in Kenya. 
 
-## Instructions
+2. **IDEMS** 
+ Has provided expartise in the integration of PreTeXt and STACK and will provide the technical support for the piloting phase of the textbooks.
+
+3. **SAMI**
+Is a UK NGO that leads the fundraising drive to support the development and piloting of the ktextbooks.  
+
+## Support the project
+You can support the textbook project through contributing to the development of the books or by donating to INNODEMS to help keep the vision of the ptoject alive.
