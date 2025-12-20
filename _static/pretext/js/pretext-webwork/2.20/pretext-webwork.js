@@ -16,6 +16,7 @@ async function handleWW(ww_id, action) {
     const ww_processing = 'webwork2';
     const ww_origin = ww_container.dataset.origin;
     const ww_problemSource = ww_container.dataset.problemsource;
+    let ww_baseCourse = ww_container.dataset.documentid;
     const ww_sourceFilePath = ww_container.dataset.sourcefilepath;
     const ww_course_id = ww_container.dataset.courseid;
     const ww_user_id = ww_container.dataset.userid;
@@ -77,6 +78,18 @@ async function handleWW(ww_id, action) {
         url = new URL(ww_domain + '/webwork2/render_rpc');
     }
     let formData = new FormData();
+    let generatedPG = 'generated/webwork/pg/';
+    // For Runestone, we specify where to find the generated problems.
+    if (runestone_logged_in) {
+        if (ww_problemSource && !ww_baseCourse) {
+            // WeBWorK authored in source, generated after 2025/10/15-ish, should have a baseCourse specified. We fall back to parsing the baseCourse from ww_id, which *should* always start with the base course prior to the first underscore (although this is not guaranteed). If no underscore is found, we fall back to eBookConfig.basecourse.
+            // This is only needed for webwork problems authored in source, not OPL problems, so we only check when ww_problemSource is set.
+            const parts = ww_id.split('_');
+            ww_baseCourse = parts.length > 1 ? parts[0] : eBookConfig.basecourse;
+            console.log("using the base course " + ww_baseCourse);
+        }
+        generatedPG = `/ns/books/published/${ww_baseCourse}/${generatedPG}`;
+    }
 
     if (action == 'check' || action =='reveal') {
         const iframe = ww_container.querySelector('.problem-iframe');
@@ -87,14 +100,14 @@ async function handleWW(ww_id, action) {
             formData.set('WWcorrectAnsOnly', "1");
         }
         if (ww_origin == 'generated') {
-            const rawProblemSource = await fetch('generated/webwork/pg/' + ww_problemSource).then((r) => r.text());
+            const rawProblemSource = await fetch(generatedPG + ww_problemSource).then((r) => r.text());
             formData.set("rawProblemSource", rawProblemSource);
         }
         else if (ww_origin == 'webwork2') formData.set("sourceFilePath", ww_sourceFilePath);
     } else {
         formData.set("problemSeed", ww_container.dataset.current_seed);
         if (ww_origin == 'generated') {
-            const rawProblemSource = await fetch('generated/webwork/pg/' + ww_problemSource).then((r) => r.text());
+            const rawProblemSource = await fetch(generatedPG + ww_problemSource).then((r) => r.text());
             formData.set("rawProblemSource", rawProblemSource);
         }
         else if (ww_origin == 'webwork2') formData.set("sourceFilePath", ww_sourceFilePath);
@@ -323,7 +336,10 @@ async function handleWW(ww_id, action) {
             // Runestone trigger
             $("body").trigger('runestone_ww_check', data)
         }
-
+        let courseUrlBase = '';
+        if (runestone_logged_in){
+            courseUrlBase = '/ns/books/published/' + eBookConfig.basecourse + '/';
+        }
         let iframeContents = '<!DOCTYPE html><head>' +
             '<script src="' + ww_domain + '/webwork2_files/node_modules/jquery/dist/jquery.min.js"></script>' +
             `<script>
@@ -377,7 +393,7 @@ async function handleWW(ww_id, action) {
                 };
             </script>` +
             '<script src="' + ww_domain + '/webwork2_files/node_modules/mathjax/es5/tex-chtml.js" id="MathJax-script" defer></script>' +
-            '<script src="_static/pretext/js/lib/knowl.js" defer></script>' +
+            `<script src="${courseUrlBase}_static/pretext/js/lib/knowl.js" defer></script>` +
             '<link rel="stylesheet" href="' + ww_domain + '/webwork2_files/node_modules/bootstrap/dist/css/bootstrap.min.css"/>' +
             '<script src="' + ww_domain + '/webwork2_files/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>';
 
@@ -401,7 +417,7 @@ async function handleWW(ww_id, action) {
         }
 
         iframeContents +=
-            '<link rel="stylesheet" href="_static/pretext/css/theme.css"/>' +
+            `<link rel="stylesheet" href="${courseUrlBase}_static/pretext/css/theme.css"/>` +
             '<script src="' + ww_domain + '/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>' +
             `<style>
                 html { overflow-y: hidden; }
