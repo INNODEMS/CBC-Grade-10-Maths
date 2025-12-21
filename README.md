@@ -14,6 +14,49 @@ Furthermore, the textbook will be designed to be easily adaptable to different c
 
 The book will be available in multiple formats, including web, PDF, and print. The web version of the book will offer the digital assessments that will help students have a more engaging personalised learning experience from the immediate feedback STACK questions provides.
 
+## Building and Viewing the Book
+
+### Prerequisites
+- Python 3.x with PreTeXt CLI installed (`pip install pretextbook`)
+- All dependencies from `requirements.txt` installed
+
+### Quick Start: Automated Build Workflow
+
+For the easiest build and preview experience, use the automated batch script:
+
+```bash
+.\build-and-view.bat
+```
+
+This single command will:
+1. Build the PreTeXt book
+2. Deploy the custom STACK JavaScript integration file
+3. Launch the book in your browser
+
+### Manual Build Process
+
+If you need more control over the build process:
+
+1. **Build the book:**
+   ```bash
+   pretext build
+   ```
+
+2. **Copy custom STACK integration file (required for STACK questions to render properly):**
+   ```bash
+   copy /Y "assets\pretext\js\pretext-stack\stackapicalls.js" "output\web\_static\pretext\js\pretext-stack\stackapicalls.js"
+   ```
+
+3. **View the book in browser:**
+   ```bash
+   pretext view web
+   ```
+
+### Important Notes
+- The custom `stackapicalls.js` file in the `assets` directory is essential for STACK questions to render correctly
+- This file must be copied to the output folder after each build
+- The automated script handles this automatically
+
 ## Contributing to the project
 
 To contribute to or work on this project, you can use any of the options  below:
