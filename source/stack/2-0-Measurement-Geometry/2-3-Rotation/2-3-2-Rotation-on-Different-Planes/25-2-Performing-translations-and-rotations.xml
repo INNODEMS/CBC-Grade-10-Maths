@@ -1,0 +1,1375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>25.2: Performing translations and rotations</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>For this questions, your browser may ask whether you want to "leave the page". In this case, you should click leave and your answer will be saved.</p>
+<p><br></p>
+
+<center>
+[[jsxgraph width="800px" height="600px" input-ref-ans1="sR1" input-ref-ans2="sR2" input-ref-ans3="sR3" input-ref-ans4="sR4"]]
+
+    JXG.Options.text.useMathJax=true;
+    var board = JXG.JSXGraph.initBoard(divid, {
+      boundingBox:[-10,6,6,-6],
+      showCopyright:false,
+      showNavigation:false,
+      keepaspectratio:true,
+      axis:true
+    });
+
+    board.create("polygon", [[-5.8,6], [-10,6], [-10,-6],[-5.8,-6]], {
+      fixed:true,
+      highlight:false,
+      fillColor:"#D9EDF7",
+      fillOpacity:1,
+      layer:9,
+      vertices:{
+        visible:false
+      },
+      borders:{
+        visible:false
+      }
+    });
+
+    function coordsList(transPoint, rotPoint) {return [
+      [
+        function(){return rotPoint.X()}, 
+        function(){return rotPoint.Y()}
+      ],
+      [
+        function(){return transPoint.X() + (rotPoint.Y()-transPoint.Y())}, 
+        function(){return transPoint.Y() - (rotPoint.X()-transPoint.X())}
+      ],
+      [
+        function(){return transPoint.X() - ((rotPoint.X()-transPoint.X())-2*(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() - (2*(rotPoint.X()-transPoint.X())+(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() + (rotPoint.Y()-transPoint.Y())/3}, 
+        function(){return transPoint.Y() - (rotPoint.X()-transPoint.X())/3}
+      ],
+      [
+        function(){return transPoint.X() - (rotPoint.X()-transPoint.X())/3}, 
+        function(){return transPoint.Y() - (rotPoint.Y()-transPoint.Y())/3}
+      ],
+      [
+        function(){return transPoint.X() - (2*(rotPoint.X()-transPoint.X())-(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() - ((rotPoint.X()-transPoint.X())+2*(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - (rotPoint.X()-transPoint.X())}, 
+        function(){return transPoint.Y() - (rotPoint.Y()-transPoint.Y())}
+      ],
+      [
+        function(){return transPoint.X() - (2*(rotPoint.X()-transPoint.X())+(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() + ((rotPoint.X()-transPoint.X())-2*(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - (3*(rotPoint.X()-transPoint.X())+2*(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() + (2*(rotPoint.X()-transPoint.X())-3*(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - (2*(rotPoint.X()-transPoint.X())+3*(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() + (3*(rotPoint.X()-transPoint.X())-2*(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - ((rotPoint.X()-transPoint.X())+2*(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() + (2*(rotPoint.X()-transPoint.X())-(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - (rotPoint.Y()-transPoint.Y())}, 
+        function(){return transPoint.Y() + (rotPoint.X()-transPoint.X())}
+      ]
+    ]};
+
+    // GREEN shape
+
+    var transPointG = board.create("point", {#cenG#}, {
+      fixed:true,
+      visible:false
+    });
+
+    var rotPointG = board.create("point", [transPointG.X()+{#first(rotG)#}, transPointG.Y()+{#second(rotG)#}], {
+      fixed:true,
+      visible:false
+    });
+
+    var coordsListG = coordsList(transPointG, rotPointG);
+
+    var pointListG = [rotPointG];
+    var i;
+    for (i in coordsListG) {
+      pointListG.push(board.create("point", coordsListG[i], {visible:false}));
+    };
+
+    board.create("polygon", pointListG, {
+      highlight:false,
+      layer:10,
+      borders:{
+        highlight:false,
+        strokeColor:"green",
+        layer:10
+      }
+    });
+
+    // RED shape
+
+    var transPointR = board.create("point", [-8,2], {
+      showInfoBox:false,
+      withLabel:true,
+      name:"\\(R\\)",
+      withGrid:true,
+      snapToGrid:true,
+      fillColor:"red",
+      strokeColor:"red",
+      layer:11,
+      label:{
+        fixed:true,
+        highlight:false,
+        fontSize:18,
+        offset:[0,20],
+        anchorX:"right",
+        useMathJax:true,
+        parse:false
+      }
+    });
+
+    var rotPointR = board.create("point", [-8,2+Math.sqrt(2)], {
+      showInfoBox:false,
+      withLabel:false,
+      fillColor:"red",
+      strokeColor:"red",
+      layer:11
+    });
+
+    var groupR = board.create("group", [transPointR, rotPointR]);
+    groupR.setRotationCenter(transPointR);
+    groupR.setRotationPoints(rotPointR);
+    groupR.setTranslationPoints(transPointR);
+
+    var coordsListR = coordsList(transPointR, rotPointR);
+
+    var pointListR = [rotPointR];
+    var i;
+    for (i in coordsListR) {
+      pointListR.push(board.create("point", coordsListR[i], {visible:false}));
+    };
+
+    board.create("polygon", pointListR, {
+      highlight:false,
+      layer:10,
+      fillColor:"red",
+      borders:{
+        highlight:false,
+        strokeColor:"red",
+        layer:10
+      }
+    });
+
+    // BLUE shape
+
+    var transPointB = board.create("point", [-8,-2], {
+      showInfoBox:false,
+      withLabel:true,
+      name:"\\(B\\)",
+      withGrid:true,
+      snapToGrid:true,
+      fillColor:"blue",
+      strokeColor:"blue",
+      layer:11,
+      label:{
+        fixed:true,
+        highlight:false,
+        fontSize:18,
+        offset:[0,-20],
+        anchorX:"left",
+        useMathJax:true,
+        parse:false
+      }
+    });
+
+    var rotPointB = board.create("point", [-8,-2-Math.sqrt(2)], {
+      showInfoBox:false,
+      withLabel:false,
+      fillColor:"blue",
+      strokeColor:"blue",
+      layer:11
+    });
+
+    var groupB = board.create("group", [transPointB, rotPointB]);
+    groupB.setRotationCenter(transPointB);
+    groupB.setRotationPoints(rotPointB);
+    groupB.setTranslationPoints(transPointB);
+
+    var coordsListB = coordsList(transPointB, rotPointB);
+
+    var pointListB = [rotPointB];
+    var i;
+    for (i in coordsListB) {
+      pointListB.push(board.create("point", coordsListB[i], {visible:false}));
+    };
+
+    board.create("polygon", pointListB, {
+      highlight:false,
+      layer:10,
+      fillColor:"blue",
+      borders:{
+        highlight:false,
+        strokeColor:"blue",
+        layer:10
+      }
+    });
+
+    stack_jxg.bind_point(sR1, transPointR);
+    stack_jxg.bind_point(sR2, rotPointR);
+    stack_jxg.bind_point(sR3, transPointB);
+    stack_jxg.bind_point(sR4, rotPointB);
+
+    board.unsuspendUpdate();
+
+[[/jsxgraph]]
+</center>
+
+<p><br>(a) By moving the red points, place the <b>red</b> shape, \(R\), so that it is a translation of the <b>green</b> shape by the vector {@transVec@}.</p> 
+<p align="right"><b>(2)</b></p>
+
+<p hidden>[[input:ans1]] [[input:ans2]] [[validation:ans1]] [[validation:ans2]]</p>
+<p>[[feedback:prt1]]</p>
+
+<p><br>(b) By moving the blue points, place the <b>blue</b> shape, \(B\), so that it is a rotation of the <b>red</b> shape by \(90^\circ\) {@rotDir@} about \(({@if integerp(first(rotCen)) then first(rotCen) else float(first(rotCen))@},{@if integerp(second(rotCen)) then second(rotCen) else float(second(rotCen))@})\).</p> 
+<p align="right"><b>(3)</b></p>
+
+<p hidden>[[input:ans3]] [[input:ans4]] [[validation:ans3]] [[validation:ans4]]</p>
+<p>[[feedback:prt2]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text/>
+    </generalfeedback>
+    <defaultgrade>5</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2018080600</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Placement of initial green shape */
+cenG:[rand(3)-1, rand(3)-1];
+rotG:rand([[1,1], [1,-1], [-1,1], [-1,-1]]);
+
+/* Randomising translation vector so that red shape does not overlap with green */
+invalidTrans:random_permutation([[0], [-2,-1,0,1,2]]);
+transVec:matrix([rand_with_prohib(-4-first(cenG), 4-first(cenG), first(invalidTrans))], [rand_with_prohib(-4-second(cenG), 4-second(cenG), second(invalidTrans))]);
+
+/* Solving for translated red shape */
+cenR:[first(cenG)+first(first(transVec)), second(cenG)+first(second(transVec))];
+rotR:[first(cenR)+first(rotG), second(cenR)+second(rotG)];
+
+/* Placing blue shape so that it doesn't overlap with red or green */
+cenB:rand([[rand_with_prohib(-4,4,[first(cenG)-2,first(cenG)-1,first(cenG),first(cenG)+1,first(cenG)+2]), rand_with_prohib(-4,4,[second(cenR)-2,second(cenR)-1,second(cenR),second(cenR)+1,second(cenR)+2])], [rand_with_prohib(-4,4,[first(cenR)-2,first(cenR)-1,first(cenR),first(cenR)+1,first(cenR)+2]), rand_with_prohib(-4,4,[second(cenG)-2,second(cenG)-1,second(cenG),second(cenG)+1,second(cenG)+2])]]);
+
+/* Finding two possible points for centre of a 90 deg rotation (clockwise or counter) */
+midRB:[(first(cenR)+first(cenB))/2, (second(cenR)+second(cenB))/2];
+rotCenClock:[first(midRB)+(second(midRB)-second(cenR)), second(midRB)+(first(cenR)-first(midRB))];
+rotCenCount:[first(midRB)-(second(midRB)-second(cenR)), second(midRB)-(first(cenR)-first(midRB))];
+
+/* Take the centre which lies on the grid and randomise if both do */
+rotCen: if first(rotCenClock)>=-5 and first(rotCenClock)<=5 and second(rotCenClock)>=-5 and second(rotCenClock)<=5 and first(rotCenCount)>=-5 and first(rotCenCount)<=5 and second(rotCenCount)>=-5 and second(rotCenCount)<=5 then rand([rotCenClock,rotCenCount]) else if first(rotCenClock)>=-5 and first(rotCenClock)<=5 and second(rotCenClock)>=-5 and second(rotCenClock)<=5 then rotCenClock else rotCenCount;
+
+/* Randomising direction of rotation */
+rotDir: if rotCen=rotCenClock then "clockwise" else "anticlockwise";
+
+/* Solving for the rotation point of the blue shape */
+rotB: if rotDir="anticlockwise" then (if rotG=[1,1] then [first(cenB)-1,second(cenB)+1] else if rotG=[1,-1] then [first(cenB)+1,second(cenB)+1] else if rotG=[-1,1] then [first(cenB)-1,second(cenB)-1] else if rotG=[-1,-1] then [first(cenB)+1,second(cenB)-1]) else (if rotG=[1,1] then [first(cenB)+1,second(cenB)-1] else if rotG=[1,-1] then [first(cenB)-1,second(cenB)-1] else if rotG=[-1,1] then [first(cenB)+1,second(cenB)+1] else if rotG=[-1,-1] then [first(cenB)-1,second(cenB)+1]);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="moodle_auto_format">
+      <text><![CDATA[<p>Green shape: {@cenG@}, {@rotG@}</p>
+<p>(a): {@transVec@}</p>
+<p>(b): {@rotDir@} about \(({@first(rotCen)@},{@second(rotCen)@})\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="moodle_auto_format">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>dot</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>(</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>cenR</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>rotR</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>cenB</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>rotB</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>2.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text><![CDATA[/* Node 1: Correct answer */
+node1_test: if ans1=cenR and abs(first(ans2)-first(rotR))<=0.1 and abs(second(ans2)-second(rotR))<=0.1 then 1 else 0;
+
+/* Node 2: Worked solution */
+
+/* Node 3: Correct translation of centre, incorrect orientation (1) */
+node3_test: if ans1=cenR then 1 else 0;
+
+/* Node 4: Correct x-coordinates (+1) */
+node4_test: if first(ans1)=first(cenR) and abs(first(ans2)-first(rotR))<=0.1 then 1 else 0;
+
+/* Node 5: Correct y-coordinates (+1) */
+node5_test: if second(ans1)=second(cenR) and abs(second(ans2)-second(rotR))<=0.1 then 1 else 0;]]></text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node1_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1.0000000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>1</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.0000000</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>Worked solution:</p>
+<p>The vector {@transVec@} represents a translation by {@first(first(transVec))@} units in the \(x\) direction and {@first(second(transVec))@} units in the \(y\) direction.</p>
+<p>In other words, this is a translation by {@abs(first(first(transVec)))@} units {@if first(first(transVec))>=0 then "rightwards" else "leftwards"@} and {@abs(first(second(transVec)))@} units {@if first(second(transVec))>=0 then "upwards" else "downwards"@}.</p>
+<p><br></p>
+
+<center>
+[[jsxgraph height="360px" width="360px"]]
+
+    var transVec = [{#first(first(transVec))#}, {#first(second(transVec))#}];
+    var rot = {#rotG#};
+
+    JXG.Options.text.useMathJax=true;
+    var board = JXG.JSXGraph.initBoard(divid, {
+      boundingBox:[-6,6,6,-6],
+      showCopyright:false,
+      showNavigation:false,
+      keepaspectratio:true,
+      axis:true
+    });
+
+    function coordsList(transPoint, rotPoint) {return [
+      [
+        function(){return rotPoint.X()}, 
+        function(){return rotPoint.Y()}
+      ],
+      [
+        function(){return transPoint.X() + (rotPoint.Y()-transPoint.Y())}, 
+        function(){return transPoint.Y() - (rotPoint.X()-transPoint.X())}
+      ],
+      [
+        function(){return transPoint.X() - ((rotPoint.X()-transPoint.X())-2*(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() - (2*(rotPoint.X()-transPoint.X())+(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() + (rotPoint.Y()-transPoint.Y())/3}, 
+        function(){return transPoint.Y() - (rotPoint.X()-transPoint.X())/3}
+      ],
+      [
+        function(){return transPoint.X() - (rotPoint.X()-transPoint.X())/3}, 
+        function(){return transPoint.Y() - (rotPoint.Y()-transPoint.Y())/3}
+      ],
+      [
+        function(){return transPoint.X() - (2*(rotPoint.X()-transPoint.X())-(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() - ((rotPoint.X()-transPoint.X())+2*(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - (rotPoint.X()-transPoint.X())}, 
+        function(){return transPoint.Y() - (rotPoint.Y()-transPoint.Y())}
+      ],
+      [
+        function(){return transPoint.X() - (2*(rotPoint.X()-transPoint.X())+(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() + ((rotPoint.X()-transPoint.X())-2*(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - (3*(rotPoint.X()-transPoint.X())+2*(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() + (2*(rotPoint.X()-transPoint.X())-3*(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - (2*(rotPoint.X()-transPoint.X())+3*(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() + (3*(rotPoint.X()-transPoint.X())-2*(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - ((rotPoint.X()-transPoint.X())+2*(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() + (2*(rotPoint.X()-transPoint.X())-(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - (rotPoint.Y()-transPoint.Y())}, 
+        function(){return transPoint.Y() + (rotPoint.X()-transPoint.X())}
+      ]
+    ]};
+
+    // GREEN shape
+
+    var transPointG = board.create("point", {#cenG#}, {
+      fixed:true,
+      visible:false
+    });
+
+    var rotPointG = board.create("point", [transPointG.X()+{#first(rotG)#}, transPointG.Y()+{#second(rotG)#}], {
+      fixed:true,
+      visible:false
+    });
+
+    var coordsListG = coordsList(transPointG, rotPointG);
+
+    var pointListG = [rotPointG];
+    var i;
+    for (i in coordsListG) {
+      pointListG.push(board.create("point", coordsListG[i], {visible:false}));
+    };
+
+    board.create("polygon", pointListG, {
+      highlight:false,
+      layer:10,
+      borders:{
+        highlight:false,
+        strokeColor:"green",
+        layer:10
+      }
+    });
+
+    // RED shape
+
+    var transPointR = board.create("point", [transVec[0]+{#first(cenG)#}, transVec[1]+{#second(cenG)#}], {
+      fixed:true,
+      highlight:false,
+      showInfoBox:false,
+      withLabel:true,
+      name:"\\(R\\)",
+      withGrid:true,
+      snapToGrid:true,
+      fillColor:"red",
+      strokeColor:"red",
+      layer:11,
+      label:{
+        fixed:true,
+        highlight:false,
+        fontSize:15,
+        offset:[0,15],
+        anchorX:"right",
+        useMathJax:true,
+        parse:false
+      }
+    });
+
+    var rotPointR = board.create("point", [transVec[0]+rot[0]+{#first(cenG)#},transVec[1]+rot[1]+{#second(cenG)#}], {
+      fixed:true,
+      highlight:false,
+      showInfoBox:false,
+      withLabel:false,
+      snapToGrid:true,
+      fillColor:"red",
+      strokeColor:"red",
+      layer:11
+    });
+
+    var groupR = board.create("group", [transPointR, rotPointR]);
+    groupR.setRotationCenter(transPointR);
+    groupR.setRotationPoints(rotPointR);
+
+    var coordsListR = coordsList(transPointR, rotPointR);
+
+    var pointListR = [rotPointR];
+    var i;
+    for (i in coordsListR) {
+      pointListR.push(board.create("point", coordsListR[i], {visible:false}));
+    };
+
+    board.create("polygon", pointListR, {
+      highlight:false,
+      layer:10,
+      fillColor:"red",
+      borders:{
+        highlight:false,
+        strokeColor:"red",
+        layer:10
+      }
+    });
+
+    // VECTOR
+
+    var vecStyle = {
+      fixed:true,
+      highlight:false,
+      strokeColor:"black",
+      layer:12,
+    };
+
+    var lineStyle = {
+      fixed:true,
+      highlight:false,
+      strokeColor:"black",
+      layer:12,
+      dash:1
+    };
+
+    board.create("arrow", [{#cenG#}, [transVec[0]+{#first(cenG)#}, transVec[1]+{#second(cenG)#}]], vecStyle);
+    board.create("segment", [{#cenG#}, [transVec[0]+{#first(cenG)#},{#second(cenG)#}]], lineStyle);
+    board.create("segment", [[transVec[0]+{#first(cenG)#},{#second(cenG)#}], [transVec[0]+{#first(cenG)#}, transVec[1]+{#second(cenG)#}]], lineStyle);
+
+[[/jsxgraph]]
+</center>
+<p><br></p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node3_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0.5000000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>You have correctly translated the centre of the green shape by the vector {@transVec@}.
+<br>However, your red shape is not oriented correctly.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node4_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5000000</truescore>
+        <truepenalty/>
+        <truenextnode>4</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>You have correctly translated the centre of the green shape by {@first(first(transVec))@} units in the \(x\) direction.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>4</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p><br>You have translated the centre of the green shape by {@first(ans1)-first(cenG)@} units in the \(x\) direction, not by {@first(first(transVec))@} units.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>4</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node5_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5000000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt1-5-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have correctly translated the centre of the green shape by {@first(second(transVec))@} units in the \(y\) direction.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-5-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>You have translated the centre of the green shape by {@second(ans1)-second(cenG)@} units in the \(y\) direction, not by {@first(second(transVec))@} units.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text><![CDATA[/* Node 1: Correct answer */
+node1_test: if ans3=cenB and abs(first(ans4)-first(rotB))<=0.1 and abs(second(ans4)-second(rotB))<=0.1 then 1 else 0;
+
+/* Node 2: Worked solution */
+
+/* Node 3: Correct for part (a) (Y-N4, N-N9) */
+node3_test: if ans1=cenR and abs(first(ans2)-first(rotR))<=0.1 and abs(second(ans2)-second(rotR))<=0.1 then 1 else 0;
+
+/* Node 4: Students rotated in the wrong direction (1) */
+node4_test: if first(ans3)=2*first(rotCen)-first(cenB) and second(ans3)=2*second(rotCen)-second(cenB) and abs(first(ans4)-(2*first(rotCen)-first(rotB)))<=0.1 and abs(second(ans4)-(2*second(rotCen)-second(rotB)))<=0.1 then 1 else 0;
+
+/* Node 5: Students has rotated correctly around the origin (1) */
+node5_test: if (rotDir="clockwise" and first(ans3)=second(cenR) and second(ans3)=-first(cenR) and (first(ans4)-second(rotR))<=0.1 and (second(ans4)+first(rotR))<=0.1) or (rotDir="anticlockwise" and first(ans3)=-second(cenR) and second(ans3)=first(cenR) and (first(ans4)+second(rotR))<=0.1 and (second(ans4)-first(rotR))<=0.1) then 1 else 0;
+
+/* Node 6: Correct x-coordinate of centre (+1) */
+node6_test: if first(ans3)=first(cenB) then 1 else 0;
+
+/* Node 7: Correct y-coordinate of centre (+1) */
+node7_test: if second(ans3)=second(cenB) then 1 else 0;
+
+/* Node 8: Correct orientation (+1) */
+node8_test: if (rotDir="anticlockwise" and ((rotG=[1,1] and abs(first(ans4)-(first(ans3)-1))<=0.1 and abs(second(ans4)-(second(ans3)+1))<=0.1) or (rotG=[1,-1] and abs(first(ans4)-(first(ans3)+1))<=0.1 and abs(second(ans4)-(second(ans3)+1))<=0.1) or (rotG=[-1,1] and abs(first(ans4)-(first(ans3)-1))<=0.1 and abs(second(ans4)-(second(ans3)-1))<=0.1) or (rotG=[-1,-1] and abs(first(ans4)-(first(ans3)+1))<=0.1 and abs(second(ans4)-(second(ans3)-1))<=0.1))) or (rotDir="clockwise" and ((rotG=[1,1] and abs(first(ans4)-(first(ans3)+1))<=0.1 and abs(second(ans4)-(second(ans3)-1))<=0.1) or (rotG=[-1,1] and abs(first(ans4)-(first(ans3)-1))<=0.1 and abs(second(ans4)-(second(ans3)-1))<=0.1) or (rotG=[1,-1] and abs(first(ans4)-(first(ans3)+1))<=0.1 and abs(second(ans4)-(second(ans3)+1))<=0.1) or (rotG=[1,1] and abs(first(ans4)-(first(ans3)-1))<=0.1 and abs(second(ans4)-(second(ans3)+1))<=0.1))) then 1 else 0;
+
+/* Node 9: ECF (3) */
+
+ecf3: if rotDir="clockwise" then [(second(ans1)-second(rotCen))+first(rotCen), -(first(ans1)-first(rotCen))+second(rotCen)] else [-(second(ans1)-second(rotCen))+first(rotCen), (first(ans1)-first(rotCen))+second(rotCen)];
+
+ecf4: if rotDir="clockwise" then [(second(ans2)-second(rotCen))+first(rotCen), -(first(ans2)-first(rotCen))+second(rotCen)] else [-(second(ans2)-second(rotCen))+first(rotCen), (first(ans2)-first(rotCen))+second(rotCen)];
+
+node9_test: if ans3=ecf3 and abs(first(ans4)-first(ecf4))<=0.1 and abs(second(ans4)-second(ecf4))<=0.1 then 1 else 0;
+
+/* Node 10: ECF: Students rotated in the wrong direction (1) */
+node10_test: if first(ans3)=2*first(rotCen)-first(ecf3) and second(ans3)=2*second(rotCen)-second(ecf3) and abs(first(ans4)-(2*first(rotCen)-first(ecf4)))<=0.1 and abs(second(ans4)-(2*second(rotCen)-second(ecf4)))<=0.1 then 1 else 0;
+
+/* Node 11: ECF: Students has rotated correctly around the origin (1) */
+node11_test: if (rotDir="clockwise" and first(ans3)=second(ans1) and second(ans3)=-first(ans1) and (first(ans4)-second(ans2))<=0.1 and (second(ans4)+first(ans2))<=0.1) or (rotDir="anticlockwise" and first(ans3)=-second(ans1) and second(ans3)=first(ans1) and (first(ans4)+second(ans2))<=0.1 and (second(ans4)-first(ans2))<=0.1) then 1 else 0;
+
+/* Node 12: ECF: Correct x-coordinate of centre (+1) */
+node12_test: if first(ans3)=first(ecf3) then 1 else 0;
+
+/* Node 13: ECF: Correct y-coordinate of centre (+1) */
+node13_test: if second(ans3)=second(ecf3) then 1 else 0;
+
+/* Node 14: ECF: Correct orientation (+1) */
+node14_test: if (rotDir="anticlockwise" and ((abs(first(ans2)-(first(ans1)+1))<=0.1 and abs(second(ans2)-(second(ans1)+1))<=0.1 and abs(first(ans4)-(first(ans3)-1))<=0.1 and abs(second(ans4)-(second(ans3)+1))<=0.1) or (abs(first(ans2)-(first(ans1)+1))<=0.1 and abs(second(ans2)-(second(ans1)-1))<=0.1 and abs(first(ans4)-(first(ans3)+1))<=0.1 and abs(second(ans4)-(second(ans3)+1))<=0.1) or (abs(first(ans2)-(first(ans1)-1))<=0.1 and abs(second(ans2)-(second(ans1)+1))<=0.1 and abs(first(ans4)-(first(ans3)-1))<=0.1 and abs(second(ans4)-(second(ans3)-1))<=0.1) or (abs(first(ans2)-(first(ans1)-1))<=0.1 and abs(second(ans2)-(second(ans1)-1))<=0.1 and abs(first(ans4)-(first(ans3)+1))<=0.1 and abs(second(ans4)-(second(ans3)-1))<=0.1))) or (rotDir="clockwise" and ((abs(first(ans2)-(first(ans1)+1))<=0.1 and abs(second(ans2)-(second(ans1)+1))<=0.1 and abs(first(ans4)-(first(ans3)+1))<=0.1 and abs(second(ans4)-(second(ans3)-1))<=0.1) or (abs(first(ans2)-(first(ans1)+1))<=0.1 and abs(second(ans2)-(second(ans1)-1))<=0.1 and abs(first(ans4)-(first(ans3)-1))<=0.1 and abs(second(ans4)-(second(ans3)-1))<=0.1) or (abs(first(ans2)-(first(ans1)-1))<=0.1 and abs(second(ans2)-(second(ans1)+1))<=0.1 and abs(first(ans4)-(first(ans3)+1))<=0.1 and abs(second(ans4)-(second(ans3)+1))<=0.1) or (abs(first(ans2)-(first(ans1)-1))<=0.1 and abs(second(ans2)-(second(ans1)-1))<=0.1 and abs(first(ans4)-(first(ans3)-1))<=0.1 and abs(second(ans4)-(second(ans3)+1))<=0.1))) then 1 else 0;]]></text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node1_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1.0000000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>1</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.0000000</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>Here is a worked solution:</p>
+<p>By rotating each of the red points in the diagram by \(90^\circ\) {@rotDir@} about \(({@if integerp(first(rotCen)) then first(rotCen) else float(first(rotCen))@},{@if integerp(second(rotCen)) then second(rotCen) else float(second(rotCen))@})\), you will rotate the whole shape as required.</p>
+<p><br></p>
+
+<center>
+[[jsxgraph width="360px" height="360px"]]
+
+    var cenR = {#cenR#}; 
+    var rotR = {#rotR#};
+    var cenB = {#cenB#};
+    var rotB = {#rotB#};
+    var rotCen = {#rotCen#};
+    var rotDir = {#rotDir#};
+
+    JXG.Options.text.useMathJax=true;
+    var board = JXG.JSXGraph.initBoard(divid, {
+      boundingBox:[-6,6,6,-6],
+      showCopyright:false,
+      showNavigation:false,
+      keepaspectratio:true,
+      axis:true
+    });
+
+    function coordsList(transPoint, rotPoint) {return [
+      [
+        function(){return rotPoint.X()}, 
+        function(){return rotPoint.Y()}
+      ],
+      [
+        function(){return transPoint.X() + (rotPoint.Y()-transPoint.Y())}, 
+        function(){return transPoint.Y() - (rotPoint.X()-transPoint.X())}
+      ],
+      [
+        function(){return transPoint.X() - ((rotPoint.X()-transPoint.X())-2*(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() - (2*(rotPoint.X()-transPoint.X())+(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() + (rotPoint.Y()-transPoint.Y())/3}, 
+        function(){return transPoint.Y() - (rotPoint.X()-transPoint.X())/3}
+      ],
+      [
+        function(){return transPoint.X() - (rotPoint.X()-transPoint.X())/3}, 
+        function(){return transPoint.Y() - (rotPoint.Y()-transPoint.Y())/3}
+      ],
+      [
+        function(){return transPoint.X() - (2*(rotPoint.X()-transPoint.X())-(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() - ((rotPoint.X()-transPoint.X())+2*(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - (rotPoint.X()-transPoint.X())}, 
+        function(){return transPoint.Y() - (rotPoint.Y()-transPoint.Y())}
+      ],
+      [
+        function(){return transPoint.X() - (2*(rotPoint.X()-transPoint.X())+(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() + ((rotPoint.X()-transPoint.X())-2*(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - (3*(rotPoint.X()-transPoint.X())+2*(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() + (2*(rotPoint.X()-transPoint.X())-3*(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - (2*(rotPoint.X()-transPoint.X())+3*(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() + (3*(rotPoint.X()-transPoint.X())-2*(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - ((rotPoint.X()-transPoint.X())+2*(rotPoint.Y()-transPoint.Y()))/3},
+        function(){return transPoint.Y() + (2*(rotPoint.X()-transPoint.X())-(rotPoint.Y()-transPoint.Y()))/3}
+      ],
+      [
+        function(){return transPoint.X() - (rotPoint.Y()-transPoint.Y())}, 
+        function(){return transPoint.Y() + (rotPoint.X()-transPoint.X())}
+      ]
+    ]};
+
+    // RED shape
+
+    var transPointR = board.create("point", cenR, {
+      fixed:true,
+      highlight:false,
+      showInfoBox:false,
+      withLabel:true,
+      name:"\\(R\\)",
+      withGrid:true,
+      snapToGrid:true,
+      fillColor:"red",
+      strokeColor:"red",
+      layer:11,
+      label:{
+        fixed:true,
+        highlight:false,
+        fontSize:15,
+        offset:[0,15],
+        anchorX:"right",
+        useMathJax:true,
+        parse:false
+      }
+    });
+
+    var rotPointR = board.create("point", rotR, {
+      fixed:true,
+      highlight:false,
+      showInfoBox:false,
+      withLabel:false,
+      fillColor:"red",
+      strokeColor:"red",
+      layer:11
+    });
+
+    var groupR = board.create("group", [transPointR, rotPointR]);
+    groupR.setRotationCenter(transPointR);
+    groupR.setRotationPoints(rotPointR);
+
+    var coordsListR = coordsList(transPointR, rotPointR);
+
+    var pointListR = [rotPointR];
+    var i;
+    for (i in coordsListR) {
+      pointListR.push(board.create("point", coordsListR[i], {visible:false}));
+    };
+
+    board.create("polygon", pointListR, {
+      highlight:false,
+      layer:10,
+      fillColor:"red",
+      borders:{
+        highlight:false,
+        strokeColor:"red",
+        layer:10
+      }
+    });
+
+    // BLUE shape
+
+    var transPointB = board.create("point", cenB, {
+      fixed:true,
+      highlight:false,
+      showInfoBox:false,
+      withLabel:true,
+      name:"\\(B\\)",
+      withGrid:true,
+      snapToGrid:true,
+      fillColor:"blue",
+      strokeColor:"blue",
+      layer:11,
+      label:{
+        fixed:true,
+        highlight:false,
+        fontSize:15,
+        offset:[0,-15],
+        anchorX:"left",
+        useMathJax:true,
+        parse:false
+      }
+    });
+
+    var rotPointB = board.create("point", rotB, {
+      fixed:true,
+      highlight:false,
+      showInfoBox:false,
+      withLabel:false,
+      fillColor:"blue",
+      strokeColor:"blue",
+      layer:11
+    });
+
+    var groupB = board.create("group", [transPointB, rotPointB]);
+    groupB.setRotationCenter(transPointB);
+    groupB.setRotationPoints(rotPointB);
+
+    var coordsListB = coordsList(transPointB, rotPointB);
+
+    var pointListB = [rotPointB];
+    var i;
+    for (i in coordsListB) {
+      pointListB.push(board.create("point", coordsListB[i], {visible:false}));
+    };
+
+    board.create("polygon", pointListB, {
+      highlight:false,
+      layer:10,
+      fillColor:"blue",
+      borders:{
+        highlight:false,
+        strokeColor:"blue",
+        layer:10
+      }
+    });
+
+    // ROTATION
+
+    board.create("point", rotCen, {
+      fixed:true,
+      highlight:false,
+      showInfoBox:false,
+      fillColor:"black",
+      strokeColor:"black",
+      layer:14
+    });
+
+    var lineStyle = {
+      fixed:true,
+      highlight:false,
+      strokeColor:"black"
+    };
+
+    var angStyle = {
+      fixed:true,
+      highlight:false,
+      withLabel:false,
+      radius:1,
+      strokeColor:"purple",
+      fillColor:"purple",
+      radiusPoint:{
+        visible:false,
+        showInfoBox:false
+      }
+    };
+
+    board.create("segment", [cenR, rotCen], lineStyle);
+    board.create("segment", [cenB, rotCen], lineStyle);
+
+    var pointStyle = {
+      fixed:true,
+      visible:false
+    }
+
+    if (rotDir == "clockwise") {
+      var p1 = board.create("point", cenB, pointStyle);
+      var p2 = board.create("point", rotCen, pointStyle);
+      var p3 = board.create("point", cenR, pointStyle);
+    } else {
+      var p1 = board.create("point", cenR, pointStyle);
+      var p2 = board.create("point", rotCen, pointStyle);
+      var p3 = board.create("point", cenB, pointStyle);
+    };
+
+    board.create("angle", [p1, p2, p3], angStyle);
+
+    lineStyle.dash = 1;
+
+    board.create("segment", [rotR, rotCen], lineStyle);
+    board.create("segment", [rotB, rotCen], lineStyle);
+
+[[/jsxgraph]]
+<center>
+<p><br></p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>10</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node11_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0.3330000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt2-11-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>You have rotated your red shape \(90^\circ\) {@rotDir@} about the origin, \((0,0)\).
+<br>However, you should have rotated about \(({@if integerp(first(rotCen)) then first(rotCen) else float(first(rotCen))@},{@if integerp(second(rotCen)) then second(rotCen) else float(second(rotCen))@})\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>11</falsenextnode>
+        <falseanswernote>prt2-11-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>11</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node12_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.3330000</truescore>
+        <truepenalty/>
+        <truenextnode>12</truenextnode>
+        <trueanswernote>prt2-12-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>The \(x\) coordinate of the centre of your blue shape is correct for your placement of the red shape.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>12</falsenextnode>
+        <falseanswernote>prt2-12-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p><br>The \(x\) coordinate of the centre of your blue shape is <b>not</b> correct for your placement of the red shape.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>12</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node13_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.3330000</truescore>
+        <truepenalty/>
+        <truenextnode>13</truenextnode>
+        <trueanswernote>prt2-13-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>The \(y\) coordinate of the centre of your blue shape is correct for your placement of the red shape.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>13</falsenextnode>
+        <falseanswernote>prt2-13-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The \(y\) coordinate of the centre of your blue shape is <b>not</b> correct for your placement of the red shape.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>13</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node14_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.3330000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt2-14-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>The orientation of your blue shape is correct for your placement of the red shape.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-14-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The orientation of your blue shape is <b>not</b> correct for your placement of the red shape.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node3_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.0000000</truescore>
+        <truepenalty/>
+        <truenextnode>3</truenextnode>
+        <trueanswernote>prt2-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>8</falsenextnode>
+        <falseanswernote>prt2-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node4_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0.3330000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt2-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>You have rotated the red shape \(90^\circ\) <b>{@if rotDir="clockwise" then "anticlockwise" else "clockwise"@}</b> about \(({@if integerp(first(rotCen)) then first(rotCen) else float(first(rotCen))@},{@if integerp(second(rotCen)) then second(rotCen) else float(second(rotCen))@})\).
+<br>However, you should have rotated <b>{@rotDir@}</b>.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>4</falsenextnode>
+        <falseanswernote>prt2-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>4</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node5_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0.3330000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt2-5-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>You have rotated the red shape \(90^\circ\) {@rotDir@} about the origin, \((0,0)\).
+<br>However, you should have rotated about \(({@if integerp(first(rotCen)) then first(rotCen) else float(first(rotCen))@},{@if integerp(second(rotCen)) then second(rotCen) else float(second(rotCen))@})\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>5</falsenextnode>
+        <falseanswernote>prt2-5-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>5</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node6_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.3330000</truescore>
+        <truepenalty/>
+        <truenextnode>6</truenextnode>
+        <trueanswernote>prt2-6-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>The \(x\) coordinate of the centre of your blue shape is correct.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>6</falsenextnode>
+        <falseanswernote>prt2-6-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p><br>The \(x\) coordinate of the centre of your blue shape is <b>not</b> correct.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>6</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node7_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.3330000</truescore>
+        <truepenalty/>
+        <truenextnode>7</truenextnode>
+        <trueanswernote>prt2-7-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>The \(y\) coordinate of the centre of your blue shape is correct.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>7</falsenextnode>
+        <falseanswernote>prt2-7-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The \(y\) coordinate of the centre of your blue shape is <b>not</b> correct.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>7</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node8_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.3330000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt2-8-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>The orientation of your blue shape is correct.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-8-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The orientation of your blue shape is <b>not</b> correct.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>8</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node9_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0.3330000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt2-9-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>The position of your blue shape is not correct.
+<br>However, the rotation you have done is consistent with your placement of the red shape.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>9</falsenextnode>
+        <falseanswernote>prt2-9-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>9</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node10_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0.3330000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt2-10-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>10</falsenextnode>
+        <falseanswernote>prt2-10-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>

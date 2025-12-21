@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>example of tree diagram</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A coin is tossed {@random_toss@} times. What is the probability of getting exactly two heads? </p>
+
+[[jsxgraph]]
+JXG.Options.text.useMathJax = true;
+var board = JXG.JSXGraph.initBoard(divid, {
+  boundingbox: [-1,5, 3*{#random_toss#}+2, -5],
+  axis:false,
+  grid:false,
+  showNavigation:false,
+  showCopyright:false,
+  pan:false,
+  zoom:false
+});
+board.suspendUpdate();
+
+// --- CONFIG ---
+var n = {#random_toss#};   // number of tosses (random 2–5)
+var xStep = 3;             // horizontal spacing
+var yTop = 4;              // top Y
+var yBottom = -4;          // bottom Y
+var radius = 0.35;         // circle radius
+
+// nodes[level][index] will hold fixed invisible centers
+var nodes = [];
+
+// root
+nodes[0] = [];
+var root = board.create('point',[0,(yTop+yBottom)/2], {
+  visible:false,fixed:true,name:''});
+nodes[0].push(root);
+
+// build levels 1..n
+for (var level=1; level<=n; level++) {
+  nodes[level] = [];
+  var count = Math.pow(2, level);
+  for (var j=0; j<count; j++) {
+    var x = level*xStep;
+    var y = (count===1) ? (yTop+yBottom)/2 : yTop - j*((yTop-yBottom)/(count-1));
+
+    // invisible fixed center
+    var center = board.create('point',[x,y],{visible:false,fixed:true});
+    nodes[level].push(center);
+
+    // circle
+    board.create('circle',[center,radius],{
+      strokeColor:'black', fillColor:'#fff',
+      fixed:true, withLabel:false, highlight:false
+    });
+
+    // label (H for even branch, T for odd)
+    var lbl = (j%2===0)?'H':'T';
+    board.create('text',[x,y,lbl],{
+      anchorX:'middle',anchorY:'middle',
+      fixed:true,fontSize:14,highlight:false
+    });
+
+    // connect to parent
+    var parent = nodes[level-1][Math.floor(j/2)];
+    board.create('segment',[parent,center],{
+      strokeWidth:1,fixed:true,highlight:false
+    });
+  }
+}
+
+board.unsuspendUpdate();
+[[/jsxgraph]]
+
+
+
+<p></p><p>[[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p></p>
+<p></p>
+<p>Let’s solve step by step: </p>
+<p>
+   <ol>
+       <li>
+            <p>Sample space for tossing a coin {@random_toss@}:</p>
+             <p>S = (HH, HT , TH , TT)</p>
+             <p>There are 4 equally likely outcomes.</p>
+        </li>
+       <li>
+           <p>Event: getting exactly two heads</p>
+            <p>E= {HH}</p>
+       </li>
+           
+              <p>Probability formula:</p>
+              <p> \(PE=\frac{Number of favorable outcomes​}{Total Outcomes} \)</p>
+              <p>The probability of getting exactly two heads when a coin is tossed {@random_toss@} is:</p>
+              <p> \(PE=\frac{1​}{4} \)</p>
+       </li>
+    </ol>
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>random_toss1:2;
+random_toss2:3;
+random_toss:rand([random_toss1,random_toss2]);
+
+S2 = {HH, HT , TH , TT};
+E2: {HH};
+S3:{HHH,HHT,HTH,THH,HTT,THT,TTH,TTT};
+E3:{HHT,HTH,THH};
+PE1: E2/S2;
+PE2: E3/S3;
+
+PE1_DEC:decimal_places(PE1);
+PE2_Dec:decimal_places(PE2);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>The random tosses for the coin \(cm={@random_toss@}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author"> Joseph Baya</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question asks for the probability of getting  heads out of the random tosses.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>

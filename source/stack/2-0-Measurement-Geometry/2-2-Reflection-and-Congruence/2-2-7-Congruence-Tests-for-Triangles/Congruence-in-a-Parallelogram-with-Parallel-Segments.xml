@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Congruence in a Parallelogram with Parallel Segments</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>In the figure below, <strong>{@letter@}{@letter1@}{@letter3@}{@letter2@}</strong> is a parallelogram. Point <strong>{@letter4@}</strong> lies on <strong>{@letter@}{@letter2@}</strong> and point <strong>{@letter5@}</strong> lies on <strong>{@letter1@}{@letter3@}</strong>. The line <strong>{@letter1@}{@letter4@}</strong> is parallel to <strong>{@letter2@}{@letter5@}</strong>. Are triangles \(
+\triangle {@letter@}{@letter1@}{@letter4@} \, \text{and} \, \triangle {@letter3@}{@letter2@}{@letter5@}\) congruent?</p>
+
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-1, 6, 9, -2],
+    axis: false,
+    showCopyright: false,
+    showNavigation: false
+});
+
+/* Base points for the parallelogram */
+var A = board.create('point', [0, 4], {name: '{#letter#}', fixed: true});
+var B = board.create('point', [1, 0], {name: '{#letter1#}', fixed: true});
+var D = board.create('point', [6, 4], {name: '{#letter2#}', fixed: true});
+
+/* Construct C so that ABCD is a parallelogram */
+var C = board.create('point', [
+    function(){ return B.X() + (D.X() - A.X()); },
+    function(){ return B.Y() + (D.Y() - A.Y()); }
+], {name: '{#letter3#}', fixed: true});
+
+/* Draw parallelogram sides */
+board.create('segment', [A, B]);
+board.create('segment', [B, C]);
+board.create('segment', [C, D]);
+board.create('segment', [D, A]);
+
+/* Points E on AD and F on BC */
+var E = board.create('point', [
+    function(){ return (A.X() + D.X())/2; },
+    function(){ return (A.Y() + D.Y())/2; }
+], {name: '{#letter4#}', fixed: true});
+
+var F = board.create('point', [
+    function(){ return (B.X() + C.X())/2; },
+    function(){ return (B.Y() + C.Y())/2; }
+], {name: '{#letter5#}', fixed: true});
+
+/* Draw BE and DF (parallel lines) */
+board.create('segment', [B, E], {
+    strokeWidth: 2,
+    strokeColor: 'black'
+});
+
+board.create('segment', [D, F], {
+    strokeWidth: 2,
+    strokeColor: 'black'
+});
+
+/* Optional arrows to emphasise parallelism */
+board.create('arrow', [E, D], {strokeWidth: 2});
+board.create('arrow', [B, F], {strokeWidth: 2});
+
+[[/jsxgraph]]
+<p>[[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>
+We are given that <strong>{@letter@}{@letter1@}{@letter3@}{@letter2@}</strong> is a parallelogram and that <strong>{@letter1@}{@letter4@} ∥ {@letter2@}{@letter5@}</strong>.
+</p>
+<p>
+<strong>Step 1: Equal angles</strong><br>
+Since the lines <strong>{@letter1@}{@letter4@}</strong> and <strong>{@letter2@}{@letter5@}</strong> are parallel,
+the angles</p><p>
+\(
+\angle {@letter@}{@letter1@}{@letter4@} \, = \, \angle {@letter3@}{@letter2@}{@letter5@}\)  <em>(Opposite angles of a parallelogram)</em>.
+</p>
+
+<p>
+<strong>Step 2: Equal sides</strong><br>
+In a parallelogram, opposite sides are equal in length.
+Hence,</p> <p>
+\(\quad \quad \quad \quad \quad \quad
+ {@letter@}{@letter1@}= {@letter3@}{@letter2@}.
+\)
+</p>
+
+<p>
+<strong>Step 3: Triangle congruence</strong><br>
+We now have:
+<ul>
+  <li>one pair of equal angles,</li>
+  <li>a second pair of equal angles (by parallel lines),</li>
+  <li>the included sides equal.</li>
+</ul>
+Therefore,
+\(
+\triangle ABE \cong \triangle CDF
+\)
+by the <strong>ASA</strong> congruence criterion.
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[ta:random_permutation([["yes", true],["no", false]]);
+ letter:rand([A,M,Q,U,Y]);
+ letter1:rand([B,F,N,R,V]);
+ letter2:rand([C,G,K,S,W]);
+ letter3:rand([D,H,L,P,T]);
+ letter4:rand([E,I,J]);
+ letter5:rand([X,O,Z]);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>radio</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mcq_correct(ta)[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1744203641</deployedseed>
+    <deployedseed>855242518</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>first(mcq_correct(ta))</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

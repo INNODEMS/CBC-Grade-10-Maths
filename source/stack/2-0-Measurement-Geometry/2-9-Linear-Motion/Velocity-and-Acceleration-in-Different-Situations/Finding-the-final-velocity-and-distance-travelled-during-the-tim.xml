@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the final velocity and distance travelled during the time given acceleration and time.</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A car starts from rest and accelerates uniformly at {@a@} m/s² for {@t@} seconds.</p>
+
+<p>a) What is its final velocity?<br>
+Final velocity = [[input:ans1]] m/s [[validation:ans1]] [[feedback:prt1]]</p>
+
+<p>b) How far does it travel during this time?<br>
+Distance = [[input:ans2]] m [[validation:ans2]] [[feedback:prt2]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p><strong>Part (a): Final velocity</strong><br>
+Using \( v = u + at \)<br>
+Initial velocity \( u = 0 \) m/s (starts from rest)<br>
+Acceleration \( a = {@a@} \) m/s²<br>
+Time \( t = {@t@} \) s<br>
+\( v = 0 + ({@a@}) \times ({@t@}) = {@ta1@} \) m/s</p>
+
+<p><strong>Part (b): Distance traveled</strong><br>
+Using \( s = ut + \frac{1}{2}at^2 \)<br>
+\( s = 0 \times {@t@} + \frac{1}{2} \times {@a@} \times ({@t@})^2 \)<br>
+\( s = \frac{1}{2} \times {@a@} \times {@t^2@} = {@ta2@} \) m</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Generate random acceleration and time */
+a: rand(10)+2;      /* m/s² */
+t: rand_with_prohib(4,10,[a]);  /* 4, 5, 6, 8, 10 seconds */
+
+/* Calculate answers */
+ta1: a * t;                 /* v = u + at, u=0 */
+ta2: 1/2 * a * t^2;        /* s = ut + ½at², u=0 */
+/*mistake */
+mistake_ta1:a/t;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@a@}</p>
+<p>{@t@}</p>
+<p>{@ta1@}</p>
+<p>{@ta2@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct final velocity</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect final velocity</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake_ta1</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You calculated the final velocity as \(\frac{a}{t}\). However, final velocity depends on the product of acceleration and time, not their ratio. Please check the worked solution.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct distance</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect distance</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You used an incorrect formula for distance. Distance travelled under uniform acceleration depends on the square of time. Please check the worked solution.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>560157368</deployedseed>
+    <deployedseed>997961884</deployedseed>
+    <deployedseed>874445576</deployedseed>
+    <deployedseed>1917101987</deployedseed>
+    <deployedseed>1084886046</deployedseed>
+    <deployedseed>1487905184</deployedseed>
+    <deployedseed>186274171</deployedseed>
+    <deployedseed>918075141</deployedseed>
+    <deployedseed>1664032345</deployedseed>
+    <deployedseed>1790729746</deployedseed>
+    <deployedseed>1088001864</deployedseed>
+    <deployedseed>599344705</deployedseed>
+    <deployedseed>1816902887</deployedseed>
+    <deployedseed>629613714</deployedseed>
+    <deployedseed>1237180161</deployedseed>
+    <deployedseed>479356895</deployedseed>
+    <deployedseed>1992621665</deployedseed>
+    <deployedseed>880028620</deployedseed>
+    <deployedseed>1525032592</deployedseed>
+    <deployedseed>769660510</deployedseed>
+    <deployedseed>843174064</deployedseed>
+    <deployedseed>1413967543</deployedseed>
+    <deployedseed>1929135965</deployedseed>
+    <deployedseed>909709922</deployedseed>
+    <deployedseed>331326954</deployedseed>
+    <deployedseed>1506934846</deployedseed>
+    <deployedseed>1465239599</deployedseed>
+    <deployedseed>2050007090</deployedseed>
+    <deployedseed>1139446615</deployedseed>
+    <deployedseed>1711450587</deployedseed>
+    <deployedseed>709459605</deployedseed>
+    <deployedseed>1398487676</deployedseed>
+    <deployedseed>2098866005</deployedseed>
+    <deployedseed>177656838</deployedseed>
+    <deployedseed>209531837</deployedseed>
+    <deployedseed>1740293902</deployedseed>
+    <deployedseed>1964092293</deployedseed>
+    <deployedseed>1009852061</deployedseed>
+    <deployedseed>701427337</deployedseed>
+    <deployedseed>932075708</deployedseed>
+    <deployedseed>85033362</deployedseed>
+    <deployedseed>1257992794</deployedseed>
+    <deployedseed>658678103</deployedseed>
+    <deployedseed>401102864</deployedseed>
+    <deployedseed>1150878019</deployedseed>
+    <deployedseed>1624754911</deployedseed>
+  </question>
+</quiz>

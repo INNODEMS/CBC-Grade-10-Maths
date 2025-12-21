@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating average speed with time segment</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A cyclist travels at {@s1@} km/h for {@t1@} hours, then at {@s2@} km/h for {@t2@} hours.</p>
+<p>Calculate the average speed for the entire journey.</p>
+
+<p>Average speed = [[input:ans1]] km/h [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p><strong>Step 1: Calculate distance for each segment</strong><br>
+First segment: Distance = Speed × Time = \( {@s1@} \times {@t1@} = {@d1@} \) km<br>
+Second segment: Distance = Speed × Time = \( {@s2@} \times {@t2@} = {@d2@} \) km</p>
+
+<p><strong>Step 2: Calculate total distance and total time</strong><br>
+Total distance = {@d1@} + {@d2@} = {@d1+d2@} km<br>
+Total time = {@t1@} + {@t2@} = {@t1+t2@} hours</p>
+
+<p><strong>Step 3: Calculate average speed</strong><br>
+Therefore, average speed is given by:<br>  \( \begin{align} =& \frac{\text{Total distance}}{\text{Total time}}\\=& \frac{{@total_distance@}}{{@total_time@}}\\\ =& {@ta@}\,\, \text{km/h} \end{align} \) </p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomly generate speeds and times */
+
+s1: 5 * (rand(15) + 4);      /* 20, 25, 30, 35, 40, 45, 50 km/h */
+s2: 5 * (rand(30) + 4);      /* 20, 25, 30, 35, 40, 45, 50 km/h */
+
+/* Times: between 1 and 4 hours */
+t1: rand(6) + 1;            /* 1, 2, 3, 4 hours */
+t2: rand_with_prohib(2,10,[t1]);            /* 1, 2, 3, 4 hours */
+
+/* Ensure speeds are different */
+while s1 = s2 do s2: 5 * (rand(12) + 4);
+
+/* Calculate distances */
+d1: s1 * t1;
+d2: s2 * t2;
+
+/* Calculate correct answer */
+total_distance: d1 + d2;
+total_time: t1 + t2;
+ta: total_distance/total_time;
+
+/* Common mistake: average of speeds */
+mistake_ta: (s1 + s2)/2;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta@}</p>
+<p>{@s1@}</p>
+<p>{@t1@}</p>
+<p>{@s2@}</p>
+<p>{@t2@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct average speed</description>
+        <answertest>CasEqual</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect average speed</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake_ta</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You calculated the average speed as \(\frac{{@s1@}+{@s2@}}{2}\) km/h. However, this method is not appropriate because the travel times are different. Please refer to the worked solution below.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>672429290</deployedseed>
+    <deployedseed>1224840790</deployedseed>
+    <deployedseed>425821667</deployedseed>
+    <deployedseed>2107519268</deployedseed>
+    <deployedseed>706502745</deployedseed>
+    <deployedseed>971820671</deployedseed>
+    <deployedseed>1169526153</deployedseed>
+    <deployedseed>1509759968</deployedseed>
+    <deployedseed>555695275</deployedseed>
+    <deployedseed>1977003710</deployedseed>
+    <deployedseed>1842861478</deployedseed>
+    <deployedseed>848785871</deployedseed>
+    <deployedseed>863990802</deployedseed>
+    <deployedseed>1686547626</deployedseed>
+    <deployedseed>391070501</deployedseed>
+    <deployedseed>1004421297</deployedseed>
+    <deployedseed>177673468</deployedseed>
+    <deployedseed>1210235052</deployedseed>
+    <deployedseed>697138764</deployedseed>
+    <deployedseed>651785165</deployedseed>
+    <deployedseed>710714799</deployedseed>
+    <deployedseed>1523088177</deployedseed>
+    <deployedseed>752915634</deployedseed>
+    <deployedseed>2064185214</deployedseed>
+    <deployedseed>1430241667</deployedseed>
+    <deployedseed>227845458</deployedseed>
+    <deployedseed>1929543532</deployedseed>
+    <deployedseed>1894086310</deployedseed>
+    <deployedseed>2062373603</deployedseed>
+    <deployedseed>382453028</deployedseed>
+    <deployedseed>423551253</deployedseed>
+    <deployedseed>202470554</deployedseed>
+    <deployedseed>374208511</deployedseed>
+    <deployedseed>1981130110</deployedseed>
+    <deployedseed>926711167</deployedseed>
+    <deployedseed>1499534599</deployedseed>
+    <deployedseed>2009485483</deployedseed>
+    <deployedseed>911516077</deployedseed>
+    <deployedseed>899075781</deployedseed>
+    <deployedseed>1373293142</deployedseed>
+    <deployedseed>1045765535</deployedseed>
+    <deployedseed>1883906103</deployedseed>
+    <deployedseed>2065125983</deployedseed>
+    <deployedseed>1544880838</deployedseed>
+    <deployedseed>807141686</deployedseed>
+    <deployedseed>1244988395</deployedseed>
+    <deployedseed>1264214606</deployedseed>
+    <deployedseed>220694018</deployedseed>
+    <deployedseed>717884390</deployedseed>
+    <deployedseed>571312063</deployedseed>
+    <deployedseed>2027293932</deployedseed>
+    <deployedseed>752041125</deployedseed>
+    <deployedseed>1140160834</deployedseed>
+    <deployedseed>137551125</deployedseed>
+    <deployedseed>135679110</deployedseed>
+    <deployedseed>1582011780</deployedseed>
+    <deployedseed>1678187052</deployedseed>
+    <deployedseed>1539096635</deployedseed>
+    <deployedseed>1753325130</deployedseed>
+    <deployedseed>1184774813</deployedseed>
+    <deployedseed>506200549</deployedseed>
+    <deployedseed>1594964762</deployedseed>
+    <deployedseed>46086855</deployedseed>
+    <deployedseed>1019251735</deployedseed>
+    <deployedseed>413733633</deployedseed>
+    <deployedseed>1995011034</deployedseed>
+    <deployedseed>1751702261</deployedseed>
+    <deployedseed>1423627450</deployedseed>
+    <deployedseed>273613355</deployedseed>
+    <deployedseed>2142822265</deployedseed>
+    <deployedseed>1404618963</deployedseed>
+    <deployedseed>1148831495</deployedseed>
+    <deployedseed>407923610</deployedseed>
+    <deployedseed>1562040157</deployedseed>
+    <deployedseed>31435763</deployedseed>
+    <deployedseed>94183472</deployedseed>
+    <deployedseed>1285397291</deployedseed>
+    <deployedseed>1177962574</deployedseed>
+    <deployedseed>1925402833</deployedseed>
+    <deployedseed>671891312</deployedseed>
+    <deployedseed>284686155</deployedseed>
+    <deployedseed>132446831</deployedseed>
+    <deployedseed>927009091</deployedseed>
+    <deployedseed>1276168858</deployedseed>
+    <deployedseed>2065736880</deployedseed>
+    <deployedseed>354937650</deployedseed>
+    <deployedseed>735155218</deployedseed>
+    <deployedseed>483429616</deployedseed>
+    <deployedseed>454583088</deployedseed>
+    <deployedseed>1306952655</deployedseed>
+    <deployedseed>1987876572</deployedseed>
+    <deployedseed>498884606</deployedseed>
+    <deployedseed>1481146026</deployedseed>
+    <deployedseed>401784519</deployedseed>
+    <deployedseed>83865246</deployedseed>
+    <deployedseed>219433260</deployedseed>
+    <deployedseed>231355282</deployedseed>
+    <deployedseed>1849727298</deployedseed>
+    <deployedseed>1563914790</deployedseed>
+    <deployedseed>59831872</deployedseed>
+  </question>
+</quiz>

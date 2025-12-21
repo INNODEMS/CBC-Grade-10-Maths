@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the Area of a Similar Polygon</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The corresponding sides of two similar regular polygons are \( {@a@} \) cm and \({@b@}\) cm respectively.The area of the smaller polygon is \( {@c@} \,\text{cm}^2\). What is the area of the larger polygon?
+</p>
+<p><b>Note:</b> Write your answer correct to <b>2</b> decimal places.</p>
+<p>[[input:ans1]] \(\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>
+Since the two polygons are similar, all corresponding lengths are in the same ratio.Here, the ratio of corresponding sides is:
+
+</p>
+<p>\(\frac{@b@}{@a@}.\)</p>
+<p>For similar figures, areas scale with the square of the ratio of corresponding lengths.Therefore, the ratio of the areas is: </p>
+<p>\(
+\left(\frac{{@b@}}{{@a@}}\right)^2.
+\)
+</p>
+<p>
+If the area of the smaller polygon is \( {@c@} \), then the area of the larger hexagon is </p>
+<p>
+\(
+{@c@} \times \left(\frac{@b@}{@a@}\right)^2.={@ta@} \,\text {cm}^2
+\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[ /* Side lengths of similar regular polygons */
+a : rand(9) + 3;   /* side length of smaller polygon */
+b : a + rand(9) + 1; /* side length of larger polygon, ensure b > a */
+
+/* Area of the smaller polygon */
+c : rand_with_step(25,300,5) ;
+
+/* Scale factor between corresponding sides */
+k : b / a;
+
+/* Area of the larger hexagon (area scales with square of side ratio) */
+ larger_hexagon : c * k^2;
+ta:decimalplaces( larger_hexagon,2);
+
+/*mistakes*/
+/*Using the linear scale factor instead of the area scale factor*/
+ta1:decimalplaces(c*k,2);
+/*Forgetting which area is given*/
+ta2:decimalplaces((1/k^2)*c,2);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Area of the smaller polygon = {@c@}</p>
+<p>Area of the larger polygon = {@ta@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Using the linear scale factor instead of the area scale factor</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+It looks like you may have used the scale factor for lengths directly to find the new area. Remember, when shapes are similar, lengths scale by the scale factor, but areas scale by the <strong>square</strong> of the scale factor. Make sure you square the ratio of the corresponding sides before multiplying it by the original area.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Reversing the scale factor</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+It looks like you may have mixed up which polygon has the given area and how the scale factor should be applied. The area provided belongs to the smaller polygon, and your task is to find the area of the larger one. Since you are scaling up, the ratio of corresponding sides should compare the larger side to the smaller side. Make sure the scale factor you use reflects the direction of enlargement and is applied correctly to the area.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>79061849</deployedseed>
+    <deployedseed>1391687465</deployedseed>
+    <deployedseed>1834114793</deployedseed>
+    <deployedseed>1545273106</deployedseed>
+    <deployedseed>1373949093</deployedseed>
+    <deployedseed>1814757350</deployedseed>
+    <deployedseed>603933186</deployedseed>
+    <deployedseed>1798249189</deployedseed>
+    <deployedseed>1945371172</deployedseed>
+    <deployedseed>729902492</deployedseed>
+    <deployedseed>2048173357</deployedseed>
+    <deployedseed>271051849</deployedseed>
+    <deployedseed>323192384</deployedseed>
+    <deployedseed>2033333096</deployedseed>
+    <deployedseed>967620088</deployedseed>
+    <deployedseed>1407082144</deployedseed>
+    <deployedseed>337210682</deployedseed>
+    <deployedseed>1331587845</deployedseed>
+    <deployedseed>930801212</deployedseed>
+    <deployedseed>245362437</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Using the linear scale factor instead of the area scale factor</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>Reversing the scale factor</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the Volume of a Triangular-Based Pyramid</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The figure below shows a pyramid with a triangular base. The base of the triangle measures \({@b@}\,\text{m}\), the height of the triangle is \({@h_tri@}\,\text{m}\), and the vertical height of the pyramid is \({@H@}\,\text{m}\). Find the volume of the pyramid.</p>
+<p>\(\text{Volume}=\)[[input:ans1]]\(\,\text{m}^3\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><strong>Given:</strong></p>
+<p>
+Base of triangle, \(b = {@b@}\,\text{m}\)<br>
+Height of triangle, \(h = {@h_tri@}\,\text{m}\)<br>
+Vertical height of pyramid, \(H = {@H@}\,\text{m}\)
+</p>
+
+<ol type="i">
+  <li>
+    <p>Compute the area of the triangular base:</p>
+    <p>
+\(
+      \begin{align}
+      \text{Base area} &= \frac{1}{2} \times \text{base} \times \text{height of triangle} \\
+      &= \frac{1}{2} \times {@b@} \times {@h_tri@} \\
+      &= {@Base_area@}\,\text{m}^2
+      \end{align}
+\)
+    </p>
+  </li>
+  <li>
+    <p>Compute the volume of the pyramid using \(V = \frac{1}{3} \times \text{Base area} \times \text{vertical height}\):</p>
+    <p>
+\(
+      \begin{align}
+      V &= \frac{1}{3} \times {@Base_area@} \times {@H@} \\
+      &= {@V@}\,\text{m}^3
+      \end{align}
+\)
+    </p>
+  </li>
+</ol>
+
+<p>
+Therefore,<br>
+The volume of the pyramid is \( {@Volume_pyramid@}\,\text{m}^3\) </p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize base of the triangle (b) */
+b : rand_with_step(4, 24, 2);  /* base between 4 cm and 14 cm in steps of 2 */
+
+/* Randomize height of the triangle (h_tri) */
+h_tri : rand_with_step(3, 20, 1);  /* triangle height between 3 cm and 10 cm */
+
+/* Randomize vertical height of the pyramid (H) */
+H : rand_with_step(5, 30, 1);   /* pyramid height between 5 cm and 20 cm */
+
+/* Compute base area of the triangle */
+Base_area : (1/2) * b * h_tri;
+
+/* Compute volume of the pyramid */
+V : (1/3) * Base_area * H;
+
+/* Convert to float and round to 2 decimal places */
+volume : float(V);
+Volume_pyramid : decimalplaces(volume, 2);
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The Base of the triangle}={@b@}\,\text{m}\)</p>
+<p>\(\text{The Vertical height of the triangle}={@h_tri@}\,\text{m}\)</p>
+<p>\(\text{The Vertical height of the Pyramid}={@H@}\,\text{m}\)</p>
+<p>\(\text{The base area}={@Base_area@}\,\text{m}^2\)</p>
+<p>\(\text{The Volume of the pyramid}={@V@}\,\text{m}^3\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>V</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct volume of the pyramid.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>V</tans>
+        <testoptions>0.00000002</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>622173973</deployedseed>
+    <deployedseed>1472648742</deployedseed>
+    <deployedseed>1696544507</deployedseed>
+    <deployedseed>303023302</deployedseed>
+    <deployedseed>1960018969</deployedseed>
+    <deployedseed>1435306534</deployedseed>
+    <deployedseed>2141764339</deployedseed>
+    <deployedseed>1386674134</deployedseed>
+    <deployedseed>272415443</deployedseed>
+    <deployedseed>1660317320</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>V</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

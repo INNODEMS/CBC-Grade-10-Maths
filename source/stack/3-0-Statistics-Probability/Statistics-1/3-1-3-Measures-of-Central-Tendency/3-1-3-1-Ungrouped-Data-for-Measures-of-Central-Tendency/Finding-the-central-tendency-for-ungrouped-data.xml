@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the central tendency for ungrouped data</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The number of cement bags manufactured daily at the <strong>Simba Cement Factory</strong> over a period of 30 days is recorded below:</p>
+{@raw_data@}
+
+<p>Analyze this ungrouped data to determine the following measures of central tendency:</p>
+<p>
+<strong>a) Mean:</strong> Calculate the mean daily production.<br>
+Mean = [[input:ans1]] bags [[validation:ans1]] [[feedback:prt1]]
+</p>
+
+<p>
+<strong>b) Median:</strong> Determine the median number of bags produced.<br>
+Median = [[input:ans2]] bags [[validation:ans2]] [[feedback:prt2]]
+</p>
+
+<p>
+<strong>c) Mode:</strong> Identify the mode of the dataset.<br>
+<em>(Note: If there is more than one mode, enter them as a set, e.g., <code>{450, 460}</code>).</em><br>
+Mode = [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><strong>a) Mean</strong></p>
+<p>The mean is the sum of all observations divided by the total number of observations (\(N\)).</p>
+\( \bar{x} = \frac{\sum x}{N} \)
+\( \bar{x} = \frac{{@sum_x@}}{30} \)
+\( \bar{x} \approx {@decimalplaces(mean_val, 2)@} \text{ bags} \)
+
+
+<br>
+<p><strong>b) Median</strong></p>
+<p>To find the median, we first arrange the data in ascending order:</p>
+{@sorted_data@}
+<p>Since there are \( N=30 \) observations (an even number), the median is the average of the two middle values (the \(15^{\text{th}}\) and \(16^{\text{th}}\) terms).</p>
+<ul>
+    <li>\(15^{\text{th}}\) value: {@term15@}</li>
+    <li>\(16^{\text{th}}\) value: {@term16@}</li>
+</ul>
+\( \text{Median} = \frac{{@term15@} + {@term16@}}{2} = {@median_val@} \text{ bags} \)
+
+<br>
+<p><strong>c) Mode</strong></p>
+<p>The mode is the value that appears most frequently in the dataset. To see this clearly, we can tally the frequency of each production amount:</p>
+
+<table border="1" style="border-collapse: collapse; width: 50%; text-align: center; margin-bottom: 10px;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th>Production (Bags)</th>
+            <th>Frequency</th>
+        </tr>
+    </thead>
+    <tbody>
+        {@freq_table_rows@}
+    </tbody>
+</table>
+
+<p>From the table, the highest frequency is <strong>{@max_freq@}</strong>.</p>
+<p>The value(s) with this frequency: <strong>{@ta_mode@}</strong>.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* 1. DATA GENERATION */
+/* We generate 30 values. To ensure repetition (for the Mode), we limit the pool of numbers. */
+/* We pick numbers between 450 and 550, but only multiples of 5 (e.g. 450, 455, 460...) */
+/* This small pool guarantees that in 30 draws, numbers will repeat multiple times. */
+pool: makelist(450 + 5*k, k, 0, 20); 
+raw_data: makelist(random_permutation(pool)[1], i, 1, 30);
+
+N: length(raw_data);
+
+/* 2. MEAN CALCULATION */
+sum_x: apply("+", raw_data);
+mean_val: float(sum_x / N);
+
+
+/* 3. MEDIAN CALCULATION */
+sorted_data: sort(raw_data);
+/* Since N=30 (even), Median is average of 15th and 16th terms */
+term15: sorted_data[15];
+term16: sorted_data[16];
+median_val: float((term15 + term16) / 2);
+
+
+/* 4. MODE CALCULATION (Robust Logic) */
+/* Get unique elements */
+unique_vals: unique(raw_data);
+/* Count frequency of each unique element */
+freqs: map(lambda([x], length(sublist(raw_data, lambda([y], y=x)))), unique_vals);
+/* Find maximum frequency */
+max_freq: lmax(freqs);
+/* Find all values that match this max frequency */
+mode_indices: sublist_indices(freqs, lambda([x], x=max_freq));
+modes: map(lambda([idx], unique_vals[idx]), mode_indices);
+
+/* Format the mode answer */
+/* If one mode, answer is the number. If multiple, answer is a set {a,b} */
+ta_mode: if length(modes)=1 then modes[1] else setify(modes);
+
+/* Display string for the raw data (comma separated) */
+data_str: sconcat(raw_data);
+
+
+
+/* --- NEW: Generate Frequency Table for Feedback --- */
+/* 1. Get unique values and sort them */
+u_vals: sort(unique(raw_data));
+
+/* 2. Count frequency for each unique value */
+u_freqs: map(lambda([x], length(sublist(raw_data, lambda([y], y=x)))), u_vals);
+
+/* 3. Build HTML rows string */
+freq_table_rows: "";
+for i:1 thru length(u_vals) do (
+    /* Highlight the row if it is the mode */
+    row_style: if u_freqs[i] = max_freq then "background-color: #d4edda; font-weight: bold;" else "",
+    
+    freq_table_rows: sconcat(
+        freq_table_rows,
+        "<tr style='", row_style, "'><td>", u_vals[i], "</td><td>", u_freqs[i], "</td></tr>"
+    )
+);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta_mode@}
+{@mean_val@}
+{@median_val@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author"> Daniel Murunga</p>
+<p id="concept"></p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+<p id="description">In this question, you are provided with 30 raw data points representing the daily production of cement bags at a factory. You are required to analyze this ungrouped data to calculate the mean daily production, determine the median, and identify the mode(s) of the dataset.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>mean_val</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>median_val</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta_mode</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>mean_val</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>median_val</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ta_mode</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Circumference of a circle under enlargement</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The radius of a circle is <strong>{@r0@} cm</strong>. The circle is enlarged by a scale factor of <strong>{@k@}</strong>. Find the circumference of the image of the circle after the enlargement.</p><p>[[input:ans1]] cm[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+
+<p>
+The original radius is \( r = {@r0@} \) cm.
+</p>
+
+<p>
+After enlargement by a scale factor of \( {@k@} \), the new radius is</p>
+<p>
+\(
+r' = {@k@} \times {@r0@} = {@r1@}
+\) cm.
+</p>
+
+<p>
+The circumference of a circle is given by
+\(
+C = 2\pi r.
+\)
+</p>
+
+<p>
+So the circumference of the enlarged circle is</p>
+<p>
+\(
+C = 2\times \frac{22}{7} \times {@r1@} = {@C1@}
+\) cm.
+</p>
+
+<p>
+Equivalently, since circumference scales linearly,</p><p>
+\(
+C = {@k@} \times (2\times \frac{22}{7} \times {@r0@}) = {@ta@} 
+\) cm.
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text> /* Original radius (in cm): decimal, nice values */
+r0 : rand_with_step(0.7,28,0.7);      /* values from 2.0 to 5.0 in steps of 0.5 */
+
+/* Scale factor */
+k : rand([0.25,0.5,0.75,1.5,2]);    /* values from 1.25 to 2.5 */
+
+/* New radius after enlargement */
+r1 : k * r0;
+
+/* Circumference after enlargement */
+C1 : 2 * 22/7 * r1;
+ta:C1;
+
+/*mistakes*/
+/*Forgetting to apply the scale factor*/
+ta1:2 * 22/7 * r0;
+/*Confusion between radius and diameter*/
+ta2:2 *2* 22/7 * r1;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Circumference of the image = {@ta@} </p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.00000000001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Forgetting to apply the scale factor</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions>0.0000001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+It looks like you may have calculated the circumference using the original radius of the circle. Remember, when a shape is enlarged, all lengths are multiplied by the scale factor. This means the radius must first be scaled before finding the circumference. Make sure you apply the scale factor to the radius before using the circumference formula.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Confusion between radius and diameter</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta2</tans>
+        <testoptions>0.0000001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+It looks like you might have confused the radius and the diameter of the circle. Remember, the formula for the circumference is \( C = 2\pi r \), which uses the radius, not the diameter. The diameter is twice the radius, so using it directly in the formula will give an incorrect result. Make sure you are using the correct measurement before applying the circumference formula.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1399585896</deployedseed>
+    <deployedseed>969058654</deployedseed>
+    <deployedseed>1922801440</deployedseed>
+    <deployedseed>884293813</deployedseed>
+    <deployedseed>1672502579</deployedseed>
+    <deployedseed>1286395488</deployedseed>
+    <deployedseed>1227985350</deployedseed>
+    <deployedseed>1697200459</deployedseed>
+    <deployedseed>821221419</deployedseed>
+    <deployedseed>625246398</deployedseed>
+    <deployedseed>1952321018</deployedseed>
+    <deployedseed>1183038094</deployedseed>
+    <deployedseed>1536276755</deployedseed>
+    <deployedseed>1205794151</deployedseed>
+    <deployedseed>1946980738</deployedseed>
+    <deployedseed>249948234</deployedseed>
+    <deployedseed>1343577732</deployedseed>
+    <deployedseed>1398766038</deployedseed>
+    <deployedseed>2105394752</deployedseed>
+    <deployedseed>546484390</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Forgetting to apply the scale factor</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>Confusion between radius and diameter</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding Complementary Angles and Trigonometric Ratios</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+Angles \({@letter_1@}\) and \({@letter_2@}\) are complementary. If \( {@letter_1@}\) = {@fraction@}\({@letter_2@}\) , calculate the following:
+</p>
+
+<ol type="a">
+    <li>
+        <p>Find the values of the angles:</p>
+        <ol type="i">
+            <li>\({@letter_1@}=\)[[input:ans1]]\(^\circ\) [[validation:ans1]]</li>
+            <li>\({@letter_2@}=\)[[input:ans2]]\(^\circ\)[[validation:ans2]]</li>
+           <p>[[feedback:prt1]]<p>
+        </ol>
+    </li>
+    <li>
+        <p>
+        Using a calculator, find the following correct to four significant figures:
+        </p>
+        <ol type="i">
+            <li>\(\sin\, {@letter_1@}=\)[[input:ans3]][[validation:ans3]]</li>
+            <li>\(\cos\,{@letter_2@}=\)[[input:ans4]] [[validation:ans4]]</li>
+           <p>[[feedback:prt2]]<p>
+        </ol>
+    </li>
+</ol>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>When we say {@letter_1@} and {@letter_2@} are complementary, it implies that \({@letter_1@}+{@letter_2@}=90^\circ\).<br>
+Also, we have \({@letter_1@}={@fraction@}{@letter_2@}\).</p>
+
+<p>First, write \({@letter_1@}\) in terms of \({@letter_2@}\), that is,<br>
+\({@eq_1@}<br>
+{@eq_2@}</p>
+
+<p>Since \({@letter_1@}+{@letter_2@}=90^\circ\), substitute \({@eq_2@}\):<br>
+\({@frac_2*letter_1@}+{@letter_1@}=90\)<br>
+{@eq_5@}<br>
+\(\quad {@letter_1@}=\frac{90}{{@coeficient@}}\)<br>
+\(\qquad ={@Ta_1@}\)</p>
+
+<p>Therefore,<br>
+<ol type='i'>
+<li>\(\angle \,{@letter_1@}={@Ta_1@}^\circ\)</li>
+<li>
+<p>\(\angle\,{@letter_2@}\)</p>
+<p>
+\(\begin{align}
+\angle \,{@letter_2@}&=90-{@Ta_1@}^\circ\\
+&={@Ta_2@}^\circ
+\end{align}\)
+</p>
+</li>
+</ol>
+</p>
+
+<p>Use your calculator to find both \(\sin\,{@Ta_1@}^\circ\) and \(\cos\,{@Ta_1@}^\circ\), and write the answers correct to 4 significant figures.<br>
+Therefore,
+<ol type='i'>
+<li>\(\sin\,{@Ta_1@}^\circ={@an_1@}\)</li>
+<li>\(\cos\,{@Ta_2@}^\circ={@an_2@}\)</li>
+</ol>
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>letter_1: rand([C,D,E,F,G,H,I,J,K,M]);
+letter_2:rand([N,O,Q,R,U,W,X,Y,Z]);
+frac:rand_with_step(1,1,1);
+frac_2:rand_with_step(2,20,2);
+fraction:frac/frac_2;
+eq_1:letter_1=fraction*letter_2;
+eq_2:letter_2=frac_2*letter_1;
+simp:false;
+eq_3:letter_1+letter_2=90;
+eq_4:frac_2*letter_1+letter_1=90;
+simp:true;
+eq_5:frac_2*letter_1+letter_1=90;
+coeficient:frac_2+1;
+eq_6:90/coeficient;
+Ta_1:round(eq_6);
+Ta_2:90-Ta_1;
+/*Part b of the question*/
+ans_1:sin(Ta_1*pi/180);
+an_1:decimalplaces(ans_1,4);
+ans_2:cos(Ta_1*pi/180);
+an_2:decimalplaces(ans_2,4);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Part a of the question</p>
+<p>\(\angle \,{@letter_1@}={@Ta_1@}^\circ\)</p>
+<p>\(\angle \,{@letter_2@}={@Ta_2@}^\circ\)</p>
+<p>Part b of the question</p>
+<p>\(\sin\,{@letter_1@}={@an_1@}\)</p>
+<p>\(\cos\,{@letter_1@}={@an_2@}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>Ta_1</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>Ta_2</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>an_1</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>an_2</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct angle.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>Ta_1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for the correct angle.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>Ta_2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the corect value computed in the calculator.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans3</sans>
+        <tans>an_1</tans>
+        <testoptions>4</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for the corect value computed in the calculator.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>an_2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>373903067</deployedseed>
+    <deployedseed>1658010805</deployedseed>
+    <deployedseed>1294555872</deployedseed>
+    <deployedseed>2043432042</deployedseed>
+    <deployedseed>729373309</deployedseed>
+    <deployedseed>1231602281</deployedseed>
+    <deployedseed>1141069541</deployedseed>
+    <deployedseed>644243532</deployedseed>
+    <deployedseed>484132993</deployedseed>
+    <deployedseed>496402449</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Ta_1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>Ta_2</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>an_1</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>an_2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

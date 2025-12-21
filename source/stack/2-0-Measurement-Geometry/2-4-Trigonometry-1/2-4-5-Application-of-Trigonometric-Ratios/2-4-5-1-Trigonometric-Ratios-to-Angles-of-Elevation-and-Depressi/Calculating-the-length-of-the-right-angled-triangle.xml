@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the length of the right angled triangle</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Determine the length of the side marked {@val_letter@} , to the nearest 2 decimal places. </p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+    boundingbox: [-5, 5, 5, -5],
+    keepAspectRatio: true,
+     showNavigation: false,
+        showCopyright: false
+});
+
+// Function to generate random color
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+// Pick one color for this page load
+var triangleColor = getRandomColor();
+
+// Points of the right-angled triangle (invisible, but with labels outside)
+var A = board.create('point', [0, 0], {
+    name: "A",
+    visible: false,
+    withLabel: true,
+    label: {offset: [-15, -15]}
+});
+
+var B = board.create('point', [4, 0], {
+    name: "B",
+    visible: false,
+    withLabel: true,
+    label: {offset: [10, -15]}
+});
+
+var C = board.create('point', [0, 3], {
+    name: "C",
+    visible: false,
+    withLabel: true,
+    label: {offset: [-20, 10]}
+});
+
+// Create triangle with random static color
+var triangle = board.create('polygon', [A, B, C], {
+    fillColor: triangleColor,
+    fillOpacity: 0.6
+});
+
+// Mark the right angle at A
+var rightAngle = board.create('angle', [B, A, C], {
+    radius: 0.5,
+    strokeColor: 'black',
+    name: "90°"
+});
+
+// Angle alpha at B
+// var alpha = board.create('angle', [C, B, A], {
+//     radius: 0.5,
+//     strokeColor: 'black',
+//     name: "α"
+// });
+
+// Angle theta at C
+var theta = board.create('angle', [A, C, B], {
+    radius: 0.5,
+    strokeColor: 'black',
+    name: "{#angle#}°"
+});
+
+// Set border color of triangle
+triangle.borders.forEach(function(border) {
+    border.setAttribute({
+        strokeColor: 'black'
+    });
+});
+
+// Add side length labels
+board.create('text', [1.6, -0.3, "{#val_letter#} "]);   // side AB
+board.create('text', [2, 1.7, "{#hyp#}"]);    // side BC
+[[/jsxgraph]]
+<p>{@val_letter@}= [[input:ans1]] cm[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+<P>Sin \(\theta=\frac{Opposite}{Hypothenuse}=\frac{{@val_letter@}}{{@hyp@}}\)</P>
+<p>\({@val_letter@}= {@hyp@} \times sin ({@angle@})\)</p>
+<p>\({@val_letter@}= {@hyp@} \times {@sine_value_decimal@}= {@opposite@}={@ta@}\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random angle between 5 and 90, step 5 */
+angle : 5 + 5*rand( floor((90-5)/5) + 1 );
+
+/* Random hypotenuse between 5 and 25 */
+hyp : 5 + rand(21);
+
+/* Sine value */
+sine_value : sin(angle * %pi/180);
+sine_value_decimal : float(sine_value);
+
+/* Opposite side */
+opposite : float(hyp * sine_value);
+
+/* Round to 2 decimal places */
+opposite_rounded : round(opposite*100)/100;
+ta:decimalplaces(opposite_rounded,2);
+val_letter:rand([x,y,z,m,n,p,q,r,s,t,w,a,b,c]);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Selected angle={@angle@}</p>
+<p>Hypothenuse side={@hyp@}</p>
+<p>Opposite side ={@ta@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1618247192</deployedseed>
+    <deployedseed>74748740</deployedseed>
+    <deployedseed>1114799686</deployedseed>
+    <deployedseed>966598984</deployedseed>
+    <deployedseed>86708346</deployedseed>
+    <deployedseed>2107010081</deployedseed>
+    <deployedseed>1540794456</deployedseed>
+    <deployedseed>944677460</deployedseed>
+    <deployedseed>2010604141</deployedseed>
+    <deployedseed>1675065243</deployedseed>
+    <deployedseed>1043623762</deployedseed>
+    <deployedseed>902555557</deployedseed>
+    <deployedseed>1621639648</deployedseed>
+    <deployedseed>2100956221</deployedseed>
+    <deployedseed>1966646535</deployedseed>
+    <deployedseed>1610005188</deployedseed>
+    <deployedseed>2142846965</deployedseed>
+    <deployedseed>680279636</deployedseed>
+    <deployedseed>383819789</deployedseed>
+    <deployedseed>965328384</deployedseed>
+    <deployedseed>1002929381</deployedseed>
+    <deployedseed>384693030</deployedseed>
+    <deployedseed>769675501</deployedseed>
+    <deployedseed>1117019810</deployedseed>
+    <deployedseed>1869929853</deployedseed>
+    <deployedseed>296134291</deployedseed>
+    <deployedseed>1865442576</deployedseed>
+    <deployedseed>1887495084</deployedseed>
+    <deployedseed>2022717904</deployedseed>
+    <deployedseed>1281269803</deployedseed>
+    <deployedseed>919166946</deployedseed>
+    <deployedseed>2126322439</deployedseed>
+    <deployedseed>268983833</deployedseed>
+    <deployedseed>1469950419</deployedseed>
+    <deployedseed>1278163264</deployedseed>
+    <deployedseed>24027571</deployedseed>
+    <deployedseed>462357252</deployedseed>
+    <deployedseed>1921561691</deployedseed>
+    <deployedseed>2111434272</deployedseed>
+    <deployedseed>1746345984</deployedseed>
+    <deployedseed>751357424</deployedseed>
+    <deployedseed>2138486223</deployedseed>
+    <deployedseed>981736521</deployedseed>
+    <deployedseed>1166632822</deployedseed>
+    <deployedseed>1050593754</deployedseed>
+    <deployedseed>1141758844</deployedseed>
+    <deployedseed>1052509119</deployedseed>
+    <deployedseed>379121288</deployedseed>
+    <deployedseed>1522527974</deployedseed>
+    <deployedseed>706509024</deployedseed>
+  </question>
+</quiz>

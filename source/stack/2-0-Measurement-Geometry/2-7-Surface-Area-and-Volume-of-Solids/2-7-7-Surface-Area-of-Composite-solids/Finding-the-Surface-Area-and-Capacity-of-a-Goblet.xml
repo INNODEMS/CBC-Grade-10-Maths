@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the Surface Area and Capacity of a Goblet</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A goblet is made up of a hemisphere mounted on top of a cylindrical base. The hemisphere has a radius of \({@r@} \,\text{m}\), and the cylindrical base has the same radius with a height of \({@h@} \,\text{m}\).</p>
+<p>Answer the following:</p>
+<ol type='i'>
+  <li><p>Find the <strong>total external surface area</strong> of the goblet.</p>
+   <p>\(\text{Surface area}=\)[[input:ans1]]\(\,\text{m}^2\)[[validation:ans1]][[feedback:prt1]]</p>
+    </li>
+  <li><p>Determine the <strong>maximum volume of liquid</strong> the goblet can hold.</p>
+   <p>\(\text{Volume}=\)[[input:ans2]]\(\,\text{m}^3\)[[validation:ans2]][[feedback:prt2]]</p>
+
+    </li>
+</ol>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><strong>Worked Solution</strong></p>
+
+<p>
+The goblet consists of two parts:
+</p>
+<ul>
+  <li>a <strong>cylindrical base</strong></li>
+  <li>a <strong>hemisphere on top</strong></li>
+</ul>
+
+<p>
+From the question, the dimensions are:
+<br>
+Radius of the hemisphere and cylinder = {@r@} m  
+<br>
+Height of the cylindrical base = {@h@} m
+</p>
+
+<ol type='i'>
+  <li>
+    <p><strong>Find the total external surface area of the goblet</strong></p>
+    
+    <p>
+    Step 1: Curved surface area of the cylinder<br>
+
+    \(
+    \begin{align}
+    \text{CSA of cylinder} &= 2 \pi r h \\
+    &= 2 \times \frac{22}{7} \times {@r@} \times {@h@} \\
+    &= {@CSA_cyl_val@} \,\text{m}^2
+    \end{align}
+    \)
+    </p>
+    
+    <p>
+    Step 2: Curved surface area of the hemisphere<br>
+
+    \(
+    \begin{align}
+    \text{CSA of hemisphere} &= 2 \pi r^2 \\
+    &= 2 \times \frac{22}{7} \times ({@r@})^2 \\
+    &= {@CSA_hemi_val@} \,\text{m}^2
+    \end{align}
+    \)
+    </p>
+    
+    <p>
+    Step 3: Total external surface area<br>
+
+    \(
+    \begin{align}
+    \text{Total surface area} &= {@CSA_cyl_val@} + {@CSA_hemi_val@} \\
+    &= {@Total_SA_val@} \,\text{m}^2
+    \end{align}
+    \)
+    </p>
+  </li>
+  
+  <li>
+    <p><strong>Determine the maximum volume of liquid the goblet can hold</strong></p>
+    
+    <p>
+    Step 1: Volume of the cylinder<br>
+
+    \(
+    \begin{align}
+    V_{\text{cylinder}} &= \pi r^2 h \\
+    &= \frac{22}{7} \times ({@r@})^2 \times {@h@} \\
+    &= {@Vol_cyl@} \,\text{m}^3
+    \end{align}
+    \)
+    </p>
+    
+    <p>
+    Step 2: Volume of the hemisphere<br>
+
+    \(
+    \begin{align}
+    V_{\text{hemisphere}} &= \frac{2}{3} \pi r^3 \\
+    &= \frac{2}{3} \times \frac{22}{7} \times ({@r@})^3 \\
+    &= {@Vol_hemi@} \,\text{m}^3
+    \end{align}
+    \)
+    </p>
+    
+    <p>
+    Step 3: Total volume of goblet<br>
+
+    \(
+    \begin{align}
+    V_{\text{total}} &= {@Vol_cyl@} + {@Vol_hemi@} \\
+    &= {@Total_Vol_val@} \,\text{m}^3
+    \end{align}
+    \)
+    </p>
+  </li>
+</ol>
+]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize radius and height around 40 (±5) */
+r: rand_with_step(7,77,7); /* radius between 35 and 45 cm */
+h: 35 + rand(11); /* height between 35 and 45 cm */
+
+/* Step 1: Curved surface area of cylinder */
+R_H:r*h;
+CSA_cyl: 2*22/7*r*h;
+CSA_cyl_val: float(CSA_cyl);
+
+/* Step 2: Curved surface area of hemisphere */
+R:r^2;
+CSA_hemi: 2*22/7*r^2;
+CSA_hemi_val: float(CSA_hemi);
+
+/* Step 3: Total external surface area */
+Total_SA: CSA_cyl + CSA_hemi;
+Total_SA_val: float(Total_SA);
+
+/* Step 4: Volume of the goblet (cylinder + hemisphere) */
+Vol_cyl: 22/7*r^2*h;
+Vol_hemi: (2/3)*22/7*r^3;
+Total_Vol: Vol_cyl + Vol_hemi;
+Total_Vol_val1: float(Total_Vol);
+Total_Vol_val:round(Total_Vol_val1);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The radius of the Goblet}={@r@}\,\text{m}\)</p>
+<p>\(\text{The height of the Goblet}={@h@}\,\text{m}\)</p>
+<p>\(\text{The Surface area of the Goblet}={@Total_SA@}\,\text{m}^2\)</p>
+<p>\(\text{The volume of the Goblet}={@Total_Vol_val@}\,\text{m}^3\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>Total_SA</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>Total_Vol_val</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct surface area</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>Total_SA</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct Volume of the goblet.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>Total_Vol_val</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1892779058</deployedseed>
+    <deployedseed>959045927</deployedseed>
+    <deployedseed>1188656956</deployedseed>
+    <deployedseed>269314256</deployedseed>
+    <deployedseed>844161085</deployedseed>
+    <deployedseed>642265835</deployedseed>
+    <deployedseed>1106259383</deployedseed>
+    <deployedseed>1506103553</deployedseed>
+    <deployedseed>319782157</deployedseed>
+    <deployedseed>1091033145</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Total_SA</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>Total_Vol_val</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

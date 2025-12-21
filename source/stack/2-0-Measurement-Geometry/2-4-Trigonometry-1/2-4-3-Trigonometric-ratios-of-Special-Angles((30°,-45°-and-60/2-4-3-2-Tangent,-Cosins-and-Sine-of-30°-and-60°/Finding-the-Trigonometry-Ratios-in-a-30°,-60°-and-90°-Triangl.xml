@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the Trigonometry Ratios in a 30°, 60° and 90° Triangle</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[Using the triangle below, find:
+<p><ol type="a">
+    <p>Find the length BC</p>
+    <li> \( \sin 30^\circ \)</li>
+    <li> \( \cos 60^\circ\)</li>
+    <li>\( \tan 30^\circ \)</li>
+</ol>
+</p>
+[[jsxgraph]]
+ var board = JXG.JSXGraph.initBoard(divid, {
+        boundingbox: [-1, 3, 3, -1],
+        axis: false,
+        showNavigation: false,
+        showCopyright: false
+    });
+
+    // Points with labels only, no circles
+    var A = board.create('point', [0, 0], { 
+        name: 'A', visible: true, fixed: true, label: {offset: [-15, -10]} 
+    });
+    var B = board.create('point', [2, 0], { 
+        name: 'B', visible: true, fixed: true, label: {offset: [15, -10]} 
+    });
+    var C = board.create('point', [2, 2.5], { 
+        name: 'C', visible: true, fixed: true, label: {offset: [15, 5]} 
+    });
+
+    // Triangle sides
+    board.create('segment', [A, B]);
+    board.create('segment', [B, C]);
+    board.create('segment', [A, C]);
+
+    // Angles
+    board.create('angle', [B, A, C], {radius: 0.5, name: '30°'});
+    board.create('angle', [A, C, B], {radius: 0.5, name: '60°'});
+
+    // Side length labels
+    board.create('text', [1, -0.1, '1']);   // AB
+    board.create('text', [0.7, 1.3, '2']);    // AC
+
+[[/jsxgraph]]
+
+<p>a. \(\text{The length BC}=\)[[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p>
+<p>b. \(\sin\,30^\circ=\)[[input:ans2]] [[validation:ans2]][[feedback:prt2]]</p>
+<p>c. \(\cos\,60^\circ=\)[[input:ans3]] [[validation:ans3]][[feedback:prt3]]</p>
+<p>d. \(\tan\,30^\circ=\)[[input:ans4]] [[validation:ans4]][[feedback:prt4]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<ol type="a">
+    <li>
+        <p><strong>Length \(BC\)</strong></p>
+        <p>
+        Using the Pythagorean theorem:<br>
+        \(
+        \begin{align}
+        BC^2 &= AC^2 - AB^2 \\
+        &= {@AC@}^2 - {@AB@}^2 \\
+        &= {@AC*AC - AB*AB@} \\
+        \therefore BC &= \sqrt{@AC*AC - AB*AB@} = {@BC@}
+        \end{align}
+        \)
+        </p>
+    </li>
+    <li>
+        <p><strong>\(\sin {@angle_30@}^\circ\)</strong></p>
+        <p>
+        \(
+        \begin{align}
+        \sin {@angle_30@}^\circ &= \frac{\text{opposite}}{\text{hypotenuse}} \\
+        &= \frac{@AB@}{@AC@} \\
+        &= {@ta_sin30@}
+        \end{align}
+        \)
+        </p>
+    </li>
+    <li>
+        <p><strong>\(\cos {@angle_60@}^\circ\)</strong></p>
+        <p>
+        \(
+        \begin{align}
+        \cos {@angle_60@}^\circ &= \frac{\text{adjacent}}{\text{hypotenuse}} \\
+        &= \frac{@AB@}{@AC@} \\
+        &= {@ta_cos60@}
+        \end{align}
+        \)
+        </p>
+    </li>
+    <li>
+        <p><strong>\(\tan {@angle_30@}^\circ\)</strong></p>
+        <p>
+        \(
+        \begin{align}
+        \tan {@angle_30@}^\circ &= \frac{\text{opposite}}{\text{adjacent}} \\
+        &= \frac{@AB@}{@BC@} \\
+        &= {@ta_tan30@}
+        \end{align}
+        \)
+        </p>
+    </li>
+</ol>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize sides of the triangle */
+AB : 1;  /* base AB: random value between 1 and 26 */
+AC : 2;  /* height AC: random value between 1 and 26 */
+BC:sqrt(2^2-1^2); /*The height of the Triangle*/
+
+/* Fixed angles */
+angle_30 : 30;  
+angle_60 : 60;
+
+/* Teacher answers (exact trig ratios) */
+ta_sin30 : sin(angle_30 * %pi / 180);   /* sin 30° */
+ta_cos60 : cos(angle_60 * %pi / 180);   /* cos 60° */
+ta_tan30 : tan(angle_30 * %pi / 180);   /* tan 30° */</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{Line AB}={@AB@}\)</p>
+<p>\(\text{Line AC}={@AC@}\)</p>
+<p>\(\text{Line BC}={@BC@}\)</p>
+<p>\(\sin\,30^\circ={@ta_sin30@}\)</p>
+<p>\(\cos\,60^\circ={@ta_cos60@}\)</p>
+<p>\(\tan\,30^\circ={@ta_tan30 @}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>BC</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta_sin30</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta_cos60</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>ta_tan30 </tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct length</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>BC</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct sin 30 degrees</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta_sin30</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct cos 60</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ta_cos60</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct tan 30</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>ta_tan30 </tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1478331919</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>BC</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta_sin30</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>ta_cos60</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>ta_tan30 </value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt4</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt4-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

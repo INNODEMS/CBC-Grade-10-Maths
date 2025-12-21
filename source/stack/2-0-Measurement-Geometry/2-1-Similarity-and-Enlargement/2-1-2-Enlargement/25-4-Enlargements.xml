@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>25.4 Enlargements</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Here is a diagram of a transformation.
+<br>The blue shape has been enlarged into the red shape.</p>
+<p><br></p>
+
+<center>
+[[jsxgraph height="500px" width="500px"]]
+
+    var largeCoord1 = [{#first(largeCen)+first(largeOri)#},{#second(largeCen)+second(largeOri)#}];
+    var largeCoord2 = [{#first(largeCen)+(if abs(first(largeOri))=3 then -first(largeOri) else first(largeOri))#},{#second(largeCen)+(if abs(second(largeOri))=3 then -second(largeOri) else second(largeOri))#}];
+
+    var cenPoint = {#tans2#};
+    var scaleFact = {#tans1#};
+
+    var smallCoord1 = [
+      cenPoint[0]*(1-1/scaleFact)+largeCoord1[0]/scaleFact,
+      cenPoint[1]*(1-1/scaleFact)+largeCoord1[1]/scaleFact,
+    ];
+    var smallCoord2 = [
+      cenPoint[0]*(1-1/scaleFact)+largeCoord2[0]/scaleFact,
+      cenPoint[1]*(1-1/scaleFact)+largeCoord2[1]/scaleFact,
+    ];
+
+    JXG.Options.text.useMathJax=true;
+    var board = JXG.JSXGraph.initBoard(divid, {
+      boundingBox:[-7,7,7,-7],
+      showCopyright:false,
+      showNavigation:false,
+      keepaspectratio:true,
+      axis:true
+    });
+
+    // Small Shape
+
+    var p1 = board.create("point", smallCoord1, {visible:false});
+    var p2 = board.create("point", smallCoord2, {visible:false});
+
+    var pointList = [
+      p1,
+      p2,
+      [p2.X()-(p1.Y()-p2.Y())/3, p2.Y()+(p1.X()-p2.X())/3],
+      [
+        p2.X()+(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3, 
+        p2.Y()+(p1.X()-p2.X())/3+(p1.Y()-p2.Y())/3
+      ],
+      [
+        p2.X()+(p1.X()-p2.X())/3-2*(p1.Y()-p2.Y())/3, 
+        p2.Y()+2*(p1.X()-p2.X())/3+(p1.Y()-p2.Y())/3
+      ],
+      [
+        p1.X()-(p1.X()-p2.X())/3-2*(p1.Y()-p2.Y())/3, 
+        p1.Y()+2*(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3
+      ],
+      [
+        p1.X()-(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3, 
+        p1.Y()+(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3
+      ],
+      [p1.X()-(p1.Y()-p2.Y())/3, p1.Y()+(p1.X()-p2.X())/3]
+    ];
+
+    board.create("polygon", pointList, {
+      fixed:true,
+      highlight:false,
+      fillColor:"blue",
+      borders:{
+        fixed:true,
+        highlight:false,
+        strokeColor:"blue"
+      },
+      vertices:{
+        visible:false
+      }
+    });
+
+    // Large Shape
+
+    var p3 = board.create("point", largeCoord1, {visible:false});
+    var p4 = board.create("point", largeCoord2, {visible:false});
+
+    var pointList = [
+      p3,
+      p4,
+      [p4.X()-(p3.Y()-p4.Y())/3, p4.Y()+(p3.X()-p4.X())/3],
+      [
+        p4.X()+(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3, 
+        p4.Y()+(p3.X()-p4.X())/3+(p3.Y()-p4.Y())/3
+      ],
+      [
+        p4.X()+(p3.X()-p4.X())/3-2*(p3.Y()-p4.Y())/3, 
+        p4.Y()+2*(p3.X()-p4.X())/3+(p3.Y()-p4.Y())/3
+      ],
+      [
+        p3.X()-(p3.X()-p4.X())/3-2*(p3.Y()-p4.Y())/3, 
+        p3.Y()+2*(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3
+      ],
+      [
+        p3.X()-(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3, 
+        p3.Y()+(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3
+      ],
+      [p3.X()-(p3.Y()-p4.Y())/3, p3.Y()+(p3.X()-p4.X())/3]
+    ];
+
+    board.create("polygon", pointList, {
+      fixed:true,
+      highlight:false,
+      fillColor:"red",
+      borders:{
+        fixed:true,
+        highlight:false,
+        strokeColor:"red"
+      },
+      vertices:{
+        visible:false
+      }
+    });
+
+[[/jsxgraph]]
+</center>
+
+<p><br>(a) Find the scale factor of the transformation.</p>
+<p align="right">[[input:ans1]] [[validation:ans1]]</p>
+<p align="right"><b>(1)</b></p>
+<p>[[feedback:prt1]]</p>
+
+<p><br>(b) Find the centre of enlargement of the transformation.</p>
+<p align="right">\((\)[[input:ans2]]\(,\) [[input:ans3]]\()\) [[validation:ans2]] [[validation:ans3]]</p>
+<p align="right"><b>(2)</b></p>
+<p>[[feedback:prt2]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text/>
+    </generalfeedback>
+    <defaultgrade>3</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2018080600</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Positioning the RED shape */
+largeCen:[rand([1,-1])*rand([1,2,3]), rand([1,-1])*rand([1,2,3])];
+largeOri:rand([[-1,-3], [3,-1], [1,3], [-3,1]]);
+
+/* Randomising centre and scale factor */
+tans1:rand([2,3]);
+
+tans2:[first(largeCen)+tans1*rand_with_prohib(ceiling((-6-first(largeCen))/tans1), floor((6-first(largeCen))/tans1), [-1,0,1]), second(largeCen)+tans1*rand_with_prohib(ceiling((-6-second(largeCen))/tans1), floor((6-second(largeCen))/tans1), [-1,0,1])];</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="moodle_auto_format">
+      <text>1</text>
+    </questionnote>
+    <questiondescription format="moodle_auto_format">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>dot</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>tans1</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>first(tans2)</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>second(tans2)</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>/* Node 1: Correct answer */
+/* Node 2: Worked solution */
+
+/* Node 3: Feedback for giving inverse */</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>tans1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1.0000000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>1</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.0000000</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>Here is a worked solution:</p>
+<p>The scale factor of enlargement can be determined by comparing the length of any similar sides of the two shapes:</p>
+<p><br></p>
+
+<center>
+[[jsxgraph height="350px" width="350px"]]
+
+    var largeCoord1 = [{#first(largeCen)+first(largeOri)#},{#second(largeCen)+second(largeOri)#}];
+    var largeCoord2 = [{#first(largeCen)+(if abs(first(largeOri))=3 then -first(largeOri) else first(largeOri))#},{#second(largeCen)+(if abs(second(largeOri))=3 then -second(largeOri) else second(largeOri))#}];
+
+    var cenPoint = {#tans2#};
+    var scaleFact = {#tans1#};
+
+    var smallCoord1 = [
+      cenPoint[0]*(1-1/scaleFact)+largeCoord1[0]/scaleFact,
+      cenPoint[1]*(1-1/scaleFact)+largeCoord1[1]/scaleFact,
+    ];
+    var smallCoord2 = [
+      cenPoint[0]*(1-1/scaleFact)+largeCoord2[0]/scaleFact,
+      cenPoint[1]*(1-1/scaleFact)+largeCoord2[1]/scaleFact,
+    ];
+
+    JXG.Options.text.useMathJax=true;
+    var board = JXG.JSXGraph.initBoard(divid, {
+      boundingBox:[-7,7,7,-7],
+      showCopyright:false,
+      showNavigation:false,
+      keepaspectratio:true,
+      axis:true
+    });
+
+    // Small Shape
+
+    var p1 = board.create("point", smallCoord1, {visible:false});
+    var p2 = board.create("point", smallCoord2, {visible:false});
+
+    var pointList = [
+      p1,
+      p2,
+      [p2.X()-(p1.Y()-p2.Y())/3, p2.Y()+(p1.X()-p2.X())/3],
+      [
+        p2.X()+(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3, 
+        p2.Y()+(p1.X()-p2.X())/3+(p1.Y()-p2.Y())/3
+      ],
+      [
+        p2.X()+(p1.X()-p2.X())/3-2*(p1.Y()-p2.Y())/3, 
+        p2.Y()+2*(p1.X()-p2.X())/3+(p1.Y()-p2.Y())/3
+      ],
+      [
+        p1.X()-(p1.X()-p2.X())/3-2*(p1.Y()-p2.Y())/3, 
+        p1.Y()+2*(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3
+      ],
+      [
+        p1.X()-(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3, 
+        p1.Y()+(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3
+      ],
+      [p1.X()-(p1.Y()-p2.Y())/3, p1.Y()+(p1.X()-p2.X())/3]
+    ];
+
+    board.create("polygon", pointList, {
+      fixed:true,
+      highlight:false,
+      fillColor:"blue",
+      borders:{
+        fixed:true,
+        highlight:false,
+        strokeColor:"blue"
+      },
+      vertices:{
+        visible:false
+      }
+    });
+
+    // Large Shape
+
+    var p3 = board.create("point", largeCoord1, {visible:false});
+    var p4 = board.create("point", largeCoord2, {visible:false});
+
+    var pointList = [
+      p3,
+      p4,
+      [p4.X()-(p3.Y()-p4.Y())/3, p4.Y()+(p3.X()-p4.X())/3],
+      [
+        p4.X()+(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3, 
+        p4.Y()+(p3.X()-p4.X())/3+(p3.Y()-p4.Y())/3
+      ],
+      [
+        p4.X()+(p3.X()-p4.X())/3-2*(p3.Y()-p4.Y())/3, 
+        p4.Y()+2*(p3.X()-p4.X())/3+(p3.Y()-p4.Y())/3
+      ],
+      [
+        p3.X()-(p3.X()-p4.X())/3-2*(p3.Y()-p4.Y())/3, 
+        p3.Y()+2*(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3
+      ],
+      [
+        p3.X()-(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3, 
+        p3.Y()+(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3
+      ],
+      [p3.X()-(p3.Y()-p4.Y())/3, p3.Y()+(p3.X()-p4.X())/3]
+    ];
+
+    board.create("polygon", pointList, {
+      fixed:true,
+      highlight:false,
+      fillColor:"red",
+      borders:{
+        fixed:true,
+        highlight:false,
+        strokeColor:"red"
+      },
+      vertices:{
+        visible:false
+      }
+    });
+
+    var lineStyle = {
+      fixed:true,
+      highlight:false,
+      strokeColor:"#00df25",
+      strokeWidth:3,
+    };
+
+    board.create("segment", [largeCoord1, largeCoord2], lineStyle);
+    board.create("segment", [smallCoord1, smallCoord2], lineStyle);
+
+[[/jsxgraph]]
+</center>
+
+<p><br>Comparing the similar green lengths of each shape, the red shape has width \(6\), and the blue shape has width \({@6/tans1@}\).</p>
+<p>Therefore, the scale factor of enlargement is \(\frac{6}{{@6/tans1@}} = {@tans1@}\)</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>1/tans1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.0000000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>You have found the scale factor of the enlargement of the red shape to the blue shape.
+<br>However, you should have found the scale factor of the transformation from <b>blue to red</b>.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>/* Node 1: Correct answer */
+/* Node 2: Worked solution */
+/* Node 3: Coordinates given wrong way around (1) */
+/* Node 4: Check correct x-coord (+1) */
+/* Node 5: Check correct y-coord (+1) */</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>[ans2,ans3]</sans>
+        <tans>tans2</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1.0000000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>1</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.0000000</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>Here is a worked solution:</p>
+<p>The centre of enlargement can be determined by drawing lines between similar points on the shapes and finding the intersection of these lines.</p>
+<p><br></p>
+
+<center>
+[[jsxgraph height="350px" width="350px"]]
+
+    var largeCoord1 = [{#first(largeCen)+first(largeOri)#},{#second(largeCen)+second(largeOri)#}];
+    var largeCoord2 = [{#first(largeCen)+(if abs(first(largeOri))=3 then -first(largeOri) else first(largeOri))#},{#second(largeCen)+(if abs(second(largeOri))=3 then -second(largeOri) else second(largeOri))#}];
+
+    var cenPoint = {#tans2#};
+    var scaleFact = {#tans1#};
+
+    var smallCoord1 = [
+      cenPoint[0]*(1-1/scaleFact)+largeCoord1[0]/scaleFact,
+      cenPoint[1]*(1-1/scaleFact)+largeCoord1[1]/scaleFact,
+    ];
+    var smallCoord2 = [
+      cenPoint[0]*(1-1/scaleFact)+largeCoord2[0]/scaleFact,
+      cenPoint[1]*(1-1/scaleFact)+largeCoord2[1]/scaleFact,
+    ];
+
+    JXG.Options.text.useMathJax=true;
+    var board = JXG.JSXGraph.initBoard(divid, {
+      boundingBox:[-7,7,7,-7],
+      showCopyright:false,
+      showNavigation:false,
+      keepaspectratio:true,
+      axis:true
+    });
+
+    // Small Shape
+
+    var p1 = board.create("point", smallCoord1, {visible:false});
+    var p2 = board.create("point", smallCoord2, {visible:false});
+
+    var pointList = [
+      p1,
+      p2,
+      [p2.X()-(p1.Y()-p2.Y())/3, p2.Y()+(p1.X()-p2.X())/3],
+      [
+        p2.X()+(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3, 
+        p2.Y()+(p1.X()-p2.X())/3+(p1.Y()-p2.Y())/3
+      ],
+      [
+        p2.X()+(p1.X()-p2.X())/3-2*(p1.Y()-p2.Y())/3, 
+        p2.Y()+2*(p1.X()-p2.X())/3+(p1.Y()-p2.Y())/3
+      ],
+      [
+        p1.X()-(p1.X()-p2.X())/3-2*(p1.Y()-p2.Y())/3, 
+        p1.Y()+2*(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3
+      ],
+      [
+        p1.X()-(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3, 
+        p1.Y()+(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3
+      ],
+      [p1.X()-(p1.Y()-p2.Y())/3, p1.Y()+(p1.X()-p2.X())/3]
+    ];
+
+    board.create("polygon", pointList, {
+      fixed:true,
+      highlight:false,
+      fillColor:"blue",
+      borders:{
+        fixed:true,
+        highlight:false,
+        strokeColor:"blue"
+      },
+      vertices:{
+        visible:false
+      }
+    });
+
+    // Large Shape
+
+    var p3 = board.create("point", largeCoord1, {visible:false});
+    var p4 = board.create("point", largeCoord2, {visible:false});
+
+    var pointList = [
+      p3,
+      p4,
+      [p4.X()-(p3.Y()-p4.Y())/3, p4.Y()+(p3.X()-p4.X())/3],
+      [
+        p4.X()+(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3, 
+        p4.Y()+(p3.X()-p4.X())/3+(p3.Y()-p4.Y())/3
+      ],
+      [
+        p4.X()+(p3.X()-p4.X())/3-2*(p3.Y()-p4.Y())/3, 
+        p4.Y()+2*(p3.X()-p4.X())/3+(p3.Y()-p4.Y())/3
+      ],
+      [
+        p3.X()-(p3.X()-p4.X())/3-2*(p3.Y()-p4.Y())/3, 
+        p3.Y()+2*(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3
+      ],
+      [
+        p3.X()-(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3, 
+        p3.Y()+(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3
+      ],
+      [p3.X()-(p3.Y()-p4.Y())/3, p3.Y()+(p3.X()-p4.X())/3]
+    ];
+
+    board.create("polygon", pointList, {
+      fixed:true,
+      highlight:false,
+      fillColor:"red",
+      borders:{
+        fixed:true,
+        highlight:false,
+        strokeColor:"red"
+      },
+      vertices:{
+        visible:false
+      }
+    });
+
+    var lineStyle = {
+      fixed:true,
+      highlight:false,
+      strokeColor:"purple",
+      strokeWidth:2,
+      dash:3
+    }
+
+    var lineA = board.create("line", [largeCoord1, smallCoord1], lineStyle);
+    var lineB = board.create("line", [largeCoord2, smallCoord2], lineStyle);
+
+    board.create("intersection", [lineA, lineB], {
+      fixed:true,
+      highlight:false,
+      fillColor:"#00df25",
+      strokeColor:"#00df25",
+      name:" "
+    })
+
+[[/jsxgraph]]
+</center>
+
+<p><br>The intersection of these lines shows that the centre of enlargement is \(({@first(tans2)@}, {@second(tans2)@})\)</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>[ans3,ans2]</sans>
+        <tans>tans2</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0.5000000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt2-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>You seem to have given your coordinates the wrong way around.
+<br>Remember that the first coordinate represents the position along the horizontal, \(x\), axis and the second coordinate represents the position along the vertical, \(y\), axis.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt2-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>first(tans2)</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5000000</truescore>
+        <truepenalty/>
+        <truenextnode>4</truenextnode>
+        <trueanswernote>prt2-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>Your answer for the \(x\) coordinate of the centre of enlargement is correct.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>4</falsenextnode>
+        <falseanswernote>prt2-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p><br>Your answer for the \(x\) coordinate of the centre of enlargement is incorrect.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>4</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>second(tans2)</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5000000</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt2-5-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Your answer for the \(y\) coordinate of the centre of enlargement is correct.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-5-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Your answer for the \(y\) coordinate of the centre of enlargement is incorrect.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>

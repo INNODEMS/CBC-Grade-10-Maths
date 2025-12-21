@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the Surface Area of a Composite Solid</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>The figure below is a composite solid made up of a rectangular prism and a triangular prism joined together.</p>
+[[jsxgraph]]
+  var board = JXG.JSXGraph.initBoard(divid, {
+      boundingbox: [-5, 12, 30, -5],
+      axis: false, showCopyright: false
+    });
+
+    // Define points
+    var A = board.create('point', [0, 0], {name: 'A', visible: false,fixed:true});
+    var B = board.create('point', [0, 6.2], {name: 'B', visible: false,fixed:true});
+    var C = board.create('point', [20, 6.2], {name: 'C', visible: false,fixed:true});
+    var D = board.create('point', [20, 0], {name: 'D', visible: false,fixed:true});
+    var E = board.create('point', [25, 3], {name: 'E', visible: false,fixed:true});
+    var F = board.create('point', [5, 3], {name: 'F', visible: false,fixed:true});
+    
+
+    // Draw rectangle and triangle
+    var rect = board.create('polygon', [A, B, C, D], {borders: {strokeColor: 'black'},fixed:true});
+    var triangle = board.create('polygon', [D, C, E], {borders: {strokeColor: 'black'},fixed:true});
+
+    // Draw diagonals
+    board.create('line', [B, F], {dash: 2, straightFirst: false, straightLast: false,fixed:true});
+    board.create('line', [A, F], {dash: 2, straightFirst: false, straightLast: false,fixed:true});
+    board.create('line', [F, E], {dash: 2, straightFirst: false, straightLast: false,fixed:true});
+
+    // Add right-angle indicator at point A
+    var RA1 = board.create('polygon', [
+      board.create('point', [0, 0], {visible: false ,fixed:true}),
+      board.create('point', [0.8, 0.5], {visible: false,fixed:true}),
+      board.create('point', [0.8, 1.2], {visible: false,fixed:true}),
+      board.create('point', [0, 0.9], {visible: false,fixed:true})
+    ], {
+      borders: {strokeColor: 'blue'},
+      fillColor: 'lightblue',
+      highlight: false,
+      withLines: true
+    });
+
+    // Add right-angle indicator at point D (between 20 cm and 6 cm sides)
+    var RA2 = board.create('polygon', [
+      board.create('point', [20, 0], {visible: false}),
+      board.create('point', [20, 0.9], {visible: false}),
+      board.create('point', [20.7, 1.1], {visible: false}),
+      board.create('point', [20.7, 0.4], {visible: false})
+    ], {
+      borders: {strokeColor: 'blue'},
+      fillColor: 'lightblue',
+      highlight: false,
+      withLines: true
+    });
+
+    // Optional: label dimensions
+    board.create('text', [-2, 4, '{#h#} cm'],{fixed:true});
+    board.create('text', [9, -1.1, '{#l#} cm'],{fixed:true});
+    board.create('text', [23, 1.5, '{#b#} cm'],{fixed:true});
+ [[/jsxgraph]]
+
+
+
+<p>
+
+<ul>
+  <li>The rectangular part has a height of \({@h@}\, \text{m}\) and a length of \({@l@}\, \text{m}\).</li>
+  <li>The triangular part is a right-angled triangle with a base of \({@b@}\, \text{m}\), a height of \({@h@}\, \text{m}\), and it shares the same width of \({@l@}\, \text{m}\) with the rectangular part.</li>
+</ul>
+</p>
+<p>
+<ol type="a">
+  <li>
+    <p>Calculate the total surface area of the rectangular part.</p>
+    <p>\(\text{Area of the rectangular part} =\) [[input:ans1]] \(\text{m}^2\)</p>
+    [[feedback:prt1]]
+  </li>
+
+  <li>
+    <p>Calculate the total surface area of the triangular part.</p>
+    <p>\(\text{Area of the triangular part} =\) [[input:ans2]] \(\text{m}^2\)</p>
+    [[feedback:prt2]]
+  </li>
+
+  <li>
+    <p>Calculate the total surface area of the solid.</p>
+    <p>\(\text{Total surface area of the solid} =\) [[input:ans3]] \(\text{m}^2\)</p>
+    [[feedback:prt3]]
+  </li>
+</ol>
+</p>
+<p hidden>
+  [[validation:ans1]]
+  [[validation:ans2]]
+  [[validation:ans3]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><strong>a. Calculate the total surface area of the rectangular part</strong></p>
+
+<p>There are three rectangular faces:</p>
+
+<p>Rectangle 1 (bottom):<br>
+Area = \( {@l@} \times {@b@} = {@Rect_1@} \, \text{m}^2 \)</p>
+
+<p>Rectangle 2 (side):<br>
+Area = \( {@l@} \times {@h@} = {@Rect_2@} \, \text{m}^2 \)</p>
+
+<p>Rectangle 3 (slanted side):<br>
+First, find the hypotenuse of the triangle:<br>
+\( c = \sqrt{{@b@}^2 +  {@h@}^2} = \sqrt{{@b_2@} + {@h_2@}} = \sqrt{@squared@} = {@hyp@} \, \text{m} \)<br>
+Area = \( {@l@} \times {@hyp@} = {@Rect_3@} \, \text{m}^2 \)</p>
+
+<p>Total surface area of rectangular part =
+\( 1{@Rect_1@}+ {@Rect_2@} + {@Rect_3@}= \boxed{{@rect_area@} \, \text{m}^2} \)</p>
+
+<p><strong>b. Calculate the total surface area of the triangular part</strong></p>
+
+<p>Each triangular base:<br>
+Area = \( \frac{1}{2} \times {@b@} \times {@h@} = {@Tri_1@} \, \text{m}^2 \)</p>
+
+<p>Total surface area of triangular part =
+\( 2 \times {@Tri_1@}  = \boxed{{@tri_area @} \, \text{m}^2} \)</p>
+
+<p><strong>c. Calculate the total surface area of the solid</strong></p>
+
+<p>Total surface area =
+\( {@rect_area@} + {@tri_area @}= \boxed{{\color{blue}{@total_surface_area@}}\, \text{cm}^2} \)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Step 1: Load 40 predefined Pythagorean triples */
+triples: [
+  [3,4,5],[5,12,13],[6,8,10],[7,24,25],[8,15,17],
+  [9,12,15],[9,40,41],[10,24,26],[11,60,61],[12,16,20],
+  [12,35,37],[13,84,85],[14,48,50],[15,20,25],[15,36,39],
+  [16,30,34],[16,63,65],[18,24,30],[18,80,82],[20,21,29],
+  [20,48,52],[21,28,35],[21,72,75],[24,32,40],[24,45,51],
+  [27,36,45],[28,45,53],[30,40,50],[30,72,78],[33,44,55],
+  [33,56,65],[35,84,91],[36,48,60],[36,77,85],[39,52,65],
+  [40,75,85],[45,60,75],[48,55,73],[60,63,87],[65,72,97]
+];
+
+/* Step 2: Randomly pick one */
+chosen : triples[rand(40) + 1];
+b : chosen[1]; /* base */
+h : chosen[2]; /* height */
+hyp : chosen[3]; /* hypotenuse */
+
+/* Step 3: Ensure the length is always greater than both */
+l : max(b, h) + rand(6) + 6; /* example: if max = 24, l could be 30 */
+b_2:b^2;
+h_2:h^2;
+squared:b_2+h_2
+
+
+
+
+/* Step 4: Calculate surface area of the rectangular prism */
+Rect_1:l*b;
+Rect_2:l*h;
+Rect_3:l*hyp;
+rect_area : Rect_1+Rect_2+Rect_3;
+
+/* Step 5: Surface area of the triangular prism */
+base_height:b*h;
+Tri_1:(1/2*b*h);
+tri_area :2*Tri_1;
+
+
+/* Step 6: Finding the total surface are of the solid. */
+
+total_surface_area : rect_area+tri_area;
+
+/* Return everything neatly */
+[b, h, l, hyp, rect_area, tri_area, total_surface_area];
+
+
+/*Mistake 1 Forgetting to Multiply by 2 for the Two Triangles*/
+tri_1:Tri_1;
+total_surface_1:rect_area+tri_1;
+
+/*Mistake 2 Not Identifying the Slanted Side Correctly*/
+rect_2:l*b;
+rect_area_2: Rect_1+Rect_2+rect_2;
+total_surface_2:rect_area_2+tri_1;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The surface area of the rectangular part}= {@rect_area@}\,\text{m}^2\)</p>
+<p>\(\text{The surface area of the triangular part}= {@tri_area@}\,\text{m}^2\)</p>
+<p>\(\text{The total surface area}= {@
+total_surface_area@}\,\text{m}^2\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Henry Onyango</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+<p id="description"> This is a question on a composite solid. The student is expected to understand the figure and calculate its surface area. The required parts are:<br
+Surface area of the rectangular part <br>
+Surface area of the triangular part <br>
+The total surface area</p>
+<p id="description">The student should know that the total surface area is found by adding the areas of all visible faces, not by using \(\text{SA}=\text{base area} \times \text{height}\),which is for volume or lateral area in some cases. </p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>rect_area</tans>
+      <boxsize>9</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>tri_area </tans>
+      <boxsize>9</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>total_surface_area</tans>
+      <boxsize>9</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct area of the rectangular part.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>rect_area</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for Incorrectly Identifying the Slanted Side</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>rect_area_2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.4</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Nice work identifying that the prism has a slanted rectangular face—recognizing that is important. However, it looks like the length you used for the slanted edge came directly from one of the triangle’s sides, rather than being calculated.</p>
+<p>Since the triangular base is a right-angled triangle, you can find the slanted edge (the hypotenuse) using the Pythagorean theorem: \(\sqrt{{@b@}^2 \times {@h@}^2}=\text{hyp}\)</p>
+<p>This gives you the correct length for that side of the rectangle. You're definitely on the right track—just remember to check whether any side lengths need to be worked out before using them.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct area of the triangular part.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>tri_area </tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for Forgetting to Multiply by 2 for the Triangular Faces</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>tri_1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.4</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Great job calculating the area of one triangle correctly! You used the right formula and applied the base and height values well. That shows a good understanding of triangle area.</p>
+<p>Just a small oversight: since the prism has two triangular faces, you need to multiply the area of one triangle by 2 to get the total area of the triangular part.</p>
+<p>So instead of just \({@tri_1@}\,\text{m}^2\), it should be: \( 2\times {@tri_1@}\)</p>
+<p>Keep up the good work—double-checking how many faces are involved will help you catch these small details next time! </p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct total surface area of the solid drawn.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>total_surface_area</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checkks for Forgetting to Multiply by 2 for the Triangular Faces</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>total_surface_1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You might have forgotten to multiply The area of the triangle by 2 hence led to the incorrect calculation. Kindly check the step by step worked solution to get the correct solution.</p>
+<p>You are almost there.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt3-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Checks for  Incorrectly Identifying the Slanted Side</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>total_surface_2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You might have forgotten to calculate the slant height instead you have used the base of the triangle. Kindly check the step by step solution below fr the correct answer.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1139111245</deployedseed>
+    <deployedseed>2046067278</deployedseed>
+    <deployedseed>1769478059</deployedseed>
+    <deployedseed>834635017</deployedseed>
+    <deployedseed>1888576451</deployedseed>
+    <deployedseed>1482052100</deployedseed>
+    <deployedseed>326051469</deployedseed>
+    <deployedseed>1784866286</deployedseed>
+    <deployedseed>1904137842</deployedseed>
+    <deployedseed>964270052</deployedseed>
+    <deployedseed>1122462650</deployedseed>
+    <deployedseed>1593098380</deployedseed>
+    <deployedseed>2138063444</deployedseed>
+    <deployedseed>433339356</deployedseed>
+    <deployedseed>372226816</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>rect_area</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>tri_area </value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>total_surface_area</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Checks for Forgetting to Multiply by 2 for the Triangular Faces</description>
+      <testinput>
+        <name>ans1</name>
+        <value/>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>tri_1</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>total_surface_1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore/>
+        <expectedpenalty/>
+        <expectedanswernote>NULL</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.4000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt2-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt3-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description/>
+      <testinput>
+        <name>ans1</name>
+        <value>rect_area_2</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value/>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>total_surface_2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.4000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore/>
+        <expectedpenalty/>
+        <expectedanswernote>NULL</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt3-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

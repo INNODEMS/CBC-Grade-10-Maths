@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating Areas of a Mechanical Arm Sweep</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A mechanical arm sweeps through \({@theta@}\). The outer radius is \({@R@}\,\text{m}\) and the inner radius is \({@r@}\,\text{m}\). Calculate the following areas:</p>
+
+<ol type='a'>
+    <li>
+        <p>The area of the smaller circle formed by the arm. [[input:ans1]]\(\,\text{m}^2\) [[validation:ans1]][[feedback:prt1]]</p>
+          
+    </li>
+    <li>
+        <p>The area of the larger circle formed by the arm. [[input:ans2]]\(\,\text{m}^2\)[[validation:ans2]][[feedback:prt2]]</p>
+    </li>
+    <li>
+        <p>The area of the region swept by the mechanical arm. [[input:ans3]]\(\,\text{m}^2\) [[validation:ans3]][[feedback:prt3]]</p>
+    </li>
+</ol>
+
+
+
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<ol type='a'>
+    <li>
+        <p><strong>Area of the smaller circle (inner radius):</strong></p>
+        <p>
+        \(\begin{align}
+        A_{\text{inner}} &= \pi r^2 \\
+        &= \frac{22}{7} \times ({@r@})^2 \\
+        &= {@A_inner_3sf@}\ \text{m}^2
+        \end{align}\)
+        </p>
+    </li>
+
+    <li>
+        <p><strong>Area of the larger circle (outer radius):</strong></p>
+        <p>
+        \(\begin{align}
+        A_{\text{outer}} &= \pi R^2 \\
+        &= \frac{22}{7} \times ({@R@})^2 \\
+        &= {@A_outer_3sf@}\ \text{m}^2
+        \end{align}\)
+        </p>
+    </li>
+
+    <li>
+        <p><strong>Area of the region swept by the mechanical arm:</strong></p>
+        <p>
+        \(\begin{align}
+        A_{\text{swept}} &= \frac{\theta}{360} \pi (R^2 - r^2) \\
+        &= \frac{@theta@}{360} \times \frac{22}{7} \times \left( {@R@}^2 - {@r@}^2 \right) \\
+        &= {@A_swept_3sf@}\ \text{m}^2
+        \end{align}\)
+        </p>
+        <p>Alternatively, you can subtract the area of the inner circle from the area of the outer circle the multiply by \(\frac{{@theta@}}{360}\):</p>
+        <p>
+        \(\begin{align}
+        A_{\text{swept}} &= ({@A_outer_3sf@} - {@A_inner_3sf@})\times \frac{{@theta@}}{360} \\
+        &= {@swept@}\ \text{m}^2\\
+&={@A_swept_3sf@}\ \text{m}^2
+        \end{align}\)
+        </p>
+    </li>
+</ol>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Define pi */
+Pi: 22/7;
+
+/* Given values */
+theta: rand_with_step(60,270,10);   /* angle in degrees */
+r: rand_with_step(7,49,7);         /* inner radius in meters */
+R: rand_with_step(49,154,7);         /* outer radius in meters */
+
+/* 1. Area of the smaller circle (inner radius) */
+A_inner: Pi * r^2;
+A_inner_3sf: decimalplaces(A_inner,3);
+
+/* 2. Area of the larger circle (outer radius) */
+A_outer: Pi * R^2;
+A_outer_3sf: decimalplaces(A_outer,3);
+swept:(A_outer-A_inner)*theta/360;
+
+/* 3. Area of the region swept by the arm (annular sector) */
+A_swept: (theta/360) * Pi * (R^2 - r^2);
+A_swept_3sf: round(A_swept);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The angle made by the mechanical arm}={@theta@}^\circ\)</p>
+<p>\(\text{The larger radius}={@R@}\,\text{cm}\)</p>
+<p>\(\text{The smaller radius}={@r@}\,\text{cm}\)</p>
+<p>\(\text{The area of the smaller circle}={@A_inner@}\,\text{cm}^2\)</p>
+<p>\(\text{The area of the larger circle}={@A_outer@}\,\text{cm}^2\)</p>
+<p>\(\text{The area of the region swept by the mechanical arm}={@A_swept_3sf@}\,\text{cm}^2\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>A_inner</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>A_outer</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>A_swept_3sf</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct area.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>A_inner</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct area.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>A_outer</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct area of the regio swept.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>A_swept_3sf</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>2076833981</deployedseed>
+    <deployedseed>1787331123</deployedseed>
+    <deployedseed>1130091022</deployedseed>
+    <deployedseed>1461166554</deployedseed>
+    <deployedseed>1985468414</deployedseed>
+    <deployedseed>1624555767</deployedseed>
+    <deployedseed>1465170681</deployedseed>
+    <deployedseed>367830928</deployedseed>
+    <deployedseed>1076845328</deployedseed>
+    <deployedseed>296308615</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>A_inner</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>A_outer</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>A_swept_3sf</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

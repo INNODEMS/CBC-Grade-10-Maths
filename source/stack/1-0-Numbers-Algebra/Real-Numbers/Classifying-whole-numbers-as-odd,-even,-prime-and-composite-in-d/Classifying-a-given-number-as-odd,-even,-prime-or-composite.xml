@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Classifying a given number as odd, even, prime or composite</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>During a math lesson, Grade 10 students were asked to classify the number <strong>{@seven_digit@}</strong> as even, odd, prime or composite.</p>
+
+<p>Which of the following are true about this number? Select all that apply:<b>
+
+[[input:ans1]] [[validation:ans1]] [[feedback:prt1]] </p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>Worked Solution</p>
+
+<p>Given the number: {@seven_digit@}:</p>
+
+<p>Test if it is Even or Odd :</p>
+<p>Check the last digit</p>
+<p>{@if is_even 
+    then sconcat("Since the last digit is  (", mod(seven_digit, 10), ")  it is even.")
+    else sconcat("Since the last digit is  (", mod(seven_digit, 10), ")  it is odd.")
+@}</p>
+
+<p>Check if it is Prime or Composite:</p>
+<p>{@if seven_digit = 1 
+    then "1 is a special number: neither prime nor composite."
+    else if is_prime_num 
+        then sconcat("After testing divisibility up to ", floor(sqrt(seven_digit)), 
+                     ", no divisors found except 1 and itself. Therefore, it is prime.")
+        else block([factor: composite_factor],
+            sconcat(seven_digit, " ÷ ", factor, " = ", seven_digit/factor, 
+                   "<br>Since it has a divisor other than 1 and itself, it is composite.")
+        )
+@}</p>
+
+<p>Therefore, {@seven_digit@} is {@t_ans1@} </p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Generate 5-digit random number */
+seven_digit: rand(90000) + 10000;
+
+/* Even/Odd */
+is_even: mod(seven_digit,2)=0;
+
+/* Prime check */
+is_prime(n) := if n<2 then false
+               else if n=2 then true
+               else if mod(n,2)=0 then false
+               else block([limit:floor(sqrt(n)),i:3,result:true],
+                   while i<=limit and result do (
+                     if mod(n,i)=0 then result:false,
+                     i:i+2
+                   ),
+                   result
+               );
+is_prime_num: is_prime(seven_digit);
+
+/* Labels */
+option_labels: ["it is even","it is odd","it is prime","it is composite"];
+option_flags: [is_even, not is_even, is_prime_num, (not is_prime_num and seven_digit>1)];
+
+/* Teacher answer (correct labels) */
+t_ans1: [];
+for i:1 thru length(option_labels) do (
+  if option_flags[i] then t_ans1: append(t_ans1,[option_labels[i]])
+);
+
+
+perm: random_permutation(makelist(i,i,1,length(option_labels)));
+ta: makelist([ option_labels[perm[i]], option_labels[perm[i]] ], i, 1, length(option_labels));
+
+/* Composite factor for feedback */
+composite_factor: if not is_prime_num and seven_digit>1 then
+  block([f:0],
+    if mod(seven_digit,2)=0 then f:2
+    else if mod(seven_digit,3)=0 then f:3
+    else for k:5 step 2 while k*k<=seven_digit and f=0 do (
+      if mod(seven_digit,k)=0 then f:k
+    ),
+    f
+  )
+else 0;
+
+/* Build correct answer display string */
+correct_answers_str: sconcat("<p>", stringjoin(correct_answers, "<br>"), "</p>");
+]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p> {@seven_digit@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>checkbox</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options>nonotanswered</options>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans> t_ans1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>

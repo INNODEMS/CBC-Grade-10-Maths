@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Enlargement of a Triangle with Centre at the Origin</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The vertices of triangle \( \triangle ABC \) are\( A\, ({@Ax@}, {@Ay@}), B\,({@Bx@}, {@By@})\, \text{and} C\, ({@Cx@}, {@Cy@}) \). The triangle is enlarged with centre \( (0,0) \) and scale factor {@k@}. Find the coordinates of the image of \( \triangle ABC \).</p>
+<p>Write your answer in form of<b> [x,y] </b></p>
+<p>A' = [[input:ans1]] [[validation:ans1]]</p>
+<p>B' = [[input:ans2]] [[validation:ans2]]</p>
+<p>C' = [[input:ans3]] [[validation:ans3]]</p>
+<p>[[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>Given the centre of enlargement is \((0,0)\) and the scale factor \(k\), We find the coordinates of the image as follows;
+</p>
+<p>\((x' ,y') = (kx, ky)\)</p>
+<p>Applying this to the given co-odinates we get;</p>
+<p>\(A' = ({@k@} \times {@Ax@}), ({@k@} \times {@Ay@}) = ({@Ax1@}, {@Ay1@})\)</p>
+<p>\(B' = ({@k@} \times {@Bx@}),( {@k@} \times {@By@}) = ({@Bx1@}, {@By1@})\)</p>
+<p>\(C' = ({@k@} \times {@Cx@}), ({@k@} \times {@Cy@}) = ({@Cx1@}, {@Cy1@})\)</p>
+<p>Verticies of the image = A' ({@Ax1@}, {@Ay1@}), B' = ({@Bx1@}, {@By1@}) and  C' = ({@Cx1@}, {@Cy1@}).</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>Ax:rand_with_step(-9,9,1);
+Ay:rand_with_prohib(1,9,[Ax]);
+
+Bx:rand_with_prohib(1,9,[Ax,Ay]);
+By:rand_with_prohib(1,9,[Ax,Ay,Bx]);
+
+Cx:rand_with_prohib(1,9,[Ax,Ay,Bx,By]);
+Cy:rand_with_prohib(1,9,[Ax,Ay,Bx,By,Ax]);
+/*scale factor*/
+k:rand([-2,-1,2,3,1/2,4]);
+/*coodinates of the image*/
+Ax1:k*Ax;
+Ay1:k*Ay;
+
+Bx1:k*Bx;
+By1:k*By;
+
+Cx1:k*Cx;
+Cy1:k*Cy;
+ta:[Ax1,Ay1];
+ta1:[Bx1,By1];
+ta2:[Cx1,Cy1];</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Verticies of the image = A' ({@Ax1@}, {@Ay1@}), B' = ({@Bx1@}, {@By1@}) and  C' = ({@Cx1@}, {@Cy1@}).</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>correst_ans : if (ans1 = ta and ans2 = ta1 and ans3 = ta2) then 1 else 0;</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>EqualComAss</answertest>
+        <sans>correst_ans</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>667132242</deployedseed>
+    <deployedseed>620241480</deployedseed>
+    <deployedseed>1168173919</deployedseed>
+    <deployedseed>1946498554</deployedseed>
+    <deployedseed>2083582321</deployedseed>
+    <deployedseed>94686810</deployedseed>
+    <deployedseed>1551388993</deployedseed>
+    <deployedseed>244396398</deployedseed>
+    <deployedseed>592545038</deployedseed>
+    <deployedseed>376704981</deployedseed>
+    <deployedseed>1137922150</deployedseed>
+    <deployedseed>809891042</deployedseed>
+    <deployedseed>374872841</deployedseed>
+    <deployedseed>298280242</deployedseed>
+    <deployedseed>786731497</deployedseed>
+    <deployedseed>209122336</deployedseed>
+    <deployedseed>1792046428</deployedseed>
+    <deployedseed>1140704256</deployedseed>
+    <deployedseed>1577414180</deployedseed>
+    <deployedseed>1173465961</deployedseed>
+    <deployedseed>256708111</deployedseed>
+    <deployedseed>844816427</deployedseed>
+    <deployedseed>1644785155</deployedseed>
+    <deployedseed>1672811177</deployedseed>
+    <deployedseed>313230182</deployedseed>
+    <deployedseed>1593383253</deployedseed>
+    <deployedseed>1010810785</deployedseed>
+    <deployedseed>1671601110</deployedseed>
+    <deployedseed>329876276</deployedseed>
+    <deployedseed>1350566906</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta1</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>ta2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

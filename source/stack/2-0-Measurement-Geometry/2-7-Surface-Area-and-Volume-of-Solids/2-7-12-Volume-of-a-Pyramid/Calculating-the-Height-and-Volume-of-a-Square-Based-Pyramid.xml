@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the Height and Volume of a Square-Based Pyramid</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The figure below shows a square-based pyramid </p>
+[[jsxgraph]]
+var brd = JXG.JSXGraph.initBoard(divid, {
+      boundingbox: [-2, 15, 12, -2], axis: false,
+      axis: false,
+      showNavigation: false,
+      showCopyright: false
+
+    });
+    // Base points (square, side 6cm)
+    var A = brd.create('point', [2, 2], {fixed:true, visible:false});
+    var B = brd.create('point', [8, 2], {fixed:true,visible:false});
+    var C = brd.create('point', [8, 8], {fixed:true,visible:false});
+    var D = brd.create('point', [2, 8], {fixed:true,visible:false});
+
+    // Apex point (center above base, height 10cm)
+    var Mx = (A.X() + B.X() + C.X() + D.X())/4;
+    var My = (A.Y() + B.Y() + C.Y() + D.Y())/4;
+    var E = brd.create('point', [Mx, My+10], {visible:false});
+
+    // Draw base
+    brd.create('polygon', [A, B, C, D], {
+      fillColor: 'blue', fillOpacity: 0.4,
+      borders: {strokeColor: '#e51d6a', strokeWidth: 3}
+    });
+
+    // Sides (faces)
+    brd.create('polygon', [A, B, E], {
+      fillColor: '#f9a', fillOpacity: 0.2,
+      borders: {strokeColor: '#e51d6a', strokeWidth: 2}
+    });
+    brd.create('polygon', [B, C, E], {
+      fillColor: '#f9a', fillOpacity: 0.2,
+      borders: {strokeColor: '#e51d6a', strokeWidth: 2}
+    });
+    brd.create('polygon', [C, D, E], {
+      fillColor: '#f9a', fillOpacity: 0.2,
+      borders: {strokeColor: '#e51d6a', strokeWidth: 2}
+    });
+    brd.create('polygon', [D, A, E], {
+      fillColor: '#f9a', fillOpacity: 0.2,
+      borders: {strokeColor: '#e51d6a', strokeWidth: 2}
+    });
+
+    // Dashed hidden lines for perspective
+    brd.create('segment', [A, C], {strokeColor:'#e51d6a', dash:2, strokeWidth:1});
+    brd.create('segment', [B, D], {strokeColor:'#e51d6a', dash:2, strokeWidth:1});
+
+    // Height (dashed vertical from base center to apex)
+    var baseCenter = brd.create('point', [Mx, My], {visible: false});
+    brd.create('segment', [baseCenter, E], {strokeColor: '#000', dash:2, strokeWidth: 2});
+
+    // Right-angle indicator for height
+    brd.create('polygon', [
+      brd.create('point', [Mx+0.5, My], {visible: false}),
+      brd.create('point', [Mx+0.5, My+0.7], {visible: false}),
+      brd.create('point', [Mx, My+0.7], {visible: false}),
+      brd.create('point', [Mx, My+0], {visible: false})
+    ], {borders: {strokeColor: 'black'}, fillColor: 'black', fillOpacity: 0});
+
+    // Dimension labels
+    brd.create('text', [ (A.X()+B.X())/2, A.Y() - 0.7, "{#a#} cm"], {fontSize: 16});
+    brd.create('text', [ (C.X()+D.X())/12, C.Y() -3, "{#a#} cm"], {fontSize: 16});
+    brd.create('text', [ E.X()-0.5, (baseCenter.Y()+E.Y())/2, "h"], {fontSize: 16});
+
+    brd.create('text',
+  [E.X() - 1.5, (baseCenter.Y() + E.Y()) / 2, "{#L#} cm"],
+  {
+    fontSize: 16,
+    rotate: 65
+  }
+);
+
+[[/jsxgraph]]
+<p>Correct to the nearest whole, find:</p>
+<ol type="i">
+  <li>
+    <p>The vertical height of the pyramid.</p>
+    <p>\(\text{Height(h)}=\)[[input:ans1]]\(\,\text{cm}\)[[validation:ans1]][[feedback:prt1]]</p>
+  </li>
+  <li>
+    <p>The volume of the pyramid.</p>
+    <p>\(\text{Volume}=\)[[input:ans2]]\(\,\text{cm}^3\)[[validation:ans2]][[feedback:prt2]]</p>
+  </li>
+</ol>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><strong>Solution</strong></p>
+
+<ol type="i">
+  <li>
+    <p><strong>Vertical height of the pyramid</strong></p>
+
+    <p>
+      The base is a square of side \({@a@}\,\text{ cm}\), so half of the base side is:
+    </p>
+
+    <p>
+\(
+      \begin{align}
+      \text{half of base side} &= \frac{{@a@}}{2} \\
+      &= {@half_a@}\,\text{cm}
+      \end{align}
+\)
+    </p>
+
+    <p>
+      The slant height of the pyramid is {@L@} cm.  
+      Using Pythagoras’ theorem in the right-angled triangle formed by the
+      vertical height, half of the base side, and the slant height:
+    </p>
+
+    <p>
+\(
+      \begin{align}
+      h^2 &= L^2 - \left(\frac{a}{2}\right)^2 \\
+      h^2 &= ({@L@})^2 - ({@half_a@})^2 \\
+      h &= \sqrt{({@L@})^2 - ({@half_a@})^2}\\
+     &={@h@} \\
+   &={@height_val@}\\
+     &={@height_pyramid@}\,\text{cm}
+      \end{align}
+\)
+    </p>
+
+    <p>
+   Therefore,<br>
+\(
+      \begin{align}
+      \text{h} &= {@Height_pyramid@}\,\text{cm}
+      \end{align}
+\)
+    </p>
+  </li>
+
+  <li>
+    <p><strong>Volume of the pyramid</strong></p>
+
+    <p>
+      Area of the square base:
+    <br>
+     \(
+      \begin{align}
+      \text{Base area} &= a^2 \\
+      &= ({@a@})^2 \\
+      &= {@Base_area@}\,\text{cm}^2
+      \end{align}
+      \)
+    </p>
+
+    <p>
+      Volume of a pyramid is given by:
+   <br>
+\(
+      \begin{align}
+      V &= \frac{1}{3} \times \text{Base area} \times h \\
+      &= \frac{1}{3} \times {@Base_area@} \times {@Height_pyramid@} \\
+     &={@volume_val@} \\
+    &={@volume_pyramid@} \, \text{cm}^3
+      \end{align}
+\)
+    </p>Therefore,<br>
+\(
+      \begin{align}
+      \text{Volume} &= {@volume_pyramid@}\,\text{cm}^3
+      \end{align}
+\)
+    </p>
+  </li>
+</ol>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Randomize one side of the square base */
+a : rand_with_step(4, 14, 4);     /* base side length in cm */
+
+/* Half of base side */
+half_a : a / 2;
+
+/* Randomize slant height L such that L > half_a */
+L : half_a + rand_with_step(2, 30, 2);   /* ensures L > half_a */
+
+/* Use Pythagoras to find vertical height h */
+h : sqrt(L^2 - half_a^2);
+
+/* Base area */
+Base_area : a^2;
+
+/* Volume of the pyramid */
+V : (1/3) * Base_area * h;
+
+/* Convert to decimal and round */
+height_val : float(h);
+Height_pyramid : decimalplaces(height_val, 4);
+height_pyramid:round(Height_pyramid);
+
+volume_val : float(V);
+Volume_pyramid : decimalplaces(volume_val, 4);
+volume_pyramid:round(Volume_pyramid);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The slant height of the pyramid}={@L@}\,\text{cm}\)</p>
+<p>\(\text{The base side of the pyramid}={@a@}\,\text{cm}\)</p>
+<p>\(\text{The vertical height of the pyramid}={@height_pyramid@}\,\text{cm}\)</p>
+<p>\(\text{The volume of the pyramid}={@volume_pyramid@}\,\text{cm}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>height_pyramid</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>volume_pyramid</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the croect vertical height of the pyramid.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>height_pyramid</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct volume of the pyramid.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>volume_pyramid</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>634408827</deployedseed>
+    <deployedseed>297868445</deployedseed>
+    <deployedseed>738897416</deployedseed>
+    <deployedseed>512100169</deployedseed>
+    <deployedseed>1302072298</deployedseed>
+    <deployedseed>1246960931</deployedseed>
+    <deployedseed>430198671</deployedseed>
+    <deployedseed>1669525034</deployedseed>
+    <deployedseed>431088652</deployedseed>
+    <deployedseed>393828387</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>height_pyramid</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>volume_pyramid</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>
