@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+                <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../../../../stack/2-0-Measurement-Geometry/2-1-Similarity-and-Enlargement/2-1-3-Scale-Factors/2-1-3-1-Area-scale-factor/Finding-the-Area-of-a-Similar-Polygon.xml" original-id="area-similar-polygon-1" assembly-id="area-similar-polygon-1" unique-id="area-similar-polygon-1">
+  <question type="stack" original-id="area-similar-polygon-1-1" assembly-id="area-similar-polygon-1-1" unique-id="area-similar-polygon-1-1">
+    <name original-id="area-similar-polygon-1-1-1" assembly-id="area-similar-polygon-1-1-1" unique-id="area-similar-polygon-1-1-1">
+      <text original-id="area-similar-polygon-1-1-1-1" assembly-id="area-similar-polygon-1-1-1-1" unique-id="area-similar-polygon-1-1-1-1">Finding the Area of a Similar Polygon</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="area-similar-polygon-1-1-2" assembly-id="area-similar-polygon-1-1-2" unique-id="area-similar-polygon-1-1-2">
+      <text original-id="area-similar-polygon-1-1-2-1" assembly-id="area-similar-polygon-1-1-2-1" unique-id="area-similar-polygon-1-1-2-1">&lt;p&gt;The corresponding sides of two similar regular polygons are \( {@a@} \) cm and \({@b@}\) cm respectively.The area of the smaller polygon is \( {@c@} \,\text{cm}^2\). What is the area of the larger polygon?
+&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; Write your answer correct to &lt;b&gt;2&lt;/b&gt; decimal places.&lt;/p&gt;
+&lt;p&gt;[[input:ans1]] \(\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="area-similar-polygon-1-1-3" assembly-id="area-similar-polygon-1-1-3" unique-id="area-similar-polygon-1-1-3">
+      <text original-id="area-similar-polygon-1-1-3-1" assembly-id="area-similar-polygon-1-1-3-1" unique-id="area-similar-polygon-1-1-3-1">&lt;h3&gt;Worked solution&lt;/h3&gt;
+&lt;p&gt;
+Since the two polygons are similar, all corresponding lengths are in the same ratio.Here, the ratio of corresponding sides is:
+
+&lt;/p&gt;
+&lt;p&gt;\(\frac{@b@}{@a@}.\)&lt;/p&gt;
+&lt;p&gt;For similar figures, areas scale with the square of the ratio of corresponding lengths.Therefore, the ratio of the areas is: &lt;/p&gt;
+&lt;p&gt;\(
+\left(\frac{{@b@}}{{@a@}}\right)^2.
+\)
+&lt;/p&gt;
+&lt;p&gt;
+If the area of the smaller polygon is \( {@c@} \), then the area of the larger hexagon is &lt;/p&gt;
+&lt;p&gt;
+\(
+{@c@} \times \left(\frac{@b@}{@a@}\right)^2.={@ta@} \,\text {cm}^2
+\)
+&lt;/p&gt;</text>
+    </generalfeedback>
+    <defaultgrade original-id="area-similar-polygon-1-1-4" assembly-id="area-similar-polygon-1-1-4" unique-id="area-similar-polygon-1-1-4">1</defaultgrade>
+    <penalty original-id="area-similar-polygon-1-1-5" assembly-id="area-similar-polygon-1-1-5" unique-id="area-similar-polygon-1-1-5">0.1</penalty>
+    <hidden original-id="area-similar-polygon-1-1-6" assembly-id="area-similar-polygon-1-1-6" unique-id="area-similar-polygon-1-1-6">0</hidden>
+    <idnumber original-id="area-similar-polygon-1-1-7" assembly-id="area-similar-polygon-1-1-7" unique-id="area-similar-polygon-1-1-7"/>
+    <stackversion original-id="area-similar-polygon-1-1-8" assembly-id="area-similar-polygon-1-1-8" unique-id="area-similar-polygon-1-1-8">
+      <text original-id="area-similar-polygon-1-1-8-1" assembly-id="area-similar-polygon-1-1-8-1" unique-id="area-similar-polygon-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="area-similar-polygon-1-1-9" assembly-id="area-similar-polygon-1-1-9" unique-id="area-similar-polygon-1-1-9">
+      <text original-id="area-similar-polygon-1-1-9-1" assembly-id="area-similar-polygon-1-1-9-1" unique-id="area-similar-polygon-1-1-9-1"> /* Side lengths of similar regular polygons */
+a : rand(9) + 3;   /* side length of smaller polygon */
+b : a + rand(9) + 1; /* side length of larger polygon, ensure b &gt; a */
+
+/* Area of the smaller polygon */
+c : rand_with_step(25,300,5) ;
+
+/* Scale factor between corresponding sides */
+k : b / a;
+
+/* Area of the larger hexagon (area scales with square of side ratio) */
+ larger_hexagon : c * k^2;
+ta:decimalplaces( larger_hexagon,2);
+
+/*mistakes*/
+/*Using the linear scale factor instead of the area scale factor*/
+ta1:decimalplaces(c*k,2);
+/*Forgetting which area is given*/
+ta2:decimalplaces((1/k^2)*c,2);</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="area-similar-polygon-1-1-10" assembly-id="area-similar-polygon-1-1-10" unique-id="area-similar-polygon-1-1-10">
+      <text original-id="area-similar-polygon-1-1-10-1" assembly-id="area-similar-polygon-1-1-10-1" unique-id="area-similar-polygon-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="area-similar-polygon-1-1-11" assembly-id="area-similar-polygon-1-1-11" unique-id="area-similar-polygon-1-1-11">
+      <text original-id="area-similar-polygon-1-1-11-1" assembly-id="area-similar-polygon-1-1-11-1" unique-id="area-similar-polygon-1-1-11-1">&lt;p&gt;Area of the smaller polygon = {@c@}&lt;/p&gt;
+&lt;p&gt;Area of the larger polygon = {@ta@}&lt;/p&gt;</text>
+    </questionnote>
+    <questiondescription format="html" original-id="area-similar-polygon-1-1-12" assembly-id="area-similar-polygon-1-1-12" unique-id="area-similar-polygon-1-1-12">
+      <text original-id="area-similar-polygon-1-1-12-1" assembly-id="area-similar-polygon-1-1-12-1" unique-id="area-similar-polygon-1-1-12-1"/>
+    </questiondescription>
+    <questionsimplify original-id="area-similar-polygon-1-1-13" assembly-id="area-similar-polygon-1-1-13" unique-id="area-similar-polygon-1-1-13">1</questionsimplify>
+    <assumepositive original-id="area-similar-polygon-1-1-14" assembly-id="area-similar-polygon-1-1-14" unique-id="area-similar-polygon-1-1-14">0</assumepositive>
+    <assumereal original-id="area-similar-polygon-1-1-15" assembly-id="area-similar-polygon-1-1-15" unique-id="area-similar-polygon-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="area-similar-polygon-1-1-16" assembly-id="area-similar-polygon-1-1-16" unique-id="area-similar-polygon-1-1-16">
+      <text original-id="area-similar-polygon-1-1-16-1" assembly-id="area-similar-polygon-1-1-16-1" unique-id="area-similar-polygon-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="area-similar-polygon-1-1-17" assembly-id="area-similar-polygon-1-1-17" unique-id="area-similar-polygon-1-1-17">
+      <text original-id="area-similar-polygon-1-1-17-1" assembly-id="area-similar-polygon-1-1-17-1" unique-id="area-similar-polygon-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="area-similar-polygon-1-1-18" assembly-id="area-similar-polygon-1-1-18" unique-id="area-similar-polygon-1-1-18">
+      <text original-id="area-similar-polygon-1-1-18-1" assembly-id="area-similar-polygon-1-1-18-1" unique-id="area-similar-polygon-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="area-similar-polygon-1-1-19" assembly-id="area-similar-polygon-1-1-19" unique-id="area-similar-polygon-1-1-19">.</decimals>
+    <scientificnotation original-id="area-similar-polygon-1-1-20" assembly-id="area-similar-polygon-1-1-20" unique-id="area-similar-polygon-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="area-similar-polygon-1-1-21" assembly-id="area-similar-polygon-1-1-21" unique-id="area-similar-polygon-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="area-similar-polygon-1-1-22" assembly-id="area-similar-polygon-1-1-22" unique-id="area-similar-polygon-1-1-22">1</sqrtsign>
+    <complexno original-id="area-similar-polygon-1-1-23" assembly-id="area-similar-polygon-1-1-23" unique-id="area-similar-polygon-1-1-23">i</complexno>
+    <inversetrig original-id="area-similar-polygon-1-1-24" assembly-id="area-similar-polygon-1-1-24" unique-id="area-similar-polygon-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="area-similar-polygon-1-1-25" assembly-id="area-similar-polygon-1-1-25" unique-id="area-similar-polygon-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="area-similar-polygon-1-1-26" assembly-id="area-similar-polygon-1-1-26" unique-id="area-similar-polygon-1-1-26">[</matrixparens>
+    <isbroken original-id="area-similar-polygon-1-1-27" assembly-id="area-similar-polygon-1-1-27" unique-id="area-similar-polygon-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="area-similar-polygon-1-1-28" assembly-id="area-similar-polygon-1-1-28" unique-id="area-similar-polygon-1-1-28"/>
+    <input original-id="area-similar-polygon-1-1-29" assembly-id="area-similar-polygon-1-1-29" unique-id="area-similar-polygon-1-1-29">
+      <name original-id="area-similar-polygon-1-1-29-1" assembly-id="area-similar-polygon-1-1-29-1" unique-id="area-similar-polygon-1-1-29-1">ans1</name>
+      <type original-id="area-similar-polygon-1-1-29-2" assembly-id="area-similar-polygon-1-1-29-2" unique-id="area-similar-polygon-1-1-29-2">algebraic</type>
+      <tans original-id="area-similar-polygon-1-1-29-3" assembly-id="area-similar-polygon-1-1-29-3" unique-id="area-similar-polygon-1-1-29-3">ta</tans>
+      <boxsize original-id="area-similar-polygon-1-1-29-4" assembly-id="area-similar-polygon-1-1-29-4" unique-id="area-similar-polygon-1-1-29-4">5</boxsize>
+      <strictsyntax original-id="area-similar-polygon-1-1-29-5" assembly-id="area-similar-polygon-1-1-29-5" unique-id="area-similar-polygon-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="area-similar-polygon-1-1-29-6" assembly-id="area-similar-polygon-1-1-29-6" unique-id="area-similar-polygon-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="area-similar-polygon-1-1-29-7" assembly-id="area-similar-polygon-1-1-29-7" unique-id="area-similar-polygon-1-1-29-7"/>
+      <syntaxattribute original-id="area-similar-polygon-1-1-29-8" assembly-id="area-similar-polygon-1-1-29-8" unique-id="area-similar-polygon-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="area-similar-polygon-1-1-29-9" assembly-id="area-similar-polygon-1-1-29-9" unique-id="area-similar-polygon-1-1-29-9"/>
+      <allowwords original-id="area-similar-polygon-1-1-29-10" assembly-id="area-similar-polygon-1-1-29-10" unique-id="area-similar-polygon-1-1-29-10"/>
+      <forbidfloat original-id="area-similar-polygon-1-1-29-11" assembly-id="area-similar-polygon-1-1-29-11" unique-id="area-similar-polygon-1-1-29-11">0</forbidfloat>
+      <requirelowestterms original-id="area-similar-polygon-1-1-29-12" assembly-id="area-similar-polygon-1-1-29-12" unique-id="area-similar-polygon-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="area-similar-polygon-1-1-29-13" assembly-id="area-similar-polygon-1-1-29-13" unique-id="area-similar-polygon-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="area-similar-polygon-1-1-29-14" assembly-id="area-similar-polygon-1-1-29-14" unique-id="area-similar-polygon-1-1-29-14">1</mustverify>
+      <showvalidation original-id="area-similar-polygon-1-1-29-15" assembly-id="area-similar-polygon-1-1-29-15" unique-id="area-similar-polygon-1-1-29-15">3</showvalidation>
+      <options original-id="area-similar-polygon-1-1-29-16" assembly-id="area-similar-polygon-1-1-29-16" unique-id="area-similar-polygon-1-1-29-16"/>
+    </input>
+    <prt original-id="area-similar-polygon-1-1-30" assembly-id="area-similar-polygon-1-1-30" unique-id="area-similar-polygon-1-1-30">
+      <name original-id="area-similar-polygon-1-1-30-1" assembly-id="area-similar-polygon-1-1-30-1" unique-id="area-similar-polygon-1-1-30-1">prt1</name>
+      <value original-id="area-similar-polygon-1-1-30-2" assembly-id="area-similar-polygon-1-1-30-2" unique-id="area-similar-polygon-1-1-30-2">1.0000000</value>
+      <autosimplify original-id="area-similar-polygon-1-1-30-3" assembly-id="area-similar-polygon-1-1-30-3" unique-id="area-similar-polygon-1-1-30-3">1</autosimplify>
+      <feedbackstyle original-id="area-similar-polygon-1-1-30-4" assembly-id="area-similar-polygon-1-1-30-4" unique-id="area-similar-polygon-1-1-30-4">1</feedbackstyle>
+      <feedbackvariables original-id="area-similar-polygon-1-1-30-5" assembly-id="area-similar-polygon-1-1-30-5" unique-id="area-similar-polygon-1-1-30-5">
+        <text original-id="area-similar-polygon-1-1-30-5-1" assembly-id="area-similar-polygon-1-1-30-5-1" unique-id="area-similar-polygon-1-1-30-5-1"/>
+      </feedbackvariables>
+      <node original-id="area-similar-polygon-1-1-30-6" assembly-id="area-similar-polygon-1-1-30-6" unique-id="area-similar-polygon-1-1-30-6">
+        <name original-id="area-similar-polygon-1-1-30-6-1" assembly-id="area-similar-polygon-1-1-30-6-1" unique-id="area-similar-polygon-1-1-30-6-1">0</name>
+        <description original-id="area-similar-polygon-1-1-30-6-2" assembly-id="area-similar-polygon-1-1-30-6-2" unique-id="area-similar-polygon-1-1-30-6-2"/>
+        <answertest original-id="area-similar-polygon-1-1-30-6-3" assembly-id="area-similar-polygon-1-1-30-6-3" unique-id="area-similar-polygon-1-1-30-6-3">NumAbsolute</answertest>
+        <sans original-id="area-similar-polygon-1-1-30-6-4" assembly-id="area-similar-polygon-1-1-30-6-4" unique-id="area-similar-polygon-1-1-30-6-4">ans1</sans>
+        <tans original-id="area-similar-polygon-1-1-30-6-5" assembly-id="area-similar-polygon-1-1-30-6-5" unique-id="area-similar-polygon-1-1-30-6-5">ta</tans>
+        <testoptions original-id="area-similar-polygon-1-1-30-6-6" assembly-id="area-similar-polygon-1-1-30-6-6" unique-id="area-similar-polygon-1-1-30-6-6">0.01</testoptions>
+        <quiet original-id="area-similar-polygon-1-1-30-6-7" assembly-id="area-similar-polygon-1-1-30-6-7" unique-id="area-similar-polygon-1-1-30-6-7">0</quiet>
+        <truescoremode original-id="area-similar-polygon-1-1-30-6-8" assembly-id="area-similar-polygon-1-1-30-6-8" unique-id="area-similar-polygon-1-1-30-6-8">=</truescoremode>
+        <truescore original-id="area-similar-polygon-1-1-30-6-9" assembly-id="area-similar-polygon-1-1-30-6-9" unique-id="area-similar-polygon-1-1-30-6-9">1</truescore>
+        <truepenalty original-id="area-similar-polygon-1-1-30-6-10" assembly-id="area-similar-polygon-1-1-30-6-10" unique-id="area-similar-polygon-1-1-30-6-10"/>
+        <truenextnode original-id="area-similar-polygon-1-1-30-6-11" assembly-id="area-similar-polygon-1-1-30-6-11" unique-id="area-similar-polygon-1-1-30-6-11">-1</truenextnode>
+        <trueanswernote original-id="area-similar-polygon-1-1-30-6-12" assembly-id="area-similar-polygon-1-1-30-6-12" unique-id="area-similar-polygon-1-1-30-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="area-similar-polygon-1-1-30-6-13" assembly-id="area-similar-polygon-1-1-30-6-13" unique-id="area-similar-polygon-1-1-30-6-13">
+          <text original-id="area-similar-polygon-1-1-30-6-13-1" assembly-id="area-similar-polygon-1-1-30-6-13-1" unique-id="area-similar-polygon-1-1-30-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="area-similar-polygon-1-1-30-6-14" assembly-id="area-similar-polygon-1-1-30-6-14" unique-id="area-similar-polygon-1-1-30-6-14">=</falsescoremode>
+        <falsescore original-id="area-similar-polygon-1-1-30-6-15" assembly-id="area-similar-polygon-1-1-30-6-15" unique-id="area-similar-polygon-1-1-30-6-15">0</falsescore>
+        <falsepenalty original-id="area-similar-polygon-1-1-30-6-16" assembly-id="area-similar-polygon-1-1-30-6-16" unique-id="area-similar-polygon-1-1-30-6-16"/>
+        <falsenextnode original-id="area-similar-polygon-1-1-30-6-17" assembly-id="area-similar-polygon-1-1-30-6-17" unique-id="area-similar-polygon-1-1-30-6-17">1</falsenextnode>
+        <falseanswernote original-id="area-similar-polygon-1-1-30-6-18" assembly-id="area-similar-polygon-1-1-30-6-18" unique-id="area-similar-polygon-1-1-30-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="area-similar-polygon-1-1-30-6-19" assembly-id="area-similar-polygon-1-1-30-6-19" unique-id="area-similar-polygon-1-1-30-6-19">
+          <text original-id="area-similar-polygon-1-1-30-6-19-1" assembly-id="area-similar-polygon-1-1-30-6-19-1" unique-id="area-similar-polygon-1-1-30-6-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="area-similar-polygon-1-1-30-7" assembly-id="area-similar-polygon-1-1-30-7" unique-id="area-similar-polygon-1-1-30-7">
+        <name original-id="area-similar-polygon-1-1-30-7-1" assembly-id="area-similar-polygon-1-1-30-7-1" unique-id="area-similar-polygon-1-1-30-7-1">1</name>
+        <description original-id="area-similar-polygon-1-1-30-7-2" assembly-id="area-similar-polygon-1-1-30-7-2" unique-id="area-similar-polygon-1-1-30-7-2">Using the linear scale factor instead of the area scale factor</description>
+        <answertest original-id="area-similar-polygon-1-1-30-7-3" assembly-id="area-similar-polygon-1-1-30-7-3" unique-id="area-similar-polygon-1-1-30-7-3">AlgEquiv</answertest>
+        <sans original-id="area-similar-polygon-1-1-30-7-4" assembly-id="area-similar-polygon-1-1-30-7-4" unique-id="area-similar-polygon-1-1-30-7-4">ans1</sans>
+        <tans original-id="area-similar-polygon-1-1-30-7-5" assembly-id="area-similar-polygon-1-1-30-7-5" unique-id="area-similar-polygon-1-1-30-7-5">ta1</tans>
+        <testoptions original-id="area-similar-polygon-1-1-30-7-6" assembly-id="area-similar-polygon-1-1-30-7-6" unique-id="area-similar-polygon-1-1-30-7-6"/>
+        <quiet original-id="area-similar-polygon-1-1-30-7-7" assembly-id="area-similar-polygon-1-1-30-7-7" unique-id="area-similar-polygon-1-1-30-7-7">0</quiet>
+        <truescoremode original-id="area-similar-polygon-1-1-30-7-8" assembly-id="area-similar-polygon-1-1-30-7-8" unique-id="area-similar-polygon-1-1-30-7-8">+</truescoremode>
+        <truescore original-id="area-similar-polygon-1-1-30-7-9" assembly-id="area-similar-polygon-1-1-30-7-9" unique-id="area-similar-polygon-1-1-30-7-9">0</truescore>
+        <truepenalty original-id="area-similar-polygon-1-1-30-7-10" assembly-id="area-similar-polygon-1-1-30-7-10" unique-id="area-similar-polygon-1-1-30-7-10"/>
+        <truenextnode original-id="area-similar-polygon-1-1-30-7-11" assembly-id="area-similar-polygon-1-1-30-7-11" unique-id="area-similar-polygon-1-1-30-7-11">-1</truenextnode>
+        <trueanswernote original-id="area-similar-polygon-1-1-30-7-12" assembly-id="area-similar-polygon-1-1-30-7-12" unique-id="area-similar-polygon-1-1-30-7-12">prt1-2-T</trueanswernote>
+        <truefeedback format="html" original-id="area-similar-polygon-1-1-30-7-13" assembly-id="area-similar-polygon-1-1-30-7-13" unique-id="area-similar-polygon-1-1-30-7-13">
+          <text original-id="area-similar-polygon-1-1-30-7-13-1" assembly-id="area-similar-polygon-1-1-30-7-13-1" unique-id="area-similar-polygon-1-1-30-7-13-1">&lt;p&gt;
+It looks like you may have used the scale factor for lengths directly to find the new area. Remember, when shapes are similar, lengths scale by the scale factor, but areas scale by the &lt;strong&gt;square&lt;/strong&gt; of the scale factor. Make sure you square the ratio of the corresponding sides before multiplying it by the original area.
+&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="area-similar-polygon-1-1-30-7-14" assembly-id="area-similar-polygon-1-1-30-7-14" unique-id="area-similar-polygon-1-1-30-7-14">-</falsescoremode>
+        <falsescore original-id="area-similar-polygon-1-1-30-7-15" assembly-id="area-similar-polygon-1-1-30-7-15" unique-id="area-similar-polygon-1-1-30-7-15">0</falsescore>
+        <falsepenalty original-id="area-similar-polygon-1-1-30-7-16" assembly-id="area-similar-polygon-1-1-30-7-16" unique-id="area-similar-polygon-1-1-30-7-16"/>
+        <falsenextnode original-id="area-similar-polygon-1-1-30-7-17" assembly-id="area-similar-polygon-1-1-30-7-17" unique-id="area-similar-polygon-1-1-30-7-17">2</falsenextnode>
+        <falseanswernote original-id="area-similar-polygon-1-1-30-7-18" assembly-id="area-similar-polygon-1-1-30-7-18" unique-id="area-similar-polygon-1-1-30-7-18">prt1-2-F</falseanswernote>
+        <falsefeedback format="html" original-id="area-similar-polygon-1-1-30-7-19" assembly-id="area-similar-polygon-1-1-30-7-19" unique-id="area-similar-polygon-1-1-30-7-19">
+          <text original-id="area-similar-polygon-1-1-30-7-19-1" assembly-id="area-similar-polygon-1-1-30-7-19-1" unique-id="area-similar-polygon-1-1-30-7-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="area-similar-polygon-1-1-30-8" assembly-id="area-similar-polygon-1-1-30-8" unique-id="area-similar-polygon-1-1-30-8">
+        <name original-id="area-similar-polygon-1-1-30-8-1" assembly-id="area-similar-polygon-1-1-30-8-1" unique-id="area-similar-polygon-1-1-30-8-1">2</name>
+        <description original-id="area-similar-polygon-1-1-30-8-2" assembly-id="area-similar-polygon-1-1-30-8-2" unique-id="area-similar-polygon-1-1-30-8-2">Reversing the scale factor</description>
+        <answertest original-id="area-similar-polygon-1-1-30-8-3" assembly-id="area-similar-polygon-1-1-30-8-3" unique-id="area-similar-polygon-1-1-30-8-3">AlgEquiv</answertest>
+        <sans original-id="area-similar-polygon-1-1-30-8-4" assembly-id="area-similar-polygon-1-1-30-8-4" unique-id="area-similar-polygon-1-1-30-8-4">ans1</sans>
+        <tans original-id="area-similar-polygon-1-1-30-8-5" assembly-id="area-similar-polygon-1-1-30-8-5" unique-id="area-similar-polygon-1-1-30-8-5">ta2</tans>
+        <testoptions original-id="area-similar-polygon-1-1-30-8-6" assembly-id="area-similar-polygon-1-1-30-8-6" unique-id="area-similar-polygon-1-1-30-8-6"/>
+        <quiet original-id="area-similar-polygon-1-1-30-8-7" assembly-id="area-similar-polygon-1-1-30-8-7" unique-id="area-similar-polygon-1-1-30-8-7">0</quiet>
+        <truescoremode original-id="area-similar-polygon-1-1-30-8-8" assembly-id="area-similar-polygon-1-1-30-8-8" unique-id="area-similar-polygon-1-1-30-8-8">+</truescoremode>
+        <truescore original-id="area-similar-polygon-1-1-30-8-9" assembly-id="area-similar-polygon-1-1-30-8-9" unique-id="area-similar-polygon-1-1-30-8-9">0</truescore>
+        <truepenalty original-id="area-similar-polygon-1-1-30-8-10" assembly-id="area-similar-polygon-1-1-30-8-10" unique-id="area-similar-polygon-1-1-30-8-10"/>
+        <truenextnode original-id="area-similar-polygon-1-1-30-8-11" assembly-id="area-similar-polygon-1-1-30-8-11" unique-id="area-similar-polygon-1-1-30-8-11">-1</truenextnode>
+        <trueanswernote original-id="area-similar-polygon-1-1-30-8-12" assembly-id="area-similar-polygon-1-1-30-8-12" unique-id="area-similar-polygon-1-1-30-8-12">prt1-3-T</trueanswernote>
+        <truefeedback format="html" original-id="area-similar-polygon-1-1-30-8-13" assembly-id="area-similar-polygon-1-1-30-8-13" unique-id="area-similar-polygon-1-1-30-8-13">
+          <text original-id="area-similar-polygon-1-1-30-8-13-1" assembly-id="area-similar-polygon-1-1-30-8-13-1" unique-id="area-similar-polygon-1-1-30-8-13-1">&lt;p&gt;
+It looks like you may have mixed up which polygon has the given area and how the scale factor should be applied. The area provided belongs to the smaller polygon, and your task is to find the area of the larger one. Since you are scaling up, the ratio of corresponding sides should compare the larger side to the smaller side. Make sure the scale factor you use reflects the direction of enlargement and is applied correctly to the area.
+&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="area-similar-polygon-1-1-30-8-14" assembly-id="area-similar-polygon-1-1-30-8-14" unique-id="area-similar-polygon-1-1-30-8-14">-</falsescoremode>
+        <falsescore original-id="area-similar-polygon-1-1-30-8-15" assembly-id="area-similar-polygon-1-1-30-8-15" unique-id="area-similar-polygon-1-1-30-8-15">0</falsescore>
+        <falsepenalty original-id="area-similar-polygon-1-1-30-8-16" assembly-id="area-similar-polygon-1-1-30-8-16" unique-id="area-similar-polygon-1-1-30-8-16"/>
+        <falsenextnode original-id="area-similar-polygon-1-1-30-8-17" assembly-id="area-similar-polygon-1-1-30-8-17" unique-id="area-similar-polygon-1-1-30-8-17">-1</falsenextnode>
+        <falseanswernote original-id="area-similar-polygon-1-1-30-8-18" assembly-id="area-similar-polygon-1-1-30-8-18" unique-id="area-similar-polygon-1-1-30-8-18">prt1-3-F</falseanswernote>
+        <falsefeedback format="html" original-id="area-similar-polygon-1-1-30-8-19" assembly-id="area-similar-polygon-1-1-30-8-19" unique-id="area-similar-polygon-1-1-30-8-19">
+          <text original-id="area-similar-polygon-1-1-30-8-19-1" assembly-id="area-similar-polygon-1-1-30-8-19-1" unique-id="area-similar-polygon-1-1-30-8-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed original-id="area-similar-polygon-1-1-31" assembly-id="area-similar-polygon-1-1-31" unique-id="area-similar-polygon-1-1-31">79061849</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-32" assembly-id="area-similar-polygon-1-1-32" unique-id="area-similar-polygon-1-1-32">1391687465</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-33" assembly-id="area-similar-polygon-1-1-33" unique-id="area-similar-polygon-1-1-33">1834114793</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-34" assembly-id="area-similar-polygon-1-1-34" unique-id="area-similar-polygon-1-1-34">1545273106</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-35" assembly-id="area-similar-polygon-1-1-35" unique-id="area-similar-polygon-1-1-35">1373949093</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-36" assembly-id="area-similar-polygon-1-1-36" unique-id="area-similar-polygon-1-1-36">1814757350</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-37" assembly-id="area-similar-polygon-1-1-37" unique-id="area-similar-polygon-1-1-37">603933186</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-38" assembly-id="area-similar-polygon-1-1-38" unique-id="area-similar-polygon-1-1-38">1798249189</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-39" assembly-id="area-similar-polygon-1-1-39" unique-id="area-similar-polygon-1-1-39">1945371172</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-40" assembly-id="area-similar-polygon-1-1-40" unique-id="area-similar-polygon-1-1-40">729902492</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-41" assembly-id="area-similar-polygon-1-1-41" unique-id="area-similar-polygon-1-1-41">2048173357</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-42" assembly-id="area-similar-polygon-1-1-42" unique-id="area-similar-polygon-1-1-42">271051849</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-43" assembly-id="area-similar-polygon-1-1-43" unique-id="area-similar-polygon-1-1-43">323192384</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-44" assembly-id="area-similar-polygon-1-1-44" unique-id="area-similar-polygon-1-1-44">2033333096</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-45" assembly-id="area-similar-polygon-1-1-45" unique-id="area-similar-polygon-1-1-45">967620088</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-46" assembly-id="area-similar-polygon-1-1-46" unique-id="area-similar-polygon-1-1-46">1407082144</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-47" assembly-id="area-similar-polygon-1-1-47" unique-id="area-similar-polygon-1-1-47">337210682</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-48" assembly-id="area-similar-polygon-1-1-48" unique-id="area-similar-polygon-1-1-48">1331587845</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-49" assembly-id="area-similar-polygon-1-1-49" unique-id="area-similar-polygon-1-1-49">930801212</deployedseed>
+    <deployedseed original-id="area-similar-polygon-1-1-50" assembly-id="area-similar-polygon-1-1-50" unique-id="area-similar-polygon-1-1-50">245362437</deployedseed>
+    <qtest original-id="area-similar-polygon-1-1-51" assembly-id="area-similar-polygon-1-1-51" unique-id="area-similar-polygon-1-1-51">
+      <testcase original-id="area-similar-polygon-1-1-51-1" assembly-id="area-similar-polygon-1-1-51-1" unique-id="area-similar-polygon-1-1-51-1">1</testcase>
+      <description original-id="area-similar-polygon-1-1-51-2" assembly-id="area-similar-polygon-1-1-51-2" unique-id="area-similar-polygon-1-1-51-2">Test case assuming the teacher's input gets full marks.</description>
+      <testinput original-id="area-similar-polygon-1-1-51-3" assembly-id="area-similar-polygon-1-1-51-3" unique-id="area-similar-polygon-1-1-51-3">
+        <name original-id="area-similar-polygon-1-1-51-3-1" assembly-id="area-similar-polygon-1-1-51-3-1" unique-id="area-similar-polygon-1-1-51-3-1">ans1</name>
+        <value original-id="area-similar-polygon-1-1-51-3-2" assembly-id="area-similar-polygon-1-1-51-3-2" unique-id="area-similar-polygon-1-1-51-3-2">ta</value>
+      </testinput>
+      <expected original-id="area-similar-polygon-1-1-51-4" assembly-id="area-similar-polygon-1-1-51-4" unique-id="area-similar-polygon-1-1-51-4">
+        <name original-id="area-similar-polygon-1-1-51-4-1" assembly-id="area-similar-polygon-1-1-51-4-1" unique-id="area-similar-polygon-1-1-51-4-1">prt1</name>
+        <expectedscore original-id="area-similar-polygon-1-1-51-4-2" assembly-id="area-similar-polygon-1-1-51-4-2" unique-id="area-similar-polygon-1-1-51-4-2">1.0000000</expectedscore>
+        <expectedpenalty original-id="area-similar-polygon-1-1-51-4-3" assembly-id="area-similar-polygon-1-1-51-4-3" unique-id="area-similar-polygon-1-1-51-4-3">0.0000000</expectedpenalty>
+        <expectedanswernote original-id="area-similar-polygon-1-1-51-4-4" assembly-id="area-similar-polygon-1-1-51-4-4" unique-id="area-similar-polygon-1-1-51-4-4">prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest original-id="area-similar-polygon-1-1-52" assembly-id="area-similar-polygon-1-1-52" unique-id="area-similar-polygon-1-1-52">
+      <testcase original-id="area-similar-polygon-1-1-52-1" assembly-id="area-similar-polygon-1-1-52-1" unique-id="area-similar-polygon-1-1-52-1">2</testcase>
+      <description original-id="area-similar-polygon-1-1-52-2" assembly-id="area-similar-polygon-1-1-52-2" unique-id="area-similar-polygon-1-1-52-2">Using the linear scale factor instead of the area scale factor</description>
+      <testinput original-id="area-similar-polygon-1-1-52-3" assembly-id="area-similar-polygon-1-1-52-3" unique-id="area-similar-polygon-1-1-52-3">
+        <name original-id="area-similar-polygon-1-1-52-3-1" assembly-id="area-similar-polygon-1-1-52-3-1" unique-id="area-similar-polygon-1-1-52-3-1">ans1</name>
+        <value original-id="area-similar-polygon-1-1-52-3-2" assembly-id="area-similar-polygon-1-1-52-3-2" unique-id="area-similar-polygon-1-1-52-3-2">ta1</value>
+      </testinput>
+      <expected original-id="area-similar-polygon-1-1-52-4" assembly-id="area-similar-polygon-1-1-52-4" unique-id="area-similar-polygon-1-1-52-4">
+        <name original-id="area-similar-polygon-1-1-52-4-1" assembly-id="area-similar-polygon-1-1-52-4-1" unique-id="area-similar-polygon-1-1-52-4-1">prt1</name>
+        <expectedscore original-id="area-similar-polygon-1-1-52-4-2" assembly-id="area-similar-polygon-1-1-52-4-2" unique-id="area-similar-polygon-1-1-52-4-2">0.0000000</expectedscore>
+        <expectedpenalty original-id="area-similar-polygon-1-1-52-4-3" assembly-id="area-similar-polygon-1-1-52-4-3" unique-id="area-similar-polygon-1-1-52-4-3"/>
+        <expectedanswernote original-id="area-similar-polygon-1-1-52-4-4" assembly-id="area-similar-polygon-1-1-52-4-4" unique-id="area-similar-polygon-1-1-52-4-4">prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest original-id="area-similar-polygon-1-1-53" assembly-id="area-similar-polygon-1-1-53" unique-id="area-similar-polygon-1-1-53">
+      <testcase original-id="area-similar-polygon-1-1-53-1" assembly-id="area-similar-polygon-1-1-53-1" unique-id="area-similar-polygon-1-1-53-1">3</testcase>
+      <description original-id="area-similar-polygon-1-1-53-2" assembly-id="area-similar-polygon-1-1-53-2" unique-id="area-similar-polygon-1-1-53-2">Reversing the scale factor</description>
+      <testinput original-id="area-similar-polygon-1-1-53-3" assembly-id="area-similar-polygon-1-1-53-3" unique-id="area-similar-polygon-1-1-53-3">
+        <name original-id="area-similar-polygon-1-1-53-3-1" assembly-id="area-similar-polygon-1-1-53-3-1" unique-id="area-similar-polygon-1-1-53-3-1">ans1</name>
+        <value original-id="area-similar-polygon-1-1-53-3-2" assembly-id="area-similar-polygon-1-1-53-3-2" unique-id="area-similar-polygon-1-1-53-3-2">ta2</value>
+      </testinput>
+      <expected original-id="area-similar-polygon-1-1-53-4" assembly-id="area-similar-polygon-1-1-53-4" unique-id="area-similar-polygon-1-1-53-4">
+        <name original-id="area-similar-polygon-1-1-53-4-1" assembly-id="area-similar-polygon-1-1-53-4-1" unique-id="area-similar-polygon-1-1-53-4-1">prt1</name>
+        <expectedscore original-id="area-similar-polygon-1-1-53-4-2" assembly-id="area-similar-polygon-1-1-53-4-2" unique-id="area-similar-polygon-1-1-53-4-2">0.0000000</expectedscore>
+        <expectedpenalty original-id="area-similar-polygon-1-1-53-4-3" assembly-id="area-similar-polygon-1-1-53-4-3" unique-id="area-similar-polygon-1-1-53-4-3"/>
+        <expectedanswernote original-id="area-similar-polygon-1-1-53-4-4" assembly-id="area-similar-polygon-1-1-53-4-4" unique-id="area-similar-polygon-1-1-53-4-4">prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>
+            

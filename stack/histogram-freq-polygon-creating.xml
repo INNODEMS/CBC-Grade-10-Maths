@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+                <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" original-id="histogram-freq-polygon-creating-1" assembly-id="histogram-freq-polygon-creating-1" unique-id="histogram-freq-polygon-creating-1">
+  <question type="stack" original-id="histogram-freq-polygon-creating-1-1" assembly-id="histogram-freq-polygon-creating-1-1" unique-id="histogram-freq-polygon-creating-1-1">
+    <name original-id="histogram-freq-polygon-creating-1-1-1" assembly-id="histogram-freq-polygon-creating-1-1-1" unique-id="histogram-freq-polygon-creating-1-1-1">
+      <text original-id="histogram-freq-polygon-creating-1-1-1-1" assembly-id="histogram-freq-polygon-creating-1-1-1-1" unique-id="histogram-freq-polygon-creating-1-1-1-1">Creating histograms and frequency polygon for time spent on social media</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="histogram-freq-polygon-creating-1-1-2" assembly-id="histogram-freq-polygon-creating-1-1-2" unique-id="histogram-freq-polygon-creating-1-1-2">
+      <text original-id="histogram-freq-polygon-creating-1-1-2-1" assembly-id="histogram-freq-polygon-creating-1-1-2-1" unique-id="histogram-freq-polygon-creating-1-1-2-1">&lt;p&gt;
+A survey was conducted to find out how much time people spend on social media daily.
+&lt;/p&gt;
+
+&lt;table border="1" cellpadding="5" cellspacing="0"&gt;
+&lt;tr&gt;
+  &lt;th&gt;Time (minutes)&lt;/th&gt;
+  &lt;th&gt;Frequency&lt;/th&gt;
+  &lt;th&gt;Class width&lt;/th&gt;
+  &lt;th&gt;Midpoint&lt;/th&gt;
+  &lt;th&gt;Frequency density&lt;/th&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;td&gt;0–10&lt;/td&gt;
+  &lt;td&gt;{@freq[1]@}&lt;/td&gt;
+  &lt;td&gt;{@widths[1]@}&lt;/td&gt;
+  &lt;td&gt;[[input:m1]] [[validation:m1]][[feedback:prt_m1]]&lt;/td&gt;
+  &lt;td&gt;[[input:d1]] [[validation:d1]][[feedback:prt1]]&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;td&gt;10–20&lt;/td&gt;
+  &lt;td&gt;{@freq[2]@}&lt;/td&gt;
+  &lt;td&gt;{@widths[2]@}&lt;/td&gt;
+  &lt;td&gt;[[input:m2]] [[validation:m2]][[feedback:prt_m2]]&lt;/td&gt;
+  &lt;td&gt;[[input:d2]] [[validation:d2]][[feedback:prt2]]&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;td&gt;20–30&lt;/td&gt;
+  &lt;td&gt;{@freq[3]@}&lt;/td&gt;
+  &lt;td&gt;{@widths[3]@}&lt;/td&gt;
+  &lt;td&gt;[[input:m3]] [[validation:m3]][[feedback:prt_m3]]&lt;/td&gt;
+  &lt;td&gt;[[input:d3]] [[validation:d3]][[feedback:prt3]]&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;td&gt;30–60&lt;/td&gt;
+  &lt;td&gt;{@freq[4]@}&lt;/td&gt;
+  &lt;td&gt;{@widths[4]@}&lt;/td&gt;
+  &lt;td&gt;[[input:m4]] [[validation:m4]][[feedback:prt_m4]]&lt;/td&gt;
+  &lt;td&gt;[[input:d4]] [[validation:d4]][[feedback:prt4]]&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;td&gt;60–120&lt;/td&gt;
+  &lt;td&gt;{@freq[5]@}&lt;/td&gt;
+  &lt;td&gt;{@widths[5]@}&lt;/td&gt;
+  &lt;td&gt;[[input:m5]] [[validation:m5]][[feedback:prt_m5]]&lt;/td&gt;
+  &lt;td&gt;[[input:d5]] [[validation:d5]][[feedback:prt5]]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+Once you have calculated the frequency densities, adjust the points on the graph so that
+the histogram and frequency polygon are correct.
+&lt;/p&gt;
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-5, 8, 130, -1],
+    axis: true,
+    showCopyright: false
+});
+
+/* Data from STACK */
+var lower = [0,10,20,30,60];
+var upper = [10,20,30,60,120];
+var mids  = [{#midpoints[1]#},{#midpoints[2]#},{#midpoints[3]#},{#midpoints[4]#},{#midpoints[5]#}];
+
+/* True densities */
+var dens = [{#densities[1]#},{#densities[2]#},{#densities[3]#},{#densities[4]#},{#densities[5]#}];
+
+/* Draw histogram rectangles */
+for (let i=0; i&lt;5; i++) {
+  board.create('polygon', [
+    [lower[i],0],
+    [upper[i],0],
+    [upper[i],dens[i]],
+    [lower[i],dens[i]]
+  ], {
+    fillOpacity: 0.2,
+    withLines: false
+  });
+}
+
+/* Draggable frequency polygon points */
+var pts = [];
+for (let i=0; i&lt;5; i++) {
+  pts.push(
+    board.create('point', [mids[i], 1], {
+      name: '',
+      size: 3
+    })
+  );
+}
+
+/* Connect points */
+board.create('polygonalchain', pts);
+[[/jsxgraph]]</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="histogram-freq-polygon-creating-1-1-3" assembly-id="histogram-freq-polygon-creating-1-1-3" unique-id="histogram-freq-polygon-creating-1-1-3">
+      <text original-id="histogram-freq-polygon-creating-1-1-3-1" assembly-id="histogram-freq-polygon-creating-1-1-3-1" unique-id="histogram-freq-polygon-creating-1-1-3-1"/>
+    </generalfeedback>
+    <defaultgrade original-id="histogram-freq-polygon-creating-1-1-4" assembly-id="histogram-freq-polygon-creating-1-1-4" unique-id="histogram-freq-polygon-creating-1-1-4">1</defaultgrade>
+    <penalty original-id="histogram-freq-polygon-creating-1-1-5" assembly-id="histogram-freq-polygon-creating-1-1-5" unique-id="histogram-freq-polygon-creating-1-1-5">0.1</penalty>
+    <hidden original-id="histogram-freq-polygon-creating-1-1-6" assembly-id="histogram-freq-polygon-creating-1-1-6" unique-id="histogram-freq-polygon-creating-1-1-6">0</hidden>
+    <idnumber original-id="histogram-freq-polygon-creating-1-1-7" assembly-id="histogram-freq-polygon-creating-1-1-7" unique-id="histogram-freq-polygon-creating-1-1-7"/>
+    <stackversion original-id="histogram-freq-polygon-creating-1-1-8" assembly-id="histogram-freq-polygon-creating-1-1-8" unique-id="histogram-freq-polygon-creating-1-1-8">
+      <text original-id="histogram-freq-polygon-creating-1-1-8-1" assembly-id="histogram-freq-polygon-creating-1-1-8-1" unique-id="histogram-freq-polygon-creating-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="histogram-freq-polygon-creating-1-1-9" assembly-id="histogram-freq-polygon-creating-1-1-9" unique-id="histogram-freq-polygon-creating-1-1-9">
+      <text original-id="histogram-freq-polygon-creating-1-1-9-1" assembly-id="histogram-freq-polygon-creating-1-1-9-1" unique-id="histogram-freq-polygon-creating-1-1-9-1">/****************************************************************/
+/* Class intervals (fixed structure, random widths)             */
+/****************************************************************/
+
+lower: [0,10,20,30,60];
+upper: [10,20,30,60,120];
+
+/* Class widths */
+widths: upper - lower;
+
+/****************************************************************/
+/* Randomised frequencies                                       */
+/****************************************************************/
+
+freq: [
+ rand(10)+10,
+ rand(10)+15,
+ rand(10)+20,
+ rand(10)+30,
+ rand(10)+15
+];
+
+/****************************************************************/
+/* Frequency densities                                          */
+/****************************************************************/
+
+densities:makelist(freq[i]/widths[i], i, 1, length(freq));
+
+/****************************************************************/
+/* Midpoints (for polygon)                                      */
+/****************************************************************/
+
+midpoints:makelist((lower[i]+upper[i])/2, i, 1, length(lower));
+</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="histogram-freq-polygon-creating-1-1-10" assembly-id="histogram-freq-polygon-creating-1-1-10" unique-id="histogram-freq-polygon-creating-1-1-10">
+      <text original-id="histogram-freq-polygon-creating-1-1-10-1" assembly-id="histogram-freq-polygon-creating-1-1-10-1" unique-id="histogram-freq-polygon-creating-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="histogram-freq-polygon-creating-1-1-11" assembly-id="histogram-freq-polygon-creating-1-1-11" unique-id="histogram-freq-polygon-creating-1-1-11">
+      <text original-id="histogram-freq-polygon-creating-1-1-11-1" assembly-id="histogram-freq-polygon-creating-1-1-11-1" unique-id="histogram-freq-polygon-creating-1-1-11-1">{@1@}</text>
+    </questionnote>
+    <questiondescription format="html" original-id="histogram-freq-polygon-creating-1-1-12" assembly-id="histogram-freq-polygon-creating-1-1-12" unique-id="histogram-freq-polygon-creating-1-1-12">
+      <text original-id="histogram-freq-polygon-creating-1-1-12-1" assembly-id="histogram-freq-polygon-creating-1-1-12-1" unique-id="histogram-freq-polygon-creating-1-1-12-1"/>
+    </questiondescription>
+    <questionsimplify original-id="histogram-freq-polygon-creating-1-1-13" assembly-id="histogram-freq-polygon-creating-1-1-13" unique-id="histogram-freq-polygon-creating-1-1-13">1</questionsimplify>
+    <assumepositive original-id="histogram-freq-polygon-creating-1-1-14" assembly-id="histogram-freq-polygon-creating-1-1-14" unique-id="histogram-freq-polygon-creating-1-1-14">0</assumepositive>
+    <assumereal original-id="histogram-freq-polygon-creating-1-1-15" assembly-id="histogram-freq-polygon-creating-1-1-15" unique-id="histogram-freq-polygon-creating-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="histogram-freq-polygon-creating-1-1-16" assembly-id="histogram-freq-polygon-creating-1-1-16" unique-id="histogram-freq-polygon-creating-1-1-16">
+      <text original-id="histogram-freq-polygon-creating-1-1-16-1" assembly-id="histogram-freq-polygon-creating-1-1-16-1" unique-id="histogram-freq-polygon-creating-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="histogram-freq-polygon-creating-1-1-17" assembly-id="histogram-freq-polygon-creating-1-1-17" unique-id="histogram-freq-polygon-creating-1-1-17">
+      <text original-id="histogram-freq-polygon-creating-1-1-17-1" assembly-id="histogram-freq-polygon-creating-1-1-17-1" unique-id="histogram-freq-polygon-creating-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="histogram-freq-polygon-creating-1-1-18" assembly-id="histogram-freq-polygon-creating-1-1-18" unique-id="histogram-freq-polygon-creating-1-1-18">
+      <text original-id="histogram-freq-polygon-creating-1-1-18-1" assembly-id="histogram-freq-polygon-creating-1-1-18-1" unique-id="histogram-freq-polygon-creating-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="histogram-freq-polygon-creating-1-1-19" assembly-id="histogram-freq-polygon-creating-1-1-19" unique-id="histogram-freq-polygon-creating-1-1-19">.</decimals>
+    <scientificnotation original-id="histogram-freq-polygon-creating-1-1-20" assembly-id="histogram-freq-polygon-creating-1-1-20" unique-id="histogram-freq-polygon-creating-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="histogram-freq-polygon-creating-1-1-21" assembly-id="histogram-freq-polygon-creating-1-1-21" unique-id="histogram-freq-polygon-creating-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="histogram-freq-polygon-creating-1-1-22" assembly-id="histogram-freq-polygon-creating-1-1-22" unique-id="histogram-freq-polygon-creating-1-1-22">1</sqrtsign>
+    <complexno original-id="histogram-freq-polygon-creating-1-1-23" assembly-id="histogram-freq-polygon-creating-1-1-23" unique-id="histogram-freq-polygon-creating-1-1-23">i</complexno>
+    <inversetrig original-id="histogram-freq-polygon-creating-1-1-24" assembly-id="histogram-freq-polygon-creating-1-1-24" unique-id="histogram-freq-polygon-creating-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="histogram-freq-polygon-creating-1-1-25" assembly-id="histogram-freq-polygon-creating-1-1-25" unique-id="histogram-freq-polygon-creating-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="histogram-freq-polygon-creating-1-1-26" assembly-id="histogram-freq-polygon-creating-1-1-26" unique-id="histogram-freq-polygon-creating-1-1-26">[</matrixparens>
+    <isbroken original-id="histogram-freq-polygon-creating-1-1-27" assembly-id="histogram-freq-polygon-creating-1-1-27" unique-id="histogram-freq-polygon-creating-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="histogram-freq-polygon-creating-1-1-28" assembly-id="histogram-freq-polygon-creating-1-1-28" unique-id="histogram-freq-polygon-creating-1-1-28"/>
+    <input original-id="histogram-freq-polygon-creating-1-1-29" assembly-id="histogram-freq-polygon-creating-1-1-29" unique-id="histogram-freq-polygon-creating-1-1-29">
+      <name original-id="histogram-freq-polygon-creating-1-1-29-1" assembly-id="histogram-freq-polygon-creating-1-1-29-1" unique-id="histogram-freq-polygon-creating-1-1-29-1">d1</name>
+      <type original-id="histogram-freq-polygon-creating-1-1-29-2" assembly-id="histogram-freq-polygon-creating-1-1-29-2" unique-id="histogram-freq-polygon-creating-1-1-29-2">algebraic</type>
+      <tans original-id="histogram-freq-polygon-creating-1-1-29-3" assembly-id="histogram-freq-polygon-creating-1-1-29-3" unique-id="histogram-freq-polygon-creating-1-1-29-3">densities[1]</tans>
+      <boxsize original-id="histogram-freq-polygon-creating-1-1-29-4" assembly-id="histogram-freq-polygon-creating-1-1-29-4" unique-id="histogram-freq-polygon-creating-1-1-29-4">6</boxsize>
+      <strictsyntax original-id="histogram-freq-polygon-creating-1-1-29-5" assembly-id="histogram-freq-polygon-creating-1-1-29-5" unique-id="histogram-freq-polygon-creating-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="histogram-freq-polygon-creating-1-1-29-6" assembly-id="histogram-freq-polygon-creating-1-1-29-6" unique-id="histogram-freq-polygon-creating-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="histogram-freq-polygon-creating-1-1-29-7" assembly-id="histogram-freq-polygon-creating-1-1-29-7" unique-id="histogram-freq-polygon-creating-1-1-29-7"/>
+      <syntaxattribute original-id="histogram-freq-polygon-creating-1-1-29-8" assembly-id="histogram-freq-polygon-creating-1-1-29-8" unique-id="histogram-freq-polygon-creating-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="histogram-freq-polygon-creating-1-1-29-9" assembly-id="histogram-freq-polygon-creating-1-1-29-9" unique-id="histogram-freq-polygon-creating-1-1-29-9"/>
+      <allowwords original-id="histogram-freq-polygon-creating-1-1-29-10" assembly-id="histogram-freq-polygon-creating-1-1-29-10" unique-id="histogram-freq-polygon-creating-1-1-29-10"/>
+      <forbidfloat original-id="histogram-freq-polygon-creating-1-1-29-11" assembly-id="histogram-freq-polygon-creating-1-1-29-11" unique-id="histogram-freq-polygon-creating-1-1-29-11">0</forbidfloat>
+      <requirelowestterms original-id="histogram-freq-polygon-creating-1-1-29-12" assembly-id="histogram-freq-polygon-creating-1-1-29-12" unique-id="histogram-freq-polygon-creating-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="histogram-freq-polygon-creating-1-1-29-13" assembly-id="histogram-freq-polygon-creating-1-1-29-13" unique-id="histogram-freq-polygon-creating-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="histogram-freq-polygon-creating-1-1-29-14" assembly-id="histogram-freq-polygon-creating-1-1-29-14" unique-id="histogram-freq-polygon-creating-1-1-29-14">1</mustverify>
+      <showvalidation original-id="histogram-freq-polygon-creating-1-1-29-15" assembly-id="histogram-freq-polygon-creating-1-1-29-15" unique-id="histogram-freq-polygon-creating-1-1-29-15">3</showvalidation>
+      <options original-id="histogram-freq-polygon-creating-1-1-29-16" assembly-id="histogram-freq-polygon-creating-1-1-29-16" unique-id="histogram-freq-polygon-creating-1-1-29-16"/>
+    </input>
+    <input original-id="histogram-freq-polygon-creating-1-1-30" assembly-id="histogram-freq-polygon-creating-1-1-30" unique-id="histogram-freq-polygon-creating-1-1-30">
+      <name original-id="histogram-freq-polygon-creating-1-1-30-1" assembly-id="histogram-freq-polygon-creating-1-1-30-1" unique-id="histogram-freq-polygon-creating-1-1-30-1">d2</name>
+      <type original-id="histogram-freq-polygon-creating-1-1-30-2" assembly-id="histogram-freq-polygon-creating-1-1-30-2" unique-id="histogram-freq-polygon-creating-1-1-30-2">algebraic</type>
+      <tans original-id="histogram-freq-polygon-creating-1-1-30-3" assembly-id="histogram-freq-polygon-creating-1-1-30-3" unique-id="histogram-freq-polygon-creating-1-1-30-3">densities[2]</tans>
+      <boxsize original-id="histogram-freq-polygon-creating-1-1-30-4" assembly-id="histogram-freq-polygon-creating-1-1-30-4" unique-id="histogram-freq-polygon-creating-1-1-30-4">6</boxsize>
+      <strictsyntax original-id="histogram-freq-polygon-creating-1-1-30-5" assembly-id="histogram-freq-polygon-creating-1-1-30-5" unique-id="histogram-freq-polygon-creating-1-1-30-5">1</strictsyntax>
+      <insertstars original-id="histogram-freq-polygon-creating-1-1-30-6" assembly-id="histogram-freq-polygon-creating-1-1-30-6" unique-id="histogram-freq-polygon-creating-1-1-30-6">0</insertstars>
+      <syntaxhint original-id="histogram-freq-polygon-creating-1-1-30-7" assembly-id="histogram-freq-polygon-creating-1-1-30-7" unique-id="histogram-freq-polygon-creating-1-1-30-7"/>
+      <syntaxattribute original-id="histogram-freq-polygon-creating-1-1-30-8" assembly-id="histogram-freq-polygon-creating-1-1-30-8" unique-id="histogram-freq-polygon-creating-1-1-30-8">0</syntaxattribute>
+      <forbidwords original-id="histogram-freq-polygon-creating-1-1-30-9" assembly-id="histogram-freq-polygon-creating-1-1-30-9" unique-id="histogram-freq-polygon-creating-1-1-30-9"/>
+      <allowwords original-id="histogram-freq-polygon-creating-1-1-30-10" assembly-id="histogram-freq-polygon-creating-1-1-30-10" unique-id="histogram-freq-polygon-creating-1-1-30-10"/>
+      <forbidfloat original-id="histogram-freq-polygon-creating-1-1-30-11" assembly-id="histogram-freq-polygon-creating-1-1-30-11" unique-id="histogram-freq-polygon-creating-1-1-30-11">0</forbidfloat>
+      <requirelowestterms original-id="histogram-freq-polygon-creating-1-1-30-12" assembly-id="histogram-freq-polygon-creating-1-1-30-12" unique-id="histogram-freq-polygon-creating-1-1-30-12">0</requirelowestterms>
+      <checkanswertype original-id="histogram-freq-polygon-creating-1-1-30-13" assembly-id="histogram-freq-polygon-creating-1-1-30-13" unique-id="histogram-freq-polygon-creating-1-1-30-13">0</checkanswertype>
+      <mustverify original-id="histogram-freq-polygon-creating-1-1-30-14" assembly-id="histogram-freq-polygon-creating-1-1-30-14" unique-id="histogram-freq-polygon-creating-1-1-30-14">1</mustverify>
+      <showvalidation original-id="histogram-freq-polygon-creating-1-1-30-15" assembly-id="histogram-freq-polygon-creating-1-1-30-15" unique-id="histogram-freq-polygon-creating-1-1-30-15">3</showvalidation>
+      <options original-id="histogram-freq-polygon-creating-1-1-30-16" assembly-id="histogram-freq-polygon-creating-1-1-30-16" unique-id="histogram-freq-polygon-creating-1-1-30-16"/>
+    </input>
+    <input original-id="histogram-freq-polygon-creating-1-1-31" assembly-id="histogram-freq-polygon-creating-1-1-31" unique-id="histogram-freq-polygon-creating-1-1-31">
+      <name original-id="histogram-freq-polygon-creating-1-1-31-1" assembly-id="histogram-freq-polygon-creating-1-1-31-1" unique-id="histogram-freq-polygon-creating-1-1-31-1">d3</name>
+      <type original-id="histogram-freq-polygon-creating-1-1-31-2" assembly-id="histogram-freq-polygon-creating-1-1-31-2" unique-id="histogram-freq-polygon-creating-1-1-31-2">algebraic</type>
+      <tans original-id="histogram-freq-polygon-creating-1-1-31-3" assembly-id="histogram-freq-polygon-creating-1-1-31-3" unique-id="histogram-freq-polygon-creating-1-1-31-3">densities[3]</tans>
+      <boxsize original-id="histogram-freq-polygon-creating-1-1-31-4" assembly-id="histogram-freq-polygon-creating-1-1-31-4" unique-id="histogram-freq-polygon-creating-1-1-31-4">6</boxsize>
+      <strictsyntax original-id="histogram-freq-polygon-creating-1-1-31-5" assembly-id="histogram-freq-polygon-creating-1-1-31-5" unique-id="histogram-freq-polygon-creating-1-1-31-5">1</strictsyntax>
+      <insertstars original-id="histogram-freq-polygon-creating-1-1-31-6" assembly-id="histogram-freq-polygon-creating-1-1-31-6" unique-id="histogram-freq-polygon-creating-1-1-31-6">0</insertstars>
+      <syntaxhint original-id="histogram-freq-polygon-creating-1-1-31-7" assembly-id="histogram-freq-polygon-creating-1-1-31-7" unique-id="histogram-freq-polygon-creating-1-1-31-7"/>
+      <syntaxattribute original-id="histogram-freq-polygon-creating-1-1-31-8" assembly-id="histogram-freq-polygon-creating-1-1-31-8" unique-id="histogram-freq-polygon-creating-1-1-31-8">0</syntaxattribute>
+      <forbidwords original-id="histogram-freq-polygon-creating-1-1-31-9" assembly-id="histogram-freq-polygon-creating-1-1-31-9" unique-id="histogram-freq-polygon-creating-1-1-31-9"/>
+      <allowwords original-id="histogram-freq-polygon-creating-1-1-31-10" assembly-id="histogram-freq-polygon-creating-1-1-31-10" unique-id="histogram-freq-polygon-creating-1-1-31-10"/>
+      <forbidfloat original-id="histogram-freq-polygon-creating-1-1-31-11" assembly-id="histogram-freq-polygon-creating-1-1-31-11" unique-id="histogram-freq-polygon-creating-1-1-31-11">0</forbidfloat>
+      <requirelowestterms original-id="histogram-freq-polygon-creating-1-1-31-12" assembly-id="histogram-freq-polygon-creating-1-1-31-12" unique-id="histogram-freq-polygon-creating-1-1-31-12">0</requirelowestterms>
+      <checkanswertype original-id="histogram-freq-polygon-creating-1-1-31-13" assembly-id="histogram-freq-polygon-creating-1-1-31-13" unique-id="histogram-freq-polygon-creating-1-1-31-13">0</checkanswertype>
+      <mustverify original-id="histogram-freq-polygon-creating-1-1-31-14" assembly-id="histogram-freq-polygon-creating-1-1-31-14" unique-id="histogram-freq-polygon-creating-1-1-31-14">1</mustverify>
+      <showvalidation original-id="histogram-freq-polygon-creating-1-1-31-15" assembly-id="histogram-freq-polygon-creating-1-1-31-15" unique-id="histogram-freq-polygon-creating-1-1-31-15">3</showvalidation>
+      <options original-id="histogram-freq-polygon-creating-1-1-31-16" assembly-id="histogram-freq-polygon-creating-1-1-31-16" unique-id="histogram-freq-polygon-creating-1-1-31-16"/>
+    </input>
+    <input original-id="histogram-freq-polygon-creating-1-1-32" assembly-id="histogram-freq-polygon-creating-1-1-32" unique-id="histogram-freq-polygon-creating-1-1-32">
+      <name original-id="histogram-freq-polygon-creating-1-1-32-1" assembly-id="histogram-freq-polygon-creating-1-1-32-1" unique-id="histogram-freq-polygon-creating-1-1-32-1">d4</name>
+      <type original-id="histogram-freq-polygon-creating-1-1-32-2" assembly-id="histogram-freq-polygon-creating-1-1-32-2" unique-id="histogram-freq-polygon-creating-1-1-32-2">algebraic</type>
+      <tans original-id="histogram-freq-polygon-creating-1-1-32-3" assembly-id="histogram-freq-polygon-creating-1-1-32-3" unique-id="histogram-freq-polygon-creating-1-1-32-3">densities[4]</tans>
+      <boxsize original-id="histogram-freq-polygon-creating-1-1-32-4" assembly-id="histogram-freq-polygon-creating-1-1-32-4" unique-id="histogram-freq-polygon-creating-1-1-32-4">6</boxsize>
+      <strictsyntax original-id="histogram-freq-polygon-creating-1-1-32-5" assembly-id="histogram-freq-polygon-creating-1-1-32-5" unique-id="histogram-freq-polygon-creating-1-1-32-5">1</strictsyntax>
+      <insertstars original-id="histogram-freq-polygon-creating-1-1-32-6" assembly-id="histogram-freq-polygon-creating-1-1-32-6" unique-id="histogram-freq-polygon-creating-1-1-32-6">0</insertstars>
+      <syntaxhint original-id="histogram-freq-polygon-creating-1-1-32-7" assembly-id="histogram-freq-polygon-creating-1-1-32-7" unique-id="histogram-freq-polygon-creating-1-1-32-7"/>
+      <syntaxattribute original-id="histogram-freq-polygon-creating-1-1-32-8" assembly-id="histogram-freq-polygon-creating-1-1-32-8" unique-id="histogram-freq-polygon-creating-1-1-32-8">0</syntaxattribute>
+      <forbidwords original-id="histogram-freq-polygon-creating-1-1-32-9" assembly-id="histogram-freq-polygon-creating-1-1-32-9" unique-id="histogram-freq-polygon-creating-1-1-32-9"/>
+      <allowwords original-id="histogram-freq-polygon-creating-1-1-32-10" assembly-id="histogram-freq-polygon-creating-1-1-32-10" unique-id="histogram-freq-polygon-creating-1-1-32-10"/>
+      <forbidfloat original-id="histogram-freq-polygon-creating-1-1-32-11" assembly-id="histogram-freq-polygon-creating-1-1-32-11" unique-id="histogram-freq-polygon-creating-1-1-32-11">0</forbidfloat>
+      <requirelowestterms original-id="histogram-freq-polygon-creating-1-1-32-12" assembly-id="histogram-freq-polygon-creating-1-1-32-12" unique-id="histogram-freq-polygon-creating-1-1-32-12">0</requirelowestterms>
+      <checkanswertype original-id="histogram-freq-polygon-creating-1-1-32-13" assembly-id="histogram-freq-polygon-creating-1-1-32-13" unique-id="histogram-freq-polygon-creating-1-1-32-13">0</checkanswertype>
+      <mustverify original-id="histogram-freq-polygon-creating-1-1-32-14" assembly-id="histogram-freq-polygon-creating-1-1-32-14" unique-id="histogram-freq-polygon-creating-1-1-32-14">1</mustverify>
+      <showvalidation original-id="histogram-freq-polygon-creating-1-1-32-15" assembly-id="histogram-freq-polygon-creating-1-1-32-15" unique-id="histogram-freq-polygon-creating-1-1-32-15">3</showvalidation>
+      <options original-id="histogram-freq-polygon-creating-1-1-32-16" assembly-id="histogram-freq-polygon-creating-1-1-32-16" unique-id="histogram-freq-polygon-creating-1-1-32-16"/>
+    </input>
+    <input original-id="histogram-freq-polygon-creating-1-1-33" assembly-id="histogram-freq-polygon-creating-1-1-33" unique-id="histogram-freq-polygon-creating-1-1-33">
+      <name original-id="histogram-freq-polygon-creating-1-1-33-1" assembly-id="histogram-freq-polygon-creating-1-1-33-1" unique-id="histogram-freq-polygon-creating-1-1-33-1">d5</name>
+      <type original-id="histogram-freq-polygon-creating-1-1-33-2" assembly-id="histogram-freq-polygon-creating-1-1-33-2" unique-id="histogram-freq-polygon-creating-1-1-33-2">algebraic</type>
+      <tans original-id="histogram-freq-polygon-creating-1-1-33-3" assembly-id="histogram-freq-polygon-creating-1-1-33-3" unique-id="histogram-freq-polygon-creating-1-1-33-3">densities[5]</tans>
+      <boxsize original-id="histogram-freq-polygon-creating-1-1-33-4" assembly-id="histogram-freq-polygon-creating-1-1-33-4" unique-id="histogram-freq-polygon-creating-1-1-33-4">6</boxsize>
+      <strictsyntax original-id="histogram-freq-polygon-creating-1-1-33-5" assembly-id="histogram-freq-polygon-creating-1-1-33-5" unique-id="histogram-freq-polygon-creating-1-1-33-5">1</strictsyntax>
+      <insertstars original-id="histogram-freq-polygon-creating-1-1-33-6" assembly-id="histogram-freq-polygon-creating-1-1-33-6" unique-id="histogram-freq-polygon-creating-1-1-33-6">0</insertstars>
+      <syntaxhint original-id="histogram-freq-polygon-creating-1-1-33-7" assembly-id="histogram-freq-polygon-creating-1-1-33-7" unique-id="histogram-freq-polygon-creating-1-1-33-7"/>
+      <syntaxattribute original-id="histogram-freq-polygon-creating-1-1-33-8" assembly-id="histogram-freq-polygon-creating-1-1-33-8" unique-id="histogram-freq-polygon-creating-1-1-33-8">0</syntaxattribute>
+      <forbidwords original-id="histogram-freq-polygon-creating-1-1-33-9" assembly-id="histogram-freq-polygon-creating-1-1-33-9" unique-id="histogram-freq-polygon-creating-1-1-33-9"/>
+      <allowwords original-id="histogram-freq-polygon-creating-1-1-33-10" assembly-id="histogram-freq-polygon-creating-1-1-33-10" unique-id="histogram-freq-polygon-creating-1-1-33-10"/>
+      <forbidfloat original-id="histogram-freq-polygon-creating-1-1-33-11" assembly-id="histogram-freq-polygon-creating-1-1-33-11" unique-id="histogram-freq-polygon-creating-1-1-33-11">0</forbidfloat>
+      <requirelowestterms original-id="histogram-freq-polygon-creating-1-1-33-12" assembly-id="histogram-freq-polygon-creating-1-1-33-12" unique-id="histogram-freq-polygon-creating-1-1-33-12">0</requirelowestterms>
+      <checkanswertype original-id="histogram-freq-polygon-creating-1-1-33-13" assembly-id="histogram-freq-polygon-creating-1-1-33-13" unique-id="histogram-freq-polygon-creating-1-1-33-13">0</checkanswertype>
+      <mustverify original-id="histogram-freq-polygon-creating-1-1-33-14" assembly-id="histogram-freq-polygon-creating-1-1-33-14" unique-id="histogram-freq-polygon-creating-1-1-33-14">1</mustverify>
+      <showvalidation original-id="histogram-freq-polygon-creating-1-1-33-15" assembly-id="histogram-freq-polygon-creating-1-1-33-15" unique-id="histogram-freq-polygon-creating-1-1-33-15">3</showvalidation>
+      <options original-id="histogram-freq-polygon-creating-1-1-33-16" assembly-id="histogram-freq-polygon-creating-1-1-33-16" unique-id="histogram-freq-polygon-creating-1-1-33-16"/>
+    </input>
+    <input original-id="histogram-freq-polygon-creating-1-1-34" assembly-id="histogram-freq-polygon-creating-1-1-34" unique-id="histogram-freq-polygon-creating-1-1-34">
+      <name original-id="histogram-freq-polygon-creating-1-1-34-1" assembly-id="histogram-freq-polygon-creating-1-1-34-1" unique-id="histogram-freq-polygon-creating-1-1-34-1">m1</name>
+      <type original-id="histogram-freq-polygon-creating-1-1-34-2" assembly-id="histogram-freq-polygon-creating-1-1-34-2" unique-id="histogram-freq-polygon-creating-1-1-34-2">algebraic</type>
+      <tans original-id="histogram-freq-polygon-creating-1-1-34-3" assembly-id="histogram-freq-polygon-creating-1-1-34-3" unique-id="histogram-freq-polygon-creating-1-1-34-3">midpoints[1]</tans>
+      <boxsize original-id="histogram-freq-polygon-creating-1-1-34-4" assembly-id="histogram-freq-polygon-creating-1-1-34-4" unique-id="histogram-freq-polygon-creating-1-1-34-4">6</boxsize>
+      <strictsyntax original-id="histogram-freq-polygon-creating-1-1-34-5" assembly-id="histogram-freq-polygon-creating-1-1-34-5" unique-id="histogram-freq-polygon-creating-1-1-34-5">1</strictsyntax>
+      <insertstars original-id="histogram-freq-polygon-creating-1-1-34-6" assembly-id="histogram-freq-polygon-creating-1-1-34-6" unique-id="histogram-freq-polygon-creating-1-1-34-6">0</insertstars>
+      <syntaxhint original-id="histogram-freq-polygon-creating-1-1-34-7" assembly-id="histogram-freq-polygon-creating-1-1-34-7" unique-id="histogram-freq-polygon-creating-1-1-34-7"/>
+      <syntaxattribute original-id="histogram-freq-polygon-creating-1-1-34-8" assembly-id="histogram-freq-polygon-creating-1-1-34-8" unique-id="histogram-freq-polygon-creating-1-1-34-8">0</syntaxattribute>
+      <forbidwords original-id="histogram-freq-polygon-creating-1-1-34-9" assembly-id="histogram-freq-polygon-creating-1-1-34-9" unique-id="histogram-freq-polygon-creating-1-1-34-9"/>
+      <allowwords original-id="histogram-freq-polygon-creating-1-1-34-10" assembly-id="histogram-freq-polygon-creating-1-1-34-10" unique-id="histogram-freq-polygon-creating-1-1-34-10"/>
+      <forbidfloat original-id="histogram-freq-polygon-creating-1-1-34-11" assembly-id="histogram-freq-polygon-creating-1-1-34-11" unique-id="histogram-freq-polygon-creating-1-1-34-11">0</forbidfloat>
+      <requirelowestterms original-id="histogram-freq-polygon-creating-1-1-34-12" assembly-id="histogram-freq-polygon-creating-1-1-34-12" unique-id="histogram-freq-polygon-creating-1-1-34-12">0</requirelowestterms>
+      <checkanswertype original-id="histogram-freq-polygon-creating-1-1-34-13" assembly-id="histogram-freq-polygon-creating-1-1-34-13" unique-id="histogram-freq-polygon-creating-1-1-34-13">0</checkanswertype>
+      <mustverify original-id="histogram-freq-polygon-creating-1-1-34-14" assembly-id="histogram-freq-polygon-creating-1-1-34-14" unique-id="histogram-freq-polygon-creating-1-1-34-14">1</mustverify>
+      <showvalidation original-id="histogram-freq-polygon-creating-1-1-34-15" assembly-id="histogram-freq-polygon-creating-1-1-34-15" unique-id="histogram-freq-polygon-creating-1-1-34-15">3</showvalidation>
+      <options original-id="histogram-freq-polygon-creating-1-1-34-16" assembly-id="histogram-freq-polygon-creating-1-1-34-16" unique-id="histogram-freq-polygon-creating-1-1-34-16"/>
+    </input>
+    <input original-id="histogram-freq-polygon-creating-1-1-35" assembly-id="histogram-freq-polygon-creating-1-1-35" unique-id="histogram-freq-polygon-creating-1-1-35">
+      <name original-id="histogram-freq-polygon-creating-1-1-35-1" assembly-id="histogram-freq-polygon-creating-1-1-35-1" unique-id="histogram-freq-polygon-creating-1-1-35-1">m2</name>
+      <type original-id="histogram-freq-polygon-creating-1-1-35-2" assembly-id="histogram-freq-polygon-creating-1-1-35-2" unique-id="histogram-freq-polygon-creating-1-1-35-2">algebraic</type>
+      <tans original-id="histogram-freq-polygon-creating-1-1-35-3" assembly-id="histogram-freq-polygon-creating-1-1-35-3" unique-id="histogram-freq-polygon-creating-1-1-35-3">midpoints[2]</tans>
+      <boxsize original-id="histogram-freq-polygon-creating-1-1-35-4" assembly-id="histogram-freq-polygon-creating-1-1-35-4" unique-id="histogram-freq-polygon-creating-1-1-35-4">6</boxsize>
+      <strictsyntax original-id="histogram-freq-polygon-creating-1-1-35-5" assembly-id="histogram-freq-polygon-creating-1-1-35-5" unique-id="histogram-freq-polygon-creating-1-1-35-5">1</strictsyntax>
+      <insertstars original-id="histogram-freq-polygon-creating-1-1-35-6" assembly-id="histogram-freq-polygon-creating-1-1-35-6" unique-id="histogram-freq-polygon-creating-1-1-35-6">0</insertstars>
+      <syntaxhint original-id="histogram-freq-polygon-creating-1-1-35-7" assembly-id="histogram-freq-polygon-creating-1-1-35-7" unique-id="histogram-freq-polygon-creating-1-1-35-7"/>
+      <syntaxattribute original-id="histogram-freq-polygon-creating-1-1-35-8" assembly-id="histogram-freq-polygon-creating-1-1-35-8" unique-id="histogram-freq-polygon-creating-1-1-35-8">0</syntaxattribute>
+      <forbidwords original-id="histogram-freq-polygon-creating-1-1-35-9" assembly-id="histogram-freq-polygon-creating-1-1-35-9" unique-id="histogram-freq-polygon-creating-1-1-35-9"/>
+      <allowwords original-id="histogram-freq-polygon-creating-1-1-35-10" assembly-id="histogram-freq-polygon-creating-1-1-35-10" unique-id="histogram-freq-polygon-creating-1-1-35-10"/>
+      <forbidfloat original-id="histogram-freq-polygon-creating-1-1-35-11" assembly-id="histogram-freq-polygon-creating-1-1-35-11" unique-id="histogram-freq-polygon-creating-1-1-35-11">0</forbidfloat>
+      <requirelowestterms original-id="histogram-freq-polygon-creating-1-1-35-12" assembly-id="histogram-freq-polygon-creating-1-1-35-12" unique-id="histogram-freq-polygon-creating-1-1-35-12">0</requirelowestterms>
+      <checkanswertype original-id="histogram-freq-polygon-creating-1-1-35-13" assembly-id="histogram-freq-polygon-creating-1-1-35-13" unique-id="histogram-freq-polygon-creating-1-1-35-13">0</checkanswertype>
+      <mustverify original-id="histogram-freq-polygon-creating-1-1-35-14" assembly-id="histogram-freq-polygon-creating-1-1-35-14" unique-id="histogram-freq-polygon-creating-1-1-35-14">1</mustverify>
+      <showvalidation original-id="histogram-freq-polygon-creating-1-1-35-15" assembly-id="histogram-freq-polygon-creating-1-1-35-15" unique-id="histogram-freq-polygon-creating-1-1-35-15">3</showvalidation>
+      <options original-id="histogram-freq-polygon-creating-1-1-35-16" assembly-id="histogram-freq-polygon-creating-1-1-35-16" unique-id="histogram-freq-polygon-creating-1-1-35-16"/>
+    </input>
+    <input original-id="histogram-freq-polygon-creating-1-1-36" assembly-id="histogram-freq-polygon-creating-1-1-36" unique-id="histogram-freq-polygon-creating-1-1-36">
+      <name original-id="histogram-freq-polygon-creating-1-1-36-1" assembly-id="histogram-freq-polygon-creating-1-1-36-1" unique-id="histogram-freq-polygon-creating-1-1-36-1">m3</name>
+      <type original-id="histogram-freq-polygon-creating-1-1-36-2" assembly-id="histogram-freq-polygon-creating-1-1-36-2" unique-id="histogram-freq-polygon-creating-1-1-36-2">algebraic</type>
+      <tans original-id="histogram-freq-polygon-creating-1-1-36-3" assembly-id="histogram-freq-polygon-creating-1-1-36-3" unique-id="histogram-freq-polygon-creating-1-1-36-3">midpoints[3]</tans>
+      <boxsize original-id="histogram-freq-polygon-creating-1-1-36-4" assembly-id="histogram-freq-polygon-creating-1-1-36-4" unique-id="histogram-freq-polygon-creating-1-1-36-4">6</boxsize>
+      <strictsyntax original-id="histogram-freq-polygon-creating-1-1-36-5" assembly-id="histogram-freq-polygon-creating-1-1-36-5" unique-id="histogram-freq-polygon-creating-1-1-36-5">1</strictsyntax>
+      <insertstars original-id="histogram-freq-polygon-creating-1-1-36-6" assembly-id="histogram-freq-polygon-creating-1-1-36-6" unique-id="histogram-freq-polygon-creating-1-1-36-6">0</insertstars>
+      <syntaxhint original-id="histogram-freq-polygon-creating-1-1-36-7" assembly-id="histogram-freq-polygon-creating-1-1-36-7" unique-id="histogram-freq-polygon-creating-1-1-36-7"/>
+      <syntaxattribute original-id="histogram-freq-polygon-creating-1-1-36-8" assembly-id="histogram-freq-polygon-creating-1-1-36-8" unique-id="histogram-freq-polygon-creating-1-1-36-8">0</syntaxattribute>
+      <forbidwords original-id="histogram-freq-polygon-creating-1-1-36-9" assembly-id="histogram-freq-polygon-creating-1-1-36-9" unique-id="histogram-freq-polygon-creating-1-1-36-9"/>
+      <allowwords original-id="histogram-freq-polygon-creating-1-1-36-10" assembly-id="histogram-freq-polygon-creating-1-1-36-10" unique-id="histogram-freq-polygon-creating-1-1-36-10"/>
+      <forbidfloat original-id="histogram-freq-polygon-creating-1-1-36-11" assembly-id="histogram-freq-polygon-creating-1-1-36-11" unique-id="histogram-freq-polygon-creating-1-1-36-11">0</forbidfloat>
+      <requirelowestterms original-id="histogram-freq-polygon-creating-1-1-36-12" assembly-id="histogram-freq-polygon-creating-1-1-36-12" unique-id="histogram-freq-polygon-creating-1-1-36-12">0</requirelowestterms>
+      <checkanswertype original-id="histogram-freq-polygon-creating-1-1-36-13" assembly-id="histogram-freq-polygon-creating-1-1-36-13" unique-id="histogram-freq-polygon-creating-1-1-36-13">0</checkanswertype>
+      <mustverify original-id="histogram-freq-polygon-creating-1-1-36-14" assembly-id="histogram-freq-polygon-creating-1-1-36-14" unique-id="histogram-freq-polygon-creating-1-1-36-14">1</mustverify>
+      <showvalidation original-id="histogram-freq-polygon-creating-1-1-36-15" assembly-id="histogram-freq-polygon-creating-1-1-36-15" unique-id="histogram-freq-polygon-creating-1-1-36-15">3</showvalidation>
+      <options original-id="histogram-freq-polygon-creating-1-1-36-16" assembly-id="histogram-freq-polygon-creating-1-1-36-16" unique-id="histogram-freq-polygon-creating-1-1-36-16"/>
+    </input>
+    <input original-id="histogram-freq-polygon-creating-1-1-37" assembly-id="histogram-freq-polygon-creating-1-1-37" unique-id="histogram-freq-polygon-creating-1-1-37">
+      <name original-id="histogram-freq-polygon-creating-1-1-37-1" assembly-id="histogram-freq-polygon-creating-1-1-37-1" unique-id="histogram-freq-polygon-creating-1-1-37-1">m4</name>
+      <type original-id="histogram-freq-polygon-creating-1-1-37-2" assembly-id="histogram-freq-polygon-creating-1-1-37-2" unique-id="histogram-freq-polygon-creating-1-1-37-2">algebraic</type>
+      <tans original-id="histogram-freq-polygon-creating-1-1-37-3" assembly-id="histogram-freq-polygon-creating-1-1-37-3" unique-id="histogram-freq-polygon-creating-1-1-37-3">midpoints[4]</tans>
+      <boxsize original-id="histogram-freq-polygon-creating-1-1-37-4" assembly-id="histogram-freq-polygon-creating-1-1-37-4" unique-id="histogram-freq-polygon-creating-1-1-37-4">6</boxsize>
+      <strictsyntax original-id="histogram-freq-polygon-creating-1-1-37-5" assembly-id="histogram-freq-polygon-creating-1-1-37-5" unique-id="histogram-freq-polygon-creating-1-1-37-5">1</strictsyntax>
+      <insertstars original-id="histogram-freq-polygon-creating-1-1-37-6" assembly-id="histogram-freq-polygon-creating-1-1-37-6" unique-id="histogram-freq-polygon-creating-1-1-37-6">0</insertstars>
+      <syntaxhint original-id="histogram-freq-polygon-creating-1-1-37-7" assembly-id="histogram-freq-polygon-creating-1-1-37-7" unique-id="histogram-freq-polygon-creating-1-1-37-7"/>
+      <syntaxattribute original-id="histogram-freq-polygon-creating-1-1-37-8" assembly-id="histogram-freq-polygon-creating-1-1-37-8" unique-id="histogram-freq-polygon-creating-1-1-37-8">0</syntaxattribute>
+      <forbidwords original-id="histogram-freq-polygon-creating-1-1-37-9" assembly-id="histogram-freq-polygon-creating-1-1-37-9" unique-id="histogram-freq-polygon-creating-1-1-37-9"/>
+      <allowwords original-id="histogram-freq-polygon-creating-1-1-37-10" assembly-id="histogram-freq-polygon-creating-1-1-37-10" unique-id="histogram-freq-polygon-creating-1-1-37-10"/>
+      <forbidfloat original-id="histogram-freq-polygon-creating-1-1-37-11" assembly-id="histogram-freq-polygon-creating-1-1-37-11" unique-id="histogram-freq-polygon-creating-1-1-37-11">0</forbidfloat>
+      <requirelowestterms original-id="histogram-freq-polygon-creating-1-1-37-12" assembly-id="histogram-freq-polygon-creating-1-1-37-12" unique-id="histogram-freq-polygon-creating-1-1-37-12">0</requirelowestterms>
+      <checkanswertype original-id="histogram-freq-polygon-creating-1-1-37-13" assembly-id="histogram-freq-polygon-creating-1-1-37-13" unique-id="histogram-freq-polygon-creating-1-1-37-13">0</checkanswertype>
+      <mustverify original-id="histogram-freq-polygon-creating-1-1-37-14" assembly-id="histogram-freq-polygon-creating-1-1-37-14" unique-id="histogram-freq-polygon-creating-1-1-37-14">1</mustverify>
+      <showvalidation original-id="histogram-freq-polygon-creating-1-1-37-15" assembly-id="histogram-freq-polygon-creating-1-1-37-15" unique-id="histogram-freq-polygon-creating-1-1-37-15">3</showvalidation>
+      <options original-id="histogram-freq-polygon-creating-1-1-37-16" assembly-id="histogram-freq-polygon-creating-1-1-37-16" unique-id="histogram-freq-polygon-creating-1-1-37-16"/>
+    </input>
+    <input original-id="histogram-freq-polygon-creating-1-1-38" assembly-id="histogram-freq-polygon-creating-1-1-38" unique-id="histogram-freq-polygon-creating-1-1-38">
+      <name original-id="histogram-freq-polygon-creating-1-1-38-1" assembly-id="histogram-freq-polygon-creating-1-1-38-1" unique-id="histogram-freq-polygon-creating-1-1-38-1">m5</name>
+      <type original-id="histogram-freq-polygon-creating-1-1-38-2" assembly-id="histogram-freq-polygon-creating-1-1-38-2" unique-id="histogram-freq-polygon-creating-1-1-38-2">algebraic</type>
+      <tans original-id="histogram-freq-polygon-creating-1-1-38-3" assembly-id="histogram-freq-polygon-creating-1-1-38-3" unique-id="histogram-freq-polygon-creating-1-1-38-3">midpoints[5]</tans>
+      <boxsize original-id="histogram-freq-polygon-creating-1-1-38-4" assembly-id="histogram-freq-polygon-creating-1-1-38-4" unique-id="histogram-freq-polygon-creating-1-1-38-4">6</boxsize>
+      <strictsyntax original-id="histogram-freq-polygon-creating-1-1-38-5" assembly-id="histogram-freq-polygon-creating-1-1-38-5" unique-id="histogram-freq-polygon-creating-1-1-38-5">1</strictsyntax>
+      <insertstars original-id="histogram-freq-polygon-creating-1-1-38-6" assembly-id="histogram-freq-polygon-creating-1-1-38-6" unique-id="histogram-freq-polygon-creating-1-1-38-6">0</insertstars>
+      <syntaxhint original-id="histogram-freq-polygon-creating-1-1-38-7" assembly-id="histogram-freq-polygon-creating-1-1-38-7" unique-id="histogram-freq-polygon-creating-1-1-38-7"/>
+      <syntaxattribute original-id="histogram-freq-polygon-creating-1-1-38-8" assembly-id="histogram-freq-polygon-creating-1-1-38-8" unique-id="histogram-freq-polygon-creating-1-1-38-8">0</syntaxattribute>
+      <forbidwords original-id="histogram-freq-polygon-creating-1-1-38-9" assembly-id="histogram-freq-polygon-creating-1-1-38-9" unique-id="histogram-freq-polygon-creating-1-1-38-9"/>
+      <allowwords original-id="histogram-freq-polygon-creating-1-1-38-10" assembly-id="histogram-freq-polygon-creating-1-1-38-10" unique-id="histogram-freq-polygon-creating-1-1-38-10"/>
+      <forbidfloat original-id="histogram-freq-polygon-creating-1-1-38-11" assembly-id="histogram-freq-polygon-creating-1-1-38-11" unique-id="histogram-freq-polygon-creating-1-1-38-11">0</forbidfloat>
+      <requirelowestterms original-id="histogram-freq-polygon-creating-1-1-38-12" assembly-id="histogram-freq-polygon-creating-1-1-38-12" unique-id="histogram-freq-polygon-creating-1-1-38-12">0</requirelowestterms>
+      <checkanswertype original-id="histogram-freq-polygon-creating-1-1-38-13" assembly-id="histogram-freq-polygon-creating-1-1-38-13" unique-id="histogram-freq-polygon-creating-1-1-38-13">0</checkanswertype>
+      <mustverify original-id="histogram-freq-polygon-creating-1-1-38-14" assembly-id="histogram-freq-polygon-creating-1-1-38-14" unique-id="histogram-freq-polygon-creating-1-1-38-14">1</mustverify>
+      <showvalidation original-id="histogram-freq-polygon-creating-1-1-38-15" assembly-id="histogram-freq-polygon-creating-1-1-38-15" unique-id="histogram-freq-polygon-creating-1-1-38-15">3</showvalidation>
+      <options original-id="histogram-freq-polygon-creating-1-1-38-16" assembly-id="histogram-freq-polygon-creating-1-1-38-16" unique-id="histogram-freq-polygon-creating-1-1-38-16"/>
+    </input>
+    <prt original-id="histogram-freq-polygon-creating-1-1-39" assembly-id="histogram-freq-polygon-creating-1-1-39" unique-id="histogram-freq-polygon-creating-1-1-39">
+      <name original-id="histogram-freq-polygon-creating-1-1-39-1" assembly-id="histogram-freq-polygon-creating-1-1-39-1" unique-id="histogram-freq-polygon-creating-1-1-39-1">prt_m1</name>
+      <value original-id="histogram-freq-polygon-creating-1-1-39-2" assembly-id="histogram-freq-polygon-creating-1-1-39-2" unique-id="histogram-freq-polygon-creating-1-1-39-2">1.0000000</value>
+      <autosimplify original-id="histogram-freq-polygon-creating-1-1-39-3" assembly-id="histogram-freq-polygon-creating-1-1-39-3" unique-id="histogram-freq-polygon-creating-1-1-39-3">1</autosimplify>
+      <feedbackstyle original-id="histogram-freq-polygon-creating-1-1-39-4" assembly-id="histogram-freq-polygon-creating-1-1-39-4" unique-id="histogram-freq-polygon-creating-1-1-39-4">1</feedbackstyle>
+      <feedbackvariables original-id="histogram-freq-polygon-creating-1-1-39-5" assembly-id="histogram-freq-polygon-creating-1-1-39-5" unique-id="histogram-freq-polygon-creating-1-1-39-5">
+        <text original-id="histogram-freq-polygon-creating-1-1-39-5-1" assembly-id="histogram-freq-polygon-creating-1-1-39-5-1" unique-id="histogram-freq-polygon-creating-1-1-39-5-1"/>
+      </feedbackvariables>
+      <node original-id="histogram-freq-polygon-creating-1-1-39-6" assembly-id="histogram-freq-polygon-creating-1-1-39-6" unique-id="histogram-freq-polygon-creating-1-1-39-6">
+        <name original-id="histogram-freq-polygon-creating-1-1-39-6-1" assembly-id="histogram-freq-polygon-creating-1-1-39-6-1" unique-id="histogram-freq-polygon-creating-1-1-39-6-1">0</name>
+        <description original-id="histogram-freq-polygon-creating-1-1-39-6-2" assembly-id="histogram-freq-polygon-creating-1-1-39-6-2" unique-id="histogram-freq-polygon-creating-1-1-39-6-2"/>
+        <answertest original-id="histogram-freq-polygon-creating-1-1-39-6-3" assembly-id="histogram-freq-polygon-creating-1-1-39-6-3" unique-id="histogram-freq-polygon-creating-1-1-39-6-3">AlgEquiv</answertest>
+        <sans original-id="histogram-freq-polygon-creating-1-1-39-6-4" assembly-id="histogram-freq-polygon-creating-1-1-39-6-4" unique-id="histogram-freq-polygon-creating-1-1-39-6-4">m1</sans>
+        <tans original-id="histogram-freq-polygon-creating-1-1-39-6-5" assembly-id="histogram-freq-polygon-creating-1-1-39-6-5" unique-id="histogram-freq-polygon-creating-1-1-39-6-5">midpoints[1]</tans>
+        <testoptions original-id="histogram-freq-polygon-creating-1-1-39-6-6" assembly-id="histogram-freq-polygon-creating-1-1-39-6-6" unique-id="histogram-freq-polygon-creating-1-1-39-6-6"/>
+        <quiet original-id="histogram-freq-polygon-creating-1-1-39-6-7" assembly-id="histogram-freq-polygon-creating-1-1-39-6-7" unique-id="histogram-freq-polygon-creating-1-1-39-6-7">0</quiet>
+        <truescoremode original-id="histogram-freq-polygon-creating-1-1-39-6-8" assembly-id="histogram-freq-polygon-creating-1-1-39-6-8" unique-id="histogram-freq-polygon-creating-1-1-39-6-8">=</truescoremode>
+        <truescore original-id="histogram-freq-polygon-creating-1-1-39-6-9" assembly-id="histogram-freq-polygon-creating-1-1-39-6-9" unique-id="histogram-freq-polygon-creating-1-1-39-6-9">1</truescore>
+        <truepenalty original-id="histogram-freq-polygon-creating-1-1-39-6-10" assembly-id="histogram-freq-polygon-creating-1-1-39-6-10" unique-id="histogram-freq-polygon-creating-1-1-39-6-10"/>
+        <truenextnode original-id="histogram-freq-polygon-creating-1-1-39-6-11" assembly-id="histogram-freq-polygon-creating-1-1-39-6-11" unique-id="histogram-freq-polygon-creating-1-1-39-6-11">-1</truenextnode>
+        <trueanswernote original-id="histogram-freq-polygon-creating-1-1-39-6-12" assembly-id="histogram-freq-polygon-creating-1-1-39-6-12" unique-id="histogram-freq-polygon-creating-1-1-39-6-12">prt_m1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-39-6-13" assembly-id="histogram-freq-polygon-creating-1-1-39-6-13" unique-id="histogram-freq-polygon-creating-1-1-39-6-13">
+          <text original-id="histogram-freq-polygon-creating-1-1-39-6-13-1" assembly-id="histogram-freq-polygon-creating-1-1-39-6-13-1" unique-id="histogram-freq-polygon-creating-1-1-39-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="histogram-freq-polygon-creating-1-1-39-6-14" assembly-id="histogram-freq-polygon-creating-1-1-39-6-14" unique-id="histogram-freq-polygon-creating-1-1-39-6-14">=</falsescoremode>
+        <falsescore original-id="histogram-freq-polygon-creating-1-1-39-6-15" assembly-id="histogram-freq-polygon-creating-1-1-39-6-15" unique-id="histogram-freq-polygon-creating-1-1-39-6-15">0</falsescore>
+        <falsepenalty original-id="histogram-freq-polygon-creating-1-1-39-6-16" assembly-id="histogram-freq-polygon-creating-1-1-39-6-16" unique-id="histogram-freq-polygon-creating-1-1-39-6-16"/>
+        <falsenextnode original-id="histogram-freq-polygon-creating-1-1-39-6-17" assembly-id="histogram-freq-polygon-creating-1-1-39-6-17" unique-id="histogram-freq-polygon-creating-1-1-39-6-17">-1</falsenextnode>
+        <falseanswernote original-id="histogram-freq-polygon-creating-1-1-39-6-18" assembly-id="histogram-freq-polygon-creating-1-1-39-6-18" unique-id="histogram-freq-polygon-creating-1-1-39-6-18">prt_m1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-39-6-19" assembly-id="histogram-freq-polygon-creating-1-1-39-6-19" unique-id="histogram-freq-polygon-creating-1-1-39-6-19">
+          <text original-id="histogram-freq-polygon-creating-1-1-39-6-19-1" assembly-id="histogram-freq-polygon-creating-1-1-39-6-19-1" unique-id="histogram-freq-polygon-creating-1-1-39-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="histogram-freq-polygon-creating-1-1-40" assembly-id="histogram-freq-polygon-creating-1-1-40" unique-id="histogram-freq-polygon-creating-1-1-40">
+      <name original-id="histogram-freq-polygon-creating-1-1-40-1" assembly-id="histogram-freq-polygon-creating-1-1-40-1" unique-id="histogram-freq-polygon-creating-1-1-40-1">prt_m2</name>
+      <value original-id="histogram-freq-polygon-creating-1-1-40-2" assembly-id="histogram-freq-polygon-creating-1-1-40-2" unique-id="histogram-freq-polygon-creating-1-1-40-2">1.0000000</value>
+      <autosimplify original-id="histogram-freq-polygon-creating-1-1-40-3" assembly-id="histogram-freq-polygon-creating-1-1-40-3" unique-id="histogram-freq-polygon-creating-1-1-40-3">1</autosimplify>
+      <feedbackstyle original-id="histogram-freq-polygon-creating-1-1-40-4" assembly-id="histogram-freq-polygon-creating-1-1-40-4" unique-id="histogram-freq-polygon-creating-1-1-40-4">1</feedbackstyle>
+      <feedbackvariables original-id="histogram-freq-polygon-creating-1-1-40-5" assembly-id="histogram-freq-polygon-creating-1-1-40-5" unique-id="histogram-freq-polygon-creating-1-1-40-5">
+        <text original-id="histogram-freq-polygon-creating-1-1-40-5-1" assembly-id="histogram-freq-polygon-creating-1-1-40-5-1" unique-id="histogram-freq-polygon-creating-1-1-40-5-1"/>
+      </feedbackvariables>
+      <node original-id="histogram-freq-polygon-creating-1-1-40-6" assembly-id="histogram-freq-polygon-creating-1-1-40-6" unique-id="histogram-freq-polygon-creating-1-1-40-6">
+        <name original-id="histogram-freq-polygon-creating-1-1-40-6-1" assembly-id="histogram-freq-polygon-creating-1-1-40-6-1" unique-id="histogram-freq-polygon-creating-1-1-40-6-1">0</name>
+        <description original-id="histogram-freq-polygon-creating-1-1-40-6-2" assembly-id="histogram-freq-polygon-creating-1-1-40-6-2" unique-id="histogram-freq-polygon-creating-1-1-40-6-2"/>
+        <answertest original-id="histogram-freq-polygon-creating-1-1-40-6-3" assembly-id="histogram-freq-polygon-creating-1-1-40-6-3" unique-id="histogram-freq-polygon-creating-1-1-40-6-3">AlgEquiv</answertest>
+        <sans original-id="histogram-freq-polygon-creating-1-1-40-6-4" assembly-id="histogram-freq-polygon-creating-1-1-40-6-4" unique-id="histogram-freq-polygon-creating-1-1-40-6-4">m2</sans>
+        <tans original-id="histogram-freq-polygon-creating-1-1-40-6-5" assembly-id="histogram-freq-polygon-creating-1-1-40-6-5" unique-id="histogram-freq-polygon-creating-1-1-40-6-5">midpoints[2]</tans>
+        <testoptions original-id="histogram-freq-polygon-creating-1-1-40-6-6" assembly-id="histogram-freq-polygon-creating-1-1-40-6-6" unique-id="histogram-freq-polygon-creating-1-1-40-6-6"/>
+        <quiet original-id="histogram-freq-polygon-creating-1-1-40-6-7" assembly-id="histogram-freq-polygon-creating-1-1-40-6-7" unique-id="histogram-freq-polygon-creating-1-1-40-6-7">0</quiet>
+        <truescoremode original-id="histogram-freq-polygon-creating-1-1-40-6-8" assembly-id="histogram-freq-polygon-creating-1-1-40-6-8" unique-id="histogram-freq-polygon-creating-1-1-40-6-8">=</truescoremode>
+        <truescore original-id="histogram-freq-polygon-creating-1-1-40-6-9" assembly-id="histogram-freq-polygon-creating-1-1-40-6-9" unique-id="histogram-freq-polygon-creating-1-1-40-6-9">1</truescore>
+        <truepenalty original-id="histogram-freq-polygon-creating-1-1-40-6-10" assembly-id="histogram-freq-polygon-creating-1-1-40-6-10" unique-id="histogram-freq-polygon-creating-1-1-40-6-10"/>
+        <truenextnode original-id="histogram-freq-polygon-creating-1-1-40-6-11" assembly-id="histogram-freq-polygon-creating-1-1-40-6-11" unique-id="histogram-freq-polygon-creating-1-1-40-6-11">-1</truenextnode>
+        <trueanswernote original-id="histogram-freq-polygon-creating-1-1-40-6-12" assembly-id="histogram-freq-polygon-creating-1-1-40-6-12" unique-id="histogram-freq-polygon-creating-1-1-40-6-12">prt_m2-1-T</trueanswernote>
+        <truefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-40-6-13" assembly-id="histogram-freq-polygon-creating-1-1-40-6-13" unique-id="histogram-freq-polygon-creating-1-1-40-6-13">
+          <text original-id="histogram-freq-polygon-creating-1-1-40-6-13-1" assembly-id="histogram-freq-polygon-creating-1-1-40-6-13-1" unique-id="histogram-freq-polygon-creating-1-1-40-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="histogram-freq-polygon-creating-1-1-40-6-14" assembly-id="histogram-freq-polygon-creating-1-1-40-6-14" unique-id="histogram-freq-polygon-creating-1-1-40-6-14">=</falsescoremode>
+        <falsescore original-id="histogram-freq-polygon-creating-1-1-40-6-15" assembly-id="histogram-freq-polygon-creating-1-1-40-6-15" unique-id="histogram-freq-polygon-creating-1-1-40-6-15">0</falsescore>
+        <falsepenalty original-id="histogram-freq-polygon-creating-1-1-40-6-16" assembly-id="histogram-freq-polygon-creating-1-1-40-6-16" unique-id="histogram-freq-polygon-creating-1-1-40-6-16"/>
+        <falsenextnode original-id="histogram-freq-polygon-creating-1-1-40-6-17" assembly-id="histogram-freq-polygon-creating-1-1-40-6-17" unique-id="histogram-freq-polygon-creating-1-1-40-6-17">-1</falsenextnode>
+        <falseanswernote original-id="histogram-freq-polygon-creating-1-1-40-6-18" assembly-id="histogram-freq-polygon-creating-1-1-40-6-18" unique-id="histogram-freq-polygon-creating-1-1-40-6-18">prt_m2-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-40-6-19" assembly-id="histogram-freq-polygon-creating-1-1-40-6-19" unique-id="histogram-freq-polygon-creating-1-1-40-6-19">
+          <text original-id="histogram-freq-polygon-creating-1-1-40-6-19-1" assembly-id="histogram-freq-polygon-creating-1-1-40-6-19-1" unique-id="histogram-freq-polygon-creating-1-1-40-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="histogram-freq-polygon-creating-1-1-41" assembly-id="histogram-freq-polygon-creating-1-1-41" unique-id="histogram-freq-polygon-creating-1-1-41">
+      <name original-id="histogram-freq-polygon-creating-1-1-41-1" assembly-id="histogram-freq-polygon-creating-1-1-41-1" unique-id="histogram-freq-polygon-creating-1-1-41-1">prt_m3</name>
+      <value original-id="histogram-freq-polygon-creating-1-1-41-2" assembly-id="histogram-freq-polygon-creating-1-1-41-2" unique-id="histogram-freq-polygon-creating-1-1-41-2">1.0000000</value>
+      <autosimplify original-id="histogram-freq-polygon-creating-1-1-41-3" assembly-id="histogram-freq-polygon-creating-1-1-41-3" unique-id="histogram-freq-polygon-creating-1-1-41-3">1</autosimplify>
+      <feedbackstyle original-id="histogram-freq-polygon-creating-1-1-41-4" assembly-id="histogram-freq-polygon-creating-1-1-41-4" unique-id="histogram-freq-polygon-creating-1-1-41-4">1</feedbackstyle>
+      <feedbackvariables original-id="histogram-freq-polygon-creating-1-1-41-5" assembly-id="histogram-freq-polygon-creating-1-1-41-5" unique-id="histogram-freq-polygon-creating-1-1-41-5">
+        <text original-id="histogram-freq-polygon-creating-1-1-41-5-1" assembly-id="histogram-freq-polygon-creating-1-1-41-5-1" unique-id="histogram-freq-polygon-creating-1-1-41-5-1"/>
+      </feedbackvariables>
+      <node original-id="histogram-freq-polygon-creating-1-1-41-6" assembly-id="histogram-freq-polygon-creating-1-1-41-6" unique-id="histogram-freq-polygon-creating-1-1-41-6">
+        <name original-id="histogram-freq-polygon-creating-1-1-41-6-1" assembly-id="histogram-freq-polygon-creating-1-1-41-6-1" unique-id="histogram-freq-polygon-creating-1-1-41-6-1">0</name>
+        <description original-id="histogram-freq-polygon-creating-1-1-41-6-2" assembly-id="histogram-freq-polygon-creating-1-1-41-6-2" unique-id="histogram-freq-polygon-creating-1-1-41-6-2"/>
+        <answertest original-id="histogram-freq-polygon-creating-1-1-41-6-3" assembly-id="histogram-freq-polygon-creating-1-1-41-6-3" unique-id="histogram-freq-polygon-creating-1-1-41-6-3">AlgEquiv</answertest>
+        <sans original-id="histogram-freq-polygon-creating-1-1-41-6-4" assembly-id="histogram-freq-polygon-creating-1-1-41-6-4" unique-id="histogram-freq-polygon-creating-1-1-41-6-4">m3</sans>
+        <tans original-id="histogram-freq-polygon-creating-1-1-41-6-5" assembly-id="histogram-freq-polygon-creating-1-1-41-6-5" unique-id="histogram-freq-polygon-creating-1-1-41-6-5">midpoints[3]</tans>
+        <testoptions original-id="histogram-freq-polygon-creating-1-1-41-6-6" assembly-id="histogram-freq-polygon-creating-1-1-41-6-6" unique-id="histogram-freq-polygon-creating-1-1-41-6-6"/>
+        <quiet original-id="histogram-freq-polygon-creating-1-1-41-6-7" assembly-id="histogram-freq-polygon-creating-1-1-41-6-7" unique-id="histogram-freq-polygon-creating-1-1-41-6-7">0</quiet>
+        <truescoremode original-id="histogram-freq-polygon-creating-1-1-41-6-8" assembly-id="histogram-freq-polygon-creating-1-1-41-6-8" unique-id="histogram-freq-polygon-creating-1-1-41-6-8">=</truescoremode>
+        <truescore original-id="histogram-freq-polygon-creating-1-1-41-6-9" assembly-id="histogram-freq-polygon-creating-1-1-41-6-9" unique-id="histogram-freq-polygon-creating-1-1-41-6-9">1</truescore>
+        <truepenalty original-id="histogram-freq-polygon-creating-1-1-41-6-10" assembly-id="histogram-freq-polygon-creating-1-1-41-6-10" unique-id="histogram-freq-polygon-creating-1-1-41-6-10"/>
+        <truenextnode original-id="histogram-freq-polygon-creating-1-1-41-6-11" assembly-id="histogram-freq-polygon-creating-1-1-41-6-11" unique-id="histogram-freq-polygon-creating-1-1-41-6-11">-1</truenextnode>
+        <trueanswernote original-id="histogram-freq-polygon-creating-1-1-41-6-12" assembly-id="histogram-freq-polygon-creating-1-1-41-6-12" unique-id="histogram-freq-polygon-creating-1-1-41-6-12">prt_m3-1-T</trueanswernote>
+        <truefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-41-6-13" assembly-id="histogram-freq-polygon-creating-1-1-41-6-13" unique-id="histogram-freq-polygon-creating-1-1-41-6-13">
+          <text original-id="histogram-freq-polygon-creating-1-1-41-6-13-1" assembly-id="histogram-freq-polygon-creating-1-1-41-6-13-1" unique-id="histogram-freq-polygon-creating-1-1-41-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="histogram-freq-polygon-creating-1-1-41-6-14" assembly-id="histogram-freq-polygon-creating-1-1-41-6-14" unique-id="histogram-freq-polygon-creating-1-1-41-6-14">=</falsescoremode>
+        <falsescore original-id="histogram-freq-polygon-creating-1-1-41-6-15" assembly-id="histogram-freq-polygon-creating-1-1-41-6-15" unique-id="histogram-freq-polygon-creating-1-1-41-6-15">0</falsescore>
+        <falsepenalty original-id="histogram-freq-polygon-creating-1-1-41-6-16" assembly-id="histogram-freq-polygon-creating-1-1-41-6-16" unique-id="histogram-freq-polygon-creating-1-1-41-6-16"/>
+        <falsenextnode original-id="histogram-freq-polygon-creating-1-1-41-6-17" assembly-id="histogram-freq-polygon-creating-1-1-41-6-17" unique-id="histogram-freq-polygon-creating-1-1-41-6-17">-1</falsenextnode>
+        <falseanswernote original-id="histogram-freq-polygon-creating-1-1-41-6-18" assembly-id="histogram-freq-polygon-creating-1-1-41-6-18" unique-id="histogram-freq-polygon-creating-1-1-41-6-18">prt_m3-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-41-6-19" assembly-id="histogram-freq-polygon-creating-1-1-41-6-19" unique-id="histogram-freq-polygon-creating-1-1-41-6-19">
+          <text original-id="histogram-freq-polygon-creating-1-1-41-6-19-1" assembly-id="histogram-freq-polygon-creating-1-1-41-6-19-1" unique-id="histogram-freq-polygon-creating-1-1-41-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="histogram-freq-polygon-creating-1-1-42" assembly-id="histogram-freq-polygon-creating-1-1-42" unique-id="histogram-freq-polygon-creating-1-1-42">
+      <name original-id="histogram-freq-polygon-creating-1-1-42-1" assembly-id="histogram-freq-polygon-creating-1-1-42-1" unique-id="histogram-freq-polygon-creating-1-1-42-1">prt_m4</name>
+      <value original-id="histogram-freq-polygon-creating-1-1-42-2" assembly-id="histogram-freq-polygon-creating-1-1-42-2" unique-id="histogram-freq-polygon-creating-1-1-42-2">1.0000000</value>
+      <autosimplify original-id="histogram-freq-polygon-creating-1-1-42-3" assembly-id="histogram-freq-polygon-creating-1-1-42-3" unique-id="histogram-freq-polygon-creating-1-1-42-3">1</autosimplify>
+      <feedbackstyle original-id="histogram-freq-polygon-creating-1-1-42-4" assembly-id="histogram-freq-polygon-creating-1-1-42-4" unique-id="histogram-freq-polygon-creating-1-1-42-4">1</feedbackstyle>
+      <feedbackvariables original-id="histogram-freq-polygon-creating-1-1-42-5" assembly-id="histogram-freq-polygon-creating-1-1-42-5" unique-id="histogram-freq-polygon-creating-1-1-42-5">
+        <text original-id="histogram-freq-polygon-creating-1-1-42-5-1" assembly-id="histogram-freq-polygon-creating-1-1-42-5-1" unique-id="histogram-freq-polygon-creating-1-1-42-5-1"/>
+      </feedbackvariables>
+      <node original-id="histogram-freq-polygon-creating-1-1-42-6" assembly-id="histogram-freq-polygon-creating-1-1-42-6" unique-id="histogram-freq-polygon-creating-1-1-42-6">
+        <name original-id="histogram-freq-polygon-creating-1-1-42-6-1" assembly-id="histogram-freq-polygon-creating-1-1-42-6-1" unique-id="histogram-freq-polygon-creating-1-1-42-6-1">0</name>
+        <description original-id="histogram-freq-polygon-creating-1-1-42-6-2" assembly-id="histogram-freq-polygon-creating-1-1-42-6-2" unique-id="histogram-freq-polygon-creating-1-1-42-6-2"/>
+        <answertest original-id="histogram-freq-polygon-creating-1-1-42-6-3" assembly-id="histogram-freq-polygon-creating-1-1-42-6-3" unique-id="histogram-freq-polygon-creating-1-1-42-6-3">AlgEquiv</answertest>
+        <sans original-id="histogram-freq-polygon-creating-1-1-42-6-4" assembly-id="histogram-freq-polygon-creating-1-1-42-6-4" unique-id="histogram-freq-polygon-creating-1-1-42-6-4">m4</sans>
+        <tans original-id="histogram-freq-polygon-creating-1-1-42-6-5" assembly-id="histogram-freq-polygon-creating-1-1-42-6-5" unique-id="histogram-freq-polygon-creating-1-1-42-6-5">midpoints[4]</tans>
+        <testoptions original-id="histogram-freq-polygon-creating-1-1-42-6-6" assembly-id="histogram-freq-polygon-creating-1-1-42-6-6" unique-id="histogram-freq-polygon-creating-1-1-42-6-6"/>
+        <quiet original-id="histogram-freq-polygon-creating-1-1-42-6-7" assembly-id="histogram-freq-polygon-creating-1-1-42-6-7" unique-id="histogram-freq-polygon-creating-1-1-42-6-7">0</quiet>
+        <truescoremode original-id="histogram-freq-polygon-creating-1-1-42-6-8" assembly-id="histogram-freq-polygon-creating-1-1-42-6-8" unique-id="histogram-freq-polygon-creating-1-1-42-6-8">=</truescoremode>
+        <truescore original-id="histogram-freq-polygon-creating-1-1-42-6-9" assembly-id="histogram-freq-polygon-creating-1-1-42-6-9" unique-id="histogram-freq-polygon-creating-1-1-42-6-9">1</truescore>
+        <truepenalty original-id="histogram-freq-polygon-creating-1-1-42-6-10" assembly-id="histogram-freq-polygon-creating-1-1-42-6-10" unique-id="histogram-freq-polygon-creating-1-1-42-6-10"/>
+        <truenextnode original-id="histogram-freq-polygon-creating-1-1-42-6-11" assembly-id="histogram-freq-polygon-creating-1-1-42-6-11" unique-id="histogram-freq-polygon-creating-1-1-42-6-11">-1</truenextnode>
+        <trueanswernote original-id="histogram-freq-polygon-creating-1-1-42-6-12" assembly-id="histogram-freq-polygon-creating-1-1-42-6-12" unique-id="histogram-freq-polygon-creating-1-1-42-6-12">prt_m4-1-T</trueanswernote>
+        <truefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-42-6-13" assembly-id="histogram-freq-polygon-creating-1-1-42-6-13" unique-id="histogram-freq-polygon-creating-1-1-42-6-13">
+          <text original-id="histogram-freq-polygon-creating-1-1-42-6-13-1" assembly-id="histogram-freq-polygon-creating-1-1-42-6-13-1" unique-id="histogram-freq-polygon-creating-1-1-42-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="histogram-freq-polygon-creating-1-1-42-6-14" assembly-id="histogram-freq-polygon-creating-1-1-42-6-14" unique-id="histogram-freq-polygon-creating-1-1-42-6-14">=</falsescoremode>
+        <falsescore original-id="histogram-freq-polygon-creating-1-1-42-6-15" assembly-id="histogram-freq-polygon-creating-1-1-42-6-15" unique-id="histogram-freq-polygon-creating-1-1-42-6-15">0</falsescore>
+        <falsepenalty original-id="histogram-freq-polygon-creating-1-1-42-6-16" assembly-id="histogram-freq-polygon-creating-1-1-42-6-16" unique-id="histogram-freq-polygon-creating-1-1-42-6-16"/>
+        <falsenextnode original-id="histogram-freq-polygon-creating-1-1-42-6-17" assembly-id="histogram-freq-polygon-creating-1-1-42-6-17" unique-id="histogram-freq-polygon-creating-1-1-42-6-17">-1</falsenextnode>
+        <falseanswernote original-id="histogram-freq-polygon-creating-1-1-42-6-18" assembly-id="histogram-freq-polygon-creating-1-1-42-6-18" unique-id="histogram-freq-polygon-creating-1-1-42-6-18">prt_m4-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-42-6-19" assembly-id="histogram-freq-polygon-creating-1-1-42-6-19" unique-id="histogram-freq-polygon-creating-1-1-42-6-19">
+          <text original-id="histogram-freq-polygon-creating-1-1-42-6-19-1" assembly-id="histogram-freq-polygon-creating-1-1-42-6-19-1" unique-id="histogram-freq-polygon-creating-1-1-42-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="histogram-freq-polygon-creating-1-1-43" assembly-id="histogram-freq-polygon-creating-1-1-43" unique-id="histogram-freq-polygon-creating-1-1-43">
+      <name original-id="histogram-freq-polygon-creating-1-1-43-1" assembly-id="histogram-freq-polygon-creating-1-1-43-1" unique-id="histogram-freq-polygon-creating-1-1-43-1">prt_m5</name>
+      <value original-id="histogram-freq-polygon-creating-1-1-43-2" assembly-id="histogram-freq-polygon-creating-1-1-43-2" unique-id="histogram-freq-polygon-creating-1-1-43-2">1.0000000</value>
+      <autosimplify original-id="histogram-freq-polygon-creating-1-1-43-3" assembly-id="histogram-freq-polygon-creating-1-1-43-3" unique-id="histogram-freq-polygon-creating-1-1-43-3">1</autosimplify>
+      <feedbackstyle original-id="histogram-freq-polygon-creating-1-1-43-4" assembly-id="histogram-freq-polygon-creating-1-1-43-4" unique-id="histogram-freq-polygon-creating-1-1-43-4">1</feedbackstyle>
+      <feedbackvariables original-id="histogram-freq-polygon-creating-1-1-43-5" assembly-id="histogram-freq-polygon-creating-1-1-43-5" unique-id="histogram-freq-polygon-creating-1-1-43-5">
+        <text original-id="histogram-freq-polygon-creating-1-1-43-5-1" assembly-id="histogram-freq-polygon-creating-1-1-43-5-1" unique-id="histogram-freq-polygon-creating-1-1-43-5-1"/>
+      </feedbackvariables>
+      <node original-id="histogram-freq-polygon-creating-1-1-43-6" assembly-id="histogram-freq-polygon-creating-1-1-43-6" unique-id="histogram-freq-polygon-creating-1-1-43-6">
+        <name original-id="histogram-freq-polygon-creating-1-1-43-6-1" assembly-id="histogram-freq-polygon-creating-1-1-43-6-1" unique-id="histogram-freq-polygon-creating-1-1-43-6-1">0</name>
+        <description original-id="histogram-freq-polygon-creating-1-1-43-6-2" assembly-id="histogram-freq-polygon-creating-1-1-43-6-2" unique-id="histogram-freq-polygon-creating-1-1-43-6-2"/>
+        <answertest original-id="histogram-freq-polygon-creating-1-1-43-6-3" assembly-id="histogram-freq-polygon-creating-1-1-43-6-3" unique-id="histogram-freq-polygon-creating-1-1-43-6-3">AlgEquiv</answertest>
+        <sans original-id="histogram-freq-polygon-creating-1-1-43-6-4" assembly-id="histogram-freq-polygon-creating-1-1-43-6-4" unique-id="histogram-freq-polygon-creating-1-1-43-6-4">m5</sans>
+        <tans original-id="histogram-freq-polygon-creating-1-1-43-6-5" assembly-id="histogram-freq-polygon-creating-1-1-43-6-5" unique-id="histogram-freq-polygon-creating-1-1-43-6-5">midpoints[5]</tans>
+        <testoptions original-id="histogram-freq-polygon-creating-1-1-43-6-6" assembly-id="histogram-freq-polygon-creating-1-1-43-6-6" unique-id="histogram-freq-polygon-creating-1-1-43-6-6"/>
+        <quiet original-id="histogram-freq-polygon-creating-1-1-43-6-7" assembly-id="histogram-freq-polygon-creating-1-1-43-6-7" unique-id="histogram-freq-polygon-creating-1-1-43-6-7">0</quiet>
+        <truescoremode original-id="histogram-freq-polygon-creating-1-1-43-6-8" assembly-id="histogram-freq-polygon-creating-1-1-43-6-8" unique-id="histogram-freq-polygon-creating-1-1-43-6-8">=</truescoremode>
+        <truescore original-id="histogram-freq-polygon-creating-1-1-43-6-9" assembly-id="histogram-freq-polygon-creating-1-1-43-6-9" unique-id="histogram-freq-polygon-creating-1-1-43-6-9">1</truescore>
+        <truepenalty original-id="histogram-freq-polygon-creating-1-1-43-6-10" assembly-id="histogram-freq-polygon-creating-1-1-43-6-10" unique-id="histogram-freq-polygon-creating-1-1-43-6-10"/>
+        <truenextnode original-id="histogram-freq-polygon-creating-1-1-43-6-11" assembly-id="histogram-freq-polygon-creating-1-1-43-6-11" unique-id="histogram-freq-polygon-creating-1-1-43-6-11">-1</truenextnode>
+        <trueanswernote original-id="histogram-freq-polygon-creating-1-1-43-6-12" assembly-id="histogram-freq-polygon-creating-1-1-43-6-12" unique-id="histogram-freq-polygon-creating-1-1-43-6-12">prt_m5-1-T</trueanswernote>
+        <truefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-43-6-13" assembly-id="histogram-freq-polygon-creating-1-1-43-6-13" unique-id="histogram-freq-polygon-creating-1-1-43-6-13">
+          <text original-id="histogram-freq-polygon-creating-1-1-43-6-13-1" assembly-id="histogram-freq-polygon-creating-1-1-43-6-13-1" unique-id="histogram-freq-polygon-creating-1-1-43-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="histogram-freq-polygon-creating-1-1-43-6-14" assembly-id="histogram-freq-polygon-creating-1-1-43-6-14" unique-id="histogram-freq-polygon-creating-1-1-43-6-14">=</falsescoremode>
+        <falsescore original-id="histogram-freq-polygon-creating-1-1-43-6-15" assembly-id="histogram-freq-polygon-creating-1-1-43-6-15" unique-id="histogram-freq-polygon-creating-1-1-43-6-15">0</falsescore>
+        <falsepenalty original-id="histogram-freq-polygon-creating-1-1-43-6-16" assembly-id="histogram-freq-polygon-creating-1-1-43-6-16" unique-id="histogram-freq-polygon-creating-1-1-43-6-16"/>
+        <falsenextnode original-id="histogram-freq-polygon-creating-1-1-43-6-17" assembly-id="histogram-freq-polygon-creating-1-1-43-6-17" unique-id="histogram-freq-polygon-creating-1-1-43-6-17">-1</falsenextnode>
+        <falseanswernote original-id="histogram-freq-polygon-creating-1-1-43-6-18" assembly-id="histogram-freq-polygon-creating-1-1-43-6-18" unique-id="histogram-freq-polygon-creating-1-1-43-6-18">prt_m5-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-43-6-19" assembly-id="histogram-freq-polygon-creating-1-1-43-6-19" unique-id="histogram-freq-polygon-creating-1-1-43-6-19">
+          <text original-id="histogram-freq-polygon-creating-1-1-43-6-19-1" assembly-id="histogram-freq-polygon-creating-1-1-43-6-19-1" unique-id="histogram-freq-polygon-creating-1-1-43-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="histogram-freq-polygon-creating-1-1-44" assembly-id="histogram-freq-polygon-creating-1-1-44" unique-id="histogram-freq-polygon-creating-1-1-44">
+      <name original-id="histogram-freq-polygon-creating-1-1-44-1" assembly-id="histogram-freq-polygon-creating-1-1-44-1" unique-id="histogram-freq-polygon-creating-1-1-44-1">prt1</name>
+      <value original-id="histogram-freq-polygon-creating-1-1-44-2" assembly-id="histogram-freq-polygon-creating-1-1-44-2" unique-id="histogram-freq-polygon-creating-1-1-44-2">1.0000000</value>
+      <autosimplify original-id="histogram-freq-polygon-creating-1-1-44-3" assembly-id="histogram-freq-polygon-creating-1-1-44-3" unique-id="histogram-freq-polygon-creating-1-1-44-3">1</autosimplify>
+      <feedbackstyle original-id="histogram-freq-polygon-creating-1-1-44-4" assembly-id="histogram-freq-polygon-creating-1-1-44-4" unique-id="histogram-freq-polygon-creating-1-1-44-4">1</feedbackstyle>
+      <feedbackvariables original-id="histogram-freq-polygon-creating-1-1-44-5" assembly-id="histogram-freq-polygon-creating-1-1-44-5" unique-id="histogram-freq-polygon-creating-1-1-44-5">
+        <text original-id="histogram-freq-polygon-creating-1-1-44-5-1" assembly-id="histogram-freq-polygon-creating-1-1-44-5-1" unique-id="histogram-freq-polygon-creating-1-1-44-5-1"/>
+      </feedbackvariables>
+      <node original-id="histogram-freq-polygon-creating-1-1-44-6" assembly-id="histogram-freq-polygon-creating-1-1-44-6" unique-id="histogram-freq-polygon-creating-1-1-44-6">
+        <name original-id="histogram-freq-polygon-creating-1-1-44-6-1" assembly-id="histogram-freq-polygon-creating-1-1-44-6-1" unique-id="histogram-freq-polygon-creating-1-1-44-6-1">0</name>
+        <description original-id="histogram-freq-polygon-creating-1-1-44-6-2" assembly-id="histogram-freq-polygon-creating-1-1-44-6-2" unique-id="histogram-freq-polygon-creating-1-1-44-6-2"/>
+        <answertest original-id="histogram-freq-polygon-creating-1-1-44-6-3" assembly-id="histogram-freq-polygon-creating-1-1-44-6-3" unique-id="histogram-freq-polygon-creating-1-1-44-6-3">AlgEquiv</answertest>
+        <sans original-id="histogram-freq-polygon-creating-1-1-44-6-4" assembly-id="histogram-freq-polygon-creating-1-1-44-6-4" unique-id="histogram-freq-polygon-creating-1-1-44-6-4">d1</sans>
+        <tans original-id="histogram-freq-polygon-creating-1-1-44-6-5" assembly-id="histogram-freq-polygon-creating-1-1-44-6-5" unique-id="histogram-freq-polygon-creating-1-1-44-6-5">densities[1]</tans>
+        <testoptions original-id="histogram-freq-polygon-creating-1-1-44-6-6" assembly-id="histogram-freq-polygon-creating-1-1-44-6-6" unique-id="histogram-freq-polygon-creating-1-1-44-6-6"/>
+        <quiet original-id="histogram-freq-polygon-creating-1-1-44-6-7" assembly-id="histogram-freq-polygon-creating-1-1-44-6-7" unique-id="histogram-freq-polygon-creating-1-1-44-6-7">0</quiet>
+        <truescoremode original-id="histogram-freq-polygon-creating-1-1-44-6-8" assembly-id="histogram-freq-polygon-creating-1-1-44-6-8" unique-id="histogram-freq-polygon-creating-1-1-44-6-8">=</truescoremode>
+        <truescore original-id="histogram-freq-polygon-creating-1-1-44-6-9" assembly-id="histogram-freq-polygon-creating-1-1-44-6-9" unique-id="histogram-freq-polygon-creating-1-1-44-6-9">1</truescore>
+        <truepenalty original-id="histogram-freq-polygon-creating-1-1-44-6-10" assembly-id="histogram-freq-polygon-creating-1-1-44-6-10" unique-id="histogram-freq-polygon-creating-1-1-44-6-10"/>
+        <truenextnode original-id="histogram-freq-polygon-creating-1-1-44-6-11" assembly-id="histogram-freq-polygon-creating-1-1-44-6-11" unique-id="histogram-freq-polygon-creating-1-1-44-6-11">-1</truenextnode>
+        <trueanswernote original-id="histogram-freq-polygon-creating-1-1-44-6-12" assembly-id="histogram-freq-polygon-creating-1-1-44-6-12" unique-id="histogram-freq-polygon-creating-1-1-44-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-44-6-13" assembly-id="histogram-freq-polygon-creating-1-1-44-6-13" unique-id="histogram-freq-polygon-creating-1-1-44-6-13">
+          <text original-id="histogram-freq-polygon-creating-1-1-44-6-13-1" assembly-id="histogram-freq-polygon-creating-1-1-44-6-13-1" unique-id="histogram-freq-polygon-creating-1-1-44-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="histogram-freq-polygon-creating-1-1-44-6-14" assembly-id="histogram-freq-polygon-creating-1-1-44-6-14" unique-id="histogram-freq-polygon-creating-1-1-44-6-14">=</falsescoremode>
+        <falsescore original-id="histogram-freq-polygon-creating-1-1-44-6-15" assembly-id="histogram-freq-polygon-creating-1-1-44-6-15" unique-id="histogram-freq-polygon-creating-1-1-44-6-15">0</falsescore>
+        <falsepenalty original-id="histogram-freq-polygon-creating-1-1-44-6-16" assembly-id="histogram-freq-polygon-creating-1-1-44-6-16" unique-id="histogram-freq-polygon-creating-1-1-44-6-16"/>
+        <falsenextnode original-id="histogram-freq-polygon-creating-1-1-44-6-17" assembly-id="histogram-freq-polygon-creating-1-1-44-6-17" unique-id="histogram-freq-polygon-creating-1-1-44-6-17">-1</falsenextnode>
+        <falseanswernote original-id="histogram-freq-polygon-creating-1-1-44-6-18" assembly-id="histogram-freq-polygon-creating-1-1-44-6-18" unique-id="histogram-freq-polygon-creating-1-1-44-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-44-6-19" assembly-id="histogram-freq-polygon-creating-1-1-44-6-19" unique-id="histogram-freq-polygon-creating-1-1-44-6-19">
+          <text original-id="histogram-freq-polygon-creating-1-1-44-6-19-1" assembly-id="histogram-freq-polygon-creating-1-1-44-6-19-1" unique-id="histogram-freq-polygon-creating-1-1-44-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="histogram-freq-polygon-creating-1-1-45" assembly-id="histogram-freq-polygon-creating-1-1-45" unique-id="histogram-freq-polygon-creating-1-1-45">
+      <name original-id="histogram-freq-polygon-creating-1-1-45-1" assembly-id="histogram-freq-polygon-creating-1-1-45-1" unique-id="histogram-freq-polygon-creating-1-1-45-1">prt2</name>
+      <value original-id="histogram-freq-polygon-creating-1-1-45-2" assembly-id="histogram-freq-polygon-creating-1-1-45-2" unique-id="histogram-freq-polygon-creating-1-1-45-2">1.0000000</value>
+      <autosimplify original-id="histogram-freq-polygon-creating-1-1-45-3" assembly-id="histogram-freq-polygon-creating-1-1-45-3" unique-id="histogram-freq-polygon-creating-1-1-45-3">1</autosimplify>
+      <feedbackstyle original-id="histogram-freq-polygon-creating-1-1-45-4" assembly-id="histogram-freq-polygon-creating-1-1-45-4" unique-id="histogram-freq-polygon-creating-1-1-45-4">1</feedbackstyle>
+      <feedbackvariables original-id="histogram-freq-polygon-creating-1-1-45-5" assembly-id="histogram-freq-polygon-creating-1-1-45-5" unique-id="histogram-freq-polygon-creating-1-1-45-5">
+        <text original-id="histogram-freq-polygon-creating-1-1-45-5-1" assembly-id="histogram-freq-polygon-creating-1-1-45-5-1" unique-id="histogram-freq-polygon-creating-1-1-45-5-1"/>
+      </feedbackvariables>
+      <node original-id="histogram-freq-polygon-creating-1-1-45-6" assembly-id="histogram-freq-polygon-creating-1-1-45-6" unique-id="histogram-freq-polygon-creating-1-1-45-6">
+        <name original-id="histogram-freq-polygon-creating-1-1-45-6-1" assembly-id="histogram-freq-polygon-creating-1-1-45-6-1" unique-id="histogram-freq-polygon-creating-1-1-45-6-1">0</name>
+        <description original-id="histogram-freq-polygon-creating-1-1-45-6-2" assembly-id="histogram-freq-polygon-creating-1-1-45-6-2" unique-id="histogram-freq-polygon-creating-1-1-45-6-2"/>
+        <answertest original-id="histogram-freq-polygon-creating-1-1-45-6-3" assembly-id="histogram-freq-polygon-creating-1-1-45-6-3" unique-id="histogram-freq-polygon-creating-1-1-45-6-3">AlgEquiv</answertest>
+        <sans original-id="histogram-freq-polygon-creating-1-1-45-6-4" assembly-id="histogram-freq-polygon-creating-1-1-45-6-4" unique-id="histogram-freq-polygon-creating-1-1-45-6-4">d2</sans>
+        <tans original-id="histogram-freq-polygon-creating-1-1-45-6-5" assembly-id="histogram-freq-polygon-creating-1-1-45-6-5" unique-id="histogram-freq-polygon-creating-1-1-45-6-5">densities[2]</tans>
+        <testoptions original-id="histogram-freq-polygon-creating-1-1-45-6-6" assembly-id="histogram-freq-polygon-creating-1-1-45-6-6" unique-id="histogram-freq-polygon-creating-1-1-45-6-6"/>
+        <quiet original-id="histogram-freq-polygon-creating-1-1-45-6-7" assembly-id="histogram-freq-polygon-creating-1-1-45-6-7" unique-id="histogram-freq-polygon-creating-1-1-45-6-7">0</quiet>
+        <truescoremode original-id="histogram-freq-polygon-creating-1-1-45-6-8" assembly-id="histogram-freq-polygon-creating-1-1-45-6-8" unique-id="histogram-freq-polygon-creating-1-1-45-6-8">=</truescoremode>
+        <truescore original-id="histogram-freq-polygon-creating-1-1-45-6-9" assembly-id="histogram-freq-polygon-creating-1-1-45-6-9" unique-id="histogram-freq-polygon-creating-1-1-45-6-9">1</truescore>
+        <truepenalty original-id="histogram-freq-polygon-creating-1-1-45-6-10" assembly-id="histogram-freq-polygon-creating-1-1-45-6-10" unique-id="histogram-freq-polygon-creating-1-1-45-6-10"/>
+        <truenextnode original-id="histogram-freq-polygon-creating-1-1-45-6-11" assembly-id="histogram-freq-polygon-creating-1-1-45-6-11" unique-id="histogram-freq-polygon-creating-1-1-45-6-11">-1</truenextnode>
+        <trueanswernote original-id="histogram-freq-polygon-creating-1-1-45-6-12" assembly-id="histogram-freq-polygon-creating-1-1-45-6-12" unique-id="histogram-freq-polygon-creating-1-1-45-6-12">prt2-1-T</trueanswernote>
+        <truefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-45-6-13" assembly-id="histogram-freq-polygon-creating-1-1-45-6-13" unique-id="histogram-freq-polygon-creating-1-1-45-6-13">
+          <text original-id="histogram-freq-polygon-creating-1-1-45-6-13-1" assembly-id="histogram-freq-polygon-creating-1-1-45-6-13-1" unique-id="histogram-freq-polygon-creating-1-1-45-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="histogram-freq-polygon-creating-1-1-45-6-14" assembly-id="histogram-freq-polygon-creating-1-1-45-6-14" unique-id="histogram-freq-polygon-creating-1-1-45-6-14">=</falsescoremode>
+        <falsescore original-id="histogram-freq-polygon-creating-1-1-45-6-15" assembly-id="histogram-freq-polygon-creating-1-1-45-6-15" unique-id="histogram-freq-polygon-creating-1-1-45-6-15">0</falsescore>
+        <falsepenalty original-id="histogram-freq-polygon-creating-1-1-45-6-16" assembly-id="histogram-freq-polygon-creating-1-1-45-6-16" unique-id="histogram-freq-polygon-creating-1-1-45-6-16"/>
+        <falsenextnode original-id="histogram-freq-polygon-creating-1-1-45-6-17" assembly-id="histogram-freq-polygon-creating-1-1-45-6-17" unique-id="histogram-freq-polygon-creating-1-1-45-6-17">-1</falsenextnode>
+        <falseanswernote original-id="histogram-freq-polygon-creating-1-1-45-6-18" assembly-id="histogram-freq-polygon-creating-1-1-45-6-18" unique-id="histogram-freq-polygon-creating-1-1-45-6-18">prt2-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-45-6-19" assembly-id="histogram-freq-polygon-creating-1-1-45-6-19" unique-id="histogram-freq-polygon-creating-1-1-45-6-19">
+          <text original-id="histogram-freq-polygon-creating-1-1-45-6-19-1" assembly-id="histogram-freq-polygon-creating-1-1-45-6-19-1" unique-id="histogram-freq-polygon-creating-1-1-45-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="histogram-freq-polygon-creating-1-1-46" assembly-id="histogram-freq-polygon-creating-1-1-46" unique-id="histogram-freq-polygon-creating-1-1-46">
+      <name original-id="histogram-freq-polygon-creating-1-1-46-1" assembly-id="histogram-freq-polygon-creating-1-1-46-1" unique-id="histogram-freq-polygon-creating-1-1-46-1">prt3</name>
+      <value original-id="histogram-freq-polygon-creating-1-1-46-2" assembly-id="histogram-freq-polygon-creating-1-1-46-2" unique-id="histogram-freq-polygon-creating-1-1-46-2">1.0000000</value>
+      <autosimplify original-id="histogram-freq-polygon-creating-1-1-46-3" assembly-id="histogram-freq-polygon-creating-1-1-46-3" unique-id="histogram-freq-polygon-creating-1-1-46-3">1</autosimplify>
+      <feedbackstyle original-id="histogram-freq-polygon-creating-1-1-46-4" assembly-id="histogram-freq-polygon-creating-1-1-46-4" unique-id="histogram-freq-polygon-creating-1-1-46-4">1</feedbackstyle>
+      <feedbackvariables original-id="histogram-freq-polygon-creating-1-1-46-5" assembly-id="histogram-freq-polygon-creating-1-1-46-5" unique-id="histogram-freq-polygon-creating-1-1-46-5">
+        <text original-id="histogram-freq-polygon-creating-1-1-46-5-1" assembly-id="histogram-freq-polygon-creating-1-1-46-5-1" unique-id="histogram-freq-polygon-creating-1-1-46-5-1"/>
+      </feedbackvariables>
+      <node original-id="histogram-freq-polygon-creating-1-1-46-6" assembly-id="histogram-freq-polygon-creating-1-1-46-6" unique-id="histogram-freq-polygon-creating-1-1-46-6">
+        <name original-id="histogram-freq-polygon-creating-1-1-46-6-1" assembly-id="histogram-freq-polygon-creating-1-1-46-6-1" unique-id="histogram-freq-polygon-creating-1-1-46-6-1">0</name>
+        <description original-id="histogram-freq-polygon-creating-1-1-46-6-2" assembly-id="histogram-freq-polygon-creating-1-1-46-6-2" unique-id="histogram-freq-polygon-creating-1-1-46-6-2"/>
+        <answertest original-id="histogram-freq-polygon-creating-1-1-46-6-3" assembly-id="histogram-freq-polygon-creating-1-1-46-6-3" unique-id="histogram-freq-polygon-creating-1-1-46-6-3">AlgEquiv</answertest>
+        <sans original-id="histogram-freq-polygon-creating-1-1-46-6-4" assembly-id="histogram-freq-polygon-creating-1-1-46-6-4" unique-id="histogram-freq-polygon-creating-1-1-46-6-4">d3</sans>
+        <tans original-id="histogram-freq-polygon-creating-1-1-46-6-5" assembly-id="histogram-freq-polygon-creating-1-1-46-6-5" unique-id="histogram-freq-polygon-creating-1-1-46-6-5">densities[3]</tans>
+        <testoptions original-id="histogram-freq-polygon-creating-1-1-46-6-6" assembly-id="histogram-freq-polygon-creating-1-1-46-6-6" unique-id="histogram-freq-polygon-creating-1-1-46-6-6"/>
+        <quiet original-id="histogram-freq-polygon-creating-1-1-46-6-7" assembly-id="histogram-freq-polygon-creating-1-1-46-6-7" unique-id="histogram-freq-polygon-creating-1-1-46-6-7">0</quiet>
+        <truescoremode original-id="histogram-freq-polygon-creating-1-1-46-6-8" assembly-id="histogram-freq-polygon-creating-1-1-46-6-8" unique-id="histogram-freq-polygon-creating-1-1-46-6-8">=</truescoremode>
+        <truescore original-id="histogram-freq-polygon-creating-1-1-46-6-9" assembly-id="histogram-freq-polygon-creating-1-1-46-6-9" unique-id="histogram-freq-polygon-creating-1-1-46-6-9">1</truescore>
+        <truepenalty original-id="histogram-freq-polygon-creating-1-1-46-6-10" assembly-id="histogram-freq-polygon-creating-1-1-46-6-10" unique-id="histogram-freq-polygon-creating-1-1-46-6-10"/>
+        <truenextnode original-id="histogram-freq-polygon-creating-1-1-46-6-11" assembly-id="histogram-freq-polygon-creating-1-1-46-6-11" unique-id="histogram-freq-polygon-creating-1-1-46-6-11">-1</truenextnode>
+        <trueanswernote original-id="histogram-freq-polygon-creating-1-1-46-6-12" assembly-id="histogram-freq-polygon-creating-1-1-46-6-12" unique-id="histogram-freq-polygon-creating-1-1-46-6-12">prt3-1-T</trueanswernote>
+        <truefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-46-6-13" assembly-id="histogram-freq-polygon-creating-1-1-46-6-13" unique-id="histogram-freq-polygon-creating-1-1-46-6-13">
+          <text original-id="histogram-freq-polygon-creating-1-1-46-6-13-1" assembly-id="histogram-freq-polygon-creating-1-1-46-6-13-1" unique-id="histogram-freq-polygon-creating-1-1-46-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="histogram-freq-polygon-creating-1-1-46-6-14" assembly-id="histogram-freq-polygon-creating-1-1-46-6-14" unique-id="histogram-freq-polygon-creating-1-1-46-6-14">=</falsescoremode>
+        <falsescore original-id="histogram-freq-polygon-creating-1-1-46-6-15" assembly-id="histogram-freq-polygon-creating-1-1-46-6-15" unique-id="histogram-freq-polygon-creating-1-1-46-6-15">0</falsescore>
+        <falsepenalty original-id="histogram-freq-polygon-creating-1-1-46-6-16" assembly-id="histogram-freq-polygon-creating-1-1-46-6-16" unique-id="histogram-freq-polygon-creating-1-1-46-6-16"/>
+        <falsenextnode original-id="histogram-freq-polygon-creating-1-1-46-6-17" assembly-id="histogram-freq-polygon-creating-1-1-46-6-17" unique-id="histogram-freq-polygon-creating-1-1-46-6-17">-1</falsenextnode>
+        <falseanswernote original-id="histogram-freq-polygon-creating-1-1-46-6-18" assembly-id="histogram-freq-polygon-creating-1-1-46-6-18" unique-id="histogram-freq-polygon-creating-1-1-46-6-18">prt3-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-46-6-19" assembly-id="histogram-freq-polygon-creating-1-1-46-6-19" unique-id="histogram-freq-polygon-creating-1-1-46-6-19">
+          <text original-id="histogram-freq-polygon-creating-1-1-46-6-19-1" assembly-id="histogram-freq-polygon-creating-1-1-46-6-19-1" unique-id="histogram-freq-polygon-creating-1-1-46-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="histogram-freq-polygon-creating-1-1-47" assembly-id="histogram-freq-polygon-creating-1-1-47" unique-id="histogram-freq-polygon-creating-1-1-47">
+      <name original-id="histogram-freq-polygon-creating-1-1-47-1" assembly-id="histogram-freq-polygon-creating-1-1-47-1" unique-id="histogram-freq-polygon-creating-1-1-47-1">prt4</name>
+      <value original-id="histogram-freq-polygon-creating-1-1-47-2" assembly-id="histogram-freq-polygon-creating-1-1-47-2" unique-id="histogram-freq-polygon-creating-1-1-47-2">1.0000000</value>
+      <autosimplify original-id="histogram-freq-polygon-creating-1-1-47-3" assembly-id="histogram-freq-polygon-creating-1-1-47-3" unique-id="histogram-freq-polygon-creating-1-1-47-3">1</autosimplify>
+      <feedbackstyle original-id="histogram-freq-polygon-creating-1-1-47-4" assembly-id="histogram-freq-polygon-creating-1-1-47-4" unique-id="histogram-freq-polygon-creating-1-1-47-4">1</feedbackstyle>
+      <feedbackvariables original-id="histogram-freq-polygon-creating-1-1-47-5" assembly-id="histogram-freq-polygon-creating-1-1-47-5" unique-id="histogram-freq-polygon-creating-1-1-47-5">
+        <text original-id="histogram-freq-polygon-creating-1-1-47-5-1" assembly-id="histogram-freq-polygon-creating-1-1-47-5-1" unique-id="histogram-freq-polygon-creating-1-1-47-5-1"/>
+      </feedbackvariables>
+      <node original-id="histogram-freq-polygon-creating-1-1-47-6" assembly-id="histogram-freq-polygon-creating-1-1-47-6" unique-id="histogram-freq-polygon-creating-1-1-47-6">
+        <name original-id="histogram-freq-polygon-creating-1-1-47-6-1" assembly-id="histogram-freq-polygon-creating-1-1-47-6-1" unique-id="histogram-freq-polygon-creating-1-1-47-6-1">0</name>
+        <description original-id="histogram-freq-polygon-creating-1-1-47-6-2" assembly-id="histogram-freq-polygon-creating-1-1-47-6-2" unique-id="histogram-freq-polygon-creating-1-1-47-6-2"/>
+        <answertest original-id="histogram-freq-polygon-creating-1-1-47-6-3" assembly-id="histogram-freq-polygon-creating-1-1-47-6-3" unique-id="histogram-freq-polygon-creating-1-1-47-6-3">AlgEquiv</answertest>
+        <sans original-id="histogram-freq-polygon-creating-1-1-47-6-4" assembly-id="histogram-freq-polygon-creating-1-1-47-6-4" unique-id="histogram-freq-polygon-creating-1-1-47-6-4">d4</sans>
+        <tans original-id="histogram-freq-polygon-creating-1-1-47-6-5" assembly-id="histogram-freq-polygon-creating-1-1-47-6-5" unique-id="histogram-freq-polygon-creating-1-1-47-6-5">densities[4]</tans>
+        <testoptions original-id="histogram-freq-polygon-creating-1-1-47-6-6" assembly-id="histogram-freq-polygon-creating-1-1-47-6-6" unique-id="histogram-freq-polygon-creating-1-1-47-6-6"/>
+        <quiet original-id="histogram-freq-polygon-creating-1-1-47-6-7" assembly-id="histogram-freq-polygon-creating-1-1-47-6-7" unique-id="histogram-freq-polygon-creating-1-1-47-6-7">0</quiet>
+        <truescoremode original-id="histogram-freq-polygon-creating-1-1-47-6-8" assembly-id="histogram-freq-polygon-creating-1-1-47-6-8" unique-id="histogram-freq-polygon-creating-1-1-47-6-8">=</truescoremode>
+        <truescore original-id="histogram-freq-polygon-creating-1-1-47-6-9" assembly-id="histogram-freq-polygon-creating-1-1-47-6-9" unique-id="histogram-freq-polygon-creating-1-1-47-6-9">1</truescore>
+        <truepenalty original-id="histogram-freq-polygon-creating-1-1-47-6-10" assembly-id="histogram-freq-polygon-creating-1-1-47-6-10" unique-id="histogram-freq-polygon-creating-1-1-47-6-10"/>
+        <truenextnode original-id="histogram-freq-polygon-creating-1-1-47-6-11" assembly-id="histogram-freq-polygon-creating-1-1-47-6-11" unique-id="histogram-freq-polygon-creating-1-1-47-6-11">-1</truenextnode>
+        <trueanswernote original-id="histogram-freq-polygon-creating-1-1-47-6-12" assembly-id="histogram-freq-polygon-creating-1-1-47-6-12" unique-id="histogram-freq-polygon-creating-1-1-47-6-12">prt4-1-T</trueanswernote>
+        <truefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-47-6-13" assembly-id="histogram-freq-polygon-creating-1-1-47-6-13" unique-id="histogram-freq-polygon-creating-1-1-47-6-13">
+          <text original-id="histogram-freq-polygon-creating-1-1-47-6-13-1" assembly-id="histogram-freq-polygon-creating-1-1-47-6-13-1" unique-id="histogram-freq-polygon-creating-1-1-47-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="histogram-freq-polygon-creating-1-1-47-6-14" assembly-id="histogram-freq-polygon-creating-1-1-47-6-14" unique-id="histogram-freq-polygon-creating-1-1-47-6-14">=</falsescoremode>
+        <falsescore original-id="histogram-freq-polygon-creating-1-1-47-6-15" assembly-id="histogram-freq-polygon-creating-1-1-47-6-15" unique-id="histogram-freq-polygon-creating-1-1-47-6-15">0</falsescore>
+        <falsepenalty original-id="histogram-freq-polygon-creating-1-1-47-6-16" assembly-id="histogram-freq-polygon-creating-1-1-47-6-16" unique-id="histogram-freq-polygon-creating-1-1-47-6-16"/>
+        <falsenextnode original-id="histogram-freq-polygon-creating-1-1-47-6-17" assembly-id="histogram-freq-polygon-creating-1-1-47-6-17" unique-id="histogram-freq-polygon-creating-1-1-47-6-17">-1</falsenextnode>
+        <falseanswernote original-id="histogram-freq-polygon-creating-1-1-47-6-18" assembly-id="histogram-freq-polygon-creating-1-1-47-6-18" unique-id="histogram-freq-polygon-creating-1-1-47-6-18">prt4-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-47-6-19" assembly-id="histogram-freq-polygon-creating-1-1-47-6-19" unique-id="histogram-freq-polygon-creating-1-1-47-6-19">
+          <text original-id="histogram-freq-polygon-creating-1-1-47-6-19-1" assembly-id="histogram-freq-polygon-creating-1-1-47-6-19-1" unique-id="histogram-freq-polygon-creating-1-1-47-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="histogram-freq-polygon-creating-1-1-48" assembly-id="histogram-freq-polygon-creating-1-1-48" unique-id="histogram-freq-polygon-creating-1-1-48">
+      <name original-id="histogram-freq-polygon-creating-1-1-48-1" assembly-id="histogram-freq-polygon-creating-1-1-48-1" unique-id="histogram-freq-polygon-creating-1-1-48-1">prt5</name>
+      <value original-id="histogram-freq-polygon-creating-1-1-48-2" assembly-id="histogram-freq-polygon-creating-1-1-48-2" unique-id="histogram-freq-polygon-creating-1-1-48-2">1.0000000</value>
+      <autosimplify original-id="histogram-freq-polygon-creating-1-1-48-3" assembly-id="histogram-freq-polygon-creating-1-1-48-3" unique-id="histogram-freq-polygon-creating-1-1-48-3">1</autosimplify>
+      <feedbackstyle original-id="histogram-freq-polygon-creating-1-1-48-4" assembly-id="histogram-freq-polygon-creating-1-1-48-4" unique-id="histogram-freq-polygon-creating-1-1-48-4">1</feedbackstyle>
+      <feedbackvariables original-id="histogram-freq-polygon-creating-1-1-48-5" assembly-id="histogram-freq-polygon-creating-1-1-48-5" unique-id="histogram-freq-polygon-creating-1-1-48-5">
+        <text original-id="histogram-freq-polygon-creating-1-1-48-5-1" assembly-id="histogram-freq-polygon-creating-1-1-48-5-1" unique-id="histogram-freq-polygon-creating-1-1-48-5-1"/>
+      </feedbackvariables>
+      <node original-id="histogram-freq-polygon-creating-1-1-48-6" assembly-id="histogram-freq-polygon-creating-1-1-48-6" unique-id="histogram-freq-polygon-creating-1-1-48-6">
+        <name original-id="histogram-freq-polygon-creating-1-1-48-6-1" assembly-id="histogram-freq-polygon-creating-1-1-48-6-1" unique-id="histogram-freq-polygon-creating-1-1-48-6-1">0</name>
+        <description original-id="histogram-freq-polygon-creating-1-1-48-6-2" assembly-id="histogram-freq-polygon-creating-1-1-48-6-2" unique-id="histogram-freq-polygon-creating-1-1-48-6-2"/>
+        <answertest original-id="histogram-freq-polygon-creating-1-1-48-6-3" assembly-id="histogram-freq-polygon-creating-1-1-48-6-3" unique-id="histogram-freq-polygon-creating-1-1-48-6-3">AlgEquiv</answertest>
+        <sans original-id="histogram-freq-polygon-creating-1-1-48-6-4" assembly-id="histogram-freq-polygon-creating-1-1-48-6-4" unique-id="histogram-freq-polygon-creating-1-1-48-6-4">d5</sans>
+        <tans original-id="histogram-freq-polygon-creating-1-1-48-6-5" assembly-id="histogram-freq-polygon-creating-1-1-48-6-5" unique-id="histogram-freq-polygon-creating-1-1-48-6-5">densities[5]</tans>
+        <testoptions original-id="histogram-freq-polygon-creating-1-1-48-6-6" assembly-id="histogram-freq-polygon-creating-1-1-48-6-6" unique-id="histogram-freq-polygon-creating-1-1-48-6-6"/>
+        <quiet original-id="histogram-freq-polygon-creating-1-1-48-6-7" assembly-id="histogram-freq-polygon-creating-1-1-48-6-7" unique-id="histogram-freq-polygon-creating-1-1-48-6-7">0</quiet>
+        <truescoremode original-id="histogram-freq-polygon-creating-1-1-48-6-8" assembly-id="histogram-freq-polygon-creating-1-1-48-6-8" unique-id="histogram-freq-polygon-creating-1-1-48-6-8">=</truescoremode>
+        <truescore original-id="histogram-freq-polygon-creating-1-1-48-6-9" assembly-id="histogram-freq-polygon-creating-1-1-48-6-9" unique-id="histogram-freq-polygon-creating-1-1-48-6-9">1</truescore>
+        <truepenalty original-id="histogram-freq-polygon-creating-1-1-48-6-10" assembly-id="histogram-freq-polygon-creating-1-1-48-6-10" unique-id="histogram-freq-polygon-creating-1-1-48-6-10"/>
+        <truenextnode original-id="histogram-freq-polygon-creating-1-1-48-6-11" assembly-id="histogram-freq-polygon-creating-1-1-48-6-11" unique-id="histogram-freq-polygon-creating-1-1-48-6-11">-1</truenextnode>
+        <trueanswernote original-id="histogram-freq-polygon-creating-1-1-48-6-12" assembly-id="histogram-freq-polygon-creating-1-1-48-6-12" unique-id="histogram-freq-polygon-creating-1-1-48-6-12">prt5-1-T</trueanswernote>
+        <truefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-48-6-13" assembly-id="histogram-freq-polygon-creating-1-1-48-6-13" unique-id="histogram-freq-polygon-creating-1-1-48-6-13">
+          <text original-id="histogram-freq-polygon-creating-1-1-48-6-13-1" assembly-id="histogram-freq-polygon-creating-1-1-48-6-13-1" unique-id="histogram-freq-polygon-creating-1-1-48-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="histogram-freq-polygon-creating-1-1-48-6-14" assembly-id="histogram-freq-polygon-creating-1-1-48-6-14" unique-id="histogram-freq-polygon-creating-1-1-48-6-14">=</falsescoremode>
+        <falsescore original-id="histogram-freq-polygon-creating-1-1-48-6-15" assembly-id="histogram-freq-polygon-creating-1-1-48-6-15" unique-id="histogram-freq-polygon-creating-1-1-48-6-15">0</falsescore>
+        <falsepenalty original-id="histogram-freq-polygon-creating-1-1-48-6-16" assembly-id="histogram-freq-polygon-creating-1-1-48-6-16" unique-id="histogram-freq-polygon-creating-1-1-48-6-16"/>
+        <falsenextnode original-id="histogram-freq-polygon-creating-1-1-48-6-17" assembly-id="histogram-freq-polygon-creating-1-1-48-6-17" unique-id="histogram-freq-polygon-creating-1-1-48-6-17">-1</falsenextnode>
+        <falseanswernote original-id="histogram-freq-polygon-creating-1-1-48-6-18" assembly-id="histogram-freq-polygon-creating-1-1-48-6-18" unique-id="histogram-freq-polygon-creating-1-1-48-6-18">prt5-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="histogram-freq-polygon-creating-1-1-48-6-19" assembly-id="histogram-freq-polygon-creating-1-1-48-6-19" unique-id="histogram-freq-polygon-creating-1-1-48-6-19">
+          <text original-id="histogram-freq-polygon-creating-1-1-48-6-19-1" assembly-id="histogram-freq-polygon-creating-1-1-48-6-19-1" unique-id="histogram-freq-polygon-creating-1-1-48-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>
+            

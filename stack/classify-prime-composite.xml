@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+            <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../../../../stack/1-0-Numbers-Algebra/Real-Numbers/Classifying-whole-numbers-as-odd,-even,-prime-and-composite-in-d/Classification-of-prime-and-composite-numbers-from-a-given-list.xml" original-id="classify-prime-composite-1" assembly-id="classify-prime-composite-1" unique-id="classify-prime-composite-1">
+  <question type="stack" original-id="classify-prime-composite-1-1" assembly-id="classify-prime-composite-1-1" unique-id="classify-prime-composite-1-1">
+    <name original-id="classify-prime-composite-1-1-1" assembly-id="classify-prime-composite-1-1-1" unique-id="classify-prime-composite-1-1-1">
+      <text original-id="classify-prime-composite-1-1-1-1" assembly-id="classify-prime-composite-1-1-1-1" unique-id="classify-prime-composite-1-1-1-1">Classification of prime and composite numbers from a given list</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="classify-prime-composite-1-1-2" assembly-id="classify-prime-composite-1-1-2" unique-id="classify-prime-composite-1-1-2">
+      <text original-id="classify-prime-composite-1-1-2-1" assembly-id="classify-prime-composite-1-1-2-1" unique-id="classify-prime-composite-1-1-2-1">&lt;p&gt;Classify each of the following numbers as &lt;strong&gt;Prime&lt;/strong&gt;, &lt;strong&gt;Composite&lt;/strong&gt;, or &lt;strong&gt;Neither&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol style="list-style-type: lower-alpha;"&gt;
+&lt;li&gt;{@n1@}: \(\,\,\)[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]&lt;/li&gt;
+&lt;li&gt;{@n2@}:  \(\,\,\)[[input:ans2]] [[validation:ans2]] [[feedback:prt2]]&lt;/li&gt;
+&lt;li&gt;{@n3@}:  \(\,\,\)[[input:ans3]] [[validation:ans3]] [[feedback:prt3]]&lt;/li&gt;
+&lt;li&gt;{@n4@}: \(\,\,\) [[input:ans4]] [[validation:ans4]] [[feedback:prt4]]&lt;/li&gt;
+&lt;li&gt;{@n5@}: \(\,\,\) [[input:ans5]] [[validation:ans5]] [[feedback:prt5]]&lt;/li&gt;
+&lt;li&gt;{@n6@}: \(\,\,\) [[input:ans6]] [[validation:ans6]] [[feedback:prt6]]&lt;/li&gt;
+&lt;li&gt;{@n7@}: \(\,\,\) [[input:ans7]] [[validation:ans7]] [[feedback:prt7]]&lt;/li&gt;
+&lt;li&gt;{@n8@}:  \(\,\,\)[[input:ans8]] [[validation:ans8]] [[feedback:prt8]]&lt;/li&gt;
+&lt;/ol&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="classify-prime-composite-1-1-3" assembly-id="classify-prime-composite-1-1-3" unique-id="classify-prime-composite-1-1-3">
+      <text original-id="classify-prime-composite-1-1-3-1" assembly-id="classify-prime-composite-1-1-3-1" unique-id="classify-prime-composite-1-1-3-1">&lt;h3&gt;Worked Solution&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Prime:&lt;/strong&gt; is a number greater than 1 with exactly two distinct positive divisors: 1 and itself.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Composite:&lt;/strong&gt; is a number greater than 1 with more than two positive divisors.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Neither:&lt;/strong&gt; Numbers 0 and 1 are neither prime nor composite.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;table border="1" cellpadding="5" style="border-collapse: collapse;"&gt;
+&lt;tr&gt;&lt;th&gt;Number&lt;/th&gt;&lt;th&gt;Check&lt;/th&gt;&lt;th&gt;Classification&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;{@n1@}&lt;/td&gt;&lt;td&gt;{@if n1 &lt; 2 then "n &lt; 2" else if is_prime(n1) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}&lt;/td&gt;&lt;td&gt;&lt;strong&gt;{@t_ans1@}&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;{@n2@}&lt;/td&gt;&lt;td&gt;{@if n2 &lt; 2 then "n &lt; 2" else if is_prime(n2) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}&lt;/td&gt;&lt;td&gt;&lt;strong&gt;{@t_ans2@}&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;{@n3@}&lt;/td&gt;&lt;td&gt;{@if n3 &lt; 2 then "n &lt; 2" else if is_prime(n3) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}&lt;/td&gt;&lt;td&gt;&lt;strong&gt;{@t_ans3@}&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;{@n4@}&lt;/td&gt;&lt;td&gt;{@if n4 &lt; 2 then "n &lt; 2" else if is_prime(n4) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}&lt;/td&gt;&lt;td&gt;&lt;strong&gt;{@t_ans4@}&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;{@n5@}&lt;/td&gt;&lt;td&gt;{@if n5 &lt; 2 then "n &lt; 2" else if is_prime(n5) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}&lt;/td&gt;&lt;td&gt;&lt;strong&gt;{@t_ans5@}&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;{@n6@}&lt;/td&gt;&lt;td&gt;{@if n6 &lt; 2 then "n &lt; 2" else if is_prime(n6) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}&lt;/td&gt;&lt;td&gt;&lt;strong&gt;{@t_ans6@}&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;{@n7@}&lt;/td&gt;&lt;td&gt;{@if n7 &lt; 2 then "n &lt; 2" else if is_prime(n7) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}&lt;/td&gt;&lt;td&gt;&lt;strong&gt;{@t_ans7@}&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;{@n8@}&lt;/td&gt;&lt;td&gt;{@if n8 &lt; 2 then "n &lt; 2" else if is_prime(n8) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}&lt;/td&gt;&lt;td&gt;&lt;strong&gt;{@t_ans8@}&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt; Note that:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt; If a number &gt; 2 ends in 0, 2, 4, 6, or 8, it's composite.&lt;/li&gt;
+&lt;li&gt; If a number &gt; 5 ends in 0 or 5, it's composite.&lt;/li&gt;
+&lt;li&gt; If the sum of digits is divisible by 3, the number is composite.&lt;/li&gt;
+&lt;li&gt; 0 and 1 are neither prime nor composite.&lt;/li&gt;
+&lt;/ul&gt;</text>
+    </generalfeedback>
+    <defaultgrade original-id="classify-prime-composite-1-1-4" assembly-id="classify-prime-composite-1-1-4" unique-id="classify-prime-composite-1-1-4">1</defaultgrade>
+    <penalty original-id="classify-prime-composite-1-1-5" assembly-id="classify-prime-composite-1-1-5" unique-id="classify-prime-composite-1-1-5">0.1</penalty>
+    <hidden original-id="classify-prime-composite-1-1-6" assembly-id="classify-prime-composite-1-1-6" unique-id="classify-prime-composite-1-1-6">0</hidden>
+    <idnumber original-id="classify-prime-composite-1-1-7" assembly-id="classify-prime-composite-1-1-7" unique-id="classify-prime-composite-1-1-7"/>
+    <stackversion original-id="classify-prime-composite-1-1-8" assembly-id="classify-prime-composite-1-1-8" unique-id="classify-prime-composite-1-1-8">
+      <text original-id="classify-prime-composite-1-1-8-1" assembly-id="classify-prime-composite-1-1-8-1" unique-id="classify-prime-composite-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="classify-prime-composite-1-1-9" assembly-id="classify-prime-composite-1-1-9" unique-id="classify-prime-composite-1-1-9">
+      <text original-id="classify-prime-composite-1-1-9-1" assembly-id="classify-prime-composite-1-1-9-1" unique-id="classify-prime-composite-1-1-9-1">/* Function to generate random prime (2-1000) */
+random_prime() := block([n],
+    while true do (
+        n: rand(999) + 2,
+        if is_prime(n) then return(n)
+    )
+);
+
+/* Function to generate random composite (4-1000) */
+random_composite() := block([n],
+    while true do (
+        n: rand(997) + 4,
+        if not is_prime(n) then return(n)
+    )
+);
+
+/* Simple prime check */
+is_prime(n) := if n &lt; 2 then false else block([result: true],
+    for i:2 thru floor(sqrt(n)) do (
+        if mod(n, i) = 0 then (result: false, return())
+    ),
+    result
+);
+
+/* Define ALL numbers with their categories - WE KNOW THE ANSWERS! */
+prime1: random_prime();
+prime2: random_prime();
+while prime2 = prime1 do prime2: random_prime();
+prime3: random_prime();
+while prime3 = prime1 or prime3 = prime2 do prime3: random_prime();
+
+comp1: random_composite();
+comp2: random_composite();
+while comp2 = comp1 do comp2: random_composite();
+comp3: random_composite();
+while comp3 = comp1 or comp3 = comp2 do comp3: random_composite();
+
+/* Question data array: [number, correct_category] */
+qdata: [
+    [prime1, "Prime"],
+    [prime2, "Prime"],
+    [prime3, "Prime"],
+    [comp1, "Composite"],
+    [comp2, "Composite"],
+    [comp3, "Composite"],
+    [0, "Neither"],
+    [1, "Neither"]
+];
+
+/* Shuffle */
+shuffled: random_permutation(qdata);
+
+/* Extract - WE KNOW THE CORRECT ANSWERS BECAUSE WE DEFINED THEM */
+n1: shuffled[1][1];  t_ans1: shuffled[1][2];
+n2: shuffled[2][1];  t_ans2: shuffled[2][2];
+n3: shuffled[3][1];  t_ans3: shuffled[3][2];
+n4: shuffled[4][1];  t_ans4: shuffled[4][2];
+n5: shuffled[5][1];  t_ans5: shuffled[5][2];
+n6: shuffled[6][1];  t_ans6: shuffled[6][2];
+n7: shuffled[7][1];  t_ans7: shuffled[7][2];
+n8: shuffled[8][1];  t_ans8: shuffled[8][2];
+
+/* Model answers - same as teacher answers */
+model_ans1: t_ans1;
+model_ans2: t_ans2;
+model_ans3: t_ans3;
+model_ans4: t_ans4;
+model_ans5: t_ans5;
+model_ans6: t_ans6;
+model_ans7: t_ans7;
+model_ans8: t_ans8;
+
+/* Dropdown matrices - EXACT PATTERN from logic question */
+m_ans1: [["Prime", is(t_ans1 = "Prime")], ["Composite", is(t_ans1 = "Composite")], ["Neither", is(t_ans1 = "Neither")]];
+m_ans2: [["Prime", is(t_ans2 = "Prime")], ["Composite", is(t_ans2 = "Composite")], ["Neither", is(t_ans2 = "Neither")]];
+m_ans3: [["Prime", is(t_ans3 = "Prime")], ["Composite", is(t_ans3 = "Composite")], ["Neither", is(t_ans3 = "Neither")]];
+m_ans4: [["Prime", is(t_ans4 = "Prime")], ["Composite", is(t_ans4 = "Composite")], ["Neither", is(t_ans4 = "Neither")]];
+m_ans5: [["Prime", is(t_ans5 = "Prime")], ["Composite", is(t_ans5 = "Composite")], ["Neither", is(t_ans5 = "Neither")]];
+m_ans6: [["Prime", is(t_ans6 = "Prime")], ["Composite", is(t_ans6 = "Composite")], ["Neither", is(t_ans6 = "Neither")]];
+m_ans7: [["Prime", is(t_ans7 = "Prime")], ["Composite", is(t_ans7 = "Composite")], ["Neither", is(t_ans7 = "Neither")]];
+m_ans8: [["Prime", is(t_ans8 = "Prime")], ["Composite", is(t_ans8 = "Composite")], ["Neither", is(t_ans8 = "Neither")]];
+
+/* Simple feedback */
+fb_wrong1: sconcat("You have failed to classify ", n1, " correctly. It is ", t_ans1, ".");
+fb_wrong2: sconcat("You have failed to classify ", n2, " correctly. It is ", t_ans2, ".");
+fb_wrong3: sconcat("You have failed to classify ", n3, " correctly. It is ", t_ans3, ".");
+fb_wrong4: sconcat("You have failed to classify ", n4, " correctly. It is ", t_ans4, ".");
+fb_wrong5: sconcat("You have failed to classify ", n5, " correctly. It is ", t_ans5, ".");
+fb_wrong6: sconcat("You have failed to classify ", n6, " correctly. It is ", t_ans6, ".");
+fb_wrong7: sconcat("You have failed to classify ", n7, " correctly. It is ", t_ans7, ".");
+fb_wrong8: sconcat("You have failed to classify ", n8, " correctly. It is ", t_ans8, ".");
+</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="classify-prime-composite-1-1-10" assembly-id="classify-prime-composite-1-1-10" unique-id="classify-prime-composite-1-1-10">
+      <text original-id="classify-prime-composite-1-1-10-1" assembly-id="classify-prime-composite-1-1-10-1" unique-id="classify-prime-composite-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="classify-prime-composite-1-1-11" assembly-id="classify-prime-composite-1-1-11" unique-id="classify-prime-composite-1-1-11">
+      <text original-id="classify-prime-composite-1-1-11-1" assembly-id="classify-prime-composite-1-1-11-1" unique-id="classify-prime-composite-1-1-11-1">&lt;p&gt;Numbers: {@n1@}, {@n2@}, {@n3@}, {@n4@}, {@n5@}, {@n6@}, {@n7@}, {@n8@}&lt;/p&gt;
+&lt;p&gt;Categories: {@t_ans1@}, {@t_ans2@}, {@t_ans3@}, {@t_ans4@}, {@t_ans5@}, {@t_ans6@}, {@t_ans7@}, {@t_ans8@}&lt;/p&gt;</text>
+    </questionnote>
+    <questiondescription format="html" original-id="classify-prime-composite-1-1-12" assembly-id="classify-prime-composite-1-1-12" unique-id="classify-prime-composite-1-1-12">
+      <text original-id="classify-prime-composite-1-1-12-1" assembly-id="classify-prime-composite-1-1-12-1" unique-id="classify-prime-composite-1-1-12-1"/>
+    </questiondescription>
+    <questionsimplify original-id="classify-prime-composite-1-1-13" assembly-id="classify-prime-composite-1-1-13" unique-id="classify-prime-composite-1-1-13">1</questionsimplify>
+    <assumepositive original-id="classify-prime-composite-1-1-14" assembly-id="classify-prime-composite-1-1-14" unique-id="classify-prime-composite-1-1-14">0</assumepositive>
+    <assumereal original-id="classify-prime-composite-1-1-15" assembly-id="classify-prime-composite-1-1-15" unique-id="classify-prime-composite-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="classify-prime-composite-1-1-16" assembly-id="classify-prime-composite-1-1-16" unique-id="classify-prime-composite-1-1-16">
+      <text original-id="classify-prime-composite-1-1-16-1" assembly-id="classify-prime-composite-1-1-16-1" unique-id="classify-prime-composite-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="classify-prime-composite-1-1-17" assembly-id="classify-prime-composite-1-1-17" unique-id="classify-prime-composite-1-1-17">
+      <text original-id="classify-prime-composite-1-1-17-1" assembly-id="classify-prime-composite-1-1-17-1" unique-id="classify-prime-composite-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="classify-prime-composite-1-1-18" assembly-id="classify-prime-composite-1-1-18" unique-id="classify-prime-composite-1-1-18">
+      <text original-id="classify-prime-composite-1-1-18-1" assembly-id="classify-prime-composite-1-1-18-1" unique-id="classify-prime-composite-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="classify-prime-composite-1-1-19" assembly-id="classify-prime-composite-1-1-19" unique-id="classify-prime-composite-1-1-19">.</decimals>
+    <scientificnotation original-id="classify-prime-composite-1-1-20" assembly-id="classify-prime-composite-1-1-20" unique-id="classify-prime-composite-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="classify-prime-composite-1-1-21" assembly-id="classify-prime-composite-1-1-21" unique-id="classify-prime-composite-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="classify-prime-composite-1-1-22" assembly-id="classify-prime-composite-1-1-22" unique-id="classify-prime-composite-1-1-22">1</sqrtsign>
+    <complexno original-id="classify-prime-composite-1-1-23" assembly-id="classify-prime-composite-1-1-23" unique-id="classify-prime-composite-1-1-23">i</complexno>
+    <inversetrig original-id="classify-prime-composite-1-1-24" assembly-id="classify-prime-composite-1-1-24" unique-id="classify-prime-composite-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="classify-prime-composite-1-1-25" assembly-id="classify-prime-composite-1-1-25" unique-id="classify-prime-composite-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="classify-prime-composite-1-1-26" assembly-id="classify-prime-composite-1-1-26" unique-id="classify-prime-composite-1-1-26">[</matrixparens>
+    <isbroken original-id="classify-prime-composite-1-1-27" assembly-id="classify-prime-composite-1-1-27" unique-id="classify-prime-composite-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="classify-prime-composite-1-1-28" assembly-id="classify-prime-composite-1-1-28" unique-id="classify-prime-composite-1-1-28"/>
+    <input original-id="classify-prime-composite-1-1-29" assembly-id="classify-prime-composite-1-1-29" unique-id="classify-prime-composite-1-1-29">
+      <name original-id="classify-prime-composite-1-1-29-1" assembly-id="classify-prime-composite-1-1-29-1" unique-id="classify-prime-composite-1-1-29-1">ans1</name>
+      <type original-id="classify-prime-composite-1-1-29-2" assembly-id="classify-prime-composite-1-1-29-2" unique-id="classify-prime-composite-1-1-29-2">dropdown</type>
+      <tans original-id="classify-prime-composite-1-1-29-3" assembly-id="classify-prime-composite-1-1-29-3" unique-id="classify-prime-composite-1-1-29-3">m_ans1</tans>
+      <boxsize original-id="classify-prime-composite-1-1-29-4" assembly-id="classify-prime-composite-1-1-29-4" unique-id="classify-prime-composite-1-1-29-4">15</boxsize>
+      <strictsyntax original-id="classify-prime-composite-1-1-29-5" assembly-id="classify-prime-composite-1-1-29-5" unique-id="classify-prime-composite-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="classify-prime-composite-1-1-29-6" assembly-id="classify-prime-composite-1-1-29-6" unique-id="classify-prime-composite-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="classify-prime-composite-1-1-29-7" assembly-id="classify-prime-composite-1-1-29-7" unique-id="classify-prime-composite-1-1-29-7"/>
+      <syntaxattribute original-id="classify-prime-composite-1-1-29-8" assembly-id="classify-prime-composite-1-1-29-8" unique-id="classify-prime-composite-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="classify-prime-composite-1-1-29-9" assembly-id="classify-prime-composite-1-1-29-9" unique-id="classify-prime-composite-1-1-29-9"/>
+      <allowwords original-id="classify-prime-composite-1-1-29-10" assembly-id="classify-prime-composite-1-1-29-10" unique-id="classify-prime-composite-1-1-29-10"/>
+      <forbidfloat original-id="classify-prime-composite-1-1-29-11" assembly-id="classify-prime-composite-1-1-29-11" unique-id="classify-prime-composite-1-1-29-11">1</forbidfloat>
+      <requirelowestterms original-id="classify-prime-composite-1-1-29-12" assembly-id="classify-prime-composite-1-1-29-12" unique-id="classify-prime-composite-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="classify-prime-composite-1-1-29-13" assembly-id="classify-prime-composite-1-1-29-13" unique-id="classify-prime-composite-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="classify-prime-composite-1-1-29-14" assembly-id="classify-prime-composite-1-1-29-14" unique-id="classify-prime-composite-1-1-29-14">0</mustverify>
+      <showvalidation original-id="classify-prime-composite-1-1-29-15" assembly-id="classify-prime-composite-1-1-29-15" unique-id="classify-prime-composite-1-1-29-15">0</showvalidation>
+      <options original-id="classify-prime-composite-1-1-29-16" assembly-id="classify-prime-composite-1-1-29-16" unique-id="classify-prime-composite-1-1-29-16"/>
+    </input>
+    <input original-id="classify-prime-composite-1-1-30" assembly-id="classify-prime-composite-1-1-30" unique-id="classify-prime-composite-1-1-30">
+      <name original-id="classify-prime-composite-1-1-30-1" assembly-id="classify-prime-composite-1-1-30-1" unique-id="classify-prime-composite-1-1-30-1">ans2</name>
+      <type original-id="classify-prime-composite-1-1-30-2" assembly-id="classify-prime-composite-1-1-30-2" unique-id="classify-prime-composite-1-1-30-2">dropdown</type>
+      <tans original-id="classify-prime-composite-1-1-30-3" assembly-id="classify-prime-composite-1-1-30-3" unique-id="classify-prime-composite-1-1-30-3">m_ans2</tans>
+      <boxsize original-id="classify-prime-composite-1-1-30-4" assembly-id="classify-prime-composite-1-1-30-4" unique-id="classify-prime-composite-1-1-30-4">15</boxsize>
+      <strictsyntax original-id="classify-prime-composite-1-1-30-5" assembly-id="classify-prime-composite-1-1-30-5" unique-id="classify-prime-composite-1-1-30-5">1</strictsyntax>
+      <insertstars original-id="classify-prime-composite-1-1-30-6" assembly-id="classify-prime-composite-1-1-30-6" unique-id="classify-prime-composite-1-1-30-6">0</insertstars>
+      <syntaxhint original-id="classify-prime-composite-1-1-30-7" assembly-id="classify-prime-composite-1-1-30-7" unique-id="classify-prime-composite-1-1-30-7"/>
+      <syntaxattribute original-id="classify-prime-composite-1-1-30-8" assembly-id="classify-prime-composite-1-1-30-8" unique-id="classify-prime-composite-1-1-30-8">0</syntaxattribute>
+      <forbidwords original-id="classify-prime-composite-1-1-30-9" assembly-id="classify-prime-composite-1-1-30-9" unique-id="classify-prime-composite-1-1-30-9"/>
+      <allowwords original-id="classify-prime-composite-1-1-30-10" assembly-id="classify-prime-composite-1-1-30-10" unique-id="classify-prime-composite-1-1-30-10"/>
+      <forbidfloat original-id="classify-prime-composite-1-1-30-11" assembly-id="classify-prime-composite-1-1-30-11" unique-id="classify-prime-composite-1-1-30-11">1</forbidfloat>
+      <requirelowestterms original-id="classify-prime-composite-1-1-30-12" assembly-id="classify-prime-composite-1-1-30-12" unique-id="classify-prime-composite-1-1-30-12">0</requirelowestterms>
+      <checkanswertype original-id="classify-prime-composite-1-1-30-13" assembly-id="classify-prime-composite-1-1-30-13" unique-id="classify-prime-composite-1-1-30-13">0</checkanswertype>
+      <mustverify original-id="classify-prime-composite-1-1-30-14" assembly-id="classify-prime-composite-1-1-30-14" unique-id="classify-prime-composite-1-1-30-14">0</mustverify>
+      <showvalidation original-id="classify-prime-composite-1-1-30-15" assembly-id="classify-prime-composite-1-1-30-15" unique-id="classify-prime-composite-1-1-30-15">0</showvalidation>
+      <options original-id="classify-prime-composite-1-1-30-16" assembly-id="classify-prime-composite-1-1-30-16" unique-id="classify-prime-composite-1-1-30-16"/>
+    </input>
+    <input original-id="classify-prime-composite-1-1-31" assembly-id="classify-prime-composite-1-1-31" unique-id="classify-prime-composite-1-1-31">
+      <name original-id="classify-prime-composite-1-1-31-1" assembly-id="classify-prime-composite-1-1-31-1" unique-id="classify-prime-composite-1-1-31-1">ans3</name>
+      <type original-id="classify-prime-composite-1-1-31-2" assembly-id="classify-prime-composite-1-1-31-2" unique-id="classify-prime-composite-1-1-31-2">dropdown</type>
+      <tans original-id="classify-prime-composite-1-1-31-3" assembly-id="classify-prime-composite-1-1-31-3" unique-id="classify-prime-composite-1-1-31-3">m_ans3</tans>
+      <boxsize original-id="classify-prime-composite-1-1-31-4" assembly-id="classify-prime-composite-1-1-31-4" unique-id="classify-prime-composite-1-1-31-4">15</boxsize>
+      <strictsyntax original-id="classify-prime-composite-1-1-31-5" assembly-id="classify-prime-composite-1-1-31-5" unique-id="classify-prime-composite-1-1-31-5">1</strictsyntax>
+      <insertstars original-id="classify-prime-composite-1-1-31-6" assembly-id="classify-prime-composite-1-1-31-6" unique-id="classify-prime-composite-1-1-31-6">0</insertstars>
+      <syntaxhint original-id="classify-prime-composite-1-1-31-7" assembly-id="classify-prime-composite-1-1-31-7" unique-id="classify-prime-composite-1-1-31-7"/>
+      <syntaxattribute original-id="classify-prime-composite-1-1-31-8" assembly-id="classify-prime-composite-1-1-31-8" unique-id="classify-prime-composite-1-1-31-8">0</syntaxattribute>
+      <forbidwords original-id="classify-prime-composite-1-1-31-9" assembly-id="classify-prime-composite-1-1-31-9" unique-id="classify-prime-composite-1-1-31-9"/>
+      <allowwords original-id="classify-prime-composite-1-1-31-10" assembly-id="classify-prime-composite-1-1-31-10" unique-id="classify-prime-composite-1-1-31-10"/>
+      <forbidfloat original-id="classify-prime-composite-1-1-31-11" assembly-id="classify-prime-composite-1-1-31-11" unique-id="classify-prime-composite-1-1-31-11">1</forbidfloat>
+      <requirelowestterms original-id="classify-prime-composite-1-1-31-12" assembly-id="classify-prime-composite-1-1-31-12" unique-id="classify-prime-composite-1-1-31-12">0</requirelowestterms>
+      <checkanswertype original-id="classify-prime-composite-1-1-31-13" assembly-id="classify-prime-composite-1-1-31-13" unique-id="classify-prime-composite-1-1-31-13">0</checkanswertype>
+      <mustverify original-id="classify-prime-composite-1-1-31-14" assembly-id="classify-prime-composite-1-1-31-14" unique-id="classify-prime-composite-1-1-31-14">0</mustverify>
+      <showvalidation original-id="classify-prime-composite-1-1-31-15" assembly-id="classify-prime-composite-1-1-31-15" unique-id="classify-prime-composite-1-1-31-15">0</showvalidation>
+      <options original-id="classify-prime-composite-1-1-31-16" assembly-id="classify-prime-composite-1-1-31-16" unique-id="classify-prime-composite-1-1-31-16"/>
+    </input>
+    <input original-id="classify-prime-composite-1-1-32" assembly-id="classify-prime-composite-1-1-32" unique-id="classify-prime-composite-1-1-32">
+      <name original-id="classify-prime-composite-1-1-32-1" assembly-id="classify-prime-composite-1-1-32-1" unique-id="classify-prime-composite-1-1-32-1">ans4</name>
+      <type original-id="classify-prime-composite-1-1-32-2" assembly-id="classify-prime-composite-1-1-32-2" unique-id="classify-prime-composite-1-1-32-2">dropdown</type>
+      <tans original-id="classify-prime-composite-1-1-32-3" assembly-id="classify-prime-composite-1-1-32-3" unique-id="classify-prime-composite-1-1-32-3">m_ans4</tans>
+      <boxsize original-id="classify-prime-composite-1-1-32-4" assembly-id="classify-prime-composite-1-1-32-4" unique-id="classify-prime-composite-1-1-32-4">15</boxsize>
+      <strictsyntax original-id="classify-prime-composite-1-1-32-5" assembly-id="classify-prime-composite-1-1-32-5" unique-id="classify-prime-composite-1-1-32-5">1</strictsyntax>
+      <insertstars original-id="classify-prime-composite-1-1-32-6" assembly-id="classify-prime-composite-1-1-32-6" unique-id="classify-prime-composite-1-1-32-6">0</insertstars>
+      <syntaxhint original-id="classify-prime-composite-1-1-32-7" assembly-id="classify-prime-composite-1-1-32-7" unique-id="classify-prime-composite-1-1-32-7"/>
+      <syntaxattribute original-id="classify-prime-composite-1-1-32-8" assembly-id="classify-prime-composite-1-1-32-8" unique-id="classify-prime-composite-1-1-32-8">0</syntaxattribute>
+      <forbidwords original-id="classify-prime-composite-1-1-32-9" assembly-id="classify-prime-composite-1-1-32-9" unique-id="classify-prime-composite-1-1-32-9"/>
+      <allowwords original-id="classify-prime-composite-1-1-32-10" assembly-id="classify-prime-composite-1-1-32-10" unique-id="classify-prime-composite-1-1-32-10"/>
+      <forbidfloat original-id="classify-prime-composite-1-1-32-11" assembly-id="classify-prime-composite-1-1-32-11" unique-id="classify-prime-composite-1-1-32-11">1</forbidfloat>
+      <requirelowestterms original-id="classify-prime-composite-1-1-32-12" assembly-id="classify-prime-composite-1-1-32-12" unique-id="classify-prime-composite-1-1-32-12">0</requirelowestterms>
+      <checkanswertype original-id="classify-prime-composite-1-1-32-13" assembly-id="classify-prime-composite-1-1-32-13" unique-id="classify-prime-composite-1-1-32-13">0</checkanswertype>
+      <mustverify original-id="classify-prime-composite-1-1-32-14" assembly-id="classify-prime-composite-1-1-32-14" unique-id="classify-prime-composite-1-1-32-14">0</mustverify>
+      <showvalidation original-id="classify-prime-composite-1-1-32-15" assembly-id="classify-prime-composite-1-1-32-15" unique-id="classify-prime-composite-1-1-32-15">0</showvalidation>
+      <options original-id="classify-prime-composite-1-1-32-16" assembly-id="classify-prime-composite-1-1-32-16" unique-id="classify-prime-composite-1-1-32-16"/>
+    </input>
+    <input original-id="classify-prime-composite-1-1-33" assembly-id="classify-prime-composite-1-1-33" unique-id="classify-prime-composite-1-1-33">
+      <name original-id="classify-prime-composite-1-1-33-1" assembly-id="classify-prime-composite-1-1-33-1" unique-id="classify-prime-composite-1-1-33-1">ans5</name>
+      <type original-id="classify-prime-composite-1-1-33-2" assembly-id="classify-prime-composite-1-1-33-2" unique-id="classify-prime-composite-1-1-33-2">dropdown</type>
+      <tans original-id="classify-prime-composite-1-1-33-3" assembly-id="classify-prime-composite-1-1-33-3" unique-id="classify-prime-composite-1-1-33-3">m_ans5</tans>
+      <boxsize original-id="classify-prime-composite-1-1-33-4" assembly-id="classify-prime-composite-1-1-33-4" unique-id="classify-prime-composite-1-1-33-4">15</boxsize>
+      <strictsyntax original-id="classify-prime-composite-1-1-33-5" assembly-id="classify-prime-composite-1-1-33-5" unique-id="classify-prime-composite-1-1-33-5">1</strictsyntax>
+      <insertstars original-id="classify-prime-composite-1-1-33-6" assembly-id="classify-prime-composite-1-1-33-6" unique-id="classify-prime-composite-1-1-33-6">0</insertstars>
+      <syntaxhint original-id="classify-prime-composite-1-1-33-7" assembly-id="classify-prime-composite-1-1-33-7" unique-id="classify-prime-composite-1-1-33-7"/>
+      <syntaxattribute original-id="classify-prime-composite-1-1-33-8" assembly-id="classify-prime-composite-1-1-33-8" unique-id="classify-prime-composite-1-1-33-8">0</syntaxattribute>
+      <forbidwords original-id="classify-prime-composite-1-1-33-9" assembly-id="classify-prime-composite-1-1-33-9" unique-id="classify-prime-composite-1-1-33-9"/>
+      <allowwords original-id="classify-prime-composite-1-1-33-10" assembly-id="classify-prime-composite-1-1-33-10" unique-id="classify-prime-composite-1-1-33-10"/>
+      <forbidfloat original-id="classify-prime-composite-1-1-33-11" assembly-id="classify-prime-composite-1-1-33-11" unique-id="classify-prime-composite-1-1-33-11">1</forbidfloat>
+      <requirelowestterms original-id="classify-prime-composite-1-1-33-12" assembly-id="classify-prime-composite-1-1-33-12" unique-id="classify-prime-composite-1-1-33-12">0</requirelowestterms>
+      <checkanswertype original-id="classify-prime-composite-1-1-33-13" assembly-id="classify-prime-composite-1-1-33-13" unique-id="classify-prime-composite-1-1-33-13">0</checkanswertype>
+      <mustverify original-id="classify-prime-composite-1-1-33-14" assembly-id="classify-prime-composite-1-1-33-14" unique-id="classify-prime-composite-1-1-33-14">0</mustverify>
+      <showvalidation original-id="classify-prime-composite-1-1-33-15" assembly-id="classify-prime-composite-1-1-33-15" unique-id="classify-prime-composite-1-1-33-15">0</showvalidation>
+      <options original-id="classify-prime-composite-1-1-33-16" assembly-id="classify-prime-composite-1-1-33-16" unique-id="classify-prime-composite-1-1-33-16"/>
+    </input>
+    <input original-id="classify-prime-composite-1-1-34" assembly-id="classify-prime-composite-1-1-34" unique-id="classify-prime-composite-1-1-34">
+      <name original-id="classify-prime-composite-1-1-34-1" assembly-id="classify-prime-composite-1-1-34-1" unique-id="classify-prime-composite-1-1-34-1">ans6</name>
+      <type original-id="classify-prime-composite-1-1-34-2" assembly-id="classify-prime-composite-1-1-34-2" unique-id="classify-prime-composite-1-1-34-2">dropdown</type>
+      <tans original-id="classify-prime-composite-1-1-34-3" assembly-id="classify-prime-composite-1-1-34-3" unique-id="classify-prime-composite-1-1-34-3">m_ans6</tans>
+      <boxsize original-id="classify-prime-composite-1-1-34-4" assembly-id="classify-prime-composite-1-1-34-4" unique-id="classify-prime-composite-1-1-34-4">15</boxsize>
+      <strictsyntax original-id="classify-prime-composite-1-1-34-5" assembly-id="classify-prime-composite-1-1-34-5" unique-id="classify-prime-composite-1-1-34-5">1</strictsyntax>
+      <insertstars original-id="classify-prime-composite-1-1-34-6" assembly-id="classify-prime-composite-1-1-34-6" unique-id="classify-prime-composite-1-1-34-6">0</insertstars>
+      <syntaxhint original-id="classify-prime-composite-1-1-34-7" assembly-id="classify-prime-composite-1-1-34-7" unique-id="classify-prime-composite-1-1-34-7"/>
+      <syntaxattribute original-id="classify-prime-composite-1-1-34-8" assembly-id="classify-prime-composite-1-1-34-8" unique-id="classify-prime-composite-1-1-34-8">0</syntaxattribute>
+      <forbidwords original-id="classify-prime-composite-1-1-34-9" assembly-id="classify-prime-composite-1-1-34-9" unique-id="classify-prime-composite-1-1-34-9"/>
+      <allowwords original-id="classify-prime-composite-1-1-34-10" assembly-id="classify-prime-composite-1-1-34-10" unique-id="classify-prime-composite-1-1-34-10"/>
+      <forbidfloat original-id="classify-prime-composite-1-1-34-11" assembly-id="classify-prime-composite-1-1-34-11" unique-id="classify-prime-composite-1-1-34-11">1</forbidfloat>
+      <requirelowestterms original-id="classify-prime-composite-1-1-34-12" assembly-id="classify-prime-composite-1-1-34-12" unique-id="classify-prime-composite-1-1-34-12">0</requirelowestterms>
+      <checkanswertype original-id="classify-prime-composite-1-1-34-13" assembly-id="classify-prime-composite-1-1-34-13" unique-id="classify-prime-composite-1-1-34-13">0</checkanswertype>
+      <mustverify original-id="classify-prime-composite-1-1-34-14" assembly-id="classify-prime-composite-1-1-34-14" unique-id="classify-prime-composite-1-1-34-14">0</mustverify>
+      <showvalidation original-id="classify-prime-composite-1-1-34-15" assembly-id="classify-prime-composite-1-1-34-15" unique-id="classify-prime-composite-1-1-34-15">0</showvalidation>
+      <options original-id="classify-prime-composite-1-1-34-16" assembly-id="classify-prime-composite-1-1-34-16" unique-id="classify-prime-composite-1-1-34-16"/>
+    </input>
+    <input original-id="classify-prime-composite-1-1-35" assembly-id="classify-prime-composite-1-1-35" unique-id="classify-prime-composite-1-1-35">
+      <name original-id="classify-prime-composite-1-1-35-1" assembly-id="classify-prime-composite-1-1-35-1" unique-id="classify-prime-composite-1-1-35-1">ans7</name>
+      <type original-id="classify-prime-composite-1-1-35-2" assembly-id="classify-prime-composite-1-1-35-2" unique-id="classify-prime-composite-1-1-35-2">dropdown</type>
+      <tans original-id="classify-prime-composite-1-1-35-3" assembly-id="classify-prime-composite-1-1-35-3" unique-id="classify-prime-composite-1-1-35-3">m_ans7</tans>
+      <boxsize original-id="classify-prime-composite-1-1-35-4" assembly-id="classify-prime-composite-1-1-35-4" unique-id="classify-prime-composite-1-1-35-4">15</boxsize>
+      <strictsyntax original-id="classify-prime-composite-1-1-35-5" assembly-id="classify-prime-composite-1-1-35-5" unique-id="classify-prime-composite-1-1-35-5">1</strictsyntax>
+      <insertstars original-id="classify-prime-composite-1-1-35-6" assembly-id="classify-prime-composite-1-1-35-6" unique-id="classify-prime-composite-1-1-35-6">0</insertstars>
+      <syntaxhint original-id="classify-prime-composite-1-1-35-7" assembly-id="classify-prime-composite-1-1-35-7" unique-id="classify-prime-composite-1-1-35-7"/>
+      <syntaxattribute original-id="classify-prime-composite-1-1-35-8" assembly-id="classify-prime-composite-1-1-35-8" unique-id="classify-prime-composite-1-1-35-8">0</syntaxattribute>
+      <forbidwords original-id="classify-prime-composite-1-1-35-9" assembly-id="classify-prime-composite-1-1-35-9" unique-id="classify-prime-composite-1-1-35-9"/>
+      <allowwords original-id="classify-prime-composite-1-1-35-10" assembly-id="classify-prime-composite-1-1-35-10" unique-id="classify-prime-composite-1-1-35-10"/>
+      <forbidfloat original-id="classify-prime-composite-1-1-35-11" assembly-id="classify-prime-composite-1-1-35-11" unique-id="classify-prime-composite-1-1-35-11">1</forbidfloat>
+      <requirelowestterms original-id="classify-prime-composite-1-1-35-12" assembly-id="classify-prime-composite-1-1-35-12" unique-id="classify-prime-composite-1-1-35-12">0</requirelowestterms>
+      <checkanswertype original-id="classify-prime-composite-1-1-35-13" assembly-id="classify-prime-composite-1-1-35-13" unique-id="classify-prime-composite-1-1-35-13">0</checkanswertype>
+      <mustverify original-id="classify-prime-composite-1-1-35-14" assembly-id="classify-prime-composite-1-1-35-14" unique-id="classify-prime-composite-1-1-35-14">0</mustverify>
+      <showvalidation original-id="classify-prime-composite-1-1-35-15" assembly-id="classify-prime-composite-1-1-35-15" unique-id="classify-prime-composite-1-1-35-15">0</showvalidation>
+      <options original-id="classify-prime-composite-1-1-35-16" assembly-id="classify-prime-composite-1-1-35-16" unique-id="classify-prime-composite-1-1-35-16"/>
+    </input>
+    <input original-id="classify-prime-composite-1-1-36" assembly-id="classify-prime-composite-1-1-36" unique-id="classify-prime-composite-1-1-36">
+      <name original-id="classify-prime-composite-1-1-36-1" assembly-id="classify-prime-composite-1-1-36-1" unique-id="classify-prime-composite-1-1-36-1">ans8</name>
+      <type original-id="classify-prime-composite-1-1-36-2" assembly-id="classify-prime-composite-1-1-36-2" unique-id="classify-prime-composite-1-1-36-2">dropdown</type>
+      <tans original-id="classify-prime-composite-1-1-36-3" assembly-id="classify-prime-composite-1-1-36-3" unique-id="classify-prime-composite-1-1-36-3">m_ans8</tans>
+      <boxsize original-id="classify-prime-composite-1-1-36-4" assembly-id="classify-prime-composite-1-1-36-4" unique-id="classify-prime-composite-1-1-36-4">15</boxsize>
+      <strictsyntax original-id="classify-prime-composite-1-1-36-5" assembly-id="classify-prime-composite-1-1-36-5" unique-id="classify-prime-composite-1-1-36-5">1</strictsyntax>
+      <insertstars original-id="classify-prime-composite-1-1-36-6" assembly-id="classify-prime-composite-1-1-36-6" unique-id="classify-prime-composite-1-1-36-6">0</insertstars>
+      <syntaxhint original-id="classify-prime-composite-1-1-36-7" assembly-id="classify-prime-composite-1-1-36-7" unique-id="classify-prime-composite-1-1-36-7"/>
+      <syntaxattribute original-id="classify-prime-composite-1-1-36-8" assembly-id="classify-prime-composite-1-1-36-8" unique-id="classify-prime-composite-1-1-36-8">0</syntaxattribute>
+      <forbidwords original-id="classify-prime-composite-1-1-36-9" assembly-id="classify-prime-composite-1-1-36-9" unique-id="classify-prime-composite-1-1-36-9"/>
+      <allowwords original-id="classify-prime-composite-1-1-36-10" assembly-id="classify-prime-composite-1-1-36-10" unique-id="classify-prime-composite-1-1-36-10"/>
+      <forbidfloat original-id="classify-prime-composite-1-1-36-11" assembly-id="classify-prime-composite-1-1-36-11" unique-id="classify-prime-composite-1-1-36-11">1</forbidfloat>
+      <requirelowestterms original-id="classify-prime-composite-1-1-36-12" assembly-id="classify-prime-composite-1-1-36-12" unique-id="classify-prime-composite-1-1-36-12">0</requirelowestterms>
+      <checkanswertype original-id="classify-prime-composite-1-1-36-13" assembly-id="classify-prime-composite-1-1-36-13" unique-id="classify-prime-composite-1-1-36-13">0</checkanswertype>
+      <mustverify original-id="classify-prime-composite-1-1-36-14" assembly-id="classify-prime-composite-1-1-36-14" unique-id="classify-prime-composite-1-1-36-14">0</mustverify>
+      <showvalidation original-id="classify-prime-composite-1-1-36-15" assembly-id="classify-prime-composite-1-1-36-15" unique-id="classify-prime-composite-1-1-36-15">0</showvalidation>
+      <options original-id="classify-prime-composite-1-1-36-16" assembly-id="classify-prime-composite-1-1-36-16" unique-id="classify-prime-composite-1-1-36-16"/>
+    </input>
+    <prt original-id="classify-prime-composite-1-1-37" assembly-id="classify-prime-composite-1-1-37" unique-id="classify-prime-composite-1-1-37">
+      <name original-id="classify-prime-composite-1-1-37-1" assembly-id="classify-prime-composite-1-1-37-1" unique-id="classify-prime-composite-1-1-37-1">prt1</name>
+      <value original-id="classify-prime-composite-1-1-37-2" assembly-id="classify-prime-composite-1-1-37-2" unique-id="classify-prime-composite-1-1-37-2">1.0000000</value>
+      <autosimplify original-id="classify-prime-composite-1-1-37-3" assembly-id="classify-prime-composite-1-1-37-3" unique-id="classify-prime-composite-1-1-37-3">1</autosimplify>
+      <feedbackstyle original-id="classify-prime-composite-1-1-37-4" assembly-id="classify-prime-composite-1-1-37-4" unique-id="classify-prime-composite-1-1-37-4">1</feedbackstyle>
+      <feedbackvariables original-id="classify-prime-composite-1-1-37-5" assembly-id="classify-prime-composite-1-1-37-5" unique-id="classify-prime-composite-1-1-37-5">
+        <text original-id="classify-prime-composite-1-1-37-5-1" assembly-id="classify-prime-composite-1-1-37-5-1" unique-id="classify-prime-composite-1-1-37-5-1"/>
+      </feedbackvariables>
+      <node original-id="classify-prime-composite-1-1-37-6" assembly-id="classify-prime-composite-1-1-37-6" unique-id="classify-prime-composite-1-1-37-6">
+        <name original-id="classify-prime-composite-1-1-37-6-1" assembly-id="classify-prime-composite-1-1-37-6-1" unique-id="classify-prime-composite-1-1-37-6-1">0</name>
+        <description original-id="classify-prime-composite-1-1-37-6-2" assembly-id="classify-prime-composite-1-1-37-6-2" unique-id="classify-prime-composite-1-1-37-6-2"/>
+        <answertest original-id="classify-prime-composite-1-1-37-6-3" assembly-id="classify-prime-composite-1-1-37-6-3" unique-id="classify-prime-composite-1-1-37-6-3">AlgEquiv</answertest>
+        <sans original-id="classify-prime-composite-1-1-37-6-4" assembly-id="classify-prime-composite-1-1-37-6-4" unique-id="classify-prime-composite-1-1-37-6-4">ans1</sans>
+        <tans original-id="classify-prime-composite-1-1-37-6-5" assembly-id="classify-prime-composite-1-1-37-6-5" unique-id="classify-prime-composite-1-1-37-6-5">t_ans1</tans>
+        <testoptions original-id="classify-prime-composite-1-1-37-6-6" assembly-id="classify-prime-composite-1-1-37-6-6" unique-id="classify-prime-composite-1-1-37-6-6"/>
+        <quiet original-id="classify-prime-composite-1-1-37-6-7" assembly-id="classify-prime-composite-1-1-37-6-7" unique-id="classify-prime-composite-1-1-37-6-7">0</quiet>
+        <truescoremode original-id="classify-prime-composite-1-1-37-6-8" assembly-id="classify-prime-composite-1-1-37-6-8" unique-id="classify-prime-composite-1-1-37-6-8">=</truescoremode>
+        <truescore original-id="classify-prime-composite-1-1-37-6-9" assembly-id="classify-prime-composite-1-1-37-6-9" unique-id="classify-prime-composite-1-1-37-6-9">1</truescore>
+        <truepenalty original-id="classify-prime-composite-1-1-37-6-10" assembly-id="classify-prime-composite-1-1-37-6-10" unique-id="classify-prime-composite-1-1-37-6-10"/>
+        <truenextnode original-id="classify-prime-composite-1-1-37-6-11" assembly-id="classify-prime-composite-1-1-37-6-11" unique-id="classify-prime-composite-1-1-37-6-11">-1</truenextnode>
+        <trueanswernote original-id="classify-prime-composite-1-1-37-6-12" assembly-id="classify-prime-composite-1-1-37-6-12" unique-id="classify-prime-composite-1-1-37-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="classify-prime-composite-1-1-37-6-13" assembly-id="classify-prime-composite-1-1-37-6-13" unique-id="classify-prime-composite-1-1-37-6-13">
+          <text original-id="classify-prime-composite-1-1-37-6-13-1" assembly-id="classify-prime-composite-1-1-37-6-13-1" unique-id="classify-prime-composite-1-1-37-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="classify-prime-composite-1-1-37-6-14" assembly-id="classify-prime-composite-1-1-37-6-14" unique-id="classify-prime-composite-1-1-37-6-14">=</falsescoremode>
+        <falsescore original-id="classify-prime-composite-1-1-37-6-15" assembly-id="classify-prime-composite-1-1-37-6-15" unique-id="classify-prime-composite-1-1-37-6-15">0</falsescore>
+        <falsepenalty original-id="classify-prime-composite-1-1-37-6-16" assembly-id="classify-prime-composite-1-1-37-6-16" unique-id="classify-prime-composite-1-1-37-6-16"/>
+        <falsenextnode original-id="classify-prime-composite-1-1-37-6-17" assembly-id="classify-prime-composite-1-1-37-6-17" unique-id="classify-prime-composite-1-1-37-6-17">-1</falsenextnode>
+        <falseanswernote original-id="classify-prime-composite-1-1-37-6-18" assembly-id="classify-prime-composite-1-1-37-6-18" unique-id="classify-prime-composite-1-1-37-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="classify-prime-composite-1-1-37-6-19" assembly-id="classify-prime-composite-1-1-37-6-19" unique-id="classify-prime-composite-1-1-37-6-19">
+          <text original-id="classify-prime-composite-1-1-37-6-19-1" assembly-id="classify-prime-composite-1-1-37-6-19-1" unique-id="classify-prime-composite-1-1-37-6-19-1">{@fb_wrong1@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="classify-prime-composite-1-1-38" assembly-id="classify-prime-composite-1-1-38" unique-id="classify-prime-composite-1-1-38">
+      <name original-id="classify-prime-composite-1-1-38-1" assembly-id="classify-prime-composite-1-1-38-1" unique-id="classify-prime-composite-1-1-38-1">prt2</name>
+      <value original-id="classify-prime-composite-1-1-38-2" assembly-id="classify-prime-composite-1-1-38-2" unique-id="classify-prime-composite-1-1-38-2">1.0000000</value>
+      <autosimplify original-id="classify-prime-composite-1-1-38-3" assembly-id="classify-prime-composite-1-1-38-3" unique-id="classify-prime-composite-1-1-38-3">1</autosimplify>
+      <feedbackstyle original-id="classify-prime-composite-1-1-38-4" assembly-id="classify-prime-composite-1-1-38-4" unique-id="classify-prime-composite-1-1-38-4">1</feedbackstyle>
+      <feedbackvariables original-id="classify-prime-composite-1-1-38-5" assembly-id="classify-prime-composite-1-1-38-5" unique-id="classify-prime-composite-1-1-38-5">
+        <text original-id="classify-prime-composite-1-1-38-5-1" assembly-id="classify-prime-composite-1-1-38-5-1" unique-id="classify-prime-composite-1-1-38-5-1"/>
+      </feedbackvariables>
+      <node original-id="classify-prime-composite-1-1-38-6" assembly-id="classify-prime-composite-1-1-38-6" unique-id="classify-prime-composite-1-1-38-6">
+        <name original-id="classify-prime-composite-1-1-38-6-1" assembly-id="classify-prime-composite-1-1-38-6-1" unique-id="classify-prime-composite-1-1-38-6-1">0</name>
+        <description original-id="classify-prime-composite-1-1-38-6-2" assembly-id="classify-prime-composite-1-1-38-6-2" unique-id="classify-prime-composite-1-1-38-6-2"/>
+        <answertest original-id="classify-prime-composite-1-1-38-6-3" assembly-id="classify-prime-composite-1-1-38-6-3" unique-id="classify-prime-composite-1-1-38-6-3">AlgEquiv</answertest>
+        <sans original-id="classify-prime-composite-1-1-38-6-4" assembly-id="classify-prime-composite-1-1-38-6-4" unique-id="classify-prime-composite-1-1-38-6-4">ans2</sans>
+        <tans original-id="classify-prime-composite-1-1-38-6-5" assembly-id="classify-prime-composite-1-1-38-6-5" unique-id="classify-prime-composite-1-1-38-6-5">t_ans2</tans>
+        <testoptions original-id="classify-prime-composite-1-1-38-6-6" assembly-id="classify-prime-composite-1-1-38-6-6" unique-id="classify-prime-composite-1-1-38-6-6"/>
+        <quiet original-id="classify-prime-composite-1-1-38-6-7" assembly-id="classify-prime-composite-1-1-38-6-7" unique-id="classify-prime-composite-1-1-38-6-7">0</quiet>
+        <truescoremode original-id="classify-prime-composite-1-1-38-6-8" assembly-id="classify-prime-composite-1-1-38-6-8" unique-id="classify-prime-composite-1-1-38-6-8">=</truescoremode>
+        <truescore original-id="classify-prime-composite-1-1-38-6-9" assembly-id="classify-prime-composite-1-1-38-6-9" unique-id="classify-prime-composite-1-1-38-6-9">1</truescore>
+        <truepenalty original-id="classify-prime-composite-1-1-38-6-10" assembly-id="classify-prime-composite-1-1-38-6-10" unique-id="classify-prime-composite-1-1-38-6-10"/>
+        <truenextnode original-id="classify-prime-composite-1-1-38-6-11" assembly-id="classify-prime-composite-1-1-38-6-11" unique-id="classify-prime-composite-1-1-38-6-11">-1</truenextnode>
+        <trueanswernote original-id="classify-prime-composite-1-1-38-6-12" assembly-id="classify-prime-composite-1-1-38-6-12" unique-id="classify-prime-composite-1-1-38-6-12">prt2-1-T</trueanswernote>
+        <truefeedback format="html" original-id="classify-prime-composite-1-1-38-6-13" assembly-id="classify-prime-composite-1-1-38-6-13" unique-id="classify-prime-composite-1-1-38-6-13">
+          <text original-id="classify-prime-composite-1-1-38-6-13-1" assembly-id="classify-prime-composite-1-1-38-6-13-1" unique-id="classify-prime-composite-1-1-38-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="classify-prime-composite-1-1-38-6-14" assembly-id="classify-prime-composite-1-1-38-6-14" unique-id="classify-prime-composite-1-1-38-6-14">=</falsescoremode>
+        <falsescore original-id="classify-prime-composite-1-1-38-6-15" assembly-id="classify-prime-composite-1-1-38-6-15" unique-id="classify-prime-composite-1-1-38-6-15">0</falsescore>
+        <falsepenalty original-id="classify-prime-composite-1-1-38-6-16" assembly-id="classify-prime-composite-1-1-38-6-16" unique-id="classify-prime-composite-1-1-38-6-16"/>
+        <falsenextnode original-id="classify-prime-composite-1-1-38-6-17" assembly-id="classify-prime-composite-1-1-38-6-17" unique-id="classify-prime-composite-1-1-38-6-17">-1</falsenextnode>
+        <falseanswernote original-id="classify-prime-composite-1-1-38-6-18" assembly-id="classify-prime-composite-1-1-38-6-18" unique-id="classify-prime-composite-1-1-38-6-18">prt2-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="classify-prime-composite-1-1-38-6-19" assembly-id="classify-prime-composite-1-1-38-6-19" unique-id="classify-prime-composite-1-1-38-6-19">
+          <text original-id="classify-prime-composite-1-1-38-6-19-1" assembly-id="classify-prime-composite-1-1-38-6-19-1" unique-id="classify-prime-composite-1-1-38-6-19-1">{@fb_wrong2@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="classify-prime-composite-1-1-39" assembly-id="classify-prime-composite-1-1-39" unique-id="classify-prime-composite-1-1-39">
+      <name original-id="classify-prime-composite-1-1-39-1" assembly-id="classify-prime-composite-1-1-39-1" unique-id="classify-prime-composite-1-1-39-1">prt3</name>
+      <value original-id="classify-prime-composite-1-1-39-2" assembly-id="classify-prime-composite-1-1-39-2" unique-id="classify-prime-composite-1-1-39-2">1.0000000</value>
+      <autosimplify original-id="classify-prime-composite-1-1-39-3" assembly-id="classify-prime-composite-1-1-39-3" unique-id="classify-prime-composite-1-1-39-3">1</autosimplify>
+      <feedbackstyle original-id="classify-prime-composite-1-1-39-4" assembly-id="classify-prime-composite-1-1-39-4" unique-id="classify-prime-composite-1-1-39-4">1</feedbackstyle>
+      <feedbackvariables original-id="classify-prime-composite-1-1-39-5" assembly-id="classify-prime-composite-1-1-39-5" unique-id="classify-prime-composite-1-1-39-5">
+        <text original-id="classify-prime-composite-1-1-39-5-1" assembly-id="classify-prime-composite-1-1-39-5-1" unique-id="classify-prime-composite-1-1-39-5-1"/>
+      </feedbackvariables>
+      <node original-id="classify-prime-composite-1-1-39-6" assembly-id="classify-prime-composite-1-1-39-6" unique-id="classify-prime-composite-1-1-39-6">
+        <name original-id="classify-prime-composite-1-1-39-6-1" assembly-id="classify-prime-composite-1-1-39-6-1" unique-id="classify-prime-composite-1-1-39-6-1">0</name>
+        <description original-id="classify-prime-composite-1-1-39-6-2" assembly-id="classify-prime-composite-1-1-39-6-2" unique-id="classify-prime-composite-1-1-39-6-2"/>
+        <answertest original-id="classify-prime-composite-1-1-39-6-3" assembly-id="classify-prime-composite-1-1-39-6-3" unique-id="classify-prime-composite-1-1-39-6-3">AlgEquiv</answertest>
+        <sans original-id="classify-prime-composite-1-1-39-6-4" assembly-id="classify-prime-composite-1-1-39-6-4" unique-id="classify-prime-composite-1-1-39-6-4">ans3</sans>
+        <tans original-id="classify-prime-composite-1-1-39-6-5" assembly-id="classify-prime-composite-1-1-39-6-5" unique-id="classify-prime-composite-1-1-39-6-5">t_ans3</tans>
+        <testoptions original-id="classify-prime-composite-1-1-39-6-6" assembly-id="classify-prime-composite-1-1-39-6-6" unique-id="classify-prime-composite-1-1-39-6-6"/>
+        <quiet original-id="classify-prime-composite-1-1-39-6-7" assembly-id="classify-prime-composite-1-1-39-6-7" unique-id="classify-prime-composite-1-1-39-6-7">0</quiet>
+        <truescoremode original-id="classify-prime-composite-1-1-39-6-8" assembly-id="classify-prime-composite-1-1-39-6-8" unique-id="classify-prime-composite-1-1-39-6-8">=</truescoremode>
+        <truescore original-id="classify-prime-composite-1-1-39-6-9" assembly-id="classify-prime-composite-1-1-39-6-9" unique-id="classify-prime-composite-1-1-39-6-9">1</truescore>
+        <truepenalty original-id="classify-prime-composite-1-1-39-6-10" assembly-id="classify-prime-composite-1-1-39-6-10" unique-id="classify-prime-composite-1-1-39-6-10"/>
+        <truenextnode original-id="classify-prime-composite-1-1-39-6-11" assembly-id="classify-prime-composite-1-1-39-6-11" unique-id="classify-prime-composite-1-1-39-6-11">-1</truenextnode>
+        <trueanswernote original-id="classify-prime-composite-1-1-39-6-12" assembly-id="classify-prime-composite-1-1-39-6-12" unique-id="classify-prime-composite-1-1-39-6-12">prt3-1-T</trueanswernote>
+        <truefeedback format="html" original-id="classify-prime-composite-1-1-39-6-13" assembly-id="classify-prime-composite-1-1-39-6-13" unique-id="classify-prime-composite-1-1-39-6-13">
+          <text original-id="classify-prime-composite-1-1-39-6-13-1" assembly-id="classify-prime-composite-1-1-39-6-13-1" unique-id="classify-prime-composite-1-1-39-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="classify-prime-composite-1-1-39-6-14" assembly-id="classify-prime-composite-1-1-39-6-14" unique-id="classify-prime-composite-1-1-39-6-14">=</falsescoremode>
+        <falsescore original-id="classify-prime-composite-1-1-39-6-15" assembly-id="classify-prime-composite-1-1-39-6-15" unique-id="classify-prime-composite-1-1-39-6-15">0</falsescore>
+        <falsepenalty original-id="classify-prime-composite-1-1-39-6-16" assembly-id="classify-prime-composite-1-1-39-6-16" unique-id="classify-prime-composite-1-1-39-6-16"/>
+        <falsenextnode original-id="classify-prime-composite-1-1-39-6-17" assembly-id="classify-prime-composite-1-1-39-6-17" unique-id="classify-prime-composite-1-1-39-6-17">-1</falsenextnode>
+        <falseanswernote original-id="classify-prime-composite-1-1-39-6-18" assembly-id="classify-prime-composite-1-1-39-6-18" unique-id="classify-prime-composite-1-1-39-6-18">prt3-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="classify-prime-composite-1-1-39-6-19" assembly-id="classify-prime-composite-1-1-39-6-19" unique-id="classify-prime-composite-1-1-39-6-19">
+          <text original-id="classify-prime-composite-1-1-39-6-19-1" assembly-id="classify-prime-composite-1-1-39-6-19-1" unique-id="classify-prime-composite-1-1-39-6-19-1">{@fb_wrong3@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="classify-prime-composite-1-1-40" assembly-id="classify-prime-composite-1-1-40" unique-id="classify-prime-composite-1-1-40">
+      <name original-id="classify-prime-composite-1-1-40-1" assembly-id="classify-prime-composite-1-1-40-1" unique-id="classify-prime-composite-1-1-40-1">prt4</name>
+      <value original-id="classify-prime-composite-1-1-40-2" assembly-id="classify-prime-composite-1-1-40-2" unique-id="classify-prime-composite-1-1-40-2">1.0000000</value>
+      <autosimplify original-id="classify-prime-composite-1-1-40-3" assembly-id="classify-prime-composite-1-1-40-3" unique-id="classify-prime-composite-1-1-40-3">1</autosimplify>
+      <feedbackstyle original-id="classify-prime-composite-1-1-40-4" assembly-id="classify-prime-composite-1-1-40-4" unique-id="classify-prime-composite-1-1-40-4">1</feedbackstyle>
+      <feedbackvariables original-id="classify-prime-composite-1-1-40-5" assembly-id="classify-prime-composite-1-1-40-5" unique-id="classify-prime-composite-1-1-40-5">
+        <text original-id="classify-prime-composite-1-1-40-5-1" assembly-id="classify-prime-composite-1-1-40-5-1" unique-id="classify-prime-composite-1-1-40-5-1"/>
+      </feedbackvariables>
+      <node original-id="classify-prime-composite-1-1-40-6" assembly-id="classify-prime-composite-1-1-40-6" unique-id="classify-prime-composite-1-1-40-6">
+        <name original-id="classify-prime-composite-1-1-40-6-1" assembly-id="classify-prime-composite-1-1-40-6-1" unique-id="classify-prime-composite-1-1-40-6-1">0</name>
+        <description original-id="classify-prime-composite-1-1-40-6-2" assembly-id="classify-prime-composite-1-1-40-6-2" unique-id="classify-prime-composite-1-1-40-6-2"/>
+        <answertest original-id="classify-prime-composite-1-1-40-6-3" assembly-id="classify-prime-composite-1-1-40-6-3" unique-id="classify-prime-composite-1-1-40-6-3">AlgEquiv</answertest>
+        <sans original-id="classify-prime-composite-1-1-40-6-4" assembly-id="classify-prime-composite-1-1-40-6-4" unique-id="classify-prime-composite-1-1-40-6-4">ans4</sans>
+        <tans original-id="classify-prime-composite-1-1-40-6-5" assembly-id="classify-prime-composite-1-1-40-6-5" unique-id="classify-prime-composite-1-1-40-6-5">t_ans4</tans>
+        <testoptions original-id="classify-prime-composite-1-1-40-6-6" assembly-id="classify-prime-composite-1-1-40-6-6" unique-id="classify-prime-composite-1-1-40-6-6"/>
+        <quiet original-id="classify-prime-composite-1-1-40-6-7" assembly-id="classify-prime-composite-1-1-40-6-7" unique-id="classify-prime-composite-1-1-40-6-7">0</quiet>
+        <truescoremode original-id="classify-prime-composite-1-1-40-6-8" assembly-id="classify-prime-composite-1-1-40-6-8" unique-id="classify-prime-composite-1-1-40-6-8">=</truescoremode>
+        <truescore original-id="classify-prime-composite-1-1-40-6-9" assembly-id="classify-prime-composite-1-1-40-6-9" unique-id="classify-prime-composite-1-1-40-6-9">1</truescore>
+        <truepenalty original-id="classify-prime-composite-1-1-40-6-10" assembly-id="classify-prime-composite-1-1-40-6-10" unique-id="classify-prime-composite-1-1-40-6-10"/>
+        <truenextnode original-id="classify-prime-composite-1-1-40-6-11" assembly-id="classify-prime-composite-1-1-40-6-11" unique-id="classify-prime-composite-1-1-40-6-11">-1</truenextnode>
+        <trueanswernote original-id="classify-prime-composite-1-1-40-6-12" assembly-id="classify-prime-composite-1-1-40-6-12" unique-id="classify-prime-composite-1-1-40-6-12">prt4-1-T</trueanswernote>
+        <truefeedback format="html" original-id="classify-prime-composite-1-1-40-6-13" assembly-id="classify-prime-composite-1-1-40-6-13" unique-id="classify-prime-composite-1-1-40-6-13">
+          <text original-id="classify-prime-composite-1-1-40-6-13-1" assembly-id="classify-prime-composite-1-1-40-6-13-1" unique-id="classify-prime-composite-1-1-40-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="classify-prime-composite-1-1-40-6-14" assembly-id="classify-prime-composite-1-1-40-6-14" unique-id="classify-prime-composite-1-1-40-6-14">=</falsescoremode>
+        <falsescore original-id="classify-prime-composite-1-1-40-6-15" assembly-id="classify-prime-composite-1-1-40-6-15" unique-id="classify-prime-composite-1-1-40-6-15">0</falsescore>
+        <falsepenalty original-id="classify-prime-composite-1-1-40-6-16" assembly-id="classify-prime-composite-1-1-40-6-16" unique-id="classify-prime-composite-1-1-40-6-16"/>
+        <falsenextnode original-id="classify-prime-composite-1-1-40-6-17" assembly-id="classify-prime-composite-1-1-40-6-17" unique-id="classify-prime-composite-1-1-40-6-17">-1</falsenextnode>
+        <falseanswernote original-id="classify-prime-composite-1-1-40-6-18" assembly-id="classify-prime-composite-1-1-40-6-18" unique-id="classify-prime-composite-1-1-40-6-18">prt4-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="classify-prime-composite-1-1-40-6-19" assembly-id="classify-prime-composite-1-1-40-6-19" unique-id="classify-prime-composite-1-1-40-6-19">
+          <text original-id="classify-prime-composite-1-1-40-6-19-1" assembly-id="classify-prime-composite-1-1-40-6-19-1" unique-id="classify-prime-composite-1-1-40-6-19-1">{@fb_wrong4@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="classify-prime-composite-1-1-41" assembly-id="classify-prime-composite-1-1-41" unique-id="classify-prime-composite-1-1-41">
+      <name original-id="classify-prime-composite-1-1-41-1" assembly-id="classify-prime-composite-1-1-41-1" unique-id="classify-prime-composite-1-1-41-1">prt5</name>
+      <value original-id="classify-prime-composite-1-1-41-2" assembly-id="classify-prime-composite-1-1-41-2" unique-id="classify-prime-composite-1-1-41-2">1.0000000</value>
+      <autosimplify original-id="classify-prime-composite-1-1-41-3" assembly-id="classify-prime-composite-1-1-41-3" unique-id="classify-prime-composite-1-1-41-3">1</autosimplify>
+      <feedbackstyle original-id="classify-prime-composite-1-1-41-4" assembly-id="classify-prime-composite-1-1-41-4" unique-id="classify-prime-composite-1-1-41-4">1</feedbackstyle>
+      <feedbackvariables original-id="classify-prime-composite-1-1-41-5" assembly-id="classify-prime-composite-1-1-41-5" unique-id="classify-prime-composite-1-1-41-5">
+        <text original-id="classify-prime-composite-1-1-41-5-1" assembly-id="classify-prime-composite-1-1-41-5-1" unique-id="classify-prime-composite-1-1-41-5-1"/>
+      </feedbackvariables>
+      <node original-id="classify-prime-composite-1-1-41-6" assembly-id="classify-prime-composite-1-1-41-6" unique-id="classify-prime-composite-1-1-41-6">
+        <name original-id="classify-prime-composite-1-1-41-6-1" assembly-id="classify-prime-composite-1-1-41-6-1" unique-id="classify-prime-composite-1-1-41-6-1">0</name>
+        <description original-id="classify-prime-composite-1-1-41-6-2" assembly-id="classify-prime-composite-1-1-41-6-2" unique-id="classify-prime-composite-1-1-41-6-2"/>
+        <answertest original-id="classify-prime-composite-1-1-41-6-3" assembly-id="classify-prime-composite-1-1-41-6-3" unique-id="classify-prime-composite-1-1-41-6-3">AlgEquiv</answertest>
+        <sans original-id="classify-prime-composite-1-1-41-6-4" assembly-id="classify-prime-composite-1-1-41-6-4" unique-id="classify-prime-composite-1-1-41-6-4">ans5</sans>
+        <tans original-id="classify-prime-composite-1-1-41-6-5" assembly-id="classify-prime-composite-1-1-41-6-5" unique-id="classify-prime-composite-1-1-41-6-5">t_ans5</tans>
+        <testoptions original-id="classify-prime-composite-1-1-41-6-6" assembly-id="classify-prime-composite-1-1-41-6-6" unique-id="classify-prime-composite-1-1-41-6-6"/>
+        <quiet original-id="classify-prime-composite-1-1-41-6-7" assembly-id="classify-prime-composite-1-1-41-6-7" unique-id="classify-prime-composite-1-1-41-6-7">0</quiet>
+        <truescoremode original-id="classify-prime-composite-1-1-41-6-8" assembly-id="classify-prime-composite-1-1-41-6-8" unique-id="classify-prime-composite-1-1-41-6-8">=</truescoremode>
+        <truescore original-id="classify-prime-composite-1-1-41-6-9" assembly-id="classify-prime-composite-1-1-41-6-9" unique-id="classify-prime-composite-1-1-41-6-9">1</truescore>
+        <truepenalty original-id="classify-prime-composite-1-1-41-6-10" assembly-id="classify-prime-composite-1-1-41-6-10" unique-id="classify-prime-composite-1-1-41-6-10"/>
+        <truenextnode original-id="classify-prime-composite-1-1-41-6-11" assembly-id="classify-prime-composite-1-1-41-6-11" unique-id="classify-prime-composite-1-1-41-6-11">-1</truenextnode>
+        <trueanswernote original-id="classify-prime-composite-1-1-41-6-12" assembly-id="classify-prime-composite-1-1-41-6-12" unique-id="classify-prime-composite-1-1-41-6-12">prt5-1-T</trueanswernote>
+        <truefeedback format="html" original-id="classify-prime-composite-1-1-41-6-13" assembly-id="classify-prime-composite-1-1-41-6-13" unique-id="classify-prime-composite-1-1-41-6-13">
+          <text original-id="classify-prime-composite-1-1-41-6-13-1" assembly-id="classify-prime-composite-1-1-41-6-13-1" unique-id="classify-prime-composite-1-1-41-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="classify-prime-composite-1-1-41-6-14" assembly-id="classify-prime-composite-1-1-41-6-14" unique-id="classify-prime-composite-1-1-41-6-14">=</falsescoremode>
+        <falsescore original-id="classify-prime-composite-1-1-41-6-15" assembly-id="classify-prime-composite-1-1-41-6-15" unique-id="classify-prime-composite-1-1-41-6-15">0</falsescore>
+        <falsepenalty original-id="classify-prime-composite-1-1-41-6-16" assembly-id="classify-prime-composite-1-1-41-6-16" unique-id="classify-prime-composite-1-1-41-6-16"/>
+        <falsenextnode original-id="classify-prime-composite-1-1-41-6-17" assembly-id="classify-prime-composite-1-1-41-6-17" unique-id="classify-prime-composite-1-1-41-6-17">-1</falsenextnode>
+        <falseanswernote original-id="classify-prime-composite-1-1-41-6-18" assembly-id="classify-prime-composite-1-1-41-6-18" unique-id="classify-prime-composite-1-1-41-6-18">prt5-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="classify-prime-composite-1-1-41-6-19" assembly-id="classify-prime-composite-1-1-41-6-19" unique-id="classify-prime-composite-1-1-41-6-19">
+          <text original-id="classify-prime-composite-1-1-41-6-19-1" assembly-id="classify-prime-composite-1-1-41-6-19-1" unique-id="classify-prime-composite-1-1-41-6-19-1">{@fb_wrong5@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="classify-prime-composite-1-1-42" assembly-id="classify-prime-composite-1-1-42" unique-id="classify-prime-composite-1-1-42">
+      <name original-id="classify-prime-composite-1-1-42-1" assembly-id="classify-prime-composite-1-1-42-1" unique-id="classify-prime-composite-1-1-42-1">prt6</name>
+      <value original-id="classify-prime-composite-1-1-42-2" assembly-id="classify-prime-composite-1-1-42-2" unique-id="classify-prime-composite-1-1-42-2">1.0000000</value>
+      <autosimplify original-id="classify-prime-composite-1-1-42-3" assembly-id="classify-prime-composite-1-1-42-3" unique-id="classify-prime-composite-1-1-42-3">1</autosimplify>
+      <feedbackstyle original-id="classify-prime-composite-1-1-42-4" assembly-id="classify-prime-composite-1-1-42-4" unique-id="classify-prime-composite-1-1-42-4">1</feedbackstyle>
+      <feedbackvariables original-id="classify-prime-composite-1-1-42-5" assembly-id="classify-prime-composite-1-1-42-5" unique-id="classify-prime-composite-1-1-42-5">
+        <text original-id="classify-prime-composite-1-1-42-5-1" assembly-id="classify-prime-composite-1-1-42-5-1" unique-id="classify-prime-composite-1-1-42-5-1"/>
+      </feedbackvariables>
+      <node original-id="classify-prime-composite-1-1-42-6" assembly-id="classify-prime-composite-1-1-42-6" unique-id="classify-prime-composite-1-1-42-6">
+        <name original-id="classify-prime-composite-1-1-42-6-1" assembly-id="classify-prime-composite-1-1-42-6-1" unique-id="classify-prime-composite-1-1-42-6-1">0</name>
+        <description original-id="classify-prime-composite-1-1-42-6-2" assembly-id="classify-prime-composite-1-1-42-6-2" unique-id="classify-prime-composite-1-1-42-6-2"/>
+        <answertest original-id="classify-prime-composite-1-1-42-6-3" assembly-id="classify-prime-composite-1-1-42-6-3" unique-id="classify-prime-composite-1-1-42-6-3">AlgEquiv</answertest>
+        <sans original-id="classify-prime-composite-1-1-42-6-4" assembly-id="classify-prime-composite-1-1-42-6-4" unique-id="classify-prime-composite-1-1-42-6-4">ans6</sans>
+        <tans original-id="classify-prime-composite-1-1-42-6-5" assembly-id="classify-prime-composite-1-1-42-6-5" unique-id="classify-prime-composite-1-1-42-6-5">t_ans6</tans>
+        <testoptions original-id="classify-prime-composite-1-1-42-6-6" assembly-id="classify-prime-composite-1-1-42-6-6" unique-id="classify-prime-composite-1-1-42-6-6"/>
+        <quiet original-id="classify-prime-composite-1-1-42-6-7" assembly-id="classify-prime-composite-1-1-42-6-7" unique-id="classify-prime-composite-1-1-42-6-7">0</quiet>
+        <truescoremode original-id="classify-prime-composite-1-1-42-6-8" assembly-id="classify-prime-composite-1-1-42-6-8" unique-id="classify-prime-composite-1-1-42-6-8">=</truescoremode>
+        <truescore original-id="classify-prime-composite-1-1-42-6-9" assembly-id="classify-prime-composite-1-1-42-6-9" unique-id="classify-prime-composite-1-1-42-6-9">1</truescore>
+        <truepenalty original-id="classify-prime-composite-1-1-42-6-10" assembly-id="classify-prime-composite-1-1-42-6-10" unique-id="classify-prime-composite-1-1-42-6-10"/>
+        <truenextnode original-id="classify-prime-composite-1-1-42-6-11" assembly-id="classify-prime-composite-1-1-42-6-11" unique-id="classify-prime-composite-1-1-42-6-11">-1</truenextnode>
+        <trueanswernote original-id="classify-prime-composite-1-1-42-6-12" assembly-id="classify-prime-composite-1-1-42-6-12" unique-id="classify-prime-composite-1-1-42-6-12">prt6-1-T</trueanswernote>
+        <truefeedback format="html" original-id="classify-prime-composite-1-1-42-6-13" assembly-id="classify-prime-composite-1-1-42-6-13" unique-id="classify-prime-composite-1-1-42-6-13">
+          <text original-id="classify-prime-composite-1-1-42-6-13-1" assembly-id="classify-prime-composite-1-1-42-6-13-1" unique-id="classify-prime-composite-1-1-42-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="classify-prime-composite-1-1-42-6-14" assembly-id="classify-prime-composite-1-1-42-6-14" unique-id="classify-prime-composite-1-1-42-6-14">=</falsescoremode>
+        <falsescore original-id="classify-prime-composite-1-1-42-6-15" assembly-id="classify-prime-composite-1-1-42-6-15" unique-id="classify-prime-composite-1-1-42-6-15">0</falsescore>
+        <falsepenalty original-id="classify-prime-composite-1-1-42-6-16" assembly-id="classify-prime-composite-1-1-42-6-16" unique-id="classify-prime-composite-1-1-42-6-16"/>
+        <falsenextnode original-id="classify-prime-composite-1-1-42-6-17" assembly-id="classify-prime-composite-1-1-42-6-17" unique-id="classify-prime-composite-1-1-42-6-17">-1</falsenextnode>
+        <falseanswernote original-id="classify-prime-composite-1-1-42-6-18" assembly-id="classify-prime-composite-1-1-42-6-18" unique-id="classify-prime-composite-1-1-42-6-18">prt6-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="classify-prime-composite-1-1-42-6-19" assembly-id="classify-prime-composite-1-1-42-6-19" unique-id="classify-prime-composite-1-1-42-6-19">
+          <text original-id="classify-prime-composite-1-1-42-6-19-1" assembly-id="classify-prime-composite-1-1-42-6-19-1" unique-id="classify-prime-composite-1-1-42-6-19-1">{@fb_wrong6@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="classify-prime-composite-1-1-43" assembly-id="classify-prime-composite-1-1-43" unique-id="classify-prime-composite-1-1-43">
+      <name original-id="classify-prime-composite-1-1-43-1" assembly-id="classify-prime-composite-1-1-43-1" unique-id="classify-prime-composite-1-1-43-1">prt7</name>
+      <value original-id="classify-prime-composite-1-1-43-2" assembly-id="classify-prime-composite-1-1-43-2" unique-id="classify-prime-composite-1-1-43-2">1.0000000</value>
+      <autosimplify original-id="classify-prime-composite-1-1-43-3" assembly-id="classify-prime-composite-1-1-43-3" unique-id="classify-prime-composite-1-1-43-3">1</autosimplify>
+      <feedbackstyle original-id="classify-prime-composite-1-1-43-4" assembly-id="classify-prime-composite-1-1-43-4" unique-id="classify-prime-composite-1-1-43-4">1</feedbackstyle>
+      <feedbackvariables original-id="classify-prime-composite-1-1-43-5" assembly-id="classify-prime-composite-1-1-43-5" unique-id="classify-prime-composite-1-1-43-5">
+        <text original-id="classify-prime-composite-1-1-43-5-1" assembly-id="classify-prime-composite-1-1-43-5-1" unique-id="classify-prime-composite-1-1-43-5-1"/>
+      </feedbackvariables>
+      <node original-id="classify-prime-composite-1-1-43-6" assembly-id="classify-prime-composite-1-1-43-6" unique-id="classify-prime-composite-1-1-43-6">
+        <name original-id="classify-prime-composite-1-1-43-6-1" assembly-id="classify-prime-composite-1-1-43-6-1" unique-id="classify-prime-composite-1-1-43-6-1">0</name>
+        <description original-id="classify-prime-composite-1-1-43-6-2" assembly-id="classify-prime-composite-1-1-43-6-2" unique-id="classify-prime-composite-1-1-43-6-2"/>
+        <answertest original-id="classify-prime-composite-1-1-43-6-3" assembly-id="classify-prime-composite-1-1-43-6-3" unique-id="classify-prime-composite-1-1-43-6-3">AlgEquiv</answertest>
+        <sans original-id="classify-prime-composite-1-1-43-6-4" assembly-id="classify-prime-composite-1-1-43-6-4" unique-id="classify-prime-composite-1-1-43-6-4">ans7</sans>
+        <tans original-id="classify-prime-composite-1-1-43-6-5" assembly-id="classify-prime-composite-1-1-43-6-5" unique-id="classify-prime-composite-1-1-43-6-5">t_ans7</tans>
+        <testoptions original-id="classify-prime-composite-1-1-43-6-6" assembly-id="classify-prime-composite-1-1-43-6-6" unique-id="classify-prime-composite-1-1-43-6-6"/>
+        <quiet original-id="classify-prime-composite-1-1-43-6-7" assembly-id="classify-prime-composite-1-1-43-6-7" unique-id="classify-prime-composite-1-1-43-6-7">0</quiet>
+        <truescoremode original-id="classify-prime-composite-1-1-43-6-8" assembly-id="classify-prime-composite-1-1-43-6-8" unique-id="classify-prime-composite-1-1-43-6-8">=</truescoremode>
+        <truescore original-id="classify-prime-composite-1-1-43-6-9" assembly-id="classify-prime-composite-1-1-43-6-9" unique-id="classify-prime-composite-1-1-43-6-9">1</truescore>
+        <truepenalty original-id="classify-prime-composite-1-1-43-6-10" assembly-id="classify-prime-composite-1-1-43-6-10" unique-id="classify-prime-composite-1-1-43-6-10"/>
+        <truenextnode original-id="classify-prime-composite-1-1-43-6-11" assembly-id="classify-prime-composite-1-1-43-6-11" unique-id="classify-prime-composite-1-1-43-6-11">-1</truenextnode>
+        <trueanswernote original-id="classify-prime-composite-1-1-43-6-12" assembly-id="classify-prime-composite-1-1-43-6-12" unique-id="classify-prime-composite-1-1-43-6-12">prt7-1-T</trueanswernote>
+        <truefeedback format="html" original-id="classify-prime-composite-1-1-43-6-13" assembly-id="classify-prime-composite-1-1-43-6-13" unique-id="classify-prime-composite-1-1-43-6-13">
+          <text original-id="classify-prime-composite-1-1-43-6-13-1" assembly-id="classify-prime-composite-1-1-43-6-13-1" unique-id="classify-prime-composite-1-1-43-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="classify-prime-composite-1-1-43-6-14" assembly-id="classify-prime-composite-1-1-43-6-14" unique-id="classify-prime-composite-1-1-43-6-14">=</falsescoremode>
+        <falsescore original-id="classify-prime-composite-1-1-43-6-15" assembly-id="classify-prime-composite-1-1-43-6-15" unique-id="classify-prime-composite-1-1-43-6-15">0</falsescore>
+        <falsepenalty original-id="classify-prime-composite-1-1-43-6-16" assembly-id="classify-prime-composite-1-1-43-6-16" unique-id="classify-prime-composite-1-1-43-6-16"/>
+        <falsenextnode original-id="classify-prime-composite-1-1-43-6-17" assembly-id="classify-prime-composite-1-1-43-6-17" unique-id="classify-prime-composite-1-1-43-6-17">-1</falsenextnode>
+        <falseanswernote original-id="classify-prime-composite-1-1-43-6-18" assembly-id="classify-prime-composite-1-1-43-6-18" unique-id="classify-prime-composite-1-1-43-6-18">prt7-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="classify-prime-composite-1-1-43-6-19" assembly-id="classify-prime-composite-1-1-43-6-19" unique-id="classify-prime-composite-1-1-43-6-19">
+          <text original-id="classify-prime-composite-1-1-43-6-19-1" assembly-id="classify-prime-composite-1-1-43-6-19-1" unique-id="classify-prime-composite-1-1-43-6-19-1">{@fb_wrong7@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="classify-prime-composite-1-1-44" assembly-id="classify-prime-composite-1-1-44" unique-id="classify-prime-composite-1-1-44">
+      <name original-id="classify-prime-composite-1-1-44-1" assembly-id="classify-prime-composite-1-1-44-1" unique-id="classify-prime-composite-1-1-44-1">prt8</name>
+      <value original-id="classify-prime-composite-1-1-44-2" assembly-id="classify-prime-composite-1-1-44-2" unique-id="classify-prime-composite-1-1-44-2">1.0000000</value>
+      <autosimplify original-id="classify-prime-composite-1-1-44-3" assembly-id="classify-prime-composite-1-1-44-3" unique-id="classify-prime-composite-1-1-44-3">1</autosimplify>
+      <feedbackstyle original-id="classify-prime-composite-1-1-44-4" assembly-id="classify-prime-composite-1-1-44-4" unique-id="classify-prime-composite-1-1-44-4">1</feedbackstyle>
+      <feedbackvariables original-id="classify-prime-composite-1-1-44-5" assembly-id="classify-prime-composite-1-1-44-5" unique-id="classify-prime-composite-1-1-44-5">
+        <text original-id="classify-prime-composite-1-1-44-5-1" assembly-id="classify-prime-composite-1-1-44-5-1" unique-id="classify-prime-composite-1-1-44-5-1"/>
+      </feedbackvariables>
+      <node original-id="classify-prime-composite-1-1-44-6" assembly-id="classify-prime-composite-1-1-44-6" unique-id="classify-prime-composite-1-1-44-6">
+        <name original-id="classify-prime-composite-1-1-44-6-1" assembly-id="classify-prime-composite-1-1-44-6-1" unique-id="classify-prime-composite-1-1-44-6-1">0</name>
+        <description original-id="classify-prime-composite-1-1-44-6-2" assembly-id="classify-prime-composite-1-1-44-6-2" unique-id="classify-prime-composite-1-1-44-6-2"/>
+        <answertest original-id="classify-prime-composite-1-1-44-6-3" assembly-id="classify-prime-composite-1-1-44-6-3" unique-id="classify-prime-composite-1-1-44-6-3">AlgEquiv</answertest>
+        <sans original-id="classify-prime-composite-1-1-44-6-4" assembly-id="classify-prime-composite-1-1-44-6-4" unique-id="classify-prime-composite-1-1-44-6-4">ans8</sans>
+        <tans original-id="classify-prime-composite-1-1-44-6-5" assembly-id="classify-prime-composite-1-1-44-6-5" unique-id="classify-prime-composite-1-1-44-6-5">t_ans8</tans>
+        <testoptions original-id="classify-prime-composite-1-1-44-6-6" assembly-id="classify-prime-composite-1-1-44-6-6" unique-id="classify-prime-composite-1-1-44-6-6"/>
+        <quiet original-id="classify-prime-composite-1-1-44-6-7" assembly-id="classify-prime-composite-1-1-44-6-7" unique-id="classify-prime-composite-1-1-44-6-7">0</quiet>
+        <truescoremode original-id="classify-prime-composite-1-1-44-6-8" assembly-id="classify-prime-composite-1-1-44-6-8" unique-id="classify-prime-composite-1-1-44-6-8">=</truescoremode>
+        <truescore original-id="classify-prime-composite-1-1-44-6-9" assembly-id="classify-prime-composite-1-1-44-6-9" unique-id="classify-prime-composite-1-1-44-6-9">1</truescore>
+        <truepenalty original-id="classify-prime-composite-1-1-44-6-10" assembly-id="classify-prime-composite-1-1-44-6-10" unique-id="classify-prime-composite-1-1-44-6-10"/>
+        <truenextnode original-id="classify-prime-composite-1-1-44-6-11" assembly-id="classify-prime-composite-1-1-44-6-11" unique-id="classify-prime-composite-1-1-44-6-11">-1</truenextnode>
+        <trueanswernote original-id="classify-prime-composite-1-1-44-6-12" assembly-id="classify-prime-composite-1-1-44-6-12" unique-id="classify-prime-composite-1-1-44-6-12">prt8-1-T</trueanswernote>
+        <truefeedback format="html" original-id="classify-prime-composite-1-1-44-6-13" assembly-id="classify-prime-composite-1-1-44-6-13" unique-id="classify-prime-composite-1-1-44-6-13">
+          <text original-id="classify-prime-composite-1-1-44-6-13-1" assembly-id="classify-prime-composite-1-1-44-6-13-1" unique-id="classify-prime-composite-1-1-44-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="classify-prime-composite-1-1-44-6-14" assembly-id="classify-prime-composite-1-1-44-6-14" unique-id="classify-prime-composite-1-1-44-6-14">=</falsescoremode>
+        <falsescore original-id="classify-prime-composite-1-1-44-6-15" assembly-id="classify-prime-composite-1-1-44-6-15" unique-id="classify-prime-composite-1-1-44-6-15">0</falsescore>
+        <falsepenalty original-id="classify-prime-composite-1-1-44-6-16" assembly-id="classify-prime-composite-1-1-44-6-16" unique-id="classify-prime-composite-1-1-44-6-16"/>
+        <falsenextnode original-id="classify-prime-composite-1-1-44-6-17" assembly-id="classify-prime-composite-1-1-44-6-17" unique-id="classify-prime-composite-1-1-44-6-17">-1</falsenextnode>
+        <falseanswernote original-id="classify-prime-composite-1-1-44-6-18" assembly-id="classify-prime-composite-1-1-44-6-18" unique-id="classify-prime-composite-1-1-44-6-18">prt8-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="classify-prime-composite-1-1-44-6-19" assembly-id="classify-prime-composite-1-1-44-6-19" unique-id="classify-prime-composite-1-1-44-6-19">
+          <text original-id="classify-prime-composite-1-1-44-6-19-1" assembly-id="classify-prime-composite-1-1-44-6-19-1" unique-id="classify-prime-composite-1-1-44-6-19-1">{@fb_wrong8@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed original-id="classify-prime-composite-1-1-45" assembly-id="classify-prime-composite-1-1-45" unique-id="classify-prime-composite-1-1-45">790907851</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-46" assembly-id="classify-prime-composite-1-1-46" unique-id="classify-prime-composite-1-1-46">472590155</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-47" assembly-id="classify-prime-composite-1-1-47" unique-id="classify-prime-composite-1-1-47">1852757535</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-48" assembly-id="classify-prime-composite-1-1-48" unique-id="classify-prime-composite-1-1-48">897071889</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-49" assembly-id="classify-prime-composite-1-1-49" unique-id="classify-prime-composite-1-1-49">1878639209</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-50" assembly-id="classify-prime-composite-1-1-50" unique-id="classify-prime-composite-1-1-50">1964076815</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-51" assembly-id="classify-prime-composite-1-1-51" unique-id="classify-prime-composite-1-1-51">1264366783</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-52" assembly-id="classify-prime-composite-1-1-52" unique-id="classify-prime-composite-1-1-52">467656167</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-53" assembly-id="classify-prime-composite-1-1-53" unique-id="classify-prime-composite-1-1-53">541892739</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-54" assembly-id="classify-prime-composite-1-1-54" unique-id="classify-prime-composite-1-1-54">521989730</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-55" assembly-id="classify-prime-composite-1-1-55" unique-id="classify-prime-composite-1-1-55">1186901684</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-56" assembly-id="classify-prime-composite-1-1-56" unique-id="classify-prime-composite-1-1-56">380677010</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-57" assembly-id="classify-prime-composite-1-1-57" unique-id="classify-prime-composite-1-1-57">233769247</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-58" assembly-id="classify-prime-composite-1-1-58" unique-id="classify-prime-composite-1-1-58">479563261</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-59" assembly-id="classify-prime-composite-1-1-59" unique-id="classify-prime-composite-1-1-59">1059660999</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-60" assembly-id="classify-prime-composite-1-1-60" unique-id="classify-prime-composite-1-1-60">542817643</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-61" assembly-id="classify-prime-composite-1-1-61" unique-id="classify-prime-composite-1-1-61">2101218206</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-62" assembly-id="classify-prime-composite-1-1-62" unique-id="classify-prime-composite-1-1-62">73953725</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-63" assembly-id="classify-prime-composite-1-1-63" unique-id="classify-prime-composite-1-1-63">42016004</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-64" assembly-id="classify-prime-composite-1-1-64" unique-id="classify-prime-composite-1-1-64">716772083</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-65" assembly-id="classify-prime-composite-1-1-65" unique-id="classify-prime-composite-1-1-65">486041619</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-66" assembly-id="classify-prime-composite-1-1-66" unique-id="classify-prime-composite-1-1-66">1267854215</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-67" assembly-id="classify-prime-composite-1-1-67" unique-id="classify-prime-composite-1-1-67">170021834</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-68" assembly-id="classify-prime-composite-1-1-68" unique-id="classify-prime-composite-1-1-68">1920365000</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-69" assembly-id="classify-prime-composite-1-1-69" unique-id="classify-prime-composite-1-1-69">1508609382</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-70" assembly-id="classify-prime-composite-1-1-70" unique-id="classify-prime-composite-1-1-70">640206615</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-71" assembly-id="classify-prime-composite-1-1-71" unique-id="classify-prime-composite-1-1-71">1594775212</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-72" assembly-id="classify-prime-composite-1-1-72" unique-id="classify-prime-composite-1-1-72">1779918647</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-73" assembly-id="classify-prime-composite-1-1-73" unique-id="classify-prime-composite-1-1-73">1874955928</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-74" assembly-id="classify-prime-composite-1-1-74" unique-id="classify-prime-composite-1-1-74">379128476</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-75" assembly-id="classify-prime-composite-1-1-75" unique-id="classify-prime-composite-1-1-75">1577276858</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-76" assembly-id="classify-prime-composite-1-1-76" unique-id="classify-prime-composite-1-1-76">1894869338</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-77" assembly-id="classify-prime-composite-1-1-77" unique-id="classify-prime-composite-1-1-77">2013283124</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-78" assembly-id="classify-prime-composite-1-1-78" unique-id="classify-prime-composite-1-1-78">1619071697</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-79" assembly-id="classify-prime-composite-1-1-79" unique-id="classify-prime-composite-1-1-79">46284903</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-80" assembly-id="classify-prime-composite-1-1-80" unique-id="classify-prime-composite-1-1-80">474533778</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-81" assembly-id="classify-prime-composite-1-1-81" unique-id="classify-prime-composite-1-1-81">429893988</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-82" assembly-id="classify-prime-composite-1-1-82" unique-id="classify-prime-composite-1-1-82">1620998561</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-83" assembly-id="classify-prime-composite-1-1-83" unique-id="classify-prime-composite-1-1-83">435755115</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-84" assembly-id="classify-prime-composite-1-1-84" unique-id="classify-prime-composite-1-1-84">880099139</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-85" assembly-id="classify-prime-composite-1-1-85" unique-id="classify-prime-composite-1-1-85">556562937</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-86" assembly-id="classify-prime-composite-1-1-86" unique-id="classify-prime-composite-1-1-86">1780425009</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-87" assembly-id="classify-prime-composite-1-1-87" unique-id="classify-prime-composite-1-1-87">627375167</deployedseed>
+    <deployedseed original-id="classify-prime-composite-1-1-88" assembly-id="classify-prime-composite-1-1-88" unique-id="classify-prime-composite-1-1-88">670963806</deployedseed>
+  </question>
+</quiz>
+        

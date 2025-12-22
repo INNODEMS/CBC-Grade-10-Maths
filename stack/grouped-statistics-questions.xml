@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+            <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" original-id="grouped-statistics-questions-1" assembly-id="grouped-statistics-questions-1" unique-id="grouped-statistics-questions-1">
+  <question type="stack" original-id="grouped-statistics-questions-1-1" assembly-id="grouped-statistics-questions-1-1" unique-id="grouped-statistics-questions-1-1">
+    <name original-id="grouped-statistics-questions-1-1-1" assembly-id="grouped-statistics-questions-1-1-1" unique-id="grouped-statistics-questions-1-1-1">
+      <text original-id="grouped-statistics-questions-1-1-1-1" assembly-id="grouped-statistics-questions-1-1-1-1" unique-id="grouped-statistics-questions-1-1-1-1">Finding mean, median and modal class for grouped data</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="grouped-statistics-questions-1-1-2" assembly-id="grouped-statistics-questions-1-1-2" unique-id="grouped-statistics-questions-1-1-2">
+      <text original-id="grouped-statistics-questions-1-1-2-1" assembly-id="grouped-statistics-questions-1-1-2-1" unique-id="grouped-statistics-questions-1-1-2-1">&lt;p&gt; A researcher collects data on daily rainfall (in mm) over a month and organises it into \(10\) equal class intervals as shown below.&lt;/p&gt;
+&lt;table border="1" cellpadding="5" cellspacing="0"&gt;
+&lt;tr&gt;&lt;th&gt;Rainfall (mm)&lt;/th&gt;&lt;th&gt;Frequency&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;0 – 9&lt;/td&gt;&lt;td&gt;{@freq[1]@}&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;10 – 19&lt;/td&gt;&lt;td&gt;{@freq[2]@}&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;20 – 29&lt;/td&gt;&lt;td&gt;{@freq[3]@}&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;30 – 39&lt;/td&gt;&lt;td&gt;{@freq[4]@}&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;40 – 49&lt;/td&gt;&lt;td&gt;{@freq[5]@}&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;50 – 59&lt;/td&gt;&lt;td&gt;{@freq[6]@}&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;60 – 69&lt;/td&gt;&lt;td&gt;{@freq[7]@}&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;70 – 79&lt;/td&gt;&lt;td&gt;{@freq[8]@}&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;80 – 89&lt;/td&gt;&lt;td&gt;{@freq[9]@}&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;90 – 100&lt;/td&gt;&lt;td&gt;{@freq[10]@}&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+&lt;p&gt;Analyze the rainfall distribution and determine the central tendency measures listed below.&lt;/p&gt;&lt;/p&gt;
+&lt;p&gt;
+a) Modal class: [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]&lt;br&gt;
+b) Mean rainfall (mm): [[input:ans2]] [[validation:ans2]][[feedback:prt2]]&lt;br&gt;
+c) Median rainfall (mm): [[input:ans3]] [[validation:ans3]][[feedback:prt3]]
+&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Enter the modal class as an interval in the form &lt;code&gt;[a,b]&lt;/code&gt;. Round numerical answers to 2 decimal places.&lt;/em&gt;&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="grouped-statistics-questions-1-1-3" assembly-id="grouped-statistics-questions-1-1-3" unique-id="grouped-statistics-questions-1-1-3">
+      <text original-id="grouped-statistics-questions-1-1-3-1" assembly-id="grouped-statistics-questions-1-1-3-1" unique-id="grouped-statistics-questions-1-1-3-1">&lt;h4&gt;Worked Solution&lt;/h4&gt;
+&lt;p&gt;To calculate the statistics, we first need to complete the frequency distribution table with the Midpoint (\(x\)), Cumulative Frequency (\(CF\)), and the product of frequency and midpoint (\(fx\)).&lt;/p&gt;
+
+&lt;table border="1"&gt;
+    &lt;thead style="background-color: #f2f2f2;"&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Class Interval&lt;/th&gt;
+            &lt;th&gt;Midpoint (\(x\))&lt;/th&gt;
+            &lt;th&gt;Frequency (\(f\))&lt;/th&gt;
+            &lt;th&gt;Cumulative Frequency (\(CF\))&lt;/th&gt;
+            &lt;th&gt;\(fx\)&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;{@classes[1][1]@} – {@classes[1][2]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[1]@}&lt;/td&gt;
+            &lt;td&gt;{@freq[1]@}&lt;/td&gt;
+            &lt;td&gt;{@cumfreq[1]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[1]*freq[1]@}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;{@classes[2][1]@} – {@classes[2][2]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[2]@}&lt;/td&gt;
+            &lt;td&gt;{@freq[2]@}&lt;/td&gt;
+            &lt;td&gt;{@cumfreq[2]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[2]*freq[2]@}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;{@classes[3][1]@} – {@classes[3][2]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[3]@}&lt;/td&gt;
+            &lt;td&gt;{@freq[3]@}&lt;/td&gt;
+            &lt;td&gt;{@cumfreq[3]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[3]*freq[3]@}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;{@classes[4][1]@} – {@classes[4][2]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[4]@}&lt;/td&gt;
+            &lt;td&gt;{@freq[4]@}&lt;/td&gt;
+            &lt;td&gt;{@cumfreq[4]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[4]*freq[4]@}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;{@classes[5][1]@} – {@classes[5][2]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[5]@}&lt;/td&gt;
+            &lt;td&gt;{@freq[5]@}&lt;/td&gt;
+            &lt;td&gt;{@cumfreq[5]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[5]*freq[5]@}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;{@classes[6][1]@} – {@classes[6][2]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[6]@}&lt;/td&gt;
+            &lt;td&gt;{@freq[6]@}&lt;/td&gt;
+            &lt;td&gt;{@cumfreq[6]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[6]*freq[6]@}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;{@classes[7][1]@} – {@classes[7][2]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[7]@}&lt;/td&gt;
+            &lt;td&gt;{@freq[7]@}&lt;/td&gt;
+            &lt;td&gt;{@cumfreq[7]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[7]*freq[7]@}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;{@classes[8][1]@} – {@classes[8][2]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[8]@}&lt;/td&gt;
+            &lt;td&gt;{@freq[8]@}&lt;/td&gt;
+            &lt;td&gt;{@cumfreq[8]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[8]*freq[8]@}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;{@classes[9][1]@} – {@classes[9][2]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[9]@}&lt;/td&gt;
+            &lt;td&gt;{@freq[9]@}&lt;/td&gt;
+            &lt;td&gt;{@cumfreq[9]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[9]*freq[9]@}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;{@classes[10][1]@} – {@classes[10][2]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[10]@}&lt;/td&gt;
+            &lt;td&gt;{@freq[10]@}&lt;/td&gt;
+            &lt;td&gt;{@cumfreq[10]@}&lt;/td&gt;
+            &lt;td&gt;{@midpoints[10]*freq[10]@}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style="font-weight: bold; background-color: #f9f9f9;"&gt;
+            &lt;td colspan="2"&gt;Total (\(\Sigma\)):&lt;/td&gt;
+            &lt;td&gt;\({@N@}\)&lt;/td&gt;
+            &lt;td&gt;&lt;/td&gt;
+            &lt;td&gt;\({@sum_fx@}\)&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+&lt;p&gt;&lt;strong&gt;a) Modal Class&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The modal class is the class interval with the highest frequency.&lt;/p&gt;
+&lt;p&gt;From the table, the highest frequency is &lt;strong&gt;{@maxf@}&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Therefore, the modal class is &lt;strong&gt;{@modal_class[1]@} – {@modal_class[2]@}&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;br&gt;
+&lt;p&gt;&lt;strong&gt;b) Median Rainfall&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;First, determine the median position:&lt;/p&gt;
+\( \text{Position } = \frac{N}{2} = \frac{@N@}{2} = {@median_pos@} \)
+&lt;p&gt;Looking at the &lt;em&gt;Cumulative Frequency (CF)&lt;/em&gt; column, the value just before {@median_pos@} is {@cf_before@}, and the next class reaches {@if median_index=1 then cumfreq[1] else cumfreq[median_index]@}.&lt;/p&gt;
+&lt;p&gt;Thus, the Median Class is &lt;strong&gt;{@L@} – {@classes[median_index][2]@}&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now, apply the median formula:&lt;/p&gt;
+\( \text{Median} = L + \left( \frac{\frac{N}{2} - CF}{f} \right) \times c \)
+&lt;p&gt;Where:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;\(L = {@L@}\) (Lower boundary of the median class)&lt;/li&gt;
+    &lt;li&gt;\(\frac{N}{2} = {@median_pos@}\)&lt;/li&gt;
+    &lt;li&gt;\(CF = {@cf_before@}\) (Cumulative frequency before the median class)&lt;/li&gt;
+    &lt;li&gt;\(f = {@f_med@}\) (Frequency of the median class)&lt;/li&gt;
+    &lt;li&gt;\(c = {@h@}\) (Class width)&lt;/li&gt;
+&lt;/ul&gt;
+
+\( \text{Median} = {@L@} + \left( \frac{{@median_pos@} - {@cf_before@}}{@f_med@} \right) \times {@h@} \)
+\( \text{Median} = {@L@} + \left( \frac{@median_pos - cf_before@}{@f_med@} \right) \times {@h@} \)
+\( \text{Median} \approx \mathbf{@decimalplaces(median_rain, 2)@} \text{ mm} \)
+
+&lt;br&gt;
+&lt;p&gt;&lt;strong&gt;c) Mean Rainfall&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The mean is calculated using the formula:&lt;/p&gt;
+\( \bar{x} = \frac{\Sigma fx}{\Sigma f} \)
+
+&lt;p&gt;From the table totals:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;\(\Sigma fx = {@sum_fx@}\)&lt;/li&gt;
+    &lt;li&gt;\(\Sigma f = {@N@}\)&lt;/li&gt;
+&lt;/ul&gt;
+
+\( \bar{x} = \frac{@sum_fx@}{@N@} \)
+\( \bar{x} \approx \mathbf{@decimalplaces(mean_rain, 2)@} \text{ mm} \)</text>
+    </generalfeedback>
+    <defaultgrade original-id="grouped-statistics-questions-1-1-4" assembly-id="grouped-statistics-questions-1-1-4" unique-id="grouped-statistics-questions-1-1-4">1</defaultgrade>
+    <penalty original-id="grouped-statistics-questions-1-1-5" assembly-id="grouped-statistics-questions-1-1-5" unique-id="grouped-statistics-questions-1-1-5">0.1</penalty>
+    <hidden original-id="grouped-statistics-questions-1-1-6" assembly-id="grouped-statistics-questions-1-1-6" unique-id="grouped-statistics-questions-1-1-6">0</hidden>
+    <idnumber original-id="grouped-statistics-questions-1-1-7" assembly-id="grouped-statistics-questions-1-1-7" unique-id="grouped-statistics-questions-1-1-7"/>
+    <stackversion original-id="grouped-statistics-questions-1-1-8" assembly-id="grouped-statistics-questions-1-1-8" unique-id="grouped-statistics-questions-1-1-8">
+      <text original-id="grouped-statistics-questions-1-1-8-1" assembly-id="grouped-statistics-questions-1-1-8-1" unique-id="grouped-statistics-questions-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="grouped-statistics-questions-1-1-9" assembly-id="grouped-statistics-questions-1-1-9" unique-id="grouped-statistics-questions-1-1-9">
+      <text original-id="grouped-statistics-questions-1-1-9-1" assembly-id="grouped-statistics-questions-1-1-9-1" unique-id="grouped-statistics-questions-1-1-9-1">/* Fixed class intervals */
+classes: [
+ [0,9], [10,19], [20,29], [30,39], [40,49],
+ [50,59], [60,69], [70,79], [80,89], [90,100]
+];
+
+/* Randomised frequencies */
+freq: [rand(3)+1,rand(4)+2,rand(5)+3,rand(6)+4,rand(7)+5,rand(8)+6,rand(7)+5,rand(6)+4,rand(5)+3,rand(4)+2];
+
+/* Basic quantities */
+k: length(freq);
+N: apply("+", freq);
+
+/* Class midpoints */
+midpoints: map(lambda([c], (float(c[1]+c[2])/2)), classes);
+
+/* --- NEW: Calculate fx column explicitly for the table and sum --- */
+/* Multiply Frequency * Midpoint element-wise */
+fx_list: map("*", freq, midpoints);
+
+/* Sum of fx */
+sum_fx: apply("+", fx_list);
+
+/* Mean rainfall */
+mean_rain: float(sum_fx / N);
+
+/* Modal class */
+maxf: lmax(freq);
+modal_index: 1;
+for j:1 thru length(freq) do
+  if freq[j] = maxf then (
+    modal_index: j,
+    return()
+);
+modal_class: classes[modal_index];
+
+/* Cumulative frequencies */
+cumfreq: [];
+running: 0;
+for j:1 thru k do (
+  running: running + freq[j],
+  cumfreq: endcons(running, cumfreq)
+);
+
+/* Median class logic */
+median_pos: N/2;
+median_index: 1;
+
+for j:1 thru k do
+  if cumfreq[j] &gt;= median_pos then (
+    median_index: j,
+    return()
+  );
+
+/* Median formula quantities */
+L: classes[median_index][1];
+cf_before: if median_index=1 then 0 else cumfreq[median_index-1];
+f_med: freq[median_index];
+h: classes[median_index][2] - classes[median_index][1] + 1;
+
+/* Median rainfall */
+median_rain: float(L + ((median_pos - cf_before)/f_med)*h);</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="grouped-statistics-questions-1-1-10" assembly-id="grouped-statistics-questions-1-1-10" unique-id="grouped-statistics-questions-1-1-10">
+      <text original-id="grouped-statistics-questions-1-1-10-1" assembly-id="grouped-statistics-questions-1-1-10-1" unique-id="grouped-statistics-questions-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="grouped-statistics-questions-1-1-11" assembly-id="grouped-statistics-questions-1-1-11" unique-id="grouped-statistics-questions-1-1-11">
+      <text original-id="grouped-statistics-questions-1-1-11-1" assembly-id="grouped-statistics-questions-1-1-11-1" unique-id="grouped-statistics-questions-1-1-11-1">&lt;p&gt;Modal class : \({@modal_class@}\)&lt;/p&gt;
+&lt;p&gt;Mean rain : \({@mean_rain@}\)&lt;/p&gt;
+&lt;p&gt;Median rain :\({@median_rain@}\)&lt;/p&gt;</text>
+    </questionnote>
+    <questiondescription format="html" original-id="grouped-statistics-questions-1-1-12" assembly-id="grouped-statistics-questions-1-1-12" unique-id="grouped-statistics-questions-1-1-12">
+      <text original-id="grouped-statistics-questions-1-1-12-1" assembly-id="grouped-statistics-questions-1-1-12-1" unique-id="grouped-statistics-questions-1-1-12-1">&lt;p id="author"&gt;Daniel Murunga&lt;/p&gt;
+&lt;p id="concept"&gt;&lt;/p&gt;
+&lt;p id="reviewer"&gt;&lt;/p&gt;
+&lt;p id="reviewer"&gt;&lt;/p&gt;
+&lt;p id="description"&gt;&lt;/p&gt;</text>
+    </questiondescription>
+    <questionsimplify original-id="grouped-statistics-questions-1-1-13" assembly-id="grouped-statistics-questions-1-1-13" unique-id="grouped-statistics-questions-1-1-13">1</questionsimplify>
+    <assumepositive original-id="grouped-statistics-questions-1-1-14" assembly-id="grouped-statistics-questions-1-1-14" unique-id="grouped-statistics-questions-1-1-14">0</assumepositive>
+    <assumereal original-id="grouped-statistics-questions-1-1-15" assembly-id="grouped-statistics-questions-1-1-15" unique-id="grouped-statistics-questions-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="grouped-statistics-questions-1-1-16" assembly-id="grouped-statistics-questions-1-1-16" unique-id="grouped-statistics-questions-1-1-16">
+      <text original-id="grouped-statistics-questions-1-1-16-1" assembly-id="grouped-statistics-questions-1-1-16-1" unique-id="grouped-statistics-questions-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="grouped-statistics-questions-1-1-17" assembly-id="grouped-statistics-questions-1-1-17" unique-id="grouped-statistics-questions-1-1-17">
+      <text original-id="grouped-statistics-questions-1-1-17-1" assembly-id="grouped-statistics-questions-1-1-17-1" unique-id="grouped-statistics-questions-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="grouped-statistics-questions-1-1-18" assembly-id="grouped-statistics-questions-1-1-18" unique-id="grouped-statistics-questions-1-1-18">
+      <text original-id="grouped-statistics-questions-1-1-18-1" assembly-id="grouped-statistics-questions-1-1-18-1" unique-id="grouped-statistics-questions-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="grouped-statistics-questions-1-1-19" assembly-id="grouped-statistics-questions-1-1-19" unique-id="grouped-statistics-questions-1-1-19">.</decimals>
+    <scientificnotation original-id="grouped-statistics-questions-1-1-20" assembly-id="grouped-statistics-questions-1-1-20" unique-id="grouped-statistics-questions-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="grouped-statistics-questions-1-1-21" assembly-id="grouped-statistics-questions-1-1-21" unique-id="grouped-statistics-questions-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="grouped-statistics-questions-1-1-22" assembly-id="grouped-statistics-questions-1-1-22" unique-id="grouped-statistics-questions-1-1-22">1</sqrtsign>
+    <complexno original-id="grouped-statistics-questions-1-1-23" assembly-id="grouped-statistics-questions-1-1-23" unique-id="grouped-statistics-questions-1-1-23">i</complexno>
+    <inversetrig original-id="grouped-statistics-questions-1-1-24" assembly-id="grouped-statistics-questions-1-1-24" unique-id="grouped-statistics-questions-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="grouped-statistics-questions-1-1-25" assembly-id="grouped-statistics-questions-1-1-25" unique-id="grouped-statistics-questions-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="grouped-statistics-questions-1-1-26" assembly-id="grouped-statistics-questions-1-1-26" unique-id="grouped-statistics-questions-1-1-26">[</matrixparens>
+    <isbroken original-id="grouped-statistics-questions-1-1-27" assembly-id="grouped-statistics-questions-1-1-27" unique-id="grouped-statistics-questions-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="grouped-statistics-questions-1-1-28" assembly-id="grouped-statistics-questions-1-1-28" unique-id="grouped-statistics-questions-1-1-28"/>
+    <input original-id="grouped-statistics-questions-1-1-29" assembly-id="grouped-statistics-questions-1-1-29" unique-id="grouped-statistics-questions-1-1-29">
+      <name original-id="grouped-statistics-questions-1-1-29-1" assembly-id="grouped-statistics-questions-1-1-29-1" unique-id="grouped-statistics-questions-1-1-29-1">ans1</name>
+      <type original-id="grouped-statistics-questions-1-1-29-2" assembly-id="grouped-statistics-questions-1-1-29-2" unique-id="grouped-statistics-questions-1-1-29-2">algebraic</type>
+      <tans original-id="grouped-statistics-questions-1-1-29-3" assembly-id="grouped-statistics-questions-1-1-29-3" unique-id="grouped-statistics-questions-1-1-29-3">modal_class</tans>
+      <boxsize original-id="grouped-statistics-questions-1-1-29-4" assembly-id="grouped-statistics-questions-1-1-29-4" unique-id="grouped-statistics-questions-1-1-29-4">6</boxsize>
+      <strictsyntax original-id="grouped-statistics-questions-1-1-29-5" assembly-id="grouped-statistics-questions-1-1-29-5" unique-id="grouped-statistics-questions-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="grouped-statistics-questions-1-1-29-6" assembly-id="grouped-statistics-questions-1-1-29-6" unique-id="grouped-statistics-questions-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="grouped-statistics-questions-1-1-29-7" assembly-id="grouped-statistics-questions-1-1-29-7" unique-id="grouped-statistics-questions-1-1-29-7"/>
+      <syntaxattribute original-id="grouped-statistics-questions-1-1-29-8" assembly-id="grouped-statistics-questions-1-1-29-8" unique-id="grouped-statistics-questions-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="grouped-statistics-questions-1-1-29-9" assembly-id="grouped-statistics-questions-1-1-29-9" unique-id="grouped-statistics-questions-1-1-29-9"/>
+      <allowwords original-id="grouped-statistics-questions-1-1-29-10" assembly-id="grouped-statistics-questions-1-1-29-10" unique-id="grouped-statistics-questions-1-1-29-10"/>
+      <forbidfloat original-id="grouped-statistics-questions-1-1-29-11" assembly-id="grouped-statistics-questions-1-1-29-11" unique-id="grouped-statistics-questions-1-1-29-11">1</forbidfloat>
+      <requirelowestterms original-id="grouped-statistics-questions-1-1-29-12" assembly-id="grouped-statistics-questions-1-1-29-12" unique-id="grouped-statistics-questions-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="grouped-statistics-questions-1-1-29-13" assembly-id="grouped-statistics-questions-1-1-29-13" unique-id="grouped-statistics-questions-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="grouped-statistics-questions-1-1-29-14" assembly-id="grouped-statistics-questions-1-1-29-14" unique-id="grouped-statistics-questions-1-1-29-14">1</mustverify>
+      <showvalidation original-id="grouped-statistics-questions-1-1-29-15" assembly-id="grouped-statistics-questions-1-1-29-15" unique-id="grouped-statistics-questions-1-1-29-15">3</showvalidation>
+      <options original-id="grouped-statistics-questions-1-1-29-16" assembly-id="grouped-statistics-questions-1-1-29-16" unique-id="grouped-statistics-questions-1-1-29-16"/>
+    </input>
+    <input original-id="grouped-statistics-questions-1-1-30" assembly-id="grouped-statistics-questions-1-1-30" unique-id="grouped-statistics-questions-1-1-30">
+      <name original-id="grouped-statistics-questions-1-1-30-1" assembly-id="grouped-statistics-questions-1-1-30-1" unique-id="grouped-statistics-questions-1-1-30-1">ans2</name>
+      <type original-id="grouped-statistics-questions-1-1-30-2" assembly-id="grouped-statistics-questions-1-1-30-2" unique-id="grouped-statistics-questions-1-1-30-2">algebraic</type>
+      <tans original-id="grouped-statistics-questions-1-1-30-3" assembly-id="grouped-statistics-questions-1-1-30-3" unique-id="grouped-statistics-questions-1-1-30-3">mean_rain</tans>
+      <boxsize original-id="grouped-statistics-questions-1-1-30-4" assembly-id="grouped-statistics-questions-1-1-30-4" unique-id="grouped-statistics-questions-1-1-30-4">6</boxsize>
+      <strictsyntax original-id="grouped-statistics-questions-1-1-30-5" assembly-id="grouped-statistics-questions-1-1-30-5" unique-id="grouped-statistics-questions-1-1-30-5">1</strictsyntax>
+      <insertstars original-id="grouped-statistics-questions-1-1-30-6" assembly-id="grouped-statistics-questions-1-1-30-6" unique-id="grouped-statistics-questions-1-1-30-6">0</insertstars>
+      <syntaxhint original-id="grouped-statistics-questions-1-1-30-7" assembly-id="grouped-statistics-questions-1-1-30-7" unique-id="grouped-statistics-questions-1-1-30-7"/>
+      <syntaxattribute original-id="grouped-statistics-questions-1-1-30-8" assembly-id="grouped-statistics-questions-1-1-30-8" unique-id="grouped-statistics-questions-1-1-30-8">0</syntaxattribute>
+      <forbidwords original-id="grouped-statistics-questions-1-1-30-9" assembly-id="grouped-statistics-questions-1-1-30-9" unique-id="grouped-statistics-questions-1-1-30-9"/>
+      <allowwords original-id="grouped-statistics-questions-1-1-30-10" assembly-id="grouped-statistics-questions-1-1-30-10" unique-id="grouped-statistics-questions-1-1-30-10"/>
+      <forbidfloat original-id="grouped-statistics-questions-1-1-30-11" assembly-id="grouped-statistics-questions-1-1-30-11" unique-id="grouped-statistics-questions-1-1-30-11">0</forbidfloat>
+      <requirelowestterms original-id="grouped-statistics-questions-1-1-30-12" assembly-id="grouped-statistics-questions-1-1-30-12" unique-id="grouped-statistics-questions-1-1-30-12">0</requirelowestterms>
+      <checkanswertype original-id="grouped-statistics-questions-1-1-30-13" assembly-id="grouped-statistics-questions-1-1-30-13" unique-id="grouped-statistics-questions-1-1-30-13">0</checkanswertype>
+      <mustverify original-id="grouped-statistics-questions-1-1-30-14" assembly-id="grouped-statistics-questions-1-1-30-14" unique-id="grouped-statistics-questions-1-1-30-14">1</mustverify>
+      <showvalidation original-id="grouped-statistics-questions-1-1-30-15" assembly-id="grouped-statistics-questions-1-1-30-15" unique-id="grouped-statistics-questions-1-1-30-15">3</showvalidation>
+      <options original-id="grouped-statistics-questions-1-1-30-16" assembly-id="grouped-statistics-questions-1-1-30-16" unique-id="grouped-statistics-questions-1-1-30-16"/>
+    </input>
+    <input original-id="grouped-statistics-questions-1-1-31" assembly-id="grouped-statistics-questions-1-1-31" unique-id="grouped-statistics-questions-1-1-31">
+      <name original-id="grouped-statistics-questions-1-1-31-1" assembly-id="grouped-statistics-questions-1-1-31-1" unique-id="grouped-statistics-questions-1-1-31-1">ans3</name>
+      <type original-id="grouped-statistics-questions-1-1-31-2" assembly-id="grouped-statistics-questions-1-1-31-2" unique-id="grouped-statistics-questions-1-1-31-2">algebraic</type>
+      <tans original-id="grouped-statistics-questions-1-1-31-3" assembly-id="grouped-statistics-questions-1-1-31-3" unique-id="grouped-statistics-questions-1-1-31-3">median_rain</tans>
+      <boxsize original-id="grouped-statistics-questions-1-1-31-4" assembly-id="grouped-statistics-questions-1-1-31-4" unique-id="grouped-statistics-questions-1-1-31-4">6</boxsize>
+      <strictsyntax original-id="grouped-statistics-questions-1-1-31-5" assembly-id="grouped-statistics-questions-1-1-31-5" unique-id="grouped-statistics-questions-1-1-31-5">1</strictsyntax>
+      <insertstars original-id="grouped-statistics-questions-1-1-31-6" assembly-id="grouped-statistics-questions-1-1-31-6" unique-id="grouped-statistics-questions-1-1-31-6">0</insertstars>
+      <syntaxhint original-id="grouped-statistics-questions-1-1-31-7" assembly-id="grouped-statistics-questions-1-1-31-7" unique-id="grouped-statistics-questions-1-1-31-7"/>
+      <syntaxattribute original-id="grouped-statistics-questions-1-1-31-8" assembly-id="grouped-statistics-questions-1-1-31-8" unique-id="grouped-statistics-questions-1-1-31-8">0</syntaxattribute>
+      <forbidwords original-id="grouped-statistics-questions-1-1-31-9" assembly-id="grouped-statistics-questions-1-1-31-9" unique-id="grouped-statistics-questions-1-1-31-9"/>
+      <allowwords original-id="grouped-statistics-questions-1-1-31-10" assembly-id="grouped-statistics-questions-1-1-31-10" unique-id="grouped-statistics-questions-1-1-31-10"/>
+      <forbidfloat original-id="grouped-statistics-questions-1-1-31-11" assembly-id="grouped-statistics-questions-1-1-31-11" unique-id="grouped-statistics-questions-1-1-31-11">0</forbidfloat>
+      <requirelowestterms original-id="grouped-statistics-questions-1-1-31-12" assembly-id="grouped-statistics-questions-1-1-31-12" unique-id="grouped-statistics-questions-1-1-31-12">0</requirelowestterms>
+      <checkanswertype original-id="grouped-statistics-questions-1-1-31-13" assembly-id="grouped-statistics-questions-1-1-31-13" unique-id="grouped-statistics-questions-1-1-31-13">0</checkanswertype>
+      <mustverify original-id="grouped-statistics-questions-1-1-31-14" assembly-id="grouped-statistics-questions-1-1-31-14" unique-id="grouped-statistics-questions-1-1-31-14">1</mustverify>
+      <showvalidation original-id="grouped-statistics-questions-1-1-31-15" assembly-id="grouped-statistics-questions-1-1-31-15" unique-id="grouped-statistics-questions-1-1-31-15">3</showvalidation>
+      <options original-id="grouped-statistics-questions-1-1-31-16" assembly-id="grouped-statistics-questions-1-1-31-16" unique-id="grouped-statistics-questions-1-1-31-16"/>
+    </input>
+    <prt original-id="grouped-statistics-questions-1-1-32" assembly-id="grouped-statistics-questions-1-1-32" unique-id="grouped-statistics-questions-1-1-32">
+      <name original-id="grouped-statistics-questions-1-1-32-1" assembly-id="grouped-statistics-questions-1-1-32-1" unique-id="grouped-statistics-questions-1-1-32-1">prt1</name>
+      <value original-id="grouped-statistics-questions-1-1-32-2" assembly-id="grouped-statistics-questions-1-1-32-2" unique-id="grouped-statistics-questions-1-1-32-2">1.0000000</value>
+      <autosimplify original-id="grouped-statistics-questions-1-1-32-3" assembly-id="grouped-statistics-questions-1-1-32-3" unique-id="grouped-statistics-questions-1-1-32-3">1</autosimplify>
+      <feedbackstyle original-id="grouped-statistics-questions-1-1-32-4" assembly-id="grouped-statistics-questions-1-1-32-4" unique-id="grouped-statistics-questions-1-1-32-4">1</feedbackstyle>
+      <feedbackvariables original-id="grouped-statistics-questions-1-1-32-5" assembly-id="grouped-statistics-questions-1-1-32-5" unique-id="grouped-statistics-questions-1-1-32-5">
+        <text original-id="grouped-statistics-questions-1-1-32-5-1" assembly-id="grouped-statistics-questions-1-1-32-5-1" unique-id="grouped-statistics-questions-1-1-32-5-1"/>
+      </feedbackvariables>
+      <node original-id="grouped-statistics-questions-1-1-32-6" assembly-id="grouped-statistics-questions-1-1-32-6" unique-id="grouped-statistics-questions-1-1-32-6">
+        <name original-id="grouped-statistics-questions-1-1-32-6-1" assembly-id="grouped-statistics-questions-1-1-32-6-1" unique-id="grouped-statistics-questions-1-1-32-6-1">0</name>
+        <description original-id="grouped-statistics-questions-1-1-32-6-2" assembly-id="grouped-statistics-questions-1-1-32-6-2" unique-id="grouped-statistics-questions-1-1-32-6-2"/>
+        <answertest original-id="grouped-statistics-questions-1-1-32-6-3" assembly-id="grouped-statistics-questions-1-1-32-6-3" unique-id="grouped-statistics-questions-1-1-32-6-3">AlgEquiv</answertest>
+        <sans original-id="grouped-statistics-questions-1-1-32-6-4" assembly-id="grouped-statistics-questions-1-1-32-6-4" unique-id="grouped-statistics-questions-1-1-32-6-4">ans1</sans>
+        <tans original-id="grouped-statistics-questions-1-1-32-6-5" assembly-id="grouped-statistics-questions-1-1-32-6-5" unique-id="grouped-statistics-questions-1-1-32-6-5">modal_class</tans>
+        <testoptions original-id="grouped-statistics-questions-1-1-32-6-6" assembly-id="grouped-statistics-questions-1-1-32-6-6" unique-id="grouped-statistics-questions-1-1-32-6-6"/>
+        <quiet original-id="grouped-statistics-questions-1-1-32-6-7" assembly-id="grouped-statistics-questions-1-1-32-6-7" unique-id="grouped-statistics-questions-1-1-32-6-7">0</quiet>
+        <truescoremode original-id="grouped-statistics-questions-1-1-32-6-8" assembly-id="grouped-statistics-questions-1-1-32-6-8" unique-id="grouped-statistics-questions-1-1-32-6-8">=</truescoremode>
+        <truescore original-id="grouped-statistics-questions-1-1-32-6-9" assembly-id="grouped-statistics-questions-1-1-32-6-9" unique-id="grouped-statistics-questions-1-1-32-6-9">1</truescore>
+        <truepenalty original-id="grouped-statistics-questions-1-1-32-6-10" assembly-id="grouped-statistics-questions-1-1-32-6-10" unique-id="grouped-statistics-questions-1-1-32-6-10"/>
+        <truenextnode original-id="grouped-statistics-questions-1-1-32-6-11" assembly-id="grouped-statistics-questions-1-1-32-6-11" unique-id="grouped-statistics-questions-1-1-32-6-11">-1</truenextnode>
+        <trueanswernote original-id="grouped-statistics-questions-1-1-32-6-12" assembly-id="grouped-statistics-questions-1-1-32-6-12" unique-id="grouped-statistics-questions-1-1-32-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="grouped-statistics-questions-1-1-32-6-13" assembly-id="grouped-statistics-questions-1-1-32-6-13" unique-id="grouped-statistics-questions-1-1-32-6-13">
+          <text original-id="grouped-statistics-questions-1-1-32-6-13-1" assembly-id="grouped-statistics-questions-1-1-32-6-13-1" unique-id="grouped-statistics-questions-1-1-32-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="grouped-statistics-questions-1-1-32-6-14" assembly-id="grouped-statistics-questions-1-1-32-6-14" unique-id="grouped-statistics-questions-1-1-32-6-14">=</falsescoremode>
+        <falsescore original-id="grouped-statistics-questions-1-1-32-6-15" assembly-id="grouped-statistics-questions-1-1-32-6-15" unique-id="grouped-statistics-questions-1-1-32-6-15">0</falsescore>
+        <falsepenalty original-id="grouped-statistics-questions-1-1-32-6-16" assembly-id="grouped-statistics-questions-1-1-32-6-16" unique-id="grouped-statistics-questions-1-1-32-6-16"/>
+        <falsenextnode original-id="grouped-statistics-questions-1-1-32-6-17" assembly-id="grouped-statistics-questions-1-1-32-6-17" unique-id="grouped-statistics-questions-1-1-32-6-17">-1</falsenextnode>
+        <falseanswernote original-id="grouped-statistics-questions-1-1-32-6-18" assembly-id="grouped-statistics-questions-1-1-32-6-18" unique-id="grouped-statistics-questions-1-1-32-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="grouped-statistics-questions-1-1-32-6-19" assembly-id="grouped-statistics-questions-1-1-32-6-19" unique-id="grouped-statistics-questions-1-1-32-6-19">
+          <text original-id="grouped-statistics-questions-1-1-32-6-19-1" assembly-id="grouped-statistics-questions-1-1-32-6-19-1" unique-id="grouped-statistics-questions-1-1-32-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="grouped-statistics-questions-1-1-33" assembly-id="grouped-statistics-questions-1-1-33" unique-id="grouped-statistics-questions-1-1-33">
+      <name original-id="grouped-statistics-questions-1-1-33-1" assembly-id="grouped-statistics-questions-1-1-33-1" unique-id="grouped-statistics-questions-1-1-33-1">prt2</name>
+      <value original-id="grouped-statistics-questions-1-1-33-2" assembly-id="grouped-statistics-questions-1-1-33-2" unique-id="grouped-statistics-questions-1-1-33-2">1.0000000</value>
+      <autosimplify original-id="grouped-statistics-questions-1-1-33-3" assembly-id="grouped-statistics-questions-1-1-33-3" unique-id="grouped-statistics-questions-1-1-33-3">1</autosimplify>
+      <feedbackstyle original-id="grouped-statistics-questions-1-1-33-4" assembly-id="grouped-statistics-questions-1-1-33-4" unique-id="grouped-statistics-questions-1-1-33-4">1</feedbackstyle>
+      <feedbackvariables original-id="grouped-statistics-questions-1-1-33-5" assembly-id="grouped-statistics-questions-1-1-33-5" unique-id="grouped-statistics-questions-1-1-33-5">
+        <text original-id="grouped-statistics-questions-1-1-33-5-1" assembly-id="grouped-statistics-questions-1-1-33-5-1" unique-id="grouped-statistics-questions-1-1-33-5-1"/>
+      </feedbackvariables>
+      <node original-id="grouped-statistics-questions-1-1-33-6" assembly-id="grouped-statistics-questions-1-1-33-6" unique-id="grouped-statistics-questions-1-1-33-6">
+        <name original-id="grouped-statistics-questions-1-1-33-6-1" assembly-id="grouped-statistics-questions-1-1-33-6-1" unique-id="grouped-statistics-questions-1-1-33-6-1">0</name>
+        <description original-id="grouped-statistics-questions-1-1-33-6-2" assembly-id="grouped-statistics-questions-1-1-33-6-2" unique-id="grouped-statistics-questions-1-1-33-6-2"/>
+        <answertest original-id="grouped-statistics-questions-1-1-33-6-3" assembly-id="grouped-statistics-questions-1-1-33-6-3" unique-id="grouped-statistics-questions-1-1-33-6-3">NumAbsolute</answertest>
+        <sans original-id="grouped-statistics-questions-1-1-33-6-4" assembly-id="grouped-statistics-questions-1-1-33-6-4" unique-id="grouped-statistics-questions-1-1-33-6-4">ans2</sans>
+        <tans original-id="grouped-statistics-questions-1-1-33-6-5" assembly-id="grouped-statistics-questions-1-1-33-6-5" unique-id="grouped-statistics-questions-1-1-33-6-5">mean_rain</tans>
+        <testoptions original-id="grouped-statistics-questions-1-1-33-6-6" assembly-id="grouped-statistics-questions-1-1-33-6-6" unique-id="grouped-statistics-questions-1-1-33-6-6">0.001</testoptions>
+        <quiet original-id="grouped-statistics-questions-1-1-33-6-7" assembly-id="grouped-statistics-questions-1-1-33-6-7" unique-id="grouped-statistics-questions-1-1-33-6-7">0</quiet>
+        <truescoremode original-id="grouped-statistics-questions-1-1-33-6-8" assembly-id="grouped-statistics-questions-1-1-33-6-8" unique-id="grouped-statistics-questions-1-1-33-6-8">=</truescoremode>
+        <truescore original-id="grouped-statistics-questions-1-1-33-6-9" assembly-id="grouped-statistics-questions-1-1-33-6-9" unique-id="grouped-statistics-questions-1-1-33-6-9">1</truescore>
+        <truepenalty original-id="grouped-statistics-questions-1-1-33-6-10" assembly-id="grouped-statistics-questions-1-1-33-6-10" unique-id="grouped-statistics-questions-1-1-33-6-10"/>
+        <truenextnode original-id="grouped-statistics-questions-1-1-33-6-11" assembly-id="grouped-statistics-questions-1-1-33-6-11" unique-id="grouped-statistics-questions-1-1-33-6-11">-1</truenextnode>
+        <trueanswernote original-id="grouped-statistics-questions-1-1-33-6-12" assembly-id="grouped-statistics-questions-1-1-33-6-12" unique-id="grouped-statistics-questions-1-1-33-6-12">prt2-1-T</trueanswernote>
+        <truefeedback format="html" original-id="grouped-statistics-questions-1-1-33-6-13" assembly-id="grouped-statistics-questions-1-1-33-6-13" unique-id="grouped-statistics-questions-1-1-33-6-13">
+          <text original-id="grouped-statistics-questions-1-1-33-6-13-1" assembly-id="grouped-statistics-questions-1-1-33-6-13-1" unique-id="grouped-statistics-questions-1-1-33-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="grouped-statistics-questions-1-1-33-6-14" assembly-id="grouped-statistics-questions-1-1-33-6-14" unique-id="grouped-statistics-questions-1-1-33-6-14">=</falsescoremode>
+        <falsescore original-id="grouped-statistics-questions-1-1-33-6-15" assembly-id="grouped-statistics-questions-1-1-33-6-15" unique-id="grouped-statistics-questions-1-1-33-6-15">0</falsescore>
+        <falsepenalty original-id="grouped-statistics-questions-1-1-33-6-16" assembly-id="grouped-statistics-questions-1-1-33-6-16" unique-id="grouped-statistics-questions-1-1-33-6-16"/>
+        <falsenextnode original-id="grouped-statistics-questions-1-1-33-6-17" assembly-id="grouped-statistics-questions-1-1-33-6-17" unique-id="grouped-statistics-questions-1-1-33-6-17">-1</falsenextnode>
+        <falseanswernote original-id="grouped-statistics-questions-1-1-33-6-18" assembly-id="grouped-statistics-questions-1-1-33-6-18" unique-id="grouped-statistics-questions-1-1-33-6-18">prt2-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="grouped-statistics-questions-1-1-33-6-19" assembly-id="grouped-statistics-questions-1-1-33-6-19" unique-id="grouped-statistics-questions-1-1-33-6-19">
+          <text original-id="grouped-statistics-questions-1-1-33-6-19-1" assembly-id="grouped-statistics-questions-1-1-33-6-19-1" unique-id="grouped-statistics-questions-1-1-33-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="grouped-statistics-questions-1-1-34" assembly-id="grouped-statistics-questions-1-1-34" unique-id="grouped-statistics-questions-1-1-34">
+      <name original-id="grouped-statistics-questions-1-1-34-1" assembly-id="grouped-statistics-questions-1-1-34-1" unique-id="grouped-statistics-questions-1-1-34-1">prt3</name>
+      <value original-id="grouped-statistics-questions-1-1-34-2" assembly-id="grouped-statistics-questions-1-1-34-2" unique-id="grouped-statistics-questions-1-1-34-2">1.0000000</value>
+      <autosimplify original-id="grouped-statistics-questions-1-1-34-3" assembly-id="grouped-statistics-questions-1-1-34-3" unique-id="grouped-statistics-questions-1-1-34-3">1</autosimplify>
+      <feedbackstyle original-id="grouped-statistics-questions-1-1-34-4" assembly-id="grouped-statistics-questions-1-1-34-4" unique-id="grouped-statistics-questions-1-1-34-4">1</feedbackstyle>
+      <feedbackvariables original-id="grouped-statistics-questions-1-1-34-5" assembly-id="grouped-statistics-questions-1-1-34-5" unique-id="grouped-statistics-questions-1-1-34-5">
+        <text original-id="grouped-statistics-questions-1-1-34-5-1" assembly-id="grouped-statistics-questions-1-1-34-5-1" unique-id="grouped-statistics-questions-1-1-34-5-1"/>
+      </feedbackvariables>
+      <node original-id="grouped-statistics-questions-1-1-34-6" assembly-id="grouped-statistics-questions-1-1-34-6" unique-id="grouped-statistics-questions-1-1-34-6">
+        <name original-id="grouped-statistics-questions-1-1-34-6-1" assembly-id="grouped-statistics-questions-1-1-34-6-1" unique-id="grouped-statistics-questions-1-1-34-6-1">0</name>
+        <description original-id="grouped-statistics-questions-1-1-34-6-2" assembly-id="grouped-statistics-questions-1-1-34-6-2" unique-id="grouped-statistics-questions-1-1-34-6-2"/>
+        <answertest original-id="grouped-statistics-questions-1-1-34-6-3" assembly-id="grouped-statistics-questions-1-1-34-6-3" unique-id="grouped-statistics-questions-1-1-34-6-3">NumAbsolute</answertest>
+        <sans original-id="grouped-statistics-questions-1-1-34-6-4" assembly-id="grouped-statistics-questions-1-1-34-6-4" unique-id="grouped-statistics-questions-1-1-34-6-4">ans3</sans>
+        <tans original-id="grouped-statistics-questions-1-1-34-6-5" assembly-id="grouped-statistics-questions-1-1-34-6-5" unique-id="grouped-statistics-questions-1-1-34-6-5">median_rain</tans>
+        <testoptions original-id="grouped-statistics-questions-1-1-34-6-6" assembly-id="grouped-statistics-questions-1-1-34-6-6" unique-id="grouped-statistics-questions-1-1-34-6-6">0.001</testoptions>
+        <quiet original-id="grouped-statistics-questions-1-1-34-6-7" assembly-id="grouped-statistics-questions-1-1-34-6-7" unique-id="grouped-statistics-questions-1-1-34-6-7">0</quiet>
+        <truescoremode original-id="grouped-statistics-questions-1-1-34-6-8" assembly-id="grouped-statistics-questions-1-1-34-6-8" unique-id="grouped-statistics-questions-1-1-34-6-8">=</truescoremode>
+        <truescore original-id="grouped-statistics-questions-1-1-34-6-9" assembly-id="grouped-statistics-questions-1-1-34-6-9" unique-id="grouped-statistics-questions-1-1-34-6-9">1</truescore>
+        <truepenalty original-id="grouped-statistics-questions-1-1-34-6-10" assembly-id="grouped-statistics-questions-1-1-34-6-10" unique-id="grouped-statistics-questions-1-1-34-6-10"/>
+        <truenextnode original-id="grouped-statistics-questions-1-1-34-6-11" assembly-id="grouped-statistics-questions-1-1-34-6-11" unique-id="grouped-statistics-questions-1-1-34-6-11">-1</truenextnode>
+        <trueanswernote original-id="grouped-statistics-questions-1-1-34-6-12" assembly-id="grouped-statistics-questions-1-1-34-6-12" unique-id="grouped-statistics-questions-1-1-34-6-12">prt3-1-T</trueanswernote>
+        <truefeedback format="html" original-id="grouped-statistics-questions-1-1-34-6-13" assembly-id="grouped-statistics-questions-1-1-34-6-13" unique-id="grouped-statistics-questions-1-1-34-6-13">
+          <text original-id="grouped-statistics-questions-1-1-34-6-13-1" assembly-id="grouped-statistics-questions-1-1-34-6-13-1" unique-id="grouped-statistics-questions-1-1-34-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="grouped-statistics-questions-1-1-34-6-14" assembly-id="grouped-statistics-questions-1-1-34-6-14" unique-id="grouped-statistics-questions-1-1-34-6-14">=</falsescoremode>
+        <falsescore original-id="grouped-statistics-questions-1-1-34-6-15" assembly-id="grouped-statistics-questions-1-1-34-6-15" unique-id="grouped-statistics-questions-1-1-34-6-15">0</falsescore>
+        <falsepenalty original-id="grouped-statistics-questions-1-1-34-6-16" assembly-id="grouped-statistics-questions-1-1-34-6-16" unique-id="grouped-statistics-questions-1-1-34-6-16"/>
+        <falsenextnode original-id="grouped-statistics-questions-1-1-34-6-17" assembly-id="grouped-statistics-questions-1-1-34-6-17" unique-id="grouped-statistics-questions-1-1-34-6-17">-1</falsenextnode>
+        <falseanswernote original-id="grouped-statistics-questions-1-1-34-6-18" assembly-id="grouped-statistics-questions-1-1-34-6-18" unique-id="grouped-statistics-questions-1-1-34-6-18">prt3-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="grouped-statistics-questions-1-1-34-6-19" assembly-id="grouped-statistics-questions-1-1-34-6-19" unique-id="grouped-statistics-questions-1-1-34-6-19">
+          <text original-id="grouped-statistics-questions-1-1-34-6-19-1" assembly-id="grouped-statistics-questions-1-1-34-6-19-1" unique-id="grouped-statistics-questions-1-1-34-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>
+        

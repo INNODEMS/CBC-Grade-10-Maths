@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+            <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" original-id="intro-prob-values-1" assembly-id="intro-prob-values-1" unique-id="intro-prob-values-1">
+  <question type="stack" original-id="intro-prob-values-1-1" assembly-id="intro-prob-values-1-1" unique-id="intro-prob-values-1-1">
+    <name original-id="intro-prob-values-1-1-1" assembly-id="intro-prob-values-1-1-1" unique-id="intro-prob-values-1-1-1">
+      <text original-id="intro-prob-values-1-1-1-1" assembly-id="intro-prob-values-1-1-1-1" unique-id="intro-prob-values-1-1-1-1">Relating probability values to real-life situations</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="intro-prob-values-1-1-2" assembly-id="intro-prob-values-1-1-2" unique-id="intro-prob-values-1-1-2">
+      <text original-id="intro-prob-values-1-1-2-1" assembly-id="intro-prob-values-1-1-2-1" unique-id="intro-prob-values-1-1-2-1">&lt;p&gt;Consider {@situation_text@}. Which of the following best represents the probability of this event?&lt;/p&gt;
+
+&lt;p&gt;[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="intro-prob-values-1-1-3" assembly-id="intro-prob-values-1-1-3" unique-id="intro-prob-values-1-1-3">
+      <text original-id="intro-prob-values-1-1-3-1" assembly-id="intro-prob-values-1-1-3-1" unique-id="intro-prob-values-1-1-3-1">&lt;h3&gt;Worked Solution&lt;/h3&gt;
+
+&lt;p&gt;A probability of &lt;strong&gt;0&lt;/strong&gt; represents an impossible event.&lt;/p&gt;
+&lt;p&gt;A probability of &lt;strong&gt;1&lt;/strong&gt; represents a certain event.&lt;/p&gt;
+&lt;p&gt;A probability between &lt;strong&gt;0 and 1&lt;/strong&gt; represents an uncertain event.&lt;/p&gt;
+
+&lt;p&gt;The correct probability value for this situation is &lt;strong&gt;{@correct_prob@}&lt;/strong&gt;.&lt;/p&gt;</text>
+    </generalfeedback>
+    <defaultgrade original-id="intro-prob-values-1-1-4" assembly-id="intro-prob-values-1-1-4" unique-id="intro-prob-values-1-1-4">1</defaultgrade>
+    <penalty original-id="intro-prob-values-1-1-5" assembly-id="intro-prob-values-1-1-5" unique-id="intro-prob-values-1-1-5">0.1</penalty>
+    <hidden original-id="intro-prob-values-1-1-6" assembly-id="intro-prob-values-1-1-6" unique-id="intro-prob-values-1-1-6">0</hidden>
+    <idnumber original-id="intro-prob-values-1-1-7" assembly-id="intro-prob-values-1-1-7" unique-id="intro-prob-values-1-1-7"/>
+    <stackversion original-id="intro-prob-values-1-1-8" assembly-id="intro-prob-values-1-1-8" unique-id="intro-prob-values-1-1-8">
+      <text original-id="intro-prob-values-1-1-8-1" assembly-id="intro-prob-values-1-1-8-1" unique-id="intro-prob-values-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="intro-prob-values-1-1-9" assembly-id="intro-prob-values-1-1-9" unique-id="intro-prob-values-1-1-9">
+      <text original-id="intro-prob-values-1-1-9-1" assembly-id="intro-prob-values-1-1-9-1" unique-id="intro-prob-values-1-1-9-1">/* Situation choice */
+sit_choice: rand([1,2,3]);
+
+/* Situation text */
+situation_text:
+  if sit_choice=1 then "picking a red ball from a bag that contains only red balls"
+  elseif sit_choice=2 then "picking a green mango from a tree with ripe and unripe mangoes"
+  else "picking a blue pen from a bag that has no blue pens";
+
+/* Correct probability value */
+correct_prob:
+  if sit_choice=1 then "1"
+  elseif sit_choice=2 then "Between 0 and 1"
+  else "0";
+
+/* Dropdown matrix */
+m_prob: [
+  ["0", is(correct_prob="0")],
+  ["Between 0 and 1", is(correct_prob="Between 0 and 1")],
+  ["1", is(correct_prob="1")]
+];
+</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="intro-prob-values-1-1-10" assembly-id="intro-prob-values-1-1-10" unique-id="intro-prob-values-1-1-10">
+      <text original-id="intro-prob-values-1-1-10-1" assembly-id="intro-prob-values-1-1-10-1" unique-id="intro-prob-values-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="intro-prob-values-1-1-11" assembly-id="intro-prob-values-1-1-11" unique-id="intro-prob-values-1-1-11">
+      <text original-id="intro-prob-values-1-1-11-1" assembly-id="intro-prob-values-1-1-11-1" unique-id="intro-prob-values-1-1-11-1">{@correct_prob@}</text>
+    </questionnote>
+    <questiondescription format="html" original-id="intro-prob-values-1-1-12" assembly-id="intro-prob-values-1-1-12" unique-id="intro-prob-values-1-1-12">
+      <text original-id="intro-prob-values-1-1-12-1" assembly-id="intro-prob-values-1-1-12-1" unique-id="intro-prob-values-1-1-12-1">&lt;p id="author"&gt;Michael Onyimbo&lt;/p&gt;
+&lt;p id="concept"&gt;Grade 10 Probability — Introduction to Probability&lt;/p&gt;
+&lt;p id="reviewer"&gt;&lt;/p&gt;
+&lt;p id="reviewer"&gt;&lt;/p&gt;
+
+&lt;p id="description"&gt;
+The question requires the learner to relate probability values to everyday situations by identifying whether events are impossible, certain, or uncertain.
+&lt;/p&gt;</text>
+    </questiondescription>
+    <questionsimplify original-id="intro-prob-values-1-1-13" assembly-id="intro-prob-values-1-1-13" unique-id="intro-prob-values-1-1-13">1</questionsimplify>
+    <assumepositive original-id="intro-prob-values-1-1-14" assembly-id="intro-prob-values-1-1-14" unique-id="intro-prob-values-1-1-14">0</assumepositive>
+    <assumereal original-id="intro-prob-values-1-1-15" assembly-id="intro-prob-values-1-1-15" unique-id="intro-prob-values-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="intro-prob-values-1-1-16" assembly-id="intro-prob-values-1-1-16" unique-id="intro-prob-values-1-1-16">
+      <text original-id="intro-prob-values-1-1-16-1" assembly-id="intro-prob-values-1-1-16-1" unique-id="intro-prob-values-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="intro-prob-values-1-1-17" assembly-id="intro-prob-values-1-1-17" unique-id="intro-prob-values-1-1-17">
+      <text original-id="intro-prob-values-1-1-17-1" assembly-id="intro-prob-values-1-1-17-1" unique-id="intro-prob-values-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="intro-prob-values-1-1-18" assembly-id="intro-prob-values-1-1-18" unique-id="intro-prob-values-1-1-18">
+      <text original-id="intro-prob-values-1-1-18-1" assembly-id="intro-prob-values-1-1-18-1" unique-id="intro-prob-values-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="intro-prob-values-1-1-19" assembly-id="intro-prob-values-1-1-19" unique-id="intro-prob-values-1-1-19">.</decimals>
+    <scientificnotation original-id="intro-prob-values-1-1-20" assembly-id="intro-prob-values-1-1-20" unique-id="intro-prob-values-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="intro-prob-values-1-1-21" assembly-id="intro-prob-values-1-1-21" unique-id="intro-prob-values-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="intro-prob-values-1-1-22" assembly-id="intro-prob-values-1-1-22" unique-id="intro-prob-values-1-1-22">1</sqrtsign>
+    <complexno original-id="intro-prob-values-1-1-23" assembly-id="intro-prob-values-1-1-23" unique-id="intro-prob-values-1-1-23">i</complexno>
+    <inversetrig original-id="intro-prob-values-1-1-24" assembly-id="intro-prob-values-1-1-24" unique-id="intro-prob-values-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="intro-prob-values-1-1-25" assembly-id="intro-prob-values-1-1-25" unique-id="intro-prob-values-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="intro-prob-values-1-1-26" assembly-id="intro-prob-values-1-1-26" unique-id="intro-prob-values-1-1-26">[</matrixparens>
+    <isbroken original-id="intro-prob-values-1-1-27" assembly-id="intro-prob-values-1-1-27" unique-id="intro-prob-values-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="intro-prob-values-1-1-28" assembly-id="intro-prob-values-1-1-28" unique-id="intro-prob-values-1-1-28"/>
+    <input original-id="intro-prob-values-1-1-29" assembly-id="intro-prob-values-1-1-29" unique-id="intro-prob-values-1-1-29">
+      <name original-id="intro-prob-values-1-1-29-1" assembly-id="intro-prob-values-1-1-29-1" unique-id="intro-prob-values-1-1-29-1">ans1</name>
+      <type original-id="intro-prob-values-1-1-29-2" assembly-id="intro-prob-values-1-1-29-2" unique-id="intro-prob-values-1-1-29-2">dropdown</type>
+      <tans original-id="intro-prob-values-1-1-29-3" assembly-id="intro-prob-values-1-1-29-3" unique-id="intro-prob-values-1-1-29-3">m_prob</tans>
+      <boxsize original-id="intro-prob-values-1-1-29-4" assembly-id="intro-prob-values-1-1-29-4" unique-id="intro-prob-values-1-1-29-4">15</boxsize>
+      <strictsyntax original-id="intro-prob-values-1-1-29-5" assembly-id="intro-prob-values-1-1-29-5" unique-id="intro-prob-values-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="intro-prob-values-1-1-29-6" assembly-id="intro-prob-values-1-1-29-6" unique-id="intro-prob-values-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="intro-prob-values-1-1-29-7" assembly-id="intro-prob-values-1-1-29-7" unique-id="intro-prob-values-1-1-29-7"/>
+      <syntaxattribute original-id="intro-prob-values-1-1-29-8" assembly-id="intro-prob-values-1-1-29-8" unique-id="intro-prob-values-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="intro-prob-values-1-1-29-9" assembly-id="intro-prob-values-1-1-29-9" unique-id="intro-prob-values-1-1-29-9"/>
+      <allowwords original-id="intro-prob-values-1-1-29-10" assembly-id="intro-prob-values-1-1-29-10" unique-id="intro-prob-values-1-1-29-10"/>
+      <forbidfloat original-id="intro-prob-values-1-1-29-11" assembly-id="intro-prob-values-1-1-29-11" unique-id="intro-prob-values-1-1-29-11">1</forbidfloat>
+      <requirelowestterms original-id="intro-prob-values-1-1-29-12" assembly-id="intro-prob-values-1-1-29-12" unique-id="intro-prob-values-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="intro-prob-values-1-1-29-13" assembly-id="intro-prob-values-1-1-29-13" unique-id="intro-prob-values-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="intro-prob-values-1-1-29-14" assembly-id="intro-prob-values-1-1-29-14" unique-id="intro-prob-values-1-1-29-14">1</mustverify>
+      <showvalidation original-id="intro-prob-values-1-1-29-15" assembly-id="intro-prob-values-1-1-29-15" unique-id="intro-prob-values-1-1-29-15">3</showvalidation>
+      <options original-id="intro-prob-values-1-1-29-16" assembly-id="intro-prob-values-1-1-29-16" unique-id="intro-prob-values-1-1-29-16"/>
+    </input>
+    <prt original-id="intro-prob-values-1-1-30" assembly-id="intro-prob-values-1-1-30" unique-id="intro-prob-values-1-1-30">
+      <name original-id="intro-prob-values-1-1-30-1" assembly-id="intro-prob-values-1-1-30-1" unique-id="intro-prob-values-1-1-30-1">prt1</name>
+      <value original-id="intro-prob-values-1-1-30-2" assembly-id="intro-prob-values-1-1-30-2" unique-id="intro-prob-values-1-1-30-2">1.0000000</value>
+      <autosimplify original-id="intro-prob-values-1-1-30-3" assembly-id="intro-prob-values-1-1-30-3" unique-id="intro-prob-values-1-1-30-3">1</autosimplify>
+      <feedbackstyle original-id="intro-prob-values-1-1-30-4" assembly-id="intro-prob-values-1-1-30-4" unique-id="intro-prob-values-1-1-30-4">1</feedbackstyle>
+      <feedbackvariables original-id="intro-prob-values-1-1-30-5" assembly-id="intro-prob-values-1-1-30-5" unique-id="intro-prob-values-1-1-30-5">
+        <text original-id="intro-prob-values-1-1-30-5-1" assembly-id="intro-prob-values-1-1-30-5-1" unique-id="intro-prob-values-1-1-30-5-1"/>
+      </feedbackvariables>
+      <node original-id="intro-prob-values-1-1-30-6" assembly-id="intro-prob-values-1-1-30-6" unique-id="intro-prob-values-1-1-30-6">
+        <name original-id="intro-prob-values-1-1-30-6-1" assembly-id="intro-prob-values-1-1-30-6-1" unique-id="intro-prob-values-1-1-30-6-1">0</name>
+        <description original-id="intro-prob-values-1-1-30-6-2" assembly-id="intro-prob-values-1-1-30-6-2" unique-id="intro-prob-values-1-1-30-6-2">Checks for the correct answer</description>
+        <answertest original-id="intro-prob-values-1-1-30-6-3" assembly-id="intro-prob-values-1-1-30-6-3" unique-id="intro-prob-values-1-1-30-6-3">AlgEquiv</answertest>
+        <sans original-id="intro-prob-values-1-1-30-6-4" assembly-id="intro-prob-values-1-1-30-6-4" unique-id="intro-prob-values-1-1-30-6-4">ans1</sans>
+        <tans original-id="intro-prob-values-1-1-30-6-5" assembly-id="intro-prob-values-1-1-30-6-5" unique-id="intro-prob-values-1-1-30-6-5">correct_prob</tans>
+        <testoptions original-id="intro-prob-values-1-1-30-6-6" assembly-id="intro-prob-values-1-1-30-6-6" unique-id="intro-prob-values-1-1-30-6-6"/>
+        <quiet original-id="intro-prob-values-1-1-30-6-7" assembly-id="intro-prob-values-1-1-30-6-7" unique-id="intro-prob-values-1-1-30-6-7">0</quiet>
+        <truescoremode original-id="intro-prob-values-1-1-30-6-8" assembly-id="intro-prob-values-1-1-30-6-8" unique-id="intro-prob-values-1-1-30-6-8">=</truescoremode>
+        <truescore original-id="intro-prob-values-1-1-30-6-9" assembly-id="intro-prob-values-1-1-30-6-9" unique-id="intro-prob-values-1-1-30-6-9">1</truescore>
+        <truepenalty original-id="intro-prob-values-1-1-30-6-10" assembly-id="intro-prob-values-1-1-30-6-10" unique-id="intro-prob-values-1-1-30-6-10"/>
+        <truenextnode original-id="intro-prob-values-1-1-30-6-11" assembly-id="intro-prob-values-1-1-30-6-11" unique-id="intro-prob-values-1-1-30-6-11">-1</truenextnode>
+        <trueanswernote original-id="intro-prob-values-1-1-30-6-12" assembly-id="intro-prob-values-1-1-30-6-12" unique-id="intro-prob-values-1-1-30-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="intro-prob-values-1-1-30-6-13" assembly-id="intro-prob-values-1-1-30-6-13" unique-id="intro-prob-values-1-1-30-6-13">
+          <text original-id="intro-prob-values-1-1-30-6-13-1" assembly-id="intro-prob-values-1-1-30-6-13-1" unique-id="intro-prob-values-1-1-30-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="intro-prob-values-1-1-30-6-14" assembly-id="intro-prob-values-1-1-30-6-14" unique-id="intro-prob-values-1-1-30-6-14">=</falsescoremode>
+        <falsescore original-id="intro-prob-values-1-1-30-6-15" assembly-id="intro-prob-values-1-1-30-6-15" unique-id="intro-prob-values-1-1-30-6-15">0</falsescore>
+        <falsepenalty original-id="intro-prob-values-1-1-30-6-16" assembly-id="intro-prob-values-1-1-30-6-16" unique-id="intro-prob-values-1-1-30-6-16"/>
+        <falsenextnode original-id="intro-prob-values-1-1-30-6-17" assembly-id="intro-prob-values-1-1-30-6-17" unique-id="intro-prob-values-1-1-30-6-17">-1</falsenextnode>
+        <falseanswernote original-id="intro-prob-values-1-1-30-6-18" assembly-id="intro-prob-values-1-1-30-6-18" unique-id="intro-prob-values-1-1-30-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="intro-prob-values-1-1-30-6-19" assembly-id="intro-prob-values-1-1-30-6-19" unique-id="intro-prob-values-1-1-30-6-19">
+          <text original-id="intro-prob-values-1-1-30-6-19-1" assembly-id="intro-prob-values-1-1-30-6-19-1" unique-id="intro-prob-values-1-1-30-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed original-id="intro-prob-values-1-1-31" assembly-id="intro-prob-values-1-1-31" unique-id="intro-prob-values-1-1-31">2063183210</deployedseed>
+    <deployedseed original-id="intro-prob-values-1-1-32" assembly-id="intro-prob-values-1-1-32" unique-id="intro-prob-values-1-1-32">2134013163</deployedseed>
+    <deployedseed original-id="intro-prob-values-1-1-33" assembly-id="intro-prob-values-1-1-33" unique-id="intro-prob-values-1-1-33">1372352059</deployedseed>
+    <qtest original-id="intro-prob-values-1-1-34" assembly-id="intro-prob-values-1-1-34" unique-id="intro-prob-values-1-1-34">
+      <testcase original-id="intro-prob-values-1-1-34-1" assembly-id="intro-prob-values-1-1-34-1" unique-id="intro-prob-values-1-1-34-1">1</testcase>
+      <description original-id="intro-prob-values-1-1-34-2" assembly-id="intro-prob-values-1-1-34-2" unique-id="intro-prob-values-1-1-34-2">Test case assuming the teacher's input gets full marks.</description>
+      <testinput original-id="intro-prob-values-1-1-34-3" assembly-id="intro-prob-values-1-1-34-3" unique-id="intro-prob-values-1-1-34-3">
+        <name original-id="intro-prob-values-1-1-34-3-1" assembly-id="intro-prob-values-1-1-34-3-1" unique-id="intro-prob-values-1-1-34-3-1">ans1</name>
+        <value original-id="intro-prob-values-1-1-34-3-2" assembly-id="intro-prob-values-1-1-34-3-2" unique-id="intro-prob-values-1-1-34-3-2">first(mcq_correct(m_prob))</value>
+      </testinput>
+      <expected original-id="intro-prob-values-1-1-34-4" assembly-id="intro-prob-values-1-1-34-4" unique-id="intro-prob-values-1-1-34-4">
+        <name original-id="intro-prob-values-1-1-34-4-1" assembly-id="intro-prob-values-1-1-34-4-1" unique-id="intro-prob-values-1-1-34-4-1">prt1</name>
+        <expectedscore original-id="intro-prob-values-1-1-34-4-2" assembly-id="intro-prob-values-1-1-34-4-2" unique-id="intro-prob-values-1-1-34-4-2">1.0000000</expectedscore>
+        <expectedpenalty original-id="intro-prob-values-1-1-34-4-3" assembly-id="intro-prob-values-1-1-34-4-3" unique-id="intro-prob-values-1-1-34-4-3">0.0000000</expectedpenalty>
+        <expectedanswernote original-id="intro-prob-values-1-1-34-4-4" assembly-id="intro-prob-values-1-1-34-4-4" unique-id="intro-prob-values-1-1-34-4-4">prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>
+        

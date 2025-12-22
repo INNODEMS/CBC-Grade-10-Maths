@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+                <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../../../../stack/2-0-Measurement-Geometry/2-4-Trigonometry-1/2-4-1-Trigonometric-Ratios-of-Acute-Angles/2-4-1-2-Sine-and-Cosine-of-an-Acute-Angle/Finding-Ladder-Height-and-Base-Distance.xml" original-id="ladder-height-base-distance-1" assembly-id="ladder-height-base-distance-1" unique-id="ladder-height-base-distance-1">
+  <question type="stack" original-id="ladder-height-base-distance-1-1" assembly-id="ladder-height-base-distance-1-1" unique-id="ladder-height-base-distance-1-1">
+    <name original-id="ladder-height-base-distance-1-1-1" assembly-id="ladder-height-base-distance-1-1-1" unique-id="ladder-height-base-distance-1-1-1">
+      <text original-id="ladder-height-base-distance-1-1-1-1" assembly-id="ladder-height-base-distance-1-1-1-1" unique-id="ladder-height-base-distance-1-1-1-1">Finding Ladder Height and Base Distance</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="ladder-height-base-distance-1-1-2" assembly-id="ladder-height-base-distance-1-1-2" unique-id="ladder-height-base-distance-1-1-2">
+      <text original-id="ladder-height-base-distance-1-1-2-1" assembly-id="ladder-height-base-distance-1-1-2-1" unique-id="ladder-height-base-distance-1-1-2-1">&lt;p&gt;A ladder {@ladder_length@} meters long leans against a vertical wall, making an angle of \({@angle_with_ground@}^\circ\) with the ground as shown in the diagram.&lt;/p&gt;
+
+[[jsxgraph]]
+ var board = JXG.JSXGraph.initBoard(divid, {
+        boundingbox: [-7, 7, 7, -7],
+        axis: false,
+        showNavigation: false,
+        showCopyright: false
+    });
+
+    // Points of triangle
+    var A = board.create('point', [-3, -1], {name: 'A', visible:false});
+    var C = board.create('point', [-3, 5], {name: 'B', visible:false});
+    var B = board.create('point', [3, -1], {name: 'C', visible:false});
+
+    var D = board.create('point', [-2.5, 5.5], {name: 'D', visible:false});
+    var E = board.create('point', [3.5, -0.5], {name: 'E', visible:false});
+
+    // Ladder points (hidden)
+    var a = board.create('point', [-3, 5], {visible:false});
+    var b = board.create('point', [-2.5, 5.5], {visible:false});
+    var c = board.create('point', [-2.9, 4.9], {visible:false});
+    var d = board.create('point', [-2.4, 5.4], {visible:false});
+
+    var e = board.create('point', [-2,4], {visible:false});
+    var f = board.create('point', [-1.5,4.5], {visible:false});
+    var g = board.create('point', [-1.9,3.9], {visible:false});
+    var h = board.create('point', [-1.4,4.4], {visible:false});
+
+    var i = board.create('point', [-1,3], {visible:false});
+    var j = board.create('point', [-0.5,3.5], {visible:false});
+    var k = board.create('point', [-0.9,2.9], {visible:false});
+    var m = board.create('point', [-0.4,3.4], {visible:false});
+
+    var n = board.create('point', [0,2], {visible:false});
+    var o = board.create('point', [0.5,2.5], {visible:false});
+    var p = board.create('point', [0.1,1.9], {visible:false});
+    var q = board.create('point', [0.6,2.4], {visible:false});
+
+    var r = board.create('point', [1,1], {visible:false});
+    var s = board.create('point', [1.5,1.5], {visible:false});
+    var t = board.create('point', [1.1,0.9], {visible:false});
+    var u = board.create('point', [1.6,1.4], {visible:false});
+
+    var v = board.create('point', [2,0], {visible:false});
+    var w = board.create('point', [2.5,0.5], {visible:false});
+    var x = board.create('point', [2.1,-0.1], {visible:false});
+    var y = board.create('point', [2.6,0.4], {visible:false});
+
+    var H = board.create('point', [2.9,-0.9], {visible:false});
+    var Q = board.create('point', [3.4,-0.4], {visible:false});
+    var z = board.create('point', [3,-1], {visible:false});
+    var G = board.create('point', [3.5,-0.5], {visible:false});
+
+    // Triangle itself
+    var triangle = board.create('polygon', [A, B, C], {
+        fillColor: 'white',
+        borders: {strokeColor: 'blue'}
+    });
+
+    // Top beam
+    board.create('segment', [D, E], {strokeColor: 'blue'});
+
+    // Ladder rungs
+    board.create('segment', [a,b], {strokeColor: 'black'});
+    board.create('segment', [c,d], {strokeColor: 'black'});
+    board.create('segment', [e,f], {strokeColor: 'black'});
+    board.create('segment', [g,h], {strokeColor: 'black'});
+    board.create('segment', [i,j], {strokeColor: 'black'});
+    board.create('segment', [k,m], {strokeColor: 'black'});
+    board.create('segment', [n,o], {strokeColor: 'black'});
+    board.create('segment', [p,q], {strokeColor: 'black'});
+    board.create('segment', [r,s], {strokeColor: 'black'});
+    board.create('segment', [t,u], {strokeColor: 'black'});
+    board.create('segment', [v,w], {strokeColor: 'black'});
+    board.create('segment', [x,y], {strokeColor: 'black'});
+    board.create('segment', [z,G], {strokeColor: 'black'});
+    board.create('segment', [H,Q], {strokeColor: 'black'});
+
+    // Label the triangle
+    var labelA = board.create('text', [0,3.5,'{#hyp#} m'], {fontSize: 12});
+    
+
+
+    // 1️⃣ Extend ground line (extend A–B to left and right)
+    var groundLeft  = board.create('point', [-6, -1], {visible:false});
+    var groundRight = board.create('point', [ 6, -1], {visible:false});
+    board.create('line', [groundLeft, groundRight], {strokeWidth:2, strokeColor:'black'});
+
+    // Label "ground"
+    board.create('text', [-0.5, -1.4, 'ground'], {fontSize: 14});
+
+    // 2️⃣ Extend the wall (vertical AC side)
+    var wallTop = board.create('point', [-3, 6], {visible:false});
+    board.create('line', [A, wallTop], {straightFirst:false, straightLast:false, strokeWidth:2});
+
+    // Label "wall"
+    board.create('text', [-3.5, 6.2, 'wall'], {fontSize: 14});
+
+  // Angle where ladder meets the ground at B
+    var angleAtB = board.create('angle', 
+        [groundLeft, B, A],   // points: (point on ground left, vertex B, ladder)
+        {
+            radius: 1,          // size of the angle arc
+            name: '{#angle_with_ground#}°',        // label
+            fontSize: 14,
+            fillColor: 'rgba(255,0,0,0.2)', // semi-transparent fill for the angle wedge
+            strokeColor: 'blue', // curve color
+            strokeWidth: 2,
+            type: 'majotr',      // draws the minor angle curve
+            nameDist: 20        // distance of label from vertex
+        }
+    );
+
+[[/jsxgraph]]
+
+&lt;p&gt;&lt;ol type='a'&gt;
+  &lt;li&gt;&lt;p&gt;How high does the ladder reach on the wall?&lt;/p&gt;
+   &lt;p&gt;\(\text{Height}\)=[[input:ans1]]\(\,\text{m}\)[[validation:ans1]][[feedback:prt1]]&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;How far is the base of the ladder from the wall?&lt;/p&gt;
+&lt;p&gt;\(\text{Base}\)=[[input:ans2]]\(\,\text{m}\)[[validation:ans2]][[feedback:prt2]]&lt;/p&gt;
+   &lt;/li&gt;
+&lt;/ol&gt;
+&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="ladder-height-base-distance-1-1-3" assembly-id="ladder-height-base-distance-1-1-3" unique-id="ladder-height-base-distance-1-1-3">
+      <text original-id="ladder-height-base-distance-1-1-3-1" assembly-id="ladder-height-base-distance-1-1-3-1" unique-id="ladder-height-base-distance-1-1-3-1">&lt;p&gt;&lt;strong&gt;Worked Solution&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The ladder, the wall and the ground form a right triangle. Use sine for the vertical (opposite) and cosine for the horizontal (adjacent).&lt;/p&gt;
+
+&lt;ol type="a"&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Height the ladder reaches on the wall&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+\[
+\begin{align}
+\sin(\theta) &amp;= \frac{\text{opposite}}{\text{hypotenuse}} \\[6pt]
+\sin({@angle_with_ground@}^\circ) &amp;= \frac{h}{@ladder_length@} \\[6pt]
+h &amp;= {@ladder_length@} \sin({@angle_with_ground@}^\circ) \\[6pt]
+&amp;= {@height_on_wall@}\,\text{m}
+\end{align}
+\]
+&lt;/p&gt;
+    &lt;p&gt;Therefore the height is &lt;strong&gt;{@height_on_wall@} m&lt;/strong&gt;&lt;/p&gt;
+  
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Distance of the base of the ladder from the wall&lt;/strong&gt;&lt;/p&gt;
+
+\[
+\begin{align}
+\cos(\theta) &amp;= \frac{\text{adjacent}}{\text{hypotenuse}} \\[6pt]
+\cos({@angle_with_ground@}^\circ) &amp;= \frac{d}{@ladder_length@} \\[6pt]
+d &amp;= {@ladder_length@} \cos({@angle_with_ground@}^\circ) \\[6pt]
+&amp;= {@distance_from_wall@}\,\text{m}
+\end{align}
+\]
+
+    &lt;p&gt;Therefore the base distance is &lt;strong&gt;{@distance_from_wall@} m&lt;/strong&gt;&lt;/p&gt;
+  
+  &lt;/li&gt;
+&lt;/ol&gt;</text>
+    </generalfeedback>
+    <defaultgrade original-id="ladder-height-base-distance-1-1-4" assembly-id="ladder-height-base-distance-1-1-4" unique-id="ladder-height-base-distance-1-1-4">15</defaultgrade>
+    <penalty original-id="ladder-height-base-distance-1-1-5" assembly-id="ladder-height-base-distance-1-1-5" unique-id="ladder-height-base-distance-1-1-5">0.1</penalty>
+    <hidden original-id="ladder-height-base-distance-1-1-6" assembly-id="ladder-height-base-distance-1-1-6" unique-id="ladder-height-base-distance-1-1-6">0</hidden>
+    <idnumber original-id="ladder-height-base-distance-1-1-7" assembly-id="ladder-height-base-distance-1-1-7" unique-id="ladder-height-base-distance-1-1-7"/>
+    <stackversion original-id="ladder-height-base-distance-1-1-8" assembly-id="ladder-height-base-distance-1-1-8" unique-id="ladder-height-base-distance-1-1-8">
+      <text original-id="ladder-height-base-distance-1-1-8-1" assembly-id="ladder-height-base-distance-1-1-8-1" unique-id="ladder-height-base-distance-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="ladder-height-base-distance-1-1-9" assembly-id="ladder-height-base-distance-1-1-9" unique-id="ladder-height-base-distance-1-1-9">
+      <text original-id="ladder-height-base-distance-1-1-9-1" assembly-id="ladder-height-base-distance-1-1-9-1" unique-id="ladder-height-base-distance-1-1-9-1">/* List of Pythagorean triples */
+triples : [
+  [3,4,5],[4,3,5],[5,12,13],[12,5,13],
+  [6,8,10],[8,6,10],[7,24,25],[24,7,25],
+  [9,40,41],[40,9,41],[8,15,17],[15,8,17],
+  [20,21,29],[21,20,29],[28,45,53],[45,28,53],
+  [11,60,61],[60,11,61],[16,63,65],[63,16,65],
+  [33,56,65],[56,33,65],[48,55,73],[55,48,73],
+  [13,84,85],[84,13,85],[36,77,85],[77,36,85],
+  [39,80,89],[80,39,89],[65,72,97],[72,65,97],
+  [20,99,101],[99,20,101],[60,91,109],[91,60,109],
+  [12,35,37],[35,12,37],[15,36,39],[36,15,39],
+  [9,12,15],[12,9,15],[40,42,58],[42,40,58],
+  [24,45,51],[45,24,51],[7,24,25],[24,7,25]
+];
+
+/* Choose a random triple */
+T : triples[rand(length(triples)) + 1];
+
+/* Assign sides relative to ladder problem */
+opp : T[1];  /* height on wall */
+adj : T[2];  /* base distance from wall */
+hyp : T[3];  /* ladder length */
+
+/* Compute the angle with ground in degrees using arccos or arcsin */
+angle_deg : round(atan(opp / adj) * 180 / %pi);
+
+/* Display results */
+ladder_length : hyp;
+height_on_wall : opp;
+distance_from_wall : adj;
+angle_with_ground : angle_deg;</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="ladder-height-base-distance-1-1-10" assembly-id="ladder-height-base-distance-1-1-10" unique-id="ladder-height-base-distance-1-1-10">
+      <text original-id="ladder-height-base-distance-1-1-10-1" assembly-id="ladder-height-base-distance-1-1-10-1" unique-id="ladder-height-base-distance-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="ladder-height-base-distance-1-1-11" assembly-id="ladder-height-base-distance-1-1-11" unique-id="ladder-height-base-distance-1-1-11">
+      <text original-id="ladder-height-base-distance-1-1-11-1" assembly-id="ladder-height-base-distance-1-1-11-1" unique-id="ladder-height-base-distance-1-1-11-1">&lt;p&gt;\(\text{The length of the ladder}={@hyp@}\,\text{m}\)&lt;/p&gt;
+&lt;p&gt;\(\text{The angle made by the ladder to the ground}={@angle_with_ground @}^\circ\)&lt;/p&gt;
+&lt;p&gt;\(\text{The height made to the wall}={@height_on_wall@}\,\text{m}\)&lt;/p&gt;
+&lt;p&gt;\(\text{The base made to the ladder}={@distance_from_wall@}\,\text{m}\)&lt;/p&gt;</text>
+    </questionnote>
+    <questiondescription format="html" original-id="ladder-height-base-distance-1-1-12" assembly-id="ladder-height-base-distance-1-1-12" unique-id="ladder-height-base-distance-1-1-12">
+      <text original-id="ladder-height-base-distance-1-1-12-1" assembly-id="ladder-height-base-distance-1-1-12-1" unique-id="ladder-height-base-distance-1-1-12-1"/>
+    </questiondescription>
+    <questionsimplify original-id="ladder-height-base-distance-1-1-13" assembly-id="ladder-height-base-distance-1-1-13" unique-id="ladder-height-base-distance-1-1-13">1</questionsimplify>
+    <assumepositive original-id="ladder-height-base-distance-1-1-14" assembly-id="ladder-height-base-distance-1-1-14" unique-id="ladder-height-base-distance-1-1-14">0</assumepositive>
+    <assumereal original-id="ladder-height-base-distance-1-1-15" assembly-id="ladder-height-base-distance-1-1-15" unique-id="ladder-height-base-distance-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="ladder-height-base-distance-1-1-16" assembly-id="ladder-height-base-distance-1-1-16" unique-id="ladder-height-base-distance-1-1-16">
+      <text original-id="ladder-height-base-distance-1-1-16-1" assembly-id="ladder-height-base-distance-1-1-16-1" unique-id="ladder-height-base-distance-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="ladder-height-base-distance-1-1-17" assembly-id="ladder-height-base-distance-1-1-17" unique-id="ladder-height-base-distance-1-1-17">
+      <text original-id="ladder-height-base-distance-1-1-17-1" assembly-id="ladder-height-base-distance-1-1-17-1" unique-id="ladder-height-base-distance-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="ladder-height-base-distance-1-1-18" assembly-id="ladder-height-base-distance-1-1-18" unique-id="ladder-height-base-distance-1-1-18">
+      <text original-id="ladder-height-base-distance-1-1-18-1" assembly-id="ladder-height-base-distance-1-1-18-1" unique-id="ladder-height-base-distance-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="ladder-height-base-distance-1-1-19" assembly-id="ladder-height-base-distance-1-1-19" unique-id="ladder-height-base-distance-1-1-19">.</decimals>
+    <scientificnotation original-id="ladder-height-base-distance-1-1-20" assembly-id="ladder-height-base-distance-1-1-20" unique-id="ladder-height-base-distance-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="ladder-height-base-distance-1-1-21" assembly-id="ladder-height-base-distance-1-1-21" unique-id="ladder-height-base-distance-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="ladder-height-base-distance-1-1-22" assembly-id="ladder-height-base-distance-1-1-22" unique-id="ladder-height-base-distance-1-1-22">1</sqrtsign>
+    <complexno original-id="ladder-height-base-distance-1-1-23" assembly-id="ladder-height-base-distance-1-1-23" unique-id="ladder-height-base-distance-1-1-23">i</complexno>
+    <inversetrig original-id="ladder-height-base-distance-1-1-24" assembly-id="ladder-height-base-distance-1-1-24" unique-id="ladder-height-base-distance-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="ladder-height-base-distance-1-1-25" assembly-id="ladder-height-base-distance-1-1-25" unique-id="ladder-height-base-distance-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="ladder-height-base-distance-1-1-26" assembly-id="ladder-height-base-distance-1-1-26" unique-id="ladder-height-base-distance-1-1-26">[</matrixparens>
+    <isbroken original-id="ladder-height-base-distance-1-1-27" assembly-id="ladder-height-base-distance-1-1-27" unique-id="ladder-height-base-distance-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="ladder-height-base-distance-1-1-28" assembly-id="ladder-height-base-distance-1-1-28" unique-id="ladder-height-base-distance-1-1-28"/>
+    <input original-id="ladder-height-base-distance-1-1-29" assembly-id="ladder-height-base-distance-1-1-29" unique-id="ladder-height-base-distance-1-1-29">
+      <name original-id="ladder-height-base-distance-1-1-29-1" assembly-id="ladder-height-base-distance-1-1-29-1" unique-id="ladder-height-base-distance-1-1-29-1">ans1</name>
+      <type original-id="ladder-height-base-distance-1-1-29-2" assembly-id="ladder-height-base-distance-1-1-29-2" unique-id="ladder-height-base-distance-1-1-29-2">algebraic</type>
+      <tans original-id="ladder-height-base-distance-1-1-29-3" assembly-id="ladder-height-base-distance-1-1-29-3" unique-id="ladder-height-base-distance-1-1-29-3">height_on_wall</tans>
+      <boxsize original-id="ladder-height-base-distance-1-1-29-4" assembly-id="ladder-height-base-distance-1-1-29-4" unique-id="ladder-height-base-distance-1-1-29-4">7</boxsize>
+      <strictsyntax original-id="ladder-height-base-distance-1-1-29-5" assembly-id="ladder-height-base-distance-1-1-29-5" unique-id="ladder-height-base-distance-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="ladder-height-base-distance-1-1-29-6" assembly-id="ladder-height-base-distance-1-1-29-6" unique-id="ladder-height-base-distance-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="ladder-height-base-distance-1-1-29-7" assembly-id="ladder-height-base-distance-1-1-29-7" unique-id="ladder-height-base-distance-1-1-29-7"/>
+      <syntaxattribute original-id="ladder-height-base-distance-1-1-29-8" assembly-id="ladder-height-base-distance-1-1-29-8" unique-id="ladder-height-base-distance-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="ladder-height-base-distance-1-1-29-9" assembly-id="ladder-height-base-distance-1-1-29-9" unique-id="ladder-height-base-distance-1-1-29-9"/>
+      <allowwords original-id="ladder-height-base-distance-1-1-29-10" assembly-id="ladder-height-base-distance-1-1-29-10" unique-id="ladder-height-base-distance-1-1-29-10"/>
+      <forbidfloat original-id="ladder-height-base-distance-1-1-29-11" assembly-id="ladder-height-base-distance-1-1-29-11" unique-id="ladder-height-base-distance-1-1-29-11">1</forbidfloat>
+      <requirelowestterms original-id="ladder-height-base-distance-1-1-29-12" assembly-id="ladder-height-base-distance-1-1-29-12" unique-id="ladder-height-base-distance-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="ladder-height-base-distance-1-1-29-13" assembly-id="ladder-height-base-distance-1-1-29-13" unique-id="ladder-height-base-distance-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="ladder-height-base-distance-1-1-29-14" assembly-id="ladder-height-base-distance-1-1-29-14" unique-id="ladder-height-base-distance-1-1-29-14">1</mustverify>
+      <showvalidation original-id="ladder-height-base-distance-1-1-29-15" assembly-id="ladder-height-base-distance-1-1-29-15" unique-id="ladder-height-base-distance-1-1-29-15">3</showvalidation>
+      <options original-id="ladder-height-base-distance-1-1-29-16" assembly-id="ladder-height-base-distance-1-1-29-16" unique-id="ladder-height-base-distance-1-1-29-16"/>
+    </input>
+    <input original-id="ladder-height-base-distance-1-1-30" assembly-id="ladder-height-base-distance-1-1-30" unique-id="ladder-height-base-distance-1-1-30">
+      <name original-id="ladder-height-base-distance-1-1-30-1" assembly-id="ladder-height-base-distance-1-1-30-1" unique-id="ladder-height-base-distance-1-1-30-1">ans2</name>
+      <type original-id="ladder-height-base-distance-1-1-30-2" assembly-id="ladder-height-base-distance-1-1-30-2" unique-id="ladder-height-base-distance-1-1-30-2">algebraic</type>
+      <tans original-id="ladder-height-base-distance-1-1-30-3" assembly-id="ladder-height-base-distance-1-1-30-3" unique-id="ladder-height-base-distance-1-1-30-3">distance_from_wall</tans>
+      <boxsize original-id="ladder-height-base-distance-1-1-30-4" assembly-id="ladder-height-base-distance-1-1-30-4" unique-id="ladder-height-base-distance-1-1-30-4">7</boxsize>
+      <strictsyntax original-id="ladder-height-base-distance-1-1-30-5" assembly-id="ladder-height-base-distance-1-1-30-5" unique-id="ladder-height-base-distance-1-1-30-5">1</strictsyntax>
+      <insertstars original-id="ladder-height-base-distance-1-1-30-6" assembly-id="ladder-height-base-distance-1-1-30-6" unique-id="ladder-height-base-distance-1-1-30-6">0</insertstars>
+      <syntaxhint original-id="ladder-height-base-distance-1-1-30-7" assembly-id="ladder-height-base-distance-1-1-30-7" unique-id="ladder-height-base-distance-1-1-30-7"/>
+      <syntaxattribute original-id="ladder-height-base-distance-1-1-30-8" assembly-id="ladder-height-base-distance-1-1-30-8" unique-id="ladder-height-base-distance-1-1-30-8">0</syntaxattribute>
+      <forbidwords original-id="ladder-height-base-distance-1-1-30-9" assembly-id="ladder-height-base-distance-1-1-30-9" unique-id="ladder-height-base-distance-1-1-30-9"/>
+      <allowwords original-id="ladder-height-base-distance-1-1-30-10" assembly-id="ladder-height-base-distance-1-1-30-10" unique-id="ladder-height-base-distance-1-1-30-10"/>
+      <forbidfloat original-id="ladder-height-base-distance-1-1-30-11" assembly-id="ladder-height-base-distance-1-1-30-11" unique-id="ladder-height-base-distance-1-1-30-11">1</forbidfloat>
+      <requirelowestterms original-id="ladder-height-base-distance-1-1-30-12" assembly-id="ladder-height-base-distance-1-1-30-12" unique-id="ladder-height-base-distance-1-1-30-12">0</requirelowestterms>
+      <checkanswertype original-id="ladder-height-base-distance-1-1-30-13" assembly-id="ladder-height-base-distance-1-1-30-13" unique-id="ladder-height-base-distance-1-1-30-13">0</checkanswertype>
+      <mustverify original-id="ladder-height-base-distance-1-1-30-14" assembly-id="ladder-height-base-distance-1-1-30-14" unique-id="ladder-height-base-distance-1-1-30-14">1</mustverify>
+      <showvalidation original-id="ladder-height-base-distance-1-1-30-15" assembly-id="ladder-height-base-distance-1-1-30-15" unique-id="ladder-height-base-distance-1-1-30-15">3</showvalidation>
+      <options original-id="ladder-height-base-distance-1-1-30-16" assembly-id="ladder-height-base-distance-1-1-30-16" unique-id="ladder-height-base-distance-1-1-30-16"/>
+    </input>
+    <prt original-id="ladder-height-base-distance-1-1-31" assembly-id="ladder-height-base-distance-1-1-31" unique-id="ladder-height-base-distance-1-1-31">
+      <name original-id="ladder-height-base-distance-1-1-31-1" assembly-id="ladder-height-base-distance-1-1-31-1" unique-id="ladder-height-base-distance-1-1-31-1">prt1</name>
+      <value original-id="ladder-height-base-distance-1-1-31-2" assembly-id="ladder-height-base-distance-1-1-31-2" unique-id="ladder-height-base-distance-1-1-31-2">1.0000000</value>
+      <autosimplify original-id="ladder-height-base-distance-1-1-31-3" assembly-id="ladder-height-base-distance-1-1-31-3" unique-id="ladder-height-base-distance-1-1-31-3">1</autosimplify>
+      <feedbackstyle original-id="ladder-height-base-distance-1-1-31-4" assembly-id="ladder-height-base-distance-1-1-31-4" unique-id="ladder-height-base-distance-1-1-31-4">1</feedbackstyle>
+      <feedbackvariables original-id="ladder-height-base-distance-1-1-31-5" assembly-id="ladder-height-base-distance-1-1-31-5" unique-id="ladder-height-base-distance-1-1-31-5">
+        <text original-id="ladder-height-base-distance-1-1-31-5-1" assembly-id="ladder-height-base-distance-1-1-31-5-1" unique-id="ladder-height-base-distance-1-1-31-5-1"/>
+      </feedbackvariables>
+      <node original-id="ladder-height-base-distance-1-1-31-6" assembly-id="ladder-height-base-distance-1-1-31-6" unique-id="ladder-height-base-distance-1-1-31-6">
+        <name original-id="ladder-height-base-distance-1-1-31-6-1" assembly-id="ladder-height-base-distance-1-1-31-6-1" unique-id="ladder-height-base-distance-1-1-31-6-1">0</name>
+        <description original-id="ladder-height-base-distance-1-1-31-6-2" assembly-id="ladder-height-base-distance-1-1-31-6-2" unique-id="ladder-height-base-distance-1-1-31-6-2">Checks for the correct height.</description>
+        <answertest original-id="ladder-height-base-distance-1-1-31-6-3" assembly-id="ladder-height-base-distance-1-1-31-6-3" unique-id="ladder-height-base-distance-1-1-31-6-3">AlgEquiv</answertest>
+        <sans original-id="ladder-height-base-distance-1-1-31-6-4" assembly-id="ladder-height-base-distance-1-1-31-6-4" unique-id="ladder-height-base-distance-1-1-31-6-4">ans1</sans>
+        <tans original-id="ladder-height-base-distance-1-1-31-6-5" assembly-id="ladder-height-base-distance-1-1-31-6-5" unique-id="ladder-height-base-distance-1-1-31-6-5">height_on_wall</tans>
+        <testoptions original-id="ladder-height-base-distance-1-1-31-6-6" assembly-id="ladder-height-base-distance-1-1-31-6-6" unique-id="ladder-height-base-distance-1-1-31-6-6"/>
+        <quiet original-id="ladder-height-base-distance-1-1-31-6-7" assembly-id="ladder-height-base-distance-1-1-31-6-7" unique-id="ladder-height-base-distance-1-1-31-6-7">0</quiet>
+        <truescoremode original-id="ladder-height-base-distance-1-1-31-6-8" assembly-id="ladder-height-base-distance-1-1-31-6-8" unique-id="ladder-height-base-distance-1-1-31-6-8">=</truescoremode>
+        <truescore original-id="ladder-height-base-distance-1-1-31-6-9" assembly-id="ladder-height-base-distance-1-1-31-6-9" unique-id="ladder-height-base-distance-1-1-31-6-9">1</truescore>
+        <truepenalty original-id="ladder-height-base-distance-1-1-31-6-10" assembly-id="ladder-height-base-distance-1-1-31-6-10" unique-id="ladder-height-base-distance-1-1-31-6-10"/>
+        <truenextnode original-id="ladder-height-base-distance-1-1-31-6-11" assembly-id="ladder-height-base-distance-1-1-31-6-11" unique-id="ladder-height-base-distance-1-1-31-6-11">-1</truenextnode>
+        <trueanswernote original-id="ladder-height-base-distance-1-1-31-6-12" assembly-id="ladder-height-base-distance-1-1-31-6-12" unique-id="ladder-height-base-distance-1-1-31-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="ladder-height-base-distance-1-1-31-6-13" assembly-id="ladder-height-base-distance-1-1-31-6-13" unique-id="ladder-height-base-distance-1-1-31-6-13">
+          <text original-id="ladder-height-base-distance-1-1-31-6-13-1" assembly-id="ladder-height-base-distance-1-1-31-6-13-1" unique-id="ladder-height-base-distance-1-1-31-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="ladder-height-base-distance-1-1-31-6-14" assembly-id="ladder-height-base-distance-1-1-31-6-14" unique-id="ladder-height-base-distance-1-1-31-6-14">=</falsescoremode>
+        <falsescore original-id="ladder-height-base-distance-1-1-31-6-15" assembly-id="ladder-height-base-distance-1-1-31-6-15" unique-id="ladder-height-base-distance-1-1-31-6-15">0</falsescore>
+        <falsepenalty original-id="ladder-height-base-distance-1-1-31-6-16" assembly-id="ladder-height-base-distance-1-1-31-6-16" unique-id="ladder-height-base-distance-1-1-31-6-16"/>
+        <falsenextnode original-id="ladder-height-base-distance-1-1-31-6-17" assembly-id="ladder-height-base-distance-1-1-31-6-17" unique-id="ladder-height-base-distance-1-1-31-6-17">-1</falsenextnode>
+        <falseanswernote original-id="ladder-height-base-distance-1-1-31-6-18" assembly-id="ladder-height-base-distance-1-1-31-6-18" unique-id="ladder-height-base-distance-1-1-31-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="ladder-height-base-distance-1-1-31-6-19" assembly-id="ladder-height-base-distance-1-1-31-6-19" unique-id="ladder-height-base-distance-1-1-31-6-19">
+          <text original-id="ladder-height-base-distance-1-1-31-6-19-1" assembly-id="ladder-height-base-distance-1-1-31-6-19-1" unique-id="ladder-height-base-distance-1-1-31-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="ladder-height-base-distance-1-1-32" assembly-id="ladder-height-base-distance-1-1-32" unique-id="ladder-height-base-distance-1-1-32">
+      <name original-id="ladder-height-base-distance-1-1-32-1" assembly-id="ladder-height-base-distance-1-1-32-1" unique-id="ladder-height-base-distance-1-1-32-1">prt2</name>
+      <value original-id="ladder-height-base-distance-1-1-32-2" assembly-id="ladder-height-base-distance-1-1-32-2" unique-id="ladder-height-base-distance-1-1-32-2">1.0000000</value>
+      <autosimplify original-id="ladder-height-base-distance-1-1-32-3" assembly-id="ladder-height-base-distance-1-1-32-3" unique-id="ladder-height-base-distance-1-1-32-3">1</autosimplify>
+      <feedbackstyle original-id="ladder-height-base-distance-1-1-32-4" assembly-id="ladder-height-base-distance-1-1-32-4" unique-id="ladder-height-base-distance-1-1-32-4">1</feedbackstyle>
+      <feedbackvariables original-id="ladder-height-base-distance-1-1-32-5" assembly-id="ladder-height-base-distance-1-1-32-5" unique-id="ladder-height-base-distance-1-1-32-5">
+        <text original-id="ladder-height-base-distance-1-1-32-5-1" assembly-id="ladder-height-base-distance-1-1-32-5-1" unique-id="ladder-height-base-distance-1-1-32-5-1"/>
+      </feedbackvariables>
+      <node original-id="ladder-height-base-distance-1-1-32-6" assembly-id="ladder-height-base-distance-1-1-32-6" unique-id="ladder-height-base-distance-1-1-32-6">
+        <name original-id="ladder-height-base-distance-1-1-32-6-1" assembly-id="ladder-height-base-distance-1-1-32-6-1" unique-id="ladder-height-base-distance-1-1-32-6-1">0</name>
+        <description original-id="ladder-height-base-distance-1-1-32-6-2" assembly-id="ladder-height-base-distance-1-1-32-6-2" unique-id="ladder-height-base-distance-1-1-32-6-2">Checks for the correct height.</description>
+        <answertest original-id="ladder-height-base-distance-1-1-32-6-3" assembly-id="ladder-height-base-distance-1-1-32-6-3" unique-id="ladder-height-base-distance-1-1-32-6-3">AlgEquiv</answertest>
+        <sans original-id="ladder-height-base-distance-1-1-32-6-4" assembly-id="ladder-height-base-distance-1-1-32-6-4" unique-id="ladder-height-base-distance-1-1-32-6-4">ans2</sans>
+        <tans original-id="ladder-height-base-distance-1-1-32-6-5" assembly-id="ladder-height-base-distance-1-1-32-6-5" unique-id="ladder-height-base-distance-1-1-32-6-5">distance_from_wall</tans>
+        <testoptions original-id="ladder-height-base-distance-1-1-32-6-6" assembly-id="ladder-height-base-distance-1-1-32-6-6" unique-id="ladder-height-base-distance-1-1-32-6-6"/>
+        <quiet original-id="ladder-height-base-distance-1-1-32-6-7" assembly-id="ladder-height-base-distance-1-1-32-6-7" unique-id="ladder-height-base-distance-1-1-32-6-7">0</quiet>
+        <truescoremode original-id="ladder-height-base-distance-1-1-32-6-8" assembly-id="ladder-height-base-distance-1-1-32-6-8" unique-id="ladder-height-base-distance-1-1-32-6-8">=</truescoremode>
+        <truescore original-id="ladder-height-base-distance-1-1-32-6-9" assembly-id="ladder-height-base-distance-1-1-32-6-9" unique-id="ladder-height-base-distance-1-1-32-6-9">1</truescore>
+        <truepenalty original-id="ladder-height-base-distance-1-1-32-6-10" assembly-id="ladder-height-base-distance-1-1-32-6-10" unique-id="ladder-height-base-distance-1-1-32-6-10"/>
+        <truenextnode original-id="ladder-height-base-distance-1-1-32-6-11" assembly-id="ladder-height-base-distance-1-1-32-6-11" unique-id="ladder-height-base-distance-1-1-32-6-11">-1</truenextnode>
+        <trueanswernote original-id="ladder-height-base-distance-1-1-32-6-12" assembly-id="ladder-height-base-distance-1-1-32-6-12" unique-id="ladder-height-base-distance-1-1-32-6-12">prt2-1-T</trueanswernote>
+        <truefeedback format="html" original-id="ladder-height-base-distance-1-1-32-6-13" assembly-id="ladder-height-base-distance-1-1-32-6-13" unique-id="ladder-height-base-distance-1-1-32-6-13">
+          <text original-id="ladder-height-base-distance-1-1-32-6-13-1" assembly-id="ladder-height-base-distance-1-1-32-6-13-1" unique-id="ladder-height-base-distance-1-1-32-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="ladder-height-base-distance-1-1-32-6-14" assembly-id="ladder-height-base-distance-1-1-32-6-14" unique-id="ladder-height-base-distance-1-1-32-6-14">=</falsescoremode>
+        <falsescore original-id="ladder-height-base-distance-1-1-32-6-15" assembly-id="ladder-height-base-distance-1-1-32-6-15" unique-id="ladder-height-base-distance-1-1-32-6-15">0</falsescore>
+        <falsepenalty original-id="ladder-height-base-distance-1-1-32-6-16" assembly-id="ladder-height-base-distance-1-1-32-6-16" unique-id="ladder-height-base-distance-1-1-32-6-16"/>
+        <falsenextnode original-id="ladder-height-base-distance-1-1-32-6-17" assembly-id="ladder-height-base-distance-1-1-32-6-17" unique-id="ladder-height-base-distance-1-1-32-6-17">-1</falsenextnode>
+        <falseanswernote original-id="ladder-height-base-distance-1-1-32-6-18" assembly-id="ladder-height-base-distance-1-1-32-6-18" unique-id="ladder-height-base-distance-1-1-32-6-18">prt2-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="ladder-height-base-distance-1-1-32-6-19" assembly-id="ladder-height-base-distance-1-1-32-6-19" unique-id="ladder-height-base-distance-1-1-32-6-19">
+          <text original-id="ladder-height-base-distance-1-1-32-6-19-1" assembly-id="ladder-height-base-distance-1-1-32-6-19-1" unique-id="ladder-height-base-distance-1-1-32-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed original-id="ladder-height-base-distance-1-1-33" assembly-id="ladder-height-base-distance-1-1-33" unique-id="ladder-height-base-distance-1-1-33">218332025</deployedseed>
+    <deployedseed original-id="ladder-height-base-distance-1-1-34" assembly-id="ladder-height-base-distance-1-1-34" unique-id="ladder-height-base-distance-1-1-34">236136818</deployedseed>
+    <deployedseed original-id="ladder-height-base-distance-1-1-35" assembly-id="ladder-height-base-distance-1-1-35" unique-id="ladder-height-base-distance-1-1-35">1887919839</deployedseed>
+    <deployedseed original-id="ladder-height-base-distance-1-1-36" assembly-id="ladder-height-base-distance-1-1-36" unique-id="ladder-height-base-distance-1-1-36">223435347</deployedseed>
+    <deployedseed original-id="ladder-height-base-distance-1-1-37" assembly-id="ladder-height-base-distance-1-1-37" unique-id="ladder-height-base-distance-1-1-37">1749346652</deployedseed>
+    <deployedseed original-id="ladder-height-base-distance-1-1-38" assembly-id="ladder-height-base-distance-1-1-38" unique-id="ladder-height-base-distance-1-1-38">1240947311</deployedseed>
+    <deployedseed original-id="ladder-height-base-distance-1-1-39" assembly-id="ladder-height-base-distance-1-1-39" unique-id="ladder-height-base-distance-1-1-39">128513505</deployedseed>
+    <deployedseed original-id="ladder-height-base-distance-1-1-40" assembly-id="ladder-height-base-distance-1-1-40" unique-id="ladder-height-base-distance-1-1-40">877613034</deployedseed>
+    <deployedseed original-id="ladder-height-base-distance-1-1-41" assembly-id="ladder-height-base-distance-1-1-41" unique-id="ladder-height-base-distance-1-1-41">1917788876</deployedseed>
+    <deployedseed original-id="ladder-height-base-distance-1-1-42" assembly-id="ladder-height-base-distance-1-1-42" unique-id="ladder-height-base-distance-1-1-42">567355160</deployedseed>
+    <qtest original-id="ladder-height-base-distance-1-1-43" assembly-id="ladder-height-base-distance-1-1-43" unique-id="ladder-height-base-distance-1-1-43">
+      <testcase original-id="ladder-height-base-distance-1-1-43-1" assembly-id="ladder-height-base-distance-1-1-43-1" unique-id="ladder-height-base-distance-1-1-43-1">1</testcase>
+      <description original-id="ladder-height-base-distance-1-1-43-2" assembly-id="ladder-height-base-distance-1-1-43-2" unique-id="ladder-height-base-distance-1-1-43-2">Test case assuming the teacher's input gets full marks.</description>
+      <testinput original-id="ladder-height-base-distance-1-1-43-3" assembly-id="ladder-height-base-distance-1-1-43-3" unique-id="ladder-height-base-distance-1-1-43-3">
+        <name original-id="ladder-height-base-distance-1-1-43-3-1" assembly-id="ladder-height-base-distance-1-1-43-3-1" unique-id="ladder-height-base-distance-1-1-43-3-1">ans1</name>
+        <value original-id="ladder-height-base-distance-1-1-43-3-2" assembly-id="ladder-height-base-distance-1-1-43-3-2" unique-id="ladder-height-base-distance-1-1-43-3-2">height_on_wall</value>
+      </testinput>
+      <testinput original-id="ladder-height-base-distance-1-1-43-4" assembly-id="ladder-height-base-distance-1-1-43-4" unique-id="ladder-height-base-distance-1-1-43-4">
+        <name original-id="ladder-height-base-distance-1-1-43-4-1" assembly-id="ladder-height-base-distance-1-1-43-4-1" unique-id="ladder-height-base-distance-1-1-43-4-1">ans2</name>
+        <value original-id="ladder-height-base-distance-1-1-43-4-2" assembly-id="ladder-height-base-distance-1-1-43-4-2" unique-id="ladder-height-base-distance-1-1-43-4-2">distance_from_wall</value>
+      </testinput>
+      <expected original-id="ladder-height-base-distance-1-1-43-5" assembly-id="ladder-height-base-distance-1-1-43-5" unique-id="ladder-height-base-distance-1-1-43-5">
+        <name original-id="ladder-height-base-distance-1-1-43-5-1" assembly-id="ladder-height-base-distance-1-1-43-5-1" unique-id="ladder-height-base-distance-1-1-43-5-1">prt1</name>
+        <expectedscore original-id="ladder-height-base-distance-1-1-43-5-2" assembly-id="ladder-height-base-distance-1-1-43-5-2" unique-id="ladder-height-base-distance-1-1-43-5-2">1.0000000</expectedscore>
+        <expectedpenalty original-id="ladder-height-base-distance-1-1-43-5-3" assembly-id="ladder-height-base-distance-1-1-43-5-3" unique-id="ladder-height-base-distance-1-1-43-5-3">0.0000000</expectedpenalty>
+        <expectedanswernote original-id="ladder-height-base-distance-1-1-43-5-4" assembly-id="ladder-height-base-distance-1-1-43-5-4" unique-id="ladder-height-base-distance-1-1-43-5-4">prt1-1-T</expectedanswernote>
+      </expected>
+      <expected original-id="ladder-height-base-distance-1-1-43-6" assembly-id="ladder-height-base-distance-1-1-43-6" unique-id="ladder-height-base-distance-1-1-43-6">
+        <name original-id="ladder-height-base-distance-1-1-43-6-1" assembly-id="ladder-height-base-distance-1-1-43-6-1" unique-id="ladder-height-base-distance-1-1-43-6-1">prt2</name>
+        <expectedscore original-id="ladder-height-base-distance-1-1-43-6-2" assembly-id="ladder-height-base-distance-1-1-43-6-2" unique-id="ladder-height-base-distance-1-1-43-6-2">1.0000000</expectedscore>
+        <expectedpenalty original-id="ladder-height-base-distance-1-1-43-6-3" assembly-id="ladder-height-base-distance-1-1-43-6-3" unique-id="ladder-height-base-distance-1-1-43-6-3">0.0000000</expectedpenalty>
+        <expectedanswernote original-id="ladder-height-base-distance-1-1-43-6-4" assembly-id="ladder-height-base-distance-1-1-43-6-4" unique-id="ladder-height-base-distance-1-1-43-6-4">prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>
+            

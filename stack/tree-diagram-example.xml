@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+            <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" original-id="tree-diagram-example-1" assembly-id="tree-diagram-example-1" unique-id="tree-diagram-example-1">
+  <question type="stack" original-id="tree-diagram-example-1-1" assembly-id="tree-diagram-example-1-1" unique-id="tree-diagram-example-1-1">
+    <name original-id="tree-diagram-example-1-1-1" assembly-id="tree-diagram-example-1-1-1" unique-id="tree-diagram-example-1-1-1">
+      <text original-id="tree-diagram-example-1-1-1-1" assembly-id="tree-diagram-example-1-1-1-1" unique-id="tree-diagram-example-1-1-1-1">example of tree diagram</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="tree-diagram-example-1-1-2" assembly-id="tree-diagram-example-1-1-2" unique-id="tree-diagram-example-1-1-2">
+      <text original-id="tree-diagram-example-1-1-2-1" assembly-id="tree-diagram-example-1-1-2-1" unique-id="tree-diagram-example-1-1-2-1">&lt;p&gt;A coin is tossed {@random_toss@} times. What is the probability of getting exactly two heads? &lt;/p&gt;
+
+[[jsxgraph]]
+JXG.Options.text.useMathJax = true;
+var board = JXG.JSXGraph.initBoard(divid, {
+  boundingbox: [-1,5, 3*{#random_toss#}+2, -5],
+  axis:false,
+  grid:false,
+  showNavigation:false,
+  showCopyright:false,
+  pan:false,
+  zoom:false
+});
+board.suspendUpdate();
+
+// --- CONFIG ---
+var n = {#random_toss#};   // number of tosses (random 2–5)
+var xStep = 3;             // horizontal spacing
+var yTop = 4;              // top Y
+var yBottom = -4;          // bottom Y
+var radius = 0.35;         // circle radius
+
+// nodes[level][index] will hold fixed invisible centers
+var nodes = [];
+
+// root
+nodes[0] = [];
+var root = board.create('point',[0,(yTop+yBottom)/2], {
+  visible:false,fixed:true,name:''});
+nodes[0].push(root);
+
+// build levels 1..n
+for (var level=1; level&lt;=n; level++) {
+  nodes[level] = [];
+  var count = Math.pow(2, level);
+  for (var j=0; j&lt;count; j++) {
+    var x = level*xStep;
+    var y = (count===1) ? (yTop+yBottom)/2 : yTop - j*((yTop-yBottom)/(count-1));
+
+    // invisible fixed center
+    var center = board.create('point',[x,y],{visible:false,fixed:true});
+    nodes[level].push(center);
+
+    // circle
+    board.create('circle',[center,radius],{
+      strokeColor:'black', fillColor:'#fff',
+      fixed:true, withLabel:false, highlight:false
+    });
+
+    // label (H for even branch, T for odd)
+    var lbl = (j%2===0)?'H':'T';
+    board.create('text',[x,y,lbl],{
+      anchorX:'middle',anchorY:'middle',
+      fixed:true,fontSize:14,highlight:false
+    });
+
+    // connect to parent
+    var parent = nodes[level-1][Math.floor(j/2)];
+    board.create('segment',[parent,center],{
+      strokeWidth:1,fixed:true,highlight:false
+    });
+  }
+}
+
+board.unsuspendUpdate();
+[[/jsxgraph]]
+
+
+
+&lt;p&gt;&lt;/p&gt;&lt;p&gt;[[input:ans1]] [[validation:ans1]][[feedback:prt1]]&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="tree-diagram-example-1-1-3" assembly-id="tree-diagram-example-1-1-3" unique-id="tree-diagram-example-1-1-3">
+      <text original-id="tree-diagram-example-1-1-3-1" assembly-id="tree-diagram-example-1-1-3-1" unique-id="tree-diagram-example-1-1-3-1">&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;Let’s solve step by step: &lt;/p&gt;
+&lt;p&gt;
+   &lt;ol&gt;
+       &lt;li&gt;
+            &lt;p&gt;Sample space for tossing a coin {@random_toss@}:&lt;/p&gt;
+             &lt;p&gt;S = (HH, HT , TH , TT)&lt;/p&gt;
+             &lt;p&gt;There are 4 equally likely outcomes.&lt;/p&gt;
+        &lt;/li&gt;
+       &lt;li&gt;
+           &lt;p&gt;Event: getting exactly two heads&lt;/p&gt;
+            &lt;p&gt;E= {HH}&lt;/p&gt;
+       &lt;/li&gt;
+           
+              &lt;p&gt;Probability formula:&lt;/p&gt;
+              &lt;p&gt; \(PE=\frac{Number of favorable outcomes​}{Total Outcomes} \)&lt;/p&gt;
+              &lt;p&gt;The probability of getting exactly two heads when a coin is tossed {@random_toss@} is:&lt;/p&gt;
+              &lt;p&gt; \(PE=\frac{1​}{4} \)&lt;/p&gt;
+       &lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/p&gt;</text>
+    </generalfeedback>
+    <defaultgrade original-id="tree-diagram-example-1-1-4" assembly-id="tree-diagram-example-1-1-4" unique-id="tree-diagram-example-1-1-4">1</defaultgrade>
+    <penalty original-id="tree-diagram-example-1-1-5" assembly-id="tree-diagram-example-1-1-5" unique-id="tree-diagram-example-1-1-5">0.1</penalty>
+    <hidden original-id="tree-diagram-example-1-1-6" assembly-id="tree-diagram-example-1-1-6" unique-id="tree-diagram-example-1-1-6">0</hidden>
+    <idnumber original-id="tree-diagram-example-1-1-7" assembly-id="tree-diagram-example-1-1-7" unique-id="tree-diagram-example-1-1-7"/>
+    <stackversion original-id="tree-diagram-example-1-1-8" assembly-id="tree-diagram-example-1-1-8" unique-id="tree-diagram-example-1-1-8">
+      <text original-id="tree-diagram-example-1-1-8-1" assembly-id="tree-diagram-example-1-1-8-1" unique-id="tree-diagram-example-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="tree-diagram-example-1-1-9" assembly-id="tree-diagram-example-1-1-9" unique-id="tree-diagram-example-1-1-9">
+      <text original-id="tree-diagram-example-1-1-9-1" assembly-id="tree-diagram-example-1-1-9-1" unique-id="tree-diagram-example-1-1-9-1">random_toss1:2;
+random_toss2:3;
+random_toss:rand([random_toss1,random_toss2]);
+
+S2 = {HH, HT , TH , TT};
+E2: {HH};
+S3:{HHH,HHT,HTH,THH,HTT,THT,TTH,TTT};
+E3:{HHT,HTH,THH};
+PE1: E2/S2;
+PE2: E3/S3;
+
+PE1_DEC:decimal_places(PE1);
+PE2_Dec:decimal_places(PE2);</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="tree-diagram-example-1-1-10" assembly-id="tree-diagram-example-1-1-10" unique-id="tree-diagram-example-1-1-10">
+      <text original-id="tree-diagram-example-1-1-10-1" assembly-id="tree-diagram-example-1-1-10-1" unique-id="tree-diagram-example-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="tree-diagram-example-1-1-11" assembly-id="tree-diagram-example-1-1-11" unique-id="tree-diagram-example-1-1-11">
+      <text original-id="tree-diagram-example-1-1-11-1" assembly-id="tree-diagram-example-1-1-11-1" unique-id="tree-diagram-example-1-1-11-1">&lt;p&gt;The random tosses for the coin \(cm={@random_toss@}\)&lt;/p&gt;</text>
+    </questionnote>
+    <questiondescription format="html" original-id="tree-diagram-example-1-1-12" assembly-id="tree-diagram-example-1-1-12" unique-id="tree-diagram-example-1-1-12">
+      <text original-id="tree-diagram-example-1-1-12-1" assembly-id="tree-diagram-example-1-1-12-1" unique-id="tree-diagram-example-1-1-12-1">&lt;p id="author"&gt; Joseph Baya&lt;/p&gt;
+&lt;p id="reviewer"&gt;&lt;/p&gt;
+&lt;p id="reviewer"&gt;&lt;/p&gt;
+
+&lt;p id="description"&gt;
+The question asks for the probability of getting  heads out of the random tosses.&lt;/p&gt;</text>
+    </questiondescription>
+    <questionsimplify original-id="tree-diagram-example-1-1-13" assembly-id="tree-diagram-example-1-1-13" unique-id="tree-diagram-example-1-1-13">1</questionsimplify>
+    <assumepositive original-id="tree-diagram-example-1-1-14" assembly-id="tree-diagram-example-1-1-14" unique-id="tree-diagram-example-1-1-14">0</assumepositive>
+    <assumereal original-id="tree-diagram-example-1-1-15" assembly-id="tree-diagram-example-1-1-15" unique-id="tree-diagram-example-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="tree-diagram-example-1-1-16" assembly-id="tree-diagram-example-1-1-16" unique-id="tree-diagram-example-1-1-16">
+      <text original-id="tree-diagram-example-1-1-16-1" assembly-id="tree-diagram-example-1-1-16-1" unique-id="tree-diagram-example-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="tree-diagram-example-1-1-17" assembly-id="tree-diagram-example-1-1-17" unique-id="tree-diagram-example-1-1-17">
+      <text original-id="tree-diagram-example-1-1-17-1" assembly-id="tree-diagram-example-1-1-17-1" unique-id="tree-diagram-example-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="tree-diagram-example-1-1-18" assembly-id="tree-diagram-example-1-1-18" unique-id="tree-diagram-example-1-1-18">
+      <text original-id="tree-diagram-example-1-1-18-1" assembly-id="tree-diagram-example-1-1-18-1" unique-id="tree-diagram-example-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="tree-diagram-example-1-1-19" assembly-id="tree-diagram-example-1-1-19" unique-id="tree-diagram-example-1-1-19">.</decimals>
+    <scientificnotation original-id="tree-diagram-example-1-1-20" assembly-id="tree-diagram-example-1-1-20" unique-id="tree-diagram-example-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="tree-diagram-example-1-1-21" assembly-id="tree-diagram-example-1-1-21" unique-id="tree-diagram-example-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="tree-diagram-example-1-1-22" assembly-id="tree-diagram-example-1-1-22" unique-id="tree-diagram-example-1-1-22">1</sqrtsign>
+    <complexno original-id="tree-diagram-example-1-1-23" assembly-id="tree-diagram-example-1-1-23" unique-id="tree-diagram-example-1-1-23">i</complexno>
+    <inversetrig original-id="tree-diagram-example-1-1-24" assembly-id="tree-diagram-example-1-1-24" unique-id="tree-diagram-example-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="tree-diagram-example-1-1-25" assembly-id="tree-diagram-example-1-1-25" unique-id="tree-diagram-example-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="tree-diagram-example-1-1-26" assembly-id="tree-diagram-example-1-1-26" unique-id="tree-diagram-example-1-1-26">[</matrixparens>
+    <isbroken original-id="tree-diagram-example-1-1-27" assembly-id="tree-diagram-example-1-1-27" unique-id="tree-diagram-example-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="tree-diagram-example-1-1-28" assembly-id="tree-diagram-example-1-1-28" unique-id="tree-diagram-example-1-1-28"/>
+    <input original-id="tree-diagram-example-1-1-29" assembly-id="tree-diagram-example-1-1-29" unique-id="tree-diagram-example-1-1-29">
+      <name original-id="tree-diagram-example-1-1-29-1" assembly-id="tree-diagram-example-1-1-29-1" unique-id="tree-diagram-example-1-1-29-1">ans1</name>
+      <type original-id="tree-diagram-example-1-1-29-2" assembly-id="tree-diagram-example-1-1-29-2" unique-id="tree-diagram-example-1-1-29-2">algebraic</type>
+      <tans original-id="tree-diagram-example-1-1-29-3" assembly-id="tree-diagram-example-1-1-29-3" unique-id="tree-diagram-example-1-1-29-3">ta1</tans>
+      <boxsize original-id="tree-diagram-example-1-1-29-4" assembly-id="tree-diagram-example-1-1-29-4" unique-id="tree-diagram-example-1-1-29-4">15</boxsize>
+      <strictsyntax original-id="tree-diagram-example-1-1-29-5" assembly-id="tree-diagram-example-1-1-29-5" unique-id="tree-diagram-example-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="tree-diagram-example-1-1-29-6" assembly-id="tree-diagram-example-1-1-29-6" unique-id="tree-diagram-example-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="tree-diagram-example-1-1-29-7" assembly-id="tree-diagram-example-1-1-29-7" unique-id="tree-diagram-example-1-1-29-7"/>
+      <syntaxattribute original-id="tree-diagram-example-1-1-29-8" assembly-id="tree-diagram-example-1-1-29-8" unique-id="tree-diagram-example-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="tree-diagram-example-1-1-29-9" assembly-id="tree-diagram-example-1-1-29-9" unique-id="tree-diagram-example-1-1-29-9"/>
+      <allowwords original-id="tree-diagram-example-1-1-29-10" assembly-id="tree-diagram-example-1-1-29-10" unique-id="tree-diagram-example-1-1-29-10"/>
+      <forbidfloat original-id="tree-diagram-example-1-1-29-11" assembly-id="tree-diagram-example-1-1-29-11" unique-id="tree-diagram-example-1-1-29-11">1</forbidfloat>
+      <requirelowestterms original-id="tree-diagram-example-1-1-29-12" assembly-id="tree-diagram-example-1-1-29-12" unique-id="tree-diagram-example-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="tree-diagram-example-1-1-29-13" assembly-id="tree-diagram-example-1-1-29-13" unique-id="tree-diagram-example-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="tree-diagram-example-1-1-29-14" assembly-id="tree-diagram-example-1-1-29-14" unique-id="tree-diagram-example-1-1-29-14">1</mustverify>
+      <showvalidation original-id="tree-diagram-example-1-1-29-15" assembly-id="tree-diagram-example-1-1-29-15" unique-id="tree-diagram-example-1-1-29-15">1</showvalidation>
+      <options original-id="tree-diagram-example-1-1-29-16" assembly-id="tree-diagram-example-1-1-29-16" unique-id="tree-diagram-example-1-1-29-16"/>
+    </input>
+    <prt original-id="tree-diagram-example-1-1-30" assembly-id="tree-diagram-example-1-1-30" unique-id="tree-diagram-example-1-1-30">
+      <name original-id="tree-diagram-example-1-1-30-1" assembly-id="tree-diagram-example-1-1-30-1" unique-id="tree-diagram-example-1-1-30-1">prt1</name>
+      <value original-id="tree-diagram-example-1-1-30-2" assembly-id="tree-diagram-example-1-1-30-2" unique-id="tree-diagram-example-1-1-30-2">1.0000000</value>
+      <autosimplify original-id="tree-diagram-example-1-1-30-3" assembly-id="tree-diagram-example-1-1-30-3" unique-id="tree-diagram-example-1-1-30-3">1</autosimplify>
+      <feedbackstyle original-id="tree-diagram-example-1-1-30-4" assembly-id="tree-diagram-example-1-1-30-4" unique-id="tree-diagram-example-1-1-30-4">1</feedbackstyle>
+      <feedbackvariables original-id="tree-diagram-example-1-1-30-5" assembly-id="tree-diagram-example-1-1-30-5" unique-id="tree-diagram-example-1-1-30-5">
+        <text original-id="tree-diagram-example-1-1-30-5-1" assembly-id="tree-diagram-example-1-1-30-5-1" unique-id="tree-diagram-example-1-1-30-5-1"/>
+      </feedbackvariables>
+      <node original-id="tree-diagram-example-1-1-30-6" assembly-id="tree-diagram-example-1-1-30-6" unique-id="tree-diagram-example-1-1-30-6">
+        <name original-id="tree-diagram-example-1-1-30-6-1" assembly-id="tree-diagram-example-1-1-30-6-1" unique-id="tree-diagram-example-1-1-30-6-1">0</name>
+        <description original-id="tree-diagram-example-1-1-30-6-2" assembly-id="tree-diagram-example-1-1-30-6-2" unique-id="tree-diagram-example-1-1-30-6-2"/>
+        <answertest original-id="tree-diagram-example-1-1-30-6-3" assembly-id="tree-diagram-example-1-1-30-6-3" unique-id="tree-diagram-example-1-1-30-6-3">AlgEquiv</answertest>
+        <sans original-id="tree-diagram-example-1-1-30-6-4" assembly-id="tree-diagram-example-1-1-30-6-4" unique-id="tree-diagram-example-1-1-30-6-4">ans1</sans>
+        <tans original-id="tree-diagram-example-1-1-30-6-5" assembly-id="tree-diagram-example-1-1-30-6-5" unique-id="tree-diagram-example-1-1-30-6-5">ta1</tans>
+        <testoptions original-id="tree-diagram-example-1-1-30-6-6" assembly-id="tree-diagram-example-1-1-30-6-6" unique-id="tree-diagram-example-1-1-30-6-6"/>
+        <quiet original-id="tree-diagram-example-1-1-30-6-7" assembly-id="tree-diagram-example-1-1-30-6-7" unique-id="tree-diagram-example-1-1-30-6-7">0</quiet>
+        <truescoremode original-id="tree-diagram-example-1-1-30-6-8" assembly-id="tree-diagram-example-1-1-30-6-8" unique-id="tree-diagram-example-1-1-30-6-8">=</truescoremode>
+        <truescore original-id="tree-diagram-example-1-1-30-6-9" assembly-id="tree-diagram-example-1-1-30-6-9" unique-id="tree-diagram-example-1-1-30-6-9">1</truescore>
+        <truepenalty original-id="tree-diagram-example-1-1-30-6-10" assembly-id="tree-diagram-example-1-1-30-6-10" unique-id="tree-diagram-example-1-1-30-6-10"/>
+        <truenextnode original-id="tree-diagram-example-1-1-30-6-11" assembly-id="tree-diagram-example-1-1-30-6-11" unique-id="tree-diagram-example-1-1-30-6-11">-1</truenextnode>
+        <trueanswernote original-id="tree-diagram-example-1-1-30-6-12" assembly-id="tree-diagram-example-1-1-30-6-12" unique-id="tree-diagram-example-1-1-30-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="tree-diagram-example-1-1-30-6-13" assembly-id="tree-diagram-example-1-1-30-6-13" unique-id="tree-diagram-example-1-1-30-6-13">
+          <text original-id="tree-diagram-example-1-1-30-6-13-1" assembly-id="tree-diagram-example-1-1-30-6-13-1" unique-id="tree-diagram-example-1-1-30-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="tree-diagram-example-1-1-30-6-14" assembly-id="tree-diagram-example-1-1-30-6-14" unique-id="tree-diagram-example-1-1-30-6-14">=</falsescoremode>
+        <falsescore original-id="tree-diagram-example-1-1-30-6-15" assembly-id="tree-diagram-example-1-1-30-6-15" unique-id="tree-diagram-example-1-1-30-6-15">0</falsescore>
+        <falsepenalty original-id="tree-diagram-example-1-1-30-6-16" assembly-id="tree-diagram-example-1-1-30-6-16" unique-id="tree-diagram-example-1-1-30-6-16"/>
+        <falsenextnode original-id="tree-diagram-example-1-1-30-6-17" assembly-id="tree-diagram-example-1-1-30-6-17" unique-id="tree-diagram-example-1-1-30-6-17">-1</falsenextnode>
+        <falseanswernote original-id="tree-diagram-example-1-1-30-6-18" assembly-id="tree-diagram-example-1-1-30-6-18" unique-id="tree-diagram-example-1-1-30-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="tree-diagram-example-1-1-30-6-19" assembly-id="tree-diagram-example-1-1-30-6-19" unique-id="tree-diagram-example-1-1-30-6-19">
+          <text original-id="tree-diagram-example-1-1-30-6-19-1" assembly-id="tree-diagram-example-1-1-30-6-19-1" unique-id="tree-diagram-example-1-1-30-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>
+        

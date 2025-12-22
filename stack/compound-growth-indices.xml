@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+                <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../../../../stack/1-0-Numbers-Algebra/Indices-and-Logarithms/Indices/Applications-of-Indices-in-Real-Life-situations/Application-of-indices-in-compound-growth.xml" original-id="compound-growth-indices-1" assembly-id="compound-growth-indices-1" unique-id="compound-growth-indices-1">
+  <question type="stack" original-id="compound-growth-indices-1-1" assembly-id="compound-growth-indices-1-1" unique-id="compound-growth-indices-1-1">
+    <name original-id="compound-growth-indices-1-1-1" assembly-id="compound-growth-indices-1-1-1" unique-id="compound-growth-indices-1-1-1">
+      <text original-id="compound-growth-indices-1-1-1-1" assembly-id="compound-growth-indices-1-1-1-1" unique-id="compound-growth-indices-1-1-1-1">Application of indices in compound growth</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="compound-growth-indices-1-1-2" assembly-id="compound-growth-indices-1-1-2" unique-id="compound-growth-indices-1-1-2">
+      <text original-id="compound-growth-indices-1-1-2-1" assembly-id="compound-growth-indices-1-1-2-1" unique-id="compound-growth-indices-1-1-2-1">&lt;p&gt;A school STEM club invests Ksh {@P@} in a small project account. The money grows by a factor of {@r@} each year. Using indices, calculate the value of the investment after {@n@} years.&lt;/p&gt;
+
+&lt;p&gt;Give your answer in the form:&lt;/p&gt;
+
+&lt;p&gt;\[
+A = P \times r^n
+\]&lt;/p&gt;
+
+&lt;p&gt;[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="compound-growth-indices-1-1-3" assembly-id="compound-growth-indices-1-1-3" unique-id="compound-growth-indices-1-1-3">
+      <text original-id="compound-growth-indices-1-1-3-1" assembly-id="compound-growth-indices-1-1-3-1" unique-id="compound-growth-indices-1-1-3-1">&lt;h3&gt;Worked Solution&lt;/h3&gt;
+
+&lt;p&gt;The value after {@n@} years with growth factor {@r@} is given by:&lt;/p&gt;
+
+&lt;p&gt;\[
+A = {@P@} \times ({@r@})^{@n@}.
+\]&lt;/p&gt;
+
+&lt;p&gt;This evaluates to:&lt;/p&gt;
+
+&lt;p&gt;\[
+A = {@A@}.
+\]&lt;/p&gt;</text>
+    </generalfeedback>
+    <defaultgrade original-id="compound-growth-indices-1-1-4" assembly-id="compound-growth-indices-1-1-4" unique-id="compound-growth-indices-1-1-4">1</defaultgrade>
+    <penalty original-id="compound-growth-indices-1-1-5" assembly-id="compound-growth-indices-1-1-5" unique-id="compound-growth-indices-1-1-5">0.1</penalty>
+    <hidden original-id="compound-growth-indices-1-1-6" assembly-id="compound-growth-indices-1-1-6" unique-id="compound-growth-indices-1-1-6">0</hidden>
+    <idnumber original-id="compound-growth-indices-1-1-7" assembly-id="compound-growth-indices-1-1-7" unique-id="compound-growth-indices-1-1-7"/>
+    <stackversion original-id="compound-growth-indices-1-1-8" assembly-id="compound-growth-indices-1-1-8" unique-id="compound-growth-indices-1-1-8">
+      <text original-id="compound-growth-indices-1-1-8-1" assembly-id="compound-growth-indices-1-1-8-1" unique-id="compound-growth-indices-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="compound-growth-indices-1-1-9" assembly-id="compound-growth-indices-1-1-9" unique-id="compound-growth-indices-1-1-9">
+      <text original-id="compound-growth-indices-1-1-9-1" assembly-id="compound-growth-indices-1-1-9-1" unique-id="compound-growth-indices-1-1-9-1">/* Principal amount in shillings */
+P: rand_with_step(500,1500,100);
+
+/* Growth multiplier (e.g. 1.05 means 5% growth) */
+rate_choices: [105/100, 110/100, 120/100];
+r: rand(rate_choices);
+
+/* Number of years */
+n: rand([2,3,4]);
+
+/* Final amount */
+A: P * r^n;
+
+/* Wrong answers */
+m1: P * r * n;        /* treats as simple growth */
+m2: P * r^(n+1);      /* adds an extra growth cycle */
+m3: P + r^n;          /* adds instead of multiplies */
+</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="compound-growth-indices-1-1-10" assembly-id="compound-growth-indices-1-1-10" unique-id="compound-growth-indices-1-1-10">
+      <text original-id="compound-growth-indices-1-1-10-1" assembly-id="compound-growth-indices-1-1-10-1" unique-id="compound-growth-indices-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="compound-growth-indices-1-1-11" assembly-id="compound-growth-indices-1-1-11" unique-id="compound-growth-indices-1-1-11">
+      <text original-id="compound-growth-indices-1-1-11-1" assembly-id="compound-growth-indices-1-1-11-1" unique-id="compound-growth-indices-1-1-11-1">{@A@}</text>
+    </questionnote>
+    <questiondescription format="html" original-id="compound-growth-indices-1-1-12" assembly-id="compound-growth-indices-1-1-12" unique-id="compound-growth-indices-1-1-12">
+      <text original-id="compound-growth-indices-1-1-12-1" assembly-id="compound-growth-indices-1-1-12-1" unique-id="compound-growth-indices-1-1-12-1"/>
+    </questiondescription>
+    <questionsimplify original-id="compound-growth-indices-1-1-13" assembly-id="compound-growth-indices-1-1-13" unique-id="compound-growth-indices-1-1-13">1</questionsimplify>
+    <assumepositive original-id="compound-growth-indices-1-1-14" assembly-id="compound-growth-indices-1-1-14" unique-id="compound-growth-indices-1-1-14">0</assumepositive>
+    <assumereal original-id="compound-growth-indices-1-1-15" assembly-id="compound-growth-indices-1-1-15" unique-id="compound-growth-indices-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="compound-growth-indices-1-1-16" assembly-id="compound-growth-indices-1-1-16" unique-id="compound-growth-indices-1-1-16">
+      <text original-id="compound-growth-indices-1-1-16-1" assembly-id="compound-growth-indices-1-1-16-1" unique-id="compound-growth-indices-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="compound-growth-indices-1-1-17" assembly-id="compound-growth-indices-1-1-17" unique-id="compound-growth-indices-1-1-17">
+      <text original-id="compound-growth-indices-1-1-17-1" assembly-id="compound-growth-indices-1-1-17-1" unique-id="compound-growth-indices-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="compound-growth-indices-1-1-18" assembly-id="compound-growth-indices-1-1-18" unique-id="compound-growth-indices-1-1-18">
+      <text original-id="compound-growth-indices-1-1-18-1" assembly-id="compound-growth-indices-1-1-18-1" unique-id="compound-growth-indices-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="compound-growth-indices-1-1-19" assembly-id="compound-growth-indices-1-1-19" unique-id="compound-growth-indices-1-1-19">.</decimals>
+    <scientificnotation original-id="compound-growth-indices-1-1-20" assembly-id="compound-growth-indices-1-1-20" unique-id="compound-growth-indices-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="compound-growth-indices-1-1-21" assembly-id="compound-growth-indices-1-1-21" unique-id="compound-growth-indices-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="compound-growth-indices-1-1-22" assembly-id="compound-growth-indices-1-1-22" unique-id="compound-growth-indices-1-1-22">1</sqrtsign>
+    <complexno original-id="compound-growth-indices-1-1-23" assembly-id="compound-growth-indices-1-1-23" unique-id="compound-growth-indices-1-1-23">i</complexno>
+    <inversetrig original-id="compound-growth-indices-1-1-24" assembly-id="compound-growth-indices-1-1-24" unique-id="compound-growth-indices-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="compound-growth-indices-1-1-25" assembly-id="compound-growth-indices-1-1-25" unique-id="compound-growth-indices-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="compound-growth-indices-1-1-26" assembly-id="compound-growth-indices-1-1-26" unique-id="compound-growth-indices-1-1-26">[</matrixparens>
+    <isbroken original-id="compound-growth-indices-1-1-27" assembly-id="compound-growth-indices-1-1-27" unique-id="compound-growth-indices-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="compound-growth-indices-1-1-28" assembly-id="compound-growth-indices-1-1-28" unique-id="compound-growth-indices-1-1-28"/>
+    <input original-id="compound-growth-indices-1-1-29" assembly-id="compound-growth-indices-1-1-29" unique-id="compound-growth-indices-1-1-29">
+      <name original-id="compound-growth-indices-1-1-29-1" assembly-id="compound-growth-indices-1-1-29-1" unique-id="compound-growth-indices-1-1-29-1">ans1</name>
+      <type original-id="compound-growth-indices-1-1-29-2" assembly-id="compound-growth-indices-1-1-29-2" unique-id="compound-growth-indices-1-1-29-2">algebraic</type>
+      <tans original-id="compound-growth-indices-1-1-29-3" assembly-id="compound-growth-indices-1-1-29-3" unique-id="compound-growth-indices-1-1-29-3">A</tans>
+      <boxsize original-id="compound-growth-indices-1-1-29-4" assembly-id="compound-growth-indices-1-1-29-4" unique-id="compound-growth-indices-1-1-29-4">15</boxsize>
+      <strictsyntax original-id="compound-growth-indices-1-1-29-5" assembly-id="compound-growth-indices-1-1-29-5" unique-id="compound-growth-indices-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="compound-growth-indices-1-1-29-6" assembly-id="compound-growth-indices-1-1-29-6" unique-id="compound-growth-indices-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="compound-growth-indices-1-1-29-7" assembly-id="compound-growth-indices-1-1-29-7" unique-id="compound-growth-indices-1-1-29-7"/>
+      <syntaxattribute original-id="compound-growth-indices-1-1-29-8" assembly-id="compound-growth-indices-1-1-29-8" unique-id="compound-growth-indices-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="compound-growth-indices-1-1-29-9" assembly-id="compound-growth-indices-1-1-29-9" unique-id="compound-growth-indices-1-1-29-9"/>
+      <allowwords original-id="compound-growth-indices-1-1-29-10" assembly-id="compound-growth-indices-1-1-29-10" unique-id="compound-growth-indices-1-1-29-10"/>
+      <forbidfloat original-id="compound-growth-indices-1-1-29-11" assembly-id="compound-growth-indices-1-1-29-11" unique-id="compound-growth-indices-1-1-29-11">1</forbidfloat>
+      <requirelowestterms original-id="compound-growth-indices-1-1-29-12" assembly-id="compound-growth-indices-1-1-29-12" unique-id="compound-growth-indices-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="compound-growth-indices-1-1-29-13" assembly-id="compound-growth-indices-1-1-29-13" unique-id="compound-growth-indices-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="compound-growth-indices-1-1-29-14" assembly-id="compound-growth-indices-1-1-29-14" unique-id="compound-growth-indices-1-1-29-14">1</mustverify>
+      <showvalidation original-id="compound-growth-indices-1-1-29-15" assembly-id="compound-growth-indices-1-1-29-15" unique-id="compound-growth-indices-1-1-29-15">3</showvalidation>
+      <options original-id="compound-growth-indices-1-1-29-16" assembly-id="compound-growth-indices-1-1-29-16" unique-id="compound-growth-indices-1-1-29-16"/>
+    </input>
+    <prt original-id="compound-growth-indices-1-1-30" assembly-id="compound-growth-indices-1-1-30" unique-id="compound-growth-indices-1-1-30">
+      <name original-id="compound-growth-indices-1-1-30-1" assembly-id="compound-growth-indices-1-1-30-1" unique-id="compound-growth-indices-1-1-30-1">prt1</name>
+      <value original-id="compound-growth-indices-1-1-30-2" assembly-id="compound-growth-indices-1-1-30-2" unique-id="compound-growth-indices-1-1-30-2">1.0000000</value>
+      <autosimplify original-id="compound-growth-indices-1-1-30-3" assembly-id="compound-growth-indices-1-1-30-3" unique-id="compound-growth-indices-1-1-30-3">1</autosimplify>
+      <feedbackstyle original-id="compound-growth-indices-1-1-30-4" assembly-id="compound-growth-indices-1-1-30-4" unique-id="compound-growth-indices-1-1-30-4">1</feedbackstyle>
+      <feedbackvariables original-id="compound-growth-indices-1-1-30-5" assembly-id="compound-growth-indices-1-1-30-5" unique-id="compound-growth-indices-1-1-30-5">
+        <text original-id="compound-growth-indices-1-1-30-5-1" assembly-id="compound-growth-indices-1-1-30-5-1" unique-id="compound-growth-indices-1-1-30-5-1"/>
+      </feedbackvariables>
+      <node original-id="compound-growth-indices-1-1-30-6" assembly-id="compound-growth-indices-1-1-30-6" unique-id="compound-growth-indices-1-1-30-6">
+        <name original-id="compound-growth-indices-1-1-30-6-1" assembly-id="compound-growth-indices-1-1-30-6-1" unique-id="compound-growth-indices-1-1-30-6-1">0</name>
+        <description original-id="compound-growth-indices-1-1-30-6-2" assembly-id="compound-growth-indices-1-1-30-6-2" unique-id="compound-growth-indices-1-1-30-6-2">Checks for the correct answer</description>
+        <answertest original-id="compound-growth-indices-1-1-30-6-3" assembly-id="compound-growth-indices-1-1-30-6-3" unique-id="compound-growth-indices-1-1-30-6-3">AlgEquiv</answertest>
+        <sans original-id="compound-growth-indices-1-1-30-6-4" assembly-id="compound-growth-indices-1-1-30-6-4" unique-id="compound-growth-indices-1-1-30-6-4">ans1</sans>
+        <tans original-id="compound-growth-indices-1-1-30-6-5" assembly-id="compound-growth-indices-1-1-30-6-5" unique-id="compound-growth-indices-1-1-30-6-5">A</tans>
+        <testoptions original-id="compound-growth-indices-1-1-30-6-6" assembly-id="compound-growth-indices-1-1-30-6-6" unique-id="compound-growth-indices-1-1-30-6-6"/>
+        <quiet original-id="compound-growth-indices-1-1-30-6-7" assembly-id="compound-growth-indices-1-1-30-6-7" unique-id="compound-growth-indices-1-1-30-6-7">0</quiet>
+        <truescoremode original-id="compound-growth-indices-1-1-30-6-8" assembly-id="compound-growth-indices-1-1-30-6-8" unique-id="compound-growth-indices-1-1-30-6-8">=</truescoremode>
+        <truescore original-id="compound-growth-indices-1-1-30-6-9" assembly-id="compound-growth-indices-1-1-30-6-9" unique-id="compound-growth-indices-1-1-30-6-9">1</truescore>
+        <truepenalty original-id="compound-growth-indices-1-1-30-6-10" assembly-id="compound-growth-indices-1-1-30-6-10" unique-id="compound-growth-indices-1-1-30-6-10"/>
+        <truenextnode original-id="compound-growth-indices-1-1-30-6-11" assembly-id="compound-growth-indices-1-1-30-6-11" unique-id="compound-growth-indices-1-1-30-6-11">-1</truenextnode>
+        <trueanswernote original-id="compound-growth-indices-1-1-30-6-12" assembly-id="compound-growth-indices-1-1-30-6-12" unique-id="compound-growth-indices-1-1-30-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="compound-growth-indices-1-1-30-6-13" assembly-id="compound-growth-indices-1-1-30-6-13" unique-id="compound-growth-indices-1-1-30-6-13">
+          <text original-id="compound-growth-indices-1-1-30-6-13-1" assembly-id="compound-growth-indices-1-1-30-6-13-1" unique-id="compound-growth-indices-1-1-30-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="compound-growth-indices-1-1-30-6-14" assembly-id="compound-growth-indices-1-1-30-6-14" unique-id="compound-growth-indices-1-1-30-6-14">=</falsescoremode>
+        <falsescore original-id="compound-growth-indices-1-1-30-6-15" assembly-id="compound-growth-indices-1-1-30-6-15" unique-id="compound-growth-indices-1-1-30-6-15">0</falsescore>
+        <falsepenalty original-id="compound-growth-indices-1-1-30-6-16" assembly-id="compound-growth-indices-1-1-30-6-16" unique-id="compound-growth-indices-1-1-30-6-16"/>
+        <falsenextnode original-id="compound-growth-indices-1-1-30-6-17" assembly-id="compound-growth-indices-1-1-30-6-17" unique-id="compound-growth-indices-1-1-30-6-17">-1</falsenextnode>
+        <falseanswernote original-id="compound-growth-indices-1-1-30-6-18" assembly-id="compound-growth-indices-1-1-30-6-18" unique-id="compound-growth-indices-1-1-30-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="compound-growth-indices-1-1-30-6-19" assembly-id="compound-growth-indices-1-1-30-6-19" unique-id="compound-growth-indices-1-1-30-6-19">
+          <text original-id="compound-growth-indices-1-1-30-6-19-1" assembly-id="compound-growth-indices-1-1-30-6-19-1" unique-id="compound-growth-indices-1-1-30-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed original-id="compound-growth-indices-1-1-31" assembly-id="compound-growth-indices-1-1-31" unique-id="compound-growth-indices-1-1-31">1204693388</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-32" assembly-id="compound-growth-indices-1-1-32" unique-id="compound-growth-indices-1-1-32">470289158</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-33" assembly-id="compound-growth-indices-1-1-33" unique-id="compound-growth-indices-1-1-33">1143310416</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-34" assembly-id="compound-growth-indices-1-1-34" unique-id="compound-growth-indices-1-1-34">977464943</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-35" assembly-id="compound-growth-indices-1-1-35" unique-id="compound-growth-indices-1-1-35">745658075</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-36" assembly-id="compound-growth-indices-1-1-36" unique-id="compound-growth-indices-1-1-36">76477481</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-37" assembly-id="compound-growth-indices-1-1-37" unique-id="compound-growth-indices-1-1-37">565758592</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-38" assembly-id="compound-growth-indices-1-1-38" unique-id="compound-growth-indices-1-1-38">1776078061</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-39" assembly-id="compound-growth-indices-1-1-39" unique-id="compound-growth-indices-1-1-39">413788810</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-40" assembly-id="compound-growth-indices-1-1-40" unique-id="compound-growth-indices-1-1-40">1371625088</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-41" assembly-id="compound-growth-indices-1-1-41" unique-id="compound-growth-indices-1-1-41">712674272</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-42" assembly-id="compound-growth-indices-1-1-42" unique-id="compound-growth-indices-1-1-42">455303737</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-43" assembly-id="compound-growth-indices-1-1-43" unique-id="compound-growth-indices-1-1-43">768547739</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-44" assembly-id="compound-growth-indices-1-1-44" unique-id="compound-growth-indices-1-1-44">1730270025</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-45" assembly-id="compound-growth-indices-1-1-45" unique-id="compound-growth-indices-1-1-45">2054268332</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-46" assembly-id="compound-growth-indices-1-1-46" unique-id="compound-growth-indices-1-1-46">983443679</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-47" assembly-id="compound-growth-indices-1-1-47" unique-id="compound-growth-indices-1-1-47">782350443</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-48" assembly-id="compound-growth-indices-1-1-48" unique-id="compound-growth-indices-1-1-48">16007077</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-49" assembly-id="compound-growth-indices-1-1-49" unique-id="compound-growth-indices-1-1-49">814986667</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-50" assembly-id="compound-growth-indices-1-1-50" unique-id="compound-growth-indices-1-1-50">322650900</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-51" assembly-id="compound-growth-indices-1-1-51" unique-id="compound-growth-indices-1-1-51">1547854658</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-52" assembly-id="compound-growth-indices-1-1-52" unique-id="compound-growth-indices-1-1-52">1981419038</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-53" assembly-id="compound-growth-indices-1-1-53" unique-id="compound-growth-indices-1-1-53">510352295</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-54" assembly-id="compound-growth-indices-1-1-54" unique-id="compound-growth-indices-1-1-54">1018688988</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-55" assembly-id="compound-growth-indices-1-1-55" unique-id="compound-growth-indices-1-1-55">1100457032</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-56" assembly-id="compound-growth-indices-1-1-56" unique-id="compound-growth-indices-1-1-56">984678176</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-57" assembly-id="compound-growth-indices-1-1-57" unique-id="compound-growth-indices-1-1-57">535107885</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-58" assembly-id="compound-growth-indices-1-1-58" unique-id="compound-growth-indices-1-1-58">1430200615</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-59" assembly-id="compound-growth-indices-1-1-59" unique-id="compound-growth-indices-1-1-59">1339368910</deployedseed>
+    <deployedseed original-id="compound-growth-indices-1-1-60" assembly-id="compound-growth-indices-1-1-60" unique-id="compound-growth-indices-1-1-60">1612582682</deployedseed>
+    <qtest original-id="compound-growth-indices-1-1-61" assembly-id="compound-growth-indices-1-1-61" unique-id="compound-growth-indices-1-1-61">
+      <testcase original-id="compound-growth-indices-1-1-61-1" assembly-id="compound-growth-indices-1-1-61-1" unique-id="compound-growth-indices-1-1-61-1">1</testcase>
+      <description original-id="compound-growth-indices-1-1-61-2" assembly-id="compound-growth-indices-1-1-61-2" unique-id="compound-growth-indices-1-1-61-2">Test case assuming the teacher's input gets full marks.</description>
+      <testinput original-id="compound-growth-indices-1-1-61-3" assembly-id="compound-growth-indices-1-1-61-3" unique-id="compound-growth-indices-1-1-61-3">
+        <name original-id="compound-growth-indices-1-1-61-3-1" assembly-id="compound-growth-indices-1-1-61-3-1" unique-id="compound-growth-indices-1-1-61-3-1">ans1</name>
+        <value original-id="compound-growth-indices-1-1-61-3-2" assembly-id="compound-growth-indices-1-1-61-3-2" unique-id="compound-growth-indices-1-1-61-3-2">A</value>
+      </testinput>
+      <expected original-id="compound-growth-indices-1-1-61-4" assembly-id="compound-growth-indices-1-1-61-4" unique-id="compound-growth-indices-1-1-61-4">
+        <name original-id="compound-growth-indices-1-1-61-4-1" assembly-id="compound-growth-indices-1-1-61-4-1" unique-id="compound-growth-indices-1-1-61-4-1">prt1</name>
+        <expectedscore original-id="compound-growth-indices-1-1-61-4-2" assembly-id="compound-growth-indices-1-1-61-4-2" unique-id="compound-growth-indices-1-1-61-4-2">1.0000000</expectedscore>
+        <expectedpenalty original-id="compound-growth-indices-1-1-61-4-3" assembly-id="compound-growth-indices-1-1-61-4-3" unique-id="compound-growth-indices-1-1-61-4-3">0.0000000</expectedpenalty>
+        <expectedanswernote original-id="compound-growth-indices-1-1-61-4-4" assembly-id="compound-growth-indices-1-1-61-4-4" unique-id="compound-growth-indices-1-1-61-4-4">prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>
+            

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+            <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../../../../stack/2-0-Measurement-Geometry/2-1-Similarity-and-Enlargement/2-1-2-Enlargement/Enlargement-and-Similarity-Parsons-Proof.xml" original-id="enlargement-similarity-parsons-1" assembly-id="enlargement-similarity-parsons-1" unique-id="enlargement-similarity-parsons-1">
+  <question type="stack" original-id="enlargement-similarity-parsons-1-1" assembly-id="enlargement-similarity-parsons-1-1" unique-id="enlargement-similarity-parsons-1-1">
+    <name original-id="enlargement-similarity-parsons-1-1-1" assembly-id="enlargement-similarity-parsons-1-1-1" unique-id="enlargement-similarity-parsons-1-1-1">
+      <text original-id="enlargement-similarity-parsons-1-1-1-1" assembly-id="enlargement-similarity-parsons-1-1-1-1" unique-id="enlargement-similarity-parsons-1-1-1-1">Enlargement and Similarity: Parsons Proof</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="enlargement-similarity-parsons-1-1-2" assembly-id="enlargement-similarity-parsons-1-1-2" unique-id="enlargement-similarity-parsons-1-1-2">
+      <text original-id="enlargement-similarity-parsons-1-1-2-1" assembly-id="enlargement-similarity-parsons-1-1-2-1" unique-id="enlargement-similarity-parsons-1-1-2-1">&lt;p&gt;
+You have discovered two triangles on the board: the small one, \(ABC\), and the big one, \(AB'C'\), which is an enlargement of the first with centre at \(A\).
+&lt;/p&gt;
+&lt;br&gt;
+[[jsxgraph]]
+var xmin = {#xmin#};
+var xmax = {#xmax#};
+var ymin = {#ymin#};
+var ymax = {#ymax#};
+
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+    boundingbox: [xmin, ymax, xmax, ymin],  
+    axis:true,
+    showCopyright:false,
+    showNavigation:false,
+    keepAspectRatio:true
+});
+
+// Base triangle coordinates from STACK
+var xA = {#xA#};
+var yA = {#yA#};
+var xB = {#xB#};
+var yB = {#yB#};
+var xC = {#xC#};
+var yC = {#yC#};
+
+// Original triangle ABC
+var A = board.create('point', [xA, yA], {name:'A', size:2, fixed:true});
+var B = board.create('point', [xB, yB], {name:'B', size:2, fixed:true});
+var C = board.create('point', [xC, yC], {name:'C', size:2, fixed:true});
+var triABC = board.create('polygon', [A,B,C], {
+    borders:{strokeColor:"green", strokeWidth:2},   // green border
+    fillColor:"lightgreen",                        // green fill
+    fillOpacity:0.4
+});
+
+// Scale factor from STACK
+var k = {#scale_factor#};
+
+// Image triangle A'B'C' (A' = A)
+var xB1 = {#xB1#};
+var yB1 = {#yB1#};
+var xC1 = {#xC1#};
+var yC1 = {#yC1#};
+
+var B1 = board.create('point', [xB1,yB1], {name:"B'", size:2, color:"red", fixed:true});
+var C1 = board.create('point', [xC1,yC1], {name:"C'", size:2, color:"red", fixed:true});
+var triA1B1C1 = board.create('polygon',[A,B1,C1], {
+    borders:{strokeColor:"red", strokeWidth:2, dash:2}, // red border
+    fillColor:"pink",                                   // red fill
+    fillOpacity:0.3
+});
+
+// Optional: show rays from A to dilated points
+board.create('line', [A,B1], {straightFirst:true, straightLast:true, strokeColor:"gray", dash:1});
+board.create('line', [A,C1], {straightFirst:true, straightLast:true, strokeColor:"gray", dash:1});
+
+[[/jsxgraph]]
+
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;p&gt;&lt;strong&gt;Theorem:&lt;/strong&gt; If \(AB'C'\) is an enlargement of \(ABC\) with centre \(A\) and scale factor \(k\), then \( \triangle ABC \sim \triangle AB'C'\).&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Drag and drop the steps into the right order:&lt;/em&gt;&lt;/p&gt;
+&lt;br&gt;
+[[parsons input="ans1" log="true"]]
+{# parsons_encode(proof_steps) #}
+[[/parsons]]
+&lt;p&gt;
+[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="enlargement-similarity-parsons-1-1-3" assembly-id="enlargement-similarity-parsons-1-1-3" unique-id="enlargement-similarity-parsons-1-1-3">
+      <text original-id="enlargement-similarity-parsons-1-1-3-1" assembly-id="enlargement-similarity-parsons-1-1-3-1" unique-id="enlargement-similarity-parsons-1-1-3-1"/>
+    </generalfeedback>
+    <defaultgrade original-id="enlargement-similarity-parsons-1-1-4" assembly-id="enlargement-similarity-parsons-1-1-4" unique-id="enlargement-similarity-parsons-1-1-4">1</defaultgrade>
+    <penalty original-id="enlargement-similarity-parsons-1-1-5" assembly-id="enlargement-similarity-parsons-1-1-5" unique-id="enlargement-similarity-parsons-1-1-5">0.1</penalty>
+    <hidden original-id="enlargement-similarity-parsons-1-1-6" assembly-id="enlargement-similarity-parsons-1-1-6" unique-id="enlargement-similarity-parsons-1-1-6">0</hidden>
+    <idnumber original-id="enlargement-similarity-parsons-1-1-7" assembly-id="enlargement-similarity-parsons-1-1-7" unique-id="enlargement-similarity-parsons-1-1-7"/>
+    <stackversion original-id="enlargement-similarity-parsons-1-1-8" assembly-id="enlargement-similarity-parsons-1-1-8" unique-id="enlargement-similarity-parsons-1-1-8">
+      <text original-id="enlargement-similarity-parsons-1-1-8-1" assembly-id="enlargement-similarity-parsons-1-1-8-1" unique-id="enlargement-similarity-parsons-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="enlargement-similarity-parsons-1-1-9" assembly-id="enlargement-similarity-parsons-1-1-9" unique-id="enlargement-similarity-parsons-1-1-9">
+      <text original-id="enlargement-similarity-parsons-1-1-9-1" assembly-id="enlargement-similarity-parsons-1-1-9-1" unique-id="enlargement-similarity-parsons-1-1-9-1">/****************************************************************/
+stack_include_contrib("prooflib.mac");
+
+/* Random scale factor */
+scale_factor : 2 + rand(2);   /* picks either 2 or 3 */
+
+/* Base triangle coordinates (randomised but structured) */
+xA : 0;  
+yA : 0;
+
+xB : 2 + rand(3);   /* between 2 and 4 */
+yB : 0;
+
+xC : 1 + rand(3);   /* between 1 and 3 */
+yC : 1 + rand(3);   /* between 1 and 3 */
+
+/* Image triangle after enlargement from A */
+xB1 : scale_factor*xB;
+yB1 : scale_factor*yB;
+
+xC1 : scale_factor*xC;
+yC1 : scale_factor*yC;
+
+
+/* Find extremes of all points (original + image) */
+xmin : min(xA, xB, xC, xB1, xC1) - 1;
+xmax : max(xA, xB, xC, xB1, xC1) + 1;
+ymin : min(yA, yB, yC, yB1, yC1) - 1;
+ymax : max(yA, yB, yC, yB1, yC1) + 1;
+
+/* -------------------------------*/
+/****************************************************************/
+/* Theorem statement */
+thm: "Show that \\(\\triangle ABC \\sim \\triangle AB'C'\\).";
+
+/****************************************************************/
+/* Proof steps */ 
+proof_steps: [
+  ["assumption", "Consider \\(\\triangle ABC\\) and its image \\(\\triangle AB'C'\\) under an enlargement with centre \\(A\\) and scale factor \\(k\\)."],
+
+  ["step1", "Point \\(A\\) is the centre of enlargement, hence \\(A = A'\\)."],
+
+  ["step2", "By definition of enlargement, \\(AB' = k\\cdot AB\\) and \\(AC' = k\\cdot AC\\)."],
+
+  ["step3", "Thus the corresponding side lengths are in proportion: \\(\\tfrac{AB'}{AB} = \\tfrac{AC'}{AC} = k\\)."],
+
+  ["step4", "An enlargement preserves angles at the centre, so \\(\\angle BAC = \\angle B'AC'\\)."],
+
+  ["step5", "Therefore, two pairs of sides are in the same ratio and the included angle is equal (SAS criterion)."],
+
+  ["conclusion", "Hence, \\(\\triangle ABC \\sim \\triangle AB'C'\\)."]
+];
+
+/****************************************************************/
+/* Correct proof order */
+proof_ans: proof("assumption",
+    proof_iff("step1","step2"),
+    proof_iff("step3","step4"),
+    "step5",
+    "conclusion"
+);
+
+
+/* Randomize steps for Parsons-style task */
+proof_steps: random_permutation(proof_steps);</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="enlargement-similarity-parsons-1-1-10" assembly-id="enlargement-similarity-parsons-1-1-10" unique-id="enlargement-similarity-parsons-1-1-10">
+      <text original-id="enlargement-similarity-parsons-1-1-10-1" assembly-id="enlargement-similarity-parsons-1-1-10-1" unique-id="enlargement-similarity-parsons-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="enlargement-similarity-parsons-1-1-11" assembly-id="enlargement-similarity-parsons-1-1-11" unique-id="enlargement-similarity-parsons-1-1-11">
+      <text original-id="enlargement-similarity-parsons-1-1-11-1" assembly-id="enlargement-similarity-parsons-1-1-11-1" unique-id="enlargement-similarity-parsons-1-1-11-1">1</text>
+    </questionnote>
+    <questiondescription format="html" original-id="enlargement-similarity-parsons-1-1-12" assembly-id="enlargement-similarity-parsons-1-1-12" unique-id="enlargement-similarity-parsons-1-1-12">
+      <text original-id="enlargement-similarity-parsons-1-1-12-1" assembly-id="enlargement-similarity-parsons-1-1-12-1" unique-id="enlargement-similarity-parsons-1-1-12-1"/>
+    </questiondescription>
+    <questionsimplify original-id="enlargement-similarity-parsons-1-1-13" assembly-id="enlargement-similarity-parsons-1-1-13" unique-id="enlargement-similarity-parsons-1-1-13">1</questionsimplify>
+    <assumepositive original-id="enlargement-similarity-parsons-1-1-14" assembly-id="enlargement-similarity-parsons-1-1-14" unique-id="enlargement-similarity-parsons-1-1-14">0</assumepositive>
+    <assumereal original-id="enlargement-similarity-parsons-1-1-15" assembly-id="enlargement-similarity-parsons-1-1-15" unique-id="enlargement-similarity-parsons-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="enlargement-similarity-parsons-1-1-16" assembly-id="enlargement-similarity-parsons-1-1-16" unique-id="enlargement-similarity-parsons-1-1-16">
+      <text original-id="enlargement-similarity-parsons-1-1-16-1" assembly-id="enlargement-similarity-parsons-1-1-16-1" unique-id="enlargement-similarity-parsons-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="enlargement-similarity-parsons-1-1-17" assembly-id="enlargement-similarity-parsons-1-1-17" unique-id="enlargement-similarity-parsons-1-1-17">
+      <text original-id="enlargement-similarity-parsons-1-1-17-1" assembly-id="enlargement-similarity-parsons-1-1-17-1" unique-id="enlargement-similarity-parsons-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="enlargement-similarity-parsons-1-1-18" assembly-id="enlargement-similarity-parsons-1-1-18" unique-id="enlargement-similarity-parsons-1-1-18">
+      <text original-id="enlargement-similarity-parsons-1-1-18-1" assembly-id="enlargement-similarity-parsons-1-1-18-1" unique-id="enlargement-similarity-parsons-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="enlargement-similarity-parsons-1-1-19" assembly-id="enlargement-similarity-parsons-1-1-19" unique-id="enlargement-similarity-parsons-1-1-19">.</decimals>
+    <scientificnotation original-id="enlargement-similarity-parsons-1-1-20" assembly-id="enlargement-similarity-parsons-1-1-20" unique-id="enlargement-similarity-parsons-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="enlargement-similarity-parsons-1-1-21" assembly-id="enlargement-similarity-parsons-1-1-21" unique-id="enlargement-similarity-parsons-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="enlargement-similarity-parsons-1-1-22" assembly-id="enlargement-similarity-parsons-1-1-22" unique-id="enlargement-similarity-parsons-1-1-22">1</sqrtsign>
+    <complexno original-id="enlargement-similarity-parsons-1-1-23" assembly-id="enlargement-similarity-parsons-1-1-23" unique-id="enlargement-similarity-parsons-1-1-23">i</complexno>
+    <inversetrig original-id="enlargement-similarity-parsons-1-1-24" assembly-id="enlargement-similarity-parsons-1-1-24" unique-id="enlargement-similarity-parsons-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="enlargement-similarity-parsons-1-1-25" assembly-id="enlargement-similarity-parsons-1-1-25" unique-id="enlargement-similarity-parsons-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="enlargement-similarity-parsons-1-1-26" assembly-id="enlargement-similarity-parsons-1-1-26" unique-id="enlargement-similarity-parsons-1-1-26">[</matrixparens>
+    <isbroken original-id="enlargement-similarity-parsons-1-1-27" assembly-id="enlargement-similarity-parsons-1-1-27" unique-id="enlargement-similarity-parsons-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="enlargement-similarity-parsons-1-1-28" assembly-id="enlargement-similarity-parsons-1-1-28" unique-id="enlargement-similarity-parsons-1-1-28"/>
+    <input original-id="enlargement-similarity-parsons-1-1-29" assembly-id="enlargement-similarity-parsons-1-1-29" unique-id="enlargement-similarity-parsons-1-1-29">
+      <name original-id="enlargement-similarity-parsons-1-1-29-1" assembly-id="enlargement-similarity-parsons-1-1-29-1" unique-id="enlargement-similarity-parsons-1-1-29-1">ans1</name>
+      <type original-id="enlargement-similarity-parsons-1-1-29-2" assembly-id="enlargement-similarity-parsons-1-1-29-2" unique-id="enlargement-similarity-parsons-1-1-29-2">parsons</type>
+      <tans original-id="enlargement-similarity-parsons-1-1-29-3" assembly-id="enlargement-similarity-parsons-1-1-29-3" unique-id="enlargement-similarity-parsons-1-1-29-3">[proof_ans, proof_steps]</tans>
+      <boxsize original-id="enlargement-similarity-parsons-1-1-29-4" assembly-id="enlargement-similarity-parsons-1-1-29-4" unique-id="enlargement-similarity-parsons-1-1-29-4">15</boxsize>
+      <strictsyntax original-id="enlargement-similarity-parsons-1-1-29-5" assembly-id="enlargement-similarity-parsons-1-1-29-5" unique-id="enlargement-similarity-parsons-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="enlargement-similarity-parsons-1-1-29-6" assembly-id="enlargement-similarity-parsons-1-1-29-6" unique-id="enlargement-similarity-parsons-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="enlargement-similarity-parsons-1-1-29-7" assembly-id="enlargement-similarity-parsons-1-1-29-7" unique-id="enlargement-similarity-parsons-1-1-29-7"/>
+      <syntaxattribute original-id="enlargement-similarity-parsons-1-1-29-8" assembly-id="enlargement-similarity-parsons-1-1-29-8" unique-id="enlargement-similarity-parsons-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="enlargement-similarity-parsons-1-1-29-9" assembly-id="enlargement-similarity-parsons-1-1-29-9" unique-id="enlargement-similarity-parsons-1-1-29-9"/>
+      <allowwords original-id="enlargement-similarity-parsons-1-1-29-10" assembly-id="enlargement-similarity-parsons-1-1-29-10" unique-id="enlargement-similarity-parsons-1-1-29-10"/>
+      <forbidfloat original-id="enlargement-similarity-parsons-1-1-29-11" assembly-id="enlargement-similarity-parsons-1-1-29-11" unique-id="enlargement-similarity-parsons-1-1-29-11">1</forbidfloat>
+      <requirelowestterms original-id="enlargement-similarity-parsons-1-1-29-12" assembly-id="enlargement-similarity-parsons-1-1-29-12" unique-id="enlargement-similarity-parsons-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="enlargement-similarity-parsons-1-1-29-13" assembly-id="enlargement-similarity-parsons-1-1-29-13" unique-id="enlargement-similarity-parsons-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="enlargement-similarity-parsons-1-1-29-14" assembly-id="enlargement-similarity-parsons-1-1-29-14" unique-id="enlargement-similarity-parsons-1-1-29-14">0</mustverify>
+      <showvalidation original-id="enlargement-similarity-parsons-1-1-29-15" assembly-id="enlargement-similarity-parsons-1-1-29-15" unique-id="enlargement-similarity-parsons-1-1-29-15">0</showvalidation>
+      <options original-id="enlargement-similarity-parsons-1-1-29-16" assembly-id="enlargement-similarity-parsons-1-1-29-16" unique-id="enlargement-similarity-parsons-1-1-29-16"/>
+    </input>
+    <prt original-id="enlargement-similarity-parsons-1-1-30" assembly-id="enlargement-similarity-parsons-1-1-30" unique-id="enlargement-similarity-parsons-1-1-30">
+      <name original-id="enlargement-similarity-parsons-1-1-30-1" assembly-id="enlargement-similarity-parsons-1-1-30-1" unique-id="enlargement-similarity-parsons-1-1-30-1">prt1</name>
+      <value original-id="enlargement-similarity-parsons-1-1-30-2" assembly-id="enlargement-similarity-parsons-1-1-30-2" unique-id="enlargement-similarity-parsons-1-1-30-2">1.0000000</value>
+      <autosimplify original-id="enlargement-similarity-parsons-1-1-30-3" assembly-id="enlargement-similarity-parsons-1-1-30-3" unique-id="enlargement-similarity-parsons-1-1-30-3">1</autosimplify>
+      <feedbackstyle original-id="enlargement-similarity-parsons-1-1-30-4" assembly-id="enlargement-similarity-parsons-1-1-30-4" unique-id="enlargement-similarity-parsons-1-1-30-4">1</feedbackstyle>
+      <feedbackvariables original-id="enlargement-similarity-parsons-1-1-30-5" assembly-id="enlargement-similarity-parsons-1-1-30-5" unique-id="enlargement-similarity-parsons-1-1-30-5">
+        <text original-id="enlargement-similarity-parsons-1-1-30-5-1" assembly-id="enlargement-similarity-parsons-1-1-30-5-1" unique-id="enlargement-similarity-parsons-1-1-30-5-1">sa: parsons_decode(ans1);
+[pd, saa]:proof_assessment(sa, proof_alternatives(proof_ans));</text>
+      </feedbackvariables>
+      <node original-id="enlargement-similarity-parsons-1-1-30-6" assembly-id="enlargement-similarity-parsons-1-1-30-6" unique-id="enlargement-similarity-parsons-1-1-30-6">
+        <name original-id="enlargement-similarity-parsons-1-1-30-6-1" assembly-id="enlargement-similarity-parsons-1-1-30-6-1" unique-id="enlargement-similarity-parsons-1-1-30-6-1">0</name>
+        <description original-id="enlargement-similarity-parsons-1-1-30-6-2" assembly-id="enlargement-similarity-parsons-1-1-30-6-2" unique-id="enlargement-similarity-parsons-1-1-30-6-2"/>
+        <answertest original-id="enlargement-similarity-parsons-1-1-30-6-3" assembly-id="enlargement-similarity-parsons-1-1-30-6-3" unique-id="enlargement-similarity-parsons-1-1-30-6-3">AlgEquiv</answertest>
+        <sans original-id="enlargement-similarity-parsons-1-1-30-6-4" assembly-id="enlargement-similarity-parsons-1-1-30-6-4" unique-id="enlargement-similarity-parsons-1-1-30-6-4">pd</sans>
+        <tans original-id="enlargement-similarity-parsons-1-1-30-6-5" assembly-id="enlargement-similarity-parsons-1-1-30-6-5" unique-id="enlargement-similarity-parsons-1-1-30-6-5">0</tans>
+        <testoptions original-id="enlargement-similarity-parsons-1-1-30-6-6" assembly-id="enlargement-similarity-parsons-1-1-30-6-6" unique-id="enlargement-similarity-parsons-1-1-30-6-6"/>
+        <quiet original-id="enlargement-similarity-parsons-1-1-30-6-7" assembly-id="enlargement-similarity-parsons-1-1-30-6-7" unique-id="enlargement-similarity-parsons-1-1-30-6-7">0</quiet>
+        <truescoremode original-id="enlargement-similarity-parsons-1-1-30-6-8" assembly-id="enlargement-similarity-parsons-1-1-30-6-8" unique-id="enlargement-similarity-parsons-1-1-30-6-8">=</truescoremode>
+        <truescore original-id="enlargement-similarity-parsons-1-1-30-6-9" assembly-id="enlargement-similarity-parsons-1-1-30-6-9" unique-id="enlargement-similarity-parsons-1-1-30-6-9">1</truescore>
+        <truepenalty original-id="enlargement-similarity-parsons-1-1-30-6-10" assembly-id="enlargement-similarity-parsons-1-1-30-6-10" unique-id="enlargement-similarity-parsons-1-1-30-6-10"/>
+        <truenextnode original-id="enlargement-similarity-parsons-1-1-30-6-11" assembly-id="enlargement-similarity-parsons-1-1-30-6-11" unique-id="enlargement-similarity-parsons-1-1-30-6-11">-1</truenextnode>
+        <trueanswernote original-id="enlargement-similarity-parsons-1-1-30-6-12" assembly-id="enlargement-similarity-parsons-1-1-30-6-12" unique-id="enlargement-similarity-parsons-1-1-30-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="enlargement-similarity-parsons-1-1-30-6-13" assembly-id="enlargement-similarity-parsons-1-1-30-6-13" unique-id="enlargement-similarity-parsons-1-1-30-6-13">
+          <text original-id="enlargement-similarity-parsons-1-1-30-6-13-1" assembly-id="enlargement-similarity-parsons-1-1-30-6-13-1" unique-id="enlargement-similarity-parsons-1-1-30-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="enlargement-similarity-parsons-1-1-30-6-14" assembly-id="enlargement-similarity-parsons-1-1-30-6-14" unique-id="enlargement-similarity-parsons-1-1-30-6-14">=</falsescoremode>
+        <falsescore original-id="enlargement-similarity-parsons-1-1-30-6-15" assembly-id="enlargement-similarity-parsons-1-1-30-6-15" unique-id="enlargement-similarity-parsons-1-1-30-6-15">0</falsescore>
+        <falsepenalty original-id="enlargement-similarity-parsons-1-1-30-6-16" assembly-id="enlargement-similarity-parsons-1-1-30-6-16" unique-id="enlargement-similarity-parsons-1-1-30-6-16"/>
+        <falsenextnode original-id="enlargement-similarity-parsons-1-1-30-6-17" assembly-id="enlargement-similarity-parsons-1-1-30-6-17" unique-id="enlargement-similarity-parsons-1-1-30-6-17">-1</falsenextnode>
+        <falseanswernote original-id="enlargement-similarity-parsons-1-1-30-6-18" assembly-id="enlargement-similarity-parsons-1-1-30-6-18" unique-id="enlargement-similarity-parsons-1-1-30-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="enlargement-similarity-parsons-1-1-30-6-19" assembly-id="enlargement-similarity-parsons-1-1-30-6-19" unique-id="enlargement-similarity-parsons-1-1-30-6-19">
+          <text original-id="enlargement-similarity-parsons-1-1-30-6-19-1" assembly-id="enlargement-similarity-parsons-1-1-30-6-19-1" unique-id="enlargement-similarity-parsons-1-1-30-6-19-1">&lt;p&gt;
+{@proof_assessment_display(saa, proof_steps)@}
+&lt;/p&gt;</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed original-id="enlargement-similarity-parsons-1-1-31" assembly-id="enlargement-similarity-parsons-1-1-31" unique-id="enlargement-similarity-parsons-1-1-31">616842617</deployedseed>
+  </question>
+</quiz>
+        

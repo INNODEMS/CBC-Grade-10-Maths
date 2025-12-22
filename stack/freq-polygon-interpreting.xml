@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+            <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" original-id="freq-polygon-interpreting-1" assembly-id="freq-polygon-interpreting-1" unique-id="freq-polygon-interpreting-1">
+  <question type="stack" original-id="freq-polygon-interpreting-1-1" assembly-id="freq-polygon-interpreting-1-1" unique-id="freq-polygon-interpreting-1-1">
+    <name original-id="freq-polygon-interpreting-1-1-1" assembly-id="freq-polygon-interpreting-1-1-1" unique-id="freq-polygon-interpreting-1-1-1">
+      <text original-id="freq-polygon-interpreting-1-1-1-1" assembly-id="freq-polygon-interpreting-1-1-1-1" unique-id="freq-polygon-interpreting-1-1-1-1">Frequency table for the time taken from a Histogram and frequency polygon</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="freq-polygon-interpreting-1-1-2" assembly-id="freq-polygon-interpreting-1-1-2" unique-id="freq-polygon-interpreting-1-1-2">
+      <text original-id="freq-polygon-interpreting-1-1-2-1" assembly-id="freq-polygon-interpreting-1-1-2-1" unique-id="freq-polygon-interpreting-1-1-2-1">&lt;p&gt;&lt;b&gt;(a)&lt;/b&gt; The histogram and frequency polygon below represent the time, in minutes, that students took to complete a Math CAT assessment.&lt;br&gt;
+Complete the table by calculating the &lt;strong&gt;frequency density&lt;/strong&gt; for each interval.
+&lt;/p&gt;
+
+[[jsxgraph]]
+
+JXG.Options.text.useMathJax = true;
+
+// Data arrays from QV
+var mids = {#midpoints#};       // midpoints of classes
+var widths = {#widths#};        // class widths
+var heights = {#densities#};    // frequency densities
+
+// Compute dynamic bounding box
+var left_x = mids[0] - widths[0]/2;
+var right_x = mids[mids.length - 1] + widths[widths.length - 1]/2;
+var max_y = Math.max(...heights);
+var top_y = max_y + 2; // small margin
+
+// Create board
+var board = JXG.JSXGraph.initBoard(divid, {
+  boundingBox: [left_x - 1, top_y, right_x + 1, -2],
+  axis: true,
+  showNavigation: false,
+  showCopyright: false,
+  grid: true
+});
+
+// Draw histogram bars
+for (var i = 0; i &lt; mids.length; i++) {
+  var x0 = mids[i] - widths[i]/2;
+  var x1 = mids[i] + widths[i]/2;
+  var y = heights[i];
+
+  board.create('polygon', [
+    [x0, 0],
+    [x1, 0],
+    [x1, y],
+    [x0, y]
+  ], {
+    fillColor: "#aaccff",
+    fillOpacity: 0.5,
+    highlight: false,
+    borders: { strokeColor: "blue", strokeWidth: 1 },
+    vertices: { visible: false }
+  });
+}
+
+// Frequency polygon
+var polygonPoints = [[left_x, 0]];
+
+for (var i = 0; i &lt; mids.length; i++) {
+  polygonPoints.push([mids[i], heights[i]]);
+}
+
+polygonPoints.push([right_x, 0]);
+
+// Draw polygon segments
+for (var i = 0; i &lt; polygonPoints.length - 1; i++) {
+  board.create("segment", [
+    polygonPoints[i],
+    polygonPoints[i + 1]
+  ], {
+    strokeColor: "black",
+    strokeWidth: 3,
+    fixed: true
+  });
+}
+
+[[/jsxgraph]]
+
+
+&lt;table style="width:500px; border:1px solid black"&gt;
+  &lt;tr style="background-color:#eee"&gt;
+    &lt;th&gt;Time Interval (min)&lt;/th&gt;
+    &lt;th&gt;Frequency&lt;/th&gt;
+    &lt;th&gt;Frequency Density&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;\({@lower_bounds[1]@} &lt; t \leq {@upper_bounds[1]@}\)&lt;/td&gt;
+    &lt;td&gt;{@frequencies[1]@}&lt;/td&gt;
+    &lt;td&gt;[[input:ans_1]] [[validation:ans_1]]&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;\({@lower_bounds[2]@} &lt; t \leq {@upper_bounds[2]@}\)&lt;/td&gt;
+    &lt;td&gt;{@frequencies[2]@}&lt;/td&gt;
+    &lt;td&gt;[[input:ans_2]] [[validation:ans_2]]&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;\({@lower_bounds[3]@} &lt; t \leq {@upper_bounds[3]@}\)&lt;/td&gt;
+    &lt;td&gt;{@frequencies[3]@}&lt;/td&gt;
+    &lt;td&gt;[[input:ans_3]] [[validation:ans_3]]&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;\({@lower_bounds[4]@} &lt; t \leq {@upper_bounds[4]@}\)&lt;/td&gt;
+    &lt;td&gt;{@frequencies[4]@}&lt;/td&gt;
+    &lt;td&gt;[[input:ans_4]] [[validation:ans_4]]&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;\({@lower_bounds[5]@} &lt; t \leq {@upper_bounds[5]@}\)&lt;/td&gt;
+    &lt;td&gt;{@frequencies[5]@}&lt;/td&gt;
+    &lt;td&gt;[[input:ans_5]] [[validation:ans_5]]&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;\({@lower_bounds[6]@} &lt; t \leq {@upper_bounds[6]@}\)&lt;/td&gt;
+    &lt;td&gt;{@frequencies[6]@}&lt;/td&gt;
+    &lt;td&gt;[[input:ans_6]] [[validation:ans_6]]&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;[[feedback:prt_table]]&lt;/p&gt;
+
+&lt;br&gt;
+
+&lt;p&gt;&lt;b&gt;(b)&lt;/b&gt; The histogram and frequency polygon representing the data are shown below.&lt;/p&gt;
+
+&lt;p&gt;[[feedback:prt_graph]]&lt;/p&gt;
+
+&lt;br&gt;
+
+&lt;p&gt;&lt;b&gt;(c)&lt;/b&gt; Estimate the number of students who completed the assessment in less than 20 minutes.&lt;/p&gt;
+&lt;p&gt;[[input:ans_estimate]] [[validation:ans_estimate]]&lt;/p&gt;
+&lt;p&gt;[[feedback:prt_estimate]]&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="freq-polygon-interpreting-1-1-3" assembly-id="freq-polygon-interpreting-1-1-3" unique-id="freq-polygon-interpreting-1-1-3">
+      <text original-id="freq-polygon-interpreting-1-1-3-1" assembly-id="freq-polygon-interpreting-1-1-3-1" unique-id="freq-polygon-interpreting-1-1-3-1">&lt;h3&gt;Worked Solution&lt;/h3&gt;
+
+&lt;p&gt;&lt;b&gt;(a)&lt;/b&gt; To find the &lt;strong&gt;frequency density&lt;/strong&gt; for each interval, we use the formula:&lt;/p&gt;
+
+&lt;p style="margin-left: 20px;"&gt;
+\[
+\text{Frequency Density} = \frac{\text{Frequency}}{\text{Class Width}}
+\]
+&lt;/p&gt;
+
+&lt;p&gt;The width of each class is calculated as the difference between the upper and lower bounds.&lt;/p&gt;
+
+&lt;p&gt;We can now complete the table:&lt;/p&gt;
+
+&lt;table style="width:500px; border:1px solid black"&gt;
+  &lt;tr style="background-color:#eee"&gt;
+    &lt;th&gt;Time Interval (min)&lt;/th&gt;
+    &lt;th&gt;Frequency&lt;/th&gt;
+    &lt;th&gt;Class Width&lt;/th&gt;
+    &lt;th&gt;Frequency Density&lt;/th&gt;
+  &lt;/tr&gt;
+  [[foreach i="makelist(k,k,1,num_bins)" ]]
+  &lt;tr&gt;
+    &lt;td&gt;\({@lower_bounds[i]@} &lt; t \leq {@upper_bounds[i]@}\)&lt;/td&gt;
+    &lt;td&gt;{@frequencies[i]@}&lt;/td&gt;
+    &lt;td&gt;{@widths[i]@}&lt;/td&gt;
+    &lt;td&gt;
+      \(
+      \frac{{@frequencies[i]@}}{{@widths[i]@}} = {@densities[i]@}
+      \)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  [[/foreach]]
+&lt;/table&gt;
+
+&lt;br&gt;
+
+&lt;p&gt;&lt;b&gt;(b)&lt;/b&gt; The histogram shown represents the distribution of completion times.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Each bar’s &lt;strong&gt;height&lt;/strong&gt; corresponds to the &lt;strong&gt;frequency density&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;The &lt;strong&gt;area&lt;/strong&gt; of each bar represents the &lt;strong&gt;number of students&lt;/strong&gt; in that interval (since: frequency = width × frequency density).&lt;/li&gt;
+  &lt;li&gt;The frequency polygon connects the midpoints of each bar, giving a visual trend of the data.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;br&gt;
+
+&lt;p&gt;&lt;b&gt;(c)&lt;/b&gt; To estimate how many students completed the assessment in less than 20 minutes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;We sum the &lt;strong&gt;frequencies of all full intervals&lt;/strong&gt; where the upper bound is ≤ 20.&lt;/li&gt;
+  &lt;li&gt;Then, if the next interval starts before 20 but ends after it, we estimate the &lt;strong&gt;partial frequency&lt;/strong&gt; in that class by:
+    &lt;br&gt;
+    &lt;p style="margin-left: 20px;"&gt;
+    \[
+    \text{Partial frequency} = (\text{cutoff} - \text{lower bound}) \times \text{frequency density}
+    \]
+    &lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+Using this approach, the estimated number of students who completed the assessment in less than 20 minutes is:
+&lt;/p&gt;
+
+&lt;p style="margin-left: 20px;"&gt;
+\[
+{@ta_estimate@}
+\]
+&lt;/p&gt;</text>
+    </generalfeedback>
+    <defaultgrade original-id="freq-polygon-interpreting-1-1-4" assembly-id="freq-polygon-interpreting-1-1-4" unique-id="freq-polygon-interpreting-1-1-4">1</defaultgrade>
+    <penalty original-id="freq-polygon-interpreting-1-1-5" assembly-id="freq-polygon-interpreting-1-1-5" unique-id="freq-polygon-interpreting-1-1-5">0.1</penalty>
+    <hidden original-id="freq-polygon-interpreting-1-1-6" assembly-id="freq-polygon-interpreting-1-1-6" unique-id="freq-polygon-interpreting-1-1-6">0</hidden>
+    <idnumber original-id="freq-polygon-interpreting-1-1-7" assembly-id="freq-polygon-interpreting-1-1-7" unique-id="freq-polygon-interpreting-1-1-7"/>
+    <stackversion original-id="freq-polygon-interpreting-1-1-8" assembly-id="freq-polygon-interpreting-1-1-8" unique-id="freq-polygon-interpreting-1-1-8">
+      <text original-id="freq-polygon-interpreting-1-1-8-1" assembly-id="freq-polygon-interpreting-1-1-8-1" unique-id="freq-polygon-interpreting-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="freq-polygon-interpreting-1-1-9" assembly-id="freq-polygon-interpreting-1-1-9" unique-id="freq-polygon-interpreting-1-1-9">
+      <text original-id="freq-polygon-interpreting-1-1-9-1" assembly-id="freq-polygon-interpreting-1-1-9-1" unique-id="freq-polygon-interpreting-1-1-9-1">/* Define number of bins */
+num_bins: 6;
+
+/* Widths and heights for each class (randomised) */
+widths: [rand(2)+2, rand(2)+3, rand(2)+5, rand(2)+4, rand(2)+6, rand(2)+3];
+densities: [rand(3)+4, rand(3)+6, rand(2)+8, rand(2)+5, rand(2)+4, rand(2)+3];
+
+/* Class lower bounds */
+lower_bounds: makelist(
+    sum(widths[i], i, 1, k-1), 
+    k, 1, length(widths)
+);
+
+/* Upper bounds */
+upper_bounds: makelist(lower_bounds[i] + widths[i], i, 1, num_bins);
+
+/* Frequencies: f = w * fd */
+frequencies: makelist(widths[i] * densities[i], i, 1, num_bins);
+
+/* Midpoints for histogram plotting */
+midpoints: makelist((lower_bounds[i] + upper_bounds[i])/2, i, 1, num_bins);
+
+/* Total number of students */
+total_students: sum(frequencies[i], i, 1, num_bins);
+
+/* Cutoff estimation (&lt; 20 min) */
+cutoff: 20;
+partial_freq: 0;
+
+for i:1 thru num_bins do (
+  if upper_bounds[i] &lt;= cutoff then (
+    partial_freq: partial_freq + frequencies[i]
+  ) else if lower_bounds[i] &lt; cutoff and upper_bounds[i] &gt; cutoff then (
+    partial_freq: partial_freq + (cutoff - lower_bounds[i]) * densities[i]
+  )
+);
+
+/* Model answers */
+ta_densities: densities;
+ta_estimate: round(partial_freq);
+</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="freq-polygon-interpreting-1-1-10" assembly-id="freq-polygon-interpreting-1-1-10" unique-id="freq-polygon-interpreting-1-1-10">
+      <text original-id="freq-polygon-interpreting-1-1-10-1" assembly-id="freq-polygon-interpreting-1-1-10-1" unique-id="freq-polygon-interpreting-1-1-10-1">[[feedback:prt1]]</text>
+    </specificfeedback>
+    <questionnote format="html" original-id="freq-polygon-interpreting-1-1-11" assembly-id="freq-polygon-interpreting-1-1-11" unique-id="freq-polygon-interpreting-1-1-11">
+      <text original-id="freq-polygon-interpreting-1-1-11-1" assembly-id="freq-polygon-interpreting-1-1-11-1" unique-id="freq-polygon-interpreting-1-1-11-1">{@ta1@}</text>
+    </questionnote>
+    <questiondescription format="html" original-id="freq-polygon-interpreting-1-1-12" assembly-id="freq-polygon-interpreting-1-1-12" unique-id="freq-polygon-interpreting-1-1-12">
+      <text original-id="freq-polygon-interpreting-1-1-12-1" assembly-id="freq-polygon-interpreting-1-1-12-1" unique-id="freq-polygon-interpreting-1-1-12-1"/>
+    </questiondescription>
+    <questionsimplify original-id="freq-polygon-interpreting-1-1-13" assembly-id="freq-polygon-interpreting-1-1-13" unique-id="freq-polygon-interpreting-1-1-13">1</questionsimplify>
+    <assumepositive original-id="freq-polygon-interpreting-1-1-14" assembly-id="freq-polygon-interpreting-1-1-14" unique-id="freq-polygon-interpreting-1-1-14">0</assumepositive>
+    <assumereal original-id="freq-polygon-interpreting-1-1-15" assembly-id="freq-polygon-interpreting-1-1-15" unique-id="freq-polygon-interpreting-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="freq-polygon-interpreting-1-1-16" assembly-id="freq-polygon-interpreting-1-1-16" unique-id="freq-polygon-interpreting-1-1-16">
+      <text original-id="freq-polygon-interpreting-1-1-16-1" assembly-id="freq-polygon-interpreting-1-1-16-1" unique-id="freq-polygon-interpreting-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="freq-polygon-interpreting-1-1-17" assembly-id="freq-polygon-interpreting-1-1-17" unique-id="freq-polygon-interpreting-1-1-17">
+      <text original-id="freq-polygon-interpreting-1-1-17-1" assembly-id="freq-polygon-interpreting-1-1-17-1" unique-id="freq-polygon-interpreting-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="freq-polygon-interpreting-1-1-18" assembly-id="freq-polygon-interpreting-1-1-18" unique-id="freq-polygon-interpreting-1-1-18">
+      <text original-id="freq-polygon-interpreting-1-1-18-1" assembly-id="freq-polygon-interpreting-1-1-18-1" unique-id="freq-polygon-interpreting-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="freq-polygon-interpreting-1-1-19" assembly-id="freq-polygon-interpreting-1-1-19" unique-id="freq-polygon-interpreting-1-1-19">.</decimals>
+    <scientificnotation original-id="freq-polygon-interpreting-1-1-20" assembly-id="freq-polygon-interpreting-1-1-20" unique-id="freq-polygon-interpreting-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="freq-polygon-interpreting-1-1-21" assembly-id="freq-polygon-interpreting-1-1-21" unique-id="freq-polygon-interpreting-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="freq-polygon-interpreting-1-1-22" assembly-id="freq-polygon-interpreting-1-1-22" unique-id="freq-polygon-interpreting-1-1-22">1</sqrtsign>
+    <complexno original-id="freq-polygon-interpreting-1-1-23" assembly-id="freq-polygon-interpreting-1-1-23" unique-id="freq-polygon-interpreting-1-1-23">i</complexno>
+    <inversetrig original-id="freq-polygon-interpreting-1-1-24" assembly-id="freq-polygon-interpreting-1-1-24" unique-id="freq-polygon-interpreting-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="freq-polygon-interpreting-1-1-25" assembly-id="freq-polygon-interpreting-1-1-25" unique-id="freq-polygon-interpreting-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="freq-polygon-interpreting-1-1-26" assembly-id="freq-polygon-interpreting-1-1-26" unique-id="freq-polygon-interpreting-1-1-26">[</matrixparens>
+    <isbroken original-id="freq-polygon-interpreting-1-1-27" assembly-id="freq-polygon-interpreting-1-1-27" unique-id="freq-polygon-interpreting-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="freq-polygon-interpreting-1-1-28" assembly-id="freq-polygon-interpreting-1-1-28" unique-id="freq-polygon-interpreting-1-1-28"/>
+    <input original-id="freq-polygon-interpreting-1-1-29" assembly-id="freq-polygon-interpreting-1-1-29" unique-id="freq-polygon-interpreting-1-1-29">
+      <name original-id="freq-polygon-interpreting-1-1-29-1" assembly-id="freq-polygon-interpreting-1-1-29-1" unique-id="freq-polygon-interpreting-1-1-29-1">ans_1</name>
+      <type original-id="freq-polygon-interpreting-1-1-29-2" assembly-id="freq-polygon-interpreting-1-1-29-2" unique-id="freq-polygon-interpreting-1-1-29-2">algebraic</type>
+      <tans original-id="freq-polygon-interpreting-1-1-29-3" assembly-id="freq-polygon-interpreting-1-1-29-3" unique-id="freq-polygon-interpreting-1-1-29-3">1</tans>
+      <boxsize original-id="freq-polygon-interpreting-1-1-29-4" assembly-id="freq-polygon-interpreting-1-1-29-4" unique-id="freq-polygon-interpreting-1-1-29-4">15</boxsize>
+      <strictsyntax original-id="freq-polygon-interpreting-1-1-29-5" assembly-id="freq-polygon-interpreting-1-1-29-5" unique-id="freq-polygon-interpreting-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="freq-polygon-interpreting-1-1-29-6" assembly-id="freq-polygon-interpreting-1-1-29-6" unique-id="freq-polygon-interpreting-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="freq-polygon-interpreting-1-1-29-7" assembly-id="freq-polygon-interpreting-1-1-29-7" unique-id="freq-polygon-interpreting-1-1-29-7"/>
+      <syntaxattribute original-id="freq-polygon-interpreting-1-1-29-8" assembly-id="freq-polygon-interpreting-1-1-29-8" unique-id="freq-polygon-interpreting-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="freq-polygon-interpreting-1-1-29-9" assembly-id="freq-polygon-interpreting-1-1-29-9" unique-id="freq-polygon-interpreting-1-1-29-9"/>
+      <allowwords original-id="freq-polygon-interpreting-1-1-29-10" assembly-id="freq-polygon-interpreting-1-1-29-10" unique-id="freq-polygon-interpreting-1-1-29-10"/>
+      <forbidfloat original-id="freq-polygon-interpreting-1-1-29-11" assembly-id="freq-polygon-interpreting-1-1-29-11" unique-id="freq-polygon-interpreting-1-1-29-11">1</forbidfloat>
+      <requirelowestterms original-id="freq-polygon-interpreting-1-1-29-12" assembly-id="freq-polygon-interpreting-1-1-29-12" unique-id="freq-polygon-interpreting-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="freq-polygon-interpreting-1-1-29-13" assembly-id="freq-polygon-interpreting-1-1-29-13" unique-id="freq-polygon-interpreting-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="freq-polygon-interpreting-1-1-29-14" assembly-id="freq-polygon-interpreting-1-1-29-14" unique-id="freq-polygon-interpreting-1-1-29-14">1</mustverify>
+      <showvalidation original-id="freq-polygon-interpreting-1-1-29-15" assembly-id="freq-polygon-interpreting-1-1-29-15" unique-id="freq-polygon-interpreting-1-1-29-15">1</showvalidation>
+      <options original-id="freq-polygon-interpreting-1-1-29-16" assembly-id="freq-polygon-interpreting-1-1-29-16" unique-id="freq-polygon-interpreting-1-1-29-16"/>
+    </input>
+    <input original-id="freq-polygon-interpreting-1-1-30" assembly-id="freq-polygon-interpreting-1-1-30" unique-id="freq-polygon-interpreting-1-1-30">
+      <name original-id="freq-polygon-interpreting-1-1-30-1" assembly-id="freq-polygon-interpreting-1-1-30-1" unique-id="freq-polygon-interpreting-1-1-30-1">ans_2</name>
+      <type original-id="freq-polygon-interpreting-1-1-30-2" assembly-id="freq-polygon-interpreting-1-1-30-2" unique-id="freq-polygon-interpreting-1-1-30-2">algebraic</type>
+      <tans original-id="freq-polygon-interpreting-1-1-30-3" assembly-id="freq-polygon-interpreting-1-1-30-3" unique-id="freq-polygon-interpreting-1-1-30-3">1</tans>
+      <boxsize original-id="freq-polygon-interpreting-1-1-30-4" assembly-id="freq-polygon-interpreting-1-1-30-4" unique-id="freq-polygon-interpreting-1-1-30-4">15</boxsize>
+      <strictsyntax original-id="freq-polygon-interpreting-1-1-30-5" assembly-id="freq-polygon-interpreting-1-1-30-5" unique-id="freq-polygon-interpreting-1-1-30-5">1</strictsyntax>
+      <insertstars original-id="freq-polygon-interpreting-1-1-30-6" assembly-id="freq-polygon-interpreting-1-1-30-6" unique-id="freq-polygon-interpreting-1-1-30-6">0</insertstars>
+      <syntaxhint original-id="freq-polygon-interpreting-1-1-30-7" assembly-id="freq-polygon-interpreting-1-1-30-7" unique-id="freq-polygon-interpreting-1-1-30-7"/>
+      <syntaxattribute original-id="freq-polygon-interpreting-1-1-30-8" assembly-id="freq-polygon-interpreting-1-1-30-8" unique-id="freq-polygon-interpreting-1-1-30-8">0</syntaxattribute>
+      <forbidwords original-id="freq-polygon-interpreting-1-1-30-9" assembly-id="freq-polygon-interpreting-1-1-30-9" unique-id="freq-polygon-interpreting-1-1-30-9"/>
+      <allowwords original-id="freq-polygon-interpreting-1-1-30-10" assembly-id="freq-polygon-interpreting-1-1-30-10" unique-id="freq-polygon-interpreting-1-1-30-10"/>
+      <forbidfloat original-id="freq-polygon-interpreting-1-1-30-11" assembly-id="freq-polygon-interpreting-1-1-30-11" unique-id="freq-polygon-interpreting-1-1-30-11">1</forbidfloat>
+      <requirelowestterms original-id="freq-polygon-interpreting-1-1-30-12" assembly-id="freq-polygon-interpreting-1-1-30-12" unique-id="freq-polygon-interpreting-1-1-30-12">0</requirelowestterms>
+      <checkanswertype original-id="freq-polygon-interpreting-1-1-30-13" assembly-id="freq-polygon-interpreting-1-1-30-13" unique-id="freq-polygon-interpreting-1-1-30-13">0</checkanswertype>
+      <mustverify original-id="freq-polygon-interpreting-1-1-30-14" assembly-id="freq-polygon-interpreting-1-1-30-14" unique-id="freq-polygon-interpreting-1-1-30-14">1</mustverify>
+      <showvalidation original-id="freq-polygon-interpreting-1-1-30-15" assembly-id="freq-polygon-interpreting-1-1-30-15" unique-id="freq-polygon-interpreting-1-1-30-15">1</showvalidation>
+      <options original-id="freq-polygon-interpreting-1-1-30-16" assembly-id="freq-polygon-interpreting-1-1-30-16" unique-id="freq-polygon-interpreting-1-1-30-16"/>
+    </input>
+    <input original-id="freq-polygon-interpreting-1-1-31" assembly-id="freq-polygon-interpreting-1-1-31" unique-id="freq-polygon-interpreting-1-1-31">
+      <name original-id="freq-polygon-interpreting-1-1-31-1" assembly-id="freq-polygon-interpreting-1-1-31-1" unique-id="freq-polygon-interpreting-1-1-31-1">ans_3</name>
+      <type original-id="freq-polygon-interpreting-1-1-31-2" assembly-id="freq-polygon-interpreting-1-1-31-2" unique-id="freq-polygon-interpreting-1-1-31-2">algebraic</type>
+      <tans original-id="freq-polygon-interpreting-1-1-31-3" assembly-id="freq-polygon-interpreting-1-1-31-3" unique-id="freq-polygon-interpreting-1-1-31-3">1</tans>
+      <boxsize original-id="freq-polygon-interpreting-1-1-31-4" assembly-id="freq-polygon-interpreting-1-1-31-4" unique-id="freq-polygon-interpreting-1-1-31-4">15</boxsize>
+      <strictsyntax original-id="freq-polygon-interpreting-1-1-31-5" assembly-id="freq-polygon-interpreting-1-1-31-5" unique-id="freq-polygon-interpreting-1-1-31-5">1</strictsyntax>
+      <insertstars original-id="freq-polygon-interpreting-1-1-31-6" assembly-id="freq-polygon-interpreting-1-1-31-6" unique-id="freq-polygon-interpreting-1-1-31-6">0</insertstars>
+      <syntaxhint original-id="freq-polygon-interpreting-1-1-31-7" assembly-id="freq-polygon-interpreting-1-1-31-7" unique-id="freq-polygon-interpreting-1-1-31-7"/>
+      <syntaxattribute original-id="freq-polygon-interpreting-1-1-31-8" assembly-id="freq-polygon-interpreting-1-1-31-8" unique-id="freq-polygon-interpreting-1-1-31-8">0</syntaxattribute>
+      <forbidwords original-id="freq-polygon-interpreting-1-1-31-9" assembly-id="freq-polygon-interpreting-1-1-31-9" unique-id="freq-polygon-interpreting-1-1-31-9"/>
+      <allowwords original-id="freq-polygon-interpreting-1-1-31-10" assembly-id="freq-polygon-interpreting-1-1-31-10" unique-id="freq-polygon-interpreting-1-1-31-10"/>
+      <forbidfloat original-id="freq-polygon-interpreting-1-1-31-11" assembly-id="freq-polygon-interpreting-1-1-31-11" unique-id="freq-polygon-interpreting-1-1-31-11">1</forbidfloat>
+      <requirelowestterms original-id="freq-polygon-interpreting-1-1-31-12" assembly-id="freq-polygon-interpreting-1-1-31-12" unique-id="freq-polygon-interpreting-1-1-31-12">0</requirelowestterms>
+      <checkanswertype original-id="freq-polygon-interpreting-1-1-31-13" assembly-id="freq-polygon-interpreting-1-1-31-13" unique-id="freq-polygon-interpreting-1-1-31-13">0</checkanswertype>
+      <mustverify original-id="freq-polygon-interpreting-1-1-31-14" assembly-id="freq-polygon-interpreting-1-1-31-14" unique-id="freq-polygon-interpreting-1-1-31-14">1</mustverify>
+      <showvalidation original-id="freq-polygon-interpreting-1-1-31-15" assembly-id="freq-polygon-interpreting-1-1-31-15" unique-id="freq-polygon-interpreting-1-1-31-15">1</showvalidation>
+      <options original-id="freq-polygon-interpreting-1-1-31-16" assembly-id="freq-polygon-interpreting-1-1-31-16" unique-id="freq-polygon-interpreting-1-1-31-16"/>
+    </input>
+    <input original-id="freq-polygon-interpreting-1-1-32" assembly-id="freq-polygon-interpreting-1-1-32" unique-id="freq-polygon-interpreting-1-1-32">
+      <name original-id="freq-polygon-interpreting-1-1-32-1" assembly-id="freq-polygon-interpreting-1-1-32-1" unique-id="freq-polygon-interpreting-1-1-32-1">ans_4</name>
+      <type original-id="freq-polygon-interpreting-1-1-32-2" assembly-id="freq-polygon-interpreting-1-1-32-2" unique-id="freq-polygon-interpreting-1-1-32-2">algebraic</type>
+      <tans original-id="freq-polygon-interpreting-1-1-32-3" assembly-id="freq-polygon-interpreting-1-1-32-3" unique-id="freq-polygon-interpreting-1-1-32-3">1</tans>
+      <boxsize original-id="freq-polygon-interpreting-1-1-32-4" assembly-id="freq-polygon-interpreting-1-1-32-4" unique-id="freq-polygon-interpreting-1-1-32-4">15</boxsize>
+      <strictsyntax original-id="freq-polygon-interpreting-1-1-32-5" assembly-id="freq-polygon-interpreting-1-1-32-5" unique-id="freq-polygon-interpreting-1-1-32-5">1</strictsyntax>
+      <insertstars original-id="freq-polygon-interpreting-1-1-32-6" assembly-id="freq-polygon-interpreting-1-1-32-6" unique-id="freq-polygon-interpreting-1-1-32-6">0</insertstars>
+      <syntaxhint original-id="freq-polygon-interpreting-1-1-32-7" assembly-id="freq-polygon-interpreting-1-1-32-7" unique-id="freq-polygon-interpreting-1-1-32-7"/>
+      <syntaxattribute original-id="freq-polygon-interpreting-1-1-32-8" assembly-id="freq-polygon-interpreting-1-1-32-8" unique-id="freq-polygon-interpreting-1-1-32-8">0</syntaxattribute>
+      <forbidwords original-id="freq-polygon-interpreting-1-1-32-9" assembly-id="freq-polygon-interpreting-1-1-32-9" unique-id="freq-polygon-interpreting-1-1-32-9"/>
+      <allowwords original-id="freq-polygon-interpreting-1-1-32-10" assembly-id="freq-polygon-interpreting-1-1-32-10" unique-id="freq-polygon-interpreting-1-1-32-10"/>
+      <forbidfloat original-id="freq-polygon-interpreting-1-1-32-11" assembly-id="freq-polygon-interpreting-1-1-32-11" unique-id="freq-polygon-interpreting-1-1-32-11">1</forbidfloat>
+      <requirelowestterms original-id="freq-polygon-interpreting-1-1-32-12" assembly-id="freq-polygon-interpreting-1-1-32-12" unique-id="freq-polygon-interpreting-1-1-32-12">0</requirelowestterms>
+      <checkanswertype original-id="freq-polygon-interpreting-1-1-32-13" assembly-id="freq-polygon-interpreting-1-1-32-13" unique-id="freq-polygon-interpreting-1-1-32-13">0</checkanswertype>
+      <mustverify original-id="freq-polygon-interpreting-1-1-32-14" assembly-id="freq-polygon-interpreting-1-1-32-14" unique-id="freq-polygon-interpreting-1-1-32-14">1</mustverify>
+      <showvalidation original-id="freq-polygon-interpreting-1-1-32-15" assembly-id="freq-polygon-interpreting-1-1-32-15" unique-id="freq-polygon-interpreting-1-1-32-15">1</showvalidation>
+      <options original-id="freq-polygon-interpreting-1-1-32-16" assembly-id="freq-polygon-interpreting-1-1-32-16" unique-id="freq-polygon-interpreting-1-1-32-16"/>
+    </input>
+    <input original-id="freq-polygon-interpreting-1-1-33" assembly-id="freq-polygon-interpreting-1-1-33" unique-id="freq-polygon-interpreting-1-1-33">
+      <name original-id="freq-polygon-interpreting-1-1-33-1" assembly-id="freq-polygon-interpreting-1-1-33-1" unique-id="freq-polygon-interpreting-1-1-33-1">ans_5</name>
+      <type original-id="freq-polygon-interpreting-1-1-33-2" assembly-id="freq-polygon-interpreting-1-1-33-2" unique-id="freq-polygon-interpreting-1-1-33-2">algebraic</type>
+      <tans original-id="freq-polygon-interpreting-1-1-33-3" assembly-id="freq-polygon-interpreting-1-1-33-3" unique-id="freq-polygon-interpreting-1-1-33-3">1</tans>
+      <boxsize original-id="freq-polygon-interpreting-1-1-33-4" assembly-id="freq-polygon-interpreting-1-1-33-4" unique-id="freq-polygon-interpreting-1-1-33-4">15</boxsize>
+      <strictsyntax original-id="freq-polygon-interpreting-1-1-33-5" assembly-id="freq-polygon-interpreting-1-1-33-5" unique-id="freq-polygon-interpreting-1-1-33-5">1</strictsyntax>
+      <insertstars original-id="freq-polygon-interpreting-1-1-33-6" assembly-id="freq-polygon-interpreting-1-1-33-6" unique-id="freq-polygon-interpreting-1-1-33-6">0</insertstars>
+      <syntaxhint original-id="freq-polygon-interpreting-1-1-33-7" assembly-id="freq-polygon-interpreting-1-1-33-7" unique-id="freq-polygon-interpreting-1-1-33-7"/>
+      <syntaxattribute original-id="freq-polygon-interpreting-1-1-33-8" assembly-id="freq-polygon-interpreting-1-1-33-8" unique-id="freq-polygon-interpreting-1-1-33-8">0</syntaxattribute>
+      <forbidwords original-id="freq-polygon-interpreting-1-1-33-9" assembly-id="freq-polygon-interpreting-1-1-33-9" unique-id="freq-polygon-interpreting-1-1-33-9"/>
+      <allowwords original-id="freq-polygon-interpreting-1-1-33-10" assembly-id="freq-polygon-interpreting-1-1-33-10" unique-id="freq-polygon-interpreting-1-1-33-10"/>
+      <forbidfloat original-id="freq-polygon-interpreting-1-1-33-11" assembly-id="freq-polygon-interpreting-1-1-33-11" unique-id="freq-polygon-interpreting-1-1-33-11">1</forbidfloat>
+      <requirelowestterms original-id="freq-polygon-interpreting-1-1-33-12" assembly-id="freq-polygon-interpreting-1-1-33-12" unique-id="freq-polygon-interpreting-1-1-33-12">0</requirelowestterms>
+      <checkanswertype original-id="freq-polygon-interpreting-1-1-33-13" assembly-id="freq-polygon-interpreting-1-1-33-13" unique-id="freq-polygon-interpreting-1-1-33-13">0</checkanswertype>
+      <mustverify original-id="freq-polygon-interpreting-1-1-33-14" assembly-id="freq-polygon-interpreting-1-1-33-14" unique-id="freq-polygon-interpreting-1-1-33-14">1</mustverify>
+      <showvalidation original-id="freq-polygon-interpreting-1-1-33-15" assembly-id="freq-polygon-interpreting-1-1-33-15" unique-id="freq-polygon-interpreting-1-1-33-15">1</showvalidation>
+      <options original-id="freq-polygon-interpreting-1-1-33-16" assembly-id="freq-polygon-interpreting-1-1-33-16" unique-id="freq-polygon-interpreting-1-1-33-16"/>
+    </input>
+    <input original-id="freq-polygon-interpreting-1-1-34" assembly-id="freq-polygon-interpreting-1-1-34" unique-id="freq-polygon-interpreting-1-1-34">
+      <name original-id="freq-polygon-interpreting-1-1-34-1" assembly-id="freq-polygon-interpreting-1-1-34-1" unique-id="freq-polygon-interpreting-1-1-34-1">ans_6</name>
+      <type original-id="freq-polygon-interpreting-1-1-34-2" assembly-id="freq-polygon-interpreting-1-1-34-2" unique-id="freq-polygon-interpreting-1-1-34-2">algebraic</type>
+      <tans original-id="freq-polygon-interpreting-1-1-34-3" assembly-id="freq-polygon-interpreting-1-1-34-3" unique-id="freq-polygon-interpreting-1-1-34-3">1</tans>
+      <boxsize original-id="freq-polygon-interpreting-1-1-34-4" assembly-id="freq-polygon-interpreting-1-1-34-4" unique-id="freq-polygon-interpreting-1-1-34-4">15</boxsize>
+      <strictsyntax original-id="freq-polygon-interpreting-1-1-34-5" assembly-id="freq-polygon-interpreting-1-1-34-5" unique-id="freq-polygon-interpreting-1-1-34-5">1</strictsyntax>
+      <insertstars original-id="freq-polygon-interpreting-1-1-34-6" assembly-id="freq-polygon-interpreting-1-1-34-6" unique-id="freq-polygon-interpreting-1-1-34-6">0</insertstars>
+      <syntaxhint original-id="freq-polygon-interpreting-1-1-34-7" assembly-id="freq-polygon-interpreting-1-1-34-7" unique-id="freq-polygon-interpreting-1-1-34-7"/>
+      <syntaxattribute original-id="freq-polygon-interpreting-1-1-34-8" assembly-id="freq-polygon-interpreting-1-1-34-8" unique-id="freq-polygon-interpreting-1-1-34-8">0</syntaxattribute>
+      <forbidwords original-id="freq-polygon-interpreting-1-1-34-9" assembly-id="freq-polygon-interpreting-1-1-34-9" unique-id="freq-polygon-interpreting-1-1-34-9"/>
+      <allowwords original-id="freq-polygon-interpreting-1-1-34-10" assembly-id="freq-polygon-interpreting-1-1-34-10" unique-id="freq-polygon-interpreting-1-1-34-10"/>
+      <forbidfloat original-id="freq-polygon-interpreting-1-1-34-11" assembly-id="freq-polygon-interpreting-1-1-34-11" unique-id="freq-polygon-interpreting-1-1-34-11">1</forbidfloat>
+      <requirelowestterms original-id="freq-polygon-interpreting-1-1-34-12" assembly-id="freq-polygon-interpreting-1-1-34-12" unique-id="freq-polygon-interpreting-1-1-34-12">0</requirelowestterms>
+      <checkanswertype original-id="freq-polygon-interpreting-1-1-34-13" assembly-id="freq-polygon-interpreting-1-1-34-13" unique-id="freq-polygon-interpreting-1-1-34-13">0</checkanswertype>
+      <mustverify original-id="freq-polygon-interpreting-1-1-34-14" assembly-id="freq-polygon-interpreting-1-1-34-14" unique-id="freq-polygon-interpreting-1-1-34-14">1</mustverify>
+      <showvalidation original-id="freq-polygon-interpreting-1-1-34-15" assembly-id="freq-polygon-interpreting-1-1-34-15" unique-id="freq-polygon-interpreting-1-1-34-15">1</showvalidation>
+      <options original-id="freq-polygon-interpreting-1-1-34-16" assembly-id="freq-polygon-interpreting-1-1-34-16" unique-id="freq-polygon-interpreting-1-1-34-16"/>
+    </input>
+    <input original-id="freq-polygon-interpreting-1-1-35" assembly-id="freq-polygon-interpreting-1-1-35" unique-id="freq-polygon-interpreting-1-1-35">
+      <name original-id="freq-polygon-interpreting-1-1-35-1" assembly-id="freq-polygon-interpreting-1-1-35-1" unique-id="freq-polygon-interpreting-1-1-35-1">ans_estimate</name>
+      <type original-id="freq-polygon-interpreting-1-1-35-2" assembly-id="freq-polygon-interpreting-1-1-35-2" unique-id="freq-polygon-interpreting-1-1-35-2">algebraic</type>
+      <tans original-id="freq-polygon-interpreting-1-1-35-3" assembly-id="freq-polygon-interpreting-1-1-35-3" unique-id="freq-polygon-interpreting-1-1-35-3">1</tans>
+      <boxsize original-id="freq-polygon-interpreting-1-1-35-4" assembly-id="freq-polygon-interpreting-1-1-35-4" unique-id="freq-polygon-interpreting-1-1-35-4">15</boxsize>
+      <strictsyntax original-id="freq-polygon-interpreting-1-1-35-5" assembly-id="freq-polygon-interpreting-1-1-35-5" unique-id="freq-polygon-interpreting-1-1-35-5">1</strictsyntax>
+      <insertstars original-id="freq-polygon-interpreting-1-1-35-6" assembly-id="freq-polygon-interpreting-1-1-35-6" unique-id="freq-polygon-interpreting-1-1-35-6">0</insertstars>
+      <syntaxhint original-id="freq-polygon-interpreting-1-1-35-7" assembly-id="freq-polygon-interpreting-1-1-35-7" unique-id="freq-polygon-interpreting-1-1-35-7"/>
+      <syntaxattribute original-id="freq-polygon-interpreting-1-1-35-8" assembly-id="freq-polygon-interpreting-1-1-35-8" unique-id="freq-polygon-interpreting-1-1-35-8">0</syntaxattribute>
+      <forbidwords original-id="freq-polygon-interpreting-1-1-35-9" assembly-id="freq-polygon-interpreting-1-1-35-9" unique-id="freq-polygon-interpreting-1-1-35-9"/>
+      <allowwords original-id="freq-polygon-interpreting-1-1-35-10" assembly-id="freq-polygon-interpreting-1-1-35-10" unique-id="freq-polygon-interpreting-1-1-35-10"/>
+      <forbidfloat original-id="freq-polygon-interpreting-1-1-35-11" assembly-id="freq-polygon-interpreting-1-1-35-11" unique-id="freq-polygon-interpreting-1-1-35-11">1</forbidfloat>
+      <requirelowestterms original-id="freq-polygon-interpreting-1-1-35-12" assembly-id="freq-polygon-interpreting-1-1-35-12" unique-id="freq-polygon-interpreting-1-1-35-12">0</requirelowestterms>
+      <checkanswertype original-id="freq-polygon-interpreting-1-1-35-13" assembly-id="freq-polygon-interpreting-1-1-35-13" unique-id="freq-polygon-interpreting-1-1-35-13">0</checkanswertype>
+      <mustverify original-id="freq-polygon-interpreting-1-1-35-14" assembly-id="freq-polygon-interpreting-1-1-35-14" unique-id="freq-polygon-interpreting-1-1-35-14">1</mustverify>
+      <showvalidation original-id="freq-polygon-interpreting-1-1-35-15" assembly-id="freq-polygon-interpreting-1-1-35-15" unique-id="freq-polygon-interpreting-1-1-35-15">1</showvalidation>
+      <options original-id="freq-polygon-interpreting-1-1-35-16" assembly-id="freq-polygon-interpreting-1-1-35-16" unique-id="freq-polygon-interpreting-1-1-35-16"/>
+    </input>
+    <prt original-id="freq-polygon-interpreting-1-1-36" assembly-id="freq-polygon-interpreting-1-1-36" unique-id="freq-polygon-interpreting-1-1-36">
+      <name original-id="freq-polygon-interpreting-1-1-36-1" assembly-id="freq-polygon-interpreting-1-1-36-1" unique-id="freq-polygon-interpreting-1-1-36-1">prt_estimate</name>
+      <value original-id="freq-polygon-interpreting-1-1-36-2" assembly-id="freq-polygon-interpreting-1-1-36-2" unique-id="freq-polygon-interpreting-1-1-36-2">1.0000000</value>
+      <autosimplify original-id="freq-polygon-interpreting-1-1-36-3" assembly-id="freq-polygon-interpreting-1-1-36-3" unique-id="freq-polygon-interpreting-1-1-36-3">1</autosimplify>
+      <feedbackstyle original-id="freq-polygon-interpreting-1-1-36-4" assembly-id="freq-polygon-interpreting-1-1-36-4" unique-id="freq-polygon-interpreting-1-1-36-4">1</feedbackstyle>
+      <feedbackvariables original-id="freq-polygon-interpreting-1-1-36-5" assembly-id="freq-polygon-interpreting-1-1-36-5" unique-id="freq-polygon-interpreting-1-1-36-5">
+        <text original-id="freq-polygon-interpreting-1-1-36-5-1" assembly-id="freq-polygon-interpreting-1-1-36-5-1" unique-id="freq-polygon-interpreting-1-1-36-5-1"/>
+      </feedbackvariables>
+      <node original-id="freq-polygon-interpreting-1-1-36-6" assembly-id="freq-polygon-interpreting-1-1-36-6" unique-id="freq-polygon-interpreting-1-1-36-6">
+        <name original-id="freq-polygon-interpreting-1-1-36-6-1" assembly-id="freq-polygon-interpreting-1-1-36-6-1" unique-id="freq-polygon-interpreting-1-1-36-6-1">0</name>
+        <description original-id="freq-polygon-interpreting-1-1-36-6-2" assembly-id="freq-polygon-interpreting-1-1-36-6-2" unique-id="freq-polygon-interpreting-1-1-36-6-2"/>
+        <answertest original-id="freq-polygon-interpreting-1-1-36-6-3" assembly-id="freq-polygon-interpreting-1-1-36-6-3" unique-id="freq-polygon-interpreting-1-1-36-6-3">AlgEquiv</answertest>
+        <sans original-id="freq-polygon-interpreting-1-1-36-6-4" assembly-id="freq-polygon-interpreting-1-1-36-6-4" unique-id="freq-polygon-interpreting-1-1-36-6-4">1</sans>
+        <tans original-id="freq-polygon-interpreting-1-1-36-6-5" assembly-id="freq-polygon-interpreting-1-1-36-6-5" unique-id="freq-polygon-interpreting-1-1-36-6-5">1</tans>
+        <testoptions original-id="freq-polygon-interpreting-1-1-36-6-6" assembly-id="freq-polygon-interpreting-1-1-36-6-6" unique-id="freq-polygon-interpreting-1-1-36-6-6"/>
+        <quiet original-id="freq-polygon-interpreting-1-1-36-6-7" assembly-id="freq-polygon-interpreting-1-1-36-6-7" unique-id="freq-polygon-interpreting-1-1-36-6-7">0</quiet>
+        <truescoremode original-id="freq-polygon-interpreting-1-1-36-6-8" assembly-id="freq-polygon-interpreting-1-1-36-6-8" unique-id="freq-polygon-interpreting-1-1-36-6-8">=</truescoremode>
+        <truescore original-id="freq-polygon-interpreting-1-1-36-6-9" assembly-id="freq-polygon-interpreting-1-1-36-6-9" unique-id="freq-polygon-interpreting-1-1-36-6-9">1</truescore>
+        <truepenalty original-id="freq-polygon-interpreting-1-1-36-6-10" assembly-id="freq-polygon-interpreting-1-1-36-6-10" unique-id="freq-polygon-interpreting-1-1-36-6-10"/>
+        <truenextnode original-id="freq-polygon-interpreting-1-1-36-6-11" assembly-id="freq-polygon-interpreting-1-1-36-6-11" unique-id="freq-polygon-interpreting-1-1-36-6-11">-1</truenextnode>
+        <trueanswernote original-id="freq-polygon-interpreting-1-1-36-6-12" assembly-id="freq-polygon-interpreting-1-1-36-6-12" unique-id="freq-polygon-interpreting-1-1-36-6-12">prt_estimate-1-T</trueanswernote>
+        <truefeedback format="html" original-id="freq-polygon-interpreting-1-1-36-6-13" assembly-id="freq-polygon-interpreting-1-1-36-6-13" unique-id="freq-polygon-interpreting-1-1-36-6-13">
+          <text original-id="freq-polygon-interpreting-1-1-36-6-13-1" assembly-id="freq-polygon-interpreting-1-1-36-6-13-1" unique-id="freq-polygon-interpreting-1-1-36-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="freq-polygon-interpreting-1-1-36-6-14" assembly-id="freq-polygon-interpreting-1-1-36-6-14" unique-id="freq-polygon-interpreting-1-1-36-6-14">=</falsescoremode>
+        <falsescore original-id="freq-polygon-interpreting-1-1-36-6-15" assembly-id="freq-polygon-interpreting-1-1-36-6-15" unique-id="freq-polygon-interpreting-1-1-36-6-15">0</falsescore>
+        <falsepenalty original-id="freq-polygon-interpreting-1-1-36-6-16" assembly-id="freq-polygon-interpreting-1-1-36-6-16" unique-id="freq-polygon-interpreting-1-1-36-6-16"/>
+        <falsenextnode original-id="freq-polygon-interpreting-1-1-36-6-17" assembly-id="freq-polygon-interpreting-1-1-36-6-17" unique-id="freq-polygon-interpreting-1-1-36-6-17">-1</falsenextnode>
+        <falseanswernote original-id="freq-polygon-interpreting-1-1-36-6-18" assembly-id="freq-polygon-interpreting-1-1-36-6-18" unique-id="freq-polygon-interpreting-1-1-36-6-18">prt_estimate-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="freq-polygon-interpreting-1-1-36-6-19" assembly-id="freq-polygon-interpreting-1-1-36-6-19" unique-id="freq-polygon-interpreting-1-1-36-6-19">
+          <text original-id="freq-polygon-interpreting-1-1-36-6-19-1" assembly-id="freq-polygon-interpreting-1-1-36-6-19-1" unique-id="freq-polygon-interpreting-1-1-36-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="freq-polygon-interpreting-1-1-37" assembly-id="freq-polygon-interpreting-1-1-37" unique-id="freq-polygon-interpreting-1-1-37">
+      <name original-id="freq-polygon-interpreting-1-1-37-1" assembly-id="freq-polygon-interpreting-1-1-37-1" unique-id="freq-polygon-interpreting-1-1-37-1">prt_graph</name>
+      <value original-id="freq-polygon-interpreting-1-1-37-2" assembly-id="freq-polygon-interpreting-1-1-37-2" unique-id="freq-polygon-interpreting-1-1-37-2">1.0000000</value>
+      <autosimplify original-id="freq-polygon-interpreting-1-1-37-3" assembly-id="freq-polygon-interpreting-1-1-37-3" unique-id="freq-polygon-interpreting-1-1-37-3">1</autosimplify>
+      <feedbackstyle original-id="freq-polygon-interpreting-1-1-37-4" assembly-id="freq-polygon-interpreting-1-1-37-4" unique-id="freq-polygon-interpreting-1-1-37-4">1</feedbackstyle>
+      <feedbackvariables original-id="freq-polygon-interpreting-1-1-37-5" assembly-id="freq-polygon-interpreting-1-1-37-5" unique-id="freq-polygon-interpreting-1-1-37-5">
+        <text original-id="freq-polygon-interpreting-1-1-37-5-1" assembly-id="freq-polygon-interpreting-1-1-37-5-1" unique-id="freq-polygon-interpreting-1-1-37-5-1"/>
+      </feedbackvariables>
+      <node original-id="freq-polygon-interpreting-1-1-37-6" assembly-id="freq-polygon-interpreting-1-1-37-6" unique-id="freq-polygon-interpreting-1-1-37-6">
+        <name original-id="freq-polygon-interpreting-1-1-37-6-1" assembly-id="freq-polygon-interpreting-1-1-37-6-1" unique-id="freq-polygon-interpreting-1-1-37-6-1">0</name>
+        <description original-id="freq-polygon-interpreting-1-1-37-6-2" assembly-id="freq-polygon-interpreting-1-1-37-6-2" unique-id="freq-polygon-interpreting-1-1-37-6-2"/>
+        <answertest original-id="freq-polygon-interpreting-1-1-37-6-3" assembly-id="freq-polygon-interpreting-1-1-37-6-3" unique-id="freq-polygon-interpreting-1-1-37-6-3">AlgEquiv</answertest>
+        <sans original-id="freq-polygon-interpreting-1-1-37-6-4" assembly-id="freq-polygon-interpreting-1-1-37-6-4" unique-id="freq-polygon-interpreting-1-1-37-6-4">1</sans>
+        <tans original-id="freq-polygon-interpreting-1-1-37-6-5" assembly-id="freq-polygon-interpreting-1-1-37-6-5" unique-id="freq-polygon-interpreting-1-1-37-6-5">1</tans>
+        <testoptions original-id="freq-polygon-interpreting-1-1-37-6-6" assembly-id="freq-polygon-interpreting-1-1-37-6-6" unique-id="freq-polygon-interpreting-1-1-37-6-6"/>
+        <quiet original-id="freq-polygon-interpreting-1-1-37-6-7" assembly-id="freq-polygon-interpreting-1-1-37-6-7" unique-id="freq-polygon-interpreting-1-1-37-6-7">0</quiet>
+        <truescoremode original-id="freq-polygon-interpreting-1-1-37-6-8" assembly-id="freq-polygon-interpreting-1-1-37-6-8" unique-id="freq-polygon-interpreting-1-1-37-6-8">=</truescoremode>
+        <truescore original-id="freq-polygon-interpreting-1-1-37-6-9" assembly-id="freq-polygon-interpreting-1-1-37-6-9" unique-id="freq-polygon-interpreting-1-1-37-6-9">1</truescore>
+        <truepenalty original-id="freq-polygon-interpreting-1-1-37-6-10" assembly-id="freq-polygon-interpreting-1-1-37-6-10" unique-id="freq-polygon-interpreting-1-1-37-6-10"/>
+        <truenextnode original-id="freq-polygon-interpreting-1-1-37-6-11" assembly-id="freq-polygon-interpreting-1-1-37-6-11" unique-id="freq-polygon-interpreting-1-1-37-6-11">-1</truenextnode>
+        <trueanswernote original-id="freq-polygon-interpreting-1-1-37-6-12" assembly-id="freq-polygon-interpreting-1-1-37-6-12" unique-id="freq-polygon-interpreting-1-1-37-6-12">prt_graph-1-T</trueanswernote>
+        <truefeedback format="html" original-id="freq-polygon-interpreting-1-1-37-6-13" assembly-id="freq-polygon-interpreting-1-1-37-6-13" unique-id="freq-polygon-interpreting-1-1-37-6-13">
+          <text original-id="freq-polygon-interpreting-1-1-37-6-13-1" assembly-id="freq-polygon-interpreting-1-1-37-6-13-1" unique-id="freq-polygon-interpreting-1-1-37-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="freq-polygon-interpreting-1-1-37-6-14" assembly-id="freq-polygon-interpreting-1-1-37-6-14" unique-id="freq-polygon-interpreting-1-1-37-6-14">=</falsescoremode>
+        <falsescore original-id="freq-polygon-interpreting-1-1-37-6-15" assembly-id="freq-polygon-interpreting-1-1-37-6-15" unique-id="freq-polygon-interpreting-1-1-37-6-15">0</falsescore>
+        <falsepenalty original-id="freq-polygon-interpreting-1-1-37-6-16" assembly-id="freq-polygon-interpreting-1-1-37-6-16" unique-id="freq-polygon-interpreting-1-1-37-6-16"/>
+        <falsenextnode original-id="freq-polygon-interpreting-1-1-37-6-17" assembly-id="freq-polygon-interpreting-1-1-37-6-17" unique-id="freq-polygon-interpreting-1-1-37-6-17">-1</falsenextnode>
+        <falseanswernote original-id="freq-polygon-interpreting-1-1-37-6-18" assembly-id="freq-polygon-interpreting-1-1-37-6-18" unique-id="freq-polygon-interpreting-1-1-37-6-18">prt_graph-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="freq-polygon-interpreting-1-1-37-6-19" assembly-id="freq-polygon-interpreting-1-1-37-6-19" unique-id="freq-polygon-interpreting-1-1-37-6-19">
+          <text original-id="freq-polygon-interpreting-1-1-37-6-19-1" assembly-id="freq-polygon-interpreting-1-1-37-6-19-1" unique-id="freq-polygon-interpreting-1-1-37-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="freq-polygon-interpreting-1-1-38" assembly-id="freq-polygon-interpreting-1-1-38" unique-id="freq-polygon-interpreting-1-1-38">
+      <name original-id="freq-polygon-interpreting-1-1-38-1" assembly-id="freq-polygon-interpreting-1-1-38-1" unique-id="freq-polygon-interpreting-1-1-38-1">prt_table</name>
+      <value original-id="freq-polygon-interpreting-1-1-38-2" assembly-id="freq-polygon-interpreting-1-1-38-2" unique-id="freq-polygon-interpreting-1-1-38-2">1.0000000</value>
+      <autosimplify original-id="freq-polygon-interpreting-1-1-38-3" assembly-id="freq-polygon-interpreting-1-1-38-3" unique-id="freq-polygon-interpreting-1-1-38-3">1</autosimplify>
+      <feedbackstyle original-id="freq-polygon-interpreting-1-1-38-4" assembly-id="freq-polygon-interpreting-1-1-38-4" unique-id="freq-polygon-interpreting-1-1-38-4">1</feedbackstyle>
+      <feedbackvariables original-id="freq-polygon-interpreting-1-1-38-5" assembly-id="freq-polygon-interpreting-1-1-38-5" unique-id="freq-polygon-interpreting-1-1-38-5">
+        <text original-id="freq-polygon-interpreting-1-1-38-5-1" assembly-id="freq-polygon-interpreting-1-1-38-5-1" unique-id="freq-polygon-interpreting-1-1-38-5-1"/>
+      </feedbackvariables>
+      <node original-id="freq-polygon-interpreting-1-1-38-6" assembly-id="freq-polygon-interpreting-1-1-38-6" unique-id="freq-polygon-interpreting-1-1-38-6">
+        <name original-id="freq-polygon-interpreting-1-1-38-6-1" assembly-id="freq-polygon-interpreting-1-1-38-6-1" unique-id="freq-polygon-interpreting-1-1-38-6-1">0</name>
+        <description original-id="freq-polygon-interpreting-1-1-38-6-2" assembly-id="freq-polygon-interpreting-1-1-38-6-2" unique-id="freq-polygon-interpreting-1-1-38-6-2"/>
+        <answertest original-id="freq-polygon-interpreting-1-1-38-6-3" assembly-id="freq-polygon-interpreting-1-1-38-6-3" unique-id="freq-polygon-interpreting-1-1-38-6-3">AlgEquiv</answertest>
+        <sans original-id="freq-polygon-interpreting-1-1-38-6-4" assembly-id="freq-polygon-interpreting-1-1-38-6-4" unique-id="freq-polygon-interpreting-1-1-38-6-4">1</sans>
+        <tans original-id="freq-polygon-interpreting-1-1-38-6-5" assembly-id="freq-polygon-interpreting-1-1-38-6-5" unique-id="freq-polygon-interpreting-1-1-38-6-5">1</tans>
+        <testoptions original-id="freq-polygon-interpreting-1-1-38-6-6" assembly-id="freq-polygon-interpreting-1-1-38-6-6" unique-id="freq-polygon-interpreting-1-1-38-6-6"/>
+        <quiet original-id="freq-polygon-interpreting-1-1-38-6-7" assembly-id="freq-polygon-interpreting-1-1-38-6-7" unique-id="freq-polygon-interpreting-1-1-38-6-7">0</quiet>
+        <truescoremode original-id="freq-polygon-interpreting-1-1-38-6-8" assembly-id="freq-polygon-interpreting-1-1-38-6-8" unique-id="freq-polygon-interpreting-1-1-38-6-8">=</truescoremode>
+        <truescore original-id="freq-polygon-interpreting-1-1-38-6-9" assembly-id="freq-polygon-interpreting-1-1-38-6-9" unique-id="freq-polygon-interpreting-1-1-38-6-9">1</truescore>
+        <truepenalty original-id="freq-polygon-interpreting-1-1-38-6-10" assembly-id="freq-polygon-interpreting-1-1-38-6-10" unique-id="freq-polygon-interpreting-1-1-38-6-10"/>
+        <truenextnode original-id="freq-polygon-interpreting-1-1-38-6-11" assembly-id="freq-polygon-interpreting-1-1-38-6-11" unique-id="freq-polygon-interpreting-1-1-38-6-11">-1</truenextnode>
+        <trueanswernote original-id="freq-polygon-interpreting-1-1-38-6-12" assembly-id="freq-polygon-interpreting-1-1-38-6-12" unique-id="freq-polygon-interpreting-1-1-38-6-12">prt_table-1-T</trueanswernote>
+        <truefeedback format="html" original-id="freq-polygon-interpreting-1-1-38-6-13" assembly-id="freq-polygon-interpreting-1-1-38-6-13" unique-id="freq-polygon-interpreting-1-1-38-6-13">
+          <text original-id="freq-polygon-interpreting-1-1-38-6-13-1" assembly-id="freq-polygon-interpreting-1-1-38-6-13-1" unique-id="freq-polygon-interpreting-1-1-38-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="freq-polygon-interpreting-1-1-38-6-14" assembly-id="freq-polygon-interpreting-1-1-38-6-14" unique-id="freq-polygon-interpreting-1-1-38-6-14">=</falsescoremode>
+        <falsescore original-id="freq-polygon-interpreting-1-1-38-6-15" assembly-id="freq-polygon-interpreting-1-1-38-6-15" unique-id="freq-polygon-interpreting-1-1-38-6-15">0</falsescore>
+        <falsepenalty original-id="freq-polygon-interpreting-1-1-38-6-16" assembly-id="freq-polygon-interpreting-1-1-38-6-16" unique-id="freq-polygon-interpreting-1-1-38-6-16"/>
+        <falsenextnode original-id="freq-polygon-interpreting-1-1-38-6-17" assembly-id="freq-polygon-interpreting-1-1-38-6-17" unique-id="freq-polygon-interpreting-1-1-38-6-17">-1</falsenextnode>
+        <falseanswernote original-id="freq-polygon-interpreting-1-1-38-6-18" assembly-id="freq-polygon-interpreting-1-1-38-6-18" unique-id="freq-polygon-interpreting-1-1-38-6-18">prt_table-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="freq-polygon-interpreting-1-1-38-6-19" assembly-id="freq-polygon-interpreting-1-1-38-6-19" unique-id="freq-polygon-interpreting-1-1-38-6-19">
+          <text original-id="freq-polygon-interpreting-1-1-38-6-19-1" assembly-id="freq-polygon-interpreting-1-1-38-6-19-1" unique-id="freq-polygon-interpreting-1-1-38-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="freq-polygon-interpreting-1-1-39" assembly-id="freq-polygon-interpreting-1-1-39" unique-id="freq-polygon-interpreting-1-1-39">
+      <name original-id="freq-polygon-interpreting-1-1-39-1" assembly-id="freq-polygon-interpreting-1-1-39-1" unique-id="freq-polygon-interpreting-1-1-39-1">prt1</name>
+      <value original-id="freq-polygon-interpreting-1-1-39-2" assembly-id="freq-polygon-interpreting-1-1-39-2" unique-id="freq-polygon-interpreting-1-1-39-2">1.0000000</value>
+      <autosimplify original-id="freq-polygon-interpreting-1-1-39-3" assembly-id="freq-polygon-interpreting-1-1-39-3" unique-id="freq-polygon-interpreting-1-1-39-3">1</autosimplify>
+      <feedbackstyle original-id="freq-polygon-interpreting-1-1-39-4" assembly-id="freq-polygon-interpreting-1-1-39-4" unique-id="freq-polygon-interpreting-1-1-39-4">1</feedbackstyle>
+      <feedbackvariables original-id="freq-polygon-interpreting-1-1-39-5" assembly-id="freq-polygon-interpreting-1-1-39-5" unique-id="freq-polygon-interpreting-1-1-39-5">
+        <text original-id="freq-polygon-interpreting-1-1-39-5-1" assembly-id="freq-polygon-interpreting-1-1-39-5-1" unique-id="freq-polygon-interpreting-1-1-39-5-1"/>
+      </feedbackvariables>
+      <node original-id="freq-polygon-interpreting-1-1-39-6" assembly-id="freq-polygon-interpreting-1-1-39-6" unique-id="freq-polygon-interpreting-1-1-39-6">
+        <name original-id="freq-polygon-interpreting-1-1-39-6-1" assembly-id="freq-polygon-interpreting-1-1-39-6-1" unique-id="freq-polygon-interpreting-1-1-39-6-1">0</name>
+        <description original-id="freq-polygon-interpreting-1-1-39-6-2" assembly-id="freq-polygon-interpreting-1-1-39-6-2" unique-id="freq-polygon-interpreting-1-1-39-6-2"/>
+        <answertest original-id="freq-polygon-interpreting-1-1-39-6-3" assembly-id="freq-polygon-interpreting-1-1-39-6-3" unique-id="freq-polygon-interpreting-1-1-39-6-3">AlgEquiv</answertest>
+        <sans original-id="freq-polygon-interpreting-1-1-39-6-4" assembly-id="freq-polygon-interpreting-1-1-39-6-4" unique-id="freq-polygon-interpreting-1-1-39-6-4">ans1</sans>
+        <tans original-id="freq-polygon-interpreting-1-1-39-6-5" assembly-id="freq-polygon-interpreting-1-1-39-6-5" unique-id="freq-polygon-interpreting-1-1-39-6-5">ta1</tans>
+        <testoptions original-id="freq-polygon-interpreting-1-1-39-6-6" assembly-id="freq-polygon-interpreting-1-1-39-6-6" unique-id="freq-polygon-interpreting-1-1-39-6-6"/>
+        <quiet original-id="freq-polygon-interpreting-1-1-39-6-7" assembly-id="freq-polygon-interpreting-1-1-39-6-7" unique-id="freq-polygon-interpreting-1-1-39-6-7">0</quiet>
+        <truescoremode original-id="freq-polygon-interpreting-1-1-39-6-8" assembly-id="freq-polygon-interpreting-1-1-39-6-8" unique-id="freq-polygon-interpreting-1-1-39-6-8">=</truescoremode>
+        <truescore original-id="freq-polygon-interpreting-1-1-39-6-9" assembly-id="freq-polygon-interpreting-1-1-39-6-9" unique-id="freq-polygon-interpreting-1-1-39-6-9">1</truescore>
+        <truepenalty original-id="freq-polygon-interpreting-1-1-39-6-10" assembly-id="freq-polygon-interpreting-1-1-39-6-10" unique-id="freq-polygon-interpreting-1-1-39-6-10"/>
+        <truenextnode original-id="freq-polygon-interpreting-1-1-39-6-11" assembly-id="freq-polygon-interpreting-1-1-39-6-11" unique-id="freq-polygon-interpreting-1-1-39-6-11">-1</truenextnode>
+        <trueanswernote original-id="freq-polygon-interpreting-1-1-39-6-12" assembly-id="freq-polygon-interpreting-1-1-39-6-12" unique-id="freq-polygon-interpreting-1-1-39-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="freq-polygon-interpreting-1-1-39-6-13" assembly-id="freq-polygon-interpreting-1-1-39-6-13" unique-id="freq-polygon-interpreting-1-1-39-6-13">
+          <text original-id="freq-polygon-interpreting-1-1-39-6-13-1" assembly-id="freq-polygon-interpreting-1-1-39-6-13-1" unique-id="freq-polygon-interpreting-1-1-39-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="freq-polygon-interpreting-1-1-39-6-14" assembly-id="freq-polygon-interpreting-1-1-39-6-14" unique-id="freq-polygon-interpreting-1-1-39-6-14">=</falsescoremode>
+        <falsescore original-id="freq-polygon-interpreting-1-1-39-6-15" assembly-id="freq-polygon-interpreting-1-1-39-6-15" unique-id="freq-polygon-interpreting-1-1-39-6-15">0</falsescore>
+        <falsepenalty original-id="freq-polygon-interpreting-1-1-39-6-16" assembly-id="freq-polygon-interpreting-1-1-39-6-16" unique-id="freq-polygon-interpreting-1-1-39-6-16"/>
+        <falsenextnode original-id="freq-polygon-interpreting-1-1-39-6-17" assembly-id="freq-polygon-interpreting-1-1-39-6-17" unique-id="freq-polygon-interpreting-1-1-39-6-17">-1</falsenextnode>
+        <falseanswernote original-id="freq-polygon-interpreting-1-1-39-6-18" assembly-id="freq-polygon-interpreting-1-1-39-6-18" unique-id="freq-polygon-interpreting-1-1-39-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="freq-polygon-interpreting-1-1-39-6-19" assembly-id="freq-polygon-interpreting-1-1-39-6-19" unique-id="freq-polygon-interpreting-1-1-39-6-19">
+          <text original-id="freq-polygon-interpreting-1-1-39-6-19-1" assembly-id="freq-polygon-interpreting-1-1-39-6-19-1" unique-id="freq-polygon-interpreting-1-1-39-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>
+        

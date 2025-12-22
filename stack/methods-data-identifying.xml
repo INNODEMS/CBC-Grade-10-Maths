@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+                <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" original-id="methods-data-identifying-1" assembly-id="methods-data-identifying-1" unique-id="methods-data-identifying-1">
+  <question type="stack" original-id="methods-data-identifying-1-1" assembly-id="methods-data-identifying-1-1" unique-id="methods-data-identifying-1-1">
+    <name original-id="methods-data-identifying-1-1-1" assembly-id="methods-data-identifying-1-1-1" unique-id="methods-data-identifying-1-1-1">
+      <text original-id="methods-data-identifying-1-1-1-1" assembly-id="methods-data-identifying-1-1-1-1" unique-id="methods-data-identifying-1-1-1-1">Selecting appropriate data collection methods</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="methods-data-identifying-1-1-2" assembly-id="methods-data-identifying-1-1-2" unique-id="methods-data-identifying-1-1-2">
+      <text original-id="methods-data-identifying-1-1-2-1" assembly-id="methods-data-identifying-1-1-2-1" unique-id="methods-data-identifying-1-1-2-1">&lt;p&gt;Read the following research scenario:&lt;/p&gt;
+&lt;p&gt;{@q_text@}&lt;/p&gt;
+&lt;p&gt;Which method of data collection is most appropriate for this scenario?&lt;/p&gt;
+&lt;p&gt;[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="methods-data-identifying-1-1-3" assembly-id="methods-data-identifying-1-1-3" unique-id="methods-data-identifying-1-1-3">
+      <text original-id="methods-data-identifying-1-1-3-1" assembly-id="methods-data-identifying-1-1-3-1" unique-id="methods-data-identifying-1-1-3-1">&lt;p&gt;&lt;strong&gt;Correct Answer: {@correct_text@}&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Each method serves a specific purpose:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Observation:&lt;/strong&gt; Studying behavior in natural settings.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Focus Group:&lt;/strong&gt; Gathering deep qualitative insights from small groups.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Census:&lt;/strong&gt; Collecting data from the entire population.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Experimentation:&lt;/strong&gt; Establishing cause-and-effect (control vs treatment).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Questionnaire:&lt;/strong&gt; Gathering standardized data from large groups efficiently.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Secondary Data:&lt;/strong&gt; Using existing records or data collected by others.&lt;/li&gt;
+&lt;/ul&gt;</text>
+    </generalfeedback>
+    <defaultgrade original-id="methods-data-identifying-1-1-4" assembly-id="methods-data-identifying-1-1-4" unique-id="methods-data-identifying-1-1-4">1</defaultgrade>
+    <penalty original-id="methods-data-identifying-1-1-5" assembly-id="methods-data-identifying-1-1-5" unique-id="methods-data-identifying-1-1-5">0.1</penalty>
+    <hidden original-id="methods-data-identifying-1-1-6" assembly-id="methods-data-identifying-1-1-6" unique-id="methods-data-identifying-1-1-6">0</hidden>
+    <idnumber original-id="methods-data-identifying-1-1-7" assembly-id="methods-data-identifying-1-1-7" unique-id="methods-data-identifying-1-1-7"/>
+    <stackversion original-id="methods-data-identifying-1-1-8" assembly-id="methods-data-identifying-1-1-8" unique-id="methods-data-identifying-1-1-8">
+      <text original-id="methods-data-identifying-1-1-8-1" assembly-id="methods-data-identifying-1-1-8-1" unique-id="methods-data-identifying-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="methods-data-identifying-1-1-9" assembly-id="methods-data-identifying-1-1-9" unique-id="methods-data-identifying-1-1-9">
+      <text original-id="methods-data-identifying-1-1-9-1" assembly-id="methods-data-identifying-1-1-9-1" unique-id="methods-data-identifying-1-1-9-1">/* 1. SCENARIO &amp; CORRECT ANSWER SETUP */
+/* Define the scenarios and their matching correct method */
+scenarios: [
+  ["You stand in a corner and record how long customers spend in each aisle without interfering.", "Observation"],
+  ["You gather detailed opinions and feelings from a small group of 10 people regarding a new product.", "Focus Group"],
+  ["You collect data from every single household in the entire country.", "Census"],
+  ["You treat one plot with fertilizer and leave another without to compare the growth results.", "Experimentation"],
+  ["You survey 500 employees anonymously using a standard form to gather data quickly.", "Questionnaire"],
+  ["You use existing rainfall records from the Meteorological Department for your research.", "Secondary Data Collection"]
+];
+
+/* Pick a random scenario */
+rand_idx: rand(length(scenarios)) + 1;
+chosen_scenario: scenarios[rand_idx];
+
+q_text: chosen_scenario[1];
+correct_text: chosen_scenario[2];
+
+/* 2. DISTRACTOR SETUP */
+/* Master list of all possible methods */
+all_methods: [
+    "Observation", 
+    "Focus Group", 
+    "Census", 
+    "Experimentation", 
+    "Questionnaire", 
+    "Secondary Data Collection", 
+    "Face-to-Face Interview", 
+    "Telephone Survey", 
+    "Case Study"
+];
+
+/* Filter out the correct answer to ensure distractors are actually wrong */
+wrong_pool: sublist(all_methods, lambda([x], x # correct_text));
+
+/* Shuffle the wrong pool so we get random distractors every time */
+shuffled_wrongs: random_permutation(wrong_pool);
+
+/* 3. BUILD THE ANSWER LIST (Matching your sample structure) */
+
+/* Correct Answer Block: ID 1, Boolean TRUE, Text */
+correct_answer: rand_selection([
+   [1, true, correct_text]
+], 1);
+
+/* Incorrect Answers Block: ID 2-4, Boolean FALSE, Text (picked from shuffled pool) */
+incorrect_answers: rand_selection([
+   [2, false, shuffled_wrongs[1]],
+   [3, false, shuffled_wrongs[2]],
+   [4, false, shuffled_wrongs[3]]
+], 3);
+
+/* 4. FINAL PERMUTATION */
+/* Combine and shuffle to get the final list 'ta' */
+ta: random_permutation(append(correct_answer, incorrect_answers));
+
+/* 5. INPUT HELPER */
+/* Extract just the text strings for the STACK Radio Button list */
+/* 'third' takes the 3rd element of each sublist (the text) */
+final_options: map(third, ta);</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="methods-data-identifying-1-1-10" assembly-id="methods-data-identifying-1-1-10" unique-id="methods-data-identifying-1-1-10">
+      <text original-id="methods-data-identifying-1-1-10-1" assembly-id="methods-data-identifying-1-1-10-1" unique-id="methods-data-identifying-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="methods-data-identifying-1-1-11" assembly-id="methods-data-identifying-1-1-11" unique-id="methods-data-identifying-1-1-11">
+      <text original-id="methods-data-identifying-1-1-11-1" assembly-id="methods-data-identifying-1-1-11-1" unique-id="methods-data-identifying-1-1-11-1">{@ta@}
+{@@}
+{@@}
+{@@}</text>
+    </questionnote>
+    <questiondescription format="html" original-id="methods-data-identifying-1-1-12" assembly-id="methods-data-identifying-1-1-12" unique-id="methods-data-identifying-1-1-12">
+      <text original-id="methods-data-identifying-1-1-12-1" assembly-id="methods-data-identifying-1-1-12-1" unique-id="methods-data-identifying-1-1-12-1">&lt;p id="author"&gt;Daniel Murunga&lt;/p&gt;
+&lt;p id="concept"&gt;&lt;/p&gt;
+&lt;p id="reviewer"&gt;&lt;/p&gt;
+&lt;p id="reviewer"&gt;&lt;/p&gt;
+&lt;p id="description"&gt;In this question, you are presented with a randomized research scenario describing a specific data gathering context. You are required to identify and select the most appropriate method of data collection (such as Observation, Census, Questionnaire, etc.) that best fits the situation described.&lt;/p&gt;</text>
+    </questiondescription>
+    <questionsimplify original-id="methods-data-identifying-1-1-13" assembly-id="methods-data-identifying-1-1-13" unique-id="methods-data-identifying-1-1-13">1</questionsimplify>
+    <assumepositive original-id="methods-data-identifying-1-1-14" assembly-id="methods-data-identifying-1-1-14" unique-id="methods-data-identifying-1-1-14">0</assumepositive>
+    <assumereal original-id="methods-data-identifying-1-1-15" assembly-id="methods-data-identifying-1-1-15" unique-id="methods-data-identifying-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="methods-data-identifying-1-1-16" assembly-id="methods-data-identifying-1-1-16" unique-id="methods-data-identifying-1-1-16">
+      <text original-id="methods-data-identifying-1-1-16-1" assembly-id="methods-data-identifying-1-1-16-1" unique-id="methods-data-identifying-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="methods-data-identifying-1-1-17" assembly-id="methods-data-identifying-1-1-17" unique-id="methods-data-identifying-1-1-17">
+      <text original-id="methods-data-identifying-1-1-17-1" assembly-id="methods-data-identifying-1-1-17-1" unique-id="methods-data-identifying-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="methods-data-identifying-1-1-18" assembly-id="methods-data-identifying-1-1-18" unique-id="methods-data-identifying-1-1-18">
+      <text original-id="methods-data-identifying-1-1-18-1" assembly-id="methods-data-identifying-1-1-18-1" unique-id="methods-data-identifying-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="methods-data-identifying-1-1-19" assembly-id="methods-data-identifying-1-1-19" unique-id="methods-data-identifying-1-1-19">.</decimals>
+    <scientificnotation original-id="methods-data-identifying-1-1-20" assembly-id="methods-data-identifying-1-1-20" unique-id="methods-data-identifying-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="methods-data-identifying-1-1-21" assembly-id="methods-data-identifying-1-1-21" unique-id="methods-data-identifying-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="methods-data-identifying-1-1-22" assembly-id="methods-data-identifying-1-1-22" unique-id="methods-data-identifying-1-1-22">1</sqrtsign>
+    <complexno original-id="methods-data-identifying-1-1-23" assembly-id="methods-data-identifying-1-1-23" unique-id="methods-data-identifying-1-1-23">i</complexno>
+    <inversetrig original-id="methods-data-identifying-1-1-24" assembly-id="methods-data-identifying-1-1-24" unique-id="methods-data-identifying-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="methods-data-identifying-1-1-25" assembly-id="methods-data-identifying-1-1-25" unique-id="methods-data-identifying-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="methods-data-identifying-1-1-26" assembly-id="methods-data-identifying-1-1-26" unique-id="methods-data-identifying-1-1-26">[</matrixparens>
+    <isbroken original-id="methods-data-identifying-1-1-27" assembly-id="methods-data-identifying-1-1-27" unique-id="methods-data-identifying-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="methods-data-identifying-1-1-28" assembly-id="methods-data-identifying-1-1-28" unique-id="methods-data-identifying-1-1-28"/>
+    <input original-id="methods-data-identifying-1-1-29" assembly-id="methods-data-identifying-1-1-29" unique-id="methods-data-identifying-1-1-29">
+      <name original-id="methods-data-identifying-1-1-29-1" assembly-id="methods-data-identifying-1-1-29-1" unique-id="methods-data-identifying-1-1-29-1">ans1</name>
+      <type original-id="methods-data-identifying-1-1-29-2" assembly-id="methods-data-identifying-1-1-29-2" unique-id="methods-data-identifying-1-1-29-2">radio</type>
+      <tans original-id="methods-data-identifying-1-1-29-3" assembly-id="methods-data-identifying-1-1-29-3" unique-id="methods-data-identifying-1-1-29-3">ta</tans>
+      <boxsize original-id="methods-data-identifying-1-1-29-4" assembly-id="methods-data-identifying-1-1-29-4" unique-id="methods-data-identifying-1-1-29-4">15</boxsize>
+      <strictsyntax original-id="methods-data-identifying-1-1-29-5" assembly-id="methods-data-identifying-1-1-29-5" unique-id="methods-data-identifying-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="methods-data-identifying-1-1-29-6" assembly-id="methods-data-identifying-1-1-29-6" unique-id="methods-data-identifying-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="methods-data-identifying-1-1-29-7" assembly-id="methods-data-identifying-1-1-29-7" unique-id="methods-data-identifying-1-1-29-7"/>
+      <syntaxattribute original-id="methods-data-identifying-1-1-29-8" assembly-id="methods-data-identifying-1-1-29-8" unique-id="methods-data-identifying-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="methods-data-identifying-1-1-29-9" assembly-id="methods-data-identifying-1-1-29-9" unique-id="methods-data-identifying-1-1-29-9"/>
+      <allowwords original-id="methods-data-identifying-1-1-29-10" assembly-id="methods-data-identifying-1-1-29-10" unique-id="methods-data-identifying-1-1-29-10"/>
+      <forbidfloat original-id="methods-data-identifying-1-1-29-11" assembly-id="methods-data-identifying-1-1-29-11" unique-id="methods-data-identifying-1-1-29-11">1</forbidfloat>
+      <requirelowestterms original-id="methods-data-identifying-1-1-29-12" assembly-id="methods-data-identifying-1-1-29-12" unique-id="methods-data-identifying-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="methods-data-identifying-1-1-29-13" assembly-id="methods-data-identifying-1-1-29-13" unique-id="methods-data-identifying-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="methods-data-identifying-1-1-29-14" assembly-id="methods-data-identifying-1-1-29-14" unique-id="methods-data-identifying-1-1-29-14">1</mustverify>
+      <showvalidation original-id="methods-data-identifying-1-1-29-15" assembly-id="methods-data-identifying-1-1-29-15" unique-id="methods-data-identifying-1-1-29-15">3</showvalidation>
+      <options original-id="methods-data-identifying-1-1-29-16" assembly-id="methods-data-identifying-1-1-29-16" unique-id="methods-data-identifying-1-1-29-16">nonotanswered</options>
+    </input>
+    <prt original-id="methods-data-identifying-1-1-30" assembly-id="methods-data-identifying-1-1-30" unique-id="methods-data-identifying-1-1-30">
+      <name original-id="methods-data-identifying-1-1-30-1" assembly-id="methods-data-identifying-1-1-30-1" unique-id="methods-data-identifying-1-1-30-1">prt1</name>
+      <value original-id="methods-data-identifying-1-1-30-2" assembly-id="methods-data-identifying-1-1-30-2" unique-id="methods-data-identifying-1-1-30-2">1.0000000</value>
+      <autosimplify original-id="methods-data-identifying-1-1-30-3" assembly-id="methods-data-identifying-1-1-30-3" unique-id="methods-data-identifying-1-1-30-3">1</autosimplify>
+      <feedbackstyle original-id="methods-data-identifying-1-1-30-4" assembly-id="methods-data-identifying-1-1-30-4" unique-id="methods-data-identifying-1-1-30-4">1</feedbackstyle>
+      <feedbackvariables original-id="methods-data-identifying-1-1-30-5" assembly-id="methods-data-identifying-1-1-30-5" unique-id="methods-data-identifying-1-1-30-5">
+        <text original-id="methods-data-identifying-1-1-30-5-1" assembly-id="methods-data-identifying-1-1-30-5-1" unique-id="methods-data-identifying-1-1-30-5-1"/>
+      </feedbackvariables>
+      <node original-id="methods-data-identifying-1-1-30-6" assembly-id="methods-data-identifying-1-1-30-6" unique-id="methods-data-identifying-1-1-30-6">
+        <name original-id="methods-data-identifying-1-1-30-6-1" assembly-id="methods-data-identifying-1-1-30-6-1" unique-id="methods-data-identifying-1-1-30-6-1">0</name>
+        <description original-id="methods-data-identifying-1-1-30-6-2" assembly-id="methods-data-identifying-1-1-30-6-2" unique-id="methods-data-identifying-1-1-30-6-2"/>
+        <answertest original-id="methods-data-identifying-1-1-30-6-3" assembly-id="methods-data-identifying-1-1-30-6-3" unique-id="methods-data-identifying-1-1-30-6-3">AlgEquiv</answertest>
+        <sans original-id="methods-data-identifying-1-1-30-6-4" assembly-id="methods-data-identifying-1-1-30-6-4" unique-id="methods-data-identifying-1-1-30-6-4">ans1</sans>
+        <tans original-id="methods-data-identifying-1-1-30-6-5" assembly-id="methods-data-identifying-1-1-30-6-5" unique-id="methods-data-identifying-1-1-30-6-5">mcq_correct(ta)[1]</tans>
+        <testoptions original-id="methods-data-identifying-1-1-30-6-6" assembly-id="methods-data-identifying-1-1-30-6-6" unique-id="methods-data-identifying-1-1-30-6-6"/>
+        <quiet original-id="methods-data-identifying-1-1-30-6-7" assembly-id="methods-data-identifying-1-1-30-6-7" unique-id="methods-data-identifying-1-1-30-6-7">0</quiet>
+        <truescoremode original-id="methods-data-identifying-1-1-30-6-8" assembly-id="methods-data-identifying-1-1-30-6-8" unique-id="methods-data-identifying-1-1-30-6-8">=</truescoremode>
+        <truescore original-id="methods-data-identifying-1-1-30-6-9" assembly-id="methods-data-identifying-1-1-30-6-9" unique-id="methods-data-identifying-1-1-30-6-9">1</truescore>
+        <truepenalty original-id="methods-data-identifying-1-1-30-6-10" assembly-id="methods-data-identifying-1-1-30-6-10" unique-id="methods-data-identifying-1-1-30-6-10"/>
+        <truenextnode original-id="methods-data-identifying-1-1-30-6-11" assembly-id="methods-data-identifying-1-1-30-6-11" unique-id="methods-data-identifying-1-1-30-6-11">-1</truenextnode>
+        <trueanswernote original-id="methods-data-identifying-1-1-30-6-12" assembly-id="methods-data-identifying-1-1-30-6-12" unique-id="methods-data-identifying-1-1-30-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="methods-data-identifying-1-1-30-6-13" assembly-id="methods-data-identifying-1-1-30-6-13" unique-id="methods-data-identifying-1-1-30-6-13">
+          <text original-id="methods-data-identifying-1-1-30-6-13-1" assembly-id="methods-data-identifying-1-1-30-6-13-1" unique-id="methods-data-identifying-1-1-30-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="methods-data-identifying-1-1-30-6-14" assembly-id="methods-data-identifying-1-1-30-6-14" unique-id="methods-data-identifying-1-1-30-6-14">=</falsescoremode>
+        <falsescore original-id="methods-data-identifying-1-1-30-6-15" assembly-id="methods-data-identifying-1-1-30-6-15" unique-id="methods-data-identifying-1-1-30-6-15">0</falsescore>
+        <falsepenalty original-id="methods-data-identifying-1-1-30-6-16" assembly-id="methods-data-identifying-1-1-30-6-16" unique-id="methods-data-identifying-1-1-30-6-16"/>
+        <falsenextnode original-id="methods-data-identifying-1-1-30-6-17" assembly-id="methods-data-identifying-1-1-30-6-17" unique-id="methods-data-identifying-1-1-30-6-17">-1</falsenextnode>
+        <falseanswernote original-id="methods-data-identifying-1-1-30-6-18" assembly-id="methods-data-identifying-1-1-30-6-18" unique-id="methods-data-identifying-1-1-30-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="methods-data-identifying-1-1-30-6-19" assembly-id="methods-data-identifying-1-1-30-6-19" unique-id="methods-data-identifying-1-1-30-6-19">
+          <text original-id="methods-data-identifying-1-1-30-6-19-1" assembly-id="methods-data-identifying-1-1-30-6-19-1" unique-id="methods-data-identifying-1-1-30-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>
+            

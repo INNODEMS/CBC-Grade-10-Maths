@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+            <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../../../../stack/2-0-Measurement-Geometry/2-1-Similarity-and-Enlargement/2-1-2-Enlargement/25-4-Enlargements.xml" original-id="enlargements-25-4-1" assembly-id="enlargements-25-4-1" unique-id="enlargements-25-4-1">
+  <question type="stack" original-id="enlargements-25-4-1-1" assembly-id="enlargements-25-4-1-1" unique-id="enlargements-25-4-1-1">
+    <name original-id="enlargements-25-4-1-1-1" assembly-id="enlargements-25-4-1-1-1" unique-id="enlargements-25-4-1-1-1">
+      <text original-id="enlargements-25-4-1-1-1-1" assembly-id="enlargements-25-4-1-1-1-1" unique-id="enlargements-25-4-1-1-1-1">25.4 Enlargements</text>
+    </name>
+    <questiontext format="html" original-id="enlargements-25-4-1-1-2" assembly-id="enlargements-25-4-1-1-2" unique-id="enlargements-25-4-1-1-2">
+      <text original-id="enlargements-25-4-1-1-2-1" assembly-id="enlargements-25-4-1-1-2-1" unique-id="enlargements-25-4-1-1-2-1">&lt;p&gt;Here is a diagram of a transformation.
+&lt;br&gt;The blue shape has been enlarged into the red shape.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;center&gt;
+[[jsxgraph height="500px" width="500px"]]
+
+    var largeCoord1 = [{#first(largeCen)+first(largeOri)#},{#second(largeCen)+second(largeOri)#}];
+    var largeCoord2 = [{#first(largeCen)+(if abs(first(largeOri))=3 then -first(largeOri) else first(largeOri))#},{#second(largeCen)+(if abs(second(largeOri))=3 then -second(largeOri) else second(largeOri))#}];
+
+    var cenPoint = {#tans2#};
+    var scaleFact = {#tans1#};
+
+    var smallCoord1 = [
+      cenPoint[0]*(1-1/scaleFact)+largeCoord1[0]/scaleFact,
+      cenPoint[1]*(1-1/scaleFact)+largeCoord1[1]/scaleFact,
+    ];
+    var smallCoord2 = [
+      cenPoint[0]*(1-1/scaleFact)+largeCoord2[0]/scaleFact,
+      cenPoint[1]*(1-1/scaleFact)+largeCoord2[1]/scaleFact,
+    ];
+
+    JXG.Options.text.useMathJax=true;
+    var board = JXG.JSXGraph.initBoard(divid, {
+      boundingBox:[-7,7,7,-7],
+      showCopyright:false,
+      showNavigation:false,
+      keepaspectratio:true,
+      axis:true
+    });
+
+    // Small Shape
+
+    var p1 = board.create("point", smallCoord1, {visible:false});
+    var p2 = board.create("point", smallCoord2, {visible:false});
+
+    var pointList = [
+      p1,
+      p2,
+      [p2.X()-(p1.Y()-p2.Y())/3, p2.Y()+(p1.X()-p2.X())/3],
+      [
+        p2.X()+(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3, 
+        p2.Y()+(p1.X()-p2.X())/3+(p1.Y()-p2.Y())/3
+      ],
+      [
+        p2.X()+(p1.X()-p2.X())/3-2*(p1.Y()-p2.Y())/3, 
+        p2.Y()+2*(p1.X()-p2.X())/3+(p1.Y()-p2.Y())/3
+      ],
+      [
+        p1.X()-(p1.X()-p2.X())/3-2*(p1.Y()-p2.Y())/3, 
+        p1.Y()+2*(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3
+      ],
+      [
+        p1.X()-(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3, 
+        p1.Y()+(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3
+      ],
+      [p1.X()-(p1.Y()-p2.Y())/3, p1.Y()+(p1.X()-p2.X())/3]
+    ];
+
+    board.create("polygon", pointList, {
+      fixed:true,
+      highlight:false,
+      fillColor:"blue",
+      borders:{
+        fixed:true,
+        highlight:false,
+        strokeColor:"blue"
+      },
+      vertices:{
+        visible:false
+      }
+    });
+
+    // Large Shape
+
+    var p3 = board.create("point", largeCoord1, {visible:false});
+    var p4 = board.create("point", largeCoord2, {visible:false});
+
+    var pointList = [
+      p3,
+      p4,
+      [p4.X()-(p3.Y()-p4.Y())/3, p4.Y()+(p3.X()-p4.X())/3],
+      [
+        p4.X()+(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3, 
+        p4.Y()+(p3.X()-p4.X())/3+(p3.Y()-p4.Y())/3
+      ],
+      [
+        p4.X()+(p3.X()-p4.X())/3-2*(p3.Y()-p4.Y())/3, 
+        p4.Y()+2*(p3.X()-p4.X())/3+(p3.Y()-p4.Y())/3
+      ],
+      [
+        p3.X()-(p3.X()-p4.X())/3-2*(p3.Y()-p4.Y())/3, 
+        p3.Y()+2*(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3
+      ],
+      [
+        p3.X()-(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3, 
+        p3.Y()+(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3
+      ],
+      [p3.X()-(p3.Y()-p4.Y())/3, p3.Y()+(p3.X()-p4.X())/3]
+    ];
+
+    board.create("polygon", pointList, {
+      fixed:true,
+      highlight:false,
+      fillColor:"red",
+      borders:{
+        fixed:true,
+        highlight:false,
+        strokeColor:"red"
+      },
+      vertices:{
+        visible:false
+      }
+    });
+
+[[/jsxgraph]]
+&lt;/center&gt;
+
+&lt;p&gt;&lt;br&gt;(a) Find the scale factor of the transformation.&lt;/p&gt;
+&lt;p align="right"&gt;[[input:ans1]] [[validation:ans1]]&lt;/p&gt;
+&lt;p align="right"&gt;&lt;b&gt;(1)&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;[[feedback:prt1]]&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;(b) Find the centre of enlargement of the transformation.&lt;/p&gt;
+&lt;p align="right"&gt;\((\)[[input:ans2]]\(,\) [[input:ans3]]\()\) [[validation:ans2]] [[validation:ans3]]&lt;/p&gt;
+&lt;p align="right"&gt;&lt;b&gt;(2)&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;[[feedback:prt2]]&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="enlargements-25-4-1-1-3" assembly-id="enlargements-25-4-1-1-3" unique-id="enlargements-25-4-1-1-3">
+      <text original-id="enlargements-25-4-1-1-3-1" assembly-id="enlargements-25-4-1-1-3-1" unique-id="enlargements-25-4-1-1-3-1"/>
+    </generalfeedback>
+    <defaultgrade original-id="enlargements-25-4-1-1-4" assembly-id="enlargements-25-4-1-1-4" unique-id="enlargements-25-4-1-1-4">3</defaultgrade>
+    <penalty original-id="enlargements-25-4-1-1-5" assembly-id="enlargements-25-4-1-1-5" unique-id="enlargements-25-4-1-1-5">0.1</penalty>
+    <hidden original-id="enlargements-25-4-1-1-6" assembly-id="enlargements-25-4-1-1-6" unique-id="enlargements-25-4-1-1-6">0</hidden>
+    <idnumber original-id="enlargements-25-4-1-1-7" assembly-id="enlargements-25-4-1-1-7" unique-id="enlargements-25-4-1-1-7"/>
+    <stackversion original-id="enlargements-25-4-1-1-8" assembly-id="enlargements-25-4-1-1-8" unique-id="enlargements-25-4-1-1-8">
+      <text original-id="enlargements-25-4-1-1-8-1" assembly-id="enlargements-25-4-1-1-8-1" unique-id="enlargements-25-4-1-1-8-1">2018080600</text>
+    </stackversion>
+    <questionvariables original-id="enlargements-25-4-1-1-9" assembly-id="enlargements-25-4-1-1-9" unique-id="enlargements-25-4-1-1-9">
+      <text original-id="enlargements-25-4-1-1-9-1" assembly-id="enlargements-25-4-1-1-9-1" unique-id="enlargements-25-4-1-1-9-1">/* Positioning the RED shape */
+largeCen:[rand([1,-1])*rand([1,2,3]), rand([1,-1])*rand([1,2,3])];
+largeOri:rand([[-1,-3], [3,-1], [1,3], [-3,1]]);
+
+/* Randomising centre and scale factor */
+tans1:rand([2,3]);
+
+tans2:[first(largeCen)+tans1*rand_with_prohib(ceiling((-6-first(largeCen))/tans1), floor((6-first(largeCen))/tans1), [-1,0,1]), second(largeCen)+tans1*rand_with_prohib(ceiling((-6-second(largeCen))/tans1), floor((6-second(largeCen))/tans1), [-1,0,1])];</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="enlargements-25-4-1-1-10" assembly-id="enlargements-25-4-1-1-10" unique-id="enlargements-25-4-1-1-10">
+      <text original-id="enlargements-25-4-1-1-10-1" assembly-id="enlargements-25-4-1-1-10-1" unique-id="enlargements-25-4-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="moodle_auto_format" original-id="enlargements-25-4-1-1-11" assembly-id="enlargements-25-4-1-1-11" unique-id="enlargements-25-4-1-1-11">
+      <text original-id="enlargements-25-4-1-1-11-1" assembly-id="enlargements-25-4-1-1-11-1" unique-id="enlargements-25-4-1-1-11-1">1</text>
+    </questionnote>
+    <questiondescription format="moodle_auto_format" original-id="enlargements-25-4-1-1-12" assembly-id="enlargements-25-4-1-1-12" unique-id="enlargements-25-4-1-1-12">
+      <text original-id="enlargements-25-4-1-1-12-1" assembly-id="enlargements-25-4-1-1-12-1" unique-id="enlargements-25-4-1-1-12-1"/>
+    </questiondescription>
+    <questionsimplify original-id="enlargements-25-4-1-1-13" assembly-id="enlargements-25-4-1-1-13" unique-id="enlargements-25-4-1-1-13">1</questionsimplify>
+    <assumepositive original-id="enlargements-25-4-1-1-14" assembly-id="enlargements-25-4-1-1-14" unique-id="enlargements-25-4-1-1-14">0</assumepositive>
+    <assumereal original-id="enlargements-25-4-1-1-15" assembly-id="enlargements-25-4-1-1-15" unique-id="enlargements-25-4-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="enlargements-25-4-1-1-16" assembly-id="enlargements-25-4-1-1-16" unique-id="enlargements-25-4-1-1-16">
+      <text original-id="enlargements-25-4-1-1-16-1" assembly-id="enlargements-25-4-1-1-16-1" unique-id="enlargements-25-4-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="enlargements-25-4-1-1-17" assembly-id="enlargements-25-4-1-1-17" unique-id="enlargements-25-4-1-1-17">
+      <text original-id="enlargements-25-4-1-1-17-1" assembly-id="enlargements-25-4-1-1-17-1" unique-id="enlargements-25-4-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="enlargements-25-4-1-1-18" assembly-id="enlargements-25-4-1-1-18" unique-id="enlargements-25-4-1-1-18">
+      <text original-id="enlargements-25-4-1-1-18-1" assembly-id="enlargements-25-4-1-1-18-1" unique-id="enlargements-25-4-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="enlargements-25-4-1-1-19" assembly-id="enlargements-25-4-1-1-19" unique-id="enlargements-25-4-1-1-19">.</decimals>
+    <scientificnotation original-id="enlargements-25-4-1-1-20" assembly-id="enlargements-25-4-1-1-20" unique-id="enlargements-25-4-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="enlargements-25-4-1-1-21" assembly-id="enlargements-25-4-1-1-21" unique-id="enlargements-25-4-1-1-21">dot</multiplicationsign>
+    <sqrtsign original-id="enlargements-25-4-1-1-22" assembly-id="enlargements-25-4-1-1-22" unique-id="enlargements-25-4-1-1-22">1</sqrtsign>
+    <complexno original-id="enlargements-25-4-1-1-23" assembly-id="enlargements-25-4-1-1-23" unique-id="enlargements-25-4-1-1-23">i</complexno>
+    <inversetrig original-id="enlargements-25-4-1-1-24" assembly-id="enlargements-25-4-1-1-24" unique-id="enlargements-25-4-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="enlargements-25-4-1-1-25" assembly-id="enlargements-25-4-1-1-25" unique-id="enlargements-25-4-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="enlargements-25-4-1-1-26" assembly-id="enlargements-25-4-1-1-26" unique-id="enlargements-25-4-1-1-26">[</matrixparens>
+    <isbroken original-id="enlargements-25-4-1-1-27" assembly-id="enlargements-25-4-1-1-27" unique-id="enlargements-25-4-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="enlargements-25-4-1-1-28" assembly-id="enlargements-25-4-1-1-28" unique-id="enlargements-25-4-1-1-28"/>
+    <input original-id="enlargements-25-4-1-1-29" assembly-id="enlargements-25-4-1-1-29" unique-id="enlargements-25-4-1-1-29">
+      <name original-id="enlargements-25-4-1-1-29-1" assembly-id="enlargements-25-4-1-1-29-1" unique-id="enlargements-25-4-1-1-29-1">ans1</name>
+      <type original-id="enlargements-25-4-1-1-29-2" assembly-id="enlargements-25-4-1-1-29-2" unique-id="enlargements-25-4-1-1-29-2">algebraic</type>
+      <tans original-id="enlargements-25-4-1-1-29-3" assembly-id="enlargements-25-4-1-1-29-3" unique-id="enlargements-25-4-1-1-29-3">tans1</tans>
+      <boxsize original-id="enlargements-25-4-1-1-29-4" assembly-id="enlargements-25-4-1-1-29-4" unique-id="enlargements-25-4-1-1-29-4">10</boxsize>
+      <strictsyntax original-id="enlargements-25-4-1-1-29-5" assembly-id="enlargements-25-4-1-1-29-5" unique-id="enlargements-25-4-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="enlargements-25-4-1-1-29-6" assembly-id="enlargements-25-4-1-1-29-6" unique-id="enlargements-25-4-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="enlargements-25-4-1-1-29-7" assembly-id="enlargements-25-4-1-1-29-7" unique-id="enlargements-25-4-1-1-29-7"/>
+      <syntaxattribute original-id="enlargements-25-4-1-1-29-8" assembly-id="enlargements-25-4-1-1-29-8" unique-id="enlargements-25-4-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="enlargements-25-4-1-1-29-9" assembly-id="enlargements-25-4-1-1-29-9" unique-id="enlargements-25-4-1-1-29-9"/>
+      <allowwords original-id="enlargements-25-4-1-1-29-10" assembly-id="enlargements-25-4-1-1-29-10" unique-id="enlargements-25-4-1-1-29-10"/>
+      <forbidfloat original-id="enlargements-25-4-1-1-29-11" assembly-id="enlargements-25-4-1-1-29-11" unique-id="enlargements-25-4-1-1-29-11">0</forbidfloat>
+      <requirelowestterms original-id="enlargements-25-4-1-1-29-12" assembly-id="enlargements-25-4-1-1-29-12" unique-id="enlargements-25-4-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="enlargements-25-4-1-1-29-13" assembly-id="enlargements-25-4-1-1-29-13" unique-id="enlargements-25-4-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="enlargements-25-4-1-1-29-14" assembly-id="enlargements-25-4-1-1-29-14" unique-id="enlargements-25-4-1-1-29-14">0</mustverify>
+      <showvalidation original-id="enlargements-25-4-1-1-29-15" assembly-id="enlargements-25-4-1-1-29-15" unique-id="enlargements-25-4-1-1-29-15">0</showvalidation>
+      <options original-id="enlargements-25-4-1-1-29-16" assembly-id="enlargements-25-4-1-1-29-16" unique-id="enlargements-25-4-1-1-29-16"/>
+    </input>
+    <input original-id="enlargements-25-4-1-1-30" assembly-id="enlargements-25-4-1-1-30" unique-id="enlargements-25-4-1-1-30">
+      <name original-id="enlargements-25-4-1-1-30-1" assembly-id="enlargements-25-4-1-1-30-1" unique-id="enlargements-25-4-1-1-30-1">ans2</name>
+      <type original-id="enlargements-25-4-1-1-30-2" assembly-id="enlargements-25-4-1-1-30-2" unique-id="enlargements-25-4-1-1-30-2">algebraic</type>
+      <tans original-id="enlargements-25-4-1-1-30-3" assembly-id="enlargements-25-4-1-1-30-3" unique-id="enlargements-25-4-1-1-30-3">first(tans2)</tans>
+      <boxsize original-id="enlargements-25-4-1-1-30-4" assembly-id="enlargements-25-4-1-1-30-4" unique-id="enlargements-25-4-1-1-30-4">5</boxsize>
+      <strictsyntax original-id="enlargements-25-4-1-1-30-5" assembly-id="enlargements-25-4-1-1-30-5" unique-id="enlargements-25-4-1-1-30-5">1</strictsyntax>
+      <insertstars original-id="enlargements-25-4-1-1-30-6" assembly-id="enlargements-25-4-1-1-30-6" unique-id="enlargements-25-4-1-1-30-6">0</insertstars>
+      <syntaxhint original-id="enlargements-25-4-1-1-30-7" assembly-id="enlargements-25-4-1-1-30-7" unique-id="enlargements-25-4-1-1-30-7"/>
+      <syntaxattribute original-id="enlargements-25-4-1-1-30-8" assembly-id="enlargements-25-4-1-1-30-8" unique-id="enlargements-25-4-1-1-30-8">0</syntaxattribute>
+      <forbidwords original-id="enlargements-25-4-1-1-30-9" assembly-id="enlargements-25-4-1-1-30-9" unique-id="enlargements-25-4-1-1-30-9"/>
+      <allowwords original-id="enlargements-25-4-1-1-30-10" assembly-id="enlargements-25-4-1-1-30-10" unique-id="enlargements-25-4-1-1-30-10"/>
+      <forbidfloat original-id="enlargements-25-4-1-1-30-11" assembly-id="enlargements-25-4-1-1-30-11" unique-id="enlargements-25-4-1-1-30-11">0</forbidfloat>
+      <requirelowestterms original-id="enlargements-25-4-1-1-30-12" assembly-id="enlargements-25-4-1-1-30-12" unique-id="enlargements-25-4-1-1-30-12">0</requirelowestterms>
+      <checkanswertype original-id="enlargements-25-4-1-1-30-13" assembly-id="enlargements-25-4-1-1-30-13" unique-id="enlargements-25-4-1-1-30-13">0</checkanswertype>
+      <mustverify original-id="enlargements-25-4-1-1-30-14" assembly-id="enlargements-25-4-1-1-30-14" unique-id="enlargements-25-4-1-1-30-14">0</mustverify>
+      <showvalidation original-id="enlargements-25-4-1-1-30-15" assembly-id="enlargements-25-4-1-1-30-15" unique-id="enlargements-25-4-1-1-30-15">0</showvalidation>
+      <options original-id="enlargements-25-4-1-1-30-16" assembly-id="enlargements-25-4-1-1-30-16" unique-id="enlargements-25-4-1-1-30-16"/>
+    </input>
+    <input original-id="enlargements-25-4-1-1-31" assembly-id="enlargements-25-4-1-1-31" unique-id="enlargements-25-4-1-1-31">
+      <name original-id="enlargements-25-4-1-1-31-1" assembly-id="enlargements-25-4-1-1-31-1" unique-id="enlargements-25-4-1-1-31-1">ans3</name>
+      <type original-id="enlargements-25-4-1-1-31-2" assembly-id="enlargements-25-4-1-1-31-2" unique-id="enlargements-25-4-1-1-31-2">algebraic</type>
+      <tans original-id="enlargements-25-4-1-1-31-3" assembly-id="enlargements-25-4-1-1-31-3" unique-id="enlargements-25-4-1-1-31-3">second(tans2)</tans>
+      <boxsize original-id="enlargements-25-4-1-1-31-4" assembly-id="enlargements-25-4-1-1-31-4" unique-id="enlargements-25-4-1-1-31-4">5</boxsize>
+      <strictsyntax original-id="enlargements-25-4-1-1-31-5" assembly-id="enlargements-25-4-1-1-31-5" unique-id="enlargements-25-4-1-1-31-5">1</strictsyntax>
+      <insertstars original-id="enlargements-25-4-1-1-31-6" assembly-id="enlargements-25-4-1-1-31-6" unique-id="enlargements-25-4-1-1-31-6">0</insertstars>
+      <syntaxhint original-id="enlargements-25-4-1-1-31-7" assembly-id="enlargements-25-4-1-1-31-7" unique-id="enlargements-25-4-1-1-31-7"/>
+      <syntaxattribute original-id="enlargements-25-4-1-1-31-8" assembly-id="enlargements-25-4-1-1-31-8" unique-id="enlargements-25-4-1-1-31-8">0</syntaxattribute>
+      <forbidwords original-id="enlargements-25-4-1-1-31-9" assembly-id="enlargements-25-4-1-1-31-9" unique-id="enlargements-25-4-1-1-31-9"/>
+      <allowwords original-id="enlargements-25-4-1-1-31-10" assembly-id="enlargements-25-4-1-1-31-10" unique-id="enlargements-25-4-1-1-31-10"/>
+      <forbidfloat original-id="enlargements-25-4-1-1-31-11" assembly-id="enlargements-25-4-1-1-31-11" unique-id="enlargements-25-4-1-1-31-11">0</forbidfloat>
+      <requirelowestterms original-id="enlargements-25-4-1-1-31-12" assembly-id="enlargements-25-4-1-1-31-12" unique-id="enlargements-25-4-1-1-31-12">0</requirelowestterms>
+      <checkanswertype original-id="enlargements-25-4-1-1-31-13" assembly-id="enlargements-25-4-1-1-31-13" unique-id="enlargements-25-4-1-1-31-13">0</checkanswertype>
+      <mustverify original-id="enlargements-25-4-1-1-31-14" assembly-id="enlargements-25-4-1-1-31-14" unique-id="enlargements-25-4-1-1-31-14">0</mustverify>
+      <showvalidation original-id="enlargements-25-4-1-1-31-15" assembly-id="enlargements-25-4-1-1-31-15" unique-id="enlargements-25-4-1-1-31-15">0</showvalidation>
+      <options original-id="enlargements-25-4-1-1-31-16" assembly-id="enlargements-25-4-1-1-31-16" unique-id="enlargements-25-4-1-1-31-16"/>
+    </input>
+    <prt original-id="enlargements-25-4-1-1-32" assembly-id="enlargements-25-4-1-1-32" unique-id="enlargements-25-4-1-1-32">
+      <name original-id="enlargements-25-4-1-1-32-1" assembly-id="enlargements-25-4-1-1-32-1" unique-id="enlargements-25-4-1-1-32-1">prt1</name>
+      <value original-id="enlargements-25-4-1-1-32-2" assembly-id="enlargements-25-4-1-1-32-2" unique-id="enlargements-25-4-1-1-32-2">1.0000000</value>
+      <autosimplify original-id="enlargements-25-4-1-1-32-3" assembly-id="enlargements-25-4-1-1-32-3" unique-id="enlargements-25-4-1-1-32-3">1</autosimplify>
+      <feedbackstyle original-id="enlargements-25-4-1-1-32-4" assembly-id="enlargements-25-4-1-1-32-4" unique-id="enlargements-25-4-1-1-32-4">1</feedbackstyle>
+      <feedbackvariables original-id="enlargements-25-4-1-1-32-5" assembly-id="enlargements-25-4-1-1-32-5" unique-id="enlargements-25-4-1-1-32-5">
+        <text original-id="enlargements-25-4-1-1-32-5-1" assembly-id="enlargements-25-4-1-1-32-5-1" unique-id="enlargements-25-4-1-1-32-5-1">/* Node 1: Correct answer */
+/* Node 2: Worked solution */
+
+/* Node 3: Feedback for giving inverse */</text>
+      </feedbackvariables>
+      <node original-id="enlargements-25-4-1-1-32-6" assembly-id="enlargements-25-4-1-1-32-6" unique-id="enlargements-25-4-1-1-32-6">
+        <name original-id="enlargements-25-4-1-1-32-6-1" assembly-id="enlargements-25-4-1-1-32-6-1" unique-id="enlargements-25-4-1-1-32-6-1">0</name>
+        <description original-id="enlargements-25-4-1-1-32-6-2" assembly-id="enlargements-25-4-1-1-32-6-2" unique-id="enlargements-25-4-1-1-32-6-2"/>
+        <answertest original-id="enlargements-25-4-1-1-32-6-3" assembly-id="enlargements-25-4-1-1-32-6-3" unique-id="enlargements-25-4-1-1-32-6-3">AlgEquiv</answertest>
+        <sans original-id="enlargements-25-4-1-1-32-6-4" assembly-id="enlargements-25-4-1-1-32-6-4" unique-id="enlargements-25-4-1-1-32-6-4">ans1</sans>
+        <tans original-id="enlargements-25-4-1-1-32-6-5" assembly-id="enlargements-25-4-1-1-32-6-5" unique-id="enlargements-25-4-1-1-32-6-5">tans1</tans>
+        <testoptions original-id="enlargements-25-4-1-1-32-6-6" assembly-id="enlargements-25-4-1-1-32-6-6" unique-id="enlargements-25-4-1-1-32-6-6"/>
+        <quiet original-id="enlargements-25-4-1-1-32-6-7" assembly-id="enlargements-25-4-1-1-32-6-7" unique-id="enlargements-25-4-1-1-32-6-7">0</quiet>
+        <truescoremode original-id="enlargements-25-4-1-1-32-6-8" assembly-id="enlargements-25-4-1-1-32-6-8" unique-id="enlargements-25-4-1-1-32-6-8">=</truescoremode>
+        <truescore original-id="enlargements-25-4-1-1-32-6-9" assembly-id="enlargements-25-4-1-1-32-6-9" unique-id="enlargements-25-4-1-1-32-6-9">1.0000000</truescore>
+        <truepenalty original-id="enlargements-25-4-1-1-32-6-10" assembly-id="enlargements-25-4-1-1-32-6-10" unique-id="enlargements-25-4-1-1-32-6-10"/>
+        <truenextnode original-id="enlargements-25-4-1-1-32-6-11" assembly-id="enlargements-25-4-1-1-32-6-11" unique-id="enlargements-25-4-1-1-32-6-11">1</truenextnode>
+        <trueanswernote original-id="enlargements-25-4-1-1-32-6-12" assembly-id="enlargements-25-4-1-1-32-6-12" unique-id="enlargements-25-4-1-1-32-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="enlargements-25-4-1-1-32-6-13" assembly-id="enlargements-25-4-1-1-32-6-13" unique-id="enlargements-25-4-1-1-32-6-13">
+          <text original-id="enlargements-25-4-1-1-32-6-13-1" assembly-id="enlargements-25-4-1-1-32-6-13-1" unique-id="enlargements-25-4-1-1-32-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="enlargements-25-4-1-1-32-6-14" assembly-id="enlargements-25-4-1-1-32-6-14" unique-id="enlargements-25-4-1-1-32-6-14">=</falsescoremode>
+        <falsescore original-id="enlargements-25-4-1-1-32-6-15" assembly-id="enlargements-25-4-1-1-32-6-15" unique-id="enlargements-25-4-1-1-32-6-15">0.0000000</falsescore>
+        <falsepenalty original-id="enlargements-25-4-1-1-32-6-16" assembly-id="enlargements-25-4-1-1-32-6-16" unique-id="enlargements-25-4-1-1-32-6-16"/>
+        <falsenextnode original-id="enlargements-25-4-1-1-32-6-17" assembly-id="enlargements-25-4-1-1-32-6-17" unique-id="enlargements-25-4-1-1-32-6-17">2</falsenextnode>
+        <falseanswernote original-id="enlargements-25-4-1-1-32-6-18" assembly-id="enlargements-25-4-1-1-32-6-18" unique-id="enlargements-25-4-1-1-32-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="enlargements-25-4-1-1-32-6-19" assembly-id="enlargements-25-4-1-1-32-6-19" unique-id="enlargements-25-4-1-1-32-6-19">
+          <text original-id="enlargements-25-4-1-1-32-6-19-1" assembly-id="enlargements-25-4-1-1-32-6-19-1" unique-id="enlargements-25-4-1-1-32-6-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="enlargements-25-4-1-1-32-7" assembly-id="enlargements-25-4-1-1-32-7" unique-id="enlargements-25-4-1-1-32-7">
+        <name original-id="enlargements-25-4-1-1-32-7-1" assembly-id="enlargements-25-4-1-1-32-7-1" unique-id="enlargements-25-4-1-1-32-7-1">1</name>
+        <description original-id="enlargements-25-4-1-1-32-7-2" assembly-id="enlargements-25-4-1-1-32-7-2" unique-id="enlargements-25-4-1-1-32-7-2"/>
+        <answertest original-id="enlargements-25-4-1-1-32-7-3" assembly-id="enlargements-25-4-1-1-32-7-3" unique-id="enlargements-25-4-1-1-32-7-3">AlgEquiv</answertest>
+        <sans original-id="enlargements-25-4-1-1-32-7-4" assembly-id="enlargements-25-4-1-1-32-7-4" unique-id="enlargements-25-4-1-1-32-7-4">1</sans>
+        <tans original-id="enlargements-25-4-1-1-32-7-5" assembly-id="enlargements-25-4-1-1-32-7-5" unique-id="enlargements-25-4-1-1-32-7-5">1</tans>
+        <testoptions original-id="enlargements-25-4-1-1-32-7-6" assembly-id="enlargements-25-4-1-1-32-7-6" unique-id="enlargements-25-4-1-1-32-7-6"/>
+        <quiet original-id="enlargements-25-4-1-1-32-7-7" assembly-id="enlargements-25-4-1-1-32-7-7" unique-id="enlargements-25-4-1-1-32-7-7">0</quiet>
+        <truescoremode original-id="enlargements-25-4-1-1-32-7-8" assembly-id="enlargements-25-4-1-1-32-7-8" unique-id="enlargements-25-4-1-1-32-7-8">+</truescoremode>
+        <truescore original-id="enlargements-25-4-1-1-32-7-9" assembly-id="enlargements-25-4-1-1-32-7-9" unique-id="enlargements-25-4-1-1-32-7-9">0.0000000</truescore>
+        <truepenalty original-id="enlargements-25-4-1-1-32-7-10" assembly-id="enlargements-25-4-1-1-32-7-10" unique-id="enlargements-25-4-1-1-32-7-10"/>
+        <truenextnode original-id="enlargements-25-4-1-1-32-7-11" assembly-id="enlargements-25-4-1-1-32-7-11" unique-id="enlargements-25-4-1-1-32-7-11">-1</truenextnode>
+        <trueanswernote original-id="enlargements-25-4-1-1-32-7-12" assembly-id="enlargements-25-4-1-1-32-7-12" unique-id="enlargements-25-4-1-1-32-7-12">prt1-2-T</trueanswernote>
+        <truefeedback format="html" original-id="enlargements-25-4-1-1-32-7-13" assembly-id="enlargements-25-4-1-1-32-7-13" unique-id="enlargements-25-4-1-1-32-7-13">
+          <text original-id="enlargements-25-4-1-1-32-7-13-1" assembly-id="enlargements-25-4-1-1-32-7-13-1" unique-id="enlargements-25-4-1-1-32-7-13-1">&lt;p&gt;&lt;br&gt;Here is a worked solution:&lt;/p&gt;
+&lt;p&gt;The scale factor of enlargement can be determined by comparing the length of any similar sides of the two shapes:&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;center&gt;
+[[jsxgraph height="350px" width="350px"]]
+
+    var largeCoord1 = [{#first(largeCen)+first(largeOri)#},{#second(largeCen)+second(largeOri)#}];
+    var largeCoord2 = [{#first(largeCen)+(if abs(first(largeOri))=3 then -first(largeOri) else first(largeOri))#},{#second(largeCen)+(if abs(second(largeOri))=3 then -second(largeOri) else second(largeOri))#}];
+
+    var cenPoint = {#tans2#};
+    var scaleFact = {#tans1#};
+
+    var smallCoord1 = [
+      cenPoint[0]*(1-1/scaleFact)+largeCoord1[0]/scaleFact,
+      cenPoint[1]*(1-1/scaleFact)+largeCoord1[1]/scaleFact,
+    ];
+    var smallCoord2 = [
+      cenPoint[0]*(1-1/scaleFact)+largeCoord2[0]/scaleFact,
+      cenPoint[1]*(1-1/scaleFact)+largeCoord2[1]/scaleFact,
+    ];
+
+    JXG.Options.text.useMathJax=true;
+    var board = JXG.JSXGraph.initBoard(divid, {
+      boundingBox:[-7,7,7,-7],
+      showCopyright:false,
+      showNavigation:false,
+      keepaspectratio:true,
+      axis:true
+    });
+
+    // Small Shape
+
+    var p1 = board.create("point", smallCoord1, {visible:false});
+    var p2 = board.create("point", smallCoord2, {visible:false});
+
+    var pointList = [
+      p1,
+      p2,
+      [p2.X()-(p1.Y()-p2.Y())/3, p2.Y()+(p1.X()-p2.X())/3],
+      [
+        p2.X()+(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3, 
+        p2.Y()+(p1.X()-p2.X())/3+(p1.Y()-p2.Y())/3
+      ],
+      [
+        p2.X()+(p1.X()-p2.X())/3-2*(p1.Y()-p2.Y())/3, 
+        p2.Y()+2*(p1.X()-p2.X())/3+(p1.Y()-p2.Y())/3
+      ],
+      [
+        p1.X()-(p1.X()-p2.X())/3-2*(p1.Y()-p2.Y())/3, 
+        p1.Y()+2*(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3
+      ],
+      [
+        p1.X()-(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3, 
+        p1.Y()+(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3
+      ],
+      [p1.X()-(p1.Y()-p2.Y())/3, p1.Y()+(p1.X()-p2.X())/3]
+    ];
+
+    board.create("polygon", pointList, {
+      fixed:true,
+      highlight:false,
+      fillColor:"blue",
+      borders:{
+        fixed:true,
+        highlight:false,
+        strokeColor:"blue"
+      },
+      vertices:{
+        visible:false
+      }
+    });
+
+    // Large Shape
+
+    var p3 = board.create("point", largeCoord1, {visible:false});
+    var p4 = board.create("point", largeCoord2, {visible:false});
+
+    var pointList = [
+      p3,
+      p4,
+      [p4.X()-(p3.Y()-p4.Y())/3, p4.Y()+(p3.X()-p4.X())/3],
+      [
+        p4.X()+(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3, 
+        p4.Y()+(p3.X()-p4.X())/3+(p3.Y()-p4.Y())/3
+      ],
+      [
+        p4.X()+(p3.X()-p4.X())/3-2*(p3.Y()-p4.Y())/3, 
+        p4.Y()+2*(p3.X()-p4.X())/3+(p3.Y()-p4.Y())/3
+      ],
+      [
+        p3.X()-(p3.X()-p4.X())/3-2*(p3.Y()-p4.Y())/3, 
+        p3.Y()+2*(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3
+      ],
+      [
+        p3.X()-(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3, 
+        p3.Y()+(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3
+      ],
+      [p3.X()-(p3.Y()-p4.Y())/3, p3.Y()+(p3.X()-p4.X())/3]
+    ];
+
+    board.create("polygon", pointList, {
+      fixed:true,
+      highlight:false,
+      fillColor:"red",
+      borders:{
+        fixed:true,
+        highlight:false,
+        strokeColor:"red"
+      },
+      vertices:{
+        visible:false
+      }
+    });
+
+    var lineStyle = {
+      fixed:true,
+      highlight:false,
+      strokeColor:"#00df25",
+      strokeWidth:3,
+    };
+
+    board.create("segment", [largeCoord1, largeCoord2], lineStyle);
+    board.create("segment", [smallCoord1, smallCoord2], lineStyle);
+
+[[/jsxgraph]]
+&lt;/center&gt;
+
+&lt;p&gt;&lt;br&gt;Comparing the similar green lengths of each shape, the red shape has width \(6\), and the blue shape has width \({@6/tans1@}\).&lt;/p&gt;
+&lt;p&gt;Therefore, the scale factor of enlargement is \(\frac{6}{{@6/tans1@}} = {@tans1@}\)&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="enlargements-25-4-1-1-32-7-14" assembly-id="enlargements-25-4-1-1-32-7-14" unique-id="enlargements-25-4-1-1-32-7-14">-</falsescoremode>
+        <falsescore original-id="enlargements-25-4-1-1-32-7-15" assembly-id="enlargements-25-4-1-1-32-7-15" unique-id="enlargements-25-4-1-1-32-7-15">0.0000000</falsescore>
+        <falsepenalty original-id="enlargements-25-4-1-1-32-7-16" assembly-id="enlargements-25-4-1-1-32-7-16" unique-id="enlargements-25-4-1-1-32-7-16"/>
+        <falsenextnode original-id="enlargements-25-4-1-1-32-7-17" assembly-id="enlargements-25-4-1-1-32-7-17" unique-id="enlargements-25-4-1-1-32-7-17">-1</falsenextnode>
+        <falseanswernote original-id="enlargements-25-4-1-1-32-7-18" assembly-id="enlargements-25-4-1-1-32-7-18" unique-id="enlargements-25-4-1-1-32-7-18">prt1-2-F</falseanswernote>
+        <falsefeedback format="html" original-id="enlargements-25-4-1-1-32-7-19" assembly-id="enlargements-25-4-1-1-32-7-19" unique-id="enlargements-25-4-1-1-32-7-19">
+          <text original-id="enlargements-25-4-1-1-32-7-19-1" assembly-id="enlargements-25-4-1-1-32-7-19-1" unique-id="enlargements-25-4-1-1-32-7-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="enlargements-25-4-1-1-32-8" assembly-id="enlargements-25-4-1-1-32-8" unique-id="enlargements-25-4-1-1-32-8">
+        <name original-id="enlargements-25-4-1-1-32-8-1" assembly-id="enlargements-25-4-1-1-32-8-1" unique-id="enlargements-25-4-1-1-32-8-1">2</name>
+        <description original-id="enlargements-25-4-1-1-32-8-2" assembly-id="enlargements-25-4-1-1-32-8-2" unique-id="enlargements-25-4-1-1-32-8-2"/>
+        <answertest original-id="enlargements-25-4-1-1-32-8-3" assembly-id="enlargements-25-4-1-1-32-8-3" unique-id="enlargements-25-4-1-1-32-8-3">AlgEquiv</answertest>
+        <sans original-id="enlargements-25-4-1-1-32-8-4" assembly-id="enlargements-25-4-1-1-32-8-4" unique-id="enlargements-25-4-1-1-32-8-4">ans1</sans>
+        <tans original-id="enlargements-25-4-1-1-32-8-5" assembly-id="enlargements-25-4-1-1-32-8-5" unique-id="enlargements-25-4-1-1-32-8-5">1/tans1</tans>
+        <testoptions original-id="enlargements-25-4-1-1-32-8-6" assembly-id="enlargements-25-4-1-1-32-8-6" unique-id="enlargements-25-4-1-1-32-8-6"/>
+        <quiet original-id="enlargements-25-4-1-1-32-8-7" assembly-id="enlargements-25-4-1-1-32-8-7" unique-id="enlargements-25-4-1-1-32-8-7">0</quiet>
+        <truescoremode original-id="enlargements-25-4-1-1-32-8-8" assembly-id="enlargements-25-4-1-1-32-8-8" unique-id="enlargements-25-4-1-1-32-8-8">+</truescoremode>
+        <truescore original-id="enlargements-25-4-1-1-32-8-9" assembly-id="enlargements-25-4-1-1-32-8-9" unique-id="enlargements-25-4-1-1-32-8-9">0.0000000</truescore>
+        <truepenalty original-id="enlargements-25-4-1-1-32-8-10" assembly-id="enlargements-25-4-1-1-32-8-10" unique-id="enlargements-25-4-1-1-32-8-10"/>
+        <truenextnode original-id="enlargements-25-4-1-1-32-8-11" assembly-id="enlargements-25-4-1-1-32-8-11" unique-id="enlargements-25-4-1-1-32-8-11">1</truenextnode>
+        <trueanswernote original-id="enlargements-25-4-1-1-32-8-12" assembly-id="enlargements-25-4-1-1-32-8-12" unique-id="enlargements-25-4-1-1-32-8-12">prt1-3-T</trueanswernote>
+        <truefeedback format="html" original-id="enlargements-25-4-1-1-32-8-13" assembly-id="enlargements-25-4-1-1-32-8-13" unique-id="enlargements-25-4-1-1-32-8-13">
+          <text original-id="enlargements-25-4-1-1-32-8-13-1" assembly-id="enlargements-25-4-1-1-32-8-13-1" unique-id="enlargements-25-4-1-1-32-8-13-1">&lt;p&gt;&lt;br&gt;You have found the scale factor of the enlargement of the red shape to the blue shape.
+&lt;br&gt;However, you should have found the scale factor of the transformation from &lt;b&gt;blue to red&lt;/b&gt;.&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="enlargements-25-4-1-1-32-8-14" assembly-id="enlargements-25-4-1-1-32-8-14" unique-id="enlargements-25-4-1-1-32-8-14">-</falsescoremode>
+        <falsescore original-id="enlargements-25-4-1-1-32-8-15" assembly-id="enlargements-25-4-1-1-32-8-15" unique-id="enlargements-25-4-1-1-32-8-15">0.0000000</falsescore>
+        <falsepenalty original-id="enlargements-25-4-1-1-32-8-16" assembly-id="enlargements-25-4-1-1-32-8-16" unique-id="enlargements-25-4-1-1-32-8-16"/>
+        <falsenextnode original-id="enlargements-25-4-1-1-32-8-17" assembly-id="enlargements-25-4-1-1-32-8-17" unique-id="enlargements-25-4-1-1-32-8-17">1</falsenextnode>
+        <falseanswernote original-id="enlargements-25-4-1-1-32-8-18" assembly-id="enlargements-25-4-1-1-32-8-18" unique-id="enlargements-25-4-1-1-32-8-18">prt1-3-F</falseanswernote>
+        <falsefeedback format="html" original-id="enlargements-25-4-1-1-32-8-19" assembly-id="enlargements-25-4-1-1-32-8-19" unique-id="enlargements-25-4-1-1-32-8-19">
+          <text original-id="enlargements-25-4-1-1-32-8-19-1" assembly-id="enlargements-25-4-1-1-32-8-19-1" unique-id="enlargements-25-4-1-1-32-8-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="enlargements-25-4-1-1-33" assembly-id="enlargements-25-4-1-1-33" unique-id="enlargements-25-4-1-1-33">
+      <name original-id="enlargements-25-4-1-1-33-1" assembly-id="enlargements-25-4-1-1-33-1" unique-id="enlargements-25-4-1-1-33-1">prt2</name>
+      <value original-id="enlargements-25-4-1-1-33-2" assembly-id="enlargements-25-4-1-1-33-2" unique-id="enlargements-25-4-1-1-33-2">1.0000000</value>
+      <autosimplify original-id="enlargements-25-4-1-1-33-3" assembly-id="enlargements-25-4-1-1-33-3" unique-id="enlargements-25-4-1-1-33-3">1</autosimplify>
+      <feedbackstyle original-id="enlargements-25-4-1-1-33-4" assembly-id="enlargements-25-4-1-1-33-4" unique-id="enlargements-25-4-1-1-33-4">1</feedbackstyle>
+      <feedbackvariables original-id="enlargements-25-4-1-1-33-5" assembly-id="enlargements-25-4-1-1-33-5" unique-id="enlargements-25-4-1-1-33-5">
+        <text original-id="enlargements-25-4-1-1-33-5-1" assembly-id="enlargements-25-4-1-1-33-5-1" unique-id="enlargements-25-4-1-1-33-5-1">/* Node 1: Correct answer */
+/* Node 2: Worked solution */
+/* Node 3: Coordinates given wrong way around (1) */
+/* Node 4: Check correct x-coord (+1) */
+/* Node 5: Check correct y-coord (+1) */</text>
+      </feedbackvariables>
+      <node original-id="enlargements-25-4-1-1-33-6" assembly-id="enlargements-25-4-1-1-33-6" unique-id="enlargements-25-4-1-1-33-6">
+        <name original-id="enlargements-25-4-1-1-33-6-1" assembly-id="enlargements-25-4-1-1-33-6-1" unique-id="enlargements-25-4-1-1-33-6-1">0</name>
+        <description original-id="enlargements-25-4-1-1-33-6-2" assembly-id="enlargements-25-4-1-1-33-6-2" unique-id="enlargements-25-4-1-1-33-6-2"/>
+        <answertest original-id="enlargements-25-4-1-1-33-6-3" assembly-id="enlargements-25-4-1-1-33-6-3" unique-id="enlargements-25-4-1-1-33-6-3">AlgEquiv</answertest>
+        <sans original-id="enlargements-25-4-1-1-33-6-4" assembly-id="enlargements-25-4-1-1-33-6-4" unique-id="enlargements-25-4-1-1-33-6-4">[ans2,ans3]</sans>
+        <tans original-id="enlargements-25-4-1-1-33-6-5" assembly-id="enlargements-25-4-1-1-33-6-5" unique-id="enlargements-25-4-1-1-33-6-5">tans2</tans>
+        <testoptions original-id="enlargements-25-4-1-1-33-6-6" assembly-id="enlargements-25-4-1-1-33-6-6" unique-id="enlargements-25-4-1-1-33-6-6"/>
+        <quiet original-id="enlargements-25-4-1-1-33-6-7" assembly-id="enlargements-25-4-1-1-33-6-7" unique-id="enlargements-25-4-1-1-33-6-7">1</quiet>
+        <truescoremode original-id="enlargements-25-4-1-1-33-6-8" assembly-id="enlargements-25-4-1-1-33-6-8" unique-id="enlargements-25-4-1-1-33-6-8">=</truescoremode>
+        <truescore original-id="enlargements-25-4-1-1-33-6-9" assembly-id="enlargements-25-4-1-1-33-6-9" unique-id="enlargements-25-4-1-1-33-6-9">1.0000000</truescore>
+        <truepenalty original-id="enlargements-25-4-1-1-33-6-10" assembly-id="enlargements-25-4-1-1-33-6-10" unique-id="enlargements-25-4-1-1-33-6-10"/>
+        <truenextnode original-id="enlargements-25-4-1-1-33-6-11" assembly-id="enlargements-25-4-1-1-33-6-11" unique-id="enlargements-25-4-1-1-33-6-11">1</truenextnode>
+        <trueanswernote original-id="enlargements-25-4-1-1-33-6-12" assembly-id="enlargements-25-4-1-1-33-6-12" unique-id="enlargements-25-4-1-1-33-6-12">prt2-1-T</trueanswernote>
+        <truefeedback format="html" original-id="enlargements-25-4-1-1-33-6-13" assembly-id="enlargements-25-4-1-1-33-6-13" unique-id="enlargements-25-4-1-1-33-6-13">
+          <text original-id="enlargements-25-4-1-1-33-6-13-1" assembly-id="enlargements-25-4-1-1-33-6-13-1" unique-id="enlargements-25-4-1-1-33-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="enlargements-25-4-1-1-33-6-14" assembly-id="enlargements-25-4-1-1-33-6-14" unique-id="enlargements-25-4-1-1-33-6-14">=</falsescoremode>
+        <falsescore original-id="enlargements-25-4-1-1-33-6-15" assembly-id="enlargements-25-4-1-1-33-6-15" unique-id="enlargements-25-4-1-1-33-6-15">0.0000000</falsescore>
+        <falsepenalty original-id="enlargements-25-4-1-1-33-6-16" assembly-id="enlargements-25-4-1-1-33-6-16" unique-id="enlargements-25-4-1-1-33-6-16"/>
+        <falsenextnode original-id="enlargements-25-4-1-1-33-6-17" assembly-id="enlargements-25-4-1-1-33-6-17" unique-id="enlargements-25-4-1-1-33-6-17">2</falsenextnode>
+        <falseanswernote original-id="enlargements-25-4-1-1-33-6-18" assembly-id="enlargements-25-4-1-1-33-6-18" unique-id="enlargements-25-4-1-1-33-6-18">prt2-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="enlargements-25-4-1-1-33-6-19" assembly-id="enlargements-25-4-1-1-33-6-19" unique-id="enlargements-25-4-1-1-33-6-19">
+          <text original-id="enlargements-25-4-1-1-33-6-19-1" assembly-id="enlargements-25-4-1-1-33-6-19-1" unique-id="enlargements-25-4-1-1-33-6-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="enlargements-25-4-1-1-33-7" assembly-id="enlargements-25-4-1-1-33-7" unique-id="enlargements-25-4-1-1-33-7">
+        <name original-id="enlargements-25-4-1-1-33-7-1" assembly-id="enlargements-25-4-1-1-33-7-1" unique-id="enlargements-25-4-1-1-33-7-1">1</name>
+        <description original-id="enlargements-25-4-1-1-33-7-2" assembly-id="enlargements-25-4-1-1-33-7-2" unique-id="enlargements-25-4-1-1-33-7-2"/>
+        <answertest original-id="enlargements-25-4-1-1-33-7-3" assembly-id="enlargements-25-4-1-1-33-7-3" unique-id="enlargements-25-4-1-1-33-7-3">AlgEquiv</answertest>
+        <sans original-id="enlargements-25-4-1-1-33-7-4" assembly-id="enlargements-25-4-1-1-33-7-4" unique-id="enlargements-25-4-1-1-33-7-4">1</sans>
+        <tans original-id="enlargements-25-4-1-1-33-7-5" assembly-id="enlargements-25-4-1-1-33-7-5" unique-id="enlargements-25-4-1-1-33-7-5">1</tans>
+        <testoptions original-id="enlargements-25-4-1-1-33-7-6" assembly-id="enlargements-25-4-1-1-33-7-6" unique-id="enlargements-25-4-1-1-33-7-6"/>
+        <quiet original-id="enlargements-25-4-1-1-33-7-7" assembly-id="enlargements-25-4-1-1-33-7-7" unique-id="enlargements-25-4-1-1-33-7-7">0</quiet>
+        <truescoremode original-id="enlargements-25-4-1-1-33-7-8" assembly-id="enlargements-25-4-1-1-33-7-8" unique-id="enlargements-25-4-1-1-33-7-8">+</truescoremode>
+        <truescore original-id="enlargements-25-4-1-1-33-7-9" assembly-id="enlargements-25-4-1-1-33-7-9" unique-id="enlargements-25-4-1-1-33-7-9">0.0000000</truescore>
+        <truepenalty original-id="enlargements-25-4-1-1-33-7-10" assembly-id="enlargements-25-4-1-1-33-7-10" unique-id="enlargements-25-4-1-1-33-7-10"/>
+        <truenextnode original-id="enlargements-25-4-1-1-33-7-11" assembly-id="enlargements-25-4-1-1-33-7-11" unique-id="enlargements-25-4-1-1-33-7-11">-1</truenextnode>
+        <trueanswernote original-id="enlargements-25-4-1-1-33-7-12" assembly-id="enlargements-25-4-1-1-33-7-12" unique-id="enlargements-25-4-1-1-33-7-12">prt2-2-T</trueanswernote>
+        <truefeedback format="html" original-id="enlargements-25-4-1-1-33-7-13" assembly-id="enlargements-25-4-1-1-33-7-13" unique-id="enlargements-25-4-1-1-33-7-13">
+          <text original-id="enlargements-25-4-1-1-33-7-13-1" assembly-id="enlargements-25-4-1-1-33-7-13-1" unique-id="enlargements-25-4-1-1-33-7-13-1">&lt;p&gt;&lt;br&gt;Here is a worked solution:&lt;/p&gt;
+&lt;p&gt;The centre of enlargement can be determined by drawing lines between similar points on the shapes and finding the intersection of these lines.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;center&gt;
+[[jsxgraph height="350px" width="350px"]]
+
+    var largeCoord1 = [{#first(largeCen)+first(largeOri)#},{#second(largeCen)+second(largeOri)#}];
+    var largeCoord2 = [{#first(largeCen)+(if abs(first(largeOri))=3 then -first(largeOri) else first(largeOri))#},{#second(largeCen)+(if abs(second(largeOri))=3 then -second(largeOri) else second(largeOri))#}];
+
+    var cenPoint = {#tans2#};
+    var scaleFact = {#tans1#};
+
+    var smallCoord1 = [
+      cenPoint[0]*(1-1/scaleFact)+largeCoord1[0]/scaleFact,
+      cenPoint[1]*(1-1/scaleFact)+largeCoord1[1]/scaleFact,
+    ];
+    var smallCoord2 = [
+      cenPoint[0]*(1-1/scaleFact)+largeCoord2[0]/scaleFact,
+      cenPoint[1]*(1-1/scaleFact)+largeCoord2[1]/scaleFact,
+    ];
+
+    JXG.Options.text.useMathJax=true;
+    var board = JXG.JSXGraph.initBoard(divid, {
+      boundingBox:[-7,7,7,-7],
+      showCopyright:false,
+      showNavigation:false,
+      keepaspectratio:true,
+      axis:true
+    });
+
+    // Small Shape
+
+    var p1 = board.create("point", smallCoord1, {visible:false});
+    var p2 = board.create("point", smallCoord2, {visible:false});
+
+    var pointList = [
+      p1,
+      p2,
+      [p2.X()-(p1.Y()-p2.Y())/3, p2.Y()+(p1.X()-p2.X())/3],
+      [
+        p2.X()+(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3, 
+        p2.Y()+(p1.X()-p2.X())/3+(p1.Y()-p2.Y())/3
+      ],
+      [
+        p2.X()+(p1.X()-p2.X())/3-2*(p1.Y()-p2.Y())/3, 
+        p2.Y()+2*(p1.X()-p2.X())/3+(p1.Y()-p2.Y())/3
+      ],
+      [
+        p1.X()-(p1.X()-p2.X())/3-2*(p1.Y()-p2.Y())/3, 
+        p1.Y()+2*(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3
+      ],
+      [
+        p1.X()-(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3, 
+        p1.Y()+(p1.X()-p2.X())/3-(p1.Y()-p2.Y())/3
+      ],
+      [p1.X()-(p1.Y()-p2.Y())/3, p1.Y()+(p1.X()-p2.X())/3]
+    ];
+
+    board.create("polygon", pointList, {
+      fixed:true,
+      highlight:false,
+      fillColor:"blue",
+      borders:{
+        fixed:true,
+        highlight:false,
+        strokeColor:"blue"
+      },
+      vertices:{
+        visible:false
+      }
+    });
+
+    // Large Shape
+
+    var p3 = board.create("point", largeCoord1, {visible:false});
+    var p4 = board.create("point", largeCoord2, {visible:false});
+
+    var pointList = [
+      p3,
+      p4,
+      [p4.X()-(p3.Y()-p4.Y())/3, p4.Y()+(p3.X()-p4.X())/3],
+      [
+        p4.X()+(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3, 
+        p4.Y()+(p3.X()-p4.X())/3+(p3.Y()-p4.Y())/3
+      ],
+      [
+        p4.X()+(p3.X()-p4.X())/3-2*(p3.Y()-p4.Y())/3, 
+        p4.Y()+2*(p3.X()-p4.X())/3+(p3.Y()-p4.Y())/3
+      ],
+      [
+        p3.X()-(p3.X()-p4.X())/3-2*(p3.Y()-p4.Y())/3, 
+        p3.Y()+2*(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3
+      ],
+      [
+        p3.X()-(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3, 
+        p3.Y()+(p3.X()-p4.X())/3-(p3.Y()-p4.Y())/3
+      ],
+      [p3.X()-(p3.Y()-p4.Y())/3, p3.Y()+(p3.X()-p4.X())/3]
+    ];
+
+    board.create("polygon", pointList, {
+      fixed:true,
+      highlight:false,
+      fillColor:"red",
+      borders:{
+        fixed:true,
+        highlight:false,
+        strokeColor:"red"
+      },
+      vertices:{
+        visible:false
+      }
+    });
+
+    var lineStyle = {
+      fixed:true,
+      highlight:false,
+      strokeColor:"purple",
+      strokeWidth:2,
+      dash:3
+    }
+
+    var lineA = board.create("line", [largeCoord1, smallCoord1], lineStyle);
+    var lineB = board.create("line", [largeCoord2, smallCoord2], lineStyle);
+
+    board.create("intersection", [lineA, lineB], {
+      fixed:true,
+      highlight:false,
+      fillColor:"#00df25",
+      strokeColor:"#00df25",
+      name:" "
+    })
+
+[[/jsxgraph]]
+&lt;/center&gt;
+
+&lt;p&gt;&lt;br&gt;The intersection of these lines shows that the centre of enlargement is \(({@first(tans2)@}, {@second(tans2)@})\)&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="enlargements-25-4-1-1-33-7-14" assembly-id="enlargements-25-4-1-1-33-7-14" unique-id="enlargements-25-4-1-1-33-7-14">-</falsescoremode>
+        <falsescore original-id="enlargements-25-4-1-1-33-7-15" assembly-id="enlargements-25-4-1-1-33-7-15" unique-id="enlargements-25-4-1-1-33-7-15">0.0000000</falsescore>
+        <falsepenalty original-id="enlargements-25-4-1-1-33-7-16" assembly-id="enlargements-25-4-1-1-33-7-16" unique-id="enlargements-25-4-1-1-33-7-16"/>
+        <falsenextnode original-id="enlargements-25-4-1-1-33-7-17" assembly-id="enlargements-25-4-1-1-33-7-17" unique-id="enlargements-25-4-1-1-33-7-17">-1</falsenextnode>
+        <falseanswernote original-id="enlargements-25-4-1-1-33-7-18" assembly-id="enlargements-25-4-1-1-33-7-18" unique-id="enlargements-25-4-1-1-33-7-18">prt2-2-F</falseanswernote>
+        <falsefeedback format="html" original-id="enlargements-25-4-1-1-33-7-19" assembly-id="enlargements-25-4-1-1-33-7-19" unique-id="enlargements-25-4-1-1-33-7-19">
+          <text original-id="enlargements-25-4-1-1-33-7-19-1" assembly-id="enlargements-25-4-1-1-33-7-19-1" unique-id="enlargements-25-4-1-1-33-7-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="enlargements-25-4-1-1-33-8" assembly-id="enlargements-25-4-1-1-33-8" unique-id="enlargements-25-4-1-1-33-8">
+        <name original-id="enlargements-25-4-1-1-33-8-1" assembly-id="enlargements-25-4-1-1-33-8-1" unique-id="enlargements-25-4-1-1-33-8-1">2</name>
+        <description original-id="enlargements-25-4-1-1-33-8-2" assembly-id="enlargements-25-4-1-1-33-8-2" unique-id="enlargements-25-4-1-1-33-8-2"/>
+        <answertest original-id="enlargements-25-4-1-1-33-8-3" assembly-id="enlargements-25-4-1-1-33-8-3" unique-id="enlargements-25-4-1-1-33-8-3">AlgEquiv</answertest>
+        <sans original-id="enlargements-25-4-1-1-33-8-4" assembly-id="enlargements-25-4-1-1-33-8-4" unique-id="enlargements-25-4-1-1-33-8-4">[ans3,ans2]</sans>
+        <tans original-id="enlargements-25-4-1-1-33-8-5" assembly-id="enlargements-25-4-1-1-33-8-5" unique-id="enlargements-25-4-1-1-33-8-5">tans2</tans>
+        <testoptions original-id="enlargements-25-4-1-1-33-8-6" assembly-id="enlargements-25-4-1-1-33-8-6" unique-id="enlargements-25-4-1-1-33-8-6"/>
+        <quiet original-id="enlargements-25-4-1-1-33-8-7" assembly-id="enlargements-25-4-1-1-33-8-7" unique-id="enlargements-25-4-1-1-33-8-7">1</quiet>
+        <truescoremode original-id="enlargements-25-4-1-1-33-8-8" assembly-id="enlargements-25-4-1-1-33-8-8" unique-id="enlargements-25-4-1-1-33-8-8">=</truescoremode>
+        <truescore original-id="enlargements-25-4-1-1-33-8-9" assembly-id="enlargements-25-4-1-1-33-8-9" unique-id="enlargements-25-4-1-1-33-8-9">0.5000000</truescore>
+        <truepenalty original-id="enlargements-25-4-1-1-33-8-10" assembly-id="enlargements-25-4-1-1-33-8-10" unique-id="enlargements-25-4-1-1-33-8-10"/>
+        <truenextnode original-id="enlargements-25-4-1-1-33-8-11" assembly-id="enlargements-25-4-1-1-33-8-11" unique-id="enlargements-25-4-1-1-33-8-11">1</truenextnode>
+        <trueanswernote original-id="enlargements-25-4-1-1-33-8-12" assembly-id="enlargements-25-4-1-1-33-8-12" unique-id="enlargements-25-4-1-1-33-8-12">prt2-3-T</trueanswernote>
+        <truefeedback format="html" original-id="enlargements-25-4-1-1-33-8-13" assembly-id="enlargements-25-4-1-1-33-8-13" unique-id="enlargements-25-4-1-1-33-8-13">
+          <text original-id="enlargements-25-4-1-1-33-8-13-1" assembly-id="enlargements-25-4-1-1-33-8-13-1" unique-id="enlargements-25-4-1-1-33-8-13-1">&lt;p&gt;&lt;br&gt;You seem to have given your coordinates the wrong way around.
+&lt;br&gt;Remember that the first coordinate represents the position along the horizontal, \(x\), axis and the second coordinate represents the position along the vertical, \(y\), axis.&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="enlargements-25-4-1-1-33-8-14" assembly-id="enlargements-25-4-1-1-33-8-14" unique-id="enlargements-25-4-1-1-33-8-14">-</falsescoremode>
+        <falsescore original-id="enlargements-25-4-1-1-33-8-15" assembly-id="enlargements-25-4-1-1-33-8-15" unique-id="enlargements-25-4-1-1-33-8-15">0.0000000</falsescore>
+        <falsepenalty original-id="enlargements-25-4-1-1-33-8-16" assembly-id="enlargements-25-4-1-1-33-8-16" unique-id="enlargements-25-4-1-1-33-8-16"/>
+        <falsenextnode original-id="enlargements-25-4-1-1-33-8-17" assembly-id="enlargements-25-4-1-1-33-8-17" unique-id="enlargements-25-4-1-1-33-8-17">3</falsenextnode>
+        <falseanswernote original-id="enlargements-25-4-1-1-33-8-18" assembly-id="enlargements-25-4-1-1-33-8-18" unique-id="enlargements-25-4-1-1-33-8-18">prt2-3-F</falseanswernote>
+        <falsefeedback format="html" original-id="enlargements-25-4-1-1-33-8-19" assembly-id="enlargements-25-4-1-1-33-8-19" unique-id="enlargements-25-4-1-1-33-8-19">
+          <text original-id="enlargements-25-4-1-1-33-8-19-1" assembly-id="enlargements-25-4-1-1-33-8-19-1" unique-id="enlargements-25-4-1-1-33-8-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="enlargements-25-4-1-1-33-9" assembly-id="enlargements-25-4-1-1-33-9" unique-id="enlargements-25-4-1-1-33-9">
+        <name original-id="enlargements-25-4-1-1-33-9-1" assembly-id="enlargements-25-4-1-1-33-9-1" unique-id="enlargements-25-4-1-1-33-9-1">3</name>
+        <description original-id="enlargements-25-4-1-1-33-9-2" assembly-id="enlargements-25-4-1-1-33-9-2" unique-id="enlargements-25-4-1-1-33-9-2"/>
+        <answertest original-id="enlargements-25-4-1-1-33-9-3" assembly-id="enlargements-25-4-1-1-33-9-3" unique-id="enlargements-25-4-1-1-33-9-3">AlgEquiv</answertest>
+        <sans original-id="enlargements-25-4-1-1-33-9-4" assembly-id="enlargements-25-4-1-1-33-9-4" unique-id="enlargements-25-4-1-1-33-9-4">ans2</sans>
+        <tans original-id="enlargements-25-4-1-1-33-9-5" assembly-id="enlargements-25-4-1-1-33-9-5" unique-id="enlargements-25-4-1-1-33-9-5">first(tans2)</tans>
+        <testoptions original-id="enlargements-25-4-1-1-33-9-6" assembly-id="enlargements-25-4-1-1-33-9-6" unique-id="enlargements-25-4-1-1-33-9-6"/>
+        <quiet original-id="enlargements-25-4-1-1-33-9-7" assembly-id="enlargements-25-4-1-1-33-9-7" unique-id="enlargements-25-4-1-1-33-9-7">0</quiet>
+        <truescoremode original-id="enlargements-25-4-1-1-33-9-8" assembly-id="enlargements-25-4-1-1-33-9-8" unique-id="enlargements-25-4-1-1-33-9-8">+</truescoremode>
+        <truescore original-id="enlargements-25-4-1-1-33-9-9" assembly-id="enlargements-25-4-1-1-33-9-9" unique-id="enlargements-25-4-1-1-33-9-9">0.5000000</truescore>
+        <truepenalty original-id="enlargements-25-4-1-1-33-9-10" assembly-id="enlargements-25-4-1-1-33-9-10" unique-id="enlargements-25-4-1-1-33-9-10"/>
+        <truenextnode original-id="enlargements-25-4-1-1-33-9-11" assembly-id="enlargements-25-4-1-1-33-9-11" unique-id="enlargements-25-4-1-1-33-9-11">4</truenextnode>
+        <trueanswernote original-id="enlargements-25-4-1-1-33-9-12" assembly-id="enlargements-25-4-1-1-33-9-12" unique-id="enlargements-25-4-1-1-33-9-12">prt2-4-T</trueanswernote>
+        <truefeedback format="html" original-id="enlargements-25-4-1-1-33-9-13" assembly-id="enlargements-25-4-1-1-33-9-13" unique-id="enlargements-25-4-1-1-33-9-13">
+          <text original-id="enlargements-25-4-1-1-33-9-13-1" assembly-id="enlargements-25-4-1-1-33-9-13-1" unique-id="enlargements-25-4-1-1-33-9-13-1">&lt;p&gt;&lt;br&gt;Your answer for the \(x\) coordinate of the centre of enlargement is correct.&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="enlargements-25-4-1-1-33-9-14" assembly-id="enlargements-25-4-1-1-33-9-14" unique-id="enlargements-25-4-1-1-33-9-14">-</falsescoremode>
+        <falsescore original-id="enlargements-25-4-1-1-33-9-15" assembly-id="enlargements-25-4-1-1-33-9-15" unique-id="enlargements-25-4-1-1-33-9-15">0.0000000</falsescore>
+        <falsepenalty original-id="enlargements-25-4-1-1-33-9-16" assembly-id="enlargements-25-4-1-1-33-9-16" unique-id="enlargements-25-4-1-1-33-9-16"/>
+        <falsenextnode original-id="enlargements-25-4-1-1-33-9-17" assembly-id="enlargements-25-4-1-1-33-9-17" unique-id="enlargements-25-4-1-1-33-9-17">4</falsenextnode>
+        <falseanswernote original-id="enlargements-25-4-1-1-33-9-18" assembly-id="enlargements-25-4-1-1-33-9-18" unique-id="enlargements-25-4-1-1-33-9-18">prt2-4-F</falseanswernote>
+        <falsefeedback format="html" original-id="enlargements-25-4-1-1-33-9-19" assembly-id="enlargements-25-4-1-1-33-9-19" unique-id="enlargements-25-4-1-1-33-9-19">
+          <text original-id="enlargements-25-4-1-1-33-9-19-1" assembly-id="enlargements-25-4-1-1-33-9-19-1" unique-id="enlargements-25-4-1-1-33-9-19-1">&lt;p&gt;&lt;br&gt;Your answer for the \(x\) coordinate of the centre of enlargement is incorrect.&lt;/p&gt;</text>
+        </falsefeedback>
+      </node>
+      <node original-id="enlargements-25-4-1-1-33-10" assembly-id="enlargements-25-4-1-1-33-10" unique-id="enlargements-25-4-1-1-33-10">
+        <name original-id="enlargements-25-4-1-1-33-10-1" assembly-id="enlargements-25-4-1-1-33-10-1" unique-id="enlargements-25-4-1-1-33-10-1">4</name>
+        <description original-id="enlargements-25-4-1-1-33-10-2" assembly-id="enlargements-25-4-1-1-33-10-2" unique-id="enlargements-25-4-1-1-33-10-2"/>
+        <answertest original-id="enlargements-25-4-1-1-33-10-3" assembly-id="enlargements-25-4-1-1-33-10-3" unique-id="enlargements-25-4-1-1-33-10-3">AlgEquiv</answertest>
+        <sans original-id="enlargements-25-4-1-1-33-10-4" assembly-id="enlargements-25-4-1-1-33-10-4" unique-id="enlargements-25-4-1-1-33-10-4">ans3</sans>
+        <tans original-id="enlargements-25-4-1-1-33-10-5" assembly-id="enlargements-25-4-1-1-33-10-5" unique-id="enlargements-25-4-1-1-33-10-5">second(tans2)</tans>
+        <testoptions original-id="enlargements-25-4-1-1-33-10-6" assembly-id="enlargements-25-4-1-1-33-10-6" unique-id="enlargements-25-4-1-1-33-10-6"/>
+        <quiet original-id="enlargements-25-4-1-1-33-10-7" assembly-id="enlargements-25-4-1-1-33-10-7" unique-id="enlargements-25-4-1-1-33-10-7">0</quiet>
+        <truescoremode original-id="enlargements-25-4-1-1-33-10-8" assembly-id="enlargements-25-4-1-1-33-10-8" unique-id="enlargements-25-4-1-1-33-10-8">+</truescoremode>
+        <truescore original-id="enlargements-25-4-1-1-33-10-9" assembly-id="enlargements-25-4-1-1-33-10-9" unique-id="enlargements-25-4-1-1-33-10-9">0.5000000</truescore>
+        <truepenalty original-id="enlargements-25-4-1-1-33-10-10" assembly-id="enlargements-25-4-1-1-33-10-10" unique-id="enlargements-25-4-1-1-33-10-10"/>
+        <truenextnode original-id="enlargements-25-4-1-1-33-10-11" assembly-id="enlargements-25-4-1-1-33-10-11" unique-id="enlargements-25-4-1-1-33-10-11">1</truenextnode>
+        <trueanswernote original-id="enlargements-25-4-1-1-33-10-12" assembly-id="enlargements-25-4-1-1-33-10-12" unique-id="enlargements-25-4-1-1-33-10-12">prt2-5-T</trueanswernote>
+        <truefeedback format="html" original-id="enlargements-25-4-1-1-33-10-13" assembly-id="enlargements-25-4-1-1-33-10-13" unique-id="enlargements-25-4-1-1-33-10-13">
+          <text original-id="enlargements-25-4-1-1-33-10-13-1" assembly-id="enlargements-25-4-1-1-33-10-13-1" unique-id="enlargements-25-4-1-1-33-10-13-1">&lt;p&gt;Your answer for the \(y\) coordinate of the centre of enlargement is correct.&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="enlargements-25-4-1-1-33-10-14" assembly-id="enlargements-25-4-1-1-33-10-14" unique-id="enlargements-25-4-1-1-33-10-14">-</falsescoremode>
+        <falsescore original-id="enlargements-25-4-1-1-33-10-15" assembly-id="enlargements-25-4-1-1-33-10-15" unique-id="enlargements-25-4-1-1-33-10-15">0.0000000</falsescore>
+        <falsepenalty original-id="enlargements-25-4-1-1-33-10-16" assembly-id="enlargements-25-4-1-1-33-10-16" unique-id="enlargements-25-4-1-1-33-10-16"/>
+        <falsenextnode original-id="enlargements-25-4-1-1-33-10-17" assembly-id="enlargements-25-4-1-1-33-10-17" unique-id="enlargements-25-4-1-1-33-10-17">1</falsenextnode>
+        <falseanswernote original-id="enlargements-25-4-1-1-33-10-18" assembly-id="enlargements-25-4-1-1-33-10-18" unique-id="enlargements-25-4-1-1-33-10-18">prt2-5-F</falseanswernote>
+        <falsefeedback format="html" original-id="enlargements-25-4-1-1-33-10-19" assembly-id="enlargements-25-4-1-1-33-10-19" unique-id="enlargements-25-4-1-1-33-10-19">
+          <text original-id="enlargements-25-4-1-1-33-10-19-1" assembly-id="enlargements-25-4-1-1-33-10-19-1" unique-id="enlargements-25-4-1-1-33-10-19-1">&lt;p&gt;Your answer for the \(y\) coordinate of the centre of enlargement is incorrect.&lt;/p&gt;</text>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>
+        

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+                <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../../../../stack/2-0-Measurement-Geometry/2-1-Similarity-and-Enlargement/2-1-3-Scale-Factors/2-1-3-2Volume-Scale-Factor/Finding-the-Capacity-of-a-Larger-Container-Using-Similarity.xml" original-id="capacity-larger-container-1" assembly-id="capacity-larger-container-1" unique-id="capacity-larger-container-1">
+  <question type="stack" original-id="capacity-larger-container-1-1" assembly-id="capacity-larger-container-1-1" unique-id="capacity-larger-container-1-1">
+    <name original-id="capacity-larger-container-1-1-1" assembly-id="capacity-larger-container-1-1-1" unique-id="capacity-larger-container-1-1-1">
+      <text original-id="capacity-larger-container-1-1-1-1" assembly-id="capacity-larger-container-1-1-1-1" unique-id="capacity-larger-container-1-1-1-1">Finding the Capacity of a Larger Container Using Similarity</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="capacity-larger-container-1-1-2" assembly-id="capacity-larger-container-1-1-2" unique-id="capacity-larger-container-1-1-2">
+      <text original-id="capacity-larger-container-1-1-2-1" assembly-id="capacity-larger-container-1-1-2-1" unique-id="capacity-larger-container-1-1-2-1">&lt;p&gt;Two similar containers have heights of {@a@} cm and {@b@} cm respectively. If the smaller container holds {@c@} ml, what is the capacity of the larger container? &lt;b&gt;Note:&lt;/b&gt; Write your answer correct to &lt;b&gt;2&lt;/b&gt; decimal places.&lt;/p&gt;
+&lt;p&gt;[[input:ans1]] ml[[validation:ans1]][[feedback:prt1]]&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="capacity-larger-container-1-1-3" assembly-id="capacity-larger-container-1-1-3" unique-id="capacity-larger-container-1-1-3">
+      <text original-id="capacity-larger-container-1-1-3-1" assembly-id="capacity-larger-container-1-1-3-1" unique-id="capacity-larger-container-1-1-3-1">&lt;h3&gt;Worked solution&lt;/h3&gt;
+&lt;p&gt;Given the linear scale factor (L.S.F)= \(\frac{{@b@}}{{@a@}}\)&lt;/p&gt;
+&lt;p&gt;Volume scale factor (V.S.F) = \((L.S.F)^3 = (\frac{{@b@}}{{@a@}})^3 = {@k^3@}\)&lt;/p&gt;
+&lt;p&gt;Given the capacity of the small container as {@c@} ml, then the capacity of larger container is given by;&lt;/p&gt;
+&lt;p&gt;\(\quad \quad \quad \quad \quad \quad  \frac{{@b1@}}{{@a1@}}= \frac{x}{{@c@}} \Rightarrow x = \frac{{@c@}\times {@b1@}}{{@a1@}} = {@larger_container@}={@ta@}\) ml&lt;/p&gt;</text>
+    </generalfeedback>
+    <defaultgrade original-id="capacity-larger-container-1-1-4" assembly-id="capacity-larger-container-1-1-4" unique-id="capacity-larger-container-1-1-4">1</defaultgrade>
+    <penalty original-id="capacity-larger-container-1-1-5" assembly-id="capacity-larger-container-1-1-5" unique-id="capacity-larger-container-1-1-5">0.1</penalty>
+    <hidden original-id="capacity-larger-container-1-1-6" assembly-id="capacity-larger-container-1-1-6" unique-id="capacity-larger-container-1-1-6">0</hidden>
+    <idnumber original-id="capacity-larger-container-1-1-7" assembly-id="capacity-larger-container-1-1-7" unique-id="capacity-larger-container-1-1-7"/>
+    <stackversion original-id="capacity-larger-container-1-1-8" assembly-id="capacity-larger-container-1-1-8" unique-id="capacity-larger-container-1-1-8">
+      <text original-id="capacity-larger-container-1-1-8-1" assembly-id="capacity-larger-container-1-1-8-1" unique-id="capacity-larger-container-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="capacity-larger-container-1-1-9" assembly-id="capacity-larger-container-1-1-9" unique-id="capacity-larger-container-1-1-9">
+      <text original-id="capacity-larger-container-1-1-9-1" assembly-id="capacity-larger-container-1-1-9-1" unique-id="capacity-larger-container-1-1-9-1"> /* Side lengths of similar regular polygons */
+a : rand(9) + 3;   /* side length of smaller polygon */
+b : a + rand(9) + 1; /* side length of larger polygon, ensure b &gt; a */
+
+/* volume of the smaller container */
+c : rand_with_step(25,300,5) ;
+
+/* Scale factor between corresponding sides */
+k : b / a;
+  /*cubic scale*/
+b1:b^3;
+a1:a^3;
+
+/* volume of the larger container (area scales with square of side ratio) */
+ larger_container : c * k^3;
+ta:decimalplaces( larger_container,2);
+
+
+/*mistakes*/
+ta1:k*c;
+ta2:decimalplaces((1/k^3)*c,2);
+ta3:c * k^2;</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="capacity-larger-container-1-1-10" assembly-id="capacity-larger-container-1-1-10" unique-id="capacity-larger-container-1-1-10">
+      <text original-id="capacity-larger-container-1-1-10-1" assembly-id="capacity-larger-container-1-1-10-1" unique-id="capacity-larger-container-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="capacity-larger-container-1-1-11" assembly-id="capacity-larger-container-1-1-11" unique-id="capacity-larger-container-1-1-11">
+      <text original-id="capacity-larger-container-1-1-11-1" assembly-id="capacity-larger-container-1-1-11-1" unique-id="capacity-larger-container-1-1-11-1">&lt;p&gt;volume of the smaller container={@c@}&lt;/p&gt;
+&lt;p&gt;volume of the larger container={@ta@}&lt;/p&gt;</text>
+    </questionnote>
+    <questiondescription format="html" original-id="capacity-larger-container-1-1-12" assembly-id="capacity-larger-container-1-1-12" unique-id="capacity-larger-container-1-1-12">
+      <text original-id="capacity-larger-container-1-1-12-1" assembly-id="capacity-larger-container-1-1-12-1" unique-id="capacity-larger-container-1-1-12-1"/>
+    </questiondescription>
+    <questionsimplify original-id="capacity-larger-container-1-1-13" assembly-id="capacity-larger-container-1-1-13" unique-id="capacity-larger-container-1-1-13">1</questionsimplify>
+    <assumepositive original-id="capacity-larger-container-1-1-14" assembly-id="capacity-larger-container-1-1-14" unique-id="capacity-larger-container-1-1-14">0</assumepositive>
+    <assumereal original-id="capacity-larger-container-1-1-15" assembly-id="capacity-larger-container-1-1-15" unique-id="capacity-larger-container-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="capacity-larger-container-1-1-16" assembly-id="capacity-larger-container-1-1-16" unique-id="capacity-larger-container-1-1-16">
+      <text original-id="capacity-larger-container-1-1-16-1" assembly-id="capacity-larger-container-1-1-16-1" unique-id="capacity-larger-container-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="capacity-larger-container-1-1-17" assembly-id="capacity-larger-container-1-1-17" unique-id="capacity-larger-container-1-1-17">
+      <text original-id="capacity-larger-container-1-1-17-1" assembly-id="capacity-larger-container-1-1-17-1" unique-id="capacity-larger-container-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="capacity-larger-container-1-1-18" assembly-id="capacity-larger-container-1-1-18" unique-id="capacity-larger-container-1-1-18">
+      <text original-id="capacity-larger-container-1-1-18-1" assembly-id="capacity-larger-container-1-1-18-1" unique-id="capacity-larger-container-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="capacity-larger-container-1-1-19" assembly-id="capacity-larger-container-1-1-19" unique-id="capacity-larger-container-1-1-19">.</decimals>
+    <scientificnotation original-id="capacity-larger-container-1-1-20" assembly-id="capacity-larger-container-1-1-20" unique-id="capacity-larger-container-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="capacity-larger-container-1-1-21" assembly-id="capacity-larger-container-1-1-21" unique-id="capacity-larger-container-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="capacity-larger-container-1-1-22" assembly-id="capacity-larger-container-1-1-22" unique-id="capacity-larger-container-1-1-22">1</sqrtsign>
+    <complexno original-id="capacity-larger-container-1-1-23" assembly-id="capacity-larger-container-1-1-23" unique-id="capacity-larger-container-1-1-23">i</complexno>
+    <inversetrig original-id="capacity-larger-container-1-1-24" assembly-id="capacity-larger-container-1-1-24" unique-id="capacity-larger-container-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="capacity-larger-container-1-1-25" assembly-id="capacity-larger-container-1-1-25" unique-id="capacity-larger-container-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="capacity-larger-container-1-1-26" assembly-id="capacity-larger-container-1-1-26" unique-id="capacity-larger-container-1-1-26">[</matrixparens>
+    <isbroken original-id="capacity-larger-container-1-1-27" assembly-id="capacity-larger-container-1-1-27" unique-id="capacity-larger-container-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="capacity-larger-container-1-1-28" assembly-id="capacity-larger-container-1-1-28" unique-id="capacity-larger-container-1-1-28"/>
+    <input original-id="capacity-larger-container-1-1-29" assembly-id="capacity-larger-container-1-1-29" unique-id="capacity-larger-container-1-1-29">
+      <name original-id="capacity-larger-container-1-1-29-1" assembly-id="capacity-larger-container-1-1-29-1" unique-id="capacity-larger-container-1-1-29-1">ans1</name>
+      <type original-id="capacity-larger-container-1-1-29-2" assembly-id="capacity-larger-container-1-1-29-2" unique-id="capacity-larger-container-1-1-29-2">algebraic</type>
+      <tans original-id="capacity-larger-container-1-1-29-3" assembly-id="capacity-larger-container-1-1-29-3" unique-id="capacity-larger-container-1-1-29-3">ta</tans>
+      <boxsize original-id="capacity-larger-container-1-1-29-4" assembly-id="capacity-larger-container-1-1-29-4" unique-id="capacity-larger-container-1-1-29-4">5</boxsize>
+      <strictsyntax original-id="capacity-larger-container-1-1-29-5" assembly-id="capacity-larger-container-1-1-29-5" unique-id="capacity-larger-container-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="capacity-larger-container-1-1-29-6" assembly-id="capacity-larger-container-1-1-29-6" unique-id="capacity-larger-container-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="capacity-larger-container-1-1-29-7" assembly-id="capacity-larger-container-1-1-29-7" unique-id="capacity-larger-container-1-1-29-7"/>
+      <syntaxattribute original-id="capacity-larger-container-1-1-29-8" assembly-id="capacity-larger-container-1-1-29-8" unique-id="capacity-larger-container-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="capacity-larger-container-1-1-29-9" assembly-id="capacity-larger-container-1-1-29-9" unique-id="capacity-larger-container-1-1-29-9"/>
+      <allowwords original-id="capacity-larger-container-1-1-29-10" assembly-id="capacity-larger-container-1-1-29-10" unique-id="capacity-larger-container-1-1-29-10"/>
+      <forbidfloat original-id="capacity-larger-container-1-1-29-11" assembly-id="capacity-larger-container-1-1-29-11" unique-id="capacity-larger-container-1-1-29-11">0</forbidfloat>
+      <requirelowestterms original-id="capacity-larger-container-1-1-29-12" assembly-id="capacity-larger-container-1-1-29-12" unique-id="capacity-larger-container-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="capacity-larger-container-1-1-29-13" assembly-id="capacity-larger-container-1-1-29-13" unique-id="capacity-larger-container-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="capacity-larger-container-1-1-29-14" assembly-id="capacity-larger-container-1-1-29-14" unique-id="capacity-larger-container-1-1-29-14">1</mustverify>
+      <showvalidation original-id="capacity-larger-container-1-1-29-15" assembly-id="capacity-larger-container-1-1-29-15" unique-id="capacity-larger-container-1-1-29-15">3</showvalidation>
+      <options original-id="capacity-larger-container-1-1-29-16" assembly-id="capacity-larger-container-1-1-29-16" unique-id="capacity-larger-container-1-1-29-16"/>
+    </input>
+    <prt original-id="capacity-larger-container-1-1-30" assembly-id="capacity-larger-container-1-1-30" unique-id="capacity-larger-container-1-1-30">
+      <name original-id="capacity-larger-container-1-1-30-1" assembly-id="capacity-larger-container-1-1-30-1" unique-id="capacity-larger-container-1-1-30-1">prt1</name>
+      <value original-id="capacity-larger-container-1-1-30-2" assembly-id="capacity-larger-container-1-1-30-2" unique-id="capacity-larger-container-1-1-30-2">1.0000000</value>
+      <autosimplify original-id="capacity-larger-container-1-1-30-3" assembly-id="capacity-larger-container-1-1-30-3" unique-id="capacity-larger-container-1-1-30-3">1</autosimplify>
+      <feedbackstyle original-id="capacity-larger-container-1-1-30-4" assembly-id="capacity-larger-container-1-1-30-4" unique-id="capacity-larger-container-1-1-30-4">1</feedbackstyle>
+      <feedbackvariables original-id="capacity-larger-container-1-1-30-5" assembly-id="capacity-larger-container-1-1-30-5" unique-id="capacity-larger-container-1-1-30-5">
+        <text original-id="capacity-larger-container-1-1-30-5-1" assembly-id="capacity-larger-container-1-1-30-5-1" unique-id="capacity-larger-container-1-1-30-5-1"/>
+      </feedbackvariables>
+      <node original-id="capacity-larger-container-1-1-30-6" assembly-id="capacity-larger-container-1-1-30-6" unique-id="capacity-larger-container-1-1-30-6">
+        <name original-id="capacity-larger-container-1-1-30-6-1" assembly-id="capacity-larger-container-1-1-30-6-1" unique-id="capacity-larger-container-1-1-30-6-1">0</name>
+        <description original-id="capacity-larger-container-1-1-30-6-2" assembly-id="capacity-larger-container-1-1-30-6-2" unique-id="capacity-larger-container-1-1-30-6-2"/>
+        <answertest original-id="capacity-larger-container-1-1-30-6-3" assembly-id="capacity-larger-container-1-1-30-6-3" unique-id="capacity-larger-container-1-1-30-6-3">NumAbsolute</answertest>
+        <sans original-id="capacity-larger-container-1-1-30-6-4" assembly-id="capacity-larger-container-1-1-30-6-4" unique-id="capacity-larger-container-1-1-30-6-4">ans1</sans>
+        <tans original-id="capacity-larger-container-1-1-30-6-5" assembly-id="capacity-larger-container-1-1-30-6-5" unique-id="capacity-larger-container-1-1-30-6-5">ta</tans>
+        <testoptions original-id="capacity-larger-container-1-1-30-6-6" assembly-id="capacity-larger-container-1-1-30-6-6" unique-id="capacity-larger-container-1-1-30-6-6">0.01</testoptions>
+        <quiet original-id="capacity-larger-container-1-1-30-6-7" assembly-id="capacity-larger-container-1-1-30-6-7" unique-id="capacity-larger-container-1-1-30-6-7">0</quiet>
+        <truescoremode original-id="capacity-larger-container-1-1-30-6-8" assembly-id="capacity-larger-container-1-1-30-6-8" unique-id="capacity-larger-container-1-1-30-6-8">=</truescoremode>
+        <truescore original-id="capacity-larger-container-1-1-30-6-9" assembly-id="capacity-larger-container-1-1-30-6-9" unique-id="capacity-larger-container-1-1-30-6-9">1</truescore>
+        <truepenalty original-id="capacity-larger-container-1-1-30-6-10" assembly-id="capacity-larger-container-1-1-30-6-10" unique-id="capacity-larger-container-1-1-30-6-10"/>
+        <truenextnode original-id="capacity-larger-container-1-1-30-6-11" assembly-id="capacity-larger-container-1-1-30-6-11" unique-id="capacity-larger-container-1-1-30-6-11">-1</truenextnode>
+        <trueanswernote original-id="capacity-larger-container-1-1-30-6-12" assembly-id="capacity-larger-container-1-1-30-6-12" unique-id="capacity-larger-container-1-1-30-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="capacity-larger-container-1-1-30-6-13" assembly-id="capacity-larger-container-1-1-30-6-13" unique-id="capacity-larger-container-1-1-30-6-13">
+          <text original-id="capacity-larger-container-1-1-30-6-13-1" assembly-id="capacity-larger-container-1-1-30-6-13-1" unique-id="capacity-larger-container-1-1-30-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="capacity-larger-container-1-1-30-6-14" assembly-id="capacity-larger-container-1-1-30-6-14" unique-id="capacity-larger-container-1-1-30-6-14">=</falsescoremode>
+        <falsescore original-id="capacity-larger-container-1-1-30-6-15" assembly-id="capacity-larger-container-1-1-30-6-15" unique-id="capacity-larger-container-1-1-30-6-15">0</falsescore>
+        <falsepenalty original-id="capacity-larger-container-1-1-30-6-16" assembly-id="capacity-larger-container-1-1-30-6-16" unique-id="capacity-larger-container-1-1-30-6-16"/>
+        <falsenextnode original-id="capacity-larger-container-1-1-30-6-17" assembly-id="capacity-larger-container-1-1-30-6-17" unique-id="capacity-larger-container-1-1-30-6-17">1</falsenextnode>
+        <falseanswernote original-id="capacity-larger-container-1-1-30-6-18" assembly-id="capacity-larger-container-1-1-30-6-18" unique-id="capacity-larger-container-1-1-30-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="capacity-larger-container-1-1-30-6-19" assembly-id="capacity-larger-container-1-1-30-6-19" unique-id="capacity-larger-container-1-1-30-6-19">
+          <text original-id="capacity-larger-container-1-1-30-6-19-1" assembly-id="capacity-larger-container-1-1-30-6-19-1" unique-id="capacity-larger-container-1-1-30-6-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="capacity-larger-container-1-1-30-7" assembly-id="capacity-larger-container-1-1-30-7" unique-id="capacity-larger-container-1-1-30-7">
+        <name original-id="capacity-larger-container-1-1-30-7-1" assembly-id="capacity-larger-container-1-1-30-7-1" unique-id="capacity-larger-container-1-1-30-7-1">1</name>
+        <description original-id="capacity-larger-container-1-1-30-7-2" assembly-id="capacity-larger-container-1-1-30-7-2" unique-id="capacity-larger-container-1-1-30-7-2">Using the length scale factor directly</description>
+        <answertest original-id="capacity-larger-container-1-1-30-7-3" assembly-id="capacity-larger-container-1-1-30-7-3" unique-id="capacity-larger-container-1-1-30-7-3">AlgEquiv</answertest>
+        <sans original-id="capacity-larger-container-1-1-30-7-4" assembly-id="capacity-larger-container-1-1-30-7-4" unique-id="capacity-larger-container-1-1-30-7-4">ans1</sans>
+        <tans original-id="capacity-larger-container-1-1-30-7-5" assembly-id="capacity-larger-container-1-1-30-7-5" unique-id="capacity-larger-container-1-1-30-7-5">ta1</tans>
+        <testoptions original-id="capacity-larger-container-1-1-30-7-6" assembly-id="capacity-larger-container-1-1-30-7-6" unique-id="capacity-larger-container-1-1-30-7-6"/>
+        <quiet original-id="capacity-larger-container-1-1-30-7-7" assembly-id="capacity-larger-container-1-1-30-7-7" unique-id="capacity-larger-container-1-1-30-7-7">0</quiet>
+        <truescoremode original-id="capacity-larger-container-1-1-30-7-8" assembly-id="capacity-larger-container-1-1-30-7-8" unique-id="capacity-larger-container-1-1-30-7-8">+</truescoremode>
+        <truescore original-id="capacity-larger-container-1-1-30-7-9" assembly-id="capacity-larger-container-1-1-30-7-9" unique-id="capacity-larger-container-1-1-30-7-9">0</truescore>
+        <truepenalty original-id="capacity-larger-container-1-1-30-7-10" assembly-id="capacity-larger-container-1-1-30-7-10" unique-id="capacity-larger-container-1-1-30-7-10"/>
+        <truenextnode original-id="capacity-larger-container-1-1-30-7-11" assembly-id="capacity-larger-container-1-1-30-7-11" unique-id="capacity-larger-container-1-1-30-7-11">-1</truenextnode>
+        <trueanswernote original-id="capacity-larger-container-1-1-30-7-12" assembly-id="capacity-larger-container-1-1-30-7-12" unique-id="capacity-larger-container-1-1-30-7-12">prt1-2-T</trueanswernote>
+        <truefeedback format="html" original-id="capacity-larger-container-1-1-30-7-13" assembly-id="capacity-larger-container-1-1-30-7-13" unique-id="capacity-larger-container-1-1-30-7-13">
+          <text original-id="capacity-larger-container-1-1-30-7-13-1" assembly-id="capacity-larger-container-1-1-30-7-13-1" unique-id="capacity-larger-container-1-1-30-7-13-1">&lt;p&gt;
+It looks like you may have used the scale factor for lengths directly to find the new capacity.
+Remember, when containers are similar, lengths scale by the scale factor, but &lt;strong&gt;volumes&lt;/strong&gt;
+scale by the &lt;strong&gt;cube&lt;/strong&gt; of the scale factor.
+Make sure you cube the ratio of the corresponding heights before multiplying it by the original volume.
+&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="capacity-larger-container-1-1-30-7-14" assembly-id="capacity-larger-container-1-1-30-7-14" unique-id="capacity-larger-container-1-1-30-7-14">-</falsescoremode>
+        <falsescore original-id="capacity-larger-container-1-1-30-7-15" assembly-id="capacity-larger-container-1-1-30-7-15" unique-id="capacity-larger-container-1-1-30-7-15">0</falsescore>
+        <falsepenalty original-id="capacity-larger-container-1-1-30-7-16" assembly-id="capacity-larger-container-1-1-30-7-16" unique-id="capacity-larger-container-1-1-30-7-16"/>
+        <falsenextnode original-id="capacity-larger-container-1-1-30-7-17" assembly-id="capacity-larger-container-1-1-30-7-17" unique-id="capacity-larger-container-1-1-30-7-17">2</falsenextnode>
+        <falseanswernote original-id="capacity-larger-container-1-1-30-7-18" assembly-id="capacity-larger-container-1-1-30-7-18" unique-id="capacity-larger-container-1-1-30-7-18">prt1-2-F</falseanswernote>
+        <falsefeedback format="html" original-id="capacity-larger-container-1-1-30-7-19" assembly-id="capacity-larger-container-1-1-30-7-19" unique-id="capacity-larger-container-1-1-30-7-19">
+          <text original-id="capacity-larger-container-1-1-30-7-19-1" assembly-id="capacity-larger-container-1-1-30-7-19-1" unique-id="capacity-larger-container-1-1-30-7-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="capacity-larger-container-1-1-30-8" assembly-id="capacity-larger-container-1-1-30-8" unique-id="capacity-larger-container-1-1-30-8">
+        <name original-id="capacity-larger-container-1-1-30-8-1" assembly-id="capacity-larger-container-1-1-30-8-1" unique-id="capacity-larger-container-1-1-30-8-1">2</name>
+        <description original-id="capacity-larger-container-1-1-30-8-2" assembly-id="capacity-larger-container-1-1-30-8-2" unique-id="capacity-larger-container-1-1-30-8-2">Inverting the scale factor</description>
+        <answertest original-id="capacity-larger-container-1-1-30-8-3" assembly-id="capacity-larger-container-1-1-30-8-3" unique-id="capacity-larger-container-1-1-30-8-3">AlgEquiv</answertest>
+        <sans original-id="capacity-larger-container-1-1-30-8-4" assembly-id="capacity-larger-container-1-1-30-8-4" unique-id="capacity-larger-container-1-1-30-8-4">ans1</sans>
+        <tans original-id="capacity-larger-container-1-1-30-8-5" assembly-id="capacity-larger-container-1-1-30-8-5" unique-id="capacity-larger-container-1-1-30-8-5">ta2</tans>
+        <testoptions original-id="capacity-larger-container-1-1-30-8-6" assembly-id="capacity-larger-container-1-1-30-8-6" unique-id="capacity-larger-container-1-1-30-8-6"/>
+        <quiet original-id="capacity-larger-container-1-1-30-8-7" assembly-id="capacity-larger-container-1-1-30-8-7" unique-id="capacity-larger-container-1-1-30-8-7">0</quiet>
+        <truescoremode original-id="capacity-larger-container-1-1-30-8-8" assembly-id="capacity-larger-container-1-1-30-8-8" unique-id="capacity-larger-container-1-1-30-8-8">+</truescoremode>
+        <truescore original-id="capacity-larger-container-1-1-30-8-9" assembly-id="capacity-larger-container-1-1-30-8-9" unique-id="capacity-larger-container-1-1-30-8-9">0</truescore>
+        <truepenalty original-id="capacity-larger-container-1-1-30-8-10" assembly-id="capacity-larger-container-1-1-30-8-10" unique-id="capacity-larger-container-1-1-30-8-10"/>
+        <truenextnode original-id="capacity-larger-container-1-1-30-8-11" assembly-id="capacity-larger-container-1-1-30-8-11" unique-id="capacity-larger-container-1-1-30-8-11">-1</truenextnode>
+        <trueanswernote original-id="capacity-larger-container-1-1-30-8-12" assembly-id="capacity-larger-container-1-1-30-8-12" unique-id="capacity-larger-container-1-1-30-8-12">prt1-3-T</trueanswernote>
+        <truefeedback format="html" original-id="capacity-larger-container-1-1-30-8-13" assembly-id="capacity-larger-container-1-1-30-8-13" unique-id="capacity-larger-container-1-1-30-8-13">
+          <text original-id="capacity-larger-container-1-1-30-8-13-1" assembly-id="capacity-larger-container-1-1-30-8-13-1" unique-id="capacity-larger-container-1-1-30-8-13-1">&lt;p&gt;
+It appears that you may have used the ratio of the larger height to the smaller height in the wrong order.
+When scaling up from the smaller container to the larger one. Check the direction of scaling before calculating the volume.
+&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="capacity-larger-container-1-1-30-8-14" assembly-id="capacity-larger-container-1-1-30-8-14" unique-id="capacity-larger-container-1-1-30-8-14">-</falsescoremode>
+        <falsescore original-id="capacity-larger-container-1-1-30-8-15" assembly-id="capacity-larger-container-1-1-30-8-15" unique-id="capacity-larger-container-1-1-30-8-15">0</falsescore>
+        <falsepenalty original-id="capacity-larger-container-1-1-30-8-16" assembly-id="capacity-larger-container-1-1-30-8-16" unique-id="capacity-larger-container-1-1-30-8-16"/>
+        <falsenextnode original-id="capacity-larger-container-1-1-30-8-17" assembly-id="capacity-larger-container-1-1-30-8-17" unique-id="capacity-larger-container-1-1-30-8-17">3</falsenextnode>
+        <falseanswernote original-id="capacity-larger-container-1-1-30-8-18" assembly-id="capacity-larger-container-1-1-30-8-18" unique-id="capacity-larger-container-1-1-30-8-18">prt1-3-F</falseanswernote>
+        <falsefeedback format="html" original-id="capacity-larger-container-1-1-30-8-19" assembly-id="capacity-larger-container-1-1-30-8-19" unique-id="capacity-larger-container-1-1-30-8-19">
+          <text original-id="capacity-larger-container-1-1-30-8-19-1" assembly-id="capacity-larger-container-1-1-30-8-19-1" unique-id="capacity-larger-container-1-1-30-8-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="capacity-larger-container-1-1-30-9" assembly-id="capacity-larger-container-1-1-30-9" unique-id="capacity-larger-container-1-1-30-9">
+        <name original-id="capacity-larger-container-1-1-30-9-1" assembly-id="capacity-larger-container-1-1-30-9-1" unique-id="capacity-larger-container-1-1-30-9-1">3</name>
+        <description original-id="capacity-larger-container-1-1-30-9-2" assembly-id="capacity-larger-container-1-1-30-9-2" unique-id="capacity-larger-container-1-1-30-9-2">Squaring the scale facto</description>
+        <answertest original-id="capacity-larger-container-1-1-30-9-3" assembly-id="capacity-larger-container-1-1-30-9-3" unique-id="capacity-larger-container-1-1-30-9-3">AlgEquiv</answertest>
+        <sans original-id="capacity-larger-container-1-1-30-9-4" assembly-id="capacity-larger-container-1-1-30-9-4" unique-id="capacity-larger-container-1-1-30-9-4">ans1</sans>
+        <tans original-id="capacity-larger-container-1-1-30-9-5" assembly-id="capacity-larger-container-1-1-30-9-5" unique-id="capacity-larger-container-1-1-30-9-5">ta3</tans>
+        <testoptions original-id="capacity-larger-container-1-1-30-9-6" assembly-id="capacity-larger-container-1-1-30-9-6" unique-id="capacity-larger-container-1-1-30-9-6"/>
+        <quiet original-id="capacity-larger-container-1-1-30-9-7" assembly-id="capacity-larger-container-1-1-30-9-7" unique-id="capacity-larger-container-1-1-30-9-7">0</quiet>
+        <truescoremode original-id="capacity-larger-container-1-1-30-9-8" assembly-id="capacity-larger-container-1-1-30-9-8" unique-id="capacity-larger-container-1-1-30-9-8">+</truescoremode>
+        <truescore original-id="capacity-larger-container-1-1-30-9-9" assembly-id="capacity-larger-container-1-1-30-9-9" unique-id="capacity-larger-container-1-1-30-9-9">0</truescore>
+        <truepenalty original-id="capacity-larger-container-1-1-30-9-10" assembly-id="capacity-larger-container-1-1-30-9-10" unique-id="capacity-larger-container-1-1-30-9-10"/>
+        <truenextnode original-id="capacity-larger-container-1-1-30-9-11" assembly-id="capacity-larger-container-1-1-30-9-11" unique-id="capacity-larger-container-1-1-30-9-11">-1</truenextnode>
+        <trueanswernote original-id="capacity-larger-container-1-1-30-9-12" assembly-id="capacity-larger-container-1-1-30-9-12" unique-id="capacity-larger-container-1-1-30-9-12">prt1-4-T</trueanswernote>
+        <truefeedback format="html" original-id="capacity-larger-container-1-1-30-9-13" assembly-id="capacity-larger-container-1-1-30-9-13" unique-id="capacity-larger-container-1-1-30-9-13">
+          <text original-id="capacity-larger-container-1-1-30-9-13-1" assembly-id="capacity-larger-container-1-1-30-9-13-1" unique-id="capacity-larger-container-1-1-30-9-13-1">&lt;p&gt;
+It seems like you squared the ratio of the heights when finding the capacity.Squaring the scale factor gives the ratio of &lt;strong&gt;areas&lt;/strong&gt;, not volumes.
+Since capacity depends on volume, you must use the &lt;strong&gt;cube&lt;/strong&gt; of the scale factor instead.
+&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="capacity-larger-container-1-1-30-9-14" assembly-id="capacity-larger-container-1-1-30-9-14" unique-id="capacity-larger-container-1-1-30-9-14">-</falsescoremode>
+        <falsescore original-id="capacity-larger-container-1-1-30-9-15" assembly-id="capacity-larger-container-1-1-30-9-15" unique-id="capacity-larger-container-1-1-30-9-15">0</falsescore>
+        <falsepenalty original-id="capacity-larger-container-1-1-30-9-16" assembly-id="capacity-larger-container-1-1-30-9-16" unique-id="capacity-larger-container-1-1-30-9-16"/>
+        <falsenextnode original-id="capacity-larger-container-1-1-30-9-17" assembly-id="capacity-larger-container-1-1-30-9-17" unique-id="capacity-larger-container-1-1-30-9-17">-1</falsenextnode>
+        <falseanswernote original-id="capacity-larger-container-1-1-30-9-18" assembly-id="capacity-larger-container-1-1-30-9-18" unique-id="capacity-larger-container-1-1-30-9-18">prt1-4-F</falseanswernote>
+        <falsefeedback format="html" original-id="capacity-larger-container-1-1-30-9-19" assembly-id="capacity-larger-container-1-1-30-9-19" unique-id="capacity-larger-container-1-1-30-9-19">
+          <text original-id="capacity-larger-container-1-1-30-9-19-1" assembly-id="capacity-larger-container-1-1-30-9-19-1" unique-id="capacity-larger-container-1-1-30-9-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed original-id="capacity-larger-container-1-1-31" assembly-id="capacity-larger-container-1-1-31" unique-id="capacity-larger-container-1-1-31">1888312194</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-32" assembly-id="capacity-larger-container-1-1-32" unique-id="capacity-larger-container-1-1-32">1797272023</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-33" assembly-id="capacity-larger-container-1-1-33" unique-id="capacity-larger-container-1-1-33">452151587</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-34" assembly-id="capacity-larger-container-1-1-34" unique-id="capacity-larger-container-1-1-34">297282071</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-35" assembly-id="capacity-larger-container-1-1-35" unique-id="capacity-larger-container-1-1-35">642147960</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-36" assembly-id="capacity-larger-container-1-1-36" unique-id="capacity-larger-container-1-1-36">1387687611</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-37" assembly-id="capacity-larger-container-1-1-37" unique-id="capacity-larger-container-1-1-37">1083938283</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-38" assembly-id="capacity-larger-container-1-1-38" unique-id="capacity-larger-container-1-1-38">1583672595</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-39" assembly-id="capacity-larger-container-1-1-39" unique-id="capacity-larger-container-1-1-39">158736662</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-40" assembly-id="capacity-larger-container-1-1-40" unique-id="capacity-larger-container-1-1-40">1537002686</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-41" assembly-id="capacity-larger-container-1-1-41" unique-id="capacity-larger-container-1-1-41">1486635612</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-42" assembly-id="capacity-larger-container-1-1-42" unique-id="capacity-larger-container-1-1-42">142836434</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-43" assembly-id="capacity-larger-container-1-1-43" unique-id="capacity-larger-container-1-1-43">1258156807</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-44" assembly-id="capacity-larger-container-1-1-44" unique-id="capacity-larger-container-1-1-44">1348420741</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-45" assembly-id="capacity-larger-container-1-1-45" unique-id="capacity-larger-container-1-1-45">384916768</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-46" assembly-id="capacity-larger-container-1-1-46" unique-id="capacity-larger-container-1-1-46">968167599</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-47" assembly-id="capacity-larger-container-1-1-47" unique-id="capacity-larger-container-1-1-47">2024802024</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-48" assembly-id="capacity-larger-container-1-1-48" unique-id="capacity-larger-container-1-1-48">1893331229</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-49" assembly-id="capacity-larger-container-1-1-49" unique-id="capacity-larger-container-1-1-49">1994180150</deployedseed>
+    <deployedseed original-id="capacity-larger-container-1-1-50" assembly-id="capacity-larger-container-1-1-50" unique-id="capacity-larger-container-1-1-50">6799222</deployedseed>
+    <qtest original-id="capacity-larger-container-1-1-51" assembly-id="capacity-larger-container-1-1-51" unique-id="capacity-larger-container-1-1-51">
+      <testcase original-id="capacity-larger-container-1-1-51-1" assembly-id="capacity-larger-container-1-1-51-1" unique-id="capacity-larger-container-1-1-51-1">1</testcase>
+      <description original-id="capacity-larger-container-1-1-51-2" assembly-id="capacity-larger-container-1-1-51-2" unique-id="capacity-larger-container-1-1-51-2">Test case assuming the teacher's input gets full marks.</description>
+      <testinput original-id="capacity-larger-container-1-1-51-3" assembly-id="capacity-larger-container-1-1-51-3" unique-id="capacity-larger-container-1-1-51-3">
+        <name original-id="capacity-larger-container-1-1-51-3-1" assembly-id="capacity-larger-container-1-1-51-3-1" unique-id="capacity-larger-container-1-1-51-3-1">ans1</name>
+        <value original-id="capacity-larger-container-1-1-51-3-2" assembly-id="capacity-larger-container-1-1-51-3-2" unique-id="capacity-larger-container-1-1-51-3-2">ta</value>
+      </testinput>
+      <expected original-id="capacity-larger-container-1-1-51-4" assembly-id="capacity-larger-container-1-1-51-4" unique-id="capacity-larger-container-1-1-51-4">
+        <name original-id="capacity-larger-container-1-1-51-4-1" assembly-id="capacity-larger-container-1-1-51-4-1" unique-id="capacity-larger-container-1-1-51-4-1">prt1</name>
+        <expectedscore original-id="capacity-larger-container-1-1-51-4-2" assembly-id="capacity-larger-container-1-1-51-4-2" unique-id="capacity-larger-container-1-1-51-4-2">1.0000000</expectedscore>
+        <expectedpenalty original-id="capacity-larger-container-1-1-51-4-3" assembly-id="capacity-larger-container-1-1-51-4-3" unique-id="capacity-larger-container-1-1-51-4-3">0.0000000</expectedpenalty>
+        <expectedanswernote original-id="capacity-larger-container-1-1-51-4-4" assembly-id="capacity-larger-container-1-1-51-4-4" unique-id="capacity-larger-container-1-1-51-4-4">prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest original-id="capacity-larger-container-1-1-52" assembly-id="capacity-larger-container-1-1-52" unique-id="capacity-larger-container-1-1-52">
+      <testcase original-id="capacity-larger-container-1-1-52-1" assembly-id="capacity-larger-container-1-1-52-1" unique-id="capacity-larger-container-1-1-52-1">2</testcase>
+      <description original-id="capacity-larger-container-1-1-52-2" assembly-id="capacity-larger-container-1-1-52-2" unique-id="capacity-larger-container-1-1-52-2">Using the length scale factor directly</description>
+      <testinput original-id="capacity-larger-container-1-1-52-3" assembly-id="capacity-larger-container-1-1-52-3" unique-id="capacity-larger-container-1-1-52-3">
+        <name original-id="capacity-larger-container-1-1-52-3-1" assembly-id="capacity-larger-container-1-1-52-3-1" unique-id="capacity-larger-container-1-1-52-3-1">ans1</name>
+        <value original-id="capacity-larger-container-1-1-52-3-2" assembly-id="capacity-larger-container-1-1-52-3-2" unique-id="capacity-larger-container-1-1-52-3-2">ta1</value>
+      </testinput>
+      <expected original-id="capacity-larger-container-1-1-52-4" assembly-id="capacity-larger-container-1-1-52-4" unique-id="capacity-larger-container-1-1-52-4">
+        <name original-id="capacity-larger-container-1-1-52-4-1" assembly-id="capacity-larger-container-1-1-52-4-1" unique-id="capacity-larger-container-1-1-52-4-1">prt1</name>
+        <expectedscore original-id="capacity-larger-container-1-1-52-4-2" assembly-id="capacity-larger-container-1-1-52-4-2" unique-id="capacity-larger-container-1-1-52-4-2">0.0000000</expectedscore>
+        <expectedpenalty original-id="capacity-larger-container-1-1-52-4-3" assembly-id="capacity-larger-container-1-1-52-4-3" unique-id="capacity-larger-container-1-1-52-4-3"/>
+        <expectedanswernote original-id="capacity-larger-container-1-1-52-4-4" assembly-id="capacity-larger-container-1-1-52-4-4" unique-id="capacity-larger-container-1-1-52-4-4">prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest original-id="capacity-larger-container-1-1-53" assembly-id="capacity-larger-container-1-1-53" unique-id="capacity-larger-container-1-1-53">
+      <testcase original-id="capacity-larger-container-1-1-53-1" assembly-id="capacity-larger-container-1-1-53-1" unique-id="capacity-larger-container-1-1-53-1">3</testcase>
+      <description original-id="capacity-larger-container-1-1-53-2" assembly-id="capacity-larger-container-1-1-53-2" unique-id="capacity-larger-container-1-1-53-2">Inverting the scale factor</description>
+      <testinput original-id="capacity-larger-container-1-1-53-3" assembly-id="capacity-larger-container-1-1-53-3" unique-id="capacity-larger-container-1-1-53-3">
+        <name original-id="capacity-larger-container-1-1-53-3-1" assembly-id="capacity-larger-container-1-1-53-3-1" unique-id="capacity-larger-container-1-1-53-3-1">ans1</name>
+        <value original-id="capacity-larger-container-1-1-53-3-2" assembly-id="capacity-larger-container-1-1-53-3-2" unique-id="capacity-larger-container-1-1-53-3-2">ta2</value>
+      </testinput>
+      <expected original-id="capacity-larger-container-1-1-53-4" assembly-id="capacity-larger-container-1-1-53-4" unique-id="capacity-larger-container-1-1-53-4">
+        <name original-id="capacity-larger-container-1-1-53-4-1" assembly-id="capacity-larger-container-1-1-53-4-1" unique-id="capacity-larger-container-1-1-53-4-1">prt1</name>
+        <expectedscore original-id="capacity-larger-container-1-1-53-4-2" assembly-id="capacity-larger-container-1-1-53-4-2" unique-id="capacity-larger-container-1-1-53-4-2">0.0000000</expectedscore>
+        <expectedpenalty original-id="capacity-larger-container-1-1-53-4-3" assembly-id="capacity-larger-container-1-1-53-4-3" unique-id="capacity-larger-container-1-1-53-4-3"/>
+        <expectedanswernote original-id="capacity-larger-container-1-1-53-4-4" assembly-id="capacity-larger-container-1-1-53-4-4" unique-id="capacity-larger-container-1-1-53-4-4">prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest original-id="capacity-larger-container-1-1-54" assembly-id="capacity-larger-container-1-1-54" unique-id="capacity-larger-container-1-1-54">
+      <testcase original-id="capacity-larger-container-1-1-54-1" assembly-id="capacity-larger-container-1-1-54-1" unique-id="capacity-larger-container-1-1-54-1">4</testcase>
+      <description original-id="capacity-larger-container-1-1-54-2" assembly-id="capacity-larger-container-1-1-54-2" unique-id="capacity-larger-container-1-1-54-2">Squaring the scale factor</description>
+      <testinput original-id="capacity-larger-container-1-1-54-3" assembly-id="capacity-larger-container-1-1-54-3" unique-id="capacity-larger-container-1-1-54-3">
+        <name original-id="capacity-larger-container-1-1-54-3-1" assembly-id="capacity-larger-container-1-1-54-3-1" unique-id="capacity-larger-container-1-1-54-3-1">ans1</name>
+        <value original-id="capacity-larger-container-1-1-54-3-2" assembly-id="capacity-larger-container-1-1-54-3-2" unique-id="capacity-larger-container-1-1-54-3-2">ta3</value>
+      </testinput>
+      <expected original-id="capacity-larger-container-1-1-54-4" assembly-id="capacity-larger-container-1-1-54-4" unique-id="capacity-larger-container-1-1-54-4">
+        <name original-id="capacity-larger-container-1-1-54-4-1" assembly-id="capacity-larger-container-1-1-54-4-1" unique-id="capacity-larger-container-1-1-54-4-1">prt1</name>
+        <expectedscore original-id="capacity-larger-container-1-1-54-4-2" assembly-id="capacity-larger-container-1-1-54-4-2" unique-id="capacity-larger-container-1-1-54-4-2">0.0000000</expectedscore>
+        <expectedpenalty original-id="capacity-larger-container-1-1-54-4-3" assembly-id="capacity-larger-container-1-1-54-4-3" unique-id="capacity-larger-container-1-1-54-4-3"/>
+        <expectedanswernote original-id="capacity-larger-container-1-1-54-4-4" assembly-id="capacity-larger-container-1-1-54-4-4" unique-id="capacity-larger-container-1-1-54-4-4">prt1-4-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>
+            

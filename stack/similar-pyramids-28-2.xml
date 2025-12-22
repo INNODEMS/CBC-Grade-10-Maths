@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+                <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../../../../stack/2-0-Measurement-Geometry/2-1-Similarity-and-Enlargement/2-1-3-Scale-Factors/2-1-3-2Volume-Scale-Factor/28-2-Similar-Pyramids.xml" original-id="similar-pyramids-28-2-1" assembly-id="similar-pyramids-28-2-1" unique-id="similar-pyramids-28-2-1">
+  <question type="stack" original-id="similar-pyramids-28-2-1-1" assembly-id="similar-pyramids-28-2-1-1" unique-id="similar-pyramids-28-2-1-1">
+    <name original-id="similar-pyramids-28-2-1-1-1" assembly-id="similar-pyramids-28-2-1-1-1" unique-id="similar-pyramids-28-2-1-1-1">
+      <text original-id="similar-pyramids-28-2-1-1-1-1" assembly-id="similar-pyramids-28-2-1-1-1-1" unique-id="similar-pyramids-28-2-1-1-1-1">28.2 Similar Pyramids</text>
+    </name>
+    <questiontext format="html" original-id="similar-pyramids-28-2-1-1-2" assembly-id="similar-pyramids-28-2-1-1-2" unique-id="similar-pyramids-28-2-1-1-2">
+      <text original-id="similar-pyramids-28-2-1-1-2-1" assembly-id="similar-pyramids-28-2-1-1-2-1" unique-id="similar-pyramids-28-2-1-1-2-1">&lt;p&gt;Here is a diagram of two similar, hexagonal-based pyramids.
+&lt;br&gt;The top section of the green pyramid is covered by the red.&lt;/p&gt;
+
+[[jsxgraph height="500px" width="500px"]]
+
+    var redHeight = {#redHeight#};
+    var greenHeight = {#greenHeight#};
+
+    // Set inital display conditions
+    var zoom = 2;
+    var cenOfView = [0,1.25];
+    var orientation = [5,0.26,0.05];
+
+    // Creating JSXGraph board: change "jxgbox" to divid for STACK questions
+    JXG.Options.text.useMathJax=true;
+    var board = JXG.JSXGraph.initBoard(divid, {
+      boundingBox:[cenOfView[0]-zoom, cenOfView[1]+zoom, cenOfView[0]+zoom, cenOfView[1]-zoom],
+      showCopyright:false,
+      showNavigation:false,
+    });
+
+    // Function to project point in 3D onto a plane through the origin normal to [xN,yN,zN];
+    function flatten_point([x,y,z]) {
+        return([x,y]);
+    };
+
+    // Functions to rotate point in 3D around x, y and z axes
+    function rotate_x([x,y,z], angle) {
+        return([
+            x,
+            Math.cos(angle)*y - Math.sin(angle)*z,
+            Math.sin(angle)*y + Math.cos(angle)*z
+        ]);
+    };
+
+    function rotate_y([x,y,z], angle) {
+        return([
+            Math.sin(angle)*z + Math.cos(angle)*x,
+            y,
+            Math.cos(angle)*z - Math.sin(angle)*x
+        ]);
+    };
+
+    function rotate_z([x,y,z], angle) {
+        return([
+            Math.cos(angle)*x - Math.sin(angle)*y,
+            Math.sin(angle)*x + Math.cos(angle)*y,
+            z
+        ]);
+    };
+
+    // Function to create a point-projection pair:
+    function make_point([x,y,z], style) {
+
+        // Rotate coordinates by display orientation
+        var coords = rotate_z(rotate_y(rotate_x([x,y,z], orientation[0]), orientation[1]), orientation[2]);
+        
+        // Create point, defined by initial coords, display coords and projected coords
+        var point = {
+            initCoords:coords,
+            dispCoords:coords,
+            proj:board.create("point", flatten_point(coords), style)
+        }
+        elements.push(point);
+        return(point);
+
+    };
+    
+    // List containing all 3D elements to be displayed (used to update position for user movement)
+    var elements = [];
+
+    // CREATE POLYGON-BASED PYRAMID print_pyram(noSides, sideLength, height, baseCentreCoords, rotation, faceStyle, pointStyle)
+    function print_pyram(
+        noSides = 4, 
+        sideLength = 1, 
+        height = 1, 
+        [x,y,z] = [0,0,0], 
+        [rotX,rotY,rotZ] = [0,0,0],
+        faceStyle = {
+            fixed:true,
+            highlight:false,
+            borders:{
+                fixed:true,
+                highlight:false
+            }
+        },
+        pointStyle = {visible:false}) {
+
+        var pointList = [];
+        
+        // Create top point without rotation or translation
+        pointList.push([0, 0, height]);
+
+        // Create points in n-gon base without rotation or translation
+        var i;
+        for (i = 0; i &lt; noSides; i++) {
+            pointList.push([
+                Math.cos(2*i*Math.PI/noSides)*sideLength/Math.sqrt(2*(1-Math.cos(2*Math.PI/noSides))),
+                Math.sin(2*i*Math.PI/noSides)*sideLength/Math.sqrt(2*(1-Math.cos(2*Math.PI/noSides))),
+                0]);
+        };
+
+        // For each defined point; rotate and translate by user specs.
+        var j;
+        for (i in pointList) {
+            j = rotate_z(rotate_y(rotate_x(pointList[i], rotX), rotY), rotZ);
+            pointList[i] = make_point([
+                x + j[0],
+                y + j[1],
+                z + j[2]
+            ], pointStyle);
+        };
+
+        // Create sloping triangular faces
+        for (i in pointList.slice(1)) {
+            board.create("polygon", [
+                pointList[0].proj,
+                pointList.slice(1)[i].proj,
+                pointList.slice(1)[(Number(i)+1) % (pointList.length-1)].proj,
+            ], faceStyle)
+        };
+
+        // Create polygon base
+        board.create("polygon", pointList.slice(1).map(function(point) {return point.proj}), faceStyle);
+
+        // Draw angle and dashed line
+        board.create("angle", [pointList[1].proj, pointList[4].proj, pointList[0].proj], {
+            fixed:true,
+            highlight:false,
+            withLabel:false,
+            fillColor:"blue",
+            strokeColor:"blue",
+            fillOpacity:0.8,
+            radius:0.3
+        });
+
+        board.create("segment", [pointList[1].proj, pointList[4].proj], {
+            fixed:true,
+            highlight:false,
+            strokeWidth:1,
+            dash:1
+        });
+
+    };
+
+    print_pyram(6, 1, 3);
+    print_pyram(6, redHeight/greenHeight, 3*redHeight/greenHeight, [0,0,3*(1-redHeight/greenHeight)], [0,0,0], {
+        fixed:true,
+        highlight:false,
+        fillColor:"#FF2F2F",
+        fillOpacity:1,
+        borders:{
+            fixed:true,
+            highlight:false
+        }
+    });
+
+    var arrowStyle = {
+        fixed:true,
+        highlight:false,
+        strokeColor:"black",
+        withLabel:true,
+        label:{
+            fixed:true,
+            highlight:false,
+            useMathJax:true,
+            parse:false
+        },
+        firstArrow:{
+            visible:true,
+            size:4
+        },
+        lastArrow:{
+            visible:true,
+            size:4
+        }
+    };
+
+    var p1 = make_point([redHeight/greenHeight + 0.1, 0, 3*(1-redHeight/greenHeight)], {visible:false});
+
+    arrowStyle.name = "\\(".concat(redHeight,"cm\\)");
+    arrowStyle.label.anchorX = "right";
+    arrowStyle.label.offset = [-8,35];
+    board.create("segment", [
+        p1.proj,
+        [p1.proj.X(), 2.9]
+    ], arrowStyle);
+
+    arrowStyle.name = "\\(".concat(greenHeight,"cm\\)");
+    arrowStyle.label.anchorX = "left";
+    arrowStyle.label.offset = [8,0];
+    board.create("segment", [
+        [p1.proj.X() + 0.4, 2.9],
+        [p1.proj.X() + 0.4, 0.08]
+    ], arrowStyle);
+
+[[/jsxgraph]]
+
+&lt;p&gt;(a) The angle at the base of the &lt;b&gt;red&lt;/b&gt; pyramid is [[input:ans1]] the angle at the base of the &lt;b&gt;green&lt;/b&gt; pyramid. [[validation:ans1]]&lt;/p&gt;
+&lt;p align="right"&gt;&lt;b&gt;(1)&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;[[feedback:prt1]]&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;(b) Given that the area of the &lt;b&gt;green&lt;/b&gt; hexagonal base is \({@float(greenArea)@}{cm}^2\), find the area of the &lt;b&gt;red&lt;/b&gt; hexagonal base.&lt;/p&gt;
+&lt;p align="right"&gt;\(A_R =\) [[input:ans2]] \({cm}^2\) [[validation:ans2]]&lt;/p&gt;
+&lt;p align="right"&gt;&lt;b&gt;(2)&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;[[feedback:prt2]]&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;(c) Given that the volume of the &lt;b&gt;red&lt;/b&gt; hexagonal pyramid is \({@float(redVol)@}{cm}^3\), find the volume of the &lt;b&gt;green&lt;/b&gt; pyramid.
+&lt;br&gt;&lt;i&gt;Give your answer to 2dp&lt;/i&gt;&lt;/p&gt;
+&lt;p align="right"&gt;\(V_G =\) [[input:ans3]] \({cm}^3\) [[validation:ans3]]&lt;/p&gt;
+&lt;p align="right"&gt;&lt;b&gt;(3)&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;[[feedback:prt3]]&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="similar-pyramids-28-2-1-1-3" assembly-id="similar-pyramids-28-2-1-1-3" unique-id="similar-pyramids-28-2-1-1-3">
+      <text original-id="similar-pyramids-28-2-1-1-3-1" assembly-id="similar-pyramids-28-2-1-1-3-1" unique-id="similar-pyramids-28-2-1-1-3-1"/>
+    </generalfeedback>
+    <defaultgrade original-id="similar-pyramids-28-2-1-1-4" assembly-id="similar-pyramids-28-2-1-1-4" unique-id="similar-pyramids-28-2-1-1-4">6</defaultgrade>
+    <penalty original-id="similar-pyramids-28-2-1-1-5" assembly-id="similar-pyramids-28-2-1-1-5" unique-id="similar-pyramids-28-2-1-1-5">0.1</penalty>
+    <hidden original-id="similar-pyramids-28-2-1-1-6" assembly-id="similar-pyramids-28-2-1-1-6" unique-id="similar-pyramids-28-2-1-1-6">0</hidden>
+    <idnumber original-id="similar-pyramids-28-2-1-1-7" assembly-id="similar-pyramids-28-2-1-1-7" unique-id="similar-pyramids-28-2-1-1-7"/>
+    <stackversion original-id="similar-pyramids-28-2-1-1-8" assembly-id="similar-pyramids-28-2-1-1-8" unique-id="similar-pyramids-28-2-1-1-8">
+      <text original-id="similar-pyramids-28-2-1-1-8-1" assembly-id="similar-pyramids-28-2-1-1-8-1" unique-id="similar-pyramids-28-2-1-1-8-1">2018080600</text>
+    </stackversion>
+    <questionvariables original-id="similar-pyramids-28-2-1-1-9" assembly-id="similar-pyramids-28-2-1-1-9" unique-id="similar-pyramids-28-2-1-1-9">
+      <text original-id="similar-pyramids-28-2-1-1-9-1" assembly-id="similar-pyramids-28-2-1-1-9-1" unique-id="similar-pyramids-28-2-1-1-9-1">dp(num, dp) := block(if num*10^dp-floor(num*10^dp)&lt;0.5 then return(float(floor(num*10^dp)/(10^dp))) else return(float(ceiling(num*10^dp)/(10^dp))));
+
+lenRat:rand([12,14,15,16,18])/10;
+
+/* Randomise similar lengths */
+
+redHeight:rand_with_prohib(41,79,[50,60,70])/10;
+greenHeight:redHeight*lenRat;
+
+/* Randomise areas and volumes */
+
+redArea: if lenRat=3/2 then 6*rand_with_step(11,19,1)/10 else 15*rand_with_step(3,7,1)/10;
+greenArea:redArea*lenRat^2;
+redVol:redArea*redHeight/3;
+greenVol:greenArea*greenHeight/3;</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="similar-pyramids-28-2-1-1-10" assembly-id="similar-pyramids-28-2-1-1-10" unique-id="similar-pyramids-28-2-1-1-10">
+      <text original-id="similar-pyramids-28-2-1-1-10-1" assembly-id="similar-pyramids-28-2-1-1-10-1" unique-id="similar-pyramids-28-2-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="moodle_auto_format" original-id="similar-pyramids-28-2-1-1-11" assembly-id="similar-pyramids-28-2-1-1-11" unique-id="similar-pyramids-28-2-1-1-11">
+      <text original-id="similar-pyramids-28-2-1-1-11-1" assembly-id="similar-pyramids-28-2-1-1-11-1" unique-id="similar-pyramids-28-2-1-1-11-1">&lt;p&gt;Red Height: {@redHeight@}, Green Height: {@greenHeight@}&lt;/p&gt;
+&lt;p&gt;(b) {@colourB@} area: {@if colourB="red" then redArea else if colourB="green" then greenArea@}&lt;/p&gt;
+&lt;p&gt;(c) {@colourC@} volume: {@if colourC="red" then redVol else if colourC="green" then greenVol@}&lt;/p&gt;</text>
+    </questionnote>
+    <questiondescription format="moodle_auto_format" original-id="similar-pyramids-28-2-1-1-12" assembly-id="similar-pyramids-28-2-1-1-12" unique-id="similar-pyramids-28-2-1-1-12">
+      <text original-id="similar-pyramids-28-2-1-1-12-1" assembly-id="similar-pyramids-28-2-1-1-12-1" unique-id="similar-pyramids-28-2-1-1-12-1"/>
+    </questiondescription>
+    <questionsimplify original-id="similar-pyramids-28-2-1-1-13" assembly-id="similar-pyramids-28-2-1-1-13" unique-id="similar-pyramids-28-2-1-1-13">1</questionsimplify>
+    <assumepositive original-id="similar-pyramids-28-2-1-1-14" assembly-id="similar-pyramids-28-2-1-1-14" unique-id="similar-pyramids-28-2-1-1-14">0</assumepositive>
+    <assumereal original-id="similar-pyramids-28-2-1-1-15" assembly-id="similar-pyramids-28-2-1-1-15" unique-id="similar-pyramids-28-2-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="similar-pyramids-28-2-1-1-16" assembly-id="similar-pyramids-28-2-1-1-16" unique-id="similar-pyramids-28-2-1-1-16">
+      <text original-id="similar-pyramids-28-2-1-1-16-1" assembly-id="similar-pyramids-28-2-1-1-16-1" unique-id="similar-pyramids-28-2-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="similar-pyramids-28-2-1-1-17" assembly-id="similar-pyramids-28-2-1-1-17" unique-id="similar-pyramids-28-2-1-1-17">
+      <text original-id="similar-pyramids-28-2-1-1-17-1" assembly-id="similar-pyramids-28-2-1-1-17-1" unique-id="similar-pyramids-28-2-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="similar-pyramids-28-2-1-1-18" assembly-id="similar-pyramids-28-2-1-1-18" unique-id="similar-pyramids-28-2-1-1-18">
+      <text original-id="similar-pyramids-28-2-1-1-18-1" assembly-id="similar-pyramids-28-2-1-1-18-1" unique-id="similar-pyramids-28-2-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="similar-pyramids-28-2-1-1-19" assembly-id="similar-pyramids-28-2-1-1-19" unique-id="similar-pyramids-28-2-1-1-19">.</decimals>
+    <scientificnotation original-id="similar-pyramids-28-2-1-1-20" assembly-id="similar-pyramids-28-2-1-1-20" unique-id="similar-pyramids-28-2-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="similar-pyramids-28-2-1-1-21" assembly-id="similar-pyramids-28-2-1-1-21" unique-id="similar-pyramids-28-2-1-1-21">dot</multiplicationsign>
+    <sqrtsign original-id="similar-pyramids-28-2-1-1-22" assembly-id="similar-pyramids-28-2-1-1-22" unique-id="similar-pyramids-28-2-1-1-22">1</sqrtsign>
+    <complexno original-id="similar-pyramids-28-2-1-1-23" assembly-id="similar-pyramids-28-2-1-1-23" unique-id="similar-pyramids-28-2-1-1-23">i</complexno>
+    <inversetrig original-id="similar-pyramids-28-2-1-1-24" assembly-id="similar-pyramids-28-2-1-1-24" unique-id="similar-pyramids-28-2-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="similar-pyramids-28-2-1-1-25" assembly-id="similar-pyramids-28-2-1-1-25" unique-id="similar-pyramids-28-2-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="similar-pyramids-28-2-1-1-26" assembly-id="similar-pyramids-28-2-1-1-26" unique-id="similar-pyramids-28-2-1-1-26">[</matrixparens>
+    <isbroken original-id="similar-pyramids-28-2-1-1-27" assembly-id="similar-pyramids-28-2-1-1-27" unique-id="similar-pyramids-28-2-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="similar-pyramids-28-2-1-1-28" assembly-id="similar-pyramids-28-2-1-1-28" unique-id="similar-pyramids-28-2-1-1-28"/>
+    <input original-id="similar-pyramids-28-2-1-1-29" assembly-id="similar-pyramids-28-2-1-1-29" unique-id="similar-pyramids-28-2-1-1-29">
+      <name original-id="similar-pyramids-28-2-1-1-29-1" assembly-id="similar-pyramids-28-2-1-1-29-1" unique-id="similar-pyramids-28-2-1-1-29-1">ans1</name>
+      <type original-id="similar-pyramids-28-2-1-1-29-2" assembly-id="similar-pyramids-28-2-1-1-29-2" unique-id="similar-pyramids-28-2-1-1-29-2">dropdown</type>
+      <tans original-id="similar-pyramids-28-2-1-1-29-3" assembly-id="similar-pyramids-28-2-1-1-29-3" unique-id="similar-pyramids-28-2-1-1-29-3">[["less than", false], ["equal to", true], ["greater than", false]]</tans>
+      <boxsize original-id="similar-pyramids-28-2-1-1-29-4" assembly-id="similar-pyramids-28-2-1-1-29-4" unique-id="similar-pyramids-28-2-1-1-29-4">10</boxsize>
+      <strictsyntax original-id="similar-pyramids-28-2-1-1-29-5" assembly-id="similar-pyramids-28-2-1-1-29-5" unique-id="similar-pyramids-28-2-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="similar-pyramids-28-2-1-1-29-6" assembly-id="similar-pyramids-28-2-1-1-29-6" unique-id="similar-pyramids-28-2-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="similar-pyramids-28-2-1-1-29-7" assembly-id="similar-pyramids-28-2-1-1-29-7" unique-id="similar-pyramids-28-2-1-1-29-7"/>
+      <syntaxattribute original-id="similar-pyramids-28-2-1-1-29-8" assembly-id="similar-pyramids-28-2-1-1-29-8" unique-id="similar-pyramids-28-2-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="similar-pyramids-28-2-1-1-29-9" assembly-id="similar-pyramids-28-2-1-1-29-9" unique-id="similar-pyramids-28-2-1-1-29-9"/>
+      <allowwords original-id="similar-pyramids-28-2-1-1-29-10" assembly-id="similar-pyramids-28-2-1-1-29-10" unique-id="similar-pyramids-28-2-1-1-29-10"/>
+      <forbidfloat original-id="similar-pyramids-28-2-1-1-29-11" assembly-id="similar-pyramids-28-2-1-1-29-11" unique-id="similar-pyramids-28-2-1-1-29-11">0</forbidfloat>
+      <requirelowestterms original-id="similar-pyramids-28-2-1-1-29-12" assembly-id="similar-pyramids-28-2-1-1-29-12" unique-id="similar-pyramids-28-2-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="similar-pyramids-28-2-1-1-29-13" assembly-id="similar-pyramids-28-2-1-1-29-13" unique-id="similar-pyramids-28-2-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="similar-pyramids-28-2-1-1-29-14" assembly-id="similar-pyramids-28-2-1-1-29-14" unique-id="similar-pyramids-28-2-1-1-29-14">0</mustverify>
+      <showvalidation original-id="similar-pyramids-28-2-1-1-29-15" assembly-id="similar-pyramids-28-2-1-1-29-15" unique-id="similar-pyramids-28-2-1-1-29-15">0</showvalidation>
+      <options original-id="similar-pyramids-28-2-1-1-29-16" assembly-id="similar-pyramids-28-2-1-1-29-16" unique-id="similar-pyramids-28-2-1-1-29-16"/>
+    </input>
+    <input original-id="similar-pyramids-28-2-1-1-30" assembly-id="similar-pyramids-28-2-1-1-30" unique-id="similar-pyramids-28-2-1-1-30">
+      <name original-id="similar-pyramids-28-2-1-1-30-1" assembly-id="similar-pyramids-28-2-1-1-30-1" unique-id="similar-pyramids-28-2-1-1-30-1">ans2</name>
+      <type original-id="similar-pyramids-28-2-1-1-30-2" assembly-id="similar-pyramids-28-2-1-1-30-2" unique-id="similar-pyramids-28-2-1-1-30-2">algebraic</type>
+      <tans original-id="similar-pyramids-28-2-1-1-30-3" assembly-id="similar-pyramids-28-2-1-1-30-3" unique-id="similar-pyramids-28-2-1-1-30-3">float(redArea)</tans>
+      <boxsize original-id="similar-pyramids-28-2-1-1-30-4" assembly-id="similar-pyramids-28-2-1-1-30-4" unique-id="similar-pyramids-28-2-1-1-30-4">10</boxsize>
+      <strictsyntax original-id="similar-pyramids-28-2-1-1-30-5" assembly-id="similar-pyramids-28-2-1-1-30-5" unique-id="similar-pyramids-28-2-1-1-30-5">1</strictsyntax>
+      <insertstars original-id="similar-pyramids-28-2-1-1-30-6" assembly-id="similar-pyramids-28-2-1-1-30-6" unique-id="similar-pyramids-28-2-1-1-30-6">0</insertstars>
+      <syntaxhint original-id="similar-pyramids-28-2-1-1-30-7" assembly-id="similar-pyramids-28-2-1-1-30-7" unique-id="similar-pyramids-28-2-1-1-30-7"/>
+      <syntaxattribute original-id="similar-pyramids-28-2-1-1-30-8" assembly-id="similar-pyramids-28-2-1-1-30-8" unique-id="similar-pyramids-28-2-1-1-30-8">0</syntaxattribute>
+      <forbidwords original-id="similar-pyramids-28-2-1-1-30-9" assembly-id="similar-pyramids-28-2-1-1-30-9" unique-id="similar-pyramids-28-2-1-1-30-9"/>
+      <allowwords original-id="similar-pyramids-28-2-1-1-30-10" assembly-id="similar-pyramids-28-2-1-1-30-10" unique-id="similar-pyramids-28-2-1-1-30-10"/>
+      <forbidfloat original-id="similar-pyramids-28-2-1-1-30-11" assembly-id="similar-pyramids-28-2-1-1-30-11" unique-id="similar-pyramids-28-2-1-1-30-11">0</forbidfloat>
+      <requirelowestterms original-id="similar-pyramids-28-2-1-1-30-12" assembly-id="similar-pyramids-28-2-1-1-30-12" unique-id="similar-pyramids-28-2-1-1-30-12">0</requirelowestterms>
+      <checkanswertype original-id="similar-pyramids-28-2-1-1-30-13" assembly-id="similar-pyramids-28-2-1-1-30-13" unique-id="similar-pyramids-28-2-1-1-30-13">0</checkanswertype>
+      <mustverify original-id="similar-pyramids-28-2-1-1-30-14" assembly-id="similar-pyramids-28-2-1-1-30-14" unique-id="similar-pyramids-28-2-1-1-30-14">0</mustverify>
+      <showvalidation original-id="similar-pyramids-28-2-1-1-30-15" assembly-id="similar-pyramids-28-2-1-1-30-15" unique-id="similar-pyramids-28-2-1-1-30-15">0</showvalidation>
+      <options original-id="similar-pyramids-28-2-1-1-30-16" assembly-id="similar-pyramids-28-2-1-1-30-16" unique-id="similar-pyramids-28-2-1-1-30-16"/>
+    </input>
+    <input original-id="similar-pyramids-28-2-1-1-31" assembly-id="similar-pyramids-28-2-1-1-31" unique-id="similar-pyramids-28-2-1-1-31">
+      <name original-id="similar-pyramids-28-2-1-1-31-1" assembly-id="similar-pyramids-28-2-1-1-31-1" unique-id="similar-pyramids-28-2-1-1-31-1">ans3</name>
+      <type original-id="similar-pyramids-28-2-1-1-31-2" assembly-id="similar-pyramids-28-2-1-1-31-2" unique-id="similar-pyramids-28-2-1-1-31-2">algebraic</type>
+      <tans original-id="similar-pyramids-28-2-1-1-31-3" assembly-id="similar-pyramids-28-2-1-1-31-3" unique-id="similar-pyramids-28-2-1-1-31-3">dp(greenVol,2)</tans>
+      <boxsize original-id="similar-pyramids-28-2-1-1-31-4" assembly-id="similar-pyramids-28-2-1-1-31-4" unique-id="similar-pyramids-28-2-1-1-31-4">10</boxsize>
+      <strictsyntax original-id="similar-pyramids-28-2-1-1-31-5" assembly-id="similar-pyramids-28-2-1-1-31-5" unique-id="similar-pyramids-28-2-1-1-31-5">1</strictsyntax>
+      <insertstars original-id="similar-pyramids-28-2-1-1-31-6" assembly-id="similar-pyramids-28-2-1-1-31-6" unique-id="similar-pyramids-28-2-1-1-31-6">0</insertstars>
+      <syntaxhint original-id="similar-pyramids-28-2-1-1-31-7" assembly-id="similar-pyramids-28-2-1-1-31-7" unique-id="similar-pyramids-28-2-1-1-31-7"/>
+      <syntaxattribute original-id="similar-pyramids-28-2-1-1-31-8" assembly-id="similar-pyramids-28-2-1-1-31-8" unique-id="similar-pyramids-28-2-1-1-31-8">0</syntaxattribute>
+      <forbidwords original-id="similar-pyramids-28-2-1-1-31-9" assembly-id="similar-pyramids-28-2-1-1-31-9" unique-id="similar-pyramids-28-2-1-1-31-9"/>
+      <allowwords original-id="similar-pyramids-28-2-1-1-31-10" assembly-id="similar-pyramids-28-2-1-1-31-10" unique-id="similar-pyramids-28-2-1-1-31-10"/>
+      <forbidfloat original-id="similar-pyramids-28-2-1-1-31-11" assembly-id="similar-pyramids-28-2-1-1-31-11" unique-id="similar-pyramids-28-2-1-1-31-11">0</forbidfloat>
+      <requirelowestterms original-id="similar-pyramids-28-2-1-1-31-12" assembly-id="similar-pyramids-28-2-1-1-31-12" unique-id="similar-pyramids-28-2-1-1-31-12">0</requirelowestterms>
+      <checkanswertype original-id="similar-pyramids-28-2-1-1-31-13" assembly-id="similar-pyramids-28-2-1-1-31-13" unique-id="similar-pyramids-28-2-1-1-31-13">0</checkanswertype>
+      <mustverify original-id="similar-pyramids-28-2-1-1-31-14" assembly-id="similar-pyramids-28-2-1-1-31-14" unique-id="similar-pyramids-28-2-1-1-31-14">0</mustverify>
+      <showvalidation original-id="similar-pyramids-28-2-1-1-31-15" assembly-id="similar-pyramids-28-2-1-1-31-15" unique-id="similar-pyramids-28-2-1-1-31-15">0</showvalidation>
+      <options original-id="similar-pyramids-28-2-1-1-31-16" assembly-id="similar-pyramids-28-2-1-1-31-16" unique-id="similar-pyramids-28-2-1-1-31-16"/>
+    </input>
+    <prt original-id="similar-pyramids-28-2-1-1-32" assembly-id="similar-pyramids-28-2-1-1-32" unique-id="similar-pyramids-28-2-1-1-32">
+      <name original-id="similar-pyramids-28-2-1-1-32-1" assembly-id="similar-pyramids-28-2-1-1-32-1" unique-id="similar-pyramids-28-2-1-1-32-1">prt1</name>
+      <value original-id="similar-pyramids-28-2-1-1-32-2" assembly-id="similar-pyramids-28-2-1-1-32-2" unique-id="similar-pyramids-28-2-1-1-32-2">1.0000000</value>
+      <autosimplify original-id="similar-pyramids-28-2-1-1-32-3" assembly-id="similar-pyramids-28-2-1-1-32-3" unique-id="similar-pyramids-28-2-1-1-32-3">1</autosimplify>
+      <feedbackstyle original-id="similar-pyramids-28-2-1-1-32-4" assembly-id="similar-pyramids-28-2-1-1-32-4" unique-id="similar-pyramids-28-2-1-1-32-4">1</feedbackstyle>
+      <feedbackvariables original-id="similar-pyramids-28-2-1-1-32-5" assembly-id="similar-pyramids-28-2-1-1-32-5" unique-id="similar-pyramids-28-2-1-1-32-5">
+        <text original-id="similar-pyramids-28-2-1-1-32-5-1" assembly-id="similar-pyramids-28-2-1-1-32-5-1" unique-id="similar-pyramids-28-2-1-1-32-5-1"/>
+      </feedbackvariables>
+      <node original-id="similar-pyramids-28-2-1-1-32-6" assembly-id="similar-pyramids-28-2-1-1-32-6" unique-id="similar-pyramids-28-2-1-1-32-6">
+        <name original-id="similar-pyramids-28-2-1-1-32-6-1" assembly-id="similar-pyramids-28-2-1-1-32-6-1" unique-id="similar-pyramids-28-2-1-1-32-6-1">0</name>
+        <description original-id="similar-pyramids-28-2-1-1-32-6-2" assembly-id="similar-pyramids-28-2-1-1-32-6-2" unique-id="similar-pyramids-28-2-1-1-32-6-2"/>
+        <answertest original-id="similar-pyramids-28-2-1-1-32-6-3" assembly-id="similar-pyramids-28-2-1-1-32-6-3" unique-id="similar-pyramids-28-2-1-1-32-6-3">String</answertest>
+        <sans original-id="similar-pyramids-28-2-1-1-32-6-4" assembly-id="similar-pyramids-28-2-1-1-32-6-4" unique-id="similar-pyramids-28-2-1-1-32-6-4">ans1</sans>
+        <tans original-id="similar-pyramids-28-2-1-1-32-6-5" assembly-id="similar-pyramids-28-2-1-1-32-6-5" unique-id="similar-pyramids-28-2-1-1-32-6-5">"equal to"</tans>
+        <testoptions original-id="similar-pyramids-28-2-1-1-32-6-6" assembly-id="similar-pyramids-28-2-1-1-32-6-6" unique-id="similar-pyramids-28-2-1-1-32-6-6"/>
+        <quiet original-id="similar-pyramids-28-2-1-1-32-6-7" assembly-id="similar-pyramids-28-2-1-1-32-6-7" unique-id="similar-pyramids-28-2-1-1-32-6-7">0</quiet>
+        <truescoremode original-id="similar-pyramids-28-2-1-1-32-6-8" assembly-id="similar-pyramids-28-2-1-1-32-6-8" unique-id="similar-pyramids-28-2-1-1-32-6-8">=</truescoremode>
+        <truescore original-id="similar-pyramids-28-2-1-1-32-6-9" assembly-id="similar-pyramids-28-2-1-1-32-6-9" unique-id="similar-pyramids-28-2-1-1-32-6-9">1.0000000</truescore>
+        <truepenalty original-id="similar-pyramids-28-2-1-1-32-6-10" assembly-id="similar-pyramids-28-2-1-1-32-6-10" unique-id="similar-pyramids-28-2-1-1-32-6-10"/>
+        <truenextnode original-id="similar-pyramids-28-2-1-1-32-6-11" assembly-id="similar-pyramids-28-2-1-1-32-6-11" unique-id="similar-pyramids-28-2-1-1-32-6-11">1</truenextnode>
+        <trueanswernote original-id="similar-pyramids-28-2-1-1-32-6-12" assembly-id="similar-pyramids-28-2-1-1-32-6-12" unique-id="similar-pyramids-28-2-1-1-32-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="similar-pyramids-28-2-1-1-32-6-13" assembly-id="similar-pyramids-28-2-1-1-32-6-13" unique-id="similar-pyramids-28-2-1-1-32-6-13">
+          <text original-id="similar-pyramids-28-2-1-1-32-6-13-1" assembly-id="similar-pyramids-28-2-1-1-32-6-13-1" unique-id="similar-pyramids-28-2-1-1-32-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="similar-pyramids-28-2-1-1-32-6-14" assembly-id="similar-pyramids-28-2-1-1-32-6-14" unique-id="similar-pyramids-28-2-1-1-32-6-14">=</falsescoremode>
+        <falsescore original-id="similar-pyramids-28-2-1-1-32-6-15" assembly-id="similar-pyramids-28-2-1-1-32-6-15" unique-id="similar-pyramids-28-2-1-1-32-6-15">0.0000000</falsescore>
+        <falsepenalty original-id="similar-pyramids-28-2-1-1-32-6-16" assembly-id="similar-pyramids-28-2-1-1-32-6-16" unique-id="similar-pyramids-28-2-1-1-32-6-16"/>
+        <falsenextnode original-id="similar-pyramids-28-2-1-1-32-6-17" assembly-id="similar-pyramids-28-2-1-1-32-6-17" unique-id="similar-pyramids-28-2-1-1-32-6-17">1</falsenextnode>
+        <falseanswernote original-id="similar-pyramids-28-2-1-1-32-6-18" assembly-id="similar-pyramids-28-2-1-1-32-6-18" unique-id="similar-pyramids-28-2-1-1-32-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="similar-pyramids-28-2-1-1-32-6-19" assembly-id="similar-pyramids-28-2-1-1-32-6-19" unique-id="similar-pyramids-28-2-1-1-32-6-19">
+          <text original-id="similar-pyramids-28-2-1-1-32-6-19-1" assembly-id="similar-pyramids-28-2-1-1-32-6-19-1" unique-id="similar-pyramids-28-2-1-1-32-6-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="similar-pyramids-28-2-1-1-32-7" assembly-id="similar-pyramids-28-2-1-1-32-7" unique-id="similar-pyramids-28-2-1-1-32-7">
+        <name original-id="similar-pyramids-28-2-1-1-32-7-1" assembly-id="similar-pyramids-28-2-1-1-32-7-1" unique-id="similar-pyramids-28-2-1-1-32-7-1">1</name>
+        <description original-id="similar-pyramids-28-2-1-1-32-7-2" assembly-id="similar-pyramids-28-2-1-1-32-7-2" unique-id="similar-pyramids-28-2-1-1-32-7-2"/>
+        <answertest original-id="similar-pyramids-28-2-1-1-32-7-3" assembly-id="similar-pyramids-28-2-1-1-32-7-3" unique-id="similar-pyramids-28-2-1-1-32-7-3">AlgEquiv</answertest>
+        <sans original-id="similar-pyramids-28-2-1-1-32-7-4" assembly-id="similar-pyramids-28-2-1-1-32-7-4" unique-id="similar-pyramids-28-2-1-1-32-7-4">1</sans>
+        <tans original-id="similar-pyramids-28-2-1-1-32-7-5" assembly-id="similar-pyramids-28-2-1-1-32-7-5" unique-id="similar-pyramids-28-2-1-1-32-7-5">1</tans>
+        <testoptions original-id="similar-pyramids-28-2-1-1-32-7-6" assembly-id="similar-pyramids-28-2-1-1-32-7-6" unique-id="similar-pyramids-28-2-1-1-32-7-6"/>
+        <quiet original-id="similar-pyramids-28-2-1-1-32-7-7" assembly-id="similar-pyramids-28-2-1-1-32-7-7" unique-id="similar-pyramids-28-2-1-1-32-7-7">0</quiet>
+        <truescoremode original-id="similar-pyramids-28-2-1-1-32-7-8" assembly-id="similar-pyramids-28-2-1-1-32-7-8" unique-id="similar-pyramids-28-2-1-1-32-7-8">+</truescoremode>
+        <truescore original-id="similar-pyramids-28-2-1-1-32-7-9" assembly-id="similar-pyramids-28-2-1-1-32-7-9" unique-id="similar-pyramids-28-2-1-1-32-7-9">0.0000000</truescore>
+        <truepenalty original-id="similar-pyramids-28-2-1-1-32-7-10" assembly-id="similar-pyramids-28-2-1-1-32-7-10" unique-id="similar-pyramids-28-2-1-1-32-7-10"/>
+        <truenextnode original-id="similar-pyramids-28-2-1-1-32-7-11" assembly-id="similar-pyramids-28-2-1-1-32-7-11" unique-id="similar-pyramids-28-2-1-1-32-7-11">-1</truenextnode>
+        <trueanswernote original-id="similar-pyramids-28-2-1-1-32-7-12" assembly-id="similar-pyramids-28-2-1-1-32-7-12" unique-id="similar-pyramids-28-2-1-1-32-7-12">prt1-2-T</trueanswernote>
+        <truefeedback format="html" original-id="similar-pyramids-28-2-1-1-32-7-13" assembly-id="similar-pyramids-28-2-1-1-32-7-13" unique-id="similar-pyramids-28-2-1-1-32-7-13">
+          <text original-id="similar-pyramids-28-2-1-1-32-7-13-1" assembly-id="similar-pyramids-28-2-1-1-32-7-13-1" unique-id="similar-pyramids-28-2-1-1-32-7-13-1">&lt;p&gt;&lt;br&gt;Here is a worked solution:&lt;/p&gt;
+&lt;p&gt;Since the two pyramids are &lt;i&gt;similar&lt;/i&gt;, corresponding angles between the shapes are equal.
+&lt;br&gt;Therefore the angle at the base of the red pyramid is &lt;b&gt;equal to&lt;/b&gt; the angle at the base of the green.&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="similar-pyramids-28-2-1-1-32-7-14" assembly-id="similar-pyramids-28-2-1-1-32-7-14" unique-id="similar-pyramids-28-2-1-1-32-7-14">-</falsescoremode>
+        <falsescore original-id="similar-pyramids-28-2-1-1-32-7-15" assembly-id="similar-pyramids-28-2-1-1-32-7-15" unique-id="similar-pyramids-28-2-1-1-32-7-15">0.0000000</falsescore>
+        <falsepenalty original-id="similar-pyramids-28-2-1-1-32-7-16" assembly-id="similar-pyramids-28-2-1-1-32-7-16" unique-id="similar-pyramids-28-2-1-1-32-7-16"/>
+        <falsenextnode original-id="similar-pyramids-28-2-1-1-32-7-17" assembly-id="similar-pyramids-28-2-1-1-32-7-17" unique-id="similar-pyramids-28-2-1-1-32-7-17">-1</falsenextnode>
+        <falseanswernote original-id="similar-pyramids-28-2-1-1-32-7-18" assembly-id="similar-pyramids-28-2-1-1-32-7-18" unique-id="similar-pyramids-28-2-1-1-32-7-18">prt1-2-F</falseanswernote>
+        <falsefeedback format="html" original-id="similar-pyramids-28-2-1-1-32-7-19" assembly-id="similar-pyramids-28-2-1-1-32-7-19" unique-id="similar-pyramids-28-2-1-1-32-7-19">
+          <text original-id="similar-pyramids-28-2-1-1-32-7-19-1" assembly-id="similar-pyramids-28-2-1-1-32-7-19-1" unique-id="similar-pyramids-28-2-1-1-32-7-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="similar-pyramids-28-2-1-1-33" assembly-id="similar-pyramids-28-2-1-1-33" unique-id="similar-pyramids-28-2-1-1-33">
+      <name original-id="similar-pyramids-28-2-1-1-33-1" assembly-id="similar-pyramids-28-2-1-1-33-1" unique-id="similar-pyramids-28-2-1-1-33-1">prt2</name>
+      <value original-id="similar-pyramids-28-2-1-1-33-2" assembly-id="similar-pyramids-28-2-1-1-33-2" unique-id="similar-pyramids-28-2-1-1-33-2">2.0000000</value>
+      <autosimplify original-id="similar-pyramids-28-2-1-1-33-3" assembly-id="similar-pyramids-28-2-1-1-33-3" unique-id="similar-pyramids-28-2-1-1-33-3">1</autosimplify>
+      <feedbackstyle original-id="similar-pyramids-28-2-1-1-33-4" assembly-id="similar-pyramids-28-2-1-1-33-4" unique-id="similar-pyramids-28-2-1-1-33-4">1</feedbackstyle>
+      <feedbackvariables original-id="similar-pyramids-28-2-1-1-33-5" assembly-id="similar-pyramids-28-2-1-1-33-5" unique-id="similar-pyramids-28-2-1-1-33-5">
+        <text original-id="similar-pyramids-28-2-1-1-33-5-1" assembly-id="similar-pyramids-28-2-1-1-33-5-1" unique-id="similar-pyramids-28-2-1-1-33-5-1">/* Node 1: Correct answer */
+/* Node 2: Worked solution */
+
+/* Node 3: Uses inverse of correct ratio (1) */
+node3_test: if abs(ans2-greenArea*lenRat^2)&lt;=0.1 then 1 else 0;
+
+/* Node 4: Does not square ratio (1) */
+node4_test: if abs(ans2-greenArea/lenRat)&lt;=0.1 then 1 else 0;
+
+/* Node 5: N3,4 errors combined (feedback) */
+node5_test: if abs(ans2-greenArea*lenRat)&lt;=0.1 then 1 else 0;</text>
+      </feedbackvariables>
+      <node original-id="similar-pyramids-28-2-1-1-33-6" assembly-id="similar-pyramids-28-2-1-1-33-6" unique-id="similar-pyramids-28-2-1-1-33-6">
+        <name original-id="similar-pyramids-28-2-1-1-33-6-1" assembly-id="similar-pyramids-28-2-1-1-33-6-1" unique-id="similar-pyramids-28-2-1-1-33-6-1">0</name>
+        <description original-id="similar-pyramids-28-2-1-1-33-6-2" assembly-id="similar-pyramids-28-2-1-1-33-6-2" unique-id="similar-pyramids-28-2-1-1-33-6-2"/>
+        <answertest original-id="similar-pyramids-28-2-1-1-33-6-3" assembly-id="similar-pyramids-28-2-1-1-33-6-3" unique-id="similar-pyramids-28-2-1-1-33-6-3">AlgEquiv</answertest>
+        <sans original-id="similar-pyramids-28-2-1-1-33-6-4" assembly-id="similar-pyramids-28-2-1-1-33-6-4" unique-id="similar-pyramids-28-2-1-1-33-6-4">ans2</sans>
+        <tans original-id="similar-pyramids-28-2-1-1-33-6-5" assembly-id="similar-pyramids-28-2-1-1-33-6-5" unique-id="similar-pyramids-28-2-1-1-33-6-5">redArea</tans>
+        <testoptions original-id="similar-pyramids-28-2-1-1-33-6-6" assembly-id="similar-pyramids-28-2-1-1-33-6-6" unique-id="similar-pyramids-28-2-1-1-33-6-6"/>
+        <quiet original-id="similar-pyramids-28-2-1-1-33-6-7" assembly-id="similar-pyramids-28-2-1-1-33-6-7" unique-id="similar-pyramids-28-2-1-1-33-6-7">0</quiet>
+        <truescoremode original-id="similar-pyramids-28-2-1-1-33-6-8" assembly-id="similar-pyramids-28-2-1-1-33-6-8" unique-id="similar-pyramids-28-2-1-1-33-6-8">=</truescoremode>
+        <truescore original-id="similar-pyramids-28-2-1-1-33-6-9" assembly-id="similar-pyramids-28-2-1-1-33-6-9" unique-id="similar-pyramids-28-2-1-1-33-6-9">1.0000000</truescore>
+        <truepenalty original-id="similar-pyramids-28-2-1-1-33-6-10" assembly-id="similar-pyramids-28-2-1-1-33-6-10" unique-id="similar-pyramids-28-2-1-1-33-6-10"/>
+        <truenextnode original-id="similar-pyramids-28-2-1-1-33-6-11" assembly-id="similar-pyramids-28-2-1-1-33-6-11" unique-id="similar-pyramids-28-2-1-1-33-6-11">1</truenextnode>
+        <trueanswernote original-id="similar-pyramids-28-2-1-1-33-6-12" assembly-id="similar-pyramids-28-2-1-1-33-6-12" unique-id="similar-pyramids-28-2-1-1-33-6-12">prt2-1-T</trueanswernote>
+        <truefeedback format="html" original-id="similar-pyramids-28-2-1-1-33-6-13" assembly-id="similar-pyramids-28-2-1-1-33-6-13" unique-id="similar-pyramids-28-2-1-1-33-6-13">
+          <text original-id="similar-pyramids-28-2-1-1-33-6-13-1" assembly-id="similar-pyramids-28-2-1-1-33-6-13-1" unique-id="similar-pyramids-28-2-1-1-33-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="similar-pyramids-28-2-1-1-33-6-14" assembly-id="similar-pyramids-28-2-1-1-33-6-14" unique-id="similar-pyramids-28-2-1-1-33-6-14">=</falsescoremode>
+        <falsescore original-id="similar-pyramids-28-2-1-1-33-6-15" assembly-id="similar-pyramids-28-2-1-1-33-6-15" unique-id="similar-pyramids-28-2-1-1-33-6-15">0.0000000</falsescore>
+        <falsepenalty original-id="similar-pyramids-28-2-1-1-33-6-16" assembly-id="similar-pyramids-28-2-1-1-33-6-16" unique-id="similar-pyramids-28-2-1-1-33-6-16"/>
+        <falsenextnode original-id="similar-pyramids-28-2-1-1-33-6-17" assembly-id="similar-pyramids-28-2-1-1-33-6-17" unique-id="similar-pyramids-28-2-1-1-33-6-17">2</falsenextnode>
+        <falseanswernote original-id="similar-pyramids-28-2-1-1-33-6-18" assembly-id="similar-pyramids-28-2-1-1-33-6-18" unique-id="similar-pyramids-28-2-1-1-33-6-18">prt2-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="similar-pyramids-28-2-1-1-33-6-19" assembly-id="similar-pyramids-28-2-1-1-33-6-19" unique-id="similar-pyramids-28-2-1-1-33-6-19">
+          <text original-id="similar-pyramids-28-2-1-1-33-6-19-1" assembly-id="similar-pyramids-28-2-1-1-33-6-19-1" unique-id="similar-pyramids-28-2-1-1-33-6-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="similar-pyramids-28-2-1-1-33-7" assembly-id="similar-pyramids-28-2-1-1-33-7" unique-id="similar-pyramids-28-2-1-1-33-7">
+        <name original-id="similar-pyramids-28-2-1-1-33-7-1" assembly-id="similar-pyramids-28-2-1-1-33-7-1" unique-id="similar-pyramids-28-2-1-1-33-7-1">1</name>
+        <description original-id="similar-pyramids-28-2-1-1-33-7-2" assembly-id="similar-pyramids-28-2-1-1-33-7-2" unique-id="similar-pyramids-28-2-1-1-33-7-2"/>
+        <answertest original-id="similar-pyramids-28-2-1-1-33-7-3" assembly-id="similar-pyramids-28-2-1-1-33-7-3" unique-id="similar-pyramids-28-2-1-1-33-7-3">AlgEquiv</answertest>
+        <sans original-id="similar-pyramids-28-2-1-1-33-7-4" assembly-id="similar-pyramids-28-2-1-1-33-7-4" unique-id="similar-pyramids-28-2-1-1-33-7-4">1</sans>
+        <tans original-id="similar-pyramids-28-2-1-1-33-7-5" assembly-id="similar-pyramids-28-2-1-1-33-7-5" unique-id="similar-pyramids-28-2-1-1-33-7-5">1</tans>
+        <testoptions original-id="similar-pyramids-28-2-1-1-33-7-6" assembly-id="similar-pyramids-28-2-1-1-33-7-6" unique-id="similar-pyramids-28-2-1-1-33-7-6"/>
+        <quiet original-id="similar-pyramids-28-2-1-1-33-7-7" assembly-id="similar-pyramids-28-2-1-1-33-7-7" unique-id="similar-pyramids-28-2-1-1-33-7-7">0</quiet>
+        <truescoremode original-id="similar-pyramids-28-2-1-1-33-7-8" assembly-id="similar-pyramids-28-2-1-1-33-7-8" unique-id="similar-pyramids-28-2-1-1-33-7-8">+</truescoremode>
+        <truescore original-id="similar-pyramids-28-2-1-1-33-7-9" assembly-id="similar-pyramids-28-2-1-1-33-7-9" unique-id="similar-pyramids-28-2-1-1-33-7-9">0.0000000</truescore>
+        <truepenalty original-id="similar-pyramids-28-2-1-1-33-7-10" assembly-id="similar-pyramids-28-2-1-1-33-7-10" unique-id="similar-pyramids-28-2-1-1-33-7-10"/>
+        <truenextnode original-id="similar-pyramids-28-2-1-1-33-7-11" assembly-id="similar-pyramids-28-2-1-1-33-7-11" unique-id="similar-pyramids-28-2-1-1-33-7-11">-1</truenextnode>
+        <trueanswernote original-id="similar-pyramids-28-2-1-1-33-7-12" assembly-id="similar-pyramids-28-2-1-1-33-7-12" unique-id="similar-pyramids-28-2-1-1-33-7-12">prt2-2-T</trueanswernote>
+        <truefeedback format="html" original-id="similar-pyramids-28-2-1-1-33-7-13" assembly-id="similar-pyramids-28-2-1-1-33-7-13" unique-id="similar-pyramids-28-2-1-1-33-7-13">
+          <text original-id="similar-pyramids-28-2-1-1-33-7-13-1" assembly-id="similar-pyramids-28-2-1-1-33-7-13-1" unique-id="similar-pyramids-28-2-1-1-33-7-13-1">&lt;p&gt;&lt;br&gt;Here is a worked solution:&lt;/p&gt;
+&lt;p&gt;Because the two pyramids are similar, the ratio between corresponding areas is equal to the &lt;b&gt;square&lt;/b&gt; of the ratio between corresponding lengths:&lt;/p&gt;
+&lt;p&gt;\(\frac{A_R}{A_G} = (\frac{h_R}{h_G})^2\)&lt;/p&gt;
+&lt;p&gt;Using the measurements given:&lt;/p&gt;
+&lt;p&gt;\(\frac{A_R}{{@float(greenArea)@}} = (\frac{{@float(redHeight)@}}{{@float(greenHeight)@}})^2\)&lt;/p&gt;
+&lt;p&gt;\(A_R = {@float(greenArea)@} \times ({@redHeight/greenHeight@})^2\)&lt;/p&gt;
+&lt;p&gt;\(A_R = {@float(redArea)@} {cm}^2\)&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="similar-pyramids-28-2-1-1-33-7-14" assembly-id="similar-pyramids-28-2-1-1-33-7-14" unique-id="similar-pyramids-28-2-1-1-33-7-14">-</falsescoremode>
+        <falsescore original-id="similar-pyramids-28-2-1-1-33-7-15" assembly-id="similar-pyramids-28-2-1-1-33-7-15" unique-id="similar-pyramids-28-2-1-1-33-7-15">0.0000000</falsescore>
+        <falsepenalty original-id="similar-pyramids-28-2-1-1-33-7-16" assembly-id="similar-pyramids-28-2-1-1-33-7-16" unique-id="similar-pyramids-28-2-1-1-33-7-16"/>
+        <falsenextnode original-id="similar-pyramids-28-2-1-1-33-7-17" assembly-id="similar-pyramids-28-2-1-1-33-7-17" unique-id="similar-pyramids-28-2-1-1-33-7-17">-1</falsenextnode>
+        <falseanswernote original-id="similar-pyramids-28-2-1-1-33-7-18" assembly-id="similar-pyramids-28-2-1-1-33-7-18" unique-id="similar-pyramids-28-2-1-1-33-7-18">prt2-2-F</falseanswernote>
+        <falsefeedback format="html" original-id="similar-pyramids-28-2-1-1-33-7-19" assembly-id="similar-pyramids-28-2-1-1-33-7-19" unique-id="similar-pyramids-28-2-1-1-33-7-19">
+          <text original-id="similar-pyramids-28-2-1-1-33-7-19-1" assembly-id="similar-pyramids-28-2-1-1-33-7-19-1" unique-id="similar-pyramids-28-2-1-1-33-7-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="similar-pyramids-28-2-1-1-33-8" assembly-id="similar-pyramids-28-2-1-1-33-8" unique-id="similar-pyramids-28-2-1-1-33-8">
+        <name original-id="similar-pyramids-28-2-1-1-33-8-1" assembly-id="similar-pyramids-28-2-1-1-33-8-1" unique-id="similar-pyramids-28-2-1-1-33-8-1">2</name>
+        <description original-id="similar-pyramids-28-2-1-1-33-8-2" assembly-id="similar-pyramids-28-2-1-1-33-8-2" unique-id="similar-pyramids-28-2-1-1-33-8-2"/>
+        <answertest original-id="similar-pyramids-28-2-1-1-33-8-3" assembly-id="similar-pyramids-28-2-1-1-33-8-3" unique-id="similar-pyramids-28-2-1-1-33-8-3">AlgEquiv</answertest>
+        <sans original-id="similar-pyramids-28-2-1-1-33-8-4" assembly-id="similar-pyramids-28-2-1-1-33-8-4" unique-id="similar-pyramids-28-2-1-1-33-8-4">node3_test</sans>
+        <tans original-id="similar-pyramids-28-2-1-1-33-8-5" assembly-id="similar-pyramids-28-2-1-1-33-8-5" unique-id="similar-pyramids-28-2-1-1-33-8-5">1</tans>
+        <testoptions original-id="similar-pyramids-28-2-1-1-33-8-6" assembly-id="similar-pyramids-28-2-1-1-33-8-6" unique-id="similar-pyramids-28-2-1-1-33-8-6"/>
+        <quiet original-id="similar-pyramids-28-2-1-1-33-8-7" assembly-id="similar-pyramids-28-2-1-1-33-8-7" unique-id="similar-pyramids-28-2-1-1-33-8-7">0</quiet>
+        <truescoremode original-id="similar-pyramids-28-2-1-1-33-8-8" assembly-id="similar-pyramids-28-2-1-1-33-8-8" unique-id="similar-pyramids-28-2-1-1-33-8-8">=</truescoremode>
+        <truescore original-id="similar-pyramids-28-2-1-1-33-8-9" assembly-id="similar-pyramids-28-2-1-1-33-8-9" unique-id="similar-pyramids-28-2-1-1-33-8-9">0.5000000</truescore>
+        <truepenalty original-id="similar-pyramids-28-2-1-1-33-8-10" assembly-id="similar-pyramids-28-2-1-1-33-8-10" unique-id="similar-pyramids-28-2-1-1-33-8-10"/>
+        <truenextnode original-id="similar-pyramids-28-2-1-1-33-8-11" assembly-id="similar-pyramids-28-2-1-1-33-8-11" unique-id="similar-pyramids-28-2-1-1-33-8-11">1</truenextnode>
+        <trueanswernote original-id="similar-pyramids-28-2-1-1-33-8-12" assembly-id="similar-pyramids-28-2-1-1-33-8-12" unique-id="similar-pyramids-28-2-1-1-33-8-12">prt2-3-T</trueanswernote>
+        <truefeedback format="html" original-id="similar-pyramids-28-2-1-1-33-8-13" assembly-id="similar-pyramids-28-2-1-1-33-8-13" unique-id="similar-pyramids-28-2-1-1-33-8-13">
+          <text original-id="similar-pyramids-28-2-1-1-33-8-13-1" assembly-id="similar-pyramids-28-2-1-1-33-8-13-1" unique-id="similar-pyramids-28-2-1-1-33-8-13-1">&lt;p&gt;&lt;br&gt;You have used the &lt;b&gt;inverse&lt;/b&gt; of the correct ratio to determine \(A_R\).
+&lt;br&gt;Since the red pyramid is smaller than the green, your answer should be &lt;b&gt;less than&lt;/b&gt; \({@float(greenArea)@}{cm}^2\).&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="similar-pyramids-28-2-1-1-33-8-14" assembly-id="similar-pyramids-28-2-1-1-33-8-14" unique-id="similar-pyramids-28-2-1-1-33-8-14">-</falsescoremode>
+        <falsescore original-id="similar-pyramids-28-2-1-1-33-8-15" assembly-id="similar-pyramids-28-2-1-1-33-8-15" unique-id="similar-pyramids-28-2-1-1-33-8-15">0.0000000</falsescore>
+        <falsepenalty original-id="similar-pyramids-28-2-1-1-33-8-16" assembly-id="similar-pyramids-28-2-1-1-33-8-16" unique-id="similar-pyramids-28-2-1-1-33-8-16"/>
+        <falsenextnode original-id="similar-pyramids-28-2-1-1-33-8-17" assembly-id="similar-pyramids-28-2-1-1-33-8-17" unique-id="similar-pyramids-28-2-1-1-33-8-17">3</falsenextnode>
+        <falseanswernote original-id="similar-pyramids-28-2-1-1-33-8-18" assembly-id="similar-pyramids-28-2-1-1-33-8-18" unique-id="similar-pyramids-28-2-1-1-33-8-18">prt2-3-F</falseanswernote>
+        <falsefeedback format="html" original-id="similar-pyramids-28-2-1-1-33-8-19" assembly-id="similar-pyramids-28-2-1-1-33-8-19" unique-id="similar-pyramids-28-2-1-1-33-8-19">
+          <text original-id="similar-pyramids-28-2-1-1-33-8-19-1" assembly-id="similar-pyramids-28-2-1-1-33-8-19-1" unique-id="similar-pyramids-28-2-1-1-33-8-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="similar-pyramids-28-2-1-1-33-9" assembly-id="similar-pyramids-28-2-1-1-33-9" unique-id="similar-pyramids-28-2-1-1-33-9">
+        <name original-id="similar-pyramids-28-2-1-1-33-9-1" assembly-id="similar-pyramids-28-2-1-1-33-9-1" unique-id="similar-pyramids-28-2-1-1-33-9-1">3</name>
+        <description original-id="similar-pyramids-28-2-1-1-33-9-2" assembly-id="similar-pyramids-28-2-1-1-33-9-2" unique-id="similar-pyramids-28-2-1-1-33-9-2"/>
+        <answertest original-id="similar-pyramids-28-2-1-1-33-9-3" assembly-id="similar-pyramids-28-2-1-1-33-9-3" unique-id="similar-pyramids-28-2-1-1-33-9-3">AlgEquiv</answertest>
+        <sans original-id="similar-pyramids-28-2-1-1-33-9-4" assembly-id="similar-pyramids-28-2-1-1-33-9-4" unique-id="similar-pyramids-28-2-1-1-33-9-4">node4_test</sans>
+        <tans original-id="similar-pyramids-28-2-1-1-33-9-5" assembly-id="similar-pyramids-28-2-1-1-33-9-5" unique-id="similar-pyramids-28-2-1-1-33-9-5">1</tans>
+        <testoptions original-id="similar-pyramids-28-2-1-1-33-9-6" assembly-id="similar-pyramids-28-2-1-1-33-9-6" unique-id="similar-pyramids-28-2-1-1-33-9-6"/>
+        <quiet original-id="similar-pyramids-28-2-1-1-33-9-7" assembly-id="similar-pyramids-28-2-1-1-33-9-7" unique-id="similar-pyramids-28-2-1-1-33-9-7">0</quiet>
+        <truescoremode original-id="similar-pyramids-28-2-1-1-33-9-8" assembly-id="similar-pyramids-28-2-1-1-33-9-8" unique-id="similar-pyramids-28-2-1-1-33-9-8">=</truescoremode>
+        <truescore original-id="similar-pyramids-28-2-1-1-33-9-9" assembly-id="similar-pyramids-28-2-1-1-33-9-9" unique-id="similar-pyramids-28-2-1-1-33-9-9">0.5000000</truescore>
+        <truepenalty original-id="similar-pyramids-28-2-1-1-33-9-10" assembly-id="similar-pyramids-28-2-1-1-33-9-10" unique-id="similar-pyramids-28-2-1-1-33-9-10"/>
+        <truenextnode original-id="similar-pyramids-28-2-1-1-33-9-11" assembly-id="similar-pyramids-28-2-1-1-33-9-11" unique-id="similar-pyramids-28-2-1-1-33-9-11">1</truenextnode>
+        <trueanswernote original-id="similar-pyramids-28-2-1-1-33-9-12" assembly-id="similar-pyramids-28-2-1-1-33-9-12" unique-id="similar-pyramids-28-2-1-1-33-9-12">prt2-4-T</trueanswernote>
+        <truefeedback format="html" original-id="similar-pyramids-28-2-1-1-33-9-13" assembly-id="similar-pyramids-28-2-1-1-33-9-13" unique-id="similar-pyramids-28-2-1-1-33-9-13">
+          <text original-id="similar-pyramids-28-2-1-1-33-9-13-1" assembly-id="similar-pyramids-28-2-1-1-33-9-13-1" unique-id="similar-pyramids-28-2-1-1-33-9-13-1">&lt;p&gt;&lt;br&gt;You have used the &lt;b&gt;square root&lt;/b&gt; of the correct ratio to determine \(A_R\).
+&lt;br&gt;Remember that the ratio between corresponding areas is equal to the &lt;b&gt;square&lt;/b&gt; of the ratio between corresponding lengths.&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="similar-pyramids-28-2-1-1-33-9-14" assembly-id="similar-pyramids-28-2-1-1-33-9-14" unique-id="similar-pyramids-28-2-1-1-33-9-14">-</falsescoremode>
+        <falsescore original-id="similar-pyramids-28-2-1-1-33-9-15" assembly-id="similar-pyramids-28-2-1-1-33-9-15" unique-id="similar-pyramids-28-2-1-1-33-9-15">0.0000000</falsescore>
+        <falsepenalty original-id="similar-pyramids-28-2-1-1-33-9-16" assembly-id="similar-pyramids-28-2-1-1-33-9-16" unique-id="similar-pyramids-28-2-1-1-33-9-16"/>
+        <falsenextnode original-id="similar-pyramids-28-2-1-1-33-9-17" assembly-id="similar-pyramids-28-2-1-1-33-9-17" unique-id="similar-pyramids-28-2-1-1-33-9-17">4</falsenextnode>
+        <falseanswernote original-id="similar-pyramids-28-2-1-1-33-9-18" assembly-id="similar-pyramids-28-2-1-1-33-9-18" unique-id="similar-pyramids-28-2-1-1-33-9-18">prt2-4-F</falseanswernote>
+        <falsefeedback format="html" original-id="similar-pyramids-28-2-1-1-33-9-19" assembly-id="similar-pyramids-28-2-1-1-33-9-19" unique-id="similar-pyramids-28-2-1-1-33-9-19">
+          <text original-id="similar-pyramids-28-2-1-1-33-9-19-1" assembly-id="similar-pyramids-28-2-1-1-33-9-19-1" unique-id="similar-pyramids-28-2-1-1-33-9-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="similar-pyramids-28-2-1-1-33-10" assembly-id="similar-pyramids-28-2-1-1-33-10" unique-id="similar-pyramids-28-2-1-1-33-10">
+        <name original-id="similar-pyramids-28-2-1-1-33-10-1" assembly-id="similar-pyramids-28-2-1-1-33-10-1" unique-id="similar-pyramids-28-2-1-1-33-10-1">4</name>
+        <description original-id="similar-pyramids-28-2-1-1-33-10-2" assembly-id="similar-pyramids-28-2-1-1-33-10-2" unique-id="similar-pyramids-28-2-1-1-33-10-2"/>
+        <answertest original-id="similar-pyramids-28-2-1-1-33-10-3" assembly-id="similar-pyramids-28-2-1-1-33-10-3" unique-id="similar-pyramids-28-2-1-1-33-10-3">AlgEquiv</answertest>
+        <sans original-id="similar-pyramids-28-2-1-1-33-10-4" assembly-id="similar-pyramids-28-2-1-1-33-10-4" unique-id="similar-pyramids-28-2-1-1-33-10-4">node5_test</sans>
+        <tans original-id="similar-pyramids-28-2-1-1-33-10-5" assembly-id="similar-pyramids-28-2-1-1-33-10-5" unique-id="similar-pyramids-28-2-1-1-33-10-5">1</tans>
+        <testoptions original-id="similar-pyramids-28-2-1-1-33-10-6" assembly-id="similar-pyramids-28-2-1-1-33-10-6" unique-id="similar-pyramids-28-2-1-1-33-10-6"/>
+        <quiet original-id="similar-pyramids-28-2-1-1-33-10-7" assembly-id="similar-pyramids-28-2-1-1-33-10-7" unique-id="similar-pyramids-28-2-1-1-33-10-7">0</quiet>
+        <truescoremode original-id="similar-pyramids-28-2-1-1-33-10-8" assembly-id="similar-pyramids-28-2-1-1-33-10-8" unique-id="similar-pyramids-28-2-1-1-33-10-8">+</truescoremode>
+        <truescore original-id="similar-pyramids-28-2-1-1-33-10-9" assembly-id="similar-pyramids-28-2-1-1-33-10-9" unique-id="similar-pyramids-28-2-1-1-33-10-9">0.0000000</truescore>
+        <truepenalty original-id="similar-pyramids-28-2-1-1-33-10-10" assembly-id="similar-pyramids-28-2-1-1-33-10-10" unique-id="similar-pyramids-28-2-1-1-33-10-10"/>
+        <truenextnode original-id="similar-pyramids-28-2-1-1-33-10-11" assembly-id="similar-pyramids-28-2-1-1-33-10-11" unique-id="similar-pyramids-28-2-1-1-33-10-11">1</truenextnode>
+        <trueanswernote original-id="similar-pyramids-28-2-1-1-33-10-12" assembly-id="similar-pyramids-28-2-1-1-33-10-12" unique-id="similar-pyramids-28-2-1-1-33-10-12">prt2-5-T</trueanswernote>
+        <truefeedback format="html" original-id="similar-pyramids-28-2-1-1-33-10-13" assembly-id="similar-pyramids-28-2-1-1-33-10-13" unique-id="similar-pyramids-28-2-1-1-33-10-13">
+          <text original-id="similar-pyramids-28-2-1-1-33-10-13-1" assembly-id="similar-pyramids-28-2-1-1-33-10-13-1" unique-id="similar-pyramids-28-2-1-1-33-10-13-1">&lt;p&gt;&lt;br&gt;You have used the &lt;b&gt;inverse&lt;/b&gt; and the &lt;b&gt;square root&lt;/b&gt; of the correct ratio to determine \(A_R\).
+&lt;br&gt;Remember that the ratio between corresponding areas is equal to the &lt;b&gt;square&lt;/b&gt; of the ratio between corresponding lengths.
+&lt;br&gt;Also, since the red pyramid is smaller than the green, your answer should be &lt;b&gt;less than&lt;/b&gt; \({@float(greenArea)@}{cm}^2\).&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="similar-pyramids-28-2-1-1-33-10-14" assembly-id="similar-pyramids-28-2-1-1-33-10-14" unique-id="similar-pyramids-28-2-1-1-33-10-14">-</falsescoremode>
+        <falsescore original-id="similar-pyramids-28-2-1-1-33-10-15" assembly-id="similar-pyramids-28-2-1-1-33-10-15" unique-id="similar-pyramids-28-2-1-1-33-10-15">0.0000000</falsescore>
+        <falsepenalty original-id="similar-pyramids-28-2-1-1-33-10-16" assembly-id="similar-pyramids-28-2-1-1-33-10-16" unique-id="similar-pyramids-28-2-1-1-33-10-16"/>
+        <falsenextnode original-id="similar-pyramids-28-2-1-1-33-10-17" assembly-id="similar-pyramids-28-2-1-1-33-10-17" unique-id="similar-pyramids-28-2-1-1-33-10-17">1</falsenextnode>
+        <falseanswernote original-id="similar-pyramids-28-2-1-1-33-10-18" assembly-id="similar-pyramids-28-2-1-1-33-10-18" unique-id="similar-pyramids-28-2-1-1-33-10-18">prt2-5-F</falseanswernote>
+        <falsefeedback format="html" original-id="similar-pyramids-28-2-1-1-33-10-19" assembly-id="similar-pyramids-28-2-1-1-33-10-19" unique-id="similar-pyramids-28-2-1-1-33-10-19">
+          <text original-id="similar-pyramids-28-2-1-1-33-10-19-1" assembly-id="similar-pyramids-28-2-1-1-33-10-19-1" unique-id="similar-pyramids-28-2-1-1-33-10-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="similar-pyramids-28-2-1-1-34" assembly-id="similar-pyramids-28-2-1-1-34" unique-id="similar-pyramids-28-2-1-1-34">
+      <name original-id="similar-pyramids-28-2-1-1-34-1" assembly-id="similar-pyramids-28-2-1-1-34-1" unique-id="similar-pyramids-28-2-1-1-34-1">prt3</name>
+      <value original-id="similar-pyramids-28-2-1-1-34-2" assembly-id="similar-pyramids-28-2-1-1-34-2" unique-id="similar-pyramids-28-2-1-1-34-2">3.0000000</value>
+      <autosimplify original-id="similar-pyramids-28-2-1-1-34-3" assembly-id="similar-pyramids-28-2-1-1-34-3" unique-id="similar-pyramids-28-2-1-1-34-3">1</autosimplify>
+      <feedbackstyle original-id="similar-pyramids-28-2-1-1-34-4" assembly-id="similar-pyramids-28-2-1-1-34-4" unique-id="similar-pyramids-28-2-1-1-34-4">1</feedbackstyle>
+      <feedbackvariables original-id="similar-pyramids-28-2-1-1-34-5" assembly-id="similar-pyramids-28-2-1-1-34-5" unique-id="similar-pyramids-28-2-1-1-34-5">
+        <text original-id="similar-pyramids-28-2-1-1-34-5-1" assembly-id="similar-pyramids-28-2-1-1-34-5-1" unique-id="similar-pyramids-28-2-1-1-34-5-1">/* Node 1: Correct answer */
+/* Node 2: Worked solution */
+
+/* Node 3: Correct answer, rounded incorrectly (2) */
+node3_test: if abs(ans3-greenVol)&lt;=0.1 then 1 else 0;
+
+/* Node 4: Uses inverse of correct ratio (1) */
+node4_test: if abs(ans3-redVol/lenRat^3)&lt;=0.1 then 1 else 0;
+
+/* Node 5: Does not cube ratio (1) */
+node5_test: if abs(ans3-redVol*lenRat)&lt;=0.1 or abs(ans3-redVol*lenRat^2)&lt;=0.1 then 1 else 0;
+
+/* Node 6: N4,5 errors combined (feedback) */
+node6_test: if abs(ans3-redVol/lenRat)&lt;=0.1 or abs(ans3-redVol/lenRat^2)&lt;=0.1 then 1 else 0;</text>
+      </feedbackvariables>
+      <node original-id="similar-pyramids-28-2-1-1-34-6" assembly-id="similar-pyramids-28-2-1-1-34-6" unique-id="similar-pyramids-28-2-1-1-34-6">
+        <name original-id="similar-pyramids-28-2-1-1-34-6-1" assembly-id="similar-pyramids-28-2-1-1-34-6-1" unique-id="similar-pyramids-28-2-1-1-34-6-1">0</name>
+        <description original-id="similar-pyramids-28-2-1-1-34-6-2" assembly-id="similar-pyramids-28-2-1-1-34-6-2" unique-id="similar-pyramids-28-2-1-1-34-6-2"/>
+        <answertest original-id="similar-pyramids-28-2-1-1-34-6-3" assembly-id="similar-pyramids-28-2-1-1-34-6-3" unique-id="similar-pyramids-28-2-1-1-34-6-3">AlgEquiv</answertest>
+        <sans original-id="similar-pyramids-28-2-1-1-34-6-4" assembly-id="similar-pyramids-28-2-1-1-34-6-4" unique-id="similar-pyramids-28-2-1-1-34-6-4">ans3</sans>
+        <tans original-id="similar-pyramids-28-2-1-1-34-6-5" assembly-id="similar-pyramids-28-2-1-1-34-6-5" unique-id="similar-pyramids-28-2-1-1-34-6-5">dp(greenVol,2)</tans>
+        <testoptions original-id="similar-pyramids-28-2-1-1-34-6-6" assembly-id="similar-pyramids-28-2-1-1-34-6-6" unique-id="similar-pyramids-28-2-1-1-34-6-6"/>
+        <quiet original-id="similar-pyramids-28-2-1-1-34-6-7" assembly-id="similar-pyramids-28-2-1-1-34-6-7" unique-id="similar-pyramids-28-2-1-1-34-6-7">0</quiet>
+        <truescoremode original-id="similar-pyramids-28-2-1-1-34-6-8" assembly-id="similar-pyramids-28-2-1-1-34-6-8" unique-id="similar-pyramids-28-2-1-1-34-6-8">=</truescoremode>
+        <truescore original-id="similar-pyramids-28-2-1-1-34-6-9" assembly-id="similar-pyramids-28-2-1-1-34-6-9" unique-id="similar-pyramids-28-2-1-1-34-6-9">1.0000000</truescore>
+        <truepenalty original-id="similar-pyramids-28-2-1-1-34-6-10" assembly-id="similar-pyramids-28-2-1-1-34-6-10" unique-id="similar-pyramids-28-2-1-1-34-6-10"/>
+        <truenextnode original-id="similar-pyramids-28-2-1-1-34-6-11" assembly-id="similar-pyramids-28-2-1-1-34-6-11" unique-id="similar-pyramids-28-2-1-1-34-6-11">1</truenextnode>
+        <trueanswernote original-id="similar-pyramids-28-2-1-1-34-6-12" assembly-id="similar-pyramids-28-2-1-1-34-6-12" unique-id="similar-pyramids-28-2-1-1-34-6-12">prt3-1-T</trueanswernote>
+        <truefeedback format="html" original-id="similar-pyramids-28-2-1-1-34-6-13" assembly-id="similar-pyramids-28-2-1-1-34-6-13" unique-id="similar-pyramids-28-2-1-1-34-6-13">
+          <text original-id="similar-pyramids-28-2-1-1-34-6-13-1" assembly-id="similar-pyramids-28-2-1-1-34-6-13-1" unique-id="similar-pyramids-28-2-1-1-34-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="similar-pyramids-28-2-1-1-34-6-14" assembly-id="similar-pyramids-28-2-1-1-34-6-14" unique-id="similar-pyramids-28-2-1-1-34-6-14">=</falsescoremode>
+        <falsescore original-id="similar-pyramids-28-2-1-1-34-6-15" assembly-id="similar-pyramids-28-2-1-1-34-6-15" unique-id="similar-pyramids-28-2-1-1-34-6-15">0.0000000</falsescore>
+        <falsepenalty original-id="similar-pyramids-28-2-1-1-34-6-16" assembly-id="similar-pyramids-28-2-1-1-34-6-16" unique-id="similar-pyramids-28-2-1-1-34-6-16"/>
+        <falsenextnode original-id="similar-pyramids-28-2-1-1-34-6-17" assembly-id="similar-pyramids-28-2-1-1-34-6-17" unique-id="similar-pyramids-28-2-1-1-34-6-17">2</falsenextnode>
+        <falseanswernote original-id="similar-pyramids-28-2-1-1-34-6-18" assembly-id="similar-pyramids-28-2-1-1-34-6-18" unique-id="similar-pyramids-28-2-1-1-34-6-18">prt3-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="similar-pyramids-28-2-1-1-34-6-19" assembly-id="similar-pyramids-28-2-1-1-34-6-19" unique-id="similar-pyramids-28-2-1-1-34-6-19">
+          <text original-id="similar-pyramids-28-2-1-1-34-6-19-1" assembly-id="similar-pyramids-28-2-1-1-34-6-19-1" unique-id="similar-pyramids-28-2-1-1-34-6-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="similar-pyramids-28-2-1-1-34-7" assembly-id="similar-pyramids-28-2-1-1-34-7" unique-id="similar-pyramids-28-2-1-1-34-7">
+        <name original-id="similar-pyramids-28-2-1-1-34-7-1" assembly-id="similar-pyramids-28-2-1-1-34-7-1" unique-id="similar-pyramids-28-2-1-1-34-7-1">1</name>
+        <description original-id="similar-pyramids-28-2-1-1-34-7-2" assembly-id="similar-pyramids-28-2-1-1-34-7-2" unique-id="similar-pyramids-28-2-1-1-34-7-2"/>
+        <answertest original-id="similar-pyramids-28-2-1-1-34-7-3" assembly-id="similar-pyramids-28-2-1-1-34-7-3" unique-id="similar-pyramids-28-2-1-1-34-7-3">AlgEquiv</answertest>
+        <sans original-id="similar-pyramids-28-2-1-1-34-7-4" assembly-id="similar-pyramids-28-2-1-1-34-7-4" unique-id="similar-pyramids-28-2-1-1-34-7-4">1</sans>
+        <tans original-id="similar-pyramids-28-2-1-1-34-7-5" assembly-id="similar-pyramids-28-2-1-1-34-7-5" unique-id="similar-pyramids-28-2-1-1-34-7-5">1</tans>
+        <testoptions original-id="similar-pyramids-28-2-1-1-34-7-6" assembly-id="similar-pyramids-28-2-1-1-34-7-6" unique-id="similar-pyramids-28-2-1-1-34-7-6"/>
+        <quiet original-id="similar-pyramids-28-2-1-1-34-7-7" assembly-id="similar-pyramids-28-2-1-1-34-7-7" unique-id="similar-pyramids-28-2-1-1-34-7-7">0</quiet>
+        <truescoremode original-id="similar-pyramids-28-2-1-1-34-7-8" assembly-id="similar-pyramids-28-2-1-1-34-7-8" unique-id="similar-pyramids-28-2-1-1-34-7-8">+</truescoremode>
+        <truescore original-id="similar-pyramids-28-2-1-1-34-7-9" assembly-id="similar-pyramids-28-2-1-1-34-7-9" unique-id="similar-pyramids-28-2-1-1-34-7-9">0.0000000</truescore>
+        <truepenalty original-id="similar-pyramids-28-2-1-1-34-7-10" assembly-id="similar-pyramids-28-2-1-1-34-7-10" unique-id="similar-pyramids-28-2-1-1-34-7-10"/>
+        <truenextnode original-id="similar-pyramids-28-2-1-1-34-7-11" assembly-id="similar-pyramids-28-2-1-1-34-7-11" unique-id="similar-pyramids-28-2-1-1-34-7-11">-1</truenextnode>
+        <trueanswernote original-id="similar-pyramids-28-2-1-1-34-7-12" assembly-id="similar-pyramids-28-2-1-1-34-7-12" unique-id="similar-pyramids-28-2-1-1-34-7-12">prt3-2-T</trueanswernote>
+        <truefeedback format="html" original-id="similar-pyramids-28-2-1-1-34-7-13" assembly-id="similar-pyramids-28-2-1-1-34-7-13" unique-id="similar-pyramids-28-2-1-1-34-7-13">
+          <text original-id="similar-pyramids-28-2-1-1-34-7-13-1" assembly-id="similar-pyramids-28-2-1-1-34-7-13-1" unique-id="similar-pyramids-28-2-1-1-34-7-13-1">&lt;p&gt;&lt;br&gt;Here is a worked solution:&lt;/p&gt;
+&lt;p&gt;Because the two pyramids are similar, the ratio between their corresponding volumes is equal to the &lt;b&gt;cube&lt;/b&gt; of the ratio between corresponding lengths:&lt;/p&gt;
+&lt;p&gt;\(\frac{V_G}{V_R} = (\frac{h_G}{h_R})^3\)&lt;/p&gt;
+&lt;p&gt;Using the measurements given:&lt;/p&gt;
+&lt;p&gt;\(\frac{V_G}{{@float(redVol)@}} = (\frac{{@float(greenHeight)@}}{{@float(redHeight)@}})^3\)&lt;/p&gt;
+&lt;p&gt;\(V_G = {@float(redVol)@} \times ({@greenHeight/redHeight@})^3\)&lt;/p&gt;
+&lt;p&gt;\(V_G = {@dp(greenVol,5)@}...\)&lt;/p&gt;
+&lt;p&gt;\(V_G = {@dp(greenVol,2)@} {cm}^3\) &lt;i&gt;(tp 2pd)&lt;/i&gt;&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="similar-pyramids-28-2-1-1-34-7-14" assembly-id="similar-pyramids-28-2-1-1-34-7-14" unique-id="similar-pyramids-28-2-1-1-34-7-14">-</falsescoremode>
+        <falsescore original-id="similar-pyramids-28-2-1-1-34-7-15" assembly-id="similar-pyramids-28-2-1-1-34-7-15" unique-id="similar-pyramids-28-2-1-1-34-7-15">0.0000000</falsescore>
+        <falsepenalty original-id="similar-pyramids-28-2-1-1-34-7-16" assembly-id="similar-pyramids-28-2-1-1-34-7-16" unique-id="similar-pyramids-28-2-1-1-34-7-16"/>
+        <falsenextnode original-id="similar-pyramids-28-2-1-1-34-7-17" assembly-id="similar-pyramids-28-2-1-1-34-7-17" unique-id="similar-pyramids-28-2-1-1-34-7-17">-1</falsenextnode>
+        <falseanswernote original-id="similar-pyramids-28-2-1-1-34-7-18" assembly-id="similar-pyramids-28-2-1-1-34-7-18" unique-id="similar-pyramids-28-2-1-1-34-7-18">prt3-2-F</falseanswernote>
+        <falsefeedback format="html" original-id="similar-pyramids-28-2-1-1-34-7-19" assembly-id="similar-pyramids-28-2-1-1-34-7-19" unique-id="similar-pyramids-28-2-1-1-34-7-19">
+          <text original-id="similar-pyramids-28-2-1-1-34-7-19-1" assembly-id="similar-pyramids-28-2-1-1-34-7-19-1" unique-id="similar-pyramids-28-2-1-1-34-7-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="similar-pyramids-28-2-1-1-34-8" assembly-id="similar-pyramids-28-2-1-1-34-8" unique-id="similar-pyramids-28-2-1-1-34-8">
+        <name original-id="similar-pyramids-28-2-1-1-34-8-1" assembly-id="similar-pyramids-28-2-1-1-34-8-1" unique-id="similar-pyramids-28-2-1-1-34-8-1">2</name>
+        <description original-id="similar-pyramids-28-2-1-1-34-8-2" assembly-id="similar-pyramids-28-2-1-1-34-8-2" unique-id="similar-pyramids-28-2-1-1-34-8-2"/>
+        <answertest original-id="similar-pyramids-28-2-1-1-34-8-3" assembly-id="similar-pyramids-28-2-1-1-34-8-3" unique-id="similar-pyramids-28-2-1-1-34-8-3">AlgEquiv</answertest>
+        <sans original-id="similar-pyramids-28-2-1-1-34-8-4" assembly-id="similar-pyramids-28-2-1-1-34-8-4" unique-id="similar-pyramids-28-2-1-1-34-8-4">node3_test</sans>
+        <tans original-id="similar-pyramids-28-2-1-1-34-8-5" assembly-id="similar-pyramids-28-2-1-1-34-8-5" unique-id="similar-pyramids-28-2-1-1-34-8-5">1</tans>
+        <testoptions original-id="similar-pyramids-28-2-1-1-34-8-6" assembly-id="similar-pyramids-28-2-1-1-34-8-6" unique-id="similar-pyramids-28-2-1-1-34-8-6">1</testoptions>
+        <quiet original-id="similar-pyramids-28-2-1-1-34-8-7" assembly-id="similar-pyramids-28-2-1-1-34-8-7" unique-id="similar-pyramids-28-2-1-1-34-8-7">0</quiet>
+        <truescoremode original-id="similar-pyramids-28-2-1-1-34-8-8" assembly-id="similar-pyramids-28-2-1-1-34-8-8" unique-id="similar-pyramids-28-2-1-1-34-8-8">=</truescoremode>
+        <truescore original-id="similar-pyramids-28-2-1-1-34-8-9" assembly-id="similar-pyramids-28-2-1-1-34-8-9" unique-id="similar-pyramids-28-2-1-1-34-8-9">0.6670000</truescore>
+        <truepenalty original-id="similar-pyramids-28-2-1-1-34-8-10" assembly-id="similar-pyramids-28-2-1-1-34-8-10" unique-id="similar-pyramids-28-2-1-1-34-8-10"/>
+        <truenextnode original-id="similar-pyramids-28-2-1-1-34-8-11" assembly-id="similar-pyramids-28-2-1-1-34-8-11" unique-id="similar-pyramids-28-2-1-1-34-8-11">1</truenextnode>
+        <trueanswernote original-id="similar-pyramids-28-2-1-1-34-8-12" assembly-id="similar-pyramids-28-2-1-1-34-8-12" unique-id="similar-pyramids-28-2-1-1-34-8-12">prt3-3-T</trueanswernote>
+        <truefeedback format="html" original-id="similar-pyramids-28-2-1-1-34-8-13" assembly-id="similar-pyramids-28-2-1-1-34-8-13" unique-id="similar-pyramids-28-2-1-1-34-8-13">
+          <text original-id="similar-pyramids-28-2-1-1-34-8-13-1" assembly-id="similar-pyramids-28-2-1-1-34-8-13-1" unique-id="similar-pyramids-28-2-1-1-34-8-13-1">&lt;p&gt;&lt;br&gt;You have found the correct volume of the green pyramid.
+&lt;br&gt;However, you have not rounded your answer correctly to 2dp.&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="similar-pyramids-28-2-1-1-34-8-14" assembly-id="similar-pyramids-28-2-1-1-34-8-14" unique-id="similar-pyramids-28-2-1-1-34-8-14">-</falsescoremode>
+        <falsescore original-id="similar-pyramids-28-2-1-1-34-8-15" assembly-id="similar-pyramids-28-2-1-1-34-8-15" unique-id="similar-pyramids-28-2-1-1-34-8-15">0.0000000</falsescore>
+        <falsepenalty original-id="similar-pyramids-28-2-1-1-34-8-16" assembly-id="similar-pyramids-28-2-1-1-34-8-16" unique-id="similar-pyramids-28-2-1-1-34-8-16"/>
+        <falsenextnode original-id="similar-pyramids-28-2-1-1-34-8-17" assembly-id="similar-pyramids-28-2-1-1-34-8-17" unique-id="similar-pyramids-28-2-1-1-34-8-17">3</falsenextnode>
+        <falseanswernote original-id="similar-pyramids-28-2-1-1-34-8-18" assembly-id="similar-pyramids-28-2-1-1-34-8-18" unique-id="similar-pyramids-28-2-1-1-34-8-18">prt3-3-F</falseanswernote>
+        <falsefeedback format="html" original-id="similar-pyramids-28-2-1-1-34-8-19" assembly-id="similar-pyramids-28-2-1-1-34-8-19" unique-id="similar-pyramids-28-2-1-1-34-8-19">
+          <text original-id="similar-pyramids-28-2-1-1-34-8-19-1" assembly-id="similar-pyramids-28-2-1-1-34-8-19-1" unique-id="similar-pyramids-28-2-1-1-34-8-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="similar-pyramids-28-2-1-1-34-9" assembly-id="similar-pyramids-28-2-1-1-34-9" unique-id="similar-pyramids-28-2-1-1-34-9">
+        <name original-id="similar-pyramids-28-2-1-1-34-9-1" assembly-id="similar-pyramids-28-2-1-1-34-9-1" unique-id="similar-pyramids-28-2-1-1-34-9-1">3</name>
+        <description original-id="similar-pyramids-28-2-1-1-34-9-2" assembly-id="similar-pyramids-28-2-1-1-34-9-2" unique-id="similar-pyramids-28-2-1-1-34-9-2"/>
+        <answertest original-id="similar-pyramids-28-2-1-1-34-9-3" assembly-id="similar-pyramids-28-2-1-1-34-9-3" unique-id="similar-pyramids-28-2-1-1-34-9-3">AlgEquiv</answertest>
+        <sans original-id="similar-pyramids-28-2-1-1-34-9-4" assembly-id="similar-pyramids-28-2-1-1-34-9-4" unique-id="similar-pyramids-28-2-1-1-34-9-4">node4_test</sans>
+        <tans original-id="similar-pyramids-28-2-1-1-34-9-5" assembly-id="similar-pyramids-28-2-1-1-34-9-5" unique-id="similar-pyramids-28-2-1-1-34-9-5">1</tans>
+        <testoptions original-id="similar-pyramids-28-2-1-1-34-9-6" assembly-id="similar-pyramids-28-2-1-1-34-9-6" unique-id="similar-pyramids-28-2-1-1-34-9-6"/>
+        <quiet original-id="similar-pyramids-28-2-1-1-34-9-7" assembly-id="similar-pyramids-28-2-1-1-34-9-7" unique-id="similar-pyramids-28-2-1-1-34-9-7">0</quiet>
+        <truescoremode original-id="similar-pyramids-28-2-1-1-34-9-8" assembly-id="similar-pyramids-28-2-1-1-34-9-8" unique-id="similar-pyramids-28-2-1-1-34-9-8">=</truescoremode>
+        <truescore original-id="similar-pyramids-28-2-1-1-34-9-9" assembly-id="similar-pyramids-28-2-1-1-34-9-9" unique-id="similar-pyramids-28-2-1-1-34-9-9">0.3330000</truescore>
+        <truepenalty original-id="similar-pyramids-28-2-1-1-34-9-10" assembly-id="similar-pyramids-28-2-1-1-34-9-10" unique-id="similar-pyramids-28-2-1-1-34-9-10"/>
+        <truenextnode original-id="similar-pyramids-28-2-1-1-34-9-11" assembly-id="similar-pyramids-28-2-1-1-34-9-11" unique-id="similar-pyramids-28-2-1-1-34-9-11">1</truenextnode>
+        <trueanswernote original-id="similar-pyramids-28-2-1-1-34-9-12" assembly-id="similar-pyramids-28-2-1-1-34-9-12" unique-id="similar-pyramids-28-2-1-1-34-9-12">prt3-4-T</trueanswernote>
+        <truefeedback format="html" original-id="similar-pyramids-28-2-1-1-34-9-13" assembly-id="similar-pyramids-28-2-1-1-34-9-13" unique-id="similar-pyramids-28-2-1-1-34-9-13">
+          <text original-id="similar-pyramids-28-2-1-1-34-9-13-1" assembly-id="similar-pyramids-28-2-1-1-34-9-13-1" unique-id="similar-pyramids-28-2-1-1-34-9-13-1">&lt;p&gt;&lt;br&gt;You have used the &lt;b&gt;inverse&lt;/b&gt; of the correct ratio to determine \(V_G\).
+&lt;br&gt;Since the green pyramid is larger than the red, your answer should be &lt;b&gt;greater than&lt;/b&gt; \({@float(redVol)@}{cm}^3\).&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="similar-pyramids-28-2-1-1-34-9-14" assembly-id="similar-pyramids-28-2-1-1-34-9-14" unique-id="similar-pyramids-28-2-1-1-34-9-14">-</falsescoremode>
+        <falsescore original-id="similar-pyramids-28-2-1-1-34-9-15" assembly-id="similar-pyramids-28-2-1-1-34-9-15" unique-id="similar-pyramids-28-2-1-1-34-9-15">0.0000000</falsescore>
+        <falsepenalty original-id="similar-pyramids-28-2-1-1-34-9-16" assembly-id="similar-pyramids-28-2-1-1-34-9-16" unique-id="similar-pyramids-28-2-1-1-34-9-16"/>
+        <falsenextnode original-id="similar-pyramids-28-2-1-1-34-9-17" assembly-id="similar-pyramids-28-2-1-1-34-9-17" unique-id="similar-pyramids-28-2-1-1-34-9-17">4</falsenextnode>
+        <falseanswernote original-id="similar-pyramids-28-2-1-1-34-9-18" assembly-id="similar-pyramids-28-2-1-1-34-9-18" unique-id="similar-pyramids-28-2-1-1-34-9-18">prt3-4-F</falseanswernote>
+        <falsefeedback format="html" original-id="similar-pyramids-28-2-1-1-34-9-19" assembly-id="similar-pyramids-28-2-1-1-34-9-19" unique-id="similar-pyramids-28-2-1-1-34-9-19">
+          <text original-id="similar-pyramids-28-2-1-1-34-9-19-1" assembly-id="similar-pyramids-28-2-1-1-34-9-19-1" unique-id="similar-pyramids-28-2-1-1-34-9-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="similar-pyramids-28-2-1-1-34-10" assembly-id="similar-pyramids-28-2-1-1-34-10" unique-id="similar-pyramids-28-2-1-1-34-10">
+        <name original-id="similar-pyramids-28-2-1-1-34-10-1" assembly-id="similar-pyramids-28-2-1-1-34-10-1" unique-id="similar-pyramids-28-2-1-1-34-10-1">4</name>
+        <description original-id="similar-pyramids-28-2-1-1-34-10-2" assembly-id="similar-pyramids-28-2-1-1-34-10-2" unique-id="similar-pyramids-28-2-1-1-34-10-2"/>
+        <answertest original-id="similar-pyramids-28-2-1-1-34-10-3" assembly-id="similar-pyramids-28-2-1-1-34-10-3" unique-id="similar-pyramids-28-2-1-1-34-10-3">AlgEquiv</answertest>
+        <sans original-id="similar-pyramids-28-2-1-1-34-10-4" assembly-id="similar-pyramids-28-2-1-1-34-10-4" unique-id="similar-pyramids-28-2-1-1-34-10-4">node5_test</sans>
+        <tans original-id="similar-pyramids-28-2-1-1-34-10-5" assembly-id="similar-pyramids-28-2-1-1-34-10-5" unique-id="similar-pyramids-28-2-1-1-34-10-5">1</tans>
+        <testoptions original-id="similar-pyramids-28-2-1-1-34-10-6" assembly-id="similar-pyramids-28-2-1-1-34-10-6" unique-id="similar-pyramids-28-2-1-1-34-10-6"/>
+        <quiet original-id="similar-pyramids-28-2-1-1-34-10-7" assembly-id="similar-pyramids-28-2-1-1-34-10-7" unique-id="similar-pyramids-28-2-1-1-34-10-7">0</quiet>
+        <truescoremode original-id="similar-pyramids-28-2-1-1-34-10-8" assembly-id="similar-pyramids-28-2-1-1-34-10-8" unique-id="similar-pyramids-28-2-1-1-34-10-8">=</truescoremode>
+        <truescore original-id="similar-pyramids-28-2-1-1-34-10-9" assembly-id="similar-pyramids-28-2-1-1-34-10-9" unique-id="similar-pyramids-28-2-1-1-34-10-9">0.3330000</truescore>
+        <truepenalty original-id="similar-pyramids-28-2-1-1-34-10-10" assembly-id="similar-pyramids-28-2-1-1-34-10-10" unique-id="similar-pyramids-28-2-1-1-34-10-10"/>
+        <truenextnode original-id="similar-pyramids-28-2-1-1-34-10-11" assembly-id="similar-pyramids-28-2-1-1-34-10-11" unique-id="similar-pyramids-28-2-1-1-34-10-11">1</truenextnode>
+        <trueanswernote original-id="similar-pyramids-28-2-1-1-34-10-12" assembly-id="similar-pyramids-28-2-1-1-34-10-12" unique-id="similar-pyramids-28-2-1-1-34-10-12">prt3-5-T</trueanswernote>
+        <truefeedback format="html" original-id="similar-pyramids-28-2-1-1-34-10-13" assembly-id="similar-pyramids-28-2-1-1-34-10-13" unique-id="similar-pyramids-28-2-1-1-34-10-13">
+          <text original-id="similar-pyramids-28-2-1-1-34-10-13-1" assembly-id="similar-pyramids-28-2-1-1-34-10-13-1" unique-id="similar-pyramids-28-2-1-1-34-10-13-1">&lt;p&gt;&lt;br&gt;You have used {@if abs(ans3-redVol*lenRat)&lt;=0.1 then "the &lt;b&gt;cube root&lt;/b&gt; of the correct ratio" else if abs(ans3-redVol*lenRat^2)&lt;=0.1 then "the &lt;b&gt;square&lt;/b&gt; of the ratio between the heights"@} to determine \(V_G\).
+&lt;br&gt;Remember that the ratio between corresponding volumes is equal to the &lt;b&gt;cube&lt;/b&gt; of the ratio between corresponding lengths.&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="similar-pyramids-28-2-1-1-34-10-14" assembly-id="similar-pyramids-28-2-1-1-34-10-14" unique-id="similar-pyramids-28-2-1-1-34-10-14">-</falsescoremode>
+        <falsescore original-id="similar-pyramids-28-2-1-1-34-10-15" assembly-id="similar-pyramids-28-2-1-1-34-10-15" unique-id="similar-pyramids-28-2-1-1-34-10-15">0.0000000</falsescore>
+        <falsepenalty original-id="similar-pyramids-28-2-1-1-34-10-16" assembly-id="similar-pyramids-28-2-1-1-34-10-16" unique-id="similar-pyramids-28-2-1-1-34-10-16"/>
+        <falsenextnode original-id="similar-pyramids-28-2-1-1-34-10-17" assembly-id="similar-pyramids-28-2-1-1-34-10-17" unique-id="similar-pyramids-28-2-1-1-34-10-17">5</falsenextnode>
+        <falseanswernote original-id="similar-pyramids-28-2-1-1-34-10-18" assembly-id="similar-pyramids-28-2-1-1-34-10-18" unique-id="similar-pyramids-28-2-1-1-34-10-18">prt3-5-F</falseanswernote>
+        <falsefeedback format="html" original-id="similar-pyramids-28-2-1-1-34-10-19" assembly-id="similar-pyramids-28-2-1-1-34-10-19" unique-id="similar-pyramids-28-2-1-1-34-10-19">
+          <text original-id="similar-pyramids-28-2-1-1-34-10-19-1" assembly-id="similar-pyramids-28-2-1-1-34-10-19-1" unique-id="similar-pyramids-28-2-1-1-34-10-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="similar-pyramids-28-2-1-1-34-11" assembly-id="similar-pyramids-28-2-1-1-34-11" unique-id="similar-pyramids-28-2-1-1-34-11">
+        <name original-id="similar-pyramids-28-2-1-1-34-11-1" assembly-id="similar-pyramids-28-2-1-1-34-11-1" unique-id="similar-pyramids-28-2-1-1-34-11-1">5</name>
+        <description original-id="similar-pyramids-28-2-1-1-34-11-2" assembly-id="similar-pyramids-28-2-1-1-34-11-2" unique-id="similar-pyramids-28-2-1-1-34-11-2"/>
+        <answertest original-id="similar-pyramids-28-2-1-1-34-11-3" assembly-id="similar-pyramids-28-2-1-1-34-11-3" unique-id="similar-pyramids-28-2-1-1-34-11-3">AlgEquiv</answertest>
+        <sans original-id="similar-pyramids-28-2-1-1-34-11-4" assembly-id="similar-pyramids-28-2-1-1-34-11-4" unique-id="similar-pyramids-28-2-1-1-34-11-4">node6_test</sans>
+        <tans original-id="similar-pyramids-28-2-1-1-34-11-5" assembly-id="similar-pyramids-28-2-1-1-34-11-5" unique-id="similar-pyramids-28-2-1-1-34-11-5">1</tans>
+        <testoptions original-id="similar-pyramids-28-2-1-1-34-11-6" assembly-id="similar-pyramids-28-2-1-1-34-11-6" unique-id="similar-pyramids-28-2-1-1-34-11-6"/>
+        <quiet original-id="similar-pyramids-28-2-1-1-34-11-7" assembly-id="similar-pyramids-28-2-1-1-34-11-7" unique-id="similar-pyramids-28-2-1-1-34-11-7">0</quiet>
+        <truescoremode original-id="similar-pyramids-28-2-1-1-34-11-8" assembly-id="similar-pyramids-28-2-1-1-34-11-8" unique-id="similar-pyramids-28-2-1-1-34-11-8">+</truescoremode>
+        <truescore original-id="similar-pyramids-28-2-1-1-34-11-9" assembly-id="similar-pyramids-28-2-1-1-34-11-9" unique-id="similar-pyramids-28-2-1-1-34-11-9">0.0000000</truescore>
+        <truepenalty original-id="similar-pyramids-28-2-1-1-34-11-10" assembly-id="similar-pyramids-28-2-1-1-34-11-10" unique-id="similar-pyramids-28-2-1-1-34-11-10"/>
+        <truenextnode original-id="similar-pyramids-28-2-1-1-34-11-11" assembly-id="similar-pyramids-28-2-1-1-34-11-11" unique-id="similar-pyramids-28-2-1-1-34-11-11">1</truenextnode>
+        <trueanswernote original-id="similar-pyramids-28-2-1-1-34-11-12" assembly-id="similar-pyramids-28-2-1-1-34-11-12" unique-id="similar-pyramids-28-2-1-1-34-11-12">prt3-6-T</trueanswernote>
+        <truefeedback format="html" original-id="similar-pyramids-28-2-1-1-34-11-13" assembly-id="similar-pyramids-28-2-1-1-34-11-13" unique-id="similar-pyramids-28-2-1-1-34-11-13">
+          <text original-id="similar-pyramids-28-2-1-1-34-11-13-1" assembly-id="similar-pyramids-28-2-1-1-34-11-13-1" unique-id="similar-pyramids-28-2-1-1-34-11-13-1">&lt;p&gt;&lt;br&gt;You have used {@if abs(ans3-redVol/lenRat)&lt;=0.1 then "the &lt;b&gt;inverse&lt;/b&gt; and the &lt;b&gt;cube root&lt;/b&gt; of the correct ratio" else if abs(ans3-redVol/lenRat^2)&lt;=0.1 then "the &lt;b&gt;inverse&lt;/b&gt; of the &lt;b&gt;square&lt;/b&gt; of the ratio between the heights"@} to determine \(V_G\).
+&lt;br&gt;Remember that the ratio between corresponding volumes is equal to the &lt;b&gt;cube&lt;/b&gt; of the ratio between corresponding lengths.
+&lt;br&gt;Also, since the green pyramid is larger than the red, your answer should be &lt;b&gt;greater than&lt;/b&gt; \({@float(redVol)@}{cm}^2\).&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="similar-pyramids-28-2-1-1-34-11-14" assembly-id="similar-pyramids-28-2-1-1-34-11-14" unique-id="similar-pyramids-28-2-1-1-34-11-14">-</falsescoremode>
+        <falsescore original-id="similar-pyramids-28-2-1-1-34-11-15" assembly-id="similar-pyramids-28-2-1-1-34-11-15" unique-id="similar-pyramids-28-2-1-1-34-11-15">0.0000000</falsescore>
+        <falsepenalty original-id="similar-pyramids-28-2-1-1-34-11-16" assembly-id="similar-pyramids-28-2-1-1-34-11-16" unique-id="similar-pyramids-28-2-1-1-34-11-16"/>
+        <falsenextnode original-id="similar-pyramids-28-2-1-1-34-11-17" assembly-id="similar-pyramids-28-2-1-1-34-11-17" unique-id="similar-pyramids-28-2-1-1-34-11-17">1</falsenextnode>
+        <falseanswernote original-id="similar-pyramids-28-2-1-1-34-11-18" assembly-id="similar-pyramids-28-2-1-1-34-11-18" unique-id="similar-pyramids-28-2-1-1-34-11-18">prt3-6-F</falseanswernote>
+        <falsefeedback format="html" original-id="similar-pyramids-28-2-1-1-34-11-19" assembly-id="similar-pyramids-28-2-1-1-34-11-19" unique-id="similar-pyramids-28-2-1-1-34-11-19">
+          <text original-id="similar-pyramids-28-2-1-1-34-11-19-1" assembly-id="similar-pyramids-28-2-1-1-34-11-19-1" unique-id="similar-pyramids-28-2-1-1-34-11-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>
+            

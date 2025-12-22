@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+            <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../../../../stack/1-0-Numbers-Algebra/Real-Numbers/Using-reciprocals-of-real-numbers-in-mathematical-computations/Application-of-reciprocals-given-the-number-of-hours-2-pipes-tak.xml" original-id="reciprocals-pipes-application-1" assembly-id="reciprocals-pipes-application-1" unique-id="reciprocals-pipes-application-1">
+  <question type="stack" original-id="reciprocals-pipes-application-1-1" assembly-id="reciprocals-pipes-application-1-1" unique-id="reciprocals-pipes-application-1-1">
+    <name original-id="reciprocals-pipes-application-1-1-1" assembly-id="reciprocals-pipes-application-1-1-1" unique-id="reciprocals-pipes-application-1-1-1">
+      <text original-id="reciprocals-pipes-application-1-1-1-1" assembly-id="reciprocals-pipes-application-1-1-1-1" unique-id="reciprocals-pipes-application-1-1-1-1">Application of reciprocals given the number of hours 2 pipes takes to fill the same tank</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="reciprocals-pipes-application-1-1-2" assembly-id="reciprocals-pipes-application-1-1-2" unique-id="reciprocals-pipes-application-1-1-2">
+      <text original-id="reciprocals-pipes-application-1-1-2-1" assembly-id="reciprocals-pipes-application-1-1-2-1" unique-id="reciprocals-pipes-application-1-1-2-1">&lt;p&gt;If Pipe A can fill a tank in {@a@} hours, and Pipe B can fill the same tank in {@b@} hours:&lt;/p&gt;
+
+&lt;p&gt;a) What fraction of the tank does Pipe A fill in 1 hour?&lt;br&gt;
+[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]&lt;/p&gt;
+
+&lt;p&gt;b) What fraction of the tank does Pipe B fill in 1 hour?&lt;br&gt;
+[[input:ans2]] [[validation:ans2]]  [[feedback:prt2]]&lt;/p&gt;
+
+&lt;p&gt;c) If both pipes work together, what fraction of the tank do they fill in 1 hour?&lt;br&gt;
+[[input:ans3]] [[validation:ans3]]  [[feedback:prt3]] &lt;/p&gt;
+
+&lt;p&gt;d) How long will it take to fill the tank if both pipes work together?&lt;br&gt;
+[[input:ans4]] [[validation:ans4]] hours [[feedback:prt4]]&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="reciprocals-pipes-application-1-1-3" assembly-id="reciprocals-pipes-application-1-1-3" unique-id="reciprocals-pipes-application-1-1-3">
+      <text original-id="reciprocals-pipes-application-1-1-3-1" assembly-id="reciprocals-pipes-application-1-1-3-1" unique-id="reciprocals-pipes-application-1-1-3-1">&lt;p&gt;Worked Solution&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Part (a):&lt;/strong&gt;&lt;br&gt;
+Pipe A fills tank in {@a@} hours&lt;br&gt;
+In 1 hour: fills \( \frac{1}{@a@} \) of tank (reciprocal of time)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Part (b):&lt;/strong&gt;&lt;br&gt;
+Pipe B fills tank in {@b@} hours&lt;br&gt;
+In 1 hour: fills \( \frac{1}{@b@} \) of tank (reciprocal of time)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Part (c):&lt;/strong&gt;&lt;br&gt;
+Fraction of tank filled by the 2 tanks in 1 hour: \( \frac{1}{@a@} + \frac{1}{@b@} = {@ta3@}\) of tank&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Part (d):&lt;/strong&gt;&lt;br&gt;
+Time to fill tank together = Reciprocal of combined rate&lt;br&gt;
+Time = \( \frac{1}{{@ta3@}} ={@ta@}\) hours&lt;/p&gt;</text>
+    </generalfeedback>
+    <defaultgrade original-id="reciprocals-pipes-application-1-1-4" assembly-id="reciprocals-pipes-application-1-1-4" unique-id="reciprocals-pipes-application-1-1-4">1</defaultgrade>
+    <penalty original-id="reciprocals-pipes-application-1-1-5" assembly-id="reciprocals-pipes-application-1-1-5" unique-id="reciprocals-pipes-application-1-1-5">0.1</penalty>
+    <hidden original-id="reciprocals-pipes-application-1-1-6" assembly-id="reciprocals-pipes-application-1-1-6" unique-id="reciprocals-pipes-application-1-1-6">0</hidden>
+    <idnumber original-id="reciprocals-pipes-application-1-1-7" assembly-id="reciprocals-pipes-application-1-1-7" unique-id="reciprocals-pipes-application-1-1-7"/>
+    <stackversion original-id="reciprocals-pipes-application-1-1-8" assembly-id="reciprocals-pipes-application-1-1-8" unique-id="reciprocals-pipes-application-1-1-8">
+      <text original-id="reciprocals-pipes-application-1-1-8-1" assembly-id="reciprocals-pipes-application-1-1-8-1" unique-id="reciprocals-pipes-application-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="reciprocals-pipes-application-1-1-9" assembly-id="reciprocals-pipes-application-1-1-9" unique-id="reciprocals-pipes-application-1-1-9">
+      <text original-id="reciprocals-pipes-application-1-1-9-1" assembly-id="reciprocals-pipes-application-1-1-9-1" unique-id="reciprocals-pipes-application-1-1-9-1">/* Randomly choose one of three options */
+option: rand(3);
+
+if option = 0 then (
+    a: 3,
+    b: 6,
+    ta: 2
+) elseif option = 1 then (
+    a: 4,
+    b: 6,
+    ta: 12/5
+) else (
+    a: 5,
+    b: 10,
+    ta: 10/3
+);
+
+/* Calculate rates */
+ta1: 1/a;
+ta2: 1/b;
+ta3: ta1 + ta2;
+/*mistake*/
+ ta1_mistake: a;
+ta2_mistake: b;
+ta3_mistake1: 1/(a+b);
+ta3_mistake2: (a+b)/2;
+ta4_mistake2: a+b;</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="reciprocals-pipes-application-1-1-10" assembly-id="reciprocals-pipes-application-1-1-10" unique-id="reciprocals-pipes-application-1-1-10">
+      <text original-id="reciprocals-pipes-application-1-1-10-1" assembly-id="reciprocals-pipes-application-1-1-10-1" unique-id="reciprocals-pipes-application-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="reciprocals-pipes-application-1-1-11" assembly-id="reciprocals-pipes-application-1-1-11" unique-id="reciprocals-pipes-application-1-1-11">
+      <text original-id="reciprocals-pipes-application-1-1-11-1" assembly-id="reciprocals-pipes-application-1-1-11-1" unique-id="reciprocals-pipes-application-1-1-11-1">&lt;p&gt;{@ta@}&lt;/p&gt;
+
+&lt;p&gt;{@ta1@}&lt;/p&gt;
+&lt;p&gt;{@a@}&lt;p&gt;
+&lt;p&gt;{@b@}&lt;/p&gt;
+
+&lt;p&gt;{@ta2@}&lt;/p&gt;
+
+&lt;p&gt;{@ta3@}&lt;/p&gt;</text>
+    </questionnote>
+    <questiondescription format="html" original-id="reciprocals-pipes-application-1-1-12" assembly-id="reciprocals-pipes-application-1-1-12" unique-id="reciprocals-pipes-application-1-1-12">
+      <text original-id="reciprocals-pipes-application-1-1-12-1" assembly-id="reciprocals-pipes-application-1-1-12-1" unique-id="reciprocals-pipes-application-1-1-12-1"/>
+    </questiondescription>
+    <questionsimplify original-id="reciprocals-pipes-application-1-1-13" assembly-id="reciprocals-pipes-application-1-1-13" unique-id="reciprocals-pipes-application-1-1-13">1</questionsimplify>
+    <assumepositive original-id="reciprocals-pipes-application-1-1-14" assembly-id="reciprocals-pipes-application-1-1-14" unique-id="reciprocals-pipes-application-1-1-14">0</assumepositive>
+    <assumereal original-id="reciprocals-pipes-application-1-1-15" assembly-id="reciprocals-pipes-application-1-1-15" unique-id="reciprocals-pipes-application-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="reciprocals-pipes-application-1-1-16" assembly-id="reciprocals-pipes-application-1-1-16" unique-id="reciprocals-pipes-application-1-1-16">
+      <text original-id="reciprocals-pipes-application-1-1-16-1" assembly-id="reciprocals-pipes-application-1-1-16-1" unique-id="reciprocals-pipes-application-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="reciprocals-pipes-application-1-1-17" assembly-id="reciprocals-pipes-application-1-1-17" unique-id="reciprocals-pipes-application-1-1-17">
+      <text original-id="reciprocals-pipes-application-1-1-17-1" assembly-id="reciprocals-pipes-application-1-1-17-1" unique-id="reciprocals-pipes-application-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="reciprocals-pipes-application-1-1-18" assembly-id="reciprocals-pipes-application-1-1-18" unique-id="reciprocals-pipes-application-1-1-18">
+      <text original-id="reciprocals-pipes-application-1-1-18-1" assembly-id="reciprocals-pipes-application-1-1-18-1" unique-id="reciprocals-pipes-application-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="reciprocals-pipes-application-1-1-19" assembly-id="reciprocals-pipes-application-1-1-19" unique-id="reciprocals-pipes-application-1-1-19">.</decimals>
+    <scientificnotation original-id="reciprocals-pipes-application-1-1-20" assembly-id="reciprocals-pipes-application-1-1-20" unique-id="reciprocals-pipes-application-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="reciprocals-pipes-application-1-1-21" assembly-id="reciprocals-pipes-application-1-1-21" unique-id="reciprocals-pipes-application-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="reciprocals-pipes-application-1-1-22" assembly-id="reciprocals-pipes-application-1-1-22" unique-id="reciprocals-pipes-application-1-1-22">1</sqrtsign>
+    <complexno original-id="reciprocals-pipes-application-1-1-23" assembly-id="reciprocals-pipes-application-1-1-23" unique-id="reciprocals-pipes-application-1-1-23">i</complexno>
+    <inversetrig original-id="reciprocals-pipes-application-1-1-24" assembly-id="reciprocals-pipes-application-1-1-24" unique-id="reciprocals-pipes-application-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="reciprocals-pipes-application-1-1-25" assembly-id="reciprocals-pipes-application-1-1-25" unique-id="reciprocals-pipes-application-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="reciprocals-pipes-application-1-1-26" assembly-id="reciprocals-pipes-application-1-1-26" unique-id="reciprocals-pipes-application-1-1-26">[</matrixparens>
+    <isbroken original-id="reciprocals-pipes-application-1-1-27" assembly-id="reciprocals-pipes-application-1-1-27" unique-id="reciprocals-pipes-application-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="reciprocals-pipes-application-1-1-28" assembly-id="reciprocals-pipes-application-1-1-28" unique-id="reciprocals-pipes-application-1-1-28"/>
+    <input original-id="reciprocals-pipes-application-1-1-29" assembly-id="reciprocals-pipes-application-1-1-29" unique-id="reciprocals-pipes-application-1-1-29">
+      <name original-id="reciprocals-pipes-application-1-1-29-1" assembly-id="reciprocals-pipes-application-1-1-29-1" unique-id="reciprocals-pipes-application-1-1-29-1">ans1</name>
+      <type original-id="reciprocals-pipes-application-1-1-29-2" assembly-id="reciprocals-pipes-application-1-1-29-2" unique-id="reciprocals-pipes-application-1-1-29-2">algebraic</type>
+      <tans original-id="reciprocals-pipes-application-1-1-29-3" assembly-id="reciprocals-pipes-application-1-1-29-3" unique-id="reciprocals-pipes-application-1-1-29-3">ta1</tans>
+      <boxsize original-id="reciprocals-pipes-application-1-1-29-4" assembly-id="reciprocals-pipes-application-1-1-29-4" unique-id="reciprocals-pipes-application-1-1-29-4">6</boxsize>
+      <strictsyntax original-id="reciprocals-pipes-application-1-1-29-5" assembly-id="reciprocals-pipes-application-1-1-29-5" unique-id="reciprocals-pipes-application-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="reciprocals-pipes-application-1-1-29-6" assembly-id="reciprocals-pipes-application-1-1-29-6" unique-id="reciprocals-pipes-application-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="reciprocals-pipes-application-1-1-29-7" assembly-id="reciprocals-pipes-application-1-1-29-7" unique-id="reciprocals-pipes-application-1-1-29-7"/>
+      <syntaxattribute original-id="reciprocals-pipes-application-1-1-29-8" assembly-id="reciprocals-pipes-application-1-1-29-8" unique-id="reciprocals-pipes-application-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="reciprocals-pipes-application-1-1-29-9" assembly-id="reciprocals-pipes-application-1-1-29-9" unique-id="reciprocals-pipes-application-1-1-29-9"/>
+      <allowwords original-id="reciprocals-pipes-application-1-1-29-10" assembly-id="reciprocals-pipes-application-1-1-29-10" unique-id="reciprocals-pipes-application-1-1-29-10"/>
+      <forbidfloat original-id="reciprocals-pipes-application-1-1-29-11" assembly-id="reciprocals-pipes-application-1-1-29-11" unique-id="reciprocals-pipes-application-1-1-29-11">1</forbidfloat>
+      <requirelowestterms original-id="reciprocals-pipes-application-1-1-29-12" assembly-id="reciprocals-pipes-application-1-1-29-12" unique-id="reciprocals-pipes-application-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="reciprocals-pipes-application-1-1-29-13" assembly-id="reciprocals-pipes-application-1-1-29-13" unique-id="reciprocals-pipes-application-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="reciprocals-pipes-application-1-1-29-14" assembly-id="reciprocals-pipes-application-1-1-29-14" unique-id="reciprocals-pipes-application-1-1-29-14">1</mustverify>
+      <showvalidation original-id="reciprocals-pipes-application-1-1-29-15" assembly-id="reciprocals-pipes-application-1-1-29-15" unique-id="reciprocals-pipes-application-1-1-29-15">3</showvalidation>
+      <options original-id="reciprocals-pipes-application-1-1-29-16" assembly-id="reciprocals-pipes-application-1-1-29-16" unique-id="reciprocals-pipes-application-1-1-29-16"/>
+    </input>
+    <input original-id="reciprocals-pipes-application-1-1-30" assembly-id="reciprocals-pipes-application-1-1-30" unique-id="reciprocals-pipes-application-1-1-30">
+      <name original-id="reciprocals-pipes-application-1-1-30-1" assembly-id="reciprocals-pipes-application-1-1-30-1" unique-id="reciprocals-pipes-application-1-1-30-1">ans2</name>
+      <type original-id="reciprocals-pipes-application-1-1-30-2" assembly-id="reciprocals-pipes-application-1-1-30-2" unique-id="reciprocals-pipes-application-1-1-30-2">algebraic</type>
+      <tans original-id="reciprocals-pipes-application-1-1-30-3" assembly-id="reciprocals-pipes-application-1-1-30-3" unique-id="reciprocals-pipes-application-1-1-30-3">ta2</tans>
+      <boxsize original-id="reciprocals-pipes-application-1-1-30-4" assembly-id="reciprocals-pipes-application-1-1-30-4" unique-id="reciprocals-pipes-application-1-1-30-4">6</boxsize>
+      <strictsyntax original-id="reciprocals-pipes-application-1-1-30-5" assembly-id="reciprocals-pipes-application-1-1-30-5" unique-id="reciprocals-pipes-application-1-1-30-5">1</strictsyntax>
+      <insertstars original-id="reciprocals-pipes-application-1-1-30-6" assembly-id="reciprocals-pipes-application-1-1-30-6" unique-id="reciprocals-pipes-application-1-1-30-6">0</insertstars>
+      <syntaxhint original-id="reciprocals-pipes-application-1-1-30-7" assembly-id="reciprocals-pipes-application-1-1-30-7" unique-id="reciprocals-pipes-application-1-1-30-7"/>
+      <syntaxattribute original-id="reciprocals-pipes-application-1-1-30-8" assembly-id="reciprocals-pipes-application-1-1-30-8" unique-id="reciprocals-pipes-application-1-1-30-8">0</syntaxattribute>
+      <forbidwords original-id="reciprocals-pipes-application-1-1-30-9" assembly-id="reciprocals-pipes-application-1-1-30-9" unique-id="reciprocals-pipes-application-1-1-30-9"/>
+      <allowwords original-id="reciprocals-pipes-application-1-1-30-10" assembly-id="reciprocals-pipes-application-1-1-30-10" unique-id="reciprocals-pipes-application-1-1-30-10"/>
+      <forbidfloat original-id="reciprocals-pipes-application-1-1-30-11" assembly-id="reciprocals-pipes-application-1-1-30-11" unique-id="reciprocals-pipes-application-1-1-30-11">1</forbidfloat>
+      <requirelowestterms original-id="reciprocals-pipes-application-1-1-30-12" assembly-id="reciprocals-pipes-application-1-1-30-12" unique-id="reciprocals-pipes-application-1-1-30-12">0</requirelowestterms>
+      <checkanswertype original-id="reciprocals-pipes-application-1-1-30-13" assembly-id="reciprocals-pipes-application-1-1-30-13" unique-id="reciprocals-pipes-application-1-1-30-13">0</checkanswertype>
+      <mustverify original-id="reciprocals-pipes-application-1-1-30-14" assembly-id="reciprocals-pipes-application-1-1-30-14" unique-id="reciprocals-pipes-application-1-1-30-14">1</mustverify>
+      <showvalidation original-id="reciprocals-pipes-application-1-1-30-15" assembly-id="reciprocals-pipes-application-1-1-30-15" unique-id="reciprocals-pipes-application-1-1-30-15">3</showvalidation>
+      <options original-id="reciprocals-pipes-application-1-1-30-16" assembly-id="reciprocals-pipes-application-1-1-30-16" unique-id="reciprocals-pipes-application-1-1-30-16"/>
+    </input>
+    <input original-id="reciprocals-pipes-application-1-1-31" assembly-id="reciprocals-pipes-application-1-1-31" unique-id="reciprocals-pipes-application-1-1-31">
+      <name original-id="reciprocals-pipes-application-1-1-31-1" assembly-id="reciprocals-pipes-application-1-1-31-1" unique-id="reciprocals-pipes-application-1-1-31-1">ans3</name>
+      <type original-id="reciprocals-pipes-application-1-1-31-2" assembly-id="reciprocals-pipes-application-1-1-31-2" unique-id="reciprocals-pipes-application-1-1-31-2">algebraic</type>
+      <tans original-id="reciprocals-pipes-application-1-1-31-3" assembly-id="reciprocals-pipes-application-1-1-31-3" unique-id="reciprocals-pipes-application-1-1-31-3">ta3</tans>
+      <boxsize original-id="reciprocals-pipes-application-1-1-31-4" assembly-id="reciprocals-pipes-application-1-1-31-4" unique-id="reciprocals-pipes-application-1-1-31-4">6</boxsize>
+      <strictsyntax original-id="reciprocals-pipes-application-1-1-31-5" assembly-id="reciprocals-pipes-application-1-1-31-5" unique-id="reciprocals-pipes-application-1-1-31-5">1</strictsyntax>
+      <insertstars original-id="reciprocals-pipes-application-1-1-31-6" assembly-id="reciprocals-pipes-application-1-1-31-6" unique-id="reciprocals-pipes-application-1-1-31-6">0</insertstars>
+      <syntaxhint original-id="reciprocals-pipes-application-1-1-31-7" assembly-id="reciprocals-pipes-application-1-1-31-7" unique-id="reciprocals-pipes-application-1-1-31-7"/>
+      <syntaxattribute original-id="reciprocals-pipes-application-1-1-31-8" assembly-id="reciprocals-pipes-application-1-1-31-8" unique-id="reciprocals-pipes-application-1-1-31-8">0</syntaxattribute>
+      <forbidwords original-id="reciprocals-pipes-application-1-1-31-9" assembly-id="reciprocals-pipes-application-1-1-31-9" unique-id="reciprocals-pipes-application-1-1-31-9"/>
+      <allowwords original-id="reciprocals-pipes-application-1-1-31-10" assembly-id="reciprocals-pipes-application-1-1-31-10" unique-id="reciprocals-pipes-application-1-1-31-10"/>
+      <forbidfloat original-id="reciprocals-pipes-application-1-1-31-11" assembly-id="reciprocals-pipes-application-1-1-31-11" unique-id="reciprocals-pipes-application-1-1-31-11">1</forbidfloat>
+      <requirelowestterms original-id="reciprocals-pipes-application-1-1-31-12" assembly-id="reciprocals-pipes-application-1-1-31-12" unique-id="reciprocals-pipes-application-1-1-31-12">0</requirelowestterms>
+      <checkanswertype original-id="reciprocals-pipes-application-1-1-31-13" assembly-id="reciprocals-pipes-application-1-1-31-13" unique-id="reciprocals-pipes-application-1-1-31-13">0</checkanswertype>
+      <mustverify original-id="reciprocals-pipes-application-1-1-31-14" assembly-id="reciprocals-pipes-application-1-1-31-14" unique-id="reciprocals-pipes-application-1-1-31-14">1</mustverify>
+      <showvalidation original-id="reciprocals-pipes-application-1-1-31-15" assembly-id="reciprocals-pipes-application-1-1-31-15" unique-id="reciprocals-pipes-application-1-1-31-15">3</showvalidation>
+      <options original-id="reciprocals-pipes-application-1-1-31-16" assembly-id="reciprocals-pipes-application-1-1-31-16" unique-id="reciprocals-pipes-application-1-1-31-16"/>
+    </input>
+    <input original-id="reciprocals-pipes-application-1-1-32" assembly-id="reciprocals-pipes-application-1-1-32" unique-id="reciprocals-pipes-application-1-1-32">
+      <name original-id="reciprocals-pipes-application-1-1-32-1" assembly-id="reciprocals-pipes-application-1-1-32-1" unique-id="reciprocals-pipes-application-1-1-32-1">ans4</name>
+      <type original-id="reciprocals-pipes-application-1-1-32-2" assembly-id="reciprocals-pipes-application-1-1-32-2" unique-id="reciprocals-pipes-application-1-1-32-2">algebraic</type>
+      <tans original-id="reciprocals-pipes-application-1-1-32-3" assembly-id="reciprocals-pipes-application-1-1-32-3" unique-id="reciprocals-pipes-application-1-1-32-3">ta</tans>
+      <boxsize original-id="reciprocals-pipes-application-1-1-32-4" assembly-id="reciprocals-pipes-application-1-1-32-4" unique-id="reciprocals-pipes-application-1-1-32-4">6</boxsize>
+      <strictsyntax original-id="reciprocals-pipes-application-1-1-32-5" assembly-id="reciprocals-pipes-application-1-1-32-5" unique-id="reciprocals-pipes-application-1-1-32-5">1</strictsyntax>
+      <insertstars original-id="reciprocals-pipes-application-1-1-32-6" assembly-id="reciprocals-pipes-application-1-1-32-6" unique-id="reciprocals-pipes-application-1-1-32-6">0</insertstars>
+      <syntaxhint original-id="reciprocals-pipes-application-1-1-32-7" assembly-id="reciprocals-pipes-application-1-1-32-7" unique-id="reciprocals-pipes-application-1-1-32-7"/>
+      <syntaxattribute original-id="reciprocals-pipes-application-1-1-32-8" assembly-id="reciprocals-pipes-application-1-1-32-8" unique-id="reciprocals-pipes-application-1-1-32-8">0</syntaxattribute>
+      <forbidwords original-id="reciprocals-pipes-application-1-1-32-9" assembly-id="reciprocals-pipes-application-1-1-32-9" unique-id="reciprocals-pipes-application-1-1-32-9"/>
+      <allowwords original-id="reciprocals-pipes-application-1-1-32-10" assembly-id="reciprocals-pipes-application-1-1-32-10" unique-id="reciprocals-pipes-application-1-1-32-10"/>
+      <forbidfloat original-id="reciprocals-pipes-application-1-1-32-11" assembly-id="reciprocals-pipes-application-1-1-32-11" unique-id="reciprocals-pipes-application-1-1-32-11">1</forbidfloat>
+      <requirelowestterms original-id="reciprocals-pipes-application-1-1-32-12" assembly-id="reciprocals-pipes-application-1-1-32-12" unique-id="reciprocals-pipes-application-1-1-32-12">0</requirelowestterms>
+      <checkanswertype original-id="reciprocals-pipes-application-1-1-32-13" assembly-id="reciprocals-pipes-application-1-1-32-13" unique-id="reciprocals-pipes-application-1-1-32-13">0</checkanswertype>
+      <mustverify original-id="reciprocals-pipes-application-1-1-32-14" assembly-id="reciprocals-pipes-application-1-1-32-14" unique-id="reciprocals-pipes-application-1-1-32-14">1</mustverify>
+      <showvalidation original-id="reciprocals-pipes-application-1-1-32-15" assembly-id="reciprocals-pipes-application-1-1-32-15" unique-id="reciprocals-pipes-application-1-1-32-15">3</showvalidation>
+      <options original-id="reciprocals-pipes-application-1-1-32-16" assembly-id="reciprocals-pipes-application-1-1-32-16" unique-id="reciprocals-pipes-application-1-1-32-16"/>
+    </input>
+    <prt original-id="reciprocals-pipes-application-1-1-33" assembly-id="reciprocals-pipes-application-1-1-33" unique-id="reciprocals-pipes-application-1-1-33">
+      <name original-id="reciprocals-pipes-application-1-1-33-1" assembly-id="reciprocals-pipes-application-1-1-33-1" unique-id="reciprocals-pipes-application-1-1-33-1">prt1</name>
+      <value original-id="reciprocals-pipes-application-1-1-33-2" assembly-id="reciprocals-pipes-application-1-1-33-2" unique-id="reciprocals-pipes-application-1-1-33-2">1.0000000</value>
+      <autosimplify original-id="reciprocals-pipes-application-1-1-33-3" assembly-id="reciprocals-pipes-application-1-1-33-3" unique-id="reciprocals-pipes-application-1-1-33-3">1</autosimplify>
+      <feedbackstyle original-id="reciprocals-pipes-application-1-1-33-4" assembly-id="reciprocals-pipes-application-1-1-33-4" unique-id="reciprocals-pipes-application-1-1-33-4">1</feedbackstyle>
+      <feedbackvariables original-id="reciprocals-pipes-application-1-1-33-5" assembly-id="reciprocals-pipes-application-1-1-33-5" unique-id="reciprocals-pipes-application-1-1-33-5">
+        <text original-id="reciprocals-pipes-application-1-1-33-5-1" assembly-id="reciprocals-pipes-application-1-1-33-5-1" unique-id="reciprocals-pipes-application-1-1-33-5-1"/>
+      </feedbackvariables>
+      <node original-id="reciprocals-pipes-application-1-1-33-6" assembly-id="reciprocals-pipes-application-1-1-33-6" unique-id="reciprocals-pipes-application-1-1-33-6">
+        <name original-id="reciprocals-pipes-application-1-1-33-6-1" assembly-id="reciprocals-pipes-application-1-1-33-6-1" unique-id="reciprocals-pipes-application-1-1-33-6-1">0</name>
+        <description original-id="reciprocals-pipes-application-1-1-33-6-2" assembly-id="reciprocals-pipes-application-1-1-33-6-2" unique-id="reciprocals-pipes-application-1-1-33-6-2">Checks for the correct fraction of the tank that Pipe A fill in 1 hour</description>
+        <answertest original-id="reciprocals-pipes-application-1-1-33-6-3" assembly-id="reciprocals-pipes-application-1-1-33-6-3" unique-id="reciprocals-pipes-application-1-1-33-6-3">AlgEquiv</answertest>
+        <sans original-id="reciprocals-pipes-application-1-1-33-6-4" assembly-id="reciprocals-pipes-application-1-1-33-6-4" unique-id="reciprocals-pipes-application-1-1-33-6-4">ans1</sans>
+        <tans original-id="reciprocals-pipes-application-1-1-33-6-5" assembly-id="reciprocals-pipes-application-1-1-33-6-5" unique-id="reciprocals-pipes-application-1-1-33-6-5">ta1</tans>
+        <testoptions original-id="reciprocals-pipes-application-1-1-33-6-6" assembly-id="reciprocals-pipes-application-1-1-33-6-6" unique-id="reciprocals-pipes-application-1-1-33-6-6"/>
+        <quiet original-id="reciprocals-pipes-application-1-1-33-6-7" assembly-id="reciprocals-pipes-application-1-1-33-6-7" unique-id="reciprocals-pipes-application-1-1-33-6-7">0</quiet>
+        <truescoremode original-id="reciprocals-pipes-application-1-1-33-6-8" assembly-id="reciprocals-pipes-application-1-1-33-6-8" unique-id="reciprocals-pipes-application-1-1-33-6-8">=</truescoremode>
+        <truescore original-id="reciprocals-pipes-application-1-1-33-6-9" assembly-id="reciprocals-pipes-application-1-1-33-6-9" unique-id="reciprocals-pipes-application-1-1-33-6-9">1</truescore>
+        <truepenalty original-id="reciprocals-pipes-application-1-1-33-6-10" assembly-id="reciprocals-pipes-application-1-1-33-6-10" unique-id="reciprocals-pipes-application-1-1-33-6-10"/>
+        <truenextnode original-id="reciprocals-pipes-application-1-1-33-6-11" assembly-id="reciprocals-pipes-application-1-1-33-6-11" unique-id="reciprocals-pipes-application-1-1-33-6-11">-1</truenextnode>
+        <trueanswernote original-id="reciprocals-pipes-application-1-1-33-6-12" assembly-id="reciprocals-pipes-application-1-1-33-6-12" unique-id="reciprocals-pipes-application-1-1-33-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="reciprocals-pipes-application-1-1-33-6-13" assembly-id="reciprocals-pipes-application-1-1-33-6-13" unique-id="reciprocals-pipes-application-1-1-33-6-13">
+          <text original-id="reciprocals-pipes-application-1-1-33-6-13-1" assembly-id="reciprocals-pipes-application-1-1-33-6-13-1" unique-id="reciprocals-pipes-application-1-1-33-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="reciprocals-pipes-application-1-1-33-6-14" assembly-id="reciprocals-pipes-application-1-1-33-6-14" unique-id="reciprocals-pipes-application-1-1-33-6-14">=</falsescoremode>
+        <falsescore original-id="reciprocals-pipes-application-1-1-33-6-15" assembly-id="reciprocals-pipes-application-1-1-33-6-15" unique-id="reciprocals-pipes-application-1-1-33-6-15">0</falsescore>
+        <falsepenalty original-id="reciprocals-pipes-application-1-1-33-6-16" assembly-id="reciprocals-pipes-application-1-1-33-6-16" unique-id="reciprocals-pipes-application-1-1-33-6-16"/>
+        <falsenextnode original-id="reciprocals-pipes-application-1-1-33-6-17" assembly-id="reciprocals-pipes-application-1-1-33-6-17" unique-id="reciprocals-pipes-application-1-1-33-6-17">1</falsenextnode>
+        <falseanswernote original-id="reciprocals-pipes-application-1-1-33-6-18" assembly-id="reciprocals-pipes-application-1-1-33-6-18" unique-id="reciprocals-pipes-application-1-1-33-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="reciprocals-pipes-application-1-1-33-6-19" assembly-id="reciprocals-pipes-application-1-1-33-6-19" unique-id="reciprocals-pipes-application-1-1-33-6-19">
+          <text original-id="reciprocals-pipes-application-1-1-33-6-19-1" assembly-id="reciprocals-pipes-application-1-1-33-6-19-1" unique-id="reciprocals-pipes-application-1-1-33-6-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="reciprocals-pipes-application-1-1-33-7" assembly-id="reciprocals-pipes-application-1-1-33-7" unique-id="reciprocals-pipes-application-1-1-33-7">
+        <name original-id="reciprocals-pipes-application-1-1-33-7-1" assembly-id="reciprocals-pipes-application-1-1-33-7-1" unique-id="reciprocals-pipes-application-1-1-33-7-1">1</name>
+        <description original-id="reciprocals-pipes-application-1-1-33-7-2" assembly-id="reciprocals-pipes-application-1-1-33-7-2" unique-id="reciprocals-pipes-application-1-1-33-7-2">Checks for incorrect fraction of tank filled by pipe A</description>
+        <answertest original-id="reciprocals-pipes-application-1-1-33-7-3" assembly-id="reciprocals-pipes-application-1-1-33-7-3" unique-id="reciprocals-pipes-application-1-1-33-7-3">AlgEquiv</answertest>
+        <sans original-id="reciprocals-pipes-application-1-1-33-7-4" assembly-id="reciprocals-pipes-application-1-1-33-7-4" unique-id="reciprocals-pipes-application-1-1-33-7-4">ans1</sans>
+        <tans original-id="reciprocals-pipes-application-1-1-33-7-5" assembly-id="reciprocals-pipes-application-1-1-33-7-5" unique-id="reciprocals-pipes-application-1-1-33-7-5">ta1_mistake</tans>
+        <testoptions original-id="reciprocals-pipes-application-1-1-33-7-6" assembly-id="reciprocals-pipes-application-1-1-33-7-6" unique-id="reciprocals-pipes-application-1-1-33-7-6"/>
+        <quiet original-id="reciprocals-pipes-application-1-1-33-7-7" assembly-id="reciprocals-pipes-application-1-1-33-7-7" unique-id="reciprocals-pipes-application-1-1-33-7-7">1</quiet>
+        <truescoremode original-id="reciprocals-pipes-application-1-1-33-7-8" assembly-id="reciprocals-pipes-application-1-1-33-7-8" unique-id="reciprocals-pipes-application-1-1-33-7-8">+</truescoremode>
+        <truescore original-id="reciprocals-pipes-application-1-1-33-7-9" assembly-id="reciprocals-pipes-application-1-1-33-7-9" unique-id="reciprocals-pipes-application-1-1-33-7-9">0</truescore>
+        <truepenalty original-id="reciprocals-pipes-application-1-1-33-7-10" assembly-id="reciprocals-pipes-application-1-1-33-7-10" unique-id="reciprocals-pipes-application-1-1-33-7-10"/>
+        <truenextnode original-id="reciprocals-pipes-application-1-1-33-7-11" assembly-id="reciprocals-pipes-application-1-1-33-7-11" unique-id="reciprocals-pipes-application-1-1-33-7-11">-1</truenextnode>
+        <trueanswernote original-id="reciprocals-pipes-application-1-1-33-7-12" assembly-id="reciprocals-pipes-application-1-1-33-7-12" unique-id="reciprocals-pipes-application-1-1-33-7-12">prt1-2-T</trueanswernote>
+        <truefeedback format="html" original-id="reciprocals-pipes-application-1-1-33-7-13" assembly-id="reciprocals-pipes-application-1-1-33-7-13" unique-id="reciprocals-pipes-application-1-1-33-7-13">
+          <text original-id="reciprocals-pipes-application-1-1-33-7-13-1" assembly-id="reciprocals-pipes-application-1-1-33-7-13-1" unique-id="reciprocals-pipes-application-1-1-33-7-13-1">&lt;p&gt;You have failed to give the correct fraction and gave ({@a@} hours) instead of its reciprocal&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="reciprocals-pipes-application-1-1-33-7-14" assembly-id="reciprocals-pipes-application-1-1-33-7-14" unique-id="reciprocals-pipes-application-1-1-33-7-14">-</falsescoremode>
+        <falsescore original-id="reciprocals-pipes-application-1-1-33-7-15" assembly-id="reciprocals-pipes-application-1-1-33-7-15" unique-id="reciprocals-pipes-application-1-1-33-7-15">0</falsescore>
+        <falsepenalty original-id="reciprocals-pipes-application-1-1-33-7-16" assembly-id="reciprocals-pipes-application-1-1-33-7-16" unique-id="reciprocals-pipes-application-1-1-33-7-16"/>
+        <falsenextnode original-id="reciprocals-pipes-application-1-1-33-7-17" assembly-id="reciprocals-pipes-application-1-1-33-7-17" unique-id="reciprocals-pipes-application-1-1-33-7-17">-1</falsenextnode>
+        <falseanswernote original-id="reciprocals-pipes-application-1-1-33-7-18" assembly-id="reciprocals-pipes-application-1-1-33-7-18" unique-id="reciprocals-pipes-application-1-1-33-7-18">prt1-2-F</falseanswernote>
+        <falsefeedback format="html" original-id="reciprocals-pipes-application-1-1-33-7-19" assembly-id="reciprocals-pipes-application-1-1-33-7-19" unique-id="reciprocals-pipes-application-1-1-33-7-19">
+          <text original-id="reciprocals-pipes-application-1-1-33-7-19-1" assembly-id="reciprocals-pipes-application-1-1-33-7-19-1" unique-id="reciprocals-pipes-application-1-1-33-7-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="reciprocals-pipes-application-1-1-34" assembly-id="reciprocals-pipes-application-1-1-34" unique-id="reciprocals-pipes-application-1-1-34">
+      <name original-id="reciprocals-pipes-application-1-1-34-1" assembly-id="reciprocals-pipes-application-1-1-34-1" unique-id="reciprocals-pipes-application-1-1-34-1">prt2</name>
+      <value original-id="reciprocals-pipes-application-1-1-34-2" assembly-id="reciprocals-pipes-application-1-1-34-2" unique-id="reciprocals-pipes-application-1-1-34-2">1.0000000</value>
+      <autosimplify original-id="reciprocals-pipes-application-1-1-34-3" assembly-id="reciprocals-pipes-application-1-1-34-3" unique-id="reciprocals-pipes-application-1-1-34-3">1</autosimplify>
+      <feedbackstyle original-id="reciprocals-pipes-application-1-1-34-4" assembly-id="reciprocals-pipes-application-1-1-34-4" unique-id="reciprocals-pipes-application-1-1-34-4">1</feedbackstyle>
+      <feedbackvariables original-id="reciprocals-pipes-application-1-1-34-5" assembly-id="reciprocals-pipes-application-1-1-34-5" unique-id="reciprocals-pipes-application-1-1-34-5">
+        <text original-id="reciprocals-pipes-application-1-1-34-5-1" assembly-id="reciprocals-pipes-application-1-1-34-5-1" unique-id="reciprocals-pipes-application-1-1-34-5-1"/>
+      </feedbackvariables>
+      <node original-id="reciprocals-pipes-application-1-1-34-6" assembly-id="reciprocals-pipes-application-1-1-34-6" unique-id="reciprocals-pipes-application-1-1-34-6">
+        <name original-id="reciprocals-pipes-application-1-1-34-6-1" assembly-id="reciprocals-pipes-application-1-1-34-6-1" unique-id="reciprocals-pipes-application-1-1-34-6-1">0</name>
+        <description original-id="reciprocals-pipes-application-1-1-34-6-2" assembly-id="reciprocals-pipes-application-1-1-34-6-2" unique-id="reciprocals-pipes-application-1-1-34-6-2">Checks for the correct fraction of the tank that Pipe B fill in 1 hour</description>
+        <answertest original-id="reciprocals-pipes-application-1-1-34-6-3" assembly-id="reciprocals-pipes-application-1-1-34-6-3" unique-id="reciprocals-pipes-application-1-1-34-6-3">AlgEquiv</answertest>
+        <sans original-id="reciprocals-pipes-application-1-1-34-6-4" assembly-id="reciprocals-pipes-application-1-1-34-6-4" unique-id="reciprocals-pipes-application-1-1-34-6-4">ans2</sans>
+        <tans original-id="reciprocals-pipes-application-1-1-34-6-5" assembly-id="reciprocals-pipes-application-1-1-34-6-5" unique-id="reciprocals-pipes-application-1-1-34-6-5">ta2</tans>
+        <testoptions original-id="reciprocals-pipes-application-1-1-34-6-6" assembly-id="reciprocals-pipes-application-1-1-34-6-6" unique-id="reciprocals-pipes-application-1-1-34-6-6"/>
+        <quiet original-id="reciprocals-pipes-application-1-1-34-6-7" assembly-id="reciprocals-pipes-application-1-1-34-6-7" unique-id="reciprocals-pipes-application-1-1-34-6-7">0</quiet>
+        <truescoremode original-id="reciprocals-pipes-application-1-1-34-6-8" assembly-id="reciprocals-pipes-application-1-1-34-6-8" unique-id="reciprocals-pipes-application-1-1-34-6-8">=</truescoremode>
+        <truescore original-id="reciprocals-pipes-application-1-1-34-6-9" assembly-id="reciprocals-pipes-application-1-1-34-6-9" unique-id="reciprocals-pipes-application-1-1-34-6-9">1</truescore>
+        <truepenalty original-id="reciprocals-pipes-application-1-1-34-6-10" assembly-id="reciprocals-pipes-application-1-1-34-6-10" unique-id="reciprocals-pipes-application-1-1-34-6-10"/>
+        <truenextnode original-id="reciprocals-pipes-application-1-1-34-6-11" assembly-id="reciprocals-pipes-application-1-1-34-6-11" unique-id="reciprocals-pipes-application-1-1-34-6-11">-1</truenextnode>
+        <trueanswernote original-id="reciprocals-pipes-application-1-1-34-6-12" assembly-id="reciprocals-pipes-application-1-1-34-6-12" unique-id="reciprocals-pipes-application-1-1-34-6-12">prt2-1-T</trueanswernote>
+        <truefeedback format="html" original-id="reciprocals-pipes-application-1-1-34-6-13" assembly-id="reciprocals-pipes-application-1-1-34-6-13" unique-id="reciprocals-pipes-application-1-1-34-6-13">
+          <text original-id="reciprocals-pipes-application-1-1-34-6-13-1" assembly-id="reciprocals-pipes-application-1-1-34-6-13-1" unique-id="reciprocals-pipes-application-1-1-34-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="reciprocals-pipes-application-1-1-34-6-14" assembly-id="reciprocals-pipes-application-1-1-34-6-14" unique-id="reciprocals-pipes-application-1-1-34-6-14">=</falsescoremode>
+        <falsescore original-id="reciprocals-pipes-application-1-1-34-6-15" assembly-id="reciprocals-pipes-application-1-1-34-6-15" unique-id="reciprocals-pipes-application-1-1-34-6-15">0</falsescore>
+        <falsepenalty original-id="reciprocals-pipes-application-1-1-34-6-16" assembly-id="reciprocals-pipes-application-1-1-34-6-16" unique-id="reciprocals-pipes-application-1-1-34-6-16"/>
+        <falsenextnode original-id="reciprocals-pipes-application-1-1-34-6-17" assembly-id="reciprocals-pipes-application-1-1-34-6-17" unique-id="reciprocals-pipes-application-1-1-34-6-17">1</falsenextnode>
+        <falseanswernote original-id="reciprocals-pipes-application-1-1-34-6-18" assembly-id="reciprocals-pipes-application-1-1-34-6-18" unique-id="reciprocals-pipes-application-1-1-34-6-18">prt2-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="reciprocals-pipes-application-1-1-34-6-19" assembly-id="reciprocals-pipes-application-1-1-34-6-19" unique-id="reciprocals-pipes-application-1-1-34-6-19">
+          <text original-id="reciprocals-pipes-application-1-1-34-6-19-1" assembly-id="reciprocals-pipes-application-1-1-34-6-19-1" unique-id="reciprocals-pipes-application-1-1-34-6-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="reciprocals-pipes-application-1-1-34-7" assembly-id="reciprocals-pipes-application-1-1-34-7" unique-id="reciprocals-pipes-application-1-1-34-7">
+        <name original-id="reciprocals-pipes-application-1-1-34-7-1" assembly-id="reciprocals-pipes-application-1-1-34-7-1" unique-id="reciprocals-pipes-application-1-1-34-7-1">1</name>
+        <description original-id="reciprocals-pipes-application-1-1-34-7-2" assembly-id="reciprocals-pipes-application-1-1-34-7-2" unique-id="reciprocals-pipes-application-1-1-34-7-2">Checks for the incorrect fraction of the tank that Pipe B fill in 1 hour</description>
+        <answertest original-id="reciprocals-pipes-application-1-1-34-7-3" assembly-id="reciprocals-pipes-application-1-1-34-7-3" unique-id="reciprocals-pipes-application-1-1-34-7-3">AlgEquiv</answertest>
+        <sans original-id="reciprocals-pipes-application-1-1-34-7-4" assembly-id="reciprocals-pipes-application-1-1-34-7-4" unique-id="reciprocals-pipes-application-1-1-34-7-4">ans2</sans>
+        <tans original-id="reciprocals-pipes-application-1-1-34-7-5" assembly-id="reciprocals-pipes-application-1-1-34-7-5" unique-id="reciprocals-pipes-application-1-1-34-7-5">ta2_mistake</tans>
+        <testoptions original-id="reciprocals-pipes-application-1-1-34-7-6" assembly-id="reciprocals-pipes-application-1-1-34-7-6" unique-id="reciprocals-pipes-application-1-1-34-7-6"/>
+        <quiet original-id="reciprocals-pipes-application-1-1-34-7-7" assembly-id="reciprocals-pipes-application-1-1-34-7-7" unique-id="reciprocals-pipes-application-1-1-34-7-7">0</quiet>
+        <truescoremode original-id="reciprocals-pipes-application-1-1-34-7-8" assembly-id="reciprocals-pipes-application-1-1-34-7-8" unique-id="reciprocals-pipes-application-1-1-34-7-8">+</truescoremode>
+        <truescore original-id="reciprocals-pipes-application-1-1-34-7-9" assembly-id="reciprocals-pipes-application-1-1-34-7-9" unique-id="reciprocals-pipes-application-1-1-34-7-9">0</truescore>
+        <truepenalty original-id="reciprocals-pipes-application-1-1-34-7-10" assembly-id="reciprocals-pipes-application-1-1-34-7-10" unique-id="reciprocals-pipes-application-1-1-34-7-10"/>
+        <truenextnode original-id="reciprocals-pipes-application-1-1-34-7-11" assembly-id="reciprocals-pipes-application-1-1-34-7-11" unique-id="reciprocals-pipes-application-1-1-34-7-11">-1</truenextnode>
+        <trueanswernote original-id="reciprocals-pipes-application-1-1-34-7-12" assembly-id="reciprocals-pipes-application-1-1-34-7-12" unique-id="reciprocals-pipes-application-1-1-34-7-12">prt2-2-T</trueanswernote>
+        <truefeedback format="html" original-id="reciprocals-pipes-application-1-1-34-7-13" assembly-id="reciprocals-pipes-application-1-1-34-7-13" unique-id="reciprocals-pipes-application-1-1-34-7-13">
+          <text original-id="reciprocals-pipes-application-1-1-34-7-13-1" assembly-id="reciprocals-pipes-application-1-1-34-7-13-1" unique-id="reciprocals-pipes-application-1-1-34-7-13-1">&lt;p&gt;You used the time ({@b@} hours) instead of its reciprocal. Remember rate is given by 1 ÷ time&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="reciprocals-pipes-application-1-1-34-7-14" assembly-id="reciprocals-pipes-application-1-1-34-7-14" unique-id="reciprocals-pipes-application-1-1-34-7-14">-</falsescoremode>
+        <falsescore original-id="reciprocals-pipes-application-1-1-34-7-15" assembly-id="reciprocals-pipes-application-1-1-34-7-15" unique-id="reciprocals-pipes-application-1-1-34-7-15">0</falsescore>
+        <falsepenalty original-id="reciprocals-pipes-application-1-1-34-7-16" assembly-id="reciprocals-pipes-application-1-1-34-7-16" unique-id="reciprocals-pipes-application-1-1-34-7-16"/>
+        <falsenextnode original-id="reciprocals-pipes-application-1-1-34-7-17" assembly-id="reciprocals-pipes-application-1-1-34-7-17" unique-id="reciprocals-pipes-application-1-1-34-7-17">-1</falsenextnode>
+        <falseanswernote original-id="reciprocals-pipes-application-1-1-34-7-18" assembly-id="reciprocals-pipes-application-1-1-34-7-18" unique-id="reciprocals-pipes-application-1-1-34-7-18">prt2-2-F</falseanswernote>
+        <falsefeedback format="html" original-id="reciprocals-pipes-application-1-1-34-7-19" assembly-id="reciprocals-pipes-application-1-1-34-7-19" unique-id="reciprocals-pipes-application-1-1-34-7-19">
+          <text original-id="reciprocals-pipes-application-1-1-34-7-19-1" assembly-id="reciprocals-pipes-application-1-1-34-7-19-1" unique-id="reciprocals-pipes-application-1-1-34-7-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="reciprocals-pipes-application-1-1-35" assembly-id="reciprocals-pipes-application-1-1-35" unique-id="reciprocals-pipes-application-1-1-35">
+      <name original-id="reciprocals-pipes-application-1-1-35-1" assembly-id="reciprocals-pipes-application-1-1-35-1" unique-id="reciprocals-pipes-application-1-1-35-1">prt3</name>
+      <value original-id="reciprocals-pipes-application-1-1-35-2" assembly-id="reciprocals-pipes-application-1-1-35-2" unique-id="reciprocals-pipes-application-1-1-35-2">1.0000000</value>
+      <autosimplify original-id="reciprocals-pipes-application-1-1-35-3" assembly-id="reciprocals-pipes-application-1-1-35-3" unique-id="reciprocals-pipes-application-1-1-35-3">1</autosimplify>
+      <feedbackstyle original-id="reciprocals-pipes-application-1-1-35-4" assembly-id="reciprocals-pipes-application-1-1-35-4" unique-id="reciprocals-pipes-application-1-1-35-4">1</feedbackstyle>
+      <feedbackvariables original-id="reciprocals-pipes-application-1-1-35-5" assembly-id="reciprocals-pipes-application-1-1-35-5" unique-id="reciprocals-pipes-application-1-1-35-5">
+        <text original-id="reciprocals-pipes-application-1-1-35-5-1" assembly-id="reciprocals-pipes-application-1-1-35-5-1" unique-id="reciprocals-pipes-application-1-1-35-5-1"/>
+      </feedbackvariables>
+      <node original-id="reciprocals-pipes-application-1-1-35-6" assembly-id="reciprocals-pipes-application-1-1-35-6" unique-id="reciprocals-pipes-application-1-1-35-6">
+        <name original-id="reciprocals-pipes-application-1-1-35-6-1" assembly-id="reciprocals-pipes-application-1-1-35-6-1" unique-id="reciprocals-pipes-application-1-1-35-6-1">0</name>
+        <description original-id="reciprocals-pipes-application-1-1-35-6-2" assembly-id="reciprocals-pipes-application-1-1-35-6-2" unique-id="reciprocals-pipes-application-1-1-35-6-2">Checks for the correct fraction of the tank filled when both pipes work together</description>
+        <answertest original-id="reciprocals-pipes-application-1-1-35-6-3" assembly-id="reciprocals-pipes-application-1-1-35-6-3" unique-id="reciprocals-pipes-application-1-1-35-6-3">AlgEquiv</answertest>
+        <sans original-id="reciprocals-pipes-application-1-1-35-6-4" assembly-id="reciprocals-pipes-application-1-1-35-6-4" unique-id="reciprocals-pipes-application-1-1-35-6-4">ans3</sans>
+        <tans original-id="reciprocals-pipes-application-1-1-35-6-5" assembly-id="reciprocals-pipes-application-1-1-35-6-5" unique-id="reciprocals-pipes-application-1-1-35-6-5">ta3</tans>
+        <testoptions original-id="reciprocals-pipes-application-1-1-35-6-6" assembly-id="reciprocals-pipes-application-1-1-35-6-6" unique-id="reciprocals-pipes-application-1-1-35-6-6"/>
+        <quiet original-id="reciprocals-pipes-application-1-1-35-6-7" assembly-id="reciprocals-pipes-application-1-1-35-6-7" unique-id="reciprocals-pipes-application-1-1-35-6-7">0</quiet>
+        <truescoremode original-id="reciprocals-pipes-application-1-1-35-6-8" assembly-id="reciprocals-pipes-application-1-1-35-6-8" unique-id="reciprocals-pipes-application-1-1-35-6-8">=</truescoremode>
+        <truescore original-id="reciprocals-pipes-application-1-1-35-6-9" assembly-id="reciprocals-pipes-application-1-1-35-6-9" unique-id="reciprocals-pipes-application-1-1-35-6-9">1</truescore>
+        <truepenalty original-id="reciprocals-pipes-application-1-1-35-6-10" assembly-id="reciprocals-pipes-application-1-1-35-6-10" unique-id="reciprocals-pipes-application-1-1-35-6-10"/>
+        <truenextnode original-id="reciprocals-pipes-application-1-1-35-6-11" assembly-id="reciprocals-pipes-application-1-1-35-6-11" unique-id="reciprocals-pipes-application-1-1-35-6-11">-1</truenextnode>
+        <trueanswernote original-id="reciprocals-pipes-application-1-1-35-6-12" assembly-id="reciprocals-pipes-application-1-1-35-6-12" unique-id="reciprocals-pipes-application-1-1-35-6-12">prt3-1-T</trueanswernote>
+        <truefeedback format="html" original-id="reciprocals-pipes-application-1-1-35-6-13" assembly-id="reciprocals-pipes-application-1-1-35-6-13" unique-id="reciprocals-pipes-application-1-1-35-6-13">
+          <text original-id="reciprocals-pipes-application-1-1-35-6-13-1" assembly-id="reciprocals-pipes-application-1-1-35-6-13-1" unique-id="reciprocals-pipes-application-1-1-35-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="reciprocals-pipes-application-1-1-35-6-14" assembly-id="reciprocals-pipes-application-1-1-35-6-14" unique-id="reciprocals-pipes-application-1-1-35-6-14">=</falsescoremode>
+        <falsescore original-id="reciprocals-pipes-application-1-1-35-6-15" assembly-id="reciprocals-pipes-application-1-1-35-6-15" unique-id="reciprocals-pipes-application-1-1-35-6-15">0</falsescore>
+        <falsepenalty original-id="reciprocals-pipes-application-1-1-35-6-16" assembly-id="reciprocals-pipes-application-1-1-35-6-16" unique-id="reciprocals-pipes-application-1-1-35-6-16"/>
+        <falsenextnode original-id="reciprocals-pipes-application-1-1-35-6-17" assembly-id="reciprocals-pipes-application-1-1-35-6-17" unique-id="reciprocals-pipes-application-1-1-35-6-17">1</falsenextnode>
+        <falseanswernote original-id="reciprocals-pipes-application-1-1-35-6-18" assembly-id="reciprocals-pipes-application-1-1-35-6-18" unique-id="reciprocals-pipes-application-1-1-35-6-18">prt3-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="reciprocals-pipes-application-1-1-35-6-19" assembly-id="reciprocals-pipes-application-1-1-35-6-19" unique-id="reciprocals-pipes-application-1-1-35-6-19">
+          <text original-id="reciprocals-pipes-application-1-1-35-6-19-1" assembly-id="reciprocals-pipes-application-1-1-35-6-19-1" unique-id="reciprocals-pipes-application-1-1-35-6-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="reciprocals-pipes-application-1-1-35-7" assembly-id="reciprocals-pipes-application-1-1-35-7" unique-id="reciprocals-pipes-application-1-1-35-7">
+        <name original-id="reciprocals-pipes-application-1-1-35-7-1" assembly-id="reciprocals-pipes-application-1-1-35-7-1" unique-id="reciprocals-pipes-application-1-1-35-7-1">1</name>
+        <description original-id="reciprocals-pipes-application-1-1-35-7-2" assembly-id="reciprocals-pipes-application-1-1-35-7-2" unique-id="reciprocals-pipes-application-1-1-35-7-2">Checks for incorrect fraction of the tank filled when both pipes work together</description>
+        <answertest original-id="reciprocals-pipes-application-1-1-35-7-3" assembly-id="reciprocals-pipes-application-1-1-35-7-3" unique-id="reciprocals-pipes-application-1-1-35-7-3">AlgEquiv</answertest>
+        <sans original-id="reciprocals-pipes-application-1-1-35-7-4" assembly-id="reciprocals-pipes-application-1-1-35-7-4" unique-id="reciprocals-pipes-application-1-1-35-7-4">ans3</sans>
+        <tans original-id="reciprocals-pipes-application-1-1-35-7-5" assembly-id="reciprocals-pipes-application-1-1-35-7-5" unique-id="reciprocals-pipes-application-1-1-35-7-5">ta3_mistake1</tans>
+        <testoptions original-id="reciprocals-pipes-application-1-1-35-7-6" assembly-id="reciprocals-pipes-application-1-1-35-7-6" unique-id="reciprocals-pipes-application-1-1-35-7-6"/>
+        <quiet original-id="reciprocals-pipes-application-1-1-35-7-7" assembly-id="reciprocals-pipes-application-1-1-35-7-7" unique-id="reciprocals-pipes-application-1-1-35-7-7">1</quiet>
+        <truescoremode original-id="reciprocals-pipes-application-1-1-35-7-8" assembly-id="reciprocals-pipes-application-1-1-35-7-8" unique-id="reciprocals-pipes-application-1-1-35-7-8">+</truescoremode>
+        <truescore original-id="reciprocals-pipes-application-1-1-35-7-9" assembly-id="reciprocals-pipes-application-1-1-35-7-9" unique-id="reciprocals-pipes-application-1-1-35-7-9">0</truescore>
+        <truepenalty original-id="reciprocals-pipes-application-1-1-35-7-10" assembly-id="reciprocals-pipes-application-1-1-35-7-10" unique-id="reciprocals-pipes-application-1-1-35-7-10"/>
+        <truenextnode original-id="reciprocals-pipes-application-1-1-35-7-11" assembly-id="reciprocals-pipes-application-1-1-35-7-11" unique-id="reciprocals-pipes-application-1-1-35-7-11">-1</truenextnode>
+        <trueanswernote original-id="reciprocals-pipes-application-1-1-35-7-12" assembly-id="reciprocals-pipes-application-1-1-35-7-12" unique-id="reciprocals-pipes-application-1-1-35-7-12">prt3-2-T</trueanswernote>
+        <truefeedback format="html" original-id="reciprocals-pipes-application-1-1-35-7-13" assembly-id="reciprocals-pipes-application-1-1-35-7-13" unique-id="reciprocals-pipes-application-1-1-35-7-13">
+          <text original-id="reciprocals-pipes-application-1-1-35-7-13-1" assembly-id="reciprocals-pipes-application-1-1-35-7-13-1" unique-id="reciprocals-pipes-application-1-1-35-7-13-1">&lt;p&gt;You added the times: \( \frac{1}{{@a+b@}} \).But we need to add the &lt;em&gt;rates&lt;/em&gt;&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="reciprocals-pipes-application-1-1-35-7-14" assembly-id="reciprocals-pipes-application-1-1-35-7-14" unique-id="reciprocals-pipes-application-1-1-35-7-14">-</falsescoremode>
+        <falsescore original-id="reciprocals-pipes-application-1-1-35-7-15" assembly-id="reciprocals-pipes-application-1-1-35-7-15" unique-id="reciprocals-pipes-application-1-1-35-7-15">0</falsescore>
+        <falsepenalty original-id="reciprocals-pipes-application-1-1-35-7-16" assembly-id="reciprocals-pipes-application-1-1-35-7-16" unique-id="reciprocals-pipes-application-1-1-35-7-16"/>
+        <falsenextnode original-id="reciprocals-pipes-application-1-1-35-7-17" assembly-id="reciprocals-pipes-application-1-1-35-7-17" unique-id="reciprocals-pipes-application-1-1-35-7-17">2</falsenextnode>
+        <falseanswernote original-id="reciprocals-pipes-application-1-1-35-7-18" assembly-id="reciprocals-pipes-application-1-1-35-7-18" unique-id="reciprocals-pipes-application-1-1-35-7-18">prt3-2-F</falseanswernote>
+        <falsefeedback format="html" original-id="reciprocals-pipes-application-1-1-35-7-19" assembly-id="reciprocals-pipes-application-1-1-35-7-19" unique-id="reciprocals-pipes-application-1-1-35-7-19">
+          <text original-id="reciprocals-pipes-application-1-1-35-7-19-1" assembly-id="reciprocals-pipes-application-1-1-35-7-19-1" unique-id="reciprocals-pipes-application-1-1-35-7-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="reciprocals-pipes-application-1-1-35-8" assembly-id="reciprocals-pipes-application-1-1-35-8" unique-id="reciprocals-pipes-application-1-1-35-8">
+        <name original-id="reciprocals-pipes-application-1-1-35-8-1" assembly-id="reciprocals-pipes-application-1-1-35-8-1" unique-id="reciprocals-pipes-application-1-1-35-8-1">2</name>
+        <description original-id="reciprocals-pipes-application-1-1-35-8-2" assembly-id="reciprocals-pipes-application-1-1-35-8-2" unique-id="reciprocals-pipes-application-1-1-35-8-2">Checks for incorrect fraction of the tank filled when both pipes work together</description>
+        <answertest original-id="reciprocals-pipes-application-1-1-35-8-3" assembly-id="reciprocals-pipes-application-1-1-35-8-3" unique-id="reciprocals-pipes-application-1-1-35-8-3">AlgEquiv</answertest>
+        <sans original-id="reciprocals-pipes-application-1-1-35-8-4" assembly-id="reciprocals-pipes-application-1-1-35-8-4" unique-id="reciprocals-pipes-application-1-1-35-8-4">ans3</sans>
+        <tans original-id="reciprocals-pipes-application-1-1-35-8-5" assembly-id="reciprocals-pipes-application-1-1-35-8-5" unique-id="reciprocals-pipes-application-1-1-35-8-5">ta3_mistake2</tans>
+        <testoptions original-id="reciprocals-pipes-application-1-1-35-8-6" assembly-id="reciprocals-pipes-application-1-1-35-8-6" unique-id="reciprocals-pipes-application-1-1-35-8-6"/>
+        <quiet original-id="reciprocals-pipes-application-1-1-35-8-7" assembly-id="reciprocals-pipes-application-1-1-35-8-7" unique-id="reciprocals-pipes-application-1-1-35-8-7">1</quiet>
+        <truescoremode original-id="reciprocals-pipes-application-1-1-35-8-8" assembly-id="reciprocals-pipes-application-1-1-35-8-8" unique-id="reciprocals-pipes-application-1-1-35-8-8">+</truescoremode>
+        <truescore original-id="reciprocals-pipes-application-1-1-35-8-9" assembly-id="reciprocals-pipes-application-1-1-35-8-9" unique-id="reciprocals-pipes-application-1-1-35-8-9">0</truescore>
+        <truepenalty original-id="reciprocals-pipes-application-1-1-35-8-10" assembly-id="reciprocals-pipes-application-1-1-35-8-10" unique-id="reciprocals-pipes-application-1-1-35-8-10"/>
+        <truenextnode original-id="reciprocals-pipes-application-1-1-35-8-11" assembly-id="reciprocals-pipes-application-1-1-35-8-11" unique-id="reciprocals-pipes-application-1-1-35-8-11">-1</truenextnode>
+        <trueanswernote original-id="reciprocals-pipes-application-1-1-35-8-12" assembly-id="reciprocals-pipes-application-1-1-35-8-12" unique-id="reciprocals-pipes-application-1-1-35-8-12">prt3-3-T</trueanswernote>
+        <truefeedback format="html" original-id="reciprocals-pipes-application-1-1-35-8-13" assembly-id="reciprocals-pipes-application-1-1-35-8-13" unique-id="reciprocals-pipes-application-1-1-35-8-13">
+          <text original-id="reciprocals-pipes-application-1-1-35-8-13-1" assembly-id="reciprocals-pipes-application-1-1-35-8-13-1" unique-id="reciprocals-pipes-application-1-1-35-8-13-1">&lt;p&gt;You have calculated the average of the times: \( \frac{@a+b@}{2} \).Rates add together, they don't average. Please check the worked solution below&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="reciprocals-pipes-application-1-1-35-8-14" assembly-id="reciprocals-pipes-application-1-1-35-8-14" unique-id="reciprocals-pipes-application-1-1-35-8-14">-</falsescoremode>
+        <falsescore original-id="reciprocals-pipes-application-1-1-35-8-15" assembly-id="reciprocals-pipes-application-1-1-35-8-15" unique-id="reciprocals-pipes-application-1-1-35-8-15">0</falsescore>
+        <falsepenalty original-id="reciprocals-pipes-application-1-1-35-8-16" assembly-id="reciprocals-pipes-application-1-1-35-8-16" unique-id="reciprocals-pipes-application-1-1-35-8-16"/>
+        <falsenextnode original-id="reciprocals-pipes-application-1-1-35-8-17" assembly-id="reciprocals-pipes-application-1-1-35-8-17" unique-id="reciprocals-pipes-application-1-1-35-8-17">-1</falsenextnode>
+        <falseanswernote original-id="reciprocals-pipes-application-1-1-35-8-18" assembly-id="reciprocals-pipes-application-1-1-35-8-18" unique-id="reciprocals-pipes-application-1-1-35-8-18">prt3-3-F</falseanswernote>
+        <falsefeedback format="html" original-id="reciprocals-pipes-application-1-1-35-8-19" assembly-id="reciprocals-pipes-application-1-1-35-8-19" unique-id="reciprocals-pipes-application-1-1-35-8-19">
+          <text original-id="reciprocals-pipes-application-1-1-35-8-19-1" assembly-id="reciprocals-pipes-application-1-1-35-8-19-1" unique-id="reciprocals-pipes-application-1-1-35-8-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="reciprocals-pipes-application-1-1-36" assembly-id="reciprocals-pipes-application-1-1-36" unique-id="reciprocals-pipes-application-1-1-36">
+      <name original-id="reciprocals-pipes-application-1-1-36-1" assembly-id="reciprocals-pipes-application-1-1-36-1" unique-id="reciprocals-pipes-application-1-1-36-1">prt4</name>
+      <value original-id="reciprocals-pipes-application-1-1-36-2" assembly-id="reciprocals-pipes-application-1-1-36-2" unique-id="reciprocals-pipes-application-1-1-36-2">1.0000000</value>
+      <autosimplify original-id="reciprocals-pipes-application-1-1-36-3" assembly-id="reciprocals-pipes-application-1-1-36-3" unique-id="reciprocals-pipes-application-1-1-36-3">1</autosimplify>
+      <feedbackstyle original-id="reciprocals-pipes-application-1-1-36-4" assembly-id="reciprocals-pipes-application-1-1-36-4" unique-id="reciprocals-pipes-application-1-1-36-4">1</feedbackstyle>
+      <feedbackvariables original-id="reciprocals-pipes-application-1-1-36-5" assembly-id="reciprocals-pipes-application-1-1-36-5" unique-id="reciprocals-pipes-application-1-1-36-5">
+        <text original-id="reciprocals-pipes-application-1-1-36-5-1" assembly-id="reciprocals-pipes-application-1-1-36-5-1" unique-id="reciprocals-pipes-application-1-1-36-5-1"/>
+      </feedbackvariables>
+      <node original-id="reciprocals-pipes-application-1-1-36-6" assembly-id="reciprocals-pipes-application-1-1-36-6" unique-id="reciprocals-pipes-application-1-1-36-6">
+        <name original-id="reciprocals-pipes-application-1-1-36-6-1" assembly-id="reciprocals-pipes-application-1-1-36-6-1" unique-id="reciprocals-pipes-application-1-1-36-6-1">0</name>
+        <description original-id="reciprocals-pipes-application-1-1-36-6-2" assembly-id="reciprocals-pipes-application-1-1-36-6-2" unique-id="reciprocals-pipes-application-1-1-36-6-2">Checks for the correct time taken to  fill the tank when both pipes work together</description>
+        <answertest original-id="reciprocals-pipes-application-1-1-36-6-3" assembly-id="reciprocals-pipes-application-1-1-36-6-3" unique-id="reciprocals-pipes-application-1-1-36-6-3">AlgEquiv</answertest>
+        <sans original-id="reciprocals-pipes-application-1-1-36-6-4" assembly-id="reciprocals-pipes-application-1-1-36-6-4" unique-id="reciprocals-pipes-application-1-1-36-6-4">ans4</sans>
+        <tans original-id="reciprocals-pipes-application-1-1-36-6-5" assembly-id="reciprocals-pipes-application-1-1-36-6-5" unique-id="reciprocals-pipes-application-1-1-36-6-5">ta</tans>
+        <testoptions original-id="reciprocals-pipes-application-1-1-36-6-6" assembly-id="reciprocals-pipes-application-1-1-36-6-6" unique-id="reciprocals-pipes-application-1-1-36-6-6"/>
+        <quiet original-id="reciprocals-pipes-application-1-1-36-6-7" assembly-id="reciprocals-pipes-application-1-1-36-6-7" unique-id="reciprocals-pipes-application-1-1-36-6-7">0</quiet>
+        <truescoremode original-id="reciprocals-pipes-application-1-1-36-6-8" assembly-id="reciprocals-pipes-application-1-1-36-6-8" unique-id="reciprocals-pipes-application-1-1-36-6-8">=</truescoremode>
+        <truescore original-id="reciprocals-pipes-application-1-1-36-6-9" assembly-id="reciprocals-pipes-application-1-1-36-6-9" unique-id="reciprocals-pipes-application-1-1-36-6-9">1</truescore>
+        <truepenalty original-id="reciprocals-pipes-application-1-1-36-6-10" assembly-id="reciprocals-pipes-application-1-1-36-6-10" unique-id="reciprocals-pipes-application-1-1-36-6-10"/>
+        <truenextnode original-id="reciprocals-pipes-application-1-1-36-6-11" assembly-id="reciprocals-pipes-application-1-1-36-6-11" unique-id="reciprocals-pipes-application-1-1-36-6-11">-1</truenextnode>
+        <trueanswernote original-id="reciprocals-pipes-application-1-1-36-6-12" assembly-id="reciprocals-pipes-application-1-1-36-6-12" unique-id="reciprocals-pipes-application-1-1-36-6-12">prt4-1-T</trueanswernote>
+        <truefeedback format="html" original-id="reciprocals-pipes-application-1-1-36-6-13" assembly-id="reciprocals-pipes-application-1-1-36-6-13" unique-id="reciprocals-pipes-application-1-1-36-6-13">
+          <text original-id="reciprocals-pipes-application-1-1-36-6-13-1" assembly-id="reciprocals-pipes-application-1-1-36-6-13-1" unique-id="reciprocals-pipes-application-1-1-36-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="reciprocals-pipes-application-1-1-36-6-14" assembly-id="reciprocals-pipes-application-1-1-36-6-14" unique-id="reciprocals-pipes-application-1-1-36-6-14">=</falsescoremode>
+        <falsescore original-id="reciprocals-pipes-application-1-1-36-6-15" assembly-id="reciprocals-pipes-application-1-1-36-6-15" unique-id="reciprocals-pipes-application-1-1-36-6-15">0</falsescore>
+        <falsepenalty original-id="reciprocals-pipes-application-1-1-36-6-16" assembly-id="reciprocals-pipes-application-1-1-36-6-16" unique-id="reciprocals-pipes-application-1-1-36-6-16"/>
+        <falsenextnode original-id="reciprocals-pipes-application-1-1-36-6-17" assembly-id="reciprocals-pipes-application-1-1-36-6-17" unique-id="reciprocals-pipes-application-1-1-36-6-17">1</falsenextnode>
+        <falseanswernote original-id="reciprocals-pipes-application-1-1-36-6-18" assembly-id="reciprocals-pipes-application-1-1-36-6-18" unique-id="reciprocals-pipes-application-1-1-36-6-18">prt4-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="reciprocals-pipes-application-1-1-36-6-19" assembly-id="reciprocals-pipes-application-1-1-36-6-19" unique-id="reciprocals-pipes-application-1-1-36-6-19">
+          <text original-id="reciprocals-pipes-application-1-1-36-6-19-1" assembly-id="reciprocals-pipes-application-1-1-36-6-19-1" unique-id="reciprocals-pipes-application-1-1-36-6-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="reciprocals-pipes-application-1-1-36-7" assembly-id="reciprocals-pipes-application-1-1-36-7" unique-id="reciprocals-pipes-application-1-1-36-7">
+        <name original-id="reciprocals-pipes-application-1-1-36-7-1" assembly-id="reciprocals-pipes-application-1-1-36-7-1" unique-id="reciprocals-pipes-application-1-1-36-7-1">1</name>
+        <description original-id="reciprocals-pipes-application-1-1-36-7-2" assembly-id="reciprocals-pipes-application-1-1-36-7-2" unique-id="reciprocals-pipes-application-1-1-36-7-2">Checks for the incorrect time taken to  fill the tank when both pipes work together</description>
+        <answertest original-id="reciprocals-pipes-application-1-1-36-7-3" assembly-id="reciprocals-pipes-application-1-1-36-7-3" unique-id="reciprocals-pipes-application-1-1-36-7-3">AlgEquiv</answertest>
+        <sans original-id="reciprocals-pipes-application-1-1-36-7-4" assembly-id="reciprocals-pipes-application-1-1-36-7-4" unique-id="reciprocals-pipes-application-1-1-36-7-4">ans4</sans>
+        <tans original-id="reciprocals-pipes-application-1-1-36-7-5" assembly-id="reciprocals-pipes-application-1-1-36-7-5" unique-id="reciprocals-pipes-application-1-1-36-7-5">ta4_mistake2</tans>
+        <testoptions original-id="reciprocals-pipes-application-1-1-36-7-6" assembly-id="reciprocals-pipes-application-1-1-36-7-6" unique-id="reciprocals-pipes-application-1-1-36-7-6"/>
+        <quiet original-id="reciprocals-pipes-application-1-1-36-7-7" assembly-id="reciprocals-pipes-application-1-1-36-7-7" unique-id="reciprocals-pipes-application-1-1-36-7-7">1</quiet>
+        <truescoremode original-id="reciprocals-pipes-application-1-1-36-7-8" assembly-id="reciprocals-pipes-application-1-1-36-7-8" unique-id="reciprocals-pipes-application-1-1-36-7-8">+</truescoremode>
+        <truescore original-id="reciprocals-pipes-application-1-1-36-7-9" assembly-id="reciprocals-pipes-application-1-1-36-7-9" unique-id="reciprocals-pipes-application-1-1-36-7-9">0</truescore>
+        <truepenalty original-id="reciprocals-pipes-application-1-1-36-7-10" assembly-id="reciprocals-pipes-application-1-1-36-7-10" unique-id="reciprocals-pipes-application-1-1-36-7-10"/>
+        <truenextnode original-id="reciprocals-pipes-application-1-1-36-7-11" assembly-id="reciprocals-pipes-application-1-1-36-7-11" unique-id="reciprocals-pipes-application-1-1-36-7-11">-1</truenextnode>
+        <trueanswernote original-id="reciprocals-pipes-application-1-1-36-7-12" assembly-id="reciprocals-pipes-application-1-1-36-7-12" unique-id="reciprocals-pipes-application-1-1-36-7-12">prt4-2-T</trueanswernote>
+        <truefeedback format="html" original-id="reciprocals-pipes-application-1-1-36-7-13" assembly-id="reciprocals-pipes-application-1-1-36-7-13" unique-id="reciprocals-pipes-application-1-1-36-7-13">
+          <text original-id="reciprocals-pipes-application-1-1-36-7-13-1" assembly-id="reciprocals-pipes-application-1-1-36-7-13-1" unique-id="reciprocals-pipes-application-1-1-36-7-13-1">&lt;p&gt;You have added the times: \( @a+b@ \) yet when pipes work together, they fill faster, not slower. Kindly look at the worked solution below.&lt;b</text>
+        </truefeedback>
+        <falsescoremode original-id="reciprocals-pipes-application-1-1-36-7-14" assembly-id="reciprocals-pipes-application-1-1-36-7-14" unique-id="reciprocals-pipes-application-1-1-36-7-14">-</falsescoremode>
+        <falsescore original-id="reciprocals-pipes-application-1-1-36-7-15" assembly-id="reciprocals-pipes-application-1-1-36-7-15" unique-id="reciprocals-pipes-application-1-1-36-7-15">0</falsescore>
+        <falsepenalty original-id="reciprocals-pipes-application-1-1-36-7-16" assembly-id="reciprocals-pipes-application-1-1-36-7-16" unique-id="reciprocals-pipes-application-1-1-36-7-16"/>
+        <falsenextnode original-id="reciprocals-pipes-application-1-1-36-7-17" assembly-id="reciprocals-pipes-application-1-1-36-7-17" unique-id="reciprocals-pipes-application-1-1-36-7-17">-1</falsenextnode>
+        <falseanswernote original-id="reciprocals-pipes-application-1-1-36-7-18" assembly-id="reciprocals-pipes-application-1-1-36-7-18" unique-id="reciprocals-pipes-application-1-1-36-7-18">prt4-2-F</falseanswernote>
+        <falsefeedback format="html" original-id="reciprocals-pipes-application-1-1-36-7-19" assembly-id="reciprocals-pipes-application-1-1-36-7-19" unique-id="reciprocals-pipes-application-1-1-36-7-19">
+          <text original-id="reciprocals-pipes-application-1-1-36-7-19-1" assembly-id="reciprocals-pipes-application-1-1-36-7-19-1" unique-id="reciprocals-pipes-application-1-1-36-7-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed original-id="reciprocals-pipes-application-1-1-37" assembly-id="reciprocals-pipes-application-1-1-37" unique-id="reciprocals-pipes-application-1-1-37">1453112607</deployedseed>
+    <deployedseed original-id="reciprocals-pipes-application-1-1-38" assembly-id="reciprocals-pipes-application-1-1-38" unique-id="reciprocals-pipes-application-1-1-38">1536954853</deployedseed>
+    <deployedseed original-id="reciprocals-pipes-application-1-1-39" assembly-id="reciprocals-pipes-application-1-1-39" unique-id="reciprocals-pipes-application-1-1-39">230967811</deployedseed>
+  </question>
+</quiz>
+        

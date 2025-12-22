@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+            <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../../../../stack/1-0-Numbers-Algebra/Real-Numbers/Classifying-real-numbers-as-rational-and-irrational-in-different/Classifying-given-numbers-as-irrational.xml" original-id="classify-irrational-1" assembly-id="classify-irrational-1" unique-id="classify-irrational-1">
+  <question type="stack" original-id="classify-irrational-1-1" assembly-id="classify-irrational-1-1" unique-id="classify-irrational-1-1">
+    <name original-id="classify-irrational-1-1-1" assembly-id="classify-irrational-1-1-1" unique-id="classify-irrational-1-1-1">
+      <text original-id="classify-irrational-1-1-1-1" assembly-id="classify-irrational-1-1-1-1" unique-id="classify-irrational-1-1-1-1">Classifying given numbers as irrational</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="classify-irrational-1-1-2" assembly-id="classify-irrational-1-1-2" unique-id="classify-irrational-1-1-2">
+      <text original-id="classify-irrational-1-1-2-1" assembly-id="classify-irrational-1-1-2-1" unique-id="classify-irrational-1-1-2-1">&lt;p&gt;Which of the following numbers are irrational? Select all that apply.&lt;/p&gt;
+
+
+
+&lt;p&gt;[[input:ans1]][[validation:ans1]] [[feedback:prt1]]&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="classify-irrational-1-1-3" assembly-id="classify-irrational-1-1-3" unique-id="classify-irrational-1-1-3">
+      <text original-id="classify-irrational-1-1-3-1" assembly-id="classify-irrational-1-1-3-1" unique-id="classify-irrational-1-1-3-1">&lt;p&gt;Worked Solution&lt;/p&gt;
+&lt;p&gt;An irrational number cannot be expressed as a fraction \( \frac{p}{q} \) where \( p \) and \( q \) are integers.&lt;/p&gt;
+
+&lt;p&gt;Note that:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;\( \sqrt{n} \) is irrational when \( n \) is not a perfect square&lt;/li&gt;
+&lt;li&gt;\( \pi \) and \( e \) are irrational&lt;/li&gt;
+&lt;li&gt;Decimals that neither terminate nor repeat are irrational&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Therefore, irrational numbers in this list are: \({@correct_answers[1][3]@},{@correct_answers[2][3]@},{@correct_answers[3][3]@}\)&lt;/p&gt;</text>
+    </generalfeedback>
+    <defaultgrade original-id="classify-irrational-1-1-4" assembly-id="classify-irrational-1-1-4" unique-id="classify-irrational-1-1-4">1</defaultgrade>
+    <penalty original-id="classify-irrational-1-1-5" assembly-id="classify-irrational-1-1-5" unique-id="classify-irrational-1-1-5">0.1</penalty>
+    <hidden original-id="classify-irrational-1-1-6" assembly-id="classify-irrational-1-1-6" unique-id="classify-irrational-1-1-6">0</hidden>
+    <idnumber original-id="classify-irrational-1-1-7" assembly-id="classify-irrational-1-1-7" unique-id="classify-irrational-1-1-7"/>
+    <stackversion original-id="classify-irrational-1-1-8" assembly-id="classify-irrational-1-1-8" unique-id="classify-irrational-1-1-8">
+      <text original-id="classify-irrational-1-1-8-1" assembly-id="classify-irrational-1-1-8-1" unique-id="classify-irrational-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="classify-irrational-1-1-9" assembly-id="classify-irrational-1-1-9" unique-id="classify-irrational-1-1-9">
+      <text original-id="classify-irrational-1-1-9-1" assembly-id="classify-irrational-1-1-9-1" unique-id="classify-irrational-1-1-9-1">/* Pool of irrational expressions (true) */
+irrationals_all: [
+    pi, sqrt(2), sqrt(3), sqrt(5), 2*sqrt(2),
+    pi - 3, sqrt(8), 0.121221222, 3*sqrt(7),
+    sqrt(10), e, sqrt(11), pi/2, sqrt(13),
+    sqrt(17), sqrt(19), sqrt(23), sqrt(29)
+];
+
+/* Pool of rational expressions (false) */
+rationals_all: [
+    5, -4, 7/3, 0.25, 3/10, sqrt(25), sqrt(49),
+    12/5, 0.12121212, -9, 4/7, 0, -13, 1.5,
+    2/3, sqrt(36), sqrt(100), 0.33333333,
+    -2.5, 0.75, sqrt(64), 0.6
+];
+
+/* Select correct answers (irrational numbers) */
+num_correct: 3;
+correct_answers: rand_selection([
+    [1, true, irrationals_all[1]],
+    [2, true, irrationals_all[2]],
+    [3, true, irrationals_all[3]],
+    [4, true, irrationals_all[4]],
+    [5, true, irrationals_all[5]],
+    [6, true, irrationals_all[6]],
+    [7, true, irrationals_all[7]],
+    [8, true, irrationals_all[8]],
+    [9, true, irrationals_all[9]],
+    [10, true, irrationals_all[10]]
+], num_correct);
+
+/* Select incorrect answers (rational numbers) */
+num_incorrect: 3;
+incorrect_answers: rand_selection([
+    [11, false, rationals_all[1]],
+    [12, false, rationals_all[2]],
+    [13, false, rationals_all[3]],
+    [14, false, rationals_all[4]],
+    [15, false, rationals_all[5]],
+    [16, false, rationals_all[6]],
+    [17, false, rationals_all[7]],
+    [18, false, rationals_all[8]],
+    [19, false, rationals_all[9]],
+    [20, false, rationals_all[10]]
+], num_incorrect);
+
+/* Combine and randomize */
+ta: random_permutation(append(correct_answers, incorrect_answers));
+ta_largest: length(ta);
+</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="classify-irrational-1-1-10" assembly-id="classify-irrational-1-1-10" unique-id="classify-irrational-1-1-10">
+      <text original-id="classify-irrational-1-1-10-1" assembly-id="classify-irrational-1-1-10-1" unique-id="classify-irrational-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="classify-irrational-1-1-11" assembly-id="classify-irrational-1-1-11" unique-id="classify-irrational-1-1-11">
+      <text original-id="classify-irrational-1-1-11-1" assembly-id="classify-irrational-1-1-11-1" unique-id="classify-irrational-1-1-11-1">&lt;p&gt;{@irrationals_all@}&lt;/p&gt;
+&lt;p&gt;{@rationals_all@}&lt;/p&gt;</text>
+    </questionnote>
+    <questiondescription format="html" original-id="classify-irrational-1-1-12" assembly-id="classify-irrational-1-1-12" unique-id="classify-irrational-1-1-12">
+      <text original-id="classify-irrational-1-1-12-1" assembly-id="classify-irrational-1-1-12-1" unique-id="classify-irrational-1-1-12-1"/>
+    </questiondescription>
+    <questionsimplify original-id="classify-irrational-1-1-13" assembly-id="classify-irrational-1-1-13" unique-id="classify-irrational-1-1-13">1</questionsimplify>
+    <assumepositive original-id="classify-irrational-1-1-14" assembly-id="classify-irrational-1-1-14" unique-id="classify-irrational-1-1-14">0</assumepositive>
+    <assumereal original-id="classify-irrational-1-1-15" assembly-id="classify-irrational-1-1-15" unique-id="classify-irrational-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="classify-irrational-1-1-16" assembly-id="classify-irrational-1-1-16" unique-id="classify-irrational-1-1-16">
+      <text original-id="classify-irrational-1-1-16-1" assembly-id="classify-irrational-1-1-16-1" unique-id="classify-irrational-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="classify-irrational-1-1-17" assembly-id="classify-irrational-1-1-17" unique-id="classify-irrational-1-1-17">
+      <text original-id="classify-irrational-1-1-17-1" assembly-id="classify-irrational-1-1-17-1" unique-id="classify-irrational-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="classify-irrational-1-1-18" assembly-id="classify-irrational-1-1-18" unique-id="classify-irrational-1-1-18">
+      <text original-id="classify-irrational-1-1-18-1" assembly-id="classify-irrational-1-1-18-1" unique-id="classify-irrational-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="classify-irrational-1-1-19" assembly-id="classify-irrational-1-1-19" unique-id="classify-irrational-1-1-19">.</decimals>
+    <scientificnotation original-id="classify-irrational-1-1-20" assembly-id="classify-irrational-1-1-20" unique-id="classify-irrational-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="classify-irrational-1-1-21" assembly-id="classify-irrational-1-1-21" unique-id="classify-irrational-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="classify-irrational-1-1-22" assembly-id="classify-irrational-1-1-22" unique-id="classify-irrational-1-1-22">1</sqrtsign>
+    <complexno original-id="classify-irrational-1-1-23" assembly-id="classify-irrational-1-1-23" unique-id="classify-irrational-1-1-23">i</complexno>
+    <inversetrig original-id="classify-irrational-1-1-24" assembly-id="classify-irrational-1-1-24" unique-id="classify-irrational-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="classify-irrational-1-1-25" assembly-id="classify-irrational-1-1-25" unique-id="classify-irrational-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="classify-irrational-1-1-26" assembly-id="classify-irrational-1-1-26" unique-id="classify-irrational-1-1-26">[</matrixparens>
+    <isbroken original-id="classify-irrational-1-1-27" assembly-id="classify-irrational-1-1-27" unique-id="classify-irrational-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="classify-irrational-1-1-28" assembly-id="classify-irrational-1-1-28" unique-id="classify-irrational-1-1-28"/>
+    <input original-id="classify-irrational-1-1-29" assembly-id="classify-irrational-1-1-29" unique-id="classify-irrational-1-1-29">
+      <name original-id="classify-irrational-1-1-29-1" assembly-id="classify-irrational-1-1-29-1" unique-id="classify-irrational-1-1-29-1">ans1</name>
+      <type original-id="classify-irrational-1-1-29-2" assembly-id="classify-irrational-1-1-29-2" unique-id="classify-irrational-1-1-29-2">checkbox</type>
+      <tans original-id="classify-irrational-1-1-29-3" assembly-id="classify-irrational-1-1-29-3" unique-id="classify-irrational-1-1-29-3">ta</tans>
+      <boxsize original-id="classify-irrational-1-1-29-4" assembly-id="classify-irrational-1-1-29-4" unique-id="classify-irrational-1-1-29-4">15</boxsize>
+      <strictsyntax original-id="classify-irrational-1-1-29-5" assembly-id="classify-irrational-1-1-29-5" unique-id="classify-irrational-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="classify-irrational-1-1-29-6" assembly-id="classify-irrational-1-1-29-6" unique-id="classify-irrational-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="classify-irrational-1-1-29-7" assembly-id="classify-irrational-1-1-29-7" unique-id="classify-irrational-1-1-29-7"/>
+      <syntaxattribute original-id="classify-irrational-1-1-29-8" assembly-id="classify-irrational-1-1-29-8" unique-id="classify-irrational-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="classify-irrational-1-1-29-9" assembly-id="classify-irrational-1-1-29-9" unique-id="classify-irrational-1-1-29-9"/>
+      <allowwords original-id="classify-irrational-1-1-29-10" assembly-id="classify-irrational-1-1-29-10" unique-id="classify-irrational-1-1-29-10"/>
+      <forbidfloat original-id="classify-irrational-1-1-29-11" assembly-id="classify-irrational-1-1-29-11" unique-id="classify-irrational-1-1-29-11">1</forbidfloat>
+      <requirelowestterms original-id="classify-irrational-1-1-29-12" assembly-id="classify-irrational-1-1-29-12" unique-id="classify-irrational-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="classify-irrational-1-1-29-13" assembly-id="classify-irrational-1-1-29-13" unique-id="classify-irrational-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="classify-irrational-1-1-29-14" assembly-id="classify-irrational-1-1-29-14" unique-id="classify-irrational-1-1-29-14">0</mustverify>
+      <showvalidation original-id="classify-irrational-1-1-29-15" assembly-id="classify-irrational-1-1-29-15" unique-id="classify-irrational-1-1-29-15">0</showvalidation>
+      <options original-id="classify-irrational-1-1-29-16" assembly-id="classify-irrational-1-1-29-16" unique-id="classify-irrational-1-1-29-16">nonotanswered</options>
+    </input>
+    <prt original-id="classify-irrational-1-1-30" assembly-id="classify-irrational-1-1-30" unique-id="classify-irrational-1-1-30">
+      <name original-id="classify-irrational-1-1-30-1" assembly-id="classify-irrational-1-1-30-1" unique-id="classify-irrational-1-1-30-1">prt1</name>
+      <value original-id="classify-irrational-1-1-30-2" assembly-id="classify-irrational-1-1-30-2" unique-id="classify-irrational-1-1-30-2">1.0000000</value>
+      <autosimplify original-id="classify-irrational-1-1-30-3" assembly-id="classify-irrational-1-1-30-3" unique-id="classify-irrational-1-1-30-3">1</autosimplify>
+      <feedbackstyle original-id="classify-irrational-1-1-30-4" assembly-id="classify-irrational-1-1-30-4" unique-id="classify-irrational-1-1-30-4">1</feedbackstyle>
+      <feedbackvariables original-id="classify-irrational-1-1-30-5" assembly-id="classify-irrational-1-1-30-5" unique-id="classify-irrational-1-1-30-5">
+        <text original-id="classify-irrational-1-1-30-5-1" assembly-id="classify-irrational-1-1-30-5-1" unique-id="classify-irrational-1-1-30-5-1"/>
+      </feedbackvariables>
+      <node original-id="classify-irrational-1-1-30-6" assembly-id="classify-irrational-1-1-30-6" unique-id="classify-irrational-1-1-30-6">
+        <name original-id="classify-irrational-1-1-30-6-1" assembly-id="classify-irrational-1-1-30-6-1" unique-id="classify-irrational-1-1-30-6-1">0</name>
+        <description original-id="classify-irrational-1-1-30-6-2" assembly-id="classify-irrational-1-1-30-6-2" unique-id="classify-irrational-1-1-30-6-2">Checks for correct classification of rational and irrational numbers</description>
+        <answertest original-id="classify-irrational-1-1-30-6-3" assembly-id="classify-irrational-1-1-30-6-3" unique-id="classify-irrational-1-1-30-6-3">AlgEquiv</answertest>
+        <sans original-id="classify-irrational-1-1-30-6-4" assembly-id="classify-irrational-1-1-30-6-4" unique-id="classify-irrational-1-1-30-6-4">ans1</sans>
+        <tans original-id="classify-irrational-1-1-30-6-5" assembly-id="classify-irrational-1-1-30-6-5" unique-id="classify-irrational-1-1-30-6-5">mcq_correct(ta)</tans>
+        <testoptions original-id="classify-irrational-1-1-30-6-6" assembly-id="classify-irrational-1-1-30-6-6" unique-id="classify-irrational-1-1-30-6-6"/>
+        <quiet original-id="classify-irrational-1-1-30-6-7" assembly-id="classify-irrational-1-1-30-6-7" unique-id="classify-irrational-1-1-30-6-7">0</quiet>
+        <truescoremode original-id="classify-irrational-1-1-30-6-8" assembly-id="classify-irrational-1-1-30-6-8" unique-id="classify-irrational-1-1-30-6-8">=</truescoremode>
+        <truescore original-id="classify-irrational-1-1-30-6-9" assembly-id="classify-irrational-1-1-30-6-9" unique-id="classify-irrational-1-1-30-6-9">1</truescore>
+        <truepenalty original-id="classify-irrational-1-1-30-6-10" assembly-id="classify-irrational-1-1-30-6-10" unique-id="classify-irrational-1-1-30-6-10"/>
+        <truenextnode original-id="classify-irrational-1-1-30-6-11" assembly-id="classify-irrational-1-1-30-6-11" unique-id="classify-irrational-1-1-30-6-11">-1</truenextnode>
+        <trueanswernote original-id="classify-irrational-1-1-30-6-12" assembly-id="classify-irrational-1-1-30-6-12" unique-id="classify-irrational-1-1-30-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="classify-irrational-1-1-30-6-13" assembly-id="classify-irrational-1-1-30-6-13" unique-id="classify-irrational-1-1-30-6-13">
+          <text original-id="classify-irrational-1-1-30-6-13-1" assembly-id="classify-irrational-1-1-30-6-13-1" unique-id="classify-irrational-1-1-30-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="classify-irrational-1-1-30-6-14" assembly-id="classify-irrational-1-1-30-6-14" unique-id="classify-irrational-1-1-30-6-14">=</falsescoremode>
+        <falsescore original-id="classify-irrational-1-1-30-6-15" assembly-id="classify-irrational-1-1-30-6-15" unique-id="classify-irrational-1-1-30-6-15">0</falsescore>
+        <falsepenalty original-id="classify-irrational-1-1-30-6-16" assembly-id="classify-irrational-1-1-30-6-16" unique-id="classify-irrational-1-1-30-6-16"/>
+        <falsenextnode original-id="classify-irrational-1-1-30-6-17" assembly-id="classify-irrational-1-1-30-6-17" unique-id="classify-irrational-1-1-30-6-17">-1</falsenextnode>
+        <falseanswernote original-id="classify-irrational-1-1-30-6-18" assembly-id="classify-irrational-1-1-30-6-18" unique-id="classify-irrational-1-1-30-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="classify-irrational-1-1-30-6-19" assembly-id="classify-irrational-1-1-30-6-19" unique-id="classify-irrational-1-1-30-6-19">
+          <text original-id="classify-irrational-1-1-30-6-19-1" assembly-id="classify-irrational-1-1-30-6-19-1" unique-id="classify-irrational-1-1-30-6-19-1">&lt;p&gt; You have to select a list of irrational numbers only. Kindly check the worked solution to see how classify to numbers.&lt;/p&gt;</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed original-id="classify-irrational-1-1-31" assembly-id="classify-irrational-1-1-31" unique-id="classify-irrational-1-1-31">1692903785</deployedseed>
+  </question>
+</quiz>
+        

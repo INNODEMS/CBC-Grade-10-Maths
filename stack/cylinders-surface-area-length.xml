@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+                <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../../../../stack/2-0-Measurement-Geometry/2-1-Similarity-and-Enlargement/2-1-3-Scale-Factors/2-1-3-2Volume-Scale-Factor/Similarity-and-Enlargement-Cylinders-_Surface-Area,-Length,-and-.xml" original-id="cylinders-surface-area-length-1" assembly-id="cylinders-surface-area-length-1" unique-id="cylinders-surface-area-length-1">
+  <question type="stack" original-id="cylinders-surface-area-length-1-1" assembly-id="cylinders-surface-area-length-1-1" unique-id="cylinders-surface-area-length-1-1">
+    <name original-id="cylinders-surface-area-length-1-1-1" assembly-id="cylinders-surface-area-length-1-1-1" unique-id="cylinders-surface-area-length-1-1-1">
+      <text original-id="cylinders-surface-area-length-1-1-1-1" assembly-id="cylinders-surface-area-length-1-1-1-1" unique-id="cylinders-surface-area-length-1-1-1-1">Similarity and Enlargement Cylinders _Surface Area, Length, and Volume Relationships (copy)</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="cylinders-surface-area-length-1-1-2" assembly-id="cylinders-surface-area-length-1-1-2" unique-id="cylinders-surface-area-length-1-1-2">
+      <text original-id="cylinders-surface-area-length-1-1-2-1" assembly-id="cylinders-surface-area-length-1-1-2-1" unique-id="cylinders-surface-area-length-1-1-2-1">&lt;p&gt;&lt;strong&gt;Two cylinders, P and Q, are mathematically similar.&lt;/strong&gt;&lt;/p&gt;
+
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+    boundingbox: [-60, -60, 90, 90],
+    axis: false,
+    visible: false,
+    showCopyright: false,
+    showNavigation: true,
+    keepAspectRatio: true
+});
+
+/* Cylinder P */
+var radiusP = 10;
+var heightP = 60;
+
+// Bottom ellipse (P)
+board.create('ellipse', [
+    [-25, 0],
+    [-25 + radiusP, 0],
+    [-25, 3]
+], {strokeColor: '#000', fillColor: '#ccc', fillOpacity: 0.3, fixed: true});
+
+// Top ellipse (P)
+board.create('ellipse', [
+    [-25, heightP],
+    [-25 + radiusP, heightP],
+    [-25, heightP + 3]
+], {strokeColor: '#000', fillColor: '#ccc', fillOpacity: 0.3, fixed: true});
+
+// Side lines (P)
+board.create('segment', [[-26.7, 0], [-26.7, heightP]], {strokeColor: '#000', fixed: true});
+board.create('segment', [[-13.5, 0], [-13.5, heightP]], {strokeColor: '#000', fixed: true});
+
+// Labels (P)
+board.create('text', [-25 + radiusP + 3, heightP / 2, 'Length = {#L_P#} cm'], {fixed: true});
+board.create('text', [-20, heightP + 5, '&lt;b&gt;Cylinder P&lt;/b&gt;'], {fixed: true});
+
+/* Cylinder Q */
+var radiusQ = 15;
+var heightQ = 80;
+
+// Bottom ellipse (Q)
+board.create('ellipse', [
+    [20, 0],
+    [20 + radiusQ, 0],
+    [20, 3]
+], {strokeColor: '#000', fillColor: '#cde', fillOpacity: 0.3, fixed: true});
+
+// Top ellipse (Q)
+board.create('ellipse', [
+    [20, heightQ],
+    [20 + radiusQ, heightQ],
+    [20, heightQ + 3]
+], {strokeColor: '#000', fillColor: '#cde', fillOpacity: 0.3, fixed: true});
+
+// Side lines (Q)
+board.create('segment', [[18.3, 0], [18.3, heightQ]], {strokeColor: '#000', fixed: true});
+board.create('segment', [[35, 0], [35, heightQ]], {strokeColor: '#000', fixed: true});
+
+// Labels (Q)
+board.create('text', [20 + radiusQ + 3, heightQ / 2, 'Length = ?'], {fixed: true});
+board.create('text', [25, heightQ + 5, '&lt;b&gt;Cylinder Q&lt;/b&gt;'], {fixed: true});
+[[/jsxgraph]]
+
+&lt;hr&gt;
+&lt;ul&gt;
+  &lt;li&gt;Total surface area of cylinder &lt;strong&gt;P&lt;/strong&gt; = {@ SA_P @} cm²&lt;/li&gt;
+  &lt;li&gt;Total surface area of cylinder &lt;strong&gt;Q&lt;/strong&gt; = {@ SA_Q @} cm²&lt;/li&gt;
+  &lt;li&gt;Length of cylinder &lt;strong&gt;P&lt;/strong&gt; = {@ L_P @} cm&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;(a)&lt;/strong&gt; Work out the length of cylinder Q.&lt;/p&gt;
+&lt;p&gt;Give your answer in cm.&lt;/p&gt;
+
+&lt;p&gt;Length of cylinder Q = [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;The volume of cylinder &lt;strong&gt;P&lt;/strong&gt; is {@ V_P @} cm³.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;(b)&lt;/strong&gt; Work out the volume of cylinder Q.&lt;/p&gt;
+&lt;p&gt;Give your answer in cm³.&lt;/p&gt;
+
+&lt;p&gt;Volume of cylinder Q = [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;&lt;strong&gt;Hints (click to expand)&lt;/strong&gt;&lt;/summary&gt;
+  &lt;ul&gt;
+    &lt;li&gt;For similar solids: area scale factor = (length scale factor)²&lt;/li&gt;
+    &lt;li&gt;Volume scale factor = (length scale factor)³&lt;/li&gt;
+    &lt;li&gt;Length scale factor = √(area scale factor)&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/details&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="cylinders-surface-area-length-1-1-3" assembly-id="cylinders-surface-area-length-1-1-3" unique-id="cylinders-surface-area-length-1-1-3">
+      <text original-id="cylinders-surface-area-length-1-1-3-1" assembly-id="cylinders-surface-area-length-1-1-3-1" unique-id="cylinders-surface-area-length-1-1-3-1">&lt;h5&gt;&lt;strong&gt;Worked Solution&lt;/strong&gt;&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;Lets first look at what we are given:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Total surface area of cylinder &lt;strong&gt;P&lt;/strong&gt; = {@ SA_P @} cm²&lt;/li&gt;
+  &lt;li&gt;Total surface area of cylinder &lt;strong&gt;Q&lt;/strong&gt; = {@ SA_Q @} cm²&lt;/li&gt;
+  &lt;li&gt;Length of cylinder &lt;strong&gt;P&lt;/strong&gt; = {@ L_P @} cm&lt;/li&gt;
+  &lt;li&gt;Volume of cylinder &lt;strong&gt;P&lt;/strong&gt; = {@ V_P @} cm³&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5&gt;&lt;strong&gt;(a)&lt;/strong&gt; Find the length of cylinder Q&lt;/h5&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Find the area (surface area) scale factor:&lt;br&gt;
+  \( \text{Area scale factor} = \dfrac{S_Q}{S_P} = \dfrac{{@ SA_Q @}}{{@ SA_P @}} = {@ scale_factor_area @} \)&lt;/li&gt;&lt;br&gt;
+
+  &lt;li&gt;Find the linear (length) scale factor:&lt;br&gt;
+  Since area scale factor = (length scale factor)²,&lt;br&gt;
+  \( \text{Length scale factor} = \sqrt{{@ scale_factor_area @}} = {@ scale_factor_length @} \)&lt;/li&gt;&lt;br&gt;
+
+  &lt;li&gt;Find the length of Q:&lt;br&gt;
+  \( L_Q = {@ L_P @} \times {@ scale_factor_length @} = {@ L_Q @}\ \text{cm} \)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer (a):&lt;/strong&gt; {@ ta_ans1 @} cm&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h5&gt;&lt;strong&gt;(b)&lt;/strong&gt; Find the volume of cylinder Q&lt;/h5&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Find the volume scale factor:&lt;br&gt;
+  \( \text{Volume scale factor} = (\text{length scale factor})^3 = {@ scale_factor_length @}^3 = {@ scale_factor_volume @} \)&lt;/li&gt;&lt;br&gt;
+
+  &lt;li&gt;Find the volume of Q:&lt;br&gt;
+  \( V_Q = {@ V_P @} \times {@ scale_factor_volume @} = {@ V_Q @}\ \text{cm}^3 \)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer (b):&lt;/strong&gt; {@ ta_ans2 @} cm³&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;em&gt;Summary:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Length of cylinder Q:&lt;/strong&gt; {@ ta_ans1 @} cm&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Volume of cylinder Q:&lt;/strong&gt; {@ ta_ans2 @} cm³&lt;/li&gt;
+&lt;/ul&gt;</text>
+    </generalfeedback>
+    <defaultgrade original-id="cylinders-surface-area-length-1-1-4" assembly-id="cylinders-surface-area-length-1-1-4" unique-id="cylinders-surface-area-length-1-1-4">1</defaultgrade>
+    <penalty original-id="cylinders-surface-area-length-1-1-5" assembly-id="cylinders-surface-area-length-1-1-5" unique-id="cylinders-surface-area-length-1-1-5">0.1</penalty>
+    <hidden original-id="cylinders-surface-area-length-1-1-6" assembly-id="cylinders-surface-area-length-1-1-6" unique-id="cylinders-surface-area-length-1-1-6">0</hidden>
+    <idnumber original-id="cylinders-surface-area-length-1-1-7" assembly-id="cylinders-surface-area-length-1-1-7" unique-id="cylinders-surface-area-length-1-1-7"/>
+    <stackversion original-id="cylinders-surface-area-length-1-1-8" assembly-id="cylinders-surface-area-length-1-1-8" unique-id="cylinders-surface-area-length-1-1-8">
+      <text original-id="cylinders-surface-area-length-1-1-8-1" assembly-id="cylinders-surface-area-length-1-1-8-1" unique-id="cylinders-surface-area-length-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="cylinders-surface-area-length-1-1-9" assembly-id="cylinders-surface-area-length-1-1-9" unique-id="cylinders-surface-area-length-1-1-9">
+      <text original-id="cylinders-surface-area-length-1-1-9-1" assembly-id="cylinders-surface-area-length-1-1-9-1" unique-id="cylinders-surface-area-length-1-1-9-1">/* Randomised variables */
+
+/* Surface areas*/
+SA_P : 10*rand_with_step(5,12,1);              /* total surface area of cylinder P (e.g. 50–120 cm²) */
+scale_factor_area : rand([4,9,16,25]);  /* area scale factor between 4 and 25 */
+SA_Q : SA_P * scale_factor_area;
+
+/* Linear scale factor */
+scale_factor_length : sqrt(scale_factor_area);
+
+/* Lengths */
+L_P : rand_with_step(3,6,1);                   /* length of cylinder P (3–6 cm) */
+L_Q : L_P * scale_factor_length;
+
+
+
+/* Volumes */
+V_P : 10*rand_with_step(8,15,1);               /*volume of cylinder P (80–150 cm³) */
+scale_factor_volume : scale_factor_length^3;
+V_Q : V_P * scale_factor_volume;
+
+/* Answers */
+ta_ans1 : decimalplaces(L_Q,2);    /* length of Q */
+ta_ans2 : decimalplaces(V_Q,2);    /* volume of Q */</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="cylinders-surface-area-length-1-1-10" assembly-id="cylinders-surface-area-length-1-1-10" unique-id="cylinders-surface-area-length-1-1-10">
+      <text original-id="cylinders-surface-area-length-1-1-10-1" assembly-id="cylinders-surface-area-length-1-1-10-1" unique-id="cylinders-surface-area-length-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="cylinders-surface-area-length-1-1-11" assembly-id="cylinders-surface-area-length-1-1-11" unique-id="cylinders-surface-area-length-1-1-11">
+      <text original-id="cylinders-surface-area-length-1-1-11-1" assembly-id="cylinders-surface-area-length-1-1-11-1" unique-id="cylinders-surface-area-length-1-1-11-1">&lt;br&gt;{@ta_ans1 @}
+&lt;br&gt;{@ta_ans2 @}</text>
+    </questionnote>
+    <questiondescription format="html" original-id="cylinders-surface-area-length-1-1-12" assembly-id="cylinders-surface-area-length-1-1-12" unique-id="cylinders-surface-area-length-1-1-12">
+      <text original-id="cylinders-surface-area-length-1-1-12-1" assembly-id="cylinders-surface-area-length-1-1-12-1" unique-id="cylinders-surface-area-length-1-1-12-1"/>
+    </questiondescription>
+    <questionsimplify original-id="cylinders-surface-area-length-1-1-13" assembly-id="cylinders-surface-area-length-1-1-13" unique-id="cylinders-surface-area-length-1-1-13">1</questionsimplify>
+    <assumepositive original-id="cylinders-surface-area-length-1-1-14" assembly-id="cylinders-surface-area-length-1-1-14" unique-id="cylinders-surface-area-length-1-1-14">0</assumepositive>
+    <assumereal original-id="cylinders-surface-area-length-1-1-15" assembly-id="cylinders-surface-area-length-1-1-15" unique-id="cylinders-surface-area-length-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="cylinders-surface-area-length-1-1-16" assembly-id="cylinders-surface-area-length-1-1-16" unique-id="cylinders-surface-area-length-1-1-16">
+      <text original-id="cylinders-surface-area-length-1-1-16-1" assembly-id="cylinders-surface-area-length-1-1-16-1" unique-id="cylinders-surface-area-length-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="cylinders-surface-area-length-1-1-17" assembly-id="cylinders-surface-area-length-1-1-17" unique-id="cylinders-surface-area-length-1-1-17">
+      <text original-id="cylinders-surface-area-length-1-1-17-1" assembly-id="cylinders-surface-area-length-1-1-17-1" unique-id="cylinders-surface-area-length-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="cylinders-surface-area-length-1-1-18" assembly-id="cylinders-surface-area-length-1-1-18" unique-id="cylinders-surface-area-length-1-1-18">
+      <text original-id="cylinders-surface-area-length-1-1-18-1" assembly-id="cylinders-surface-area-length-1-1-18-1" unique-id="cylinders-surface-area-length-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="cylinders-surface-area-length-1-1-19" assembly-id="cylinders-surface-area-length-1-1-19" unique-id="cylinders-surface-area-length-1-1-19">.</decimals>
+    <scientificnotation original-id="cylinders-surface-area-length-1-1-20" assembly-id="cylinders-surface-area-length-1-1-20" unique-id="cylinders-surface-area-length-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="cylinders-surface-area-length-1-1-21" assembly-id="cylinders-surface-area-length-1-1-21" unique-id="cylinders-surface-area-length-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="cylinders-surface-area-length-1-1-22" assembly-id="cylinders-surface-area-length-1-1-22" unique-id="cylinders-surface-area-length-1-1-22">1</sqrtsign>
+    <complexno original-id="cylinders-surface-area-length-1-1-23" assembly-id="cylinders-surface-area-length-1-1-23" unique-id="cylinders-surface-area-length-1-1-23">i</complexno>
+    <inversetrig original-id="cylinders-surface-area-length-1-1-24" assembly-id="cylinders-surface-area-length-1-1-24" unique-id="cylinders-surface-area-length-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="cylinders-surface-area-length-1-1-25" assembly-id="cylinders-surface-area-length-1-1-25" unique-id="cylinders-surface-area-length-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="cylinders-surface-area-length-1-1-26" assembly-id="cylinders-surface-area-length-1-1-26" unique-id="cylinders-surface-area-length-1-1-26">[</matrixparens>
+    <isbroken original-id="cylinders-surface-area-length-1-1-27" assembly-id="cylinders-surface-area-length-1-1-27" unique-id="cylinders-surface-area-length-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="cylinders-surface-area-length-1-1-28" assembly-id="cylinders-surface-area-length-1-1-28" unique-id="cylinders-surface-area-length-1-1-28"/>
+    <input original-id="cylinders-surface-area-length-1-1-29" assembly-id="cylinders-surface-area-length-1-1-29" unique-id="cylinders-surface-area-length-1-1-29">
+      <name original-id="cylinders-surface-area-length-1-1-29-1" assembly-id="cylinders-surface-area-length-1-1-29-1" unique-id="cylinders-surface-area-length-1-1-29-1">ans1</name>
+      <type original-id="cylinders-surface-area-length-1-1-29-2" assembly-id="cylinders-surface-area-length-1-1-29-2" unique-id="cylinders-surface-area-length-1-1-29-2">algebraic</type>
+      <tans original-id="cylinders-surface-area-length-1-1-29-3" assembly-id="cylinders-surface-area-length-1-1-29-3" unique-id="cylinders-surface-area-length-1-1-29-3">ta_ans1 </tans>
+      <boxsize original-id="cylinders-surface-area-length-1-1-29-4" assembly-id="cylinders-surface-area-length-1-1-29-4" unique-id="cylinders-surface-area-length-1-1-29-4">8</boxsize>
+      <strictsyntax original-id="cylinders-surface-area-length-1-1-29-5" assembly-id="cylinders-surface-area-length-1-1-29-5" unique-id="cylinders-surface-area-length-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="cylinders-surface-area-length-1-1-29-6" assembly-id="cylinders-surface-area-length-1-1-29-6" unique-id="cylinders-surface-area-length-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="cylinders-surface-area-length-1-1-29-7" assembly-id="cylinders-surface-area-length-1-1-29-7" unique-id="cylinders-surface-area-length-1-1-29-7"/>
+      <syntaxattribute original-id="cylinders-surface-area-length-1-1-29-8" assembly-id="cylinders-surface-area-length-1-1-29-8" unique-id="cylinders-surface-area-length-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="cylinders-surface-area-length-1-1-29-9" assembly-id="cylinders-surface-area-length-1-1-29-9" unique-id="cylinders-surface-area-length-1-1-29-9"/>
+      <allowwords original-id="cylinders-surface-area-length-1-1-29-10" assembly-id="cylinders-surface-area-length-1-1-29-10" unique-id="cylinders-surface-area-length-1-1-29-10"/>
+      <forbidfloat original-id="cylinders-surface-area-length-1-1-29-11" assembly-id="cylinders-surface-area-length-1-1-29-11" unique-id="cylinders-surface-area-length-1-1-29-11">1</forbidfloat>
+      <requirelowestterms original-id="cylinders-surface-area-length-1-1-29-12" assembly-id="cylinders-surface-area-length-1-1-29-12" unique-id="cylinders-surface-area-length-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="cylinders-surface-area-length-1-1-29-13" assembly-id="cylinders-surface-area-length-1-1-29-13" unique-id="cylinders-surface-area-length-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="cylinders-surface-area-length-1-1-29-14" assembly-id="cylinders-surface-area-length-1-1-29-14" unique-id="cylinders-surface-area-length-1-1-29-14">1</mustverify>
+      <showvalidation original-id="cylinders-surface-area-length-1-1-29-15" assembly-id="cylinders-surface-area-length-1-1-29-15" unique-id="cylinders-surface-area-length-1-1-29-15">1</showvalidation>
+      <options original-id="cylinders-surface-area-length-1-1-29-16" assembly-id="cylinders-surface-area-length-1-1-29-16" unique-id="cylinders-surface-area-length-1-1-29-16"/>
+    </input>
+    <input original-id="cylinders-surface-area-length-1-1-30" assembly-id="cylinders-surface-area-length-1-1-30" unique-id="cylinders-surface-area-length-1-1-30">
+      <name original-id="cylinders-surface-area-length-1-1-30-1" assembly-id="cylinders-surface-area-length-1-1-30-1" unique-id="cylinders-surface-area-length-1-1-30-1">ans2</name>
+      <type original-id="cylinders-surface-area-length-1-1-30-2" assembly-id="cylinders-surface-area-length-1-1-30-2" unique-id="cylinders-surface-area-length-1-1-30-2">algebraic</type>
+      <tans original-id="cylinders-surface-area-length-1-1-30-3" assembly-id="cylinders-surface-area-length-1-1-30-3" unique-id="cylinders-surface-area-length-1-1-30-3">ta_ans2 </tans>
+      <boxsize original-id="cylinders-surface-area-length-1-1-30-4" assembly-id="cylinders-surface-area-length-1-1-30-4" unique-id="cylinders-surface-area-length-1-1-30-4">8</boxsize>
+      <strictsyntax original-id="cylinders-surface-area-length-1-1-30-5" assembly-id="cylinders-surface-area-length-1-1-30-5" unique-id="cylinders-surface-area-length-1-1-30-5">1</strictsyntax>
+      <insertstars original-id="cylinders-surface-area-length-1-1-30-6" assembly-id="cylinders-surface-area-length-1-1-30-6" unique-id="cylinders-surface-area-length-1-1-30-6">0</insertstars>
+      <syntaxhint original-id="cylinders-surface-area-length-1-1-30-7" assembly-id="cylinders-surface-area-length-1-1-30-7" unique-id="cylinders-surface-area-length-1-1-30-7"/>
+      <syntaxattribute original-id="cylinders-surface-area-length-1-1-30-8" assembly-id="cylinders-surface-area-length-1-1-30-8" unique-id="cylinders-surface-area-length-1-1-30-8">0</syntaxattribute>
+      <forbidwords original-id="cylinders-surface-area-length-1-1-30-9" assembly-id="cylinders-surface-area-length-1-1-30-9" unique-id="cylinders-surface-area-length-1-1-30-9"/>
+      <allowwords original-id="cylinders-surface-area-length-1-1-30-10" assembly-id="cylinders-surface-area-length-1-1-30-10" unique-id="cylinders-surface-area-length-1-1-30-10"/>
+      <forbidfloat original-id="cylinders-surface-area-length-1-1-30-11" assembly-id="cylinders-surface-area-length-1-1-30-11" unique-id="cylinders-surface-area-length-1-1-30-11">1</forbidfloat>
+      <requirelowestterms original-id="cylinders-surface-area-length-1-1-30-12" assembly-id="cylinders-surface-area-length-1-1-30-12" unique-id="cylinders-surface-area-length-1-1-30-12">0</requirelowestterms>
+      <checkanswertype original-id="cylinders-surface-area-length-1-1-30-13" assembly-id="cylinders-surface-area-length-1-1-30-13" unique-id="cylinders-surface-area-length-1-1-30-13">0</checkanswertype>
+      <mustverify original-id="cylinders-surface-area-length-1-1-30-14" assembly-id="cylinders-surface-area-length-1-1-30-14" unique-id="cylinders-surface-area-length-1-1-30-14">1</mustverify>
+      <showvalidation original-id="cylinders-surface-area-length-1-1-30-15" assembly-id="cylinders-surface-area-length-1-1-30-15" unique-id="cylinders-surface-area-length-1-1-30-15">1</showvalidation>
+      <options original-id="cylinders-surface-area-length-1-1-30-16" assembly-id="cylinders-surface-area-length-1-1-30-16" unique-id="cylinders-surface-area-length-1-1-30-16"/>
+    </input>
+    <prt original-id="cylinders-surface-area-length-1-1-31" assembly-id="cylinders-surface-area-length-1-1-31" unique-id="cylinders-surface-area-length-1-1-31">
+      <name original-id="cylinders-surface-area-length-1-1-31-1" assembly-id="cylinders-surface-area-length-1-1-31-1" unique-id="cylinders-surface-area-length-1-1-31-1">prt1</name>
+      <value original-id="cylinders-surface-area-length-1-1-31-2" assembly-id="cylinders-surface-area-length-1-1-31-2" unique-id="cylinders-surface-area-length-1-1-31-2">1.0000000</value>
+      <autosimplify original-id="cylinders-surface-area-length-1-1-31-3" assembly-id="cylinders-surface-area-length-1-1-31-3" unique-id="cylinders-surface-area-length-1-1-31-3">1</autosimplify>
+      <feedbackstyle original-id="cylinders-surface-area-length-1-1-31-4" assembly-id="cylinders-surface-area-length-1-1-31-4" unique-id="cylinders-surface-area-length-1-1-31-4">1</feedbackstyle>
+      <feedbackvariables original-id="cylinders-surface-area-length-1-1-31-5" assembly-id="cylinders-surface-area-length-1-1-31-5" unique-id="cylinders-surface-area-length-1-1-31-5">
+        <text original-id="cylinders-surface-area-length-1-1-31-5-1" assembly-id="cylinders-surface-area-length-1-1-31-5-1" unique-id="cylinders-surface-area-length-1-1-31-5-1"/>
+      </feedbackvariables>
+      <node original-id="cylinders-surface-area-length-1-1-31-6" assembly-id="cylinders-surface-area-length-1-1-31-6" unique-id="cylinders-surface-area-length-1-1-31-6">
+        <name original-id="cylinders-surface-area-length-1-1-31-6-1" assembly-id="cylinders-surface-area-length-1-1-31-6-1" unique-id="cylinders-surface-area-length-1-1-31-6-1">0</name>
+        <description original-id="cylinders-surface-area-length-1-1-31-6-2" assembly-id="cylinders-surface-area-length-1-1-31-6-2" unique-id="cylinders-surface-area-length-1-1-31-6-2"/>
+        <answertest original-id="cylinders-surface-area-length-1-1-31-6-3" assembly-id="cylinders-surface-area-length-1-1-31-6-3" unique-id="cylinders-surface-area-length-1-1-31-6-3">AlgEquiv</answertest>
+        <sans original-id="cylinders-surface-area-length-1-1-31-6-4" assembly-id="cylinders-surface-area-length-1-1-31-6-4" unique-id="cylinders-surface-area-length-1-1-31-6-4">ans1</sans>
+        <tans original-id="cylinders-surface-area-length-1-1-31-6-5" assembly-id="cylinders-surface-area-length-1-1-31-6-5" unique-id="cylinders-surface-area-length-1-1-31-6-5">ta_ans1 </tans>
+        <testoptions original-id="cylinders-surface-area-length-1-1-31-6-6" assembly-id="cylinders-surface-area-length-1-1-31-6-6" unique-id="cylinders-surface-area-length-1-1-31-6-6"/>
+        <quiet original-id="cylinders-surface-area-length-1-1-31-6-7" assembly-id="cylinders-surface-area-length-1-1-31-6-7" unique-id="cylinders-surface-area-length-1-1-31-6-7">0</quiet>
+        <truescoremode original-id="cylinders-surface-area-length-1-1-31-6-8" assembly-id="cylinders-surface-area-length-1-1-31-6-8" unique-id="cylinders-surface-area-length-1-1-31-6-8">=</truescoremode>
+        <truescore original-id="cylinders-surface-area-length-1-1-31-6-9" assembly-id="cylinders-surface-area-length-1-1-31-6-9" unique-id="cylinders-surface-area-length-1-1-31-6-9">1</truescore>
+        <truepenalty original-id="cylinders-surface-area-length-1-1-31-6-10" assembly-id="cylinders-surface-area-length-1-1-31-6-10" unique-id="cylinders-surface-area-length-1-1-31-6-10"/>
+        <truenextnode original-id="cylinders-surface-area-length-1-1-31-6-11" assembly-id="cylinders-surface-area-length-1-1-31-6-11" unique-id="cylinders-surface-area-length-1-1-31-6-11">-1</truenextnode>
+        <trueanswernote original-id="cylinders-surface-area-length-1-1-31-6-12" assembly-id="cylinders-surface-area-length-1-1-31-6-12" unique-id="cylinders-surface-area-length-1-1-31-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="cylinders-surface-area-length-1-1-31-6-13" assembly-id="cylinders-surface-area-length-1-1-31-6-13" unique-id="cylinders-surface-area-length-1-1-31-6-13">
+          <text original-id="cylinders-surface-area-length-1-1-31-6-13-1" assembly-id="cylinders-surface-area-length-1-1-31-6-13-1" unique-id="cylinders-surface-area-length-1-1-31-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="cylinders-surface-area-length-1-1-31-6-14" assembly-id="cylinders-surface-area-length-1-1-31-6-14" unique-id="cylinders-surface-area-length-1-1-31-6-14">=</falsescoremode>
+        <falsescore original-id="cylinders-surface-area-length-1-1-31-6-15" assembly-id="cylinders-surface-area-length-1-1-31-6-15" unique-id="cylinders-surface-area-length-1-1-31-6-15">0</falsescore>
+        <falsepenalty original-id="cylinders-surface-area-length-1-1-31-6-16" assembly-id="cylinders-surface-area-length-1-1-31-6-16" unique-id="cylinders-surface-area-length-1-1-31-6-16"/>
+        <falsenextnode original-id="cylinders-surface-area-length-1-1-31-6-17" assembly-id="cylinders-surface-area-length-1-1-31-6-17" unique-id="cylinders-surface-area-length-1-1-31-6-17">-1</falsenextnode>
+        <falseanswernote original-id="cylinders-surface-area-length-1-1-31-6-18" assembly-id="cylinders-surface-area-length-1-1-31-6-18" unique-id="cylinders-surface-area-length-1-1-31-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="cylinders-surface-area-length-1-1-31-6-19" assembly-id="cylinders-surface-area-length-1-1-31-6-19" unique-id="cylinders-surface-area-length-1-1-31-6-19">
+          <text original-id="cylinders-surface-area-length-1-1-31-6-19-1" assembly-id="cylinders-surface-area-length-1-1-31-6-19-1" unique-id="cylinders-surface-area-length-1-1-31-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="cylinders-surface-area-length-1-1-32" assembly-id="cylinders-surface-area-length-1-1-32" unique-id="cylinders-surface-area-length-1-1-32">
+      <name original-id="cylinders-surface-area-length-1-1-32-1" assembly-id="cylinders-surface-area-length-1-1-32-1" unique-id="cylinders-surface-area-length-1-1-32-1">prt2</name>
+      <value original-id="cylinders-surface-area-length-1-1-32-2" assembly-id="cylinders-surface-area-length-1-1-32-2" unique-id="cylinders-surface-area-length-1-1-32-2">1.0000000</value>
+      <autosimplify original-id="cylinders-surface-area-length-1-1-32-3" assembly-id="cylinders-surface-area-length-1-1-32-3" unique-id="cylinders-surface-area-length-1-1-32-3">1</autosimplify>
+      <feedbackstyle original-id="cylinders-surface-area-length-1-1-32-4" assembly-id="cylinders-surface-area-length-1-1-32-4" unique-id="cylinders-surface-area-length-1-1-32-4">1</feedbackstyle>
+      <feedbackvariables original-id="cylinders-surface-area-length-1-1-32-5" assembly-id="cylinders-surface-area-length-1-1-32-5" unique-id="cylinders-surface-area-length-1-1-32-5">
+        <text original-id="cylinders-surface-area-length-1-1-32-5-1" assembly-id="cylinders-surface-area-length-1-1-32-5-1" unique-id="cylinders-surface-area-length-1-1-32-5-1"/>
+      </feedbackvariables>
+      <node original-id="cylinders-surface-area-length-1-1-32-6" assembly-id="cylinders-surface-area-length-1-1-32-6" unique-id="cylinders-surface-area-length-1-1-32-6">
+        <name original-id="cylinders-surface-area-length-1-1-32-6-1" assembly-id="cylinders-surface-area-length-1-1-32-6-1" unique-id="cylinders-surface-area-length-1-1-32-6-1">0</name>
+        <description original-id="cylinders-surface-area-length-1-1-32-6-2" assembly-id="cylinders-surface-area-length-1-1-32-6-2" unique-id="cylinders-surface-area-length-1-1-32-6-2"/>
+        <answertest original-id="cylinders-surface-area-length-1-1-32-6-3" assembly-id="cylinders-surface-area-length-1-1-32-6-3" unique-id="cylinders-surface-area-length-1-1-32-6-3">AlgEquiv</answertest>
+        <sans original-id="cylinders-surface-area-length-1-1-32-6-4" assembly-id="cylinders-surface-area-length-1-1-32-6-4" unique-id="cylinders-surface-area-length-1-1-32-6-4">ans2</sans>
+        <tans original-id="cylinders-surface-area-length-1-1-32-6-5" assembly-id="cylinders-surface-area-length-1-1-32-6-5" unique-id="cylinders-surface-area-length-1-1-32-6-5">ta_ans2 </tans>
+        <testoptions original-id="cylinders-surface-area-length-1-1-32-6-6" assembly-id="cylinders-surface-area-length-1-1-32-6-6" unique-id="cylinders-surface-area-length-1-1-32-6-6"/>
+        <quiet original-id="cylinders-surface-area-length-1-1-32-6-7" assembly-id="cylinders-surface-area-length-1-1-32-6-7" unique-id="cylinders-surface-area-length-1-1-32-6-7">0</quiet>
+        <truescoremode original-id="cylinders-surface-area-length-1-1-32-6-8" assembly-id="cylinders-surface-area-length-1-1-32-6-8" unique-id="cylinders-surface-area-length-1-1-32-6-8">=</truescoremode>
+        <truescore original-id="cylinders-surface-area-length-1-1-32-6-9" assembly-id="cylinders-surface-area-length-1-1-32-6-9" unique-id="cylinders-surface-area-length-1-1-32-6-9">1</truescore>
+        <truepenalty original-id="cylinders-surface-area-length-1-1-32-6-10" assembly-id="cylinders-surface-area-length-1-1-32-6-10" unique-id="cylinders-surface-area-length-1-1-32-6-10"/>
+        <truenextnode original-id="cylinders-surface-area-length-1-1-32-6-11" assembly-id="cylinders-surface-area-length-1-1-32-6-11" unique-id="cylinders-surface-area-length-1-1-32-6-11">-1</truenextnode>
+        <trueanswernote original-id="cylinders-surface-area-length-1-1-32-6-12" assembly-id="cylinders-surface-area-length-1-1-32-6-12" unique-id="cylinders-surface-area-length-1-1-32-6-12">prt2-1-T</trueanswernote>
+        <truefeedback format="html" original-id="cylinders-surface-area-length-1-1-32-6-13" assembly-id="cylinders-surface-area-length-1-1-32-6-13" unique-id="cylinders-surface-area-length-1-1-32-6-13">
+          <text original-id="cylinders-surface-area-length-1-1-32-6-13-1" assembly-id="cylinders-surface-area-length-1-1-32-6-13-1" unique-id="cylinders-surface-area-length-1-1-32-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="cylinders-surface-area-length-1-1-32-6-14" assembly-id="cylinders-surface-area-length-1-1-32-6-14" unique-id="cylinders-surface-area-length-1-1-32-6-14">=</falsescoremode>
+        <falsescore original-id="cylinders-surface-area-length-1-1-32-6-15" assembly-id="cylinders-surface-area-length-1-1-32-6-15" unique-id="cylinders-surface-area-length-1-1-32-6-15">0</falsescore>
+        <falsepenalty original-id="cylinders-surface-area-length-1-1-32-6-16" assembly-id="cylinders-surface-area-length-1-1-32-6-16" unique-id="cylinders-surface-area-length-1-1-32-6-16"/>
+        <falsenextnode original-id="cylinders-surface-area-length-1-1-32-6-17" assembly-id="cylinders-surface-area-length-1-1-32-6-17" unique-id="cylinders-surface-area-length-1-1-32-6-17">-1</falsenextnode>
+        <falseanswernote original-id="cylinders-surface-area-length-1-1-32-6-18" assembly-id="cylinders-surface-area-length-1-1-32-6-18" unique-id="cylinders-surface-area-length-1-1-32-6-18">prt2-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="cylinders-surface-area-length-1-1-32-6-19" assembly-id="cylinders-surface-area-length-1-1-32-6-19" unique-id="cylinders-surface-area-length-1-1-32-6-19">
+          <text original-id="cylinders-surface-area-length-1-1-32-6-19-1" assembly-id="cylinders-surface-area-length-1-1-32-6-19-1" unique-id="cylinders-surface-area-length-1-1-32-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>
+            

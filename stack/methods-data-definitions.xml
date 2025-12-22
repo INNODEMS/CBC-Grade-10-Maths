@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+                <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" original-id="methods-data-definitions-1" assembly-id="methods-data-definitions-1" unique-id="methods-data-definitions-1">
+  <question type="stack" original-id="methods-data-definitions-1-1" assembly-id="methods-data-definitions-1-1" unique-id="methods-data-definitions-1-1">
+    <name original-id="methods-data-definitions-1-1-1" assembly-id="methods-data-definitions-1-1-1" unique-id="methods-data-definitions-1-1-1">
+      <text original-id="methods-data-definitions-1-1-1-1" assembly-id="methods-data-definitions-1-1-1-1" unique-id="methods-data-definitions-1-1-1-1">Identifying data collection methods</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="methods-data-definitions-1-1-2" assembly-id="methods-data-definitions-1-1-2" unique-id="methods-data-definitions-1-1-2">
+      <text original-id="methods-data-definitions-1-1-2-1" assembly-id="methods-data-definitions-1-1-2-1" unique-id="methods-data-definitions-1-1-2-1">&lt;p&gt;Consider the following research scenario:&lt;/p&gt;
+&lt;p&gt;{@q_text@}&lt;/p&gt;
+&lt;p&gt;Identify the specific method of data collection being used in this situation.&lt;/p&gt;
+&lt;p&gt;[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="methods-data-definitions-1-1-3" assembly-id="methods-data-definitions-1-1-3" unique-id="methods-data-definitions-1-1-3">
+      <text original-id="methods-data-definitions-1-1-3-1" assembly-id="methods-data-definitions-1-1-3-1" unique-id="methods-data-definitions-1-1-3-1">&lt;p&gt;&lt;strong&gt;Correct Answer: {@correct_text@}&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Reasoning:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Observation:&lt;/strong&gt; Involves watching subjects in their natural environment without interaction (e.g., the wildlife ranger).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Focus Group:&lt;/strong&gt; A guided discussion with a small group to get qualitative opinions (e.g., the teenagers discussing phones).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Census:&lt;/strong&gt; A complete count of the entire population (e.g., the government survey).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Experimentation:&lt;/strong&gt; Manipulating variables (fertilizer) to measure the effect (maize growth).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Questionnaire:&lt;/strong&gt; Using standard forms/emails to get feedback from a large number of people (e.g., the student email).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Secondary Data:&lt;/strong&gt; Analyzing data that was already collected by someone else (e.g., the NBS reports).&lt;/li&gt;
+&lt;/ul&gt;</text>
+    </generalfeedback>
+    <defaultgrade original-id="methods-data-definitions-1-1-4" assembly-id="methods-data-definitions-1-1-4" unique-id="methods-data-definitions-1-1-4">1</defaultgrade>
+    <penalty original-id="methods-data-definitions-1-1-5" assembly-id="methods-data-definitions-1-1-5" unique-id="methods-data-definitions-1-1-5">0.1</penalty>
+    <hidden original-id="methods-data-definitions-1-1-6" assembly-id="methods-data-definitions-1-1-6" unique-id="methods-data-definitions-1-1-6">0</hidden>
+    <idnumber original-id="methods-data-definitions-1-1-7" assembly-id="methods-data-definitions-1-1-7" unique-id="methods-data-definitions-1-1-7"/>
+    <stackversion original-id="methods-data-definitions-1-1-8" assembly-id="methods-data-definitions-1-1-8" unique-id="methods-data-definitions-1-1-8">
+      <text original-id="methods-data-definitions-1-1-8-1" assembly-id="methods-data-definitions-1-1-8-1" unique-id="methods-data-definitions-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="methods-data-definitions-1-1-9" assembly-id="methods-data-definitions-1-1-9" unique-id="methods-data-definitions-1-1-9">
+      <text original-id="methods-data-definitions-1-1-9-1" assembly-id="methods-data-definitions-1-1-9-1" unique-id="methods-data-definitions-1-1-9-1">/* 1. SCENARIO &amp; CORRECT ANSWER SETUP */
+/* NEW Scenarios focusing on different contexts (Agriculture, Wildlife, Business, etc.) */
+scenarios: [
+  ["A wildlife ranger hides in a blind to count the number of elephants visiting a watering hole at sunset without disturbing them.", "Observation"],
+  
+  ["A mobile phone company invites a small group of 8 teenagers to have a guided discussion about what features they dislike in current smartphones.", "Focus Group"],
+  
+  ["The government requires every single citizen to provide details on their age, occupation, and housing status to assist in national planning.", "Census"],
+  
+  ["A farmer divides his land into two plots. He uses a new fertilizer on Plot A and the old fertilizer on Plot B to see which one produces more maize.", "Experimentation"],
+  
+  ["A university sends an email form to all 10,000 students asking them to rate the quality of the cafeteria food on a scale of 1 to 5.", "Questionnaire"],
+  
+  ["An economist analyzes the inflation rates in Kenya from 1990 to 2020 using annual reports published by the National Bureau of Statistics.", "Secondary Data Collection"]
+];
+
+/* Pick a random scenario */
+rand_idx: rand(length(scenarios)) + 1;
+chosen_scenario: scenarios[rand_idx];
+
+q_text: chosen_scenario[1];
+correct_text: chosen_scenario[2];
+
+/* 2. DISTRACTOR SETUP */
+/* Master list of all possible methods */
+all_methods: [
+    "Observation", 
+    "Focus Group", 
+    "Census", 
+    "Experimentation", 
+    "Questionnaire", 
+    "Secondary Data Collection", 
+    "Face-to-Face Interview", 
+    "Telephone Survey", 
+    "Case Study"
+];
+
+/* Filter out the correct answer */
+wrong_pool: sublist(all_methods, lambda([x], x # correct_text));
+
+/* Shuffle the wrong pool */
+shuffled_wrongs: random_permutation(wrong_pool);
+
+/* 3. BUILD THE ANSWER LIST */
+/* Correct Answer: ID 1 */
+correct_answer: rand_selection([
+   [1, true, correct_text]
+], 1);
+
+/* Incorrect Answers: ID 2-4 (Pick 3 distinct wrong ones) */
+incorrect_answers: rand_selection([
+   [2, false, shuffled_wrongs[1]],
+   [3, false, shuffled_wrongs[2]],
+   [4, false, shuffled_wrongs[3]]
+], 3);
+
+/* 4. FINAL PERMUTATION */
+ta: random_permutation(append(correct_answer, incorrect_answers));
+
+/* 5. INPUT HELPER */
+final_options: map(third, ta);</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="methods-data-definitions-1-1-10" assembly-id="methods-data-definitions-1-1-10" unique-id="methods-data-definitions-1-1-10">
+      <text original-id="methods-data-definitions-1-1-10-1" assembly-id="methods-data-definitions-1-1-10-1" unique-id="methods-data-definitions-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="methods-data-definitions-1-1-11" assembly-id="methods-data-definitions-1-1-11" unique-id="methods-data-definitions-1-1-11">
+      <text original-id="methods-data-definitions-1-1-11-1" assembly-id="methods-data-definitions-1-1-11-1" unique-id="methods-data-definitions-1-1-11-1">{@ta@}</text>
+    </questionnote>
+    <questiondescription format="html" original-id="methods-data-definitions-1-1-12" assembly-id="methods-data-definitions-1-1-12" unique-id="methods-data-definitions-1-1-12">
+      <text original-id="methods-data-definitions-1-1-12-1" assembly-id="methods-data-definitions-1-1-12-1" unique-id="methods-data-definitions-1-1-12-1">&lt;p id="author"&gt;Daniel Murunga&lt;/p&gt;
+&lt;p id="concept"&gt;&lt;/p&gt;
+&lt;p id="reviewer"&gt;&lt;/p&gt;
+&lt;p id="reviewer"&gt;&lt;/p&gt;
+&lt;p id="description"&gt;In this variant question, you are presented with a randomized real-world scenario (ranging from agriculture to economics). You must identify the correct data collection method used, such as Experimentation, Secondary Data, or Focus Groups.&lt;/p&gt;</text>
+    </questiondescription>
+    <questionsimplify original-id="methods-data-definitions-1-1-13" assembly-id="methods-data-definitions-1-1-13" unique-id="methods-data-definitions-1-1-13">1</questionsimplify>
+    <assumepositive original-id="methods-data-definitions-1-1-14" assembly-id="methods-data-definitions-1-1-14" unique-id="methods-data-definitions-1-1-14">0</assumepositive>
+    <assumereal original-id="methods-data-definitions-1-1-15" assembly-id="methods-data-definitions-1-1-15" unique-id="methods-data-definitions-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="methods-data-definitions-1-1-16" assembly-id="methods-data-definitions-1-1-16" unique-id="methods-data-definitions-1-1-16">
+      <text original-id="methods-data-definitions-1-1-16-1" assembly-id="methods-data-definitions-1-1-16-1" unique-id="methods-data-definitions-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="methods-data-definitions-1-1-17" assembly-id="methods-data-definitions-1-1-17" unique-id="methods-data-definitions-1-1-17">
+      <text original-id="methods-data-definitions-1-1-17-1" assembly-id="methods-data-definitions-1-1-17-1" unique-id="methods-data-definitions-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="methods-data-definitions-1-1-18" assembly-id="methods-data-definitions-1-1-18" unique-id="methods-data-definitions-1-1-18">
+      <text original-id="methods-data-definitions-1-1-18-1" assembly-id="methods-data-definitions-1-1-18-1" unique-id="methods-data-definitions-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="methods-data-definitions-1-1-19" assembly-id="methods-data-definitions-1-1-19" unique-id="methods-data-definitions-1-1-19">.</decimals>
+    <scientificnotation original-id="methods-data-definitions-1-1-20" assembly-id="methods-data-definitions-1-1-20" unique-id="methods-data-definitions-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="methods-data-definitions-1-1-21" assembly-id="methods-data-definitions-1-1-21" unique-id="methods-data-definitions-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="methods-data-definitions-1-1-22" assembly-id="methods-data-definitions-1-1-22" unique-id="methods-data-definitions-1-1-22">1</sqrtsign>
+    <complexno original-id="methods-data-definitions-1-1-23" assembly-id="methods-data-definitions-1-1-23" unique-id="methods-data-definitions-1-1-23">i</complexno>
+    <inversetrig original-id="methods-data-definitions-1-1-24" assembly-id="methods-data-definitions-1-1-24" unique-id="methods-data-definitions-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="methods-data-definitions-1-1-25" assembly-id="methods-data-definitions-1-1-25" unique-id="methods-data-definitions-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="methods-data-definitions-1-1-26" assembly-id="methods-data-definitions-1-1-26" unique-id="methods-data-definitions-1-1-26">[</matrixparens>
+    <isbroken original-id="methods-data-definitions-1-1-27" assembly-id="methods-data-definitions-1-1-27" unique-id="methods-data-definitions-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="methods-data-definitions-1-1-28" assembly-id="methods-data-definitions-1-1-28" unique-id="methods-data-definitions-1-1-28"/>
+    <input original-id="methods-data-definitions-1-1-29" assembly-id="methods-data-definitions-1-1-29" unique-id="methods-data-definitions-1-1-29">
+      <name original-id="methods-data-definitions-1-1-29-1" assembly-id="methods-data-definitions-1-1-29-1" unique-id="methods-data-definitions-1-1-29-1">ans1</name>
+      <type original-id="methods-data-definitions-1-1-29-2" assembly-id="methods-data-definitions-1-1-29-2" unique-id="methods-data-definitions-1-1-29-2">radio</type>
+      <tans original-id="methods-data-definitions-1-1-29-3" assembly-id="methods-data-definitions-1-1-29-3" unique-id="methods-data-definitions-1-1-29-3">ta</tans>
+      <boxsize original-id="methods-data-definitions-1-1-29-4" assembly-id="methods-data-definitions-1-1-29-4" unique-id="methods-data-definitions-1-1-29-4">15</boxsize>
+      <strictsyntax original-id="methods-data-definitions-1-1-29-5" assembly-id="methods-data-definitions-1-1-29-5" unique-id="methods-data-definitions-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="methods-data-definitions-1-1-29-6" assembly-id="methods-data-definitions-1-1-29-6" unique-id="methods-data-definitions-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="methods-data-definitions-1-1-29-7" assembly-id="methods-data-definitions-1-1-29-7" unique-id="methods-data-definitions-1-1-29-7"/>
+      <syntaxattribute original-id="methods-data-definitions-1-1-29-8" assembly-id="methods-data-definitions-1-1-29-8" unique-id="methods-data-definitions-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="methods-data-definitions-1-1-29-9" assembly-id="methods-data-definitions-1-1-29-9" unique-id="methods-data-definitions-1-1-29-9"/>
+      <allowwords original-id="methods-data-definitions-1-1-29-10" assembly-id="methods-data-definitions-1-1-29-10" unique-id="methods-data-definitions-1-1-29-10"/>
+      <forbidfloat original-id="methods-data-definitions-1-1-29-11" assembly-id="methods-data-definitions-1-1-29-11" unique-id="methods-data-definitions-1-1-29-11">1</forbidfloat>
+      <requirelowestterms original-id="methods-data-definitions-1-1-29-12" assembly-id="methods-data-definitions-1-1-29-12" unique-id="methods-data-definitions-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="methods-data-definitions-1-1-29-13" assembly-id="methods-data-definitions-1-1-29-13" unique-id="methods-data-definitions-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="methods-data-definitions-1-1-29-14" assembly-id="methods-data-definitions-1-1-29-14" unique-id="methods-data-definitions-1-1-29-14">1</mustverify>
+      <showvalidation original-id="methods-data-definitions-1-1-29-15" assembly-id="methods-data-definitions-1-1-29-15" unique-id="methods-data-definitions-1-1-29-15">3</showvalidation>
+      <options original-id="methods-data-definitions-1-1-29-16" assembly-id="methods-data-definitions-1-1-29-16" unique-id="methods-data-definitions-1-1-29-16">nonotanswered</options>
+    </input>
+    <prt original-id="methods-data-definitions-1-1-30" assembly-id="methods-data-definitions-1-1-30" unique-id="methods-data-definitions-1-1-30">
+      <name original-id="methods-data-definitions-1-1-30-1" assembly-id="methods-data-definitions-1-1-30-1" unique-id="methods-data-definitions-1-1-30-1">prt1</name>
+      <value original-id="methods-data-definitions-1-1-30-2" assembly-id="methods-data-definitions-1-1-30-2" unique-id="methods-data-definitions-1-1-30-2">1.0000000</value>
+      <autosimplify original-id="methods-data-definitions-1-1-30-3" assembly-id="methods-data-definitions-1-1-30-3" unique-id="methods-data-definitions-1-1-30-3">1</autosimplify>
+      <feedbackstyle original-id="methods-data-definitions-1-1-30-4" assembly-id="methods-data-definitions-1-1-30-4" unique-id="methods-data-definitions-1-1-30-4">1</feedbackstyle>
+      <feedbackvariables original-id="methods-data-definitions-1-1-30-5" assembly-id="methods-data-definitions-1-1-30-5" unique-id="methods-data-definitions-1-1-30-5">
+        <text original-id="methods-data-definitions-1-1-30-5-1" assembly-id="methods-data-definitions-1-1-30-5-1" unique-id="methods-data-definitions-1-1-30-5-1"/>
+      </feedbackvariables>
+      <node original-id="methods-data-definitions-1-1-30-6" assembly-id="methods-data-definitions-1-1-30-6" unique-id="methods-data-definitions-1-1-30-6">
+        <name original-id="methods-data-definitions-1-1-30-6-1" assembly-id="methods-data-definitions-1-1-30-6-1" unique-id="methods-data-definitions-1-1-30-6-1">0</name>
+        <description original-id="methods-data-definitions-1-1-30-6-2" assembly-id="methods-data-definitions-1-1-30-6-2" unique-id="methods-data-definitions-1-1-30-6-2">Checks for the correct answer</description>
+        <answertest original-id="methods-data-definitions-1-1-30-6-3" assembly-id="methods-data-definitions-1-1-30-6-3" unique-id="methods-data-definitions-1-1-30-6-3">AlgEquiv</answertest>
+        <sans original-id="methods-data-definitions-1-1-30-6-4" assembly-id="methods-data-definitions-1-1-30-6-4" unique-id="methods-data-definitions-1-1-30-6-4">ans1</sans>
+        <tans original-id="methods-data-definitions-1-1-30-6-5" assembly-id="methods-data-definitions-1-1-30-6-5" unique-id="methods-data-definitions-1-1-30-6-5">mcq_correct(ta)[1]</tans>
+        <testoptions original-id="methods-data-definitions-1-1-30-6-6" assembly-id="methods-data-definitions-1-1-30-6-6" unique-id="methods-data-definitions-1-1-30-6-6"/>
+        <quiet original-id="methods-data-definitions-1-1-30-6-7" assembly-id="methods-data-definitions-1-1-30-6-7" unique-id="methods-data-definitions-1-1-30-6-7">0</quiet>
+        <truescoremode original-id="methods-data-definitions-1-1-30-6-8" assembly-id="methods-data-definitions-1-1-30-6-8" unique-id="methods-data-definitions-1-1-30-6-8">=</truescoremode>
+        <truescore original-id="methods-data-definitions-1-1-30-6-9" assembly-id="methods-data-definitions-1-1-30-6-9" unique-id="methods-data-definitions-1-1-30-6-9">1</truescore>
+        <truepenalty original-id="methods-data-definitions-1-1-30-6-10" assembly-id="methods-data-definitions-1-1-30-6-10" unique-id="methods-data-definitions-1-1-30-6-10"/>
+        <truenextnode original-id="methods-data-definitions-1-1-30-6-11" assembly-id="methods-data-definitions-1-1-30-6-11" unique-id="methods-data-definitions-1-1-30-6-11">-1</truenextnode>
+        <trueanswernote original-id="methods-data-definitions-1-1-30-6-12" assembly-id="methods-data-definitions-1-1-30-6-12" unique-id="methods-data-definitions-1-1-30-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="methods-data-definitions-1-1-30-6-13" assembly-id="methods-data-definitions-1-1-30-6-13" unique-id="methods-data-definitions-1-1-30-6-13">
+          <text original-id="methods-data-definitions-1-1-30-6-13-1" assembly-id="methods-data-definitions-1-1-30-6-13-1" unique-id="methods-data-definitions-1-1-30-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="methods-data-definitions-1-1-30-6-14" assembly-id="methods-data-definitions-1-1-30-6-14" unique-id="methods-data-definitions-1-1-30-6-14">=</falsescoremode>
+        <falsescore original-id="methods-data-definitions-1-1-30-6-15" assembly-id="methods-data-definitions-1-1-30-6-15" unique-id="methods-data-definitions-1-1-30-6-15">0</falsescore>
+        <falsepenalty original-id="methods-data-definitions-1-1-30-6-16" assembly-id="methods-data-definitions-1-1-30-6-16" unique-id="methods-data-definitions-1-1-30-6-16"/>
+        <falsenextnode original-id="methods-data-definitions-1-1-30-6-17" assembly-id="methods-data-definitions-1-1-30-6-17" unique-id="methods-data-definitions-1-1-30-6-17">-1</falsenextnode>
+        <falseanswernote original-id="methods-data-definitions-1-1-30-6-18" assembly-id="methods-data-definitions-1-1-30-6-18" unique-id="methods-data-definitions-1-1-30-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="methods-data-definitions-1-1-30-6-19" assembly-id="methods-data-definitions-1-1-30-6-19" unique-id="methods-data-definitions-1-1-30-6-19">
+          <text original-id="methods-data-definitions-1-1-30-6-19-1" assembly-id="methods-data-definitions-1-1-30-6-19-1" unique-id="methods-data-definitions-1-1-30-6-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>
+            

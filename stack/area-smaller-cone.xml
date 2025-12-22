@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+                <quiz xmlns="" xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../../../../stack/2-0-Measurement-Geometry/2-1-Similarity-and-Enlargement/2-1-3-Scale-Factors/2-1-3-1-Area-scale-factor/Finding-the-Area-of-a-Smaller-Cone-and-the-Slant-Height-of-a-Lar.xml" original-id="area-smaller-cone-1" assembly-id="area-smaller-cone-1" unique-id="area-smaller-cone-1">
+  <question type="stack" original-id="area-smaller-cone-1-1" assembly-id="area-smaller-cone-1-1" unique-id="area-smaller-cone-1-1">
+    <name original-id="area-smaller-cone-1-1-1" assembly-id="area-smaller-cone-1-1-1" unique-id="area-smaller-cone-1-1-1">
+      <text original-id="area-smaller-cone-1-1-1-1" assembly-id="area-smaller-cone-1-1-1-1" unique-id="area-smaller-cone-1-1-1-1">Finding the Area of a Smaller Cone and the Slant Height of a Larger Cone from an Area Ratio</text>
+    </name>
+    <questiontext format="moodle_auto_format" original-id="area-smaller-cone-1-1-2" assembly-id="area-smaller-cone-1-1-2" unique-id="area-smaller-cone-1-1-2">
+      <text original-id="area-smaller-cone-1-1-2-1" assembly-id="area-smaller-cone-1-1-2-1" unique-id="area-smaller-cone-1-1-2-1">&lt;p&gt;The ratio of the area of two similar cones is \(\frac{{@square_list_a@}}{{@square_list_b@}}\).&lt;/p&gt;
+&lt;p&gt;(a). Find the area of the smaller cone if the area of the bigger cone is {@c@} \(\text{m}^2\). &lt;b&gt;Note:&lt;/b&gt; Write your answer correct to &lt;b&gt;2 &lt;/b&gt;decimal places.&lt;/p&gt;
+&lt;p&gt;[[input:ans1]] \(\text{m}^2\)[[validation:ans1]][[feedback:prt1]]&lt;/p&gt;
+&lt;p&gt;(b). If the slanting height of the smaller cone is {@d@} m find the slanting height of the larger cone.&lt;b&gt;Note:&lt;/b&gt; Write your answer correct to &lt;b&gt;2&lt;/b&gt; decimal places.&lt;/p&gt;
+&lt;p&gt;[[input:ans2]] m[[validation:ans2]][[feedback:prt2]]&lt;/p&gt;</text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format" original-id="area-smaller-cone-1-1-3" assembly-id="area-smaller-cone-1-1-3" unique-id="area-smaller-cone-1-1-3">
+      <text original-id="area-smaller-cone-1-1-3-1" assembly-id="area-smaller-cone-1-1-3-1" unique-id="area-smaller-cone-1-1-3-1">&lt;h3&gt;Worked solution&lt;h3&gt;
+&lt;p&gt;\(\begin{align}\text{(a).Area of the smaller cone} = \frac{{@square_list_a@} \times {@c@}}{{@square_list_b@}}\\={@small_cone@}\\={@ta@}\end{align}\)&lt;/p&gt;
+&lt;p&gt; \(\begin{align}\text{(b).Slant height of the larger cone} = \frac{{@square_list_b@} \times {@d@}}{{@square_list_a@}}\\={@ta1@}\end{align}\)&lt;/p&gt;</text>
+    </generalfeedback>
+    <defaultgrade original-id="area-smaller-cone-1-1-4" assembly-id="area-smaller-cone-1-1-4" unique-id="area-smaller-cone-1-1-4">1</defaultgrade>
+    <penalty original-id="area-smaller-cone-1-1-5" assembly-id="area-smaller-cone-1-1-5" unique-id="area-smaller-cone-1-1-5">0.1</penalty>
+    <hidden original-id="area-smaller-cone-1-1-6" assembly-id="area-smaller-cone-1-1-6" unique-id="area-smaller-cone-1-1-6">0</hidden>
+    <idnumber original-id="area-smaller-cone-1-1-7" assembly-id="area-smaller-cone-1-1-7" unique-id="area-smaller-cone-1-1-7"/>
+    <stackversion original-id="area-smaller-cone-1-1-8" assembly-id="area-smaller-cone-1-1-8" unique-id="area-smaller-cone-1-1-8">
+      <text original-id="area-smaller-cone-1-1-8-1" assembly-id="area-smaller-cone-1-1-8-1" unique-id="area-smaller-cone-1-1-8-1">2025073100</text>
+    </stackversion>
+    <questionvariables original-id="area-smaller-cone-1-1-9" assembly-id="area-smaller-cone-1-1-9" unique-id="area-smaller-cone-1-1-9">
+      <text original-id="area-smaller-cone-1-1-9-1" assembly-id="area-smaller-cone-1-1-9-1" unique-id="area-smaller-cone-1-1-9-1">/* Generate perfect-square values for a and b */
+square_list_a:rand ([4,9,16,25,36,49,64,81,100]);  /* extend if desired */
+square_list_b:rand ([121,144,169,196,225,256,289,324,400,441,484,529,576,625]);  /* extend if desired */
+
+/* Area of the larger cone */
+c: rand_with_step(700,1200,5);
+
+/* Slant height of the smaller cone */
+d: rand(12) + 7;
+/*area of the small cone*/
+small_cone:float(square_list_a*c)/square_list_b;
+/*square root of b/a*/
+squareroot:sqrt(square_list_b/square_list_a);
+/*Slanting height of the cone*/
+slating_height:float(squareroot*d);
+ta:decimalplaces(small_cone,2);
+ta1:decimalplaces(slating_height,2);
+
+/*mistakes for part a */
+/*Reversing the ratio of the areas*/
+small_cone1:float(square_list_b*c)/square_list_a;
+ta2:decimalplaces(small_cone1,2);
+/*Treating the area ratio as a linear ratio*/
+squareroot1:sqrt(square_list_a/square_list_b);
+ta3:decimalplaces((squareroot1*c),2);
+
+/*mistakes for part b */
+/*Using the area ratio directly for slanting height*/
+ta4:decimalplaces((square_list_b/square_list_a)*d,2);
+/*Using the inverse scale factor*/
+ta5:decimalplaces((1/squareroot)*d,2);</text>
+    </questionvariables>
+    <specificfeedback format="html" original-id="area-smaller-cone-1-1-10" assembly-id="area-smaller-cone-1-1-10" unique-id="area-smaller-cone-1-1-10">
+      <text original-id="area-smaller-cone-1-1-10-1" assembly-id="area-smaller-cone-1-1-10-1" unique-id="area-smaller-cone-1-1-10-1"/>
+    </specificfeedback>
+    <questionnote format="html" original-id="area-smaller-cone-1-1-11" assembly-id="area-smaller-cone-1-1-11" unique-id="area-smaller-cone-1-1-11">
+      <text original-id="area-smaller-cone-1-1-11-1" assembly-id="area-smaller-cone-1-1-11-1" unique-id="area-smaller-cone-1-1-11-1">&lt;p&gt;Area of the larger cone = {@c@}&lt;/p&gt;</text>
+    </questionnote>
+    <questiondescription format="html" original-id="area-smaller-cone-1-1-12" assembly-id="area-smaller-cone-1-1-12" unique-id="area-smaller-cone-1-1-12">
+      <text original-id="area-smaller-cone-1-1-12-1" assembly-id="area-smaller-cone-1-1-12-1" unique-id="area-smaller-cone-1-1-12-1"/>
+    </questiondescription>
+    <questionsimplify original-id="area-smaller-cone-1-1-13" assembly-id="area-smaller-cone-1-1-13" unique-id="area-smaller-cone-1-1-13">1</questionsimplify>
+    <assumepositive original-id="area-smaller-cone-1-1-14" assembly-id="area-smaller-cone-1-1-14" unique-id="area-smaller-cone-1-1-14">0</assumepositive>
+    <assumereal original-id="area-smaller-cone-1-1-15" assembly-id="area-smaller-cone-1-1-15" unique-id="area-smaller-cone-1-1-15">0</assumereal>
+    <prtcorrect format="html" original-id="area-smaller-cone-1-1-16" assembly-id="area-smaller-cone-1-1-16" unique-id="area-smaller-cone-1-1-16">
+      <text original-id="area-smaller-cone-1-1-16-1" assembly-id="area-smaller-cone-1-1-16-1" unique-id="area-smaller-cone-1-1-16-1">&lt;span style="font-size: 1.5em; color:green;"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt; Correct answer, well done.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html" original-id="area-smaller-cone-1-1-17" assembly-id="area-smaller-cone-1-1-17" unique-id="area-smaller-cone-1-1-17">
+      <text original-id="area-smaller-cone-1-1-17-1" assembly-id="area-smaller-cone-1-1-17-1" unique-id="area-smaller-cone-1-1-17-1">&lt;span style="font-size: 1.5em; color:orange;"&gt;&lt;i class="fa fa-adjust"&gt;&lt;/i&gt;&lt;/span&gt; Your answer is partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html" original-id="area-smaller-cone-1-1-18" assembly-id="area-smaller-cone-1-1-18" unique-id="area-smaller-cone-1-1-18">
+      <text original-id="area-smaller-cone-1-1-18-1" assembly-id="area-smaller-cone-1-1-18-1" unique-id="area-smaller-cone-1-1-18-1">&lt;span style="font-size: 1.5em; color:red;"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/span&gt; Incorrect answer.</text>
+    </prtincorrect>
+    <decimals original-id="area-smaller-cone-1-1-19" assembly-id="area-smaller-cone-1-1-19" unique-id="area-smaller-cone-1-1-19">.</decimals>
+    <scientificnotation original-id="area-smaller-cone-1-1-20" assembly-id="area-smaller-cone-1-1-20" unique-id="area-smaller-cone-1-1-20">*10</scientificnotation>
+    <multiplicationsign original-id="area-smaller-cone-1-1-21" assembly-id="area-smaller-cone-1-1-21" unique-id="area-smaller-cone-1-1-21">none</multiplicationsign>
+    <sqrtsign original-id="area-smaller-cone-1-1-22" assembly-id="area-smaller-cone-1-1-22" unique-id="area-smaller-cone-1-1-22">1</sqrtsign>
+    <complexno original-id="area-smaller-cone-1-1-23" assembly-id="area-smaller-cone-1-1-23" unique-id="area-smaller-cone-1-1-23">i</complexno>
+    <inversetrig original-id="area-smaller-cone-1-1-24" assembly-id="area-smaller-cone-1-1-24" unique-id="area-smaller-cone-1-1-24">cos-1</inversetrig>
+    <logicsymbol original-id="area-smaller-cone-1-1-25" assembly-id="area-smaller-cone-1-1-25" unique-id="area-smaller-cone-1-1-25">lang</logicsymbol>
+    <matrixparens original-id="area-smaller-cone-1-1-26" assembly-id="area-smaller-cone-1-1-26" unique-id="area-smaller-cone-1-1-26">[</matrixparens>
+    <isbroken original-id="area-smaller-cone-1-1-27" assembly-id="area-smaller-cone-1-1-27" unique-id="area-smaller-cone-1-1-27">0</isbroken>
+    <variantsselectionseed original-id="area-smaller-cone-1-1-28" assembly-id="area-smaller-cone-1-1-28" unique-id="area-smaller-cone-1-1-28"/>
+    <input original-id="area-smaller-cone-1-1-29" assembly-id="area-smaller-cone-1-1-29" unique-id="area-smaller-cone-1-1-29">
+      <name original-id="area-smaller-cone-1-1-29-1" assembly-id="area-smaller-cone-1-1-29-1" unique-id="area-smaller-cone-1-1-29-1">ans1</name>
+      <type original-id="area-smaller-cone-1-1-29-2" assembly-id="area-smaller-cone-1-1-29-2" unique-id="area-smaller-cone-1-1-29-2">algebraic</type>
+      <tans original-id="area-smaller-cone-1-1-29-3" assembly-id="area-smaller-cone-1-1-29-3" unique-id="area-smaller-cone-1-1-29-3">ta</tans>
+      <boxsize original-id="area-smaller-cone-1-1-29-4" assembly-id="area-smaller-cone-1-1-29-4" unique-id="area-smaller-cone-1-1-29-4">5</boxsize>
+      <strictsyntax original-id="area-smaller-cone-1-1-29-5" assembly-id="area-smaller-cone-1-1-29-5" unique-id="area-smaller-cone-1-1-29-5">1</strictsyntax>
+      <insertstars original-id="area-smaller-cone-1-1-29-6" assembly-id="area-smaller-cone-1-1-29-6" unique-id="area-smaller-cone-1-1-29-6">0</insertstars>
+      <syntaxhint original-id="area-smaller-cone-1-1-29-7" assembly-id="area-smaller-cone-1-1-29-7" unique-id="area-smaller-cone-1-1-29-7"/>
+      <syntaxattribute original-id="area-smaller-cone-1-1-29-8" assembly-id="area-smaller-cone-1-1-29-8" unique-id="area-smaller-cone-1-1-29-8">0</syntaxattribute>
+      <forbidwords original-id="area-smaller-cone-1-1-29-9" assembly-id="area-smaller-cone-1-1-29-9" unique-id="area-smaller-cone-1-1-29-9"/>
+      <allowwords original-id="area-smaller-cone-1-1-29-10" assembly-id="area-smaller-cone-1-1-29-10" unique-id="area-smaller-cone-1-1-29-10"/>
+      <forbidfloat original-id="area-smaller-cone-1-1-29-11" assembly-id="area-smaller-cone-1-1-29-11" unique-id="area-smaller-cone-1-1-29-11">0</forbidfloat>
+      <requirelowestterms original-id="area-smaller-cone-1-1-29-12" assembly-id="area-smaller-cone-1-1-29-12" unique-id="area-smaller-cone-1-1-29-12">0</requirelowestterms>
+      <checkanswertype original-id="area-smaller-cone-1-1-29-13" assembly-id="area-smaller-cone-1-1-29-13" unique-id="area-smaller-cone-1-1-29-13">0</checkanswertype>
+      <mustverify original-id="area-smaller-cone-1-1-29-14" assembly-id="area-smaller-cone-1-1-29-14" unique-id="area-smaller-cone-1-1-29-14">1</mustverify>
+      <showvalidation original-id="area-smaller-cone-1-1-29-15" assembly-id="area-smaller-cone-1-1-29-15" unique-id="area-smaller-cone-1-1-29-15">3</showvalidation>
+      <options original-id="area-smaller-cone-1-1-29-16" assembly-id="area-smaller-cone-1-1-29-16" unique-id="area-smaller-cone-1-1-29-16"/>
+    </input>
+    <input original-id="area-smaller-cone-1-1-30" assembly-id="area-smaller-cone-1-1-30" unique-id="area-smaller-cone-1-1-30">
+      <name original-id="area-smaller-cone-1-1-30-1" assembly-id="area-smaller-cone-1-1-30-1" unique-id="area-smaller-cone-1-1-30-1">ans2</name>
+      <type original-id="area-smaller-cone-1-1-30-2" assembly-id="area-smaller-cone-1-1-30-2" unique-id="area-smaller-cone-1-1-30-2">algebraic</type>
+      <tans original-id="area-smaller-cone-1-1-30-3" assembly-id="area-smaller-cone-1-1-30-3" unique-id="area-smaller-cone-1-1-30-3">ta1</tans>
+      <boxsize original-id="area-smaller-cone-1-1-30-4" assembly-id="area-smaller-cone-1-1-30-4" unique-id="area-smaller-cone-1-1-30-4">5</boxsize>
+      <strictsyntax original-id="area-smaller-cone-1-1-30-5" assembly-id="area-smaller-cone-1-1-30-5" unique-id="area-smaller-cone-1-1-30-5">1</strictsyntax>
+      <insertstars original-id="area-smaller-cone-1-1-30-6" assembly-id="area-smaller-cone-1-1-30-6" unique-id="area-smaller-cone-1-1-30-6">0</insertstars>
+      <syntaxhint original-id="area-smaller-cone-1-1-30-7" assembly-id="area-smaller-cone-1-1-30-7" unique-id="area-smaller-cone-1-1-30-7"/>
+      <syntaxattribute original-id="area-smaller-cone-1-1-30-8" assembly-id="area-smaller-cone-1-1-30-8" unique-id="area-smaller-cone-1-1-30-8">0</syntaxattribute>
+      <forbidwords original-id="area-smaller-cone-1-1-30-9" assembly-id="area-smaller-cone-1-1-30-9" unique-id="area-smaller-cone-1-1-30-9"/>
+      <allowwords original-id="area-smaller-cone-1-1-30-10" assembly-id="area-smaller-cone-1-1-30-10" unique-id="area-smaller-cone-1-1-30-10"/>
+      <forbidfloat original-id="area-smaller-cone-1-1-30-11" assembly-id="area-smaller-cone-1-1-30-11" unique-id="area-smaller-cone-1-1-30-11">0</forbidfloat>
+      <requirelowestterms original-id="area-smaller-cone-1-1-30-12" assembly-id="area-smaller-cone-1-1-30-12" unique-id="area-smaller-cone-1-1-30-12">0</requirelowestterms>
+      <checkanswertype original-id="area-smaller-cone-1-1-30-13" assembly-id="area-smaller-cone-1-1-30-13" unique-id="area-smaller-cone-1-1-30-13">0</checkanswertype>
+      <mustverify original-id="area-smaller-cone-1-1-30-14" assembly-id="area-smaller-cone-1-1-30-14" unique-id="area-smaller-cone-1-1-30-14">1</mustverify>
+      <showvalidation original-id="area-smaller-cone-1-1-30-15" assembly-id="area-smaller-cone-1-1-30-15" unique-id="area-smaller-cone-1-1-30-15">3</showvalidation>
+      <options original-id="area-smaller-cone-1-1-30-16" assembly-id="area-smaller-cone-1-1-30-16" unique-id="area-smaller-cone-1-1-30-16"/>
+    </input>
+    <prt original-id="area-smaller-cone-1-1-31" assembly-id="area-smaller-cone-1-1-31" unique-id="area-smaller-cone-1-1-31">
+      <name original-id="area-smaller-cone-1-1-31-1" assembly-id="area-smaller-cone-1-1-31-1" unique-id="area-smaller-cone-1-1-31-1">prt1</name>
+      <value original-id="area-smaller-cone-1-1-31-2" assembly-id="area-smaller-cone-1-1-31-2" unique-id="area-smaller-cone-1-1-31-2">1.0000000</value>
+      <autosimplify original-id="area-smaller-cone-1-1-31-3" assembly-id="area-smaller-cone-1-1-31-3" unique-id="area-smaller-cone-1-1-31-3">1</autosimplify>
+      <feedbackstyle original-id="area-smaller-cone-1-1-31-4" assembly-id="area-smaller-cone-1-1-31-4" unique-id="area-smaller-cone-1-1-31-4">1</feedbackstyle>
+      <feedbackvariables original-id="area-smaller-cone-1-1-31-5" assembly-id="area-smaller-cone-1-1-31-5" unique-id="area-smaller-cone-1-1-31-5">
+        <text original-id="area-smaller-cone-1-1-31-5-1" assembly-id="area-smaller-cone-1-1-31-5-1" unique-id="area-smaller-cone-1-1-31-5-1"/>
+      </feedbackvariables>
+      <node original-id="area-smaller-cone-1-1-31-6" assembly-id="area-smaller-cone-1-1-31-6" unique-id="area-smaller-cone-1-1-31-6">
+        <name original-id="area-smaller-cone-1-1-31-6-1" assembly-id="area-smaller-cone-1-1-31-6-1" unique-id="area-smaller-cone-1-1-31-6-1">0</name>
+        <description original-id="area-smaller-cone-1-1-31-6-2" assembly-id="area-smaller-cone-1-1-31-6-2" unique-id="area-smaller-cone-1-1-31-6-2"/>
+        <answertest original-id="area-smaller-cone-1-1-31-6-3" assembly-id="area-smaller-cone-1-1-31-6-3" unique-id="area-smaller-cone-1-1-31-6-3">NumAbsolute</answertest>
+        <sans original-id="area-smaller-cone-1-1-31-6-4" assembly-id="area-smaller-cone-1-1-31-6-4" unique-id="area-smaller-cone-1-1-31-6-4">ans1</sans>
+        <tans original-id="area-smaller-cone-1-1-31-6-5" assembly-id="area-smaller-cone-1-1-31-6-5" unique-id="area-smaller-cone-1-1-31-6-5">ta</tans>
+        <testoptions original-id="area-smaller-cone-1-1-31-6-6" assembly-id="area-smaller-cone-1-1-31-6-6" unique-id="area-smaller-cone-1-1-31-6-6">0.01</testoptions>
+        <quiet original-id="area-smaller-cone-1-1-31-6-7" assembly-id="area-smaller-cone-1-1-31-6-7" unique-id="area-smaller-cone-1-1-31-6-7">0</quiet>
+        <truescoremode original-id="area-smaller-cone-1-1-31-6-8" assembly-id="area-smaller-cone-1-1-31-6-8" unique-id="area-smaller-cone-1-1-31-6-8">=</truescoremode>
+        <truescore original-id="area-smaller-cone-1-1-31-6-9" assembly-id="area-smaller-cone-1-1-31-6-9" unique-id="area-smaller-cone-1-1-31-6-9">1</truescore>
+        <truepenalty original-id="area-smaller-cone-1-1-31-6-10" assembly-id="area-smaller-cone-1-1-31-6-10" unique-id="area-smaller-cone-1-1-31-6-10"/>
+        <truenextnode original-id="area-smaller-cone-1-1-31-6-11" assembly-id="area-smaller-cone-1-1-31-6-11" unique-id="area-smaller-cone-1-1-31-6-11">-1</truenextnode>
+        <trueanswernote original-id="area-smaller-cone-1-1-31-6-12" assembly-id="area-smaller-cone-1-1-31-6-12" unique-id="area-smaller-cone-1-1-31-6-12">prt1-1-T</trueanswernote>
+        <truefeedback format="html" original-id="area-smaller-cone-1-1-31-6-13" assembly-id="area-smaller-cone-1-1-31-6-13" unique-id="area-smaller-cone-1-1-31-6-13">
+          <text original-id="area-smaller-cone-1-1-31-6-13-1" assembly-id="area-smaller-cone-1-1-31-6-13-1" unique-id="area-smaller-cone-1-1-31-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="area-smaller-cone-1-1-31-6-14" assembly-id="area-smaller-cone-1-1-31-6-14" unique-id="area-smaller-cone-1-1-31-6-14">=</falsescoremode>
+        <falsescore original-id="area-smaller-cone-1-1-31-6-15" assembly-id="area-smaller-cone-1-1-31-6-15" unique-id="area-smaller-cone-1-1-31-6-15">0</falsescore>
+        <falsepenalty original-id="area-smaller-cone-1-1-31-6-16" assembly-id="area-smaller-cone-1-1-31-6-16" unique-id="area-smaller-cone-1-1-31-6-16"/>
+        <falsenextnode original-id="area-smaller-cone-1-1-31-6-17" assembly-id="area-smaller-cone-1-1-31-6-17" unique-id="area-smaller-cone-1-1-31-6-17">1</falsenextnode>
+        <falseanswernote original-id="area-smaller-cone-1-1-31-6-18" assembly-id="area-smaller-cone-1-1-31-6-18" unique-id="area-smaller-cone-1-1-31-6-18">prt1-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="area-smaller-cone-1-1-31-6-19" assembly-id="area-smaller-cone-1-1-31-6-19" unique-id="area-smaller-cone-1-1-31-6-19">
+          <text original-id="area-smaller-cone-1-1-31-6-19-1" assembly-id="area-smaller-cone-1-1-31-6-19-1" unique-id="area-smaller-cone-1-1-31-6-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="area-smaller-cone-1-1-31-7" assembly-id="area-smaller-cone-1-1-31-7" unique-id="area-smaller-cone-1-1-31-7">
+        <name original-id="area-smaller-cone-1-1-31-7-1" assembly-id="area-smaller-cone-1-1-31-7-1" unique-id="area-smaller-cone-1-1-31-7-1">1</name>
+        <description original-id="area-smaller-cone-1-1-31-7-2" assembly-id="area-smaller-cone-1-1-31-7-2" unique-id="area-smaller-cone-1-1-31-7-2">: Reversing the ratio of the areas</description>
+        <answertest original-id="area-smaller-cone-1-1-31-7-3" assembly-id="area-smaller-cone-1-1-31-7-3" unique-id="area-smaller-cone-1-1-31-7-3">AlgEquiv</answertest>
+        <sans original-id="area-smaller-cone-1-1-31-7-4" assembly-id="area-smaller-cone-1-1-31-7-4" unique-id="area-smaller-cone-1-1-31-7-4">ans1</sans>
+        <tans original-id="area-smaller-cone-1-1-31-7-5" assembly-id="area-smaller-cone-1-1-31-7-5" unique-id="area-smaller-cone-1-1-31-7-5">ta2</tans>
+        <testoptions original-id="area-smaller-cone-1-1-31-7-6" assembly-id="area-smaller-cone-1-1-31-7-6" unique-id="area-smaller-cone-1-1-31-7-6"/>
+        <quiet original-id="area-smaller-cone-1-1-31-7-7" assembly-id="area-smaller-cone-1-1-31-7-7" unique-id="area-smaller-cone-1-1-31-7-7">0</quiet>
+        <truescoremode original-id="area-smaller-cone-1-1-31-7-8" assembly-id="area-smaller-cone-1-1-31-7-8" unique-id="area-smaller-cone-1-1-31-7-8">+</truescoremode>
+        <truescore original-id="area-smaller-cone-1-1-31-7-9" assembly-id="area-smaller-cone-1-1-31-7-9" unique-id="area-smaller-cone-1-1-31-7-9">0</truescore>
+        <truepenalty original-id="area-smaller-cone-1-1-31-7-10" assembly-id="area-smaller-cone-1-1-31-7-10" unique-id="area-smaller-cone-1-1-31-7-10"/>
+        <truenextnode original-id="area-smaller-cone-1-1-31-7-11" assembly-id="area-smaller-cone-1-1-31-7-11" unique-id="area-smaller-cone-1-1-31-7-11">-1</truenextnode>
+        <trueanswernote original-id="area-smaller-cone-1-1-31-7-12" assembly-id="area-smaller-cone-1-1-31-7-12" unique-id="area-smaller-cone-1-1-31-7-12">prt1-2-T</trueanswernote>
+        <truefeedback format="html" original-id="area-smaller-cone-1-1-31-7-13" assembly-id="area-smaller-cone-1-1-31-7-13" unique-id="area-smaller-cone-1-1-31-7-13">
+          <text original-id="area-smaller-cone-1-1-31-7-13-1" assembly-id="area-smaller-cone-1-1-31-7-13-1" unique-id="area-smaller-cone-1-1-31-7-13-1">&lt;p&gt;
+It looks like you may have reversed the ratio of the areas. The ratio is given as smaller to larger, so the smaller cone’s area should be the corresponding fraction of the larger cone’s area. Make sure the ratio you use matches which cone you are finding the area for.
+&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="area-smaller-cone-1-1-31-7-14" assembly-id="area-smaller-cone-1-1-31-7-14" unique-id="area-smaller-cone-1-1-31-7-14">-</falsescoremode>
+        <falsescore original-id="area-smaller-cone-1-1-31-7-15" assembly-id="area-smaller-cone-1-1-31-7-15" unique-id="area-smaller-cone-1-1-31-7-15">0</falsescore>
+        <falsepenalty original-id="area-smaller-cone-1-1-31-7-16" assembly-id="area-smaller-cone-1-1-31-7-16" unique-id="area-smaller-cone-1-1-31-7-16"/>
+        <falsenextnode original-id="area-smaller-cone-1-1-31-7-17" assembly-id="area-smaller-cone-1-1-31-7-17" unique-id="area-smaller-cone-1-1-31-7-17">2</falsenextnode>
+        <falseanswernote original-id="area-smaller-cone-1-1-31-7-18" assembly-id="area-smaller-cone-1-1-31-7-18" unique-id="area-smaller-cone-1-1-31-7-18">prt1-2-F</falseanswernote>
+        <falsefeedback format="html" original-id="area-smaller-cone-1-1-31-7-19" assembly-id="area-smaller-cone-1-1-31-7-19" unique-id="area-smaller-cone-1-1-31-7-19">
+          <text original-id="area-smaller-cone-1-1-31-7-19-1" assembly-id="area-smaller-cone-1-1-31-7-19-1" unique-id="area-smaller-cone-1-1-31-7-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="area-smaller-cone-1-1-31-8" assembly-id="area-smaller-cone-1-1-31-8" unique-id="area-smaller-cone-1-1-31-8">
+        <name original-id="area-smaller-cone-1-1-31-8-1" assembly-id="area-smaller-cone-1-1-31-8-1" unique-id="area-smaller-cone-1-1-31-8-1">2</name>
+        <description original-id="area-smaller-cone-1-1-31-8-2" assembly-id="area-smaller-cone-1-1-31-8-2" unique-id="area-smaller-cone-1-1-31-8-2">Treating the area ratio as a linear ratio</description>
+        <answertest original-id="area-smaller-cone-1-1-31-8-3" assembly-id="area-smaller-cone-1-1-31-8-3" unique-id="area-smaller-cone-1-1-31-8-3">AlgEquiv</answertest>
+        <sans original-id="area-smaller-cone-1-1-31-8-4" assembly-id="area-smaller-cone-1-1-31-8-4" unique-id="area-smaller-cone-1-1-31-8-4">ans1</sans>
+        <tans original-id="area-smaller-cone-1-1-31-8-5" assembly-id="area-smaller-cone-1-1-31-8-5" unique-id="area-smaller-cone-1-1-31-8-5">ta3</tans>
+        <testoptions original-id="area-smaller-cone-1-1-31-8-6" assembly-id="area-smaller-cone-1-1-31-8-6" unique-id="area-smaller-cone-1-1-31-8-6"/>
+        <quiet original-id="area-smaller-cone-1-1-31-8-7" assembly-id="area-smaller-cone-1-1-31-8-7" unique-id="area-smaller-cone-1-1-31-8-7">0</quiet>
+        <truescoremode original-id="area-smaller-cone-1-1-31-8-8" assembly-id="area-smaller-cone-1-1-31-8-8" unique-id="area-smaller-cone-1-1-31-8-8">+</truescoremode>
+        <truescore original-id="area-smaller-cone-1-1-31-8-9" assembly-id="area-smaller-cone-1-1-31-8-9" unique-id="area-smaller-cone-1-1-31-8-9">0</truescore>
+        <truepenalty original-id="area-smaller-cone-1-1-31-8-10" assembly-id="area-smaller-cone-1-1-31-8-10" unique-id="area-smaller-cone-1-1-31-8-10"/>
+        <truenextnode original-id="area-smaller-cone-1-1-31-8-11" assembly-id="area-smaller-cone-1-1-31-8-11" unique-id="area-smaller-cone-1-1-31-8-11">-1</truenextnode>
+        <trueanswernote original-id="area-smaller-cone-1-1-31-8-12" assembly-id="area-smaller-cone-1-1-31-8-12" unique-id="area-smaller-cone-1-1-31-8-12">prt1-3-T</trueanswernote>
+        <truefeedback format="html" original-id="area-smaller-cone-1-1-31-8-13" assembly-id="area-smaller-cone-1-1-31-8-13" unique-id="area-smaller-cone-1-1-31-8-13">
+          <text original-id="area-smaller-cone-1-1-31-8-13-1" assembly-id="area-smaller-cone-1-1-31-8-13-1" unique-id="area-smaller-cone-1-1-31-8-13-1">&lt;p&gt;
+It looks like you may have treated the given area ratio as if it applied directly to lengths. Remember, the ratio given compares the &lt;strong&gt;areas&lt;/strong&gt; of the cones, not their linear dimensions. Since the areas are already in the ratio \(\frac{{@square_list_a@}}{{@square_list_b@}}\), you can use this ratio directly to find the smaller area from the larger one.
+&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="area-smaller-cone-1-1-31-8-14" assembly-id="area-smaller-cone-1-1-31-8-14" unique-id="area-smaller-cone-1-1-31-8-14">-</falsescoremode>
+        <falsescore original-id="area-smaller-cone-1-1-31-8-15" assembly-id="area-smaller-cone-1-1-31-8-15" unique-id="area-smaller-cone-1-1-31-8-15">0</falsescore>
+        <falsepenalty original-id="area-smaller-cone-1-1-31-8-16" assembly-id="area-smaller-cone-1-1-31-8-16" unique-id="area-smaller-cone-1-1-31-8-16"/>
+        <falsenextnode original-id="area-smaller-cone-1-1-31-8-17" assembly-id="area-smaller-cone-1-1-31-8-17" unique-id="area-smaller-cone-1-1-31-8-17">-1</falsenextnode>
+        <falseanswernote original-id="area-smaller-cone-1-1-31-8-18" assembly-id="area-smaller-cone-1-1-31-8-18" unique-id="area-smaller-cone-1-1-31-8-18">prt1-3-F</falseanswernote>
+        <falsefeedback format="html" original-id="area-smaller-cone-1-1-31-8-19" assembly-id="area-smaller-cone-1-1-31-8-19" unique-id="area-smaller-cone-1-1-31-8-19">
+          <text original-id="area-smaller-cone-1-1-31-8-19-1" assembly-id="area-smaller-cone-1-1-31-8-19-1" unique-id="area-smaller-cone-1-1-31-8-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt original-id="area-smaller-cone-1-1-32" assembly-id="area-smaller-cone-1-1-32" unique-id="area-smaller-cone-1-1-32">
+      <name original-id="area-smaller-cone-1-1-32-1" assembly-id="area-smaller-cone-1-1-32-1" unique-id="area-smaller-cone-1-1-32-1">prt2</name>
+      <value original-id="area-smaller-cone-1-1-32-2" assembly-id="area-smaller-cone-1-1-32-2" unique-id="area-smaller-cone-1-1-32-2">2.0000000</value>
+      <autosimplify original-id="area-smaller-cone-1-1-32-3" assembly-id="area-smaller-cone-1-1-32-3" unique-id="area-smaller-cone-1-1-32-3">1</autosimplify>
+      <feedbackstyle original-id="area-smaller-cone-1-1-32-4" assembly-id="area-smaller-cone-1-1-32-4" unique-id="area-smaller-cone-1-1-32-4">1</feedbackstyle>
+      <feedbackvariables original-id="area-smaller-cone-1-1-32-5" assembly-id="area-smaller-cone-1-1-32-5" unique-id="area-smaller-cone-1-1-32-5">
+        <text original-id="area-smaller-cone-1-1-32-5-1" assembly-id="area-smaller-cone-1-1-32-5-1" unique-id="area-smaller-cone-1-1-32-5-1"/>
+      </feedbackvariables>
+      <node original-id="area-smaller-cone-1-1-32-6" assembly-id="area-smaller-cone-1-1-32-6" unique-id="area-smaller-cone-1-1-32-6">
+        <name original-id="area-smaller-cone-1-1-32-6-1" assembly-id="area-smaller-cone-1-1-32-6-1" unique-id="area-smaller-cone-1-1-32-6-1">0</name>
+        <description original-id="area-smaller-cone-1-1-32-6-2" assembly-id="area-smaller-cone-1-1-32-6-2" unique-id="area-smaller-cone-1-1-32-6-2"/>
+        <answertest original-id="area-smaller-cone-1-1-32-6-3" assembly-id="area-smaller-cone-1-1-32-6-3" unique-id="area-smaller-cone-1-1-32-6-3">NumAbsolute</answertest>
+        <sans original-id="area-smaller-cone-1-1-32-6-4" assembly-id="area-smaller-cone-1-1-32-6-4" unique-id="area-smaller-cone-1-1-32-6-4">ans2</sans>
+        <tans original-id="area-smaller-cone-1-1-32-6-5" assembly-id="area-smaller-cone-1-1-32-6-5" unique-id="area-smaller-cone-1-1-32-6-5">ta1</tans>
+        <testoptions original-id="area-smaller-cone-1-1-32-6-6" assembly-id="area-smaller-cone-1-1-32-6-6" unique-id="area-smaller-cone-1-1-32-6-6">0.01</testoptions>
+        <quiet original-id="area-smaller-cone-1-1-32-6-7" assembly-id="area-smaller-cone-1-1-32-6-7" unique-id="area-smaller-cone-1-1-32-6-7">0</quiet>
+        <truescoremode original-id="area-smaller-cone-1-1-32-6-8" assembly-id="area-smaller-cone-1-1-32-6-8" unique-id="area-smaller-cone-1-1-32-6-8">=</truescoremode>
+        <truescore original-id="area-smaller-cone-1-1-32-6-9" assembly-id="area-smaller-cone-1-1-32-6-9" unique-id="area-smaller-cone-1-1-32-6-9">1</truescore>
+        <truepenalty original-id="area-smaller-cone-1-1-32-6-10" assembly-id="area-smaller-cone-1-1-32-6-10" unique-id="area-smaller-cone-1-1-32-6-10"/>
+        <truenextnode original-id="area-smaller-cone-1-1-32-6-11" assembly-id="area-smaller-cone-1-1-32-6-11" unique-id="area-smaller-cone-1-1-32-6-11">-1</truenextnode>
+        <trueanswernote original-id="area-smaller-cone-1-1-32-6-12" assembly-id="area-smaller-cone-1-1-32-6-12" unique-id="area-smaller-cone-1-1-32-6-12">prt2-1-T</trueanswernote>
+        <truefeedback format="html" original-id="area-smaller-cone-1-1-32-6-13" assembly-id="area-smaller-cone-1-1-32-6-13" unique-id="area-smaller-cone-1-1-32-6-13">
+          <text original-id="area-smaller-cone-1-1-32-6-13-1" assembly-id="area-smaller-cone-1-1-32-6-13-1" unique-id="area-smaller-cone-1-1-32-6-13-1"/>
+        </truefeedback>
+        <falsescoremode original-id="area-smaller-cone-1-1-32-6-14" assembly-id="area-smaller-cone-1-1-32-6-14" unique-id="area-smaller-cone-1-1-32-6-14">=</falsescoremode>
+        <falsescore original-id="area-smaller-cone-1-1-32-6-15" assembly-id="area-smaller-cone-1-1-32-6-15" unique-id="area-smaller-cone-1-1-32-6-15">0</falsescore>
+        <falsepenalty original-id="area-smaller-cone-1-1-32-6-16" assembly-id="area-smaller-cone-1-1-32-6-16" unique-id="area-smaller-cone-1-1-32-6-16"/>
+        <falsenextnode original-id="area-smaller-cone-1-1-32-6-17" assembly-id="area-smaller-cone-1-1-32-6-17" unique-id="area-smaller-cone-1-1-32-6-17">1</falsenextnode>
+        <falseanswernote original-id="area-smaller-cone-1-1-32-6-18" assembly-id="area-smaller-cone-1-1-32-6-18" unique-id="area-smaller-cone-1-1-32-6-18">prt2-1-F</falseanswernote>
+        <falsefeedback format="html" original-id="area-smaller-cone-1-1-32-6-19" assembly-id="area-smaller-cone-1-1-32-6-19" unique-id="area-smaller-cone-1-1-32-6-19">
+          <text original-id="area-smaller-cone-1-1-32-6-19-1" assembly-id="area-smaller-cone-1-1-32-6-19-1" unique-id="area-smaller-cone-1-1-32-6-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="area-smaller-cone-1-1-32-7" assembly-id="area-smaller-cone-1-1-32-7" unique-id="area-smaller-cone-1-1-32-7">
+        <name original-id="area-smaller-cone-1-1-32-7-1" assembly-id="area-smaller-cone-1-1-32-7-1" unique-id="area-smaller-cone-1-1-32-7-1">1</name>
+        <description original-id="area-smaller-cone-1-1-32-7-2" assembly-id="area-smaller-cone-1-1-32-7-2" unique-id="area-smaller-cone-1-1-32-7-2">Using the area ratio directly for slanting height</description>
+        <answertest original-id="area-smaller-cone-1-1-32-7-3" assembly-id="area-smaller-cone-1-1-32-7-3" unique-id="area-smaller-cone-1-1-32-7-3">AlgEquiv</answertest>
+        <sans original-id="area-smaller-cone-1-1-32-7-4" assembly-id="area-smaller-cone-1-1-32-7-4" unique-id="area-smaller-cone-1-1-32-7-4">ans2</sans>
+        <tans original-id="area-smaller-cone-1-1-32-7-5" assembly-id="area-smaller-cone-1-1-32-7-5" unique-id="area-smaller-cone-1-1-32-7-5">ta4</tans>
+        <testoptions original-id="area-smaller-cone-1-1-32-7-6" assembly-id="area-smaller-cone-1-1-32-7-6" unique-id="area-smaller-cone-1-1-32-7-6"/>
+        <quiet original-id="area-smaller-cone-1-1-32-7-7" assembly-id="area-smaller-cone-1-1-32-7-7" unique-id="area-smaller-cone-1-1-32-7-7">0</quiet>
+        <truescoremode original-id="area-smaller-cone-1-1-32-7-8" assembly-id="area-smaller-cone-1-1-32-7-8" unique-id="area-smaller-cone-1-1-32-7-8">+</truescoremode>
+        <truescore original-id="area-smaller-cone-1-1-32-7-9" assembly-id="area-smaller-cone-1-1-32-7-9" unique-id="area-smaller-cone-1-1-32-7-9">0</truescore>
+        <truepenalty original-id="area-smaller-cone-1-1-32-7-10" assembly-id="area-smaller-cone-1-1-32-7-10" unique-id="area-smaller-cone-1-1-32-7-10"/>
+        <truenextnode original-id="area-smaller-cone-1-1-32-7-11" assembly-id="area-smaller-cone-1-1-32-7-11" unique-id="area-smaller-cone-1-1-32-7-11">-1</truenextnode>
+        <trueanswernote original-id="area-smaller-cone-1-1-32-7-12" assembly-id="area-smaller-cone-1-1-32-7-12" unique-id="area-smaller-cone-1-1-32-7-12">prt2-2-T</trueanswernote>
+        <truefeedback format="html" original-id="area-smaller-cone-1-1-32-7-13" assembly-id="area-smaller-cone-1-1-32-7-13" unique-id="area-smaller-cone-1-1-32-7-13">
+          <text original-id="area-smaller-cone-1-1-32-7-13-1" assembly-id="area-smaller-cone-1-1-32-7-13-1" unique-id="area-smaller-cone-1-1-32-7-13-1">&lt;p&gt;
+It looks like you may have used the area ratio directly to find the slanting height. Remember, slanting height is a &lt;strong&gt;linear&lt;/strong&gt; measurement, so you must first find the linear scale factor by taking the square root of the area ratio before applying it.
+&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="area-smaller-cone-1-1-32-7-14" assembly-id="area-smaller-cone-1-1-32-7-14" unique-id="area-smaller-cone-1-1-32-7-14">-</falsescoremode>
+        <falsescore original-id="area-smaller-cone-1-1-32-7-15" assembly-id="area-smaller-cone-1-1-32-7-15" unique-id="area-smaller-cone-1-1-32-7-15">0</falsescore>
+        <falsepenalty original-id="area-smaller-cone-1-1-32-7-16" assembly-id="area-smaller-cone-1-1-32-7-16" unique-id="area-smaller-cone-1-1-32-7-16"/>
+        <falsenextnode original-id="area-smaller-cone-1-1-32-7-17" assembly-id="area-smaller-cone-1-1-32-7-17" unique-id="area-smaller-cone-1-1-32-7-17">2</falsenextnode>
+        <falseanswernote original-id="area-smaller-cone-1-1-32-7-18" assembly-id="area-smaller-cone-1-1-32-7-18" unique-id="area-smaller-cone-1-1-32-7-18">prt2-2-F</falseanswernote>
+        <falsefeedback format="html" original-id="area-smaller-cone-1-1-32-7-19" assembly-id="area-smaller-cone-1-1-32-7-19" unique-id="area-smaller-cone-1-1-32-7-19">
+          <text original-id="area-smaller-cone-1-1-32-7-19-1" assembly-id="area-smaller-cone-1-1-32-7-19-1" unique-id="area-smaller-cone-1-1-32-7-19-1"/>
+        </falsefeedback>
+      </node>
+      <node original-id="area-smaller-cone-1-1-32-8" assembly-id="area-smaller-cone-1-1-32-8" unique-id="area-smaller-cone-1-1-32-8">
+        <name original-id="area-smaller-cone-1-1-32-8-1" assembly-id="area-smaller-cone-1-1-32-8-1" unique-id="area-smaller-cone-1-1-32-8-1">2</name>
+        <description original-id="area-smaller-cone-1-1-32-8-2" assembly-id="area-smaller-cone-1-1-32-8-2" unique-id="area-smaller-cone-1-1-32-8-2">Using the inverse scale factor</description>
+        <answertest original-id="area-smaller-cone-1-1-32-8-3" assembly-id="area-smaller-cone-1-1-32-8-3" unique-id="area-smaller-cone-1-1-32-8-3">AlgEquiv</answertest>
+        <sans original-id="area-smaller-cone-1-1-32-8-4" assembly-id="area-smaller-cone-1-1-32-8-4" unique-id="area-smaller-cone-1-1-32-8-4">ans2</sans>
+        <tans original-id="area-smaller-cone-1-1-32-8-5" assembly-id="area-smaller-cone-1-1-32-8-5" unique-id="area-smaller-cone-1-1-32-8-5">ta5</tans>
+        <testoptions original-id="area-smaller-cone-1-1-32-8-6" assembly-id="area-smaller-cone-1-1-32-8-6" unique-id="area-smaller-cone-1-1-32-8-6"/>
+        <quiet original-id="area-smaller-cone-1-1-32-8-7" assembly-id="area-smaller-cone-1-1-32-8-7" unique-id="area-smaller-cone-1-1-32-8-7">0</quiet>
+        <truescoremode original-id="area-smaller-cone-1-1-32-8-8" assembly-id="area-smaller-cone-1-1-32-8-8" unique-id="area-smaller-cone-1-1-32-8-8">+</truescoremode>
+        <truescore original-id="area-smaller-cone-1-1-32-8-9" assembly-id="area-smaller-cone-1-1-32-8-9" unique-id="area-smaller-cone-1-1-32-8-9">0</truescore>
+        <truepenalty original-id="area-smaller-cone-1-1-32-8-10" assembly-id="area-smaller-cone-1-1-32-8-10" unique-id="area-smaller-cone-1-1-32-8-10"/>
+        <truenextnode original-id="area-smaller-cone-1-1-32-8-11" assembly-id="area-smaller-cone-1-1-32-8-11" unique-id="area-smaller-cone-1-1-32-8-11">-1</truenextnode>
+        <trueanswernote original-id="area-smaller-cone-1-1-32-8-12" assembly-id="area-smaller-cone-1-1-32-8-12" unique-id="area-smaller-cone-1-1-32-8-12">prt2-3-T</trueanswernote>
+        <truefeedback format="html" original-id="area-smaller-cone-1-1-32-8-13" assembly-id="area-smaller-cone-1-1-32-8-13" unique-id="area-smaller-cone-1-1-32-8-13">
+          <text original-id="area-smaller-cone-1-1-32-8-13-1" assembly-id="area-smaller-cone-1-1-32-8-13-1" unique-id="area-smaller-cone-1-1-32-8-13-1">&lt;p&gt;
+It looks like you may have used the scale factor in the wrong direction. Because you are finding the slanting height of the &lt;strong&gt;larger&lt;/strong&gt; cone, the linear scale factor should increase the measurement from the smaller cone. Make sure the ratio you use reflects this enlargement.
+&lt;/p&gt;</text>
+        </truefeedback>
+        <falsescoremode original-id="area-smaller-cone-1-1-32-8-14" assembly-id="area-smaller-cone-1-1-32-8-14" unique-id="area-smaller-cone-1-1-32-8-14">-</falsescoremode>
+        <falsescore original-id="area-smaller-cone-1-1-32-8-15" assembly-id="area-smaller-cone-1-1-32-8-15" unique-id="area-smaller-cone-1-1-32-8-15">0</falsescore>
+        <falsepenalty original-id="area-smaller-cone-1-1-32-8-16" assembly-id="area-smaller-cone-1-1-32-8-16" unique-id="area-smaller-cone-1-1-32-8-16"/>
+        <falsenextnode original-id="area-smaller-cone-1-1-32-8-17" assembly-id="area-smaller-cone-1-1-32-8-17" unique-id="area-smaller-cone-1-1-32-8-17">-1</falsenextnode>
+        <falseanswernote original-id="area-smaller-cone-1-1-32-8-18" assembly-id="area-smaller-cone-1-1-32-8-18" unique-id="area-smaller-cone-1-1-32-8-18">prt2-3-F</falseanswernote>
+        <falsefeedback format="html" original-id="area-smaller-cone-1-1-32-8-19" assembly-id="area-smaller-cone-1-1-32-8-19" unique-id="area-smaller-cone-1-1-32-8-19">
+          <text original-id="area-smaller-cone-1-1-32-8-19-1" assembly-id="area-smaller-cone-1-1-32-8-19-1" unique-id="area-smaller-cone-1-1-32-8-19-1"/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed original-id="area-smaller-cone-1-1-33" assembly-id="area-smaller-cone-1-1-33" unique-id="area-smaller-cone-1-1-33">1348376000</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-34" assembly-id="area-smaller-cone-1-1-34" unique-id="area-smaller-cone-1-1-34">215098362</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-35" assembly-id="area-smaller-cone-1-1-35" unique-id="area-smaller-cone-1-1-35">1084583742</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-36" assembly-id="area-smaller-cone-1-1-36" unique-id="area-smaller-cone-1-1-36">74674136</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-37" assembly-id="area-smaller-cone-1-1-37" unique-id="area-smaller-cone-1-1-37">2074317</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-38" assembly-id="area-smaller-cone-1-1-38" unique-id="area-smaller-cone-1-1-38">1270197206</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-39" assembly-id="area-smaller-cone-1-1-39" unique-id="area-smaller-cone-1-1-39">1553223504</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-40" assembly-id="area-smaller-cone-1-1-40" unique-id="area-smaller-cone-1-1-40">1550683142</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-41" assembly-id="area-smaller-cone-1-1-41" unique-id="area-smaller-cone-1-1-41">1521773251</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-42" assembly-id="area-smaller-cone-1-1-42" unique-id="area-smaller-cone-1-1-42">1685104174</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-43" assembly-id="area-smaller-cone-1-1-43" unique-id="area-smaller-cone-1-1-43">1163192734</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-44" assembly-id="area-smaller-cone-1-1-44" unique-id="area-smaller-cone-1-1-44">1903478190</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-45" assembly-id="area-smaller-cone-1-1-45" unique-id="area-smaller-cone-1-1-45">717419186</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-46" assembly-id="area-smaller-cone-1-1-46" unique-id="area-smaller-cone-1-1-46">917654281</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-47" assembly-id="area-smaller-cone-1-1-47" unique-id="area-smaller-cone-1-1-47">1201627536</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-48" assembly-id="area-smaller-cone-1-1-48" unique-id="area-smaller-cone-1-1-48">1689379633</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-49" assembly-id="area-smaller-cone-1-1-49" unique-id="area-smaller-cone-1-1-49">384484721</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-50" assembly-id="area-smaller-cone-1-1-50" unique-id="area-smaller-cone-1-1-50">2063613650</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-51" assembly-id="area-smaller-cone-1-1-51" unique-id="area-smaller-cone-1-1-51">1214778491</deployedseed>
+    <deployedseed original-id="area-smaller-cone-1-1-52" assembly-id="area-smaller-cone-1-1-52" unique-id="area-smaller-cone-1-1-52">625627639</deployedseed>
+    <qtest original-id="area-smaller-cone-1-1-53" assembly-id="area-smaller-cone-1-1-53" unique-id="area-smaller-cone-1-1-53">
+      <testcase original-id="area-smaller-cone-1-1-53-1" assembly-id="area-smaller-cone-1-1-53-1" unique-id="area-smaller-cone-1-1-53-1">1</testcase>
+      <description original-id="area-smaller-cone-1-1-53-2" assembly-id="area-smaller-cone-1-1-53-2" unique-id="area-smaller-cone-1-1-53-2">Test case assuming the teacher's input gets full marks.</description>
+      <testinput original-id="area-smaller-cone-1-1-53-3" assembly-id="area-smaller-cone-1-1-53-3" unique-id="area-smaller-cone-1-1-53-3">
+        <name original-id="area-smaller-cone-1-1-53-3-1" assembly-id="area-smaller-cone-1-1-53-3-1" unique-id="area-smaller-cone-1-1-53-3-1">ans1</name>
+        <value original-id="area-smaller-cone-1-1-53-3-2" assembly-id="area-smaller-cone-1-1-53-3-2" unique-id="area-smaller-cone-1-1-53-3-2">ta</value>
+      </testinput>
+      <testinput original-id="area-smaller-cone-1-1-53-4" assembly-id="area-smaller-cone-1-1-53-4" unique-id="area-smaller-cone-1-1-53-4">
+        <name original-id="area-smaller-cone-1-1-53-4-1" assembly-id="area-smaller-cone-1-1-53-4-1" unique-id="area-smaller-cone-1-1-53-4-1">ans2</name>
+        <value original-id="area-smaller-cone-1-1-53-4-2" assembly-id="area-smaller-cone-1-1-53-4-2" unique-id="area-smaller-cone-1-1-53-4-2">ta1</value>
+      </testinput>
+      <expected original-id="area-smaller-cone-1-1-53-5" assembly-id="area-smaller-cone-1-1-53-5" unique-id="area-smaller-cone-1-1-53-5">
+        <name original-id="area-smaller-cone-1-1-53-5-1" assembly-id="area-smaller-cone-1-1-53-5-1" unique-id="area-smaller-cone-1-1-53-5-1">prt1</name>
+        <expectedscore original-id="area-smaller-cone-1-1-53-5-2" assembly-id="area-smaller-cone-1-1-53-5-2" unique-id="area-smaller-cone-1-1-53-5-2">1.0000000</expectedscore>
+        <expectedpenalty original-id="area-smaller-cone-1-1-53-5-3" assembly-id="area-smaller-cone-1-1-53-5-3" unique-id="area-smaller-cone-1-1-53-5-3">0.0000000</expectedpenalty>
+        <expectedanswernote original-id="area-smaller-cone-1-1-53-5-4" assembly-id="area-smaller-cone-1-1-53-5-4" unique-id="area-smaller-cone-1-1-53-5-4">prt1-1-T</expectedanswernote>
+      </expected>
+      <expected original-id="area-smaller-cone-1-1-53-6" assembly-id="area-smaller-cone-1-1-53-6" unique-id="area-smaller-cone-1-1-53-6">
+        <name original-id="area-smaller-cone-1-1-53-6-1" assembly-id="area-smaller-cone-1-1-53-6-1" unique-id="area-smaller-cone-1-1-53-6-1">prt2</name>
+        <expectedscore original-id="area-smaller-cone-1-1-53-6-2" assembly-id="area-smaller-cone-1-1-53-6-2" unique-id="area-smaller-cone-1-1-53-6-2">1.0000000</expectedscore>
+        <expectedpenalty original-id="area-smaller-cone-1-1-53-6-3" assembly-id="area-smaller-cone-1-1-53-6-3" unique-id="area-smaller-cone-1-1-53-6-3">0.0000000</expectedpenalty>
+        <expectedanswernote original-id="area-smaller-cone-1-1-53-6-4" assembly-id="area-smaller-cone-1-1-53-6-4" unique-id="area-smaller-cone-1-1-53-6-4">prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest original-id="area-smaller-cone-1-1-54" assembly-id="area-smaller-cone-1-1-54" unique-id="area-smaller-cone-1-1-54">
+      <testcase original-id="area-smaller-cone-1-1-54-1" assembly-id="area-smaller-cone-1-1-54-1" unique-id="area-smaller-cone-1-1-54-1">2</testcase>
+      <description original-id="area-smaller-cone-1-1-54-2" assembly-id="area-smaller-cone-1-1-54-2" unique-id="area-smaller-cone-1-1-54-2">incorrect answer</description>
+      <testinput original-id="area-smaller-cone-1-1-54-3" assembly-id="area-smaller-cone-1-1-54-3" unique-id="area-smaller-cone-1-1-54-3">
+        <name original-id="area-smaller-cone-1-1-54-3-1" assembly-id="area-smaller-cone-1-1-54-3-1" unique-id="area-smaller-cone-1-1-54-3-1">ans1</name>
+        <value original-id="area-smaller-cone-1-1-54-3-2" assembly-id="area-smaller-cone-1-1-54-3-2" unique-id="area-smaller-cone-1-1-54-3-2">ta2</value>
+      </testinput>
+      <testinput original-id="area-smaller-cone-1-1-54-4" assembly-id="area-smaller-cone-1-1-54-4" unique-id="area-smaller-cone-1-1-54-4">
+        <name original-id="area-smaller-cone-1-1-54-4-1" assembly-id="area-smaller-cone-1-1-54-4-1" unique-id="area-smaller-cone-1-1-54-4-1">ans2</name>
+        <value original-id="area-smaller-cone-1-1-54-4-2" assembly-id="area-smaller-cone-1-1-54-4-2" unique-id="area-smaller-cone-1-1-54-4-2">ta4</value>
+      </testinput>
+      <expected original-id="area-smaller-cone-1-1-54-5" assembly-id="area-smaller-cone-1-1-54-5" unique-id="area-smaller-cone-1-1-54-5">
+        <name original-id="area-smaller-cone-1-1-54-5-1" assembly-id="area-smaller-cone-1-1-54-5-1" unique-id="area-smaller-cone-1-1-54-5-1">prt1</name>
+        <expectedscore original-id="area-smaller-cone-1-1-54-5-2" assembly-id="area-smaller-cone-1-1-54-5-2" unique-id="area-smaller-cone-1-1-54-5-2">0.0000000</expectedscore>
+        <expectedpenalty original-id="area-smaller-cone-1-1-54-5-3" assembly-id="area-smaller-cone-1-1-54-5-3" unique-id="area-smaller-cone-1-1-54-5-3"/>
+        <expectedanswernote original-id="area-smaller-cone-1-1-54-5-4" assembly-id="area-smaller-cone-1-1-54-5-4" unique-id="area-smaller-cone-1-1-54-5-4">prt1-2-T</expectedanswernote>
+      </expected>
+      <expected original-id="area-smaller-cone-1-1-54-6" assembly-id="area-smaller-cone-1-1-54-6" unique-id="area-smaller-cone-1-1-54-6">
+        <name original-id="area-smaller-cone-1-1-54-6-1" assembly-id="area-smaller-cone-1-1-54-6-1" unique-id="area-smaller-cone-1-1-54-6-1">prt2</name>
+        <expectedscore original-id="area-smaller-cone-1-1-54-6-2" assembly-id="area-smaller-cone-1-1-54-6-2" unique-id="area-smaller-cone-1-1-54-6-2">0.0000000</expectedscore>
+        <expectedpenalty original-id="area-smaller-cone-1-1-54-6-3" assembly-id="area-smaller-cone-1-1-54-6-3" unique-id="area-smaller-cone-1-1-54-6-3"/>
+        <expectedanswernote original-id="area-smaller-cone-1-1-54-6-4" assembly-id="area-smaller-cone-1-1-54-6-4" unique-id="area-smaller-cone-1-1-54-6-4">prt2-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest original-id="area-smaller-cone-1-1-55" assembly-id="area-smaller-cone-1-1-55" unique-id="area-smaller-cone-1-1-55">
+      <testcase original-id="area-smaller-cone-1-1-55-1" assembly-id="area-smaller-cone-1-1-55-1" unique-id="area-smaller-cone-1-1-55-1">3</testcase>
+      <description original-id="area-smaller-cone-1-1-55-2" assembly-id="area-smaller-cone-1-1-55-2" unique-id="area-smaller-cone-1-1-55-2">incorrect answer</description>
+      <testinput original-id="area-smaller-cone-1-1-55-3" assembly-id="area-smaller-cone-1-1-55-3" unique-id="area-smaller-cone-1-1-55-3">
+        <name original-id="area-smaller-cone-1-1-55-3-1" assembly-id="area-smaller-cone-1-1-55-3-1" unique-id="area-smaller-cone-1-1-55-3-1">ans1</name>
+        <value original-id="area-smaller-cone-1-1-55-3-2" assembly-id="area-smaller-cone-1-1-55-3-2" unique-id="area-smaller-cone-1-1-55-3-2">ta3</value>
+      </testinput>
+      <testinput original-id="area-smaller-cone-1-1-55-4" assembly-id="area-smaller-cone-1-1-55-4" unique-id="area-smaller-cone-1-1-55-4">
+        <name original-id="area-smaller-cone-1-1-55-4-1" assembly-id="area-smaller-cone-1-1-55-4-1" unique-id="area-smaller-cone-1-1-55-4-1">ans2</name>
+        <value original-id="area-smaller-cone-1-1-55-4-2" assembly-id="area-smaller-cone-1-1-55-4-2" unique-id="area-smaller-cone-1-1-55-4-2">ta5</value>
+      </testinput>
+      <expected original-id="area-smaller-cone-1-1-55-5" assembly-id="area-smaller-cone-1-1-55-5" unique-id="area-smaller-cone-1-1-55-5">
+        <name original-id="area-smaller-cone-1-1-55-5-1" assembly-id="area-smaller-cone-1-1-55-5-1" unique-id="area-smaller-cone-1-1-55-5-1">prt1</name>
+        <expectedscore original-id="area-smaller-cone-1-1-55-5-2" assembly-id="area-smaller-cone-1-1-55-5-2" unique-id="area-smaller-cone-1-1-55-5-2">0.0000000</expectedscore>
+        <expectedpenalty original-id="area-smaller-cone-1-1-55-5-3" assembly-id="area-smaller-cone-1-1-55-5-3" unique-id="area-smaller-cone-1-1-55-5-3"/>
+        <expectedanswernote original-id="area-smaller-cone-1-1-55-5-4" assembly-id="area-smaller-cone-1-1-55-5-4" unique-id="area-smaller-cone-1-1-55-5-4">prt1-3-T</expectedanswernote>
+      </expected>
+      <expected original-id="area-smaller-cone-1-1-55-6" assembly-id="area-smaller-cone-1-1-55-6" unique-id="area-smaller-cone-1-1-55-6">
+        <name original-id="area-smaller-cone-1-1-55-6-1" assembly-id="area-smaller-cone-1-1-55-6-1" unique-id="area-smaller-cone-1-1-55-6-1">prt2</name>
+        <expectedscore original-id="area-smaller-cone-1-1-55-6-2" assembly-id="area-smaller-cone-1-1-55-6-2" unique-id="area-smaller-cone-1-1-55-6-2">0.0000000</expectedscore>
+        <expectedpenalty original-id="area-smaller-cone-1-1-55-6-3" assembly-id="area-smaller-cone-1-1-55-6-3" unique-id="area-smaller-cone-1-1-55-6-3"/>
+        <expectedanswernote original-id="area-smaller-cone-1-1-55-6-4" assembly-id="area-smaller-cone-1-1-55-6-4" unique-id="area-smaller-cone-1-1-55-6-4">prt2-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>
+            
