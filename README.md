@@ -17,8 +17,8 @@ The book will be available in multiple formats, including web, PDF, and print. T
 ## Building and Viewing the Book
 
 ### Prerequisites
-- Python 3.x with PreTeXt CLI installed (`pip install pretextbook`)
-- All dependencies from `requirements.txt` installed
+- Python 3.x with PreTeXt CLI installed (`pip install pretext>=2.34`)
+- All dependencies from `requirements.txt` installed (`pip install -r requirements.txt`)
 
 ### Quick Start: Automated Build Workflow
 
@@ -30,7 +30,7 @@ For the easiest build and preview experience, use the automated batch script:
 
 This single command will:
 1. Build the PreTeXt book
-2. Deploy the custom STACK JavaScript integration file
+<!-- 2. Deploy the custom STACK JavaScript integration file -->
 3. Launch the book in your browser
 
 ### Manual Build Process
@@ -39,23 +39,23 @@ If you need more control over the build process:
 
 1. **Build the book:**
    ```bash
-   pretext build
+   pretext build web
    ```
 
-2. **Copy custom STACK integration file (required for STACK questions to render properly):**
+<!-- 2. **Copy custom STACK integration file (required for STACK questions to render properly):**
    ```bash
    copy /Y "assets\pretext\js\pretext-stack\stackapicalls.js" "output\web\_static\pretext\js\pretext-stack\stackapicalls.js"
-   ```
+   ``` -->
 
 3. **View the book in browser:**
    ```bash
    pretext view web
    ```
 
-### Important Notes
+<!-- ### Important Notes
 - The custom `stackapicalls.js` file in the `assets` directory is essential for STACK questions to render correctly
 - This file must be copied to the output folder after each build
-- The automated script handles this automatically
+- The automated script handles this automatically -->
 
 ## Contributing to the project
 
@@ -84,7 +84,7 @@ For questions or feedback, please contact the project maintainer at [contact@inn
 
 # Enablers of the project
 
-This project was initially supported by a grant from the US Embassy in Nairobi. The initial support enalbed hiring of 10 interns who were trained in authoring the textbook in PreTeXt by [Prof Oscar Levin](https://math.oscarlevin.com/) and trained in STACK authoring by the INNODEMS team. Other enablers of this project are:
+This project was initially supported by a grant from the US Embassy in Nairobi. The initial support enabled hiring of 10 interns who were trained in authoring the textbook in PreTeXt by [Prof Oscar Levin](https://math.oscarlevin.com/) and trained in STACK authoring by the INNODEMS team. Other enablers of this project are:
 1. **INNODEMS**  
    [INNODEMS](https://innodems.org/) is the organization that supports the interns and coordinates the development of the textbook project locally in Kenya. 
 
@@ -95,4 +95,4 @@ This project was initially supported by a grant from the US Embassy in Nairobi. 
         [SAMI](https://samicharity.co.uk/home) is a UK NGO that leads the fundraising drive to support the development and piloting of the ktextbooks.  
 
 ## Support the project
-    You can support the textbook project through contributing to the development of the books or by donating to INNODEMS to help keep the vision of the ptoject alive.
+    You can support the textbook project through contributing to the development of the books or by donating to INNODEMS to help keep the vision of the project alive.
