@@ -35,7 +35,9 @@
 
         </statement>
      </activity>
-     
+      <p>
+            <m>\textbf{Key Takeaway</m>
+        </p>
      <p>
         ♦ The <m>\textbf{area}</m> of a <m>\textbf{regular polygon}</m> can be found using this formula, where <m>\textbf{P}</m>
         is the <m>\textbf{perimeter}</m> and <m>\textbf{a}</m>
@@ -47,11 +49,7 @@
      <image width="50%">
      <latex-image label="polgon-triangle">
         \begin{tikzpicture}
-                    
-            % Define colors
-            \definecolor{hexcolor}{RGB}{135, 206, 250} % Light blue fill
-            \definecolor{edgecolor}{RGB}{30, 144, 255}  % Blue outline
-
+            
             % Define hexagon vertices
             \def\R{3} % Radius of hexagon
             \foreach \i in {0,60,...,300} {
@@ -59,7 +57,7 @@
             }
 
             % Draw the hexagon
-            \filldraw[fill=hexcolor, draw=edgecolor, thick] 
+            \draw[thick] 
                 (P0) -- (P60) -- (P120) -- (P180) -- (P240) -- (P300) -- cycle;
 
             % Define center
@@ -73,7 +71,7 @@
             % \draw (0,-\R)++(0,0) -- ++(0.2,0) -- ++(0,0.);
 
             % Mark the center point
-            \filldraw[black] (C) circle (2pt);
+            \draw[thick] (C) circle (2pt);
         \end{tikzpicture}
      </latex-image>
      </image>
@@ -92,10 +90,10 @@
                 \coordinate (C) at (0,6); % Height of an equilateral triangle with side 6
 
                 % Draw the equilateral triangle
-                \draw[thick, blue] (A) -- (B) -- (C) -- cycle;
+                \draw[thick] (A) -- (B) -- (C) -- cycle;
             
                 % Label the side length
-                \draw[thick,blue] (A) -- node[left] {\Large 10 m} (C);
+                \draw[thick] (A) -- node[left] {\Large 10 m} (C);
             
                 % Define point E inside the triangle
                 \coordinate (E) at (0,2.2);
@@ -111,7 +109,7 @@
             
                 % Label point E
                 \node[left] at (E) {\Large $A$};
-                \filldraw[black] (E) circle (2pt);
+                \draw[thick] (E) circle (2pt);
             \end{tikzpicture}
         </latex-image>
      </image>
@@ -151,8 +149,7 @@
                 <image width="60%">
      <latex-image label="polgon-hexagon-example">
         \begin{tikzpicture}
-             \definecolor{hexcolor}{RGB}{102, 255, 102} % Light blue fill
-            \definecolor{edgecolor}{RGB}{30, 144, 255}  % Blue outline
+            
 
             % Define hexagon vertices
             \def\R{3} % Radius of hexagon
@@ -161,7 +158,7 @@
             }
 
             % Draw the hexagon
-            \filldraw[fill=hexcolor, draw=edgecolor, thick] 
+            \draw[thick] 
                 (P0) -- (P60) -- (P120) -- (P180) -- (P240) -- (P300) -- cycle;
 
             % Define center
@@ -175,7 +172,7 @@
             % \draw (0,-\R)++(0,0) -- ++(0.2,0) -- ++(0,0.);
 
             % Mark the center point
-            \filldraw[black] (C) circle (2pt);
+            \draw[thick] (C) circle (2pt);
            
         \end{tikzpicture}
      </latex-image>
@@ -333,9 +330,6 @@
                         \coordinate (P\i) at ({360/7*\i}:2);
                     }
                     
-                    % Fill the heptagon with pink color
-                    \fill[green!10] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- cycle;
-                    
                     % Draw the heptagon
                     \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- cycle;
                     
@@ -373,8 +367,11 @@
             </p>
         </statement>
     </activity>
+     <p>
+            <m>\textbf{Key Takeaway</m>
+        </p>
     <p>
-        <m> {\color{blue}\textbf{Properties of a Regular Heptagon.}}</m>.
+        <m>\textbf{Properties of a Regular Heptagon.}</m>.
     </p>
     <p>
        ♦ Sum of interior angles = <m> (n-2) \times 180^\circ</m>. Where n is the number of sides.
@@ -451,19 +448,17 @@
                     \foreach \i in {0,1,...,6} {
                         \coordinate (P\i) at ({360/7*\i}:2);
                     }
-                    
-                    % Fill the heptagon with pink color
-                    \fill[blue!45] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- cycle;
-                    
                     % Draw the heptagon
                     \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- cycle;
                     \coordinate(0,0);
                     \draw[thick] (P0) --(0,0) node[midway, above left]{10 cm};
-                    \draw[fill=black](0,0) circle(2pt);
+                    \draw[thick](0,0) circle(2pt);
                     % Label the vertices
                     \foreach \i in {0,1,...,6} {
-                        \node[font=\small] at ({360/7*\i}:2.2) {$P_{\i}$};
+                    \node[font=\small] at ({360/7*\i}:2.2) {$P_{\i}$};
                     }
+                    <!-- % Mark center point
+                    \filldraw[black] (O) circle (2pt) node[above] {\textbf{O}}; -->
                 \end{tikzpicture}
             </latex-image>
            </image>
@@ -573,10 +568,6 @@
             \foreach \i in {0,1,...,7} {
             \coordinate (P\i) at ({360/8*\i}:2);
             }
-            
-            % Fill the octagon with pink color
-            \fill[blue!20] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7) -- cycle;
-            
             % Draw the octagon
             \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7) -- cycle;
             % Label the vertices
@@ -609,7 +600,7 @@
                 \coordinate (O) at (0,0);
 
                 % Draw the heptagon
-                \draw[thick,fill=pink!20] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7) -- cycle;
+                \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7) -- cycle;
 
                 % % Label the vertices
                 % \foreach \i/\name in {0/A, 1/B, 2/C, 3/D, 4/E, 5/F, 6/G, 7/H} {
@@ -682,7 +673,7 @@
                 \coordinate (O) at (0,0);
 
                 % Draw the heptagon
-                \draw[thick,fill=yellow!10] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7) -- cycle;
+                \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7) -- cycle;
 
                 % % Label the vertices
                 % \foreach \i/\name in {0/A, 1/B, 2/C, 3/D, 4/E, 5/F, 6/G, 7/H} {
@@ -770,7 +761,7 @@
                 🔹Use a ruler to draw a horizontal diameter (P0 to P6) passing through the center.
             </p>
             <p>
-               3. ivide the Circle into 9 Equal Parts. 
+               3. Divide the Circle into 9 Equal Parts. 
             </p>
             <p>
                 🔹Use a protractor to measure angles of 360° ÷ 9 = 40° from point P0.
@@ -955,10 +946,6 @@
             \foreach \i in {0,1,...,9} {
                 \coordinate (P\i) at ({360/10*\i}:2);
             }
-            
-            % Fill the decagon with pink color
-            \fill[pink] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7) -- (P8) -- (P9) -- cycle;
-            
             % Draw the decagon
             \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7) -- (P8) -- (P9) -- cycle;
             
@@ -993,7 +980,7 @@
                     \node at (-1.5,0.2) {7.5 cm};
                     \node at (-3, -1.5) {5 cm};
                     % Draw the decagon
-                    \draw[thick, blue] 
+                    \draw[thick] 
                         (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- 
                         (P5) -- (P6) -- (P7) -- (P8) -- (P9) -- cycle;
 
@@ -1006,7 +993,7 @@
                     \draw[dashed, thick] (P6) -- (O) -- (P5) -- cycle;
                     
                     % Mark center point
-                    \filldraw[black] (O) circle (2pt) node[above] {\textbf{O}};
+                    \\filldraw[black] (O) circle (2pt) node[above] {\textbf{O}};
             \end{tikzpicture}
         </latex-image>
         </image>
@@ -1051,7 +1038,7 @@
        
         </example>
         <p>
-            <m>\textbf{Mixed Exercise}</m>
+            <m>\textbf{ Exercise}</m>
         </p>
         <sidebyside>
         <p>
@@ -1074,7 +1061,7 @@
                     \coordinate (O) at (0,0);
                     \node at (-3, -1.5) {10 cm};
                     % Draw the decagon
-                    \draw[thick, pink] 
+                    \draw[thick] 
                         (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- 
                         (P5) -- (P6) -- (P7) -- (P8) -- cycle;
 
@@ -1124,7 +1111,7 @@
                     \coordinate (O) at (0,0);
                     \node at (-3, -1.5) {30 cm};
                     % Draw the decagon
-                    \draw[thick, green] 
+                    \draw[thick] 
                         (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- 
                         (P5) -- (P6) -- (P7) -- (P8) -- cycle;
 

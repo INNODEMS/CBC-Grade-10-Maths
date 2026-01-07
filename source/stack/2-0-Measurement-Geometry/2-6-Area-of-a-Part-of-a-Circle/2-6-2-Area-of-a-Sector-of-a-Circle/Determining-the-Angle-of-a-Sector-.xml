@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Determining the Angle of a Sector.</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>The diagram below shows a sector of a circle with center \(\text{O}\) and radius \({@r@}\,\text{cm}\). The area of the sector is \({@Area@} \, \text{cm}^2\).</p>
+[[jsxgraph]]
+  var brd = JXG.JSXGraph.initBoard(divid, {
+        boundingbox: [-1, 8, 8, -1],
+        axis: false,
+        showNavigation: false,
+        showCopyright: false
+    });
+
+    // Centre of the circle
+    var O = brd.create('point', [0, 0], {visible: false});
+
+    // Radius length
+    var r = 6;
+
+    // Points on the circle forming 45° sector
+    var P = brd.create('point', [r, 0], {visible: false}); // along x-axis
+    var Q = brd.create('point', [r*Math.cos(Math.PI/4), r*Math.sin(Math.PI/4)], {visible: false});
+
+    // Draw the 45° sector
+    brd.create('sector', [O, P, Q], {
+        fillColor: 'white',
+        fillOpacity: 0.4,
+        strokeColor: 'black'
+    });
+
+    // Draw radii
+    brd.create('segment', [O, P], {strokeWidth: 2});
+    brd.create('segment', [O, Q], {strokeWidth: 2});
+
+    // Draw arc of the sector
+    brd.create('arc', [O, P, Q], {strokeWidth: 2});
+
+    // Angle marker
+    brd.create('angle', [P, O, Q], {radius: 1.2, name: 'x'});
+
+    // Radius label
+    brd.create('text', [r/2, -0.2,  '{#r#} cm']);
+
+[[/jsxgraph]]
+<p>Calculate the angle subtended at the center of the circle. (Take \(\pi=\frac{22}{7}\))</p>
+<p>\(\text{x}=\)[[input:ans1]]\(^\circ\)[[validation:ans1]]\(^\circ\)</p>
+<p hidden>[[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>To find the angle at the center of a sector, we use the formula:</p>  
+<p>\(\text{Area of sector} = \frac{x}{360} \times \pi r^2\)</p>  
+
+<p>We are given:</p>  
+<p>Area = \({@Area@}\, \text{cm}^2\), \(r = {@r@}\) cm, \(\pi = {@pi_val@}\)</p>  
+
+<p>Substitute the values into the formula:</p>  
+<p>\({@Area@} = \frac{x}{360} \times {@pi_val@} \times {@r@}^2\)</p>  
+
+<p>Calculate \({@r@}^2\):</p>  
+<p>\({@r@} \times {@r@} = {@r_square@}\)</p>  
+
+<p>Now the equation becomes:</p>  
+<p>\({@Area@} = \frac{x}{360} \times {@pi_val@} \times {@r_square@}\)</p>  
+
+<p>Multiply \(\frac{22}{7} \times {@r_square@}\):</p>  
+<p>\(\frac{22 \times {@r_square@}}{7}  = {@solve_1@}\)</p>  
+
+<p>Now:</p>  
+<p>\({@Area@} = \frac{x}{360} \times {@solve_1@}\)</p>  
+
+<p>Multiply both sides by 360:</p>  
+<p>\({@Area@} \times 360 = x \times {@solve_1@}\)</p>  
+<p>\({@solve_2@}= x \times {@solve_1@}\)</p>  
+
+<p>Divide both sides by {@solve_1@}:</p>  
+<p>\(x = \frac{{@solve_2@}}{{@solve_1@}} = {@theta_deg@}^\circ\)</p>  
+
+<p><strong>Final Answer:</strong> \(\boxed{x = {\color{blue}{@theta_deg@}^\circ}}\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize radius r in the range [1.0, 2.0) */
+r : rand(100) + 1;
+
+/* Randomize angle θ in degrees in the range [20°, 90°) */
+ theta_deg: rand(60) + 25;
+
+/* Convert θ from degrees to fraction of a full circle */
+theta_frac: theta_deg / 360;
+
+/* Use pi as 22/7 instead of 3.1416 */
+pi_val : 22/7;
+r_square:r^2;
+
+solve_1: pi_val*r_square;
+
+
+solution:pi_val*r_square;
+
+/* Compute area of the sector: A = (θ/360) × π × r² */
+area : theta_frac * pi_val * r^2;
+Area:decimalplaces(area,2);
+
+solve_2:Area*360;
+
+
+/*Mistake  1 Forgetting to Square the Radius:*/
+
+solved_angle1:(Area*360)/(pi_val*r);
+solved_angle:round(solved_angle1);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The area of the sector.}={@Area@}\,\text{cm}^2\)</p>
+<p>\(\text{The radius of the sector.}={@r@}\,\text{cm}\)</p>
+<p>\(\text{The angle subtended.}={@theta_deg@}^\circ\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Henry Onyango</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+<p id="description">The question provided requires the student to find the area of a sector.
+To solve it correctly, the student must carefully read the word problem and extract the relevant information to apply the correct formula.
+
+The formula for the area of a sector is:  \(\text{Area}=\frac{\theta}{360} \times \pi r^2\)</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>theta_deg</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct angle subtended at the center.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>theta_deg</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for Forgetting to Square the Radius:</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>solved_angle</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Good job! Just a quick note remember to square the radius \(\text{ r}={@r@}\text{cm}\) before using it in the formula. You missed this step, which is crucial for getting the correct answer. Double-check your calculations and keep going!"</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>732045538</deployedseed>
+    <deployedseed>413954209</deployedseed>
+    <deployedseed>21479528</deployedseed>
+    <deployedseed>1588447047</deployedseed>
+    <deployedseed>2075094465</deployedseed>
+    <deployedseed>2034055939</deployedseed>
+    <deployedseed>1513817748</deployedseed>
+    <deployedseed>1521222529</deployedseed>
+    <deployedseed>335635900</deployedseed>
+    <deployedseed>1301223782</deployedseed>
+    <deployedseed>1971234622</deployedseed>
+    <deployedseed>1275477564</deployedseed>
+    <deployedseed>1798486227</deployedseed>
+    <deployedseed>1389623318</deployedseed>
+    <deployedseed>670513795</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>theta_deg</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Checks for Forgetting to Square the Radius:</description>
+      <testinput>
+        <name>ans1</name>
+        <value>solved_angle</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.5000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

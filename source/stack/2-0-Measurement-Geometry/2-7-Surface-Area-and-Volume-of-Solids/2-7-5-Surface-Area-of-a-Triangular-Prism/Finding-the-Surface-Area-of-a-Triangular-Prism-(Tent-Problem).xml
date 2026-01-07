@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the Surface Area of a Triangular Prism (Tent Problem)</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A tent is shaped like a triangular prism. The triangular ends of the tent each have a base of \({@big_base@}\, \text{cm}\) and a height of \({@h@}\, \text{cm}\). The length of the tent is \({@l@}\, \text{cm}\). Calculate the total surface area of the tent’s canvas.</p>
+<p>\(\text{Total surface area of the tent’s canvas}=\)[[input:ans1]]\(\,\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>
+Given: A tent is shaped like a triangular prism with the following dimensions:
+</p>
+<p>
+Base of right triangle \(={@b@}\,\text{m}\) <br/>
+Height of triangle \(={@h@}\,\text{m}\) <br/>
+Sloping side (hypotenuse) \(={@hyp@}\,\text{m}\) <br/>
+Big base of tent \(={@big_base@}\,\text{m}\) <br/>
+Length of tent \(={@l@}\,\text{m}\)
+</p>
+
+<p>
+<ol type="a">
+<li>
+<p><b>Find the Total Surface Area of the Tent</b></p>
+
+<p>
+\(\textbf{Step 1. Find the area of one triangular end}\)
+</p>
+<p>
+\(\begin{align}
+A_{\triangle} &= \frac{1}{2} \times \text{base} \times \text{height} \\
+&= \frac{1}{2} \times {@big_base@} \times {@h@} \\
+&= {@area_triangle@}\,\text{m}^2
+\end{align}\)
+</p>
+
+<p>
+\(\textbf{Step 2. Find the area of one rectangular side (the sloping panel)}\)
+</p>
+<p>
+\(\begin{align}
+A_{\text{rect}} &= \text{sloping side} \times \text{length} \\
+&= {@hyp@} \times {@l@} \\
+&= {@area_rectangle@}\,\text{m}^2
+\end{align}\)
+</p>
+
+<p>
+\(\textbf{Step 3. Find the total surface area of the tent’s canvas}\)
+</p>
+<p>
+\(\begin{align}
+\text{Total Surface Area} &= 2(A_{\triangle}) + 2(A_{\text{rect}}) \\
+&= 2({@area_triangle@}) + 2({@area_rectangle@}) \\
+&= {@total_SA@}\,\text{m}^2
+\end{align}\)
+</p>
+
+
+
+<p>
+\(\boxed{\text{Total Surface Area of the Tent’s Canvas} = {@final_answer@}\,\text{m}^2}\)
+</p>
+
+</li>
+</ol>
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Step 1: Load 40 predefined Pythagorean triples */
+triples: [
+  [3,4,5],[5,12,13],[6,8,10],[7,24,25],[8,15,17],
+  [9,12,15],[9,40,41],[10,24,26],[11,60,61],[12,16,20],
+  [12,35,37],[13,84,85],[14,48,50],[15,20,25],[15,36,39],
+  [16,30,34],[16,63,65],[18,24,30],[18,80,82],[20,21,29],
+  [20,48,52],[21,28,35],[21,72,75],[24,32,40],[24,45,51],
+  [27,36,45],[28,45,53],[30,40,50],[30,72,78],[33,44,55],
+  [33,56,65],[35,84,91],[36,48,60],[36,77,85],[39,52,65],
+  [40,75,85],[45,60,75],[48,55,73],[60,63,87],[65,72,97]
+];
+
+/* Step 2: Randomly pick one triple */
+chosen : triples[rand(40) + 1];
+b : chosen[1];     /* base of right triangle */
+h : chosen[2];     /* height of triangle */
+hyp : chosen[3];   /* sloping side of triangle */
+
+/* Step 3: The big base of the tent = 2 * b */
+big_base : 2 * b;
+
+/* Step 4: Choose the tent length (ensure it is longer than triangle sides) */
+l : max(b, h) + rand(35) + 6;
+
+/* Step 5: Compute triangle area */
+area_triangle : (1/2) * big_base * h;
+
+/* Step 6: Compute area of rectangle (use hypotenuse and length) */
+area_rectangle : hyp * l;
+
+/* Step 7: Total Surface Area of Tent Canvas (using your given formula) */
+total_SA : 2 * area_triangle + 2 * area_rectangle;
+
+/* Step 8: Final answer as integer (no decimal places) */
+final_answer : floor(total_SA);
+
+/* Step 9: Display values */
+[b, h, hyp, big_base, l, total_SA, final_answer];</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The sides of the canvas, base, height and length of the tent are respectively } = {@big_base@},\, {@h@}, \,{@l@} \, \text{m}.\)</p>
+<p>\(\text{The total surface area of the tent’s canvas } = {@total_SA @} \, \text{m}^2.\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>total_SA</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct area of the tent.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>total_SA</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>898956398</deployedseed>
+    <deployedseed>114805046</deployedseed>
+    <deployedseed>782004264</deployedseed>
+    <deployedseed>915045287</deployedseed>
+    <deployedseed>1182082657</deployedseed>
+    <deployedseed>254679943</deployedseed>
+    <deployedseed>1810194406</deployedseed>
+    <deployedseed>2106563414</deployedseed>
+    <deployedseed>1891030211</deployedseed>
+    <deployedseed>1638627377</deployedseed>
+    <deployedseed>1428195866</deployedseed>
+    <deployedseed>2123410837</deployedseed>
+    <deployedseed>236915818</deployedseed>
+    <deployedseed>918889862</deployedseed>
+    <deployedseed>434753919</deployedseed>
+    <deployedseed>1106308893</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>total_SA</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

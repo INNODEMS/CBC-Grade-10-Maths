@@ -1,19 +1,98 @@
-# PreTeXt Codespace
+# CBC Grade 10 Mathematics digital textbook Project
 
-Use this template repository to quickly start a new [PreTeXt](https://pretextbook.org) project entirely in the cloud, using GitHub Codespaces.  
+This repository contains the source files for the CBC Grade 10 Mathematics book, developed using [PreTeXt](https://pretextbook.org) and will incoorporate [STACK](https://stack-assessment.org/) exercises for student's personalised learning. PreTeXt is a powerful tool for creating high-quality educational materials, including textbooks, in multiple formats.
 
-## Instructions
+## Project Overview
 
-Look for the green button at the top right of this page.  If the button says `Use this template`, then you are ready to create a new repository for your project.  Click on the button and select "Create a new repository".  On the next page, give your project a name, select public or private (this can be changed later), and click the "Create repository from template" button.
+This initiative is part of a larger project focused on developing digital Open Educational Resources (OERs) for Kenyan secondary schools. The main goal is to create a comprehensive and accessible digital mathematics textbook for Grade 10 students, fully aligned with the Competency-Based Curriculum (CBC).
 
-You now have a GitHub repository saved in your account.  You can come back to that page any time you want to work on your project (note the URL or else find it in the list of your repositories when you log in to GitHub).
+The initial version of the textbook will be developed by a team of 10 interns, who will design the content and assessment materials from scratch. Digital STACK questions, created separately, will be integrated into the subsections of the book to help students test and reinforce their understanding of key concepts.
 
-To start work on your project, go to the green button at the top of *your* repository's page, which will say `<> Code`.  
+The review process, covering both the textbook and the exercises, will provide an opportunity for broader contributions from teachers, students, and other education stakeholders. Development will remain continuous, incorporating feedback and suggestions to ensure the resource becomes increasingly responsive to the needs of teachers, learners, and CBC requirements, while also meeting international standards.
 
-1. Click on this button.
-2. Click on the tab that says "Codespaces."
-3. Click "Create codespace on main."
+Furthermore, the textbook will be designed to be easily adaptable to different contexts, making it suitable for adoption by other countries seeking similar resources. 
 
-This take a minute or two (just the first time; later this will be much faster) and then open a browser version of VS Code with everything set up to start working.  It will generate a new pretext book (and replace this README with one you can edit for your project). 
+The book will be available in multiple formats, including web, PDF, and print. The web version of the book will offer the digital assessments that will help students have a more engaging personalised learning experience from the immediate feedback STACK questions provides.
 
-Next time you want to work on your book, return to your newly created repository, go to the green `<> Code` button, and select the codespace you previously created.  If you don't see that codespace (perhaps you deleted it to save space), you can always create a new codespace.
+## Building and Viewing the Book
+
+### Prerequisites
+- Python 3.x with PreTeXt CLI installed (`pip install pretextbook`)
+- All dependencies from `requirements.txt` installed
+
+### Quick Start: Automated Build Workflow
+
+For the easiest build and preview experience, use the automated batch script:
+
+```bash
+.\build-and-view.bat
+```
+
+This single command will:
+1. Build the PreTeXt book
+2. Deploy the custom STACK JavaScript integration file
+3. Launch the book in your browser
+
+### Manual Build Process
+
+If you need more control over the build process:
+
+1. **Build the book:**
+   ```bash
+   pretext build
+   ```
+
+2. **Copy custom STACK integration file (required for STACK questions to render properly):**
+   ```bash
+   copy /Y "assets\pretext\js\pretext-stack\stackapicalls.js" "output\web\_static\pretext\js\pretext-stack\stackapicalls.js"
+   ```
+
+3. **View the book in browser:**
+   ```bash
+   pretext view web
+   ```
+
+### Important Notes
+- The custom `stackapicalls.js` file in the `assets` directory is essential for STACK questions to render correctly
+- This file must be copied to the output folder after each build
+- The automated script handles this automatically
+
+## Contributing to the project
+
+To contribute to or work on this project, you can use any of the options  below:
+
+1. **Clone the Repository**  
+    Contributions are welcome! If you'd like to contribute and you are an experienced github user:
+- Fork this repository.
+- Make your changes in a feature branch.
+- Submit a pull request for review.
+
+2. **Issues tab**  
+    You can use the issues tab in github to describe the changes/additions/corrections wou would like to be made in the book. Significant contributions that will lead to improvement of the content, form of the activities or improvement of the exercises will be acknowledged within the book.
+
+3. **Review links in the Book**  
+    Use the provided links in the PreTeXt book to leave comments that will lead to improvement of the book.
+
+## License
+
+This project is licensed under the [Creative commons by non-commercial license](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+## Contact
+
+For questions or feedback, please contact the project maintainer at [contact@innodems.org].
+
+
+# Enablers of the project
+
+This project was initially supported by a grant from the US Embassy in Nairobi. The initial support enalbed hiring of 10 interns who were trained in authoring the textbook in PreTeXt by [Prof Oscar Levin](https://math.oscarlevin.com/) and trained in STACK authoring by the INNODEMS team. Other enablers of this project are:
+1. **INNODEMS**  
+   [INNODEMS](https://innodems.org/) is the organization that supports the interns and coordinates the development of the textbook project locally in Kenya. 
+
+2. **IDEMS**   
+     [IDEMS](https://www.idems.international/) has provided expartise in the integration of PreTeXt and STACK and will provide the technical support for the piloting phase of the textbooks.
+
+4. **SAMI**   
+        [SAMI](https://samicharity.co.uk/home) is a UK NGO that leads the fundraising drive to support the development and piloting of the ktextbooks.  
+
+## Support the project
+    You can support the textbook project through contributing to the development of the books or by donating to INNODEMS to help keep the vision of the ptoject alive.

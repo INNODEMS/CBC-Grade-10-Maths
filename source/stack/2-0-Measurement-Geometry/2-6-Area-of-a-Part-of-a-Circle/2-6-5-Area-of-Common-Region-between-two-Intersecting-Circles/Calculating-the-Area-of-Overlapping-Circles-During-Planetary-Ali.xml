@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the Area of Overlapping Circles During Planetary Alignment</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>During a rare planetary alignment, two planets appear as overlapping circular disks when viewed from Earth. Each disk has radius \( {@r@} \,\text{km} \), and the distance between their centres is \(  {@d@} \,\text{km} \). The overlapping region is bounded by two circular arcs. At each centre, the chord of intersection subtends an angle of \( {@theta_deg@}^\circ \).</p>
+<p>Calculate the area of the overlapping region </strong>,giving your answer in whole numbers. </p>
+
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-2, 2, 6, -2],
+    axis: false,
+    showNavigation: false,
+    showCopyright: false
+  });
+
+  // Scale for illustration only
+  var r = 1.5;
+  var d = 2.2;
+
+  var C1 = board.create('point', [0, 0], {name: 'C_1', fixed: true});
+  var C2 = board.create('point', [d, 0], {name: 'C_2', fixed: true});
+
+  var circ1 = board.create('circle', [C1, r]);
+  var circ2 = board.create('circle', [C2, r]);
+
+  // Intersection points
+  var I = board.create('intersection', [circ1, circ2, 0], {name: 'A'});
+  var J = board.create('intersection', [circ1, circ2, 1], {name: 'B'});
+
+  // Radii
+  board.create('segment', [C1, I], {dash: 2});
+  board.create('segment', [C1, J], {dash: 2});
+
+  // Angle
+  board.create('angle', [I, C1, J], {name: '\\(\\theta\\)'});
+
+[[/jsxgraph]]
+<p>\(\text{Area}=\)[[input:ans1]]\(\,\text{km}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>We are asked to determine the area of the overlapping region of two planetary disks. Each disk has radius <em>r</em>, the distance between their centers is <em>d</em>, and the chord of intersection subtends an angle <em>θ</em> at each center. The solution proceeds as follows:</p>
+
+<p><strong>Step 1: Area of a circular segment</strong></p>
+
+<p>The area of a circular segment is given by:</p>
+
+<p>\(
+\text{Area of segment} = \text{Area of sector} - \text{Area of triangle}
+\)</p>
+
+<p>1a. Area of the sector:</p>
+<p>
+\(
+\begin{align}
+\text{Area of sector} &= \frac{\theta}{360} \pi r^2 \\
+&= \frac{{@theta_deg@}}{360} \times \frac{22}{7} \times {@r@}^2 \\
+&= {@sector@}\,\text{km}^2
+\end{align}
+\)
+</p>
+
+<p>1b. Area of the triangle formed by the chord and radii:</p>
+<p>
+\(
+\begin{align}
+\text{Area of triangle} &= \frac{1}{2} r^2 \sin \theta \\
+&= \frac{1}{2} \times {@r@}^2 \times \sin({@theta_deg@}^\circ) \\
+&= {@triangle@}\,\text{km}^2
+\end{align}
+\)
+</p>
+
+<p>1c. Area of the segment:</p>
+<p>
+\(
+\begin{align}
+\text{Area of segment} &= \text{Area of sector} - \text{Area of triangle} \\
+&= {@sector@} - {@triangle@} \\
+&= {@seg@}\,\text{km}^2
+\end{align}
+\)
+</p>
+
+<hr>
+
+<p><strong>Step 2: Area of overlapping region</strong></p>
+
+<p>Since the overlapping region consists of two identical segments (one from each circle), the total area is:</p>
+<p>
+\(
+\begin{align}
+\text{Area of overlap} &= 2 \times \text{Area of segment} \\
+&= 2 \times {@seg@} \\
+&= {@Overlaping_area@}\,\text{km}^2
+\end{align}
+\)
+</p>
+
+<p>Rounding to whole numbers:</p>
+<p>
+\(
+\begin{align}
+\text{Area of overlapping region} &= {@Area@}\,\text{km}^2
+\end{align}
+\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Randomised radius (km) */
+r : rand_with_step(100,700,10);
+
+/* Distance between centres (km), must be < 2r */
+d :rand_with_step(500,5000,100);
+
+/* Central angle (degrees) subtended by the overlap chord */
+theta_deg : rand_with_step(60,180,10);
+
+
+/*Area of the segment*/
+sector:theta_deg/360*22/7*r^2;
+
+triangle:1/2*r^2*float(sin(theta_deg * %pi / 180));
+/*Area of the first segment */
+seg:sector-triangle;
+/*The area of the overlapping circle */
+Overlaping_area:2*seg;
+Area:round(Overlaping_area);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The planetary radius}={@r@}\,\text{km}\)</p>
+<p>\(\text{The planetary Distance}={@d@}\,\text{km}\)</p>
+<p>\(\text{The angle made by the planetary}={@theta_deg@}\,\text{km}\)</p>
+<p>\(\text{The area of the overlapping shadow visible from Earth. }={@Area@}\,\text{km}^2\)</p]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>Area</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct area.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>Area</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1487145861</deployedseed>
+    <deployedseed>480793609</deployedseed>
+    <deployedseed>207210154</deployedseed>
+    <deployedseed>289059438</deployedseed>
+    <deployedseed>2019918887</deployedseed>
+    <deployedseed>1658968335</deployedseed>
+    <deployedseed>1750870986</deployedseed>
+    <deployedseed>1691750733</deployedseed>
+    <deployedseed>1390573116</deployedseed>
+    <deployedseed>637510846</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Area</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

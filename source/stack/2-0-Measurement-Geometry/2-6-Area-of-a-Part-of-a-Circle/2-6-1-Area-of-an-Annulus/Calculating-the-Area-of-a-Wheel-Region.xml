@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the Area of a Wheel Region</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A wheel consists of a circular outer rim and a circular inner hub, both having the same centre. The outer radius of the wheel is \({@R@}\,\text{cm}\), and the radius of the inner hub is \({@r@}\,\text{cm}\). Using \(\pi = 3.142\), determine the area of the wheel region.</p>
+<p>\(\text{The area of the wheel region}=\)[[input:ans1]]\(\,\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>The outer radius of the wheel \(={@R@}\,\text{cm}\).<br>
+Inner hub radius \(={@r@}\,\text{cm}\)
+</p>
+<p>Therefore,<br>
+\(
+\begin{align}
+A&=\pi(R^2-r^2)\\
+&=3.142({@R@}^2-{@r@}^2) \\
+&=3.142({@R_1@}-{@r_2@}) \\
+&=3.12 \times {@Radius_1@} \\
+&={@A@}\,\text{cm}^2
+\end{align}
+
+\)
+</p>
+<p>Therefore,<br>
+\(\text{The area of the wheel region}={@A@}\,\text{cm}^2\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize inner radius */
+r: rand_with_step(7,70 , 7);
+
+/* Randomize outer radius greater than inner radius */
+R: r + rand_with_step(7,140 , 7);
+
+/* Define pi as 22/7 */
+Pi: 3.142;
+
+/* Area of the annulus */
+R_1:R^2;
+r_2:r^2;
+Radius_1:R_1-r_2;
+A: Pi * (R^2 - r^2);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The radius of the outer hub}={@R@}\,\text{cm}\)</p>
+<p>\(\text{The radius of the inner hub}={@r@}\,\text{cm}\)</p>
+<p>\(\text{The area of the wheel region}={@A@}\,\text{cm}^2\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>A</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct area of the wheel region.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>A</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>381937522</deployedseed>
+    <deployedseed>1214204477</deployedseed>
+    <deployedseed>1626521967</deployedseed>
+    <deployedseed>1302563729</deployedseed>
+    <deployedseed>1039865122</deployedseed>
+    <deployedseed>1562986115</deployedseed>
+    <deployedseed>2054144308</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>A</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

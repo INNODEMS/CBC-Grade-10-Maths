@@ -41,7 +41,7 @@
 							Rulers and string
 						</p>
 						<p>
-							🌲 Step-by-Step Instructions.
+							 Step-by-Step Instructions.
 						</p>
 						<p>
 							1. Create the Model
@@ -172,22 +172,22 @@
 		 </sidebyside>	
 		</statement>
 		<solution>
-		<image width="30%">
+		<image width="50%">
 		<latex-image label="cone-cylinder">
-			\begin{tikzpicture}
+			\begin{tikzpicture}[rotate=90]
 				% Set background color
 				<!-- \fill[cyan!30] (-3,-1) rectangle (3,9); -->
 				
 				% Fill the cylinder with a light blue shade
-				\fill[blue!30] (-2,0) rectangle (2,5);
-				\filldraw[fill=blue!30, draw=black] (0,5) ellipse (2cm and 0.5cm);
-				\filldraw[fill=blue!30, draw=black, dashed] (0,0) ellipse (2cm and 0.5cm);
+				\draw[thick] (-2,0) rectangle (2,5);
+				\draw[thick] (0,5) ellipse (2cm and 0.5cm);
+				\draw[dashed] (0,0) ellipse (2cm and 0.5cm);
 				% Draw the base ellipse
 				\draw[dashed] (0,0) ellipse (2cm and 0.5cm);
 				
 				% Draw the vertical sides of the cylinder
-				\fill[blue!30] (-2,0) -- (-2,5);
-				\fill[blue!30] (2,0) -- (2,5);
+				\draw[thick] (-2,0) -- (-2,5);
+				\draw[thick] (2,0) -- (2,5);
 				
 				% Draw the top ellipse of the cylinder
 				\draw (0,5) ellipse (2cm and 0.5cm);
@@ -202,9 +202,9 @@
 				\draw[dashed] (0,0) --(2,0);
 				
 				% Label dimensions
-				\node[right] at (2,2.5) {\large 50 cm};
-				\node[below] at (1,-0.5) {\large 40 cm};
-				\node[left] at (0,6.5) {\large 30 cm};
+				\node[above] at (2,2.5) {\large 50 cm};
+				\node[right] at (1,-1) {\large 40 cm};
+				\node[below] at (1,6.5) {\large 30 cm};
     
 			\end{tikzpicture}
 		</latex-image>
@@ -276,9 +276,9 @@
 	</li>
    </ol>
    </p>
-   <image width="160%">
+   <image width="100%">
    <latex-image label="trun">
-	\begin{tikzpicture}
+	\begin{tikzpicture}[rotate=270]
 		% Define colors
 		\definecolor{mycube}{RGB}{144, 202, 249} % Light Blue for cube
 		\definecolor{mypyramid}{RGB}{255, 183, 77} % Orange for pyramid
@@ -310,7 +310,7 @@
 
 		% Dimension labels
 		\draw[&lt;-&gt;] (1.5,-1,0) -- (1.5,1,0);
-		\node[right] at (1.5,0,0) {\large 14 cm};
+		\node[above] at (1.5,0,0) {\large 14 cm};
 
 		\draw[&lt;-&gt;] (1.5,1,1) -- (1.5,1,9);
 		\node[right] at (1.5,0.8,5.5) {\large 33 cm};
@@ -325,9 +325,9 @@
    </p>
    
    
-   <image>
-   <latex-image>
-	\begin{tikzpicture}
+   <image width="50%">
+   <latex-image label="frustrum-cube-cube">
+	\begin{tikzpicture}[rotate=90]
 		% Bottom hemisphere (correct semicircle)
 			\draw[thick] (-3,0) arc (180:360:3 and 1.5);
 			
@@ -341,10 +341,10 @@
 			\draw[thick] (3,4) arc (0:180:3 and 1.5);
 			
 			% Total height dimension
-			\draw[&lt;-&gt;] (-3.5,0) -- node[left] {11 m} (-3.5,4);
+			\draw[&lt;-&gt;] (-3.5,0) -- node[below] {11 m} (-3.5,4);
 			
 			% Lower diameter dimension
-			\draw[&lt;-&gt;] (-3,-0.2) -- node[below] {6 m} (3,-0.2);
+			\draw[&lt;-&gt;] (-3,-0.2) -- node[right] {6 m} (3,-0.2);
 	\end{tikzpicture}
    </latex-image>
    </image>
@@ -360,14 +360,14 @@
 	<p>
 	5. Mogaka a grade 10 student was trying to sketch an image of a ice cream cone container with icecream. Find the surface area of the sketched image alongside.
 </p>
-<image>
+<image width="45%">
    <latex-image label="truncated-cone-exercise">
      \begin{tikzpicture}
 		% Draw the base circle (equator)
 		\draw[thick] (0,0) ellipse (2 and 1);
 		
 		% Draw the semicircle (hemisphere) starting from -2
-		\draw[thick, fill=gray!30] (-2,0) arc (180:360:2);
+		\draw[thick] (-2,0) arc (180:360:2);
 		
 		% Vertical radius
 		\draw[dashed] (-2,0) --(0,0) -- (0,5);

@@ -19,7 +19,7 @@
                     <p>
                         Measure and record the the length of the model. 
                     </p>
-                    <image width="40%">
+                    <image width="60%">
                     <latex-image label="cylinder2">
                         \begin{tikzpicture}[scale=0.5]
                             % Draw the main cylinder body
@@ -47,7 +47,7 @@
                     <p>
                        Open the model as illustrated below. 
                     </p>
-                    <image width="50%">
+                    <image width="60%">
                     <latex-image label="cylinder3">
                         \begin{tikzpicture}[scale=0.5]
                             % Define rectangle width and height
@@ -70,7 +70,7 @@
                     <p>
                         Fold one circular end into two equal parts as shown;
                     </p>
-                    <image width="40%">
+                    <image width="50%">
                     <latex-image label="cylinder4">
                         \begin{tikzpicture}
                             % Define radius
@@ -84,7 +84,7 @@
 
                             % Draw label for the diameter
                             \draw[-&gt;] (-0.5,-0.1) -- (0.5,-0.1);
-                            \node[below] at (0,-0.2) {Diameter};
+                            \node[below] at (-0.2,0) {d};
                         \end{tikzpicture}
                     </latex-image>
                         
@@ -235,7 +235,7 @@
             <p>
                 The figure below shows a cylinder. Calculate the surface area of the cylinder to two decimal places.(<m>\textbf{Use}\, \pi=\frac{22}{7}</m>)
             </p>
-                  <image width="70%">
+                  <image width="40%">
         <shortdescription>Cylindrical prism</shortdescription>
      <latex-image label="volume-of-a-cylinder-six-exercise-one">
         \begin{tikzpicture}[rotate=90]
@@ -375,8 +375,9 @@
         </p>
     </activity>
     <p>
-        <m>\textbf{Note: Open Cylinder}</m>
-    </p>
+            <m>\textbf{Key Takeaway}</m>
+        </p>
+    
     <p>
         An open cylinder, is a cylinder where the top is open. It means that 
         you will only have one circle instade of two.
@@ -386,9 +387,7 @@
         and the circle.
     </p>
     
-    <p>
-        <m>\textbf{Essential Concepts:}</m>
-    </p>
+    
     <p>
         An open cylinder has a curved surface and one circular face.
     </p>
@@ -401,10 +400,7 @@
             <mrow>= \amp  \pi r (r+2h) </mrow>
         </md>
     </p>
-    <p>
-        <m>\textbf{Note:}</m> For an open cylinder an exeminer will give guidlines. But most of the cylinders 
-        are considerd closed.
-    </p>
+    
     <example>
         <statement>
             <p>
@@ -533,7 +529,7 @@
         <latex-image label="cylinder7">
             \begin{tikzpicture}[rotate=90]
                 % Fill the shape with magenta
-                \fill[magenta] (-2,0) arc (180:360:2 and 0.8) -- (2,4) arc (360:180:2 and 0.8) -- cycle;
+                \fill[cyan] (-2,0) arc (180:360:2 and 0.8) -- (2,4) arc (360:180:2 and 0.8) -- cycle;
                 
                 % Draw the base ellipse
                 \draw[thick] (-2,0) arc (180:360:2 and 0.8); 
@@ -543,7 +539,7 @@
                 \draw[thick] (2,0) -- (2,4);
 
                 % Draw the top semicircle
-                \draw[thick,fill=magenta] (-2,4) arc (180:360:2 and 0.8);
+                \draw[thick,fill=cyan] (-2,4) arc (180:360:2 and 0.8);
 
                 % Draw a line at the top of the semicircle
                 \draw[thick] (-2,4) -- (2,4);
@@ -562,10 +558,10 @@
                 <p>
                     The cylinder below has a radius of 4 cm and a height of 10 cm. Use <m>\pi = 3.142</m>
                 </p>
-                 <image width="30%">
+                 <image width="45%">
         <shortdescription>Cylindrical prism</shortdescription>
      <latex-image label="volume-of-a-cylinder-exercise-one">
-        \begin{tikzpicture}
+        \begin{tikzpicture}[rotate=90]
             % Draw the top ellipse
             \draw (0,4) ellipse (1.5 and 0.5);
 
@@ -577,7 +573,7 @@
              \draw[dashed] (0,0) --(0,4);
              \node at (0.2,2.2) {10 cm};
             % Draw the bottom ellipse (partially hidden)
-            \fill[gray!30] (0,0) ellipse (1.5 and 0.5); % Shaded bottom base
+            \draw[thick] (0,0) ellipse (1.5 and 0.5); % Shaded bottom base
             \draw[dashed] (0,0) ellipse (1.5 and 0.5);  % Dashed for hidden portion
         \end{tikzpicture}
      </latex-image>
@@ -642,49 +638,49 @@
             <m>\textbf{Exercise}</m>
         </p>
         <p>
-            1. A cylinder has a volume of 1,570 cm³ and a radius of 10 cm.
+            1. A cylinder has a volume of 1,570 cm³ and a diameter of 30 cm.
           Find its height.Use (<m>\pi = 3.14</m>)
         </p>
         <image width="40%">
             <latex-image label="cylinder-five-two">
                 \begin{tikzpicture}[scale=0.2, rotate=90] % Rotated 90 degrees to lie horizontally
-                    % Define dimensions
+                      % Define dimensions
                     \def\diameter{24} % Diameter of the cylinder
                     \def\radius{12}   % Radius of the cylinder (half of diameter)
                     \def\height{30}   % Length of the cylinder (previously height)
 
                     % Draw and fill the curved surface with green
-                    \fill[blue!20] (-\radius,0) -- (-\radius,-\height)
+                    \draw[thick] (-\radius,0) -- (-\radius,-\height)
                     arc (180:360:\radius cm and 2cm)
                     -- (\radius,0)
                     arc (0:180:\radius cm and 2cm);
 
                     % Fill the front and back cross-sections with white
-                    \fill[blue!20] (-\radius,0) arc (180:360:\radius cm and 2cm)
+                    \draw[thick] (-\radius,0) arc (180:360:\radius cm and 2cm)
                     arc (0:180:\radius cm and 2cm);
                                 
-                    \fill[blue!20] (-\radius,-\height) arc (180:360:\radius cm and 2cm)
+                    \fill[white] (-\radius,-\height) arc (180:360:\radius cm and 2cm)
                     arc (0:180:\radius cm and 2cm);
 
                     % Draw the front ellipse
-                    \draw[thick,magenta] (-\radius,0) arc (180:360:\radius cm and 2cm);
-                    \draw[ thick,magenta] (\radius,0) arc (0:180:\radius cm and 2cm);
+                    \draw[thick] (-\radius,0) arc (180:360:\radius cm and 2cm);
+                    \draw[ thick] (\radius,0) arc (0:180:\radius cm and 2cm);
 
                     % Draw the back ellipse
-                    \draw[thick,magenta] (-\radius,-\height) arc (180:360:\radius cm and 2cm);
-                    \draw[ thick,magenta] (\radius,-\height) arc (0:180:\radius cm and 2cm);
+                    \draw[thick] (-\radius,-\height) arc (180:360:\radius cm and 2cm);
+                    \draw[ thick] (\radius,-\height) arc (0:180:\radius cm and 2cm);
 
                     % Draw the sides
                     \draw[thick,] (-\radius,0) -- (-\radius,-\height);
-                    \draw[thick,magenta] (\radius,0) -- (\radius,-\height);
+                    \draw[thick] (\radius,0) -- (\radius,-\height);
 
                     % Label Diameter (Vertical since cylinder is lying down)
                     \draw[&lt;-&gt;, blue, thick] (-\radius, 4) -- (\radius, 4)
-                    node[midway, above, font=\bfseries, blue, rotate=-90] {10 cm};
+                    node[midway, above, font=\bfseries, blue, rotate=-90] {30 cm};
 
                     % Label Length (formerly height, now horizontal)
-                    \draw[&lt;-&gt;,blue, thick] (\radius + 2, 0) -- (\radius + 2, -\height)
-                    node[midway, above, font=\bfseries, blue] {$h$};
+                    \draw[&lt;-&gt;, blue, thick] (\radius + 2, 0) -- (\radius + 2, -\height)
+                    node[midway, left, font=\bfseries, blue, rotate=-90] {h cm};
                 \end{tikzpicture}
             </latex-image>
             
@@ -728,12 +724,12 @@
                     \draw[thick,magenta] (\radius,0) -- (\radius,-\height);
 
                     % Label Diameter (Vertical since cylinder is lying down)
-                    \draw[&lt;-&gt;, blue, thick] (-\radius, 4) -- (\radius, 4)
-                    node[midway, above, font=\bfseries, blue, rotate=-90] {14 cm};
+                    \draw[&lt;-&gt;, black, thick] (-\radius, 4) -- (\radius, 4)
+                    node[midway, above, font=\bfseries, black, rotate=-90] {14 cm};
 
                     % Label Length (formerly height, now horizontal)
-                    \draw[&lt;-&gt;, blue, thick] (\radius + 2, 0) -- (\radius + 2, -\height)
-                    node[midway, left, font=\bfseries, blue, rotate=-90] {10 cm};
+                    \draw[&lt;-&gt;, black, thick] (\radius + 2, 0) -- (\radius + 2, -\height)
+                    node[midway, left, font=\bfseries, black, rotate=-90] {10 cm};
                 \end{tikzpicture}
             </latex-image>
             

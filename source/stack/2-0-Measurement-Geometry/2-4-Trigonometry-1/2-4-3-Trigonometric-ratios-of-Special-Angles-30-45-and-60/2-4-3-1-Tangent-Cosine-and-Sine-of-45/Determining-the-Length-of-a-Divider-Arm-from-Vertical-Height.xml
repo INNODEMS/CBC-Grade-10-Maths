@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Determining the Length of a Divider Arm from Vertical Height</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The angle formed by the arms of an upright pair of dividers and the horizontal is \({@theta@}^\circ\). The vertical distance from the horizontal to the vertex is \({@d@}\,\text{cm}\). Find the length of one arm of the divider without using a calculator or trigonometric tables.</p>
+<p>\(\text{The Length of a divider arm from vertical height}=\)[[input:ans1]]\(\,\text{cm}\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><strong>Worked Solution:</strong></p>
+
+<p>We are asked to find the length of one arm of the divider given:</p>
+<ul>
+    <li>Angle with horizontal: {@theta@}°</li>
+    <li>Vertical distance from horizontal to vertex: \({@d@}\, \text{cm}\)</li>
+</ul>
+
+<p>From trigonometry, for an upright divider forming an angle \(\theta\) with the horizontal, the relationship between the vertical height and the arm length is:</p>
+
+<p>
+\(\begin{align}
+\text{Arm length} &= \frac{\text{Vertical distance}}{\sin \theta} \\
+&= \frac{@d@}{\sin({@theta@}^\circ)} \\
+&= {@arm_length@} \text{ cm}
+\end{align}\)
+</p>
+
+<p>Hence, the length of one arm of the divider is {@arm_length@} cm.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize the vertical distance from 5 to 25 cm in steps of 1 */
+d: rand_with_step(1,56,4);
+
+/* Angle of 45 degrees */
+theta: 45;
+
+/* Convert degrees to radians for computation */
+theta_rad: theta * %pi/180;
+
+/* Length of one arm of the divider */
+arm_length: d / sin(theta_rad);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The angle made by the pair of divider is} ={@theta@}^\circ\)</p>
+<p>\(\text{The distance}={@d@}\,\text{cm}\)</p>
+<p>\(\text{The Length of a divider arm from vertical height}={@arm_length@}\,\text{cm}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>arm_length</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct Length.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>arm_length</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>463734286</deployedseed>
+    <deployedseed>1283760297</deployedseed>
+    <deployedseed>13384997</deployedseed>
+    <deployedseed>663029925</deployedseed>
+    <deployedseed>2100032474</deployedseed>
+    <deployedseed>1598453226</deployedseed>
+    <deployedseed>1703353731</deployedseed>
+    <deployedseed>1427792288</deployedseed>
+    <deployedseed>2098633323</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>arm_length</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

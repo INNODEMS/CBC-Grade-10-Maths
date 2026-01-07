@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding acceleration and total distance using velocity-time graph</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The velocity–time graph of a moving object shows the following motion phases:</p>
+
+<ol>
+  <li>Constant velocity of {@v1@} m/s for {@t1@} s</li>
+  <li>Uniform acceleration to {@v2@} m/s over {@t2@} s</li>
+  <li>Constant velocity of {@v2@} m/s for {@t3@} s</li>
+</ol>
+
+<p><b>a)</b> Find the acceleration during phase 2.<br>
+Acceleration = [[input:ans1]] m/s² [[validation:ans1]] [[feedback:prt1]]</p>
+
+<p><b>b)</b> Find the total distance travelled.<br>
+Total distance = [[input:ans2]] m [[validation:ans2]] [[feedback:prt2]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><b>Worked Solution</b></p>
+
+<p>The motion is represented on a velocity–time graph. The total distance travelled is equal to the area under the graph.</p>
+<p><b>a) Acceleration during phase 2</b></p>
+
+<p>Acceleration is the change in velocity divided by the time taken.</p>
+
+<p>\[a = \frac{\text{change in velocity}}{\text{time taken}}\]</p>
+
+<p>\[a = \frac{v_2 - v_1}{t_2}\]</p>
+
+<p>\[a = \frac{{@v2@} - {@v1@}}{{@t2@}}\]</p>
+
+<p>\[a = {@ta1@} \text{ m/s}^2\]</p>
+
+<p><b>b) Total distance travelled</b></p>
+
+<p>The total distance is the sum of the areas under the velocity–time graph for the three phases.</p>
+
+<ul>
+  <li><b>Phase 1:</b> Constant velocity {@v1@} m/s for {@t1@} s</li>
+</ul>
+
+<p>
+\[
+\text{Distance}_1 = v_1 \times t_1 = {@v1@} \times {@t1@} = {@s1@} \text{ m}
+\]
+</p>
+
+<ul>
+  <li><b>Phase 2:</b> Uniform acceleration from {@v1@} m/s to {@v2@} m/s over {@t2@} s</li>
+</ul>
+
+<p>The area is a trapezium.</p>
+
+<p>
+\[
+\text{Distance}_2 = \frac{(v_1 + v_2)}{2} \times t_2
+\]
+</p>
+
+<p>
+\[
+\text{Distance}_2 = \frac{({@v1@} + {@v2@})}{2} \times {@t2@} = {@s2@} \text{ m}
+\]
+</p>
+
+<ul>
+  <li><b>Phase 3:</b> Constant velocity {@v2@} m/s for {@t3@} s</li>
+</ul>
+
+<p>
+\[
+\text{Distance}_3 = v_2 \times t_3 = {@v2@} \times {@t3@} = {@s3@} \text{ m}
+\]
+</p>
+
+<hr>
+
+<p><b>Total distance travelled</b></p>
+
+<p>
+\[
+\text{Total distance} = \text{Distance}_1 + \text{Distance}_2 + \text{Distance}_3
+\]
+</p>
+
+<p>
+\[
+= {@s1@} + {@s2@} + {@s3@}
+\]
+</p>
+
+<p>
+\[
+= {@ta2@} \text{ m}
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>v1: 10 * (rand(9) + 2);
+t1: rand(20)+2;
+v2: v1 + 10 * (rand(9) + 1);
+t2: rand(18)+4;
+t3: rand_with_prohib(3,23,[t2]);
+
+
+ta1: (v2 - v1) / t2;
+
+/* Distances */
+s1: v1 * t1;                           /* rectangle */
+s2: (v1 + v2) / 2 * t2;               /* trapezium */
+s3: v2 * t3;                           /* rectangle */
+
+/* Total distance */
+ta2: s1 + s2 + s3;
+/*mistake*/
+mistake_ta1:v2/t2;
+velocity:v1+v2+v3;
+time:t1+t2+t3;
+mistake_ta2:velocity/time;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@t1@}</p>
+<p>{@t2@}</p>
+<p>{@t3@}</p>
+<p> {@v1@} </p>
+<p> {@s1@} </p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans> ta1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the acceleration during phase 2</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans> ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for the incorrect acceleration</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake_ta1</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You used the velocity {@v2@} to calculate acceleration. Acceleration should be calculated using the change in velocity over time. Please refer to the worked solution.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct total distance</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect total distance</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>mistake_ta2</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You added the velocities of the 3 phases and divided by the sum of their time. Distance should be calculated by finding the area under each section of the velocity–time graph. Please refer to the worked solution.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1976123270</deployedseed>
+    <deployedseed>834906619</deployedseed>
+    <deployedseed>552369452</deployedseed>
+    <deployedseed>1772027973</deployedseed>
+    <deployedseed>584628918</deployedseed>
+    <deployedseed>113890637</deployedseed>
+    <deployedseed>1332110158</deployedseed>
+    <deployedseed>518352699</deployedseed>
+    <deployedseed>1670343067</deployedseed>
+    <deployedseed>794098855</deployedseed>
+    <deployedseed>1662938086</deployedseed>
+    <deployedseed>1026845032</deployedseed>
+    <deployedseed>1575836675</deployedseed>
+    <deployedseed>836279088</deployedseed>
+    <deployedseed>234709278</deployedseed>
+    <deployedseed>1677868350</deployedseed>
+    <deployedseed>1437847746</deployedseed>
+    <deployedseed>228117166</deployedseed>
+    <deployedseed>997964296</deployedseed>
+    <deployedseed>1786356775</deployedseed>
+    <deployedseed>1044464388</deployedseed>
+    <deployedseed>2091681066</deployedseed>
+    <deployedseed>654530322</deployedseed>
+    <deployedseed>1975453640</deployedseed>
+    <deployedseed>2034235217</deployedseed>
+    <deployedseed>597899028</deployedseed>
+    <deployedseed>1235012756</deployedseed>
+    <deployedseed>651913162</deployedseed>
+    <deployedseed>931211983</deployedseed>
+    <deployedseed>594588559</deployedseed>
+    <deployedseed>1162819178</deployedseed>
+    <deployedseed>2012064389</deployedseed>
+    <deployedseed>1040207694</deployedseed>
+    <deployedseed>186653622</deployedseed>
+    <deployedseed>1155700725</deployedseed>
+    <deployedseed>1233395819</deployedseed>
+    <deployedseed>1030828450</deployedseed>
+    <deployedseed>1729378654</deployedseed>
+    <deployedseed>2104545395</deployedseed>
+    <deployedseed>563768223</deployedseed>
+    <deployedseed>1524254934</deployedseed>
+    <deployedseed>1015919723</deployedseed>
+    <deployedseed>726265635</deployedseed>
+    <deployedseed>1270875268</deployedseed>
+    <deployedseed>1280182438</deployedseed>
+    <deployedseed>652192035</deployedseed>
+    <deployedseed>1193689024</deployedseed>
+    <deployedseed>1233618969</deployedseed>
+    <deployedseed>1758704643</deployedseed>
+    <deployedseed>1575112017</deployedseed>
+    <deployedseed>1957898725</deployedseed>
+    <deployedseed>255438153</deployedseed>
+    <deployedseed>701806619</deployedseed>
+    <deployedseed>989841682</deployedseed>
+    <deployedseed>223149224</deployedseed>
+    <deployedseed>774641111</deployedseed>
+    <deployedseed>67762499</deployedseed>
+    <deployedseed>1472649561</deployedseed>
+    <deployedseed>1375797987</deployedseed>
+    <deployedseed>577587142</deployedseed>
+    <deployedseed>1840284782</deployedseed>
+    <deployedseed>1890190606</deployedseed>
+    <deployedseed>1257651972</deployedseed>
+    <deployedseed>2112700751</deployedseed>
+    <deployedseed>163379061</deployedseed>
+    <deployedseed>2032965546</deployedseed>
+    <deployedseed>2132404444</deployedseed>
+    <deployedseed>1365394487</deployedseed>
+    <deployedseed>1460651288</deployedseed>
+    <deployedseed>750902398</deployedseed>
+    <deployedseed>1212896762</deployedseed>
+    <deployedseed>2043030409</deployedseed>
+    <deployedseed>2038614513</deployedseed>
+    <deployedseed>766691488</deployedseed>
+    <deployedseed>811757839</deployedseed>
+    <deployedseed>1471116103</deployedseed>
+    <deployedseed>2044582819</deployedseed>
+    <deployedseed>325398850</deployedseed>
+    <deployedseed>1264193205</deployedseed>
+    <deployedseed>885136877</deployedseed>
+    <deployedseed>431290860</deployedseed>
+    <deployedseed>495192604</deployedseed>
+    <deployedseed>1867707151</deployedseed>
+    <deployedseed>1516973685</deployedseed>
+    <deployedseed>912450214</deployedseed>
+    <deployedseed>969793623</deployedseed>
+    <deployedseed>1069497903</deployedseed>
+    <deployedseed>1399154353</deployedseed>
+    <deployedseed>1562912909</deployedseed>
+    <deployedseed>18434796</deployedseed>
+    <deployedseed>708077634</deployedseed>
+    <deployedseed>2115370541</deployedseed>
+    <deployedseed>1080173484</deployedseed>
+    <deployedseed>1392506040</deployedseed>
+    <deployedseed>1583506028</deployedseed>
+    <deployedseed>285129693</deployedseed>
+    <deployedseed>171365504</deployedseed>
+    <deployedseed>1758405821</deployedseed>
+    <deployedseed>1181092153</deployedseed>
+    <deployedseed>861206513</deployedseed>
+  </question>
+</quiz>

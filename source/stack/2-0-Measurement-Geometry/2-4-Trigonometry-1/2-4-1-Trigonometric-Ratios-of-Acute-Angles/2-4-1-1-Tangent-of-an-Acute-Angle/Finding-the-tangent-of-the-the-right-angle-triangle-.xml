@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the tangent of the the right angle triangle.</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>In the right triangle below, the right angle is at \(Q\). The side opposite the angle \( \theta \) has length {@opp@} cm, and the side adjacent to \( \theta \) has length {@adj@} cm.</p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+        boundingbox: [-1, 4.5, 6, -1],
+        axis: false,
+        showNavigation: false,
+        showCopyright: false
+    });
+
+    // Points with labels only (no circles)
+    var Q = board.create('point', [0, 0], {
+        name: 'Q',
+        fixed: true,
+        visible: false,
+        label: {offset: [-15, -10], visible: true}
+    });
+
+    var R = board.create('point', [4, 0], {
+        name: 'R',
+        fixed: true,
+        visible: false,
+        label: {offset: [10, -10], visible: true}
+    });
+
+    var P = board.create('point', [0, 3], {
+        name: 'P',
+        fixed: true,
+        visible: false,
+        label: {offset: [-15, 10], visible: true}
+    });
+
+    // Triangle sides
+    board.create('segment', [Q, R]);
+    board.create('segment', [Q, P]);
+    board.create('segment', [P, R]);
+
+    // Right-angle at Q
+    board.create('angle', [P, Q, R], {
+        radius: 0.4,
+        type: 'square',
+        name: ''
+    });
+
+    // Angle θ at R (inside)
+    board.create('angle', [P, R, Q], {
+        radius: 0.6,
+        name: 'θ'
+    });
+
+    // Length labels
+    board.create('text', [-0.6, 1.5, '{#opp #} cm']);
+    board.create('text', [2, -0.4, '{#adj#} cm']);
+
+[[/jsxgraph]]
+
+<p>Find the tangent of angle \( \theta \) in the triangle above.</p>
+
+<p>\(\text{Tan}\theta=\)[[input:ans1]][[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><strong>Worked Solution:</strong></p>
+
+<p>To find the tangent of angle \( \theta \) in a right triangle, we use the definition:</p>
+
+\(
+\tan(\theta) = \frac{\text{opposite}}{\text{adjacent}}.
+\)
+
+<p>From the diagram:</p>
+<ol type='a'>
+    <li>The side opposite \( \theta \) has length <strong>{@opp@}</strong> cm.</li>
+    <li>The side adjacent to \( \theta \) has length <strong>{@adj@}</strong> cm.</li>
+</ol>
+
+<p>Using the formula for tangent, we write:</p>
+
+\(
+\begin{align}
+\tan(\theta) &= \frac{\text{opposite}}{\text{adjacent}} \\
+             &= \frac{@opp@}{@adj@}
+\end{align}
+\)
+
+<p>Depending on the numbers, this fraction may simplify. For example:</p>
+
+\(
+\begin{align}
+\tan(\theta) &= {@opp@} \div {@adj@} \\
+             &= {@ta@}
+\end{align}
+\)
+
+<p>Hence, the correct value of \( \tan(\theta) \) for this triangle is:</p>
+
+\(
+\boxed{\tan(\theta) = {@ta@}}
+\)
+]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* List of Pythagorean triples (a,b,c) with c as hypotenuse */
+triples : [
+    [3,4,5], [4,3,5], [5,12,13], [12,5,13],
+    [6,8,10], [8,6,10], [7,24,25], [24,7,25],
+    [9,40,41], [40,9,41], [8,15,17], [15,8,17],
+    [20,21,29], [21,20,29], [28,45,53], [45,28,53],
+    [11,60,61], [60,11,61], [16,63,65], [63,16,65],
+    [33,56,65], [56,33,65], [48,55,73], [55,48,73],
+    [13,84,85], [84,13,85], [36,77,85], [77,36,85],
+    [39,80,89], [80,39,89], [65,72,97], [72,65,97],
+    [20,99,101], [99,20,101], [60,91,109], [91,60,109],
+    [12,35,37], [35,12,37], [15,36,39], [36,15,39],
+    [9,12,15], [12,9,15], [40,42,58], [42,40,58],
+    [24,45,51], [45,24,51], [7,24,25], [24,7,25]
+];
+
+
+/* Choose a triple */
+T : triples[rand(length(triples)) + 1];
+
+/* Interpret values as triangle sides relative to angle θ */
+opp : T[1];   /* opposite to θ */
+adj : T[2];   /* adjacent to θ */
+hyp : T[3];   /* not used directly but available */
+
+/* Teacher's answer */
+ta : opp/adj;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The adjacent side}={@adj@}\,\text{cm}\)</p>
+<p>\(\text{The The opposite side}={@opp@}\,\text{cm}\)</p>
+<p>\(\text{Tan}\theta={@ta@}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1355896698</deployedseed>
+    <deployedseed>218522591</deployedseed>
+    <deployedseed>1556606280</deployedseed>
+    <deployedseed>676318674</deployedseed>
+    <deployedseed>1094469592</deployedseed>
+    <deployedseed>412725892</deployedseed>
+    <deployedseed>647964252</deployedseed>
+    <deployedseed>981797054</deployedseed>
+    <deployedseed>1600918594</deployedseed>
+    <deployedseed>1313107109</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

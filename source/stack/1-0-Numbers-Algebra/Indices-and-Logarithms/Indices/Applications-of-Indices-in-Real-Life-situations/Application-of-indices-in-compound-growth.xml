@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Application of indices in compound growth</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A school STEM club invests Ksh {@P@} in a small project account. The money grows by a factor of {@r@} each year. Using indices, calculate the value of the investment after {@n@} years.</p>
+
+<p>Give your answer in the form:</p>
+
+<p>\[
+A = P \times r^n
+\]</p>
+
+<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>The value after {@n@} years with growth factor {@r@} is given by:</p>
+
+<p>\[
+A = {@P@} \times ({@r@})^{@n@}.
+\]</p>
+
+<p>This evaluates to:</p>
+
+<p>\[
+A = {@A@}.
+\]</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Principal amount in shillings */
+P: rand_with_step(500,1500,100);
+
+/* Growth multiplier (e.g. 1.05 means 5% growth) */
+rate_choices: [105/100, 110/100, 120/100];
+r: rand(rate_choices);
+
+/* Number of years */
+n: rand([2,3,4]);
+
+/* Final amount */
+A: P * r^n;
+
+/* Wrong answers */
+m1: P * r * n;        /* treats as simple growth */
+m2: P * r^(n+1);      /* adds an extra growth cycle */
+m3: P + r^n;          /* adds instead of multiplies */
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@A@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>A</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>A</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1204693388</deployedseed>
+    <deployedseed>470289158</deployedseed>
+    <deployedseed>1143310416</deployedseed>
+    <deployedseed>977464943</deployedseed>
+    <deployedseed>745658075</deployedseed>
+    <deployedseed>76477481</deployedseed>
+    <deployedseed>565758592</deployedseed>
+    <deployedseed>1776078061</deployedseed>
+    <deployedseed>413788810</deployedseed>
+    <deployedseed>1371625088</deployedseed>
+    <deployedseed>712674272</deployedseed>
+    <deployedseed>455303737</deployedseed>
+    <deployedseed>768547739</deployedseed>
+    <deployedseed>1730270025</deployedseed>
+    <deployedseed>2054268332</deployedseed>
+    <deployedseed>983443679</deployedseed>
+    <deployedseed>782350443</deployedseed>
+    <deployedseed>16007077</deployedseed>
+    <deployedseed>814986667</deployedseed>
+    <deployedseed>322650900</deployedseed>
+    <deployedseed>1547854658</deployedseed>
+    <deployedseed>1981419038</deployedseed>
+    <deployedseed>510352295</deployedseed>
+    <deployedseed>1018688988</deployedseed>
+    <deployedseed>1100457032</deployedseed>
+    <deployedseed>984678176</deployedseed>
+    <deployedseed>535107885</deployedseed>
+    <deployedseed>1430200615</deployedseed>
+    <deployedseed>1339368910</deployedseed>
+    <deployedseed>1612582682</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>A</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

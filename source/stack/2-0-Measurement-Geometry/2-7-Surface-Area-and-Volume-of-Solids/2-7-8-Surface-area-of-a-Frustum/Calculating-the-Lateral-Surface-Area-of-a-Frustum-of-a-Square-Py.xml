@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the Lateral Surface Area of a Frustum of a Square Pyramid</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h3 style="text-align:center;">
+A frustum of a square pyramid has:
+</h3>
+
+<ul>
+  <li>Top square side length: {@b@} m</li>
+  <li>Bottom square side length: {@a@} m</li>
+  <li>Slant height (along one lateral face): {@l@} m</li>
+</ul>
+
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-10, 9, 10, -7],
+    axis: false,
+    showCopyright: false
+});
+
+/* Parameters from STACK */
+var a_disp = {#a#};
+var b_disp = {#b#};
+var l_disp = {#l#};
+
+var a = 16;
+var b = 12;
+var l = 6;
+
+
+/* Visual parameters */
+var scale = 0.25;
+var baseStretch = 1.4;   // <-- makes bases longer
+var faceHeight = 3;
+var k = 0.45;            // scale factor for top trapezium
+var lift = 5;            // vertical shift
+
+/* ---------- First trapezium ---------- */
+var T1 = board.create('point',
+    [-baseStretch * a * scale / 2, 0],
+    {visible:false, fixed:true}
+);
+var T2 = board.create('point',
+    [ baseStretch * a * scale / 2, 0],
+    {visible:false, fixed:true}
+);
+var B2 = board.create('point',
+    [ baseStretch * b * scale / 2, -faceHeight],
+    {visible:false, fixed:true}
+);
+var B1 = board.create('point',
+    [-baseStretch * b * scale / 2, -faceHeight],
+    {visible:false, fixed:true}
+);
+
+var trap1 = board.create('polygon', [T1, T2, B2, B1], {
+    fillColor: '#cccccc',
+    fillOpacity: 0.4,
+    borders: {strokeWidth: 2}
+});
+
+/* ---------- Second trapezium (scaled & lifted) ---------- */
+function scaleAndLift(P) {
+    return [k * P.X(), k * P.Y() + lift];
+}
+
+var T1p = board.create('point', scaleAndLift(T1), {visible:false, fixed:true});
+var T2p = board.create('point', scaleAndLift(T2), {visible:false, fixed:true});
+var B2p = board.create('point', scaleAndLift(B2), {visible:false, fixed:true});
+var B1p = board.create('point', scaleAndLift(B1), {visible:false, fixed:true});
+
+var trap2 = board.create('polygon', [T1p, T2p, B2p, B1p], {
+    fillColor: '#eeeeee',
+    fillOpacity: 0.6,
+    borders: {strokeWidth: 2}
+});
+
+/* ---------- Lateral edges ---------- */
+var e1 = board.create('segment', [T1, T1p], {strokeWidth: 2});
+var e2 = board.create('segment', [T2, T2p], {strokeWidth: 2});
+var e3 = board.create('segment', [B1, B1p], {strokeWidth: 2});
+var e4 = board.create('segment', [B2, B2p], {strokeWidth: 2});
+
+/* ---------- Labels attached to edges ---------- */
+
+/* a: centered on lower base of first trapezium */
+board.create('text', [
+    (B1.X() + B2.X()) / 2 - 0.35,
+    B1.Y() - 0.6,
+    a_disp + ' m'
+], {fontSize: 14});
+
+/* b: centered on upper base of second trapezium */
+board.create('text', [
+    (T1p.X() + T2p.X()) / 2 - 0.25,
+    T1p.Y() + 0.6,
+    b_disp + ' m'
+], {fontSize: 14});
+
+/* l: further to the right, centered on right slanted edge */
+board.create('text', [
+    T2p.X() + 1.0,   // pushed further right
+    (T2.Y() + T2p.Y()) / 2,
+    l_disp + ' m'
+], {fontSize: 14});
+[[/jsxgraph]]
+
+
+<p style="text-align:center;">
+Calculate the <strong>lateral surface area</strong> of the frustum.
+</p>
+
+<p style="text-align:center;">
+[[input:ans1]] m<sup>2</sup><br>
+[[validation:ans1]]<br>
+[[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<h3>Worked solution</h3>
+
+<p>
+The lateral surface of a frustum of a square pyramid is made up of
+<strong>four congruent lateral faces</strong>.
+</p>
+
+<p>
+Each lateral face is an <strong>isosceles trapezoid</strong> with:
+</p>
+
+<ul>
+  <li>parallel sides of lengths {@a@} m and {@b@} m,</li>
+  <li>a height equal to the slant height {@l@} m.</li>
+</ul>
+
+<p>
+The area of one trapezoidal face is:
+</p>
+
+<p style="text-align:center;">
+LSA<sub>face</sub> = ( {@a@} + {@b@} ) / 2 × {@l@}
+</p>
+
+<p>
+Since there are four identical lateral faces, the curved (lateral) surface area is:
+</p>
+
+<p style="text-align:center;">
+LSA = 4 × ( {@a@} + {@b@} ) / 2 × {@l@}
+</p>
+
+<p>
+Simplifying:
+</p>
+
+<p style="text-align:center;">
+LSA = 2 × ( {@a@} + {@b@} ) × {@l@}
+</p>
+
+<p>
+Substituting the given values:
+</p>
+
+<p style="text-align:center;">
+LSA = {@ta@} m<sup>2</sup>
+</p>
+
+<p>
+So the correct answer is <strong>{@ta@} m<sup>2</sup></strong>.
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Top square side length */
+b : rand(10) + 3;          
+
+/* Bottom square side length (strictly larger than b) */
+a : b + rand(5) + 1;
+
+/* Slant height of one lateral face */
+l : rand(5) + 3;
+
+/* Teacher's answer: lateral surface area */
+ta : 2*(a + b)*l;
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Larger square edge length: {@a@}</p>
+<p>Smaller square edge length: {@b@}</p>
+<p>Slant height: {@l@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<p><i class="fa fa-check"></i> Correct answer, well done.</p>]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<p><i class="fa fa-adjust"></i> Your answer is partially correct.</p>]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<p><i class="fa fa-times"></i> Incorrect answer.</p>]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text><![CDATA[neg_ans: if ans1 < 0 then 1 else 0;]]></text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.0001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Well done!</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>neg_ans</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Your answer is negative, which is not possible for a surface.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1832025903</deployedseed>
+    <deployedseed>62749082</deployedseed>
+    <deployedseed>558917321</deployedseed>
+    <deployedseed>1697237969</deployedseed>
+    <deployedseed>1507408984</deployedseed>
+    <deployedseed>566464803</deployedseed>
+    <deployedseed>2082129365</deployedseed>
+    <deployedseed>244783150</deployedseed>
+    <deployedseed>1576653567</deployedseed>
+    <deployedseed>1215641958</deployedseed>
+    <deployedseed>1087837960</deployedseed>
+    <deployedseed>655980504</deployedseed>
+    <deployedseed>2069248133</deployedseed>
+    <deployedseed>297545671</deployedseed>
+    <deployedseed>1456254869</deployedseed>
+    <deployedseed>1192593587</deployedseed>
+    <deployedseed>607109253</deployedseed>
+    <deployedseed>1091364609</deployedseed>
+    <deployedseed>2045664928</deployedseed>
+    <deployedseed>2140952907</deployedseed>
+    <deployedseed>1269509981</deployedseed>
+    <deployedseed>1459965049</deployedseed>
+    <deployedseed>1834699772</deployedseed>
+    <deployedseed>1289553933</deployedseed>
+    <deployedseed>1980708582</deployedseed>
+    <deployedseed>1025560495</deployedseed>
+    <deployedseed>887711698</deployedseed>
+    <deployedseed>1772000751</deployedseed>
+    <deployedseed>1160794577</deployedseed>
+    <deployedseed>1588782558</deployedseed>
+    <deployedseed>601822212</deployedseed>
+    <deployedseed>1837976576</deployedseed>
+    <deployedseed>1442217447</deployedseed>
+    <deployedseed>1515814789</deployedseed>
+    <deployedseed>36529830</deployedseed>
+    <deployedseed>5488803</deployedseed>
+    <deployedseed>2139851427</deployedseed>
+    <deployedseed>260584907</deployedseed>
+    <deployedseed>1529325760</deployedseed>
+    <deployedseed>1918482439</deployedseed>
+    <deployedseed>1505900183</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

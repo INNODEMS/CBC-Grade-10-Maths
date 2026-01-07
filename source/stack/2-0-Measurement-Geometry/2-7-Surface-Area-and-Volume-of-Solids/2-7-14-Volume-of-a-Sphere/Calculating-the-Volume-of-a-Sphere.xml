@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the Volume of a Sphere</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Find the volume of the figure shown below. Use \(\pi = \frac{22}{7}\) write your answer correct to \(3\,\text{decimal places}\).
+</p>
+[[jsxgraph]]
+const brd = JXG.JSXGraph.initBoard(divid, {
+      boundingbox: [-3, 11, 11, -3],
+      axis: false,
+      showCopyright: false,
+      showNavigation: false
+    });
+
+    // Sphere parameters
+    const center = brd.create('point', [4, 4], {visible: false});
+    const r = 4; // radius
+    const a = r;        // horizontal radius
+    const b = r * 0.55; // vertical flattening for 3D effect
+
+    // Main (equatorial) circle (ellipse shape for perspective)
+    const frontEllipse = brd.create('curve', [
+      t => center.X() + a * Math.cos(t),
+      t => center.Y() + b * Math.sin(t),
+      0, Math.PI
+    ], {strokeColor: 'blue', strokeWidth: 2, fillColor: 'blue'});
+
+    const backEllipse = brd.create('curve', [
+      t => center.X() + a * Math.cos(t),
+      t => center.Y() + b * Math.sin(t),
+      Math.PI, 2 * Math.PI
+    ], {strokeColor: 'blue', dash: 2, strokeWidth: 2, fillColor: 'blue'});
+
+    // Full circular shape (outer boundary)
+    const fullCircle = brd.create('circle', [center, [center.X() + r, center.Y()]], {
+      fillColor: 'white',
+      fillOpacity: 0.8,
+      strokeColor: '#e51d6a',
+      strokeWidth: 2
+    });
+
+    // Radius line (↔)
+    const edge = brd.create('point', [center.X() + r, center.Y()], {visible: false});
+    const radiusLine = brd.create('arrow', [center, edge], {
+      strokeColor: 'blue',
+      strokeWidth: 2,
+      firstArrow: {type: 2, size: 6},
+      lastArrow: {type: 2, size: 6}
+    });
+
+    // Radius label
+    brd.create('text', [center.X() + r/2 - 0.5, center.Y() + 0.6, "{#r#} cm"], {fixed:true,
+      fontSize: 16,
+      fontFamily: 'Times'
+    });
+[[/jsxgraph]]
+<p>\(\text{Volume}=\)[[input:ans1]]\(\,\text{cm}^3\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>Radius of the sphere \(= {@r@}\, \text{cm}\)</p>
+<p>
+\(\begin{align}
+\text{V} &= \frac{4}{3} \pi r^3 \\
+&= \frac{4}{3} \times \frac{22}{7} \times ({@r@})^3\\
+&=\frac{4}{3} \times \frac{22}{7} \times {@R@}\\
+&=\frac{4}{3}  \times {@v@}\\
+&={@volume@}\\
+&={@Volume_sphere@}\,\text{cm}^3
+\end{align}\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize the radius (r) */
+r : rand_with_step(7, 84, 7);  /* radius between 1 cm and 10 cm */
+R:r^3;
+/* Use pi = 22/7 */
+pi_val : 22/7;
+
+/* Compute volume of the sphere: V = 4/3 * pi * r^3 */
+v:pi_val * r^3;
+V : (4/3) * pi_val * r^3;
+
+/* Convert to float and round to 2 decimal places */
+volume : float(V);
+Volume_sphere : decimalplaces(volume, 3);
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The radius of the sphere}={@r@}\,\text{cm}\)</p>
+<p>\(\text{The Volume of the sphere}={@Volume_sphere@}\,\text{cm}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>Volume_sphere</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct volume of the sphere.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>Volume_sphere</tans>
+        <testoptions>3</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>264569255</deployedseed>
+    <deployedseed>1134227968</deployedseed>
+    <deployedseed>652805737</deployedseed>
+    <deployedseed>1570940511</deployedseed>
+    <deployedseed>171157194</deployedseed>
+    <deployedseed>1941054501</deployedseed>
+    <deployedseed>2141347461</deployedseed>
+    <deployedseed>1847043948</deployedseed>
+    <deployedseed>1299768693</deployedseed>
+    <deployedseed>354252897</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Volume_sphere</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

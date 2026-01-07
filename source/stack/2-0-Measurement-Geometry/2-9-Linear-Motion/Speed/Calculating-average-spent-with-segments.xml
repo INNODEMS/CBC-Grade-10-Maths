@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating average spent with segments</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A car travels {@d1@} km at {@s1@} km/h, then {@d2@} km at {@s2@} km/h.</p>
+<p>Calculate the average speed for the entire {@d1+d2@} km journey.</p>
+
+<p>Average speed = [[input:ans1]] km/h [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p><strong>Step 1: Calculate time for each segment</strong><br>
+First segment: Time = \( \frac{@d1@}{@s1@} = {@t1@} \) hours<br>
+Second segment: Time = \( \frac{@d2@}{@s2@} = {@t2@} \) hours</p>
+
+<p><strong>Step 2: Calculate total time and total distance</strong><br>
+Total distance = {@d1@} + {@d2@} = {@d1+d2@} km<br>
+Total time = {@t1@} + {@t2@} = {@t1+t2@} hours</p>
+
+<p><strong>Step 3: Calculate average speed</strong><br>
+Average speed = \( \frac{\text{Total distance}}{\text{Total time}} = \frac{@d1+d2@}{@t1+t2@} = {@ta@} \) km/h</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Generate two segments */
+d1: 100 * (rand(3) + 1);  /* 100, 200, 300 km */
+s1: 10 * (rand(4) + 4);   /* 40, 50, 60, 70 km/h */
+d2: 100 * (rand(3) + 1);  /* 100, 200, 300 km */
+s2: 10 * (rand(4) + 4);   /* 40, 50, 60, 70 km/h */
+
+/* Calculate times */
+t1: d1/s1;
+t2: d2/s2;
+total_distance: d1 + d2;
+total_time: t1 + t2;
+ta: total_distance/total_time;
+/*mistake*/
+mistake_ta:(s1+s2)/2;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta@}</p>
+<p>{@d1@}</p>
+<p>{@s1@}</p>
+<p>{@d2@}</p>
+<p>{@s2@}</p>
+<p> {@d1+d2@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct average speed</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect calculation of average speed</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake_ta</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You found \(\frac{{@s1@}+{@s2@}}{2}\), which is the average of the speeds at different distances. In this problem, the average speed must be found using total distance divided by total time. Please refer to the worked solution below.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1667235265</deployedseed>
+    <deployedseed>530092279</deployedseed>
+    <deployedseed>1072003650</deployedseed>
+    <deployedseed>858349556</deployedseed>
+    <deployedseed>1553015854</deployedseed>
+    <deployedseed>1023261509</deployedseed>
+    <deployedseed>1111874973</deployedseed>
+    <deployedseed>779648968</deployedseed>
+    <deployedseed>783585146</deployedseed>
+    <deployedseed>722949929</deployedseed>
+    <deployedseed>284521533</deployedseed>
+    <deployedseed>2011349121</deployedseed>
+    <deployedseed>1261052881</deployedseed>
+    <deployedseed>1042558294</deployedseed>
+    <deployedseed>2093833398</deployedseed>
+    <deployedseed>1619040768</deployedseed>
+    <deployedseed>497244796</deployedseed>
+    <deployedseed>1702947374</deployedseed>
+    <deployedseed>1729735484</deployedseed>
+    <deployedseed>1162990162</deployedseed>
+    <deployedseed>201928675</deployedseed>
+    <deployedseed>229517353</deployedseed>
+    <deployedseed>57441854</deployedseed>
+    <deployedseed>1822619579</deployedseed>
+    <deployedseed>29082588</deployedseed>
+    <deployedseed>666110450</deployedseed>
+    <deployedseed>596330211</deployedseed>
+    <deployedseed>1277454526</deployedseed>
+    <deployedseed>2117614709</deployedseed>
+    <deployedseed>1618468959</deployedseed>
+    <deployedseed>1207786830</deployedseed>
+    <deployedseed>741045226</deployedseed>
+    <deployedseed>1002442271</deployedseed>
+    <deployedseed>1268979379</deployedseed>
+    <deployedseed>1137540952</deployedseed>
+  </question>
+</quiz>

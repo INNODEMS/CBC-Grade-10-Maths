@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Classification of prime and composite numbers from a given list</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Classify each of the following numbers as <strong>Prime</strong>, <strong>Composite</strong>, or <strong>Neither</strong></p>
+
+<ol style="list-style-type: lower-alpha;">
+<li>{@n1@}: \(\,\,\)[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</li>
+<li>{@n2@}:  \(\,\,\)[[input:ans2]] [[validation:ans2]] [[feedback:prt2]]</li>
+<li>{@n3@}:  \(\,\,\)[[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</li>
+<li>{@n4@}: \(\,\,\) [[input:ans4]] [[validation:ans4]] [[feedback:prt4]]</li>
+<li>{@n5@}: \(\,\,\) [[input:ans5]] [[validation:ans5]] [[feedback:prt5]]</li>
+<li>{@n6@}: \(\,\,\) [[input:ans6]] [[validation:ans6]] [[feedback:prt6]]</li>
+<li>{@n7@}: \(\,\,\) [[input:ans7]] [[validation:ans7]] [[feedback:prt7]]</li>
+<li>{@n8@}:  \(\,\,\)[[input:ans8]] [[validation:ans8]] [[feedback:prt8]]</li>
+</ol>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<ul>
+<li><strong>Prime:</strong> is a number greater than 1 with exactly two distinct positive divisors: 1 and itself.</li>
+<li><strong>Composite:</strong> is a number greater than 1 with more than two positive divisors.</li>
+<li><strong>Neither:</strong> Numbers 0 and 1 are neither prime nor composite.</li>
+</ul>
+
+
+<table border="1" cellpadding="5" style="border-collapse: collapse;">
+<tr><th>Number</th><th>Check</th><th>Classification</th></tr>
+<tr><td>{@n1@}</td><td>{@if n1 < 2 then "n < 2" else if is_prime(n1) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}</td><td><strong>{@t_ans1@}</strong></td></tr>
+<tr><td>{@n2@}</td><td>{@if n2 < 2 then "n < 2" else if is_prime(n2) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}</td><td><strong>{@t_ans2@}</strong></td></tr>
+<tr><td>{@n3@}</td><td>{@if n3 < 2 then "n < 2" else if is_prime(n3) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}</td><td><strong>{@t_ans3@}</strong></td></tr>
+<tr><td>{@n4@}</td><td>{@if n4 < 2 then "n < 2" else if is_prime(n4) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}</td><td><strong>{@t_ans4@}</strong></td></tr>
+<tr><td>{@n5@}</td><td>{@if n5 < 2 then "n < 2" else if is_prime(n5) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}</td><td><strong>{@t_ans5@}</strong></td></tr>
+<tr><td>{@n6@}</td><td>{@if n6 < 2 then "n < 2" else if is_prime(n6) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}</td><td><strong>{@t_ans6@}</strong></td></tr>
+<tr><td>{@n7@}</td><td>{@if n7 < 2 then "n < 2" else if is_prime(n7) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}</td><td><strong>{@t_ans7@}</strong></td></tr>
+<tr><td>{@n8@}</td><td>{@if n8 < 2 then "n < 2" else if is_prime(n8) then "No divisors except 1 and itself" else "Has factors other than 1 and itself"@}</td><td><strong>{@t_ans8@}</strong></td></tr>
+</table>
+
+<p> Note that:</p>
+<ul>
+<li> If a number > 2 ends in 0, 2, 4, 6, or 8, it's composite.</li>
+<li> If a number > 5 ends in 0 or 5, it's composite.</li>
+<li> If the sum of digits is divisible by 3, the number is composite.</li>
+<li> 0 and 1 are neither prime nor composite.</li>
+</ul>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Function to generate random prime (2-1000) */
+random_prime() := block([n],
+    while true do (
+        n: rand(999) + 2,
+        if is_prime(n) then return(n)
+    )
+);
+
+/* Function to generate random composite (4-1000) */
+random_composite() := block([n],
+    while true do (
+        n: rand(997) + 4,
+        if not is_prime(n) then return(n)
+    )
+);
+
+/* Simple prime check */
+is_prime(n) := if n < 2 then false else block([result: true],
+    for i:2 thru floor(sqrt(n)) do (
+        if mod(n, i) = 0 then (result: false, return())
+    ),
+    result
+);
+
+/* Define ALL numbers with their categories - WE KNOW THE ANSWERS! */
+prime1: random_prime();
+prime2: random_prime();
+while prime2 = prime1 do prime2: random_prime();
+prime3: random_prime();
+while prime3 = prime1 or prime3 = prime2 do prime3: random_prime();
+
+comp1: random_composite();
+comp2: random_composite();
+while comp2 = comp1 do comp2: random_composite();
+comp3: random_composite();
+while comp3 = comp1 or comp3 = comp2 do comp3: random_composite();
+
+/* Question data array: [number, correct_category] */
+qdata: [
+    [prime1, "Prime"],
+    [prime2, "Prime"],
+    [prime3, "Prime"],
+    [comp1, "Composite"],
+    [comp2, "Composite"],
+    [comp3, "Composite"],
+    [0, "Neither"],
+    [1, "Neither"]
+];
+
+/* Shuffle */
+shuffled: random_permutation(qdata);
+
+/* Extract - WE KNOW THE CORRECT ANSWERS BECAUSE WE DEFINED THEM */
+n1: shuffled[1][1];  t_ans1: shuffled[1][2];
+n2: shuffled[2][1];  t_ans2: shuffled[2][2];
+n3: shuffled[3][1];  t_ans3: shuffled[3][2];
+n4: shuffled[4][1];  t_ans4: shuffled[4][2];
+n5: shuffled[5][1];  t_ans5: shuffled[5][2];
+n6: shuffled[6][1];  t_ans6: shuffled[6][2];
+n7: shuffled[7][1];  t_ans7: shuffled[7][2];
+n8: shuffled[8][1];  t_ans8: shuffled[8][2];
+
+/* Model answers - same as teacher answers */
+model_ans1: t_ans1;
+model_ans2: t_ans2;
+model_ans3: t_ans3;
+model_ans4: t_ans4;
+model_ans5: t_ans5;
+model_ans6: t_ans6;
+model_ans7: t_ans7;
+model_ans8: t_ans8;
+
+/* Dropdown matrices - EXACT PATTERN from logic question */
+m_ans1: [["Prime", is(t_ans1 = "Prime")], ["Composite", is(t_ans1 = "Composite")], ["Neither", is(t_ans1 = "Neither")]];
+m_ans2: [["Prime", is(t_ans2 = "Prime")], ["Composite", is(t_ans2 = "Composite")], ["Neither", is(t_ans2 = "Neither")]];
+m_ans3: [["Prime", is(t_ans3 = "Prime")], ["Composite", is(t_ans3 = "Composite")], ["Neither", is(t_ans3 = "Neither")]];
+m_ans4: [["Prime", is(t_ans4 = "Prime")], ["Composite", is(t_ans4 = "Composite")], ["Neither", is(t_ans4 = "Neither")]];
+m_ans5: [["Prime", is(t_ans5 = "Prime")], ["Composite", is(t_ans5 = "Composite")], ["Neither", is(t_ans5 = "Neither")]];
+m_ans6: [["Prime", is(t_ans6 = "Prime")], ["Composite", is(t_ans6 = "Composite")], ["Neither", is(t_ans6 = "Neither")]];
+m_ans7: [["Prime", is(t_ans7 = "Prime")], ["Composite", is(t_ans7 = "Composite")], ["Neither", is(t_ans7 = "Neither")]];
+m_ans8: [["Prime", is(t_ans8 = "Prime")], ["Composite", is(t_ans8 = "Composite")], ["Neither", is(t_ans8 = "Neither")]];
+
+/* Simple feedback */
+fb_wrong1: sconcat("You have failed to classify ", n1, " correctly. It is ", t_ans1, ".");
+fb_wrong2: sconcat("You have failed to classify ", n2, " correctly. It is ", t_ans2, ".");
+fb_wrong3: sconcat("You have failed to classify ", n3, " correctly. It is ", t_ans3, ".");
+fb_wrong4: sconcat("You have failed to classify ", n4, " correctly. It is ", t_ans4, ".");
+fb_wrong5: sconcat("You have failed to classify ", n5, " correctly. It is ", t_ans5, ".");
+fb_wrong6: sconcat("You have failed to classify ", n6, " correctly. It is ", t_ans6, ".");
+fb_wrong7: sconcat("You have failed to classify ", n7, " correctly. It is ", t_ans7, ".");
+fb_wrong8: sconcat("You have failed to classify ", n8, " correctly. It is ", t_ans8, ".");
+]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Numbers: {@n1@}, {@n2@}, {@n3@}, {@n4@}, {@n5@}, {@n6@}, {@n7@}, {@n8@}</p>
+<p>Categories: {@t_ans1@}, {@t_ans2@}, {@t_ans3@}, {@t_ans4@}, {@t_ans5@}, {@t_ans6@}, {@t_ans7@}, {@t_ans8@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>dropdown</type>
+      <tans>m_ans1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>dropdown</type>
+      <tans>m_ans2</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>dropdown</type>
+      <tans>m_ans3</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>dropdown</type>
+      <tans>m_ans4</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans5</name>
+      <type>dropdown</type>
+      <tans>m_ans5</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans6</name>
+      <type>dropdown</type>
+      <tans>m_ans6</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans7</name>
+      <type>dropdown</type>
+      <tans>m_ans7</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans8</name>
+      <type>dropdown</type>
+      <tans>m_ans8</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>t_ans1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>{@fb_wrong1@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>t_ans2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>{@fb_wrong2@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>t_ans3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>{@fb_wrong3@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>t_ans4</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>{@fb_wrong4@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt5</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans5</sans>
+        <tans>t_ans5</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt5-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt5-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>{@fb_wrong5@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt6</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans6</sans>
+        <tans>t_ans6</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt6-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt6-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>{@fb_wrong6@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt7</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans7</sans>
+        <tans>t_ans7</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt7-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt7-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>{@fb_wrong7@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt8</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans8</sans>
+        <tans>t_ans8</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt8-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt8-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>{@fb_wrong8@}</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>790907851</deployedseed>
+    <deployedseed>472590155</deployedseed>
+    <deployedseed>1852757535</deployedseed>
+    <deployedseed>897071889</deployedseed>
+    <deployedseed>1878639209</deployedseed>
+    <deployedseed>1964076815</deployedseed>
+    <deployedseed>1264366783</deployedseed>
+    <deployedseed>467656167</deployedseed>
+    <deployedseed>541892739</deployedseed>
+    <deployedseed>521989730</deployedseed>
+    <deployedseed>1186901684</deployedseed>
+    <deployedseed>380677010</deployedseed>
+    <deployedseed>233769247</deployedseed>
+    <deployedseed>479563261</deployedseed>
+    <deployedseed>1059660999</deployedseed>
+    <deployedseed>542817643</deployedseed>
+    <deployedseed>2101218206</deployedseed>
+    <deployedseed>73953725</deployedseed>
+    <deployedseed>42016004</deployedseed>
+    <deployedseed>716772083</deployedseed>
+    <deployedseed>486041619</deployedseed>
+    <deployedseed>1267854215</deployedseed>
+    <deployedseed>170021834</deployedseed>
+    <deployedseed>1920365000</deployedseed>
+    <deployedseed>1508609382</deployedseed>
+    <deployedseed>640206615</deployedseed>
+    <deployedseed>1594775212</deployedseed>
+    <deployedseed>1779918647</deployedseed>
+    <deployedseed>1874955928</deployedseed>
+    <deployedseed>379128476</deployedseed>
+    <deployedseed>1577276858</deployedseed>
+    <deployedseed>1894869338</deployedseed>
+    <deployedseed>2013283124</deployedseed>
+    <deployedseed>1619071697</deployedseed>
+    <deployedseed>46284903</deployedseed>
+    <deployedseed>474533778</deployedseed>
+    <deployedseed>429893988</deployedseed>
+    <deployedseed>1620998561</deployedseed>
+    <deployedseed>435755115</deployedseed>
+    <deployedseed>880099139</deployedseed>
+    <deployedseed>556562937</deployedseed>
+    <deployedseed>1780425009</deployedseed>
+    <deployedseed>627375167</deployedseed>
+    <deployedseed>670963806</deployedseed>
+  </question>
+</quiz>

@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the surface area of a square-based pyramid from its net</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>The figure below shows a pyramid. Sketch the net of the pyramid and work out the surface area of the pyramid from its net</p>
+<p><b>Note:</b>Round off your final answer to <b>2</b> decimal places.</p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+    boundingbox: [-50, 500, 500, -50],
+    keepAspectRatio: true,
+    axis: false,
+    showCopyright: false
+});
+
+// ----------- POINTS (square base + inverted apex) -----------
+var A = board.create('point', [100, 150], {name: 'A', size: 2, color: 'black'});
+var B = board.create('point', [300, 150], {name: 'B', size: 2, color: 'black'});
+var C = board.create('point', [300, 300], {name: 'C', size: 2, color: 'black'});
+var D = board.create('point', [100, 300], {name: 'D', size: 2, color: 'black'});
+var V = board.create('point', [200, 430], {name: 'V', size: 2, color: 'black'}); // apex below base
+
+// ----------- BASE SQUARE (orange) -----------
+var base = board.create('polygon', [A, B, C, D], {
+    borders: {strokeColor: 'black'},
+    fillColor: 'orange',
+    fillOpacity: 0.8,
+    vertices: {visible: false}
+});
+
+// ----------- SIDE FACES (cyan tones) -----------
+var face1 = board.create('polygon', [V, A, B], {
+    borders: {strokeColor: 'black'},
+    fillColor: 'cyan',
+    fillOpacity: 0.6,
+    vertices: {visible: false}
+});
+
+var face2 = board.create('polygon', [V, B, C], {
+    borders: {strokeColor: 'black'},
+    fillColor: 'cyan',
+    fillOpacity: 0.7,
+    vertices: {visible: false}
+});
+
+var face3 = board.create('polygon', [V, C, D], {
+    borders: {strokeColor: 'black'},
+    fillColor: 'cyan',
+    fillOpacity: 0.5,
+    vertices: {visible: false}
+});
+
+var face4 = board.create('polygon', [V, D, A], {
+    borders: {strokeColor: 'black'},
+    fillColor: 'cyan',
+    fillOpacity: 0.65,
+    vertices: {visible: false}
+});
+
+// ----------- EDGES TO APEX (for clarity) -----------
+board.create('segment', [A, V], {strokeColor: 'black'});
+board.create('segment', [B, V], {strokeColor: 'black'});
+board.create('segment', [C, V], {strokeColor: 'black'});
+board.create('segment', [D, V], {strokeColor: 'black'});
+
+// ----------- LABELS -----------
+board.create('text', [180, 130, '{#width#} cm'], {fontSize: 14, color: 'black'});
+board.create('text', [310, 240, '{#length#} cm'], {fontSize: 14, color: 'black'});
+board.create('text', [270, 360, '{#slanting_height#} cm'], {fontSize: 14, color: 'black'});
+
+[[/jsxgraph]]
+<p>Surface area=[[input:ans1]]cm\(^2\) [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>(a).The figure below shows the net of the pyramid</p>
+
+[[jsxgraph]]
+ var board = JXG.JSXGraph.initBoard('jxgbox', {
+    boundingbox: [-180, 180, 180, -180],
+    keepAspectRatio: true,
+    axis: false,
+    showCopyright: false
+});
+
+// ---------- BASE SQUARE (orange) ----------
+var A = board.create('point', [-36, 36], {name: '', size: 2, color: 'black'});
+var B = board.create('point', [43.2, 36], {name: '', size: 2, color: 'black'});
+var C = board.create('point', [43.2, -36], {name: '', size: 2, color: 'black'});
+var D = board.create('point', [-36, -36], {name: '', size: 2, color: 'black'});
+
+var base = board.create('polygon', [A, B, C, D], {
+    borders: {strokeColor: 'black', strokeWidth: 1},
+    fillColor: 'orange',
+    fillOpacity: 0.8,
+    vertices: {visible: false}
+});
+
+// ---------- TRIANGULAR FACES (cyan) ----------
+var V1 = board.create('point', [0, -134.1], {name: '', size: 1, color: 'black'});
+var V2 = board.create('point', [0, 134.1], {name: '', size: 1, color: 'black'});
+var V3 = board.create('point', [-134.1, 0], {name: '', size: 1, color: 'black'});
+var V4 = board.create('point', [134.1, 0], {name: '', size: 1, color: 'black'});
+
+// Top triangle (XDC)
+board.create('polygon', [D, C, V1], {
+    borders: {strokeColor: 'black', strokeWidth: 1},
+    fillColor: 'cyan',
+    fillOpacity: 0.8,
+    vertices: {visible: false}
+});
+
+// Bottom triangle (ABY)
+board.create('polygon', [A, B, V2], {
+    borders: {strokeColor: 'black', strokeWidth: 1},
+    fillColor: 'cyan',
+    fillOpacity: 0.8,
+    vertices: {visible: false}
+});
+
+// Left triangle (DZA)
+board.create('polygon', [D, A, V3], {
+    borders: {strokeColor: 'black', strokeWidth: 1},
+    fillColor: 'cyan',
+    fillOpacity: 0.8,
+    vertices: {visible: false}
+});
+
+// Right triangle (CBV)
+board.create('polygon', [C, B, V4], {
+    borders: {strokeColor: 'black', strokeWidth: 1},
+    fillColor: 'cyan',
+    fillOpacity: 0.8,
+    vertices: {visible: false}
+});
+
+// ---------- PERPENDICULAR DASHED LINES ----------
+board.create('segment', [V1, [3.6, -36]], {
+    strokeColor: 'red', dash: 2, strokeWidth: 1
+});
+board.create('segment', [V2, [3.6, 36]], {
+    strokeColor: 'red', dash: 2, strokeWidth: 1
+});
+board.create('segment', [V3, [-36, 0]], {
+    strokeColor: 'red', dash: 2, strokeWidth: 1
+});
+board.create('segment', [V4, [43.2, 0]], {
+    strokeColor: 'red', dash: 2, strokeWidth: 1
+});
+
+// ---------- TEXT LABELS ----------
+board.create('text', [-46, -41, 'A'], {fontSize: 14, color: 'black'});
+board.create('text', [48, -41, 'B'], {fontSize: 14, color: 'black'});
+board.create('text', [-45, 45, 'D'], {fontSize: 14, color: 'black'});
+board.create('text', [48, 45, 'C'], {fontSize: 14, color: 'black'});
+board.create('text', [0, -140, 'V'], {fontSize: 14, anchorX: 'middle'});
+board.create('text', [0, 145, 'V'], {fontSize: 14, anchorX: 'middle'});
+board.create('text', [-140, 5, 'V'], {fontSize: 14, anchorX: 'middle'});
+board.create('text', [140, 5, 'V'], {fontSize: 14, anchorX: 'middle'});
+
+// ---------- DIMENSION LABELS ----------
+var dim = function(x, y, text, rot=0) {
+    board.create('text', [x, y, text], {
+        fontSize: 10,
+        color: 'black',
+        rotate: rot,
+        anchorX: 'middle'
+    });
+};
+
+// Slanting heights
+dim(-85, -26, '{#slanting_height#} cm');
+dim(-38, -80, '{#slanting_height#} cm');
+dim(-85, 30, '{#slanting_height#} cm');
+dim(-33, 90, '{#slanting_height#} cm');
+dim(90, 30, '{#slanting_height#} cm');
+dim(35, 90, '{#slanting_height#} cm');
+dim(90, -26, '{#slanting_height#} cm');
+dim(35, -80, '{#slanting_height#} cm');
+
+// Base dimensions
+dim(3.6, 32, '{#length#} cm');
+dim(-25, 0, '{#width#} cm');
+[[/jsxgraph]]
+
+<p>(b).  Calculating the surface area</p>
+<p>\(\begin{align}\text{Area of the base}&=length\times width\\&={@width@}cm\times{@length@}cm\\&={@base_area@}cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Vertical height}&=\sqrt{{@slanting_height@}^2-{@half_legth@}^2}\\&=\sqrt{{@square_slanting_height@}-{@square_half_length@}}\\&={@vertical_height@} cm\end{align}\)</p>
+<p>\(\begin{align}\text{Area of a triangular face}&=\frac{1}{2}\times base \times height\\&=\frac{1}{2}\times{@length@} cm\times{@vertical_height@} cm\\&={@area_of_triangle_A@}cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Since all the four triangular faces are similar,then surface area of the faces}&=4\times{@area_of_triangle_A@}\\&={@sum_area_of_triangular_faces@} cm^2\end{align}\)<p>
+<p>\(\begin{align}\text{Surface area of pyramid }&=\text{Area of base}+\text{Area of triangular faces}\\&={@base_area@} cm^2+{@sum_area_of_triangular_faces@}cm^2\\&={@ta@}cm^2\end{align}\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/*Surface area  of a square base pyramid*/
+length:rand_with_step(5,35,1);/*randomized values for the length */
+width:length;/*randomized values for the width */
+slanting_height:rand_with_step(21,60,1);/*randomized values for the slanting height */
+
+half_legth:0.5*length;/*half of the length value which will help us find the vertical height using pythagorean relationship */
+
+base_area:length*width;/*base area of the square part*/
+
+square_slanting_height:slanting_height^2;/*square of the slanting height*/
+square_half_length:(length*0.5)^2;/*square of half the value of the length*/
+vertical_height:sqrt(square_slanting_height-square_half_length);/*the value of the vertical height of the triangle which will enable us find its area*/
+vertical_height_of_pyramid:sqrt(vertical_height^2-square_half_length);/*vertical height of the pyramid*/
+
+area_of_triangle_A:0.5*length*vertical_height;/*area of the first triangle A*/
+area_of_triangle_B:0.5*length*vertical_height;/*area of the second triangle B*/
+area_of_triangle_C:0.5*width*vertical_height;/*area of the third triangle C*/
+area_of_triangle_D:0.5*width*vertical_height;/*area of the fourth triangle D*/
+sum_area_of_triangular_faces:4*area_of_triangle_A;
+
+total_surface_area:decimalplaces((base_area)+(area_of_triangle_A*4),2);/*total surface area of the pyramid*/
+ta:total_surface_area;/*teacher's answer*/
+/*mistake1- confusing slanting heigth to be vertical height of the triangles*/
+area_of_triangle_1:0.5*length*slanting_height;/*confusing slanting heigth to be vertical height*/
+surface_area:base_area+(4*area_of_triangle_1);/*total surface area*/
+ta_1:surface_area;
+
+/*mistake 2: confusing vertical height of the pyramid to be the height of the triangles*/
+area_of_triangle_2:0.5*length*vertical_height_of_pyramid;
+surface_area:base_area+(4*area_of_triangle_2);/*total surface area*/
+ta_2:surface_area;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Vertical height = {@vertical_height_of_pyramid@}</p>
+<p>Total surface area={@ta@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Eric Morara</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+<p id="description">The question requires the student to find the surface area of a square-base pyramid from its net .</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>check for correct surface area</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.02</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>It looks like you confused the slanting height of the triangle with the vertical height when calculating the area.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta_1</tans>
+        <testoptions>0.02</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you confused the slanting height of the triangle with the vertical height when calculating the area. Keep in mind that the height used in the calculation of the area of a triangle must be perpendicular to the base. You're on the right track, just be careful to identify the correct height next time</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>It seems you used the vertical height of the pyramid instead of the vertical height of the triangular face when working with the area of a triangle.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta_2</tans>
+        <testoptions>0.02</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It seems you used the vertical height of the pyramid instead of the vertical height of the triangular face when working with the area of a triangle. For triangle area calculations on a pyramid, use the height of the triangular face, not the vertical height of the whole pyramid. </p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1304574074</deployedseed>
+    <deployedseed>2133722309</deployedseed>
+    <deployedseed>86944550</deployedseed>
+    <deployedseed>1639731779</deployedseed>
+    <deployedseed>1711018908</deployedseed>
+    <deployedseed>1108014335</deployedseed>
+    <deployedseed>193047946</deployedseed>
+    <deployedseed>1737134203</deployedseed>
+    <deployedseed>581756681</deployedseed>
+    <deployedseed>2133334049</deployedseed>
+    <deployedseed>1009375310</deployedseed>
+    <deployedseed>2126977359</deployedseed>
+    <deployedseed>2008015258</deployedseed>
+    <deployedseed>1654878667</deployedseed>
+    <deployedseed>1438504464</deployedseed>
+    <deployedseed>51318854</deployedseed>
+    <deployedseed>1436231513</deployedseed>
+    <deployedseed>34970773</deployedseed>
+    <deployedseed>1596080662</deployedseed>
+    <deployedseed>1046037262</deployedseed>
+    <deployedseed>1110952750</deployedseed>
+    <deployedseed>743225773</deployedseed>
+    <deployedseed>940925322</deployedseed>
+    <deployedseed>215368667</deployedseed>
+    <deployedseed>1296817206</deployedseed>
+    <deployedseed>677480307</deployedseed>
+    <deployedseed>170882782</deployedseed>
+    <deployedseed>2119835071</deployedseed>
+    <deployedseed>1606722789</deployedseed>
+    <deployedseed>2130437520</deployedseed>
+    <deployedseed>1484696357</deployedseed>
+    <deployedseed>1679699252</deployedseed>
+    <deployedseed>1327142180</deployedseed>
+    <deployedseed>1067461428</deployedseed>
+    <deployedseed>158596202</deployedseed>
+    <deployedseed>1439058697</deployedseed>
+    <deployedseed>103975333</deployedseed>
+    <deployedseed>789824666</deployedseed>
+    <deployedseed>593568929</deployedseed>
+    <deployedseed>1476977628</deployedseed>
+    <deployedseed>328085749</deployedseed>
+    <deployedseed>891882016</deployedseed>
+    <deployedseed>1020906657</deployedseed>
+    <deployedseed>2038948654</deployedseed>
+    <deployedseed>1915114567</deployedseed>
+    <deployedseed>1981355410</deployedseed>
+    <deployedseed>109188079</deployedseed>
+    <deployedseed>876365070</deployedseed>
+    <deployedseed>775649167</deployedseed>
+    <deployedseed>1677731631</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description><![CDATA[<p>It looks like you confused the slanting height of the triangle with the vertical height when calculating the area. Keep in mind that the height used in the calculation of the area of a triangle must be perpendicular to the base. You're on the right tra]]></description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta_1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>check for correct surface area</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description><![CDATA[<p>It seems you used the vertical height of the pyramid instead of the vertical height of the triangular face when working with the area of a triangle. For triangle area calculations on a pyramid, use the height of the triangular face, not the vertical he]]></description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta_2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>
