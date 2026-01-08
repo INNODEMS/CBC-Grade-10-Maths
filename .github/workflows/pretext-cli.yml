@@ -23,6 +23,9 @@ jobs:
             - name: install deps
               run: pip install -r requirements.txt
 
+            - name: install tex dependencies
+              run: tlmgr update --self && tlmgr install tkz-euclide
+
             - name: install local ptx files
               run: pretext --version
 
