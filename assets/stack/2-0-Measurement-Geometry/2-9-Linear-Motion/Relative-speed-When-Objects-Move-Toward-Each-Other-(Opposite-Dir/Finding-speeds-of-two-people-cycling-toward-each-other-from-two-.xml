@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding speeds of two people cycling toward each other from two towns</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p><strong>[[verbatim]]</strong></p>
+<p>{@name1@} and {@name2@} start cycling toward each other from two towns {@distance_disp@} km apart. {@faster_name@} cycles {@speed_diff_disp@} km/h faster than {@slower_name@}. If they meet after {@time_disp@} hours:</p>
+<p>Find their speeds.</p>
+<p>{@faster_name@}'s speed: [[input:ans1]]  km/h [[validation:ans1]] [[feedback:prt1]]</p>
+<p>{@slower_name@}'s speed: [[input:ans2]] km/h [[validation:ans2]] [[feedback:prt2]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>Let {@slower_name@}'s speed = \(v\) km/h.</p>
+<p>Then {@faster_name@}'s speed = \(v + {@speed_diff_disp@}\) km/h.</p>
+
+<p>When cycling toward each other, their relative speed is the sum:</p>
+<p>\(v + (v + {@speed_diff_disp@}) = 2v + {@speed_diff_disp@}\) km/h</p>
+
+<p>They cover {@distance_disp@} km in {@time_disp@} hour, so:</p>
+<p>\((2v + {@speed_diff_disp@}) \times {@time_disp@} = {@distance_disp@}\)</p>
+<p>\(2v + {@speed_diff_disp@} = \frac{ {@distance_disp@} }{ {@time_disp@} }\)</p>
+<p>\(2v = {@distance_disp/time_disp@} - {@speed_diff_disp@}\)</p>
+<p>\(v = \frac{ {@distance_disp/time_disp@} - {@speed_diff_disp@} }{2} = {@answer2@} \text{ km/h}\)</p>
+
+<p>{@faster_name@}'s speed = \(v + {@speed_diff_disp@} = {@answer2@} + {@speed_diff_disp@} = {@answer1@} \text{ km/h}\)</p>
+
+<p>Therefore, their speeds are:</p>
+<ul>
+  <li>{@faster_name@}: {@ta1@} km/h</li>
+  <li>{@slower_name@}: {@ta2@} km/h</li>
+</ul>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Randomize parameters */
+distance : rand(6)*10 + 30;        
+time : rand(3) + 2;               
+speed_diff : rand(5)*2 + 2;       
+
+/* Determine who is faster randomly */
+if rand(2) = 0 then (
+    /* Alice is faster */
+    alice_faster : true,
+    speed_difference : speed_diff
+) else (
+    /* Bob is faster */
+    alice_faster : false,
+    speed_difference : -speed_diff
+);
+
+/* Generate names randomly */
+names : [["Alice", "Bob"], ["Emma", "Liam"], ["Sophia", "Noah"], ["Olivia", "James"]];
+name_pair : names[rand(4) + 1];
+name1 : name_pair[1];
+name2 : name_pair[2];
+
+/* Calculate speeds - system of equations */
+/* d = (v_a + v_b) * t  and  v_a - v_b = diff */
+/* v_a = (d/t + diff)/2, v_b = (d/t - diff)/2 */
+
+total_speed : distance / time;                /* v_a + v_b */
+if alice_faster then (
+    v_alice : (total_speed + speed_diff)/2,
+    v_bob : (total_speed - speed_diff)/2
+) else (
+    v_alice : (total_speed - speed_diff)/2,
+    v_bob : (total_speed + speed_diff)/2
+);
+
+/* Ensure speeds are positive and reasonable */
+if v_alice < 5 then v_alice : 5;
+if v_bob < 5 then v_bob : 5;
+
+/* Round to nice numbers */
+v_alice : round(v_alice*2)/2;  /* Round to nearest 0.5 */
+v_bob : round(v_bob*2)/2;
+
+/* Recalculate to ensure consistency */
+speed_diff_actual : abs(v_alice - v_bob);
+distance_actual : (v_alice + v_bob) * time;
+
+/* Answer variables */
+answer1 : if alice_faster then v_alice else v_bob;  /* Faster cyclist */
+answer2 : if alice_faster then v_bob else v_alice;  /* Slower cyclist */
+
+/* Alternative forms */
+ta1 : ratsimp(answer1);
+ta2 : ratsimp(answer2);
+
+/* Distractor variables (common mistakes) */
+/* Mistake 1: Using d/t for each */
+distractor1_a : distance / time;
+distractor1_b : distractor1_a;
+
+/* Mistake 2: Dividing difference equally */
+distractor2_faster : (distance/time + speed_diff/2);
+distractor2_slower : (distance/time - speed_diff/2);
+
+/* Mistake 3: Reversing who's faster */
+distractor3_faster : if alice_faster then v_bob else v_alice;
+distractor3_slower : if alice_faster then v_alice else v_bob;
+
+/* Display variables */
+distance_disp : distance;
+time_disp : time;
+speed_diff_disp : speed_diff_actual;
+faster_name : if alice_faster then name1 else name2;
+slower_name : if alice_faster then name2 else name1;]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@faster_name@}</p>
+<p>{@slower_name@}</p>
+<p>{@distance_disp@}</p>
+<p> {@speed_diff_disp@} </p>
+<p> {@time_disp@}</p>
+<p>{@ta1@}</p>
+<p>{@ta2@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct speed</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect speed</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>distractor1_a</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have used \(\frac{\text{distance}}{\text{time}} = {@distance_disp@}/{@time_disp@}\) km/h for both cyclists.</p>
+  <p>Remember this is only applicable if they had the same speed, but one is {@speed_diff_disp@} km/h faster.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Checks for incorrect speed</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>distractor3_faster</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have correctly identified the speed but you reversed which cyclist is faster.</p>
+  <p>Remember: {{@faster_name@}} is faster than {{@slower_name@}} by {@speed_diff_disp@} km/h.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for correct speed</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect speed</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>distractor1_b</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have used \(\frac{\text{distance}}{\text{time}} = {@distance_disp@}/{@time_disp@}\) km/h for both cyclists.</p>
+  <p>Remember this is only applicable if they had the same speed, but one is {@speed_diff_disp@} km/h faster.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Checks for incorrect speed</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>distractor3_slower </tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have correctly identified the speed but you reversed which cyclist is faster.</p>
+  <p>Remember: {{@faster_name@}} is faster than {{@slower_name@}} by {@speed_diff_disp@} km/h.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>2137390938</deployedseed>
+    <deployedseed>1140170803</deployedseed>
+    <deployedseed>429363518</deployedseed>
+    <deployedseed>1675535193</deployedseed>
+    <deployedseed>692870726</deployedseed>
+    <deployedseed>526811702</deployedseed>
+    <deployedseed>419369282</deployedseed>
+    <deployedseed>1981059400</deployedseed>
+    <deployedseed>1855637074</deployedseed>
+    <deployedseed>1146551888</deployedseed>
+    <deployedseed>278805263</deployedseed>
+    <deployedseed>1026867987</deployedseed>
+    <deployedseed>1430376554</deployedseed>
+    <deployedseed>687570127</deployedseed>
+    <deployedseed>394419193</deployedseed>
+    <deployedseed>581931571</deployedseed>
+    <deployedseed>36558850</deployedseed>
+    <deployedseed>1117179205</deployedseed>
+    <deployedseed>405476463</deployedseed>
+    <deployedseed>1770199060</deployedseed>
+    <deployedseed>1254563990</deployedseed>
+    <deployedseed>1861838929</deployedseed>
+    <deployedseed>1869503957</deployedseed>
+    <deployedseed>409909736</deployedseed>
+    <deployedseed>1147371598</deployedseed>
+    <deployedseed>189541289</deployedseed>
+    <deployedseed>1783005934</deployedseed>
+    <deployedseed>147660164</deployedseed>
+    <deployedseed>1585407958</deployedseed>
+    <deployedseed>1530686463</deployedseed>
+    <deployedseed>1827725282</deployedseed>
+    <deployedseed>1285917300</deployedseed>
+    <deployedseed>1281216947</deployedseed>
+    <deployedseed>1888208116</deployedseed>
+    <deployedseed>1132663208</deployedseed>
+    <deployedseed>573474888</deployedseed>
+    <deployedseed>816867108</deployedseed>
+    <deployedseed>72151759</deployedseed>
+    <deployedseed>2128487251</deployedseed>
+    <deployedseed>623363646</deployedseed>
+    <deployedseed>1873372387</deployedseed>
+    <deployedseed>839249930</deployedseed>
+    <deployedseed>207395999</deployedseed>
+    <deployedseed>402288079</deployedseed>
+    <deployedseed>62463598</deployedseed>
+    <deployedseed>63227792</deployedseed>
+    <deployedseed>575064218</deployedseed>
+    <deployedseed>534727040</deployedseed>
+    <deployedseed>1181090975</deployedseed>
+    <deployedseed>2083889290</deployedseed>
+    <deployedseed>384240161</deployedseed>
+    <deployedseed>1942783974</deployedseed>
+    <deployedseed>298507491</deployedseed>
+    <deployedseed>546477230</deployedseed>
+    <deployedseed>201796975</deployedseed>
+    <deployedseed>1295129273</deployedseed>
+    <deployedseed>614829917</deployedseed>
+    <deployedseed>1318679032</deployedseed>
+    <deployedseed>1491932897</deployedseed>
+    <deployedseed>627193667</deployedseed>
+    <deployedseed>1296843281</deployedseed>
+    <deployedseed>510769732</deployedseed>
+    <deployedseed>1809056077</deployedseed>
+    <deployedseed>2127026980</deployedseed>
+    <deployedseed>649432126</deployedseed>
+    <deployedseed>173371950</deployedseed>
+    <deployedseed>966273606</deployedseed>
+    <deployedseed>1750786181</deployedseed>
+    <deployedseed>1694971253</deployedseed>
+    <deployedseed>1573574241</deployedseed>
+    <deployedseed>1680953302</deployedseed>
+    <deployedseed>1653628943</deployedseed>
+    <deployedseed>1364882337</deployedseed>
+    <deployedseed>914527061</deployedseed>
+    <deployedseed>312505846</deployedseed>
+    <deployedseed>1130099740</deployedseed>
+    <deployedseed>251142589</deployedseed>
+    <deployedseed>459950605</deployedseed>
+    <deployedseed>733829506</deployedseed>
+    <deployedseed>1448948054</deployedseed>
+    <deployedseed>530113046</deployedseed>
+    <deployedseed>589012911</deployedseed>
+    <deployedseed>16941288</deployedseed>
+    <deployedseed>1176327238</deployedseed>
+    <deployedseed>2061591078</deployedseed>
+    <deployedseed>666496079</deployedseed>
+    <deployedseed>1290044994</deployedseed>
+    <deployedseed>1524089413</deployedseed>
+    <deployedseed>490567448</deployedseed>
+    <deployedseed>1141595632</deployedseed>
+    <deployedseed>1178476670</deployedseed>
+    <deployedseed>1744894080</deployedseed>
+    <deployedseed>1789564307</deployedseed>
+    <deployedseed>1614781179</deployedseed>
+    <deployedseed>87013040</deployedseed>
+    <deployedseed>30561827</deployedseed>
+    <deployedseed>534867292</deployedseed>
+    <deployedseed>215909567</deployedseed>
+    <deployedseed>583511141</deployedseed>
+    <deployedseed>891834829</deployedseed>
+  </question>
+</quiz>

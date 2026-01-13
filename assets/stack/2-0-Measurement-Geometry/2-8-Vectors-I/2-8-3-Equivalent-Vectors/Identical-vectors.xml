@@ -24,17 +24,60 @@ stack_jxg.bind_point_relative(ans1Ref, p3, p4);
 
 [[/jsxgraph]]
 
-<p style="display:none">[[input:ans1]] [[validation:ans1]]</p>]]></text>
+<p style="display:none">[[input:ans1]] [[validation:ans1]]</p>
+[[feedback:prt1]]]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text/>
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>Two vectors are considered <b>equivalent</b> (or identical) if they have the same <b>magnitude</b> (length) and the same <b>direction</b>. In terms of coordinates, this means their horizontal and vertical components must be equal.</p>
+
+<p><b>Step 1: Determine the components of the fixed vector \(\vec{p_1p_2}\).</b></p>
+<p>We calculate the change in \(x\) and the change in \(y\) from point \(p_1\) to \(p_2\):</p>
+<ul>
+    <li>Change in \(x\) (\(\Delta x\)): \( {@p2x@} - ({@p1x@}) = {@v1[1]@} \)</li>
+    <li>Change in \(y\) (\(\Delta y\)): \( {@p2y@} - ({@p1y@}) = {@v1[2]@} \)</li>
+</ul>
+<p>So, the vector \(\vec{p_1p_2}\) can be written as the column vector \(\mathbf{v} = \begin{pmatrix} {@v1[1]@} \\ {@v1[2]@} \end{pmatrix}\).</p>
+
+<p><b>Step 2: Adjust \(\vec{p_3p_4}\).</b></p>
+<p>For \(\vec{p_3p_4}\) to be identical to \(\vec{p_1p_2}\), it must have these same components. You can place the start point \(p_3\) anywhere on the grid, but the end point \(p_4\) must be positioned relative to \(p_3\) such that:</p>
+<ul>
+    <li>\(x_4 = x_3 + {@v1[1]@}\)</li>
+    <li>\(y_4 = y_3 + {@v1[2]@}\)</li>
+</ul>
+
+<p>The image below shows one correct solution. The blue vector is the target \(\vec{p_1p_2}\), and the green vector is \(\vec{p_3p_4}\) correctly placed to be equivalent.</p>
+
+<div style="text-align: center;">
+[[jsxgraph width="500px" height="500px"]]
+JXG.Options.text.useMathJax = true;
+var board = JXG.JSXGraph.initBoard(divid, { boundingbox : [-5.5, 5.5, 5.5, -5.5], axis : true, showNavigation:false, showCopyright:false});
+
+// The target fixed vector (Blue)
+var p1 = board.create('point', {#p1#}, { name : 'p_1', fixed: true, size:3, color:'#0000ff' });
+var p2 = board.create('point', {#p2#}, { name : 'p_2', fixed: true, size:3, color:'#0000ff' });
+board.create('arrow', [p1, p2], { fixed : true, strokeWidth : 4, strokeOpacity : .6, color:'#0000ff' });
+
+// The solution vector (Green) - Fixed in a correct position
+// We place p3 at its randomized initial starting point defined in variables
+var p3_sol = board.create('point', {#p3#}, { name : 'p_3', fixed: true, size:3, color:'#009900' });
+// We calculate the correct p4 position relative to p3 using the vector component v1
+var p4x_sol = {#p3x#} + {#v1[1]#};
+var p4y_sol = {#p3y#} + {#v1[2]#};
+var p4_sol = board.create('point', [p4x_sol, p4y_sol], { name : 'p_4', fixed: true, size:3, color:'#009900' });
+board.create('arrow', [p3_sol, p4_sol], { fixed : true, strokeWidth : 4, strokeOpacity : .8, color:'#009900' });
+
+[[/jsxgraph]]
+</div>
+
+<p>Graphically, the arrow for \(\vec{p_3p_4}\) must look parallel to \(\vec{p_1p_2}\), point in the same direction, and have the same length.</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025012100</text>
+      <text>2025073100</text>
     </stackversion>
     <questionvariables>
       <text>p1x: rand_with_step(-5, 0, 1);
@@ -56,13 +99,17 @@ p4: [p4x, p4y];
 ta1: [[p2x+1, p2y], v1]</text>
     </questionvariables>
     <specificfeedback format="html">
-      <text>[[feedback:prt1]]</text>
+      <text/>
     </specificfeedback>
     <questionnote format="moodle_auto_format">
       <text>{@p1@}, {@p2@}, {@p3@}, {@p4@}</text>
     </questionnote>
     <questiondescription format="moodle_auto_format">
-      <text/>
+      <text><![CDATA[<p id="author">Daniel Murunga</p>
+<p id="concept"></p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+<p id="description">Interactive JSXGraph task: Given a fixed vector p1p2 defined by random coordinates, the student must manipulate points p3 and p4 to create an equivalent vector p3p4. Tests understanding of vector components and equivalence (magnitude/direction) independent of position.</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -205,6 +252,26 @@ is_parallel: is(rank(stack) = 1);</text>
     <deployedseed>359102522</deployedseed>
     <deployedseed>40935666</deployedseed>
     <deployedseed>1260884880</deployedseed>
+    <deployedseed>595061215</deployedseed>
+    <deployedseed>1843785792</deployedseed>
+    <deployedseed>1332838441</deployedseed>
+    <deployedseed>194891018</deployedseed>
+    <deployedseed>639255130</deployedseed>
+    <deployedseed>91017390</deployedseed>
+    <deployedseed>1664025336</deployedseed>
+    <deployedseed>144433631</deployedseed>
+    <deployedseed>2039842295</deployedseed>
+    <deployedseed>1617180675</deployedseed>
+    <deployedseed>166345319</deployedseed>
+    <deployedseed>1853860172</deployedseed>
+    <deployedseed>523668081</deployedseed>
+    <deployedseed>451020595</deployedseed>
+    <deployedseed>1188045540</deployedseed>
+    <deployedseed>1592955616</deployedseed>
+    <deployedseed>1607457245</deployedseed>
+    <deployedseed>466512560</deployedseed>
+    <deployedseed>822826366</deployedseed>
+    <deployedseed>1345543774</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>

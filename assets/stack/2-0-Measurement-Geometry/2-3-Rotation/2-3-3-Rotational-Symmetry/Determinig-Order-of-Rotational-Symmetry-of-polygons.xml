@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Determinig Order of Rotational Symmetry of polygons</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+What is the <b>order of rotational symmetry</b> of the shape shown below?
+</p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-5,5,5,-5],
+    axis:false,
+    showCopyright:false
+});
+
+var shape = {#shape_id#};
+var rot = {#rot_js#};
+
+/* Helper: rotate a point */
+function R(p) {
+    var x = p[0], y = p[1];
+    return [
+        x*Math.cos(rot) - y*Math.sin(rot),
+        x*Math.sin(rot) + y*Math.cos(rot)
+    ];
+}
+
+/* Shape definitions */
+var pts = [];
+
+if (shape === 1) {
+    /* square */
+    pts = [[-2,-2],[2,-2],[2,2],[-2,2]];
+}
+else if (shape === 2) {
+    /* rectangle */
+    pts = [[-3,-1],[3,-1],[3,1],[-3,1]];
+}
+else if (shape === 3) {
+    /* rhombus */
+    pts = [[0,3],[2,0],[0,-3],[-2,0]];
+}
+else if (shape === 4) {
+    /* kite */
+    pts = [[0,3],[2,0],[0,-1],[-2,0]];
+}
+else if (shape === 5) {
+    /* equilateral triangle */
+    pts = [[0,3],[-2,-1],[2,-1]];
+}
+else if (shape === 6) {
+    /* regular pentagon */
+    var n = 5;
+    for (var i=0; i<n; i++) {
+        var a = 2*Math.PI*i/n;
+        pts.push([3*Math.cos(a), 3*Math.sin(a)]);
+    }
+}
+else if (shape === 7) {
+    /* cross-shaped dodecagon */
+    pts = [
+        [1,3],[-1,3],[-1,1],[-3,1],[-3,-1],[-1,-1],
+        [-1,-3],[1,-3],[1,-1],[3,-1],[3,1],[1,1]
+    ];
+}
+
+/* Apply rotation */
+var polypts = [];
+for (var i=0; i<pts.length; i++) {
+    polypts.push(board.create('point', R(pts[i]), {visible:false}));
+}
+
+/* Draw polygon */
+board.create('polygon', polypts, {
+    borders:{strokeWidth:3, strokeColor:'#e91e63'},
+    fillColor:'#f8bbd0',
+    fillOpacity:0.6
+});
+[[/jsxgraph]]
+
+<p>Enter a single integer : [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>General feedback</h3>
+
+<p>
+The shape shown is a <b>{@shape_name@}</b>.
+</p>
+
+<p>
+The <b>order of rotational symmetry</b> is the number of distinct rotations
+less than \(360^\circ\) that map the shape exactly onto itself.
+</p>
+
+<p>
+For this shape, the correct order of rotational symmetry is:
+</p>
+
+<p style="text-align:center;">
+\[
+\boxed{{@order_sym@}}
+\]
+</p>
+
+<p>
+Try mentally rotating the shape about its centre and counting how many times
+it matches itself before a full turn.
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* List of shapes:
+   1 = square
+   2 = rectangle (non-square)
+   3 = rhombus (non-square)
+   4 = kite
+   5 = equilateral triangle
+   6 = regular pentagon
+   7 = cross-shaped dodecagon
+*/
+
+shape_id: rand(7) + 1;
+
+/* Order of rotational symmetry for each shape */
+order_sym:
+  if shape_id = 1 then 4
+  elseif shape_id = 2 then 2
+  elseif shape_id = 3 then 2
+  elseif shape_id = 4 then 1
+  elseif shape_id = 5 then 3
+  elseif shape_id = 6 then 5
+  elseif shape_id = 7 then 4;
+
+/* Human-readable name (for feedback only) */
+shape_name:
+  if shape_id = 1 then "square"
+  elseif shape_id = 2 then "rectangle"
+  elseif shape_id = 3 then "rhombus"
+  elseif shape_id = 4 then "kite"
+  elseif shape_id = 5 then "equilateral triangle"
+  elseif shape_id = 6 then "regular pentagon"
+  elseif shape_id = 7 then "dodecagon";
+
+/* Random rotation so image is not static */
+k: rand(4);
+rot_js: float(k * %pi/2);
+
+/* Teacher's answer */
+ta: order_sym;
+]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Shape {@shape_name@}</p>
+<p> Order of Rotational Symmetry {@ta@}]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>2060933478</deployedseed>
+    <deployedseed>358082973</deployedseed>
+    <deployedseed>2032183071</deployedseed>
+    <deployedseed>1369787173</deployedseed>
+    <deployedseed>658033191</deployedseed>
+    <deployedseed>1474055575</deployedseed>
+    <deployedseed>864503505</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>
