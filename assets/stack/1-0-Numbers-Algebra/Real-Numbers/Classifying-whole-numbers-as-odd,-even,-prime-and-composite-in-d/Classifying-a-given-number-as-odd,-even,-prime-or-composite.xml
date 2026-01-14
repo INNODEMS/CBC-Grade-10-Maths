@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Classifying a given number as odd, even, prime or composite</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+During a mathematics lesson, Grade 10 students were asked to classify the number
+<strong>{@num@}</strong>.
+</p>
+
+<p>
+Which of the following statements are true? Select all that apply.
+
+
+[[input:ans1]] [[validation:ans1]] [[feedback:prt1]] </p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><strong>Worked Solution</strong></p>
+
+<p>Given the number: <strong>{@num@}</strong></p>
+
+<hr>
+
+<p><strong>1. Test if the number is even or odd</strong></p>
+
+<p>
+We check the last digit of the number.
+</p>
+
+<p>
+{@if is_even
+  then sconcat(
+    "The last digit is ", mod(num,10),
+    ", which is even. Therefore, the number is <strong>even</strong>."
+  )
+  else sconcat(
+    "The last digit is ", mod(num,10),
+    ", which is odd. Therefore, the number is <strong>odd</strong>."
+  )
+@}
+</p>
+
+<hr>
+
+<p><strong>2. Test if the number is prime or composite</strong></p>
+
+<p>
+{@if num = 1
+  then "The number 1 is neither prime nor composite."
+  else if is_prime_num
+    then sconcat(
+      "After checking divisibility up to ",
+      floor(sqrt(num)),
+      ", no divisors other than 1 and itself were found. ",
+      "Therefore, the number is <strong>prime</strong>."
+    )
+    else
+      sconcat(
+        "The number has a divisor other than 1 and itself, ",
+        "so it is <strong>composite</strong>."
+      )
+@}
+</p>
+
+<hr>
+
+<p>
+Therefore, the correct classification of <strong>{@num@}</strong> is:
+</p>
+
+<ul>
+{@if is_even then "<li>It is even</li>" else "<li>It is odd</li>"@}
+{@if is_prime_num then "<li>It is prime</li>" else "<li>It is composite</li>"@}
+</ul>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/*Random 5-digit number*/
+num: rand(90000) + 10000;
+
+/*Properties */
+is_even : mod(num, 2) = 0;
+
+/* Prime test */
+is_prime(n) := if n < 2 then false
+  else if n = 2 then true
+  else if mod(n,2) = 0 then false
+  else block(
+    [i:3, lim:floor(sqrt(n)), res:true],
+    while i <= lim and res do (
+      if mod(n,i) = 0 then res:false,
+      i:i+2
+    ),
+    res
+  );
+
+is_prime_num : is_prime(num);
+is_composite : (num > 1 and not is_prime_num);
+
+/*Options (fixed meaning)*/
+options : [
+  [1, is_even,        "It is even"],
+  [2, not is_even,    "It is odd"],
+  [3, is_prime_num,   "It is prime"],
+  [4, is_composite,   "It is composite"]
+];
+
+/* Randomise order */
+ta : random_permutation(options);
+
+/* Correct checkbox indices */
+ta_index : sort(makelist(x[1], x, sublist(ta, lambda([y], y[2]))));
+]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p> {@num@}</p>
+<p>{@ta@}</p>
+<p>{@ta_index@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>checkbox</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options>nonotanswered</options>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for correct classification of the number</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans> mcq_correct(ta)</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>You have failed to classify the number correctly. Remember even numbers are divisible by 2, Prime numbers have exactly two positive divisors and Composite numbers have more than two positive divisors</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1059710098</deployedseed>
+    <deployedseed>547170300</deployedseed>
+    <deployedseed>1194614475</deployedseed>
+    <deployedseed>1580648822</deployedseed>
+    <deployedseed>1269789402</deployedseed>
+    <deployedseed>547369750</deployedseed>
+    <deployedseed>408261890</deployedseed>
+    <deployedseed>559639026</deployedseed>
+    <deployedseed>379863612</deployedseed>
+    <deployedseed>1202977</deployedseed>
+    <deployedseed>1157115718</deployedseed>
+    <deployedseed>24501780</deployedseed>
+    <deployedseed>1084399392</deployedseed>
+    <deployedseed>1816373431</deployedseed>
+    <deployedseed>132060031</deployedseed>
+    <deployedseed>2130270077</deployedseed>
+    <deployedseed>1676179042</deployedseed>
+    <deployedseed>224364902</deployedseed>
+    <deployedseed>2079683345</deployedseed>
+    <deployedseed>284376136</deployedseed>
+    <deployedseed>1321189428</deployedseed>
+    <deployedseed>1063767705</deployedseed>
+    <deployedseed>1011545714</deployedseed>
+    <deployedseed>1245514392</deployedseed>
+    <deployedseed>1538326807</deployedseed>
+    <deployedseed>276707944</deployedseed>
+    <deployedseed>1022729690</deployedseed>
+    <deployedseed>1876012189</deployedseed>
+    <deployedseed>1928561438</deployedseed>
+    <deployedseed>622796981</deployedseed>
+    <deployedseed>1193512051</deployedseed>
+    <deployedseed>832918532</deployedseed>
+    <deployedseed>1553494186</deployedseed>
+    <deployedseed>1686408778</deployedseed>
+    <deployedseed>389453272</deployedseed>
+    <deployedseed>1480393812</deployedseed>
+    <deployedseed>1252935874</deployedseed>
+    <deployedseed>551197138</deployedseed>
+    <deployedseed>1032849496</deployedseed>
+    <deployedseed>479169299</deployedseed>
+    <deployedseed>1965260531</deployedseed>
+    <deployedseed>25419222</deployedseed>
+    <deployedseed>1286457644</deployedseed>
+    <deployedseed>548536119</deployedseed>
+    <deployedseed>1649494143</deployedseed>
+    <deployedseed>745987305</deployedseed>
+    <deployedseed>218505444</deployedseed>
+    <deployedseed>2037850638</deployedseed>
+    <deployedseed>1050459069</deployedseed>
+    <deployedseed>1029167144</deployedseed>
+    <deployedseed>1962478312</deployedseed>
+    <deployedseed>2020476530</deployedseed>
+    <deployedseed>1565788493</deployedseed>
+    <deployedseed>104712402</deployedseed>
+    <deployedseed>541276300</deployedseed>
+    <deployedseed>2128508344</deployedseed>
+    <deployedseed>498607777</deployedseed>
+    <deployedseed>891098310</deployedseed>
+    <deployedseed>397709518</deployedseed>
+    <deployedseed>194022007</deployedseed>
+    <deployedseed>1945011142</deployedseed>
+    <deployedseed>489547712</deployedseed>
+    <deployedseed>467502996</deployedseed>
+    <deployedseed>569334606</deployedseed>
+    <deployedseed>1680747174</deployedseed>
+    <deployedseed>201060290</deployedseed>
+    <deployedseed>228809958</deployedseed>
+    <deployedseed>351267588</deployedseed>
+    <deployedseed>1667023277</deployedseed>
+    <deployedseed>1936914846</deployedseed>
+    <deployedseed>1615674540</deployedseed>
+    <deployedseed>1160511118</deployedseed>
+    <deployedseed>2029145980</deployedseed>
+    <deployedseed>888027919</deployedseed>
+    <deployedseed>963200219</deployedseed>
+    <deployedseed>120830118</deployedseed>
+    <deployedseed>1989096906</deployedseed>
+    <deployedseed>423065985</deployedseed>
+    <deployedseed>253290323</deployedseed>
+    <deployedseed>190043291</deployedseed>
+    <deployedseed>1690490298</deployedseed>
+    <deployedseed>1889245278</deployedseed>
+    <deployedseed>705568962</deployedseed>
+    <deployedseed>2054139777</deployedseed>
+    <deployedseed>1435980919</deployedseed>
+    <deployedseed>1884750943</deployedseed>
+    <deployedseed>742097127</deployedseed>
+    <deployedseed>1794807643</deployedseed>
+    <deployedseed>1055089075</deployedseed>
+    <deployedseed>681433546</deployedseed>
+    <deployedseed>1125738147</deployedseed>
+    <deployedseed>858824294</deployedseed>
+    <deployedseed>577638467</deployedseed>
+    <deployedseed>986748180</deployedseed>
+    <deployedseed>980859873</deployedseed>
+    <deployedseed>254324662</deployedseed>
+    <deployedseed>1143631519</deployedseed>
+    <deployedseed>857588297</deployedseed>
+    <deployedseed>924430711</deployedseed>
+    <deployedseed>369403643</deployedseed>
+  </question>
+</quiz>

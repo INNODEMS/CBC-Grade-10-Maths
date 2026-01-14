@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Representing Data using a Frequency Distribution Table</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Thirty customers at a service center recorded their wait times in minutes as follows:</p>
+
+<p style="background-color: #f9f9f9; padding: 15px; border: 1px solid #ddd; font-family: monospace; font-size: 1.1em; line-height: 1.6;">
+    {@data_str@}
+</p>
+
+<p>Prepare a frequency distribution table for this set of data. The wait times observed have been listed in the first column for you. Count how many times each wait time appears in the list above.</p>
+
+<table class="table table-bordered table-striped" style="width: 50%; margin-top: 20px;">
+    <thead style="background-color: #e0e0e0;">
+        <tr>
+            <th style="text-align: center;">Wait Time (Minutes)</th>
+            <th style="text-align: center;">Frequency</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center; font-weight:bold;">{@v1@}</td>
+            <td style="text-align: center;">[[input:ans1]] [[validation:ans1]]</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight:bold;">{@v2@}</td>
+            <td style="text-align: center;">[[input:ans2]] [[validation:ans2]]</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight:bold;">{@v3@}</td>
+            <td style="text-align: center;">[[input:ans3]] [[validation:ans3]]</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight:bold;">{@v4@}</td>
+            <td style="text-align: center;">[[input:ans4]] [[validation:ans4]]</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight:bold;">{@v5@}</td>
+            <td style="text-align: center;">[[input:ans5]] [[validation:ans5]]</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight:bold;">{@v6@}</td>
+            <td style="text-align: center;">[[input:ans6]] [[validation:ans6]]</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight:bold;">{@v7@}</td>
+            <td style="text-align: center;">[[input:ans7]] [[validation:ans7]]</td>
+        </tr>
+    </tbody>
+</table>
+[[feedback:prt1]]]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>To solve this, you count how many times each specific number appears in the list.</p>
+<ul>
+    <li>Wait time <strong>{@v1@}</strong> appears <strong>{@f1@}</strong> times.</li>
+    <li>Wait time <strong>{@v2@}</strong> appears <strong>{@f2@}</strong> times.</li>
+    <li>Wait time <strong>{@v3@}</strong> appears <strong>{@f3@}</strong> times.</li>
+    <li>Wait time <strong>{@v4@}</strong> appears <strong>{@f4@}</strong> times.</li>
+    <li>Wait time <strong>{@v5@}</strong> appears <strong>{@f5@}</strong> times.</li>
+    <li>Wait time <strong>{@v6@}</strong> appears <strong>{@f6@}</strong> times.</li>
+    <li>Wait time <strong>{@v7@}</strong> appears <strong>{@f7@}</strong> times.</li>
+</ul>
+<p><strong>Total:</strong> {@f1@} + {@f2@} + {@f3@} + {@f4@} + {@f5@} + {@f6@} + {@f7@} = 30.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* 1. Generate 7 UNIQUE values for the wait times (e.g., from range 2 to 25) */
+/* We create a list of candidates, shuffle it, and take the first 7 */
+candidates: makelist(i, i, 2, 25);
+shuffled_cands: random_permutation(candidates);
+/* Sort them so the table looks organized (ascending order) */
+vals: sort(makelist(shuffled_cands[i], i, 1, 7));
+
+/* Extract individual values for the table display */
+v1: vals[1];
+v2: vals[2];
+v3: vals[3];
+v4: vals[4];
+v5: vals[5];
+v6: vals[6];
+v7: vals[7];
+
+/* 2. Generate 7 Random Frequencies that sum exactly to 30 */
+/* Start with 1 for each to ensure every number appears at least once */
+freqs: [1, 1, 1, 1, 1, 1, 1];
+/* Distribute the remaining 23 counts randomly among the 7 bins */
+for i:1 thru 23 do (
+   idx: rand(7) + 1,
+   freqs[idx]: freqs[idx] + 1
+);
+
+/* Extract correct frequencies for grading */
+f1: freqs[1];
+f2: freqs[2];
+f3: freqs[3];
+f4: freqs[4];
+f5: freqs[5];
+f6: freqs[6];
+f7: freqs[7];
+
+/* 3. Build the Raw Data List */
+raw_list: [];
+/* Loop through our 7 values and add them to the list f_i times */
+for i:1 thru 7 do (
+   val: vals[i],
+   count: freqs[i],
+   for k:1 thru count do raw_list: endcons(val, raw_list)
+);
+
+/* 4. Shuffle the final list of 30 items for display */
+final_data: random_permutation(raw_list);
+
+/* Create the string for display */
+data_str: sconcat(final_data[1]);
+for i:2 thru 30 do data_str: sconcat(data_str, ", ", final_data[i]);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Wait time {@v1@} : {@f1@} frequency.</p>
+    <p>Wait time {@v2@} : {@f2@} frequency.</p>
+    <p>Wait time {@v3@} : {@f3@} frequency.</p>
+    <p>Wait time {@v4@} : {@f4@} frequency.</p>
+    <p>Wait time {@v5@} : {@f5@} frequency.</p>
+    <p>Wait time {@v6@} : {@f6@} frequency.</p>
+    <p>Wait time {@v7@} : {@f7@} frequency.</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Daniel Murunga</p>
+<p id="review"></p>
+<p id="description">This exercise tests your ability to convert a list of raw data into a frequency table. You will be presented with a list of wait times for 30 customers and must count how often each specific time appears to complete the frequency column.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>f1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>f2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>f3</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>f4</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans5</name>
+      <type>algebraic</type>
+      <tans>f5</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans6</name>
+      <type>algebraic</type>
+      <tans>f6</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans7</name>
+      <type>algebraic</type>
+      <tans>f7</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>node_test : if ans1=f1 and ans2=f2 and ans3=f3 and ans4=f4 and ans5=f5 and ans6=f6 and ans7=f7 then 1 else 0;</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct frequency for all the input</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>node_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>897030612</deployedseed>
+    <deployedseed>1969588392</deployedseed>
+    <deployedseed>472734390</deployedseed>
+    <deployedseed>1521671015</deployedseed>
+    <deployedseed>1763710756</deployedseed>
+    <deployedseed>2107104041</deployedseed>
+    <deployedseed>775622401</deployedseed>
+    <deployedseed>1944091969</deployedseed>
+    <deployedseed>660665717</deployedseed>
+    <deployedseed>118206062</deployedseed>
+    <deployedseed>11040685</deployedseed>
+    <deployedseed>29284981</deployedseed>
+    <deployedseed>331150507</deployedseed>
+    <deployedseed>445505233</deployedseed>
+    <deployedseed>224422933</deployedseed>
+    <deployedseed>1562818580</deployedseed>
+    <deployedseed>58759632</deployedseed>
+    <deployedseed>1879799672</deployedseed>
+    <deployedseed>1314096606</deployedseed>
+    <deployedseed>335067719</deployedseed>
+    <deployedseed>1949120964</deployedseed>
+    <deployedseed>277099334</deployedseed>
+    <deployedseed>1200963902</deployedseed>
+    <deployedseed>48169873</deployedseed>
+    <deployedseed>1591328133</deployedseed>
+    <deployedseed>1973373142</deployedseed>
+    <deployedseed>1813718315</deployedseed>
+    <deployedseed>2035024772</deployedseed>
+    <deployedseed>1667257190</deployedseed>
+    <deployedseed>790431631</deployedseed>
+  </question>
+</quiz>

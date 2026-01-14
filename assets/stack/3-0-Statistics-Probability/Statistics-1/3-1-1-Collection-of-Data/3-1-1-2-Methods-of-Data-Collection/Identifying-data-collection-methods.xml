@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Identifying data collection methods</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Consider the following research scenario:</p>
+<p>{@q_text@}</p>
+<p>Identify the specific method of data collection being used in this situation.</p>
+<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><strong>Correct Answer: {@correct_text@}</strong></p>
+<p><strong>Reasoning:</strong></p>
+<ul>
+    <li><strong>Observation:</strong> Involves watching subjects in their natural environment without interaction (e.g., the wildlife ranger).</li>
+    <li><strong>Focus Group:</strong> A guided discussion with a small group to get qualitative opinions (e.g., the teenagers discussing phones).</li>
+    <li><strong>Census:</strong> A complete count of the entire population (e.g., the government survey).</li>
+    <li><strong>Experimentation:</strong> Manipulating variables (fertilizer) to measure the effect (maize growth).</li>
+    <li><strong>Questionnaire:</strong> Using standard forms/emails to get feedback from a large number of people (e.g., the student email).</li>
+    <li><strong>Secondary Data:</strong> Analyzing data that was already collected by someone else (e.g., the NBS reports).</li>
+</ul>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* 1. SCENARIO & CORRECT ANSWER SETUP */
+/* NEW Scenarios focusing on different contexts (Agriculture, Wildlife, Business, etc.) */
+scenarios: [
+  ["A wildlife ranger hides in a blind to count the number of elephants visiting a watering hole at sunset without disturbing them.", "Observation"],
+  
+  ["A mobile phone company invites a small group of 8 teenagers to have a guided discussion about what features they dislike in current smartphones.", "Focus Group"],
+  
+  ["The government requires every single citizen to provide details on their age, occupation, and housing status to assist in national planning.", "Census"],
+  
+  ["A farmer divides his land into two plots. He uses a new fertilizer on Plot A and the old fertilizer on Plot B to see which one produces more maize.", "Experimentation"],
+  
+  ["A university sends an email form to all 10,000 students asking them to rate the quality of the cafeteria food on a scale of 1 to 5.", "Questionnaire"],
+  
+  ["An economist analyzes the inflation rates in Kenya from 1990 to 2020 using annual reports published by the National Bureau of Statistics.", "Secondary Data Collection"]
+];
+
+/* Pick a random scenario */
+rand_idx: rand(length(scenarios)) + 1;
+chosen_scenario: scenarios[rand_idx];
+
+q_text: chosen_scenario[1];
+correct_text: chosen_scenario[2];
+
+/* 2. DISTRACTOR SETUP */
+/* Master list of all possible methods */
+all_methods: [
+    "Observation", 
+    "Focus Group", 
+    "Census", 
+    "Experimentation", 
+    "Questionnaire", 
+    "Secondary Data Collection", 
+    "Face-to-Face Interview", 
+    "Telephone Survey", 
+    "Case Study"
+];
+
+/* Filter out the correct answer */
+wrong_pool: sublist(all_methods, lambda([x], x # correct_text));
+
+/* Shuffle the wrong pool */
+shuffled_wrongs: random_permutation(wrong_pool);
+
+/* 3. BUILD THE ANSWER LIST */
+/* Correct Answer: ID 1 */
+correct_answer: rand_selection([
+   [1, true, correct_text]
+], 1);
+
+/* Incorrect Answers: ID 2-4 (Pick 3 distinct wrong ones) */
+incorrect_answers: rand_selection([
+   [2, false, shuffled_wrongs[1]],
+   [3, false, shuffled_wrongs[2]],
+   [4, false, shuffled_wrongs[3]]
+], 3);
+
+/* 4. FINAL PERMUTATION */
+ta: random_permutation(append(correct_answer, incorrect_answers));
+
+/* 5. INPUT HELPER */
+final_options: map(third, ta);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Daniel Murunga</p>
+<p id="concept"></p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+<p id="description">In this variant question, you are presented with a randomized real-world scenario (ranging from agriculture to economics). You must identify the correct data collection method used, such as Experimentation, Secondary Data, or Focus Groups.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>radio</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options>nonotanswered</options>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mcq_correct(ta)[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1939807603</deployedseed>
+    <deployedseed>272475855</deployedseed>
+    <deployedseed>856172502</deployedseed>
+    <deployedseed>45461360</deployedseed>
+    <deployedseed>1189181072</deployedseed>
+    <deployedseed>1589562589</deployedseed>
+    <deployedseed>2126920967</deployedseed>
+    <deployedseed>2101225009</deployedseed>
+    <deployedseed>291453128</deployedseed>
+    <deployedseed>1909486783</deployedseed>
+  </question>
+</quiz>

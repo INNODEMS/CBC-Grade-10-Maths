@@ -11,9 +11,9 @@ on:
   # pull_request:
   #     branches: ["*"]
 
-  # # Runs on pushes to main
-  # push:
-  #     branches: ["main"]
+  # Runs on pushes to main
+  push:
+      branches: ["main"]
 
   # # Runs every day at 00:00 UTC
   # schedule:
@@ -47,6 +47,9 @@ jobs:
 
       - name: install deps
         run: pip install -r requirements.txt --break-system-packages
+
+      - name: install tex dependencies
+        run: tlmgr update --self && tlmgr install tkz-euclide
 
       - name: install local ptx files
         run: pretext --version

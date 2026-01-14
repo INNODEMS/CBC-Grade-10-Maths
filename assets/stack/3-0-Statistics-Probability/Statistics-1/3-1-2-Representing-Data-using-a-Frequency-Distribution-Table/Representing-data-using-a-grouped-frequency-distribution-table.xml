@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Representing data using a grouped frequency distribution table</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The following data represents the exam scores of <strong>{@total_students@}</strong> students in a mathematics class:</p>
+
+<p style="background-color: #f9f9f9; padding: 15px; border: 1px solid #ddd; font-family: monospace; font-size: 1.1em; line-height: 1.6;">
+    {@data_str@}
+</p>
+
+<p>Construct a <strong>grouped frequency distribution table</strong> for this data using the class intervals provided below.</p>
+
+<table class="table table-bordered table-striped" style="width: 60%; margin-top: 20px;">
+    <thead style="background-color: #e0e0e0;">
+        <tr>
+            <th style="text-align: center;">Score Interval</th>
+            <th style="text-align: center;">Frequency</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center;">{@c1_min@} – {@c1_max@}</td>
+            <td style="text-align: center;">[[input:ans1]] [[validation:ans1]]</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">{@c2_min@} – {@c2_max@}</td>
+            <td style="text-align: center;">[[input:ans2]] [[validation:ans2]]</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">{@c3_min@} – {@c3_max@}</td>
+            <td style="text-align: center;">[[input:ans3]] [[validation:ans3]]</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">{@c4_min@} – {@c4_max@}</td>
+            <td style="text-align: center;">[[input:ans4]] [[validation:ans4]]</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">{@c5_min@} – {@c5_max@}</td>
+            <td style="text-align: center;">[[input:ans5]] [[validation:ans5]]</td>
+        </tr>
+        <tr style="font-weight: bold; background-color: #f2f2f2;">
+            <td style="text-align: right; padding-right: 20px;">Total</td>
+            <td style="text-align: center;">[[input:ans_total]] [[validation:ans_total]]</td>
+        </tr>
+    </tbody>
+</table>
+[[feedback:prt1]]]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>To create the grouped frequency table, you tally the scores that fall into each range:</p>
+
+<ul>
+    <li><strong>{@c1_min@} – {@c1_max@}:</strong> Counting scores in the 40s gives <strong>{@f1@}</strong>.</li>
+    <li><strong>{@c2_min@} – {@c2_max@}:</strong> Counting scores in the 50s gives <strong>{@f2@}</strong>.</li>
+    <li><strong>{@c3_min@} – {@c3_max@}:</strong> Counting scores in the 60s gives <strong>{@f3@}</strong>.</li>
+    <li><strong>{@c4_min@} – {@c4_max@}:</strong> Counting scores in the 70s gives <strong>{@f4@}</strong>.</li>
+    <li><strong>{@c5_min@} – {@c5_max@}:</strong> Counting scores in the 80s gives <strong>{@f5@}</strong>.</li>
+</ul>
+
+<p><strong>Total Check:</strong> {@f1@} + {@f2@} + {@f3@} + {@f4@} + {@f5@} = <strong>{@total_students@}</strong>.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* 1. Define Class Intervals (Fixed for simplicity in this example) */
+/* We will use 5 groups: 40-49, 50-59, 60-69, 70-79, 80-89 */
+c1_min: 40; c1_max: 49;
+c2_min: 50; c2_max: 59;
+c3_min: 60; c3_max: 69;
+c4_min: 70; c4_max: 79;
+c5_min: 80; c5_max: 89;
+
+/* 2. Generate Random Frequencies for each group */
+/* We ensure there are between 3 and 8 students in each group */
+f1: rand(6) + 3;
+f2: rand(6) + 3;
+f3: rand(6) + 3;
+f4: rand(6) + 3;
+f5: rand(6) + 3;
+
+total_students: f1 + f2 + f3 + f4 + f5;
+
+/* 3. Generate Raw Data Points */
+/* We create a list of scores that fit into each group according to the frequencies above */
+
+/* Helper function to generate N random integers in a range [a,b] */
+generate_group(n, a, b) := makelist(rand(b - a + 1) + a, k, 1, n);
+
+group1_scores: generate_group(f1, c1_min, c1_max);
+group2_scores: generate_group(f2, c2_min, c2_max);
+group3_scores: generate_group(f3, c3_min, c3_max);
+group4_scores: generate_group(f4, c4_min, c4_max);
+group5_scores: generate_group(f5, c5_min, c5_max);
+
+/* Combine all lists into one */
+raw_data_list: append(group1_scores, group2_scores, group3_scores, group4_scores, group5_scores);
+
+/* 4. Shuffle the combined list so the groups are mixed up */
+shuffled_data: random_permutation(raw_data_list);
+
+/* 5. Create Display String */
+data_str: sconcat(shuffled_data[1]);
+for i:2 thru total_students do data_str: sconcat(data_str, ", ", shuffled_data[i]);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta1@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Daniel Murunga</p>
+<p id="reviewer"></p>
+<p id="reviewer"> </p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans_total</name>
+      <type>algebraic</type>
+      <tans>total_students</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>f1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>f2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>f3</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>f4</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans5</name>
+      <type>algebraic</type>
+      <tans>f5</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>node_test : if ans1=f1 and ans2=f2 and ans3=f3 and ans4=f4 and ans5=f5 and ans_total=total_students then 1 else 0;</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>690373012</deployedseed>
+  </question>
+</quiz>

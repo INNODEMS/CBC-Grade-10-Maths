@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Reflect shape on an axis</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+The red shape is shown on the coordinate plane.
+Reflect it in the <strong>y-axis</strong>.
+</p>
+
+[[jsxgraph
+  input-ref-sP1="sP1"
+  input-ref-sP2="sP2"
+  input-ref-sP3="sP3"
+  input-ref-sP4="sP4"
+  input-ref-sP5="sP5"
+  input-ref-sP6="sP6"
+]]
+
+var board = JXG.JSXGraph.initBoard(divid, {
+  boundingbox: [-4, 8, 7, -2],
+  axis: true,
+  grid: true,
+  showCopyright: false
+});
+
+// ----------------------------
+// Teacher shape (fixed, red)
+// ----------------------------
+var teacherShape = {#base_shape#};
+var teacherPts = [];
+
+for (var i = 0; i < teacherShape.length; i++) {
+  teacherPts.push(
+    board.create('point', teacherShape[i], {
+      visible: false,
+      fixed: true
+    })
+  );
+}
+
+for (var i = 0; i < teacherPts.length; i++) {
+  board.create('segment', [
+    teacherPts[i],
+    teacherPts[(i + 1) % teacherPts.length]
+  ], {
+    strokeColor: 'red',
+    strokeWidth: 3,
+    fixed: true
+  });
+}
+
+// ----------------------------
+// Student shape (draggable points only)
+// ----------------------------
+var studentShape = {#student_shape#};
+var studentPts = [];
+
+for (var i = 0; i < studentShape.length; i++) {
+  studentPts.push(
+    board.create('point', studentShape[i], {
+      color: 'blue',
+      snapToGrid: true,
+      withLabel: false
+    })
+  );
+}
+
+// Draw edges (non-draggable)
+for (var i = 0; i < studentPts.length; i++) {
+  board.create('segment', [
+    studentPts[i],
+    studentPts[(i + 1) % studentPts.length]
+  ], {
+    strokeColor: 'blue',
+    strokeWidth: 2,
+    fixed: true,
+    highlight: false
+  });
+}
+
+// ----------------------------
+// STACK bindings (CRITICAL)
+// ----------------------------
+stack_jxg.bind_point(sP1, studentPts[0]);
+stack_jxg.bind_point(sP2, studentPts[1]);
+stack_jxg.bind_point(sP3, studentPts[2]);
+stack_jxg.bind_point(sP4, studentPts[3]);
+stack_jxg.bind_point(sP5, studentPts[4]);
+stack_jxg.bind_point(sP6, studentPts[5]);
+
+board.unsuspendUpdate();
+
+[[/jsxgraph]]
+
+
+<div style="display:none">
+[[input:sP1]] [[validation:sP1]]
+[[input:sP2]] [[validation:sP2]]
+[[input:sP3]] [[validation:sP3]]
+[[input:sP4]] [[validation:sP4]]
+[[input:sP5]] [[validation:sP5]]
+[[input:sP6]] [[validation:sP6]]
+</div>
+
+[[feedback:prt1]]]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text/>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random parameters */
+start_x: rand([-3, -2]);
+start_y: rand([-1, 1, 2]);
+length: rand([4, 5]);
+height: rand([3, 4, 5]);
+
+/* Base L-shape (teacher shape) */
+base_shape: [
+  [start_x, start_y],
+  [start_x + length, start_y],
+  [start_x + length - 1, start_y + 1],
+  [start_x + 1, start_y + 1],
+  [start_x + 1, start_y + height],
+  [start_x, start_y + height]
+];
+
+/* Reflection across the y-axis */
+reflected_shape: map(lambda([p], [-p[1], p[2]]), base_shape);
+
+/* Completely unrelated student starting shape */
+student_shape: [[4,1],[5,1],[6,3],[6,4],[5,6],[4,6]];
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@base_shape@},</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>sP1</name>
+      <type>algebraic</type>
+      <tans>reflected_shape[1]</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>sP2</name>
+      <type>algebraic</type>
+      <tans>reflected_shape[2]</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>sP3</name>
+      <type>algebraic</type>
+      <tans>reflected_shape[3]</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>sP4</name>
+      <type>algebraic</type>
+      <tans>reflected_shape[4]</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>sP5</name>
+      <type>algebraic</type>
+      <tans>reflected_shape[5]</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>sP6</name>
+      <type>algebraic</type>
+      <tans>reflected_shape[6]</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>student_shape: sort([sP1, sP2, sP3, sP4, sP5, sP6]);</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>student_shape</sans>
+        <tans>sort(reflected_shape)</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1759191554</deployedseed>
+    <deployedseed>610362512</deployedseed>
+    <deployedseed>917059148</deployedseed>
+    <deployedseed>1870303665</deployedseed>
+    <deployedseed>1071327382</deployedseed>
+    <deployedseed>1814251858</deployedseed>
+    <deployedseed>901952842</deployedseed>
+    <deployedseed>1962256078</deployedseed>
+    <deployedseed>32215440</deployedseed>
+    <deployedseed>392144042</deployedseed>
+    <deployedseed>1757093948</deployedseed>
+    <deployedseed>1934070349</deployedseed>
+    <deployedseed>5250438</deployedseed>
+    <deployedseed>486269779</deployedseed>
+    <deployedseed>812228446</deployedseed>
+    <deployedseed>327212806</deployedseed>
+    <deployedseed>1019911420</deployedseed>
+    <deployedseed>440968055</deployedseed>
+    <deployedseed>1454562098</deployedseed>
+    <deployedseed>1199367907</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>sP1</name>
+        <value>reflected_shape[1]</value>
+      </testinput>
+      <testinput>
+        <name>sP2</name>
+        <value>reflected_shape[2]</value>
+      </testinput>
+      <testinput>
+        <name>sP3</name>
+        <value>reflected_shape[3]</value>
+      </testinput>
+      <testinput>
+        <name>sP4</name>
+        <value>reflected_shape[4]</value>
+      </testinput>
+      <testinput>
+        <name>sP5</name>
+        <value>reflected_shape[5]</value>
+      </testinput>
+      <testinput>
+        <name>sP6</name>
+        <value>reflected_shape[6]</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

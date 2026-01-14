@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding displacement of an object in constant velocity motion</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A car moves in a straight line with constant velocity \( v = {@v@}\,\mathrm{m/s} \) for a total time of \( {@T@}\,\mathrm{s} \).</p>
+
+<p>
+<b>(a)</b> The graph below shows the displacement–time relationship \( s = {@v@}t \).
+A <span style="color:red;">red dashed vertical line</span> marks the time \( t {@t0@}\,\mathrm{s} \).</p>
+
+<p>
+Use the graph to determine the displacement of the car at time \( t = {@t0@}\,\mathrm{s} \). Then drag the <span style="color:green;"><b>green point</b></span> vertically so that it lies on the blue line.</p>
+
+[[jsxgraph width="550px" height="400px"]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-1, {#v#}*{#T#}+5, {#T#}+2, -5],
+    axis: true,
+    showCopyright: false,
+    defaultAxes: {
+        x: { name: 'Displacement (m)', withLabel: true },
+        y: { name: 'Time (s)', withLabel: true }
+    }
+});
+
+var v = {#v#};
+var T = {#T#};
+var t0 = {#t0#};
+var maxDisp = v * T;
+
+// Displacement-time line
+board.create('segment', [[0,0],[T,maxDisp]], {
+    strokeColor: 'blue',
+    strokeWidth: 3
+});
+
+// Line label
+board.create('text', [T/2, maxDisp/2, 's = ' + v + 't'], {
+    anchorX: 'middle',
+    color: 'blue'
+});
+
+// Vertical line at t = t0
+board.create('line', [[t0,0],[t0,maxDisp]], {
+    strokeColor: 'red',
+    dash: 2
+});
+
+// Label for t0
+board.create('text', [t0, -maxDisp*0.08, 't = ' + t0 + ' s'], {
+    anchorX: 'middle',
+    color: 'red'
+});
+
+// Draggable point
+var studentPoint = board.create('point', [t0, 0], {
+    name: '',
+    color: 'green',
+    size: 4
+});
+
+// Feedback text
+var feedback = board.create('text', [T/2, maxDisp*0.95,
+    'Drag the green point to find the displacement at t = ' + t0 + ' s'], {
+    anchorX: 'middle',
+    color: 'darkblue'
+});
+
+var correctY = v * t0;
+
+// Interactive feedback
+studentPoint.on('drag', function() {
+    var y = studentPoint.Y();
+    if (Math.abs(y - correctY) < 0.5) {
+        feedback.setText('✓ Correct!  s(' + t0 + ') = ' + correctY + ' m');
+        feedback.setAttribute({color:'green'});
+    } else {
+        feedback.setText('Current displacement: ' + y.toFixed(1) + ' m');
+        feedback.setAttribute({color:'black'});
+    }
+});
+
+board.create('grid', []);
+[[/jsxgraph]]
+
+<p>
+Therefore, the displacement at time \( t = {@t0@}\,\mathrm{s} \) is</p>
+<p>\(s({@t0@}) =\) [[input:ans1]] \(\mathrm{m}\) [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+
+<p>For motion with constant velocity, the displacement increases linearly with time.</p>
+
+<p>The displacement is given by:</p>
+
+\[s(t) = v \times t\]
+
+<p>In this question:</p>
+
+\[v = {@v@}\,\text{m/s}, \quad t_0 = {@t0@}\,\text{s}\]
+
+<p>Therefore:</p>
+
+\[s({@t0@}) = {@v@} \times {@t0@} = {@ta@}\,\text{m}\]
+
+<p>On the displacement–time graph, this corresponds to reading the vertical value of the straight line at time \(t_0\) and displacement {@ta@}</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomised parameters */
+v : rand(7) + 3;          /* velocity between 3 and 9 m/s */
+T : rand(6) + 6;          /* total time between 6 and 11 s */
+t0 : rand(T-2) + 2;       /* query time strictly inside interval */
+
+/* Displacement function */
+s(t) := v*t;
+
+/* Teacher's answer */
+ta : s(t0);
+
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta@}</p>
+<p>{@v@}</p>
+<p>{@T@}</p>
+<p>{@t0@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct displacement</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>You have visually estimated the displacement by looking at the graph instead of using the formula s=v×t</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>709728905</deployedseed>
+    <deployedseed>513074471</deployedseed>
+    <deployedseed>580002364</deployedseed>
+    <deployedseed>18269216</deployedseed>
+    <deployedseed>353774793</deployedseed>
+    <deployedseed>41533065</deployedseed>
+    <deployedseed>1645659507</deployedseed>
+    <deployedseed>835818530</deployedseed>
+    <deployedseed>1282675852</deployedseed>
+    <deployedseed>1421875283</deployedseed>
+    <deployedseed>231633332</deployedseed>
+    <deployedseed>737282550</deployedseed>
+    <deployedseed>770634504</deployedseed>
+    <deployedseed>352742674</deployedseed>
+    <deployedseed>1076314128</deployedseed>
+    <deployedseed>1635387197</deployedseed>
+    <deployedseed>1002139028</deployedseed>
+    <deployedseed>1040879335</deployedseed>
+    <deployedseed>2122150374</deployedseed>
+    <deployedseed>1039596605</deployedseed>
+    <deployedseed>1658681934</deployedseed>
+    <deployedseed>1321511681</deployedseed>
+    <deployedseed>1796462365</deployedseed>
+    <deployedseed>692439680</deployedseed>
+    <deployedseed>1208952849</deployedseed>
+    <deployedseed>779480260</deployedseed>
+    <deployedseed>1126099577</deployedseed>
+    <deployedseed>1167322410</deployedseed>
+    <deployedseed>362705535</deployedseed>
+    <deployedseed>979106520</deployedseed>
+    <deployedseed>1095204110</deployedseed>
+    <deployedseed>1672286414</deployedseed>
+    <deployedseed>159383793</deployedseed>
+    <deployedseed>1704111437</deployedseed>
+    <deployedseed>68090260</deployedseed>
+    <deployedseed>973393930</deployedseed>
+    <deployedseed>607259906</deployedseed>
+    <deployedseed>503403673</deployedseed>
+    <deployedseed>677278749</deployedseed>
+    <deployedseed>1874225099</deployedseed>
+    <deployedseed>742801304</deployedseed>
+    <deployedseed>1760976750</deployedseed>
+    <deployedseed>1090709348</deployedseed>
+    <deployedseed>1187024816</deployedseed>
+    <deployedseed>719521538</deployedseed>
+    <deployedseed>567621727</deployedseed>
+    <deployedseed>1661055633</deployedseed>
+    <deployedseed>711580833</deployedseed>
+    <deployedseed>1712621725</deployedseed>
+    <deployedseed>311416187</deployedseed>
+    <deployedseed>1480555013</deployedseed>
+    <deployedseed>57954144</deployedseed>
+    <deployedseed>1883540616</deployedseed>
+    <deployedseed>1778271367</deployedseed>
+    <deployedseed>306462812</deployedseed>
+    <deployedseed>1483878764</deployedseed>
+    <deployedseed>1915278175</deployedseed>
+    <deployedseed>1321876956</deployedseed>
+    <deployedseed>1094017928</deployedseed>
+    <deployedseed>1749947168</deployedseed>
+    <deployedseed>1825375381</deployedseed>
+    <deployedseed>1787819788</deployedseed>
+    <deployedseed>2080419625</deployedseed>
+    <deployedseed>1004247538</deployedseed>
+  </question>
+</quiz>
