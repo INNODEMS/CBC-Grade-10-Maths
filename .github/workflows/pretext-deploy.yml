@@ -12,8 +12,8 @@ on:
   #     branches: ["*"]
 
   # Runs on pushes to main
-  push:
-      branches: ["main"]
+  # push:
+  #     branches: ["main"]
 
   # # Runs every day at 00:00 UTC
   # schedule:
@@ -57,7 +57,7 @@ jobs:
       - name: install local ptx files
         run: pretext --version
 
-      - name: build deploy targets
+      - name: build deploy targets  # This fails: PTX:ERROR: cannot locate executable with configuration name `node` as command `node`
         run: pretext build --deploys
 
       - name: run deploy
