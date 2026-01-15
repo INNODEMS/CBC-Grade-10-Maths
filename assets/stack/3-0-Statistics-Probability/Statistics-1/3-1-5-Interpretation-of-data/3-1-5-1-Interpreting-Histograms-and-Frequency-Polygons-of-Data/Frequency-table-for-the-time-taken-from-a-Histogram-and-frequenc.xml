@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Frequency table for the time taken from a Histogram and frequency polygon</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p><b>(a)</b> The histogram and frequency polygon below represent the time, in minutes, that students took to complete a Math CAT assessment.<br>
+Complete the table by calculating the <strong>frequency density</strong> for each interval.
+</p>
+
+[[jsxgraph]]
+
+JXG.Options.text.useMathJax = true;
+
+// Data arrays from QV
+var mids = {#midpoints#};       // midpoints of classes
+var widths = {#widths#};        // class widths
+var heights = {#densities#};    // frequency densities
+
+// Compute dynamic bounding box
+var left_x = mids[0] - widths[0]/2;
+var right_x = mids[mids.length - 1] + widths[widths.length - 1]/2;
+var max_y = Math.max(...heights);
+var top_y = max_y + 2; // small margin
+
+// Create board
+var board = JXG.JSXGraph.initBoard(divid, {
+  boundingBox: [left_x - 1, top_y, right_x + 1, -2],
+  axis: true,
+  showNavigation: false,
+  showCopyright: false,
+  grid: true
+});
+
+// Draw histogram bars
+for (var i = 0; i < mids.length; i++) {
+  var x0 = mids[i] - widths[i]/2;
+  var x1 = mids[i] + widths[i]/2;
+  var y = heights[i];
+
+  board.create('polygon', [
+    [x0, 0],
+    [x1, 0],
+    [x1, y],
+    [x0, y]
+  ], {
+    fillColor: "#aaccff",
+    fillOpacity: 0.5,
+    highlight: false,
+    borders: { strokeColor: "blue", strokeWidth: 1 },
+    vertices: { visible: false }
+  });
+}
+
+// Frequency polygon
+var polygonPoints = [[left_x, 0]];
+
+for (var i = 0; i < mids.length; i++) {
+  polygonPoints.push([mids[i], heights[i]]);
+}
+
+polygonPoints.push([right_x, 0]);
+
+// Draw polygon segments
+for (var i = 0; i < polygonPoints.length - 1; i++) {
+  board.create("segment", [
+    polygonPoints[i],
+    polygonPoints[i + 1]
+  ], {
+    strokeColor: "black",
+    strokeWidth: 3,
+    fixed: true
+  });
+}
+
+[[/jsxgraph]]
+
+
+<table style="width:500px; border:1px solid black">
+  <tr style="background-color:#eee">
+    <th>Time Interval (min)</th>
+    <th>Frequency</th>
+    <th>Frequency Density</th>
+  </tr>
+  <tr>
+    <td>\({@lower_bounds[1]@} < t \leq {@upper_bounds[1]@}\)</td>
+    <td>{@frequencies[1]@}</td>
+    <td>[[input:ans_1]] [[validation:ans_1]]</td>
+  </tr>
+  <tr>
+    <td>\({@lower_bounds[2]@} < t \leq {@upper_bounds[2]@}\)</td>
+    <td>{@frequencies[2]@}</td>
+    <td>[[input:ans_2]] [[validation:ans_2]]</td>
+  </tr>
+  <tr>
+    <td>\({@lower_bounds[3]@} < t \leq {@upper_bounds[3]@}\)</td>
+    <td>{@frequencies[3]@}</td>
+    <td>[[input:ans_3]] [[validation:ans_3]]</td>
+  </tr>
+  <tr>
+    <td>\({@lower_bounds[4]@} < t \leq {@upper_bounds[4]@}\)</td>
+    <td>{@frequencies[4]@}</td>
+    <td>[[input:ans_4]] [[validation:ans_4]]</td>
+  </tr>
+  <tr>
+    <td>\({@lower_bounds[5]@} < t \leq {@upper_bounds[5]@}\)</td>
+    <td>{@frequencies[5]@}</td>
+    <td>[[input:ans_5]] [[validation:ans_5]]</td>
+  </tr>
+  <tr>
+    <td>\({@lower_bounds[6]@} < t \leq {@upper_bounds[6]@}\)</td>
+    <td>{@frequencies[6]@}</td>
+    <td>[[input:ans_6]] [[validation:ans_6]]</td>
+  </tr>
+</table>
+
+<p>[[feedback:prt_table]]</p>
+
+<br>
+
+<p><b>(b)</b> The histogram and frequency polygon representing the data are shown below.</p>
+
+<p>[[feedback:prt_graph]]</p>
+
+<br>
+
+<p><b>(c)</b> Estimate the number of students who completed the assessment in less than 20 minutes.</p>
+<p>[[input:ans_estimate]] [[validation:ans_estimate]]</p>
+<p>[[feedback:prt_estimate]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p><b>(a)</b> To find the <strong>frequency density</strong> for each interval, we use the formula:</p>
+
+<p style="margin-left: 20px;">
+\[
+\text{Frequency Density} = \frac{\text{Frequency}}{\text{Class Width}}
+\]
+</p>
+
+<p>The width of each class is calculated as the difference between the upper and lower bounds.</p>
+
+<p>We can now complete the table:</p>
+
+<table style="width:500px; border:1px solid black">
+  <tr style="background-color:#eee">
+    <th>Time Interval (min)</th>
+    <th>Frequency</th>
+    <th>Class Width</th>
+    <th>Frequency Density</th>
+  </tr>
+  [[foreach i="makelist(k,k,1,num_bins)" ]]
+  <tr>
+    <td>\({@lower_bounds[i]@} < t \leq {@upper_bounds[i]@}\)</td>
+    <td>{@frequencies[i]@}</td>
+    <td>{@widths[i]@}</td>
+    <td>
+      \(
+      \frac{{@frequencies[i]@}}{{@widths[i]@}} = {@densities[i]@}
+      \)
+    </td>
+  </tr>
+  [[/foreach]]
+</table>
+
+<br>
+
+<p><b>(b)</b> The histogram shown represents the distribution of completion times.</p>
+
+<ul>
+  <li>Each bar’s <strong>height</strong> corresponds to the <strong>frequency density</strong>.</li>
+  <li>The <strong>area</strong> of each bar represents the <strong>number of students</strong> in that interval (since: frequency = width × frequency density).</li>
+  <li>The frequency polygon connects the midpoints of each bar, giving a visual trend of the data.</li>
+</ul>
+
+<br>
+
+<p><b>(c)</b> To estimate how many students completed the assessment in less than 20 minutes:</p>
+
+<ul>
+  <li>We sum the <strong>frequencies of all full intervals</strong> where the upper bound is ≤ 20.</li>
+  <li>Then, if the next interval starts before 20 but ends after it, we estimate the <strong>partial frequency</strong> in that class by:
+    <br>
+    <p style="margin-left: 20px;">
+    \[
+    \text{Partial frequency} = (\text{cutoff} - \text{lower bound}) \times \text{frequency density}
+    \]
+    </p>
+  </li>
+</ul>
+
+<p>
+Using this approach, the estimated number of students who completed the assessment in less than 20 minutes is:
+</p>
+
+<p style="margin-left: 20px;">
+\[
+{@ta_estimate@}
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Define number of bins */
+num_bins: 6;
+
+/* Widths and heights for each class (randomised) */
+widths: [rand(2)+2, rand(2)+3, rand(2)+5, rand(2)+4, rand(2)+6, rand(2)+3];
+densities: [rand(3)+4, rand(3)+6, rand(2)+8, rand(2)+5, rand(2)+4, rand(2)+3];
+
+/* Class lower bounds */
+lower_bounds: makelist(
+    sum(widths[i], i, 1, k-1), 
+    k, 1, length(widths)
+);
+
+/* Upper bounds */
+upper_bounds: makelist(lower_bounds[i] + widths[i], i, 1, num_bins);
+
+/* Frequencies: f = w * fd */
+frequencies: makelist(widths[i] * densities[i], i, 1, num_bins);
+
+/* Midpoints for histogram plotting */
+midpoints: makelist((lower_bounds[i] + upper_bounds[i])/2, i, 1, num_bins);
+
+/* Total number of students */
+total_students: sum(frequencies[i], i, 1, num_bins);
+
+/* Cutoff estimation (< 20 min) */
+cutoff: 20;
+partial_freq: 0;
+
+for i:1 thru num_bins do (
+  if upper_bounds[i] <= cutoff then (
+    partial_freq: partial_freq + frequencies[i]
+  ) else if lower_bounds[i] < cutoff and upper_bounds[i] > cutoff then (
+    partial_freq: partial_freq + (cutoff - lower_bounds[i]) * densities[i]
+  )
+);
+
+/* Model answers */
+ta_densities: densities;
+ta_estimate: round(partial_freq);
+]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text>[[feedback:prt1]]</text>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta1@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans_1</name>
+      <type>algebraic</type>
+      <tans>1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_2</name>
+      <type>algebraic</type>
+      <tans>1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_3</name>
+      <type>algebraic</type>
+      <tans>1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_4</name>
+      <type>algebraic</type>
+      <tans>1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_5</name>
+      <type>algebraic</type>
+      <tans>1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_6</name>
+      <type>algebraic</type>
+      <tans>1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_estimate</name>
+      <type>algebraic</type>
+      <tans>1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt_estimate</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>1</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_estimate-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_estimate-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_graph</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>1</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_graph-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_graph-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_table</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>1</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_table-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_table-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>

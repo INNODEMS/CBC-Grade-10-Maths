@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the translation of a given vector</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Consider triangle \(PQR\) where \(\vec{PQ} = \mathbf{u}\) and \(\vec{PR} = \mathbf{v}\).</p>
+<ul>
+    <li>Point \(S\) is located on \(PR\) such that \(PS : SR = {@s1@} : {@s2@}\).</li>
+    <li>Point \(T\) lies on \(QR\) with \(QT : TR = {@t1@} : {@t2@}\).</li>
+    <li>Point \(U\) is on \(PQ\) such that \(PU : UQ = {@u1@} : {@u2@}\).</li>
+</ul>
+
+<p>Determine the following vectors in terms of \(\mathbf{u}\) and \(\mathbf{v}\).</p>
+<p><i>(Enter \(\mathbf{u}\) as <code>u</code> and \(\mathbf{v}\) as <code>v</code>).</i></p>
+
+<ol class="HELM_parts">
+    <li>
+        \(\vec{PS} = \) [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+    </li>
+    <li>
+        \(\vec{PT} = \) [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]
+    </li>
+    <li>
+        \(\vec{PU} = \) [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]
+    </li>
+    <li>
+        \(\vec{ST} = \) [[input:ans4]] [[validation:ans4]] [[feedback:prt4]]
+    </li>
+    <li>
+        \(\vec{TU} = \) [[input:ans5]] [[validation:ans5]] [[feedback:prt5]]
+    </li>
+</ol>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p><b>(a) Finding \(\vec{PS}\)</b></p>
+<p>We are given that \(PS : SR = {@s1@} : {@s2@}\). This means the line \(PR\) is divided into \({@s1@} + {@s2@} = {@s_sum@}\) parts.</p>
+<p>\(PS\) represents \({@s1@}\) of those parts.</p>
+\[ \vec{PS} = \frac{@s1@}{@s_sum@}\vec{PR} = \mathbf{@ta_ps@} \]
+
+<p><b>(c) Finding \(\vec{PU}\)</b></p>
+<p>Similarly, \(PU : UQ = {@u1@} : {@u2@}\). The line \(PQ\) is divided into \({@u1@} + {@u2@} = {@u_sum@}\) parts.</p>
+\[ \vec{PU} = \frac{@u1@}{@u_sum@}\vec{PQ} = \mathbf{@ta_pu@} \]
+
+<p><b>(b) Finding \(\vec{PT}\)</b></p>
+<p>To find \(\vec{PT}\), we first need to travel from \(P\) to \(Q\), and then from \(Q\) to \(T\): \(\vec{PT} = \vec{PQ} + \vec{QT}\).</p>
+<p>First, find \(\vec{QR}\):</p>
+\[ \vec{QR} = \vec{PR} - \vec{PQ} = \mathbf{v} - \mathbf{u} \]
+<p>We know \(QT : TR = {@t1@} : {@t2@}\), so \(QT\) is \(\frac{@t1@}{@t_sum@}\) of \(QR\).</p>
+\[ \vec{QT} = \frac{@t1@}{@t_sum@}(\mathbf{v} - \mathbf{u}) \]
+<p>Now, add them together:</p>
+\[ \vec{PT} = \mathbf{u} + \frac{@t1@}{@t_sum@}(\mathbf{v} - \mathbf{u}) \]
+\[ \vec{PT} = \mathbf{@ta_pt_simp@} \]
+
+<p><b>(d) Finding \(\vec{ST}\)</b></p>
+<p>Using the triangle rule:</p>
+\[ \vec{ST} = \vec{PT} - \vec{PS} \]
+\[ \vec{ST} = \left( {@ta_pt_simp@} \right) - \left( {@ta_ps@} \right) \]
+\[ \vec{ST} = \mathbf{@ta_st_simp@} \]
+
+<p><b>(e) Finding \(\vec{TU}\)</b></p>
+\[ \vec{TU} = \vec{PU} - \vec{PT} \]
+\[ \vec{TU} = \left( {@ta_pu@} \right) - \left( {@ta_pt_simp@} \right) \]
+\[ \vec{TU} = \mathbf{@ta_tu_simp@} \]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. Randomize the Ratios */
+/* Ratio for S on PR (s1 : s2) */
+s1: rand_with_step(1, 4, 1);
+s2: rand_with_step(1, 4, 1);
+s_sum: s1 + s2;
+
+/* Ratio for T on QR (t1 : t2) */
+t1: rand_with_step(1, 4, 1);
+t2: rand_with_step(1, 4, 1);
+t_sum: t1 + t2;
+
+/* Ratio for U on PQ (u1 : u2) */
+u1: rand_with_step(1, 4, 1);
+u2: rand_with_step(1, 4, 1);
+u_sum: u1 + u2;
+
+/* 2. Calculate the Answers in terms of u and v */
+/* Note: u and v are treated as variables here */
+
+/* (a) Vector PS */
+/* PS is a fraction of PR (v) */
+ta_ps: (s1 / s_sum) * v;
+
+/* (c) Vector PU - doing this early as it is simple */
+/* PU is a fraction of PQ (u) */
+ta_pu: (u1 / u_sum) * u;
+
+/* (b) Vector PT */
+/* Using vector addition: PT = PQ + QT */
+/* QT is a fraction of QR. QR = v - u */
+vec_qr: v - u;
+vec_qt: (t1 / t_sum) * vec_qr;
+ta_pt: u + vec_qt; 
+/* Simplify explicitly for the solution display */
+ta_pt_simp: expand(ta_pt);
+
+/* (d) Vector ST */
+/* ST = PT - PS */
+ta_st: ta_pt - ta_ps;
+ta_st_simp: expand(ta_st);
+
+/* (e) Vector TU */
+/* TU = PU - PT */
+ta_tu: ta_pu - ta_pt;
+ta_tu_simp: expand(ta_tu);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta_ps@}
+{@ta_pt@}
+{@ta_pu@}
+{@ta_st@}
+{@ta_tu@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta_ps</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta_pt</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta_pu</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>ta_st</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans5</name>
+      <type>algebraic</type>
+      <tans>ta_tu</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta_ps</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta_pt</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ta_pu</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>ta_st</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt5</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans5</sans>
+        <tans>ta_tu</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt5-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt5-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>700848505</deployedseed>
+    <deployedseed>799369422</deployedseed>
+    <deployedseed>872321852</deployedseed>
+    <deployedseed>540105102</deployedseed>
+    <deployedseed>1342962442</deployedseed>
+    <deployedseed>1332561727</deployedseed>
+    <deployedseed>1061984096</deployedseed>
+    <deployedseed>360053069</deployedseed>
+    <deployedseed>696105427</deployedseed>
+    <deployedseed>431997300</deployedseed>
+    <deployedseed>822970997</deployedseed>
+    <deployedseed>1528212688</deployedseed>
+    <deployedseed>921287923</deployedseed>
+    <deployedseed>118698432</deployedseed>
+    <deployedseed>790146061</deployedseed>
+    <deployedseed>186582284</deployedseed>
+    <deployedseed>1755019466</deployedseed>
+    <deployedseed>798073658</deployedseed>
+    <deployedseed>983099596</deployedseed>
+    <deployedseed>1815058798</deployedseed>
+    <deployedseed>1212660050</deployedseed>
+    <deployedseed>1132513102</deployedseed>
+    <deployedseed>1168399926</deployedseed>
+    <deployedseed>1525375715</deployedseed>
+    <deployedseed>2091108779</deployedseed>
+    <deployedseed>1773645429</deployedseed>
+    <deployedseed>1566861517</deployedseed>
+    <deployedseed>1360769629</deployedseed>
+    <deployedseed>1495119325</deployedseed>
+    <deployedseed>678379351</deployedseed>
+    <deployedseed>925022291</deployedseed>
+    <deployedseed>1686825188</deployedseed>
+    <deployedseed>1594273984</deployedseed>
+    <deployedseed>881110269</deployedseed>
+    <deployedseed>175003515</deployedseed>
+    <deployedseed>445448141</deployedseed>
+    <deployedseed>964142979</deployedseed>
+    <deployedseed>132858672</deployedseed>
+    <deployedseed>1085050243</deployedseed>
+    <deployedseed>716184952</deployedseed>
+    <deployedseed>45656528</deployedseed>
+    <deployedseed>297582706</deployedseed>
+    <deployedseed>1715919473</deployedseed>
+    <deployedseed>949447732</deployedseed>
+    <deployedseed>527003122</deployedseed>
+    <deployedseed>1553134587</deployedseed>
+    <deployedseed>625527178</deployedseed>
+    <deployedseed>301975279</deployedseed>
+    <deployedseed>1755176444</deployedseed>
+    <deployedseed>893965859</deployedseed>
+  </question>
+</quiz>

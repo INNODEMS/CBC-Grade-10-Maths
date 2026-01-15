@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Determining the Surface Area of an Ice-Cream Cone Container</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+Mogaka, a Grade 10 student, sketches a diagram of an ice-cream container consisting of
+a conical container with ice cream at the bottom, as shown in the diagram below.</p>
+[[jsxgraph]]
+const brd = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-8, 18, 8, -8],
+    axis: false,
+    showNavigation: false,
+    showCopyright: false
+  });
+
+  const r = 6;
+  const h = 10;
+
+  // Base ellipse (top of hemisphere and base of cone)
+  const base = brd.create('curve', [
+    t => r * Math.cos(t),
+    t => 0.7 * r * Math.sin(t),
+    0, 2 * Math.PI
+  ], {strokeColor: 'black'});
+
+  // Hemisphere: only lower half, sharing same rim (y ≤ 0)
+  const hemi = brd.create('curve', [
+    t => r * Math.cos(t),
+    t => 0.7 * r * Math.sin(t),   // same vertical scale
+    0, Math.PI                    // from left to right, lower part
+  ], {strokeColor: 'blue', strokeWidth: 2, fillColor: '#90caf9', fillOpacity: 0.6});
+
+  // Apex of cone
+  const A = brd.create('point', [0, h], {visible: false});
+  const L = brd.create('point', [-r, 0], {visible: false});
+  const R = brd.create('point', [ r, 0], {visible: false});
+
+  // Cone sides
+  brd.create('segment', [A, L], {strokeColor: 'black'});
+  brd.create('segment', [A, R], {strokeColor: 'black'});
+
+  // Height (dashed)
+  const O = brd.create('point', [0, 0], {visible: false});
+  brd.create('segment', [A, O], {strokeColor: 'black', dash: 2});
+
+  // Radius on base (dashed)
+  brd.create('segment', [O, R], {strokeColor: 'black', dash: 2});
+brd.create('segment', [O, L], {strokeColor: 'black', dash: 2});
+
+  // Labels
+  brd.create('text', [0.3, 5, '{#height_of_the_cone#} m'], {anchorX: 'left'});
+  brd.create('text', [-2.5, 0.7, '{#base_radius_of_the_cone#} m'], {anchorX: 'left'});
+  brd.create('text', [-4, 6.5, ' {#slantheight_of_the_cone#} m'], {rotate: -60});
+  
+  /* Semicircle (lower half) */
+    brd.create('curve', [
+        t => r * Math.cos(t),
+        t => -r * Math.sin(t),
+        0, Math.PI
+    ], {
+        strokeWidth: 2,
+        strokeColor: '#1f3c88',
+        fillColor: '#90caf9',
+        fillOpacity: 0.6
+    });
+
+[[/jsxgraph]]
+<p>
+    Determine the total surface area of the sketched ice-cream container.
+  </p>
+<p>\(\text{Total surface area of the ice-cream}=\)[[input:ans1]]\(\,\text{m}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>
+The ice-cream container is made up of two solid shapes:
+</p>
+
+<p>
+• a <strong>cone</strong><br>
+• a <strong>hemisphere</strong>
+</p>
+<p>
+Only the <strong>curved surfaces</strong> are exposed.  
+The circular face where the cone and hemisphere meet is not included in the surface area.
+</p>
+<p>
+From the diagram:
+</p>
+<p>
+Radius of the cone and hemisphere = {@base_radius_of_the_cone@} m<br>
+Height of the cone = {@height_of_the_cone@} m<br>
+Slant height of the cone = {@slantheight_of_the_cone@} m
+</p>
+<p><strong>Step 1: Curved surface area of the cone</strong></p>
+
+<p>
+The formula for the curved surface area of a cone is:
+<br>
+\(
+\text{Curved surface area} = \pi r l
+\)
+</p>
+<p>
+Substituting the given values:
+<br>
+\(
+\begin{align}
+\text{Area of cone}
+&= \frac{22}{7} \times {@base_radius_of_the_cone@} \times {@slantheight_of_the_cone@} \\
+&=\frac{22}{7} \times {@R_times_l@}\\
+&= {@Area_cone@}\ \text{m}^2
+\end{align}
+\)
+</p>
+<p><strong>Step 2: Curved surface area of the hemisphere</strong></p>
+<p>
+The formula for the curved surface area of a hemisphere is:
+<br>
+\(
+\text{Curved surface area} = 2\pi r^2
+\)
+</p>
+<p>
+Substituting the value of the radius:
+<br>
+\(
+\begin{align}
+\text{Area of hemisphere}
+&= 2 \times \frac{22}{7} \times ({@base_radius_of_the_cone@})^2 \\
+&=2 \times \frac{22}{7} \times {@R1@}\\
+&={@Hemisphere_area@}\\
+&= {@Hemishere_Area@}\ \text{m}^2
+\end{align}
+\)
+</p>
+<p><strong>Step 3: Total surface area of the ice-cream container</strong></p>
+<p>
+The total surface area is obtained by adding the curved surface area of the cone
+and the curved surface area of the hemisphere.<br>
+
+\(
+\begin{align}
+\text{Total surface area}
+&= {@Area_cone@} + {@Hemishere_Area@} \\
+&={@SA@}\\
+&= {@Surface_Area@}\ \text{m}^2
+\end{align}
+\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/*The triplets of the Triangle.*/
+list_of_the_values:[[3,4,5],[6,8,10],[9,12,15],[5, 12, 13],[7, 24, 25],[8, 15, 17],
+    [9, 40, 41],[11, 60, 61],[12, 35, 37],[13, 84, 85],[16, 63, 65],[20, 21, 29],[33, 56, 65],
+    [36, 77, 85],[39, 80, 89],[48, 55, 73],[60, 91, 109],[65, 72, 97],[80, 99, 121],[15, 20, 25],
+    [35, 72, 85],[36, 77, 85],[39, 80, 89],[72, 24, 72]];
+index:1+rand(24);
+choose_one:list_of_the_values[index];
+/*The */
+base_radius_of_the_cone:choose_one[1];
+height_of_the_cone:choose_one[2];
+slantheight_of_the_cone:choose_one[3];
+/*Computing the total surface area of the cone.*/
+R_times_l:base_radius_of_the_cone*slantheight_of_the_cone;
+
+/*Curved surface area of the cone*/
+Area:22/7 *R_times_l;
+area_1:float(Area);
+Area_cone:decimalplaces(area_1,3);
+
+/*Curved surface area of the hemisphere*/
+R1:base_radius_of_the_cone^2;
+Hemisphere_area:2*22/7*base_radius_of_the_cone^2;
+Hemishere_Area:float(Hemisphere_area);
+
+/*Total external surface area*/
+SA:area_1+Hemishere_Area;
+Surface_Area:round(SA);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The dimension of the Ice cream are}\)</p>
+<p>\(\text{Radius}={@base_radius_of_the_cone@}\,\text{m}\)</p>
+<p>\(\text{The vertical height}={@height_of_the_cone@}\,\text{m}\)</p>
+<p>\(\text{The slant height}={@slantheight_of_the_cone@}\,\text{m}\)</p>
+<p>\(\text{The total surface area}={@Surface_Area@}^2\,\text{m}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>Surface_Area</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct answer.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>Surface_Area</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>284306722</deployedseed>
+    <deployedseed>1226109399</deployedseed>
+    <deployedseed>1707633495</deployedseed>
+    <deployedseed>350713548</deployedseed>
+    <deployedseed>1245437329</deployedseed>
+    <deployedseed>1685454586</deployedseed>
+    <deployedseed>878840300</deployedseed>
+    <deployedseed>1158568173</deployedseed>
+    <deployedseed>1203560089</deployedseed>
+    <deployedseed>264638322</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Surface_Area</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Surface_Area</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

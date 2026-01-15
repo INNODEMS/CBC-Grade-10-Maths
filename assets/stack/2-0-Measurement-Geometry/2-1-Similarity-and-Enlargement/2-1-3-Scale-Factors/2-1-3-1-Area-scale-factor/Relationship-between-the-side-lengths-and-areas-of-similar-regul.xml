@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Relationship between the side lengths and areas of similar regular hexagons</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+The corresponding sides of two similar regular hexagons are \( {@s1@} \) and \( {@s2@} \) respectively.</p>
+<p><b>(a)</b> Find the ratio of their areas.<br>
+[[input:ans1]] [[validation:ans1]][[feedback:prt1]]
+</p>
+<p>(b).  </b>If the area of the smaller hexagon is \( {@A_small@} \), calculate the area of the larger hexagon.<br> <b>Note:</b> Write your answer correct to 2 decimal places
+[[input:ans2]] [[validation:ans2]][[feedback:prt2]]
+</p>
+<p>.</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>Determine the linear scale factor</p>
+<p>The side lengths of the similar regular hexagons are:<p>
+<p>Small hexagon: \( {@s1@} \)</p>
+<p>Large hexagon: \( {@s2@} \)</p>
+<p>The linear scale factor from the smaller to the larger hexagon is</p>
+
+<p>\(k = \frac{@s2@}{@s1@}.\)</p>
+
+<p>Ratio of their areas</p>
+<p>For any pair of similar shapes, the ratio of their areas is the square of the ratio of their corresponding side lengths.  
+Thus,</p>
+
+<p>\(\text{Area ratio} = k^2 = \left(\frac{@s2@}{@s1@}\right)^2 = {@ratio_area@}.
+\)</p>
+
+<p> Area of the larger hexagon</p>
+<p>We are told that the area of the smaller hexagon  = {@A_small@}.
+
+<p>To find the area of the larger hexagon, multiply by the area ratio:</p>
+
+<p>\(A_{\text{large}}= A_{\text{small}} \cdot k^2= {@A_small@} \cdot {@ratio_area@}
+= {@A_large@}.
+\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Random side lengths: smaller between 2 and 8, larger between 9 and 15 */
+s1 : rand(7) + 2;        /* 2–8 */
+s2 : rand(7) + 9;        /* 9–15 */
+
+g : gcd(s1,s2);
+if g > 1 then s2:s2+1 else s2:s2;
+
+/* Random area of small hexagon */
+A_small : rand(50) + 10;   /* area between 10 and 59 */
+
+/* Ratio of similarity (linear) */
+k : s2/s1;
+
+/* Area ratio */
+ratio_area : k^2;
+
+/* Area of larger hexagon */
+A_large : A_small * ratio_area;
+ta:ratio_area;
+ta1:(s1/s2)^2;
+ta2:decimalplaces(A_large,2);
+
+/*mistakes for part a*/
+/*Giving the ratio of sides instead of areas*/
+ta3:s1/s2;
+ta4:k;
+
+
+/*mistakes for part b*/
+/*Using the linear scale factor instead of the area scale factor*/
+ta5:decimalplaces(A_small * k,2);
+/*Reversing the scale factor*/
+ta6:decimalplaces((A_small * ta3^2),2);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Area of larger hexagon  = {@ta2@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>correst_ans : if (ans1 = ta or ans1 = ta1) then 1 else 0;
+mistake_1 : if (ans1 = ta3 or ans1 = ta4) then 1 else 0;
+</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>correst_ans</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Giving the ratio of sides instead of areas</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>mistake_1</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+It looks like you may have given the ratio of the corresponding side lengths instead of the ratio of the areas. Remember, for similar shapes, areas do not scale in the same way as lengths. To find the ratio of the areas, you need to square the ratio of the corresponding sides.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>2.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Using the linear scale factor instead of the area scale factor</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta5</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+It looks like you may have used the scale factor for lengths to calculate the area. Remember, areas of similar shapes scale with the <strong>square</strong> of the linear scale factor. Make sure you square the ratio of the corresponding sides before multiplying by the given area.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Reversing the scale factor</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta6</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+It looks like you may have used the scale factor in the wrong direction. Since you are finding the area of the <strong>larger</strong> hexagon, the scale factor should increase the area from the smaller one. Make sure the ratio you use reflects this enlargement.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>73589154</deployedseed>
+    <deployedseed>298018735</deployedseed>
+    <deployedseed>909468526</deployedseed>
+    <deployedseed>763164617</deployedseed>
+    <deployedseed>1732555680</deployedseed>
+    <deployedseed>515592156</deployedseed>
+    <deployedseed>1907301326</deployedseed>
+    <deployedseed>1774139147</deployedseed>
+    <deployedseed>754968375</deployedseed>
+    <deployedseed>439189280</deployedseed>
+    <deployedseed>244211860</deployedseed>
+    <deployedseed>1703741225</deployedseed>
+    <deployedseed>625634220</deployedseed>
+    <deployedseed>1996599596</deployedseed>
+    <deployedseed>725719598</deployedseed>
+    <deployedseed>1845128522</deployedseed>
+    <deployedseed>1342851629</deployedseed>
+    <deployedseed>1927026479</deployedseed>
+    <deployedseed>1497858971</deployedseed>
+    <deployedseed>1173129879</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Giving the ratio of sides instead of areas</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta3</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta5</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt2-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>incorrect answer</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta4</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta5</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt2-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

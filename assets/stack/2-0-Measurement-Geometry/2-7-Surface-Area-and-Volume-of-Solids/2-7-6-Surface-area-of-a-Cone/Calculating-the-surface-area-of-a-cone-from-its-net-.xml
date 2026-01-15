@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the surface area of a cone from its net.</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Calculate the surface area of the net of the cone shown below. </p>
+<p><b>Note:</b>Round off your final answer to 2 decimal places.</p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+    boundingbox: [-50, 300, 300, -50],
+    keepAspectRatio: true,
+    showCopyright: false,
+    axis: false
+});
+
+// Function to generate bright random colors (avoid dark shades)
+function brightColor() {
+    // Generate RGB values between 100–255 for brightness
+    var r = Math.floor(100 + Math.random() * 155);
+    var g = Math.floor(100 + Math.random() * 155);
+    var b = Math.floor(100 + Math.random() * 155);
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+}
+
+// Generate bright colors for lateral and base
+var lateralColor = brightColor();
+var baseColor = brightColor();
+
+// ----------- CONE LATERAL SURFACE (sector) -----------
+
+// Points corresponding to SVG coordinates (scaled and shifted)
+var C = board.create('point', [150, 50], {name: '', size: 2, color: 'black'});
+var B = board.create('point', [200, 100], {name: '', size: 2, color: 'black'});
+var A = board.create('point', [100, 100], {name: '', size: 2, color: 'black'});
+
+// Lateral surface triangle (sector-like region)
+var lateral = board.create('polygon', [C, B, A], {
+    borders: {strokeColor: 'black'},
+    fillColor: lateralColor,
+    vertices: {visible: false}
+});
+
+// Arc for lateral surface
+var arc = board.create('arc', [C, B, A], {
+    strokeColor: 'black',
+    fillColor: 'none'
+});
+
+// Slant height lines
+var lineCB = board.create('segment', [C, B], {strokeColor: 'black'});
+var lineCA = board.create('segment', [C, A], {strokeColor: 'black'});
+
+// Labels
+board.create('text', [143, 70, '{#selected_angle#}'], {fontSize: 12, color: 'black'});
+board.create('text', [185, 75, '{#selected_radius#}'], {fontSize: 12, color: 'black'});
+
+// Label points
+board.create('text', [150, 45, 'C'], {fontSize: 12, color: 'black'});
+board.create('text', [90, 105, 'A'], {fontSize: 12, color: 'black'});
+board.create('text', [205, 105, 'B'], {fontSize: 12, color: 'black'});
+
+// ----------- CIRCLE BASE (bottom) -----------
+var circleCenter = board.create('point', [150, 170], {visible: false});
+var circleBase = board.create('circle', [circleCenter, 50], {
+    strokeColor: 'black',
+    fillColor: baseColor
+});
+
+// Radius line
+var circleEdge = board.create('point', [200, 170], {visible: false});
+var radiusLine = board.create('segment', [circleCenter, circleEdge], {strokeColor: 'black'});
+
+// Radius label
+board.create('text', [160, 175, '{#radius_circle#} cm'], {fontSize: 12, color: 'black'});
+
+[[/jsxgraph]]
+
+<p>Surface area=[[input:ans1]]cm\(^2\) [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>To find the surface area of a cone using its net, you need to calculate the areas of the circular base and the curved surface which unfolds into a sector of a circle and then add them together.</p>
+
+<p>\(\begin{align}\text{The total surface area of a cone}&=\frac{\theta}{360} \pi r^2 + \pi r^2 \end{align}\)</p>
+<p>\(\begin{align}\text{Area of a sector}&=\frac{\theta}{360} \pi r^2\\&=\frac{{@selected_angle @}}{360} \times \frac{22}{7} \times {@selected_radius @} cm\times {@selected_radius @} cm\\&={@area_of_sector@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Area of the circle}&=\pi r^2\\&=\frac{22}{7} \times {@radius_circle@} cm\times {@radius_circle@}cm\\&={@area_of_circle@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Total surface area}&={@area_of_sector@} cm^2 +{@area_of_circle@} cm^2\\&={@surface_area@} cm^2\end{align}\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Define the list of angle-radius pairs */
+angle_radius_pairs : [   [90, 6], [180, 12], [60, 6], [120, 12], [360, 8], [45, 4], [30, 10], [90, 12], [180, 24], [60, 9], [120, 18], 
+    [180, 10], [90, 10], [45, 12], [60, 12], [120, 6], [180, 8], [270, 6], [240, 4], [150, 9], [135, 6], [60, 3], 
+    [30, 12], [120, 15], [60, 15], [180, 5], [90, 15], [270, 10], [45, 8], [30, 4], [180, 6], [120, 4], [90, 8], 
+    [240, 6], [330, 10], [270, 12], [90, 18], [180, 14], [45, 10], [120, 9], [90, 3], [60, 5], [150, 12], [90, 6], 
+    [30, 8], [270, 8], [240, 8], [180, 16], [60, 18], [90, 4]];
+
+/* Select a random index between 1 and the length of the list */
+random_index : floor(rand(length(angle_radius_pairs)) + 1);
+
+/* Select the random angle-radius pair */
+random_pair : angle_radius_pairs[random_index];
+
+/* Extract angle and radius from the pair */
+selected_angle : random_pair[1];  /* Get the angle (first element) */
+selected_radius : random_pair[2]; /* Get the radius (second element) */
+
+/* Display the selected angle and radius */
+PI:float(22/7);/*constant pi*/
+radius_circle:rand_with_step(0.7,49,0.7);/*radius of the circle*/
+angle_simp:selected_angle/360;
+area_of_sector_calcution:angle_simp*PI*selected_radius*selected_radius;/*the area of a sector*/
+area_of_sector:decimalplaces(area_of_sector_calcution,2);
+area_of_circle:PI*radius_circle*radius_circle;
+surface_area:area_of_sector+area_of_circle;/*total surface area of the sector*/
+ta:surface_area;/*teacher's answer*/
+
+/*mistakes*/
+ta_1:area_of_sector;/*taking the area of a sector only and not including the area of the base circle*/
+arc_length:angle_simp*PI*selected_radius*2;/*the area of a sector*/
+surface_area_1:decimalplaces(arc_length+area_of_circle,2);/*confusing the formula of finding arc length  and area of a sector*/
+ta_2:surface_area_1;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Curved surface area={@area_of_sector@}</p>
+<p>Area of  the circle={@area_of_circle@}</p>
+<p>Total surface area={@area_of_sector@}+{@area_of_circle@}={@ta@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Eric Morara</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+<p id="description">The student is required to find the surface area of a cone from its net.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>check for correct surface area</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.02</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description><![CDATA[<p>Forgetting to Include Both Parts of the Net</p>]]></description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta_1</tans>
+        <testoptions>0.02</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you may have only calculated the curved part of the cone. Don’t forget that the base, a circle  is also part of the surface area. A complete cone includes both the curved surface and the circular base. You’re close! Just remember to add in the area of the base and give it another shot.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>0</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description><![CDATA[<p>using different formular</p>]]></description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta_2</tans>
+        <testoptions>0.02</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It seems like you might have mixed up the formulas. It looks like you used the one for arc length instead of the area of a sector. Easy mistake! Just remember, arc length tells you how long the edge is, while surface area needs the whole space inside the curved surface. Take another look at the formula for area of a sector and try again — you’re definitely on the right path</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1763890566</deployedseed>
+    <deployedseed>2061595220</deployedseed>
+    <deployedseed>983459988</deployedseed>
+    <deployedseed>1531537744</deployedseed>
+    <deployedseed>334247223</deployedseed>
+    <deployedseed>1254959479</deployedseed>
+    <deployedseed>5140731</deployedseed>
+    <deployedseed>40855358</deployedseed>
+    <deployedseed>1554201656</deployedseed>
+    <deployedseed>2127684266</deployedseed>
+    <deployedseed>556888103</deployedseed>
+    <deployedseed>326545244</deployedseed>
+    <deployedseed>834524737</deployedseed>
+    <deployedseed>252858599</deployedseed>
+    <deployedseed>355102152</deployedseed>
+    <deployedseed>1424034904</deployedseed>
+    <deployedseed>971940424</deployedseed>
+    <deployedseed>1333289159</deployedseed>
+    <deployedseed>1230638154</deployedseed>
+    <deployedseed>1803500554</deployedseed>
+    <deployedseed>1473492153</deployedseed>
+    <deployedseed>1083990600</deployedseed>
+    <deployedseed>247950570</deployedseed>
+    <deployedseed>46438055</deployedseed>
+    <deployedseed>1914737808</deployedseed>
+    <deployedseed>1592295033</deployedseed>
+    <deployedseed>1813457475</deployedseed>
+    <deployedseed>1082979311</deployedseed>
+    <deployedseed>1677665889</deployedseed>
+    <deployedseed>407275877</deployedseed>
+    <deployedseed>947691266</deployedseed>
+    <deployedseed>771992511</deployedseed>
+    <deployedseed>773405527</deployedseed>
+    <deployedseed>424190548</deployedseed>
+    <deployedseed>701582006</deployedseed>
+    <deployedseed>1271575093</deployedseed>
+    <deployedseed>844277937</deployedseed>
+    <deployedseed>335433789</deployedseed>
+    <deployedseed>1452883510</deployedseed>
+    <deployedseed>2142217123</deployedseed>
+    <deployedseed>42736221</deployedseed>
+    <deployedseed>1703530973</deployedseed>
+    <deployedseed>688807252</deployedseed>
+    <deployedseed>1061482019</deployedseed>
+    <deployedseed>1132874038</deployedseed>
+    <deployedseed>777377907</deployedseed>
+    <deployedseed>1431605351</deployedseed>
+    <deployedseed>1284454978</deployedseed>
+    <deployedseed>724581817</deployedseed>
+    <deployedseed>1661683560</deployedseed>
+    <deployedseed>1687640294</deployedseed>
+    <deployedseed>1214514452</deployedseed>
+    <deployedseed>476287415</deployedseed>
+    <deployedseed>1183226533</deployedseed>
+    <deployedseed>1868396798</deployedseed>
+    <deployedseed>1195042234</deployedseed>
+    <deployedseed>51697972</deployedseed>
+    <deployedseed>868971350</deployedseed>
+    <deployedseed>1162205104</deployedseed>
+    <deployedseed>1551249951</deployedseed>
+    <deployedseed>2080212349</deployedseed>
+    <deployedseed>1106401572</deployedseed>
+    <deployedseed>95250476</deployedseed>
+    <deployedseed>1852625930</deployedseed>
+    <deployedseed>1350306619</deployedseed>
+    <deployedseed>321898233</deployedseed>
+    <deployedseed>1368125622</deployedseed>
+    <deployedseed>753284107</deployedseed>
+    <deployedseed>502862718</deployedseed>
+    <deployedseed>219902337</deployedseed>
+    <deployedseed>1634940156</deployedseed>
+    <deployedseed>792712410</deployedseed>
+    <deployedseed>1581399296</deployedseed>
+    <deployedseed>498620656</deployedseed>
+    <deployedseed>1978759707</deployedseed>
+    <deployedseed>65281709</deployedseed>
+    <deployedseed>1505159341</deployedseed>
+    <deployedseed>1127745457</deployedseed>
+    <deployedseed>1074064799</deployedseed>
+    <deployedseed>1473183824</deployedseed>
+    <deployedseed>2056560639</deployedseed>
+    <deployedseed>1745067140</deployedseed>
+    <deployedseed>1255076447</deployedseed>
+    <deployedseed>1559461388</deployedseed>
+    <deployedseed>741079339</deployedseed>
+    <deployedseed>138897746</deployedseed>
+    <deployedseed>880737183</deployedseed>
+    <deployedseed>986583183</deployedseed>
+    <deployedseed>94944238</deployedseed>
+    <deployedseed>1246331975</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>correct surface are</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description><![CDATA[<p>Forgetting to Include Both Parts of the Net</p>]]></description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta_1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description><![CDATA[<p>using different formular</p>]]></description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta_2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Relating probability values to real-life situations</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Consider {@situation_text@}. Which of the following best represents the probability of this event?</p>
+
+<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>A probability of <strong>0</strong> represents an impossible event.</p>
+<p>A probability of <strong>1</strong> represents a certain event.</p>
+<p>A probability between <strong>0 and 1</strong> represents an uncertain event.</p>
+
+<p>The correct probability value for this situation is <strong>{@correct_prob@}</strong>.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Situation choice */
+sit_choice: rand([1,2,3]);
+
+/* Situation text */
+situation_text:
+  if sit_choice=1 then "picking a red ball from a bag that contains only red balls"
+  elseif sit_choice=2 then "picking a green mango from a tree with ripe and unripe mangoes"
+  else "picking a blue pen from a bag that has no blue pens";
+
+/* Correct probability value */
+correct_prob:
+  if sit_choice=1 then "1"
+  elseif sit_choice=2 then "Between 0 and 1"
+  else "0";
+
+/* Dropdown matrix */
+m_prob: [
+  ["0", is(correct_prob="0")],
+  ["Between 0 and 1", is(correct_prob="Between 0 and 1")],
+  ["1", is(correct_prob="1")]
+];
+]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@correct_prob@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Grade 10 Probability — Introduction to Probability</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to relate probability values to everyday situations by identifying whether events are impossible, certain, or uncertain.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>dropdown</type>
+      <tans>m_prob</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>correct_prob</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>2063183210</deployedseed>
+    <deployedseed>2134013163</deployedseed>
+    <deployedseed>1372352059</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>first(mcq_correct(m_prob))</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

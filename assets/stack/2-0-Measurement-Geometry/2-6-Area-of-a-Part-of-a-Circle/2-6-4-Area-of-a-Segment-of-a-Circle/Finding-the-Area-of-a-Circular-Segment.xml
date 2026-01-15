@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the Area of a Circular Segment</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A circular park has a radius of \({@radius@}\,\text{cm}\). A walking path cuts across the park, forming a chord that subtends an angle of \({@theta_deg@}^\circ\) at the centre of the circle, as shown in the figure below. </p>
+
+<p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+      boundingbox: [-2, 7, 7, -2], 
+      axis:false,
+      showCopyright: false,
+      showNavigation: false
+
+    });
+    var r = 4; // radius in cm
+    var angle = 108; // degrees
+    var theta = angle * Math.PI / 180; // radians
+
+    // Center at (2,2)
+    var O = board.create('point', [2,2], {fixed:true, visible:false});
+    // Endpoints of sector
+    var A = board.create('point', [2 + r, 2], {fixed:true, visible:false});
+    var B = board.create('point', [2 + r*Math.cos(theta), 2 + r*Math.sin(theta)], {fixed:true, visible:false});
+
+    // Draw full circle
+    board.create('circle', [O, A], {strokeColor:'#e51d6a', strokeWidth:3});
+
+    // Draw sector (polygon for fill)
+    var sectorPoints = [O];
+    var n = 40;
+    for(var i=0;i<=n;i++) {
+      var t = i/n*theta;
+      sectorPoints.push(
+        board.create('point', [
+          2 + r*Math.cos(t),
+          2 + r*Math.sin(t)
+        ], {visible: false})
+      );
+    }
+    var sectorPoly = board.create('polygon', sectorPoints, {
+      fillColor:'#f9a', fillOpacity:0.5,
+      borders: {visible:false}
+    });
+
+    // Draw triangle from center
+    var triangle = board.create('polygon', [O, A, B], {
+      fillColor:'#f9a', fillOpacity:0.8,
+      borders: {strokeColor:'#e51d6a', strokeWidth:2}
+    });
+
+    // Create chord between A and B (segment boundary of the segment)
+    board.create('segment', [A,B], {strokeColor:'#e51d6a', strokeWidth:2});
+
+    // Polygon for yellow segment area (between chord and arc)
+    var segmentPoints = [A, B];
+    for(var i=n;i>=0;i--) {
+      var t = i/n*theta;
+      segmentPoints.push(
+        board.create('point', [
+          2 + r*Math.cos(t),
+          2 + r*Math.sin(t)
+        ], {visible: false})
+      );
+    }
+    board.create('polygon', segmentPoints, {
+      fillColor:'yellow', fillOpacity:0.7,
+      borders: {visible: false}
+    });
+
+    // Dimension label (radius)
+    board.create('text', [ (O.X()+A.X())/2-0.5, (O.Y()+A.Y())/2.8, "{#radius#} cm"], {fontSize:18 });
+
+    // Angle label at center
+    board.create('text', [O.X()+0.3, O.Y()+0.4, "{#theta_deg#}°"], {fontSize:18 });
+
+[[/jsxgraph]]
+</p>
+<p>
+Calculate the area of the circular segment formed by the walking path \(\text{Correct to 4 s.f}\).
+</p>
+
+<p>\(\text{Area of the Circular segment}=\)[[input:ans1]]\(\,\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>To find the area of the segment, first find the area of the triangle and then subtract it from the area of the sector.</p>
+
+<p><strong>Area of a sector</strong></p>
+<p>Recall:<br>
+\(\text{Area of a sector}=\frac{\theta}{360} \times \pi r^2\)<br>
+Therefore,<br>
+\(\begin{align}
+A&=\frac{{@theta_deg@}}{360} \times \frac{22}{7} \times {@radius@}^2 \\
+&=\frac{{@theta_deg@}}{360} \times \frac{22}{7} \times {@R@}^2 \\
+&={@area_sector@} \\
+&={@Area_sector@}\,\text{cm}^2
+\end{align}
+\)
+</p>
+
+<p><strong>Area of a triangle</strong></p>
+<p>Similarly, recall:<br>
+\(A=\frac{1}{2} a b \sin \, \theta\) <br>
+Where \(a={@radius@} \,\text{cm}\) and \(b={@radius@}\,\text{cm}\)<br>
+Therefore,<br>
+
+\(
+\begin{align}
+A&=\frac{1}{2} \times {@radius@} \times {@radius@} \times \sin\,{@theta_deg@}^\circ\\
+&=\frac{1}{2} \times {@R@}^2 \times \sin\,{@theta_deg@}^\circ\\
+&={@area_triangle@} \\
+&={@Area_triangle@}\,\text{cm}^2
+\end{align}
+\)
+</p>
+
+<p>Therefore,<br>
+\(
+\begin{align}
+\text{Area of a segment}&={@Area_sector@}\,\text{cm}^2 - {@Area_triangle@}\,\text{cm}^2 \\
+&={@area_segment@} \\
+&={@Area_segment@}\,\text{cm}^2
+\end{align}
+\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Step 1: Randomize radius and angle */
+radius : rand_with_step(7,140,7);        /* radius between 10 and 20 */
+theta_deg : rand_with_step(10,180,10);   /* angle between 60° and 135° */
+R:radius^2;
+
+/* Step 2: Area of sector */
+area_sector : theta_deg/360*22/7*radius^2;
+Area_sector:decimalplaces(area_sector,4);
+/* Step 3: Area of triangle (1/2 ab sinθ)
+   where a = b = radius */
+degree:R*float(sin(theta_deg * %pi / 180));
+
+area_triangle : 1/2*radius^2*float(sin(theta_deg * %pi / 180));
+Area_triangle:decimalplaces(area_triangle,4);
+
+/* Step 4: Area of segment */
+area_segment :area_sector-area_triangle;
+Area_segment:decimalplaces(area_segment,4);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{Radius of the circular park}={@radius@}\,\text{cm}\)</p>
+<p>\(\text{Angle subtended}={@theta_deg @}^\circ\)</p>
+<p>\(\text{Area of the circular segment formed by the walking path.}={@Area_segment@}\,\text{cm}^2\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>Area_segment</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct area of the segment.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>Area_segment</tans>
+        <testoptions>4</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>2044697540</deployedseed>
+    <deployedseed>102620884</deployedseed>
+    <deployedseed>1837811420</deployedseed>
+    <deployedseed>1803227246</deployedseed>
+    <deployedseed>306837904</deployedseed>
+    <deployedseed>1308312381</deployedseed>
+    <deployedseed>550081987</deployedseed>
+    <deployedseed>1647817503</deployedseed>
+    <deployedseed>1061963214</deployedseed>
+    <deployedseed>806515198</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Area_segment</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

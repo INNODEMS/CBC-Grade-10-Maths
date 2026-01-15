@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Recognize congruent triangles</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Are the two triangles shown below congruent? </p><p>[[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p> 
+(a).[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+    boundingbox: [-6, 7, 6, -1],
+    axis: false,
+    showNavigation: false,
+    showCopyright: false
+});
+
+// Points with labels only (no circles), labels positioned outside
+var A = board.create('point', [0, 3], {
+    name: 'A',
+    fixed: true,
+    visible: false,
+    label: {offset: [0, 15], visible: true, fontSize: 14} // above point
+});
+
+var B = board.create('point', [-2.5, 2], {
+    name: 'B',
+    fixed: true,
+    visible: false,
+    label: {offset: [-15, -10], visible: true, fontSize: 14} // left below
+});
+
+var C = board.create('point', [2.5, 0], {
+    name: 'C',
+    fixed: true,
+    visible: false,
+    label: {offset: [15, -10], visible: true, fontSize: 14} // right below
+});
+
+// Triangle sides
+var AB = board.create('segment', [A, B]);
+var AC = board.create('segment', [A, C]);
+var BC = board.create('segment', [B, C]);
+
+// Angles inside the triangle
+board.create('angle', [B, A, C], {   // Angle at A
+    radius: 0.6,
+    withLabel: true,
+    name: '100°',
+    label: {offset: [0, 0], fontSize: 12}
+});
+
+board.create('angle', [C, B, A], {   // Angle at B
+    radius: 0.8,
+    withLabel: true,
+    name: '40°',
+    label: {offset: [0, 0], fontSize: 12}
+});
+
+board.create('angle', [A, C, B], {   // Angle at C
+    radius: 0.8,
+    withLabel: true,
+    name: '40°',
+    label: {offset: [0, 0], fontSize: 12}
+});
+
+// Side length labels
+board.create('text', [1.0, 2.0, '9 cm'], {fontSize: 12});    // AC
+board.create('text', [-1.0, 1.1, '7 cm'], {fontSize: 12});   // AB
+board.create('text', [-1.6, 2.6, '5 cm'], {fontSize: 12});     // BC
+[[/jsxgraph]]
+
+
+(b)
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+    boundingbox: [-6, 7, 6, -1],
+    axis: false,
+    showNavigation: false,
+    showCopyright: false
+});
+
+// Points with labels only (no circles), labels positioned outside
+var P = board.create('point', [0, 3], {
+    name: 'P',
+    fixed: true,
+    visible: false,
+    label: {offset: [0, 15], visible: true, fontSize: 14}
+});
+
+var Q = board.create('point', [-2.5, 2], {
+    name: 'Q',
+    fixed: true,
+    visible: false,
+    label: {offset: [-15, -10], visible: true, fontSize: 14}
+});
+
+var R = board.create('point', [2.5, 0], {
+    name: 'R',
+    fixed: true,
+    visible: false,
+    label: {offset: [15, -10], visible: true, fontSize: 14}
+});
+
+// Triangle sides
+var PQ = board.create('segment', [P, Q]);
+var PR = board.create('segment', [P, R]);
+var QR = board.create('segment', [Q, R]);
+
+// Angles inside the triangle
+board.create('angle', [Q, P, R], {   // Angle at P
+    radius: 0.6,
+    withLabel: true,
+    name: '100°',
+    label: {offset: [0, 0], fontSize: 12}
+});
+
+board.create('angle', [R, Q, P], {   // Angle at Q
+    radius: 0.8,
+    withLabel: true,
+    name: '40°',
+    label: {offset: [0, 0], fontSize: 12}
+});
+
+board.create('angle', [P, R, Q], {   // Angle at R
+    radius: 0.8,
+    withLabel: true,
+    name: '40°',
+    label: {offset: [0, 0], fontSize: 12}
+});
+
+// Side length labels (substituted)
+board.create('text', [1.5, 1.5, '7 cm'], {fontSize: 12});   // PR (was 9)
+board.create('text', [-0.6, 1.7, '5 cm'], {fontSize: 12});  // PQ (was 7)
+board.create('text', [1.6, 3.4, '9 cm'], {fontSize: 12});   // QR (was 5)
+
+// --- Rotation Function ---
+function rotatePoint(p, angleDeg, center) {
+    var angleRad = angleDeg * Math.PI / 180;
+    var x = p.X() - center[0];
+    var y = p.Y() - center[1];
+    var xNew = x * Math.cos(angleRad) - y * Math.sin(angleRad) + center[0];
+    var yNew = x * Math.sin(angleRad) + y * Math.cos(angleRad) + center[1];
+    p.setPosition(JXG.COORDS_BY_USER, [xNew, yNew]);
+}
+
+// Rotation center (around point P)
+var center = [P.X(), P.Y()];
+
+// Rotate each point 60° anticlockwise
+rotatePoint(P, 60, center);
+rotatePoint(Q, 60, center);
+rotatePoint(R, 60, center);
+
+
+
+[[/jsxgraph]]]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text/>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[ta:random_permutation([["yes", true],["no", false]]);
+]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta1@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>dropdown</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>checkbox</type>
+      <tans>ta1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mcq_correct(ta)[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>2.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>mcq_correct(ta1)[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>979441476</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>first(mcq_correct(ta))</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

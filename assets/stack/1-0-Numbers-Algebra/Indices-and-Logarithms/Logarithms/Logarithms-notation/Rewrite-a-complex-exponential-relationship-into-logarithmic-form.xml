@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Rewrite a complex exponential relationship into logarithmic form</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>During a simulation, a machine amplifies a signal using exponential growth. After several cycles, the signal reaches a strength of \({@number@}\), 
+generated using base \({@base@}\).</p>
+<p>Write the logarithmic form of the statement:</p>
+
+<p>\[
+{@base@}^{@chosen_exp@} = {@number@}
+\]</p>
+
+<p>Express your answer in the form \(\log_{a}(b)\).</p>
+
+<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>The exponential relationship is:</p>
+
+<p>\[
+{@base@}^{@chosen_exp@} = {@number@}.
+\]</p>
+
+<p>We use the identity:</p>
+
+<p>\[
+a^k = N \quad \Longleftrightarrow \quad \log_a(N) = k.
+\]</p>
+
+<p>So:</p>
+
+<p>\[
+\log_{ {@base@} }({@number@}) = {@chosen_exp@}.
+\]</p>
+
+<p>This is written as:</p>
+
+<p>\[
+\frac{\log({@number@})}{\log({@base@})}.
+\]</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>2</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Choose a base that produces larger results */
+base: rand([2,3,4,5,10]);
+
+/* Two exponents to choose from */
+exp1: rand([3,4,5,6]);
+exp2: exp1 + rand([1,2,3]);  /* slightly larger exponent */
+
+/* Choose between exp1 and exp2 to create variation */
+chosen_exp: rand([exp1, exp2]);
+
+/* Compute number */
+number: base^chosen_exp;
+
+/* Correct logarithm form using Maxima syntax */
+log_expr: log(number)/log(base);
+
+/* Common mistakes */
+m1: log(chosen_exp)/log(base);      /* swaps result with exponent */
+m2: log(base)/log(number);          /* reverses arguments */
+m3: number/chosen_exp;              /* arithmetic misuse */
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@base@}^{@chosen_exp@} = {@number@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept"></p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description"> The question requires the learner to convert a more complex exponential statement into logarithmic form by identifying the correct base and result while applying the definition of logarithms.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>log(number)/log(base)</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>log(number)/log(base)</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1627317658</deployedseed>
+    <deployedseed>84405787</deployedseed>
+    <deployedseed>513313332</deployedseed>
+    <deployedseed>886951485</deployedseed>
+    <deployedseed>1070035133</deployedseed>
+    <deployedseed>1668976912</deployedseed>
+    <deployedseed>1646856099</deployedseed>
+    <deployedseed>879192544</deployedseed>
+    <deployedseed>2134883010</deployedseed>
+    <deployedseed>1959452724</deployedseed>
+    <deployedseed>1203624073</deployedseed>
+    <deployedseed>122874616</deployedseed>
+    <deployedseed>1180422593</deployedseed>
+    <deployedseed>43916218</deployedseed>
+    <deployedseed>1451919885</deployedseed>
+    <deployedseed>600639619</deployedseed>
+    <deployedseed>397751899</deployedseed>
+    <deployedseed>1331294408</deployedseed>
+    <deployedseed>1939895846</deployedseed>
+    <deployedseed>85965175</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>log(number)/log(base)</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

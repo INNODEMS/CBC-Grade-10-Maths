@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the meeting time of two cyclist  after starting at different times and going in the same direction</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A cyclist starts from a point travelling at a constant speed of {@v1@} km/h.
+Another cyclist starts from the same point, {@delay_h@} hours later, travelling in the same direction at a constant speed of {@v2@} km/h.</p>
+<p>How long after the second cyclist starts will the second cyclist catch up with the first?</p>
+<p> Time \(=\) [[input:ans1]] hours  [[validation:ans1]]  [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>The first cyclist starts earlier, so the distance they cover before the second cyclist starts is given by its velocity multiplied by the time difference:<br>
+ \({@v1@} \times {@delay_h@} = {@head_start@} \text{ km}.\)</p>
+
+<p>Since both cyclists travel in the same direction, the relative speed is:<br> \({@v2@} - {@v1@} = {@rel_speed@} \text{ km/h}.\)</p>
+<p>Therefore, time taken to catch up is:<br> \(\frac{{@head_start@}}{{@rel_speed@}} = {@ta@} \text{ hours}.\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Speeds (km/h) */
+v1 : rand(6) + 12;        /* 12–17 km/h */
+v2 : v1 + rand(5) + 3;   /* always faster */
+
+/* Delay between starts (hours) */
+delay_h : (rand(8) + 1) * 1/9;   
+
+/* Head start distance */
+head_start : v1 * delay_h;
+
+/* Relative speed */
+rel_speed : v2 - v1;
+
+/* Time to catch up (hours after second starts) */
+ta : head_start / rel_speed;
+mistake_rel_speed:v2 + v1;
+mistake_ta:head_start / mistake_rel_speed;
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta@}</p>
+<p>{@v1@}</p>
+<p>{@v2@}</p>
+<p>{@delay_h@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct time the cyclist met</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect time</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake_ta</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have added the speeds instead of subtracting them since the cyclists were going in same direction.Kindly look at the work solution below</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1708789421</deployedseed>
+    <deployedseed>1879997403</deployedseed>
+    <deployedseed>980185991</deployedseed>
+    <deployedseed>432378565</deployedseed>
+    <deployedseed>1080140392</deployedseed>
+    <deployedseed>593720707</deployedseed>
+    <deployedseed>30026993</deployedseed>
+    <deployedseed>749443755</deployedseed>
+    <deployedseed>329900353</deployedseed>
+    <deployedseed>856320925</deployedseed>
+    <deployedseed>1098243143</deployedseed>
+    <deployedseed>443684035</deployedseed>
+    <deployedseed>33852191</deployedseed>
+    <deployedseed>863801514</deployedseed>
+    <deployedseed>2084481896</deployedseed>
+    <deployedseed>1821879403</deployedseed>
+    <deployedseed>265288101</deployedseed>
+    <deployedseed>1911484884</deployedseed>
+    <deployedseed>425160068</deployedseed>
+    <deployedseed>890863339</deployedseed>
+    <deployedseed>302253370</deployedseed>
+    <deployedseed>1780811389</deployedseed>
+    <deployedseed>1685690484</deployedseed>
+    <deployedseed>1444738098</deployedseed>
+    <deployedseed>1449838150</deployedseed>
+    <deployedseed>1256137633</deployedseed>
+    <deployedseed>1867811816</deployedseed>
+    <deployedseed>325862944</deployedseed>
+    <deployedseed>1205379576</deployedseed>
+    <deployedseed>1439016144</deployedseed>
+    <deployedseed>1983983138</deployedseed>
+    <deployedseed>1143473836</deployedseed>
+    <deployedseed>874795181</deployedseed>
+    <deployedseed>2057371566</deployedseed>
+    <deployedseed>681240473</deployedseed>
+    <deployedseed>2004322796</deployedseed>
+    <deployedseed>661131198</deployedseed>
+    <deployedseed>710047632</deployedseed>
+    <deployedseed>1651219673</deployedseed>
+    <deployedseed>1588802082</deployedseed>
+    <deployedseed>1125491277</deployedseed>
+    <deployedseed>119645785</deployedseed>
+    <deployedseed>809722214</deployedseed>
+    <deployedseed>204890587</deployedseed>
+    <deployedseed>633972534</deployedseed>
+    <deployedseed>821072868</deployedseed>
+    <deployedseed>762349606</deployedseed>
+    <deployedseed>464554748</deployedseed>
+    <deployedseed>819590429</deployedseed>
+    <deployedseed>1919928200</deployedseed>
+    <deployedseed>439192743</deployedseed>
+    <deployedseed>690127933</deployedseed>
+    <deployedseed>115920314</deployedseed>
+    <deployedseed>1929210859</deployedseed>
+    <deployedseed>2057055543</deployedseed>
+    <deployedseed>494232899</deployedseed>
+    <deployedseed>24003788</deployedseed>
+    <deployedseed>1082649798</deployedseed>
+    <deployedseed>1307961032</deployedseed>
+    <deployedseed>1661786085</deployedseed>
+    <deployedseed>1711503920</deployedseed>
+    <deployedseed>229786340</deployedseed>
+    <deployedseed>1785170639</deployedseed>
+    <deployedseed>1657748137</deployedseed>
+    <deployedseed>638818333</deployedseed>
+    <deployedseed>202701902</deployedseed>
+    <deployedseed>475751118</deployedseed>
+    <deployedseed>1004558140</deployedseed>
+    <deployedseed>772581705</deployedseed>
+    <deployedseed>2015708842</deployedseed>
+    <deployedseed>1482599411</deployedseed>
+    <deployedseed>1745168491</deployedseed>
+    <deployedseed>1603081343</deployedseed>
+    <deployedseed>1616383423</deployedseed>
+  </question>
+</quiz>

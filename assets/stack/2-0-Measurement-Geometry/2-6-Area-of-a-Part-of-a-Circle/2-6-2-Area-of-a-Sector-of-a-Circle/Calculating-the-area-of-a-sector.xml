@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the area of a sector</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Ekadeli opened a door whose width is {@r@} \(\text{m}\).
+The door is fixed at a point O. As the door opened, it swept the flow through an angle of {@theta_deg@}\(^\circ\). 
+The figure below shows the part of the floor through which the door swept. Calculate the area through which the door swept. (Use \(\pi=\frac{22}{7}\))</p>
+[[jsxgraph]]
+      var board = JXG.JSXGraph.initBoard(divid, {
+        boundingbox: [-10, 15, 15, -10],
+        axis: false,
+        showCopyright: false,
+        showNavigation: false
+      });
+    
+      // Center point O
+      var O = board.create('point', [0, 0], {
+        name: 'O',
+        fixed: true,
+        size: 0,
+        showInfobox: false,
+        visible: false,
+        label: { visible: false }
+      });
+       var pointO = board.create('point', [0, 0], {
+        name: 'O',
+        visible: false,
+        label: {
+        visible: true,
+        offset: [-10, -10],
+        fontSize: 16
+        }
+     });
+      
+
+    
+      // Angle BOA = 60 degrees
+      var angleDeg = {#theta_deg#};
+      var angleRad = angleDeg * Math.PI / 180;
+      var radius = {#r#}; // 7 cm
+    
+      // Points A and B on the circle with radius 7
+      var A = board.create('point', [radius, -1], {
+        name: 'A',
+        fixed: true,
+        size: 0,
+        showInfobox: false,
+        visible: false,
+        label: { visible: false }
+      });
+    
+      var B = board.create('point', [radius * Math.cos(angleRad), radius * Math.sin(angleRad)], {
+        name: 'B',
+        fixed: true,
+        size: 0,
+        showInfobox: false,
+        visible: false,
+        label: { visible: false }
+      });
+    
+     
+    
+      // Draw the arc indicating angle BOA
+      var angleArc = board.create('sector', [O, A, B], {
+        radius: 1.5,
+        fillColor: 'lightgray',
+        strokeColor: 'blue',
+        strokeWidth: 1,
+        withLabel: false
+      });
+    
+      // Add angle label
+      board.create('text', [
+        1, 0.3,
+        function() {
+          return '{#theta_deg#}°';
+        }
+      ], { fontSize: 14 });
+    
+      // Add label for length AO = 7 cm
+      board.create('text', [
+        function() { return (O.X() + A.X()) / 2.7; },
+        function() { return (O.Y() + A.Y()) / 2.7 - 1; },
+        '{#r#} m'
+      ], { fontSize: 14 });   
+ [[/jsxgraph]]
+<p>\(\text{Area through which the door swept is}\) [[input:ans1]] \(m^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>We’re given:</p>
+<p><ul><li>The door acts like a radius of a circle, sweeping through an angle of {@theta_deg@}\(^\circ\)</li>
+<li>\(\text{Radius r}={@r@}\, \text{m}\)</li>
+<li>\(\text{Angle}\,\theta={@theta_deg@}\)</li>
+<li>\(\pi={@pi_val@}\)</li></ul></p>
+<p>The area swept is a sector of a circle, and the formula for the area of a sector is:</p>
+<p>\(\text{Area}=\frac{\theta}{360} \times {@pi_val@} r^2\)</p>
+<p>Substitute the values:</p>
+<p>\(\begin{align} \text{Area} &=\frac{{@theta_deg@}}{360} \times {@pi_val@} \times  ({@r@})^2\\
+&={@ theta_frac@} \times {@pi_val@} \times  {@r_square@} \\
+&= {@ theta_frac@} \times {@solution@}\\
+&={@area@}\,\text{m}^2
+
+
+
+\end{align}\)</p>
+<p>Therefore, </p>
+<p>Area through which the door swept is {@Area@}\(\text{m}^2\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize radius r in the range [1.0, 2.0) */
+r : rand(100)/10 + 1.0;
+
+/* Randomize angle θ in degrees in the range [20°, 90°) */
+ theta_deg: rand(60) + 25;
+
+/* Convert θ from degrees to fraction of a full circle */
+theta_frac: theta_deg / 360;
+
+/* Use pi as 22/7 instead of 3.1416 */
+pi_val : 22/7;
+r_square:r^2;
+
+solution:pi_val*r_square;
+
+/* Compute area of the sector: A = (θ/360) × π × r² */
+area : theta_frac * pi_val * r^2;
+Area:decimalplaces(area,1);
+
+
+/*Mistake 1  Misapplying the Arc Length Formula Instead of Area of Sector*/
+
+Area_1:theta_frac*2*pi_val*r;
+Area1:decimalplaces(Area_1,1);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{Radius of the sector}=\){@r@}</p>
+<p>\(\text{The angle }\, \theta =\){@theta_deg @}</p>
+<p>\(\text{Area}=\){@Area@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Henry Onyango</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+<p id="description">The question provided requires the student to find the area of a sector.
+To solve it correctly, the student must carefully read the word problem and extract the relevant information to apply the correct formula.
+
+The formula for the area of a sector is:  \(\text{Area}=\frac{\theta}{360} \times \pi r^2\)</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>Area</tans>
+      <boxsize>9</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct area calculated.</description>
+        <answertest>NumDecPlaces</answertest>
+        <sans>ans1</sans>
+        <tans>Area</tans>
+        <testoptions>1</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for wrong use of the formular.</description>
+        <answertest>NumDecPlaces</answertest>
+        <sans>ans1</sans>
+        <tans>Area1</tans>
+        <testoptions>1</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p> It looks like you used the formula for arc length instead of the formula for the area of the sector. You may have done something like this:</p>
+<p>\(\textbf{Arc length}=\frac{\theta}{360^\circ} \times 2 \pi r\)</p>
+<p>This gives the distance along the curved edge of the door's swing, not the area of the floor that the door actually swept through.</p>
+<p>\(\textbf{What You Should Do Instead:}\)</p>
+<p>Use the area of a sector formula:</p>
+<p>\(\text{Area}= \frac{\theta}{360^\circ} \times \pi r^2\)</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1676065475</deployedseed>
+    <deployedseed>755370642</deployedseed>
+    <deployedseed>227248341</deployedseed>
+    <deployedseed>118401119</deployedseed>
+    <deployedseed>1677184340</deployedseed>
+    <deployedseed>1231560853</deployedseed>
+    <deployedseed>1451232413</deployedseed>
+    <deployedseed>2006218653</deployedseed>
+    <deployedseed>506884214</deployedseed>
+    <deployedseed>1594147002</deployedseed>
+    <deployedseed>792974397</deployedseed>
+    <deployedseed>720618612</deployedseed>
+    <deployedseed>1939106053</deployedseed>
+    <deployedseed>1483859556</deployedseed>
+    <deployedseed>82687235</deployedseed>
+    <deployedseed>675935412</deployedseed>
+    <deployedseed>736801933</deployedseed>
+    <deployedseed>916685649</deployedseed>
+    <deployedseed>1280095253</deployedseed>
+    <deployedseed>55120571</deployedseed>
+    <deployedseed>1600868853</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Area</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Checks for wrong use of the formular.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Area1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.1000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

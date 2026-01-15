@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Transforming between 3 figures</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Consider the diagram below:</p>
+<p><br></p>
+
+[[jsxgraph]]
+
+var board = JXG.JSXGraph.initBoard(divid, {boundingBox:[-12,10,12,-10], 
+showCopyright:false, showNavigation:false, axis:true, grid:true, keepAspectRatio:true, insertTicks:true});
+
+var styleA = {vertices:{visible:false, fixed:true}, borders:{highlight:false, strokeColor:"red", strokeOpacity:0.8, fixed:true}, fillColor:"red", fillOpacity:0.2, fixed:true, highlight:false};
+var shapeA = board.create("polygon", {@string(pointsListR)@}, styleA);
+
+var styleB = {vertices:{visible:false, fixed:true}, borders:{highlight:false, strokeColor:"blue", strokeOpacity:0.8, fixed:true}, fillColor:"blue", fillOpacity:0.2, fixed:true, highlight:false};
+var shapeB = board.create("polygon", {@string(pointsListB)@}, styleB);
+
+var styleC = {vertices:{visible:false, fixed:true}, borders:{highlight:false, strokeColor:"green", strokeOpacity:0.8, fixed:true}, fillColor:"green", fillOpacity:0.2, fixed:true, highlight:false};
+var shapeC = board.create("polygon", {@string(pointsListG)@}, styleC);
+
+[[/jsxgraph]]
+
+<p><br>(a) Describe the single transformation from the RED shape to the BLUE shape.<br>Give either the <b>equation</b> of the line of reflection or the <b>coordinates</b> of the centre of rotation.<br><i>For coordinates, use square brackets: \([x, y]\).</i></p>
+<p align="right"><br>[[input:ans1]] [[validation:ans1]]</p>
+<p align="right">[[input:ans2]] [[validation:ans2]]</p>
+<p>[[feedback:prt1]]</p>
+
+<p><br>(b) Describe the transformation from the BLUE shape to the GREEN shape as a {@if blueToGreenType="REFLECTION" then "reflection in \\(x=0\\) or \\(y=0\\)" else "anti-clockwise rotation about the origin"@} followed by a translation.</p> 
+<p align="right"><br>{@if blueToGreenType="REFLECTION" then "Reflection in:" else "Rotation by:"@} [[input:ans3]] {@if blueToGreenType="ROTATION" then "\\(^\\circ\\)" else ""@}[[validation:ans3]]</p>
+<p align="right">Translation by [[input:ans4]] units in the x-direction and [[input:ans5]] units in the y-direction. [[validation:ans4]] [[validation:ans5]]</p>
+<p>[[feedback:prt2]]</p>
+
+<p><br>(c) Describe the transformation from GREEN shape to RED shape as a translation followed by a reflection in \(x=0, y=0\) or \(y = \pm x\).</p>
+<p align="right">Translation by [[input:ans6]] units in the x-direction and [[input:ans7]] units in the y-direction. [[validation:ans6]] [[validation:ans7]]</p>
+<p align="right"><br>Reflection in: [[input:ans8]] [[validation:ans8]]</p>
+<p>[[feedback:prt3]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>Worked solution</p>
+<p>Consider the diagram above:</p>
+<p>(a) Describe the single transformation from the RED shape to the BLUE shape.<br>Give either the <b>equation</b> of the line of reflection or the <b>coordinates</b> of the centre of rotation.<br><i>For coordinates, use square brackets: \([x, y]\).</i></p>
+<p>{@mcq_correct([["ROTATION", if redToBlueType="ROTATION" then true else false],["REFLECTION", if redToBlueType="REFLECTION" then true else false]])[1]@}</p>
+<p>{@tans2@}</p>
+<p>(b) Describe the transformation from the BLUE shape to the GREEN shape as a {@if blueToGreenType="REFLECTION" then "reflection in \\(x=0\\) or \\(y=0\\)" else "anti-clockwise rotation about the origin"@} followed by a translation.</p> 
+<p>{@if blueToGreenType="REFLECTION" then "Reflection in:" else "Rotation by:"@} {@tans3@} {@if blueToGreenType="ROTATION" then "\\(^\\circ\\)" else ""@}</p>
+<p>Translation by {@tans4@} units in the x-direction and {@tans5@} units in the y-direction. {@tans4@}</p>
+<p><b></b></p>
+<p>(c) Describe the transformation from GREEN shape to RED shape as a translation followed by a reflection in \(x=0, y=0\) or \(y = \pm x\).</p>
+<p>Translation by {@tans6@} units in the x-direction and {@tans7@} units in the y-direction.</p>
+<p>Reflection in: {@tans8@} </p>]]></text>
+    </generalfeedback>
+    <defaultgrade>5</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2022071300</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* FUNCTIONS */
+
+/* Checking if a shape is off of the grid */
+xLim:11
+yLim:9
+shape_off_grid(listOfPoints) := block(if abs(first(first(listOfPoints)))>xLim or abs(first(second(listOfPoints)))>xLim or abs(first(third(listOfPoints)))>xLim or abs(first(fourth(listOfPoints)))>xLim or abs(first(fifth(listOfPoints)))>xLim or abs(first(sixth(listOfPoints)))>xLim or abs(second(first(listOfPoints)))>yLim or abs(second(second(listOfPoints)))>yLim or abs(second(third(listOfPoints)))>yLim or abs(second(fourth(listOfPoints)))>yLim or abs(second(fifth(listOfPoints)))>yLim or abs(second(sixth(listOfPoints)))>yLim then return(true) else return(false));
+
+/* Checking if shapes are touching */
+
+/* Rotating a list of points by 0, 90, 180 or 270 degree about a centre coordinate */
+rotate_shape(listOfPoints, centre, angle) := block(rotationMatrix: if angle=0 then matrix([1,0],[0,1]) else if angle=270 then matrix([0,1],[-1,0]) else if angle=180 then matrix([-1,0],[0,-1]) else if angle=90 then matrix([0,-1],[1,0]) else return("Invalid angle"), centreVec:matrix([first(centre)],[second(centre)]), point1:(rotationMatrix.(matrix([first(first(listOfPoints))],[second(first(listOfPoints))])-centreVec)+centreVec), point2:(rotationMatrix.(matrix([first(second(listOfPoints))],[second(second(listOfPoints))])-centreVec)+centreVec), point3:(rotationMatrix.(matrix([first(third(listOfPoints))],[second(third(listOfPoints))])-centreVec)+centreVec), point4:(rotationMatrix.(matrix([first(fourth(listOfPoints))],[second(fourth(listOfPoints))])-centreVec)+centreVec), point5:(rotationMatrix.(matrix([first(fifth(listOfPoints))],[second(fifth(listOfPoints))])-centreVec)+centreVec), point6:(rotationMatrix.(matrix([first(sixth(listOfPoints))],[second(sixth(listOfPoints))])-centreVec)+centreVec), return([list_matrix_entries(point1), list_matrix_entries(point2), list_matrix_entries(point3), list_matrix_entries(point4), list_matrix_entries(point5), list_matrix_entries(point6)]));
+
+/* Translating a shape by some coordinate vector */
+translate_shape(listOfPoints, transCo) := block(transVec:matrix([first(transCo)],[second(transCo)]), point1:matrix([first(first(listOfPoints))],[second(first(listOfPoints))])+transVec, point2:matrix([first(second(listOfPoints))],[second(second(listOfPoints))])+transVec, point3:matrix([first(third(listOfPoints))],[second(third(listOfPoints))])+transVec, point4:matrix([first(fourth(listOfPoints))],[second(fourth(listOfPoints))])+transVec, point5:matrix([first(fifth(listOfPoints))],[second(fifth(listOfPoints))])+transVec, point6:matrix([first(sixth(listOfPoints))],[second(sixth(listOfPoints))])+transVec, return([list_matrix_entries(point1), list_matrix_entries(point2), list_matrix_entries(point3), list_matrix_entries(point4), list_matrix_entries(point5), list_matrix_entries(point6)]));
+
+/* Reflecting a shape in a line parallel to either the "x-axis", "y-axis", "pos-diag", "neg-diag".
+contant should be y-intercept unless line is parallel to y-axis, then x-intercept */
+reflect_shape(listOfPoints, line, const) := block(reflectionMatrix: if line="x-axis" then matrix([1,0],[0,-1]) else if line="y-axis" then matrix([-1,0],[0,1]) else if line="pos-diag" then matrix([0,1],[1,0]) else if line="neg-diag" then matrix([0,-1],[-1,0]) else return("Invalid line"),interceptVec: if line="y-axis" then matrix([const],[0]) else matrix([0],[const]), point1:reflectionMatrix.(matrix([first(first(listOfPoints))],[second(first(listOfPoints))])-interceptVec)+interceptVec, point2:reflectionMatrix.(matrix([first(second(listOfPoints))],[second(second(listOfPoints))])-interceptVec)+interceptVec, point3:reflectionMatrix.(matrix([first(third(listOfPoints))],[second(third(listOfPoints))])-interceptVec)+interceptVec, point4:reflectionMatrix.(matrix([first(fourth(listOfPoints))],[second(fourth(listOfPoints))])-interceptVec)+interceptVec, point5:reflectionMatrix.(matrix([first(fifth(listOfPoints))],[second(fifth(listOfPoints))])-interceptVec)+interceptVec, point6:reflectionMatrix.(matrix([first(sixth(listOfPoints))],[second(sixth(listOfPoints))])-interceptVec)+interceptVec, return([list_matrix_entries(point1), list_matrix_entries(point2), list_matrix_entries(point3), list_matrix_entries(point4), list_matrix_entries(point5), list_matrix_entries(point6)]));
+
+/* Defining "L shape" at origin */
+pointsListO:[[0,0], [-1,0], [-1,-1], [1,-1], [1,2], [0,2]];
+
+/* RED: Transforming the "L shape" for an initial position via a random translation and rotation */
+pointsListR:translate_shape(rotate_shape(pointsListO, [0,0], rand([0,90,180,270])),[rand([-4,-3,3,4]), rand([-3,-2,2,3])]);
+
+/* BLUE: Transformation to blue from red should be a reflection or a rotation. */
+
+redToBlueType:rand(["ROTATION","REFLECTION"]);
+
+/* List representing the transformation from red to blue is [centre, angle] for rotation or [line, constant] for reflection */
+
+redToBlueInfo: if redToBlueType="ROTATION" then [[rand_with_prohib(-2,2,[0]),rand_with_prohib(-2,2,[0])], rand([90,180,270])] else [rand(["x-axis","y-axis","pos-diag","neg-diag"]), rand_with_prohib(-2,2,[0])];
+
+pointsListB: if redToBlueType="ROTATION" then rotate_shape(pointsListR,first(redToBlueInfo),second(redToBlueInfo)) else reflect_shape(pointsListR,first(redToBlueInfo),second(redToBlueInfo));
+
+tans2: if redToBlueType="ROTATION" then first(redToBlueInfo) else if first(redToBlueInfo)="x-axis" then y=second(redToBlueInfo) else if first(redToBlueInfo)="y-axis" then x=second(redToBlueInfo) else if first(redToBlueInfo)="pos-diag" then y=x+second(redToBlueInfo) else y=-x+second(redToBlueInfo);
+
+/* GREEN: Should be a reflection/rotation (opposite to redToBlueType) from blue followed by a translation. 
+So that the answer is unique, reflections should be specified as in either the y or x axis and rotations should be about the origin. */
+
+blueToGreenType: if redToBlueType="ROTATION" then "REFLECTION" else "ROTATION";
+blueToGreenInfo: if blueToGreenType="ROTATION" then rand([90,180,270]) else rand(["x-axis","y-axis"]);
+blueToGreenTrans: [rand_with_prohib(-4,4,[0]),rand_with_prohib(-3,3,[0])];
+
+pointsListG: if blueToGreenType="ROTATION" then translate_shape(rotate_shape(pointsListB,[0,0],blueToGreenInfo),blueToGreenTrans) else translate_shape(reflect_shape(pointsListB,blueToGreenInfo,0),blueToGreenTrans);
+
+tans3: if blueToGreenType="ROTATION" then blueToGreenInfo else if blueToGreenInfo="x-axis" then y=0 else x=0;
+tans4:first(blueToGreenTrans);
+tans5:second(blueToGreenTrans);
+
+/* Finding the translation from green back to red */
+
+redToBlueMat: if redToBlueType="ROTATION" then (if second(redToBlueInfo)=90 then matrix([0,-1],[1,0]) else if second(redToBlueInfo)=180 then matrix([-1,0],[0,-1]) else matrix([0,1],[-1,0])) else (if first(redToBlueInfo)="x-axis" then matrix([1,0],[0,-1]) else if first(redToBlueInfo)="y-axis" then matrix([-1,0],[0,1]) else if first(redToBlueInfo)="pos-diag" then matrix([0,1],[1,0]) else matrix([0,-1],[-1,0]));
+
+blueToGreenMat: if blueToGreenType="ROTATION" then (if blueToGreenInfo=90 then matrix([0,-1],[1,0]) else if blueToGreenInfo=180 then matrix([-1,0],[0,-1]) else matrix([0,1],[-1,0])) else (if blueToGreenInfo="x-axis" then matrix([1,0],[0,-1]) else matrix([-1,0],[0,1]));
+
+greenToRedMat: blueToGreenMat.redToBlueMat;
+
+tans8: if greenToRedMat=matrix([1,0],[0,-1]) then y=0 else if greenToRedMat=matrix([-1,0],[0,1]) then x=0 else if greenToRedMat=matrix([0,1],[1,0]) then y=x else y=-x;
+
+greenToRedVec:list_matrix_entries(greenToRedMat.matrix([first(first(pointsListR))],[second(first(pointsListR))])-matrix([first(first(pointsListG))],[second(first(pointsListG))]));
+
+tans6:first(greenToRedVec);
+tans7:second(greenToRedVec);
+
+/* Delete variants where the shapes are off the grid */
+
+shapesOffGrid: if shape_off_grid(pointsListR) or shape_off_grid(pointsListB) or shape_off_grid(pointsListG) then true else false;]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="moodle_auto_format">
+      <text><![CDATA[<p>{@shapesOffGrid@}</p>
+<p>{@pointsListR@}</p>
+<p>{@pointsListB@}</p>
+<p>{@pointsListG@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="moodle_auto_format">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>dot</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>dropdown</type>
+      <tans><![CDATA[[["ROTATION", if redToBlueType="ROTATION" then true else false],["REFLECTION", if redToBlueType="REFLECTION" then true else false]]]]></tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>tans2</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>2</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>tans3</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>2</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>tans4</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans5</name>
+      <type>algebraic</type>
+      <tans>tans5</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans6</name>
+      <type>algebraic</type>
+      <tans>tans6</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans7</name>
+      <type>algebraic</type>
+      <tans>tans7</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans8</name>
+      <type>algebraic</type>
+      <tans>tans8</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>2</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>/* Node 1: Check correct transformation */
+node1_test: if ans1=redToBlueType and ans2=tans2 then 1 else 0;
+
+/* Node 2: Check whether the transformation type is correct */</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node1_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>redToBlueType</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>You are correct that the type of transformation required is a {@if redToBlueType="REFLECTION" then "reflection" else "rotation"@}.<br>However, the {@if redToBlueType="REFLECTION" then "line of reflection" else "centre of rotation"@} should be {@tans2@}.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p><br>The type of transformation required is actually a {@if redToBlueType="REFLECTION" then "reflection" else "rotation"@} and the {@if redToBlueType="REFLECTION" then "line of reflection" else "centre of rotation"@} should be {@tans2@}.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>2.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>/* Node 1: Check correct transformation */
+node1_test: if ans3=tans3 and ans4=tans4 and ans5=tans5 then 1 else 0;
+
+/* Node 2: Check correct reflection/rotation */
+
+/* Node 3: Check correct translation */
+node3_test: if ans4=tans4 and ans5=tans5 then 1 else 0;</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node1_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>tans3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5</truescore>
+        <truepenalty/>
+        <truenextnode>2</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>Your {@if blueToGreenType="RELECTION" then "reflection" else "rotation"@} is correct.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p><br>Your {@if blueToGreenType="RELECTION" then "reflection" else "rotation"@} is not correct.<br>It should be {@if blueToGreenType="RELECTION" then "in the line" else "around the point"@} {@tans3@}.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node3_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>Your translation is correct.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p><br>Your translation is not correct.<br>It should be {@tans4@} units in the x-direction and {@tans5@} units in the y-direction.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>2.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>/* Node 1: Check correct transformation */
+node1_test: if ans6=tans6 and ans7=tans7 and ans8=tans8 then 1 else 0;
+
+/* Node 2: Check correct translation */
+node2_test: if ans6=tans6 and ans7=tans7 and ans8=tans8 then 1 else 0;
+
+/* Node 3: Check correct reflection */</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node1_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>node2_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5</truescore>
+        <truepenalty/>
+        <truenextnode>2</truenextnode>
+        <trueanswernote>prt3-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>Your translation is correct.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt3-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p><br>Your translation is not correct.<br>It should be {@tans6@} units in the x-direction and {@tans7@} units in the y-direction.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans8</sans>
+        <tans>tans8</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>Your reflection is correct.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p><br>Your reflection is not correct.<br>It should be in the line {@tans8@}.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>5279559</deployedseed>
+    <deployedseed>1883898474</deployedseed>
+    <deployedseed>197742602</deployedseed>
+    <deployedseed>340063282</deployedseed>
+    <deployedseed>1995345126</deployedseed>
+    <deployedseed>1797321647</deployedseed>
+    <deployedseed>1407218759</deployedseed>
+    <deployedseed>595176932</deployedseed>
+    <deployedseed>1302434728</deployedseed>
+    <deployedseed>1305384280</deployedseed>
+    <deployedseed>1151582815</deployedseed>
+    <deployedseed>1420474054</deployedseed>
+    <deployedseed>1789131008</deployedseed>
+    <deployedseed>1334821376</deployedseed>
+    <deployedseed>1755440536</deployedseed>
+    <deployedseed>1473987479</deployedseed>
+    <deployedseed>1348238268</deployedseed>
+    <deployedseed>310426784</deployedseed>
+    <deployedseed>507551070</deployedseed>
+    <deployedseed>2087716963</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description/>
+      <testinput>
+        <name>ans1</name>
+        <value><![CDATA[first(mcq_correct([["ROTATION", if redToBlueType="ROTATION" then true else false],["REFLECTION", if redToBlueType="REFLECTION" then true else false]]))]]></value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>tans2</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>tans3</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>tans4</value>
+      </testinput>
+      <testinput>
+        <name>ans5</name>
+        <value>tans5</value>
+      </testinput>
+      <testinput>
+        <name>ans6</name>
+        <value>tans6</value>
+      </testinput>
+      <testinput>
+        <name>ans7</name>
+        <value>tans7</value>
+      </testinput>
+      <testinput>
+        <name>ans8</name>
+        <value>tans8</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

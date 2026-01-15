@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Presenting Population growth model using indices</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A small community in rural Kenya has an initial population of {@P0@} people. The population grows each year by a factor of {@g@}. Using indices, calculate the population after {@t@} years.</p>
+
+<p>Write your answer using the model:</p>
+
+<p>\[
+P(t) = P_0 \times g^t
+\]</p>
+
+<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>The population model is:</p>
+
+<p>\[
+P(t) = {@P0@} \times ({@g@})^{@t@}.
+\]</p>
+
+<p>Evaluating this gives:</p>
+
+<p>\[
+P(t) = {@Pt@}.
+\]</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Initial population */
+P0: rand_with_step(800,1500,50);
+
+/* Annual growth multiplier */
+g_choices: [103/100, 104/100, 106/100];
+g: rand(g_choices);
+
+/* Number of years */
+t: rand([3,4,5,6]);
+
+/* Final population */
+Pt: P0 * g^t;
+
+/* Wrong answers */
+m1: P0 * g * t;           /* linear growth mistake */
+m2: P0 + g^t;             /* add instead of multiply */
+m3: P0 * g^(t-1);         /* misses one cycle */
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@Pt@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept"></p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description"> The question requires the learner to apply exponential growth models using indices to determine the population size after a given number of years.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>Pt</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>Pt</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>570798313</deployedseed>
+    <deployedseed>311733780</deployedseed>
+    <deployedseed>1702950114</deployedseed>
+    <deployedseed>1993951345</deployedseed>
+    <deployedseed>1549629842</deployedseed>
+    <deployedseed>550465260</deployedseed>
+    <deployedseed>281892136</deployedseed>
+    <deployedseed>711460335</deployedseed>
+    <deployedseed>608626031</deployedseed>
+    <deployedseed>601522753</deployedseed>
+    <deployedseed>2100145447</deployedseed>
+    <deployedseed>355397365</deployedseed>
+    <deployedseed>1509261520</deployedseed>
+    <deployedseed>1683233103</deployedseed>
+    <deployedseed>1075476600</deployedseed>
+    <deployedseed>1507055970</deployedseed>
+    <deployedseed>1785922661</deployedseed>
+    <deployedseed>584640187</deployedseed>
+    <deployedseed>1286973375</deployedseed>
+    <deployedseed>1053777539</deployedseed>
+    <deployedseed>770260005</deployedseed>
+    <deployedseed>755447148</deployedseed>
+    <deployedseed>122648178</deployedseed>
+    <deployedseed>1905483401</deployedseed>
+    <deployedseed>49771151</deployedseed>
+    <deployedseed>1132670522</deployedseed>
+    <deployedseed>1357693019</deployedseed>
+    <deployedseed>1272057235</deployedseed>
+    <deployedseed>103174766</deployedseed>
+    <deployedseed>1519757016</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Pt</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

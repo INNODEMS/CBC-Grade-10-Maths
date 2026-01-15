@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Identifying the volume of a cone</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A cone-shaped funnel has a radius of {@r_cm@} cm and a height of {@h_cm@} cm. How much water can the funnel hold?
+</p>
+<p>
+Give your answer in <strong>cubic metres</strong>.
+</p>
+[[jsxgraph]]
+const brd = JXG.JSXGraph.initBoard('jxgbox', {
+      boundingbox: [-4, 15, 14, -3],
+      axis: false,
+      showCopyright: false,
+      showNavigation: false
+    });
+
+    // Cone dimensions
+    const r = 7;   // radius
+    const l = 10;  // slant height
+
+    // Center of ellipse base
+    const O = brd.create('point', [5, 8], {visible: false});
+    const a = r / 2;   // horizontal radius
+    const b = r / 6;   // vertical radius (flattened for ellipse look)
+
+    // Apex (tip of cone)
+    const Apex = brd.create('point', [O.X(), O.Y() - l], {visible: false});
+
+    // Base edge points
+    const A = brd.create('point', [O.X() - a, O.Y()], {visible: false});
+    const B = brd.create('point', [O.X() + a, O.Y()], {visible: false});
+
+    // Cone sides
+    brd.create('segment', [Apex, A], {strokeColor: '#222', strokeWidth: 2});
+    brd.create('segment', [Apex, B], {strokeColor: '#222', strokeWidth: 2});
+
+    // Filled cone surface
+    brd.create('polygon', [A, Apex, B], {
+      fillColor: 'yellow',
+      fillOpacity: 0.85,
+      borders: {visible: false}
+    });
+
+    // Ellipse (base)
+    const ellipseFront = brd.create('curve', [
+      t => O.X() + a * Math.cos(t),
+      t => O.Y() + b * Math.sin(t),
+      Math.PI, 2 * Math.PI
+    ], {strokeColor: '#222', strokeWidth: 2});
+
+    const ellipseBack = brd.create('curve', [
+      t => O.X() + a * Math.cos(t),
+      t => O.Y() + b * Math.sin(t),
+      0, Math.PI
+    ], {strokeColor: '#222', dash: 2, strokeWidth: 2});
+
+    // Radius line (↔) with arrowheads on both sides
+    const radiusLine = brd.create('arrow', [O, B], {
+      strokeColor: '#222',
+      strokeWidth: 2,
+      lastArrow: {type: 2, size: 6},
+      firstArrow: {type: 2, size: 6}
+    });
+
+    // Label for radius
+    brd.create('text', [O.X() + a / 3, O.Y() + 0.3, "{#r_cm#} cm"], {fontSize: 16});
+
+
+    // Perpendicular (vertical) height of the cone
+const heightLine = brd.create('segment', [O, Apex], {
+  strokeColor: '#000',
+  strokeWidth: 2,
+  dash: 1
+});
+
+// Label for perpendicular height
+brd.create('text', [O.X() - 0.5, O.Y() - l / 2, "{#h_cm#} cm"], {
+  fontSize: 16,
+  rotate: 90,
+  fillColor: 'blue',
+  strokeColor: 'blue'
+});
+
+[[/jsxgraph]]
+<p>
+\(\text{Volume}=\)[[input:ans1]]\(\,\text{m}^3\)[[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><strong>Step 1: Identify the given information</strong></p>
+
+<p>
+The funnel is in the shape of a cone.
+</p>
+
+<p>
+Radius of the base = {@r_cm@} cm  
+<br>
+Perpendicular height = {@h_cm@} cm
+</p>
+
+<p>
+The volume is required in <strong>cubic metres</strong>, so all measurements must be converted from centimetres to metres.
+</p>
+
+<p><strong>Step 2: Convert centimetres to metres</strong></p>
+
+<p>
+\(\begin{align}
+r &= \frac{{@r_cm@}}{100}\ \\
+&={@r_1@}\,\text{m} \\
+h &= \frac{{@h_cm@}}{100} \\
+&= {@h_1@}\,\text{m}
+\end{align}\)
+</p>
+
+<p><strong>Step 3: Find the area of the circular base</strong></p>
+
+<p>
+\(\begin{align}
+\text{Base area} &= \pi r^2 \\
+&= \frac{22}{7}\times \left({@r_1@}\right)^2 \\
+&={@base@}
+\end{align}\)
+</p>
+
+<p><strong>Step 4: Write the formula for the volume of a cone</strong></p>
+
+<p>
+\(\begin{align}
+\text{Volume of a cone} &= \frac{1}{3}\times \text{base area} \times \text{height}
+\end{align}\)
+</p>
+
+<p><strong>Step 5: Substitute the values</strong></p>
+
+<p>
+\(
+\begin{align}
+V &= \frac{1}{3} \times {@base@} \times {@h_1@} \\
+&=\frac{1}{3} \times {@B_h@} \\
+&={@ta@} \,\text{m}^3
+\end{align}
+\)
+</p>
+
+<p>
+Therefore, the amount of water the funnel can hold is \({@ta@}\,\text{m}^3\).
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random radius and height in cm */
+r_cm : rand_with_step(84,168,7) + 5;     /* radius between 5 and 10 cm */
+h_cm : rand_with_step(36,72,3) + 10;   /* height between 10 and 20 cm */
+
+/* Convert to metres */
+r : r_cm / 100;
+r_1:float(r);
+h : h_cm / 100;
+h_1:float(h);
+
+base:22/7*r_1^2;
+B_h:base*h_1;
+
+/* Volume of the cone in cubic metres */
+ta : (1/3)*22/7*r_1^2*h_1;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The height of the cone}={@r_cm@}\,\text{cm}\)</p>
+<p>\(\text{The Radius of the cone}={@h_cm@}\,\text{cm}\)</p>
+<p>\(\text{The Volume of of the cone}={@ta@}\,\text{m}^3\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct answere of the volume of the cone,</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.000000000003</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1325035748</deployedseed>
+    <deployedseed>184543388</deployedseed>
+    <deployedseed>1973250354</deployedseed>
+    <deployedseed>2044628257</deployedseed>
+    <deployedseed>1846064042</deployedseed>
+    <deployedseed>436126978</deployedseed>
+    <deployedseed>438677703</deployedseed>
+    <deployedseed>1274559731</deployedseed>
+    <deployedseed>1729589058</deployedseed>
+    <deployedseed>187188220</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

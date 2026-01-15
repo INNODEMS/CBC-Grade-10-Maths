@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the Depth of Water in a Cylindrical Container</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A spherical container has a diameter of \({@d_sph@}\,\text{cm}\) and is \(\dfrac{4}{3}\) full of water. The water is emptied into a cylindrical container of diameter \({@d_cyl@}\,\text{cm}\). Find the depth of the water in the cylindrical container.</p>
+<p>\(\text{The depth of the water}=\)[[input:ans1]]\(\,\text{cm}\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><strong>Step 1: Write down the given information</strong></p>
+<p>Diameter of the sphere = {@d_sph@} cm</p>
+<p>Diameter of the cylinder = {@d_cyl@} cm</p>
+<p>Fraction of the sphere filled with water = \( \dfrac{4}{3} \)</p>
+
+<p><strong>Step 2: Find the radii of the sphere and the cylinder</strong></p>
+<p>
+\(\begin{align}
+r_{\text{sphere}}&=\frac{\text{Diameter}}{2}\\
+ &= \frac{{@d_sph@}}{2} \\
+&={@r_sph@}\,\text{cm}\\
+&\\
+r_{\text{cylinder}}
+&=\frac{\text{Diameter}}{2}\\
+&=\frac{{@d_cyl@}}{2} \\
+ &= {@r_cyl@}\,\text{cm}\\
+\end{align}\)
+</p>
+
+<p><strong>Step 3: Find the volume of water in the sphere</strong></p>
+<p>
+\(
+\begin{align}
+V_{\text{sphere}}
+&=\frac{4}{3} \times \frac{4}{3}\pi r^3 \\
+ &= \frac{4}{3} \times \frac{4}{3}\times \frac{22}{7} \times {@r_sph@}^{3} \\
+&= \frac{16}{9} \times \frac{22}{7} \times {@R_s@} \\
+&=\frac{16}{9} \times{@v@}\\
+&={@V_sphere@}\\
+&={@v_sphere@}\,\text{cm}^3
+\end{align}\)
+</p>
+
+<p><strong>Step 4: Write the formula for the volume of water in the cylinder</strong></p>
+<p>
+\(\begin{align}
+V_{\text{cylinder}} &= \pi r^2 h \\
+&= \frac{22}{7} \times {@r_cyl@}^2 \times h
+\end{align}\)
+</p>
+
+<p><strong>Step 5: Equate the two volumes to find the depth of water</strong></p>
+<p>
+\(\begin{align} V_{sphere}&=V_{cylinder}\\
+{@v_sphere@}&= \frac{22}{7} \times {@r_cyl@}^2 \times h\\
+h &= \frac{{@v_sphere@}}{ \frac{22}{7} \times {@r_cyl@}^2}\\
+&=\frac{{@v_sphere@}}{{@Cy@}}\\
+&={@h@}\\
+&={@depth@}\,\text{cm}
+
+\end{align}\)
+</p>
+
+<p>
+Therefore,<br>
+\(\begin{align}
+\text{Depth of the water} &= {@depth@}\,\text{cm}
+\end{align}\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Randomize diameter of the cylinder */
+d_cyl : rand_with_step(6, 20, 2);   /* cylinder diameter between 6 cm and 20 cm */
+
+/* Randomize diameter of the sphere (always greater than cylinder) */
+d_sph : d_cyl + rand_with_step(10, 40, 2);  /* sphere diameter > cylinder diameter */
+
+/* Heights and radii */
+r_sph : d_sph / 2;
+r_cyl : d_cyl / 2;
+
+/* Fraction of sphere filled with water */
+fraction : 4/3;
+
+/* Use pi */
+pi_val : 22/7;
+
+/* Volume of water from sphere */
+V_sphere : fraction * (4/3) * pi_val * r_sph^3;
+
+/* Depth of water in the cylinder */
+h : V_sphere / (pi_val * r_cyl^2);
+
+/* Convert to decimal and round */
+depth : float(h);
+Depth_cylinder : decimalplaces(depth, 2);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The diameter of the sphere}={@d_sph@}\,\text{cm}\)</p>
+<p>\(\text{The diameter of the cylinder}={@d_cyl@}\,\text{cm}\)</p>
+<p>\(\text{The volume of the sphere}={@V_sphere@}\,\text{cm}^3\)</p>
+<p>\(\text{The height of the cylinder}={@depth@}\,\text{cm}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>depth</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checcks for the correct height of the cylinder.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>depth</tans>
+        <testoptions>0.000000000001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1552983850</deployedseed>
+    <deployedseed>2065100228</deployedseed>
+    <deployedseed>218362514</deployedseed>
+    <deployedseed>1946267100</deployedseed>
+    <deployedseed>963643092</deployedseed>
+    <deployedseed>2112298858</deployedseed>
+    <deployedseed>706929964</deployedseed>
+    <deployedseed>2036964292</deployedseed>
+    <deployedseed>1719564714</deployedseed>
+    <deployedseed>1370883810</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>depth</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

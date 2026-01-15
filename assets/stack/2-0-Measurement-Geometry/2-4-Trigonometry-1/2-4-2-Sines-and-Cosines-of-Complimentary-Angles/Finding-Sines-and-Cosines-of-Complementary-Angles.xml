@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding Sines and Cosines of Complementary Angles</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+Find the acute angles \(\alpha\) and \(\beta\) that satisfy each of the following trigonometric equations:
+</p>
+
+<ol type="a">
+  <li><p>\(\cos\, 45^\circ = \sin \alpha\)</p>
+  <p>\(\alpha=\)[[input:ans1]]\(^\circ\)[[validation:ans1]][[feedback:prt1]]</p>
+    </li>
+  <li><p>\(\cos\, \beta = \sin 5\beta\)</p>
+   <p>\(\beta =\)[[input:ans2]]\(^\circ\)[[validation:ans2]][[feedback:prt2]]</p>
+     </li>
+  <li><p>\(\sin\,2\alpha = \cos 30^\circ\)</p>
+       <p>\(\alpha=\)[[input:ans3]]\(^\circ\)[[validation:ans3]][[feedback:prt3]]</p>
+   </li>
+</ol>
+
+<p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>
+<ol type='a'>
+<li>
+<p>\(\cos\, 45^\circ = \sin \alpha\)</p>
+<p>Implies that,<br>
+\(
+\begin{align}
+{@theta_1@}^\circ + \alpha &=90^\circ \\
+\alpha &= 90^\circ-{@theta_1@}^\circ \\
+&={@sol1@}^\circ
+
+
+\end{align}
+
+\) <br>
+Therefore, <br>
+The acute angle \(\alpha = {@sol1@}^\circ\)
+
+</p>
+
+
+</li>
+
+<li>
+<p>\(\cos\, \beta = \sin 5\beta\)</p>
+<p>Implies that,<br>
+\(
+\begin{align}
+\beta+ {@num_1@}\beta &=90^\circ \\
+{@sol@}\beta &= 90^\circ \\
+\beta &= \frac{90^\circ}{{@sol@}}\\
+&={@sol2@}^\circ
+
+
+\end{align}
+
+\) <br>
+Therefore, <br>
+The acute angle \(\beta = {@sol2@}^\circ\)
+
+</p>
+
+
+</li>
+<li>
+<p>\(\sin\,2\alpha = \cos 30^\circ\)</p>
+<p>Implies that,<br>
+\(
+\begin{align}
+2 \alpha + {@theta_2@}^\circ &=90^\circ \\
+2 \alpha &= 90^\circ - {@theta_2@}^\circ\\
+\alpha &= \frac{{@sol_2@}^\circ}{2}\\
+&={@sol3@}^\circ
+
+
+\end{align}
+
+\) <br>
+Therefore, <br>
+The acute angle \(\beta = {@sol3@}^\circ\)
+
+</p>
+
+
+</li>
+
+
+
+</ol>
+
+
+
+
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>theta_1:rand_with_step(10,90,5); /*Randomizing degrees of part a*/
+theta_2:rand_with_step(10,90,10);/*Randomizing degrees of part c*/
+num_1:rand_with_step(2,20,2);
+/*Solution*/
+/* (a) Solution */
+sol1: 90-theta_1;
+
+
+/* (b) Solution */
+sol:num_1+1;
+sol2:90/(num_1+1);
+
+
+/* (c) Solution */
+sol_2:90-theta_2;
+sol3:(90-theta_2)/2;
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Part (a) of the question</p>
+<p>\(\text{The acute angle}\, \alpha={@sol1@}^\circ\)</p>
+
+<p>Part (b) of the question</p>
+<p>\(\text{The acute angle}\, \beta={@sol2@}^\circ\)</p>
+
+<p>Part (c) of the question</p>
+<p>\(\text{The acute angle}\, \alpha={@sol3@}^\circ\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>sol1</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>sol2</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>sol3</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correctalpha</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>sol1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct beta</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>sol2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct beta</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>sol3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1498791632</deployedseed>
+    <deployedseed>933751405</deployedseed>
+    <deployedseed>1168044800</deployedseed>
+    <deployedseed>1317545600</deployedseed>
+    <deployedseed>1211450507</deployedseed>
+    <deployedseed>977152072</deployedseed>
+    <deployedseed>1363826559</deployedseed>
+    <deployedseed>1037945741</deployedseed>
+    <deployedseed>524532633</deployedseed>
+    <deployedseed>1067551243</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>sol1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>sol2</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>sol3</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the area of segment.</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A chord XY of length \({@XY@}\,\text{}\) is drawn in a circle with centre
+O and radius \({@XO@}\,\text{}\), as shown in the figure below.
+</p>
+
+<p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+      boundingbox: [-12, 12, 12, -12],
+      axis: false,
+      showNavigation: false,
+      showCopyright: false
+  });
+
+  /* Points: dots removed, labels kept */
+  var X = board.create('point', [-7, 0], {
+      name: 'X',
+      size: 0,
+      strokeOpacity: 0,
+      fillOpacity: 0,
+      label: { offset: [-12, 8] }   // outside the circle
+  });
+
+  var Y = board.create('point', [7, 0], {
+      name: 'Y',
+      size: 0,
+      strokeOpacity: 0,
+      fillOpacity: 0
+  });
+
+  var N = board.create('midpoint', [X, Y], {
+      name: 'N',
+      size: 0,
+      strokeOpacity: 0,
+      fillOpacity: 0
+  });
+
+  var ON = Math.sqrt(64 - 49); // √15
+  var O  = board.create('point', [0, ON], {
+      name: 'O',
+      size: 0,
+      strokeOpacity: 0,
+      fillOpacity: 0
+
+  });
+
+  /* Constructions */
+  board.create('circle', [O, X]);
+  board.create('segment', [X, Y]);
+  board.create('segment', [O, N], {straightFirst:false, straightLast:false});
+  board.create('segment', [O, X]);
+  board.create('segment', [O, Y]);
+
+  /* Text labels */
+  board.create('text', [-3, ON - 0.5, '{#XO#} cm']);
+  board.create('text', [-1, -0.8, '{#XY#} cm']);
+  board.create('text', [0, -5, 'P ']);
+    // Right angle at N between NO and NX
+    var aONX = board.create('angle', [O, N, X], {
+        radius: 1,
+        withLabel: false,      // no angle text
+        type: 'sector',        // classic angle mark
+        orthoSensitivity: 1    // treat as right angle
+    });
+
+
+[[/jsxgraph]]
+</p>
+
+<p>
+Calculate the following:
+</p>
+
+<ol type="a">
+  <li>
+   <p>The distance <strong>ON</strong>.</p>
+   <p>\(\text{ON}=\)[[input:ans1]]\(\,\text{cm}\)[[validation:ans1]][[feedback:prt1]]</p>
+  </li>
+  <li>
+   <p>The area of the sector <strong>OXPY</strong>.</p>
+    <p>\(\text{Area of a sector}=\)[[input:ans2]]\(\,\text{cm}^2\)[[validation:ans2]][[feedback:prt2]] \(\text{Correct to 3 d.p}\)</p>
+   </li>
+  <li>
+    <p>The area of triangle <strong>OXY.</p>
+    <p>\(\text{Area of a triangle}=\)[[input:ans3]]\(\,\text{cm}^2\)[[validation:ans3]][[feedback:prt3]]</p>
+    </li>
+  <li>
+    <p>The area of the minor segment.</p>
+     <p>\(\text{Area of minor segment}=\)[[input:ans4]]\(\,\text{cm}^2\)[[validation:ans4]][[feedback:prt4]] \(\text{Correct to 3 d.p}\)</p>
+   </li>
+  <li>
+   <p>The area of the major segment.</p>
+    <p>\(\text{Area of major segment}=\)[[input:ans5]]\(\,\text{cm}^2\)[[validation:ans5]][[feedback:prt5]] \(\text{Correct to 3 d.p}\)</p>
+   </li>
+</ol>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<ol type="a">
+
+<li>
+<p><strong>Distance ON</strong></p>
+
+<p>
+Since <strong>N</strong> is the midpoint of <strong>XY</strong>, triangle
+<strong>ONX</strong> is right-angled at <strong>N</strong>.
+</p>
+
+\(
+\begin{align}
+XN &= \frac{XY}{2} \\
+&=\frac{{@XY@}}{2} \\
+&={@XN@}\,\text{cm}
+\end{align}
+\)
+
+<p>
+Using Pythagoras’ theorem in \(\triangle ONX\):
+</p>
+
+\(
+\begin{align}
+ON^2 + XN^2 &= XO^2 \\
+ON^2 &= {@XO@}^2 - {@XN@}^2 \\
+ON &= \sqrt{{@XO@}^2 - {@XN@}^2}\\
+&=\{{@ON@}\}\ \text{cm}
+\end{align}
+\)
+
+
+</li>
+
+<li>
+<p><strong>Area of sector OXPY</strong></p>
+
+<p>
+In right-angled triangle <strong>ONX</strong>:
+</p>
+
+\(
+\begin{align}
+\cos(\angle NOX) &= \frac{ON}{XO}\\
+&=\frac{{@ON@}}{{@XO@}} \\
+\angle \, NOX &=\cos^(-1)(\frac{{@ON@}}{{@XO@}})\\
+&={@angle_NOX@}
+
+\end{align}
+\)
+
+<p>Therefore, <br>
+\(\angle\, XOY={@angle_NOX@} \times 2={@angle_XOY@}^\circ\)
+</p>
+
+<p>
+Area of a sector:
+</p>
+
+\(
+\begin{align}
+\text{Area of sector}
+&= \frac{\angle XOY}{360} \times \pi r^2\\
+&=\frac{\theta}{360} \times \frac{22}{7} \times {@XO@}^2\\
+&={@area_sector@} \, \text{cm}^2
+\end{align}
+\)
+
+<p>
+Therefore, the area of a sector \(={@area_sector@} \, \text{cm}^2\)
+</p>
+</li>
+
+<li>
+<p><strong>Area of triangle OXY</strong></p>
+
+<p>
+Triangle <strong>OXY</strong> has base <strong>XY</strong> and height <strong>ON</strong>.
+</p>
+
+\(
+\begin{align}
+\text{Area of } \triangle OXY
+&= \frac{1}{2} \times XY \times ON \\
+&=\frac{1}{2} \times {@XY@} \times {@ON@} \\
+&={@area_triangle@}\,\text{cm}^2
+\end{align}
+\)
+
+<p>
+Therefore, the area of the triangle \(={@area_triangle@} \, \text{cm}^2\)
+</p>
+</li>
+
+<li>
+<p><strong>Area of the minor segment</strong></p>
+
+\(
+\begin{align}
+\text{Area of minor segment}
+&= \text{Area of sector} - \text{Area of } \triangle\,OXY \\
+&={@area_sector1@}-{@area_triangle@} \\
+&={@area_minor_segment@}\,\text{cm}^2
+\end{align}
+\)
+
+<p>
+Therefore, the area of the minor segment \(={@area_minor_segment@} \, \text{cm}^2\)
+</p>
+</li>
+
+<li>
+<p><strong>Area of the major segment</strong></p>
+
+<p>
+Area of the circle:
+</p>
+
+\(
+\begin{align}
+\text{Area of circle} &= \pi r^2\\
+&=\frac{22}{7}\times {@XO@}^2\\
+&={@area_circle@}\,\text{cm}^2
+\end{align}
+\)
+<p>Therefore, <br> 
+
+\(
+\begin{align}
+\text{Area of major segment}
+&= \text{Area of circle} - \text{Area of minor segment}\\
+&={@area_circle@}-{@area_minor_segment@} \\
+&={@area_major_segment@}\,\text{cm}^2
+\end{align}
+\)
+</p>
+
+<p>
+Therefore, the area of the major segment \(={@area_major_segment@} \, \text{cm}^2\)
+</p>
+</li>
+
+</ol>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Step 1: Choose a Pythagorean triplet
+   XN = a , ON = b , XO = c */
+triplets : [
+  [3,4,5],
+  [4,3,5],
+  [5,12,13],
+  [12,5,13],
+  [6,8,10],
+  [8,6,10],
+  [8,15,17],
+  [15,8,17],
+  [9,12,15],
+  [12,9,15],
+  [12,16,20],
+  [16,12,20],
+  [5,12,13],
+  [6,8,10],
+  [8,15,17]
+];
+T : rand(length(triplets)) + 1;
+[a,b,c] : triplets[T];
+
+XN : a;
+ON : b;
+XO : c;
+
+/* Step 2: Chord length */
+XY : 2*XN;
+
+/* Step 3: Angle NOX (right triangle XNO)
+   Use cosine (can also use sine or tangent) */
+
+angle_NOX : acos(ON/XO)* 180/%pi, numer;
+
+/* Step 4: Central angle XOY */
+angle_XOY : 2*angle_NOX;
+
+/* Step 5: Areas */
+area_sector1 : angle_XOY/360*22/7*XO^2;
+area_sector:decimalplaces(area_sector1,3);
+area_triangle : 1/2*(XY*ON);
+
+area_minor_segment1 : area_sector1 - area_triangle;
+area_minor_segment:decimalplaces(area_minor_segment1,3);
+
+area_circle1:22/7*XO^2;
+area_circle:decimalplaces(area_circle1,3);
+
+area_major_segment1 : area_circle - area_minor_segment1;
+area_major_segment:decimalplaces(area_major_segment1,3);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The radius of the circle}={@XO@}\,\text{cm}\)<p>
+<p>\(\text{The distance}={@ON@}\,\text{cm}\)<p>
+<p>\(\text{The area of a sector}={@area_sector@}\,\text{cm}\)<p>
+<p>\(\text{The area of triangle}={@area_triangle@}\,\text{cm}\)<p>
+<p>\(\text{The area of the minor segment}={@area_minor_segment@}\,\text{cm}\)<p>
+<p>\(\text{The area of the major segment}={@area_major_segment@}\,\text{cm}\)<p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ON</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>area_sector</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>area_triangle</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>area_minor_segment</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans5</name>
+      <type>algebraic</type>
+      <tans>area_major_segment</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct answer.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ON</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Check for the correct answer.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>area_sector</tans>
+        <testoptions>3</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct answer.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>area_triangle</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the  correct answer.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans4</sans>
+        <tans>area_minor_segment</tans>
+        <testoptions>3</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt5</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct answere.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans5</sans>
+        <tans>area_major_segment</tans>
+        <testoptions>3</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt5-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt5-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>379003907</deployedseed>
+    <deployedseed>1760418488</deployedseed>
+    <deployedseed>417529719</deployedseed>
+    <deployedseed>1864570437</deployedseed>
+    <deployedseed>732548113</deployedseed>
+    <deployedseed>558553308</deployedseed>
+    <deployedseed>1116230003</deployedseed>
+    <deployedseed>490245281</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ON</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>area_sector</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>area_triangle</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>area_minor_segment</value>
+      </testinput>
+      <testinput>
+        <name>ans5</name>
+        <value>area_major_segment</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt4</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt4-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt5</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt5-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

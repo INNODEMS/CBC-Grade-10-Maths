@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Working out the volume of a cuboid.</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Using the figure below, find the volume of the cuboid in \(m^3\)</p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard("jxgbox", {boundingbox: [-1, 5, 8,-1], axis: false, showCopyright: false});
+
+
+        //Defining points of the cube.
+
+        var A = board. create ('point'  , [0,0], {'visible':false , 'fixed':true});
+        var B = board. create ('point'  , [0,2], {'visible':false , 'fixed':true});
+        var C = board. create ('point'  , [5,0], {'visible':false , 'fixed':true});
+        var D = board. create ('point'  , [5,2], {'visible':false , 'fixed':true});
+        var E = board. create ('point'  , [7,2], {'visible':false , 'fixed':true});
+        var F = board. create ('point'  , [7,4], {'visible':false , 'fixed':true});
+        var G = board. create ('point'  , [2,4], {'visible':false , 'fixed':true});
+        var H = board. create ('point'  , [2,2], {'visible':false , 'fixed':true});
+
+        //drawing lines to join the points
+
+        var Y = board. create ('polygon'  , [A, B, D, C, A, B, G, F, E, C, D, F, G, H, A], {fillcolour:'blue' , borders:{strokeColour: 'white'}});
+        
+        //labeling lengths.
+       var labelA = board. create('text', [-0.5,1.2, '{#Length_1#}cm'],{fontSize: 12});
+       var labelA = board. create('text', [1.5,-0.5, '{#width_1#}cm'],{fontSize: 12});
+       var labelA = board. create('text', [6.5,1.1, '{#height_1#} cm'],{fontSize: 12});
+
+[[/jsxgraph]]
+<p></p><p>[[input:ans1]]\(m^3\) [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3
+<p>To find the area of the volume we use the formula, Length \( \times \) width  \(\times\) height </p>
+<p>The length of the cuboid is \({@Length_1@}\)</p>
+<p>The height of the cuboid is \({@height_1@}\)</p>
+<p>The width of the cuboid is \({@width_1@}\)</p>
+<p> volume =\({@Length_1@} \times {@width_1@} \times {@height_1@}\)</p>
+<p>\({@volume_1@}\)</p>
+<p> Converting cubic  \(cm^3\)to  \(m^3\) we divide the volume with \(100000cm^3\) </p>
+<p>To get \({@vol_1@}m^3\)</p>
+= \({@volume@}m^3\)]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025012100</text>
+    </stackversion>
+    <questionvariables>
+      <text>Length_1:rand_with_step(100,300,1);/*Length in centimetres*/
+width_1:rand_with_step(550,970,1);/*Length in centimetres*/
+height_1:rand_with_step(320,500,1);/*Length in centimetres*/
+volume_1:Length_1*width_1*height_1;/*The volume of the cuboid*/
+vol_1:volume_1 / 1000000;/*Volume in cubic metres*/
+volume:decimalplaces(vol_1,2);
+
+/*Mistake_1- Adding the lengths to get the volume instead of multiplying.*/
+vol_mistake1:Length_1+width_1+height_1;/*Wrongly calculated volume*/
+
+/*Mistake_2- Lack of conversion to \( cm^3\) */
+vol_mistake2 :volume_1;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="moodle_auto_format">
+      <text><![CDATA[<p>{@Length_1@}</p>
+<p>{@height_1@}</p>
+<p>{@width_1@}</p>
+<p>{@volume_1@}</p>
+<p>{@volume@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Harriet Mogaka</p>
+<p id="concept"></p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">The question requires the learner to find the volume of a cuboid, given the length, width, and height. The learner is expected to use the  formula  which is length x width x height to get the volume of a cuboid.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>volume</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Volume of a cuboid</description>
+        <answertest>NumDecPlaces</answertest>
+        <sans>ans1</sans>
+        <tans>volume</tans>
+        <testoptions>2</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Lack of conversion to cubic metres</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>vol_mistake2</tans>
+        <testoptions>2</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5</truescore>
+        <truepenalty/>
+        <truenextnode>2</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You correctly computed the volume for the cuboid but you did not convert your answer to cubic metres.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Addition instead of multiplication.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>vol_mistake1</tans>
+        <testoptions>2</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Your computations are correct but it seems you added instead of multiplying.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>511149270</deployedseed>
+    <deployedseed>1011677963</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>volume</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

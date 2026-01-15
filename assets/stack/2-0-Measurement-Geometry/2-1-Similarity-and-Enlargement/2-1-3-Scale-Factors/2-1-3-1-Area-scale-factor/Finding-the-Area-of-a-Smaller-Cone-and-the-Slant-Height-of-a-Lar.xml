@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the Area of a Smaller Cone and the Slant Height of a Larger Cone from an Area Ratio</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The ratio of the area of two similar cones is \(\frac{{@square_list_a@}}{{@square_list_b@}}\).</p>
+<p>(a). Find the area of the smaller cone if the area of the bigger cone is {@c@} \(\text{m}^2\). <b>Note:</b> Write your answer correct to <b>2 </b>decimal places.</p>
+<p>[[input:ans1]] \(\text{m}^2\)[[validation:ans1]][[feedback:prt1]]</p>
+<p>(b). If the slanting height of the smaller cone is {@d@} m find the slanting height of the larger cone.<b>Note:</b> Write your answer correct to <b>2</b> decimal places.</p>
+<p>[[input:ans2]] m[[validation:ans2]][[feedback:prt2]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution<h3>
+<p>\(\begin{align}\text{(a).Area of the smaller cone} = \frac{{@square_list_a@} \times {@c@}}{{@square_list_b@}}\\={@small_cone@}\\={@ta@}\end{align}\)</p>
+<p> \(\begin{align}\text{(b).Slant height of the larger cone} = \frac{{@square_list_b@} \times {@d@}}{{@square_list_a@}}\\={@ta1@}\end{align}\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Generate perfect-square values for a and b */
+square_list_a:rand ([4,9,16,25,36,49,64,81,100]);  /* extend if desired */
+square_list_b:rand ([121,144,169,196,225,256,289,324,400,441,484,529,576,625]);  /* extend if desired */
+
+/* Area of the larger cone */
+c: rand_with_step(700,1200,5);
+
+/* Slant height of the smaller cone */
+d: rand(12) + 7;
+/*area of the small cone*/
+small_cone:float(square_list_a*c)/square_list_b;
+/*square root of b/a*/
+squareroot:sqrt(square_list_b/square_list_a);
+/*Slanting height of the cone*/
+slating_height:float(squareroot*d);
+ta:decimalplaces(small_cone,2);
+ta1:decimalplaces(slating_height,2);
+
+/*mistakes for part a */
+/*Reversing the ratio of the areas*/
+small_cone1:float(square_list_b*c)/square_list_a;
+ta2:decimalplaces(small_cone1,2);
+/*Treating the area ratio as a linear ratio*/
+squareroot1:sqrt(square_list_a/square_list_b);
+ta3:decimalplaces((squareroot1*c),2);
+
+/*mistakes for part b */
+/*Using the area ratio directly for slanting height*/
+ta4:decimalplaces((square_list_b/square_list_a)*d,2);
+/*Using the inverse scale factor*/
+ta5:decimalplaces((1/squareroot)*d,2);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Area of the larger cone = {@c@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>: Reversing the ratio of the areas</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+It looks like you may have reversed the ratio of the areas. The ratio is given as smaller to larger, so the smaller cone’s area should be the corresponding fraction of the larger cone’s area. Make sure the ratio you use matches which cone you are finding the area for.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Treating the area ratio as a linear ratio</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+It looks like you may have treated the given area ratio as if it applied directly to lengths. Remember, the ratio given compares the <strong>areas</strong> of the cones, not their linear dimensions. Since the areas are already in the ratio \(\frac{{@square_list_a@}}{{@square_list_b@}}\), you can use this ratio directly to find the smaller area from the larger one.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>2.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>ta1</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Using the area ratio directly for slanting height</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta4</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+It looks like you may have used the area ratio directly to find the slanting height. Remember, slanting height is a <strong>linear</strong> measurement, so you must first find the linear scale factor by taking the square root of the area ratio before applying it.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Using the inverse scale factor</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta5</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+It looks like you may have used the scale factor in the wrong direction. Because you are finding the slanting height of the <strong>larger</strong> cone, the linear scale factor should increase the measurement from the smaller cone. Make sure the ratio you use reflects this enlargement.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1348376000</deployedseed>
+    <deployedseed>215098362</deployedseed>
+    <deployedseed>1084583742</deployedseed>
+    <deployedseed>74674136</deployedseed>
+    <deployedseed>2074317</deployedseed>
+    <deployedseed>1270197206</deployedseed>
+    <deployedseed>1553223504</deployedseed>
+    <deployedseed>1550683142</deployedseed>
+    <deployedseed>1521773251</deployedseed>
+    <deployedseed>1685104174</deployedseed>
+    <deployedseed>1163192734</deployedseed>
+    <deployedseed>1903478190</deployedseed>
+    <deployedseed>717419186</deployedseed>
+    <deployedseed>917654281</deployedseed>
+    <deployedseed>1201627536</deployedseed>
+    <deployedseed>1689379633</deployedseed>
+    <deployedseed>384484721</deployedseed>
+    <deployedseed>2063613650</deployedseed>
+    <deployedseed>1214778491</deployedseed>
+    <deployedseed>625627639</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>incorrect answer</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta2</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta4</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt2-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>incorrect answer</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta3</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta5</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-3-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt2-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

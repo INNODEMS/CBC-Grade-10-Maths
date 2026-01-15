@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding reciprocals of rational and irrational numbers using a calculator</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Find the reciprocal of the following numbers using a calculator. Leave your answer to 4 decimal places where possible.</p>
+
+<p><b>a)</b> \(\sqrt{{@number1@}} =\) [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>
+<p><b>b)</b> \(\frac{{@number2@}}{ \pi} =\) [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]</p>
+<p><b>c)</b> \({@frac1@} =\) [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>To find reciprocal of \(\sqrt{{@number1@}}\),  \(\frac{{@number2@}}{ \pi} \) and \({@frac1@}\) using a calculator:<p>
+<ol type="i">
+<li>Enter the number into the calculator</li>
+<li>Press the reciprocal button <code style="background-color: #e8e8e8; padding: 2px 6px; border: 1px solid #bbb; border-radius: 3px;">x⁻¹</code> on the calculator</li>
+<li>Press \(=\) sign and read the displayed result.</li>
+</ol>
+
+<p><b>a)</b> Therefore, the reciprocal of \(\sqrt{{@number1@}}\) is \({@recip_a@} \)</p>
+<p> Given to 4 decimal places we have \({@ta1@}\)</p>
+
+<p><b>b)</b> The reciprocal of  \(\frac{{@number2@}}{ \pi} \)  is \({@recip_b@} \)<br>
+Giving the number to 4 decimal points we have: \({@ta2@}\)</p>
+<p><b>c)</b> Given \({@frac1@}\), the reciprocal is \({@ta3@}\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>number1:rand(1000)+4;
+a:sqrt(number1);
+recip_a:float(1.0/a);
+ta1:decimalplaces(recip_a,4);
+number2:rand(10)+1;
+b :number2/ %pi;
+recip_b:float(1.0/b);
+ta2:decimalplaces(recip_b,4);
+num:rand(10)+1;
+den:rand_with_prohib(5,35,[num]);
+frac1:num/den;
+ta3:1/frac1;
+mistake_ta3:-1/frac1;
+/*mistake*/
+mistake1:number2/ 3.142;
+recip_b1:float(1.0/mistake1);
+ta2_mistake:decimalplaces(recip_b1,4);
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\sqrt{{@number1@}} \)</p>
+<p>{@recip_a@}</p>
+<p>{@ta1@}</p>
+<p>\(\frac{{@number2@}}{ /pi} \)</p>
+<p>{@recip_b@}</p>
+<p>{@ta2@}</p>
+<p>{@frac1@}</p>
+<p>{@ta3@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta3</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct reciprocal</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions>4</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect reciprocal of the number</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>a</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have given the square root of the number \({@a@\) instead of the reciprocal \({@ta1@}\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct reciprocal</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect reciprocal of the number</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2_mistake</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p> You have used the wrong value of  \(\pi\). Kindly use 22/7 or 3.142857142857143 not the rounded number 3.142</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct reciprocal</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ta3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for the incorrect reciprocal</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>mistake_ta3</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have failed to calculate the reciprocal of the fraction instead you changed the sign which is not the definition of reciprocal. Kindly check the worked solution below.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1466043628</deployedseed>
+    <deployedseed>712580742</deployedseed>
+    <deployedseed>2099995872</deployedseed>
+    <deployedseed>1099315876</deployedseed>
+    <deployedseed>1920210447</deployedseed>
+    <deployedseed>623007538</deployedseed>
+    <deployedseed>494795253</deployedseed>
+    <deployedseed>780867293</deployedseed>
+    <deployedseed>2092852790</deployedseed>
+    <deployedseed>298119527</deployedseed>
+    <deployedseed>1712387763</deployedseed>
+    <deployedseed>1804837398</deployedseed>
+    <deployedseed>1119537621</deployedseed>
+    <deployedseed>1457460521</deployedseed>
+    <deployedseed>1861681721</deployedseed>
+    <deployedseed>144420032</deployedseed>
+    <deployedseed>1479740194</deployedseed>
+    <deployedseed>357241367</deployedseed>
+    <deployedseed>1680513609</deployedseed>
+    <deployedseed>581753983</deployedseed>
+    <deployedseed>568821517</deployedseed>
+    <deployedseed>1265487792</deployedseed>
+    <deployedseed>1328642140</deployedseed>
+    <deployedseed>1184310560</deployedseed>
+    <deployedseed>1379536010</deployedseed>
+    <deployedseed>1667703521</deployedseed>
+    <deployedseed>651003334</deployedseed>
+    <deployedseed>302524984</deployedseed>
+    <deployedseed>258083560</deployedseed>
+    <deployedseed>1421548262</deployedseed>
+    <deployedseed>39008345</deployedseed>
+    <deployedseed>789588718</deployedseed>
+    <deployedseed>808119620</deployedseed>
+    <deployedseed>1846424535</deployedseed>
+    <deployedseed>1460560196</deployedseed>
+    <deployedseed>612558717</deployedseed>
+    <deployedseed>1922742282</deployedseed>
+    <deployedseed>419354400</deployedseed>
+    <deployedseed>295477692</deployedseed>
+    <deployedseed>1503438398</deployedseed>
+    <deployedseed>320118592</deployedseed>
+    <deployedseed>1565103025</deployedseed>
+    <deployedseed>684883782</deployedseed>
+    <deployedseed>415599991</deployedseed>
+    <deployedseed>182230073</deployedseed>
+    <deployedseed>1767515397</deployedseed>
+    <deployedseed>1244701749</deployedseed>
+    <deployedseed>1442426150</deployedseed>
+    <deployedseed>1653930121</deployedseed>
+    <deployedseed>1692362420</deployedseed>
+    <deployedseed>425183271</deployedseed>
+    <deployedseed>351918156</deployedseed>
+    <deployedseed>1687454113</deployedseed>
+    <deployedseed>1320142933</deployedseed>
+    <deployedseed>1803821061</deployedseed>
+    <deployedseed>1161565234</deployedseed>
+    <deployedseed>1107942578</deployedseed>
+    <deployedseed>1451536843</deployedseed>
+    <deployedseed>2043060810</deployedseed>
+    <deployedseed>1665204632</deployedseed>
+    <deployedseed>1355123213</deployedseed>
+    <deployedseed>483662440</deployedseed>
+    <deployedseed>1126359106</deployedseed>
+    <deployedseed>1149683648</deployedseed>
+    <deployedseed>2020550127</deployedseed>
+    <deployedseed>1393629486</deployedseed>
+    <deployedseed>1329484391</deployedseed>
+    <deployedseed>1620397373</deployedseed>
+    <deployedseed>1948376442</deployedseed>
+    <deployedseed>616185733</deployedseed>
+    <deployedseed>390378363</deployedseed>
+    <deployedseed>795555952</deployedseed>
+    <deployedseed>329517939</deployedseed>
+    <deployedseed>227324467</deployedseed>
+    <deployedseed>927318136</deployedseed>
+    <deployedseed>1592790432</deployedseed>
+    <deployedseed>1056332010</deployedseed>
+    <deployedseed>2076408479</deployedseed>
+    <deployedseed>580581146</deployedseed>
+    <deployedseed>569945535</deployedseed>
+    <deployedseed>1514294478</deployedseed>
+    <deployedseed>927464989</deployedseed>
+    <deployedseed>2117744090</deployedseed>
+    <deployedseed>1809370060</deployedseed>
+    <deployedseed>2104769297</deployedseed>
+    <deployedseed>1030200041</deployedseed>
+    <deployedseed>546575518</deployedseed>
+    <deployedseed>631949597</deployedseed>
+    <deployedseed>509476057</deployedseed>
+    <deployedseed>1909589647</deployedseed>
+    <deployedseed>982496696</deployedseed>
+    <deployedseed>14981081</deployedseed>
+    <deployedseed>9385158</deployedseed>
+    <deployedseed>224270605</deployedseed>
+    <deployedseed>2064054330</deployedseed>
+    <deployedseed>1310688132</deployedseed>
+    <deployedseed>1028662534</deployedseed>
+    <deployedseed>560143703</deployedseed>
+    <deployedseed>285362903</deployedseed>
+    <deployedseed>1540784037</deployedseed>
+    <deployedseed>491931631</deployedseed>
+    <deployedseed>841739920</deployedseed>
+    <deployedseed>1137547518</deployedseed>
+    <deployedseed>91334860</deployedseed>
+    <deployedseed>1755239467</deployedseed>
+    <deployedseed>948649425</deployedseed>
+    <deployedseed>316327601</deployedseed>
+    <deployedseed>285681791</deployedseed>
+    <deployedseed>1835174828</deployedseed>
+    <deployedseed>1412376325</deployedseed>
+    <deployedseed>287637476</deployedseed>
+    <deployedseed>1357707266</deployedseed>
+    <deployedseed>1661796158</deployedseed>
+    <deployedseed>1428261797</deployedseed>
+    <deployedseed>574534543</deployedseed>
+    <deployedseed>1999520203</deployedseed>
+    <deployedseed>566664244</deployedseed>
+    <deployedseed>1032080412</deployedseed>
+    <deployedseed>1070407371</deployedseed>
+    <deployedseed>1060994395</deployedseed>
+    <deployedseed>1145292407</deployedseed>
+    <deployedseed>1359751530</deployedseed>
+    <deployedseed>2074359646</deployedseed>
+    <deployedseed>1061794939</deployedseed>
+    <deployedseed>495651071</deployedseed>
+    <deployedseed>261734657</deployedseed>
+    <deployedseed>1312024253</deployedseed>
+    <deployedseed>2146833204</deployedseed>
+    <deployedseed>209160617</deployedseed>
+    <deployedseed>1541507387</deployedseed>
+    <deployedseed>1184337048</deployedseed>
+    <deployedseed>1005966705</deployedseed>
+    <deployedseed>1370107724</deployedseed>
+    <deployedseed>418144615</deployedseed>
+    <deployedseed>1419016655</deployedseed>
+    <deployedseed>1701819989</deployedseed>
+    <deployedseed>137189114</deployedseed>
+    <deployedseed>2015662270</deployedseed>
+    <deployedseed>386491907</deployedseed>
+    <deployedseed>661356336</deployedseed>
+    <deployedseed>1438995298</deployedseed>
+    <deployedseed>598593080</deployedseed>
+    <deployedseed>724173205</deployedseed>
+    <deployedseed>809548898</deployedseed>
+    <deployedseed>1393573856</deployedseed>
+    <deployedseed>1304550040</deployedseed>
+    <deployedseed>77724757</deployedseed>
+    <deployedseed>1206422835</deployedseed>
+    <deployedseed>220772267</deployedseed>
+    <deployedseed>1578477885</deployedseed>
+    <deployedseed>1484514956</deployedseed>
+    <deployedseed>532578929</deployedseed>
+    <deployedseed>1171453143</deployedseed>
+    <deployedseed>515558600</deployedseed>
+    <deployedseed>289411473</deployedseed>
+    <deployedseed>1070002204</deployedseed>
+    <deployedseed>1181525906</deployedseed>
+    <deployedseed>82544794</deployedseed>
+  </question>
+</quiz>

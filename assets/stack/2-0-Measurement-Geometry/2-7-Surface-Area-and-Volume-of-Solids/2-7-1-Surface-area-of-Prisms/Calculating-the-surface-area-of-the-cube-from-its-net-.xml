@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the surface area of the cube from its net.</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The figure below shows a cube. Sketch the net of the cube and work out the surface area of the cube from its net.</p>
+[[jsxgraph]]
+ var board = JXG.JSXGraph.initBoard('jxgbox', {
+    boundingbox: [-50, 350, 350, -50],
+    keepAspectRatio: true,
+    axis: false,
+    showCopyright: false
+});
+
+// ----------- CUBE VERTICES -----------
+// Front face
+var A = board.create('point', [90, 90], {name: 'A', size: 2, color: 'black'});
+var B = board.create('point', [202.5, 90], {name: 'B', size: 2, color: 'black'});
+var C = board.create('point', [202.5, 202.5], {name: 'C', size: 2, color: 'black'});
+var D = board.create('point', [90, 202.5], {name: 'D', size: 2, color: 'black'});
+
+// Back face
+var E = board.create('point', [135, 45], {name: 'E', size: 2, color: 'black'});
+var F = board.create('point', [247.5, 45], {name: 'F', size: 2, color: 'black'});
+var G = board.create('point', [247.5, 157.5], {name: 'G', size: 2, color: 'black'});
+var H = board.create('point', [135, 157.5], {name: 'H', size: 2, color: 'black'});
+
+// ----------- FACES (wireframe) -----------
+board.create('polygon', [A, B, C, D], {
+    borders: {strokeColor: 'blue'},
+    fillColor: 'none',
+    vertices: {visible: false}
+});
+
+board.create('polygon', [E, F, G, H], {
+    borders: {strokeColor: 'blue'},
+    fillColor: 'none',
+    vertices: {visible: false}
+});
+
+// Connect corresponding corners (edges between front and back faces)
+board.create('segment', [A, E], {strokeColor: 'blue'});
+board.create('segment', [B, F], {strokeColor: 'blue'});
+board.create('segment', [C, G], {strokeColor: 'blue'});
+board.create('segment', [D, H], {strokeColor: 'blue'});
+
+// ----------- DIMENSION LABELS -----------
+board.create('text', [146, 210, '{#side#} cm'], {fontSize: 14, color: 'black'});
+board.create('text', [225, 185, '{#side#} cm'], {fontSize: 14, color: 'black'});
+board.create('text', [250, 110, '{#side#} cm'], {fontSize: 14, color: 'black'});
+
+[[/jsxgraph]]
+<p>Surface area=[[input:ans1]] cm\(^2\) [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p>(a).The figure below shows the net of the cube</p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+  boundingbox: [-20, 420, 340, -20],
+  keepAspectRatio: false,
+  axis: false,
+  showCopyright: false
+});
+
+var s = 80;            // cell size
+var x0 = 90;           // left column x
+var yTop = 330;        // row1 y (largest y is lower visually)
+var col = function(c){ return x0 + (c-1)*s; };
+var row = function(r){ return yTop - (r-1)*s; };
+
+// helper to draw a face and optional edge labels
+function drawFace(id, c, r, color, labels) {
+  var x = col(c), y = row(r);
+  var P1 = board.create('point', [x, y], {visible:false});
+  var P2 = board.create('point', [x + s, y], {visible:false});
+  var P3 = board.create('point', [x + s, y - s], {visible:false});
+  var P4 = board.create('point', [x, y - s], {visible:false});
+
+  board.create('polygon', [P1, P2, P3, P4], {
+    fillColor: color,
+    fillOpacity: 0.9,
+    borders: {strokeColor: 'black'},
+    vertices: {visible: false}
+  });
+
+  // center label (face letter)
+  board.create('text', [x + s/2 - 6, y - s/2 + 6, id], {fontSize:16, color:'black'});
+
+  // labels: pass an object with top/bottom/left/right keys (strings or undefined)
+  if(labels) {
+    if(labels.top)    board.create('text', [x + s/2, y + 6, labels.top], {fontSize:10, color:'black'});
+    if(labels.bottom) board.create('text', [x + s/2, y - s - 6, labels.bottom], {fontSize:10, color:'black'});
+    if(labels.left)   board.create('text', [x - 18, y - s/2 + 6, labels.left], {fontSize:10, color:'black'});
+    if(labels.right)  board.create('text', [x + s + 18, y - s/2 + 6, labels.right], {fontSize:10, color:'black'});
+  }
+}
+
+// Layout matches your CSS grid:
+// A at (2,1), B (2,2), C (2,3), D (2,4), E (1,3), F (3,3)
+// Use placeholders "{#side#} cm" just like your HTML.
+
+drawFace('A', 2, 1, 'yellow', {
+  top:    '{#side#} cm',
+  left:   '{#side#} cm',
+  right:  '{#side#} cm'
+});
+
+drawFace('B', 2, 2, 'blue', {
+  bottom: '{#side#} cm',
+  left:   '{#side#} cm',
+  right:  '{#side#} cm'
+});
+
+drawFace('C', 2, 3, 'orange', {
+  // dimensions fully removed from square C in your HTML — none added
+});
+
+drawFace('D', 2, 4, 'yellow', {
+  bottom: '{#side#} cm',
+  right:  '{#side#} cm'
+});
+
+drawFace('E', 1, 3, 'cyan', {
+  bottom: '{#side#} cm',
+  left:   '{#side#} cm'
+});
+
+drawFace('F', 3, 3, 'purple', {
+  bottom: '{#side#} cm',
+  right:  '{#side#} cm'
+});
+
+// Optional: draw thin border lines between grid cells to make folds clearer
+for(var c=1;c<=3;c++){
+  for(var r=1;r<=5;r++){
+    var x = col(c), y = row(r);
+    var p1 = board.create('point',[x,y],{visible:false});
+    var p2 = board.create('point',[x+s,y],{visible:false});
+    var p3 = board.create('point',[x+s,y-s],{visible:false});
+    board.create('segment',[p1,p2],{visible:false});
+    board.create('segment',[p2,p3],{visible:false});
+  }
+}
+[[/jsxgraph]]
+
+<p>(b).Calculating  the surface area.</p>
+<p>\(\begin{align}\text{The area of one face}&=length \times width\\&={@side@} cm\times {@side@} cm\\&={@area_of_squareA@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{There are 6 faces. Therefore, the surface area of the cube}&=6 \times \text{area of one face}\\&=6 \times {@area_of_squareA@} cm^2\\&={@ta@} cm^2\end{align}\)</p>
+<p><b>Alternative</b></p>
+<p>\(\begin{align}\text{Area of square A}&=length \times width\\&={@side@} cm\times {@side@} cm\\&={@area_of_squareA@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Area of square B}&=length \times width\\&={@side@} cm\times {@side@} cm\\&={@area_of_squareA@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Area of square C}&=length \times width\\&={@side@} cm\times {@side@} cm\\&={@area_of_squareA@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Area of square D}&=length \times width\\&={@side@} cm\times {@side@} cm\\&={@area_of_squareA@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Area of square E}&=length \times width\\&={@side@} cm\times {@side@} cm\\&={@area_of_squareA@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Area of square F}&=length \times width\\&={@side@} cm\times {@side@} cm\\&={@area_of_squareA@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Surface area of the cube}&={@area_of_squareA@} cm^2+{@area_of_squareB@} cm^2+{@area_of_squareC@} cm^2+{@area_of_squareD@} cm^2+{@area_of_squareE@} cm^2+{@area_of_squareF@} cm^2\\&={@ta@} cm^2\end{align}\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/*surface area of a cube*/
+side:rand_with_step(5,99,1);/*dimension of the side of the cube*/
+area_of_squareA:side*side;/*area of  square A*/
+area_of_squareB:side*side;/*area of  square B*/
+area_of_squareC:side*side;/*area of  square C*/
+area_of_squareD:side*side;/*area of  square D*/
+area_of_squareE:side*side;/*area of  square E*/
+area_of_squareF:side*side;/*area of  square F*/
+surface_area:area_of_squareA*6;/*total surface area of the cube from its net*/
+ta:surface_area;/*teacher's answer*/
+
+/*mistakes*/
+ta_1:area_of_squareA*5;/*not including all faces*/
+perimeter:(side+side+side+side)*6;
+ta_2:perimeter;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Surface area of the cube =6 \times area of one face={@ta@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>check for correct surface area</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description><![CDATA[<p> Adding Instead of Multiplying</p>]]></description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta_2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you found the perimeter instead of the area. Remember, perimeter measures the distance around the edge, but surface area is all about the space inside each face. Try squaring the side length instead — you’re close, just a small switch in the formula will get you there</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>0</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description><![CDATA[<p>Not including all faces</p>]]></description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta_1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You’re almost there, it looks like you missed one of the cube’s faces. A cube has 6 equal square faces, so make sure all of them are counted. Double-check your net and give it another try</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1787018075</deployedseed>
+    <deployedseed>2062995598</deployedseed>
+    <deployedseed>1601273657</deployedseed>
+    <deployedseed>350542555</deployedseed>
+    <deployedseed>777690842</deployedseed>
+    <deployedseed>1803501000</deployedseed>
+    <deployedseed>228221649</deployedseed>
+    <deployedseed>2041729038</deployedseed>
+    <deployedseed>1271633358</deployedseed>
+    <deployedseed>1396585628</deployedseed>
+    <deployedseed>1994389680</deployedseed>
+    <deployedseed>287356643</deployedseed>
+    <deployedseed>363660712</deployedseed>
+    <deployedseed>292131946</deployedseed>
+    <deployedseed>1290839965</deployedseed>
+    <deployedseed>889988027</deployedseed>
+    <deployedseed>1546515111</deployedseed>
+    <deployedseed>709814206</deployedseed>
+    <deployedseed>252827283</deployedseed>
+    <deployedseed>2126261550</deployedseed>
+    <deployedseed>1426889628</deployedseed>
+    <deployedseed>1440502928</deployedseed>
+    <deployedseed>1047909913</deployedseed>
+    <deployedseed>425776401</deployedseed>
+    <deployedseed>340656734</deployedseed>
+    <deployedseed>1464225579</deployedseed>
+    <deployedseed>505480315</deployedseed>
+    <deployedseed>2107764411</deployedseed>
+    <deployedseed>262196927</deployedseed>
+    <deployedseed>1331015599</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>correct surface area</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description><![CDATA[<p> Adding Instead of Multiplying</p>]]></description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta_2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description><![CDATA[<p>Not including all faces</p>]]></description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta_1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

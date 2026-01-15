@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding Trigonometric Ratios in a Right-Angled Triangle</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Look at the figure below and use it to find the following trigonometric ratios:</p>
+[[jsxgraph]]
+ var board = JXG.JSXGraph.initBoard(divid, {
+        boundingbox: [-1, 4.5, 6, -1],
+        axis: false,
+        showNavigation: false,
+        showCopyright: false
+    });
+
+    // Points with labels only (no circles)
+    var Q = board.create('point', [0, 0], {
+        name: 'Q',
+        fixed: true,
+        visible: false,
+        label: {offset: [-15, -10], visible: true}
+    });
+
+    var R = board.create('point', [4, 0], {
+        name: 'R',
+        fixed: true,
+        visible: false,
+        label: {offset: [10, -10], visible: true}
+    });
+
+    var P = board.create('point', [0, 3], {
+        name: 'P',
+        fixed: true,
+        visible: false,
+        label: {offset: [-15, 10], visible: true}
+    });
+
+    // Triangle sides
+    board.create('segment', [Q, R]);
+    board.create('segment', [Q, P]);
+    board.create('segment', [P, R]);
+
+    // Right-angle at Q
+    board.create('angle', [P, Q, R], {
+        radius: 0.4,
+        type: 'square',
+        name: ''
+    });
+
+    // Angle θ at R (inside)
+    board.create('angle', [P, R, Q], {
+        radius: 0.6,
+        name: '45°'
+    });
+
+    // Length labels
+    board.create('text', [-0.6, 1.5, '{#side#} cm']);
+    board.create('text', [2, -0.4, '{#side#} cm']);
+
+[[/jsxgraph]]
+
+<ol type='i'>
+    <li>\(\text{Length of side PR }=\)[[input:ans1]]\(\,\text{cm}\)[[validation:ans1]][[feedback:prt1]]</li>
+    <li>\(Tan \,45^\circ=\)[[input:ans2]][[validation:ans2]][[feedback:prt2]]</li>
+    <li>\(Cos\,45^\circ=\)[[input:ans3]][[validation:ans3]][[feedback:prt3]]</li>
+    <li>\(Sin\,45^\circ=\)[[input:ans4]][[validation:ans4]][[feedback:prt4]]</li>
+</ol>
+
+
+
+
+
+
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><strong>Worked Solution:</strong></p>
+
+<p>Given a right-angled triangle PQR with right angle at Q and angle \( \angle R = 45^\circ \). Let the sides opposite and adjacent to the 45° angle be equal to <em>side</em> cm.</p>
+
+<ol type='i'>
+    <li>
+        <p>Length of side PR (hypotenuse):</p>
+        <p>
+        Using Pythagoras theorem: <br>
+        \(\begin{align}
+        PR &= \sqrt{PQ^2 + QR^2} \\
+        &= \sqrt{{@side@}^2 + {@side@}^2} \\
+        &= \sqrt{2 \cdot {@side@}^2} \\
+        &= {@RP@}\, \text{ cm}
+        \end{align}\)
+        </p>
+    </li>
+
+    <li>
+        <p>\(Tan \,45^\circ\):</p>
+        <p>
+        \(\begin{align}
+        \tan 45^\circ &= \frac{\text{Opposite}}{\text{Adjacent}} \\
+        &= \frac{PQ}{QR} \\
+        &= \frac{{@side@}}{{@side@}}\\
+        &= {@tan_45@}
+        \end{align}\)
+        </p>
+    </li>
+
+    <li>
+        <p>\(Cos\,45^\circ\):</p>
+        <p>
+        \(\begin{align}
+        \cos 45^\circ &= \frac{\text{Adjacent}}{\text{Hypotenuse}} \\
+        &= \frac{{@side@}}{{@RP@}} \\
+        &= {@cos_45@} 
+        &\approx 0.707
+        \end{align}\)
+        </p>
+    </li>
+
+    <li>
+        <p>\(Sin\,45^\circ\):</p>
+        <p>
+        \(\begin{align}
+        \sin 45^\circ &= \frac{\text{Opposite}}{\text{Hypotenuse}} \\
+        &= \frac{{@side@}}{{@RP@}}\\
+        &={@sin_45@}\\
+      & \approx 0.707
+        \end{align}\)
+        </p>
+    </li>
+</ol>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>Angle:45; /*The special angle 45*/
+side:rand_with_step(1,26,4);/*Randomizing the side of the triangle that is opposite and adjasment*/
+RP:sqrt(side^2+side^2); /*Finding the Hypotenues of the triangle*/
+/*Solution of the trigonometric ratios of angle 45 degrees.*/
+tan_45:side/side;
+cos_45:side/RP;
+sin_45:side/RP;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The angle given}={@Angle@}^\circ\)<p>
+<p>\(\text{Length PR}={@RP@}\,\text{cm}\)<p>
+<p>\(Tan\,45^\circ={@tan_45@}\)<p>
+<p>\(Cos\,45^\circ={@cos_45@}\)<p>
+<p>\(Sin\,45^\circ={@sin_45@}\)<p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>RP</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>tan_45</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>cos_45</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>sin_45</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct length</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>RP</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct angle.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>tan_45</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct cosine</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>cos_45</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct sine.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>sin_45</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>707128844</deployedseed>
+    <deployedseed>192637798</deployedseed>
+    <deployedseed>32843412</deployedseed>
+    <deployedseed>51332121</deployedseed>
+    <deployedseed>748836221</deployedseed>
+    <deployedseed>1150621624</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>RP</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>tan_45</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>cos_45</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>sin_45</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt4</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt4-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

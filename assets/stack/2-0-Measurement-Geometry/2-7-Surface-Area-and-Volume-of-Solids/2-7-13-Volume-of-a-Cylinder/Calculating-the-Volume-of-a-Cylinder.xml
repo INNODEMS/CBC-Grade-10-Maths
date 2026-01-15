@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the Volume of a Cylinder</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The figure below shows a cylinder. </p>
+[[jsxgraph]]
+const brd = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-15, 30, 40, -10],
+    axis: false,
+    showNavigation: false,
+    showCopyright: false
+  });
+
+  const rx = 5;
+  const ry = 10.5;
+  const L  = 30;
+  const y0 = 6;   // vertical shift upward 🔑
+
+  // Left ellipse
+  brd.create('curve', [
+    t => rx * Math.cos(t),
+    t => y0 + ry * Math.sin(t),
+    0, 2 * Math.PI
+  ], {strokeColor: 'black', fillcolor:'#90caf9', fillOpacity:0.6});
+
+  // Right ellipse
+  brd.create('curve', [
+    t => L + rx * Math.cos(t),
+    t => y0 + ry * Math.sin(t),
+    0, 2 * Math.PI
+  ], {strokeColor: 'black', dash: 2, fillcolor:'#90caf9', fillOpacity:0.6});
+
+  // Top edge of cylinder
+  brd.create('segment',
+    [[0,  y0 + ry], [L,  y0 + ry]],
+    {strokeColor: 'black'});
+
+  // Bottom edge of cylinder
+  brd.create('segment',
+    [[0,  y0 - ry], [L,  y0 - ry]],
+    {strokeColor: 'black'});
+
+  // Dashed diameter on left ellipse
+  brd.create('segment',
+    [[0, y0 - ry], [0, y0 + ry]],
+    {strokeColor: 'black', dash: 2});
+
+  // Diameter label
+  
+  brd.create('text', [-4.5, 6, '{#diameter#} cm']);
+
+  brd.create('text', [10, 18, '{#height#} cm']);
+[[/jsxgraph]]
+
+<p>
+<ol type='i'>
+<li>
+<p>
+Determine the Radius ow the cylinder.
+</p>
+<p>\(\text{Radius}=\)[[input:ans1]]\(\,\text{cm}\)[[validation:ans1]][[feedback:prt1]]</p>
+</li>
+<li>
+<p>
+Calculate the volume of the cylinder, \(\text{correct to 2 decimal places}\). Use \(\pi=\frac{22}{7}\).
+</p>
+<p>\(\text{Volume}=\)[[input:ans2]]\(\,\text{cm}^2\)[[validation:ans2]][[feedback:prt2]]</p>
+</li>
+<ol>
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<ol type='i'>
+
+<li>
+<p><strong>Determining the radius of the cylinder</strong></p>
+
+<p>
+From the diagram, the diameter of the cylinder is {@diameter@} cm.
+<br>
+\(
+\begin{align}
+\text{Radius} &= \frac{\text{Diameter}}{2} \\
+              &= \frac{{@diameter@}}{2} \\
+              &= {@r@}\ \text{cm}
+\end{align}
+\)
+</p>
+</li>
+
+<li>
+<p><strong>Calculating the volume of the cylinder</strong></p>
+
+<p>
+The formula for the volume of a cylinder is:
+<br>
+\(
+V = \pi r^2 h
+\)
+</p>
+
+<p>
+Using \(\pi = \frac{22}{7}\), radius \(r = {@r@}\) cm, and height \(h = {@height@}\) cm:
+<br>
+\(
+\begin{align}
+V &= \frac{22}{7} \times ({@r@})^2 \times {@height@} \\
+  &= {@volume@}\ \text{cm}^3 \\
+  &= {@Volume_cylinder@}\ \text{cm}^3 \, (\text{to 2 d.p.})
+\end{align}
+\)
+</p>
+
+</li>
+
+</ol>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomise diameter and height */
+diameter : 6*rand_with_step(2,40,2);   /* diameter between 10 cm and 49 cm */
+height   : rand_with_step(5,100,5);   /* height between 10 cm and 49 cm */
+
+/* Radius */
+r : diameter / 2;
+
+/* Use pi = 22/7 */
+pi_val : 22/7;
+
+/* Volume of the cylinder */
+V : pi_val * r^2 * height;
+volume:float(V);
+Volume_cylinder:decimalplaces(volume,2);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The diameter of a cylinder}={@diameter@}\,\text{cm}\)</p>
+<p>\(\text{The height of a cylinder}={@height@}\,\text{cm}\)</p>
+<p>\(\text{The Radius of a cylinder}={@r@}\,\text{cm}\)</p>
+<p>\(\text{The Volume of a cylinder}={@Volume_cylinder@}\,\text{cm}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>r</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>Volume_cylinder</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct radius of a cylinder.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>r</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct Volume of the cylinder.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>Volume_cylinder</tans>
+        <testoptions>2</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1430050364</deployedseed>
+    <deployedseed>1563097007</deployedseed>
+    <deployedseed>1234934667</deployedseed>
+    <deployedseed>2010652498</deployedseed>
+    <deployedseed>401790010</deployedseed>
+    <deployedseed>476801143</deployedseed>
+    <deployedseed>1757666139</deployedseed>
+    <deployedseed>1519536959</deployedseed>
+    <deployedseed>993884773</deployedseed>
+    <deployedseed>1737189694</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>r</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>Volume_cylinder</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

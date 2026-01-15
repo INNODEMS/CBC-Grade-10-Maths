@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Interpreting Histograms and Frequency Polygons of Data</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The histogram and frequency polygon below represent the time taken, \(t\) (in minutes), for a group of students to complete a Science experiment.</p>
+
+<p>Use the graph to answer the questions below.</p>
+
+<p>
+[[jsxgraph width="750px" height="450px"]]
+    JXG.Options.text.useMathJax = true;
+    
+    // 1. IMPORT DATA FROM MAXIMA
+    var x = [0, {#x1#}, {#x2#}, {#x3#}, {#x4#}, {#x5#}];
+    var h = [{#h1#}, {#h2#}, {#h3#}, {#h4#}, {#h5#}];
+    var max_h = Math.max(...h);
+    var max_x = x[5];
+
+    // 2. INIT BOARD
+    var board = JXG.JSXGraph.initBoard(divid, {
+        boundingBox: [-5, max_h + 2, max_x + 5, -2],
+        grid: true,
+        showNavigation: false,
+        showCopyright: false,
+        zoom: {enabled: false},   // Disable zoom
+        pan: {enabled: false}     // Disable panning
+    });
+
+    // 3. AXES
+    var yAxis = board.create("axis", [[0, 0], [0, max_h + 5]], {
+        name: "\\(fd\\)",
+        withLabel: true,
+        label: { offset: [-20, 0] }
+    });
+
+    var xAxis = board.create("axis", [[0, 0], [max_x + 5, 0]], {
+        name: "\\(t\\,[min]\\)",
+        withLabel: true,
+        label: { offset: [-10, -20] }
+    });
+
+    // 4. DRAW BARS (Histogram)
+    var midPoints = [];
+    for(let i=0; i<5; i++){
+        // Create Rectangles
+        board.create('polygon', [
+            [x[i], 0], [x[i+1], 0], [x[i+1], h[i]], [x[i], h[i]]
+        ], {
+            fixed: true,                // 1. Prevent dragging
+            fillColor: '#004499',
+            fillOpacity: 0.3,
+            borders: {
+                strokeColor: 'black',
+                fixed: true             // Lock borders
+            },
+            vertices: { 
+                visible: false,         // 2. Remove corner dots
+                fixed: true             // Lock vertices
+            }
+        });
+        
+        // Store midpoints for Frequency Polygon
+        midPoints.push([ (x[i]+x[i+1])/2, h[i] ]);
+    }
+
+    // 5. DRAW FREQUENCY POLYGON
+    var p0 = board.create('point', [x[0], 0], {visible:false, fixed:true});
+    var pLast = board.create('point', [x[5], 0], {visible:false, fixed:true});
+    
+    var points = [];
+    for(let i=0; i<midPoints.length; i++){
+        // We keep these red dots to mark the data points, but fix them
+        points.push(board.create('point', midPoints[i], {
+            size: 2, 
+            color: 'red', 
+            fixed: true,       // Lock points
+            name: '',
+            highlight: false   // Disable hover effect
+        }));
+    }
+    
+    // Connect segments
+    board.create('segment', [p0, points[0]], {strokeColor:'red', strokeWidth:2, dash:2, fixed:true, highlight:false});
+    
+    for(let i=0; i<points.length-1; i++){
+        board.create('segment', [points[i], points[i+1]], {strokeColor:'red', strokeWidth:2, fixed:true, highlight:false});
+    }
+    
+    board.create('segment', [points[points.length-1], pLast], {strokeColor:'red', strokeWidth:2, dash:2, fixed:true, highlight:false});
+
+[[/jsxgraph]]
+</p>
+
+<p><b>(a)</b> What is the frequency density for the interval \({@x2@} < t \leq {@x3@}\)?</p>
+<p>[[input:ans1]] [[validation:ans1]]</p>
+
+<p><b>(b)</b> Calculate the number of students (frequency) who took between \({@x1@}\) and \({@x2@}\) minutes.</p>
+<p>[[input:ans2]] [[validation:ans2]]</p>
+
+<p><b>(c)</b> Calculate the total number of students who participated in the experiment.</p>
+<p>[[input:ans3]] [[validation:ans3]]</p>
+
+<p><b>(d)</b> Estimate the number of students who took less than <b>{@T_cut@}</b> minutes.</p>
+<p>[[input:ans4]] [[validation:ans4]]</p>
+
+<p>[[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p><b>(a) Reading Frequency Density</b></p>
+<p>To find the frequency density, we look at the height of the bar on the vertical axis.</p>
+<p>For the interval \({@x2@} < t \leq {@x3@}\), the height of the corresponding bar is <b>{@h3@}</b>.</p>
+<p>Therefore, the frequency density is <b>{@ta1@}</b>.</p>
+<p><b>(b) Calculating Frequency</b></p>
+<p>In a histogram, the area of the bar represents the frequency. The formula is:</p>
+\( \text{Frequency} = \text{Width} \times \text{Frequency Density} \)
+
+<p>We are asked for the frequency of the interval \({@x1@} < t \leq {@x2@}\).</p>
+<ul>
+    <li><b>Class Width:</b> The interval is from {@x1@} to {@x2@}, so the width is \( {@x2@} - {@x1@} = {@w2@} \).</li>
+    <li><b>Frequency Density:</b> From the graph, the height of this bar is {@h2@}.</li>
+    <li><b>Calculation:</b> \( {@w2@} \times {@h2@} = \mathbf{@ta2@} \).</li>
+</ul>
+
+<p><b>(c) Total Frequency</b></p>
+<p>To find the total number of students, we calculate the area of every bar in the histogram and add them together.</p>
+
+<table class="table table-bordered table-sm">
+    <thead>
+        <tr>
+            <th>Interval</th>
+            <th>Width</th>
+            <th>Height (FD)</th>
+            <th>Frequency (Area)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>\(0 < t \leq {@x1@}\)</td>
+            <td>{@w1@}</td>
+            <td>{@h1@}</td>
+            <td>\( {@w1@} \times {@h1@} = {@freq1@} \)</td>
+        </tr>
+        <tr>
+            <td>\({@x1@} < t \leq {@x2@}\)</td>
+            <td>{@w2@}</td>
+            <td>{@h2@}</td>
+            <td>\( {@w2@} \times {@h2@} = {@freq2@} \)</td>
+        </tr>
+        <tr>
+            <td>\({@x2@} < t \leq {@x3@}\)</td>
+            <td>{@w3@}</td>
+            <td>{@h3@}</td>
+            <td>\( {@w3@} \times {@h3@} = {@freq3@} \)</td>
+        </tr>
+        <tr>
+            <td>\({@x3@} < t \leq {@x4@}\)</td>
+            <td>{@w4@}</td>
+            <td>{@h4@}</td>
+            <td>\( {@w4@} \times {@h4@} = {@freq4@} \)</td>
+        </tr>
+        <tr>
+            <td>\({@x4@} < t \leq {@x5@}\)</td>
+            <td>{@w5@}</td>
+            <td>{@h5@}</td>
+            <td>\( {@w5@} \times {@h5@} = {@freq5@} \)</td>
+        </tr>
+        <tr style="font-weight:bold; background-color:#f2f2f2;">
+            <td colspan="3" style="text-align:left;">Total:</td>
+            <td>{@ta3@}</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><b>(d) Estimation</b></p>
+<p>We need to estimate the number of students who took less than <b>{@T_cut@}</b> minutes.</p>
+<p>This time \({@T_cut@}\) falls inside the interval \({@x3@} < t \leq {@x4@}\). We split our calculation into two parts:</p>
+
+<ol>
+    <li>
+        <b>Full Intervals:</b> All students in the intervals before {@x3@} minutes are included.
+        <br>
+        Sum = \({@freq1@} + {@freq2@} + {@freq3@} = {@sum_prev@}\).
+    </li>
+    <li>
+        <b>Partial Interval:</b> We need the students between {@x3@} and {@T_cut@}.
+        <ul>
+            <li>The width of this partial section is \( {@T_cut@} - {@x3@} = {@p_width@} \).</li>
+            <li>The height (frequency density) of this bar is {@h4@}.</li>
+            <li>Partial Frequency = \( {@p_width@} \times {@h4@} = {@freq_partial@} \).</li>
+        </ul>
+    </li>
+</ol>
+
+<p><b>Total Estimate:</b> \( {@sum_prev@} + {@freq_partial@} = \mathbf{@ta4@} \).</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. RANDOMIZATION OF DATA */
+/* Widths: random integers between 2 and 10 */
+w1: rand(4)+4;
+w2: rand(4)+4;
+w3: rand(4)+4;
+w4: rand(4)+4;
+w5: rand(4)+4;
+
+/* Heights (FD): random integers. Multiplied by 1.0 to ensure float in JS if needed */
+h1: rand([2,3,4,5]);
+h2: rand([6,7,8,9]);
+h3: rand([10,11,12]);
+h4: rand([5,6,7,8]);
+h5: rand([1,2,3]);
+
+/* 2. CALCULATE BOUNDARIES (x-axis) */
+x0: 0;
+x1: x0 + w1;
+x2: x1 + w2;
+x3: x2 + w3;
+x4: x3 + w4;
+x5: x4 + w5;
+
+/* 3. CALCULATE FREQUENCIES (Answers) */
+/* Frequency = Width * Height */
+freq1: w1 * h1;
+freq2: w2 * h2;
+freq3: w3 * h3;
+freq4: w4 * h4;
+freq5: w5 * h5;
+
+total_freq: freq1 + freq2 + freq3 + freq4 + freq5;
+
+/* 4. DEFINE ANSWERS FOR PARTS - RENAMED TO AVOID CONFLICT */
+
+/* Part A: Read Frequency Density of the modal class (highest bar - h3) */
+ta1: h3;
+
+/* Part B: Calculate frequency of a specific interval (e.g. 2nd interval) */
+ta2: freq2;
+
+/* Part C: Total Frequency */
+ta3: total_freq;
+
+/* Part D: Estimation (e.g. less than specific time T) */
+/* Let's pick a cut-off point 'T' inside the 4th interval */
+T_cut: x3 + floor(w4/2); 
+/* Calc: All of 1,2,3 + partial 4 */
+freq_partial: (T_cut - x3) * h4;
+ta4: freq1 + freq2 + freq3 + freq_partial;
+
+/* Helper variables for feedback display */
+p_width: T_cut - x3;
+sum_prev: freq1 + freq2 + freq3;
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta1@}</p>
+<p>{@ta2@}</p>
+<p>{@ta3@}</p>
+<p>{@ta4@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Daniel Murunga</p>
+<p id="reviewer"></p>
+<p id="reviewer"> </p>
+<p id="description">Given a histogram and frequency polygon representing the time taken by students to complete a Science experiment, the student is required to interpret the graph to determine frequency densities, calculate interval frequencies, determine the total number of students, and estimate the frequency below a specific time.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta3</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>ta4</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>node_test : if ta1=ans1 and ans2=ta2  and ans3=ta3 and ans4=ta4  then 1 else 0;</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer to all the inputs</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>node_test</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>1</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.25</truescore>
+        <truepenalty/>
+        <truenextnode>3</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+  <span style="color:green; font-weight:bold;">Correct answer, well done.</span> 
+  You accurately identified the frequency density by reading the height of the bar for the interval \({@x2@} < t \leq {@x3@}\) from the vertical axis.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>
+  <span style="color:red; font-weight:bold;">Incorrect.</span> 
+  Check the vertical axis (\(y\)-axis) again. The frequency density corresponds exactly to the <b>height</b> of the rectangular bar for the interval \({@x2@} < t \leq {@x3@}\).
+</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.25</truescore>
+        <truepenalty/>
+        <truenextnode>4</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+  <span style="color:green; font-weight:bold;">Correct answer, well done.</span> 
+  You correctly calculated the frequency (number of students) by finding the area of the bar: 
+  \(\text{Frequency} = \text{Width} \times \text{Height}\).
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>4</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>
+  <span style="color:red; font-weight:bold;">Incorrect answer.</span> 
+  Remember that in a histogram, the frequency is represented by the <b>area</b> of the bar. 
+  <br>Multiply the <b>width</b> of the interval \({@x1@} < t \leq {@x2@}\) by its <b>frequency density</b> (height).
+</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>4</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ta3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.25</truescore>
+        <truepenalty/>
+        <truenextnode>5</truenextnode>
+        <trueanswernote>prt1-5-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+  <span style="color:green; font-weight:bold;">Correct answer, well done.</span> 
+  You correctly found the total number of students by calculating the area of every bar in the histogram and summing them up.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>5</falsenextnode>
+        <falseanswernote>prt1-5-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>
+  <span style="color:red; font-weight:bold;">Incorrect answer.</span> 
+  To find the total number of students, you must calculate the <b>frequency (area)</b> for all 5 bars individually and then add those totals together.
+</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>5</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>ta4</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.25</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt1-6-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+  <span style="color:green; font-weight:bold;">Correct answer, well done.</span> 
+  You correctly estimated the value by summing the full bars to the left and calculating the partial area for the interval containing <b>{@T_cut@}</b> minutes.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-6-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>
+  <span style="color:red; font-weight:bold;">Incorrect answer.</span> 
+  To estimate the count for less than <b>{@T_cut@}</b> minutes:
+  <br>1. Sum the frequencies of all intervals that are completely below {@T_cut@}.
+  <br>2. Calculate the area of the <b>partial section</b> of the specific bar where {@T_cut@} falls (use the new partial width \(\times\) height).
+  <br>3. Add these together.
+</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>437162259</deployedseed>
+    <deployedseed>204148088</deployedseed>
+    <deployedseed>1565869946</deployedseed>
+    <deployedseed>514890767</deployedseed>
+    <deployedseed>2140160516</deployedseed>
+    <deployedseed>759287947</deployedseed>
+    <deployedseed>2015513601</deployedseed>
+    <deployedseed>1698026066</deployedseed>
+    <deployedseed>700299333</deployedseed>
+    <deployedseed>639822755</deployedseed>
+    <deployedseed>1480910083</deployedseed>
+    <deployedseed>179186504</deployedseed>
+    <deployedseed>1980418275</deployedseed>
+    <deployedseed>2083875930</deployedseed>
+    <deployedseed>436652071</deployedseed>
+    <deployedseed>912141187</deployedseed>
+    <deployedseed>772766080</deployedseed>
+    <deployedseed>976475729</deployedseed>
+    <deployedseed>265890703</deployedseed>
+    <deployedseed>1243112523</deployedseed>
+    <deployedseed>1162439348</deployedseed>
+    <deployedseed>1909187283</deployedseed>
+    <deployedseed>1096183546</deployedseed>
+    <deployedseed>1120416226</deployedseed>
+    <deployedseed>983887392</deployedseed>
+    <deployedseed>1149770037</deployedseed>
+    <deployedseed>655109852</deployedseed>
+    <deployedseed>555131942</deployedseed>
+    <deployedseed>1968558449</deployedseed>
+    <deployedseed>1595096261</deployedseed>
+    <deployedseed>393534933</deployedseed>
+    <deployedseed>378372450</deployedseed>
+    <deployedseed>1064296889</deployedseed>
+    <deployedseed>597657359</deployedseed>
+    <deployedseed>2069156787</deployedseed>
+    <deployedseed>968824228</deployedseed>
+    <deployedseed>1403782197</deployedseed>
+    <deployedseed>1555146169</deployedseed>
+    <deployedseed>1889617686</deployedseed>
+    <deployedseed>646239031</deployedseed>
+    <deployedseed>1824079559</deployedseed>
+    <deployedseed>2076683238</deployedseed>
+    <deployedseed>1680430571</deployedseed>
+    <deployedseed>213139144</deployedseed>
+    <deployedseed>1815274974</deployedseed>
+    <deployedseed>2008044779</deployedseed>
+    <deployedseed>1495570185</deployedseed>
+    <deployedseed>1993118444</deployedseed>
+    <deployedseed>1965815240</deployedseed>
+    <deployedseed>1218713989</deployedseed>
+  </question>
+</quiz>

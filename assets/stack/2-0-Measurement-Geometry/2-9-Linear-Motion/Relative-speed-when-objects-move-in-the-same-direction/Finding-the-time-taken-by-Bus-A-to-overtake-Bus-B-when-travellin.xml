@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the time taken by Bus A to overtake Bus B when travelling in the same direction</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+Two buses are traveling on the same road in the same direction. Bus A moves at {@vA@} km/h, and Bus B moves at {@vB@} km/h. At a certain moment, Bus A is {@d_val@} {@d_unit@} behind Bus B.
+</p>
+<p>How long will it take for Bus A to overtake Bus B?</p>
+<p>Time \(=\) [[input:ans1]] hours [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>Since both buses travel in the same direction, Bus A approaches Bus B at the
+<strong>relative speed</strong>:</p>
+<p>\( {@vA@} - {@vB@} = {@v_rel@} \text{ km/h}\)</p>
+<p>The initial distance between the buses is:
+\({@d_km@} \text{ km}\)</p>
+<p>The time needed to overtake is: <br>
+\(\begin{align} t =& \frac{\text{distance}}{\text{relative speed}}\\
+=& \frac{{@d_km@}}{{@v_rel@}}\\
+=& {@ta@} \text{ hours} \end{align}\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Speeds in km/h */
+vB : rand(21) + 30;        /* Bus B: 30–50 km/h */
+vA : vB + rand(11) + 5;   /* Bus A faster by 5–15 km/h */
+
+/* Distance with unit preserved (meters or km) */
+if rand(2) = 0 then (
+    d_val : rand(900) + 200,          
+    d_unit : "m",
+    d : d_val * m,
+    d_km : d_val/1000
+) else (
+    d_val : rand(90) + 100,          
+    d_unit : "km",
+    d : d_val * km,
+    d_km : d_val
+);
+
+/* Relative speed */
+v_rel : vA - vB;
+
+/* Exact time in hours */
+ta : d_km / v_rel;
+/*mistake*/
+wrong2 :
+  if d_unit = "m" then d_val / v_rel else false;
+wrong1 : d_km / (vA + vB);
+
+
+]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta@}</p>
+<p>{@vA@}</p>
+<p>{@vB@}</p>
+<p>{@d_val@} {@d_unit@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct time</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for forgotten unit conversion</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>wrong2</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You did not convert the distance into kilometres before dividing by the speed. Kindly check the worked solution</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Checks for use of wrong speed</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>wrong1</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You added the two speeds. Since both buses move in the same direction, you must use the difference of their speeds.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1428350345</deployedseed>
+    <deployedseed>123072458</deployedseed>
+    <deployedseed>39787916</deployedseed>
+    <deployedseed>298678319</deployedseed>
+    <deployedseed>839332107</deployedseed>
+    <deployedseed>46258408</deployedseed>
+    <deployedseed>2011225657</deployedseed>
+    <deployedseed>366848667</deployedseed>
+    <deployedseed>968830870</deployedseed>
+    <deployedseed>190541628</deployedseed>
+    <deployedseed>2028315294</deployedseed>
+    <deployedseed>1679194756</deployedseed>
+    <deployedseed>970410399</deployedseed>
+    <deployedseed>1340924127</deployedseed>
+    <deployedseed>647466892</deployedseed>
+    <deployedseed>585057834</deployedseed>
+    <deployedseed>1293602942</deployedseed>
+    <deployedseed>1805197403</deployedseed>
+    <deployedseed>703273320</deployedseed>
+    <deployedseed>2143070912</deployedseed>
+    <deployedseed>90287571</deployedseed>
+    <deployedseed>1767367363</deployedseed>
+    <deployedseed>1385080170</deployedseed>
+    <deployedseed>814696325</deployedseed>
+    <deployedseed>2075710922</deployedseed>
+    <deployedseed>1149935657</deployedseed>
+    <deployedseed>1348041460</deployedseed>
+    <deployedseed>952886138</deployedseed>
+    <deployedseed>1150074600</deployedseed>
+    <deployedseed>1723821480</deployedseed>
+    <deployedseed>832446547</deployedseed>
+    <deployedseed>1040614963</deployedseed>
+    <deployedseed>1444446711</deployedseed>
+    <deployedseed>228598886</deployedseed>
+    <deployedseed>1354174902</deployedseed>
+    <deployedseed>256445382</deployedseed>
+    <deployedseed>1524432665</deployedseed>
+    <deployedseed>1081479908</deployedseed>
+    <deployedseed>1671755144</deployedseed>
+    <deployedseed>302018616</deployedseed>
+    <deployedseed>270468037</deployedseed>
+    <deployedseed>1968236433</deployedseed>
+    <deployedseed>1469209816</deployedseed>
+    <deployedseed>553650006</deployedseed>
+    <deployedseed>1379026222</deployedseed>
+    <deployedseed>665461305</deployedseed>
+    <deployedseed>876299526</deployedseed>
+    <deployedseed>410340692</deployedseed>
+    <deployedseed>1415601174</deployedseed>
+    <deployedseed>392065012</deployedseed>
+    <deployedseed>56610286</deployedseed>
+    <deployedseed>976143176</deployedseed>
+    <deployedseed>1410044025</deployedseed>
+    <deployedseed>921207718</deployedseed>
+    <deployedseed>160258568</deployedseed>
+    <deployedseed>1711333176</deployedseed>
+    <deployedseed>1675401373</deployedseed>
+    <deployedseed>461938810</deployedseed>
+    <deployedseed>90043839</deployedseed>
+    <deployedseed>2052136841</deployedseed>
+    <deployedseed>575268877</deployedseed>
+    <deployedseed>1652139679</deployedseed>
+    <deployedseed>1307236355</deployedseed>
+    <deployedseed>146995592</deployedseed>
+    <deployedseed>373655390</deployedseed>
+    <deployedseed>1890778587</deployedseed>
+    <deployedseed>1657959867</deployedseed>
+    <deployedseed>834001267</deployedseed>
+    <deployedseed>1074819871</deployedseed>
+    <deployedseed>1683046804</deployedseed>
+    <deployedseed>694259264</deployedseed>
+    <deployedseed>8677755</deployedseed>
+    <deployedseed>880914121</deployedseed>
+    <deployedseed>1610422388</deployedseed>
+    <deployedseed>17490804</deployedseed>
+    <deployedseed>1655049013</deployedseed>
+    <deployedseed>813214717</deployedseed>
+    <deployedseed>1429997200</deployedseed>
+    <deployedseed>1826752362</deployedseed>
+    <deployedseed>268162998</deployedseed>
+    <deployedseed>1695634008</deployedseed>
+    <deployedseed>1949314335</deployedseed>
+    <deployedseed>1813462881</deployedseed>
+    <deployedseed>872213236</deployedseed>
+    <deployedseed>1488842285</deployedseed>
+    <deployedseed>716850388</deployedseed>
+    <deployedseed>1937911254</deployedseed>
+    <deployedseed>777340268</deployedseed>
+    <deployedseed>1765909713</deployedseed>
+    <deployedseed>707615407</deployedseed>
+    <deployedseed>270338582</deployedseed>
+    <deployedseed>502116586</deployedseed>
+    <deployedseed>1995626051</deployedseed>
+    <deployedseed>1074752924</deployedseed>
+    <deployedseed>625079689</deployedseed>
+    <deployedseed>1142578696</deployedseed>
+    <deployedseed>2050622134</deployedseed>
+    <deployedseed>227334573</deployedseed>
+    <deployedseed>1534614731</deployedseed>
+    <deployedseed>285450010</deployedseed>
+  </question>
+</quiz>

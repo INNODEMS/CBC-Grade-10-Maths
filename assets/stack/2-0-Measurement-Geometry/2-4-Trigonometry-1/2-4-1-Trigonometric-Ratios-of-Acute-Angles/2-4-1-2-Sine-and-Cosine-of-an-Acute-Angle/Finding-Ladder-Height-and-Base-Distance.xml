@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding Ladder Height and Base Distance</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A ladder {@ladder_length@} meters long leans against a vertical wall, making an angle of \({@angle_with_ground@}^\circ\) with the ground as shown in the diagram.</p>
+
+[[jsxgraph]]
+ var board = JXG.JSXGraph.initBoard(divid, {
+        boundingbox: [-7, 7, 7, -7],
+        axis: false,
+        showNavigation: false,
+        showCopyright: false
+    });
+
+    // Points of triangle
+    var A = board.create('point', [-3, -1], {name: 'A', visible:false});
+    var C = board.create('point', [-3, 5], {name: 'B', visible:false});
+    var B = board.create('point', [3, -1], {name: 'C', visible:false});
+
+    var D = board.create('point', [-2.5, 5.5], {name: 'D', visible:false});
+    var E = board.create('point', [3.5, -0.5], {name: 'E', visible:false});
+
+    // Ladder points (hidden)
+    var a = board.create('point', [-3, 5], {visible:false});
+    var b = board.create('point', [-2.5, 5.5], {visible:false});
+    var c = board.create('point', [-2.9, 4.9], {visible:false});
+    var d = board.create('point', [-2.4, 5.4], {visible:false});
+
+    var e = board.create('point', [-2,4], {visible:false});
+    var f = board.create('point', [-1.5,4.5], {visible:false});
+    var g = board.create('point', [-1.9,3.9], {visible:false});
+    var h = board.create('point', [-1.4,4.4], {visible:false});
+
+    var i = board.create('point', [-1,3], {visible:false});
+    var j = board.create('point', [-0.5,3.5], {visible:false});
+    var k = board.create('point', [-0.9,2.9], {visible:false});
+    var m = board.create('point', [-0.4,3.4], {visible:false});
+
+    var n = board.create('point', [0,2], {visible:false});
+    var o = board.create('point', [0.5,2.5], {visible:false});
+    var p = board.create('point', [0.1,1.9], {visible:false});
+    var q = board.create('point', [0.6,2.4], {visible:false});
+
+    var r = board.create('point', [1,1], {visible:false});
+    var s = board.create('point', [1.5,1.5], {visible:false});
+    var t = board.create('point', [1.1,0.9], {visible:false});
+    var u = board.create('point', [1.6,1.4], {visible:false});
+
+    var v = board.create('point', [2,0], {visible:false});
+    var w = board.create('point', [2.5,0.5], {visible:false});
+    var x = board.create('point', [2.1,-0.1], {visible:false});
+    var y = board.create('point', [2.6,0.4], {visible:false});
+
+    var H = board.create('point', [2.9,-0.9], {visible:false});
+    var Q = board.create('point', [3.4,-0.4], {visible:false});
+    var z = board.create('point', [3,-1], {visible:false});
+    var G = board.create('point', [3.5,-0.5], {visible:false});
+
+    // Triangle itself
+    var triangle = board.create('polygon', [A, B, C], {
+        fillColor: 'white',
+        borders: {strokeColor: 'blue'}
+    });
+
+    // Top beam
+    board.create('segment', [D, E], {strokeColor: 'blue'});
+
+    // Ladder rungs
+    board.create('segment', [a,b], {strokeColor: 'black'});
+    board.create('segment', [c,d], {strokeColor: 'black'});
+    board.create('segment', [e,f], {strokeColor: 'black'});
+    board.create('segment', [g,h], {strokeColor: 'black'});
+    board.create('segment', [i,j], {strokeColor: 'black'});
+    board.create('segment', [k,m], {strokeColor: 'black'});
+    board.create('segment', [n,o], {strokeColor: 'black'});
+    board.create('segment', [p,q], {strokeColor: 'black'});
+    board.create('segment', [r,s], {strokeColor: 'black'});
+    board.create('segment', [t,u], {strokeColor: 'black'});
+    board.create('segment', [v,w], {strokeColor: 'black'});
+    board.create('segment', [x,y], {strokeColor: 'black'});
+    board.create('segment', [z,G], {strokeColor: 'black'});
+    board.create('segment', [H,Q], {strokeColor: 'black'});
+
+    // Label the triangle
+    var labelA = board.create('text', [0,3.5,'{#hyp#} m'], {fontSize: 12});
+    
+
+
+    // 1️⃣ Extend ground line (extend A–B to left and right)
+    var groundLeft  = board.create('point', [-6, -1], {visible:false});
+    var groundRight = board.create('point', [ 6, -1], {visible:false});
+    board.create('line', [groundLeft, groundRight], {strokeWidth:2, strokeColor:'black'});
+
+    // Label "ground"
+    board.create('text', [-0.5, -1.4, 'ground'], {fontSize: 14});
+
+    // 2️⃣ Extend the wall (vertical AC side)
+    var wallTop = board.create('point', [-3, 6], {visible:false});
+    board.create('line', [A, wallTop], {straightFirst:false, straightLast:false, strokeWidth:2});
+
+    // Label "wall"
+    board.create('text', [-3.5, 6.2, 'wall'], {fontSize: 14});
+
+  // Angle where ladder meets the ground at B
+    var angleAtB = board.create('angle', 
+        [groundLeft, B, A],   // points: (point on ground left, vertex B, ladder)
+        {
+            radius: 1,          // size of the angle arc
+            name: '{#angle_with_ground#}°',        // label
+            fontSize: 14,
+            fillColor: 'rgba(255,0,0,0.2)', // semi-transparent fill for the angle wedge
+            strokeColor: 'blue', // curve color
+            strokeWidth: 2,
+            type: 'majotr',      // draws the minor angle curve
+            nameDist: 20        // distance of label from vertex
+        }
+    );
+
+[[/jsxgraph]]
+
+<p><ol type='a'>
+  <li><p>How high does the ladder reach on the wall?</p>
+   <p>\(\text{Height}\)=[[input:ans1]]\(\,\text{m}\)[[validation:ans1]][[feedback:prt1]]</p>
+    </li>
+  <li><p>How far is the base of the ladder from the wall?</p>
+<p>\(\text{Base}\)=[[input:ans2]]\(\,\text{m}\)[[validation:ans2]][[feedback:prt2]]</p>
+   </li>
+</ol>
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><strong>Worked Solution</strong></p>
+
+<p>The ladder, the wall and the ground form a right triangle. Use sine for the vertical (opposite) and cosine for the horizontal (adjacent).</p>
+
+<ol type="a">
+  <li>
+    <p><strong>Height the ladder reaches on the wall</strong></p>
+<p>
+\[
+\begin{align}
+\sin(\theta) &= \frac{\text{opposite}}{\text{hypotenuse}} \\[6pt]
+\sin({@angle_with_ground@}^\circ) &= \frac{h}{@ladder_length@} \\[6pt]
+h &= {@ladder_length@} \sin({@angle_with_ground@}^\circ) \\[6pt]
+&= {@height_on_wall@}\,\text{m}
+\end{align}
+\]
+</p>
+    <p>Therefore the height is <strong>{@height_on_wall@} m</strong></p>
+  
+  </li>
+
+  <li>
+    <p><strong>Distance of the base of the ladder from the wall</strong></p>
+
+\[
+\begin{align}
+\cos(\theta) &= \frac{\text{adjacent}}{\text{hypotenuse}} \\[6pt]
+\cos({@angle_with_ground@}^\circ) &= \frac{d}{@ladder_length@} \\[6pt]
+d &= {@ladder_length@} \cos({@angle_with_ground@}^\circ) \\[6pt]
+&= {@distance_from_wall@}\,\text{m}
+\end{align}
+\]
+
+    <p>Therefore the base distance is <strong>{@distance_from_wall@} m</strong></p>
+  
+  </li>
+</ol>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* List of Pythagorean triples */
+triples : [
+  [3,4,5],[4,3,5],[5,12,13],[12,5,13],
+  [6,8,10],[8,6,10],[7,24,25],[24,7,25],
+  [9,40,41],[40,9,41],[8,15,17],[15,8,17],
+  [20,21,29],[21,20,29],[28,45,53],[45,28,53],
+  [11,60,61],[60,11,61],[16,63,65],[63,16,65],
+  [33,56,65],[56,33,65],[48,55,73],[55,48,73],
+  [13,84,85],[84,13,85],[36,77,85],[77,36,85],
+  [39,80,89],[80,39,89],[65,72,97],[72,65,97],
+  [20,99,101],[99,20,101],[60,91,109],[91,60,109],
+  [12,35,37],[35,12,37],[15,36,39],[36,15,39],
+  [9,12,15],[12,9,15],[40,42,58],[42,40,58],
+  [24,45,51],[45,24,51],[7,24,25],[24,7,25]
+];
+
+/* Choose a random triple */
+T : triples[rand(length(triples)) + 1];
+
+/* Assign sides relative to ladder problem */
+opp : T[1];  /* height on wall */
+adj : T[2];  /* base distance from wall */
+hyp : T[3];  /* ladder length */
+
+/* Compute the angle with ground in degrees using arccos or arcsin */
+angle_deg : round(atan(opp / adj) * 180 / %pi);
+
+/* Display results */
+ladder_length : hyp;
+height_on_wall : opp;
+distance_from_wall : adj;
+angle_with_ground : angle_deg;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The length of the ladder}={@hyp@}\,\text{m}\)</p>
+<p>\(\text{The angle made by the ladder to the ground}={@angle_with_ground @}^\circ\)</p>
+<p>\(\text{The height made to the wall}={@height_on_wall@}\,\text{m}\)</p>
+<p>\(\text{The base made to the ladder}={@distance_from_wall@}\,\text{m}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>height_on_wall</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>distance_from_wall</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct height.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>height_on_wall</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct height.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>distance_from_wall</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>218332025</deployedseed>
+    <deployedseed>236136818</deployedseed>
+    <deployedseed>1887919839</deployedseed>
+    <deployedseed>223435347</deployedseed>
+    <deployedseed>1749346652</deployedseed>
+    <deployedseed>1240947311</deployedseed>
+    <deployedseed>128513505</deployedseed>
+    <deployedseed>877613034</deployedseed>
+    <deployedseed>1917788876</deployedseed>
+    <deployedseed>567355160</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>height_on_wall</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>distance_from_wall</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

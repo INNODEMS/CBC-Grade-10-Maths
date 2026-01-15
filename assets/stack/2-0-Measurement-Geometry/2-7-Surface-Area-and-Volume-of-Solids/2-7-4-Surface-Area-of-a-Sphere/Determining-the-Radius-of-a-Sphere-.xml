@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Determining  the Radius of a Sphere.</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[A company is designing a spherical water tank. The total external surface area of the tank, which will be painted, is \({@A@}\,\text{m}^2\). Using this information, determine the diameter of the spherical tank.
+<p>\(\text{Diameter of the water tank}=\)[[input:ans1]]\(\,\text{m}\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>We are asked to determine the <strong>diameter</strong> of a spherical water tank given its total surface area.</p>
+
+<p><strong>Step 1: Recall the formula for the surface area of a sphere</strong></p>
+
+<p>
+\(
+\text{Surface area} = 4 \pi r^2
+\)
+</p>
+
+<p><strong>Step 2: Substitute the given surface area</strong></p>
+
+<p>
+The total surface area is \( {@A@} \, \text{m}^2 \) and \( \pi = \dfrac{22}{7} \). Let \( r \) be the radius of the tank.
+</p>
+
+<p>
+\(
+\begin{align}
+4 \pi r^2 &= {@A@} \\
+4 \times \frac{22}{7} \times r^2 &= {@A@} \\
+\frac{88}{7} r^2 &= {@A@} \\
+r^2 &= \frac{7 \times {@A@}}{88} \\
+r &=  \frac{\sqrt{7 \times {@A@}}}{\sqrt{88}}        \\
+&= {@r@} \, \text{m}
+\end{align}
+\)
+</p>
+
+<p><strong>Step 3: Compute the diameter</strong></p>
+
+<p>
+\(
+\begin{align}
+\text{Diameter} &= 2r \\
+&= 2 \times {@r@} \\
+&= {@D@} \, \text{m}
+\end{align}
+\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize the radius */
+r : rand_with_step(7,140,7);
+D:2*r;
+/* Use pi = 22/7 */
+pi_val : 22/7;
+R:r^2;
+
+/* Area formula */
+A_1:pi_val * r^2;
+A : 4*pi_val * r^2;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The Surface area of the water tank}={@A@}\,\text{m}^2\)</p>
+<p>\(\text{The radius of the water tank}={@r@}\,\text{m}\)</p>
+<p>\(\text{The diameter of the water tank}={@D@}\,\text{m}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>D</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct Diameter of the water tank.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>D</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1517707994</deployedseed>
+    <deployedseed>822097076</deployedseed>
+    <deployedseed>691915663</deployedseed>
+    <deployedseed>1959513092</deployedseed>
+    <deployedseed>765192441</deployedseed>
+    <deployedseed>1857701209</deployedseed>
+    <deployedseed>585960216</deployedseed>
+    <deployedseed>333888321</deployedseed>
+    <deployedseed>1090348021</deployedseed>
+    <deployedseed>1130038073</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>D</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the Volume of a cuboid</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>A cuboid has the following dimensions:</p>
+<ul>
+<li>Length: <strong>{@L@} cm</strong></li>
+<li>Width: <strong>{@W@} cm</strong></li>
+<li>Height: <strong>{@H@} cm</strong></li>
+</ul>
+<p>The diagram below represents the cuboid (not drawn to scale):</p>
+<p>[[jsxgraph]] // Extract STACK variables var L = {#L#}; var W = {#W#}; var H = {#H#}; var offset = W; // Offset for the back face // Dynamic bounding box var board = JXG.JSXGraph.initBoard(divid, { boundingbox: [ -1, H + offset + 1, L + offset + 2, -1 ], axis: false, showCopyright: false }); // Helper: hidden fixed point function hiddenPoint(coords) { return board.create('point', coords, { visible: false, fixed: true }); } // Front face points var A = hiddenPoint([0, 0]); var B = hiddenPoint([L, 0]); var D = hiddenPoint([0, H]); var C = hiddenPoint([L, H]); // Back face points var E = hiddenPoint([offset, offset]); var F = hiddenPoint([L + offset, offset]); var Hpt = hiddenPoint([offset, H + offset]); var G = hiddenPoint([L + offset, H + offset]); // Helper: fixed edge function edge(P, Q) { return board.create('segment', [P, Q], { fixed: true, strokeWidth: 2 }); } // Draw edges edge(A, B); edge(A, D); edge(B, C); edge(D, C); edge(E, F); edge(E, Hpt); edge(F, G); edge(Hpt, G); edge(A, E); edge(B, F); edge(C, G); edge(D, Hpt); // -------------- DIMENSION LABELS -------------- // Length label (L) along AB board.create('text', [L/2, -0.5, L + " cm"], {fixed: true, anchorX: 'middle'} ); // Height label (H) along AD board.create('text', [-0.5, H/2, H + " cm"], {fixed: true, anchorY: 'middle'} ); // Width label (W) along AE (the slanted depth edge) board.create('text', [offset/2, offset/2, W + " cm"], {fixed: true} ); [[/jsxgraph]]</p>
+<p>Find the volume of the cuboid in cubic centimetres (cm³).</p>
+<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>The volume of a cuboid is found by multiplying its three dimensions:</p>
+<p>\[ V = L \times W \times H. \]</p>
+<p>In this problem, the cuboid has dimensions:</p>
+<ul>
+<li>Length: \( {@L@} \) cm</li>
+<li>Width: \( {@W@} \) cm</li>
+<li>Height: \( {@H@} \) cm</li>
+</ul>
+<p>Therefore, the volume is:</p>
+<p>\[ V = {@L@} \times {@W@} \times {@H@} = {@V@}\text{ cm}^3. \]</p>
+<p>So the correct answer is <strong>{@V@} cm³</strong>.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Generate three different side lengths between 2 and 12 */
+L : rand(11) + 2;
+W : rand(11) + 2;
+H : rand(11) + 2;
+
+/* Ensure all are distinct */
+while W = L do W : rand(11) + 2;
+while H = L or H = W do H : rand(11) + 2;
+
+/* Compute volume */
+V : L * W * H;
+
+/* Model Answers */
+ta1:V;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Dimensions: \({@L@} \times {@W@} \times {@H@}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<p><i class="fa fa-check"></i> Correct answer, well done.</p>]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<p><i class="fa fa-adjust"></i> Your answer is partially correct.</p>]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<p><i class="fa fa-times"></i> Incorrect answer.</p>]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text><![CDATA[neg_ans: if ans1 < 0 then 1 else 0;]]></text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions>0.0001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Well done!</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>neg_ans</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Your answer is negative, which is not possible for a volume.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>114824904</deployedseed>
+    <deployedseed>1128954338</deployedseed>
+    <deployedseed>886255434</deployedseed>
+    <deployedseed>307137256</deployedseed>
+    <deployedseed>115798125</deployedseed>
+    <deployedseed>36622622</deployedseed>
+    <deployedseed>323302975</deployedseed>
+    <deployedseed>2066350961</deployedseed>
+    <deployedseed>583085265</deployedseed>
+    <deployedseed>380052630</deployedseed>
+    <deployedseed>483820492</deployedseed>
+    <deployedseed>1058806787</deployedseed>
+    <deployedseed>560182147</deployedseed>
+    <deployedseed>1186703680</deployedseed>
+    <deployedseed>995077166</deployedseed>
+    <deployedseed>1102743376</deployedseed>
+    <deployedseed>1076616687</deployedseed>
+    <deployedseed>280708051</deployedseed>
+    <deployedseed>1125355376</deployedseed>
+    <deployedseed>1063978534</deployedseed>
+    <deployedseed>1464185567</deployedseed>
+    <deployedseed>565870749</deployedseed>
+    <deployedseed>890001055</deployedseed>
+    <deployedseed>1427962286</deployedseed>
+    <deployedseed>890461777</deployedseed>
+    <deployedseed>88153794</deployedseed>
+    <deployedseed>880438853</deployedseed>
+    <deployedseed>1437870820</deployedseed>
+    <deployedseed>455461477</deployedseed>
+    <deployedseed>1616585217</deployedseed>
+    <deployedseed>42943101</deployedseed>
+    <deployedseed>362009030</deployedseed>
+    <deployedseed>1956207309</deployedseed>
+    <deployedseed>225473097</deployedseed>
+    <deployedseed>460060457</deployedseed>
+    <deployedseed>2080301004</deployedseed>
+    <deployedseed>92839150</deployedseed>
+    <deployedseed>1539853612</deployedseed>
+    <deployedseed>361394966</deployedseed>
+    <deployedseed>1721217001</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Identifying and Determining the Surface Area of a Conical Container</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A conical container is open at the bottom and is made of metal. The container has a base radius of \({@base_radius_of_the_cone@}\,\text{cm}\) and a vertical height of \({@height_of_the_cone@}\,\text{cm}\), as shown in the diagram below.
+</p>
+
+[[jsxgraph]]
+const brd = JXG.JSXGraph.initBoard(divid, {
+      boundingbox: [-6, 12, 6, -2], // (xmin, ymax, xmax, ymin)
+      axis: false,
+      showNavigation: false,
+      showCopyright: false
+    });
+
+    // Cone parameters
+    const radius = 4;   // 5 cm (visual units)
+    const height = 9;   // 8 cm (visual units)
+
+    // Center of base and apex
+    const O = brd.create('point', [0, 0], {visible: false});
+    const Apex = brd.create('point', [0, height], {visible: false});
+
+    // Ellipse params for perspective: horizontal a = radius, vertical b = radius * factor
+    const a = radius;
+    const b = radius * 0.35; // flatten factor for nice perspective
+
+    // Points on ellipse (left & right)
+    const left = brd.create('point', [-a, 0], {visible: false});
+    const right = brd.create('point', [a, 0], {visible: false});
+
+    // Back half of ellipse (hidden) - dashed
+    brd.create('curve', [
+      function(t) { return O.X() + a * Math.cos(t); },
+      function(t) { return O.Y() + b * Math.sin(t); },
+      0, Math.PI
+    ], {strokeColor: '#222', dash: 2, strokeWidth: 2});
+
+    // Front half of ellipse (visible) - solid
+    brd.create('curve', [
+      function(t) { return O.X() + a * Math.cos(t); },
+      function(t) { return O.Y() + b * Math.sin(t); },
+      Math.PI, 2 * Math.PI
+    ], {strokeColor: '#222', strokeWidth: 2});
+
+    // Cone sides (Apex to left & right)
+    brd.create('segment', [Apex, left], {strokeColor: '#222', strokeWidth: 3});
+    brd.create('segment', [Apex, right], {strokeColor: '#222', strokeWidth: 3});
+
+    // Fill visible triangular face (Apex-left-right) with nice color
+    // Note: polygon [left, Apex, right] keeps ordering so fill doesn't cross the ellipse
+    brd.create('polygon', [left, Apex, right], {
+      fillColor: '#ff5a8a',   // pretty pink
+      fillOpacity: 0.9,
+      borders: {strokeColor: '#c2185b', strokeWidth: 2}
+    });
+
+    // Draw the vertical height line (Apex to center)
+    brd.create('segment', [Apex, O], {strokeColor: '#111', strokeWidth: 1.5, dash: 2});
+
+    // Draw radius line (center to right) and add double arrow heads
+    // Use an arrow from O to right, and another from right to O to simulate ↔
+    brd.create('arrow', [O, right], {strokeColor: '#111', strokeWidth: 1.6, lastArrow:{type:2,size:6}});
+    brd.create('arrow', [right, O], {strokeColor: '#111', strokeWidth: 1.6, lastArrow:{type:2,size:6}});
+
+    // Right-angle square at the base center (between height and radius)
+    // Small square with corner at (0,0)
+    const s = 0.6; // square size (visual)
+    const p1 = brd.create('point', [0 + s, 0], {fixed:true, visible: false});
+    const p2 = brd.create('point', [s, s], {fixed:true,visible: false});
+    const p3 = brd.create('point', [0, s], {fixed:true,visible: false});
+    brd.create('polygon', [O, p1, p2, p3], {
+      fillColor: '#ffeb3b', // yellow box
+      fillOpacity: 0.95,
+      borders: {strokeColor: '#444', strokeWidth: 1}
+    });
+
+    // Labels: radius (5 cm) — place slightly above the radius line
+    brd.create('text', [a/2 - 0.6, -0.4, '{#base_radius_of_the_cone#} cm'], {fontSize: 16, fontFamily: 'Arial'});
+
+    // Label: height (8 cm) — place mid way along vertical
+    brd.create('text', [0.4, height/2 + 0.4, '{#height_of_the_cone#} cm'], {fontSize: 16, fontFamily: 'Arial'});
+
+    // Optional: slanted edge label (if you want slant labelled, uncomment below)
+    brd.create('text', [ (a)/2 + 0.5, (height)/2, 'L ' ], {fontSize: 14});
+[[/jsxgraph]]
+
+<p>
+Using the information given above:
+</p>
+<p>
+<ol type="a">
+  <li>
+    <p>Identify the slant height of the conical container.</p>
+<p>\(\text{Slant height(L)}=\)[[input:ans1]]\(\,\text{cm}\)[[validation:ans1]][[feedback:prt1]]</p>
+  </li>
+  <li>
+    <p>Determine the total surface area of metal sheet required to construct the container, correct to \(\text{three decimal places}\).</p>
+<p>\(\text{Total surface area of metal sheet}=\)[[input:ans2]]\(\,\text{cm}^2\)[[validation:ans2]][[feedback:prt2]]</p>
+  </li>
+</ol>
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>
+We are given a conical container that is <strong>open at the bottom</strong>.  
+The base radius of the cone is <strong>\({@base_radius_of_the_cone@}\,\text{cm}\)</strong>  
+and the vertical height is <strong>\({@height_of_the_cone@}\,\text{cm}\)</strong>.
+</p>
+<p>
+The diagram shows that the radius, height, and slant height form a <strong>right-angled triangle</strong>.
+</p>
+
+<ol type="a">
+
+<li>
+<p><strong>Identifying the slant height of the cone</strong></p>
+
+<p>
+Using Pythagoras’ theorem:
+</p>
+
+<p>
+\(
+\text{(Slant height)}^2 = (\text{radius})^2 + (\text{height})^2
+\)
+</p>
+
+<p>
+\(
+\begin{align}
+L^2 &= {@base_radius_of_the_cone@}^2 + {@height_of_the_cone@}^2 \\
+L^2 &= ({@base_radius_of_the_cone@})^2 + ({@height_of_the_cone@})^2 \\
+L &= \sqrt{({@base_radius_of_the_cone@})^2 + ({@height_of_the_cone@})^2}\\
+&= {@slantheight_of_the_cone@}\,\text{cm}
+\end{align}
+\)
+</p>
+<p>
+From the given values, the slant height is:<br>
+\(
+L = {@slantheight_of_the_cone@}\,\text{cm}
+\)
+</p>
+</li>
+
+<li>
+<p><strong>Determining the total surface area of metal sheet required</strong></p>
+
+<p>
+Since the container is <strong>open at the bottom</strong>, only the curved surface area is required.
+</p>
+<p>
+The formula for the curved surface area of a cone is:
+</p>
+<p>
+\(
+\text{Curved surface area} = \pi r l
+\)
+</p>
+<p>
+Substituting the given values:
+<br>
+\(
+\begin{align}
+\text{Surface Area} &= \pi \times {@base_radius_of_the_cone@} \times {@slantheight_of_the_cone@} \\
+&= \frac{22}{7} \times {@base_radius_of_the_cone@} \times {@slantheight_of_the_cone@} \\
+&= \frac{22}{7} \times {@R_times_l@} \\
+&={@area_1@}\\
+&= {@Area_cone@}\,\text{cm}^2
+\end{align}
+\)
+</p>
+<p>
+Therefore, the total surface area of metal sheet required is:<br>
+\(
+\boxed{{@Area_cone@}\,\text{cm}^2}
+\)
+</p>
+
+</li>
+
+</ol>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/*The triplets of the Triangle.*/
+list_of_the_values:[[3,4,5],[6,8,10],[9,12,15],[5, 12, 13],[7, 24, 25],[8, 15, 17],
+    [9, 40, 41],[11, 60, 61],[12, 35, 37],[13, 84, 85],[16, 63, 65],[20, 21, 29],[33, 56, 65],
+    [36, 77, 85],[39, 80, 89],[48, 55, 73],[60, 91, 109],[65, 72, 97],[80, 99, 121],[15, 20, 25],
+    [35, 72, 85],[36, 77, 85],[39, 80, 89],[72, 24, 72]];
+index:1+rand(24);
+choose_one:list_of_the_values[index];
+/*The */
+base_radius_of_the_cone:choose_one[1];
+height_of_the_cone:choose_one[2];
+slantheight_of_the_cone:choose_one[3];
+/*Computing the total surface area of the cone.*/
+R_times_l:base_radius_of_the_cone*slantheight_of_the_cone;
+
+Area:22/7 *R_times_l;
+area_1:float(Area);
+Area_cone:decimalplaces(area_1,3);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The radius and the Vertical height of the conical container  are}\, {@base_radius_of_the_cone@}\,\text{cm} \,\text{and}\,{@height_of_the_cone@}\text{cm}\,\text{respectively}.\)</p>
+<p>\(\text{The slant height of the conical container}={@slantheight_of_the_cone@}\,\text{cm}\)</p>
+<p>\(\text{The Total surface area of the canonical  container}={@Area_cone@}\,\text{cm}^2\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>slantheight_of_the_cone</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>Area_cone</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct slant height.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>slantheight_of_the_cone</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct total surface area.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>Area_cone</tans>
+        <testoptions>3</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>495309420</deployedseed>
+    <deployedseed>946492125</deployedseed>
+    <deployedseed>464423999</deployedseed>
+    <deployedseed>503080996</deployedseed>
+    <deployedseed>1517086034</deployedseed>
+    <deployedseed>844591234</deployedseed>
+    <deployedseed>263952967</deployedseed>
+    <deployedseed>1756799903</deployedseed>
+    <deployedseed>658595555</deployedseed>
+    <deployedseed>908238727</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>slantheight_of_the_cone</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>Area_cone</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>
