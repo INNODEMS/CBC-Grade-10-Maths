@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding distance and acceleration from a velocity–time graph</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A car starts from rest and accelerates uniformly to a velocity of \({@vmax@}\,\mathrm{m/s}\) in \({@t1@}\,\mathrm{s}\). It then maintains this velocity for \({@t2@}\,\mathrm{s}\), before decelerating uniformly to rest in \({@t3@}\,\mathrm{s}\). The total time is \({@T@}\,\mathrm{s}\).
+</p>
+
+<hr>
+
+<p><strong>(a)</strong> Draw the velocity–time graph by dragging the blue points B, C, and D to their correct positions. Point A \((0,0)\) is fixed.</p>
+
+[[jsxgraph width="700px" height="500px"
+  input-ref-B="B"
+  input-ref-C="C"
+  input-ref-D="D"
+]]
+
+var board = JXG.JSXGraph.initBoard(divid, {
+  boundingbox: [-2, {#vmax#} + 10, {#T#} + 10, -5],
+  axis: true,
+  grid: true,
+  showCopyright: false,
+  showNavigation: false
+});
+
+// Fixed point A
+var A = board.create('point', [0, 0], {
+  name: 'A',
+  fixed: true,
+  size: 3,
+  color: 'black',
+  label: { offset: [-10, -15] }
+});
+
+// Draggable student points
+var B = board.create('point', {#B_init#}, {
+  name: '',
+  size: 4,
+  color: 'blue',
+  snapToGrid: true,
+  label: { visible: false }
+});
+board.create('text', [() => B.X() + 0.5, () => B.Y() + 1.5, () => `B (${Math.round(B.X())}, ${Math.round(B.Y())})`]);
+
+var C = board.create('point', {#C_init#}, {
+  name: '',
+  size: 4,
+  color: 'blue',
+  snapToGrid: true,
+  label: { visible: false }
+});
+board.create('text', [() => C.X() + 0.5, () => C.Y() + 1.5, () => `C (${Math.round(C.X())}, ${Math.round(C.Y())})`]);
+
+var D = board.create('point', {#D_init#}, {
+  name: '',
+  size: 4,
+  color: 'blue',
+  snapToGrid: true,
+  label: { visible: false }
+});
+board.create('text', [() => D.X() + 0.5, () => D.Y() + 1.5, () => `D (${Math.round(D.X())}, ${Math.round(D.Y())})`]);
+
+// Connect segments
+board.create('segment', [A, B], { strokeWidth: 2 });
+board.create('segment', [B, C], { strokeWidth: 2 });
+board.create('segment', [C, D], { strokeWidth: 2 });
+
+// STACK bindings (full point bindings)
+stack_jxg.bind_point('B', B);
+stack_jxg.bind_point('C', C);
+stack_jxg.bind_point('D', D);
+
+board.unsuspendUpdate();
+[[/jsxgraph]]
+
+<div style="display:none">
+  [[input:B]] [[validation:B]] [[feedback:prtB]]
+  [[input:C]] [[validation:C]] [[feedback:prtC]]
+  [[input:D]] [[validation:D]] [[feedback:prtD]]
+</div>
+
+
+<hr>
+
+<p><strong>(b)</strong> Calculate the total distance travelled.</p>
+<p>Total distance = [[input:ans1]] m [[validation:ans1]] [[feedback:prt1]]</p>
+
+<p><strong>(c)</strong> Determine the average velocity.</p>
+<p>Average velocity = [[input:ans2]] m/s [[validation:ans2]] [[feedback:prt2]]</p>
+
+<p><strong>(d)</strong> Calculate:</p>
+<ul>
+  <li>Acceleration = [[input:ans3]] m/s² [[validation:ans3]] [[feedback:prt3]]</li>
+  <li>Deceleration = [[input:ans4]] m/s² [[validation:ans4]] [[feedback:prt4]]</li>
+</ul>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+
+<p>
+The motion consists of three distinct phases, which are clearly represented on the
+velocity–time graph:
+</p>
+
+<ol>
+<li>
+<strong>Uniform acceleration</strong> from rest to
+\({@vmax@}\,\mathrm{m\,s^{-1}}\) in \({@t1@}\,\mathrm{s}\).
+</li>
+
+<li>
+<strong>Constant velocity</strong> motion for \({@t2@}\,\mathrm{s}\).
+</li>
+
+<li>
+<strong>Uniform deceleration</strong> back to rest in \({@t3@}\,\mathrm{s}\).
+</li>
+</ol>
+
+<hr>
+
+<h4>(a) Velocity–time graph</h4>
+
+<p>
+The graph is made of three straight-line segments joining the points:
+</p>
+
+\[
+(0,0), \quad ({@t1@},{@vmax@}), \quad ({@t1@}+{@t2@},{@vmax@}), \quad ({@T@},0).
+\]
+
+<p>
+The gradient of each segment represents the acceleration during that phase.
+</p>
+
+<hr>
+
+
+<p>(b) Total distance travelled</p>
+<p> 
+Distances come from <em>areas under the graph</em>, while accelerations come from
+<em>gradients of the graph</em>.
+</p>
+
+<p>
+The total distance is the area under the velocity–time graph.
+This area is the sum of:
+</p>
+
+<ul>
+<li>a triangle during acceleration: \(\displaystyle \frac12 {@vmax@}\cdot{@t1@}\),</li>
+<li>a rectangle at constant velocity: \(\displaystyle {@vmax@}\cdot{@t2@}\),</li>
+<li>a triangle during deceleration: \(\displaystyle \frac12 {@vmax@}\cdot{@t3@}\).</li>
+</ul>
+
+<p>
+Hence,
+\[
+s = \frac12 {@vmax@}({@t1@}+{@t3@}) + {@vmax@}\cdot{@t2@}
+   = {@stot@}\ \mathrm{m}.
+\]
+</p>
+
+<hr>
+
+<h4>(c) Average velocity</h4>
+
+<p>
+The average velocity over the whole journey is defined as
+</p>
+
+\[
+\bar v = \frac{\text{total distance}}{\text{total time}}
+       = \frac{{@stot@}}{{@T@}}
+       = {@vavg@}\ \mathrm{m\,s^{-1}}.
+\]
+
+<hr>
+
+<h4>(d) Acceleration and deceleration</h4>
+
+<p>
+The acceleration is the gradient of the first straight section:
+</p>
+
+\[
+a = \frac{\Delta v}{\Delta t}
+  = \frac{{@vmax@}}{{@t1@}}
+  = {@a@}\ \mathrm{m\,s^{-2}}.
+\]
+
+<p>
+The deceleration is the gradient of the final straight section:
+</p>
+
+\[
+d = \frac{0-{@vmax@}}{{@t3@}}
+  = {@d@}\ \mathrm{m\,s^{-2}}.
+\]
+</p>
+
+<p>
+The negative sign indicates that the velocity is decreasing.
+</p>
+
+<hr>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random parameters */
+vmax : rand(21) + 30;
+t1   : rand(6) + 8;
+t2   : rand(11) + 10;
+t3   : rand(6) + 8;
+T    : t1 + t2 + t3;
+
+/* Physics quantities */
+a     : vmax / t1;
+d     : -vmax / t3;
+s1    : 1/2 * vmax * t1;
+s2    : vmax * t2;
+s3    : 1/2 * vmax * t3;
+stot  : s1 + s2 + s3;
+vavg  : stot / T;
+
+/* Model answers (avoid B/C/D conflict!) */
+B_model : [t1, vmax];
+C_model : [t1 + t2, vmax];
+D_model : [T, 0];
+
+/* Initial draggable points */
+B_init : [5, 10];
+C_init : [15, 15];
+D_init : [25, 10];
+
+/* Model answers for other parts */
+ta_dist : stot;
+ta_vavg : vavg;
+ta_a    : a;
+ta_d    : d;
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[{@vmax@}, {@t1@}, {@t2@}, {@t3@}
+<p>{@ta_dist@}</p>
+{@ta_vavg@}
+<p> {@ta_a  @}</p>
+<p>{@ta_d @}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta_dist</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta_vavg</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta_a </tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>ta_d  </tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>B</name>
+      <type>algebraic</type>
+      <tans>B_model</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>C</name>
+      <type>algebraic</type>
+      <tans>C_model</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>D</name>
+      <type>algebraic</type>
+      <tans>D_model</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta_dist</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta_vavg </tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ta_a</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>ta_d</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prtB</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ansB</sans>
+        <tans>B_model</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prtB-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prtB-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The points must be ordered in time: acceleration, constant speed, then deceleration.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prtC</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ansC</sans>
+        <tans>C_model</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prtC-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prtC-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The velocity levels are correct, but the transition times are not. Check when acceleration and deceleration end.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prtD</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ansD</sans>
+        <tans>D_model</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prtD-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prtD-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The motion must end at zero velocity at time T. Check the final point.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>613701689</deployedseed>
+    <deployedseed>24081215</deployedseed>
+    <deployedseed>185017111</deployedseed>
+    <deployedseed>246853938</deployedseed>
+    <deployedseed>1478909497</deployedseed>
+    <deployedseed>122590486</deployedseed>
+    <deployedseed>1911076282</deployedseed>
+    <deployedseed>1797381260</deployedseed>
+    <deployedseed>531732342</deployedseed>
+    <deployedseed>190867265</deployedseed>
+    <deployedseed>1168774651</deployedseed>
+    <deployedseed>491560724</deployedseed>
+    <deployedseed>12710233</deployedseed>
+    <deployedseed>769935093</deployedseed>
+    <deployedseed>1074207201</deployedseed>
+    <deployedseed>919153636</deployedseed>
+    <deployedseed>2106245838</deployedseed>
+    <deployedseed>2004459536</deployedseed>
+    <deployedseed>812062737</deployedseed>
+    <deployedseed>1878456574</deployedseed>
+    <deployedseed>1725099549</deployedseed>
+    <deployedseed>140102613</deployedseed>
+    <deployedseed>397269886</deployedseed>
+    <deployedseed>1047044361</deployedseed>
+    <deployedseed>5624462</deployedseed>
+    <deployedseed>145005675</deployedseed>
+    <deployedseed>573374546</deployedseed>
+    <deployedseed>742226789</deployedseed>
+    <deployedseed>137701818</deployedseed>
+    <deployedseed>1287898769</deployedseed>
+    <deployedseed>125908095</deployedseed>
+    <deployedseed>1685554695</deployedseed>
+    <deployedseed>96549256</deployedseed>
+    <deployedseed>476523043</deployedseed>
+    <deployedseed>1561041107</deployedseed>
+    <deployedseed>1756516910</deployedseed>
+    <deployedseed>319148174</deployedseed>
+    <deployedseed>2031779182</deployedseed>
+    <deployedseed>868324824</deployedseed>
+    <deployedseed>972400206</deployedseed>
+    <deployedseed>129048903</deployedseed>
+    <deployedseed>1036687000</deployedseed>
+    <deployedseed>1470940176</deployedseed>
+    <deployedseed>1226072648</deployedseed>
+    <deployedseed>1874065023</deployedseed>
+    <deployedseed>1601845168</deployedseed>
+    <deployedseed>1035875716</deployedseed>
+    <deployedseed>1460354770</deployedseed>
+    <deployedseed>149155472</deployedseed>
+    <deployedseed>1715839471</deployedseed>
+    <deployedseed>1224002667</deployedseed>
+    <deployedseed>976932135</deployedseed>
+    <deployedseed>473944286</deployedseed>
+    <deployedseed>787835285</deployedseed>
+    <deployedseed>1449222342</deployedseed>
+    <deployedseed>756842181</deployedseed>
+    <deployedseed>742175871</deployedseed>
+    <deployedseed>364933396</deployedseed>
+    <deployedseed>2041153986</deployedseed>
+    <deployedseed>254500011</deployedseed>
+    <deployedseed>1704591023</deployedseed>
+    <deployedseed>722807437</deployedseed>
+    <deployedseed>329415375</deployedseed>
+    <deployedseed>619923856</deployedseed>
+    <deployedseed>112789154</deployedseed>
+    <deployedseed>634715865</deployedseed>
+    <deployedseed>703781207</deployedseed>
+    <deployedseed>879837762</deployedseed>
+    <deployedseed>1000010564</deployedseed>
+    <deployedseed>1601880389</deployedseed>
+    <deployedseed>2131685042</deployedseed>
+    <deployedseed>40568486</deployedseed>
+    <deployedseed>1382528002</deployedseed>
+    <deployedseed>1596818229</deployedseed>
+    <deployedseed>984486007</deployedseed>
+    <deployedseed>5680940</deployedseed>
+    <deployedseed>1691666140</deployedseed>
+    <deployedseed>1862947022</deployedseed>
+    <deployedseed>1110635430</deployedseed>
+    <deployedseed>547796797</deployedseed>
+    <deployedseed>1355256776</deployedseed>
+    <deployedseed>119454216</deployedseed>
+    <deployedseed>1041006121</deployedseed>
+    <deployedseed>1431664969</deployedseed>
+    <deployedseed>1258939453</deployedseed>
+    <deployedseed>755093462</deployedseed>
+    <deployedseed>223100623</deployedseed>
+    <deployedseed>1725430182</deployedseed>
+    <deployedseed>197593858</deployedseed>
+    <deployedseed>1291665577</deployedseed>
+    <deployedseed>1463403312</deployedseed>
+    <deployedseed>534091384</deployedseed>
+    <deployedseed>1671401251</deployedseed>
+    <deployedseed>1740258742</deployedseed>
+    <deployedseed>1795225956</deployedseed>
+    <deployedseed>1600494508</deployedseed>
+    <deployedseed>214626188</deployedseed>
+    <deployedseed>2134544713</deployedseed>
+  </question>
+</quiz>

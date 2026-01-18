@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the Volume of Material in a Hollow Cylinder</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A hollow cylindrical pipe has an outer radius of \({@R@}\,\text{m}\), an inner radius of  \({@r@}\,\text{m}\) and a length of  \({@h@}\,\text{m}\).<br>
+Calculate the volume of material used to make the pipe.
+</p>
+<p>\(\text{Volume of the pipe}=\)[[input:ans1]]\(\,\text{m}^3\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>Given:</p>
+<p>Outer radius: \({@R@}\,\text{m}\)</p>
+<p>Inner radius: \({@r@} \,\text{m}\)</p>
+<p>Length of the pipe: \({@h@} \,\text{m}\)</p>
+
+<p>Step 1: Compute the volume of the outer cylinder</p>
+<p>
+\(\begin{align}
+V_\text{Outer} &= \pi R^2 h \\
+&= 3.142 \times {@R@}^2 \times {@h@} \\
+&={@V_Outer@}\,\text{m}^3
+\end{align}\)
+</p>
+
+<p>Step 2: Compute the volume of the inner cylinder</p>
+<p>
+\(\begin{align}
+V_\text{Inner} &= \pi r^2 h \\
+&= 3.142 \times {@r@}^2 \times {@h@}\\
+&={@V_Inner@}\,\text{m}^3
+\end{align}\)
+</p>
+
+<p>Step 3: Subtract inner volume from outer volume to get the hollow cylinder volume</p>
+<p>
+\(\begin{align}
+V &= V_\text{Outer} - V_\text{Inner} \\
+&= {@V_Outer@}-{@V_Inner@}\\
+&={@V_1@}\,\text{m}^3
+\end{align}\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize the length of the cylinder (h) */
+h : rand_with_step(50, 200, 5);    /* Length between 50 m and 200 m */
+
+/* Randomize inner radius (r) */
+r : rand_with_step(5, 15, 1);      /* Inner radius between 5 m and 15 m */
+
+/* Randomize outer radius (R) ensuring it is greater than inner radius */
+R : r + rand_with_step(15, 60, 5);  /* Outer radius = inner radius + 1 to 10 m */
+
+/* Use pi = 3.142 */
+pi_val : 3.142;
+
+/* Volume of hollow cylinder: V = pi*(R^2 - r^2)*h */
+
+/*Volume of the Outer cylinder*/
+V_Outer:pi_val*R^2*h;
+
+
+/*Volume of the inner cylinder*/
+V_Inner:pi_val*r^2*h;
+V_1:round(V_Outer-V_Inner);
+
+/* Volume of hollow cylinder: V = pi*(R^2 - r^2)*h */
+V : pi_val * (R^2 - r^2) * h;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The radius of the inner pipe}={@r@}\,\text{m}\)</p>
+<p>\(\text{The radius of outer pipe}={@R@}\,\text{m}\)</p
+<p>\(\text{The length of the pipe}={@h@}\,\text{m}\)</p
+<p>\(\text{The Volume of the pipe}={@V_1@}\,\text{m}^3\)</p]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>V_1</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct vollume of the hollow cylinder.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>V_1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1474033891</deployedseed>
+    <deployedseed>1789054874</deployedseed>
+    <deployedseed>1098105351</deployedseed>
+    <deployedseed>746079149</deployedseed>
+    <deployedseed>891374623</deployedseed>
+    <deployedseed>1265192438</deployedseed>
+    <deployedseed>697259169</deployedseed>
+    <deployedseed>1400721512</deployedseed>
+    <deployedseed>1081652442</deployedseed>
+    <deployedseed>1909359229</deployedseed>
+    <deployedseed>1436696387</deployedseed>
+    <deployedseed>1974782042</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>V_1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

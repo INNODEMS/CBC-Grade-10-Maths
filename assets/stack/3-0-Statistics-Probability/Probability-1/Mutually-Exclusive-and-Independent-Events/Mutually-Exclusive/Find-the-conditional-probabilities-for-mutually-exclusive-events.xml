@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Find the conditional probabilities for mutually exclusive events</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>On a firing range, a rifleman has two attempts to hit a target. The probability of hitting the target with the first shot is {@prob_first@} and the probability of hitting with the second shot is {@prob_second@}.The probability of hitting the target with both shots is {@prob_both@}. </p>
+<p>Find the probability of the following events below.</p>
+<p>\(M:\) "Missing the target with both shots".</p>
+<p>\(P(M)=\)[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>
+<p>\(N:\) "Hitting with the first shot and missing with the second".</p>
+<p>\(P(N)=\)[[input:ans2]] [[validation:ans2]] [[feedback:prt2]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><b>Worked solution</b></p>
+<p>Find the probability of the following events below.</p>
+<hr>
+<p>Find P(M) with \(M:\) "Missing the target with both shots".</p>
+<p>To answer to this question, we denote the events \(F\), \(S\) and \(H\) as follows:</p>
+<p> \(F:\) "Hitting the target with the first shot".</p>
+<p> \(S:\) "Hitting the target with the second shot".</p>
+<p> \(H:\) "Hitting the target with both shots".</p>
+<p>We get from the information provided by the text question that \(P(F)={@prob_first@} \), \(P(S)={@prob_second@} \) and \(P(H)={@prob_both@} \).</p>
+<p>Then \( P(M)=1 - P(F \cup S) \), and \( P(F \cup S)=(P(F)-P(H))+(P(S)-P(H))+P(H) \).</p>
+<p>So \(P(F \cup S)=({@prob_first@} - {@prob_both@})+({@prob_second@}-{@prob_both@})+{@prob_both@}\).</p>
+<p>Thus \(P(F \cup S)={@total@}\), and \( P(M)= 1-{@total@}\).</p>
+<p>Therefore \(P(M)={@ta1@}\).</p>
+<hr>
+<p>Find P(N) with \(N:\)"hitting with the first shot and missing with the second</p>
+<p> We have: \( P(N)=P(F)-P(H)\). Then</p>
+<p>\( P(N)={@prob_first@}-{@prob_both@}\)</p>
+<p>Therefore, \( P(N)={@ta2@}\) </p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2022071300</text>
+    </stackversion>
+    <questionvariables>
+      <text>/*Randomize the numbers 0.2, 0.3 and 0.1*/
+
+prob_both:(rand(2)+1)/10; /*p(hitting the target with both shots) =0.1*/
+prob_first:(rand(4)+1)/10 + prob_both; /*p(hitting the target with the first shot) = 0.2*/
+prob_second:(rand_with_step(1,4,1))/10+ prob_both; /*p(hitting with the second shot) = 0.3*/
+
+/*model answer*/
+
+total:(prob_first-prob_both)+(prob_second-prob_both)+prob_both;
+prob_comb:1-total;
+ta1:prob_comb; /*p(Missing the target with both shots)*/
+
+prob_miss:prob_first-prob_both;
+ta2:prob_miss; /*p(hitting first shot and missing with the second shot)*/</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="moodle_auto_format">
+      <text>{@prob_both@}, {@prob_first@} and {@prob_second@} 
+ans = {@ta1@} {@ta2@}</text>
+    </questionnote>
+    <questiondescription format="moodle_auto_format">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<p>Correct answer, well done.</p>]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<p>Incorrect answer.</p>]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>dot</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>numerical</type>
+      <tans>ta1</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>numerical</type>
+      <tans>ta2</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>/*Node1:checking the correct answer*/
+
+/*Node2:checking the answer given as 1- p(hitting the target with both shots) to find the p(missing the target with both shots)*/
+mistake_2:1- prob_both;</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake_2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Your answer is the difference between the p(hitting the target with both shots) from the one and not difference between one and total sum of probability of first shot, second shot and both shots.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>/*Node1:checking the correct answer*/
+
+/*Node2: checking the answer given as p(Hitting both shots) instead of hitting shot 1 and missing shot 2*/
+mistake_2:prob_both;
+
+/*Node3:checking the answer given as p(hitting the target with first shot)-P(hitting the target with both shots) to find p(hitting with the first shot and missing with the second)*/
+mistake_3:prob_first-prob_both;</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>mistake_2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have given the probability of hitting with both shots as the answer.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>mistake_3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have given the difference between the probability of hitting with the first shot and the probability of hitting with both shots. Instead give the difference between the probability of the first shot and probability of both shots.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>2003996442</deployedseed>
+    <deployedseed>984419315</deployedseed>
+    <deployedseed>1683220564</deployedseed>
+    <deployedseed>1107082850</deployedseed>
+    <deployedseed>685432645</deployedseed>
+    <deployedseed>443753311</deployedseed>
+    <deployedseed>1861092466</deployedseed>
+    <deployedseed>717998741</deployedseed>
+    <deployedseed>642330716</deployedseed>
+    <deployedseed>1066119026</deployedseed>
+    <deployedseed>685733213</deployedseed>
+    <deployedseed>1441908941</deployedseed>
+    <deployedseed>547837848</deployedseed>
+    <deployedseed>394693774</deployedseed>
+  </question>
+</quiz>

@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Determining the surface area of the closed cuboid from its net.</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Calculate the surface area of the box given below from its net,</p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+  boundingbox: [-20, 250, 250, -20],
+  axis: false,
+  showCopyright: false,
+  showNavigation: false
+});
+
+// Vertex coordinates
+var A = board.create('point', [60, 60], {visible:false});
+var B = board.create('point', [150, 60], {visible:false});
+var C = board.create('point', [150, 120], {visible:false});
+var D = board.create('point', [60, 120], {visible:false});
+
+var E = board.create('point', [105, 15], {visible:false});
+var F = board.create('point', [195, 15], {visible:false});
+var G = board.create('point', [195, 75], {visible:false});
+var H = board.create('point', [105, 75], {visible:false});
+
+// Faces (same layout and color as SVG)
+var front = board.create('polygon', [A, B, C, D], {
+  fillColor: 'blue',
+  fillOpacity: 0.5,
+  borders: {strokeColor: 'black'},
+  vertices: {visible: false}
+});
+
+var back = board.create('polygon', [E, F, G, H], {
+  fillColor: 'blue',
+  fillOpacity: 0.5,
+  borders: {strokeColor: 'black'},
+  vertices: {visible: false}
+});
+
+var topFace = board.create('polygon', [A, B, F, E], {
+  fillColor: 'orange',
+  fillOpacity: 0.5,
+  borders: {strokeColor: 'black'},
+  vertices: {visible: false}
+});
+
+var bottomFace = board.create('polygon', [D, C, G, H], {
+  fillColor: 'orange',
+  fillOpacity: 0.5,
+  borders: {strokeColor: 'black'},
+  vertices: {visible: false}
+});
+
+var rightFace = board.create('polygon', [B, C, G, F], {
+  fillColor: 'cyan',
+  fillOpacity: 0.5,
+  borders: {strokeColor: 'black'},
+  vertices: {visible: false}
+});
+
+var leftFace = board.create('polygon', [A, D, H, E], {
+  fillColor: 'cyan',
+  fillOpacity: 0.5,
+  borders: {strokeColor: 'black'},
+  vertices: {visible: false}
+});
+
+// Midpoint markers
+var midDC = board.create('point', [105, 120], {visible:false, size:2, fillColor:'black'});
+var midCG = board.create('point', [172.5, 97.5], {visible:false, size:2, fillColor:'black'});
+var midGF = board.create('point', [195, 45], {visible:false, size:2, fillColor:'black'});
+
+// Dimension labels
+board.create('text', [110, 130, '{#length#}cm'], {fontSize:12});
+board.create('text', [177, 107, '{#width#}cm'], {fontSize:12});
+board.create('text', [200, 55, '{#height#}cm'], {fontSize:12});
+
+[[/jsxgraph]]
+<p>Surface area of the cuboid=[[input:ans1]] cm\(^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>(a).The figure below shows the net of the box</p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+  boundingbox: [-40, 550, 700, -60],
+  keepAspectRatio: false,
+  axis: false,
+  showCopyright: false
+});
+
+var s = 120;       // cell size
+var x0 = 180;      // left column x
+var yTop = 480;    // row1 y (largest y is top visually)
+var col = function(c){ return x0 + (c-1)*s; };
+var row = function(r){ return yTop - (r-1)*s; };
+
+// helper to draw a face and optional edge labels
+function drawFace(id, c, r, color, labels) {
+  var x = col(c), y = row(r);
+  var P1 = board.create('point', [x, y], {visible:false});
+  var P2 = board.create('point', [x + s, y], {visible:false});
+  var P3 = board.create('point', [x + s, y - s], {visible:false});
+  var P4 = board.create('point', [x, y - s], {visible:false});
+
+  board.create('polygon', [P1, P2, P3, P4], {
+    fillColor: color,
+    fillOpacity: 0.9,
+    borders: {strokeColor: 'black', strokeWidth: 1.5},
+    vertices: {visible: false}
+  });
+
+  // Center label (face letter)
+  board.create('text', [x + s/2 - 6, y - s/2 + 6, id], {fontSize: 16, color: 'black'});
+
+  // Edge dimension labels
+  if (labels) {
+    if (labels.top)
+      board.create('text', [x + s/2, y + 10, labels.top], {fontSize: 11, color: 'black'});
+    if (labels.bottom)
+      board.create('text', [x + s/2, y - s - 15, labels.bottom], {fontSize: 11, color: 'black'});
+    if (labels.left)
+      board.create('text', [x - 35, y - s/2 + 6, labels.left], {fontSize: 11, color: 'black'});
+    if (labels.right)
+      board.create('text', [x + s + 20, y - s/2 + 6, labels.right], {fontSize: 11, color: 'black'});
+  }
+}
+
+// Layout matches your HTML:
+// A(3,1), B(3,2), C(3,3), D(3,4), E(2,3), F(4,3)
+
+drawFace('A', 3, 1, 'orange', {
+  top: '{#length#} cm',
+  left: '{#width#} cm',
+  right: '{#width#} cm'
+});
+
+drawFace('B', 3, 2, 'blue', {
+  bottom: '{#length#} cm',
+  left: '{#height#} cm',
+  right: '{#height#} cm'
+});
+
+drawFace('C', 3, 3, 'orange', {
+  // no labels for this face
+});
+
+drawFace('D', 3, 4, 'blue', {
+  bottom: '{#length#} cm',
+  right: '{#height#} cm'
+});
+
+drawFace('E', 2, 3, 'cyan', {
+  bottom: '{#height#} cm',
+  left: '{#width#} cm'
+});
+
+drawFace('F', 4, 3, 'cyan', {
+  bottom: '{#height#} cm',
+  right: '{#width#} cm'
+});
+
+// Optional: light grid lines to outline folds
+for (var c = 1; c <= 5; c++) {
+  for (var r = 1; r <= 5; r++) {
+    var x = col(c), y = row(r);
+    var p1 = board.create('point', [x, y], {visible: false});
+    var p2 = board.create('point', [x + s, y], {visible: false});
+    var p3 = board.create('point', [x + s, y - s], {visible: false});
+    var p4 = board.create('point', [x, y - s], {visible: false});
+    board.create('polygon', [p1, p2, p3, p4], {
+      borders: {strokeColor: '#ccc', strokeWidth: 0.5},
+      fillOpacity: 0,
+      vertices: {visible: false}
+    });
+  }
+}
+
+[[/jsxgraph]]
+
+<p>(b).Surface area of the box</p>
+<p>\(\begin{align}\text{Area of a rectangle}&=length \times width\\\end{align}\)</p>
+<p>\(\begin{align}\text{Area of rectangle A}&={@length@} cm\times{@width@} cm\\&={@area_of_rectangleA@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Area of rectangle B}&={@length@} cm\times{@height@} cm\\&={@area_of_rectangleB@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Area of rectangle C}&={@length@} cm\times{@width@} cm\\&={@area_of_rectangleC@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Area of rectangle D}&={@length@} cm\times{@height@} cm\\&={@area_of_rectangleD@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Area of rectangle E}&={@width@} cm\times{@height@} cm\\&={@area_of_rectangleE@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Area of rectangle F}&={@width@} cm\times{@height@} cm\\&={@area_of_rectangleF@} cm^2\end{align}\)</p>
+<p>\(\begin{align}\text{Surface area}&={@area_of_rectangleA@} cm^2+{@area_of_rectangleB@} cm^2+{@area_of_rectangleC@} cm^2+{@area_of_rectangleD@} cm^2+{@area_of_rectangleE@} cm^2+{@area_of_rectangleF@} cm^2\\&={@ta@} cm^2\end{align}\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/*surface area of a cuboid*/
+length:rand_with_step(50,99,1);/*length of the cuboid*/
+width:rand_with_step(10,49,1);/*width of the cuboid*/
+height:rand_with_prohib(9,60,[length,width]);/*height of the cuboid*/
+
+area_of_rectangleA:length*width;/*area of rectangleA from the net*/
+area_of_rectangleC:length*width;/*area of rectangleB from the net*/
+area_of_rectangleB:length*height;/*area of rectangleC from the net*/
+area_of_rectangleD:length*height;/*area of rectangleD from the net*/
+area_of_rectangleE:height*width;/*area of rectangleE from the net*/
+area_of_rectangleF:height*width;/*area of rectangleF from the net*/
+surface_area:area_of_rectangleA+area_of_rectangleB+area_of_rectangleC+area_of_rectangleD+area_of_rectangleE+area_of_rectangleF;/*total surface area of the cuboid from its net*/
+ta:surface_area;/*teacher's answer*/
+
+/*mistakes*/
+ta_1:area_of_rectangleA*6;/*assuming all the six faces are the same*/
+ta_2:area_of_rectangleB*6;/*assuming all the six faces are the same*/
+ta_3:area_of_rectangleE*6;/*assuming all the six faces are the same*/</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>The net of a rectangle has 6 faces. 2 opposite faces are equal</p>
+<p>Surface area ={@ta@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Eric Morara </p>
+<p id="concept">https://ecampus.idems.international/question/bank/history/history.php?entryid=129307&returnurl=%2Fquestion%2Fedit.php%3Fcourseid%3D430%26cat%3D19907%252C121817&courseid=430&filter=%7B%22category%22%3A%7B%22jointype%22%3A1%2C%22values%22%3A%5B%2219907%22%5D%2C%22filteroptions%22%3A%7B%22includesubcategories%22%3Afalse%7D%7D%2C%22hidden%22%3A%7B%22jointype%22%3A1%2C%22values%22%3A%5B0%5D%7D%7D</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">The question requires a student to determine the surface area of the given cuboid from its net. He is required first to open the cuboid to form a net and then work out the surface area.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>check for correct surface area</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Assuming All Faces Are Equal</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta_1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you might have assumed that all the faces of the cuboid are the same. Remember, a cuboid has six faces, but the faces are typically rectangles, not squares. Each pair of opposite faces has the same dimensions, but the dimensions for different pairs can be different from each other. Make sure to identify the length, width, and height properly and use the correct side lengths for each face.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>0</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Assuming All Faces Are Equal</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta_2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you might have assumed that all the faces of the cuboid are the same. Remember, a cuboid has six faces, but the faces are typically rectangles, not squares. Each pair of opposite faces has the same dimensions, but the dimensions for different pairs can be different from each other. Make sure to identify the length, width, and height properly and use the correct side lengths for each face.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Assuming All Faces Are Equal</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta_3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you might have assumed that all the faces of the cuboid are the same. Remember, a cuboid has six faces, but the faces are typically rectangles, not squares. Each pair of opposite faces has the same dimensions, but the dimensions for different pairs can be different from each other. Make sure to identify the length, width, and height properly and use the correct side lengths for each face.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1062631462</deployedseed>
+    <deployedseed>2010205959</deployedseed>
+    <deployedseed>1608392455</deployedseed>
+    <deployedseed>1468635976</deployedseed>
+    <deployedseed>1952263700</deployedseed>
+    <deployedseed>1324922865</deployedseed>
+    <deployedseed>1223005949</deployedseed>
+    <deployedseed>139772572</deployedseed>
+    <deployedseed>1548959192</deployedseed>
+    <deployedseed>436499890</deployedseed>
+    <deployedseed>2112354359</deployedseed>
+    <deployedseed>41242115</deployedseed>
+    <deployedseed>1669697290</deployedseed>
+    <deployedseed>950319511</deployedseed>
+    <deployedseed>71942627</deployedseed>
+    <deployedseed>2107591720</deployedseed>
+    <deployedseed>1901253914</deployedseed>
+    <deployedseed>208348972</deployedseed>
+    <deployedseed>678776284</deployedseed>
+    <deployedseed>1542547585</deployedseed>
+    <deployedseed>896519598</deployedseed>
+    <deployedseed>1083288714</deployedseed>
+    <deployedseed>730185285</deployedseed>
+    <deployedseed>1044990958</deployedseed>
+    <deployedseed>1114799414</deployedseed>
+    <deployedseed>479241447</deployedseed>
+    <deployedseed>367618333</deployedseed>
+    <deployedseed>194950173</deployedseed>
+    <deployedseed>1546885640</deployedseed>
+    <deployedseed>1747644929</deployedseed>
+    <deployedseed>545130091</deployedseed>
+    <deployedseed>355731481</deployedseed>
+    <deployedseed>960897976</deployedseed>
+    <deployedseed>361890321</deployedseed>
+    <deployedseed>1829019403</deployedseed>
+    <deployedseed>390493851</deployedseed>
+    <deployedseed>970099838</deployedseed>
+    <deployedseed>195832921</deployedseed>
+    <deployedseed>273640400</deployedseed>
+    <deployedseed>1369747291</deployedseed>
+    <deployedseed>1534770013</deployedseed>
+    <deployedseed>1518126687</deployedseed>
+    <deployedseed>388712652</deployedseed>
+    <deployedseed>281336652</deployedseed>
+    <deployedseed>1673701455</deployedseed>
+    <deployedseed>1206333839</deployedseed>
+    <deployedseed>317741870</deployedseed>
+    <deployedseed>1558976530</deployedseed>
+    <deployedseed>504799557</deployedseed>
+    <deployedseed>1732598490</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>correct surface area</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Assuming All Faces Are Equal</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta_1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>Assuming All Faces Are Equal</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta_1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>4</testcase>
+      <description>Assuming All Faces Are Equal</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta_2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>5</testcase>
+      <description>Assuming All Faces Are Equal</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta_3</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-4-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

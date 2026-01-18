@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the Area of Intersecting Circles</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Determine the area of intersection of the two circles shown in the figure below \(\text{correct to 4 decimal places}\).</p>
+[[jsxgraph]]
+const brd = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-15, 15, 15, -15],
+    axis: false,
+    showNavigation: false,
+    showCopyright: false
+  });
+
+  // Circle centres
+    // Circle centre O1 with label to the left
+    const O1 = brd.create('point', [-4, 0], {
+    name: 'O₁',
+    fixed: true,
+    size: 2,
+    label: {
+        offset: [-16, 0]   // negative x → label moves to the left
+    }
+    });
+
+  
+  const O2 = brd.create('point', [4, 0],  {name: 'O₂', fixed: true, size: 2});
+
+  // Radii (adjust to your needs)
+  const r1 = 6.3;
+  const r2 = 6.3;
+
+  const c1 = brd.create('circle', [O1, r1], {strokeColor: 'black'});
+  const c2 = brd.create('circle', [O2, r2], {strokeColor: 'black'});
+
+  // Intersection points
+  const A = brd.create('intersection', [c1, c2, 0], {name: 'A', size: 2});
+  const B = brd.create('intersection', [c1, c2, 1], {name: 'B', size: 2});
+
+  // Chord AB (label “10 m” can be added as text)
+  const AB = brd.create('segment', [A, B], {strokeColor: 'blue'});
+
+  // Lens boundary arcs
+  const arc1 = brd.create('arc', [O1, A, B], {strokeColor: 'blue', strokeWidth: 2});
+  const arc2 = brd.create('arc', [O2, B, A], {strokeColor: 'blue', strokeWidth: 2});
+
+  // Filled lens: approximate by a curve following both arcs
+  const lens = brd.create('curve', [
+    function(t) {
+      // upper arc (O1, A->B), t in [0, 0.5]; lower (O2, B->A), t in (0.5, 1]
+      const u = (t <= 0.5) ? 2 * t : 2 * (t - 0.5);
+      if (t <= 0.5) {
+        const angA = Math.atan2(A.Y() - O1.Y(), A.X() - O1.X());
+        const angB = Math.atan2(B.Y() - O1.Y(), B.X() - O1.X());
+        const ang = angA + u * (angB - angA);
+        return O1.X() + r1 * Math.cos(ang);
+      } else {
+        const angB = Math.atan2(B.Y() - O2.Y(), B.X() - O2.X());
+        const angA = Math.atan2(A.Y() - O2.Y(), A.X() - O2.X());
+        const ang = angB + u * (angA - angB);
+        return O2.X() + r2 * Math.cos(ang);
+      }
+    },
+    function(t) {
+      const u = (t <= 0.5) ? 2 * t : 2 * (t - 0.5);
+      if (t <= 0.5) {
+        const angA = Math.atan2(A.Y() - O1.Y(), A.X() - O1.X());
+        const angB = Math.atan2(B.Y() - O1.Y(), B.X() - O1.X());
+        const ang = angA + u * (angB - angA);
+        return O1.Y() + r1 * Math.sin(ang);
+      } else {
+        const angB = Math.atan2(B.Y() - O2.Y(), B.X() - O2.X());
+        const angA = Math.atan2(A.Y() - O2.Y(), A.X() - O2.X());
+        const ang = angB + u * (angA - angB);
+        return O2.Y() + r2 * Math.sin(ang);
+      }
+    },
+    0, 1
+  ], {
+    fillColor: '#99aaff',
+    fillOpacity: 0.4,
+    strokeWidth: 0
+  });
+
+ 
+    // Triangle B O2 A
+  const triBO2A = brd.create('polygon', [B, O2, A], {
+    borders: {strokeColor: 'black', strokeWidth: 1},
+    fillColor: '#ffeeaa',
+    fillOpacity: 0.4
+  });
+  
+
+  // Triangle B O1 A
+  const triBO1A = brd.create('polygon', [B, O1, A], {
+    borders: {strokeColor: 'black', strokeWidth: 1},
+    fillColor: '#ffeeaa',
+    fillOpacity: 0.4
+  });
+
+  
+
+  
+
+
+    // Angle at O2: ∠BO2A = 120°
+    const angO2 = brd.create('angle', [B, O2, A], {
+    radius: 1,                     // bigger arc → more visible
+    name: '{#theta_deg2#}°',
+    withLabel: true,
+    strokeColor: '#c1121f',          // deep red
+    strokeWidth: 1,
+    fillColor: '#f28482',            // light red fill
+    fillOpacity: 0.7,
+    label: {
+        offset: [12, 12],
+        strokeColor: '#c1121f',
+        fontSize: 16
+    }
+    });
+
+    // Angle at O1: ∠AO1B = 70°
+    const angO1 = brd.create('angle', [A, O1, B], {
+    radius: 1,
+    name: '{#theta_deg1 #}°',
+    withLabel: true,
+    strokeColor: '#003049',          // deep blue
+    strokeWidth: 1,
+    fillColor: '#90dbf4',            // light blue fill
+    fillOpacity: 0.7,
+    label: {
+        offset: [-14, 10],
+        strokeColor: '#003049',
+        fontSize: 16
+    }
+    });
+
+    const W = brd.create('text', [2.2, -2.7, '{#BO_2#} m'], {
+    fontSize: 13
+    });
+
+    const X = brd.create('text', [-3.5, 3.5, '{#AO_1#} m'], {
+    fontSize: 13
+    });
+[[/jsxgraph]]
+<p>\(\text{Area of the two overlapping circles}=\)[[input:ans1]]\(\,\text{m}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>We are asked to determine the area of intersection of two circles. Let the circles have radii <em>AO₁</em> and <em>BO₂</em>, and angles subtended by the chord at the centers be <em>θ₁</em> and <em>θ₂</em>, respectively. The solution proceeds as follows:</p>
+
+<p><strong>Step 1: Area of segment in the first circle</strong></p>
+
+<p>The area of a circular segment is given by:</p>
+<p>\(
+\text{Area of segment} = \text{Area of sector} - \text{Area of triangle}
+\)</p>
+
+<p>1a. Area of the sector:</p>
+<p>
+\(\begin{align}
+\text{Area of sector}_1 &= \frac{\theta_1}{360} \pi r^2 \\
+&=\frac{{@theta_deg1@}}{360} \times \frac{22}{7} \times {@AO_1@}^2\\
+&=\frac{{@theta_deg1@}}{360} \times \frac{22}{7} \times {@R1@}\\
+&={@area_sector@}\\
+&= {@Area_sector@}\,\text{m}^2
+\end{align}
+\)</p>
+
+<p>1b. Area of the triangle formed by the chord and radii:</p>
+<p>\(
+\begin{align}
+\text{Area of triangle}_1 &= \frac{1}{2} r^2 \sin \theta_1 \\
+&= \frac{1}{2} \times {@AO_1@} \times {@AO_1@} \times \sin {@theta_deg1@}\\
+&= \frac{1}{2} \times {@R1@}\times \sin {@theta_deg1@}\\
+&={@area_triangle@}\\
+&= {@Area_triangle@}\,\text{m}^2
+\end{align}
+\)</p>
+
+<p>1c. Area of the segment in the first circle:</p>
+<p>
+\(
+\begin{align}
+\text{Area of segment}_1 &= \text{Area of sector}_1 - \text{Area of triangle}_1 \\
+&={@area_sector@}-{@area_triangle@}\\
+&={@area_segment@}\\
+&= {@Area_segment@}\,\text{m}^2
+\end{align}
+\)
+
+</p>
+
+
+<p><strong>Step 2: Area of segment in the second circle</strong></p>
+
+<p>2a. Area of the sector:</p>
+<p>
+\(\begin{align}
+\text{Area of sector}_2 &= \frac{\theta_2}{360} \pi r^2 \\
+&=\frac{{@theta_deg2@}}{360} \times \frac{22}{7} \times {@BO_2@}^2\\
+&=\frac{{@theta_deg2@}}{360} \times \frac{22}{7} \times {@R2@}\\
+&={@area_sector1@}\\
+&= {@Area_sector1@}\,\text{m}^2
+\end{align}
+\)</p>
+
+<p>2b. Area of the triangle formed by the chord and radii:</p>
+<p>\(
+\begin{align}
+\text{Area of triangle}_2 &= \frac{1}{2} r^2 \sin \theta_2 \\
+&= \frac{1}{2} \times {@BO_2@} \times {@BO_2@} \times \sin {@theta_deg2@}\\
+&= \frac{1}{2} \times {@R2@}\times \sin {@theta_deg2@}\\
+&={@area_triangle1@}\\
+&= {@Area_triangle1@}\,\text{m}^2
+\end{align}
+\)</p>
+
+<p>2c. Area of the segment in the second circle:</p>
+<p>
+\(
+\begin{align}
+\text{Area of segment}_2 &= \text{Area of sector}_2 - \text{Area of triangle}_2 \\
+&={@area_sector1@}-{@area_triangle1@}\\
+&={@area_segment1@}\\
+&= {@Area_segment1@}\,\text{m}^2
+\end{align}
+\)
+
+<hr>
+
+<p><strong>Step 3: Area of intersection of the two circles</strong></p>
+
+<p>The total area of intersection is the sum of the two segments:</p>
+<p>
+\(\begin{align}
+\text{Area of intersection} &= \text{Area of segment}_1 + \text{Area of segment}_2 \\
+&={@area_segment@}+{@area_segment1@} \\
+&={@Area@}\\
+&= {@Area_of_intersecting_circles@}\,\text{m}^2
+\end{align}
+
+\)</p>
+
+
+<p>
+Therefore, <br>
+\(
+\text{Area of intersection} = {@Area@}\,\text{m}^2
+\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Step 1: Randomize radius and angle */
+AO_1: rand_with_step(7,50,3);        /* radius_1 between 1 and  */
+BO_2: rand_with_step(7,140,7);        /* radius_2 between 1 and  */
+
+theta_deg1 : rand_with_step(5,60,5);   /* angle between 5° and 60° */
+theta_deg2 : rand_with_step(10,180,10);   /* angle between 10° and 180° */
+R1:AO_1^2;
+R2:BO_2^2;
+
+/*Area of segment 1*/
+
+/* Step 2: Area of sector */
+area_sector : theta_deg1/360*22/7*AO_1^2;
+Area_sector:decimalplaces(area_sector,4);
+/* Step 3: Area of triangle (1/2 ab sinθ)
+   where a = b = radius */
+degree:R1*float(sin(theta_deg * %pi / 180));
+
+area_triangle : 1/2*AO_1^2*float(sin(theta_deg1 * %pi / 180));
+Area_triangle:decimalplaces(area_triangle,4);
+
+/* Step 4: Area of segment */
+area_segment :area_sector-area_triangle;
+Area_segment:decimalplaces(area_segment,4);
+
+/*Area of segment 2*/
+
+/* Step 2: Area of sector */
+area_sector1 : theta_deg2/360*22/7*BO_2^2;
+Area_sector1:decimalplaces(area_sector1,4);
+/* Step 3: Area of triangle (1/2 ab sinθ)
+   where a = b = radius */
+degree1:R2*float(sin(theta_deg2 * %pi / 180));
+
+area_triangle1 : 1/2*BO_2^2*float(sin(theta_deg2 * %pi / 180));
+Area_triangle1:decimalplaces(area_triangle1,4);
+
+/* Step 4: Area of segment */
+area_segment1 :area_sector1-area_triangle1;
+Area_segment1:decimalplaces(area_segment1,4);
+
+/*The area of the intersecting circles*/
+Area:area_segment+area_segment1;
+Area_of_intersecting_circles:Area_segment+Area_segment1;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The radius of the smaller circle}={@AO_1@}\,\text{m}\)</p>
+<p>\(\text{The radius of the larger circle}={@BO_2@}\,\text{m}\)</p>
+
+<p>\(\text{The angle of the smaller circle}={@theta_deg1@}^\circ\)</p>
+<p>\(\text{The angle of the larger circle}={@theta_deg2@}^\circ\)</p>
+
+<p>\(\text{Area of the intersecting circles}={@Area_of_intersecting_circles@}\,\text{m}^2\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>Area_of_intersecting_circles</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct area of the two intersecting circle.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>Area_of_intersecting_circles</tans>
+        <testoptions>4</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>577421972</deployedseed>
+    <deployedseed>1778207486</deployedseed>
+    <deployedseed>765659013</deployedseed>
+    <deployedseed>1182882678</deployedseed>
+    <deployedseed>700251600</deployedseed>
+    <deployedseed>1134722525</deployedseed>
+    <deployedseed>415519738</deployedseed>
+    <deployedseed>1935267208</deployedseed>
+    <deployedseed>586547265</deployedseed>
+    <deployedseed>386924318</deployedseed>
+    <deployedseed>1378474822</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Area_of_intersecting_circles</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

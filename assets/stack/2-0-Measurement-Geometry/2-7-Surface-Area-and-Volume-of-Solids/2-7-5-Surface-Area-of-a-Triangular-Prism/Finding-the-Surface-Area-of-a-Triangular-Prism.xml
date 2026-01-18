@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the Surface Area of a Triangular Prism</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The figure below shows a triangular prism.</p>
+[[jsxgraph]]
+const board = JXG.JSXGraph.initBoard(divid, {
+      boundingbox: [-1, 9, 9, -1],
+      axis: false,
+      showNavigation: false,
+      showCopyright: false
+    });
+
+    // Base triangle (right triangle)
+    const A = board.create('point', [1, 1], {name: 'A',visible:false, size: 0, fixed: true});
+    const B = board.create('point', [4, 1], {name: 'B', visible:false,size: 0, fixed: true});
+    const C = board.create('point', [1, 4], {name: 'C', visible:false,size: 0, fixed: true});
+
+    // Top triangle offset along prism's length (4.5 units)
+    const offset = 4.5;
+    const D = board.create('point', [A.X() + offset, A.Y() + 0.6], {name: 'D', visible:false,size: 0, fixed: true});
+    const E = board.create('point', [B.X() + offset, B.Y() + 0.3], {name: 'E', visible:false,size: 0, fixed: true});
+    const F = board.create('point', [C.X() + offset, C.Y() + 0.6], {name: 'F', visible:false,size: 0, fixed: true});
+
+    // Base and top triangles
+    board.create('polygon', [A, B, C], {
+      borders: {strokeColor: 'black', strokeWidth: 2}
+    });
+    board.create('polygon', [D, E, F], {
+      borders: {strokeColor: 'black', strokeWidth: 2, dash: 2}
+    });
+
+    // Connect top and base
+    board.create('segment', [A, D], {strokeColor: 'black', strokeWidth: 2});
+    board.create('segment', [B, E], {strokeColor: 'black', strokeWidth: 2});
+    board.create('segment', [C, F], {strokeColor: 'black', strokeWidth: 2, dash: 2});
+
+    // Optional dashed diagonals
+    
+
+    // Dimension labels
+    board.create('text', [(A.X()+B.X())/2, A.Y()-0.5, "{#h#} in."], {fontSize: 14});
+    board.create('text', [A.X()-0.7, (A.Y()+C.Y())/2, "{#b#} in."], {fontSize: 14});
+    board.create('text', [(B.X()+E.X())/2, B.Y()-0.4, "{#hyp#} in."], {fontSize: 14});
+    board.create('text', [A.X()+1.6, A.Y()+1.7, "{#l#} in."], {fontSize: 14});
+
+    // === Right angle marker at ∠BAC ===
+    const rightMark1 = board.create('point', [A.X() + 0.3, A.Y()], {visible: false});
+    const rightMark2 = board.create('point', [A.X(), A.Y() + 0.3], {visible: false});
+    const rightMark3 = board.create('point', [A.X() + 0.3, A.Y() + 0.3], {visible: false});
+
+    board.create('polygon', [A, rightMark1, rightMark3, rightMark2], {
+      borders: {strokeColor: 'black'},
+      fillColor: 'black',
+      fillOpacity: 0.4,
+      withLines: false
+    });
+[[/jsxgraph]]
+  <p>Find:</p>
+</p>
+<ol type="a">
+  <li>
+    <p>The area of the triangular parts.</p>
+    <p>\(\displaystyle \text{Area}_{\triangle} = \) [[input:ans1]] [[validation:ans1]]\(\, \text{in.}^2\)[[feedback:prt1]]</p>
+  </li>
+
+  <li>
+    <p>The area of rectangular lateral faces.</p>
+    <p>\(\displaystyle \text{Area}_{\text{rect}} = \) [[input:ans2]] [[validation:ans2]]\(\, \text{in.}^2\)[[feedback:prt2]]</p>
+  </li>
+
+  <li>
+    <p>The total surface area of the prism.</p>
+    <p>\(\displaystyle \text{Total surface area} = \) [[input:ans3]] [[validation:ans3]]\(\, \text{in.}^2\)[[feedback:prt3]]</p>
+  </li>
+</ol>
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>We are given the dimensions of a triangular prism as follows:</p>
+<p>\(\text{Base} = {@b@}\, \text{in.}, \text{ Height} = {@h@}\, \text{in.}, \text{Hypotenuse} = {@hyp@}\, \text{in.}, \text{Length} = {@l@}\, \text{in.}\)</p>
+
+<p>To find the total surface area, we follow these steps:</p>
+
+<ol type="a">
+  <li>
+    <p><strong>Step 1:</strong> Find the area of the triangular faces.</p>
+    <p>The prism has two triangular ends.</p>
+    <p>Area of one triangle:</p>
+    <p>
+\(
+      \begin{align}
+      \text{Area of one triangle} &= \tfrac{1}{2} \times \text{base} \times \text{height} \\
+      &= \tfrac{1}{2} \times {@b@} \times {@h@} \\
+      &= {@area1_triangle@}\, \text{in.}^2
+      \end{align}
+\)
+    </p>
+    <p>Therefore, area of two triangular ends:</p>
+    <p>
+\(
+      \begin{align}
+      \text{Area of two triangles} &= 2 \times {@area1_triangle@} \\
+      &= {@area_triangle@}\, \text{in.}^2
+      \end{align}
+\)
+    </p>
+  </li>
+
+  <li>
+    <p><strong>Step 2:</strong> Find the area of the three rectangular faces.</p>
+    <p>Each rectangle corresponds to a side of the triangle extended along the prism’s length.</p>
+    <p>
+\(
+      \begin{align}
+      \text{Area of base rectangle} &= \text{length} \times \text{base} \\&= {@l@} \times {@b@}\\ &= {@area_rect_base@}\, \text{in.}^2 \\
+      \text{Area of height rectangle} &= \text{length} \times \text{height} \\ &= {@l@} \times {@h@} \\ &= {@area_rect_height@}\, \text{in.}^2 \\
+      \text{Area of sloping rectangle} &= \text{length} \times \text{hypotenuse}\\ & = {@l@} \times {@hyp@} \\ &= {@area_rect_hyp@}\, \text{in.}^2
+      \end{align}
+\)
+    </p>
+
+    <p>Total area of the three rectangular faces:</p>
+    <p>
+\(
+      \begin{align}
+      \text{Total area of rectangles} &= {@area_rect_base@} + {@area_rect_height@} + {@area_rect_hyp@} \\
+      &= {@area_rect@}\, \text{in.}^2
+      \end{align}
+\)
+    </p>
+  </li>
+
+  <li>
+    <p><strong>Step 3:</strong> Find the total surface area of the prism.</p>
+    <p>
+\(
+      \begin{align}
+      \text{Total Surface Area} &= \text{Area of two triangles} + \text{Area of three rectangles} \\
+      &= {@area_triangle@} + {@area_rect@} \\
+      &= {@total_SA@}\, \text{in.}^2
+      \end{align}
+\)
+    </p>
+    <p>Hence, the total surface area of the triangular prism is:</p>
+    <p>
+\(
+      \begin{align}
+      \text{TSA} = {@final_answer@}\, \text{in.}^2
+      \end{align}
+\)
+    </p>
+  </li>
+</ol>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Step 1: Load 40 predefined Pythagorean triples */
+triples: [
+  [3,4,5],[5,12,13],[6,8,10],[7,24,25],[8,15,17],
+  [9,12,15],[9,40,41],[10,24,26],[11,60,61],[12,16,20],
+  [12,35,37],[13,84,85],[14,48,50],[15,20,25],[15,36,39],
+  [16,30,34],[16,63,65],[18,24,30],[18,80,82],[20,21,29],
+  [20,48,52],[21,28,35],[21,72,75],[24,32,40],[24,45,51],
+  [27,36,45],[28,45,53],[30,40,50],[30,72,78],[33,44,55],
+  [33,56,65],[35,84,91],[36,48,60],[36,77,85],[39,52,65],
+  [40,75,85],[45,60,75],[48,55,73],[60,63,87],[65,72,97]
+];
+
+/* Step 2: Randomly pick one triple */
+chosen : triples[rand(40) + 1];
+
+/* Step 3: Assign variables for triangle sides */
+b : chosen[1];     /* base of right triangle */
+h : chosen[2];     /* height of triangle */
+hyp : chosen[3];   /* sloping side (hypotenuse) */
+
+/* Step 4: Choose prism length (ensure longer than sides) */
+l : max(b, h) + rand(6) + 6;
+
+/* Step 5: Compute the area of the triangular face */
+area1_triangle : (1/2) * b * h;
+area_triangle :2*area1_triangle;
+
+/* Step 6: Compute the areas of the three rectangular faces */
+area_rect_base : l * b;
+area_rect_height : l * h;
+area_rect_hyp : l * hyp;
+
+area_rect:area_rect_base+area_rect_height+area_rect_hyp;
+
+/* Step 7: Compute total surface area */
+total_SA : area_rect+area_triangle;
+
+/* Step 8: Remove decimals without using round() */
+final_answer : floor(total_SA);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{Area of the triangular faces}={@area_triangle@}\,\text{in}^2\)</p>
+<p>\(\text{Area of the rectangular lateral faces}={@area_rect@}\,\text{in}^2\)</p>
+<p>\(\text{Total surface area of the prism.}={@total_SA@}\,\text{in}^2\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>area_triangle</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>area_rect</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>total_SA</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct area of triangular faces.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>area_triangle</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks the correct area of the lateral faces.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>area_rect</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the corect total area of the prism.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>total_SA</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1479919328</deployedseed>
+    <deployedseed>189225120</deployedseed>
+    <deployedseed>520041851</deployedseed>
+    <deployedseed>811703299</deployedseed>
+    <deployedseed>621158157</deployedseed>
+    <deployedseed>1816178652</deployedseed>
+    <deployedseed>164564091</deployedseed>
+    <deployedseed>1366875133</deployedseed>
+    <deployedseed>838377416</deployedseed>
+    <deployedseed>2013897117</deployedseed>
+    <deployedseed>1880562053</deployedseed>
+    <deployedseed>645251120</deployedseed>
+    <deployedseed>1705573799</deployedseed>
+    <deployedseed>1618018343</deployedseed>
+    <deployedseed>1188274939</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>area_triangle</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>area_rect</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>total_SA</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

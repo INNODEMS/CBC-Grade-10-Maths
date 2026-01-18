@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Using Similar Triangles to Find Unknown Side Lengths</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Are triangle \(ABC\) in <b>Fig 1</b> and triangle \(PQR\) in <b> Fig 2</b> similar?</p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+    boundingbox: [-2, 12, 16, -2],
+    axis: false,
+    pan: { enabled: false },
+    zoom: { enabled: false },
+    showNavigation: false
+});
+
+/* === Triangle LMN (smaller, top-left) === */
+var L = board.create('point', [1,10], {name:'P', fixed:true, size:2});
+var M = board.create('point', [0,8], {name:'Q', fixed:true, visible:true});
+var N = board.create('point', [3,8], {name:'R', fixed:true, visible:true});
+
+function edge(P1,P2){ return board.create('segment',[P1,P2],{strokeWidth:2,fixed:true}); }
+edge(L,M); edge(M,N); edge(N,L);
+
+// Side labels
+board.create('text',[()=>(L.X()+M.X())/6, ()=>(L.Y()+M.Y())/2+0.2, "{#PQ#} cm"]);
+board.create('text',[()=>(L.X()+N.X())/2, ()=>(L.Y()+N.Y())/2+0.2, "{#PR#} cm"]);
+board.create('text',[()=>(M.X()+N.X())/3, ()=>(M.Y()+N.Y())/2-0.2, "{#letter2#} cm"]);
+
+// Angles near apexes
+board.create('text',[L.X()-0.1, L.Y()-0.3, "55°"]);
+board.create('text',[M.X()+2.4, M.Y()+0.2, "50°"]);
+
+/* === Triangle ABC (larger, bottom-right, closer) === */
+var A = board.create('point', [6,7], {name:'A', fixed:true, size:2});
+var B = board.create('point', [4.5,3], {name:'B', fixed:true, visible:true});
+var C = board.create('point', [9,3], {name:'C', fixed:true, visible:true});
+
+edge(A,B); edge(B,C); edge(C,A);
+
+// Side labels
+board.create('text',[()=>(A.X()+B.X())/2.2, ()=>(A.Y()+B.Y())/2+0.2, "{#AB#} cm"]);
+board.create('text',[()=>(A.X()+C.X())/2, ()=>(A.Y()+C.Y())/2+0.2, "{#letter1#} cm"]);
+board.create('text',[()=>(B.X()+C.X())/2, ()=>(B.Y()+C.Y())/2-0.2, "{#BC#} cm"]);
+
+// Angles near apexes
+board.create('text',[A.X()-0.1, A.Y()-0.4, "55°"]);
+board.create('text',[C.X()-0.6, C.Y()+0.2, "50°"]);
+
+// Label for first triangle
+board.create('text', [
+    () => L.X() - 0.0,
+    () => L.Y() -2.6,
+    "Fig 1"
+], {
+    fontSize: 16,
+    fontWeight: 'bold'
+});
+
+// Label for second triangle
+board.create('text', [
+    () => A.X() + 0.2,
+    () => A.Y() - 4.5,
+    "Fig 2"
+], {
+    fontSize: 16,
+    fontWeight: 'bold'
+});
+
+
+/* Prevent interaction */
+board.renderer.svgRoot.style.pointerEvents = "none";
+
+[[/jsxgraph]]
+<p>[[input:ans1]] [[validation:ans1]][[feedback:prt1]]  </p>
+<p>Hence find the values of {@letter1@} = [[input:ans2]] cm[[validation:ans2]] and {@letter2@} = [[input:ans3]] cm[[validation:ans3]]</p>.
+<p>[[feedback:prt2]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>\(PQ\) corresponds to \(AB\), \(PR\) corresponds to \(AC\) and \(QR\) corresponds to \(BC\).</p>
+<p>\(\frac{AB}{PQ} = \frac{AC}{PR} = \frac{BC}{QR} = constant ratio\)</p>
+<p>\(\angle QPR = \angle BAC = 55 ^\circ\)</p>
+<p>\(\angle PRQ = \angle ACB = 50^\circ\)</p>
+<p>\(\angle PQR = \angle ABC = 180^\circ-(75^\circ + 50^\circ)=50^\circ\)</p>
+<p> \(\triangle\, PQR\) and \(\triangle \,ABC\) are similar</p>
+<p>Thus, \(\frac{AB}{PQ} = \frac{AC}{PR}  \Rightarrow \)  \(\frac{{@AB@}}{{@PQ@}} = \frac{{@letter1@}}{{@PR@}}\)</p>
+<p>\(\quad \quad \quad \quad \quad \quad {@letter1@}=\frac{{@AB@}\times {@PR@}}{{@PQ@}}={@AC@} \) cm</p>
+
+<p>Similary, \(\frac{AB}{PQ} = \frac{BC}{QR}  \Rightarrow \)  \(\frac{{@AB@}}{{@PQ@}} = \frac{{@BC@}}{{@letter2@}}\)</p>
+<p>\(\quad \quad \quad \quad \quad \quad{@letter2@}=\frac{{@PQ@}\times {@BC@}}{{@AB@}}={@QR@} \) cm</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[ta:random_permutation([["Triangle PQR and ABC are similar", true],["Triangle PQR and ABC are not similar", false]]);
+/*random letters*/
+letter1:rand([a,b,c,d,g,h,j,k,m,n]);
+letter2:rand([p,q,r,s,t,u,v,w,x,y,z]);
+
+/*scale factor*/
+k:rand([1.5,2,2.5,3,3.5,4]);
+/*length of the lines of  triangle PQR*/
+PQ:rand(5)+2;
+PR:rand_with_step(8,12,1);
+QR:rand_with_prohib(5,12,[PQ,PR]);
+
+/*length of the lines of  triangle ABC*/
+AB:k*PQ;
+BC:k*QR;
+AC:k*PR;
+ta2:QR;
+ta1:AC;]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@letter2@} = {@ta1@}</p>
+<p>{@letter1@} = {@ta2@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>dropdown</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>EqualComAss</answertest>
+        <sans>ans1</sans>
+        <tans>mcq_correct(ta)[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>2.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>correst_ans : if (ans2 = ta2 and ans3 = ta1 ) then 1 else 0;</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>correst_ans</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1783764272</deployedseed>
+    <deployedseed>1381043345</deployedseed>
+    <deployedseed>784462808</deployedseed>
+    <deployedseed>1177687880</deployedseed>
+    <deployedseed>646759116</deployedseed>
+    <deployedseed>1269543923</deployedseed>
+    <deployedseed>642494703</deployedseed>
+    <deployedseed>660297367</deployedseed>
+    <deployedseed>1308250445</deployedseed>
+    <deployedseed>1067334865</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>first(mcq_correct(ta))</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta2</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>ta1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

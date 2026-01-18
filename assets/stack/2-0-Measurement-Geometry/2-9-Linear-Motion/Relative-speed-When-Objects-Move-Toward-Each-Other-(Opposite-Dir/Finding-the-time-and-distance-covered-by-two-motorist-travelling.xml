@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the time and distance covered by two motorist travelling towards each other</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A motorist left <strong>Nakuru</strong> for <strong>Nairobi</strong>, a distance of
+{@D@} km, at {@t1_time_str@} am and travelled at an average speed of {@v1@} km/h.</p>
+<p>Another motorist left <strong>Nairobi</strong> for <strong>Nakuru</strong> at {@t2_time_str@} am and travelled at {@v2@} km/h.
+</p>
+
+<p>Find:</p>
+<ol type="a">
+<li>The time they met:<br><br>\({@t2_time_str@}\,\, \text{am}+ \)[[input:ans1]] hours [[validation:ans1]] [[feedback:prt1]]</li>
+<br>
+<li>How far from Nairobi they met:<br><br> [[input:ans2]] km [[validation:ans2]] [[feedback:prt2]]</li>
+</ol>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>The first motorist starts earlier than the second. During the delay of
+\({@delay_h@} \text{ hours}\) the first motorist travels: </p>
+<p>\({@v1@} \text{km/h} \times {@delay_h@} \text{h} = {@d_headstart@} \text{ km}\)</p>
+<p>When the second motorist starts, the remaining distance between them is:</p>
+<p>\({@D@} \text{ km}  - {@d_headstart@} \text{ km} = {@d_remaining@} \text{ km}\)</p>
+<p>Since the motorists are travelling towards each other, their Relative speed is:</p>
+<p>\({@v1@} + {@v2@} = {@v_rel@} \text{ km/h}\)</p>
+<p>The time taken from the second motorist’s departure until they meet is:</p>
+<p>\(\frac{{@d_remaining@}}{{@v_rel@}} = {@t_after_2@} \text{ hours}\)</p>
+<p>Therefore, the time they is:</p>
+<p>Second motorist's start time + {@ta1@} hours or first motorist's start time +{@delay_h + t_after_2@} hours </p>
+<p>The distance from Nairobi is:</p>
+<p>\({@v2@} \times {@t_after_2@} = {@ta2@} \text{ km}\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Total distance between towns (km) */
+D : rand(7)*20 + 200;
+
+/* Speeds (km/h) */
+v1 : rand(5)*10 + 70;
+v2 : rand(5)*10 + 90;
+
+/* Start time of first motorist (hours, 24h clock) */
+h_start : rand(3) + 7;
+t1_start : h_start;
+
+/* Delay before second motorist leaves (hours) */
+delay_h : (rand(4) + 1)/4;   /* 15, 30, 45, 60 minutes */
+
+/* Second motorist start time */
+t2_start : t1_start + delay_h;
+
+/* Distance covered by first motorist before second starts */
+d_headstart : v1 * delay_h;
+
+/* Remaining distance */
+d_remaining : D - d_headstart;
+
+/* Relative speed (towards each other) */
+v_rel : v1 + v2;
+
+/* Time after second starts until they meet */
+t_after_2 : d_remaining / v_rel;
+
+/* Distance from Nairobi */
+d_from_nairobi : v2 * t_after_2;
+
+/* Teacher answers */
+ta1 : t_after_2;
+ta2 : d_from_nairobi;
+
+/* Helper to format minutes as two digits */
+twodig(n) := if n < 10 then sconcat("0", string(n)) else string(n);
+
+/* Convert times to hh:mm strings */
+t1_h : floor(t1_start);
+t1_m : 60*(t1_start - t1_h);
+t1_time_str : sconcat(string(t1_h), ":", twodig(t1_m));
+
+t2_h : floor(t2_start);
+t2_m : 60*(t2_start - t2_h);
+t2_time_str : sconcat(string(t2_h), ":", twodig(t2_m));
+
+/*mistake*/
+v_rel_wrong : v1 - v2;  /* Should be v1 + v2 */
+mistake_ta1 : d_remaining / v_rel_wrong;
+/* WRONG CODE - Using full distance D */
+t_after_2_wrong2 : D / (v1 + v2);  /* Should be d_remaining */
+/* WRONG CODE - Using first motorist's speed */
+d_from_nairobi_wrong : v1 * t_after_2;  /* Should be v2 */
+/* WRONG CODE - Using delay time instead of travel time */
+d_from_nairobi_wrong2 : v2 * delay_h;  /* Should be t_after_2 */
+
+]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta1@}</p>
+<p>{@ta2@}</p>
+<p>{@D@}</p>
+<p>{@v1@} </p>
+<p>{@v2@} </p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct time </description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect time</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake_ta1</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You subtracted the speeds, but they're moving <em>toward</em> each other, not in the same direction. When objects move toward each other, their relative speed is the <em>sum</em> of their speeds.</p]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Checks for incorrect time</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>t_after_2_wrong2</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p> You used the full distance {@D@} km, but the first motorist already travelled {@d_headstart@} km during the delay.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for correct distance</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect distance</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>d_from_nairobi_wrong</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You used the first motorist's speed ({@v1@} km/h), but we want distance from Nairobi where the <em>second</em> motorist started.</p]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Checks for incorrect distance</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>d_from_nairobi_wrong2</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You used ({@delay_h@} hours), but we need the time they actually drove toward each other.</p]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>717606511</deployedseed>
+    <deployedseed>1519014274</deployedseed>
+    <deployedseed>1004705187</deployedseed>
+    <deployedseed>1148950646</deployedseed>
+    <deployedseed>1609829561</deployedseed>
+    <deployedseed>1213422018</deployedseed>
+    <deployedseed>759999993</deployedseed>
+    <deployedseed>1664442652</deployedseed>
+    <deployedseed>1174640957</deployedseed>
+    <deployedseed>739447133</deployedseed>
+    <deployedseed>1399084978</deployedseed>
+    <deployedseed>676632200</deployedseed>
+    <deployedseed>1099645941</deployedseed>
+    <deployedseed>754152600</deployedseed>
+    <deployedseed>685193216</deployedseed>
+    <deployedseed>911339155</deployedseed>
+    <deployedseed>837681500</deployedseed>
+    <deployedseed>1258673416</deployedseed>
+    <deployedseed>1299686412</deployedseed>
+    <deployedseed>1638195976</deployedseed>
+    <deployedseed>726757849</deployedseed>
+    <deployedseed>968866303</deployedseed>
+    <deployedseed>837095078</deployedseed>
+    <deployedseed>547366791</deployedseed>
+    <deployedseed>1749279108</deployedseed>
+    <deployedseed>967062384</deployedseed>
+    <deployedseed>1497015372</deployedseed>
+    <deployedseed>1378296395</deployedseed>
+    <deployedseed>979310407</deployedseed>
+    <deployedseed>613082465</deployedseed>
+    <deployedseed>1318373644</deployedseed>
+    <deployedseed>378667788</deployedseed>
+    <deployedseed>562586663</deployedseed>
+    <deployedseed>93987964</deployedseed>
+    <deployedseed>378145507</deployedseed>
+    <deployedseed>1498445454</deployedseed>
+    <deployedseed>2054946476</deployedseed>
+    <deployedseed>920521616</deployedseed>
+    <deployedseed>503323904</deployedseed>
+    <deployedseed>1180447128</deployedseed>
+    <deployedseed>1837151348</deployedseed>
+    <deployedseed>667561112</deployedseed>
+    <deployedseed>629080866</deployedseed>
+    <deployedseed>870981913</deployedseed>
+    <deployedseed>1398492664</deployedseed>
+    <deployedseed>1145580257</deployedseed>
+    <deployedseed>1005710159</deployedseed>
+    <deployedseed>931977777</deployedseed>
+    <deployedseed>334807029</deployedseed>
+    <deployedseed>1858298252</deployedseed>
+    <deployedseed>621104336</deployedseed>
+    <deployedseed>476975425</deployedseed>
+    <deployedseed>1436097663</deployedseed>
+    <deployedseed>300577380</deployedseed>
+    <deployedseed>1651125372</deployedseed>
+    <deployedseed>2133925684</deployedseed>
+    <deployedseed>238893470</deployedseed>
+    <deployedseed>1651586616</deployedseed>
+    <deployedseed>555727364</deployedseed>
+    <deployedseed>474219992</deployedseed>
+    <deployedseed>328189068</deployedseed>
+    <deployedseed>217708050</deployedseed>
+    <deployedseed>1480067357</deployedseed>
+    <deployedseed>1999409455</deployedseed>
+    <deployedseed>1641908702</deployedseed>
+    <deployedseed>1346823730</deployedseed>
+    <deployedseed>758443238</deployedseed>
+    <deployedseed>1901524558</deployedseed>
+    <deployedseed>2104569736</deployedseed>
+    <deployedseed>1797151144</deployedseed>
+    <deployedseed>793900973</deployedseed>
+    <deployedseed>2011218928</deployedseed>
+    <deployedseed>2107989841</deployedseed>
+    <deployedseed>1050636942</deployedseed>
+    <deployedseed>1754935429</deployedseed>
+    <deployedseed>374215952</deployedseed>
+    <deployedseed>222160219</deployedseed>
+    <deployedseed>1403346159</deployedseed>
+    <deployedseed>1849287453</deployedseed>
+    <deployedseed>873049300</deployedseed>
+    <deployedseed>746409174</deployedseed>
+    <deployedseed>1723604027</deployedseed>
+    <deployedseed>255867097</deployedseed>
+    <deployedseed>1176686988</deployedseed>
+    <deployedseed>1926554284</deployedseed>
+    <deployedseed>363987017</deployedseed>
+    <deployedseed>1275193521</deployedseed>
+    <deployedseed>1044550400</deployedseed>
+    <deployedseed>579122883</deployedseed>
+    <deployedseed>1599259407</deployedseed>
+  </question>
+</quiz>

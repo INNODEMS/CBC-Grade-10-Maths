@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Using a given displacement time graph to answer the given questions</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+Use the displacement–time graph below to answer the questions.
+</p>
+
+[[jsxgraph width="700px" height="450px"]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-1, {# d1*1.2 #}, {# t3+1 #}, -5],
+    axis: true,
+    grid: true,
+    showNavigation: false,
+    showCopyright: false,
+    defaultAxes: {
+        y: { name: 'Time (s)', withLabel: true },
+        x: { name: '', withLabel: false,  }
+    }
+});
+board.create('text', [-0.8, 0, 'Displacement (m)'], {
+    anchorX: 'left',
+    anchorY: 'middle',
+    rotate: 90
+});
+
+
+
+var A = board.create('point', [0, 0], {fixed:true, size:2, name:''});
+var B = board.create('point', [{# t1 #}, {# d1 #}], {fixed:true, size:2, name:''});
+var C = board.create('point', [{# t2 #}, {# d1 #}], {fixed:true, size:2, name:''});
+var D = board.create('point', [{# t3 #}, 0], {fixed:true, size:2, name:''});
+
+board.create('segment', [A, B], {strokeWidth:3});
+board.create('segment', [B, C], {strokeWidth:3});
+board.create('segment', [C, D], {strokeWidth:3});
+[[/jsxgraph]]
+
+
+<hr>
+
+<p><strong>(a)</strong> Describe the motion of the object during each segment.</p>
+
+<p>
+Segment A (0 to {@t1@} s):  
+[[input:ans1a]] [[validation:ans1a]][[feedback:prt1a]]
+</p>
+
+<p>
+Segment B ({@t1@} to {@t2@} s):  
+[[input:ans1b]] [[validation:ans1b]] [[feedback:prt1b]]
+</p>
+
+<p>
+Segment C ({@t2@} to {@t3@} s):  
+[[input:ans1c]] [[validation:ans1c]][[feedback:prt1c]]
+</p>
+<hr>
+
+<p><strong>(b)</strong> Calculate the velocity of the object during segment A.</p>
+<p>
+[[input:ans2]] m/s [[validation:ans2]] [[feedback:prt2]]
+</p>
+
+<hr>
+
+<p><strong>(c)</strong> During which segment is the object stationary?</p>
+<p>
+[[input:ans3]] [[validation:ans3]] [[feedback:prt3]]
+</p>
+
+<hr>
+
+<p><strong>(d)</strong> Calculate the total distance travelled.</p>
+<p>
+[[input:ans4]] m [[validation:ans4]] [[feedback:prt4]]
+</p>
+
+<hr>
+
+<p><strong>(e)</strong> Calculate the average velocity over the whole journey.</p>
+<p>
+[[input:ans5]] m/s [[validation:ans5]] [[feedback:prt5]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+This question is based on interpreting a <strong>displacement–time graph</strong>.
+</p>
+<ul>
+<li>The <strong>slope</strong> of a displacement–time graph tells you the velocity.</li>
+<li>A <strong>horizontal line</strong> means the object is at rest.</li>
+<li><strong>Total distance</strong> and <strong>displacement</strong> are not the same.</li>
+</ul>
+
+<hr>
+
+<h4>Part (a): Description of motion</h4>
+
+<ul>
+<li>
+<strong>Segment A (0 to {@t1@} s):</strong><br>
+The graph is a straight line with a <strong>positive slope</strong>, so the object moves with
+<strong>constant positive velocity</strong>.
+</li>
+
+<li>
+<strong>Segment B ({@t1@} to {@t2@} s):</strong><br>
+The graph is <strong>horizontal</strong>, meaning the displacement does not change.
+Therefore, the object is <strong>at rest</strong>.
+</li>
+
+<li>
+<strong>Segment C ({@t2@} to {@t3@} s):</strong><br>
+The graph is a straight line with a <strong>negative slope</strong>, so the object moves with
+<strong>constant negative velocity</strong>, returning towards the starting point.
+</li>
+</ul>
+
+<hr>
+
+<h4>Part (b): Velocity during segment A</h4>
+
+<p>
+Velocity is given by the slope of the displacement–time graph:
+</p>
+
+\[
+v = \frac{\text{change in displacement}}{\text{change in time}}
+= \frac{{@d1@}}{{@t1@}} = {@float(v_A)@}\ \text{m/s}.
+\]
+
+<hr>
+
+<h4>Part (c): Stationary segment</h4>
+
+<p>
+The object is stationary when the graph is horizontal (zero slope).
+This occurs during <strong>Segment B</strong>.
+</p>
+
+<hr>
+
+<h4>Part (d): Total distance travelled</h4>
+
+<p>
+Total distance is the <strong>sum of all distances travelled</strong>, regardless of direction:
+</p>
+
+<ul>
+<li>Distance travelled upward: {@d1@} m</li>
+<li>Distance travelled downward: {@d1@} m</li>
+</ul>
+
+<p>
+\[
+\text{Total distance} = {@d1@} + {@d1@} = {@total_distance@}\ \text{m}.
+\]
+</p>
+
+<hr>
+
+<h4>Part (e): Average velocity</h4>
+
+<p>
+Average velocity is defined as:
+</p>
+
+\[
+\text{Average velocity} = \frac{\text{total displacement}}{\text{total time}}.
+\]
+
+<p>
+Since the object returns to its starting point, the total displacement is zero.
+Therefore:
+</p>
+
+\[
+\text{Average velocity} = 0\ \text{m/s}.
+\]
+
+<hr>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Randomised time points */
+t1 : rand([2,3,4]);
+t2 : t1 + rand([2,3]);
+t3 : t2 + rand([2,3]);
+
+/* Maximum displacement */
+d1 : rand([20,30,40]);
+
+/* Velocities */
+v_A : d1 / t1;
+ta2:float(v_A);
+v_C : -d1 / (t3 - t2);
+
+/* Distance and averages */
+total_distance : 2*d1;
+average_velocity : 0;
+
+/* MCQ options for part (a) - Segment descriptions */
+mc_segA : [
+  [1, true,  castext("Constant positive velocity")],
+  [2, false, castext("Constant negative velocity")],
+  [3, false, castext("At rest")],
+  [4, false, castext("Accelerating")]
+];
+
+mc_segB : [
+  [1, false, castext("Constant positive velocity")],
+  [2, false, castext("Constant negative velocity")],
+  [3, true,  castext("At rest")],
+  [4, false, castext("Accelerating")]
+];
+
+mc_segC : [
+  [1, false, castext("Constant positive velocity")],
+  [2, true,  castext("Constant negative velocity")],
+  [3, false, castext("At rest")],
+  [4, false, castext("Accelerating")]
+];
+
+/* MCQ options for part (c) - Stationary segments */
+mc_stationary : [
+  [1,false, castext("Segment A (0 to {@t1@} s)")],
+  [2,true, castext("Segment B ({@t1@} to {@t2@} s)")],
+  [3,false, castext("Segment C ({@t2@} to {@t3@} s)")],
+  [4,false, castext("Multiple segments")]
+];
+]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@d1@}</p>
+<p>{@total_distance@}</p>
+<p>{@average_velocity@}</p>
+<p>{@v_A@}</p>
+<p>{@mc_segA@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1a</name>
+      <type>radio</type>
+      <tans>mc_segA</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options>nonotanswered</options>
+    </input>
+    <input>
+      <name>ans1b</name>
+      <type>radio</type>
+      <tans>mc_segB</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options>nonotanswered</options>
+    </input>
+    <input>
+      <name>ans1c</name>
+      <type>radio</type>
+      <tans>mc_segC</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options>nonotanswered</options>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>radio</type>
+      <tans>mc_stationary</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options>nonotanswered</options>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>total_distance</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans5</name>
+      <type>algebraic</type>
+      <tans>average_velocity</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1a</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1a</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1a-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1a-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt1b</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1b</sans>
+        <tans>3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1b-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1b-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt1c</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1c</sans>
+        <tans>2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1c-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1c-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>total_distance</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt5</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans5</sans>
+        <tans>average_velocity</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt5-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt5-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>552123230</deployedseed>
+    <deployedseed>1167318146</deployedseed>
+    <deployedseed>983604435</deployedseed>
+    <deployedseed>293959916</deployedseed>
+    <deployedseed>1164225871</deployedseed>
+    <deployedseed>1760110314</deployedseed>
+    <deployedseed>1214649612</deployedseed>
+    <deployedseed>1454282565</deployedseed>
+    <deployedseed>138862595</deployedseed>
+    <deployedseed>1145202517</deployedseed>
+    <deployedseed>1300274915</deployedseed>
+    <deployedseed>1626948018</deployedseed>
+    <deployedseed>1769964322</deployedseed>
+    <deployedseed>1464468118</deployedseed>
+    <deployedseed>841291829</deployedseed>
+    <deployedseed>2048182181</deployedseed>
+    <deployedseed>1800324118</deployedseed>
+    <deployedseed>2102923575</deployedseed>
+    <deployedseed>1333162305</deployedseed>
+    <deployedseed>934156393</deployedseed>
+    <deployedseed>77977273</deployedseed>
+    <deployedseed>1972644697</deployedseed>
+    <deployedseed>1792763915</deployedseed>
+    <deployedseed>1818387746</deployedseed>
+    <deployedseed>836413070</deployedseed>
+    <deployedseed>1901374087</deployedseed>
+    <deployedseed>2057844558</deployedseed>
+    <deployedseed>840286082</deployedseed>
+  </question>
+</quiz>

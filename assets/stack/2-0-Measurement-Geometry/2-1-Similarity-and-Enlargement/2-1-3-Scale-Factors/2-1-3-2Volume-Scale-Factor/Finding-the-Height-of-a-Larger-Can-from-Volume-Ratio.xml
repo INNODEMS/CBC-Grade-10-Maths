@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the Height of a Larger Can from Volume Ratio</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Two similar cans have volumes of  {@volume_list_a@} \(\text{m}^3\) and {@volume_list_b@} \(\text{m}^3\)respectively. If the smaller can has a height of {@c@} \(\text{m}\), what is the height of the larger can?</p><p>[[input:ans1]] m[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+
+<p>Since the two cans are <strong>similar solids</strong>, the ratio of their corresponding linear dimensions
+is equal to the <strong>cube root of the ratio of their volumes</strong>.</p>
+<p>\(\frac{H_{\text{large}}}{H_{\text{small}}}
+=
+\sqrt[3]{\frac{V_{\text{large}}}{V_{\text{small}}}}
+\)
+</p>
+
+<p>
+Substituting the given values:
+\(
+\frac{H_{\text{large}}}{{@c@}}
+=
+\sqrt[3]{\frac{{@volume_list_b@}}{{@volume_list_a@}}}
+=
+{@cuberoot@}
+\)
+</p>
+
+<p>
+Hence, the height of the larger can is:
+\(
+H_{\text{large}}
+=
+{@cuberoot@} \times {@c@}
+=
+{@height@}\,\text{m}
+\)
+</p>
+
+<p>
+Rounding to two decimal places, the final answer is:
+\(
+\boxed{{@ta@}\,\text{m}}
+\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Generate perfect-volume values for a and b */
+volume_list_a:rand ([8,27,64,125,216,343,512]);  /* extend if desired */
+volume_list_b:rand ([729,1000,1331,1728,2197]);  /* extend if desired */
+
+/* height of the smaller can */
+c: rand(16) + 7;
+/*cube root of b/a*/
+cuberoot:(volume_list_b/volume_list_a)^(1/3);
+/* height of the cone*/
+height:float(cuberoot*c);
+ta:decimalplaces(height,2);
+
+/*mistakes*/
+/*Using the volume ratio directly as the height ratio*/
+ta1:decimalplaces((volume_list_b/volume_list_a)*c,2);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Height of the larger can = {@ta@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Using the volume ratio directly as the height ratio</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+It looks like you may have used the ratio of the volumes directly to find the new height.
+Remember, when solids are similar, volumes scale with the <strong>cube</strong> of the linear scale factor.
+To find the ratio of the heights, you must take the <strong>cube root</strong> of the ratio of the volumes.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>2029999784</deployedseed>
+    <deployedseed>713192678</deployedseed>
+    <deployedseed>1673125481</deployedseed>
+    <deployedseed>1367168093</deployedseed>
+    <deployedseed>986716178</deployedseed>
+    <deployedseed>940502346</deployedseed>
+    <deployedseed>1901669421</deployedseed>
+    <deployedseed>1704001595</deployedseed>
+    <deployedseed>624592332</deployedseed>
+    <deployedseed>1387724132</deployedseed>
+    <deployedseed>569275624</deployedseed>
+    <deployedseed>1005492784</deployedseed>
+    <deployedseed>909616491</deployedseed>
+    <deployedseed>400365834</deployedseed>
+    <deployedseed>2040091319</deployedseed>
+    <deployedseed>1911112448</deployedseed>
+    <deployedseed>1014923249</deployedseed>
+    <deployedseed>128635935</deployedseed>
+    <deployedseed>754649357</deployedseed>
+    <deployedseed>719575431</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Identical vectors 2</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[Move the point \(p_4\) so that the vector \(\vec{p_3p_4}\) is identical to the vector \(\vec{p_1p_2}\).
+
+[[jsxgraph input-ref-ans1='ans1Ref']]
+
+var board = JXG.JSXGraph.initBoard(divid, { boundingbox : [-5.5, 5.5, 5.5, -5.5], axis : true });
+
+var p1 = board.create('point', {#p1#}, { name : 'p_1', fixed: true });
+var p2 = board.create('point', {#p2#}, { name : 'p_2', fixed: true, lastArrow: {type: 2, size: 8, highlightSize: 6} });
+
+var p3 = board.create('point', {#p3#}, { name : 'p_3', fixed: true, snapSizeX: 0.5, snapSizeY: 0.5, snapToGrid: true });
+var p4 = board.create('point', {#p4#}, { name : 'p_4', fixed: false, lastArrow: {type: 2, size: 8, highlightSize: 6}, snapSizeX: 0.5, snapSizeY: 0.5, snapToGrid: true });
+
+board.create('arrow', [p1, p2], { fixed : true, strokeWidth : 4, strokeOpacity : .6 });
+board.create('arrow', [p3, p4], {strokeWidth : 4, strokeOpacity : .6 });
+
+stack_jxg.bind_point_relative(ans1Ref, p3, p4);
+
+[[/jsxgraph]]
+
+<p style="display:none">[[input:ans1]] [[validation:ans1]]</p>
+[[feedback:prt1]]]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>Two vectors are considered <b>equivalent</b> if they describe the same "movement" — that is, they have the same horizontal change (component \(x\)) and vertical change (component \(y\)).</p>
+
+<p><b>Step 1: Find the components of the given vector \(\vec{p_1p_2}\).</b></p>
+<p>We calculate how far we move from \(p_1\) to \(p_2\):</p>
+<ul>
+    <li>Horizontal change (\(\Delta x\)): \( {@p2x@} - ({@p1x@}) = \mathbf{@v1[1]@} \)</li>
+    <li>Vertical change (\(\Delta y\)): \( {@p2y@} - ({@p1y@}) = \mathbf{@v1[2]@} \)</li>
+</ul>
+<p>So, the vector is \(\mathbf{v} = \begin{pmatrix} {@v1[1]@} \\ {@v1[2]@} \end{pmatrix}\).</p>
+
+<p><b>Step 2: Position \(\vec{p_3p_4}\).</b></p>
+<p>The vector \(\vec{p_3p_4}\) must have these exact same components.</p>
+<p>Since the starting point \(p_3\) is fixed at the origin \((0,0)\), the endpoint \(p_4\) is simply the coordinates given by the vector components:</p>
+\[ p_4 = (0 + {@v1[1]@}, 0 + {@v1[2]@}) = ({@v1[1]@}, {@v1[2]@}) \]
+
+<p>The diagram below shows the correct position. The blue arrow is the original vector, and the green arrow is the solution.</p>
+
+<div style="text-align: center;">
+[[jsxgraph width="500px" height="500px"]]
+    JXG.Options.text.useMathJax = true;
+    var board = JXG.JSXGraph.initBoard(divid, { 
+        boundingbox : [-5.5, 5.5, 5.5, -5.5], 
+        axis : true, 
+        showNavigation: false, 
+        showCopyright: false, 
+        zoom: {enabled: false}, 
+        pan: {enabled: false}
+    });
+
+    // 1. Draw the Reference Vector p1->p2 (Blue)
+    var p1 = board.create('point', {#p1#}, { name : 'p_1', fixed: true, size: 3, color: '#004499', label:{offset:[-10,-10]} });
+    var p2 = board.create('point', {#p2#}, { name : 'p_2', fixed: true, size: 3, color: '#004499' });
+    board.create('arrow', [p1, p2], { fixed: true, strokeWidth: 4, strokeOpacity: 0.6, color: '#004499' });
+
+    // 2. Draw the Solution Vector p3->p4 (Green)
+    var p3 = board.create('point', {#p3#}, { name : 'p_3', fixed: true, snapSizeX: 0.5, snapSizeY: 0.5, snapToGrid: true });
+    
+    // Calculate correct p4 position: p3 + vector components
+    var p4_x = {#p3x#} + {#v1[1]#};
+    var p4_y = {#p3y#} + {#v1[2]#};
+    
+    var p4 = board.create('point', [p4_x, p4_y], { name : 'p_4', fixed: true, size: 3, color: '#008800' });
+    board.create('arrow', [p3, p4], { fixed: true, strokeWidth: 4, strokeOpacity: 0.8, color: '#008800' });
+
+[[/jsxgraph]]
+</div>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>p1x: rand_with_step(-5, -1, 1);
+p1y: rand_with_step(-5, -1, 1);
+p2x: p1x+rand_with_step(1, 4, 1);
+p2y: p1y+rand_with_step(1, 3, 1);
+v1: [p2x-p1x, p2y-p1y];
+
+p3x: 0;
+p3y: 0;
+p4x: p3x+rand_with_step(-5, -1, 1);
+p4y: p3y+rand_with_step(1, 5, 1);
+
+p1: [p1x, p1y];
+p2: [p2x, p2y];
+p3: [p3x, p3y];
+p4: [p4x, p4y];
+
+ta1: [[p2x+1, p2y], v1]</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="moodle_auto_format">
+      <text>{@p1@}, {@p2@}, {@p3@}, {@p4@}</text>
+    </questionnote>
+    <questiondescription format="moodle_auto_format">
+      <text><![CDATA[<p id="author">Daniel Murunga</p>
+<p id="concept"></p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+<p id="description">JSXGraph interactive task. Given a random reference vector p1p2 (blue), the student must move point p4 (connected to fixed origin p3) to create an equivalent vector p3p4. Checks if relative coordinates [p4-p3] match [p2-p1].</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>dot</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>sv: ans1[2];
+stack: matrix(sv, v1);
+is_parallel: is(rank(stack) = 1);</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>sv</sans>
+        <tans>-v1</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Your vector is opposite to \(\vec{p_1p_2}\), not identical!</text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>sv</sans>
+        <tans>v1</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>is_parallel</sans>
+        <tans>true</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Your vector is parallel to \(\vec{p_1p_2}\), but not identical!</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Your vector is not identical to \(\vec{p_1p_2}\); in fact, is it not even parallel!</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1586907116</deployedseed>
+    <deployedseed>1472623394</deployedseed>
+    <deployedseed>1205969954</deployedseed>
+    <deployedseed>542773597</deployedseed>
+    <deployedseed>1696546475</deployedseed>
+    <deployedseed>2141059283</deployedseed>
+    <deployedseed>305789242</deployedseed>
+    <deployedseed>326662952</deployedseed>
+    <deployedseed>796071881</deployedseed>
+    <deployedseed>1956926514</deployedseed>
+    <deployedseed>1154429849</deployedseed>
+    <deployedseed>120819070</deployedseed>
+    <deployedseed>359102522</deployedseed>
+    <deployedseed>40935666</deployedseed>
+    <deployedseed>1260884880</deployedseed>
+    <deployedseed>1128133418</deployedseed>
+    <deployedseed>1357585984</deployedseed>
+    <deployedseed>1328389351</deployedseed>
+    <deployedseed>1834180901</deployedseed>
+    <deployedseed>1504082306</deployedseed>
+    <deployedseed>497241751</deployedseed>
+    <deployedseed>1310828650</deployedseed>
+    <deployedseed>1850499643</deployedseed>
+    <deployedseed>84017880</deployedseed>
+    <deployedseed>1024923489</deployedseed>
+    <deployedseed>1813464940</deployedseed>
+    <deployedseed>135299860</deployedseed>
+    <deployedseed>1136691774</deployedseed>
+    <deployedseed>1471099245</deployedseed>
+    <deployedseed>1773183615</deployedseed>
+    <deployedseed>1667672893</deployedseed>
+    <deployedseed>631287358</deployedseed>
+    <deployedseed>529451085</deployedseed>
+    <deployedseed>1727963114</deployedseed>
+    <deployedseed>1296148118</deployedseed>
+    <deployedseed>375280021</deployedseed>
+    <deployedseed>1198746962</deployedseed>
+    <deployedseed>1523061082</deployedseed>
+    <deployedseed>1022603294</deployedseed>
+    <deployedseed>1903168082</deployedseed>
+    <deployedseed>1886713830</deployedseed>
+    <deployedseed>326416701</deployedseed>
+    <deployedseed>628025664</deployedseed>
+    <deployedseed>184874732</deployedseed>
+    <deployedseed>1493354070</deployedseed>
+    <deployedseed>1744942473</deployedseed>
+    <deployedseed>2141842915</deployedseed>
+    <deployedseed>323241332</deployedseed>
+    <deployedseed>1278940607</deployedseed>
+    <deployedseed>2043119135</deployedseed>
+    <deployedseed>1716448034</deployedseed>
+    <deployedseed>1199043601</deployedseed>
+    <deployedseed>813430737</deployedseed>
+    <deployedseed>445462727</deployedseed>
+    <deployedseed>1418622091</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description/>
+      <testinput>
+        <name>ans1</name>
+        <value>[[0,0], -v1]</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description/>
+      <testinput>
+        <name>ans1</name>
+        <value>[[0,0], 2*v1]</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>4</testcase>
+      <description/>
+      <testinput>
+        <name>ans1</name>
+        <value>[[0,0], [v1[2], -v1[1]]]</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-3-F</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

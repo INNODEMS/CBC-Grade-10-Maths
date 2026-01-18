@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding deceleration and distance travelled given speed and time</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A car traveling at {@u@} m/s brakes uniformly and comes to rest in {@t@} seconds.</p>
+
+<p>a) What is its deceleration?<br>
+Deceleration = [[input:ans1]] m/s² [[validation:ans1]] [[feedback:prt1]]</p>
+
+<p>b) How far does it travel before stopping?<br>
+Stopping distance = [[input:ans2]] m [[validation:ans2]] [[feedback:prt2]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>Given: \( u = {@u@} \) m/s, \( v = 0 \) m/s, \( t = {@t@} \) s</p>
+
+<p><strong>Part (a): Deceleration </strong><br><p></p>
+\(\begin{align} a =& \frac{v - u}{t}\\\ =& \frac{0 - {@u@}}{@t@} \\=& {@ta1@}\,\, \text{m/s²} \end{align}\) <br>
+(negative indicates deceleration)</p>
+
+<p><strong>Part (b): Distance travelled before stopping</strong><br>
+\(\begin{align} s &= \frac{u + v}{2} \times t \\ &= \frac{{@u@} + 0}{2} \times {@t@}\\ &={@ta2@}\,\, \text{m} \end{align} \) </p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Generate random initial velocity and time */
+u: 5 * (rand(24) + 4);      
+t: rand_with_step(4,10,2);     
+
+/* Calculate answers */
+ta1: -u/t;                 
+ta2: u * t / 2;            
+/*mistake*/
+mistake_ta1:(u/t);
+mistake_ta2:u*t;
+
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta1@}</p>
+<p>{@ta2@}</p>
+<p>{@u@}</p>
+<p>{@t@} </p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct deceleration</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect deceleration</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake_ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You ignored the direction of acceleration. Since the car is slowing down and comes to rest, the acceleration is negative. Deceleration should be based on a decrease in velocity. Please check the worked solution.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct distance travelled before stopping</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect distance</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>mistake_ta2</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You calculated the distance using \(s = ut\), which assumes the car is moving at a constant speed. In this question, the car is braking uniformly, so its speed is changing. Please use a formula for uniformly accelerated motion and check the worked solution.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1253187148</deployedseed>
+    <deployedseed>1887660823</deployedseed>
+    <deployedseed>29927608</deployedseed>
+    <deployedseed>1517569361</deployedseed>
+    <deployedseed>394633159</deployedseed>
+    <deployedseed>1166541007</deployedseed>
+    <deployedseed>1612147840</deployedseed>
+    <deployedseed>1887415918</deployedseed>
+    <deployedseed>1263092799</deployedseed>
+    <deployedseed>227941849</deployedseed>
+    <deployedseed>1039547565</deployedseed>
+    <deployedseed>1785228432</deployedseed>
+    <deployedseed>1556170674</deployedseed>
+    <deployedseed>367882025</deployedseed>
+    <deployedseed>315293920</deployedseed>
+    <deployedseed>779351624</deployedseed>
+    <deployedseed>2009490920</deployedseed>
+    <deployedseed>359681841</deployedseed>
+    <deployedseed>324227798</deployedseed>
+    <deployedseed>333797203</deployedseed>
+    <deployedseed>2069828570</deployedseed>
+    <deployedseed>523028544</deployedseed>
+    <deployedseed>1161919826</deployedseed>
+    <deployedseed>330453545</deployedseed>
+    <deployedseed>1442197965</deployedseed>
+    <deployedseed>1219278785</deployedseed>
+    <deployedseed>1699437040</deployedseed>
+    <deployedseed>151835633</deployedseed>
+    <deployedseed>165182857</deployedseed>
+    <deployedseed>714417384</deployedseed>
+    <deployedseed>1308896474</deployedseed>
+    <deployedseed>2141411597</deployedseed>
+    <deployedseed>454893294</deployedseed>
+    <deployedseed>407711050</deployedseed>
+    <deployedseed>707938329</deployedseed>
+    <deployedseed>1853216720</deployedseed>
+    <deployedseed>1453874275</deployedseed>
+    <deployedseed>1061515991</deployedseed>
+    <deployedseed>868071887</deployedseed>
+    <deployedseed>294264910</deployedseed>
+    <deployedseed>1618469582</deployedseed>
+    <deployedseed>570094246</deployedseed>
+    <deployedseed>1683712825</deployedseed>
+    <deployedseed>587578932</deployedseed>
+    <deployedseed>1259179716</deployedseed>
+    <deployedseed>1880371089</deployedseed>
+    <deployedseed>370905702</deployedseed>
+    <deployedseed>1554233490</deployedseed>
+    <deployedseed>45175166</deployedseed>
+    <deployedseed>34410169</deployedseed>
+    <deployedseed>1908161946</deployedseed>
+    <deployedseed>478722182</deployedseed>
+    <deployedseed>351929752</deployedseed>
+    <deployedseed>408295627</deployedseed>
+    <deployedseed>1950509502</deployedseed>
+    <deployedseed>287207249</deployedseed>
+    <deployedseed>1133273829</deployedseed>
+    <deployedseed>693329987</deployedseed>
+    <deployedseed>1182868222</deployedseed>
+    <deployedseed>897850115</deployedseed>
+    <deployedseed>560730858</deployedseed>
+    <deployedseed>1298333234</deployedseed>
+  </question>
+</quiz>

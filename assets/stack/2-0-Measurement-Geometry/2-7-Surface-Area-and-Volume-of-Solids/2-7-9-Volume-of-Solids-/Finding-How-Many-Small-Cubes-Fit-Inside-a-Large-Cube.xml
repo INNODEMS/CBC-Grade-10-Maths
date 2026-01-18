@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding How Many Small Cubes Fit Inside a Large Cube</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A large cubic box has a side length of \({@large_side @} \, \text{cm}\). How many smaller cubic boxes, each with a side length of  \({@small_side@} \, \text{cm}\), can fit inside the large box?</p>
+
+
+
+<p>\(\text{Volume of the large box}=\)[[input:ans1]]\(\text{cm}^2\) [[validation:ans1]][[feedback:prt1]]</p>
+
+<p>\(\text{Volume of the small box}=\)[[input:ans2]]\(\text{cm}^2\) [[validation:ans2]][[feedback:prt2]]</p>
+
+<p>\(\text{Number of small boxes}=\)[[input:ans3]]\(\text{cm}\) [[validation:ans3]][[feedback:prt3]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>Given:</p>
+<p><ul>
+<li>Large cube side \(= {@large_side@}\, \text{cm}\)</li>
+<li>Small cube side  \(= {@small_side@}\, \text{cm}\)</li>
+</ul></p>
+
+<p>Volume of a cube with side (\(S\))
+a is <br> \(V=S^3\)</p>
+<h>\(\textbf{Volume of the large box}\)</h>
+<p>\( \begin{align}
+\text{Volume} &= {@large_side@}^3 \\
+&= {@large_side@}\times {@large_side@} \times {@large_side@} \\
+&={@V_large@}\,\text{cm}^3 \\
+\text{Therefore},\\
+\text{Volume of large box}&={@V_large@}\, \text{cm}^3
+
+
+\end{align}
+\)</p>
+
+
+<h>\(\textbf{Volume of the small box}\)</h>
+<p>\( \begin{align}
+\text{Volume} &= {@small_side@}^3 \\
+&= {@small_side@}\times {@small_side@} \times {@small_side@} \\
+&={@V_small@}\,\text{cm}^3 \\
+\text{Therefore},\\
+\text{Volume of small box}&={@V_small@}\, \text{cm}^3
+
+
+\end{align}
+\)</p>
+
+<h>\(\textbf{How many small boxes fit inside the large box}\)</h>
+<p>Divide the big volume by the small volume:</p>
+<p>\(\begin{align}
+{@V_large@} \div {@V_small@} &= {@num_cubes@} \\
+& \approx {@Number@} \\
+\text{Therefore},\\
+\text{Number of small boxes}&={@Number@}
+\end{align}\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize side lengths */
+large_side : (rand(30) + 1) * 30;   /* Large cube side: multiples of 20 cm */
+small_side : (rand(20) + 1) * 3;    /* Small cube side: multiples of 10 cm */
+
+/* Calculate volumes */
+V_large : large_side^3;
+V_small : small_side^3;
+
+/* Number of small cubes (whole number division) */
+num_cubes : V_large / V_small;
+Number:round(num_cubes);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{Side of the larger and smaller box are  }=[{@large_side@}\,\text{cm},\,{@small_side@}\,\text{cm}] \,\text{respectively}\)</p>
+<p>\(\text{Volume of large box}= {@V_large@}\,\text{cm}^3\)</p>
+<p>\(\text{Volume of small box}= {@V_small@}\,\text{cm}^3\)</p>
+<p>\(\text{Number of small boxes}={@Number@}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>V_large</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>V_small</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>Number</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct volume of the large box.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>V_large</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct Volume of the smaller box.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>V_small</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct number of small boxes placed.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>Number</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1540630113</deployedseed>
+    <deployedseed>1042680555</deployedseed>
+    <deployedseed>1906981426</deployedseed>
+    <deployedseed>1616013486</deployedseed>
+    <deployedseed>966598676</deployedseed>
+    <deployedseed>310971446</deployedseed>
+    <deployedseed>1621630285</deployedseed>
+    <deployedseed>932619256</deployedseed>
+    <deployedseed>895923582</deployedseed>
+    <deployedseed>888076983</deployedseed>
+    <deployedseed>367434806</deployedseed>
+    <deployedseed>51506653</deployedseed>
+    <deployedseed>1463568290</deployedseed>
+    <deployedseed>1544956097</deployedseed>
+    <deployedseed>943806612</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>V_large</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>V_small</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>Number</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

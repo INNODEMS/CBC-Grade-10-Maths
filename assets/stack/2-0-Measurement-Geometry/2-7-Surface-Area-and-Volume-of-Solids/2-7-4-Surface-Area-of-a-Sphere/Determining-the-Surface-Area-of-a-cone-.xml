@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Determining  the Surface Area of a cone.</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Find the surface area of the solid shown in the diagram below. \(\text{Use}\, \pi= \frac{22}{7}.\)</p>
+[[jsxgraph]]
+const brd = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-8, 8, 8, -8],
+    axis: false,
+    showNavigation: false,
+    showCopyright: false
+  });
+
+  // Big circle (sphere outline), radius 7
+  const O = brd.create('point', [0, 0], {
+    name: '',
+    size: 3,
+    fixed: true
+  });
+  const sphere = brd.create('circle', [O, 5], {
+    strokeColor: 'black'
+  });
+
+  // Horizontal "equator" as dashed ellipse (here: circle flattened visually)
+  const equator = brd.create('curve', [
+    function (t) { return 5 * Math.cos(t); },
+    function (t) { return 2 * Math.sin(t); }, // smaller vertical radius for ellipse look
+    0, 2 * Math.PI
+  ], {
+    strokeColor: 'blue',
+    dash: 2
+  });
+
+  // Radius arrow from centre to right side
+  const P = brd.create('point', [5, 0], {name: '', fixed: true, visible: false});
+  const radiusSeg = brd.create('segment', [O, P], {
+    strokeColor: 'black',
+    lastArrow: true
+  });
+
+  // Label r = 7 cm slightly above the radius
+  brd.create('text', [2, 0.6, ' {#r#} cm'], {
+    anchorX: 'left',
+    anchorY: 'middle'
+  });
+[[/jsxgraph]]
+<p>\(\text{Total surface area}=\)[[input:ans1]]\(\,\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>The solid shown in the diagram is a <strong>sphere</strong>.</p>
+<p><strong>Step 1: Formula</strong></p>
+<p>
+The surface area of a sphere is given by:<br>
+\(
+\text{Surface area} = 4\pi r^2
+\)
+</p>
+
+<p><strong>Step 2: Substitute values</strong></p>
+
+<p>
+From the diagram, the radius is \( r = {@r@} \) cm and  
+\( \pi = \dfrac{22}{7} \).
+</p>
+
+<p>
+\(
+\begin{align}
+\text{Surface area} &= 4 \pi r^2\\
+&= 4 \times \frac{22}{7} \times {@r@}^2 \\
+&=4 \times \frac{22}{7} \times {@r@} \times  {@r@} \\
+&= 4 \times {@A_1@}\\
+&={@A@}\,\text{cm}^2
+\end{align}
+\)
+</p>
+
+
+
+<p>Therefore,<br>
+\(
+\begin{align}
+\text{Surface area}
+&= {@A@}\ \text{cm}^2
+\end{align}
+\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize the radius */
+r : rand_with_step(7,140,7);
+
+/* Use pi = 22/7 */
+pi_val : 22/7;
+R:r^2;
+
+/* Area formula */
+A_1:pi_val * r^2;
+A : 4*pi_val * r^2;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The radius of the sphere}={@r@}\, \text{cm}\)</p>
+<p>\(\text{The Total surface area of the sphere}={@A@}\, \text{cm}^2\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>A</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct surface area of the sphere.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>A</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>905395309</deployedseed>
+    <deployedseed>1571628229</deployedseed>
+    <deployedseed>1439141239</deployedseed>
+    <deployedseed>1325375191</deployedseed>
+    <deployedseed>106948967</deployedseed>
+    <deployedseed>455006865</deployedseed>
+    <deployedseed>1205449038</deployedseed>
+    <deployedseed>664162355</deployedseed>
+    <deployedseed>2135130515</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>A</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

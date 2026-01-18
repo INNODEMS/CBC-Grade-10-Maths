@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Determining the Area of an Annulus</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Determine is the area of the annulus shown below? Leave your answer correct to \(3\,\text{ significant figures}\).</p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+        boundingbox: [-7, 7, 7, -7],
+        axis: false,
+        showNavigation: false,
+        showCopyright: false
+    });
+
+    // Centre of circles (dot only, no label)
+    var O = board.create('point', [0, 0], {fixed: true, visible:true, name: ''});
+
+    // Inner and outer circles (concentric)
+    var inner = board.create('circle', [O, 3], {
+        strokeWidth: 2,
+        fillColor: 'yellow',
+        fillOpacity: 1
+    });
+
+    var outer = board.create('circle', [O, 5], {
+        strokeWidth: 2,
+        fillColor: 'white',
+        fillOpacity: 0.4
+    });
+
+    // Points on inner and outer circles
+    var P_inner = board.create('point', [3, 0], {size: 2, fixed: true, visible:true,name: ''});
+    var P_outer = board.create('point', [-4, 3], {size: 2, fixed: true, visible:true,name: ''});
+
+    // Dashed segments from O to points on circles
+    board.create('segment', [O, P_inner], {dash: 2});
+    board.create('segment', [O, P_outer], {dash: 2});
+
+    // Labels for lengths
+    board.create('text', [1.2, -0.8, '{#r#} cm']);
+    board.create('text', [-2.5, 0.7, '{#R#} cm']);
+[[/jsxgraph]]
+<p>\(\text{Area of the annulus}=\)[[input:ans1]]\(\,\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><strong>Worked Solution:</strong></p>
+
+<p>An annulus is the region between two concentric circles.</p>
+
+<p>From the diagram:</p>
+<p>
+Inner radius \(= {@r@}\,\text{cm}\) <br>
+Outer radius = \(= {@R@}\,\text{cm}\) cm
+</p>
+
+<p><strong>Step 1: Write down the formula for the area of an annulus.</strong></p>
+
+<p>
+\(\begin{align}
+A &= \pi (R^2 - r^2)
+\end{align}\)
+</p>
+
+<p><strong>Step 2: Use \(\pi = \dfrac{22}{7}\).</strong></p>
+
+<p>
+\(\begin{align}
+A &= \frac{22}{7} (R^2 - r^2)
+\end{align}\)
+</p>
+
+<p><strong>Step 3: Substitute the values and evaluate.</strong></p>
+
+<p>
+\(\begin{align}
+A &= \frac{22}{7} \left( ({@R@})^2 - ({@r@})^2 \right) \\
+  &= {@A_1@}\ \text{cm}^2
+\end{align}\)
+</p>
+
+<p><strong>Therefore, the area of the annulus \(= {@A_1@}\,\text{cm}^2\), \(\text{correct to 3 significant figures}\)\.</strong></p>]]></text>
+    </generalfeedback>
+    <defaultgrade>15</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize inner radius */
+r: rand_with_step(2, 20, 1);
+
+/* Randomize outer radius greater than inner radius */
+R: r + rand_with_step(2, 20, 1);
+
+/* Define pi as 22/7 */
+Pi: 22/7;
+
+/* Area of the annulus */
+A: Pi * (R^2 - r^2);
+A_1:decimalplaces(A,3);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{R}={@R@}\,\text{cm}\)</p>
+<p>\(\text{r}={@r@}\,\text{cm}\)</p>
+<p>\(\text{Area of the annulus}={@A_1@}\,\text{cm}^2\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>A_1</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct area of the annulus.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>A_1</tans>
+        <testoptions>3</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>809882816</deployedseed>
+    <deployedseed>522008795</deployedseed>
+    <deployedseed>2053648820</deployedseed>
+    <deployedseed>1684600237</deployedseed>
+    <deployedseed>1096243115</deployedseed>
+    <deployedseed>1425749727</deployedseed>
+    <deployedseed>354852508</deployedseed>
+    <deployedseed>1829921507</deployedseed>
+    <deployedseed>2048334323</deployedseed>
+    <deployedseed>1840953147</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>A_1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

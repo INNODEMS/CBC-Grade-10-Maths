@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Applying mixed laws of indices</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>In a coding competition, a robot performs repeated actions. One routine runs \({@base@}^{@a@}\) cycles, another runs \({@base@}^{@b@}\) cycles, and an optimisation process reduces the total by a factor of \({@base@}^{@c@}\).</p>
+<p>Simplify the expression below using the laws of indices:</p>
+
+<p>\[
+\frac{{@base@}^{@a@} \times {@base@}^{@b@}}{{@base@}^{@c@}}
+\]</p>
+
+<p>Write your final answer in index form.</p>
+
+<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>We first apply the product law:</p>
+
+<p>\[
+{@base@}^{@a@} \times {@base@}^{@b@}
+= {@base@}^{@a + b@}.
+\]</p>
+
+<p>Then apply the quotient law:</p>
+
+<p>\[
+\frac{{@base@}^{@a + b@}}{{@base@}^{@c@}}
+= {@base@}^{{@a + b@}  - {@c@}}
+\]</p>
+
+<p>Therefore, the simplified expression is:</p>
+
+<p>\[
+{@base@}^{@exp_total@}.
+\]</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>2</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random base */
+base: rand([2,3,5,7]);
+
+/* Random exponents for a mixed-law expression */
+a: rand([2,3,4,5]);
+b: rand([1,2,3]);
+c: rand([1,2,3]);
+
+/* Expression: (base^a * base^b) / base^c */
+exp_total: (a + b) - c;   /* correct simplified exponent */
+
+/* Full expression (for teacher notes) */
+expr: (base^a * base^b) / base^c;
+
+/* Common mistakes */
+m1: base^(a + b + c);        /* adds all exponents */
+m2: base^(a - b - c);        /* subtracts incorrectly */
+m3: base^(a*b - c);          /* multiplies a and b */
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@expr@}</p>
+<p>{@exp_total@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept"></p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description"> The question requires the learner to apply multiple laws of indices, including the product and quotient laws, to simplify an expression with the same base.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>base^exp_total</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>base^exp_total</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>579995722</deployedseed>
+    <deployedseed>1172877083</deployedseed>
+    <deployedseed>2035590700</deployedseed>
+    <deployedseed>588211729</deployedseed>
+    <deployedseed>1594212298</deployedseed>
+    <deployedseed>1620530512</deployedseed>
+    <deployedseed>20258085</deployedseed>
+    <deployedseed>1804799037</deployedseed>
+    <deployedseed>2098590136</deployedseed>
+    <deployedseed>1727325121</deployedseed>
+    <deployedseed>1025630841</deployedseed>
+    <deployedseed>494962060</deployedseed>
+    <deployedseed>2077104952</deployedseed>
+    <deployedseed>1648134736</deployedseed>
+    <deployedseed>29919034</deployedseed>
+    <deployedseed>783847120</deployedseed>
+    <deployedseed>1998299804</deployedseed>
+    <deployedseed>911198464</deployedseed>
+    <deployedseed>1280093457</deployedseed>
+    <deployedseed>489514939</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>base^exp_total</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

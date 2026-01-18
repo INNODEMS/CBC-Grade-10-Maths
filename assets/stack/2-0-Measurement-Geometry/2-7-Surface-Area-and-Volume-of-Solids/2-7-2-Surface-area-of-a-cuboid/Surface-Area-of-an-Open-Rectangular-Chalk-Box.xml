@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Surface Area of an Open Rectangular Chalk Box</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A rectangular chalk box with no lid has dimensions of \({@length@} \,\text{cm}\) in length, \({@width@} \, \text{cm}\) in width, and \({@height@} \, \text{cm}\) in height. What is its total external surface area?</p>
+
+
+
+
+
+
+
+
+<p>\(\text{Surface area }=\)[[input:ans1]]\(\text{cm}^2\)[[feedback:prt1]]</p>
+
+<p hidden> [[validation:ans1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>For a rectangular open box (open at the top), the surface area consists of:</p>
+<p><ol><li>Base (bottom): \(L \times W\)</li>
+<li>Two sides: \(2(L \times H)\)</li>
+<li>Front and back: \(2(W \times H)\)</li></ol></p>
+<p>Therefore the formula is:</p>
+<p>\(\text{Surface Area} = (L \times W)+2(L \times H)+2(W \times H)\)</p>
+<p>Given:</p>
+<p><ol><li>\(\text{length}={@length@}\, \text{cm}\)</li>
+<li>\(\text{width}={@width@}\, \text{cm}\)</li>
+<li>\(\text{height}={@height@}\, \text{cm}\)</li></ol></p>
+<p>Substitute values in the formula.</p>
+<p>\(\begin{align}
+\text{Surface Area}& = ({@length@} \times {@width@})+2({@length@} \times {@height@})+2({@width@} \times {@height@}) \\
+&= {@mult_1@}+2({@mult_2@})+2({@mult_3@})\\
+&= {@mult_1@}+{@multy_times1@}+ {@multy_times2@}\\
+&= {\color{blue}{@surface_area@} }\, \text{cm}^2
+\end{align}\)</p>
+<p>Therefore,</p>
+<p>\(\text{The external surface area of the open chalk box is} \, {\color{blue}{@surface_area@} }\, \text{cm}^2\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025012100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Generate 3 distinct values for length, width, height */
+allvalues: random_permutation(makelist(i, i, 5, 60));
+length: allvalues[1];
+width: allvalues[2];
+height: allvalues[3];
+
+mult_1:length*width;
+mult_2:length*height;
+mult_3:width*height;
+
+multy_times1:2*mult_2;
+multy_times2:2*mult_3;
+
+/* Surface area of open rectangular box (no lid):
+   SA = (length * width) + 2*(length * height) + 2*(width * height) */
+surface_area: (length * width) + 2*(length * height) + 2*(width * height);
+
+/*Mistake 1 Using the formula for a closed box as SA= 2(L*W)+2(L*H)+2(W*H)*/
+
+surface_1: 2*(length * width) + 2*(length * height) + 2*(width * height);
+
+/*Mistake 2 Forgetting to multiply by 2 for sides SA= L*W+L*H+W*H*/
+
+surface_2: (length * width) + (length * height) + (width * height);
+
+
+/*Mistake 3 Using the volume formula instead of surface areas SA= L*W*H*/
+
+surface_3: length * width * height;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The length} = {@length@}\)</p>
+<p>\(\text{The width} = {@width@}\)</p>
+<p>\(\text{The height} = {@height@}\)</p>
+<p>\(\text{The surface area} = {@surface_area@}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Henry Onyango</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+<p id="description">This question involves finding the surface area of an open cuboid. The student is required to carefully read and interpret the given question, and then apply their knowledge of open cuboids to calculate the surface area. 
+The formula for the surface area of an open cuboid is: \(\text{SA}=(L \times W)+2(L \times H)+2(W \times H)\)</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>surface_area</tans>
+      <boxsize>9</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct surface area of the open chalk box.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>surface_area</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description> Using the formula for a closed box as SA= \(2(L \times W)+2(L \times H)+2(W \times H) \)</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>surface_1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you used the formula for the total surface area of a closed rectangular box: \(\text{SA} =2(LW+LH+WH)\)</p>
+<p>That’s a great formula — but it applies only when the box has a lid.
+In this question, the box is open at the top, so we don’t count the top face</p>
+<p>\(\textbf{ What to do:}\)</p>
+<p>Use the adjusted formula for an open box:</p>
+<p>\(\text{SA} =LW+2LH+2WH)\)</p>
+<p>You’re almost there! Just leave out the top next time 😊</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description> Forgetting to multiply by 2 for sides \(\text{SA}= L \timesW+L \times H+W \times H\)</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>surface_2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It seems like you only calculated one side for each face (like just LH or WH). But remember — each of those faces appears twice on the box.</p>
+<p>\(\text{What to do:}\)</p>
+<p>Multiply both \(LH\) and \(WH\) by \(2\):</p>
+<p>\(\text{SA}=LW+2LH+2WH\)</p>
+<p>Great effort! Keep an eye out for repeating faces — you’re doing well!</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description> Using the volume formula instead of surface areas \(\text{SA}= L \times W \times H \)</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>surface_3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Oops — it looks like you calculated the volume of the box instead of its surface area.</p>
+<p>Volume tells us how much space is inside the box, but we’re looking for how much material covers the outside.</p>
+<p>\(\textbf{What to do:}\)</p>
+<p>Switch from:</p>
+<p>\(\text{Volume}=L \times W \times H\)</p>
+<p>To:</p>
+<p>\(\text{Surface Area} = LW+2LH+2WH\)</p>
+<p>It’s a common mix-up! You’re thinking in the right direction — just shift to surface area thinking</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1273617974</deployedseed>
+    <deployedseed>1261183567</deployedseed>
+    <deployedseed>1716278813</deployedseed>
+    <deployedseed>2049379563</deployedseed>
+    <deployedseed>2036110364</deployedseed>
+    <deployedseed>1213661168</deployedseed>
+    <deployedseed>1047689927</deployedseed>
+    <deployedseed>1737530654</deployedseed>
+    <deployedseed>1445591059</deployedseed>
+    <deployedseed>1765007807</deployedseed>
+    <deployedseed>1734323210</deployedseed>
+    <deployedseed>2113795126</deployedseed>
+    <deployedseed>1836724386</deployedseed>
+    <deployedseed>743844812</deployedseed>
+    <deployedseed>179939616</deployedseed>
+    <deployedseed>409526780</deployedseed>
+    <deployedseed>1135805886</deployedseed>
+    <deployedseed>300730593</deployedseed>
+    <deployedseed>6844527</deployedseed>
+    <deployedseed>124337765</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>surface_area</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description> Using the formula for a closed box as SA= \(2(L \times W)+2(L \times H)+2(W \times H) \)</description>
+      <testinput>
+        <name>ans1</name>
+        <value>surface_1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.5000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description> Forgetting to multiply by 2 for sides \(\text{SA}= L \timesW+L \times H+W \times H\)</description>
+      <testinput>
+        <name>ans1</name>
+        <value>surface_2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.1000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>4</testcase>
+      <description> Using the volume formula instead of surface areas \(\text{SA}= L \times W \times H \)</description>
+      <testinput>
+        <name>ans1</name>
+        <value>surface_3</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-4-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>
