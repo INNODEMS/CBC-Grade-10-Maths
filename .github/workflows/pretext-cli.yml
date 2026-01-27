@@ -41,6 +41,14 @@ jobs:
                     echo "PreTeXt version is less than 2.5, using old build command"
                     pretext build
                 fi
+
+            - name: build deploy target student
+              run: pretext build student
+
+            - name: Copy version without review links into student subfolder
+              run: |
+                cp -r output/student/ output/web/
+
             - name: stage deployment
               run: pretext deploy --stage-only
 
