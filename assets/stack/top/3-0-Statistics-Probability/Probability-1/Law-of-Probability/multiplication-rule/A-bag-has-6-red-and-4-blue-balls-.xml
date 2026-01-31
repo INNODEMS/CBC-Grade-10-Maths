@@ -34,16 +34,16 @@
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>1</text>
-    </questionvariables>
-    <specificfeedback format="html">
       <text>blueballs:rand(10)+2;
 redballs : rand(10)+rand(4);
-ball1:rand(red, yellow, green, purple, orange);
-ball2:rand(blue, black ,white ,pink , brown);</text>
+ball1:rand([red, yellow, green, purple, orange]);
+ball2:rand([blue, black ,white ,pink , brown]);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
     </specificfeedback>
     <questionnote format="html">
       <text>\({@blueballs@}\)
@@ -101,7 +101,7 @@ ball2:rand(blue, black ,white ,pink , brown);</text>
     <input>
       <name>ans2</name>
       <type>algebraic</type>
-      <tans>1</tans>
+      <tans>ta2</tans>
       <boxsize>15</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -184,5 +184,29 @@ ball2:rand(blue, black ,white ,pink , brown);</text>
         </falsefeedback>
       </node>
     </prt>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>

@@ -2,77 +2,89 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Applying mixed laws of indices</text>
+      <text>Applying mixed laws of indices using bundles of paper</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>In a coding competition, a robot performs repeated actions. One routine runs \({@base@}^{@a@}\) cycles, another runs \({@base@}^{@b@}\) cycles, and an optimisation process reduces the total by a factor of \({@base@}^{@c@}\).</p>
-<p>Simplify the expression below using the laws of indices:</p>
+      <text><![CDATA[<p><strong>Watamuu Comprehensive School</strong> is buying blocks of writing paper for Grade \(10\) learners. Each block contains \({@base@}^{@a@}\) sheets of paper. The school buys \({@base@}^{@b@}\) blocks. The blocks are then taken apart and its sheets are packed into bundles to be given to the students, each bundle containing \({@base@}^{@c@}\) sheets.</p>
 
-<p>\[
-\frac{{@base@}^{@a@} \times {@base@}^{@b@}}{{@base@}^{@c@}}
-\]</p>
+<p>
+By applying Laws of indices, how many bundles of sheets are formed?
+Write your answer as a <strong>single power</strong>, in index form.
+</p>
 
-<p>Write your final answer in index form.</p>
-
-<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+<p>
+[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
 
-<p>We first apply the product law:</p>
+<p>
+First, find the total number of sheets:
+</p>
 
-<p>\[
+<p>
+\[
 {@base@}^{@a@} \times {@base@}^{@b@}
-= {@base@}^{@a + b@}.
-\]</p>
+= {@base@}^{@a + b@}
+\]
+</p>
 
-<p>Then apply the quotient law:</p>
+<p>
+Next, divide by the number of sheets in each bundle:
+</p>
 
-<p>\[
+<p>
+\[
 \frac{{@base@}^{@a + b@}}{{@base@}^{@c@}}
-= {@base@}^{{@a + b@}  - {@c@}}
-\]</p>
+= {@base@}^{{@a + b@} - {@c@}}
+\]
+</p>
 
-<p>Therefore, the simplified expression is:</p>
+<p>
+Therefore, the number of bundles formed is:
+</p>
 
-<p>\[
-{@base@}^{@exp_total@}.
-\]</p>]]></text>
+<p>
+\[
+\boxed{{@base@}^{@exp_total@}}
+\]
+</p>]]></text>
     </generalfeedback>
     <defaultgrade>2</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>/* Random base */
 base: rand([2,3,5,7]);
 
-/* Random exponents for a mixed-law expression */
-a: rand([2,3,4,5]);
-b: rand([1,2,3]);
-c: rand([1,2,3]);
+/* Random exponents */
+a: rand([2,3,4,5]);   /* pages per book */
+b: rand([1,2,3]);     /* number of books */
+c: rand([1,2,3]);     /* pages per bundle */
 
-/* Expression: (base^a * base^b) / base^c */
-exp_total: (a + b) - c;   /* correct simplified exponent */
+/* Correct simplified exponent */
+exp_total: (a + b) - c;
 
 /* Full expression (for teacher notes) */
 expr: (base^a * base^b) / base^c;
 
-/* Common mistakes */
-m1: base^(a + b + c);        /* adds all exponents */
-m2: base^(a - b - c);        /* subtracts incorrectly */
-m3: base^(a*b - c);          /* multiplies a and b */
+/* Common student mistakes */
+m1: base^(a + b + c);
+m2: base^(a - b - c);
+m3: base^(a*b - c);
 </text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>{@expr@}</p>
-<p>{@exp_total@}</p>]]></text>
+      <text><![CDATA[<p>Expression: {@expr@}</p>
+<p>Simplified exponent: {@exp_total@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
@@ -80,7 +92,7 @@ m3: base^(a*b - c);          /* multiplies a and b */
 <p id="reviewer"></p>
 <p id="reviewer"></p>
 
-<p id="description"> The question requires the learner to apply multiple laws of indices, including the product and quotient laws, to simplify an expression with the same base.</p>]]></text>
+<p id="description"> This question assesses learners’ ability to apply both the product and quotient laws of indices using a familiar school-based context.</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -149,10 +161,88 @@ m3: base^(a*b - c);          /* multiplies a and b */
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>added all the exponents</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You added all the exponents.
+Exponents are added when multiplying, but subtracted when dividing.</text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>incorrect subtraction of exponents</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>The subtraction of exponents is incorrect.
+First add the exponents in the numerator, then subtract the denominator exponent.</text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Multiplication of exponents</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Exponents should not be multiplied here.
+Multiplication of exponents only happens when raising a power to a power.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Apply the laws of indices step by step: multiply first, then divide</text>
         </falsefeedback>
       </node>
     </prt>

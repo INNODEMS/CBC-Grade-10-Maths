@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Translation Vector</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+    The red rectangle is shown on the coordinate plane. Translate the rectangle by the vector: \( \mathbf{v} = \begin{pmatrix} {@vx@} \\ {@vy@} \end{pmatrix} \)
+    Drag the <strong>Blue</strong> points to move the shape.
+</p>
+
+[[jsxgraph
+  input-ref-ans1="ans1"
+  input-ref-ans2="ans2"
+  input-ref-ans3="ans3"
+  input-ref-ans4="ans4"
+]]
+var board = JXG.JSXGraph.initBoard(divid, {
+  boundingbox: [-5, 8, 9, -5],
+  axis: true,
+  grid: {
+      gridX: 1,
+      gridY: 1
+  },
+  showCopyright: false,
+  zoom: {enabled: false},
+  pan: {enabled: false}
+});
+
+// ----------------------------
+// 1. Teacher Shape (Fixed, Red)
+// ----------------------------
+var teacherCoords = {#rect_init#};
+var teacherPts = [];
+
+// Create invisible fixed points
+for (var i = 0; i < teacherCoords.length; i++) {
+  teacherPts.push(
+    board.create('point', teacherCoords[i], {
+      visible: false,
+      fixed: true,
+      name: ''
+    })
+  );
+}
+
+// Create the red polygon
+board.create('polygon', teacherPts, {
+  borders: { strokeColor: 'red', strokeWidth: 2, dash: 2 },
+  fillColor: 'red',
+  fillOpacity: 0.1,
+  fixed: true,
+  hasInnerPoints: false
+});
+
+// ----------------------------
+// 2. Student Shape (Draggable, Blue)
+// ----------------------------
+// Start at the same position as teacher shape
+var studentCoords = {#rect_init#};
+var studentPts = [];
+
+for (var i = 0; i < studentCoords.length; i++) {
+  studentPts.push(
+    board.create('point', studentCoords[i], {
+      color: 'blue',
+      size: 4,
+      snapToGrid: true, 
+      snapSizeX: 1,
+      snapSizeY: 1,
+      withLabel: false
+    })
+  );
+}
+
+// Create the blue polygon
+board.create('polygon', studentPts, {
+  borders: { strokeColor: 'blue', strokeWidth: 3 },
+  fillColor: 'blue',
+  fillOpacity: 0.2
+});
+
+// ----------------------------
+// 3. STACK Bindings
+// ----------------------------
+stack_jxg.bind_point(ans1, studentPts[0]);
+stack_jxg.bind_point(ans2, studentPts[1]);
+stack_jxg.bind_point(ans3, studentPts[2]);
+stack_jxg.bind_point(ans4, studentPts[3]);
+
+board.unsuspendUpdate();
+[[/jsxgraph]]
+
+<div style="display:none">
+  [[input:ans1]] [[validation:ans1]]
+  [[input:ans2]] [[validation:ans2]]
+  [[input:ans3]] [[validation:ans3]]
+  [[input:ans4]] [[validation:ans4]]
+</div>
+
+[[feedback:prt1]]]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>To translate a shape by a vector \(\mathbf{v} = \begin{pmatrix} {@vx@} \\ {@vy@} \end{pmatrix}\), we add the horizontal component \({@vx@}\) to the \(x\)-coordinate and the vertical component \({@vy@}\) to the \(y\)-coordinate of every vertex.</p>
+
+<p>For example, taking the bottom-left corner \(( {@rect_init[1][1]@}, {@rect_init[1][2]@} )\):</p>
+<ul>
+    <li>New \(x = {@rect_init[1][1]@} + {@vx@} = \mathbf{@ta1[1]@}\)</li>
+    <li>New \(y = {@rect_init[1][2]@} + {@vy@} = \mathbf{@ta1[2]@}\)</li>
+</ul>
+<p>Repeating this for all points moves the rectangle to the position shown in green below.</p>
+
+<div style="text-align: center;">
+[[jsxgraph width="500px" height="500px"]]
+    var board = JXG.JSXGraph.initBoard(divid, {
+        boundingbox : [-5, 8, 9, -5],
+        axis : true,
+        grid: {
+            gridX: 1,
+            gridY: 1
+        },
+        showNavigation: false,
+        showCopyright: false,
+        zoom: {enabled: false},
+        pan: {enabled: false}
+    });
+
+    // 1. Draw Original Shape (Red)
+    var startCoords = {#rect_init#};
+    var startPts = [];
+    
+    for(var i=0; i<startCoords.length; i++){
+        startPts.push(board.create('point', startCoords[i], {visible:false, fixed:true}));
+    }
+    board.create('polygon', startPts, {
+        borders: {strokeColor:'red', strokeWidth:2, dash:2},
+        fillColor:'red', 
+        fillOpacity:0.1, 
+        fixed:true
+    });
+
+    // 2. Draw Solution Shape (Green)
+    // We calculate the new position using the vector vx, vy
+    var solCoords = [];
+    var vx = {#vx#};
+    var vy = {#vy#};
+    
+    for(var i=0; i<startCoords.length; i++){
+        solCoords.push([ startCoords[i][0] + vx, startCoords[i][1] + vy ]);
+    }
+
+    var solPts = [];
+    for(var i=0; i<solCoords.length; i++){
+        solPts.push(board.create('point', solCoords[i], {
+            name:'', 
+            fixed:true, 
+            size:2, 
+            color:'#008800'
+        }));
+    }
+    board.create('polygon', solPts, {
+        borders: {strokeColor:'#008800', strokeWidth:3},
+        fillColor:'#008800', 
+        fillOpacity:0.2, 
+        fixed:true
+    });
+
+    // 3. Draw Translation Vector Arrow (for visual aid)
+    // Connects Bottom-Left of Start to Bottom-Left of End
+    board.create('arrow', [startPts[0], solPts[0]], {
+        color:'black', 
+        strokeWidth:3, 
+        fixed:true,
+        name: 'v'
+    });
+    
+    // Label the vector
+    var midX = (startPts[0].X() + solPts[0].X()) / 2;
+    var midY = (startPts[0].Y() + solPts[0].Y()) / 2;
+    //board.create('text', [midX, midY, "\\mathbf{v}"], {fontSize:16, fixed:true});
+
+[[/jsxgraph]]
+</div>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. Dimensions and Start Position (Integers) */
+w: rand([2, 3]);
+h: rand([2, 3]);
+start_x: rand([-4, -3, -2]);
+start_y: rand([-3, -2, -1]);
+
+/* Define Initial Rectangle (Teacher Shape - Fixed) */
+rect_init: [
+  [start_x, start_y],
+  [start_x + w, start_y],
+  [start_x + w, start_y + h],
+  [start_x, start_y + h]
+];
+
+/* 2. Random Translation Vector (Integers) */
+vx: rand([3, 4, 5]);
+vy: rand([2, 3, 4]);
+
+/* 3. Calculate Solution (Target Coordinates) */
+ta1: [rect_init[1][1] + vx, rect_init[1][2] + vy];
+ta2: [rect_init[2][1] + vx, rect_init[2][2] + vy];
+ta3: [rect_init[3][1] + vx, rect_init[3][2] + vy];
+ta4: [rect_init[4][1] + vx, rect_init[4][2] + vy];
+
+/* List for grading */
+sol_list: [ta1, ta2, ta3, ta4];</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Rectangle Width: {@w@}</p>
+<p>Rectangle Height: {@h@}</p>
+<p>Start X (Bottom-Left): {@start_x@}</p>
+<p>Start Y (Bottom-Left): {@start_y@}</p>
+<p>Translation Vector X: {@vx@}</p>
+<p>Translation Vector Y: {@vy@}</p>
+<p>Solution Bottom-Left (ta1): {@ta1@}</p>
+<p>Solution Bottom-Right (ta2): {@ta2@}</p>
+<p>Solution Top-Right (ta3): {@ta3@}</p>
+<p>Solution Top-Left (ta4): {@ta4@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta3</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>ta4</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>all_correct_input : if ans1=ta1 and ans2=ta2 and ans3=ta3 and ans4=ta4  then 1 else 0;
+
+/* 4. Define Common Mistakes (Wrong Answers) */
+/* Mistake B: Inverse Direction (Student subtracted the vector instead of adding) */
+wa_inverse: [
+  [rect_init[1][1] - vx, rect_init[1][2] - vy],
+  [rect_init[2][1] - vx, rect_init[2][2] - vy],
+  [rect_init[3][1] - vx, rect_init[3][2] - vy],
+  [rect_init[4][1] - vx, rect_init[4][2] - vy]
+];
+node3_error : if wa_inverse = [ans1,ans2,ans3,ans4] then 1 else 0;
+
+
+/* Mistake C: Moved X only (Forgot Y component) */
+wa_x_only: [
+  [rect_init[1][1] + vx, rect_init[1][2]],
+  [rect_init[2][1] + vx, rect_init[2][2]],
+  [rect_init[3][1] + vx, rect_init[3][2]],
+  [rect_init[4][1] + vx, rect_init[4][2]]
+];
+
+/* Mistake D: Moved Y only (Forgot X component) */
+wa_y_only: [
+  [rect_init[1][1], rect_init[1][2] + vy],
+  [rect_init[2][1], rect_init[2][2] + vy],
+  [rect_init[3][1], rect_init[3][2] + vy],
+  [rect_init[4][1], rect_init[4][2] + vy]
+];
+
+
+/* Initialize count */
+correct_count: 0;
+
+/* Check each corner individually */
+/* We use 'is' and '=' to check if the coordinate lists are identical */
+if is(ans1 = ta1) then correct_count: correct_count + 1;
+if is(ans2 = ta2) then correct_count: correct_count + 1;
+if is(ans3 = ta3) then correct_count: correct_count + 1;
+if is(ans4 = ta4) then correct_count: correct_count + 1;</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct position cordinates for all the four points</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>all_correct_input</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>1</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.25</truescore>
+        <truepenalty/>
+        <truenextnode>3</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Bottom-Left Corner: Correct! You dragged this corner to the correct position.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Bottom-Left Corner: Incorrect position.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.25</truescore>
+        <truepenalty/>
+        <truenextnode>4</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Bottom-Right Corner: Correct! You dragged this corner to the correct position.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>4</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Bottom-Right Corner: Incorrect position.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>4</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ta3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.25</truescore>
+        <truepenalty/>
+        <truenextnode>5</truenextnode>
+        <trueanswernote>prt1-5-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Top-Right Corner: Correct! You dragged this corner to the correct position.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>5</falsenextnode>
+        <falseanswernote>prt1-5-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Top-Right Corner: Incorrect position.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>5</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>ta4</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.25</truescore>
+        <truepenalty/>
+        <truenextnode>6</truenextnode>
+        <trueanswernote>prt1-6-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Top-Left Corner: Correct! You dragged this corner to the correct position.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>6</falsenextnode>
+        <falseanswernote>prt1-6-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Top-Left Corner: Incorrect position.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>6</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>[ans1, ans2, ans3, ans4]</sans>
+        <tans>wa_inverse</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>7</truenextnode>
+        <trueanswernote>prt1-7-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You seem to have moved the rectangle in the opposite direction. Check the signs of your vector components.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>7</falsenextnode>
+        <falseanswernote>prt1-7-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>7</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>[ans1, ans2, ans3, ans4]</sans>
+        <tans>wa_x_only</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt1-8-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p> You seem to have only translated the shape horizontally. Don't forget the vertical change!</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-8-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>875449681</deployedseed>
+    <deployedseed>1176380979</deployedseed>
+    <deployedseed>2079919030</deployedseed>
+    <deployedseed>1043479488</deployedseed>
+    <deployedseed>141769569</deployedseed>
+    <deployedseed>2020453447</deployedseed>
+    <deployedseed>1103716575</deployedseed>
+    <deployedseed>768122141</deployedseed>
+    <deployedseed>1457692502</deployedseed>
+    <deployedseed>329571510</deployedseed>
+    <deployedseed>1900445278</deployedseed>
+    <deployedseed>2010647117</deployedseed>
+    <deployedseed>83073192</deployedseed>
+    <deployedseed>2115142537</deployedseed>
+    <deployedseed>1968072153</deployedseed>
+    <deployedseed>1561312920</deployedseed>
+    <deployedseed>878769265</deployedseed>
+    <deployedseed>1580911570</deployedseed>
+    <deployedseed>21658533</deployedseed>
+    <deployedseed>1962023223</deployedseed>
+    <deployedseed>414421083</deployedseed>
+    <deployedseed>1127477257</deployedseed>
+    <deployedseed>312982269</deployedseed>
+    <deployedseed>1032531838</deployedseed>
+    <deployedseed>1949583525</deployedseed>
+    <deployedseed>844169218</deployedseed>
+    <deployedseed>1679298889</deployedseed>
+    <deployedseed>443558948</deployedseed>
+    <deployedseed>1436652306</deployedseed>
+    <deployedseed>1883279905</deployedseed>
+    <deployedseed>1573251518</deployedseed>
+    <deployedseed>1271253245</deployedseed>
+    <deployedseed>659577348</deployedseed>
+    <deployedseed>1342730735</deployedseed>
+    <deployedseed>837353338</deployedseed>
+    <deployedseed>1246266620</deployedseed>
+    <deployedseed>334020564</deployedseed>
+    <deployedseed>456647037</deployedseed>
+    <deployedseed>1092210920</deployedseed>
+    <deployedseed>557496613</deployedseed>
+    <deployedseed>434209066</deployedseed>
+    <deployedseed>582301008</deployedseed>
+    <deployedseed>1149206090</deployedseed>
+    <deployedseed>2111071488</deployedseed>
+    <deployedseed>22577705</deployedseed>
+    <deployedseed>1428433046</deployedseed>
+    <deployedseed>228822875</deployedseed>
+    <deployedseed>946739903</deployedseed>
+    <deployedseed>185910551</deployedseed>
+    <deployedseed>1439685916</deployedseed>
+  </question>
+</quiz>

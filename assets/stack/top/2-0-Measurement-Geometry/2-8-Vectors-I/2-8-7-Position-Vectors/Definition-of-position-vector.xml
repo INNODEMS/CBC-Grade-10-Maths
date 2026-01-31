@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Definition of position vector</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>{@q_text@}</p>
+<p>[[input:ans1]] [[validation:ans1]]</p>
+<p>[[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</p>
+<p>A <b>position vector</b> describes the position of a point relative to the origin. Therefore, it is fixed to start at \((0,0)\).</p>
+<p>Other vectors (free vectors) are defined only by length and direction and can be moved anywhere in space.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* 1. SCENARIO & CORRECT ANSWER SETUP */
+/* Define the scenarios (Questions) and their matching correct answer */
+scenarios: [
+  ["Which of the following best describes a <b>position vector</b>?", "A vector which always starts at the origin of the coordinate system."],
+  ["Select the definition that correctly describes a <b>position vector</b>.", "A vector which always starts at the origin of the coordinate system."]
+];
+
+/* Pick a random scenario (in case you want to vary the wording) */
+rand_idx: rand(length(scenarios)) + 1;
+chosen_scenario: scenarios[rand_idx];
+
+q_text: chosen_scenario[1];
+correct_text: chosen_scenario[2];
+
+/* 2. DISTRACTOR SETUP */
+/* Master list of all possible vector definitions (Correct + Distractors) */
+all_defs: [
+    "A vector which always starts at the origin of the coordinate system.", 
+    "A vector which may be translated to any point in space provided their direction and length remain unchanged.", 
+    "A vector whose length may change as long as its direction remains the same.", 
+    "A vector whose direction may change as long as its length stays the same.",
+    "A vector having magnitude zero and undefined direction."
+];
+
+/* Filter out the correct answer to ensure distractors are actually wrong */
+/* This ensures 'correct_text' is never in the 'wrong_pool' */
+wrong_pool: sublist(all_defs, lambda([x], x # correct_text));
+
+/* Shuffle the wrong pool so we get random distractors every time */
+shuffled_wrongs: random_permutation(wrong_pool);
+
+/* 3. BUILD THE ANSWER LIST */
+
+/* Correct Answer Block: ID 1, Boolean TRUE, Text */
+correct_answer: rand_selection([
+   [1, true, correct_text]
+], 1);
+
+/* Incorrect Answers Block: ID 2-4, Boolean FALSE, Text (picked from shuffled pool) */
+/* We pick the top 3 from the shuffled list to serve as distractors */
+incorrect_answers: rand_selection([
+   [2, false, shuffled_wrongs[1]],
+   [3, false, shuffled_wrongs[2]],
+   [4, false, shuffled_wrongs[3]]
+], 3);
+
+/* 4. FINAL PERMUTATION */
+/* Combine correct and incorrect blocks and shuffle them into the final list 'ta' */
+ta: random_permutation(append(correct_answer, incorrect_answers));
+
+/* 5. INPUT HELPER */
+/* Extract just the text strings for the STACK Radio Button list display */
+final_options: map(third, ta);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Daniel Murunga</p>
+<p id="concept"></p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+<p id="description"></p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>radio</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options>nonotanswered</options>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mcq_correct(ta)[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>269746825</deployedseed>
+    <deployedseed>935783794</deployedseed>
+    <deployedseed>1342006680</deployedseed>
+    <deployedseed>879191236</deployedseed>
+    <deployedseed>87392176</deployedseed>
+    <deployedseed>268411857</deployedseed>
+    <deployedseed>229102633</deployedseed>
+    <deployedseed>987629621</deployedseed>
+    <deployedseed>224932665</deployedseed>
+    <deployedseed>2077186654</deployedseed>
+  </question>
+</quiz>

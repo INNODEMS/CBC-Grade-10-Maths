@@ -6,68 +6,36 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>Find the area of the figure below, centered at O, and round your answer to the nearest \(\textbf{whole number}\).</p>
-<p>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <script src="https://jsxgraph.org/distrib/jsxgraphcore.js"></script>
-  <link rel="stylesheet" href="https://jsxgraph.org/distrib/jsxgraph.css" />
-</head>
-<body>
-  <div id="box" style="width: 500px; height: 500px;"></div>
-  <script>
-    var board = JXG.JSXGraph.initBoard('box', {
-      boundingbox: [-40, 40, 40, -40],
-      axis: false, showCopyright: false
-    });
 
-    // Centre point O
-    var O = board.create('point', [0, 0], {name: 'O', fixed: true,visible: false});
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-6, 6, 6, -6],
+    axis: true,
+    showCopyright: false
+});
 
-    // Draw pentagon vertices manually using radius 25.5 cm
-    var A = board.create('point', [0, 25.5], {visible: false});
-    var B = board.create('point', [24.2, 7.9], {visible: false});
-    var C = board.create('point', [14.8, -20.6], {visible: false});
-    var D = board.create('point', [-14.8, -20.6], {visible: false});
-    var E = board.create('point', [-24.2, 7.9], {visible: false});
+/* Centre */
+var C = board.create('point', [{@cx@}, {@cy@}], {
+    name: 'C',
+    fixed: true
+});
 
-    // Draw pentagon
-    var pentagon = board.create('polygon', [A, B, C, D, E], {
-      borders: {strokeColor: 'black'},
-      fillColor: 'none'
-    });
+/* First vertex */
+var A = board.create('point', [
+    {@cx@} + {@R@},
+    {@cy@}
+], {
+    name: 'A',
+    fixed: true
+});
 
-    // Draw radius line (25.5 cm) from centre to vertex C
-    var radiusLine = board.create('line', [O, C], {straightFirst: false, straightLast: false, strokeColor: 'black'});
-    
+/* Regular pentagon */
+var pentagon = board.create('regularpolygon', [C, A, 5], {
+    withLines: true,
+    withVertices: true
+});
+[[/jsxgraph]]
 
-    // Draw radius line (25.5 cm) from centre to vertex B
-    var radiusLine = board.create('line', [O, B], {straightFirst: false, straightLast: false, strokeColor: 'black'});
-    board.create('text', [-1, -10, "{#slant#} cm"], {fontSize: 12,fixed: true});
-    board.create('text', [-0.2, 2, "O"], {fontSize: 12,fixed: true});
-
-    // Draw side base (approx 30 cm) between B and E
-    var base = board.create('segment', [B, C], {strokeColor: 'black'});
-    board.create('text', [B.X() , B.Y() -15, "{#base_length#} cm"], {fontSize: 12,fixed: true});
-
-    // Draw perpendicular height from O to base BC
-     // Draw perpendicular height from O to base BC
-    var midpoint = board.create('midpoint', [B, C], {visible: false});
-    var heightLine = board.create('segment', [O, midpoint], {strokeColor: 'black', dash: 1});
-
-    // Draw right angle marker without alpha symbol
-    var rightAngle = board.create('nonreflexangle', [B, midpoint, O], {
-      radius: 3,
-      type: 'square',
-      name: '',fixed: true
-    });
-
-  </script>
-</body>
-</html>
-
-</p>
 
 
 <p>\(\text{Area} =\)[[input:ans1]]\(\text{cm}^2\) [[feedback:prt1]]</p>
@@ -127,13 +95,13 @@ h&=\sqrt{{@height_1@}}\\
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text><![CDATA[/* Title: Random Pentagon Area Calculator with Expanded Range */
 
 /* Generate random base_length divisible by 10 between 20 and 200 (20 options) */
-base_length : 10 * (rand(25) + 2); /* random(19)+2 ensures minimum 20 */
+base_length : 10 * (rand(20) + 2); /* random(19)+2 ensures minimum 20 */
 
 /* Calculate maximum possible slant height (less than base_length, greater than half_base) */
 half_base : base_length / 2;

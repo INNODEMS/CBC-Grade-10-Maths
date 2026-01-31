@@ -5,41 +5,60 @@
       <text>Applying the product law of indices</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>During a digital photography session, a camera stores images in groups. One group contains \({@base@}^{@exp1@}\) image patterns and another contains \({@base@}^{@exp2@}\) patterns.</p>
+      <text><![CDATA[<p>The Agriculture Club is doing mango processing and is making mango juice. Each jar of mango juice needs \({@base@}^{@exp1@}\) mangoes. The group makes \({@base@}^{@exp2@}\) jars of mango juice.</p>
 
-<p>Write the total number of patterns in index form.</p>
+<p>How many mangoes are needed in total?
+Write your answer as a <strong>single power</strong>, in index form.
+</p>
 
-<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+<p>
+[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
 
-<p>We use the product law of indices:</p>
+<p>
+The total number of mangoes is found by multiplying the number of mangoes per jar by the number of jars.
+</p>
 
-<p>\[
-a^m \times a^n = a^{m+n}.
-\]</p>
+<p>
+We use the product law of indices:
+</p>
 
-<p>Here, the base \({@base@}\) is the same in both terms.</p>
-
-<p>So,</p>
-
-<p>\[
-{@base@}^{@exp1@} \times {@base@}^{@exp2@} 
-= {@base@}^{@exp1 + exp2@}.
-\]</p>
-
-<p>Thus the simplified expression is:
+<p>
 \[
-{@base@}^{@exp_total@}.
-\]</p>]]></text>
+a^m \times a^n = a^{m+n}
+\]
+</p>
+
+<p>
+So,
+</p>
+
+<p>
+\[
+{@base@}^{@exp1@} \times {@base@}^{@exp2@}
+= {@base@}^{@exp1 + exp2@}
+\]
+</p>
+
+<p>
+Therefore, the total number of mangoes needed is:
+</p>
+
+<p>
+\[
+\boxed{{@base@}^{@exp_total@}}
+\]
+</p>]]></text>
     </generalfeedback>
     <defaultgrade>2</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>/* Random base and exponents */
@@ -50,20 +69,20 @@ exp2: rand([1,2,3,4]);
 /* Correct simplified exponent */
 exp_total: exp1 + exp2;
 
-/* Full expression before simplification */
+/* Original expression */
 expr: base^exp1 * base^exp2;
 
 /* Common student mistakes */
-m1: base^(exp1*exp2);     /* multiplies exponents instead of adding */
-m2: (base^exp1) + (base^exp2);  /* adds powers instead of multiplying */
-m3: base^(exp1 - exp2);   /* subtracts instead of adding */
+m1: base^(exp1*exp2);        /* multiplies exponents */
+m2: base^exp1 + base^exp2;  /* adds instead of multiplying */
+m3: base^(exp1 - exp2);     /* subtracts exponents */
 </text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>Expression: {@expr@}</p>
+      <text><![CDATA[<p>Original expression: {@expr@}</p>
 <p>Total exponent: {@exp_total@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
@@ -72,9 +91,7 @@ m3: base^(exp1 - exp2);   /* subtracts instead of adding */
 <p id="reviewer"></p>
 <p id="reviewer"></p>
 
-<p id="description">
-The question requires the learner to apply the product law of indices to simplify an expression by adding the exponents of terms that share the same base.
-</p>]]></text>
+<p id="description"> This question helps learners apply the product law of indices in a real-life situation by finding the total number of items expressed using powers.</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -143,8 +160,83 @@ The question requires the learner to apply the product law of indices to simplif
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Mistake1</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You multiplied the exponents. When bases are the same, we add exponents.</text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Mistake2</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You added the powers instead of multiplying them</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Mistake3</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You used subtraction to arrive to your answer. Subtraction is used when dividing, not multiplying.</text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -167,6 +259,14 @@ The question requires the learner to apply the product law of indices to simplif
     <deployedseed>809444564</deployedseed>
     <deployedseed>1264279383</deployedseed>
     <deployedseed>2073465178</deployedseed>
+    <deployedseed>1579859510</deployedseed>
+    <deployedseed>307554636</deployedseed>
+    <deployedseed>638799585</deployedseed>
+    <deployedseed>2141287681</deployedseed>
+    <deployedseed>6227094</deployedseed>
+    <deployedseed>570461657</deployedseed>
+    <deployedseed>1354425370</deployedseed>
+    <deployedseed>68949546</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>

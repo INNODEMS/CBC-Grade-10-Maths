@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating position and displacement Vectors</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Consider the two points \( A \) and \( B \) shown on the coordinate plane below.</p>
+<p>Use the diagram to determine their coordinates and then answer the questions.</p>
+
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-7, 7, 7, -7],
+    axis: true,
+    showCopyright: false,
+    defaultAxes: {
+        x: {
+            ticks: {
+                distance: 1,      /* Force numbers every 1 unit */
+                majorHeight: 10,  /* Length of the tick mark */
+                minorTicks: 0     /* No small ticks between integers */
+            }
+        },
+        y: {
+            ticks: {
+                distance: 1,
+                majorHeight: 10,
+                minorTicks: 0
+            }
+        }
+    },
+    grid: {
+        gridX: 1,  /* Vertical grid lines every 1 unit */
+        gridY: 1   /* Horizontal grid lines every 1 unit */
+    }
+});
+
+/* Define Origin */
+var O = board.create('point', [0,0], {name:'O', fixed:true, size:1, color:'black'});
+
+/* Define Points A and B (Integers) */
+var A = board.create('point', [{#ax#}, {#ay#}], {name:'A', fixed:true, color:'blue', snapToGrid:true});
+var B = board.create('point', [{#bx#}, {#by#}], {name:'B', fixed:true, color:'red', snapToGrid:true});
+
+/* Draw Position Vectors (Dashed lines from Origin) */
+var posA = board.create('arrow', [O, A], {strokeColor:'blue', dash:2, strokeWidth:1});
+var posB = board.create('arrow', [O, B], {strokeColor:'red', dash:2, strokeWidth:1});
+
+/* Draw Vector AB (Solid line) */
+var vecAB = board.create('arrow', [A, B], {strokeColor:'green', strokeWidth:2});
+
+/* Label vector AB */
+board.create('text', [function(){return (A.X()+B.X())/2;}, function(){return (A.Y()+B.Y())/2 + 0.5;}, "\\(\\vec{AB}\\)"], {fontSize:15, color:'green'});
+[[/jsxgraph]]
+<br>
+
+<p><b>(a)</b> Write down the position vector of point \( A \) (denoted as \(\vec{a}\) or \(\vec{OA}\)).</p>
+<div>\( \vec{OA} = \) [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</div>
+
+<p><b>(b)</b> Write down the position vector of point \( B \) (denoted as \(\vec{b}\) or \(\vec{OB}\)).</p>
+<div>\( \vec{OB} = \) [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]</div>
+
+<p><b>(c)</b> Hence, calculate the vector \( \vec{AB} \).</p>
+<div>\( \vec{AB} = \) [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</div>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>First, we read the coordinates from the graph:</p>
+<ul>
+    <li>Point \(A\) is at <b>({@ax@}, {@ay@})</b>.</li>
+    <li>Point \(B\) is at <b>({@bx@}, {@by@})</b>.</li>
+</ul>
+
+<p><b>(a) & (b) Position Vectors:</b></p>
+<p>The position vector is simply the coordinates written as a column vector:</p>
+\( \vec{OA} = \begin{pmatrix} {@ax@} \\ {@ay@} \end{pmatrix}, \quad \vec{OB} = \begin{pmatrix} {@bx@} \\ {@by@} \end{pmatrix} \)
+
+<p><b>(c) Displacement Vector:</b></p>
+<p>To find the vector from \(A\) to \(B\), we subtract the start position from the end position:</p>
+\( \vec{AB} = \vec{OB} - \vec{OA} = \begin{pmatrix} {@bx@} \\ {@by@} \end{pmatrix} - \begin{pmatrix} {@ax@} \\ {@ay@} \end{pmatrix} = \begin{pmatrix} {@vec_ab_x@} \\ {@vec_ab_y@} \end{pmatrix} \)]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. Generate Random Coordinates (Integers) */
+/* Range -5 to 5 ensures they fit well on a -6 to 6 grid */
+ax: rand_with_step(-5, 5, 1);
+ay: rand_with_step(-5, 5, 1);
+
+bx: rand_with_step(-5, 5, 1);
+by: rand_with_step(-5, 5, 1);
+
+/* Safety check: ensure points are distinct */
+bx: if (bx=ax and by=ay) then bx+2 else bx;
+
+/* 2. Define Answers as MATRICES */
+ta_pos_a: matrix([ax], [ay]);
+ta_pos_b: matrix([bx], [by]);
+
+/* Vector AB = b - a */
+vec_ab_x: bx - ax;
+vec_ab_y: by - ay;
+ta_vec_ab: matrix([vec_ab_x], [vec_ab_y]);
+
+/* 3. Wrong Answers for Feedback */
+wa_rev: matrix([ax - bx], [ay - by]);
+wa_sum: matrix([ax + bx], [ay + by]);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\({@ta_pos_a@} {@ta_pos_b@} {@ta_vec_ab@} \)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>matrix</type>
+      <tans>ta_pos_a</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>matrix</type>
+      <tans>ta_pos_b</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>matrix</type>
+      <tans>ta_vec_ab</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta_pos_a</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta_pos_b</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ta_vec_ab</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1565780573</deployedseed>
+    <deployedseed>1593720427</deployedseed>
+    <deployedseed>182579854</deployedseed>
+    <deployedseed>1350708151</deployedseed>
+    <deployedseed>203339760</deployedseed>
+    <deployedseed>1407806821</deployedseed>
+    <deployedseed>219816830</deployedseed>
+    <deployedseed>2050729905</deployedseed>
+    <deployedseed>533727594</deployedseed>
+    <deployedseed>232688524</deployedseed>
+    <deployedseed>481240310</deployedseed>
+    <deployedseed>500821104</deployedseed>
+    <deployedseed>632951240</deployedseed>
+    <deployedseed>1026568996</deployedseed>
+    <deployedseed>682098651</deployedseed>
+    <deployedseed>1714686057</deployedseed>
+    <deployedseed>831030975</deployedseed>
+    <deployedseed>1250147111</deployedseed>
+    <deployedseed>574655295</deployedseed>
+    <deployedseed>1753546574</deployedseed>
+    <deployedseed>575950567</deployedseed>
+  </question>
+</quiz>
