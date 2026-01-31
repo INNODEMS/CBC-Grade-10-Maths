@@ -95,7 +95,7 @@ To contribute to or work on this project, you can use any of the options  below:
 
 ## License
 
-This project is licensed under the [Creative commons by non-commercial license](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+This project is licensed under the [Creative commons attribution non-commercial share-alike license](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 ## Contact
 
