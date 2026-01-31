@@ -1,5 +1,89 @@
 <stack-static>
-    <statement><p>Go to the online version of this book to view this question.</p></statement>
-    <!-- <solution><p></p></solution> -->
-    <!-- <answer><p></p></answer> -->
+<statement><div><p>Look at the cube shown below. Each edge of the cube measures <m>{7}</m> <m>\text{cm}</m>.</p>
+
+
+
+
+  <title>Sector OAB</title>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css"/>
+
+
+
+    <div id="box" class="jxgbox" style="width: 500px; height: 500px;"/>
+    <script type="text/javascript">
+        const board = JXG.JSXGraph.initBoard('box', {
+            boundingbox: [-2, 5, 5, -2], showCopyright: false,
+            
+            axis: false, showNavigation: false, keepAspectRatio:true
+        });
+
+        const side = 2.5;
+
+        // Define points
+        let A = board.create('point', [0, 0], {visible: false});
+        let B = board.create('point', [side, 0], {visible: false});
+        let C = board.create('point', [side, side], {visible: false});
+        let D = board.create('point', [0, side], {visible: false});
+
+        let A1 = board.create('point', [0.8, 1], {visible: false});
+        let B1 = board.create('point', [side + 0.8, 1], {visible: false});
+        let C1 = board.create('point', [side + 0.8, side + 1], {visible: false});
+        let D1 = board.create('point', [0.8, side + 1], {visible: false});
+
+        // Create edges
+        board.create('polygon', [A, B, C, D], {borders: {strokeColor: 'blue'}});
+        board.create('polygon', [A1, B1, C1, D1], {borders: {strokeColor: 'blue'}});
+        board.create('line', [A, A1], {straightFirst: false, straightLast: false, strokeColor: 'blue'});
+        board.create('line', [B, B1], {straightFirst: false, straightLast: false, strokeColor: 'blue'});
+        board.create('line', [C, C1], {straightFirst: false, straightLast: false, strokeColor: 'blue'});
+        board.create('line', [D, D1], {straightFirst: false, straightLast: false, strokeColor: 'blue'});
+
+        // Label the 3 visible edges with 13 cm
+        board.create('text', [1.2, -0.2, "7 cm"]);
+        board.create('text', [3.5, 2, "7 cm"]);
+        board.create('text', [3, 0.4, "7 cm"]);
+    </script>
+
+
+
+
+
+
+<p>Calculate the total surface area of the cube in:</p>
+<p/><ol type="a"><li><p><m>\text{Square centimeters} =</m><fillin characters="9" name="ans1"/><m>\text{cm}^2</m> </p></li>
+<li><m>\text{Square meters}=</m><fillin characters="9" name="ans2"/><m>\text{m}^2</m> </li></ol>
+<p/>
+
+
+
+
+<p hidden=""/></div></statement>
+<solution><div><p>Given the side = <m>{7}</m> <m>\text{cm}</m>:</p>
+<p>Surface Area (SA) of a cube = 6 × (side)² or <m>5 l^2</m> where <m>l</m> is the side of the cube.</p>
+<p>Substitute the value in the formula of the cube.</p>
+<p><md>
+<mrow>\text{SA} \amp =6 \times {7}^2</mrow>
+<mrow>\amp = 6 \times  ({7} \times  {7})</mrow>
+<mrow>\amp = 6 \times  {7}</mrow>
+<mrow>\amp = {294}\, \text{cm}^2</mrow>
+</md></p>
+
+<p>Convert cm² to m²</p>
+<p>Since:</p>
+<p> <m>1\, \text{m}^2= 10\,000 \, \text{cm}^2</m></p>
+<p>Therefore,</p>
+
+<p><md>
+<mrow>\text{Surface Area in} \, \text{m}^2  \amp = \frac{{294}}{10\,000  }</mrow>
+<mrow>\amp = {\frac{147}{5000}} \, \text{m}^2</mrow>
+</md></p>
+<p>Which can be simplified as, <m>{0.0294}</m> <m>\text{m}^2</m></p>
+
+
+<p>The surface of the cube in</p>
+<p/><ol type="a"><li><m>\text{Square centimeters}= </m><m>{294}</m> <m>\text{cm}^2</m></li>
+<li><m>\text{Square meters }= </m><m>{\frac{147}{5000}}</m> <m>\text{m}^2</m> or <m>{0.0294}</m> <m>\text{m}^2</m></li></ol></div></solution>
+<answer><p><m>294</m></p></answer>
+<answer><p><m>0.0294</m></p></answer>
 </stack-static>

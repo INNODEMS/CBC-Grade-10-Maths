@@ -1,5 +1,133 @@
 <stack-static>
-    <statement><p>Go to the online version of this book to view this question.</p></statement>
-    <!-- <solution><p></p></solution> -->
-    <!-- <answer><p></p></answer> -->
+<statement><div><p>The figure below represents a building block with dimensions. </p>
+
+
+
+
+  <title>Sector OAB</title>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css"/>
+
+
+
+    <link rel="stylesheet" href="https://jsxgraph.org/distrib/jsxgraph.css"/>
+    <script src="https://jsxgraph.org/distrib/jsxgraphcore.js"/>
+    
+    <div id="box" class="jxgbox" style="width: 500px; height: 400px;"/>
+    <script type="text/javascript">
+        var board = JXG.JSXGraph.initBoard('box', {
+            boundingbox: [-5, 15, 20, -5],
+            axis: false,
+            showNavigation: false,
+            showCopyright: false
+        });
+        
+        // Front face (12 cm x 4 cm)
+        var A = board.create('point', [2, 2], { visible: false ,fixed:true });
+        var B = board.create('point', [14, 2], { visible: false  ,fixed:true });
+        var C = board.create('point', [14, 6], { visible: false  ,fixed:true });
+        var D = board.create('point', [2, 6], { visible: false  ,fixed:true });
+        
+        // Back face (shifted for 3D effect)
+        var E = board.create('point', [5, 5], { visible: false ,fixed:true });
+        var F = board.create('point', [17, 5], { visible: false  ,fixed:true });
+        var G = board.create('point', [17, 9], { visible: false  ,fixed:true });
+        var H = board.create('point', [5, 9], { visible: false ,fixed:true  });
+        
+        // Draw front and back faces
+        var frontFace = board.create('polygon', [A, B, C, D], { borders: { strokeColor: 'blue' ,fixed:true } });
+        var backFace = board.create('polygon', [E, F, G, H], { borders: { strokeColor: 'blue' ,fixed:true } });
+        
+        // Connect front and back faces with solid lines
+        board.create('line', [A, E], { straightFirst: false, straightLast: false, strokeColor: 'blue' ,fixed:true });
+        board.create('line', [B, F], { straightFirst: false, straightLast: false, strokeColor: 'blue' ,fixed:true });
+        board.create('line', [C, G], { straightFirst: false, straightLast: false, strokeColor: 'blue' ,fixed:true });
+        board.create('line', [D, H], { straightFirst: false, straightLast: false, strokeColor: 'blue' ,fixed:true });
+        
+        // Labels for dimensions
+        board.create('text', [(A.X() + B.X()) / 2, A.Y() - 0.8, "33 cm"],{fixed:true });
+        board.create('text', [B.X() +2.3, (B.Y() + C.Y()) / 2, "39 cm"],{fixed:true });
+        board.create('text', [(G.X() + F.X()) / 2 +0.5, (G.Y() + F.Y()) / 2 + 0.9, "26 cm"],{fixed:true });
+    </script>
+    
+    
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+<p/><ol type="a"><li><p>Calculate the volume of the block.</p>
+<p><m>\text{Volume}=</m><fillin characters="9" name="ans1"/> <m>\text{cm}^3</m> </p></li>
+<li><p>Calculate the total surface area of the block.</p>
+<p><m>\text{Surface area}=</m><fillin characters="9" name="ans2"/> <m>\text{cm}^2</m> </p></li>
+<li><p>If <m>{10}</m> such blocks are packed together to form a large cube-shaped structure, what is the total volume of the structure?</p>
+<p><m>\text{Total volume}=</m><fillin characters="9" name="ans3"/> <m>\text{cm}^2</m> </p></li></ol>
+
+
+
+
+
+
+<p hidden="">   </p></div></statement>
+<solution><div><p>Given:</p>
+<p>A building block has:</p>
+<p/><ul><li><m>\text{Length}={33}\,\text{cm}</m></li>
+<li><m>\text{Width}={39}\,\text{cm}</m></li>
+<li><m>\text{Height}={26}\,\text{cm}</m></li></ul>
+<p>There are <m>{10}</m> such identical blocks.</p>
+<p/><ol type="a"><li><p>Find the volume of one block</p>
+<p>We use the formula for the volume of a cuboid:</p>
+<p><m>\text{Volume}= \text{Length}\times \text{Width} \times \text{Height}</m></p>
+
+
+
+<p>Where:</p>
+<p><m>l={33}\,\text{cm}</m></p>
+<p><m>w={39}\,\text{cm}</m></p>
+<p><m>h={26}\,\text{cm}</m></p>
+
+<p>Substitute the given values:</p>
+<p><md>
+<mrow>\text{Volume} \amp = {33} \times {39} \times {26}</mrow>
+<mrow>\amp ={33462}\,\text{cm}^3</mrow>
+</md></p>
+<p>Therefore,</p><p>The volume of the building block <m>= {\color{blue}{33462}}\,\text{cm}^3</m></p></li>
+
+
+<li><p>Find the total surface area of one block</p>
+<p>The surface area of a cuboid is calculated using:</p>
+<p><m>\text{Surface Area}=2(lw+wh+hl)</m></p>
+
+<p><md>
+<mrow>\text{Surface Area} \amp = 2\left (  ({33} \times {39}) +({39} \times {26})+({33} \times {33}) \right )</mrow>
+<mrow>\amp = 2({1287}+{1014}+{858})</mrow>
+<mrow>\amp =2 \times {3159}</mrow>
+<mrow>\amp = {6318}\,\text{cm}^2</mrow>
+</md></p>
+<p>Therefore,</p>
+<p>The surface area of the building block is <m>{\color{blue} {6318} }\,\text{cm}^2 </m></p>
+</li>
+<li><p>Find the total volume of all <m>{10}</m> blocks</p>
+<p>We already found the volume of one block is: <m>= {\color{blue}{33462}}\,\text{cm}^3</m></p>
+<p>Now multiply by the number of blocks:</p>
+<p><md>
+<mrow>\text{Total Volume}\amp ={33462} \times {10}</mrow>
+<mrow>\amp ={334620}\,\text{cm}^3</mrow>
+</md></p>
+<p>Therefore,</p>
+<p><m>\text{Total volume of }\, {10} \, \text{blocks}= {\color{blue} {334620}} \, \text{cm}^3</m></p></li></ol></div></solution>
+<answer><p><m>33462</m></p></answer>
+<answer><p><m>6318</m></p></answer>
+<answer><p><m>334620</m></p></answer>
 </stack-static>
