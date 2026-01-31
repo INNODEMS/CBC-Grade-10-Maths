@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the conditional probability of independent events</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Assume that a noisy channel independently transmits symbols, say \(0s\) \({@aa@}\)% of the time and \(1s\) \({@bb@}\)% of the time. At the receiver, there is a \({@cc@}\)% chance of obtaining any particular symbol distorted. What is the probability of receiving a \(1\), irrespective of which symbol is transmitted?
+</p><p>[[input:ans1]] [[validation:ans1]][[feedback:prt1]]
+(Give your answer in two decimal places)</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>Worked solution</p>
+<p>Given that;</p>
+<p>Probability \(0s \, \text{transmitted}\), \(P(0)\) is \({@p_0@}\)</p>
+<p>Probability \(1s \, \text{transmitted}\), \(P(1)\) is \({@p_1@}\)</p
+<p>\(P(1 \, \text{received} \,| \,0\, \text{transmitted}), \, P(1|0)\) is \({@p_1_0@}\)</p>
+<p>Hence, the probability of receiving a zero is</p>
+<p>
+\(
+\begin{align}
+P(1) &= P(1 \, \text{received}) \\
+       &= P(1|0)\cdot P(0)+P(1|1)\cdot P(1) \\
+       &= ({@p_1_0@})\cdot ({@p_0@})+(1-{@p_1_0@})\cdot ({@p_1@}) \\
+       &= ({@p_1_0@}\cdot {@p_0@})+({@1-p_1_0@}\cdot {@p_1@}) \\
+       &={@ta@}
+\end{align}
+\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2022071300</text>
+    </stackversion>
+    <questionvariables>
+      <text>/*Defining question variables*/
+aa:rand(70)+20;/*percentage time of 0s*/
+bb:100-aa;/*percentage time of 1s*/
+cc:rand(5)+1;/*percentage chance of obtaining any particular symbol distorted*/
+dd:aa/100;
+p_0:decimalplaces(float(dd),2);/*p('0' is transmitted)*/
+ee:bb/100;
+p_1:decimalplaces(float(ee),2);/*p('1' is transmitted)*/
+ff:cc/100;
+p_1_0:decimalplaces(float(ff),2);/*p(1 is received|0 is transmitted)*/
+gg:(100-cc)/100;
+p_1_1:decimalplaces(float(gg),2);/*p(1 is received|1 is transmitted)*/
+p_r1:(p_1_0*p_0)+(p_1_1*p_1);/*p(receive 1)*/
+
+/*Model answer*/
+ta:decimalplaces(p_r1,2);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="moodle_auto_format">
+      <text><![CDATA[<p>Assume that a noisy channel independently transmits symbols,say \(0s \quad {@aa@}\)% of the time and \(1s \quad {@bb@}\)% of the time.At the receiver,there is a \({@cc@}\)% chance of obtaining any particular symbol distorted.What is the probability of receiving a \(1\), irrespective of which symbol is transmitted?={@ta@}]]></text>
+    </questionnote>
+    <questiondescription format="moodle_auto_format">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>dot</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>numerical</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>/*Node 1 checks for correct answer*/
+/*Node 2: mistake_ Finding the probability that 1 is transmitted*/
+mistake_2:p_1;</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake_2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You seem to have computed the probability that 1 is transmitted</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1638569649</deployedseed>
+    <deployedseed>857732058</deployedseed>
+    <deployedseed>95692247</deployedseed>
+    <deployedseed>571216670</deployedseed>
+    <deployedseed>1595751123</deployedseed>
+    <deployedseed>1769388477</deployedseed>
+    <deployedseed>1113493477</deployedseed>
+    <deployedseed>320714518</deployedseed>
+    <deployedseed>247722684</deployedseed>
+    <deployedseed>1915194517</deployedseed>
+    <deployedseed>1806699535</deployedseed>
+    <deployedseed>1605610109</deployedseed>
+    <deployedseed>2035819953</deployedseed>
+    <deployedseed>1129600390</deployedseed>
+    <deployedseed>1714899734</deployedseed>
+    <deployedseed>72231147</deployedseed>
+    <deployedseed>1605264755</deployedseed>
+    <deployedseed>932430476</deployedseed>
+    <deployedseed>722574912</deployedseed>
+    <deployedseed>1239038383</deployedseed>
+    <deployedseed>1980178274</deployedseed>
+    <deployedseed>513629911</deployedseed>
+    <deployedseed>1809935251</deployedseed>
+    <deployedseed>806771525</deployedseed>
+    <deployedseed>1352357805</deployedseed>
+    <deployedseed>1284479172</deployedseed>
+    <deployedseed>986872156</deployedseed>
+    <deployedseed>1519460451</deployedseed>
+    <deployedseed>669630824</deployedseed>
+    <deployedseed>2096123117</deployedseed>
+    <deployedseed>1024602873</deployedseed>
+    <deployedseed>1510795697</deployedseed>
+    <deployedseed>88796002</deployedseed>
+    <deployedseed>298615115</deployedseed>
+    <deployedseed>212333667</deployedseed>
+    <deployedseed>921095421</deployedseed>
+    <deployedseed>454054208</deployedseed>
+    <deployedseed>1325332027</deployedseed>
+    <deployedseed>885843575</deployedseed>
+    <deployedseed>854775987</deployedseed>
+    <deployedseed>615669238</deployedseed>
+    <deployedseed>1066781515</deployedseed>
+    <deployedseed>2019846351</deployedseed>
+    <deployedseed>1862224316</deployedseed>
+    <deployedseed>1048545568</deployedseed>
+    <deployedseed>360166264</deployedseed>
+    <deployedseed>260931254</deployedseed>
+    <deployedseed>1044544396</deployedseed>
+    <deployedseed>699198565</deployedseed>
+    <deployedseed>1561310745</deployedseed>
+    <deployedseed>91213072</deployedseed>
+    <deployedseed>1071549819</deployedseed>
+    <deployedseed>236244787</deployedseed>
+    <deployedseed>1033973020</deployedseed>
+    <deployedseed>1711416519</deployedseed>
+    <deployedseed>746209679</deployedseed>
+    <deployedseed>235426703</deployedseed>
+    <deployedseed>1157557990</deployedseed>
+    <deployedseed>1519988072</deployedseed>
+    <deployedseed>943117497</deployedseed>
+    <deployedseed>1803032161</deployedseed>
+    <deployedseed>1535426244</deployedseed>
+    <deployedseed>8319351</deployedseed>
+    <deployedseed>1281734933</deployedseed>
+    <deployedseed>236056993</deployedseed>
+    <deployedseed>1244195414</deployedseed>
+    <deployedseed>6547558</deployedseed>
+    <deployedseed>69584487</deployedseed>
+    <deployedseed>1634607745</deployedseed>
+    <deployedseed>893946465</deployedseed>
+    <deployedseed>2031281257</deployedseed>
+    <deployedseed>967715848</deployedseed>
+    <deployedseed>359030953</deployedseed>
+    <deployedseed>820248599</deployedseed>
+    <deployedseed>676720730</deployedseed>
+    <deployedseed>266810343</deployedseed>
+    <deployedseed>2045552695</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

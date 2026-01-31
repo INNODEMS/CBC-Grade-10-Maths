@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Sequential Translations of a Point</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A point \( M({@mx@}, {@my@}) \) undergoes a translation by the vector \( \begin{pmatrix} {@v1x@} \\ {@v1y@} \end{pmatrix} \).</p>
+<ol class="HELM_parts">
+    <li>
+        <p>Determine the coordinates of \( M' \), the transformed point.</p>
+       <div>\( M' = \) [[input:ans1]] [[validation:ans1]]</div>
+    </li>
+    <li>
+        <p>If \( M' \) is then translated by \( \begin{pmatrix} {@v2x@} \\ {@v2y@} \end{pmatrix} \), find the final position \( M'' \).</p>
+        <div>\( M'' = \) [[input:ans2]] [[validation:ans2]]</div>
+    </li>
+    <li>
+        <p>What is the single translation vector that maps \( M \) to \( M'' \) directly?</p>
+        <div>Vector = [[input:ans3]] [[validation:ans3]]</div>
+    </li>
+</ol>
+<p> [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p><b>Part (a): Finding M'</b></p>
+<p>To translate a point \(M(x, y)\) by a vector \(\begin{pmatrix} a \\ b \end{pmatrix}\), we add the vector components to the point's coordinates:</p>
+\[ M' = \begin{pmatrix} {@mx@} \\ {@my@} \end{pmatrix} + \begin{pmatrix} {@v1x@} \\ {@v1y@} \end{pmatrix} = \begin{pmatrix} {@mx@} + {@v1x@} \\ {@my@} + {@v1y@} \end{pmatrix} = \begin{pmatrix} {@m1x@} \\ {@m1y@} \end{pmatrix} \]
+<p>So, the coordinates of \( M' \) are \( ({@m1x@}, {@m1y@}) \).</p>
+
+<p><b>Part (b): Finding M''</b></p>
+<p>Now we translate \( M' \) by the second vector \(\begin{pmatrix} {@v2x@} \\ {@v2y@} \end{pmatrix}\):</p>
+\[ M'' = \begin{pmatrix} {@m1x@} \\ {@m1y@} \end{pmatrix} + \begin{pmatrix} {@v2x@} \\ {@v2y@} \end{pmatrix} = \begin{pmatrix} {@m1x@} + {@v2x@} \\ {@m1y@} + {@v2y@} \end{pmatrix} = \begin{pmatrix} {@m2x@} \\ {@m2y@} \end{pmatrix} \]
+<p>The final position is \( M''({@m2x@}, {@m2y@}) \).</p>
+
+<p><b>Part (c): Single Translation Vector</b></p>
+<p>The single translation vector that maps the start \(M\) directly to the end \(M''\) is the sum of the two individual translation vectors:</p>
+\[ \mathbf{v}_{total} = \mathbf{v}_1 + \mathbf{v}_2 \]
+\[ \mathbf{v}_{total} = \begin{pmatrix} {@v1x@} \\ {@v1y@} \end{pmatrix} + \begin{pmatrix} {@v2x@} \\ {@v2y@} \end{pmatrix} = \begin{pmatrix} {@v1x@} + {@v2x@} \\ {@v1y@} + {@v2y@} \end{pmatrix} = \begin{pmatrix} {@vtx@} \\ {@vty@} \end{pmatrix} \]
+<p>Alternatively, you can subtract the starting point from the end point:</p>
+\[ M'' - M = \begin{pmatrix} {@m2x@} \\ {@m2y@} \end{pmatrix} - \begin{pmatrix} {@mx@} \\ {@my@} \end{pmatrix} = \begin{pmatrix} {@vtx@} \\ {@vty@} \end{pmatrix} \]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. Define Starting Point M */
+mx: rand_with_step(-5, 5, 1);
+my: rand_with_step(-5, 5, 1);
+
+/* 2. Define First Translation Vector v1 */
+v1x: rand_with_step(2, 6, 1);
+v1y: rand_with_step(2, 6, 1);
+/* Randomly negate some values for variety */
+if rand([true,false]) then v1x: -v1x;
+if rand([true,false]) then v1y: -v1y;
+
+/* 3. Define Second Translation Vector v2 */
+v2x: rand_with_step(2, 6, 1);
+v2y: rand_with_step(2, 6, 1);
+if rand([true,false]) then v2x: -v2x;
+if rand([true,false]) then v2y: -v2y;
+
+/* --- CALCULATIONS --- */
+
+/* Part (a): Coordinates of M' */
+/* M' = M + v1 */
+m1x: mx + v1x;
+m1y: my + v1y;
+/* We store the answer as a column matrix to match standard vector input */
+ans_a: matrix([m1x],[m1y]);
+
+/* Part (b): Coordinates of M'' */
+/* M'' = M' + v2 */
+m2x: m1x + v2x;
+m2y: m1y + v2y;
+ans_b: matrix([m2x],[m2y]);
+
+/* Part (c): Single Translation Vector */
+/* V_total = v1 + v2 */
+vtx: v1x + v2x;
+vty: v1y + v2y;
+ans_c: matrix([vtx],[vty]);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Starting x-coordinate of M: {@mx@}</p>
+<p>Starting y-coordinate of M: {@my@}</p>
+
+<p>Translation Vector 1 (x-component): {@v1x@}</p>
+<p>Translation Vector 1 (y-component): {@v1y@}</p>
+
+<p>Translation Vector 2 (x-component): {@v2x@}</p>
+<p>Translation Vector 2 (y-component): {@v2y@}</p>
+
+<p>Intermediate Point M' (x-coordinate): {@m1x@}</p>
+<p>Intermediate Point M' (y-coordinate): {@m1y@}</p>
+<p>Answer for Part (a) (Matrix M'): {@ans_a@}</p>
+
+<p>Final Point M'' (x-coordinate): {@m2x@}</p>
+<p>Final Point M'' (y-coordinate): {@m2y@}</p>
+<p>Answer for Part (b) (Matrix M''): {@ans_b@}</p>
+
+<p>Total Translation Vector (x-component): {@vtx@}</p>
+<p>Total Translation Vector (y-component): {@vty@}</p>
+<p>Answer for Part (c) (Total Vector): {@ans_c@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>matrix</type>
+      <tans>ans_a</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>matrix</type>
+      <tans>ans_b</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>matrix</type>
+      <tans>ans_c</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>correct_answer : if ans1=ans_a  and ans2=ans_b  and ans3=ans_c then 1 else 0;
+
+/* --- COMMON MISTAKES --- */
+
+/* Mistake (a): Subtracted vector instead of added */
+/* Student calculates M - v1 */
+wa_a: matrix([mx - v1x], [my - v1y]);
+
+/* Mistake (b): Translated from original M instead of M' */
+/* Student calculates M + v2 (ignoring the first step) */
+wa_b: matrix([mx + v2x], [my + v2y]);
+
+/* Mistake (c): Reverse direction */
+/* Student calculates vector from M'' to M (signs flipped) */
+wa_c: matrix([-vtx], [-vty]);</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answers for all the inputs</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>correct_answer</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>1</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ans_a</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.333</truescore>
+        <truepenalty/>
+        <truenextnode>4</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>Your answer for \( M' \) is correct.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>wa_a</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>4</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p> Your answer for \( M' \) is <b>incorrect</b>. <br> It seems you subtracted the vector components from the point. To translate a point by a vector, you must add the corresponding components.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>4</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p> Your answer for \( M' \) is <b>incorrect</b></p>.]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>4</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ans_b</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.333</truescore>
+        <truepenalty/>
+        <truenextnode>6</truenextnode>
+        <trueanswernote>prt1-5-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>Your answer for the \( M'' \) is correct.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>5</falsenextnode>
+        <falseanswernote>prt1-5-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>5</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>wa_b</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>6</truenextnode>
+        <trueanswernote>prt1-6-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p> Your answer for \( M'' \) is <b>incorrect</b>. You might have applied the second translation to the original point (M). The question asks you to translate the transformed point \( (M') \) that you found in part (a). </p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>6</falsenextnode>
+        <falseanswernote>prt1-6-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p> Your answer for \( M'' \) is <b>incorrect</b></p>.]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>6</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ans_c</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.333</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-7-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><br>Your answer for single translation vector that maps \(𝑀\) to  \( M'' \) is correct.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>7</falsenextnode>
+        <falseanswernote>prt1-7-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>7</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>wa_c</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt1-8-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You might have found the vector with the correct magnitude, but the signs are opposite. This is the vector that maps \((M'')\) back to \((M)\). Check your direction.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-8-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p> Your answer is <b>Incorrect</b>.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1859469856</deployedseed>
+    <deployedseed>1391147369</deployedseed>
+    <deployedseed>312822246</deployedseed>
+    <deployedseed>1525591197</deployedseed>
+    <deployedseed>25919506</deployedseed>
+    <deployedseed>858331193</deployedseed>
+    <deployedseed>1270227943</deployedseed>
+    <deployedseed>250633576</deployedseed>
+    <deployedseed>1350617775</deployedseed>
+    <deployedseed>2089516083</deployedseed>
+    <deployedseed>1133866571</deployedseed>
+    <deployedseed>959020609</deployedseed>
+    <deployedseed>1219119446</deployedseed>
+    <deployedseed>331126974</deployedseed>
+    <deployedseed>1398710899</deployedseed>
+    <deployedseed>1200654860</deployedseed>
+    <deployedseed>1028386187</deployedseed>
+    <deployedseed>1996121774</deployedseed>
+    <deployedseed>516645051</deployedseed>
+    <deployedseed>224636193</deployedseed>
+    <deployedseed>932084217</deployedseed>
+    <deployedseed>1130423722</deployedseed>
+    <deployedseed>1921023784</deployedseed>
+    <deployedseed>389041614</deployedseed>
+    <deployedseed>229507757</deployedseed>
+    <deployedseed>1214595992</deployedseed>
+    <deployedseed>254661736</deployedseed>
+    <deployedseed>1770795285</deployedseed>
+    <deployedseed>646255345</deployedseed>
+    <deployedseed>1451369703</deployedseed>
+    <deployedseed>2103925661</deployedseed>
+    <deployedseed>1373409145</deployedseed>
+    <deployedseed>726850817</deployedseed>
+    <deployedseed>1230383882</deployedseed>
+    <deployedseed>2105127605</deployedseed>
+    <deployedseed>1799147006</deployedseed>
+    <deployedseed>641751026</deployedseed>
+    <deployedseed>323484107</deployedseed>
+    <deployedseed>1749738053</deployedseed>
+    <deployedseed>400811034</deployedseed>
+    <deployedseed>1947814865</deployedseed>
+    <deployedseed>1213797106</deployedseed>
+    <deployedseed>1389299513</deployedseed>
+    <deployedseed>127853904</deployedseed>
+    <deployedseed>2006138851</deployedseed>
+    <deployedseed>599975091</deployedseed>
+    <deployedseed>932983770</deployedseed>
+    <deployedseed>1428561301</deployedseed>
+    <deployedseed>416681775</deployedseed>
+    <deployedseed>458190931</deployedseed>
+    <deployedseed>1622507672</deployedseed>
+  </question>
+</quiz>

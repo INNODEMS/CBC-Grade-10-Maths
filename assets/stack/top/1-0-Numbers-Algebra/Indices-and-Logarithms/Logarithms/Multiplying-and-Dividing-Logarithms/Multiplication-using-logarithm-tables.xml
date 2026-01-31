@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Multiplication using logarithm tables</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h3 style="text-align:center;">
+Use base-10 logarithm tables to evaluate:
+</h3>
+
+<p style="text-align:center;">
+\[
+{@a@} \times {@b@}
+\]
+</p>
+
+<p style="text-align:center;">
+You must use <strong>base-10 logarithm tables</strong>.<br>
+Give your answer correct to <strong>three significant figures</strong>.
+</p>
+
+<p style="text-align:center;">
+[[input:ans1]]<br>
+[[validation:ans1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<h3>Worked solution</h3>
+
+<p>
+We are asked to evaluate
+</p>
+
+<p style="text-align:center;">
+\[
+{@a@} \times {@b@}
+\]
+</p>
+
+<p>
+using <strong>base-10 logarithm tables</strong>.
+</p>
+
+<p>
+First, the logarithms of the two numbers are found using the tables:
+</p>
+
+<ul>
+  <li>\(\log_{10}({@a@}) \approx {@loga@}\)</li>
+  <li>\(\log_{10}({@b@}) \approx {@logb@}\)</li>
+</ul>
+
+<p>
+Using the law of logarithms,
+</p>
+
+<p style="text-align:center;">
+\[
+\log(ab) = \log a + \log b,
+\]
+</p>
+
+<p>
+we add the logarithms:
+</p>
+
+<p style="text-align:center;">
+\[
+\log_{10}({@a@} \times {@b@}) \approx {@logsum@}.
+\]
+</p>
+
+<p>
+The next step is to find the antilogarithm. From the tables,
+</p>
+
+<p style="text-align:center;">
+\[
+{@a@} \times {@b@} \approx 10^{@logsum@}.
+\]
+</p>
+
+<p>
+This gives a value close to the exact product. Rounding to
+<strong>three significant figures</strong>,
+</p>
+
+<p style="text-align:center;">
+\[
+{@a@} \times {@b@} \approx {@ta@}.
+\]
+</p>
+
+<p>
+So the correct answer is
+<strong>{@ta@}</strong>.
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random mantissas suitable for log tables */
+A: rand(900) + 100;   /* 100–999 */
+B: rand(900) + 100;   /* 100–999 */
+
+/* Convert to decimals with 3 significant figures */
+A: A / 100;
+B: B / 100;
+
+/* Random powers of 10 */
+pa: rand(3);  /* 0,1,2 */
+pb: rand(3);
+
+/* Final numbers shown to students */
+a: A * 10^pa;
+b: B * 10^pb;
+
+/* Logarithms rounded to 4-figure table accuracy (teacher-side only) */
+loga: round(log(a)/log(10)*10000)/10000;
+logb: round(log(b)/log(10)*10000)/10000;
+
+/* Sum of logarithms */
+logsum: loga + logb;
+
+/* Exact product */
+ta_exact: a * b;
+
+/* Table-style final answer (3 significant figures) */
+ta: significantfigures(ta_exact, 3);
+
+/* Tolerance for logarithm table rounding (±2%) */
+tol: abs(ta) * 0.02;
+/* PRT helper: added numbers instead of using logarithms */
+wrong_add_numbers: a + b;
+
+/* PRT helper: multiplied logarithms instead of adding (safe) */
+wrong_mult_logs: exp(float(round(loga * logb)) * float(log(10)));
+
+/* PRT helper: mantissas only (ignored powers of ten) — safe */
+mant_a: round(float((loga - floor(loga))*10000)/10000);
+mant_b: round(float((logb - floor(logb))*10000)/10000);
+wrong_mant_only: exp(float((mant_a + mant_b) * log(10)));
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text>[[feedback:prt1]]</text>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta1@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text>Students must evaluate the product of two numbers using base-10 logarithm tables.
+The question is randomised and assessed using a Potential Response Tree
+to diagnose common errors in the use of logarithms.</text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ans1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Correct answer</description>
+        <answertest>NumSigFigs</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>3</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Well done. Your answer is correct to three significant figures.</text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Added numbers instead of multiplying</description>
+        <answertest>NumSigFigs</answertest>
+        <sans>ans1</sans>
+        <tans>wrong_add_numbers</tans>
+        <testoptions>3</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>It appears that you added the two numbers instead of multiplying them.
+
+Remember that logarithms are used to convert a multiplication into an
+addition of logarithms, not an addition of the original numbers.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>“Let’s add Node 3 (mantissas only).”</description>
+        <answertest>NumSigFigs</answertest>
+        <sans>ans1</sans>
+        <tans>wrong_mant_only</tans>
+        <testoptions>3</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>It looks like you used only the mantissas from the logarithm tables.
+
+Remember that when finding an antilogarithm, you must also include the
+characteristic, which determines the correct power of 10.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[Your answer is not correct.
+
+Check that you have:
+<ul>
+  <li>used base-10 logarithms,</li>
+  <li>added the logarithms correctly,</li>
+  <li>included the correct power of 10,</li>
+  <li>rounded your final answer appropriately.</li>
+</ul>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>

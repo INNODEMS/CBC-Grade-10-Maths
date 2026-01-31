@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Applying mixed laws of indices using bundles of paper</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p><strong>Watamuu Comprehensive School</strong> is buying blocks of writing paper for Grade \(10\) learners. Each block contains \({@base@}^{@a@}\) sheets of paper. The school buys \({@base@}^{@b@}\) blocks. The blocks are then taken apart and its sheets are packed into bundles to be given to the students, each bundle containing \({@base@}^{@c@}\) sheets.</p>
+
+<p>
+By applying Laws of indices, how many bundles of sheets are formed?
+Write your answer as a <strong>single power</strong>, in index form.
+</p>
+
+<p>
+[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+First, find the total number of sheets:
+</p>
+
+<p>
+\[
+{@base@}^{@a@} \times {@base@}^{@b@}
+= {@base@}^{@a + b@}
+\]
+</p>
+
+<p>
+Next, divide by the number of sheets in each bundle:
+</p>
+
+<p>
+\[
+\frac{{@base@}^{@a + b@}}{{@base@}^{@c@}}
+= {@base@}^{{@a + b@} - {@c@}}
+\]
+</p>
+
+<p>
+Therefore, the number of bundles formed is:
+</p>
+
+<p>
+\[
+\boxed{{@base@}^{@exp_total@}}
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>2</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random base */
+base: rand([2,3,5,7]);
+
+/* Random exponents */
+a: rand([2,3,4,5]);   /* pages per book */
+b: rand([1,2,3]);     /* number of books */
+c: rand([1,2,3]);     /* pages per bundle */
+
+/* Correct simplified exponent */
+exp_total: (a + b) - c;
+
+/* Full expression (for teacher notes) */
+expr: (base^a * base^b) / base^c;
+
+/* Common student mistakes */
+m1: base^(a + b + c);
+m2: base^(a - b - c);
+m3: base^(a*b - c);
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Expression: {@expr@}</p>
+<p>Simplified exponent: {@exp_total@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept"></p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description"> This question assesses learners’ ability to apply both the product and quotient laws of indices using a familiar school-based context.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>base^exp_total</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>base^exp_total</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>added all the exponents</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You added all the exponents.
+Exponents are added when multiplying, but subtracted when dividing.</text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>incorrect subtraction of exponents</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>The subtraction of exponents is incorrect.
+First add the exponents in the numerator, then subtract the denominator exponent.</text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Multiplication of exponents</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Exponents should not be multiplied here.
+Multiplication of exponents only happens when raising a power to a power.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Apply the laws of indices step by step: multiply first, then divide</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>579995722</deployedseed>
+    <deployedseed>1172877083</deployedseed>
+    <deployedseed>2035590700</deployedseed>
+    <deployedseed>588211729</deployedseed>
+    <deployedseed>1594212298</deployedseed>
+    <deployedseed>1620530512</deployedseed>
+    <deployedseed>20258085</deployedseed>
+    <deployedseed>1804799037</deployedseed>
+    <deployedseed>2098590136</deployedseed>
+    <deployedseed>1727325121</deployedseed>
+    <deployedseed>1025630841</deployedseed>
+    <deployedseed>494962060</deployedseed>
+    <deployedseed>2077104952</deployedseed>
+    <deployedseed>1648134736</deployedseed>
+    <deployedseed>29919034</deployedseed>
+    <deployedseed>783847120</deployedseed>
+    <deployedseed>1998299804</deployedseed>
+    <deployedseed>911198464</deployedseed>
+    <deployedseed>1280093457</deployedseed>
+    <deployedseed>489514939</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>base^exp_total</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

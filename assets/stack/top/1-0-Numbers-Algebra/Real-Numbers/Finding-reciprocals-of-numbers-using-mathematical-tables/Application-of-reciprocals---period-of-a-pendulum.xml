@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Application of reciprocals - period of a pendulum</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The <strong>period</strong> (\(T\)) of a swinging pendulum is the reciprocal of its <strong>frequency</strong> (\(f\)). The relationship is given by the formula:</p>
+\(T = \frac{1}{f} \)
+
+<p>A digital sensor records the frequency of a pendulum as <strong>{@freq_disp@} Hz</strong>.</p>
+
+<p>Use a <strong>table of reciprocals</strong> to calculate the period of the pendulum in seconds.</p>
+
+<p>Period (\(T\)) \(=\) [[input:ans1]] s [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>
+To find the period, we need to find the reciprocal of \({@freq_disp@}\).
+</p>
+\[ T = \frac{1}{{@freq_disp@}} \]
+
+<p>Using a mathematical table of reciprocals:</p>
+
+<p>
+1. Move down the column labelled \(x\) to the row <strong>{@part_a@}</strong>.
+</p>
+
+<p>
+2. Move across to the main column headed <strong>{@part_b@}</strong>.<br>
+The value at this intersection is <strong>{@table_val_main@}</strong>.
+</p>
+
+<p>
+3. Continue along the same row to the <strong>"SUBTRACT"</strong> (Mean Difference) column headed <strong>{@part_c@}</strong>.<br>
+The mean difference value found here corresponds to <strong>{@sub_num@}</strong> (representing 0.000{@sub_num@}).
+</p>
+
+<p>
+4. <strong>Subtract</strong> the mean difference from the main table value.<br>
+(We subtract because the function \(y=1/x\) is a decreasing function).
+</p>
+
+<p>
+\[ {@table_val_main@} - 0.000{@sub_num@} = {@ta@} \]
+</p>
+
+<p>
+The period of the pendulum is <strong>{@ta@} seconds</strong>.
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* 1. Generate the Frequency components (1.000 to 9.999) */
+d1 : rand(8) + 1;       /* Integer part: 1-9 (Avoid 0) */
+d2 : rand(10);          /* 1st decimal: 0-9 */
+d3 : rand(10);          /* 2nd decimal: 0-9 */
+d4 : rand(9) + 1;       /* 3rd decimal (mean difference): 1-9 */
+
+/* Construct the Frequency 'f' */
+freq : d1 + d2/10 + d3/100 + d4/1000;
+freq : float(freq);
+
+/* 2. Simulate the Table Lookup Values */
+/* 'part_a' is the Row (e.g., 2.3) */
+part_a : d1 + d2/10;
+
+/* 'part_b' is the Main Column (e.g., 4) */
+part_b : d3;
+
+/* 'part_c' is the Difference Column (e.g., 7) */
+part_c : d4;
+
+/* 3. Calculate the Table Values */
+/* Calculate the value found in the main body (1 / d1.d2d3) rounded to 4dp */
+val_lookup_base : d1 + d2/10 + d3/100;
+table_val_main : decimalplaces(1/val_lookup_base, 4);
+
+/* Calculate the exact final answer (1/f) */
+ta : decimalplaces(1/freq, 4);
+
+/* Calculate the 'Subtract' value (Mean Difference) */
+/* We reverse-engineer the difference to ensure the feedback math works perfectly */
+/* Difference = (Main Table Value) - (True Answer) */
+diff_val : table_val_main - ta;
+
+/* Convert this to the integer seen in the "Subtract" column (e.g., 0.0005 -> 5) */
+sub_num : round(diff_val * 10000);
+
+/* Safety: Ensure sub_num is positive (Reciprocals always decrease) */
+sub_num : abs(sub_num);
+
+/* Formatting for display */
+/* Ensures 4.500 displays as 4.500 not 4.5 in some contexts if needed */
+freq_disp : dispdp(freq, 3);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Sheila Cherotich</p>
+ <p id="concept"></p> 
+<p id="reviewer"></p> 
+<p id="description">This question requires the learner to find the reciprocal of a given decimal number using a table.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>

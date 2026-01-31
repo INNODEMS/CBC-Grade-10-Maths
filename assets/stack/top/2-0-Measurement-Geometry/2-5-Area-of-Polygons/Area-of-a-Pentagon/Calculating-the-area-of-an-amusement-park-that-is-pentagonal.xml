@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the area of an amusement park that is pentagonal</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>An amusement park is the shape of a regular pentagon. Each side of the park measures \({@side@}\,\text{m}\) and the height of the pentagon park is \({@height@} \, \text{m}\).  Calculate the total area of the park.</p>
+
+
+
+<p>\(\text{The area of the park} =\) [[input:ans1]]\(\,\text{m}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><b>Given:</b><br>
+• Side length = {@side@} m <br>
+• Height of one triangle (from the center to the midpoint of a side) = {@height@} m
+</p>
+
+<p>
+\(\text{Area of pentagon} = 5 \times \text{area of one triangle}\)
+</p>
+
+<p><b>Find the area of one triangle</b></p>
+
+<p>
+Each triangle has: <br>
+• Base = side of the pentagon = {@side@} m <br>
+• Height = {@height@} m <br>
+\(
+\begin{align}
+\text{Area of one triangle} &= \frac{1}{2} \times \text{base} \times \text{height} \\
+&= \frac{1}{2} \times {@side@} \times {@height@} \\
+&= {@triangle_area@}\, \text{m}^2
+\end{align}
+\)
+</p>
+
+<p><b>Find the total area of the pentagon</b></p>
+
+<p>
+\(
+\begin{align}
+\text{Total area} &= 5 \times \text{area of one triangle} \\
+&= 5 \times {@triangle_area@} \\
+&= {@total_area@}\, \text{m}^2
+\end{align}
+\)
+</p>
+
+<p>
+\(\text{Therefore, the total area of the pentagon-shaped park is } {@total_area@} \text{ m}^2.\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize side (even numbers between 12 m and 24 m) */
+side : 2 * (rand(59) + 6);
+
+/* Randomize height (even numbers less than side, between 4 m and side - 2) */
+height : 2 * (rand(floor(side/2 - 1)) + 2);
+
+/* Calculate area of one triangle */
+triangle_area : (1/2) * side * height;
+
+/* Calculate total area of the pentagon */
+total_area : 5 * triangle_area;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(\text{The side of the park}={@side@}\, \text{m}\)</p>
+<p>\(\text{The height of the park}={@height@}\, \text{m}\)</p>
+<p>\(\text{The total area of the park} ={@total_area @}\, \text{m}^2\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>total_area</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct area of the Park</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>total_area </tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>186010924</deployedseed>
+    <deployedseed>1564304654</deployedseed>
+    <deployedseed>1154157900</deployedseed>
+    <deployedseed>540929435</deployedseed>
+    <deployedseed>1397138613</deployedseed>
+    <deployedseed>571375666</deployedseed>
+    <deployedseed>1612155045</deployedseed>
+    <deployedseed>1859754314</deployedseed>
+    <deployedseed>1877367945</deployedseed>
+    <deployedseed>413907649</deployedseed>
+    <deployedseed>1788488058</deployedseed>
+    <deployedseed>338987672</deployedseed>
+    <deployedseed>1437160372</deployedseed>
+    <deployedseed>263345802</deployedseed>
+    <deployedseed>492636609</deployedseed>
+    <deployedseed>24299845</deployedseed>
+    <deployedseed>779908321</deployedseed>
+    <deployedseed>1937719920</deployedseed>
+    <deployedseed>974992899</deployedseed>
+    <deployedseed>1359162162</deployedseed>
+    <deployedseed>1123388676</deployedseed>
+    <deployedseed>1700669460</deployedseed>
+    <deployedseed>248839222</deployedseed>
+    <deployedseed>1930375434</deployedseed>
+    <deployedseed>1032306604</deployedseed>
+    <deployedseed>870041193</deployedseed>
+    <deployedseed>435302336</deployedseed>
+    <deployedseed>389601898</deployedseed>
+    <deployedseed>1116109498</deployedseed>
+    <deployedseed>84065636</deployedseed>
+    <deployedseed>1821701990</deployedseed>
+    <deployedseed>1761157030</deployedseed>
+    <deployedseed>999961877</deployedseed>
+    <deployedseed>519312310</deployedseed>
+    <deployedseed>2000747856</deployedseed>
+    <deployedseed>361037671</deployedseed>
+    <deployedseed>422882134</deployedseed>
+    <deployedseed>1220947598</deployedseed>
+    <deployedseed>2119514653</deployedseed>
+    <deployedseed>1390014620</deployedseed>
+    <deployedseed>1946695340</deployedseed>
+    <deployedseed>1525252246</deployedseed>
+    <deployedseed>1019159644</deployedseed>
+    <deployedseed>1646926697</deployedseed>
+    <deployedseed>1819883164</deployedseed>
+    <deployedseed>438560407</deployedseed>
+    <deployedseed>1775187634</deployedseed>
+    <deployedseed>511859166</deployedseed>
+    <deployedseed>801082439</deployedseed>
+    <deployedseed>854756196</deployedseed>
+    <deployedseed>34650985</deployedseed>
+    <deployedseed>960151487</deployedseed>
+    <deployedseed>1166623247</deployedseed>
+    <deployedseed>764262248</deployedseed>
+    <deployedseed>1805018715</deployedseed>
+    <deployedseed>1754696703</deployedseed>
+    <deployedseed>1548104727</deployedseed>
+    <deployedseed>663317899</deployedseed>
+    <deployedseed>750835897</deployedseed>
+    <deployedseed>2125906301</deployedseed>
+    <deployedseed>421583613</deployedseed>
+    <deployedseed>166563103</deployedseed>
+    <deployedseed>125633239</deployedseed>
+    <deployedseed>350052005</deployedseed>
+    <deployedseed>1561739183</deployedseed>
+    <deployedseed>1594898780</deployedseed>
+    <deployedseed>523723027</deployedseed>
+    <deployedseed>1365334145</deployedseed>
+    <deployedseed>1728674447</deployedseed>
+    <deployedseed>1598117031</deployedseed>
+    <deployedseed>881414558</deployedseed>
+    <deployedseed>1092161938</deployedseed>
+    <deployedseed>419275926</deployedseed>
+    <deployedseed>428829347</deployedseed>
+    <deployedseed>87123615</deployedseed>
+    <deployedseed>2110593102</deployedseed>
+    <deployedseed>1090261588</deployedseed>
+    <deployedseed>1814892305</deployedseed>
+    <deployedseed>1919379979</deployedseed>
+    <deployedseed>965770745</deployedseed>
+    <deployedseed>800851194</deployedseed>
+    <deployedseed>76236133</deployedseed>
+    <deployedseed>976968092</deployedseed>
+    <deployedseed>898270112</deployedseed>
+    <deployedseed>1358649687</deployedseed>
+    <deployedseed>936705970</deployedseed>
+    <deployedseed>609685089</deployedseed>
+    <deployedseed>342000743</deployedseed>
+    <deployedseed>490542811</deployedseed>
+    <deployedseed>1295993359</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>total_area</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Adding logarithms for mixed power and root</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The quantity of Manganese in a Physics experiment is given by:
+</p>
+
+<p>
+\[
+{@base@}^{@exp@} \times \sqrt{{@base@}}
+\]
+</p>
+
+<p>
+By applying logarithms, write \(\!\left({@base@}^{@exp@} \times \sqrt{{@base@}}\right)\) in terms of \(\log {@base@}\).
+</p>
+
+<p>
+[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+First rewrite the square root as a fractional index:
+</p>
+
+<p>
+\[
+\sqrt{{@base@}} = {@base@}^{1/2}
+\]
+</p>
+
+<p>
+Now combine the powers:
+</p>
+
+<p>
+\[
+{@base@}^{@exp@} \times {@base@}^{1/2}
+= {@base@}^{@exp + 1/2@}
+\]
+</p>
+
+<p>
+Apply the logarithm law:
+</p>
+
+<p>
+\[
+\log(a^n) = n\log a
+\]
+</p>
+
+<p>
+So,
+</p>
+
+<p>
+\[
+\log\!\left({@base@}^{@exp@} \times \sqrt{{@base@}}\right)
+= ({@exp@} + \tfrac{1}{2})\log {@base@}
+\]
+</p>
+
+<p>
+Therefore, the correct answer is:
+</p>
+
+<p>
+\[
+\boxed{({@exp@} + \tfrac{1}{2})\log {@base@}}
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random base and exponent */
+base: rand([2,3,5,7,10]);
+exp: rand([2,3,4]);
+
+/* Expression: log(a^n * sqrt(a)) */
+correct: (exp + 1/2) * log(base);
+
+/* Common student mistakes */
+m1: exp * log(base);           /* ignores the root */
+m2: (exp - 1/2) * log(base);   /* subtracts instead of adding */
+m3: log(base)^(exp + 1/2);     /* raises the logarithm to a power */
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Base: {@base@}</p>
+<p>Exponent: {@exp@}</p>
+<p>Correct form: {@correct@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept"></p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description"> This question assesses learners’ ability to apply logarithm laws to expressions involving both powers and roots by rewriting them as a single logarithmic expression.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>correct</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>correct</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>ignores the root</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You ignored the square root. Apply the square roots for you to get the correct answer</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>subtracts instead of adding</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You subtracted the indices.
+When multiplying powers with the same base, we add the indices.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>raises the logarithm to a power</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>The exponent should multiply the logarithm, not raise it to a power.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Rewrite all terms as powers of the same base before applying logarithms.</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>836797191</deployedseed>
+    <deployedseed>1506040214</deployedseed>
+    <deployedseed>1373017669</deployedseed>
+    <deployedseed>2016876354</deployedseed>
+    <deployedseed>219767995</deployedseed>
+    <deployedseed>1258428002</deployedseed>
+    <deployedseed>1829280251</deployedseed>
+    <deployedseed>1754730522</deployedseed>
+    <deployedseed>1310687529</deployedseed>
+    <deployedseed>1625200934</deployedseed>
+    <deployedseed>1382794741</deployedseed>
+    <deployedseed>1103489455</deployedseed>
+    <deployedseed>773349986</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>correct</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

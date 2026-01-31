@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the reciprocal of decimal numbers using a table of reciprocals</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Use a <strong>table of reciprocals</strong> to find the reciprocal of <strong>{@a@}</strong>.</p>
+<p>Give your answer to 4 decimal places.</p>
+<p>Reciprocal of \({@a@} =\) [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>
+To find the reciprocal of \({@a@}\) (which is \(\frac{1}{@a@}\)) using a mathematical table, follow the steps below.
+</p>
+
+<p>
+1. In the table of reciprocals, move down the column labelled \(x\) until you locate the row <strong>{@float(part_a)@}</strong>.
+</p>
+
+<p>
+2. From this row, move across to the main column headed <strong>{@part_b@}</strong>.
+</p>
+
+<p>
+3. Read the number at the intersection of this row and column.<br>
+This value is <strong>{@a_1_answer@}</strong>.
+</p>
+
+<p>
+4. Next, move further along the same row to the <strong>"SUBTRACT"</strong> column (Mean Difference) headed <strong>{@part_c@}</strong>.<br>
+The number you find here is the mean difference, which is <strong>{@sub_num@}</strong> (in the last decimal places).
+</p>
+
+<p>
+5. <strong>Subtract</strong> this mean difference from your first value.<br>
+(Note: We subtract because the reciprocal function \(\frac{1}{x}\) decreases as \(x\) increases).
+</p>
+
+<p>
+\[ {@a_1_answer@} - 0.000{@sub_num@} = {@ta@} \]
+</p>
+
+<p>
+Therefore, using the table of reciprocals, the reciprocal of \({@a@}\) is <strong>{@ta@}</strong>.
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* 1. Generate the decimal number components (1.000 to 9.999) */
+/* We generate digits separately to ensure clean table lookups */
+d1 : rand(9) + 1;       /* Integer part: 1-9 */
+d2 : rand(10);          /* 1st decimal: 0-9 */
+d3 : rand(10);          /* 2nd decimal: 0-9 */
+d4 : rand(9) + 1;       /* 3rd decimal (mean difference): 1-9 */
+
+/* Construct the full number 'a' */
+a : d1 + d2/10 + d3/100 + d4/1000;
+a : float(a);
+
+/* 2. Simulate the Table Lookup Values */
+/* 'part_a' is the Row (e.g., 2.3) */
+part_a : d1 + d2/10;
+
+/* 'part_b' is the Main Column (e.g., 4) */
+part_b : d3;
+
+/* 'part_c' is the Difference Column (e.g., 7) */
+part_c : d4;
+
+/* Calculate the Main Table Value (First 3 digits) */
+/* In a table of reciprocals, we look up 1 / (d1.d2d3) */
+val_lookup : d1 + d2/10 + d3/100;
+a_1_answer : decimalplaces(1/val_lookup, 4);
+
+/* 3. Calculate Final Answer and Difference */
+/* 'ta' is the true reciprocal rounded to 4 decimal places */
+ta : decimalplaces(1/a, 4);
+
+/* Calculate the 'Subtract' value (Mean Difference) */
+/* Since 1/x is a DECREASING function, the table subtracts the difference. */
+/* We find the integer difference between the main value and the final answer */
+/* Multiply by 10000 to get the integer represented in the 'Subtract' column */
+sub_num : round((a_1_answer - ta) * 10000);
+
+/* Safety check: ensure sub_num is positive (it should be, as 1/x decreases) */
+sub_num : abs(sub_num);
+
+/* Format variables for display */
+part_a_disp : ssubst("", "0.", string(part_a)); /* Helps formatting if needed */]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\({@a@}\)</p>
+<p>\({@ta@}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Sheila Cherotich</p>
+ <p id="concept"></p> 
+<p id="reviewer"></p> 
+<p id="description">This question requires the learner to find the reciprocal of a given decimal number using a table.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>
