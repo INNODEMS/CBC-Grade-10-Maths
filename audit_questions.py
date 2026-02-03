@@ -2,6 +2,8 @@ import os
 import re
 from collections import Counter
 from lxml import etree
+from slugify import slugify
+from pathlib import Path
 
 # Configuration
 ASSET_FILES_ROOT = './assets'      # The tree containing the STACK questions
@@ -34,7 +36,19 @@ def get_referenced_sources(root_dir, tag="stack"):
                     references.extend(matches)
     return references
 
-def audit_includes(extensions, tag):
+def write_orphaned(orphans, orphan_include_file):
+    with open(orphan_include_file, "w") as f:
+        for orphan in orphans:
+            filename = Path(orphan).stem
+            slug = slugify(filename)
+            f.write(f"""
+                <exercise xml:id="ex-{slug}">
+                    <!--<title></title>-->
+                    <stack label="stk-{slug}" source="{orphan}"/>
+                </exercise>
+            """)
+
+def audit_includes(extensions, tag, orphan_include_file=None):
     # 1. Collect data
     actual_files = get_all_asset_files(ASSET_FILES_ROOT, extensions)
     referenced_list = get_referenced_sources(PTX_FILES_ROOT, tag)
@@ -69,6 +83,8 @@ def audit_includes(extensions, tag):
     for o in sorted(orphans):
         print(f"   [-] {o}")
     if not orphans: print("   None")
+    if orphan_include_file:
+        write_orphaned(orphans, orphan_include_file)
 
     return actual_files
 
@@ -115,7 +131,7 @@ def run_audit():
     print("--- Starting IMAGE Audit ---\n")
     audit_includes((".png", ".jpg", ".jpeg", ".webp"), "image")
     print("\n\n--- Starting STACK Audit ---\n")
-    stack_files = audit_includes(".xml", "stack")
+    stack_files = audit_includes(".xml", "stack", orphan_include_file="orphaned.ptx")
     check_deployed_variants(stack_files)
 
 if __name__ == "__main__":
