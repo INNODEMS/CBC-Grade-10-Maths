@@ -36,17 +36,27 @@ def get_referenced_sources(root_dir, tag="stack"):
                     references.extend(matches)
     return references
 
+def get_label_from_filepath(path):
+    filename = Path(path).stem
+    return slugify(filename)
+
 def write_orphaned(orphans, orphan_include_file):
     with open(orphan_include_file, "w") as f:
         for orphan in orphans:
-            filename = Path(orphan).stem
-            slug = slugify(filename)
+            slug = get_label_from_filepath(orphan)
             f.write(f"""
                 <exercise xml:id="ex-{slug}">
                     <!--<title></title>-->
                     <stack label="stk-{slug}" source="{orphan}"/>
                 </exercise>
             """)
+
+            static = os.path.join("generated-assets", "stack", f"stk-{slug}.ptx")
+            if not os.path.isfile(static):
+                with open(static, "w") as fs:
+                    fs.write("<stack-static>\n"
+                            "<statement><p>Go to the online version of this book to view this question.</p></statement>\n"
+                            "</stack-static>")
 
 def audit_includes(extensions, tag, orphan_include_file=None):
     # 1. Collect data
