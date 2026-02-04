@@ -13,14 +13,14 @@
       <text><![CDATA[<p>Worked Solution</p>
 <p>Since the reciprocal of \( x \) is \( {@frac@} \) and by definition, the reciprocal of a number 2 is 1 divided by the number 2: \(\frac{1}{2}\)</p>
 <p>Then: \( \frac{1}{x} = {@frac@} \)</p>
-<p>Therefore, \( x = {@ta@} \)</p>]]></text>
+<p>Therefore, \( x = {@float(ta)@} \)</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>den: rand(110) + 20;
@@ -30,13 +30,13 @@ num:rand(10)+1;
 frac: num/den;
 
 /* The answer is the denominator */
-ta: den/num;</text>
+ta: float(den/num);</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>{@ta@}</p>
+      <text><![CDATA[<p>{@float(ta)@}</p>
 <p> {@frac@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
@@ -75,7 +75,7 @@ ta: den/num;</text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
@@ -93,10 +93,10 @@ ta: den/num;</text>
       <node>
         <name>0</name>
         <description>Checks for the correct value given a reciprocal</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>ta</tans>
-        <testoptions/>
+        <testoptions>0.001</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>

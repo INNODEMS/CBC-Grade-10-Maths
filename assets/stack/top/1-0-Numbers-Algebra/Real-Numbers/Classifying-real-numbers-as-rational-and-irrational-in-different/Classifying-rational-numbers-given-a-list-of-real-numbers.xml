@@ -4,11 +4,14 @@
     <name>
       <text>Classifying rational numbers given a list of real numbers</text>
     </name>
-    <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Grade 10 maths teacher has a magical number sorter that only accepts rational numbers. The following numbers are ready to be sorted. Which of them will be accepted?<br> Select all rational numbers.</p>
-</p><p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    <questiontext format="html">
+      <text><![CDATA[<p>A Grade 10 mathematics teacher has a magical number sorter that only accepts <strong>rational numbers</strong>.</p>
+<p>From the list below, <strong>EXACTLY THREE</strong> of the numbers are rational. Which ones are they?</p>
+<p></p>
+<p></p>
+<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
     </questiontext>
-    <generalfeedback format="moodle_auto_format">
+    <generalfeedback format="html">
       <text><![CDATA[<h3>Worked Solution</h3>
 <p>A rational number is any number that can be expressed as a fraction \( \frac{p}{q} \) where \( p \) and \( q \) are integers and \( q \neq 0 \).</p>
 <p>The decimal representation of a rational number either terminates (stops at some point) or repeats (continues but has a repeating pattern).</p>
@@ -20,7 +23,7 @@
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>/* Pool of rational expressions (true) */
@@ -33,7 +36,7 @@ rationals_all: [
 /* Pool of irrational expressions (false) */
 irrationals_all: [
     pi, sqrt(2), sqrt(3), sqrt(5), 2*sqrt(2),
-    pi - 3, sqrt(8), 0.121221222, 3*sqrt(7),
+    pi - 3, sqrt(8), 3*sqrt(7),
     sqrt(10), e, sqrt(11), pi/2, sqrt(13)
 ];
 
@@ -86,13 +89,13 @@ ta_largest: length(ta);
     <assumepositive>0</assumepositive>
     <assumereal>0</assumereal>
     <prtcorrect format="html">
-      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+      <text><![CDATA[<p><i class="fa fa-check"></i> Correct answer, well done.</p>]]></text>
     </prtcorrect>
     <prtpartiallycorrect format="html">
-      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+      <text><![CDATA[<p><i class="fa fa-adjust"></i> Your answer is partially correct.</p>]]></text>
     </prtpartiallycorrect>
     <prtincorrect format="html">
-      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+      <text><![CDATA[<p><i class="fa fa-times"></i> Incorrect answer.</p>]]></text>
     </prtincorrect>
     <decimals>.</decimals>
     <scientificnotation>*10</scientificnotation>
@@ -149,13 +152,52 @@ ta_largest: length(ta);
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text><![CDATA[<p> You have failed to select the correct list of rational numbers. Kindly check on the worked solution below</p>]]></text>
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>SubstEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mcq_correct(ta)</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>1842945592</deployedseed>
+    <deployedseed>88498340</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description/>
+      <testinput>
+        <name>ans1</name>
+        <value>mcq_correct(ta)</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>

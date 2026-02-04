@@ -23,28 +23,34 @@ Which of the following statements are true? Select all that apply.
 
 <hr>
 
-<p><strong>1. Test if the number is even or odd</strong></p>
+<p><strong>1. Testing whether the number is even or odd</strong></p>
 
 <p>
-We check the last digit of the number.
+A number is <strong>even</strong> if it is divisible by 2, and <strong>odd</strong> if it is not.
+An easy way to check this is to look at the last digit.
 </p>
 
 <p>
 {@if is_even
   then sconcat(
     "The last digit is ", mod(num,10),
-    ", which is even. Therefore, the number is <strong>even</strong>."
+    ". Since this digit is even, the number is <strong>even</strong>."
   )
   else sconcat(
     "The last digit is ", mod(num,10),
-    ", which is odd. Therefore, the number is <strong>odd</strong>."
+    ". Since this digit is odd, the number is <strong>odd</strong>."
   )
 @}
 </p>
 
 <hr>
 
-<p><strong>2. Test if the number is prime or composite</strong></p>
+<p><strong>2. Testing whether the number is prime or composite</strong></p>
+
+<p>
+A number is <strong>prime</strong> if it has exactly two positive divisors: 1 and itself.
+It is <strong>composite</strong> if it has more than two positive divisors.
+</p>
 
 <p>
 {@if num = 1
@@ -66,21 +72,19 @@ We check the last digit of the number.
 
 <hr>
 
-<p>
-Therefore, the correct classification of <strong>{@num@}</strong> is:
+<p><strong>Final classification:</strong> You  need to choose: </p>
+<p>one option describing whether the number is even or odd, and in this case; {@if is_even then "<li>It is even</li>" else "<li>It is odd</li>"@}
 </p>
-
-<ul>
-{@if is_even then "<li>It is even</li>" else "<li>It is odd</li>"@}
+<p>one option describing whether the number is prime or composite. Therefore;</p>
 {@if is_prime_num then "<li>It is prime</li>" else "<li>It is composite</li>"@}
-</ul>]]></text>
+</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text><![CDATA[/*Random 5-digit number*/
