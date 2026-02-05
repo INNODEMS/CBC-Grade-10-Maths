@@ -5,90 +5,145 @@
       <text>Finding the Area of a Regular Pentagon</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Find the area of the figure below, centered at O, and round your answer to the nearest \(\textbf{whole number}\).</p>
+      <text><![CDATA[<p>Find the area of the figure below, centered at \(O\).</p>
 
 [[jsxgraph]]
 var board = JXG.JSXGraph.initBoard(divid, {
-    boundingbox: [-6, 6, 6, -6],
-    axis: true,
+    boundingbox: [-40, 40, 40, -40],
+    axis: false,
     showCopyright: false
 });
 
-/* Centre */
-var C = board.create('point', [{@cx@}, {@cy@}], {
-    name: 'C',
+/* Centre point O */
+var O = board.create('point', [0, 0], {
+    name: 'O',
+    fixed: true,
+    visible: false
+});
+
+/* Pentagon vertices (numerical, fixed shape) */
+var A = board.create('point', [0, 25.5], {visible: false});
+var B = board.create('point', [24.2, 7.9], {visible: false});
+var C = board.create('point', [14.8, -20.6], {visible: false});
+var D = board.create('point', [-14.8, -20.6], {visible: false});
+var E = board.create('point', [-24.2, 7.9], {visible: false});
+
+/* Pentagon */
+board.create('polygon', [A, B, C, D, E], {
+    borders: {strokeColor: 'black'},
+    fillColor: 'none'
+});
+
+/* Radius lines */
+board.create('segment', [O, C], {
+    strokeColor: 'black',
+    straightFirst: false,
+    straightLast: false
+});
+
+board.create('segment', [O, B], {
+    strokeColor: 'black',
+    straightFirst: false,
+    straightLast: false
+});
+
+/* Labels */
+board.create('text', [-1, -10, "{#slant#} cm"], {
+    fontSize: 12,
     fixed: true
 });
 
-/* First vertex */
-var A = board.create('point', [
-    {@cx@} + {@R@},
-    {@cy@}
+board.create('text', [-0.2, 2, "O"], {
+    fontSize: 12,
+    fixed: true
+});
+
+/* Base BC */
+board.create('segment', [B, C], {
+    strokeColor: 'black'
+});
+
+board.create('text', [
+    function(){ return B.X(); },
+    function(){ return B.Y() - 15; },
+    "{#base_length#} cm"
 ], {
-    name: 'A',
+    fontSize: 12,
     fixed: true
 });
 
-/* Regular pentagon */
-var pentagon = board.create('regularpolygon', [C, A, 5], {
-    withLines: true,
-    withVertices: true
+/* Perpendicular height from O to BC */
+var midpoint = board.create('midpoint', [B, C], {visible: false});
+
+board.create('segment', [O, midpoint], {
+    strokeColor: 'black',
+    dash: 1
+});
+
+/* Right angle marker */
+board.create('nonreflexangle', [B, midpoint, O], {
+    radius: 3,
+    type: 'square',
+    name: '',
+    fixed: true
 });
 [[/jsxgraph]]
 
+<p>
+\(\text{Area} =\) [[input:ans1]] \(\text{cm}^2\)
+[[feedback:prt1]]
+</p>
 
-
-<p>\(\text{Area} =\)[[input:ans1]]\(\text{cm}^2\) [[feedback:prt1]]</p>
-<p hidden>[[validation:ans1]]</p>]]></text>
+<p style="display:none;">
+[[validation:ans1]]
+</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<p>The figure above is a regular isosceles pentagon</p>
-<p>Each triangle has</p>
-<p><ul><li>
-\(\text{Base} = \frac{{@base_length @}}{2}={@half_base@} \,\text{cm}\) (side of the pentagon)
-</li>
-<li>
-\(\text{Slant height }= {@slant@}\, \text{ cm}\) (distance from centre O to a vertex).
-</li></ul></p>
-<p>To find the area of the above pentagon the following steps are followed</p>
-<p>\(\textbf{ Step 1. Find the area of one triangle.}\)</p>
-<p>Each triangle is isosceles, but we can split it into two right-angled triangles to find its height.</p>
-<p>Base\(=  {@base_length @} \,\text{cm}\)</p>
-<p>Hypotenuse \(= {@slant@}\, \text{ cm}\)</p>
-<p>height \(=\) ?</p>
-<p>Use Pythagoras’ theorem to find the perpendicular height (h).</p>
+      <text><![CDATA[<h3>Worked solution</h3>
+<p> To calculate the area of the pentagon, divide the shape into five identical isosceles triangles by joining each vertex to
+the centre \(O\).
 <p>
-\(\begin{align}
-{@slant@}^2 &=  h^2+({@half_base@})^2 \\
-{@slant1@}&=h^2 + {@half_base1@} \\
-h^2 &= {@slant1@}-{@half_base1@}  \\
-h&=\sqrt{{@height_1@}}\\
-&={@height@} \\
-&={@height3@} \\
+Each triangle has:
+<ul>
+  <li>base length \( {@base_length@} \) cm</li>
+  <li>two equal sides of length \( {@slant@} \) cm</li>
+</ul>
+</p>
 
-& \approx {@height2@}
+<p>
+To find the perpendicular height of one triangle, we split it into two right-angled triangles.
+The hypotenuse is the slanted side, and half the base is
+\[
+\frac{{@base_length@}}{2}.
+\]
+</p>
 
-\end{align}\)
-</p>
-<p>\(\text{Step 2. Calculate area of one triangle.}\)</p>
 <p>
-\(
-\begin{align} \text{Area} &= \frac{1}{2} \times \text{base} \times \text{height} \\
-&= \frac{1}{2} \times {@base_length@} \times {@height2@} \\
-&=\frac{1}{2} \times {@area_1@} \\
-&={@area_triangle1@}\, \text{cm}^2
-\end{align}\)
+Using Pythagoras’ theorem:
+\[
+h = \sqrt{({@slant@})^2 - \left(\frac{{@base_length@}}{2}\right)^2}.
+\]
 </p>
-<p>\(\textbf{Step 3. Calculate area of the pentagon.}\)</p>
+
 <p>
-\(
-\begin{align} \text{Area}&= 5 \times \text{Area of one triangle}\\
-&= 5 \times {@area_triangle1@}\\
-&= {@area_pentagon@}\\
-&={@ta@}\,\text{cm}^2
-\end{align}\)
+The area of one triangle is therefore
+\[
+\frac{1}{2} \times {@base_length@} \times h.
+\]
 </p>
-<p>Area of the pentagon \({@ta@}\,\text{cm}^2\).</p>]]></text>
+
+<p>
+Since the pentagon consists of five identical triangles, its total area is
+\[
+5 \times \frac{1}{2} \times {@base_length@} \times h = {@ta@}.
+\]
+</p>
+
+<p>
+\[
+\boxed{\text{Area} = {@ta@}\text{ cm}^2}
+\]
+</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -98,78 +153,114 @@ h&=\sqrt{{@height_1@}}\\
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[/* Title: Random Pentagon Area Calculator with Expanded Range */
+      <text><![CDATA[/* Title: Random Pentagon Area Calculator with Expanded Range (NO conditionals) */
 
-/* Generate random base_length divisible by 10 between 20 and 200 (20 options) */
-base_length : 10 * (rand(20) + 2); /* random(19)+2 ensures minimum 20 */
+/* Base length: divisible by 10, between 20 and 260 */
+base_length : 10 * (rand(25) + 2);
 
-/* Calculate maximum possible slant height (less than base_length, greater than half_base) */
+/* Half base */
 half_base : base_length / 2;
-max_slant : base_length - 5; /* ensure slant < base_length */
 
-/* If half_base is greater than or equal to max_slant, adjust max_slant to be at least half_base + 5 */
-if half_base >= max_slant then max_slant : half_base + 5;
+/* Maximum slant height: always safely greater than half_base */
+max_slant : max(base_length - 5, half_base + 5);
 
-/* Generate random slant height divisible by 5, greater than half_base but less than base_length */
-slant : 5 * (floor(half_base/5) + rand(floor((max_slant - half_base)/5)) + 1);
-
-slant1:slant^2;
-half_base1:half_base^2;
-height_1:slant1-half_base1;
-
-/* Calculate height using Pythagoras theorem */
-height : sqrt(height_1);
-height3:float(height);
-height2:decimalplaces(height3,1);
-
-
-/* Calculate area of one triangle */
-area_1:base_length *height2;
-area_triangle : (1/2) * base_length * height2;
-area_triangle1:decimalplaces(area_triangle,1);
-
-/* Calculate area of pentagon */
-area_pentagon : 5 * area_triangle;
-ta1:decimalplaces(area_pentagon,1);
-ta:round(area_pentagon );
-
-/* ---------- Randomized mistake generation ---------- */
-
-/* Generate random mistake number between 1 and 4 */
-mistake_number : rand(4) + 1;
-
-/* Define mistake answers */
-if mistake_number = 1 then (
-    mistake_answer : round((1/2) * base_length * slant), /* using slant as height */
-    feedback : "Great effort! Remember, slant height is the side of the triangle, not its perpendicular height. Try using Pythagoras to find the height correctly."
-)
-else if mistake_number = 2 then (
-    mistake_answer : round((1/2) * base_length * half_base), /* using half base as height */
-    feedback : "Nice try. Half the base helps form the right-angled triangle, but it is not the perpendicular height itself. Please review the triangle splitting method."
-)
-else if mistake_number = 3 then (
-    mistake_answer : round(area_triangle), /* forgetting to multiply by 5 */
-    feedback : "Almost there! You calculated the area of one triangle perfectly. Just remember to multiply by 5 to get the total pentagon area."
-)
-else if mistake_number = 4 then (
-    mistake_answer : round((base_length * slant) / 2), /* using (base*slant)/2 directly */
-    feedback : "You’re working hard, which is great! However, slant height is not perpendicular to the base. Always use the perpendicular height in the area formula."
+/* Slant height: divisible by 5, strictly between half_base and max_slant */
+slant : 5 * (
+  floor(half_base/5)
+  + rand(floor((max_slant - half_base)/5))
+  + 1
 );
 
-/* Display outputs for debugging or STACK usage */
-/*display(base_length, slant, half_base, height, area_triangle, correct_answer, mistake_number, mistake_answer, feedback);*/
+/* Height using Pythagoras */
+height : sqrt(slant^2 - half_base^2);
+height_d : decimalplaces(float(height), 1);
+
+/* Area of one triangle */
+area_triangle : (1/2) * base_length * height_d;
+area_triangle_d : decimalplaces(area_triangle, 1);
+
+/* Area of pentagon */
+area_pentagon : 5 * area_triangle;
+ta_exact : decimalplaces(area_pentagon, 1);
+ta : round(area_pentagon);
+
+/* ---------- Randomised mistake generation (NO conditionals) ---------- */
+
+/* Mistake selector */
+mistake_number : rand(4) + 1;
+
+/* List of mistake answers */
+mistake_answers : [
+  round((1/2) * base_length * slant),      /* using slant as height */
+  round((1/2) * base_length * half_base),  /* using half base as height */
+  round(area_triangle),                    /* forgetting ×5 */
+  round((base_length * slant) / 2)         /* base × slant / 2 */
+];
+
+/* Corresponding feedback messages */
+mistake_feedback : [
+  "Great effort! Remember, the slant height is not the perpendicular height. Use Pythagoras to find the correct height.",
+  "Nice try. Half the base helps form the right triangle, but it is not the perpendicular height.",
+  "Almost there! You found the area of one triangle. Remember to multiply by 5.",
+  "Good attempt! The slant height is not perpendicular to the base. Use the perpendicular height in the area formula."
+];
+
+/* Selected mistake answer and feedback */
+mistake_answer : mistake_answers[mistake_number];
+feedback : mistake_feedback[mistake_number];
 ]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>The base \(={@base_length@}\)</p>
-<p>The slant height \(={@slant@}\)</p>
-<p>The area of the pentagon \(={@ta@}\)</p>]]></text>
+      <text><![CDATA[<p><strong>Purpose of the question</strong></p>
+
+<p>
+This question assesses students’ ability to calculate the area of a regular pentagon by
+decomposing it into five congruent isosceles triangles with a common centre.
+The emphasis is on correct geometric reasoning rather than memorisation of a single formula.
+</p>
+
+<p><strong>Mathematical approach</strong></p>
+
+<p>
+Students are expected to recognise that the pentagon can be split into five identical triangles,
+each with base equal to the side length of the pentagon and height obtained by dropping a
+perpendicular from the centre to the base.
+The perpendicular height must be calculated using Pythagoras’ theorem.
+</p>
+
+<p><strong>Use of the diagram</strong></p>
+
+<ul>
+  <li>The JSXGraph figure is centred at \(O\) and is provided to support visualisation.</li>
+  <li>The slanted sides represent the distance from the centre to a vertex.</li>
+  <li>The dashed segment represents the perpendicular height used in the area calculation.</li>
+  <li>The diagram is illustrative only and is not used for validation.</li>
+</ul>
+
+<p><strong>Design choices</strong></p>
+
+<ul>
+  <li>All values are generated to ensure a valid right triangle.</li>
+  <li>No conditional statements are used in the question variables.</li>
+  <li>Common incorrect strategies are anticipated and handled in the PRT.</li>
+</ul>
+
+<p><strong>Common student difficulties</strong></p>
+
+<ul>
+  <li>Using the slanted side instead of the perpendicular height.</li>
+  <li>Using half the base as the height.</li>
+  <li>Calculating the area of only one triangle and forgetting to multiply by five.</li>
+</ul>]]></text>
     </questionnote>
     <questiondescription format="html">
-      <text/>
+      <text><![CDATA[<p id="author">Monica Sherily</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+<p id="description">This question is on finding the area of a regular pentagon. The learner is required to observe the diagram and identify the various dimensions then calculate the area of the pentagon. Guide them to first find the area of one triangle formed by drawing lines from the center to each vertex, and then multiply it by five to get the total area of the pentagon.</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>

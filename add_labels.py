@@ -7,7 +7,7 @@ import string
 TARGET_TAGS = [
     "activity", "example", "exercise", "exercises", "exploration", "investigation", "introduction", "insight", "task", "technology", "note", "notation", 
     "figure", "table", 
-    "p", "ol", "ul", "li", 
+    "p", "li", 
 ]
 FILE_EXTENSION = '.ptx'
 SEARCH_DIR = './source'  # Current directory

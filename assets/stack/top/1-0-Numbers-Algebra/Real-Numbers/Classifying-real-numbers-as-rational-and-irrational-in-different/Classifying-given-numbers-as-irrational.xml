@@ -4,44 +4,47 @@
     <name>
       <text>Classifying given numbers as irrational</text>
     </name>
-    <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Which of the following numbers are irrational? Select all that apply.</p>
-
-
-
+    <questiontext format="html">
+      <text><![CDATA[<p>Which of the following numbers are irrational? <strong>Exactly three</strong> of the numbers are irrational. Selecting more or fewer will result in an incorrect answer.</p>
 <p>[[input:ans1]][[validation:ans1]] [[feedback:prt1]]</p>]]></text>
     </questiontext>
-    <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<p>Worked Solution</p>
-<p>An irrational number cannot be expressed as a fraction \( \frac{p}{q} \) where \( p \) and \( q \) are integers.</p>
-
-<p>Note that:</p>
+    <generalfeedback format="html">
+      <text><![CDATA[<p><strong>Worked Solution</strong></p>
+<p>An <strong>irrational number</strong> is a number that cannot be written in the form \(\displaystyle \frac{p}{q} \), where \( p \) and \( q \) are integers and \( q \neq 0 \).</p>
+<p>To decide whether a number is rational or irrational, use the following rules:</p>
 <ul>
-<li>\( \sqrt{n} \) is irrational when \( n \) is not a perfect square</li>
-<li>\( \pi \) and \( e \) are irrational</li>
-<li>Decimals that neither terminate nor repeat are irrational</li>
+<li><strong>Square roots:</strong> If the number inside the square root is a <em>perfect square</em>, the result is rational. If it is <em>not</em> a perfect square, the result is irrational.</li>
+<li><strong>Special numbers:</strong> The numbers \( \pi \) and \( e \) are irrational.</li>
+<li><strong>Decimals:</strong>
+<ul>
+<li>Decimals that <em>terminate</em> or <em>repeat</em> are rational.</li>
+<li>Decimals that <em>do not terminate and do not repeat</em> are irrational.</li>
 </ul>
-<p>Therefore, irrational numbers in this list are: \({@correct_answers[1][3]@},{@correct_answers[2][3]@},{@correct_answers[3][3]@}\)</p>]]></text>
+</li>
+</ul>
+<p>Applying these rules to the given list, the irrational numbers are:</p>
+<p>\[\displaystyle {@correct_answers[1][3]@},\; {@correct_answers[2][3]@},\; {@correct_answers[3][3]@} \]</p>
+<p><em>If you selected any other numbers, check which rule above applies to them and revise your choice.</em></p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>/* Pool of irrational expressions (true) */
 irrationals_all: [
     pi, sqrt(2), sqrt(3), sqrt(5), 2*sqrt(2),
-    pi - 3, sqrt(8), 0.121221222, 3*sqrt(7),
+    pi - 3, sqrt(8), 3*sqrt(7),
     sqrt(10), e, sqrt(11), pi/2, sqrt(13),
     sqrt(17), sqrt(19), sqrt(23), sqrt(29)
 ];
 
 /* Pool of rational expressions (false) */
 rationals_all: [
-    5, -4, 7/3, 0.25, 3/10, sqrt(25), sqrt(49),
+    -4, 7/3, 0.25, 3/10, sqrt(25), sqrt(49),
     12/5, 0.12121212, -9, 4/7, 0, -13, 1.5,
     2/3, sqrt(36), sqrt(100), 0.33333333,
     -2.5, 0.75, sqrt(64), 0.6
@@ -96,13 +99,13 @@ ta_largest: length(ta);
     <assumepositive>0</assumepositive>
     <assumereal>0</assumereal>
     <prtcorrect format="html">
-      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+      <text><![CDATA[<p><i class="fa fa-check"></i> Correct answer, well done.</p>]]></text>
     </prtcorrect>
     <prtpartiallycorrect format="html">
-      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+      <text><![CDATA[<p><i class="fa fa-adjust"></i> Your answer is partially correct.</p>]]></text>
     </prtpartiallycorrect>
     <prtincorrect format="html">
-      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+      <text><![CDATA[<p><i class="fa fa-times"></i> Incorrect answer.</p>]]></text>
     </prtincorrect>
     <decimals>.</decimals>
     <scientificnotation>*10</scientificnotation>
@@ -154,15 +157,40 @@ ta_largest: length(ta);
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-1-T</trueanswernote>
         <truefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>You selected all the irrational numbers.</p>]]></text>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text><![CDATA[<p> You have to select a list of irrational numbers only. Kindly check the worked solution to see how classify to numbers.</p>]]></text>
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>SubstEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mcq_correct(ta)</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You selected at least one <strong>rational</strong> number.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
         </falsefeedback>
       </node>
     </prt>
