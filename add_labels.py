@@ -1,6 +1,7 @@
 import os
 import re
 import random
+import argparse
 import string
 
 # Configuration
@@ -30,21 +31,41 @@ def process_content(content):
         content = re.sub(pattern, replace_func, content)
     return content
 
-def main():
-    for root, _, files in os.walk(SEARCH_DIR):
+def iter_ptx_files(path):
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Search path does not exist: {path}")
+
+    if os.path.isfile(path):
+        if path.endswith(FILE_EXTENSION):
+            yield path
+        return
+
+    for root, _, files in os.walk(path):
         for file in files:
             if file.endswith(FILE_EXTENSION):
-                file_path = os.path.join(root, file)
-                
-                with open(file_path, 'r', encoding='utf-8') as f:
-                    original_content = f.read()
-                
-                new_content = process_content(original_content)
-                
-                if new_content != original_content:
-                    with open(file_path, 'w', encoding='utf-8') as f:
-                        f.write(new_content)
-                    print(f"Updated: {file_path}")
+                yield os.path.join(root, file)
+
+
+def main(*, search_dir=SEARCH_DIR):
+    for file_path in iter_ptx_files(search_dir):
+        with open(file_path, 'r', encoding='utf-8') as f:
+            original_content = f.read()
+
+        new_content = process_content(original_content)
+
+        if new_content != original_content:
+            with open(file_path, 'w', encoding='utf-8') as f:
+                f.write(new_content)
+            print(f"Updated: {file_path}")
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Add xml:id labels to PreTeXt files.")
+    parser.add_argument(
+        "--search-dir",
+        dest="search_dir",
+        default=SEARCH_DIR,
+        help="Directory or file to process (defaults to ./source).",
+    )
+
+    args = parser.parse_args()
+    main(search_dir=args.search_dir)
