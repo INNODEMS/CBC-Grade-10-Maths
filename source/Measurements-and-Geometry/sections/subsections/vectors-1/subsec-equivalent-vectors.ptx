@@ -188,6 +188,11 @@
                     direction but <alert>not</alert> to be equivalent? Explain your answer.
                 </p>
             </statement>
+            <answer>
+                <p>
+                    <alert>Yes</alert>. Two vectors are only equivalent if they have both the <alert>same direction</alert> and the <alert>same magnitude</alert> (length).
+                </p>
+            </answer>
         </exercise>
         <exercise xml:id="auto_e4t6o20e">
             <statement>
@@ -239,6 +244,40 @@
                     </image>
                 </figure>
             </statement>
+            <answer>
+                <p>
+                    <ul>
+                        <li>
+                            <p>
+                                Equivalent Pairs
+                            </p>
+                            <p>
+                                <m>\overrightarrow{DA}</m> and <m>\overrightarrow{CB}</m>: Both point directly upward and have the same length (sides of the square).
+                            </p>
+                            <p>
+                                <m>\overrightarrow{DC}</m> and <m>\overrightarrow{AB}</m>: Both point directly to the right and have the same length.
+                            </p>
+                            <p>
+                                <m>\overrightarrow{DO}</m> and <m>\overrightarrow{OB}</m> Both point in the same direction along the diagonal and have the same length.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Non-Equivalent Pairs
+                            </p>
+                            <p>
+                                <m>\overrightarrow{DA}</m> and <m>\overrightarrow{BC}</m>: While they have the same length, they point in opposite directions (up vs. down).
+                            </p>
+                            <p>
+                                <m>\overrightarrow{DC}</m> and <m>\overrightarrow{DA}</m>: These have the same length but different directions (horizontal vs. vertical).
+                            </p>
+                            <p>
+                                <m>\overrightarrow{DB}</m> and <m>\overrightarrow{AC}</m>: These are the diagonals; they have the same length but different directions.
+                            </p>
+                        </li>
+                    </ul>
+                </p>
+            </answer>
         </exercise>
         <exercise xml:id="auto_b2tri8nw">
             <statement>
@@ -246,6 +285,55 @@
                     Draw two vectors that have the same magnitude and direction but start at different points.
                 </p>
             </statement>
+            <answer>
+                <p>
+                    
+                </p>
+                <figure xml:id="equiv-vectors-1">
+                    <caption></caption>
+                    <image width="50%">
+                        <shortdescription></shortdescription>
+                        <latex-image>
+                           \begin{tikzpicture}
+
+                                % Draw fine grid (10x smaller squares)
+                                \draw[gray!30, very thin, step=0.1] (-1,-1) grid (6,5);
+
+                                % Draw main grid
+                                \draw[gray!70, thin, step=1] (-1,-1) grid (6,5);
+                                
+                                % Draw Axes
+                                \draw[thick, -&gt;] (-1,0) -- (6.5,0) node[below] {$x$};
+                                \draw[thick, -&gt;] (0,-1) -- (0,5.5) node[left] {$y$};
+
+                                % Define vector 1 starting at (1,1)
+                                \coordinate (Start1) at (1,1);
+                                \coordinate (End1) at (4,3); % Magnitude: sqrt(3^2 + 2^2)
+                                
+                                % Define vector 2 starting at (2,0)
+                                \coordinate (Start2) at (2,0);
+                                \coordinate (End2) at (5,2); % Same magnitude and direction
+                                
+                                % Draw Vector 1 (Blue)
+                                \draw[very thick, blue, -{Latex[scale=1.5]}] (Start1) -- (End1) 
+                                    node[midway, above left] {$\mathbf{u}$};
+                                \fill (Start1) circle (2pt);
+                                \node[below left] at (Start1) {\small $(1,1)$};
+
+                                % Draw Vector 2 (Red)
+                                \draw[very thick, red, -{Latex[scale=1.5]}] (Start2) -- (End2) 
+                                    node[midway, below right] {$\mathbf{v}$};
+                                \fill (Start2) circle (2pt);
+                                \node[below right] at (Start2) {\small $(2,0)$};
+
+                                % Label note
+                                \node[draw, fill=white, font=\small] at (3,4.5) {$\mathbf{u} = \mathbf{v} = \binom{3}{2}$};
+
+                            \end{tikzpicture}
+                        </latex-image>
+                    </image>
+                </figure>
+            </answer>
         </exercise>
     </exercises>
 
