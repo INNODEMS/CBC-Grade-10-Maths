@@ -3,6 +3,7 @@ import re
 import random
 import argparse
 import string
+from pathlib import Path
 
 # Configuration
 TARGET_TAGS = [
@@ -11,6 +12,7 @@ TARGET_TAGS = [
     "p", "li", 
 ]
 FILE_EXTENSION = '.ptx'
+EXCLUDE = 'resources-blurb-'
 SEARCH_DIR = './source'  # Current directory
 
 def generate_label(length=8):
@@ -42,7 +44,7 @@ def iter_ptx_files(path):
 
     for root, _, files in os.walk(path):
         for file in files:
-            if file.endswith(FILE_EXTENSION):
+            if file.endswith(FILE_EXTENSION) and not Path(file).stem.startswith(EXCLUDE):
                 yield os.path.join(root, file)
 
 
