@@ -140,6 +140,8 @@ def check_deployed_variants(stack_files):
 def run_audit():
     print("--- Starting IMAGE Audit ---\n")
     audit_includes((".png", ".jpg", ".jpeg", ".webp"), "image")
+    print("--- Starting PDF Audit ---\n")
+    audit_includes((".pdf"), "dataurl")
     print("\n\n--- Starting STACK Audit ---\n")
     stack_files = audit_includes(".xml", "stack", orphan_include_file="orphaned.ptx")
     check_deployed_variants(stack_files)
