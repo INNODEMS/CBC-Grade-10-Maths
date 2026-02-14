@@ -1,16 +1,132 @@
-<subsection xml:id="subsec-Rotation-on-different-planes">
-    <title>Rotation on Different Planes</title>
+  <subsubsection xml:id="subsubsec-rotational-symmetry-of-plane-figures">
+    <title>Rotational Symmetry of Plane Figures</title>
+    <activity xml:id="auto_t1sdmwvk">
+    <p xml:id="auto_hh765rl0">
+        <term>Work in groups</term>
+    </p>
+    <p xml:id="auto_afyk420x">
+      <term>Materials</term>
+    </p>
+    <p xml:id="auto_6y84x4k9">
+      <ul xml:id="auto_g2k0bgps">
+        <li xml:id="auto_f73lvw6o">
+          <p xml:id="auto_f3i01x95">
+            A printed copy of the figure.
+          </p>
+        </li>
+        <li xml:id="auto_f99oifa7">
+          <p xml:id="auto_wgfdh86k">
+            Pencils, push pin. 
+          </p>
+        </li>
+        <li xml:id="auto_nyb4pysc">
+          <p xml:id="auto_21skosah">
+            Constuction paper.
+          </p>
+        </li>
+        <li xml:id="auto_rgz4dssl">
+          <p xml:id="auto_kq1qy4fo">
+            Pair of scissors.
+          </p>
+        </li>
+      </ul>
+    </p>
+    <image width="50%">
+        <latex-image label="object_star">
+          \begin{tikzpicture}
 
-    <introduction xml:id="auto_2ycdkqf9">
-        <p xml:id="auto_1axxqzuz">
-            Rotation on different planes" refers to the concept of rotating an object or point around various axes within different planes in a three-dimensional space.
-        </p>
-    </introduction>
+            % Draw the star
+            \fill[purple!50, even odd rule]
+             (90:3) -- (234:3) -- (18:3) -- (162:3)   -- (306:3) -- cycle;
 
-    <subsubsection xml:id="subsubsec-rotation-in-the-cartesian-plane">
-        <title>Rotation in the Cartesian Plane</title>
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    <p xml:id="auto_j18afhhs">
+      <term>Instructions</term>
+    </p>
+    <p xml:id="auto_orhmh0pi">
+      <ul xml:id="auto_wvykizxz">
+        <li xml:id="auto_10vn4ifi">
+          <p xml:id="auto_vhdjy34q">
+             On a construction paper, trace and cut the figure above. 
+          </p>
+        </li>
+        <li xml:id="auto_xd8tk4xy">
+          <p xml:id="auto_wirs82tu">
+            Place the tracing on top the printed copy and place a pin through their centre such that the tracing can rotate.
+          </p>
+        </li>
+        <li xml:id="auto_mb1genoo">
+          <p xml:id="auto_zw752mur">
+            Manually rotate the tracing around the centre and note how many times the shape looks exactly the same in one full turn <m>(360^\circ).</m>
+          </p>
+        </li>
+      </ul>
+    </p>
+    <p xml:id="auto_dsv6ik6v">
+      <term>Key Takeaway</term>
+    </p>
+    <p xml:id="auto_xr1u4fdv">
+      The number of times the tracing of the star fits onto the printed copy in one complete turn is <m>5 </m> times.
+       This is called the <term>order of rotational symmetry,</term> that is, the number of times the figure fits onto itself in one complete turn <m>(360^\circ).</m>
+    </p>
+    <p xml:id="auto_du6n11n0">
+      When given a figure with the measure of the angle between the identical parts, the order of rotational symmetry can be computed as shown.
+    </p>
+    <p xml:id="auto_9kalo2an">
+      <me>
+        \text{ Order of rotational symmetry} = \frac{360^\circ}{\text{angle between the identical parts}}
+      </me>
+    </p>
+  </activity>
 
-        <activity xml:id="auto_cd6w1qt4">
+  <example xml:id="auto_yt5k8ob1">
+    <statement>
+      <p xml:id="auto_50rbmwc6">
+        Find the order of rotational symmetry in the figure below.
+      </p>
+      <image width="50%">
+        <latex-image label="order_of_rotational_symmetry_example">
+          \begin{tikzpicture}
+          \usetikzlibrary{angles,quotes} % Required for angle annotations
+            \draw(-3.4,3.4) -- (-0.6,0.6);
+            \draw(-2,4) -- (-2,0);
+            \draw(-0.6,3.4) -- (-3.4,0.6);
+            \draw(-4,2) -- (0,2);
+            \coordinate (D) at (-2,2);
+            \coordinate (I) at (0,2);
+            \coordinate (C) at (-0.6,3.4);
+
+            \draw[thick] (-2,2) circle[radius=2];
+
+          \draw[draw=black] plot coordinates{(I)(D)(C)} pic["$45^\circ$", draw=black, angle eccentricity=1.2, angle radius=.5cm]
+          {angle=I--D--C};; 
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </statement>
+    <solution>
+      <p xml:id="auto_3unqnara">
+        <me>
+        \text{ Order of rotational symmetry} = \frac{360^\circ}{\text{angle between the identical parts}}
+      </me>
+      </p>
+      <p xml:id="auto_q3z5ll7v">
+        <me>
+        \text{ Order of rotational symmetry} = \frac{360^\circ}{45^\circ}
+      </me>
+      </p>
+      <p xml:id="auto_t5bd5mzu">
+        <me>
+        \text{ Order of rotational symmetry} = 8
+      </me>
+        
+      </p>
+    </solution>
+  </example>
+
+          <activity xml:id="auto_cd6w1qt4">
             <introduction xml:id="auto_chw2e7wg">
                 <p xml:id="auto_6aqabg7o">
                     <alert>Work in pairs</alert>
@@ -432,7 +548,6 @@
             
         </exercises>
         
-    </subsubsection>
     
 
 
@@ -455,4 +570,90 @@
                 <stack label="stk-rotation-of-a-triangle-about-the-origin-in-a-clockwise-direction" source="stack/top/2-0-Measurement-Geometry/2-3-Rotation/2-3-2-Rotation-on-Different-Planes/Rotation-of-a-triangle-about-the-origin-in-a-clockwise-direction.xml" />
             </exercise>
                 
-</subsection>
+
+  <exercises xml:id="exercises-determining-the-order-of-rotational-symmetry-of-plane-figures">
+    <exercise xml:id="auto_chuv0uke">
+      <statement>
+        <p xml:id="auto_012sbg7k">
+          State the order of symmetry in the figures below.
+        </p>
+        <sidebyside>
+          <image width="50%">
+          <latex-image label="triangle_rotational_symmetry">
+            \begin{tikzpicture}
+              \draw[thick,red] (0:.5cm) \foreach \x in {120,240} {
+                -- (\x:.5cm)
+                } -- cycle (90:.5cm);
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+
+        <image width="50%">
+          <latex-image label="pentagon_rotational_symmetry">
+              \begin{tikzpicture}
+              \draw[thick,orange] (0:.5cm) \foreach \x in {72,144,...,359} {
+                -- (\x:.5cm)
+               } -- cycle (90:.5cm) ;  
+              \end{tikzpicture}
+          </latex-image>
+          </image>
+
+          <image width="50%">
+          <latex-image label="octagon_rotaional_symmetry">
+            \begin{tikzpicture}
+              \draw[thick,purple] (0:.5cm) \foreach \x in {45,90,...,359} {
+               -- (\x:.5cm)
+               } -- cycle (90:.5cm);
+            \end{tikzpicture}
+          </latex-image>
+          </image>
+        </sidebyside>
+
+        <sidebyside>
+          <image width="50%">
+          <latex-image label="circle_rotational_symmetry">
+            \begin{tikzpicture}
+              \draw[thick,purple] (0:.5cm) \foreach \x in {10,20,...,359} {
+               -- (\x:.5cm)
+               } -- cycle (90:.5cm);
+            \end{tikzpicture}
+          </latex-image>
+          </image>
+
+          <image width="50%">
+            <latex-image label="Circle_triangle_rotational_symmetry">
+              \begin{tikzpicture}
+                \fill[black!20] circle (2pt);
+                \draw (0:.5cm) \foreach \x in {120,240} {
+                    -- (\x:.5cm)
+                  } -- cycle (90:.5cm) ;
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+
+          <image width="50%">
+          <latex-image label="rhombus_rotational_symmetry">
+            \begin{tikzpicture}
+                \usetikzlibrary{quotes,angles}
+                \draw[blue,thick](0,2) coordinate (D)-- (0,0) coordinate (A)-- (4,0) coordinate (B)--(2,2)coordinate(C)--(0,2)coordinate(D);
+                \draw[blue](0,0)--(0,0.3)--(0.3,0.3)--(0.3,0);
+                \draw[blue](0,2)--(0.3,2)--(0.3,1.7)--(0,1.7);
+                \draw[blue](0.9,2.1)--(1,2)--(0.9,1.9);
+                \draw[blue](0.9,0.1)--(1,0)--(0.9,-0.1);
+                \end{tikzpicture}
+          </latex-image>
+          </image>
+        </sidebyside>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="auto_euvelelj">
+      <statement>
+        <p xml:id="auto_52jf1osh">
+          Find the order of rotational symmetry in the letters of the alphabet.
+        </p>
+      </statement>
+    </exercise>
+  </exercises>
+    
+  </subsubsection>
