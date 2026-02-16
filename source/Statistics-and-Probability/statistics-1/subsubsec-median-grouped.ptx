@@ -1,9 +1,149 @@
 <subsubsection xml:id="subsubsec-median-grouped">
     <title>Median (Grouped)</title>
-    
+
     <introduction>
         <p>
-            TODO
+            When data is grouped, we cannot determine the exact middle value by simply counting. Instead, we use cumulative frequencies to locate the median class and then use interpolation to estimate the median value.
         </p>
     </introduction>
+
+    <activity>
+        <p>
+            <term>Work in groups</term>
+        </p>
+        <p>
+            Using the pocket money data provided below:
+        </p>
+        <table>
+            <title>Pocket Money Distribution</title>
+            <tabular left="medium" right="medium" top="medium" bottom="medium">
+                <row halign="left" header="yes">
+                    <cell>Pocket Money (Ksh)</cell>
+                    <cell><m>100 - 199</m></cell>
+                    <cell><m>200 - 299</m></cell>
+                    <cell><m>300 - 399</m></cell>
+                    <cell><m>400 - 499</m></cell>
+                    <cell><m>500 - 599</m></cell>
+                </row>
+                <row halign="left" header="yes"> 
+                    <cell>Frequency</cell>
+                    <cell><m>8</m></cell>
+                    <cell><m>15</m></cell>
+                    <cell><m>22</m></cell>
+                    <cell><m>20</m></cell>
+                    <cell><m>10</m></cell>
+                </row>
+            </tabular>
+        </table>
+        <p>
+            <ol>
+                <li><p>Construct a Cumulative Frequency column for this data.</p></li>
+                <li><p>Identify the class interval where the middle student lies.</p></li>
+            </ol>
+        </p>
+    </activity>
+
+    <insight>
+        <p>
+            <term>Calculating Median</term>
+        </p>
+        <p>
+            For grouped frequency data, we use interpolation to estimate the median using the following formula:
+        </p>
+        <p>
+            <md>
+                <mrow> \text{Median} = \amp  L + \left(\frac{\frac{n}{2} - CF}{F}\right)\times C</mrow>
+            </md>
+        </p>
+        <p>
+            Where:
+            <ul>
+                <li><p><m>L</m> = Lower boundary of the median class.</p></li>
+                <li><p><m>n</m> = Sum of all frequencies (<m>\sum f</m>).</p></li>
+                <li><p><m>CF</m> = Cumulative frequency <term>before</term> the median class.</p></li>
+                <li><p><m>F</m> = Frequency of the median class itself.</p></li>
+                <li><p><m>C</m> = Class width.</p></li>
+            </ul>
+        </p>
+    </insight>
+
+    <example>
+        <statement>
+            <p>
+                The data below represents the times (in seconds) recorded in the heats of a <m>100</m> m race. The data has been grouped into intervals of width 0.5 seconds.
+            </p>
+            <p>
+                Estimate the median time based on the frequency table below.
+            </p>
+            <table>
+                <title>Race Times</title>
+                <tabular left="medium" right="medium" top="medium" bottom="medium">
+                    <row halign="left" header="yes">
+                        <cell>Class Interval</cell>
+                        <cell>Frequency</cell>
+                    </row>
+                    <row><cell><m>11.5 - 11.9</m></cell><cell><m>2</m></cell></row>
+                    <row><cell><m>12.0 - 12.4</m></cell><cell><m>4</m></cell></row>
+                    <row><cell><m>12.5 - 12.9</m></cell><cell><m>5</m></cell></row>
+                    <row><cell><m>13.0 - 13.4</m></cell><cell><m>4</m></cell></row>
+                    <row><cell><m>13.5 - 13.9</m></cell><cell><m>5</m></cell></row>
+                    <row><cell><m>14.0 - 14.4</m></cell><cell><m>6</m></cell></row>
+                    <row><cell><m>14.5 - 14.9</m></cell><cell><m>5</m></cell></row>
+                    <row><cell><m>15.0 - 15.4</m></cell><cell><m>4</m></cell></row>
+                    <row><cell><m>15.5 - 15.9</m></cell><cell><m>1</m></cell></row>
+                </tabular>
+            </table>
+        </statement>
+        <solution>
+            <p>
+                First, we add a Cumulative Frequency (CF) column to find the position of the median.
+            </p>
+            <table>
+                <title>Cumulative Frequency Table</title>
+                <tabular left="medium" right="medium" top="medium" bottom="medium">
+                    <row halign="left" header="yes">
+                        <cell>Class Interval</cell>
+                        <cell>Frequency (<m>f</m>)</cell>
+                        <cell>Cumulative Frequency (<m>CF</m>)</cell>
+                    </row>
+                    <row><cell><m>11.5 - 11.9</m></cell><cell><m>2</m></cell><cell><m>2</m></cell></row>
+                    <row><cell><m>12.0 - 12.4</m></cell><cell><m>4</m></cell><cell><m>6</m></cell></row>
+                    <row><cell><m>12.5 - 12.9</m></cell><cell><m>5</m></cell><cell><m>11</m></cell></row>
+                    <row><cell><m>13.0 - 13.4</m></cell><cell><m>4</m></cell><cell><m>15</m></cell></row>
+                    <row><cell><m>13.5 - 13.9</m></cell><cell><m>5</m></cell><cell><m>20</m></cell></row>
+                    <row><cell><m>14.0 - 14.4</m></cell><cell><m>6</m></cell><cell><m>26</m></cell></row>
+                    <row><cell><m>14.5 - 14.9</m></cell><cell><m>5</m></cell><cell><m>31</m></cell></row>
+                    <row><cell><m>15.0 - 15.4</m></cell><cell><m>4</m></cell><cell><m>35</m></cell></row>
+                    <row><cell><m>15.5 - 15.9</m></cell><cell><m>1</m></cell><cell><m>36</m></cell></row>
+                </tabular>
+            </table>
+            <p>
+                <strong>Step 1: Locate the Median Class</strong><br/>
+                Total frequency <m>n = 36</m>. The median position is <m>\frac{36}{2} = 18</m>.
+                Looking at the CF column, the value 18 falls within the interval where the cumulative frequency rises from 15 to 20. 
+                Therefore, the <term>median class is 13.5 - 13.9</term>.
+            </p>
+            <p>
+                <strong>Step 2: Apply the Formula</strong>
+                <ul>
+                    <li><m>L = 13.5</m> (Lower boundary)</li>
+                    <li><m>n = 36</m>, so <m>\frac{n}{2} = 18</m></li>
+                    <li><m>CF = 15</m> (Value before the median class)</li>
+                    <li><m>F = 5</m> (Frequency of the median class)</li>
+                    <li><m>C = 0.5</m> (Class width)</li>
+                </ul>
+            </p>
+            <p>
+                <md>
+                    <mrow> \text{Median} = \amp  13.5 + \left(\frac{18 - 15}{5}\right)\times 0.5</mrow>
+                    <mrow> =  \amp 13.5 + \left(\frac{3}{5}\times 0.5\right)</mrow>
+                    <mrow> =  \amp 13.5 + 0.3</mrow>
+                    <mrow> =  \amp 13.8</mrow>
+                </md>
+            </p>
+            <p>
+                Thus, the median time is <m>13.8</m> seconds.
+            </p>
+        </solution>
+    </example>
 </subsubsection>
