@@ -6,7 +6,8 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>Mathematics test scores for \( {@n_students@} \) students in a class are listed below:</p>
-<p>\({@raw_data@}\)</p>
+<p style="background-color: #f9f9f9; padding: 15px; border: 1px solid #ddd; font-family: monospace; font-size: 1.1em; line-height: 1.6;">
+\({@raw_data@}\)</p>
 <p><strong>a)</strong> Complete the frequency distribution table below by counting the number of scores that fall into each class interval.</p>
 <table border="1">
     <thead>
@@ -67,7 +68,7 @@
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text><![CDATA[/* 1. SETUP CLASSES AND RAW DATA */
@@ -130,7 +131,8 @@ median_est: float(L_med + ((med_pos - cf_prev) / f_med) * h);
 
 /* 4. DISPLAY HELPERS */
 /* Create a string of the raw data for display */
-data_str: sconcat(raw_data);]]></text>
+data_str: sconcat(raw_data);
+for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
