@@ -1,0 +1,231 @@
+<subsubsection xml:id="subsubsec-area-of-octagons">
+    <title>Area of Octagons</title>
+    <p xml:id="auto_gxxksqaf"> A regular octagon is an(8-sided) polygon with eight vertices (corners) and ten edges (sides).
+    </p>
+    <activity xml:id="auto_88250qv0">
+        <statement>
+            <p xml:id="auto_4g0g4yrs">
+                <m>\textbf{Materials Needed:}</m>
+            </p>
+            <p xml:id="auto_7cb56o2z">
+                 ♦  Compass,                Ruler, 
+                 Protractor
+               </p>
+               <p xml:id="auto_byycs9ay">
+                 ♦ Pencil, 
+                 Eraser, 
+                 Graph paper (optional)
+            </p>
+            <p xml:id="auto_76f996cx">
+             <m>\textbf{ Drawing a Regular Octagon (8-sided Polygon)}</m>   
+            </p>
+            <p xml:id="auto_7bx29sjd">
+                1. Draw a Circle:
+            </p>
+            <p xml:id="auto_h0766iuf">
+                🔹Use a compass to draw a circle of your deired radius.
+            </p>
+            <p xml:id="auto_7nott2lt">
+                🔹Mark the center (O).
+            </p>
+            <p xml:id="auto_vuzuxzgo">
+                2. Draw the First Diameter:
+            </p>
+            <p xml:id="auto_k7sko17o">
+                🔹Use a ruler to draw a horizontal diameter (P0 to 95) passing through the center.
+            </p>
+            <p xml:id="auto_q7m43u0m">
+               3. Divide the Circle into 8 Equal Parts. 
+            </p>
+            <p xml:id="auto_effwyqqv">
+                🔹Use a protractor to measure angles of 360° ÷ 8 = 45° from point P0.
+            </p>
+            <p xml:id="auto_sdzdl88y">
+                🔹Mark each 45° interval on the circle to get 8 points.
+            </p>
+            <p xml:id="auto_nva6m3i7">
+                4. Connect the Points: 
+            </p>
+            <p xml:id="auto_3a6iyc1x">
+                🔹Use a ruler to connect the eight points in order to form the octagon.
+            </p>
+        </statement>
+    </activity>
+            <p xml:id="auto_6czg2cog">
+                <m>\textbf{Discussion Questions}</m>
+            </p>
+            <p xml:id="auto_8slk6q5x">
+                <m>\textbf{Study Questions}</m>
+            </p>
+        <p xml:id="auto_ydkb99am">
+            
+        1. What is the sum of all interior angles of an octagon ?    </p>
+    <p xml:id="auto_wfzbv9c5">
+        2, How do we calculate the measure of one interior angle of a regular octagon?
+    </p>
+    <p xml:id="auto_yxpicyol">
+       3, Have you ever seen octagon-shaped objects in real life?
+    </p>
+  
+    
+    <image width="50%">
+    <latex-image label="regular-octagon">
+        \begin{tikzpicture}
+            % Define the octagon
+            \foreach \i in {0,1,...,7} {
+            \coordinate (P\i) at ({360/8*\i}:2);
+            }
+            % Draw the octagon
+            \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7) -- cycle;
+            % Label the vertices
+            \foreach \i in {0,1,...,7} {
+                \node[font=\small] at ({360/8*\i}:2.2) {$P_{\i}$};
+            }
+        \end{tikzpicture}
+    </latex-image>
+    </image>
+        <example xml:id="auto_7t0k84m4">
+        <statement>
+            <sidebyside>
+             <p xml:id="auto_ui7wzj99">
+                A regular octagon  with O as its centre.
+               If OA is 8 cm, find its area.
+            </p>
+                   <image>
+        <latex-image label="regular-octagon-named-example">
+            \begin{tikzpicture}
+                % Define heptagon properties
+                \def\R{3} % Radius of heptagon
+                \def\angle{360/8} % Angle between vertices for an octagon
+
+                % Define heptagon vertices counterclockwise
+                \foreach \i in {0,1,2,3,4,5,6,7} {
+                    \coordinate (P\i) at (\i*\angle:\R);
+                }
+
+                % Define center
+                \coordinate (O) at (0,0);
+
+                % Draw the heptagon
+                \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7) -- cycle;
+
+                % % Label the vertices
+                % \foreach \i/\name in {0/A, 1/B, 2/C, 3/D, 4/E, 5/F, 6/G, 7/H} {
+                %     \node[scale=1.1] at (P\i) {\textbf{\name}};
+                % }
+
+                % Draw dashed lines from O to A and B
+                \draw[dashed] (O) -- (P0) node[midway, below left] { 8 cm};
+                \draw[dashed] (O) -- (P1) node[midway,  right] {8 cm};
+                 % % Label the vertices
+                % \foreach \i/\name in {0/A, 1/B, 2/C, 3/D, 4/E, 5/F, 6/G, 7/H} {
+                %     \node[scale=1.1] at (P\i) {\textbf{\name}};
+                % }
+                 % Draw arc for 45° angle
+                \draw[thick] (9:0.5) arc (9:50:0.5);
+                \node at (20:1) {\small $45^\circ$}; 
+
+                % Mark center point
+                \filldraw[black] (O) circle (2pt) node[above left] {\textbf{O}};
+            \end{tikzpicture}
+        </latex-image>
+        </image>
+            </sidebyside>
+           
+        </statement>
+        <solution>
+            <p xml:id="auto_60k67mud">
+                There are 8 triangles since an octagon has 8 sides.
+                Area of Triangle <m>AOB = \frac{1}{2} ab \text{sin} 45^\circ </m> 
+            </p>
+            <p xml:id="auto_18arfv2k">
+                <md>
+                    <mrow>  \triangle AOB = \amp \frac{1}{2}\times 8\times 8\, \text{sin} \, 45^\circ </mrow>
+                    <mrow> = \amp \frac{1}{2}\times 64\, \text{cm}^2 \times \text{sin} \,  45^\circ</mrow>
+                    <mrow> = \amp \frac{1}{2}\times 64\, \text{cm}^2 \times 0.7071 </mrow>
+                    <mrow> = \amp 22.6274 \, \text{cm}^2 </mrow>
+                    
+                </md>
+            </p>
+            <p xml:id="auto_7exzxkrz">
+                Therefore the total area 
+                <md>
+                    <mrow> = \amp 8 \times 22.6274 \, \text{cm}^2 </mrow>
+                    <mrow> = \amp 181.02 \, \text{cm}^2 </mrow>
+                </md>
+            </p>
+        </solution>
+     
+    </example>
+    
+    <example xml:id="auto_d5906h1a">
+        <statement>
+            <p xml:id="auto_wna7dzhx">
+                The figure below represents a regular octagon with O as its centre.
+                If OA is 7cm, find its area
+            </p>
+                       <image width="50%">
+        <latex-image label="octagon-example-two">
+            \begin{tikzpicture}
+                % Define heptagon properties
+                \def\R{3} % Radius of heptagon
+                \def\angle{360/8} % Angle between vertices for an octagon
+
+                % Define heptagon vertices counterclockwise
+                \foreach \i in {0,1,2,3,4,5,6,7} {
+                    \coordinate (P\i) at (\i*\angle:\R);
+                }
+
+                % Define center
+                \coordinate (O) at (0,0);
+
+                % Draw the heptagon
+                \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7) -- cycle;
+
+                % % Label the vertices
+                % \foreach \i/\name in {0/A, 1/B, 2/C, 3/D, 4/E, 5/F, 6/G, 7/H} {
+                %     \node[scale=1.1] at (P\i) {\textbf{\name}};
+                % }
+
+                % Draw dashed lines from O to A and B
+                \draw[dashed] (O) -- (P4) node[midway, below left] {7cm};
+                \draw[dashed] (O) -- (P3) node[midway,  right] {7 cm};
+                 % % Label the vertices
+                % \foreach \i/\name in {0/A, 1/B, 2/C, 3/D, 4/E, 5/F, 6/G, 7/H} {
+                %     \node[scale=1.1] at (P\i) {\textbf{\name}};
+                % }
+                <!-- % Draw arc for 45° angle
+                \draw[thick] (9:135:0.5) arc (9:180:0.5);
+                \node at (20:1) {\small $45^\circ$}; -->
+
+                % Mark center point
+                \filldraw[black] (O) circle (2pt) node[above right] {\textbf{O}};
+            \end{tikzpicture}
+        </latex-image>
+        </image>
+        </statement>
+                <solution>
+            <p xml:id="auto_cel3k5sp">
+                There are 8 triangles since an octagon has 8 sides and the sum of interior angles of one triangle is <m>360 ^\circ</m>.
+                Area of Triangle <m>AOB = \frac{1}{2} ab \, \text{sin} \, 45^\circ </m> . 
+            </p>
+            <p xml:id="auto_wbbim6z9">
+                The angle of <m>\triangle AOB = \frac{360}{8} = 45^\circ </m>
+                <md>
+                    <mrow>  \triangle AOB = \amp \frac{1}{2}\times 7\times 7 \, \, \text{ sin} \, 45^\circ </mrow>
+                    <mrow> = \amp \frac{1}{2}\times 49\, \text{cm}^2 \times \text{sin}\, 45^\circ</mrow>
+                    <mrow> = \amp \frac{1}{2}\times 49\, \text{cm}^2 \times 0.7071 </mrow>
+                    <mrow> = \amp 17.3241 \, \text{cm}^2 </mrow>
+                    
+                </md>
+            </p>
+            <p xml:id="auto_pkizzrbe">
+                Therefore the total area 
+                <md>
+                    <mrow> = \amp 8 \times 17.3241 \, \text{cm}^2 </mrow>
+                    <mrow> = \amp 138.59\, \text{cm}^2 </mrow>
+                </md>
+            </p>
+        </solution>
+    </example>
+</subsubsection>

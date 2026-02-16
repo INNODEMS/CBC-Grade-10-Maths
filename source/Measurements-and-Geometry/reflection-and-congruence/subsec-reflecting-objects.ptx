@@ -1,0 +1,876 @@
+<subsection xml:id="subsec-reflecting-objects">
+    <title>Reflecting Objects</title>
+    <activity xml:id="auto_nkg0ez0x">
+      <p xml:id="auto_pvjk0j4b">
+        <term>Work in groups</term>
+      </p>
+      <p xml:id="auto_vz9holr3">
+        Here is a step by step approach on reflection of a triangle on a plane <m>M.</m>
+      </p>
+       
+      <image>
+        <latex-image label="object_mirror_line">
+          \begin{tikzpicture}
+            % Draw the grid lines
+            \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+
+            % Draw the original triangle
+            \fill[blue,opacity=0.3] (-2,3) -- (-4,0) -- (-1,-2) -- cycle;
+            \draw[blue,thick] (-2,3) -- (-4,0) -- (-1,-2) -- cycle;
+            \node[blue] at (-2,3.1) {A};
+            \node[blue] at (-4.1,0) {B};
+            \node[blue] at (-0.9,-2.1) {C};
+
+            % Draw the mirror line x = 0
+            \draw[red,thick,-&gt;] (0,-4) -- (0,4) node[above right] {$M$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+
+      <p xml:id="auto_szvhtdk8">
+        Draw a perpendicular line from vertex <m>A</m> to the mirror line <m>M</m> and measure the distance by counting the 
+        number of squares between vertex <m>A</m> and the mirror line <m>M.</m> Repeat this process for vertices <m>B \text { and }C.</m>
+      </p>
+
+      <image>
+        <latex-image label="object_mirror_line_perpendicular_distance_1">
+          \begin{tikzpicture}
+            % Draw the grid lines
+            \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+
+            % Draw the original triangle
+            \fill[blue,opacity=0.3] (-2,3) -- (-4,0) -- (-1,-2) -- cycle;
+            \draw[blue,thick] (-2,3) -- (-4,0) -- (-1,-2) -- cycle;
+            \node[blue] at (-2,3.1) {A};
+            \node[blue] at (-4.1,0) {B};
+            \node[blue] at (-0.9,-2.1) {C};
+
+            % Draw the mirror line x = 0
+            \draw[red,thick,-&gt;] (0,-4) -- (0,4) node[above right] {$M$};
+
+            %Draw the perpendicular distance to M
+            \draw[black] (-2,3) -- (0,3);
+            \draw[black] (-4,-0) -- (0,0);
+            \draw[black] (-1,-2) -- (0,-2);
+
+            %Draw the the angle at the perpendicular bisector
+            \draw(-.4,3) -- (-.4,3.4) -- (0,3.4);
+            \draw(-.4,0) -- (-.4,.4) -- (0,.4);
+            \draw(-.4,-2) -- (-.4,-1.6) -- (0,-1.6);
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+      
+      <p xml:id="auto_ggdk245f">
+        Determine the position of the reflected vertices. For vertex <m>A</m> the perpendicular distance between the vertex and the mirror line is 
+        <m>2</m> squares. Count <m>2</m> squares from the mirror line to the opposite side of the mirror line and mark that point as <m>A',</m> 
+        which is the reflected image of vertex <m>A.</m> Repeat the same procedure the remaining vertices <m>B \text { and }C.</m>
+      </p>
+
+      <image>
+        <latex-image label="object_mirror_line_perpendicular_distance_2">
+          \begin{tikzpicture}
+            % Draw the grid lines
+            \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+
+            % Draw the original triangle
+            \fill[blue,opacity=0.3] (-2,3) -- (-4,0) -- (-1,-2) -- cycle;
+            \draw[blue,thick] (-2,3) -- (-4,0) -- (-1,-2) -- cycle;
+            \node[blue] at (-2,3.1) {A};
+            \node[blue] at (-4.1,0) {B};
+            \node[blue] at (-0.9,-2.1) {C};
+
+            % Draw the mirror line x = 0
+            \draw[red,thick,-&gt;] (0,-4) -- (0,4) node[above right] {$M$};
+
+            %Draw the perpendicular distance to M
+            \draw[black] (-2,3) -- (2,3) node[green,above right] {$A'$};
+            \draw[black] (-4,-0) -- (4,0) node[green,above right] {$B'$};
+            \draw[black] (-1,-2) -- (1,-2) node[green,above right] {$C'$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+
+      <p xml:id="auto_wls7292p">
+        Connect the reflected vertices <m>A',B' \text { and }C'</m> to create the reflected image of the triangle <m>ABC.</m>
+      </p>
+
+      <image>
+        <shortdescription>Reflected triangle</shortdescription>
+        <latex-image label="triangle-1">
+          \begin{tikzpicture}
+            
+            % Draw the grid lines
+            \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+
+
+            % Draw the original triangle
+            \fill[blue,opacity=0.3] (-2,3) -- (-4,0) -- (-1,-2) -- cycle;
+            \draw[blue,thick] (-2,3) -- (-4,0) -- (-1,-2) -- cycle;
+            \node[blue] at (-2,3.1) {A};
+            \node[blue] at (-4.1,0) {B};
+            \node[blue] at (-0.9,-2.1) {C};
+
+            % Draw the mirror line x = 0
+            \draw[red,thick,-&gt;] (0,-4) -- (0,4) node[above right] {$M$};
+
+            %Draw the perpendicular distance from M to the opposite side of the mirror
+            \draw[red,black] (-2,3) -- (2,3);
+            \draw[red,black] (-4,-0) -- (4,0);
+            \draw[red,black] (-1,-2) -- (1,-2);
+
+            % Calculate and draw the reflected triangle
+            \fill[green,opacity=0.3] (2,3) -- (4,0) -- (1,-2) -- cycle;
+            \draw[green,thick] (2,3) -- (4,0) -- (1,-2)-- cycle;
+            \node[green] at (2.2,3.3) {A'};
+            \node[green] at (4.3,0.2) {B'};
+            \node[green] at (1.5,-1.9) {C'};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+
+    </activity>
+
+    <example xml:id="auto_hlfinc15">
+      <statement>
+        <p xml:id="auto_ggo7a48m">
+          Draw the image of the pentagon under the reflaction on the diagonal mirror line <m>M.</m>
+        </p>
+
+        <image>
+        <latex-image label="object_mirror_line_example">
+          \begin{tikzpicture}
+            % Draw the grid lines
+            \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+
+            % Draw the original pentagon
+            \fill[blue,opacity=0.3] (-1,0) -- (-3,0) -- (-4,2) -- (-2,3.5) -- (0,2) -- cycle;
+            \draw[blue,thick] (-1,0) -- (-3,0) -- (-4,2) -- (-2,3.5) -- (0,2) -- cycle;
+            \node[right,blue] at (-1.2,0) {A};
+            \node[blue] at (-3.2,0) {B};
+            \node[blue] at (-4.2,2) {C};
+            \node[above,blue] at (-1.8,3.5) {D};
+            \node[blue] at (0.2,2) {E};
+
+            % Draw the mirror line x = y
+            \draw[red,thick,-&gt;] (-4,-4) -- (4,4) node[above right] {$M$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+      </statement>
+
+      <solution>
+        <p xml:id="auto_5bv3em5a">
+          To obtain the image <m>A'</m> of <m>A</m> draw a perpendicular line from <m>A</m> to the mirro line <m>M,</m> extend the 
+          line the same distance on the opposite side of the mirror line and mark the point as <m>A'.</m> Similarly, obtain the images 
+          <m>B', C', D', E'</m> the images of vertices <m>B, C, D, E</m> respectively.
+        </p>
+        <p xml:id="auto_9i7lb4vs">
+          Connect the images of the vertices to form the reflection of the pentagon. 
+        </p> 
+
+        <image>
+        <latex-image label="object_mirror_line_example_solution">
+          \begin{tikzpicture}
+            % Draw the grid lines
+            \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+
+            % Draw the original pentagon
+            \fill[blue,opacity=0.3] (-1,0) -- (-3,0) -- (-4,2) -- (-2,3.5) -- (0,2) -- cycle;
+            \draw[blue,thick] (-1,0) -- (-3,0) -- (-4,2) -- (-2,3.5) -- (0,2) -- cycle;
+            \node[right,blue] at (-1.2,0) {A};
+            \node[blue] at (-3.2,0) {B};
+            \node[blue] at (-4.2,2) {C};
+            \node[above,blue] at (-1.8,3.5) {D};
+            \node[blue] at (0.2,2) {E};
+
+            % Draw the mirror line x = y
+            \draw[red,thick,-&gt;] (-4,-4) -- (4,4) node[above right] {$M$};
+
+            %Draw the perpendicular distance from vertices to the opposite side of the mirror
+            \draw[black] (-1,0) -- (0,-1);
+            \draw[black] (-3,0) -- (0,-3);
+            \draw[black] (-4,2) -- (2,-4);
+            \draw[black] (-2,3.5) -- (3.5,-2);
+            \draw[black] (0,2) -- (2,0);
+
+            % Draw the image of the pentagon
+            \fill[purple,opacity=0.3] (0,-1) -- (0,-3) -- (2,-4) -- (3.5,-2) -- (2,0) -- cycle;
+            \draw[purple,thick] (0,-1) -- (0,-3) -- (2,-4) -- (3.5,-2) -- (2,0) -- cycle;
+            \node[left,purple] at (0,-1.2) {A'};
+            \node[purple] at (0,-3.2) {B'};
+            \node[purple] at (2,-4.2) {C'};
+            \node[right,purple] at (3.5,-2.2) {D'};
+            \node[purple] at (2.2,0) {E'};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+      </solution>
+    </example>
+    
+    <p xml:id="auto_goplwqxw">
+      <term>Key Takeaway</term>
+    </p>
+    <p xml:id="auto_4t6snj74">
+      <ul xml:id="auto_7vl2alg8">
+        <li xml:id="auto_jh8nrkgm">
+          <p xml:id="auto_oxq5mmdx">
+            Reflection moves the image of an object across the mirror line, that is, to the opposite side of the mirror line.
+          </p>
+        </li>
+        <li xml:id="auto_a3hausis">
+          <p xml:id="auto_d45o1f9r">
+            A point on the object is the same distance as its reflection from the mirror line.
+          </p>
+        </li>
+        <li xml:id="auto_vgzpwy3d">
+          <p xml:id="auto_bkgvwqp4">
+            The line connecting a point to its image is perpendicular to the mirror line. Therefore, the mirror line is the perpendicular
+            bisector of the lines connecting the object points and the image points.
+          </p>
+        </li>
+      </ul>
+    </p>
+<activity xml:id="auto_li0hnf1w">
+      <p xml:id="auto_bteilm80">
+        <term>Work in groups</term>
+      </p>
+      <p xml:id="auto_1201n9kv">
+       Consider the activity below illustrating plane of symmetry of a cube.
+      </p>
+
+      <sidebyside widths="30% 30% 30%">
+    <image>
+      <shortdescription></shortdescription>
+      <latex-image>
+        \begin{tikzpicture}[scale=3]
+
+        % Draw the cube
+        \draw[thick] (0,0,0) -- (1,0,0) -- (1,1,0) -- (0,1,0) -- cycle; % Front face
+        \draw[thick] (0,0,1) -- (1,0,1) -- (1,1,1) -- (0,1,1) -- cycle; % Back face
+        \draw[thick] (0,0,0) -- (0,0,1); % Left edge
+        \draw[thick] (1,0,0) -- (1,0,1); % Right edge
+        \draw[thick] (1,1,0) -- (1,1,1); % Right back edge
+        \draw[thick] (0,1,0) -- (0,1,1); % Left back edge
+
+        % Draw the plane of symmetry (semi-transparent)
+        \fill[red!30,opacity=0.5] (0.5,0,0) -- (0.5,1,0) -- (0.5,1,1) -- (0.5,0,1) -- cycle; % Plane
+
+        % Add labels (optional)
+        \node at (0.5, -0.1, 0.5) {Vertical Plane of Symmetry};
+
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+
+    <image>
+      <latex-image label="vertical-plane-of-symmetry-2">
+        \begin{tikzpicture}[scale=3]
+
+          % Draw the cube
+          \draw[thick] (0,0,0) -- (1,0,0) -- (1,1,0) -- (0,1,0) -- cycle; % Front face
+          \draw[thick] (0,0,1) -- (1,0,1) -- (1,1,1) -- (0,1,1) -- cycle; % Back face
+          \draw[thick] (0,0,0) -- (0,0,1); % Left vertical edge
+          \draw[thick] (1,0,0) -- (1,0,1); % Right vertical edge
+          \draw[thick] (1,1,0) -- (1,1,1); % Back right edge
+          \draw[thick] (0,1,0) -- (0,1,1); % Back left edge
+
+          % Draw one vertical plane of symmetry (semi-transparent)
+          \fill[red!30,opacity=0.5] (0,0,0.5) -- (1,0,0.5) -- (1,1,.5) -- (0,1,0.5) -- cycle; % Diagonal plane
+
+          % Add labels (optional)
+          \node at (0.5, 0.5, 1.1) {Vertical Plane of Symmetry};
+
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+
+    <image>
+      <latex-image label="horizontal plane of symmetry">
+        \begin{tikzpicture}[scale=3]
+
+        % Draw the cube
+        \draw[thick] (0,0,0) -- (1,0,0) -- (1,1,0) -- (0,1,0) -- cycle; % Bottom face
+        \draw[thick] (0,0,1) -- (1,0,1) -- (1,1,1) -- (0,1,1) -- cycle; % Top face
+        \draw[thick] (0,0,0) -- (0,0,1); % Left vertical edge
+        \draw[thick] (1,0,0) -- (1,0,1); % Right vertical edge
+        \draw[thick] (1,1,0) -- (1,1,1); % Right back vertical edge
+        \draw[thick] (0,1,0) -- (0,1,1); % Left back vertical edge
+
+        % Draw the horizontal plane of symmetry (semi-transparent)
+        \fill[green!30,opacity=0.5] (0,0.5,0) -- (1,0.5,0) -- (1,0.5,1) -- (0,0.5,1) -- cycle; % Horizontal plane
+
+        % Add labels (optional)
+        \node at (0.5, 0.6, 1.1) {Horizontal Plane of Symmetry};
+
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+
+    </sidebyside>
+
+    <sidebyside  widths="30% 30% 30%">
+      <image>
+      <latex-image label="diagonal-plane-of-symmetry-1">
+        \begin{tikzpicture}[scale=3]
+
+          % Draw the cube
+          \draw[thick] (0,0,0) -- (1,0,0) -- (1,1,0) -- (0,1,0) -- cycle; % Front face
+          \draw[thick] (0,0,1) -- (1,0,1) -- (1,1,1) -- (0,1,1) -- cycle; % Back face
+          \draw[thick] (0,0,0) -- (0,0,1); % Left vertical edge
+          \draw[thick] (1,0,0) -- (1,0,1); % Right vertical edge
+          \draw[thick] (1,1,0) -- (1,1,1); % Back right edge
+          \draw[thick] (0,1,0) -- (0,1,1); % Back left edge
+
+          % Draw one diagonal plane of symmetry (semi-transparent)
+          \fill[blue!30,opacity=0.5] (0,0,0) -- (1,0,0) -- (1,1,1) -- (0,1,1) -- cycle; % Diagonal plane
+
+          % Add labels (optional)
+          \node at (0.5, 0.5, 1.1) {Diagonal Plane of Symmetry};
+
+        \end{tikzpicture}
+      </latex-image>
+      </image>     
+
+      <image>
+      <latex-image label="diagonal-plane-of-symmetry-2">
+        \begin{tikzpicture}[scale=3]
+
+          % Draw the cube
+          \draw[thick] (0,0,0) -- (1,0,0) -- (1,1,0) -- (0,1,0) -- cycle; % Front face
+          \draw[thick] (0,0,1) -- (1,0,1) -- (1,1,1) -- (0,1,1) -- cycle; % Back face
+          \draw[thick] (0,0,0) -- (0,0,1); % Left vertical edge
+          \draw[thick] (1,0,0) -- (1,0,1); % Right vertical edge
+          \draw[thick] (1,1,0) -- (1,1,1); % Back right edge
+          \draw[thick] (0,1,0) -- (0,1,1); % Back left edge
+
+          % Draw one diagonal plane of symmetry (semi-transparent)
+          \fill[yellow!30,opacity=0.8] (1,1,0) -- (0,1,0) -- (0,0,1) -- (1,0,1) -- cycle; % Diagonal plane
+
+          % Add labels (optional)
+          \node at (0.5, 0.5, 1.1) {Diagonal Plane of Symmetry};
+
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+
+    <image>
+      <latex-image label="diagonal-plane-of-symmetry-3">
+        \begin{tikzpicture}[scale=3]
+
+          % Draw the cube
+          \draw[thick] (0,0,0) -- (1,0,0) -- (1,1,0) -- (0,1,0) -- cycle; % Front face
+          \draw[thick] (0,0,1) -- (1,0,1) -- (1,1,1) -- (0,1,1) -- cycle; % Back face
+          \draw[thick] (0,0,0) -- (0,0,1); % Left vertical edge
+          \draw[thick] (1,0,0) -- (1,0,1); % Right vertical edge
+          \draw[thick] (1,1,0) -- (1,1,1); % Back right edge
+          \draw[thick] (0,1,0) -- (0,1,1); % Back left edge
+
+          % Draw one diagonal plane of symmetry (semi-transparent)
+          \draw[blue,thick] (0,0,1) -- (1,1,1) -- (1,1,0) -- (0,0,0) -- cycle;
+
+          % Add labels (optional)
+          \node at (0.5, 0.5, 1.1) {Diagonal Plane of Symmetry};
+
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+
+    </sidebyside>
+
+    <sidebyside  widths="30% 30% 30%">
+      <image>
+      <latex-image label="diagonal-plane-of-symmetry-4">
+        \begin{tikzpicture}[scale=3]
+
+          % Draw the cube
+          \draw[thick] (0,0,0) -- (1,0,0) -- (1,1,0) -- (0,1,0) -- cycle; % Front face
+          \draw[thick] (0,0,1) -- (1,0,1) -- (1,1,1) -- (0,1,1) -- cycle; % Back face
+          \draw[thick] (0,0,0) -- (0,0,1); % Left vertical edge
+          \draw[thick] (1,0,0) -- (1,0,1); % Right vertical edge
+          \draw[thick] (1,1,0) -- (1,1,1); % Back right edge
+          \draw[thick] (0,1,0) -- (0,1,1); % Back left edge
+
+          % Draw one diagonal plane of symmetry (semi-transparent)
+          \fill[purple!30,opacity=0.5] (0,1,0) -- (0,1,1) -- (1,0,1) -- (1,0,0) -- cycle; % Diagonal plane
+
+          % Add labels (optional)
+          \node at (0.5, 0.5, 1.1) {Diagonal Plane of Symmetry};
+
+        \end{tikzpicture}
+      </latex-image>
+      </image>
+
+      <image>
+      <latex-image label="diagonal-plane-of-symmetry-5">
+        \begin{tikzpicture}[scale=3]
+
+          % Draw the cube
+          \draw[thick] (0,0,0) -- (1,0,0) -- (1,1,0) -- (0,1,0) -- cycle; % Front face
+          \draw[thick] (0,0,1) -- (1,0,1) -- (1,1,1) -- (0,1,1) -- cycle; % Back face
+          \draw[thick] (0,0,0) -- (0,0,1); % Left vertical edge
+          \draw[thick] (1,0,0) -- (1,0,1); % Right vertical edge
+          \draw[thick] (1,1,0) -- (1,1,1); % Back right edge
+          \draw[thick] (0,1,0) -- (0,1,1); % Back left edge
+
+          % Draw one diagonal plane of symmetry (semi-transparent)
+          \fill[orange!30,opacity=0.5] (0,0,0) -- (1,0,1) -- (1,1,1) -- (0,1,0) -- cycle; % Diagonal plane
+
+          % Add labels (optional)
+          \node at (0.5, 0.5, 1.1) {Diagonal Plane of Symmetry};
+
+        \end{tikzpicture}
+      </latex-image>
+      </image>
+
+          <image>
+      <latex-image label="diagonal-plane-of-symmetry-6">
+        \begin{tikzpicture}[scale=3]
+
+          % Draw the cube
+          \draw[thick] (0,0,0) -- (1,0,0) -- (1,1,0) -- (0,1,0) -- cycle; % Front face
+          \draw[thick] (0,0,1) -- (1,0,1) -- (1,1,1) -- (0,1,1) -- cycle; % Back face
+          \draw[thick] (0,0,0) -- (0,0,1); % Left vertical edge
+          \draw[thick] (1,0,0) -- (1,0,1); % Right vertical edge
+          \draw[thick] (1,1,0) -- (1,1,1); % Back right edge
+          \draw[thick] (0,1,0) -- (0,1,1); % Back left edge
+
+          % Draw one diagonal plane of symmetry (semi-transparent)
+          \fill[blue!30,opacity=0.5] (1,0,0) -- (1,1,0) -- (0,1,1) -- (0,0,1) -- cycle; % Diagonal plane
+
+          % Add labels (optional)
+          \node at (0.5, 0.5, 1.1) {Diagonal Plane of Symmetry};
+
+        \end{tikzpicture}
+      </latex-image>
+      </image>
+    </sidebyside>
+
+    <p xml:id="auto_6rlxhc0t">
+      There are <m>9</m> planes of symmetry in a cube as you can see in the images above.
+    </p>
+    <p xml:id="auto_e3387eld">
+      <ul xml:id="auto_adrrq3fc">
+        <li xml:id="auto_fma5idws">
+          <p xml:id="auto_uwm9vs35">
+            <m>2</m> vertical planes of symmetry.
+          </p>
+        </li>
+        <li xml:id="auto_2hh0po6a">
+          <p xml:id="auto_zcwnoj84">
+            <m>1</m> horizontal plane of symmetry.
+          </p>
+        </li>
+        <li xml:id="auto_lbdyzwwh">
+          <p xml:id="auto_yj4s3jz2">
+            <m>6</m> diagonal planes of symmetry.
+          </p>
+        </li>
+      </ul>
+    </p>
+    </activity>
+
+    <p xml:id="auto_86w1dv1j">
+      <term>Key Takeaway</term>
+    </p>
+    <p xml:id="auto_w7quunt1">
+      <term>Plane of symmetry</term> is an imaginary flat surface that divides an object into two equal halves,
+       such that one half is the mirror image of the other half.
+    </p>
+    <p xml:id="auto_u509w1iz">
+      When you cut a banana vertically into two equal halves such that one half is the reflection of the other half, 
+      you create a plane of symmetry of the banana. 
+    </p>
+
+    <example xml:id="auto_obsviaky">
+      <statement>
+        <p xml:id="auto_ty19wfxs">
+          How many planes of symmetry does a square based pyramid have?
+        </p>
+        <image width="30%">
+          <latex-image label="sq_pyramid_ex">
+            \begin{tikzpicture}
+              % Coordinates
+              \coordinate (A) at (-1,0.7); % Bottom left corner
+              \coordinate (B) at (0,0); % Bottom right corner
+              \coordinate (C) at (1.5,.7); % Top right corner
+              \coordinate (D) at (0.4,1.5); % Top left corner
+              \coordinate (E) at (0,5); % Apex of the pyramid
+              \coordinate (F) at (-.3,1.1);
+              \coordinate (G) at (.8,.3);
+              \coordinate (H) at (1,1.1);
+              \coordinate (I) at (-.5,.4);
+
+              % Draw base
+              \draw[thick] (A) -- (B) -- (C);
+              \draw[thick, dashed] (C) -- (D) -- (A);
+
+              %  Base of the pyramid
+              \fill[cyan,opacity=0.5] (A) -- (B) -- (C) -- (D) -- cycle;
+              
+              % Draw pyramid edges
+              \draw[thick] (E) -- (A);
+              \draw[thick] (E) -- (B);
+              \draw[thick] (E) -- (C);
+              \draw[style=dashed,thick] (E) -- (D);
+
+
+
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </statement>
+      <solution>
+        <p xml:id="auto_xygekvzs">
+          A square based pyramid has <m>4</m> planes of symmetry as shown below.
+        </p>
+
+        <sidebyside>
+        <image >
+          <latex-image label="sq_pyramid_1">
+            \begin{tikzpicture}
+              % Coordinates
+              \coordinate (A) at (-1,0.7); % Bottom left corner
+              \coordinate (B) at (0,0); % Bottom right corner
+              \coordinate (C) at (1.5,.7); % Top right corner
+              \coordinate (D) at (0.4,1.5); % Top left corner
+              \coordinate (E) at (0,5); % Apex of the pyramid
+              \coordinate (F) at (-.3,1.1);
+              \coordinate (G) at (.8,.3);
+              \coordinate (H) at (1,1.1);
+              \coordinate (I) at (-.5,.4);
+
+              % Draw base
+              \draw[thick] (A) -- (B) -- (C);
+              \draw[thick, dashed] (C) -- (D) -- (A);
+              
+              % Draw pyramid edges
+              \draw[thick] (E) -- (A);
+              \draw[thick] (E) -- (B);
+              \draw[thick] (E) -- (C);
+              \draw[style=dashed,thick] (E) -- (D);
+
+              % Draw planes of symmetry
+              \begin{scope}[opacity=0.3]
+                  % Plane 1: through SA and SC
+                  \fill[blue] (E) -- (A) -- (C) -- cycle;
+
+
+                  % Plane 5: Base of the pyramid
+                  \fill[cyan] (A) -- (B) -- (C) -- (D) -- cycle;
+              \end{scope}
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+
+        <image>
+          <latex-image label="sq_pyramid_2">
+            \begin{tikzpicture}
+              % Coordinates
+              \coordinate (A) at (-1,0.7); % Bottom left corner
+              \coordinate (B) at (0,0); % Bottom right corner
+              \coordinate (C) at (1.5,.7); % Top right corner
+              \coordinate (D) at (0.4,1.5); % Top left corner
+              \coordinate (E) at (0,5); % Apex of the pyramid
+              \coordinate (F) at (-.3,1.1);
+              \coordinate (G) at (.8,.3);
+              \coordinate (H) at (1,1.1);
+              \coordinate (I) at (-.5,.4);
+
+              % Draw base
+              \draw[thick] (A) -- (B) -- (C);
+              \draw[thick, dashed] (C) -- (D) -- (A);
+              
+              % Draw pyramid edges
+              \draw[thick] (E) -- (A);
+              \draw[thick] (E) -- (B);
+              \draw[thick] (E) -- (C);
+              \draw[style=dashed,thick] (E) -- (D);
+
+              % Draw planes of symmetry
+              \begin{scope}[opacity=0.3]
+
+                  % Plane 2: through SB and SD
+                  \fill[red] (E) -- (B) -- (D) -- cycle;
+
+                  % Plane 5: Base of the pyramid
+                  \fill[cyan] (A) -- (B) -- (C) -- (D) -- cycle;
+              \end{scope}
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+
+        <image>
+          <latex-image label="sq_pyramid_3">
+            \begin{tikzpicture}
+              % Coordinates
+              \coordinate (A) at (-1,0.7); % Bottom left corner
+              \coordinate (B) at (0,0); % Bottom right corner
+              \coordinate (C) at (1.5,.7); % Top right corner
+              \coordinate (D) at (0.4,1.5); % Top left corner
+              \coordinate (E) at (0,5); % Apex of the pyramid
+              \coordinate (F) at (-.3,1.1);
+              \coordinate (G) at (.8,.3);
+              \coordinate (H) at (1,1.1);
+              \coordinate (I) at (-.5,.4);
+
+              % Draw base
+              \draw[thick] (A) -- (B) -- (C);
+              \draw[thick, dashed] (C) -- (D) -- (A);
+              
+              % Draw pyramid edges
+              \draw[thick] (E) -- (A);
+              \draw[thick] (E) -- (B);
+              \draw[thick] (E) -- (C);
+              \draw[style=dashed,thick] (E) -- (D);
+
+              % Draw planes of symmetry
+              \begin{scope}[opacity=0.3]
+
+                  % Plane 3: through midpoints of edges (vertical)
+                  \fill[green] (E) -- (F) -- (G) -- cycle;
+
+                  % Plane 5: Base of the pyramid
+                  \fill[cyan] (A) -- (B) -- (C) -- (D) -- cycle;
+              \end{scope}
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+
+        <image>
+          <latex-image label="sq_pyramid_4">
+            \begin{tikzpicture}
+              % Coordinates
+              \coordinate (A) at (-1,0.7); % Bottom left corner
+              \coordinate (B) at (0,0); % Bottom right corner
+              \coordinate (C) at (1.5,.7); % Top right corner
+              \coordinate (D) at (0.4,1.5); % Top left corner
+              \coordinate (E) at (0,5); % Apex of the pyramid
+              \coordinate (F) at (-.3,1.1);
+              \coordinate (G) at (.8,.3);
+              \coordinate (H) at (1,1.1);
+              \coordinate (I) at (-.5,.4);
+
+              % Draw base
+              \draw[thick] (A) -- (B) -- (C);
+              \draw[thick, dashed] (C) -- (D) -- (A);
+              
+              % Draw pyramid edges
+              \draw[thick] (E) -- (A);
+              \draw[thick] (E) -- (B);
+              \draw[thick] (E) -- (C);
+              \draw[style=dashed,thick] (E) -- (D);
+
+              % Draw planes of symmetry
+              \begin{scope}[opacity=0.3]
+
+                  % Plane 4: through midpoints of edges (other vertical)
+                  \fill[yellow] (E) -- (H) -- (I) -- cycle;
+
+                  % Plane 5: Base of the pyramid
+                  \fill[cyan] (A) -- (B) -- (C) -- (D) -- cycle;
+              \end{scope}
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+        </sidebyside>
+      </solution>
+    </example>
+
+    <exercises xml:id="exercises-plane-of-symmetry">
+      <exercise xml:id="auto_jmfhp6hk">
+      <statement>
+        <p xml:id="auto_sdi7yfi3">
+          How many planes of symmetry are there in the following geometrical objects.
+        </p>
+        <p xml:id="auto_jumu95di">
+          <ol xml:id="auto_emrytof8">
+            <li xml:id="auto_dtqa6hqx">
+              <p xml:id="auto_4vyda351">
+                Sphere.
+              </p>
+            </li>
+            <li xml:id="auto_839zqxfx">
+              <p xml:id="auto_a0kkuyjt">
+                Triangular prism.
+              </p>
+            </li>
+            <li xml:id="auto_y7das2h6">
+              <p xml:id="auto_3d0i9npe">
+                Rectangular prism.
+              </p>
+            </li>
+            <li xml:id="auto_9ypjoqgh">
+              <p xml:id="auto_6bzvtx9g">
+                Cone.
+              </p>
+            </li>
+            <li xml:id="auto_84tkdkgz">
+              <p xml:id="auto_lxr1tx22">
+                Cylinder.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="auto_6rk61a3l">
+      <statement>
+        <p xml:id="auto_5p6jc6i3">
+          Find planes of symmetry for objects around the school.
+        </p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="auto_o95d6ho0">
+      <statement>
+        <p xml:id="auto_809gy1pg">
+          Identify fruits and vegetables that have planes of symmetry.
+        </p>
+      </statement>
+    </exercise>
+    </exercises>
+
+    
+  
+
+            <exercise xml:id="auto_jwjh08so" label="ex-number-of-planes-of-symmetry-in-3d-shapes">
+                <stack label="stk-number-of-planes-of-symmetry-in-3d-shapes" source="stack/top/2-0-Measurement-Geometry/2-2-Reflection-and-Congruence/2-2-2-Plane-of-Symmetry/Number-of-Planes-of-Symmetry-in-3D-Shapes.xml" />
+            </exercise>
+
+    <exercise xml:id="ex-25-3-reflections-2">
+        <stack label="stk-25-3-reflections-2" source="stack/top/2-0-Measurement-Geometry/2-2-Reflection-and-Congruence/2-2-4-Reflection-of-Different-Shapes-on-a-Plane/25-3-Reflections.xml"/>
+    </exercise>
+    <exercise xml:id="ex-reflect-shape-on-an-axis">
+        <stack label="stk-reflect-shape-on-an-axis" source="stack/top/2-0-Measurement-Geometry/2-2-Reflection-and-Congruence/2-2-4-Reflection-of-Different-Shapes-on-a-Plane/Reflect-shape-on-an-axis.xml"/>
+    </exercise>
+    <exercises xml:id="exercises-reflection-of-different-shapes-in-a-plane">
+      <exercise xml:id="auto_gxmsmd2i">
+      <statement>
+        <p xml:id="auto_m8tcvgqo">
+           Copy the figures below and draw their images under the reflection on the mirror line <m>M.</m>  
+        </p>
+
+        <sidebyside>
+
+        <image>
+          <latex-image label="object_mirror_line_1">
+            \begin{tikzpicture}
+              % Draw the axes
+              \draw[thick,blue,-&gt;] (-5,0) -- (5,0) node[right] {M};
+              
+
+              % Draw the grid lines
+              \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+
+              \node[draw,font=\sffamily\fontsize{60}{72}\selectfont] at (0,3) (t) {MIRROR};
+
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+
+        <image>
+        <latex-image label="object_mirror_line_2">
+          \begin{tikzpicture}
+
+            % Draw the grid lines
+            \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+
+            % Draw the original triangle
+            \fill[blue,opacity=0.3] (-2,3) -- (-4,0) -- (-1,-2) -- (-2.5,0) -- cycle;
+            \draw[blue,thick] (-2,3) -- (-4,0) -- (-1,-2) -- (-2.5,0)-- cycle;
+            \node[blue] at (-2,3.1) {A};
+            \node[blue] at (-4.1,0) {B};
+            \node[blue] at (-0.9,-2.1) {C};
+            \node[blue] at (-2.7,0) {D};
+
+            % Draw the mirror line x = y
+            \draw[red,thick,-&gt;] (-4,-4) -- (4,4) node[above right] {$M$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+
+      <image>
+        <latex-image label="object_mirror_line_3">
+          \begin{tikzpicture}
+
+            % Draw the grid lines
+            \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+
+            % Draw the star
+            \fill[orange!50, even odd rule]
+             (90:3) -- (234:3) -- (18:3) -- (162:3)   -- (306:3) -- cycle;
+
+            % Draw the mirror line x = -y
+            \draw[black,thick,-&gt;] (-4,4) -- (4,-4) node[above right] {$M$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+
+      </sidebyside>
+      </statement>
+      </exercise>
+
+      <exercise xml:id="auto_aeooh6nc">
+        <statement>
+      <p xml:id="auto_x1im3ve3">
+         Reflect the object about the y-axis
+      </p>
+
+      <image>
+        <latex-image label="object_on_a_plane_2">
+          \begin{tikzpicture}
+
+            % Draw the axes
+            \draw[thin,-&gt;] (-5,0) -- (5,0) node[right] {x-axis};
+            \draw[thin,-&gt;] (0,-5) -- (0,5) node[above] {y-axis};
+            
+            % Draw the grid lines
+            \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+
+            % Draw the kite
+            \fill[green!30,opacity=0.3] (-4,-4) -- (-1,-4) -- (1,-3) -- (-3,-3) -- (-3,3) -- (-4,3) -- cycle;
+            \draw[green,thick] (-4,-4) -- (-1,-4) -- (1,-3) -- (-3,-3) -- (-3,3) -- (-4,3) -- cycle;
+  
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+      </statement>
+      </exercise>
+
+      <exercise xml:id="auto_39cc44xh">
+      <statement>
+          <p xml:id="auto_p4ks10so">
+       The vertices of a polygon are given as: A(-5,5), B(-6,3), C(-5,1), D(-3,0), E(-2,2) and F(-3,4).
+          Find the image of the polygon under the following reflection lines:
+      </p>
+      <p xml:id="auto_undztpl4">
+        <ol xml:id="auto_v7tosvta">
+          <li xml:id="auto_qi7ctjtn">
+            <p xml:id="auto_durcu9be">
+              <m>y = x</m> followed by <m>y = 0</m>
+            </p>
+          </li>
+          <li xml:id="auto_gc3cgeqm">
+           <p xml:id="auto_1khbgr5d">
+              <m>x = 0</m>
+            </p>
+          </li>
+        </ol>
+      </p>
+      </statement>
+      </exercise>
+
+      <exercise xml:id="auto_r1cjf9hi">
+        <statement>
+          <p xml:id="auto_3cevs5xf">
+            The points <m>A'(-4,1),\,B'(-2,4)\text{ and } C'(-1,3)</m> are the images of points <m>A,\,B \text{ and } C</m>
+             respectively under a reflection on the line <m>x = -1.</m> Find the coordinates for points <m>A,\,B \text{ and } C.</m>
+          </p>
+        </statement>
+      </exercise>
+      
+    </exercises>
+  
+  </subsection>

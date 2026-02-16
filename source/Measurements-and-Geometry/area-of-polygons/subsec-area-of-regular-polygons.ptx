@@ -1,0 +1,235 @@
+<subsection xml:id="subsec-area-of-regular-polygons" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Area of Regular Polygons</title>
+     <introduction xml:id="auto_ob9e3r3z">
+     <activity xml:id="auto_yujyceai">
+        <statement>
+            <p xml:id="auto_jcgvy619">
+                <m>\textbf{Materials Needed:}</m>
+            </p>
+            <p xml:id="auto_ldxpueun">
+                                    i.Compass,
+                </p>
+                            <p xml:id="auto_qr16ke35">
+                    ii. Ruler
+                </p>
+                            <p xml:id="auto_b3ng0u3c">
+                    ii. Protractor
+                </p>
+                            <p xml:id="auto_6p7nb5rw">
+                    iv. Calculator
+                </p>
+                            <p xml:id="auto_j43ai0m3">
+                    v. Pencil and paper
+                </p>
+                            <p xml:id="auto_bx5r3v2m">
+                    vi. Colored pencils (optional)
+
+                             <ul xml:id="auto_3jqpg7in">
+                                <li xml:id="auto_hjm2ygft">
+                                    <p xml:id="auto_duhjbg0r">
+                                        Draw a line from the center O perpendicular to a side (e.g., side BC). This line is the apothem (denoted a). Label the apothem clearly.
+                                    </p>
+                                </li>
+                             </ul>
+                            </p>
+
+        </statement>
+     </activity>
+      <p xml:id="auto_vwfg08y7">
+            <m>\textbf{Key Takeaway}</m>
+        </p>
+     <p xml:id="auto_etfvpqqw">
+        ♦ The <m>\textbf{area}</m> of a <m>\textbf{regular polygon}</m> can be found using this formula, where <m>\textbf{P}</m>
+        is the <m>\textbf{perimeter}</m> and <m>\textbf{a}</m>
+        is the apothem
+     </p>
+      <p xml:id="auto_un1y64zj">
+        The <m>\textbf{apothem}</m> is the distance from the center of a regular polygon to <m>\, \textbf{a} </m>side. Where <m> \textbf{a}</m> is the half <m>\frac{1}{2} \text{side.}</m>
+     </p>
+     <image width="50%">
+     <latex-image label="polgon-triangle">
+        \begin{tikzpicture}
+            
+            % Define hexagon vertices
+            \def\R{3} % Radius of hexagon
+            \foreach \i in {0,60,...,300} {
+                \coordinate (P\i) at (\i:\R);
+            }
+
+            % Draw the hexagon
+            \draw[thick] 
+                (P0) -- (P60) -- (P120) -- (P180) -- (P240) -- (P300) -- cycle;
+
+            % Define center
+            \coordinate (C) at (0,0);
+            
+            % Draw the perpendicular segment
+            \draw[dashed] (C) -- (0,-2.62) node[midway,left] {\Large $a$};
+
+            % Right angle marker
+            \draw[thick] (0,-2.35) -- (0.2,-2.35) -- (0.2,-2.62);
+            % \draw (0,-\R)++(0,0) -- ++(0.2,0) -- ++(0,0.);
+
+            % Mark the center point
+            \draw[thick] (C) circle (2pt);
+        \end{tikzpicture}
+     </latex-image>
+     </image>
+    
+     <p xml:id="auto_6hrlkpkt">
+        You want to find the area of the triangle. You can see it has an apothem of
+        <m>\sqrt{3}</m> meters and a side length of 10 meters.
+
+     </p>
+     <image width="50%">
+        <latex-image label="polgon-hexagon">
+            \begin{tikzpicture}
+                            % Define triangle vertices
+                \coordinate (A) at (-3,0);
+                \coordinate (B) at (3,0);
+                \coordinate (C) at (0,6); % Height of an equilateral triangle with side 6
+
+                % Draw the equilateral triangle
+                \draw[thick] (A) -- (B) -- (C) -- cycle;
+            
+                % Label the side length
+                \draw[thick] (A) -- node[left] {\Large 10 m} (C);
+            
+                % Define point E inside the triangle
+                \coordinate (E) at (0,2.2);
+                \coordinate (E1) at (1.5,3);
+            
+                % Draw perpendicular segment from E to side BC
+                \draw[dashed] (E) -- (E1) node[above ,midway,rotate=40] {\large $\sqrt{3}$ m};
+            
+                %draw the right angle
+                \tkzMarkRightAngle[draw=black,size=.2](B,E1,E);
+            
+                % Label the perpendicular length
+            
+                % Label point E
+                \node[left] at (E) {\Large $A$};
+                \draw[thick] (E) circle (2pt);
+            \end{tikzpicture}
+        </latex-image>
+     </image>
+        <p xml:id="auto_hu7x2dwi">
+            If you also find the perimeter, P
+,
+        then you can use the formula A= <m> \frac{1}{2} \textbf{P}a</m> to find the area.
+        </p>
+        <p xml:id="auto_x1wp53lx">
+            <me>
+                \textbf{P} = \text{length of each side } \times a \text{, where } a = h
+            </me>
+            
+            <me>
+                P = 10 \, \text{m} \times 3
+            </me>
+            <me>
+                = 30, \text{m}
+            </me>
+            Now, use the formula for the area of a regular polygon is :
+        </p>
+        <p xml:id="auto_8jctyk83">
+            <md>
+                <mrow> A = \amp \frac{1}{2} \times 30 \times \sqrt{3} </mrow>
+                <mrow> = \amp 125.98 \, \text{m}^2 </mrow>
+            </md>
+        </p>
+        <example xml:id="auto_x2krxvru">
+            <statement>
+                <p xml:id="auto_dq9xi3c4">
+                    A regular hexagon with center h is shown below
+                </p>
+                <p xml:id="auto_4lhdvgvh">
+                 Similarly you can use <m>A = \frac{1}{2} \times n \times S \times a</m>
+                </p>   
+               
+                <image width="60%">
+     <latex-image label="polgon-hexagon-example">
+        \begin{tikzpicture}
+            
+
+            % Define hexagon vertices
+            \def\R{3} % Radius of hexagon
+            \foreach \i in {0,60,...,300} {
+                \coordinate (P\i) at (\i:\R);
+            }
+
+            % Draw the hexagon
+            \draw[thick] 
+                (P0) -- (P60) -- (P120) -- (P180) -- (P240) -- (P300) -- cycle;
+
+            % Define center
+            \coordinate (C) at (0,0) node[above] {\Large h};
+            
+            % Draw the perpendicular segment
+            \draw[dashed] (C) -- (0,-2.62) node[midway,left] {\Large $14$ cm};
+
+            % Right angle marker
+            \draw[thick] (0,-2.35) -- (0.2,-2.35) -- (0.2,-2.62) node[below]{20 cm};
+            % \draw (0,-\R)++(0,0) -- ++(0.2,0) -- ++(0,0.);
+
+            % Mark the center point
+            \draw[thick] (C) circle (2pt);
+           
+        \end{tikzpicture}
+     </latex-image>
+     </image>
+            </statement>
+            <solution>
+                     <p xml:id="auto_55wx40em">Find the perimeter P, Then use the formula A= <m> \frac{1}{2} \textbf{P}a</m> to find the area.
+        </p>
+        <p xml:id="auto_pgdse83y">
+            <me>
+                \textbf{P} = \text{length of each side } \times a
+            </me>
+            
+            <me>
+                P = 20 \, \text{cm} \times 6
+            </me>
+            <me>
+                = 120 \, \text{cm}^2
+            </me>
+            Now, use the formula for the area of a regular polygon is :
+        </p>
+        <p xml:id="auto_x0r22ahs">
+            <md>
+                <mrow> A = \amp \frac{1}{2} \times 120 \times 14 \, \text{cm} </mrow>
+                <mrow> = \amp 840 \text{cm}^2 </mrow>
+            </md>
+        </p>
+         <p xml:id="auto_rcfjqgjg">
+                    Where <m>n = \text{number of sides,} S = \text{length of each side and } a = \frac{S}{2}  </m>
+                    
+                </p>
+                <p xml:id="auto_951lnqeu">
+                    <md>
+                        <mrow>A = \amp  \frac{1}{2} n \times S \times a</mrow>
+                        <mrow> = \amp  \frac{1}{2} \times 6 \times 20 \, \text{cm} \times 14 \, \text{cm}</mrow>
+                        <mrow> = \amp \frac{1,680}{2} \, \text{cm}^2</mrow>
+                        <mrow> = \amp 840 \,\text{cm}^2 </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        
+      </introduction> 
+
+      <xi:include href="subsubsec-area-of-heptagons.ptx" />
+
+      <xi:include href="subsubsec-area-of-octagons.ptx" />
+
+              <exercise xml:id="ex-calculating-the-area-of-an-amusement-park-that-is-pentagonal">
+            <stack label="stk-calculating-the-area-of-an-amusement-park-that-is-pentagonal" source="stack/top/2-0-Measurement-Geometry/2-5-Area-of-Polygons/Area-of-a-Pentagon/Calculating-the-area-of-an-amusement-park-that-is-pentagonal.xml"/>
+        </exercise>
+        <exercise xml:id="ex-finding-the-area-of-a-regular-pentagon">
+            <stack label="stk-finding-the-area-of-a-regular-pentagon" source="stack/top/2-0-Measurement-Geometry/2-5-Area-of-Polygons/Area-of-a-Pentagon/Finding-the-Area-of-a-Regular-Pentagon.xml"/>
+        </exercise>
+
+
+    
+    
+      
+</subsection>

@@ -1,0 +1,299 @@
+<subsection xml:id="subsec-volume-of-spheres">
+    <title>Volume of Spheres</title>
+      
+       <activity xml:id="auto_ric9u873">
+        <statement>
+            <p xml:id="auto_qur77g9u">
+              <m>\textbf{Orange Peeling Experiment}</m>  
+            </p>
+            <sidebyside>
+            <p xml:id="auto_zu663vm7">
+                <ul xml:id="auto_r4gyx2a7">
+                    <li xml:id="auto_hrhv2eqm">
+                        <p xml:id="auto_8112f9l4">
+                           Materials Needed:  
+                        </p>
+                        <p xml:id="auto_9umjbzcd">
+                            ♦ An orange (or any round fruit)
+                        </p>
+                        <p xml:id="auto_1g6njb0s">
+                            ♦ A knife
+                        </p>
+                        <p xml:id="auto_2mdzvyn0">
+                            ♦ A flat surface
+                        </p>
+                    </li>
+                </ul>
+            </p>
+            <image width="50%">
+            <latex-image label="borders-sphere">
+                \begin{tikzpicture}
+                    % Define colors
+                    \definecolor{orange}{rgb}{1,0.5,0}
+                    \definecolor{green}{rgb}{0,0.6,0}
+
+                    % Function to draw an orange with a single black dot near the leaf
+                    \newcommand{\draworange}[2]{
+                    % Draw the main orange
+                    \filldraw[fill=orange,draw=black] (#1,#2) circle(1);
+                    
+                    % Add a black dot near the leaf
+                    \fill[black] (#1+0.3,#2+0.8) circle(0.12);
+
+                    % Add a green leaf
+                    \filldraw[fill=green,draw=black,rotate around={30:(#1,#2+1)}] 
+                    (#1,#2+1) ellipse (0.5 and 0.2);
+                    }
+
+                    % Bottom layer (4 oranges)
+                    \foreach \x in {0,2,4,6} {
+                        \draworange{\x}{0}
+                    }
+
+                    % Second layer (3 oranges)
+                    \foreach \x in {1,3,5} {
+                        \draworange{\x}{1.7}
+                    }
+
+                    % Third layer (2 oranges)
+                    \foreach \x in {2,4} {
+                        \draworange{\x}{3.4}
+                    }
+
+                    % Top layer (1 orange)
+                    \draworange{3}{5.1}
+
+                    % Ground surface
+                    \draw[thick] (-1,-1) -- (7,-1);
+                    
+                    % Labels
+                    \node at (3,-1.5) {Pyramidal Stack of Oranges};
+                \end{tikzpicture}
+            </latex-image>
+            </image>
+                
+            </sidebyside>
+            <p xml:id="auto_3n5pdwfd">
+                <ul xml:id="auto_dfk12zp2">
+                    
+                    <li xml:id="auto_5giqiwkc">
+                        <p xml:id="auto_wdxxlcv7">
+                            Cut the orange in half and carefully peel the skin off in small sections.
+                        </p>
+                    </li>
+                    <li xml:id="auto_v0kg3mvi">
+                        <p xml:id="auto_gh9ftp6f">
+                            Try flattening the peels and arrange them to see how they approximate a circle’s area.
+                        </p>
+                        <p xml:id="auto_dl4dz3v5">
+                           ♦ When you peel an orange and flatten the pieces, you can see that the peels cover a large area.
+                        </p>
+                        <p xml:id="auto_bhrjsqug">
+                            ♦ This helps visualize why increasing the radius increases the overall amount of space the fruit takes up (its volume).
+                        </p>
+                    </li>
+                    <li xml:id="auto_eudjsbfi">
+                        <p xml:id="auto_34b9avl4">
+                           Cutting the Orange into Sections. 
+                        </p>
+                        <p xml:id="auto_0hs839ps">
+                            ♦ If you cut an orange in half, you can see its cross-section.
+                        </p>
+                        <p xml:id="auto_qweuisw0">
+                           ♦  If you keep slicing it into smaller spheres, their individual radii determine their volumes.
+                        </p>
+                    </li>
+                    <li xml:id="auto_sar8l62y">
+                        <p xml:id="auto_okog3ow8">
+                            Why do you think oranges or tomatoes or apples etc. are stacking in pyramidal stacks in the market?
+                        </p>
+                        <p xml:id="auto_mdcrn1mk">
+                            ♦ Oranges in a fruit market are often packed in pyramidal stacks because spheres fit together efficiently.
+                        </p>
+                        <p xml:id="auto_oulf21ev">
+                            ♦ The larger the radius, the more space each orange occupies, which directly affects storage and packaging.
+                        </p>
+                    </li>
+                    <li xml:id="auto_eyg4ouum">
+                        <p xml:id="auto_m0qv30q6">
+                            Key takeaways 
+                        </p>
+
+                        <p xml:id="auto_kmyjq4gz">
+                            ♦ The radius is the most important factor in determining the volume of a sphere.
+                        </p>
+                        <p xml:id="auto_c07ekg3n">
+                            ♦ If the radius doubles, the volume increases by <m>2^3 = 8</m> times!
+                        </p>
+                        <p xml:id="auto_4jo8s8d7">
+                            ♦ This explains why a slightly bigger orange holds significantly more juice compared to a smaller one.
+                        </p>
+                    </li>
+                </ul>
+            </p>    
+        </statement>
+       </activity>
+       <p xml:id="auto_oeirvehu">
+            <m>\textbf{Key Takeaway}</m>
+        </p>
+        <p xml:id="auto_xlajrfbr">
+
+        A sphere is a perfectly round object.
+       </p>
+       <example xml:id="auto_93iy8eqr">
+       <statement>
+        <p xml:id="auto_tf6quisv">
+             A sphere has a radius of 6 cm. Find its volume.
+        </p>  
+        <p xml:id="auto_9vfhqxsv">
+          <md>
+            <mrow> \text{V} =\amp \frac{4}{3} \times \pi r^3</mrow>
+            <mrow>  = \amp 3.142 \times \frac{4}{3} \times (6)^3</mrow>
+            <mrow> = \amp \frac {864}{3} \times 3.142 </mrow>
+            <mrow> = \amp 904.9 \, \text{cm}^3</mrow>
+          </md>  
+        </p>
+       </statement>
+        
+       </example>
+       <example xml:id="auto_g6o6xyo5">
+        <statement>
+            <p xml:id="auto_u6ooq3ga">
+                A football has a radius of 9 cm. What is the volume of the ball?
+            </p>
+
+        </statement>
+        <solution>
+            <p xml:id="auto_u2nn2jfi">
+                <md>
+                    <mrow> \text{V} =\amp \frac{4}{3} \times \pi r^3</mrow>
+                    <mrow>  = \amp 3.142 \times \pi\frac{4}{3} \times (9 \,\text{cm})^3</mrow>
+                    <mrow> = \amp 3054.02\, \text{cm}^3</mrow>
+                </md>  
+            </p>
+        </solution>
+       </example>
+       <example xml:id="auto_ix2tk448">
+        <statement>
+            <p xml:id="auto_alvrw1jt">
+                A planet has a radius of 1000 km. What's it's volume?
+            </p>
+        </statement>
+        <solution>
+            <p xml:id="auto_i2i8zpnc">
+                <md>
+                    <mrow> \text{V} =\amp \frac{4}{3} \times r^3</mrow>
+                    <mrow>  = \amp 3.142 \times\frac{4}{3} \times (1000)^3</mrow>
+                    <mrow> = \amp 4,189,333,333 4.19= \ 10^9\, \text{km}^3</mrow>
+                </md>  
+                
+            </p>
+        </solution>
+       </example>
+       <p xml:id="auto_rr71pv2d">
+        <m>\textbf{Exercise}</m>
+       </p>
+       <sidebyside>
+        <p xml:id="auto_8diow2g5">
+        1. A solid sphere has a radius of 7 cm. Find its volume.
+       </p>
+       <image width="45%">
+            <shortdescription> Sphere </shortdescription>
+            <latex-image label="sphere-example-t">
+                \begin{tikzpicture}
+                    % Draw the main circle
+                    \draw [thick,blue!70](0,0) circle (2);
+                    
+                    % Draw the dashed ellipse inside the circle
+                    \draw[dashed,red!50] (-2,0) arc (180:360:2 and 0.5);
+                    \draw[dashed,red!50] (2,0) arc (0:180:2 and 0.5);
+                    
+                    
+                    % Draw and label the center point
+                    \fill (0,0) circle (0.05);
+                    \node[above right] at (0.5,0) {\small $r =7 cm$};
+                    
+                    % Draw the radius line
+                    \draw[dashed] (0,0) -- (2,0);
+                \end{tikzpicture}
+            </latex-image>
+        </image>
+       </sidebyside>
+    
+       <p xml:id="auto_a1pexx05">
+        2. A bowl is in the shape of a hemisphere with a diameter of 12 cm.
+       Find the volume of the bowl.
+       </p>
+      <sidebyside>
+         <p xml:id="auto_7dq03iq2">
+        3. A sphere has a volume of 500 cm³. If the radius is doubled, what will be the new volume?
+       </p><image width="45%">
+            <shortdescription> Sphere </shortdescription>
+            <latex-image label="sphere-example-r">
+                \begin{tikzpicture}
+                    % Draw the main circle
+                    \draw [thick,magenta!70](0,0) circle (2);
+                    
+                    % Draw the dashed ellipse inside the circle
+                    \draw[dashed,cyan] (-2,0) arc (180:360:2 and 0.5);
+                    \draw[dashed,cyan] (2,0) arc (0:180:2 and 0.5);
+                    
+                    
+                    % Draw and label the center point
+                    \fill (0,0) circle (0.05);
+                    \node[above right] at (-1,-0.8) {\small $V = 500cm^3$};
+                    
+                    % Draw the radius line
+                    \draw[dashed] (0,0) -- (2,0);
+                \end{tikzpicture}
+            </latex-image>
+        </image>
+      </sidebyside>
+       <p xml:id="auto_eotoyijs">
+        4. A raindrop is modeled as a sphere with a radius of 0.2 cm. If a storm produces 1,000,000 raindrops,
+        what is the total volume of water in liters?
+       </p>
+       
+        <sidebyside>
+        <image width="45%">
+           <latex-image label="sphere-purple">
+            \begin{tikzpicture}
+                % Draw the sphere
+                \shade[ball color=purple!70] (0,0) circle (2cm);
+                
+                % Draw equator line
+                \draw[dashed] (-2,0) arc (180:360:2cm and 0.5cm);
+                \draw (-2,0) arc (180:0:2cm and 0.5cm);
+                
+                % Draw vertical meridian
+                \draw[dashed] (0,-2) arc (-90:90:0.5cm and 2cm);
+                \draw (0,2) arc (90:270:0.5cm and 2cm);
+                
+                % Draw radius
+                \draw[thick, yellow] (0,0) -- (2,0) node[midway, above] {$r = 12$ cm};
+                
+                % Label sphere
+                \node at (0,-2.5) {Sphere with radius \( r = 12cm \)};
+            \end{tikzpicture}
+           </latex-image>
+           </image>
+        <p xml:id="auto_dt1xk8tg">
+           5  A basketball has a radius of 12 cm, while a tennis ball has a radius of 4 cm.
+        How many tennis balls can fit inside the basketball, assuming no empty space?
+       </p> 
+        </sidebyside>
+       
+       
+          
+
+
+            <exercise xml:id="auto_0sk3k3a8" label="ex-calculating-the-volume-of-a-sphere">
+                <stack label="stk-calculating-the-volume-of-a-sphere" source="stack/top/2-0-Measurement-Geometry/2-7-Surface-Area-and-Volume-of-Solids/2-7-14-Volume-of-a-Sphere/Calculating-the-Volume-of-a-Sphere.xml" />
+            </exercise>
+                
+
+            <exercise xml:id="auto_xhnnvmo7" label="ex-calculating-the-depth-of-water-in-a-cylindrical-container">
+                <stack label="stk-calculating-the-depth-of-water-in-a-cylindrical-container" source="stack/top/2-0-Measurement-Geometry/2-7-Surface-Area-and-Volume-of-Solids/2-7-14-Volume-of-a-Sphere/Calculating-the-Depth-of-Water-in-a-Cylindrical-Container.xml" />
+            </exercise>
+                
+</subsection>
