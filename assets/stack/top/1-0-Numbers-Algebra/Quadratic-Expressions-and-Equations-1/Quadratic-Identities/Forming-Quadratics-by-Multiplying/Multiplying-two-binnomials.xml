@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Multiplying two binnomials</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+Expand and simplify:
+\( {@expr@} \)
+</p>
+<p>
+Enter your answer in fully expanded form.
+<br><br>
+[[input:ans1]]
+[[validation:ans1]]
+[[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>To expand the expression</p>
+
+<p>
+\(
+{@expr@}
+\)
+</p>
+
+<p>we use the distributive property, multiplying each term in the first bracket by each term in the second bracket.</p>
+
+<p><strong>Step 1: Multiply the first terms</strong></p>
+
+<p>
+\(
+({@a@}x)({@c@}x) = {@a*c@}x^2
+\)
+</p>
+
+<p><strong>Step 2: Multiply the outer terms</strong></p>
+
+<p>
+\(
+({@a@}x)({@d@}) = {@a*d@}x
+\)
+</p>
+
+<p><strong>Step 3: Multiply the inner terms</strong></p>
+
+<p>
+\(
+({@b@})({@c@}x) = {@b*c@}x
+\)
+</p>
+
+<p><strong>Step 4: Multiply the last terms</strong></p>
+
+<p>
+\(
+({@b@})({@d@}) = {@b*d@}
+\)
+</p>
+
+<p><strong>Step 5: Combine like terms</strong></p>
+
+<p>The linear terms must be added together:</p>
+
+<p>
+\(
+{@a*d@}x + {@b*c@}x = {@a*d + b*c@}x
+\)
+</p>
+
+<p><strong>Final Answer:</strong></p>
+
+<p>
+\(
+{@ta@}
+\)
+</p>
+
+<p>Remember: when multiplying two binomials, every term in the first bracket must multiply every term in the second bracket, and like terms must be collected at the end.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random non-zero coefficients for x terms */
+a : rand_with_prohib(-5,5,[0]);
+c : rand_with_prohib(-5,5,[0]);
+
+/* Random constants */
+b : rand(11)-5;
+d : rand(11)-5;
+
+/* Define the expression */
+expr : (a*x + b)*(c*x + d);
+
+/* Expanded teacher answer */
+ta : expand(expr);
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>ta</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>
