@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+""" Adding in links to lesson plans, only where they exist"""
 from __future__ import annotations
 
 from pathlib import Path
@@ -146,8 +146,8 @@ def main() -> None:
         if not ptx_rel or not lesson_plan_rel or not step_by_step_rel:
             continue
 
-        if "/real-numbers/" not in ptx_rel.replace("\\", "/"):
-            continue
+        # if "/real-numbers/" not in ptx_rel.replace("\\", "/"):
+        #     continue
 
         ptx_path = source_root / ptx_rel
         if not ptx_path.exists():
