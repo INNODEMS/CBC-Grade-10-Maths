@@ -66,7 +66,11 @@ def validate_paths(base_dir: str = '..') -> None:
     syllabus_total = sum(1 for row in rows if row['In Syllabus'].strip().upper() == 'YES')
     ptx_ok = lp_ok = step_ok = 0
 
-    output_path = os.path.join(base_dir, OUTPUT_CSV)
+    output_path = os.path.join(OUTPUT_CSV)
+
+    # Ensure we always start from a clean file
+    if os.path.exists(output_path):
+        os.remove(output_path)
     sheet_rows = []  # data to send back to Google Sheets
 
     with open(output_path, 'w', newline='', encoding='utf-8') as f_out:
