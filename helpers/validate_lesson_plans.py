@@ -51,6 +51,15 @@ def validate_paths(base_dir: str = '..') -> None:
     headers = values[0]
     rows_data = values[1:]
 
+    fieldnames = headers
+
+    status_cols = [
+        'PTX Exists',
+        'Lesson Plan Exists',
+        'Step By Step Exists',
+    ]
+    out_fieldnames = fieldnames + status_cols
+
     rows = [dict(zip(headers, row)) for row in rows_data]
 
     total = len(rows)
@@ -65,7 +74,7 @@ def validate_paths(base_dir: str = '..') -> None:
     sheet_rows = []  # data to send back to Google Sheets
 
     with open(output_path, 'w', newline='', encoding='utf-8') as f_out:
-        writer = csv.DictWriter(f_out, fieldnames=headers)
+        writer = csv.DictWriter(f_out, fieldnames=out_fieldnames)
         writer.writeheader()
 
         for row in rows:
@@ -88,19 +97,17 @@ def validate_paths(base_dir: str = '..') -> None:
                 
             if not in_syllabus:
                 row['Lesson Plan Exists'] = 'EXTENSION'
-                row['Step By Step Guide Exists'] = 'EXTENSION'
+                row['Step By Step Exists'] = 'EXTENSION'
             else:
                 row['Lesson Plan Exists'] = 'YES' if lp_exists else 'NO'
-                row['Step By Step Guide Exists'] = 'YES' if step_exists else 'NO'
+                row['Step By Step Exists'] = 'YES' if step_exists else 'NO'
                 lp_ok += int(lp_exists)
                 step_ok += int(step_exists)
-                
-            print(list(row.keys()))
                     
             writer.writerow(row)
 
             # Collect row for Sheets in the same column order
-            sheet_rows.append([row.get(col, '') for col in headers])
+            sheet_rows.append([row.get(col, '') for col in out_fieldnames])
 
     def pct(count: int, total=total) -> str:
         return f"{(count / total * 100):.1f}%" if total else 'N/A'
@@ -111,7 +118,7 @@ def validate_paths(base_dir: str = '..') -> None:
     print(f"Total rows: {total}, In Syllabus: {syllabus_total}")
     print(f"Wrote validation results to {OUTPUT_CSV}")
 
-    write_validated_to_sheet(headers, sheet_rows)
+    write_validated_to_sheet(out_fieldnames, sheet_rows)
 
 
 def write_validated_to_sheet(headers, rows, sheet_name: str = 'File Matching Validated') -> None:
