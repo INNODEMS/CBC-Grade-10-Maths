@@ -175,7 +175,7 @@ def main() -> None:
 
         processed += 1
 
-    print(f"Processed real-numbers files: {processed}")
+    print(f"Processed files: {processed}")
     print(f"Resource boxes added: {added_count}")
     print(f"Old resource boxes removed: {removed_count}")
 
