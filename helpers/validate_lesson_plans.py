@@ -67,6 +67,10 @@ def validate_paths(base_dir: str = '..') -> None:
     ptx_ok = lp_ok = step_ok = 0
 
     output_path = os.path.join(OUTPUT_CSV)
+
+    # Ensure we always start from a clean file
+    if os.path.exists(output_path):
+        os.remove(output_path)
     sheet_rows = []  # data to send back to Google Sheets
 
     with open(output_path, 'w', newline='', encoding='utf-8') as f_out:
