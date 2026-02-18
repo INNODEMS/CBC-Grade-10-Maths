@@ -13,7 +13,7 @@ TARGET_TAGS = [
 ]
 FILE_EXTENSION = '.ptx'
 EXCLUDE = 'resources-blurb-'
-SEARCH_DIR = './source'  # Current directory
+SEARCH_DIR = '../source'
 
 def generate_label(length=8):
     chars = string.ascii_lowercase + string.digits

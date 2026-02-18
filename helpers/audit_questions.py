@@ -6,8 +6,8 @@ from slugify import slugify
 from pathlib import Path
 
 # Configuration
-ASSET_FILES_ROOT = './assets'      # The tree containing the STACK questions
-PTX_FILES_ROOT = './source'      # The tree containing files that reference the XMLs
+ASSET_FILES_ROOT = '../assets'      # The tree containing the STACK questions
+PTX_FILES_ROOT = '../source'      # The tree containing files that reference the XMLs
 
 def get_all_asset_files(root_dir, extension=".xml"):
     """Recursively finds all .xml files in a directory tree."""
