@@ -23,7 +23,19 @@ def build_axiom(indent: str, lesson_plan: str, step_by_step: str, newline: str) 
     inner3 = inner2 + "    "
     inner4 = inner3 + "    "
 
-    block = f"""
+    if step_by_step is None: # Only do lesson plan if step by step guide is missing
+        block = f"""
+{indent}<axiom component=\"resources\">
+{inner}<!-- Link to blurb -->
+{inner}<xi:include href=\"../../resources-blurb-lesson.ptx\" />
+
+{inner}<p>
+{inner2}<dataurl source=\"{lesson_plan}\"> Lesson Plan </dataurl>
+{inner}</p>
+{indent}</axiom>
+"""
+    else:
+        block = f"""
 {indent}<axiom component=\"resources\">
 {inner}<!-- Link to blurb -->
 {inner}<xi:include href=\"../../resources-blurb-lesson.ptx\" />
@@ -130,32 +142,30 @@ def main() -> None:
     source_root = REPO_ROOT / "source"
 
     added_count = 0
+    only_lesson = 0
     removed_count = 0
     processed = 0
 
     df = pd.read_csv(csv_path, encoding="utf-8")
 
     for row in df.to_dict(orient="records"):
-        if row.get("PTX Exists") != "YES" or row.get("Lesson Plan Exists") != "YES" or row.get("Step By Step Exists") != "YES":
+        ptx_ok = row.get("PTX Exists") == "YES"
+        lesson_ok = row.get("Lesson Plan Exists") == "YES"
+        step_ok = row.get("Step By Step Exists") == "YES"
+        if not ptx_ok or not lesson_ok: # file doesn't exist or lesson plan doesn't exist, skip. Step by step guide is optional, so we can still add the lesson plan if step by step guide is missing.
             continue
 
         ptx_rel = (row.get("PTX Path") or "").strip()
         lesson_plan_rel = (row.get("Lesson Plan Path") or "").strip()
-        step_by_step_rel = (row.get("Step By Step Guide Path") or "").strip()
-
-        if not ptx_rel or not lesson_plan_rel or not step_by_step_rel:
-            continue
-
-        # if "/real-numbers/" not in ptx_rel.replace("\\", "/"):
-        #     continue
-
-        ptx_path = source_root / ptx_rel
-        if not ptx_path.exists():
-            continue
-
         lesson_plan = f"lesson_plans/{lesson_plan_rel}"
-        step_by_step = f"lesson_plans/{step_by_step_rel}"
-
+        
+        if step_ok:
+            step_by_step_rel = (row.get("Step By Step Guide Path") or "").strip()
+            step_by_step = f"lesson_plans/{step_by_step_rel}"
+        else:
+            step_by_step = None
+            
+        ptx_path = source_root / ptx_rel
         content = ptx_path.read_text(encoding="utf-8")
 
         original_content = content
@@ -169,14 +179,17 @@ def main() -> None:
         if updated is not None:
             content = updated
             added_count += 1
+            if not step_ok:
+                only_lesson += 1
 
         if content != original_content:
             ptx_path.write_text(content, encoding="utf-8")
 
         processed += 1
 
-    print(f"Processed real-numbers files: {processed}")
+    print(f"Processed files: {processed}")
     print(f"Resource boxes added: {added_count}")
+    print(f"Of which, lesson plan only (no step-by-step): {only_lesson}")
     print(f"Old resource boxes removed: {removed_count}")
 
 
