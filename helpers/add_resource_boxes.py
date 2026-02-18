@@ -137,6 +137,78 @@ def remove_old_resource_boxes(content: str) -> tuple[str, int]:
     return "".join(pieces), removed
 
 
+def upgrade_lesson_only_resource_boxes(
+    content: str, lesson_plan: str, step_by_step: str
+) -> tuple[str, int]:
+    """Upgrade existing resource boxes that only have a Lesson Plan.
+
+    If a Step-by-Step Guide now exists, replace such boxes with the
+    newer side-by-side layout containing both Lesson Plan and
+    Step-by-Step Guide links.
+    """
+
+    if step_by_step is None:
+        return content, 0
+
+    phrase_blurb = "../../resources-blurb-lesson.ptx"
+    # Quick bail-out if there are no resource blurbs at all.
+    if phrase_blurb not in content:
+        return content, 0
+
+    newline = detect_newline(content)
+    lowered = content.lower()
+    upgraded = 0
+    pieces: list[str] = []
+    i = 0
+    n = len(content)
+
+    while True:
+        start = content.find("<axiom", i)
+        if start == -1:
+            pieces.append(content[i:])
+            break
+
+        pieces.append(content[i:start])
+
+        end = content.find("</axiom>", start)
+        if end == -1:
+            pieces.append(content[start:])
+            break
+
+        end_close = end + len("</axiom>")
+        block = content[start:end_close]
+        block_lower = lowered[start:end_close]
+
+        # Identify lesson-only resource boxes that should be upgraded.
+        if (
+            phrase_blurb.lower() in block_lower
+            and "lesson plan" in block_lower
+            and "step-by-step guide" not in block_lower
+        ):
+            # Derive indentation from the line containing the opening tag.
+            line_start = content.rfind(newline, 0, start)
+            if line_start == -1:
+                line_start = 0
+            else:
+                line_start += len(newline)
+            line = content[line_start:start]
+            indent = line[: len(line) - len(line.lstrip())]
+
+            # Reuse the standard builder, but strip surrounding newlines
+            # so we don't disturb spacing around this block.
+            new_block = build_axiom(indent, lesson_plan, step_by_step, newline)
+            new_block = new_block.strip("\r\n")
+
+            pieces.append(new_block)
+            upgraded += 1
+            i = end_close
+        else:
+            pieces.append(block)
+            i = end_close
+
+    return "".join(pieces), upgraded
+
+
 def main() -> None:
     csv_path = HELPERS_DIR / CSV_FILENAME
     source_root = REPO_ROOT / "source"
@@ -144,6 +216,7 @@ def main() -> None:
     added_count = 0
     only_lesson = 0
     removed_count = 0
+    upgraded_count = 0
     processed = 0
 
     df = pd.read_csv(csv_path, encoding="utf-8")
@@ -151,7 +224,7 @@ def main() -> None:
     for row in df.to_dict(orient="records"):
         ptx_ok = row.get("PTX Exists") == "YES"
         lesson_ok = row.get("Lesson Plan Exists") == "YES"
-        step_ok = row.get("Step By Step Exists") == "YES"
+        step_ok = row.get("Step By Step Guide Exists") == "YES"
         if not ptx_ok or not lesson_ok: # file doesn't exist or lesson plan doesn't exist, skip. Step by step guide is optional, so we can still add the lesson plan if step by step guide is missing.
             continue
 
@@ -174,6 +247,15 @@ def main() -> None:
         content, removed_here = remove_old_resource_boxes(content)
         removed_count += removed_here
 
+        # Next, if a step-by-step guide now exists, upgrade any
+        # existing lesson-only resource boxes to the side-by-side
+        # layout with both links.
+        if step_ok:
+            content, upgraded_here = upgrade_lesson_only_resource_boxes(
+                content, lesson_plan, step_by_step
+            )
+            upgraded_count += upgraded_here
+
         # Then, insert the new-style resource box if needed.
         updated = insert_axiom_if_missing(content, lesson_plan, step_by_step)
         if updated is not None:
@@ -191,6 +273,7 @@ def main() -> None:
     print(f"Resource boxes added: {added_count}")
     print(f"Of which, lesson plan only (no step-by-step): {only_lesson}")
     print(f"Old resource boxes removed: {removed_count}")
+    print(f"Existing boxes upgraded to include step-by-step: {upgraded_count}")
 
 
 if __name__ == "__main__":
