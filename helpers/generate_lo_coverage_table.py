@@ -62,10 +62,7 @@ def parse_file_matching_validated(fmv_csv_path):
             # Remap Surface Area and Volume sections to the syllabus strand
             orig_strand = row['Chapter'].strip()
             section = row['Section'].strip()
-            if orig_strand in ['Surface Area', 'Volume'] or section in ['Surface Area', 'Volume']:
-                strand = 'Surface Area and Volume of Solids'
-            else:
-                strand = orig_strand
+            strand = orig_strand
             substrand = section
             section_filecase = row['Section Filecase'].strip()
             subsection_filecase = row['Subsection Filecase'].strip()
@@ -84,6 +81,15 @@ def parse_file_matching_validated(fmv_csv_path):
 
 
 def generate_ptx(lo_data, fmv_mapping, output_path):
+    # Assign strand and substrand numbers
+    strand_numbers = {}
+    substrand_numbers = {}
+    for i, (strand, substrands) in enumerate(lo_data.items(), 1):
+        strand_numbers[strand] = i
+        substrand_numbers[strand] = {}
+        for j, substrand in enumerate(substrands.keys(), 1):
+            substrand_numbers[strand][substrand] = j
+
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<!-- AUTO-GENERATED FILE - DO NOT EDIT MANUALLY -->',
@@ -93,17 +99,19 @@ def generate_ptx(lo_data, fmv_mapping, output_path):
         '    <title>Learning Outcomes Coverage Table</title>',
         '',
         '    <p>',
-        '        This table maps each learning outcome to the section(s) of the textbook where it is covered.',
+        '        For each strand and sub-strand in the 2025 Core Mathematics CBE Curriculum, this table maps each specific learning outcome to the section(s) of the textbook where it is covered.',
         '        Section numbers are clickable links.',
         '    </p>',
         ''
     ]
     for strand, substrands in lo_data.items():
         strand_id = strand.replace(' ', '-').replace('.', '-').lower()
+        s_num = strand_numbers[strand]
         lines.append(f'    <paragraphs xml:id="lo-coverage-{strand_id}">')
-        lines.append(f'        <title>{strand}</title>')
+        lines.append(f'        <title>{s_num}.0 {strand}</title>')
         for substrand, outcomes in substrands.items():
-            lines.append(f'        <p>{substrand}</p>')
+            ss_num = substrand_numbers[strand][substrand]
+            lines.append(f'        <p>{s_num}.{ss_num} {substrand}</p>')
             lines.append('        <tabular halign="left">')
             lines.append('            <col width="10%"/>')
             lines.append('            <col width="90%"/>')
@@ -112,7 +120,16 @@ def generate_ptx(lo_data, fmv_mapping, output_path):
             lines.append('                <cell>Coverage in Textbook</cell>')
             lines.append('            </row>')
             for letter, outcome in outcomes:
-                xml_ids = fmv_mapping.get(strand, {}).get(substrand, {}).get(outcome, [])
+                # Special handling for Surface Area and Volume of Solids
+                if substrand == 'Surface Area and Volume of Solids':
+                    xml_ids = []
+                    # Aggregate all substrands (Surface Area, Volume) for this sub-strand
+                    for ss in ['Surface Area', 'Volume']:
+                        xml_ids += fmv_mapping.get(strand, {}).get(ss, {}).get(outcome, [])
+                    # Also include any direct matches under the combined substrand name (for robustness)
+                    xml_ids += fmv_mapping.get(strand, {}).get(substrand, {}).get(outcome, [])
+                else:
+                    xml_ids = fmv_mapping.get(strand, {}).get(substrand, {}).get(outcome, [])
                 refs = [f'§<xref ref="{xml_id}" text="global"/>' for xml_id in xml_ids]
                 coverage = ', '.join(refs) if refs else '<mdash/>'
                 lines.append('            <row bottom="minor">')
