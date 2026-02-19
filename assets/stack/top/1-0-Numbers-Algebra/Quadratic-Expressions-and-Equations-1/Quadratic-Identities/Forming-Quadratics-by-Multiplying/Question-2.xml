@@ -2,25 +2,70 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Identifying sample space of a simple probability experiment</text>
+      <text>Question 2</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Consider {@experiment_text@} Write the possible sample space for this experiment.</p>
+      <text><![CDATA[<h3 style="text-align:center;">
+Expand and simplify the following expression:
+</h3>
 
-<p>Give your solution as a set, using <code>{</code> and <code>}</code> to denote the set.</p>
+<p style="text-align:center;">
+\[
+({@a@}x + {@b@})({@c@}x + {@d@})
+\]
+</p>
 
-<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+<p style="text-align:center;">
+Give your answer in the form \(Ax^2 + Bx + C\).
+</p>
+
+<p style="text-align:center;">
+[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
 
-<p>The sample space is the set of all possible outcomes of the experiment.</p>
+<p>To expand the product of two binomials, we use the distributive property 
+(multiply each term in the first bracket by each term in the second bracket).</p>
 
-<p>For this experiment, the sample space is:</p>
+<p>
+\(
+({@a@}x + {@b@})({@c@}x + {@d@})
+\)
+</p>
 
-<p>\[
-{@S_text@}
-\]</p>]]></text>
+<p>Multiply each term:</p>
+
+<p>
+\(
+= ({@a@}x)({@c@}x) + ({@a@}x)({@d@}) + ({@b@})({@c@}x) + ({@b@})({@d@})
+\)
+</p>
+
+<p>Simplify each product:</p>
+
+<p>
+\(
+= {@a*c@}x^2 + {@a*d@}x + {@b*c@}x + {@b*d@}
+\)
+</p>
+
+<p>Now combine like terms:</p>
+
+<p>
+\(
+= {@a*c@}x^2 + {@a*d + b*c@}x + {@b*d@}
+\)
+</p>
+
+<p><strong>Final Answer:</strong></p>
+
+<p>
+\(
+{@ta@}
+\)
+</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -30,33 +75,27 @@
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[/* Randomly choose the experiment */
-exp_choice: rand([1,2,3]);
+      <text>/* Random non-zero coefficients */
+a : rand_with_prohib(-2,2,[0]);
+b : rand_with_prohib(-3,3,[0]);
+c : rand_with_prohib(-6,6,[0]);
+d : rand_with_prohib(-4,4,[0]);
 
-/* Define the experiment description as a string */
-experiment_text: if exp_choice=1 then "Tossing a fair coin once (use H and T to denote its sides)."
-                  elseif exp_choice=2 then "Rolling a fair six-sided die once."
-                  else "Selecting a day at random from the weekend (use Mon, Tue, ..., Sat, Sun to denote weekdays).";
+/* Define expression */
+expr : (a*x + b)*(c*x + d);
 
-/* Sample spaces */
-S_text: if exp_choice=1 then {H, T}
-         elseif exp_choice=2 then {1, 2, 3, 4, 5, 6}
-         else {Sat, Sun};
-]]></text>
+/* Teacher answer */
+ta : expand(expr);
+</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@S_text@}</text>
+      <text>{@ta@}</text>
     </questionnote>
     <questiondescription format="html">
-      <text><![CDATA[<p id="author">Michael Onyimbo</p>
-<p id="concept"></p>
-<p id="reviewer"></p>
-<p id="reviewer"></p>
-
-<p id="description">The question requires the learner to identify the sample space by listing all possible outcomes for a simple probability experiment.</p>]]></text>
+      <text/>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -83,7 +122,7 @@ S_text: if exp_choice=1 then {H, T}
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>S_text</tans>
+      <tans>ta</tans>
       <boxsize>15</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -95,7 +134,7 @@ S_text: if exp_choice=1 then {H, T}
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <prt>
@@ -108,10 +147,10 @@ S_text: if exp_choice=1 then {H, T}
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description>Checks for the correct answer</description>
+        <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>S_text</tans>
+        <tans>ta</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -132,22 +171,5 @@ S_text: if exp_choice=1 then {H, T}
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>1592215505</deployedseed>
-    <deployedseed>724403633</deployedseed>
-    <deployedseed>1792777686</deployedseed>
-    <qtest>
-      <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
-      <testinput>
-        <name>ans1</name>
-        <value>S_text</value>
-      </testinput>
-      <expected>
-        <name>prt1</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
-      </expected>
-    </qtest>
   </question>
 </quiz>
