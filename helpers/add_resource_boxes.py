@@ -63,26 +63,27 @@ def insert_axiom_if_missing(content: str, lesson_plan: str, step_by_step: str) -
     if "../../resources-blurb-lesson.ptx" in content:
         return None
 
-    title_index = content.find("</title>")
-    if title_index == -1:
+    # Insert after </objectives> instead of </title>
+    objectives_index = content.find("</objectives>")
+    if objectives_index == -1:
         return None
 
     newline = detect_newline(content)
-    title_line_start = content.rfind(newline, 0, title_index)
-    if title_line_start == -1:
-        title_line_start = 0
+    objectives_line_start = content.rfind(newline, 0, objectives_index)
+    if objectives_line_start == -1:
+        objectives_line_start = 0
     else:
-        title_line_start += len(newline)
+        objectives_line_start += len(newline)
 
-    title_line_end = content.find(newline, title_index)
-    if title_line_end == -1:
-        title_line_end = len(content)
+    objectives_line_end = content.find(newline, objectives_index)
+    if objectives_line_end == -1:
+        objectives_line_end = len(content)
 
-    title_line = content[title_line_start:title_line_end]
-    indent = title_line[: len(title_line) - len(title_line.lstrip())]
+    objectives_line = content[objectives_line_start:objectives_line_end]
+    indent = objectives_line[: len(objectives_line) - len(objectives_line.lstrip())]
 
     axiom_block = build_axiom(indent, lesson_plan, step_by_step, newline)
-    insert_pos = title_index + len("</title>")
+    insert_pos = objectives_index + len("</objectives>")
     return content[:insert_pos] + axiom_block + content[insert_pos:]
 
 
