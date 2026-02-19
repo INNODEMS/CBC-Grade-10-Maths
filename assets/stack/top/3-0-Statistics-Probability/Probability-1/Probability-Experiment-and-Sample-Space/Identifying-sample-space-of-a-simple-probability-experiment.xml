@@ -7,6 +7,8 @@
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>Consider {@experiment_text@} Write the possible sample space for this experiment.</p>
 
+<p>Give your solution as a set, using <code>{</code> and <code>}</code> to denote the set.</p>
+
 <p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
@@ -17,7 +19,7 @@
 <p>For this experiment, the sample space is:</p>
 
 <p>\[
-\text{${@S_text@}"}
+{@S_text@}
 \]</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -25,21 +27,21 @@
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text><![CDATA[/* Randomly choose the experiment */
 exp_choice: rand([1,2,3]);
 
 /* Define the experiment description as a string */
-experiment_text: if exp_choice=1 then "Tossing a fair coin once."
+experiment_text: if exp_choice=1 then "Tossing a fair coin once (use H and T to denote its sides)."
                   elseif exp_choice=2 then "Rolling a fair six-sided die once."
-                  else "Selecting a day at random from the weekend.";
+                  else "Selecting a day at random from the weekend (use Mon, Tue, ..., Sat, Sun to denote weekdays).";
 
 /* Sample spaces */
-S_text: if exp_choice=1 then "{H, T}"
-         elseif exp_choice=2 then "{1, 2, 3, 4, 5, 6}"
-         else "{Sat, Sun}";
+S_text: if exp_choice=1 then {H, T}
+         elseif exp_choice=2 then {1, 2, 3, 4, 5, 6}
+         else {Sat, Sun};
 ]]></text>
     </questionvariables>
     <specificfeedback format="html">

@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Quadratic Identities - Area Model for Numerical Squares</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>We can use the quadratic identity \((a+b)^2 = a^2 + 2ab + b^2\) to calculate squares of large numbers mentally.</p>
+
+<p>Imagine a square garden with a side length of <strong>{@total_num@} m</strong>. We can split this length into <strong>{@base_val@} m</strong> and <strong>{@offset_val@} m</strong>.</p>
+
+<p>Use the <strong>Area Model</strong> diagram below to calculate the area of each section, and then find the total area of the garden.</p>
+
+[[jsxgraph]]
+/* Define specific drawing coordinates to ensure the diagram looks good */
+/* We don't use the actual values (e.g. 50 and 3) because 3 would be too small to see */
+var b_draw = 6;  /* Drawing size for the big square */
+var o_draw = 2;  /* Drawing size for the small square */
+var total_draw = b_draw + o_draw;
+
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-1, total_draw + 1, total_draw + 1, -1],
+    axis: false,
+    showCopyright: false,
+    keepaspectratio: true
+});
+
+/* 1. Draw the Main Outer Square Points */
+var p1 = board.create('point', [0, 0], {visible:false});
+var p2 = board.create('point', [total_draw, 0], {visible:false});
+var p3 = board.create('point', [total_draw, total_draw], {visible:false});
+var p4 = board.create('point', [0, total_draw], {visible:false});
+
+/* Draw Outer Border */
+board.create('polygon', [p1, p2, p3, p4], {
+    borders: {strokeColor:'black', strokeWidth:2},
+    fillColor: 'none'
+});
+
+/* 2. Define Split Points */
+var split_x = board.create('point', [b_draw, 0], {visible:false});
+var split_y = board.create('point', [0, o_draw], {visible:false}); /* Split from top downwards visually, or bottom up. Let's do bottom-left is big. */
+/* Actually, standard math diagram usually puts big square at bottom-left or top-left. Let's do Bottom-Left as Big. */
+var split_x_top = board.create('point', [b_draw, total_draw], {visible:false});
+var split_y_right = board.create('point', [total_draw, b_draw], {visible:false});
+var center = board.create('point', [b_draw, b_draw], {visible:false});
+var left_split = board.create('point', [0, b_draw], {visible:false});
+
+/* 3. Draw Dividing Lines */
+board.create('segment', [left_split, split_y_right], {strokeColor:'gray', dash:2});
+board.create('segment', [split_x, split_x_top], {strokeColor:'gray', dash:2});
+
+/* 4. Label the Sides (Using the STACK variables) */
+/* Bottom Labels */
+board.create('text', [b_draw/2, -0.5, "{#base_val#}"], {anchorX:'middle'});
+board.create('text', [b_draw + o_draw/2, -0.5, "{#offset_val#}"], {anchorX:'middle'});
+
+/* Left Labels */
+board.create('text', [-0.5, b_draw/2, "{#base_val#}"], {anchorX:'middle'});
+board.create('text', [-0.5, b_draw + o_draw/2, "{#offset_val#}"], {anchorX:'middle'});
+
+/* 5. Color the Regions */
+/* Big Square (Bottom-Left) */
+board.create('polygon', [p1, split_x, center, left_split], {fillColor:'#d1e7dd', borders:{visible:false}});
+board.create('text', [b_draw/2, b_draw/2, "A"], {fontSize:16});
+
+/* Small Square (Top-Right) */
+board.create('polygon', [center, split_y_right, p3, split_x_top], {fillColor:'#f8d7da', borders:{visible:false}});
+board.create('text', [b_draw + o_draw/2, b_draw + o_draw/2, "D"], {fontSize:16});
+
+/* Rectangles */
+board.create('polygon', [left_split, center, split_x_top, p4], {fillColor:'#fff3cd', borders:{visible:false}});
+board.create('text', [b_draw/2, b_draw + o_draw/2, "B"], {fontSize:16});
+
+board.create('polygon', [split_x, p2, split_y_right, center], {fillColor:'#fff3cd', borders:{visible:false}});
+board.create('text', [b_draw + o_draw/2, b_draw/2, "C"], {fontSize:16});
+[[/jsxgraph]]
+
+<p><strong>Part 1: Find the area of each section.</strong></p>
+<table>
+    <tr>
+        <td>Area A (Big Square):</td>
+        <td>\( {@base_val@}^2 = \) [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</td>
+    </tr>
+    <tr>
+        <td>Area B (Rectangle):</td>
+        <td>\( {@base_val@} \times {@offset_val@} = \) [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]</td>
+    </tr>
+    <tr>
+        <td>Area C (Rectangle):</td>
+        <td>\( {@offset_val@} \times {@base_val@} = \) [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</td>
+    </tr>
+    <tr>
+        <td>Area D (Small Square):</td>
+        <td>\( {@offset_val@}^2 = \) [[input:ans4]] [[validation:ans4]] [[feedback:prt4]]</td>
+    </tr>
+</table>
+
+<p><strong>Part 2: Total Area</strong></p>
+<p>Add the four areas together to find the total area of the garden (which equals \({@total_num@}^2\)).</p>
+<p>Total Area = [[input:ans5]] \(m^2\) [[validation:ans5]] [[feedback:prt5]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p><b>Worked Solution:</b></p>
+<p>We are calculating \({@total_num@}^2\) by breaking it down into \({@exp_step@}\).</p>
+
+<p>Using the identity \((a+b)^2 = a^2 + 2ab + b^2\), where \(a={@base_val@}\) and \(b={@offset_val@}\):</p>
+<ul>
+    <li><b>Region A (\(a^2\)):</b> \({@base_val@}^2 = {@area_A@}\)</li>
+    <li><b>Region B (\(ab\)):</b> \({@base_val@} \times {@offset_val@} = {@area_B@}\)</li>
+    <li><b>Region C (\(ba\)):</b> \({@offset_val@} \times {@base_val@} = {@area_C@}\)</li>
+    <li><b>Region D (\(b^2\)):</b> \({@offset_val@}^2 = {@area_D@}\)</li>
+</ul>
+
+<p>Adding them together:</p>
+\[ {@area_A@} + {@area_B@} + {@area_C@} + {@area_D@} = \mathbf{{@total_area@}} \]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* 1. Generate a random 2-digit number (e.g., 53, 62, etc.) */
+/* We pick a 'base' multiple of 10 and a small 'offset' */
+base_val : rand([20, 30, 40, 50, 60]);
+offset_val : rand([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+/* The total number to square */
+total_num : base_val + offset_val;
+
+/* 2. Calculate the Areas of the 4 Regions */
+/* Top-Left (Big Square) */
+area_A : base_val^2;
+
+/* Top-Right and Bottom-Left (Rectangles) */
+area_B : base_val * offset_val;
+area_C : offset_val * base_val; /* Same as B */
+
+/* Bottom-Right (Small Square) */
+area_D : offset_val^2;
+
+/* 3. Final Total Area */
+total_area : total_num^2;
+
+/* 4. Formatted Display for Feedback */
+exp_step : sconcat("(", base_val, " + ", offset_val, ")^2");]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p><b>Region A :</b> \({@area_A@}\)</p>
+<p><b>Region B :</b> \({@area_B@}\)</p>
+<p><b>Region C :</b> \({@area_C@}\)</p>
+<p><b>Region D :</b> \({@area_D@}\)</p>
+<p>Total area: \({@total_area@} \)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Daniel Murunga</p>
+<p id="concept"></p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+<p id="description"></p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>area_A</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>area_B</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>area_C</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>area_D</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans5</name>
+      <type>algebraic</type>
+      <tans>total_area</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct area of region A</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>area_A</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct area of region B</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>area_B</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct area of region C</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>area_C</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct area of region D</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>area_D</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt5</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct area of whole square</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans5</sans>
+        <tans>total_area</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt5-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt5-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>995724566</deployedseed>
+    <deployedseed>1993310386</deployedseed>
+    <deployedseed>919327518</deployedseed>
+    <deployedseed>612762114</deployedseed>
+    <deployedseed>960149897</deployedseed>
+    <deployedseed>1402468631</deployedseed>
+    <deployedseed>1158356664</deployedseed>
+    <deployedseed>1663564747</deployedseed>
+    <deployedseed>1975931459</deployedseed>
+    <deployedseed>423356003</deployedseed>
+    <deployedseed>1257521290</deployedseed>
+    <deployedseed>712020446</deployedseed>
+    <deployedseed>2129219232</deployedseed>
+    <deployedseed>594997530</deployedseed>
+    <deployedseed>38217436</deployedseed>
+    <deployedseed>898586771</deployedseed>
+    <deployedseed>386664273</deployedseed>
+    <deployedseed>847852821</deployedseed>
+    <deployedseed>387103360</deployedseed>
+    <deployedseed>420723206</deployedseed>
+    <deployedseed>63787581</deployedseed>
+  </question>
+</quiz>
