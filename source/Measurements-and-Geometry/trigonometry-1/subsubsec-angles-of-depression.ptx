@@ -1,7 +1,697 @@
 <subsubsection xml:id="subsubsec-angles-of-depression" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Angles of Depression</title>
-    <p>
-        TODO
-    </p>
+    <activity xml:id="auto_lov3todh">
+        <p xml:id="auto_2i0306v0">
+            <m>\textbf{Individual work}</m>
+        </p>
+        <p xml:id="auto_wt3eswpf">
+            <term>What you require:</term> Your homemade clinometer, a ruler or measuring tape, a notebook and pen and a friend (optional, but fun!)
+        </p>
+        <p xml:id="auto_gbeotobo">
+            <ol xml:id="auto_iqztmt1d">
+                <li xml:id="auto_4l0u28vj">
+                    <p xml:id="auto_m6hu8u4b">
+                        Climb up to a higher place like a step, a balcony, or a small hill
+                    </p>
+                </li>
+                <li xml:id="auto_psycerpm">
+                    <p xml:id="auto_eo6gnvkr">
+                        Hold the clinometer at eye level, and look through it toward an object on the
+                            ground (like a cone, stone, or your friend’s shoes).
+                    </p>
+                </li>
+                <li xml:id="auto_177fmhnd">
+                    <p xml:id="auto_r9pnjhg3">
+                        Watch the string and record the angle where it crosses the scale. That’s your angle of depression!
+                    </p>
+                </li>
+                <li xml:id="auto_foh78a7a">
+                    <p xml:id="auto_7oiiijgo">
+                        Measure the height from your 
+                        eyes to the ground (that’s your vertical distance).
+                    </p>
+                    <p xml:id="auto_0842qtrl">
+                        Calculate how far the object is from the base of your standing point.
+                    </p>
+                </li>
+                <li xml:id="auto_vusvblw9">
+                    <p xml:id="auto_b3w4lcqy">
+                        Share and discuss your work with your classmates.
+                    </p>
+                </li>
+            </ol>
+        </p>
+    </activity>
+
+        <example xml:id="auto_3otryzal">
+        <statement>
+            <p xml:id="auto_0xdn8vn2">
+                A hiker stands on top of a hill that is <m>120\,\text{m}</m> high 
+                and looks down at a cabin in a valley. The angle of
+                depression to the cabin is <m>40^\circ</m>. 
+                Calculate the horizontal distance from the hiker 
+                to the cabin.
+            </p>
+        </statement>
+        <solution>
+            <p xml:id="auto_2cly5n39">
+                Consider the figure below:
+            </p>
+            <image width="50%">
+            <latex-image label="depression-cabin-example">
+                \begin{tikzpicture}
+                    % Using polar coordinates for exact 40° depression angle
+                    % Hiker position: horizontal = 4/tan(40°) from cabin, height = 4
+                    \pgfmathsetmacro{\hikerdist}{4/tan(40)}
+                    \coordinate (hiker) at (\hikerdist,4);
+                    \coordinate (cabin) at (0,0);
+                    % Ground line
+                    \draw[very thick] (-0.5,0) -- (5.5,0);
+                    % Hill at hiker position
+                    \draw[very thick, brown] (\hikerdist,0) -- (hiker);
+                    \fill[brown!30] (\hikerdist-0.5,0) -- (hiker) -- (\hikerdist+0.5,0) -- cycle;
+                    % Hiker at top of hill
+                    \draw[thick] (hiker) -- ++(0,0.4);
+                    \draw[thick,fill=cyan] ($(hiker) + (0,0.4)$) circle (0.12);
+                    \node[above] at ($(hiker) + (0,0.55)$) {Hiker};
+                    % Cabin at origin
+                    \draw[thick, brown, fill=brown!40] (0,0) rectangle (0.5,0.35);
+                    \draw[thick, brown] (0,0.35) -- (0.25,0.5) -- (0.5,0.35);
+                    \node[below] at (0.25,-0.1) {Cabin};
+                    % Horizontal line from hiker
+                    \draw[dashed, thin] (hiker) -- (-0.3,4);
+                    % Line of sight using polar: from hiker at -40° (depression)
+                    \draw[very thick, dashed, blue] (hiker) -- ($(hiker) + (-150:6)$);
+                    % Angle of depression - exactly 40° below horizontal
+                    \draw ($(hiker) + (180:1)$) arc[start angle=180, end angle=220, radius=1cm];
+                    \node at ($(hiker) + (200:1.4)$) {$40^\circ$};
+                    % Right angle mark at base
+                    \draw (\hikerdist-0.3,0) -- (\hikerdist-0.3,0.3) -- (\hikerdist,0.3);
+                    % Labels
+                    \node[below] at (2.4,0) {$d = ?$};
+                    \node[right] at ($(hiker) + (0.15,-2)$) {$120\,\text{m}$};
+                \end{tikzpicture}
+            </latex-image>
+                
+            </image>
+            <p xml:id="auto_97qz6i8w">
+                The angle of depression is <m>40^\circ</m>. Inside the right triangle at the hiker's position, 
+                the angle between the line of sight and the vertical is <m>90^\circ - 40^\circ = 50^\circ</m>.
+            </p>
+            <p>
+                Using this angle, the horizontal distance <m>d</m> is opposite and the height <m>120\,\text{m}</m> is adjacent.
+            </p>
+            <p xml:id="auto_9z0mzysy">
+                <md>
+                    <mrow> \tan\,50^\circ \amp = \frac{d}{120} </mrow>
+                    <mrow> d \amp = 120 \times \tan\,50^\circ </mrow>
+                    <mrow> \amp = 120 \times 1.1918 </mrow>
+                    <mrow> \amp = 143\,\text{m}</mrow>
+                </md>
+            </p>
+        </solution>
+    </example>
+
+    <exercises xml:id="exercises-angles-depression">
+        <exercise xml:id="ex-plane-depression">
+            <statement>
+                <p>
+                    A plane flies to a height of <m>80\,\text{m}</m> above the ground. The angle of
+                    depression from the plane to a radar on the ground is <m>30^\circ</m>. Find
+                    the horizontal distance between the radar and the plane's projection on the
+                    ground.
+                </p>
+                <image width="55%">
+                <latex-image label="exercise-plane-depression">
+                    \begin{tikzpicture}
+                        % Using polar coordinates for exact 30° depression angle
+                        % plane horizontal distance = 4/tan(30°) from person
+                        \pgfmathsetmacro{\planedist}{4/tan(30)}
+                        \coordinate (plane) at (\planedist,4);
+                        \coordinate (person) at (0,0);
+                        % Ground line
+                        \draw[very thick] (-0.5,0) -- (7.5,0);
+                        % Vertical line at plane position
+                        \draw[very thick] (\planedist,0) -- (plane);
+                        % Horizontal line from plane
+                        \draw[dashed] (plane) -- (-0.3,4);
+                        % Line of sight using polar: from plane at -30° (depression)
+                        \draw[very thick, dashed, blue] (plane) -- ($(plane) + (-150:8)$);
+                        % Right angle mark
+                        \draw (\planedist-0.3,0) -- (\planedist-0.3,0.3) -- (\planedist,0.3);
+                        % Angle of depression - exactly 30° below horizontal
+                        \draw ($(plane) + (180:1)$) arc[start angle=180, end angle=210, radius=1cm];
+                        \node at ($(plane) + (195:1.4)$) {$30^\circ$};
+                        % Radar at origin
+                        \fill[black] (person) circle (0.1);
+                        % plane symbol
+                        \draw[thick,fill=gray] (plane) circle (0.2);
+                        \node[above] at ($(plane) + (0,0.3)$) {Plane};
+                        % Labels
+                        \node[below] at (0,-0.1) {Radar};
+                        \node[right] at ($(plane) + (0.15,-2)$) {$80\,\text{m}$};
+                        \node[below] at (3.5,0) {$d = ?$};
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+            </statement>
+            <answer>
+                <p>
+                    The angle of depression is <m>30^\circ</m>. Inside the right triangle at the plane's position, 
+                    the angle between the line of sight and the vertical is <m>90^\circ - 30^\circ = 60^\circ</m>.
+                </p>
+                <p>
+                    Given:
+                </p>
+                <p>
+                    <ul>
+                        <li><p>Height of plane (adjacent to the <m>60^\circ</m> angle) = <m>80\,\text{m}</m></p></li>
+                        <li><p>Angle inside the triangle = <m>60^\circ</m></p></li>
+                        <li><p>Horizontal distance (opposite to the <m>60^\circ</m> angle) = <m>d</m></p></li>
+                    </ul>
+                </p>
+                <p>
+                    Using tangent:
+                </p>
+                <p>
+                    <md>
+                        <mrow>\tan\,60^\circ \amp = \frac{d}{80}</mrow>
+                        <mrow>d \amp = 80 \times \tan\,60^\circ</mrow>
+                        <mrow>\amp = 80 \times 1.7321</mrow>
+                        <mrow>\amp = 138.57\,\text{m}</mrow>
+                    </md>
+                </p>
+                <p>
+                    The horizontal distance is approximately <m>138.6\,\text{m}</m>.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="ex-lifeguard-tower">
+            <statement>
+                <p>
+                    A lifeguard sits in a tower that is <m>4.5\,\text{m}</m> above the beach. 
+                    She spots a swimmer in distress at an angle of depression of <m>18^\circ</m>. 
+                    How far is the swimmer from the base of the lifeguard tower?
+                </p>
+                <image width="55%">
+                <latex-image label="exercise-lifeguard">
+                    \begin{tikzpicture}
+                        % Using polar coordinates for exact 18° depression angle
+                        \coordinate (lifeguard) at (0,2.25);
+                        % Swimmer distance = 2.25/tan(18°)
+                        \pgfmathsetmacro{\swimmerdist}{2.25/tan(18)}
+                        % Beach/water line
+                        \draw[very thick, yellow!70!brown] (-0.5,0) -- (7.5,0);
+                        \fill[blue!20] (5,0) rectangle (7.5,-0.3);
+                        \node[below] at (6.5,-0.3) {Water};
+                        % Lifeguard tower at origin
+                        \draw[very thick, brown] (0,0) -- (lifeguard);
+                        \draw[thick, brown] (-0.3,2.25) -- (0.3,2.25);
+                        \draw[thick, brown] (-0.2,0) -- (-0.2,2.25);
+                        \draw[thick, brown] (0.2,0) -- (0.2,2.25);
+                        % Lifeguard
+                        \draw[thick,fill=cyan] ($(lifeguard) + (0,0.1)$) circle (0.12);
+                        \node[above] at ($(lifeguard) + (0,0.25)$) {Lifeguard};
+                        % Horizontal line from lifeguard
+                        \draw[dashed] (lifeguard) -- (7.2,2.25);
+                        % Line of sight using polar: from lifeguard at -18° (depression)
+                        \draw[very thick, dashed, blue] (lifeguard) -- ($(lifeguard) + (-18:7.5)$);
+                        % Swimmer at correct distance
+                        \draw[thick, red, fill=red] (\swimmerdist,0) circle (0.15);
+                        \node[below] at (\swimmerdist,-0.1) {Swimmer};
+                        % Angle of depression - exactly 18° below horizontal
+                        \draw ($(lifeguard) + (0:1)$) arc[start angle=0, end angle=-18, radius=1cm];
+                        \node at ($(lifeguard) + (-9:1.5)$) {$18^\circ$};
+                        % Labels
+                        \node[left] at (0,1.1) {$4.5\,\text{m}$};
+                        \node[below] at (3.5,0) {$d = ?$};
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+            </statement>
+            <answer>
+                <p>
+                    The angle of depression is <m>18^\circ</m>. Inside the right triangle at the lifeguard's position, 
+                    the angle between the line of sight and the vertical is <m>90^\circ - 18^\circ = 72^\circ</m>.
+                </p>
+                <p>
+                    Given:
+                </p>
+                <p>
+                    <ul>
+                        <li><p>Height of tower (adjacent to the <m>72^\circ</m> angle) = <m>4.5\,\text{m}</m></p></li>
+                        <li><p>Angle inside the triangle = <m>72^\circ</m></p></li>
+                        <li><p>Horizontal distance (opposite to the <m>72^\circ</m> angle) = <m>d</m></p></li>
+                    </ul>
+                </p>
+                <p>
+                    Using tangent:
+                </p>
+                <p>
+                    <md>
+                        <mrow>\tan\,72^\circ \amp = \frac{d}{4.5}</mrow>
+                        <mrow>d \amp = 4.5 \times \tan\,72^\circ</mrow>
+                        <mrow>\amp = 4.5 \times 3.0777</mrow>
+                        <mrow>\amp = 13.85\,\text{m}</mrow>
+                    </md>
+                </p>
+                <p>
+                    The swimmer is approximately <m>13.9\,\text{m}</m> from the base of the tower.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="ex-cliff-boat">
+            <statement>
+                <p>
+                    A tourist stands at the edge of a cliff overlooking Lake Victoria. 
+                    The cliff is <m>35\,\text{m}</m> high. She sees a fishing boat on the water 
+                    at an angle of depression of <m>28^\circ</m>. How far is the boat from 
+                    the base of the cliff?
+                </p>
+                <image width="55%">
+                <latex-image label="exercise-cliff-boat">
+                    \begin{tikzpicture}
+                        % Using polar coordinates for exact 28° depression angle
+                        \coordinate (tourist) at (0,3.5);
+                        % Boat distance = 3.5/tan(28°)
+                        \pgfmathsetmacro{\boatdist}{3.5/tan(28)}
+                        % Water
+                        \fill[blue!30] (-0.5,0) rectangle (7,-0.4);
+                        \draw[very thick, blue!50] (-0.5,0) -- (7,0);
+                        % Cliff at origin
+                        \draw[very thick, brown!60!black] (0,0) -- (tourist);
+                        \fill[brown!40] (-0.3,0) -- (-0.3,3.5) -- (0,3.5) -- (0,0) -- cycle;
+                        % Tourist at top of cliff
+                        \draw[thick] (tourist) -- ++(0,0.4);
+                        \draw[thick,fill=cyan] ($(tourist) + (0,0.4)$) circle (0.1);
+                        \node[above] at ($(tourist) + (0,0.5)$) {Tourist};
+                        % Horizontal line from cliff top
+                        \draw[dashed] (tourist) -- (6.8,3.5);
+                        % Line of sight using polar: from tourist at -28° (depression)
+                        \draw[very thick, dashed, blue] (tourist) -- ($(tourist) + (-28:7.5)$);
+                        % Boat at correct distance
+                        \draw[thick, brown] (\boatdist-0.3,-0.1) -- (\boatdist,0.2) -- (\boatdist+0.3,-0.1) -- cycle;
+                        \draw[thick, brown] (\boatdist,0.2) -- (\boatdist,0.5);
+                        \node[below] at (\boatdist,-0.2) {Boat};
+                        % Angle of depression - exactly 28° below horizontal
+                        \draw ($(tourist) + (0:1)$) arc[start angle=0, end angle=-28, radius=1cm];
+                        \node at ($(tourist) + (-14:1.5)$) {$28^\circ$};
+                        % Labels
+                        \node[left] at (0,1.75) {$35\,\text{m}$};
+                        \node[above] at (3.3,0) {$d = ?$};
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+            </statement>
+            <answer>
+                <p>
+                    The angle of depression is <m>28^\circ</m>. Inside the right triangle at the tourist's position, 
+                    the angle between the line of sight and the vertical is <m>90^\circ - 28^\circ = 62^\circ</m>.
+                </p>
+                <p>
+                    Given:
+                </p>
+                <p>
+                    <ul>
+                        <li><p>Height of cliff (adjacent to the <m>62^\circ</m> angle) = <m>35\,\text{m}</m></p></li>
+                        <li><p>Angle inside the triangle = <m>62^\circ</m></p></li>
+                        <li><p>Horizontal distance (opposite to the <m>62^\circ</m> angle) = <m>d</m></p></li>
+                    </ul>
+                </p>
+                <p>
+                    Using tangent:
+                </p>
+                <p>
+                    <md>
+                        <mrow>\tan\,62^\circ \amp = \frac{d}{35}</mrow>
+                        <mrow>d \amp = 35 \times \tan\,62^\circ</mrow>
+                        <mrow>\amp = 35 \times 1.8807</mrow>
+                        <mrow>\amp = 65.82\,\text{m}</mrow>
+                    </md>
+                </p>
+                <p>
+                    The boat is approximately <m>65.8\,\text{m}</m> from the base of the cliff.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="ex-airplane-landing">
+            <statement>
+                <p>
+                    An airplane is preparing to land. The pilot can see the runway at an 
+                    angle of depression of <m>5^\circ</m>. If the airplane is flying at an 
+                    altitude of <m>1500\,\text{m}</m>, what is the horizontal distance from 
+                    the airplane to the runway?
+                </p>
+                <image width="60%">
+                <latex-image label="exercise-airplane">
+                    \begin{tikzpicture}
+                        % Using polar coordinates for exact 5° depression angle
+                        \coordinate (plane) at (0.3,0.8);
+                        % Runway distance = 0.8/tan(5°) - very large ratio
+                        \pgfmathsetmacro{\runwaydist}{0.8/tan(5)}
+                        % Ground/runway
+                        \draw[very thick] (-0.5,0) -- (10,0);
+                        \draw[thick, gray] (\runwaydist-0.5,-0.1) rectangle (\runwaydist+0.5,0.1);
+                        \node[below] at (\runwaydist,0) {Runway};
+                        % Airplane
+                        \draw[thick, blue, fill=blue!30] ($(plane) + (-0.3,0)$) -- ($(plane) + (0.1,0.12)$) -- ($(plane) + (0.3,0)$) -- ($(plane) + (0.1,-0.12)$) -- cycle;
+                        \draw[thick, blue] ($(plane) + (0.1,0)$) -- ($(plane) + (0.5,0)$);
+                        \node[above] at ($(plane) + (0.1,0.15)$) {Airplane};
+                        % Altitude line
+                        \draw[very thick] (0.3,0) -- (plane);
+                        % Horizontal line from airplane
+                        \draw[dashed] (plane) -- (9.5,0.8);
+                        % Line of sight using polar: from plane at -5° (depression)
+                        \draw[very thick, dashed, red] (plane) -- ($(plane) + (-5:9.5)$);
+                        % Angle of depression - exactly 5° below horizontal
+                        \draw ($(plane) + (0:1)$) arc[start angle=0, end angle=-5, radius=1cm];
+                        \node at ($(plane) + (-2.5:1.8)$) {$5^\circ$};
+                        % Labels
+                        \node[left] at (0.3,0.4) {$1500\,\text{m}$};
+                        \node[above] at (5,0) {$d = ?$};
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+            </statement>
+            <answer>
+                <p>
+                    The angle of depression is <m>5^\circ</m>. Inside the right triangle at the airplane's position, 
+                    the angle between the line of sight and the vertical is <m>90^\circ - 5^\circ = 85^\circ</m>.
+                </p>
+                <p>
+                    Given:
+                </p>
+                <p>
+                    <ul>
+                        <li><p>Altitude (adjacent to the <m>85^\circ</m> angle) = <m>1500\,\text{m}</m></p></li>
+                        <li><p>Angle inside the triangle = <m>85^\circ</m></p></li>
+                        <li><p>Horizontal distance (opposite to the <m>85^\circ</m> angle) = <m>d</m></p></li>
+                    </ul>
+                </p>
+                <p>
+                    Using tangent:
+                </p>
+                <p>
+                    <md>
+                        <mrow>\tan\,85^\circ \amp = \frac{d}{1500}</mrow>
+                        <mrow>d \amp = 1500 \times \tan\,85^\circ</mrow>
+                        <mrow>\amp = 1500 \times 11.4301</mrow>
+                        <mrow>\amp = 17145.15\,\text{m}</mrow>
+                    </md>
+                </p>
+                <p>
+                    The horizontal distance is approximately <m>17.1\,\text{km}</m> (or <m>17145\,\text{m}</m>).
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="ex-birdwatcher">
+            <statement>
+                <p>
+                    A birdwatcher is standing on a platform <m>8\,\text{m}</m> above the ground 
+                    in Kakamega Forest. She spots a rare bird on the ground at an angle 
+                    of depression of <m>35^\circ</m>. How far must she walk horizontally 
+                    to reach the spot where the bird was standing?
+                </p>
+                <image width="55%">
+                <latex-image label="exercise-birdwatcher">
+                    \begin{tikzpicture}
+                        % Using polar coordinates for exact 35° depression angle
+                        \coordinate (watcher) at (0,4);
+                        % Bird distance = 4/tan(35°)
+                        \pgfmathsetmacro{\birddist}{4/tan(35)}
+                        % Ground with forest floor
+                        \draw[very thick, green!30!brown] (-0.5,0) -- (6.5,0);
+                        % Platform/tree at origin
+                        \draw[very thick, brown] (0,0) -- (watcher);
+                        \draw[thick, brown] (-0.4,4) -- (0.4,4);
+                        % Birdwatcher
+                        \draw[thick] (watcher) -- ++(0,0.4);
+                        \draw[thick,fill=cyan] ($(watcher) + (0,0.4)$) circle (0.1);
+                        \node[above] at ($(watcher) + (0,0.5)$) {Birdwatcher};
+                        % Horizontal line from platform
+                        \draw[dashed] (watcher) -- (6,4);
+                        % Line of sight using polar: from watcher at -35° (depression)
+                        \draw[very thick, dashed, blue] (watcher) -- ($(watcher) + (-35:7)$);
+                        % Bird at correct distance
+                        \draw[thick, orange, fill=orange] (\birddist,0.15) -- (\birddist-0.2,0) -- (\birddist+0.2,0) -- cycle;
+                        \node[below] at (\birddist,-0.1) {Bird};
+                        % Angle of depression - exactly 35° below horizontal
+                        \draw ($(watcher) + (0:1)$) arc[start angle=0, end angle=-35, radius=1cm];
+                        \node at ($(watcher) + (-17.5:1.5)$) {$35^\circ$};
+                        % Labels
+                        \node[left] at (0,2) {$8\,\text{m}$};
+                        \node[above] at (2.9,0) {$d = ?$};
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+            </statement>
+            <answer>
+                <p>
+                    The angle of depression is <m>35^\circ</m>. Inside the right triangle at the birdwatcher's position, 
+                    the angle between the line of sight and the vertical is <m>90^\circ - 35^\circ = 55^\circ</m>.
+                </p>
+                <p>
+                    Given:
+                </p>
+                <p>
+                    <ul>
+                        <li><p>Height of platform (adjacent to the <m>55^\circ</m> angle) = <m>8\,\text{m}</m></p></li>
+                        <li><p>Angle inside the triangle = <m>55^\circ</m></p></li>
+                        <li><p>Horizontal distance (opposite to the <m>55^\circ</m> angle) = <m>d</m></p></li>
+                    </ul>
+                </p>
+                <p>
+                    Using tangent:
+                </p>
+                <p>
+                    <md>
+                        <mrow>\tan\,55^\circ \amp = \frac{d}{8}</mrow>
+                        <mrow>d \amp = 8 \times \tan\,55^\circ</mrow>
+                        <mrow>\amp = 8 \times 1.4281</mrow>
+                        <mrow>\amp = 11.42\,\text{m}</mrow>
+                    </md>
+                </p>
+                <p>
+                    The birdwatcher must walk approximately <m>11.4\,\text{m}</m> horizontally.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="ex-helicopter-angle">
+            <statement>
+                <p>
+                    A rescue helicopter is hovering at a height of <m>200\,\text{m}</m> above ground level. 
+                    The pilot can see a stranded hiker on the ground <m>350\,\text{m}</m> horizontally 
+                    from the helicopter. Calculate the angle of depression from the helicopter to the hiker.
+                </p>
+                <image width="55%">
+                <latex-image label="exercise-helicopter-angle">
+                    \begin{tikzpicture}
+                        % Helicopter and hiker positions
+                        \coordinate (heli) at (0,4);
+                        \coordinate (hiker) at (7,0);
+                        % Ground line
+                        \draw[very thick] (-0.5,0) -- (7.5,0);
+                        % Vertical from helicopter
+                        \draw[very thick] (0,0) -- (heli);
+                        % Helicopter
+                        \draw[thick, blue, fill=blue!30] (heli) circle (0.25);
+                        \draw[thick, blue] (-0.5,4.25) -- (0.5,4.25);
+                        \node[above] at (0,4.4) {Helicopter};
+                        % Horizontal line from helicopter
+                        \draw[dashed] (heli) -- (7.3,4);
+                        % Line of sight to hiker
+                        \draw[very thick, dashed, red] (heli) -- (hiker);
+                        % Hiker
+                        \draw[thick] (7,0) -- (7,0.4);
+                        \draw[thick,fill=orange] (7,0.4) circle (0.1);
+                        \node[below] at (7,-0.1) {Hiker};
+                        % Angle of depression
+                        \draw ($(heli) + (0:1)$) arc[start angle=0, end angle=-30, radius=1cm];
+                        \node at ($(heli) + (-15:1.5)$) {$\theta = ?$};
+                        % Right angle mark
+                        \draw (-0.3,0) -- (-0.3,0.3) -- (0,0.3);
+                        % Labels
+                        \node[left] at (0,2) {$200\,\text{m}$};
+                        \node[below] at (3.5,0) {$350\,\text{m}$};
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+            </statement>
+            <answer>
+                <p>
+                    Given:
+                </p>
+                <p>
+                    <ul>
+                        <li><p>Height of helicopter (opposite) = <m>200\,\text{m}</m></p></li>
+                        <li><p>Horizontal distance (adjacent) = <m>350\,\text{m}</m></p></li>
+                        <li><p>Angle of depression = <m>\theta</m></p></li>
+                    </ul>
+                </p>
+                <p>
+                    Using tangent:
+                </p>
+                <p>
+                    <md>
+                        <mrow>\tan\,\theta \amp = \frac{200}{350}</mrow>
+                        <mrow>\tan\,\theta \amp = 0.5714</mrow>
+                        <mrow>\theta \amp = \tan^{-1}(0.5714)</mrow>
+                        <mrow>\amp = 29.74^\circ</mrow>
+                    </md>
+                </p>
+                <p>
+                    The angle of depression is approximately <m>29.7^\circ</m>.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="ex-lookout-tower-angle">
+            <statement>
+                <p>
+                    A ranger stands at the top of a <m>25\,\text{m}</m> lookout tower in Tsavo National Park. 
+                    She spots a watering hole that is <m>80\,\text{m}</m> from the base of the tower. 
+                    At what angle of depression is she looking at the watering hole?
+                </p>
+                <image width="55%">
+                <latex-image label="exercise-lookout-tower-angle">
+                    \begin{tikzpicture}
+                        % Tower and watering hole positions
+                        \coordinate (ranger) at (0,5);
+                        \coordinate (water) at (6,0);
+                        % Ground line
+                        \draw[very thick, yellow!60!brown] (-0.5,0) -- (6.5,0);
+                        % Tower
+                        \draw[very thick, brown] (0,0) -- (ranger);
+                        \draw[thick, brown] (-0.3,5) -- (0.3,5);
+                        % Ranger
+                        \draw[thick,fill=green!50] (0,5.1) circle (0.12);
+                        \node[above] at (0,5.3) {Ranger};
+                        % Horizontal line from ranger
+                        \draw[dashed] (ranger) -- (6.3,5);
+                        % Line of sight to watering hole
+                        \draw[very thick, dashed, blue] (ranger) -- (water);
+                        % Watering hole
+                        \fill[blue!40] (water) ellipse (0.4 and 0.15);
+                        \node[below] at (6,-0.2) {Watering hole};
+                        % Angle of depression
+                        \draw ($(ranger) + (0:1)$) arc[start angle=0, end angle=-40, radius=1cm];
+                        \node at ($(ranger) + (-20:1.5)$) {$\theta = ?$};
+                        % Right angle mark
+                        \draw (-0.3,0) -- (-0.3,0.3) -- (0,0.3);
+                        % Labels
+                        \node[left] at (0,2.5) {$25\,\text{m}$};
+                        \node[below] at (3,0) {$80\,\text{m}$};
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+            </statement>
+            <answer>
+                <p>
+                    Given:
+                </p>
+                <p>
+                    <ul>
+                        <li><p>Height of tower (opposite) = <m>25\,\text{m}</m></p></li>
+                        <li><p>Horizontal distance (adjacent) = <m>80\,\text{m}</m></p></li>
+                        <li><p>Angle of depression = <m>\theta</m></p></li>
+                    </ul>
+                </p>
+                <p>
+                    Using tangent:
+                </p>
+                <p>
+                    <md>
+                        <mrow>\tan\,\theta \amp = \frac{25}{80}</mrow>
+                        <mrow>\tan\,\theta \amp = 0.3125</mrow>
+                        <mrow>\theta \amp = \tan^{-1}(0.3125)</mrow>
+                        <mrow>\amp = 17.35^\circ</mrow>
+                    </md>
+                </p>
+                <p>
+                    The angle of depression is approximately <m>17.4^\circ</m>.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="ex-diver-angle">
+            <statement>
+                <p>
+                    A diver stands on a diving board that is <m>10\,\text{m}</m> above the surface of the 
+                    swimming pool. From where she stands, she can see a coin at the bottom of the pool. 
+                    The coin is <m>6\,\text{m}</m> horizontally from a point directly below her. 
+                    If the pool is <m>3\,\text{m}</m> deep, find the angle of depression from the 
+                    diver to the coin.
+                </p>
+                <image width="55%">
+                <latex-image label="exercise-diver-angle">
+                    \begin{tikzpicture}[scale=0.5]
+                        % Scale: 1 unit = 1m for accurate proportions
+                        % Diver: 10m above water, Pool: 3m deep, Horizontal: 6m
+                        % Water surface at y=0, pool bottom at y=-3, diver at y=10
+                        \coordinate (diver) at (0,10);
+                        \coordinate (water) at (6,0);
+                        \coordinate (coin) at (6,-3);
+                        % Pool sides
+                        \draw[very thick, brown] (-1,0) -- (8,0);
+                        \fill[blue!30] (-0.5,-3) rectangle (7,0);
+                        \draw[very thick] (-0.5,-3) -- (7,-3);
+                        % Diving board
+                        \draw[very thick, gray] (-1,10) -- (1,10);
+                        \draw[very thick, gray] (-0.5,0) -- (-0.5,10);
+                        % Diver
+                        \draw[thick,fill=cyan] (diver) circle (0.2);
+                        \node[above] at (0,10.3) {Diver};
+                        % Horizontal line from diver
+                        \draw[dashed] (diver) -- (7.5,10);
+                        % Line of sight to coin
+                        \draw[very thick, dashed, red] (diver) -- (coin);
+                        % Coin
+                        \fill[yellow!70!orange] (coin) circle (0.25);
+                        \node[below right] at (6,-3.3) {Coin};
+                        % Angle of depression (actual angle is approx 65.2°)
+                        \draw ($(diver) + (0:1.5)$) arc[start angle=0, end angle=-65.2, radius=1.5cm];
+                        \node at ($(diver) + (-32:2.2)$) {$\theta = ?$};
+                        % Labels
+                        \node[left] at (-0.7,5) {$10\,\text{m}$};
+                        \node[left] at (-0.3,-1.5) {$3\,\text{m}$};
+                        \node[below] at (3,0) {$6\,\text{m}$};
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+            </statement>
+            <answer>
+                <p>
+                    Given:
+                </p>
+                <p>
+                    <ul>
+                        <li><p>Height of diving board above water = <m>10\,\text{m}</m></p></li>
+                        <li><p>Depth of pool = <m>3\,\text{m}</m></p></li>
+                        <li><p>Total vertical distance = <m>10 + 3 = 13\,\text{m}</m></p></li>
+                        <li><p>Horizontal distance = <m>6\,\text{m}</m></p></li>
+                    </ul>
+                </p>
+                <p>
+                    Using tangent:
+                </p>
+                <p>
+                    <md>
+                        <mrow>\tan\,\theta \amp = \frac{13}{6}</mrow>
+                        <mrow>\tan\,\theta \amp = 2.1667</mrow>
+                        <mrow>\theta \amp = \tan^{-1}(2.1667)</mrow>
+                        <mrow>\amp = 65.22^\circ</mrow>
+                    </md>
+                </p>
+                <p>
+                    The angle of depression from the diver to the coin is approximately <m>65.2^\circ</m>.
+                </p>
+            </answer>
+        </exercise>
+    </exercises>
     
 </subsubsection>
