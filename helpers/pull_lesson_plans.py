@@ -1,7 +1,9 @@
+
 import os
 import io
 import re
 import json
+import argparse
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -27,7 +29,7 @@ def sanitize_filename(name):
     cleaned = re.sub(r"\s+", "-", cleaned)
     return cleaned
 
-def download_folder(folder_id, local_path):
+def download_folder(folder_id, local_path, only_missing=False):
     if not os.path.exists(local_path):
         os.makedirs(local_path)
 
@@ -40,15 +42,19 @@ def download_folder(folder_id, local_path):
     for item in items:
         cleaned_name = sanitize_filename(item['name'])
         item_path = os.path.join(local_path, cleaned_name)
-        
+
         if item['mimeType'] == 'application/vnd.google-apps.folder':
             # Recursive call for subfolders
-            download_folder(item['id'], item_path)
-            
+            download_folder(item['id'], item_path, only_missing=only_missing)
+
         elif item['mimeType'] == 'application/vnd.google-apps.document':
+            pdf_path = f"{item_path}.pdf"
+            if only_missing and os.path.exists(pdf_path):
+                print(f"Skipping (already exists): {pdf_path}")
+                continue
             # Export Google Doc as PDF
             request = service.files().export_media(fileId=item['id'], mimeType='application/pdf')
-            fh = io.FileIO(f"{item_path}.pdf", 'wb')
+            fh = io.FileIO(pdf_path, 'wb')
             downloader = MediaIoBaseDownload(fh, request)
             done = False
             while not done:
@@ -56,4 +62,8 @@ def download_folder(folder_id, local_path):
             print(f"Downloaded: {cleaned_name}.pdf")
 
 # Start the process
-download_folder(LESSON_PLANS_FOLDER_ID, '../assets/lesson_plans')
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Download lesson plans from Google Drive.")
+    parser.add_argument('--only-missing', action='store_true', help='Only download PDFs that are not already present')
+    args = parser.parse_args()
+    download_folder(LESSON_PLANS_FOLDER_ID, '../assets/lesson_plans', only_missing=args.only_missing)
