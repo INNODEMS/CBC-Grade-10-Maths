@@ -1,7 +1,7 @@
 <subsection xml:id="subsec-area-of-polygons-in-real-life" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Area of Polygons in Real-Life</title>
     <objectives component="outcomes">
-        <introduction>
+    <introduction>
             <dl>
                 <li>
                     <title>Strand</title>
@@ -84,6 +84,7 @@
             </p>
         </solution>
     </example>
+        
 
     <!-- EXAMPLE: surveyor field -->
     <example xml:id="ex-survey-field">
@@ -279,28 +280,30 @@
 
         <exercise xml:id="ex-pentagonal-garden">
             <statement>
-                <p>A Mombasa school wants a regular octagonal
-                flower bed. Each side of the octagon is <m>4\,\text{m}</m>. Calculate the area of the bed using trigonometry (use the apothem).</p>
+                <p>A Mombasa school wants a regular octagonal flower bed, where the distance from the center to a vertex is <m>4\,\text{m}</m>. Calculate the area of the bed, giving your answer exactly in simplest surd form.</p>
             </statement>
             <solution>
-                <p>For a regular n-gon with side <m>s</m>, the apothem <m>a</m> is
-                <md><mrow>a=\dfrac{s}{2\tan\left(\dfrac{\pi}{n}\right)}</mrow></md>
-                and the area is <m>A=\tfrac12\times\text{perimeter}\times a=\tfrac12( n s) a.</m></p>
+                <p>Join the centre to each vertex to form 8 congruent isosceles triangles. Each triangle has two equal sides of length <m>R</m> (the circumradius) and vertex angle <m>\theta=360^\circ/8=45^\circ</m>.</p>
 
-                <p>Here <m>n=8</m> and <m>s=4\,\text{m}.</m> Compute the apothem:
+                <p>The area of one triangle is
                 <md>
-                    <mrow>\tan\left(\dfrac{\pi}{8}\right)=\tan(22.5^{\circ})=\sqrt{2}-1\approx0.4142136</mrow>
-                    <mrow>a=\dfrac{s}{2\tan(\pi/8)}=\dfrac{4}{2(\sqrt{2}-1)}=\dfrac{4}{2(\sqrt{2}-1)}\right.\</mrow>
-                    <mrow>\quad=\dfrac{4(\sqrt{2}+1)}{2}=2(\sqrt{2}+1)\approx4.8284271\,\text{m}</mrow>
+                    <mrow>A_{triangle}=\tfrac{1}{2}R^{2}\sin\theta=\tfrac{1}{2}R^{2}\sin45^\circ=\tfrac{1}{2}R^{2}\cdot\dfrac{\sqrt{2}}{2}=\dfrac{R^{2}}{2\sqrt{2}}</mrow>
                 </md>
+                </p>
 
-                <p>Perimeter <m>P=8s=32\,\text{m}.</m> Now area:
+                <p>Multiplying by 8 gives the octagon area
                 <md>
-                    <mrow>A=\tfrac12 P a=\tfrac12\times32\times4.8284271=16\times4.8284271\right.\</mrow>
-                    <mrow>\quad\approx77.2548\,\text{m}^2\right.\</mrow>
+                    <mrow>A_{octagon}=8A_{triangle}=8\cdot\dfrac{R^{2}}{2\sqrt{2}}=2\sqrt{2}\;R^{2}</mrow>
                 </md>
+                </p>
 
-                <p>Rounded to two decimal places, the area is <m>77.25\,\text{m}^2</m>.</p>
+                <p>With <m>R=4\,\text{m}</m> we obtain
+                <md>
+                    <mrow>A=2\sqrt{2}\times 4^{2}=32\sqrt{2}\,\text{m}^{2}</mrow>
+                </md>
+                </p>
+
+                <p>The exact area is <m>32\sqrt{2}\,\text{m}^{2}</m>. (Approx. <m>45.25\,\text{m}^{2}</m>.)</p>
             </solution>
         </exercise>
 
@@ -377,18 +380,9 @@
 
     <exercise xml:id="ex-window-pane-grid">
         <statement>
-            <p>
-                A rectangular window measures <m>1.8\,\text{m}</m> wide and
-                <m>1.2\,\text{m}</m> high. The wooden frame around the outside is
-                <m>0.06\,\text{m}</m> (6 cm) wide and the internal dividing strips
-                (muntins) are <m>0.04\,\text{m}</m> (4 cm) wide. The window is a
-                3 by 2 grid of glass panes (three columns and two rows).
-                Calculate:
+            <p> 
+                A carpenter in Nairobi is making a rectangular window with a grid of six glass panes (arranged in 3 rows and 2 columns). Each glass pain is a square with length <m>30\,\text{cm}</m>. The frame is made of wood, and the external borders should be <m>10\,\text{cm}</m> on all sides, while the internal borders should be <m>5\,\text{cm}</m>
             </p>
-            <ol>
-                <li>The total area of glass required (m<sup>2</sup>).</li>
-                <li>The total area of wood for the frame and internal strips (m<sup>2</sup>).</li>
-            </ol>
             <image width="55%">
             <latex-image label="exercise-window-grid-diag">
                 \begin{tikzpicture}[x=0.5cm,y=0.5cm]
@@ -423,39 +417,55 @@
                 \end{tikzpicture}
             </latex-image>
             </image>
+            <ol>
+                <li>Determine the total area of glass required in <m>\text{m}^2</m></li>
+                <li>Find the width and length of the frame in meters </li>
+                <li>By subtracting the glass area from the total area, find the area of wood required for the frame and dividers.</li>
+            </ol>
         </statement>
-        <answer>
-            <p>Let outer width <m>W=1.8\,\text{m}</m>, height <m>H=1.2\,\text{m}</m>, frame <m>f=0.06\,\text{m}</m> and divider <m>d=0.04\,\text{m}</m>.</p>
-            <p>Interior width available for panes: <m>W_i=W-2f=1.8-0.12=1.68\,\text{m}</m>.</p>
-            <p>Total width of internal vertical dividers: <m>2d=0.08\,\text{m}</m> (two vertical strips between three panes).</p>
-            <p>Width of one pane:
-            <md>
-                <mrow>w = \dfrac{W_i-2d}{3} = \dfrac{1.68-0.08}{3} = \dfrac{1.60}{3} = 0.533333\,\text{m}</mrow>
-            </md>
+        <solution>
+            <p>
+                We need to convert to meters to ensure our answers are in the correct units.
             </p>
-            <p>Interior height available for panes: <m>H_i=H-2f=1.2-0.12=1.08\,\text{m}</m>.</p>
-            <p>Height of one pane (one horizontal divider):
-            <md>
-                <mrow>h = \dfrac{H_i-d}{2} = \dfrac{1.08-0.04}{2} = \dfrac{1.04}{2} = 0.52\,\text{m}</mrow>
-            </md>
+            <p>
+                <ol>
+                    <li>
+                        <p>
+                            Each pane has area <m>0.3\,\text{m} \times 0.3\,\text{m} = 0.09\,\text{m}^2</m>. With 6 panes, the total glass area is <m>6 \times 0.09 = 0.54\,\text{m}^2</m>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The total width of the frame is the sum of the widths of the panes, internal dividers and external borders. Since there is one internal divider between the two columns of panes, the total width is
+                            <md>
+                                <mrow> W = 2 \times 0.1 + 1 \times 0.05 + 2 \times 0.3 = 0.85\,\text{m} </mrow>
+                            </md>
+                            For the height, there are two internal dividers, so
+                            <md>
+                                <mrow> H = 2 \times 0.1 + 2 \times 0.05 + 3 \times 0.3 = 1.2\,\text{m} </mrow>
+                            </md>                  
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The total area of the window is <m>W \times H = 0.85\,\text{m} \times 1.2\,\text{m} = 1.02\,\text{m}^2</m>. Subtracting the glass area gives the area of wood required:
+                            <md>
+                                \text{Wood Area} = 1.02 - 0.54 = 0.48 \text{ m}^2
+                            </md>
+                            
+                        </p>
+                    </li>
+                </ol>
             </p>
-            <p>Area of one pane: <md><mrow>A_{pane}=w\times h = 0.533333\times 0.52 \approx 0.2773\,\text{m}^2</mrow></md></p>
-            <p>Total glass area (6 panes): <md><mrow>A_{glass}=6\times0.277333\approx 1.664\,\text{m}^2</mrow></md></p>
-            <p>Total window area: <md><mrow>A_{total}=W\times H=1.8\times1.2=2.16\,\text{m}^2</mrow></md></p>
-            <p>Area of wood (frame + dividers): <md><mrow>A_{wood}=A_{total}-A_{glass}=2.16-1.664=0.496\,\text{m}^2</mrow></md></p>
-            <p>Answers:
-                <ul>
-                    <li>Total glass required: <m>1.664\,\text{m}^2\, (\approx 1.66\,\text{m}^2)</m></li>
-                    <li>Total wood area: <m>0.496\,\text{m}^2\, (\approx 0.50\,\text{m}^2)</m></li>
-                </ul>
-            </p>
-            <p><em>Note:</em> For ordering timber you may prefer linear lengths of each strip and a thickness to compute volume; here we show the surface area occupied by wood in the window.</p>
-        </answer>
+        </solution>
     </exercise>
     <exercise>
         <statement>
             <p>
                 Footballs are created using a pattern of 12 regular pentagons and 20 regular hexagons, as shown below.
+                <image source="AI-soccer-ball.png" width="50%">
+                <shortdescription>Football</shortdescription>
+                </image>
             </p>
             <p>
                 Let's consider just one petal, consisting of one pentagon surrounded by five hexagons, as shown below. The side length is <m>10 \text{cm}</m>.
@@ -463,8 +473,6 @@
             <p>
                 <image>
                     <latex-image>
-                            % TikZ picture: a regular pentagon surrounded by five regular hexagons
-                % Generated for the exercise: one pentagon with 5 surrounding hexagons
                 \begin{tikzpicture}[scale=2, line join=round]
                 % pentagon circumradius (adjust for size)
                     \pgfmathsetmacro{\Rp}{1}
@@ -484,7 +492,6 @@
 
                 % filled central pentagon
                 \draw[very thick, fill=black!10] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- cycle;
-                \node[right] at ($(P1)!0.5!(P1)$) {10 cm};
 
                 % draw five hexagons around the pentagon
                 \foreach \i in {0,1,2,3,4} {
@@ -506,6 +513,7 @@
                     \pgfmathsetmacro{\angB}{90+72*\i+72}
                     \draw[line width=0.6pt] (\angA:\Rp) -- (\angB:\Rp);
                 }
+                \node[below] at ($(P2)!0.5!(P3)$) {10 cm};
                 \end{tikzpicture}
 
                 </latex-image>
@@ -535,47 +543,100 @@
                 </ol>
         </statement>
          <solution>
-            <p>Let the common side length of the pentagons and hexagons be <m>s</m>.</p>
+            <ol>
+                <li>
+                    <p> To find the area of the pentagon, divide it into 5 triangles from the center, whose bases are the edges (length <m>10 \text{cm}</m>). Draw the height <m>h</m> for the center <m>O</m> to the edge (bisecting it at <m>F</m>).</p>
+                    <image>
+                        <latex-image>
+                            \begin{tikzpicture}[scale=2]
+                            \def\R{1.6} % circumradius
+                            % pentagon vertices (one point upwards)
+                            \foreach \i in {0,...,4}{
+                                \pgfmathsetmacro{\ang}{90+72*\i}
+                                \coordinate (P\i) at (\ang:\R);
+                            }
+                            \coordinate (O) at (0,0);
 
-            <p>Area of a regular pentagon (exact):
-            <md>
-                <mrow>A_{pentagon}=\dfrac{1}{4}\sqrt{5\bigl(5+2\sqrt{5}\bigr)}\;s^{2}\approx 1.72048\;s^{2}</mrow>
-            </md>
-            </p>
+                            % draw pentagon
+                            \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- cycle;
 
-            <p>Area of a regular hexagon (exact):
-            <md>
-                <mrow>A_{hexagon}=\dfrac{3\sqrt{3}}{2}\;s^{2}\approx 2.59808\;s^{2}</mrow>
-            </md>
-            </p>
+                            % highlight one interior triangle (central triangle O-P0-P1)
+                            \fill[blue!12] (O) -- (P0) -- (P1) -- cycle;
+                            \draw[thick] (O) -- (P0) (O) -- (P1);
 
-            <p>Area of the five hexagons around one pentagon (the "petal"):
-            <md>
-                <mrow>5A_{hexagon}=5\times\dfrac{3\sqrt{3}}{2}\;s^{2}\approx 12.99038\;s^{2}</mrow>
-            </md>
-            </p>
+                            % midpoint of side P0--P1 (foot of apothem)
+                            \coordinate (M01) at ($(P0)!0.5!(P1)$);
+                            \node[above left] at (M01) {F};
+                            \node[above left] at ($(M01)!0.5!(P0)$) {5 cm};
 
-            <p>Petal area (central pentagon + its five surrounding hexagons):
-            <md>
-                <mrow>A_{petal}=A_{pentagon}+5A_{hexagon}\approx 1.72048\;s^{2}+12.99038\;s^{2}\approx 14.71086\;s^{2}</mrow>
-            </md>
-            </p>
+                            % apothem from centre to midpoint (perpendicular to side)
+                            \draw[red,thick] (O) -- node[left] {$h$} (M01);
 
-            <p>Why we cannot simply glue 12 petals: each hexagon is shared by three neighbouring pentagons, so if you form 12 separate petals you would triple-count hexagons. Counting incidences gives
-            <md>
-                <mrow>12\times 5=60\text{ pentagon--hexagon incidences. Since each hexagon meets 3 pentagons, the number of distinct hexagons is }\dfrac{60}{3}=20.</mrow>
-            </md>
-            Hence the correct net uses 12 pentagons and 20 hexagons (the truncated icosahedron / football pattern).</p>
+                            % right-angle marker at M01 between OM01 and M01P0
+                            \draw pic["",draw=black,angle radius=3mm] {right angle=O--M01--P0};
+                            \draw pic[draw=black,angle radius=15mm, "$36^\circ$"] {angle=P0--O--M01};
+                            
 
-            <p>Total surface area (12 pentagons + 20 hexagons):
-            <md>
-                <mrow>A_{total}=12A_{pentagon}+20A_{hexagon}
-                =12\times\dfrac{1}{4}\sqrt{5\bigl(5+2\sqrt{5}\bigr)}\;s^{2}+20\times\dfrac{3\sqrt{3}}{2}\;s^{2}\right.\
-                =3\sqrt{5\bigl(5+2\sqrt{5}\bigr)}\;s^{2}+30\sqrt{3}\;s^{2}\approx 72.60725\;s^{2}</mrow>
-            </md>
-            </p>
+                            % mark side length s on side P0--P1
+                            \draw ($(P0)!0.5!(P4)$) node[above right] {10 cm};
 
-            <p>For a numerical example: if the common side length is <m>1\,\text{cm}</m> then the total area of the net is approximately <m>72.61\,\text{cm}^2</m>.</p>
+                            % mark circumradius R to one vertex
+                            \draw[gray,dashed] (O) -- node[right] {$R$} (P0);
+
+                            % labels for points
+                            \node[below left] at (O) {O};
+                            \node[above] at (P0) {A};
+                            \node[above left] at (P1) {B};
+                            \node[below left] at (P2) {C};
+                            \node[below right] at (P3) {D};
+                            \node[above right] at (P4) {E};
+                            \end{tikzpicture}
+                        </latex-image>
+                        
+                    </image>
+                    
+                    <p>The angle <m>\angle AOB</m> is <m>360^\circ/5=72^\circ</m>, so since <m>F</m> bisects <m>AB</m>, <m>\angle AOF = 72/2 = 36^\circ</m>. Using trigonometry, we have: </p>
+                    <md>
+                        <mrow> \tan 36^\circ \amp = \frac{5}{h} </mrow> 
+                        <mrow> h \amp = \frac{5}{\tan 36^\circ}</mrow>
+                        <mrow> \amp \approx 6.8819 </mrow>
+                    </md>
+                    <p>Area of one triangle is <m>\tfrac{1}{2}\times10\times h\approx34.41\,\text{cm}^2</m>, so the pentagon area is <m>5\times34.41\approx172.05\,\text{cm}^2</m>.</p>
+                </li>
+
+                <li>
+                    <p> The hexagon can be split into 6 equilateral triangles of length <m>10\,\text{cm}</m>, so each has area </p>
+                    <md>
+                        <mrow> A_{\text{triangle}} \amp = \frac{1}{2} \times 10 \times 10 \times \sin 60^\circ  </mrow>
+                        <mrow> \amp = \frac{1}{2} \times 100 \times \frac{\sqrt{3}}{2} </mrow>
+                        <mrow> \amp = 25\sqrt{3} </mrow>
+                    </md>
+                    <p>So the total area of a hexagon is: </p>
+                    <md>
+                        <mrow>A_{\text{hexagon}}=6 \times 25\sqrt{3} = 150\sqrt{3}</mrow>
+                    </md>
+                    <p>Thus the petal has total area: </p>
+                    <md>
+                        <mrow>A_{\text{petal}} \amp = 5 A_{\text{hexagon}} + A_{\text{pentagon}} </mrow>
+                        <mrow> \amp = 5 \times 150\sqrt{3} + 172.05 </mrow>
+                        <mrow> \amp \approx 1471\,\text{cm}^2 </mrow>
+                    </md>
+                    
+                </li>
+
+                <li>
+                    <p>To get 12 pentagons would require 12 petals, which would give <m>5 \times 12 = 60</m> hexagons, which is too many. The correct net uses 20 hexagons, so we need to use only 4 petals, giving <m>4 \times 5 = 20</m> hexagons and <m>4</m> pentagons. We then add the remaining 8 pentagons separately to get the total of 12 pentagons.</p>
+                </li>
+
+                <li>
+                    <p> We have </p>
+                    <md>
+                        <mrow> A_{\text{ball}} \amp = 4 \times A_{\text{petal}} + 8 \times A_{\text{pentagon}} </mrow>
+                        <mrow> \amp = 4 \times 1471 + 8 \times 172.05 </mrow>
+                        <mrow> \amp \approx 6,056\,\text{cm}^2 </mrow>
+                    </md>
+                </li>
+            </ol>
         </solution>
 
 
