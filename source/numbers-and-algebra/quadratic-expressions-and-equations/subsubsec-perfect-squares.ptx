@@ -1,5 +1,26 @@
 <subsubsection xml:id="subsubsec-perfect-squares" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Perfect Squares</title>
+    <objectives component="outcomes">
+        <introduction>
+            <dl>
+                <li>
+                    <title>Strand</title>
+                    <p>
+                        1.0 Numbers and Algebra
+                    </p>
+                </li>
+                <li>
+                    <title>Sub-Strand</title>
+                    <p>
+                        1.3 Quadratic Expressions and Equations
+                    </p>
+                </li>
+            </dl>
+        </introduction>
+        <ul>
+            <li>Derive the quadratic identities from the concept of area</li>
+        </ul>
+    </objectives>
     <axiom component="resources">
         <!-- Link to blurb -->
         <xi:include href="../../resources-blurb-lesson.ptx" />
@@ -15,185 +36,345 @@
             </sidebyside>
         </sbsgroup>
     </axiom>
+    <activity xml:id="activity_perfect_squares_geometric_explore">
+        <!-- <title>Exploring the Area of a Square with Side Length <m>(a+b)</m></title> -->
 
-
-
-    <activity xml:id="auto_upsvqrlr">
-        <p xml:id="auto_60id38ad">
-            <em><term>Work in Groups.</term></em>
+        <p>
+            Study the diagram below carefully. Use what you know about area to investigate what is happening.
         </p>
-        <p xml:id="auto_em4y8k0p"> 
-            Define, discuss, and work on the following:
-            <ol xml:id="auto_dgezk56f">
-                <li xml:id="auto_mgzczpef">
-                    <p xml:id="auto_mqwqnjpz">Perfect square identities.</p>
+        <figure xml:id="fig_perfect_square_expansion">
+            <caption>Geometric Decomposition of <m>(a+b)^2</m></caption>
+            <image xml:id="img_perfect_square_expansion" width="60%">
+                <shortdescription>A square with side length (a+b) divided into four colored regions representing a^2, 2ab, and b^2</shortdescription>
+                <latex-image>
+                    \begin{tikzpicture}[scale=1.5]
+                    \pgfmathsetmacro{\a}{2.4}
+                    \pgfmathsetmacro{\b}{1.6}
+                    \pgfmathsetmacro{\aplusb}{\a+\b}
+                    \pgfmathsetmacro{\amid}{\a/2}
+                    \pgfmathsetmacro{\bmid}{\b/2}
+                    \pgfmathsetmacro{\halfab}{\aplusb/2}
+
+                    % Fill regions
+                    \fill[blue!25] (0,\b) rectangle (\a,\aplusb);
+                    \fill[green!25] (0,0) rectangle (\a,\b);
+                    \fill[green!25] (\a,\b) rectangle (\aplusb,\aplusb);
+                    \fill[red!25] (\a,0) rectangle (\aplusb,\b);
+
+                    % Draw borders
+                    \draw[thick] (0,0) rectangle (\aplusb,\aplusb);
+                    \draw[dashed,gray!40] (\a,0) -- (\a,\aplusb);
+                    \draw[dashed,gray!40] (0,\b) -- (\aplusb,\b);
+
+                    % Dimension lines and labels - Bottom
+                    \draw[|-|] (-0.35,-0.25) -- (-0.35+\a,-0.25);
+                    \node[anchor=north,inner sep=2pt] at (-0.35+\amid,-0.35) {\(\mathbf{a}\)};
+
+                    \draw[|-|] (-0.35+\a,-0.25) -- (-0.35+\aplusb,-0.25);
+                    \node[anchor=north,inner sep=2pt] at (-0.35+\a+\bmid,-0.35) {\(\mathbf{b}\)};
+
+                    % Dimension lines - Left
+                    \draw[|-|] (-0.5,0) -- (-0.5,\b);
+                    \node[anchor=east,inner sep=2pt] at (-0.62,\bmid) {\(\mathbf{b}\)};
+
+                    \draw[|-|] (-0.5,\b) -- (-0.5,\aplusb);
+                    \node[anchor=east,inner sep=2pt] at (-0.62,\b+\amid) {\(\mathbf{a}\)};
+
+                    % Total dimensions
+                    \draw[|-|] (\aplusb+0.25,0) -- (\aplusb+0.25,\aplusb);
+                    \node[anchor=west,inner sep=2pt] at (\aplusb+0.4,\halfab) {\(\mathbf{a+b}\)};
+
+                    \draw[|-|] (0,\aplusb+0.3) -- (\aplusb,\aplusb+0.3);
+                    \node[anchor=south,inner sep=2pt] at (\halfab,\aplusb+0.4) {\(\mathbf{a+b}\)};
+
+                    % Region labels
+                    %\node[font=\Large\bfseries,blue!60] at (\amid,\b+\amid) {\(a^2\)};
+                    \node[font=\Large\bfseries,green!60] at (\amid,\bmid) {\(ab\)};
+                    %\node[font=\Large\bfseries,green!60] at (\a+\bmid,\b+\amid) {\(ab\)};
+                    %\node[font=\Large\bfseries,red!60] at (\a+\bmid,\bmid) {\(b^2\)};
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+        <p>
+            <ol marker="1.">
+                <li>
+                    <p>
+                        Find the areas of the smaller regions
+                    </p>
+                    <p>
+                        <ol marker="(a)">
+                            <li>
+                                <p>
+                                    Identify the side lengths of each colored region; the blue square, the two green rectangles, and the red square.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Add all these smaller areas together.
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                    <p>
+                        Write your total area as a simplified algebraic expression.
+                    </p>
                 </li>
-                <li xml:id="auto_hwnj4hbm">
-                    <p xml:id="auto_9syzqcw1">Expanding perfect squares.</p>
+                <li>
+                    <p>
+                         Find the area of the large square
+                    </p>
+                    <p>
+                        <ol marker="(a)">
+                            <li>
+                                <p>
+                                    What is the total length of one side of the large outer square?
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Using the formula for the area of a square, calculate the area of the whole square directly.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Express your answer in algebraic form.
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
                 </li>
-                <li xml:id="auto_1tw9p6yi">
-                    <p xml:id="auto_pcfz65rz">Recognizing perfect square trinomials.</p>
+                <li>
+                    <p>
+                        Compare your results
+                    </p>
+                    <p>
+                        <ol marker="(a)">
+                            <li>
+                                <p>
+                                    Compare the total area you found by adding the smaller parts with the area you found using the side length of the large square.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Are the two expressions the same?
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    What conclusion can you make about <m>(a+b)^2</m>?
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
                 </li>
-                <li xml:id="auto_0svm5l5y">
-                    <p xml:id="auto_tzvjzwik">Factoring perfect square trinomials.</p>
+                <li>
+                    <p>
+                        How does breaking a square into smaller regions help explain why <m>(a+b)^2</m> expands the way it does? 
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        What does each smaller region represent in the expansion?
+                    </p>
                 </li>
             </ol>
         </p>
-        <p xml:id="auto_nkrnfucs">
-            Copy the following expressions and identities, observe and discuss:
-            <ol xml:id="auto_tp8bziyo" marker="(i).">
-                <li xml:id="auto_ttzs6lar">
-                    <p xml:id="auto_262rt19n"><m>(a + b)^2 = a^2 + 2ab + b^2</m></p>
-                </li>
-                <li xml:id="auto_5weqiq82">
-                    <p xml:id="auto_8r6cwqa4"><m>(a - b)^2 = a^2 - 2ab + b^2</m></p>
-                </li>  
-            </ol>
-            Recognize the middle term is twice the product of the two terms.
+    </activity>
+    <!-- <insight>
+        <p>
+            An <alert>integer</alert> that can be written as the product of two equal integers is called a <em><term>perfect square</term></em>. For example, <m>16</m> is a perfect square because it can be expressed as <m>4 \times 4</m>, and <m>25</m> is a perfect square because it can be expressed as <m>5 \times 5.</m>
         </p>
-        <p xml:id="auto_f8uc5rg9">
-            <ul xml:id="auto_mo3g0h30">
-                <li xml:id="auto_wthrqp5d">
-                    <p xml:id="auto_k8pxsriy">Compare the different approaches groups used to solve similar problems.</p>
+        <p>
+            <alert>A perfect square identity</alert> represents the square of a binomial<fn>A binomial is a type of algebraic expression (polynomial) that consists of exactly two terms connected by a plus (<m>+</m>) or minus (<m>-</m>) sign.</fn>, resulting in a quadratic expression. These identities are essential tools in algebra for expanding expressions and factoring quadratic equations.
+        </p>
+        <p>
+            The two primary perfect square identities are:
+            <ul>
+                <li>
+                    <p>
+                        <m>(a+b)^2 = a^2 + 2ab + b^2</m>
+                    </p>
                 </li>
-                <li xml:id="auto_5ydy2v64">
-                    <p xml:id="auto_f8zlotpo">Discuss how perfect square identities can make simplification and factoring easier.</p>
-                </li>
-                <li xml:id="auto_mvf3ns9k">
-                    <p xml:id="auto_lqjh1gym">Explore how these identities are useful in different contexts (e.g., solving quadratic equations, simplifying expressions in algebra).</p>
-                </li>
-                <li xml:id="auto_u4kupvzf">
-                    <p xml:id="auto_oaojf0ju">How do perfect square identities help us solve quadratic expressions faster?</p>
-                </li>
-                <li xml:id="auto_xt1kl7jq">
-                    <p xml:id="auto_c8qtmt5t">What happens if we don't recognize the identity right away—how might that slow us down?</p>
-                </li>
-                <li xml:id="auto_nmx814fp">
-                    <p xml:id="auto_kas1zw74">Can you think of any real-world applications where you might use perfect square identities?</p>
+                <li>
+                    <p>
+                        <m> (a - b)^2 = a^2 - 2ab +b^2  </m>
+                    </p>
                 </li>
             </ul>
         </p>
-    </activity>
-
-    <p xml:id="auto_ph5a57bb">
-        A <em><term>Perfect Square</term></em> is a special kind of trinomial that can be factored into the square of a binomial. 
-        There are two forms of perfect square identities:
-    </p>
-    <ul>
-        <li xml:id="auto_qzb0huct">
-            <p xml:id="auto_c7tomgv2">
-                <m> (a + b)^2 = a^2 + 2ab +b^2  </m>, and
-            </p>
-        </li>
-        <li xml:id="auto_5jggf73c">
-            <p xml:id="auto_aa7dae8a">
-                <m> (a - b)^2 = a^2 - 2ab +b^2  </m>
-            </p>
-        </li>
-    </ul>
-    
-    <p xml:id="auto_i4t6pl2v">
-        In these identities, the expression on the left is a perfect square, which means it can be written as the square of a binomial (a two-term expression). 
-        The first identity is used when the middle term is positive, and the second identity is used when the middle term is negative.
-    </p>
-
-    <example xml:id="auto_zyorrwjd">
-    <title>(Using the first identity)</title>
-        
+    </insight> -->
+    <insight>
+        <p>
+            An <alert>integer</alert> that can be written as the product of two equal integers is called a 
+            <term>perfect square</term>. 
+            For example, <m>16</m> is a perfect square because 
+            <m>16 = 4 \times 4</m>, and <m>25</m> is a perfect square because <m>25 = 5 \times 5</m>.
+        </p>
+        <p>
+            In algebra, a <alert>perfect square identity</alert> describes what happens when a 
+            <term>binomial</term><fn>A binomial is an algebraic expression made up of exactly two terms joined by a plus (<m>+</m>) or minus (<m>-</m>) sign.</fn> 
+            is multiplied by itself. The result is a quadratic expression.
+        </p>
+        <p>
+            The two main perfect square identities are:
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <m>(a+b)^2 = a^2 + 2ab + b^2</m>
+                </li>
+                <li>
+                    <m>(a-b)^2 = a^2 - 2ab + b^2</m>
+                </li>
+            </ul>
+        </p>
+        <p>
+            These identities are important because they help us expand expressions 
+            and recognize special patterns when factoring quadratic expressions.
+        </p>
+    </insight>
+    <example>
         <statement>
-            <p xml:id="auto_zpcpym79">
-                
-            </p>
-            <p xml:id="auto_tvnempk9">
-                Consider the quadratic below:
-                <me>
-                    x^2 + 6x + 9
-                </me>                    
+            <p>
+                Expand and simplify: <m>(x + 5)^2</m>.
             </p>
         </statement>
-
         <solution>
-            <p xml:id="auto_0ts8xawo">
-                The expression <m>x^2 + 6x + 9</m> is perfefect square. A perfect square follows the pattern:
-                <md>
-                    <mrow> (a + b)^2 \amp = a^2 + 2ab + b^2 </mrow>
-                </md>
+            <p>
+                Use the perfect square identity 
+                <m>(a+b)^2 = a^2 + 2ab + b^2</m>.
             </p>
-            <p xml:id="auto_td33sff2">
-                Here, <m>a^2 = x^2, 2ab = 6x</m> and <m>b^2 = 9.</m> The square roots of <m>x^2</m> and <m>9</m> are <m>x</m> and <m>3,</m>
-                respectively.
+            <p>
+                Here, <m>a = x</m> and <m>b = 5</m>.
             </p>
-            <p xml:id="auto_sw9gtqa8">
-                In this case, the expression <m>x^2 + 6x + 9</m> matches the form <m>a^2 + 2ab + b^2,</m> where:
-                <ul xml:id="auto_ifqv4bkt">
-                    <li xml:id="auto_k9syx8w3">
-                        <p xml:id="auto_dffzxwkt">
-                            <m>a = x,</m>
-                        </p>
-                    </li>
-                    <li xml:id="auto_qowjr8n3">
-                        <p xml:id="auto_kv23941k">
-                            <m>b = 3.</m>
-                        </p>
-                    </li>
-                </ul>
-            </p>
-            <p xml:id="auto_3irp63l0">
-                The middle term <m>2ab</m> is <m>6x,</m> which fits the formula for a perfect square with a negative middle term. 
-                Applying the identity:
-                <md>
-                <mrow>x^2 + 6x + 9 \amp = (x + 3)^2 </mrow>
-                </md>
-                So, <m>x^2 + 6x + 9</m> factors into <m>(x + 3)^2.</m>
+            <p>
+                <m>
+                (x+5)^2 = x^2 + 2(x)(5) + 5^2 
+                = x^2 + 10x + 25.
+                </m>
             </p>
         </solution>
-
     </example>
-
-    <example xml:id="auto_0u8ldn3b">
-    <title>(Using the second identity)</title>
-
+    <example>
         <statement>
-            <p xml:id="auto_5oh4x0jc">
-                
-            </p>
-            <p xml:id="auto_vcdf68tz">
-                Using the quadratic below:
-                <me>
-                    x^2 - 10x + 25
-                </me>                    
+            <p>
+                Expand and simplify: <m>(2y - 3)^2</m>.
             </p>
         </statement>
-
         <solution>
-            <p xml:id="auto_7lpgaony">
-                The expression <m>x^2 - 10x + 25</m> matches the form <m>a^2 - 2ab + b^2</m> where:
-                <ul xml:id="auto_syrx4qe4">
-                    <li xml:id="auto_8kzgheo0">
-                        <p xml:id="auto_gzy5i5jd">
-                            <m>a = x,</m>
-                        </p>
-                    </li>
-                    <li xml:id="auto_nj36ro7f">
-                        <p xml:id="auto_05loeg22">
-                            <m>b = 5.</m>
-                        </p>
-                    </li>
-                    <li xml:id="auto_p77rwm56">
-                        <p xml:id="auto_i22knxqa">
-                            The middle term <m>2ab = -10x,</m> and the constant term <m>b^2 = 25.</m>
-                        </p>
-                    </li>
-                </ul>
+            <p>
+                Use the perfect square identity 
+                <m>(a-b)^2 = a^2 - 2ab + b^2</m>.
             </p>
-            <p xml:id="auto_3w6x84oc">
-                So, this is a perfect square, and we can factor it as:
-                <md>
-                    <mrow>x^2 - 10x + 25 \amp = (x - 5)^2 </mrow>
-                </md>
+            <p>
+                Here, <m>a = 2y</m> and <m>b = 3</m>.
+            </p>
+            <p>
+                <m>
+                (2y - 3)^2 = (2y)^2 - 2(2y)(3) + 3^2 
+                = 4y^2 - 12y + 9.
+                </m>
             </p>
         </solution>
-
     </example>
+    <example>
+        <statement>
+            <p>
+                Show that <m>9x^2 + 24x + 16</m> is a perfect square and express it in factorized form.
+            </p>
+        </statement>
+        <solution>
+            <p>
+                Compare the expression with the identity 
+                <m>(a+b)^2 = a^2 + 2ab + b^2</m>.
+            </p>
+            <p>
+                <m>
+                9x^2 = (3x)^2, \quad 16 = 4^2, 
+                \quad \text{and} \quad 2(3x)(4) = 24x.
+                </m>
+            </p>
+            <p>
+                Therefore,
+                <m>
+                9x^2 + 24x + 16 = (3x + 4)^2.
+                </m>
+            </p>
+        </solution>
+    </example>
+    <exercises xml:id="exercises-perfect-squares-identity">
+        <exercise>
+            <statement>
+                <p>
+                    Expand and simplify the following expressions:
+                </p>
+                <p>
+                    <ol>
+                        <li><m>(x + 7)^2</m></li>
+                        <li><m>(3a - 2)^2</m></li>
+                        <li><m>(2m + 5n)^2</m></li>
+                    </ol>
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    <ol>
+                        <li><m>x^2 + 14x + 49</m></li>
+                        <li><m>9a^2 - 12a + 4</m></li>
+                        <li><m>4m^2 + 20mn + 25n^2</m></li>
+                    </ol>
+                </p>
+            </answer>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
+                    Show that <m>x^2 - 10x + 25</m> is a perfect square and write it in factorized form.
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    <m>
+                    x^2 - 10x + 25 = (x - 5)^2
+                    </m>
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    Factorize: <m>16y^2 + 40y + 25</m>.
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    <m>
+                    16y^2 + 40y + 25 = (4y + 5)^2
+                    </m>
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    Determine whether <m>4x^2 + 12x + 7</m> is a perfect square. Give a reason for your answer.
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    It is not a perfect square because 
+                    <m>4x^2 = (2x)^2</m> and 
+                    <m>7</m> is not a perfect square, 
+                    and the middle term <m>12x</m> does not match 
+                    <m>2(2x)(\sqrt{7})</m>. 
+                    Therefore, it cannot be written in the form <m>(a+b)^2</m>.
+                </p>
+            </answer>
+        </exercise>
+
+    </exercises>
 
 </subsubsection>

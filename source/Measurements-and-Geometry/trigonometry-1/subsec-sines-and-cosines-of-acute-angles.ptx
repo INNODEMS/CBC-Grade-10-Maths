@@ -1,5 +1,43 @@
 <subsection xml:id="subsec-sines-and-cosines-of-acute-angles" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Sines and Cosines of Acute Angles</title>
+    <objectives component="outcomes">
+        <introduction>
+            <dl>
+                <li>
+                    <title>Strand</title>
+                    <p>
+                        2.0 Measurements and Geometry
+                    </p>
+                </li>
+                <li>
+                    <title>Sub-Strand</title>
+                    <p>
+                        2.4 Trigonometry 1
+                    </p>
+                </li>
+            </dl>
+        </introduction>
+        <ul>
+            <li>Relate the sine, cosine and tangent of acute angles</li>
+        </ul>
+    </objectives>
+        <axiom component="resources">
+        <!-- Link to blurb -->
+        <xi:include href="../../resources-blurb-lesson.ptx" />
+
+        <sbsgroup widths="45% 45%" margins="2% 2%">
+            <sidebyside>
+                <p>
+                    <dataurl source="lesson_plans/measurements-and-geometry/trigonometry-1/sines-and-cosines-of-acute-angles.pdf"> Lesson Plan </dataurl>
+                </p>
+                <p>
+                    <dataurl source="lesson_plans/measurements-and-geometry/trigonometry-1/step-by-step-guide_sines-and-cosines-of-acute-angles.pdf"> Step-by-Step Guide </dataurl>
+                </p>
+            </sidebyside>
+        </sbsgroup>
+    </axiom>
+
+
     <activity xml:id="auto_ck7pa5a2">
         <p xml:id="auto_w6l8fzvf">
             <m>\textbf{Work in groups}</m>
@@ -182,7 +220,7 @@
                     This constant value is obtained by taking
                     the ratio of the side <term>opposite</term> to the angle
                     <m>\theta </m> to the <term>hypotenuse</term> side in each case.
-                    This ratio is called the sine of angle <m>\theta </m>, which can be written as as <m>sin \, \theta</m>.
+                    This ratio is called the sine of angle <m>\theta </m>, which can be written as as <m>\sin \, \theta</m>.
                 </p>
             </li>
 
@@ -197,7 +235,7 @@
                     This constant value is obtained by taking
                     the ratio of the side <term>adjacent</term> to the angle
                     <m>\theta </m> to the <term>hypotenuse</term> side in each case.
-                    This ratio is called the cosine of angle <m>\theta </m>, which can be written as <m>cos \, \theta</m>.
+                    This ratio is called the cosine of angle <m>\theta </m>, which can be written as <m>\cos \, \theta</m>.
                 </p>
             </li>
         
@@ -209,39 +247,34 @@
     <image width="50%">
     <latex-image label="Triangle12">
         \begin{tikzpicture}
-            % Define points
-            \coordinate (A) at (0,0);
-            \coordinate (B) at (4,0);
-            \coordinate (C) at (4,3);
+                    % Points
+                    \coordinate (A) at (5,0);
+                    \coordinate (B) at (0,0);
+                    \coordinate (C) at (5,3);
 
-            % Draw triangle
-            \draw[thick] (A) -- (B) -- (C) -- cycle;
+                    % Triangle
+                    \draw[thick] (B) -- node[below]{Adjacent} (A) -- node[right]{Opposite} (C) -- node[sloped,above]{Hypotenuse} (B);
 
-            % Right angle box at B
-            \draw (B) -- ++(-0.3,0) -- ++(0,0.3) -- ++(0.3,0);
+                    % Right angle box at A
+                    \draw (A) -- ++(-0.3,0) -- ++(0,0.3) -- ++(0.3,0);
 
-            % Angle theta at A
-            \draw[thick,blue] (0.8,0) arc[start angle=0, end angle=36.87, radius=0.8];
-            \node [very thick]at (0.9,0.3) {\(\theta\)};
+                    % Angle theta at B
+                    \draw [blue,very thick](1,0) arc[start angle=0,end angle=30,radius=1cm];
+                    \node [right]at (0.9,0.3) {\(\theta\)};
 
-            % Labels for sides
-            \node at (2,-0.4) {adjacent};
-            \node[rotate=90] at (4.4,1.5) {opposite};
-            \node[rotate=28] at (2.4,2.3) {Hypotenuse};
-
-            % Point labels
-            \node[left] at (A) {A};
-            \node[right] at (B) {B};
-            \node[ right] at (C) {C};
-        \end{tikzpicture}
+                    % Labels
+                    \node[ left] at (B) {B};
+                    \node[right] at (A) {A};
+                    \node[ right] at (C) {C};
+                \end{tikzpicture}
     </latex-image>
         
     </image>
     <p xml:id="auto_8kqqpesq">
         <md>
-            <mrow> tan \, \theta=\amp \frac{\text{Opposite}}{\text{Adjacent}} </mrow>
-            <mrow> cos\, \theta =\amp \frac{\text{Adjacent}}{\text{Hypotenuse}}</mrow>
-            <mrow> sin\,\theta =\amp \frac{\text{Opposite}}{\text{Hypotenuse}}</mrow>
+            <mrow> \tan \, \theta=\amp \frac{\text{Opposite}}{\text{Adjacent}} </mrow>
+            <mrow> \cos\, \theta =\amp \frac{\text{Adjacent}}{\text{Hypotenuse}}</mrow>
+            <mrow> \sin\,\theta =\amp \frac{\text{Opposite}}{\text{Hypotenuse}}</mrow>
             
         </md>
     </p>
@@ -258,12 +291,12 @@
                 <ol xml:id="auto_eal67vq9" marker="(a)">
                     <li xml:id="auto_xs9hncxh">
                         <p xml:id="auto_f8ntx6q1">
-                            <m>sin\,\theta</m>
+                            <m>\sin\,\theta</m>
                         </p>
                     </li>
                     <li xml:id="auto_ite158sf">
                         <p xml:id="auto_z8bsu2iq">
-                            <m>cos\,\theta</m>
+                            <m>\cos\,\theta</m>
                         </p>
 
                     </li>
@@ -341,7 +374,7 @@
             </p>
         </solution>
     </example>
-    <example xml:id="auto_1yj8mvbt">
+    <!-- <example xml:id="auto_1yj8mvbt">
         <statement>
             <p xml:id="auto_rgojzvq1">
                 A ladder leans against a wall, forming a <m>70^\circ</m> 
@@ -351,7 +384,7 @@
         </statement>
         <solution>
             <p xml:id="auto_wq6238t4">
-                Using <m>sin⁡</m>, since we need the opposite side:
+                Using <m>\sin⁡</m>, since we need the opposite side:
             </p>
             <p xml:id="auto_i6i63hvd">
                 <md>
@@ -365,18 +398,9 @@
                 The ladder reaches <m>4.6985 \,m</m> up the wall.
             </p>
         </solution>
-    </example>
+    </example> -->
     
     <!-- STACK Questions -->
-    <exercise xml:id="auto_a0zfmiwt">
-        <title>Exact Values of Sine and Cosine Without a Calculator</title>
-
-        <introduction xml:id="auto_sdw8jxfr">
-            <p xml:id="auto_bo3lr7eu">Load the question by clicking the button below.</p>
-        </introduction>
-
-        <stack label="exact-values-sine-cosine-no-calc" source="stack/top/2-0-Measurement-Geometry/2-4-Trigonometry-1/2-4-1-Trigonometric-Ratios-of-Acute-Angles/2-4-1-2-Sine-and-Cosine-of-an-Acute-Angle/Exact-Values-of-Sine,-Cosine,-and-Tangent-Without-a-Calculator.xml"/>
-    </exercise>
 
     <exercise xml:id="auto_bcf7z08h">
         <title>Finding Ladder Height and Base Distance</title>
@@ -398,53 +422,96 @@
         <stack label="trig-ratios-right-triangle-2" source="stack/top/2-0-Measurement-Geometry/2-4-Trigonometry-1/2-4-1-Trigonometric-Ratios-of-Acute-Angles/2-4-1-2-Sine-and-Cosine-of-an-Acute-Angle/Finding-Trigonometric-Ratios-in-a-Right-Angled-Triangle.xml"/>
     </exercise>
 
+    <p xml:id="auto_vs23moz2">
+        <m>\textbf{Technology Integration: Exploring Trigonometric Ratios}</m>
+    </p>
+    <p xml:id="auto_xigst8oe">
+        To learn more on trigonometric ratios, find these interactive and insightful resources:
+    </p>
+    <p xml:id="auto_0yeqtpzf">
+        <ol xml:id="auto_7y86a1nk">
+            <li xml:id="auto_eni50vam">
+                <p xml:id="auto_94tlpe9d">
+                    Khan Academy – Interactive Learning
+                </p>
+                <p xml:id="auto_jqz0cynm">
+                    Learn trigonometric ratios in right triangles through step-by-step 
+                    tutorials and hands-on exercises.
+                </p>
+                <p xml:id="auto_0cjsc0p1">
+                    <url href="https://www.khanacademy.org/math/geometry/hs-geo-trig/hs-geo-trig-ratios-intro/a/finding-trig-ratios-in-right-triangles" />
+                </p>
+            </li>
+            <li xml:id="auto_imnqog3l">
+                <p xml:id="auto_ai7w0bj0">
+                    Trigonometry Short Course Guide
+                </p>
+                <p xml:id="auto_9irsmcxf">
+                    A well-structured PDF with in-depth explanations and examples to
+                        strengthen your grasp of trigonometry.
+                </p>
+                <p xml:id="auto_jyzrbd9s">
+                    <url href="https://www.govst.edu/uploadedFiles/Academics/Colleges_and_Programs/CAS/Trigonometry_Short_Course_Tutorial_Lauren_Johnson.pdf" />
+                </p>
+            </li>
+            <li xml:id="auto_5tenyqwo">
+                <p xml:id="auto_hc70ezl9">
+                    YouTube Video – Visual Explanation
+                </p>
+                <p xml:id="auto_2fn5fscm">
+                    Gain a clear and concise understanding of trigonometric ratios 
+                    with this engaging video tutorial.
+                </p>
+                <p xml:id="auto_qew9jet8">
+                    <url href="https://youtu.be/uyKvSe6Ltgs" />
+                </p>
+            </li>
+
+        </ol>
+    </p>
+    
+
 
     <exercises xml:id="auto_j507qoeg" >
         <exercise xml:id="auto_j7halv9d">
             <statement>
-                <p xml:id="auto_axbk8s29">
-                    <ol>
-                        <li xml:id="auto_6x8fhrq8"> 
-                            <p xml:id="auto_ozytqbk5"> In the figure given below,</p>
+                <p xml:id="auto_axbk8s29"> In the figure given below,</p>
                             
-                            <image width="70%">
-                            <latex-image label="question">
-                                \begin{tikzpicture}
-                                    % Draw the right-angled triangle
-                                    \draw [very thick,fill=white] (0,0) -- (4,0) -- (4,3) -- cycle;
+                <image width="70%">
+                <latex-image label="question">
+                    \begin{tikzpicture}
+                        % Draw the right-angled triangle
+                        \draw [very thick,fill=white] (0,0) -- (4,0) -- (4,3) -- cycle;
 
-                                    % Label the sides
-                                    \node [blue]at (2,-0.3) {8 cm}; % Adjacent side
-                                    \node [black]at (4.5,1.5) {\textbf{6 cm}}; % Opposite side
-                                    \node at (2,2) {10 cm}; % Hypotenuse
+                        % Label the sides
+                        \node [blue]at (2,-0.3) {8 cm}; % Adjacent side
+                        \node [black]at (4.5,1.5) {\textbf{6 cm}}; % Opposite side
+                        \node at (2,2) {10 cm}; % Hypotenuse
 
-                                    % Label the right angle
-                                    \draw [very thick] (4,0) -- (3.7,0) -- (3.7,0.3) -- (4,0.3) -- cycle;
-                                    
+                        % Label the right angle
+                        \draw [very thick] (4,0) -- (3.7,0) -- (3.7,0.3) -- (4,0.3) -- cycle;
+                        
 
-                                    % Mark the angle theta at the hypotenuse-adjacent junction
-                                    \draw (0.5,0) arc[start angle=0,end angle=36.87,radius=0.5cm];
-                                    \node at (0.8,0.3) {\(\alpha\)}; % Place theta at correct position
-                                \end{tikzpicture}
-                            </latex-image>
-                                
-                            </image>
-                            <p xml:id="auto_ek1xcbqb">
-                                Find;
+                        % Mark the angle theta at the hypotenuse-adjacent junction
+                        \draw (0.5,0) arc[start angle=0,end angle=36.87,radius=0.5cm];
+                        \node at (0.8,0.3) {\(\alpha\)}; % Place theta at correct position
+                    \end{tikzpicture}
+                </latex-image>
+                    
+                </image>
+                <p xml:id="auto_ek1xcbqb">
+                    Find:
+                </p>
+                <p xml:id="auto_6pklqn0c">
+                    <ol xml:id="auto_6xvk9j1k" marker="a) ">
+                        <li xml:id="auto_cned2gyp">
+                            <p xml:id="auto_ywz2k0un">
+                                <m>\sin\,\alpha</m>
                             </p>
-                            <p xml:id="auto_6pklqn0c">
-                                <ol xml:id="auto_6xvk9j1k" marker="a) ">
-                                    <li xml:id="auto_cned2gyp">
-                                        <p xml:id="auto_ywz2k0un">
-                                            <m>sin\,\alpha</m>
-                                        </p>
-                                    </li>
-                                    <li xml:id="auto_7u8ra6q4">
-                                        <p xml:id="auto_xjsefbm5">
-                                            <m>cos\,\alpha</m>
-                                        </p>
-                                    </li>
-                                </ol>
+                        </li>
+                        <li xml:id="auto_7u8ra6q4">
+                            <p xml:id="auto_xjsefbm5">
+                                <m>\cos\,\alpha</m>
                             </p>
                         </li>
                     </ol>
@@ -455,12 +522,12 @@
                     <ol marker="a)">
                         <li xml:id="auto_qynt5euz">
                             <p xml:id="auto_uswjv6jq">
-                                <m>sin\,\alpha=0.6</m>
+                                <m>\sin\,\alpha=0.6</m>
                             </p>
                         </li>
                         <li xml:id="auto_76l1o6hk">
                             <p xml:id="auto_nlbmgug8">
-                                <m>cos\,\alpha=0.8</m>
+                                <m>\cos\,\alpha=0.8</m>
                             </p>
                         </li>
                     </ol>
@@ -470,33 +537,24 @@
 
         <exercise xml:id="auto_d13fh33i">
             <statement>
-                <p xml:id="auto_2x9te94n">
-                    <ol>
-                        <li xml:id="auto_33ihwzwc">
-                            <p xml:id="auto_dkmv7n34">
-                                A flagpole <m>12</m> meters tall casts a shadow of 
-                                <m>8</m> meters on the ground.
-                            </p>
-                            <p xml:id="auto_2p7z2g1a">
-                                <ol xml:id="auto_fv88hcyg" marker="(a)">
-                                    <li xml:id="auto_offz95xp">
-                                        <p xml:id="auto_9ty8sc17">
-                                            What is the angle of elevation of the sun?
-                                        </p>
-                                    </li>
-                                    <li xml:id="auto_0ibgsz3h">
-                                        <p xml:id="auto_1valkqvq">
-                                            If the shadow increases to <m>10</m> meters, what will be the new angle of elevation?
-                                        </p>
-                                    </li>
-                                </ol>
+                <p xml:id="auto_dkmv7n34">
+                    A flagpole <m>12</m> meters tall casts a shadow of 
+                    <m>8</m> meters on the ground.
+                </p>
+                <p xml:id="auto_2p7z2g1a">
+                    <ol xml:id="auto_fv88hcyg" marker="(a)">
+                        <li xml:id="auto_offz95xp">
+                            <p xml:id="auto_9ty8sc17">
+                                What is the angle of elevation of the sun?
                             </p>
                         </li>
-
+                        <li xml:id="auto_0ibgsz3h">
+                            <p xml:id="auto_1valkqvq">
+                                If the shadow increases to <m>10</m> meters, what will be the new angle of elevation?
+                            </p>
+                        </li>
                     </ol>
                 </p>
-            
-                    
             </statement>
             <answer>
                 <p xml:id="auto_uqk8nev2">
@@ -518,26 +576,20 @@
 
         <exercise xml:id="auto_6in0krfy">
             <statement>
-                <p xml:id="auto_ydeyldh9">
-                    <ol>
-                        <li xml:id="auto_y30dfeno">
-                            <p xml:id="auto_b7hi1z1k">
-                                An airplane takes off at 
-                                an angle of <m>18^\circ</m> to the ground. After flying <m>500</m> meters,
+                <p xml:id="auto_b7hi1z1k">
+                    An airplane takes off at 
+                    an angle of <m>18^\circ</m> to the ground. After flying <m>500</m> meters,
+                </p>
+                <p xml:id="auto_9kz9o9ws">
+                    <ol xml:id="auto_0gdkmqrr" marker="(a)">
+                        <li xml:id="auto_fle8i5gd">
+                            <p xml:id="auto_2rp5dj97">
+                            How high is the airplane above the ground? 
                             </p>
-                            <p xml:id="auto_9kz9o9ws">
-                                <ol xml:id="auto_0gdkmqrr" marker="(a)">
-                                    <li xml:id="auto_fle8i5gd">
-                                        <p xml:id="auto_2rp5dj97">
-                                        How high is the airplane above the ground? 
-                                        </p>
-                                    </li>
-                                    <li xml:id="auto_8ekv42gs">
-                                        <p xml:id="auto_dy6vjyoj">
-                                            How far has it traveled horizontally from the starting point?
-                                        </p>
-                                    </li>
-                                </ol>
+                        </li>
+                        <li xml:id="auto_8ekv42gs">
+                            <p xml:id="auto_dy6vjyoj">
+                                How far has it traveled horizontally from the starting point?
                             </p>
                         </li>
                     </ol>
@@ -563,14 +615,11 @@
         </exercise> 
         <exercise xml:id="auto_jawajmj6">
             <statement>
-                <p xml:id="auto_z89f91xt">
-                    <ol>
-                        <li xml:id="auto_hvu3lg7l">
-                            <p xml:id="auto_lvvg39w1">
-                                A ladder <m>5</m> meters long leans against a 
-                                vertical wall, making an angle of <m>65^\circ</m> with the ground as shown.
-                            </p>
-                            <image width="50%">
+                <p xml:id="auto_lvvg39w1">
+                    A ladder <m>5</m> meters long leans against a 
+                    vertical wall, making an angle of <m>65^\circ</m> with the ground as shown.
+                </p>
+                <image width="50%">
                             <latex-image label="Question1">
                                 \begin{tikzpicture}[scale=1.5]
                                     % Draw the wall and ground
@@ -599,19 +648,16 @@
                             </latex-image>
                                 
                             </image>
-                            <p xml:id="auto_gsxxo33v">
-                                <ol xml:id="auto_wipi3xgg" marker="(a)">
-                                    <li xml:id="auto_nyaeaia8">
-                                        <p xml:id="auto_qjs05y66">
-                                            How high does the ladder reach on the wall?
-                                        </p>
-                                    </li>
-                                    <li xml:id="auto_p3jh6vtg">
-                                        <p xml:id="auto_qxcp5e8e">
-                                            How far is the base of the ladder from the wall?
-                                        </p>
-                                    </li>
-                                </ol>
+                <p xml:id="auto_gsxxo33v">
+                    <ol xml:id="auto_wipi3xgg" marker="(a)">
+                        <li xml:id="auto_nyaeaia8">
+                            <p xml:id="auto_qjs05y66">
+                                How high does the ladder reach on the wall?
+                            </p>
+                        </li>
+                        <li xml:id="auto_p3jh6vtg">
+                            <p xml:id="auto_qxcp5e8e">
+                                How far is the base of the ladder from the wall?
                             </p>
                         </li>
                     </ol>
@@ -637,562 +683,5 @@
 
         
     </exercises>
-
-    
-
-
-
-    <p xml:id="auto_dcyzr0qx">
-        <m>{\color{black} \textbf{Tables of Sines and Cosines}}</m>
-    </p>
-    
-    <activity xml:id="auto_nsfaqonl">
-        <p xml:id="auto_rwot9044">
-            <m>\textbf{Work in groups}</m>
-        </p>
-        <p xml:id="auto_u43cdnd5">
-            <term>What you require:</term> A scientific calculator{for verification}, ruler and pencil, a printed table of sine and cosine values.
-        </p>
-        <p xml:id="auto_ke4639yz">
-            <ol xml:id="auto_031egdsj" >
-                <li xml:id="auto_8fruq1d7">
-                    <p xml:id="auto_a11amv4i">
-                        Complete the Trigonometric Table.
-                    </p>
-                    <p xml:id="auto_f6vfwwof">
-                        Fill in the missing values in the table below. Use a calculator to check your answers if needed.
-                    </p>
-                    <tabular halign="left" bottom="medium" right="medium" top="medium" left="medium">
-                        <row header="yes">
-                            <cell>Angle(<m>{\color{black}^\circ}</m>)</cell>
-                            <cell><m>{\color{black} sin\,\theta}</m></cell>
-                            <cell><m>{\color{black} cos\,\theta}</m></cell>
-                            <cell><m>{\color{black} sin(90^\circ-\theta)}</m></cell>
-                            <cell><m>{\color{black}cos(90^\circ-\theta)}</m></cell>
-                        </row>
-                        <row>
-                            <cell><m>0^\circ</m></cell>
-                            <cell><m>0.0000</m></cell>
-                            <cell><m>1.0000</m></cell>
-                            <cell></cell>
-                            <cell></cell>
-                        </row>
-                        <row>
-                            <cell><m>30^\circ</m></cell>
-                            <cell><m>0.5000</m></cell>
-                            <cell><m>1.0000</m></cell>
-                            <cell></cell>
-                            <cell></cell>
-                        </row>
-                        <row>
-                            <cell><m>45^\circ</m></cell>
-                            <cell></cell>
-                            <cell></cell>
-                            <cell></cell>
-                            <cell></cell>
-                        </row>
-                        <row>
-                            <cell><m>60^\circ</m></cell>
-                            <cell></cell>
-                            <cell></cell>
-                            <cell></cell>
-                            <cell></cell>
-                        </row>
-                        <row>
-                            <cell><m>45^\circ</m></cell>
-                            <cell><m>1.0000</m></cell>
-                            <cell><m>0.0000</m></cell>
-                            <cell></cell>
-                            <cell></cell>
-                        </row>
-                    </tabular>
-
-                </li>
-                <li xml:id="auto_jsfcnjrv">
-                    <p xml:id="auto_pdbg40j8">
-                        Analyze the following.
-                    </p>
-                    <p xml:id="auto_ho95d96d">
-                        <ul xml:id="auto_mh7fd5f8">
-                            <li xml:id="auto_0kk3gxyt">
-                                <p xml:id="auto_f7y9b7g5">
-                                    Compare <m>sin\,\theta</m> with <m>cos(90^\circ-\theta)</m>. What do you notice?
-                                </p>
-                            </li>
-                            <li xml:id="auto_8coc4bv2">
-                                <p xml:id="auto_5ofph241">
-                                    Compare <m>sin\,\theta</m> with <m>cos(90^\circ-\theta)</m>. What pattern do you see?
-                                </p>
-                            </li>
-                        </ul>
-                    </p>
-                </li>
-                <li xml:id="auto_4sbt4amv">
-                    <p xml:id="auto_oh8795r0">
-                        Discuss your work with other groups in class.
-                    </p>
-                </li>
-            </ol>
-        </p>
-    </activity>
-
-    <p xml:id="auto_4s3nnmjx">
-        <m>\textbf{Extended Activity}</m>
-    </p>
-    <activity xml:id="auto_e3hi1q4a">
-        <p xml:id="auto_dj6qujed">
-            <m>\textbf{Work in groups}</m>
-        </p>
-        <p xml:id="auto_ew5ez1fe">
-            <term>What you require:</term> Ruler, pencil, graph paper and a protractor.
-        </p>
-        <p xml:id="auto_ybot8mhf">
-            <ol xml:id="auto_sj1zdcc5">
-                <li xml:id="auto_6botuz1m">
-                    <p xml:id="auto_izgvjv8v">
-                        Draw a right triangle and label the opposite, adjacent and 
-                        hypotenuse on all three sides and indicate the angle <m>\theta</m>.
-                    </p>
-                </li>
-                <li xml:id="auto_vvepuwjp">
-                    <p xml:id="auto_6xysgoyn">
-                        Measure both the length(<m>cm</m>) and angle <m>\theta</m>.
-                    </p>
-                </li>
-                <li xml:id="auto_jzzpnf66">
-                    <p xml:id="auto_byoaripm">
-                        Find <m>sin(\theta),\,cos(\theta)\, \text{and}\, tan\,\theta </m>.
-                    </p>
-                </li>
-                <li xml:id="auto_qxv5fguk">
-                    <p xml:id="auto_2j749e34">
-                        Divide <m>sin(\theta) \,\text{by}\, cos(\theta)</m> and record your answers on the table below. 
-                    </p>
-                    <tabular halign="left" bottom="medium" right="medium" left="medium" top="medium">
-                        <row header="yes">
-                            <cell>Side Measurement</cell>
-                            <cell>Length (<m>cm</m>)</cell>
-                            <cell>Ratio calculation</cell>
-                            <cell>Results</cell>
-                        </row>
-                        <row>
-                            <cell>Opposite</cell>
-                            <cell></cell>
-                            <cell><m>sin(\theta)= \frac{\text{Opposite}}{\text{Hypotenuse}}</m></cell>
-                            <cell></cell>
-                        </row>
-                        <row>
-                            <cell>Adjacent</cell>
-                            <cell></cell>
-                            <cell><m>cos(\theta)= \frac{\text{Adjacent}}{\text{Hypotenuse}}</m></cell>
-                            <cell></cell>
-                        </row>
-                        <row>
-                            <cell>Hypotenuse</cell>
-                            <cell></cell>
-                            <cell><m>tan(\theta)= \frac{\text{Opposite}}{\text{Adjacent}}</m></cell>
-                            <cell></cell>
-                        </row>
-                    </tabular>
-                </li>
-                <li xml:id="auto_a3c47hjx">
-                    <p xml:id="auto_q8fu5bai">
-                        Repeat the procedure  with a different right triangle.
-                    </p>
-                </li>
-                <li xml:id="auto_oofueza8">
-                    <p xml:id="auto_cz74yhzl">
-                        How are <m>sin\,\theta,\, cos\,\theta,\, \text{and}\,tan\, \theta </m> related?
-                    </p>
-                </li>
-                <li xml:id="auto_wz07t4f0">
-                    <p xml:id="auto_syovc34u">
-                        Discuss your work with other learners.
-                    </p>
-                </li>
-            </ol>
-        </p>
-    </activity>
-
-
-    <p xml:id="auto_xjpqtrya">
-        <m>\textbf{Key Takeaway}</m>
-    </p>
-    <p xml:id="auto_mol3h8qb">
-        When you look at the tables of Cosine and sine, you will notice that,
-    </p>
-    <p xml:id="auto_63menrii">
-        <ol xml:id="auto_ncczyw7o" marker="i)">
-            <li xml:id="auto_cpna23ba">
-                <p xml:id="auto_zmj3g1ar">
-                    The values of their sines increase from <m>0</m> to <m>1</m>.
-                </p>
-            </li>
-            <li xml:id="auto_qe9kqvm6">
-                <p xml:id="auto_imgeu8n9">
-                    The values of their cosines decrease from <m>1</m> to <m>0</m>
-                </p>
-            </li>
-        </ol>
-    </p>
-    <p xml:id="auto_9hsgugwu">
-        Therefore, the values in the difference
-        column of <term>cosine </term> tables have to be
-        subtracted and those in the difference
-        columns of the <term>sine </term> tables have to be
-        added.
-    </p>
-    <p xml:id="auto_xx7fdr6c">
-        Generally, 
-    </p>
-    <p xml:id="auto_0qffubyb">
-        The values of sine and cosine ranges from <m>0</m> to <m>1</m>(<m>0\leq \theta \leq 1</m>).
-    </p>
-    <p xml:id="auto_uogo0vn1">
-        As the angles increase
-        from <m>0^\circ</m> to <m>90^\circ</m>:
-    </p>
-    <example xml:id="auto_mgiju848">
-        <statement>
-            <p xml:id="auto_o0y4ncau">
-                Read the sine and cosine values of the
-                following angles from the tables.
-            </p>
-            <p xml:id="auto_ae8aw02o">
-                <ol xml:id="auto_q2qxveck" marker="(a)">
-                    <li xml:id="auto_l2dpgy09">
-                        <p xml:id="auto_yjekj3q5">
-                            <m>46^\circ</m>
-                        </p>
-                    </li>
-                    <li xml:id="auto_cp5kxnka">
-                        <p xml:id="auto_6ru8nome">
-                            <m>45.5^\circ</m>
-                        </p>
-                    </li>
-                    <li xml:id="auto_3wqzw6pm">
-                        <p xml:id="auto_eihkfivd">
-                            <m>75.67^\circ</m>
-                        </p>
-                    </li>
-                </ol>
-            </p>
-        </statement>
-        <solution>
-            <p xml:id="auto_7d5758uh">
-                <ol xml:id="auto_757pdlsz" marker="(a)">
-                    <li xml:id="auto_m9ynp168">
-                        <p xml:id="auto_jcvlsh13">
-                            <m>sin\,46^\circ</m>
-                        </p>
-                        <p xml:id="auto_p6lttdcj">
-                            Locate <m>46^\circ</m>in the sine and cosine table.
-                        </p>
-                        <p xml:id="auto_hpzxxpa4">
-                            Read the corresponding sine value. That is <me>sin\,46^\circ= 0.7193</me>,
-                        </p>
-                        <p xml:id="auto_vchhazpc">
-                            <m>cos\,46^\circ</m>
-                        </p>
-                            <p xml:id="auto_piuczbo1">
-                            Read the corresponding cosine value. That is <me>cos\,46^\circ= 0.6947</me>,
-                        </p>
-                    </li>
-                    <li xml:id="auto_2d2u60ho">
-                        <p xml:id="auto_wvirlb4l">
-                            <m>sin\,45.5^\circ</m>
-                        </p>
-                        <p xml:id="auto_spmagud9">
-                            Locate <m>45.5^\circ</m>in the sine and cosine table.
-                        </p>
-                        <p xml:id="auto_8boimk2k">
-                            Read the corresponding sine value. That is <me>sin\,45.5^\circ= 0.7133</me>,
-                        </p>
-                        <p xml:id="auto_6x64rco9">
-                            <m>cos\,45.5^\circ</m>
-                        </p>
-                        <p xml:id="auto_v0p3ehg5">
-                            Read the corresponding cosine value. That is <me>cos\,45.5^\circ= 0.7009</me>,
-                        </p>
-                    </li>
-                    <li xml:id="auto_jj665jz0">
-                        <p xml:id="auto_ywwo2kg9">
-                            
-                            <m>sin\,75.67^\circ</m>
-                        </p>
-                        <p xml:id="auto_xe2xqnsh">
-                            Using decimal tables, <m>sin\,75.6^\circ=0.9686</m>.  From the difference column under 
-                            <m>7</m> reads <m>0.0003</m>
-                        </p>
-                        <p xml:id="auto_tx7cguxq">
-                            Therefore, <md>
-                                <mrow> sin\,75.67^\circ=\amp 0.9686+0.0003</mrow>
-                                <mrow>= \amp 0.9689</mrow>
-                            </md>
-                        </p>
-                        <p xml:id="auto_5a6rfgsf">
-                            
-                            <m>cos\,75.67^\circ</m>
-                        </p>
-                        <p xml:id="auto_8fk99nzi">
-                            Using decimal tables, <m>cos\,75.6^\circ=0.2487</m>.  From the difference column under 
-                            <m>7</m> reads <m>0.0012</m>
-                        </p>
-                        <p xml:id="auto_qoe1y18d">
-                            Therefore, <md>
-                                <mrow> cos\,75.67^\circ=\amp 0.2487-0.0012</mrow>
-                                <mrow>= \amp 0.2475</mrow>
-                            </md>
-                        </p>
-                        
-
-                        
-                    </li>
-                </ol>
-            </p>
-        </solution>
-    </example>
-    <example xml:id="auto_zz84kntj">
-        <statement>
-            <p xml:id="auto_5nkg88hz">
-                Find the value of <m>t</m> and <m>w</m> in the figure shown below (Using sine and cosine tables).
-            </p>
-            <image width="50%">
-            <latex-image label="Triangle14">
-                \begin{tikzpicture}
-                    
-                    % Draw the triangle
-                    \draw [very thick] (0,0) node[left] {$C$} -- (6,0) node[right] {$B$} -- (6,5) node[above] {$A$} -- cycle;
-                    
-                    % Hypotenuse Label
-                    \draw [very thick](3,2.5) node[left] {8 cm};
-
-                    % Right angle symbol at B
-                    \draw[very thick] (6,0) -- ++(-0.4,0) -- ++(0,0.4) -- ++(0.4,0);
-                    
-                    % Sides Labels
-                    \node[right] at (6,2.5) {$t$ cm};
-                    \node[below] at (3,0) {$w$ cm};
-
-                    % Angle at C
-                    \draw [very thick](0.8,0) arc[start angle=0,end angle=57.6,radius=0.5];
-                    \node[right] at (1,0.4) { $54.7^\circ$};
-                \end{tikzpicture}
-            </latex-image>
-                
-            </image>
-
-        </statement>
-        <solution>
-            <p xml:id="auto_hudlosgx">
-                Recall that; 
-            </p>
-            <p xml:id="auto_3te13278">
-                <m>sin\,\theta=\frac{\text{opposite}}{\text{Hypotenuse}}=\frac{\text{t}}{8}</m>
-            </p>
-            <p xml:id="auto_uvoyv4s5">
-                <m>cos\,\theta=\frac{\text{opposite}}{\text{Hypotenuse}}=\frac{\text{w}}{8}</m>
-            </p>
-            <p xml:id="auto_o61to0p7">
-                Therefore, <md>
-                    <mrow> sin\,54.7^\circ=\amp \frac{\text{t}}{8}</mrow>
-                    <mrow> 8\,sin\,54.7^\circ=\amp \text{t}</mrow>
-                    
-                </md>
-            </p>
-            <p xml:id="auto_ha98t1wz">
-                But, from tables of sine, <m>sin\,54.7^\circ=0.8161</m>
-            </p>
-            <p xml:id="auto_fltb7iup">
-                Therefore, <md>
-                    <mrow> \text{t} =\amp 8 \times 0.8161 </mrow>
-                    <mrow> =\amp 6.5288 </mrow>
-                </md>
-            </p>
-
-            <p xml:id="auto_as9pa3te">
-                <md>
-                    <mrow> cos\,54.7^\circ=\amp \frac{\text{w}}{8}</mrow>
-                    <mrow> 8\,cos\,54.7^\circ=\amp \text{w}</mrow>
-                    
-                </md>
-            </p>
-            <p xml:id="auto_cljciluv">
-                But, from tables of cosine, <m>cos\,54.7^\circ=0.5779</m>
-            </p>
-            <p xml:id="auto_0dj4n6fq">
-                Therefore, <md>
-                    <mrow> \text{w} =\amp 8 \times 0.5779 </mrow>
-                    <mrow> =\amp 4.6232 </mrow>
-                </md>
-            </p>
-        </solution>
-    </example>
-
-<exercises xml:id="auto_kb1lnpnh">
-        
-    <exercise xml:id="auto_bgf2o0ic">
-        <statement>
-            <p xml:id="auto_87dr6n9j">
-                <ol>
-                    <li xml:id="auto_a522jqy8">
-                        <p xml:id="auto_vydutbq0">
-                            Find from tables the angle whose sine and cosine is:
-                        </p>
-                        <p xml:id="auto_5c17iju8">
-                            <ol xml:id="auto_njmltlej" marker="(a)">
-                                <li xml:id="auto_2lfebrrg">
-                                    <p xml:id="auto_nvnnejfz">
-                                        <m>0.4467</m>
-                                    </p>
-                                </li>
-                                <li xml:id="auto_bzoetyrf">
-                                    <p xml:id="auto_5r05uzu5">
-                                        <m>0.5875</m>
-                                    </p>
-                                </li>
-                                <li xml:id="auto_cwqnornf">
-                                    <p xml:id="auto_10o57d86">
-                                        <m>0.0004</m>
-                                    </p>
-                                </li>
-                            </ol>
-                        </p>
-                    </li>
-                </ol>
-            </p>
-        </statement>
-        <answer>
-            <p xml:id="auto_pudbb8k1">
-                <ol marker="(a)">
-                    <li xml:id="auto_h2moawrl">
-                        <p xml:id="auto_13q95y3s">
-                            The answer is <m>26.57^\circ</m>
-                        </p>
-                    </li>
-                    <li xml:id="auto_ofmkn4ur">
-                        <p xml:id="auto_okhbiv7u">
-                            The answer is <m>54^\circ</m>
-                        </p>
-                    </li>
-                    <li xml:id="auto_jbnjjcvp">
-                        <p xml:id="auto_llpuyw84">
-                            The answer is <m>0.023^\circ</m>
-                        </p>
-                    </li>
-                </ol>
-            </p>
-        </answer>
-    </exercise>
-
-    <exercise xml:id="auto_x6l72yaw">
-        <statement>
-            <p xml:id="auto_hzaz2dc2">
-                <ol>
-                    <li xml:id="auto_z51fx4h7">
-                        <p xml:id="auto_wf6d8r5m">
-                            Read from the tables the sine and the cosine of:
-                        </p>
-                        <p xml:id="auto_9fdw6fit">
-                            <ol xml:id="auto_7bwd8tfo" marker="(a)">
-                                <li xml:id="auto_zf77v3h3">
-                                    <p xml:id="auto_akssm4uw">
-                                        <m>45.46^\circ</m>
-                                    </p>
-                                </li>
-                                <li xml:id="auto_j5593ydf">
-                                    <p xml:id="auto_sz9nalpu">
-                                        <m>52^\circ\, 9^′</m>
-                                    </p>
-                                </li>
-                                <li xml:id="auto_5j04rbb2">
-                                    <p xml:id="auto_p5w07tct">
-                                        <m>25^\circ\, 45^′</m>
-                                    </p>
-                                </li>
-
-                            </ol>
-                    
-                        </p>
-                    </li>
-                </ol>
-            </p>
-        </statement>
-        <answer>
-            <p xml:id="auto_opr2u0ww">
-                <ol marker="(a)">
-                    <li xml:id="auto_e736kxda">
-                        <p xml:id="auto_s76kr9b5">
-                            <m>\sin 45.46^\circ = 0.7132</m>, <m>\cos 45.46^\circ = 0.7009</m>
-                        </p>
-                    </li>
-                    <li xml:id="auto_3tq1rna1">
-                        <p xml:id="auto_inmia4d0">
-                            <m>\sin 52^\circ 9^′ = 0.7880</m>, <m>\cos 52^\circ 9^′ = 0.6156</m>
-                        </p>
-                    </li>
-                    <li xml:id="auto_i8whl8ip">
-                        <p xml:id="auto_zp09u5dr">
-                            <m>\sin 25^\circ 45^′ = 0.4348</m>, <m>\cos 25^\circ 45^′ = 0.9005</m>
-                        </p>
-                    </li>
-                </ol>
-            </p>
-        </answer>
-    </exercise>
-
-    <exercise xml:id="auto_9dmb3ojn">
-        <statement>
-            <p xml:id="auto_t7dfzz2p">
-                <ol>
-                    <li xml:id="auto_30c0a3ob">
-                        <p xml:id="auto_zghkkr1z">
-                            The figure below shows an isosceles
-                            triangle in which <m>AB = AC = 9\, cm</m>.
-                            Angle <m>BAC</m> is <m>100^\circ</m>. Calculate the
-                            length of BC.
-                        </p>
-                        <image width="50%">
-                        <latex-image label="Triangle15">
-                            \begin{tikzpicture}[scale=1]
-                                
-                                % Define points
-                                \coordinate (A) at (3,4);
-                                \coordinate (B) at (0,0);
-                                \coordinate (C) at (6,0);
-
-                                % Draw the triangle
-                                \draw [very thick,fill=white] (B) node[left] {$B$} -- (A) node[above] {$A$} -- (C) node[right] {$C$} -- cycle;
-
-                                % Mark equal sides
-                                \draw [very thick] (1.4,2) -- ++(0.4,0.3);
-                                \draw [very thick](4.6,2) -- ++(-0.4,0.3);
-
-                                % Angle at A
-                                \draw (2.4,3.2) arc[start angle=210,end angle=330,radius=0.7];
-                                \node[below] at (3,2.9) { $100^\circ$};
-
-                                % Side label
-                                \node[right] at (4.7,2) { 9 cm};
-                            \end{tikzpicture}
-                        </latex-image>
-                            
-                        </image>
-
-                    </li>
-                    
-                </ol>
-            </p>
-        </statement>
-        <answer>
-            <p xml:id="auto_0ihocg6o">
-                <m>\text{The length BC}= 13.8\, \text{cm}</m>
-            </p>
-        </answer>
-    </exercise>
-
-    
-
-</exercises>
 
 </subsection>

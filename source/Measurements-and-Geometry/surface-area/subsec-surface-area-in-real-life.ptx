@@ -1,8 +1,312 @@
-<subsection xml:id="subsec-surface-area-in-real-life">
+<subsection xml:id="subsec-surface-area-in-real-life" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Surface Area in Real-Life</title>
+    <objectives component="outcomes">
+        <introduction>
+            <dl>
+                <li>
+                    <title>Strand</title>
+                    <p>
+                        2.0 Measurements and Geometry
+                    </p>
+                </li>
+                <li>
+                    <title>Sub-Strand</title>
+                    <p>
+                        2.7 Surface Area
+                    </p>
+                </li>
+            </dl>
+        </introduction>
+        <ul>
+            <li>Calculate the volume of prisms, pyramids, cones, frustums and spheres</li>
+            <li>Explore the use of the surface area and volume of solids in real-life situations</li>
+        </ul>
+    </objectives>
     <introduction>
         <p>
-            TODO
+            Surface area is a fundamental geometric concept with many practical uses. Engineers use surface area to calculate heat transfer and cooling rates; manufacturers rely on it for coating, painting, or material estimates; architects and landscapers use it when planning cladding, tiling, or irrigation coverage; and scientists use surface area to model reactions that occur at interfaces (e.g., catalysis or evaporation). Understanding how to compute surface area lets you accurately size materials, predict performance, and control costs across a wide range of real-world applications.
         </p>
     </introduction>
+
+    <activity>
+        <statement>
+            <ul>
+                <li>
+                    <p>
+                        Think about parts of your house or objects within your house you may want to paint.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        For example, this could include pillars, walls, boxes, the roof, ...
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        For each, determine what kind of shape it is and estimate its dimensions.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        For each, determine whether you would paint the entire object or only parts of it, and determine the surface area that you want to paint.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        If a small bucket of paint costs 500 ksh and is sufficient to cover 5 <m>m^2</m>, how much does it cost to paint the different objects you identified?
+                    </p>
+                </li>
+            </ul>
+        </statement>
+    </activity>
+
+
+    <example label="house-pillar-example">
+      <statement>
+        <p>
+            We want to paint a round pillar in our house.
+            It is 3 meters tall and has a radius of 15 cm.
+            If a small bucket of paint costs 500 ksh and is sufficient to cover 5 <m>m^2</m>, how much does it cost to paint the pillar?
+        </p> 
+       </statement> 
+        <solution>
+            <paragraphs><title>Standardize the Units</title>
+                <p>The height is given in meters, but the radius is in centimeters. To make our calculations consistent, we should convert the radius to meters:</p>
+                <ul>
+                <li><em>Height (<m>h</m>):</em> <m>3 \text{ m}</m></li>
+                <li><em>Radius (<m>r</m>):</em> <m>15 \text{ cm} = 0.15 \text{ m}</m></li>
+                </ul>
+            </paragraphs>
+            <paragraphs>
+                <title>Calculate the Lateral Surface Area</title>
+                <p>The formula for the curved surface area of a cylinder is <m>A = 2\pi rh</m>. This is essentially the circumference of the circle multiplied by the height.</p>
+                <md>
+                <mrow>A \amp = 2 \times \pi \times 0.15 \times 3</mrow>
+                <mrow> \amp = 0.9 \times \pi</mrow>
+                <mrow> \amp \approx 0.9 \times 3.14159</mrow>
+                <mrow> \amp \approx 2.827 \text{ m}^2</mrow>
+                </md>
+            </paragraphs>
+            <paragraphs>
+                <title>Determine the Number of Buckets Needed</title>
+                <p>One bucket of paint covers <m>5 \text{ m}^2</m>. We compare this to the area of our pillar:</p>
+                <ul>
+                <li><em>Area to paint:</em> <m>2.827 \text{ m}^2</m></li>
+                <li><em>Bucket coverage:</em> <m>5 \text{ m}^2</m></li>
+                </ul>
+                <p>Since the area of the pillar (<m>2.827 \text{ m}^2</m>) is less than the coverage of one bucket (<m>5 \text{ m}^2</m>), we only need to purchase <em>one bucket</em> of paint.</p>
+            </paragraphs>
+            <paragraphs>
+                <title>Calculate the Total Cost</title>
+                <p>Even though we won't use the entire bucket, hardware stores typically don't sell half-buckets! Therefore, we must buy one full bucket.</p>
+
+                <ul>
+                <li><em>Number of buckets:</em> <m>1</m></li>
+                <li><em>Price per bucket:</em> <m>500 \text{ ksh}</m></li>
+                <li><em>Total Cost:</em> <m>1 \times 500 = 500 \text{ ksh}</m></li>
+                </ul>
+            </paragraphs>
+        </solution> 
+    </example>
+
+    <example label="house-roof-example">
+      <statement>
+        <p>
+            For a house whose base is a square of <m>6 \times 6</m> meters
+            we want to construct a roof that has a pyramid shape.
+            The diagonals from the edge to the top are 5 meters long.
+            If a square meter of roofing material costs 2000 ksh,
+            how much does the roofing material cost that we need for the house?
+        </p>  
+        <image width="50%">
+            <shortdescription> Roof of a house </shortdescription>
+            <latex-image label="house-roof-example-image">
+                \tdplotsetmaincoords{60}{60}
+                \begin{tikzpicture}[tdplot_main_coords]
+                % Define Coordinates
+                % Base of the house (z = 0)
+                \coordinate (A) at (0,0,0);
+                \coordinate (B) at (8,0,0);
+                \coordinate (C) at (8,8,0);
+                \coordinate (D) at (0,8,0);
+                
+                % Top of the walls / Base of the roof (z = 6)
+                \coordinate (A1) at (0,0,6);
+                \coordinate (B1) at (8,0,6);
+                \coordinate (C1) at (8,8,6);
+                \coordinate (D1) at (0,8,6);
+                
+                % Peak of the pyramid roof
+                % To have side lengths of 6m with a base of 8m, 
+                % the height (h) must be: h = sqrt(6^2 - (sqrt(8^2+8^2)/2)^2) = sqrt(36 - 32) = 2
+                \coordinate (Peak) at (4,4,8);
+
+                % --- Draw Back (Hidden) Edges ---
+                \draw[dashed, gray] (A) -- (D);
+                \draw[dashed, gray] (D) -- (C);
+                \draw[dashed, gray] (D) -- (D1);
+                
+                % --- Draw Base and Walls ---
+                \draw[thick] (A) -- (B) -- (C);
+                \draw[thick] (A) -- (A1);
+                \draw[thick] (B) -- (B1);
+                \draw[thick] (C) -- (C1);
+                \draw[thick] (A1) -- (B1) -- (C1) -- (D1) -- cycle;
+                
+                % --- Draw Roof ---
+                \draw[thick, fill=blue!10, fill opacity=0.3] (A1) -- (B1) -- (Peak) -- cycle;
+                \draw[thick, fill=blue!20, fill opacity=0.3] (B1) -- (C1) -- (Peak) -- cycle;
+                \draw[thick, fill=blue!20, fill opacity=0.3] (C1) -- (D1) -- (Peak) -- cycle;
+                \draw[thick, fill=blue!20, fill opacity=0.3] (D1) -- (A1) -- (Peak) -- cycle;
+                \draw[thick] (A1) -- (Peak);
+                \draw[thick] (C1) -- (Peak);
+
+                % --- Labels for Dimensions ---
+                % Base Width
+                \draw[&lt;-&gt;, shift={(0,-0.7,0)}] (A) -- node[below] {6 m} (B);
+                
+                % Side length of the roof triangle
+                % Labeling the edge between B1 and the Peak
+                \path (B1) -- (Peak) node[midway, right, xshift=2pt] {5 m};
+                \path (C1) -- (Peak) node[midway, right, xshift=2pt] {5 m};
+
+                % Optional: Label the base of the triangle on the roof
+                \draw[&lt;-&gt;, blue, shift={(0,0,0.2)}] (B1) -- node[above] {6 m} (C1);
+                \end{tikzpicture}
+            </latex-image>
+        </image> 
+       </statement> 
+        <solution>
+        <paragraphs>
+            
+            <title>Identify the Triangle Dimensions</title>
+            <p>Each of the four triangular sides of the roof has the following side lengths:</p>
+            <ul>
+                <li><em>Side <m>a</m>:</em> <m>5 \text{ m}</m></li>
+                <li><em>Side <m>b</m>:</em> <m>5 \text{ m}</m></li>
+                <li><em>Side <m>c</m> (Base):</em> <m>6 \text{ m}</m></li>
+            </ul>
+        </paragraphs>
+
+        <paragraphs>
+            <title>Calculate the Area Using Heron's Formula</title>
+            <p>Heron's Formula allows us to find the area of a triangle when we know all three sides. First, we find the <em>semi-perimeter</em> (<m>s</m>):</p>
+
+            <ul>
+            <li><m>s = \frac{a + b + c}{2} = \frac{5 + 5 + 6}{2} = \frac{16}{2} = 8 \text{ m}</m></li>
+            </ul>
+
+            <p>Now, we use the Area formula:</p>
+            <md>
+                <mrow>\text{Area} \amp = \sqrt{s(s-a)(s-b)(s-c)}</mrow>
+                <mrow>            \amp = \sqrt{8(8-5)(8-5)(8-6)}</mrow>
+                <mrow>            \amp = \sqrt{8 \times 3 \times 3 \times 2}</mrow>
+                <mrow>            \amp = \sqrt{144} = 12 \text{ m}^2</mrow>
+            </md>
+        </paragraphs>
+
+        <paragraphs>
+            <title>Total Roofing Material Needed</title>
+            <p>Since the roof has <em>four identical triangles</em>, we multiply the area of one triangle by four:</p>
+
+            <ul>
+            <li><em>Total Area:</em> <m>12 \times 4 = 48 \text{ m}^2</m></li>
+            </ul>
+        </paragraphs>
+
+        <paragraphs>
+            <title>Calculate the Total Cost</title>
+            <p>We multiply the total area by the price of <m>2000 \text{ ksh}</m> per square meter:</p>
+
+            <p><em>Total Cost:</em> <m>48 \times 2000 = 96000 \text{ ksh}</m></p>
+        </paragraphs>
+        </solution> 
+    </example>  
+
+    <exercises xml:id="exercises-surface-area-real-life">
+        <title>Exercises</title>
+
+        <exercise xml:id="ex-leather-ball">
+            <statement>
+                <p>
+                    A spherical ball has radius <m>15	\text{ cm}</m>. How much leather is needed to cover the entire surface of the ball? If leather costs <m>1200	\text{ ksh}</m> per square metre, estimate the cost of the leather required.
+                </p>
+            </statement>
+            <answer>
+                <m>0.09\pi	\text{ m}^2 	\text{ (approximately }0.283	\text{ m}^2)</m>
+            </answer>
+            <answer>
+                <m>\text{Cost }= 108\pi\text{ ksh (approximately }339.3\text{ ksh)}</m>
+            </answer>
+            <solution>
+                <p>
+                    Convert radius to metres: <m>r = 15	\text{ cm} = 0.15	\text{ m}.</m> Surface area of a sphere is <m>A = 4\pi r^2.</m>
+                </p>
+                <md>
+                    <mrow>A \amp = 4\pi (0.15)^2 = 4\pi(0.0225) = 0.09\pi\text{ m}^2</mrow>
+                    <mrow>\amp \approx 0.09 \times 3.14159 \approx 0.283\text{ m}^2</mrow>
+                </md>
+                <p>
+                    Cost: <m>0.09\pi \times 1200 = 108\pi\text{ ksh} \approx 339.3\text{ ksh}.</m>
+                </p>
+            </solution>
+        </exercise>
+
+        <exercise xml:id="ex-gift-wrap-box">
+            <statement>
+                <p>
+                    A gift box is a rectangular prism with dimensions <m>40	\text{ cm} \times 30	\text{ cm} \times 25	\text{ cm}.</m> How much wrapping paper (in square metres) is required to cover the entire box (including top and bottom)?
+                </p>
+            </statement>
+            <answer>
+                <m>0.59	\text{ m}^2</m>
+            </answer>
+            <solution>
+                <p>
+                    Convert dimensions to metres: <m>l=0.40\text{ m},\; w=0.30\text{ m},\; h=0.25\text{ m}.</m> Total surface area of a cuboid is <m>2(lw+lh+wh).</m>
+                </p>
+                <md>
+                    <mrow>\text{SA} \amp = 2(0.40\times0.30 + 0.40\times0.25 + 0.30\times0.25)</mrow>
+                    <mrow>\amp = 2(0.12 + 0.10 + 0.075) = 2(0.295) = 0.59\text{ m}^2</mrow>
+                </md>
+            </solution>
+        </exercise>
+
+    </exercises>
+
+    <insight>
+        <p>
+            Understanding surface area helps solve practical problems involving coverage, cost and material estimates.
+        </p>
+        <p>
+            <ol marker="(a)">
+                <li>
+                    <p>
+                        Surface area calculations determine how much material is needed to cover an object (paint, fabric, roofing, cladding).
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Always use consistent units before computing areas; convert measurements when necessary.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Recognise and apply the correct formula for common shapes (prisms, cylinders, cones, pyramids, spheres) and decompose complex objects into simpler parts.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Distinguish between lateral and total surface area depending on whether ends/bases are included in the coverage.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Surface area links directly to cost and planning; accurate calculations reduce waste and help estimate expenses.
+                    </p>
+                </li>
+            </ol>
+        </p>
+    </insight>
+
 </subsection>
