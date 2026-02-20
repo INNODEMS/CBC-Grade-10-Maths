@@ -23,7 +23,205 @@
     </objectives>
     <introduction>
         <p>
-            TODO
+            In everyday life students there are  many situations where they need to
+            estimate the area of a piece of land, a roof, a classroom floor or the
+            cover of a water tank.
+        </p>
+        <p>
+            In this section we learn how to apply area formulas for triangles, quadrilaterals, regular polygons and irregular polygons. 
         </p>
     </introduction>
+
+    <!-- EXAMPLE: triangular plot -->
+    <example xml:id="ex-triangular-plot">
+        <title>Area of a Triangular Plot</title>
+        <statement>
+            <p>
+                A farmer near Eldoret has a triangular plot of land. Two sides measure
+                <m>50\,\text{m}</m> and <m>80\,\text{m}</m>, and the angle between them is
+                <m>60^\circ</m>. Estimate the area of the plot.
+            </p>
+        </statement>
+        <solution>
+            <p>
+                Use the formula for the area of a triangle when two sides and the
+                included angle are known:
+            </p>
+            <md>
+                <mrow>A \amp= \frac{1}{2} ab \sin C</mrow>
+            </md>
+            <p>
+                Substituting the given values:
+            </p>
+            <md>
+                <mrow>A \amp= \frac{1}{2} \times 50 \times 80 \times \sin 60^\circ</mrow>
+                <mrow>\amp= 2000 \times \frac{\sqrt3}{2}</mrow>
+                <mrow>\amp= 1000\sqrt3 \approx 1732\,\text{m}^2</mrow>
+            </md>
+            <p>
+                The triangular plot has area approximately <m>1732\,\text{m}^2</m>.
+            </p>
+        </solution>
+    </example>
+
+    <!-- EXAMPLE: surveyor field -->
+    <example xml:id="ex-survey-field">
+        <title>Surveying an Irregular Field</title>
+        <statement>
+            <p>
+                A surveyor in Kisumu is measuring a piece of land that is not quite a
+                rectangle, as shown below.  He records the lengths of the four sides:
+                <m>AB=100\,\text{m}, BC=80\,\text{m},
+                CD=120\,\text{m}, DA=90\,\text{m}</m>, and he also measures the
+                diagonal <m>AC=150\,\text{m}</m>.  The angle between <m>AB</m> and
+                <m>AC</m> at point A is <m>35^\circ</m>, and the angle between <m>AC</m>
+                and <m>CD</m> at point C is <m>60^\circ</m>.  Estimate the total area
+                of the field by splitting it into two triangles.
+            </p>
+            <image width="55%">
+            <latex-image label="ex-survey-field-diag">
+                \begin{tikzpicture}[scale=0.6]
+                    % coordinates for quadrilateral
+                    \coordinate (A) at (0,0);
+                    \coordinate (B) at (5.5,0);
+                    \coordinate (C) at (6,2.5);
+                    \coordinate (D) at (1,3);
+                    % draw sides
+                    \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
+                    % diagonal
+                    \draw[thick,dashed] (A) -- (C);
+                    % point labels
+                    \node[below left] at (A) {A};
+                    \node[below right] at (B) {B};
+                    \node[above right] at (C) {C};
+                    \node[above left] at (D) {D};
+                    % side lengths
+                    \node[below] at ($(A)!0.5!(B)$) {100 m};
+                    \node[right] at ($(B)!0.5!(C)$) {80 m};
+                    \node[above] at ($(C)!0.5!(D)$) {120 m};
+                    \node[left] at ($(D)!0.5!(A)$) {90 m};
+                    % diagonal length
+                    \node[above left] at ($(A)!0.5!(C)$) {150 m};
+                    % angle markers
+                    \draw pic[draw=black,angle radius=1.2cm,"$35^\circ$"] {angle=B--A--C};
+                    \draw pic[draw=black,angle radius=1.2cm,"$60^\circ$"] {angle=D--C--A};
+                \end{tikzpicture}
+            </latex-image>
+            </image>
+        </statement>
+        <solution>
+            <p>
+                Split the field along the diagonal <m>AC</m>, giving triangles
+                <m>ABC</m> and <m>ACD</m>.  We find each area using the formula
+                <m>\frac12 ab\sin C</m> and then add them.
+            </p>
+            <p>
+                For triangle <m>ABC</m>:
+            </p>
+            <md>
+                <mrow>A_{ABC} \amp= \frac12 \times 100 \times 150 \times \sin 35^\circ</mrow>
+                <mrow>\amp\approx 7500 \times 0.574 \approx 4305\,\text{m}^2</mrow>
+            </md>
+            <p>
+                For triangle <m>ACD</m>:
+            </p>
+            <md>
+                <mrow>A_{ACD} \amp= \frac12 \times 150 \times 120 \times \sin 60^\circ</mrow>
+                <mrow>\amp= 9000 \times \frac{\sqrt3}{2} \approx 7794\,\text{m}^2</mrow>
+            </md>
+            <p>
+                Adding the two areas gives a total of about
+                <m>4305 + 7794 \approx 12\,099\,\text{m}^2</m>, so the irregular field covers
+                roughly <m>12\,100\,\text{m}^2</m>.
+            </p>
+        </solution>
+    </example>
+
+    <!-- EXAMPLE: pavilion and forecourt -->
+    <example xml:id="ex-pavilion-forecourt">
+        <title>Area of a Pavilion and Forecourt</title>
+        <statement>
+            <p>
+                A village school in Kilifi wants to pave a new outdoor area consisting
+                of a regular hexagonal pavilion attached to a triangular forecourt.
+                The hexagon will have sides of <m>6\,\text{m}</m> and the forecourt is
+                a triangle with two sides <m>6\,\text{m}</m>, meeting the hexagon at an angle of <m>60^\circ</m> as shown below.
+            </p>
+            <image width="60%">
+            <latex-image label="ex-pavilion-forecourt-diag">
+                \begin{tikzpicture}[scale=0.4]
+                    % regular hexagon centre (0,0) radius 6
+                    \foreach \i in {0,60,...,300} {
+                        \coordinate (H\i) at (\i:6);
+                    }
+                    \draw[thick] (H0) -- (H60) -- (H120) -- (H180) -- (H240) -- (H300) -- cycle;
+                    % triangle attached at H0
+                    \coordinate (A) at (H60);
+                    \coordinate (B) at ($(A)+(120:6)$);
+                    \coordinate (C) at (H120);
+                    \draw[thick] (A) -- (B) -- (C) -- cycle;
+                    % labels
+                    \node[above right] at (A) {A};
+                    \node[above] at (B) {B};
+                    \node[above left] at (C) {C};
+                    % side lengths hexagon (optional omitted for clarity)
+                    \node[above right] at ($(H0)!0.5!(H60)$) {6 m};
+                    % triangle sides
+                    \node[above right] at ($(A)!0.5!(B)$) {6 m};
+                    \node[below] at ($(A)!0.5!(C)$) {6 m};
+                    % angle marker at A
+                    \draw pic[draw=black,angle radius=1cm,"$60^\circ$"] {angle=B--A--C};
+                \end{tikzpicture}
+            </latex-image>
+            </image>
+            <p>
+                Estimate the total area that must be tiled, and then find the cost if
+                tiles are <m>5\,500</m> Kenyan shillings per square metre. Give your answer rounded to the nearest shilling.
+            </p>
+        </statement>
+        <solution>
+            <p>
+                The total area is the sum of the hexagon and triangle areas.
+            </p>
+            <p>
+                For the hexagon, divide it into 6 identical triangles by joining the
+                centre to each corner.  Each triangle has two sides of length
+                <m>6\,\text{m}</m> and the angle between them at the centre is
+                <m>360^\circ/6 = 60^\circ </m>.
+            </p>
+            <p>
+                Use the sine formula <m>A=\tfrac12ab\sin C</m> for one such triangle:
+            </p>
+            <md>
+                <mrow>A_{small} \amp= \frac12 \times 6 \times 6 \times \sin 60^\circ</mrow>
+                <mrow>\amp= 18 \times \frac{\sqrt3}{2} = 9\sqrt3\, \text{m}^2</mrow>
+            </md>
+            <p>
+                Multiplying by 6 gives
+            </p>
+            <md>
+                <mrow>A_{hex} \amp= 6 \times 9\sqrt3 = 54\sqrt3\,\text{m}^2</mrow>
+            </md>
+            <p>
+                Triangle: the forecourt is a triangle with sides 6 m and 6m and an
+                included angle of 60°.  We apply the same sine formula
+                <m>A=\tfrac12ab\sin C</m> to find its area:
+            </p>
+            <md>
+                <mrow>A_{tri} \amp= \frac12 \times 6 \times 6 \times \sin 60^\circ</mrow>
+                <mrow>\amp= 18 \times \frac{\sqrt3}{2} = 9\sqrt3\,\text{m}^2</mrow>
+            </md>
+            <p>
+                Total area is
+                <m>54\sqrt3 + 9\sqrt3 = 63\sqrt3 \approx 109.1\,\text{m}^2</m>.  At <m>5,500\,\text{KSh/m}^2</m> the paving will cost approximately
+            </p>
+            <md>
+                <mrow>\text{Cost} \amp= 63\sqrt3 \times 5\,500 \approx 600\,156\,\text{KSh}</mrow>
+            </md>
+            <p>
+                So the school should budget <m>600\,156</m> Kenyan shillings.
+            </p>
+        </solution>
+    </example>
+
 </subsection>
