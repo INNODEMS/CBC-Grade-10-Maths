@@ -1,5 +1,26 @@
 <subsubsection xml:id="subsubsec-logarithms-in-real-life" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Logarithms in Real-Life</title>
+    <objectives component="outcomes">
+        <introduction>
+            <dl>
+                <li>
+                    <title>Strand</title>
+                    <p>
+                        1.0 Numbers and Algebra
+                    </p>
+                </li>
+                <li>
+                    <title>Sub-Strand</title>
+                    <p>
+                        1.2 Indices and Logarithms
+                    </p>
+                </li>
+            </dl>
+        </introduction>
+        <ul>
+            <li>Appreciate the use of indices and common logarithms in mathematical computations</li>
+        </ul>
+    </objectives>
     <axiom component="resources">
         <!-- Link to blurb -->
         <xi:include href="../../resources-blurb-lesson.ptx" />
@@ -16,41 +37,221 @@
         </sbsgroup>
     </axiom>
 
-
-
-    <introduction>
-        <p xml:id="auto_qeozfjlh">
-                At individual level, go explore how logarithms are used in different fields such as engineering, finance, and science.
+    <activity xml:id="auto_anchor_log_real">
+        <title>Exploring Logarithms in Different Fields</title>
+        <statement>
+            <p>
+                At an individual level, explore how logarithms are used in different fields, such as:
             </p>
-            <p xml:id="auto_petpr27o">
-                <ol xml:id="auto_ijv2xa8d">
-                    <li xml:id="auto_2r2ul28k">
-                        <p xml:id="auto_2u1okhe3">
-                            Research and describe two real-life applications of logarithms. Present your findings to the class.
+            <ul>
+                <li><p>Engineering: Signal processing, decibel measurements, circuit analysis</p></li>
+                <li><p>Finance: Compound interest, investment growth, loan calculations</p></li>
+                <li><p>Science: pH scale in chemistry, radioactive decay, population biology</p></li>
+                <li><p>Geology: Richter scale for earthquake measurement</p></li>
+                <li><p>Astronomy: Stellar magnitude and brightness</p></li>
+                <li><p>Medicine: Drug concentration decay in the body</p></li>
+            </ul>
+            <p>Individual Research Task:</p>
+            <ol>
+                <li><p>Choose one field that interests you.</p></li>
+                <li><p>Find at least one specific example of how logarithms are used.</p></li>
+                <li><p>Write down the formula or application.</p></li>
+                <li><p>Be prepared to share with your group.</p></li>
+            </ol>
+            <p>Share your findings with your group and discuss:</p>
+            <ul>
+                <li><p>What common patterns do you see across different applications?</p></li>
+                <li><p>Why do you think logarithms are useful for these applications?</p></li>
+                <li><p>How do logarithms help us work with very large or very small numbers?</p></li>
+            </ul>
+        </statement>
+    </activity>
+
+    <insight>
+        <title>Why Do We Use Logarithms in Real Life?</title>
+        <statement>
+            <p>Logarithms help us:</p>
+            <ul>
+                <li>Compress large ranges of numbers into manageable scales</li>
+                <li>Solve exponential equations (find unknown exponents)</li>
+                <li>Model phenomena that grow or decay exponentially</li>
+                <li>Simplify multiplication and division into addition and subtraction</li>
+            </ul>
+            <paragraphs>
+                <title>Key Real-Life Applications</title>
+
+                <table>
+                    <row>
+                        <cell header="yes">Application</cell><cell header="yes">Formula</cell><cell header="yes">What It Measures</cell>
+                    </row>
+                    <row>
+                        <cell>pH Scale (Chemistry)</cell><cell><m>pH = -\log [H^+]</m></cell><cell>Acidity/alkalinity</cell>
+                    </row>
+                    <row>
+                        <cell>Richter Scale (Geology)</cell><cell><m>R = \log (I/I_0)</m></cell><cell>Earthquake intensity</cell>
+                    </row>
+                    <row>
+                        <cell>Decibel Scale (Sound)</cell><cell><m>dB = 10\log (I/I_0)</m></cell><cell>Sound intensity</cell>
+                    </row>
+                    <row>
+                        <cell>Population Growth</cell><cell><m>P = P_0 e^{rt}</m></cell><cell>Exponential population change</cell>
+                    </row>
+                </table>
+            </paragraphs>
+            
+            <paragraphs>
+            <title>Important Properties for Applications</title>
+            <ul>
+                <li><m>\log(ab) = \log a + \log b</m> -  useful for compound calculations</li>
+                <li><m>\log(a/b) = \log a - \log b</m> - useful for ratio comparisons</li>
+                <li><m>\log(a^n) = n\log a</m> - useful for exponential problems</li>
+                <li><m>\log(\sqrt{a}) = \tfrac12\log a</m> - useful for root calculations</li>
+            </ul>
+            <p><em>Addressing misconceptions:</em> Remember, the negative sign in the pH formula is part of its definition, not the answer; each unit increase on the Richter scale represents a tenfold increase in intensity.</p>
+            </paragraphs>
+
+        </statement>
+    </insight>
+
+
+    <example xml:id="ex-population-growth">
+        <statement>
+            <p>A country's population grows by 5% each year. So if the initial population is <m>P_0</m>, then after <m>t</m> years the population is <m>P=P_0 (1.05)^{t}</m>. How long does it take for the population to double?</p>
+        </statement>
+        <solution>
+            <p>For doubling <m>2P_0=P_0 e^{rt}</m> so <m>2=e^{rt}</m> giving <m>\ln 2 = rt</m> and <m>t=\frac{\ln2}{0.05}\approx 13.86\text{ years}</m>. (At 5% the doubling time is <m>\approx 14</m> years; to double in 10 years <m>r\approx6.93\%</m>.)</p>
+        </solution>
+    </example>
+
+    <example xml:id="ex-carbon-dating">
+        <title>Carbon Dating and Half-Life</title>
+        <statement>
+            <p>
+                Carbon-14 dating is a method for estimating the age of formerly living things. While alive, organisms take in Carbon-14; after death the Carbon-14 decays and is not replaced, so the remaining fraction indicates how long it has been since death.
+            </p>
+            <p>
+                If the amount of carbon at the beginning is <m>N_0</m>, after <m>t</m> years the amount remaining is <m>N = N_0\left(\tfrac{1}{2}\right)^{t/T_{1/2}}</m>, where <m>T_{1/2}</m> is the half-life. For Carbon-14, <m>T_{1/2}=5730</m> years. In other words, every <m>T_{1/2}=5730</m> years the amount of Carbon-14 in the sample decreases by one half.
+            </p>
+            <p>
+                A sample of human bones contains 12.5% of the amount of Carbon-14 in the bones of a living human being. Estimate the age of the sample.
+            </p>
+        </statement>
+        <solution>
+            <p>
+                As 12.5% remain, we have <m>N=0.125N_0</m>. Using the decay formula, we get <m>0.125N_0=N_0\left(\tfrac{1}{2}\right)^{t/5730}</m>. Dividing by <m>N_0</m>, we have <m>0.125=\left(\tfrac{1}{2}\right)^{t/5730}</m>. 
+            </p>
+            <p>    
+                Take log with base 2 on both sides: <m>\log_2 0.125=\tfrac{t}{5730}\log_2(1/2)</m>, so
+                <m>t=5730\dfrac{\log_2 0.125}{\log_2 (1/2)}</m>. Since <m>\log_2 0.125=-3</m> and <m>\log_2 (1/2)=-1</m>, we get <m>t=5730\times3=17190</m> years.
+            </p>
+        </solution>
+    </example>
+
+    <example xml:id="ex-pH-calculation">
+        <statement>
+            <p>The pH scale in chemistry is based on logarithms. Given that <m>pH = -\log [H^+]</m>, determine the pH of a solution where <m>[H^+] = 3.2\times 10^{-4}</m>.</p>
+        </statement>
+        <solution>
+            <p>pH = -\log(3.2\times 10^{-4}) = -(\log 3.2 + \log 10^{-4}) = -(0.5051 - 4) = 3.49 (acidic solution)</p>
+        </solution>
+    </example>
+
+    <example xml:id="ex-richter-scale">
+        <statement>
+            <p>The Richter scale measures earthquake intensity using <m>R = \log(I/I_0)</m>. If an earthquake is 1000 times more intense than the reference, what is its magnitude?</p>
+        </statement>
+        <solution>
+            <p>Here <m>I/I_0 = 1000 = 10^3</m>, so <m>R = \log 10^3 = 3</m>. Magnitude = 3.0.</p>
+        </solution>
+    </example>
+
+    <exercises xml:id="exercises-log-real-exit">
+        <exercise xml:id="auto_algae_double">
+            <statement>
+            <p xml:id="auto_algae_p">
+                Assume the number of algae in Lake Victoria doubles every week. 
+                <ol>
+                    <li>
+                        <p>
+                            If today Lake Victoria is one quarter covered in algae, how long does it take until it is fully covered?                           
                         </p>
                     </li>
-                    <li xml:id="auto_15j729gh">
-                        <p xml:id="auto_b5z43e5g">
-                            The pH scale in chemistry is based on logarithms. Given that pH is defined as <m>\text{pH} = -\log[H^+]</m>, determine the pH of a solution where <m>[H^+] = 3.2 \times 10^{-4}</m>.
-                        </p>
-                    </li>
-                    <li xml:id="auto_4phrtd91">
-                        <p xml:id="auto_oemfeufs">
-                            The Richter scale measures earthquake intensity using the formula <m>R = \log \left( \frac{I}{I_0} \right)</m>, where <m>I</m> is the intensity of the earthquake and <m>I_0</m> is the reference intensity. If an earthquake is 1000 times more intense than the reference, what is its magnitude on the Richter scale?
-                        </p>
-                    </li>
-                    <li xml:id="auto_jwqgxqny">
-                        <p xml:id="auto_9rohf3if">
-                            Use logarithm tables to evaluate <m> \sqrt{ \frac{(6.28 \times 42.5)}{9.81} }</m>.
-                        </p>
-                    </li>
-                    <li xml:id="auto_faeie1yd">
-                        <p xml:id="auto_d72i5kt0">
-                            A country's population grows exponentially according to the formula <m>P = P_0 e^{rt}</m>, where <m>P_0</m> is the initial population, <m>r</m> is the growth rate, and <m>t</m> is time in years. Solve for <m>t</m> if a population doubles in <m>10</m> years at a growth rate of <m>5\%</m> per year.
+                    <li>
+                        <p>
+                            If today Lake Victoria is 1% covered in algae, how long does it take until it is fully covered?                           
                         </p>
                     </li>
                 </ol>
             </p>
-    </introduction>
-    
+            </statement>
+            <solution>
+                <ol>
+                    <li>
+                        <p>If at the beginning X% are covered, after <m>n</m> weeks the coverage is <m>X \cdot 2^n</m>. So we want to find <m>n</m> such that <m>X \cdot 2^n = 100\%</m>, i.e., <m>2^n = \frac{100}{X}</m>. If <m>X=25\%</m>, then <m>2^n = 4</m>, so <m>n= \log_2 4 = 2</m> weeks.</p>
+                        <p>(We can also see this directly: start at 1/4. After 1 week → 1/2; after 2 weeks → 1 (fully covered). So it takes 2 weeks.)</p>
+                    </li>
+                    <li>
+                        <p>
+                            If <m>X=1\%</m>, then <m>2^n = 100</m>, so <m>n= \log_2 100</m>. Since <m>\log_2 100 = \frac{\ln 100}{\ln 2} \approx \frac{4.605}{0.693} \approx 6.64</m>, it takes approximately 6.64 weeks.                  
+                        </p>
+                    </li>
+                </ol>
+            </solution>
+            <answer>
+                <p>2 weeks</p>
+            </answer>
+            <answer>
+                <p>Approximately 6.64 weeks</p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="ex-investment-logarithm">
+            <statement>
+                <p>
+                    You put 10000 ksh into an account that grows by 6% each year. How many years will it take for the money to double to 20000 ksh if the interest is added once per year?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Each year, the new amount <m>A</m> of money is the old amount <m>P + 0.06 P = P(1 + 0.06) = P(1.06)</m>. So after <m>t</m> years, <m>A = P(1.06)^t</m>. Put <m>A=20000</m>, <m>P=10000</m>. So
+                    <m>20000 = 10000(1.06)^t</m> which simplifies to <m>2 = 1.06^t</m>.
+                    Take natural logs of both sides: <m>\ln 2 = t\ln 1.06</m>, therefore
+                    <m>t = \dfrac{\ln 2}{\ln 1.06} \approx \dfrac{0.6931}{0.05827} \approx 11.9\ \text{years}.</m>
+                    In plain terms: it takes about 12 years for the investment to double.
+                </p>
+            </solution>
+            <answer>
+                <p>About 11.9 years (≈ 12 years)</p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="auto_newdecibel">
+            <statement>
+            <p xml:id="auto_newdecibel_p">
+                The sound level in decibels is given by <m>L = 10 \,\log_{10}\left(\frac{I}{I_0}\right)</m>, where <m>I_0 = 10^{-12}\,\text{W/m}^2</m> is a reference intensity. Calculate the decibel level of a sound whose intensity is <m>1.0 \times 10^{-3}\,\text{W/m}^2</m>.
+            </p>
+            </statement>
+            <solution>
+                <p>Compute the ratio: <m>I/I_0 = 1.0\times10^{-3}/10^{-12} = 10^{9}.</m> Then <m>L = 10\log_{10}(10^{9}) = 10\times9 = 90\text{ dB}.</m></p>
+            </solution>
+            <answer>
+                <p>90 dB</p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="ex-newlogarithmicRate">
+            <statement>
+            <p xml:id="ex-newlogarithmicRate_p">
+                The brightness of a star is measured on a logarithmic magnitude scale where a difference of <m>5</m> magnitudes corresponds to a brightness ratio of <m>100</m>. If one star is <m>250</m> times brighter than another, what is the difference in magnitudes between them? (Use logarithms.)
+            </p>
+            </statement>
+            <solution>
+                <p>If brightness ratio <m>R = 100^{\Delta m/5}</m>, then <m>250 = 100^{\Delta m/5}</m>. Take base-10 logs: <m>\log_{10}250 = (\Delta m/5)\log_{10}100 = 2(\Delta m/5)</m>, so <m>\Delta m = \tfrac{5}{2}\log_{10}250\</m>. Using <m>\log_{10}250\approx2.39794</m>, <m>\Delta m\approx(5/2)\times2.39794\approx5.9949\approx6.0.</m></p>
+            </solution>
+            <answer>
+                <p>Approximately 6.0 magnitudes</p>
+            </answer>
+        </exercise>
+    </exercises>
+
 </subsubsection>

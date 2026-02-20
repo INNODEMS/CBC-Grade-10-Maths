@@ -25,7 +25,7 @@ def process_content(content):
         # <tag           : Matches the start of the tag
         # (?![^>]*label=): Negative lookahead; ensures 'label=' isn't already inside the tag
         # (?=[ \t>])     : Ensures the tag name is followed by a space, tab, or closing bracket
-        pattern = rf'<{tag}(?![^>]*xml:id=)(?=[ \t>])'
+        pattern = rf'<{tag}(?![^>]*xml:id=)(?![^>]*label=)(?=[ \t>])'
         
         def replace_func(match):
             return f'<{tag} xml:id="{generate_label()}"'

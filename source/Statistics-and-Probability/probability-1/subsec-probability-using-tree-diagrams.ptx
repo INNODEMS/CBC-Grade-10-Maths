@@ -1,12 +1,932 @@
 <subsection xml:id="subsec-probability-using-tree-diagrams" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Probability Using Tree Diagrams</title>
-    <introduction>
+    <objectives component="outcomes">
+        <introduction>
+            <dl>
+                <li>
+                    <title>Strand</title>
+                    <p>
+                        3.0 Statistics and Probability
+                    </p>
+                </li>
+                <li>
+                    <title>Sub-Strand</title>
+                    <p>
+                        3.2 Probability 1
+                    </p>
+                </li>
+            </dl>
+        </introduction>
+        <ul>
+            <li>Determine the probability of independent events using tree diagrams</li>
+        </ul>
+    </objectives>
+    <axiom component="resources">
+        <!-- Link to blurb -->
+        <xi:include href="../../resources-blurb-lesson.ptx" />
+
+        <sbsgroup widths="45% 45%" margins="2% 2%">
+            <sidebyside>
+                <p>
+                    <dataurl source="lesson_plans/statistics-and-probability/probability-1/probability-using-tree-diagrams.pdf"> Lesson Plan </dataurl>
+                </p>
+                <p>
+                    <dataurl source="lesson_plans/statistics-and-probability/probability-1/step-by-step-guide_probability-using-tree-diagrams.pdf"> Step-by-Step Guide </dataurl>
+                </p>
+            </sidebyside>
+        </sbsgroup>
+    </axiom>
+
+
+
+    <activity>
+        <introduction>
+            <p>
+                <term>Work in pairs</term>
+            </p>
+            <p>
+                A bag contains <m>5</m> green balls and <m>3</m> red balls, making <m>8</m> balls in total. You will pick three balls one at a time without putting any back.
+            </p>
+        </introduction>
+        <task>
+            <statement>
+                <p>
+                    Draw a starting point and create two branches to show the two possible colours that could be selected first. Label each branch with the probability of selecting that colour based on the number of balls in the bag at the beginning.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    From the branch that represents selecting a red ball first, draw two new branches to show the possible outcomes for the second pick. Think carefully about how the total number of balls and the number of red balls have changed after removing one red ball, and label the branches using the new probabilities.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    From the branch that represents selecting red on both the first and second picks, draw the final set of branches for the third pick. Determine how many balls remain in total and how many red balls are still available, and use this information to label the branches correctly.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    Trace the path that represents picking a red ball in all three draws. Describe what happens to the numerators and denominators of the probabilities as you move along this path and explain why these changes occur.
+                </p>
+            </statement>
+        </task>
+        <task>
+            <statement>
+                <p>
+                    Use the rule for finding the probability of successive events by multiplying the probabilities along a single branch. Write out the multiplication clearly and simplify your result.
+                </p>
+            </statement>
+        </task>
+    </activity>
+
+    <insight xml:id="insight-tree-rules">
         <p>
-            TODO
+            A <term>Probability Tree Diagram</term> is a visual way to organize and calculate probabilities for multiple events happening one after another. 
         </p>
-    </introduction>
+        <p>
+            Here are the golden rules for using tree diagrams:
+            <ul>
+                <li>
+                    <p>
+                        <alert>Branches from the same point add to <m>1</m>:</alert> The probabilities of all branches originating from a single node must always add up to exactly <m>1</m> (or <m>100\%</m>), because they represent all possible outcomes for that specific event.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <alert>Multiply along the branches (The "AND" Rule):</alert> To find the probability of a sequence of events (e.g., Event A <term>and</term> then Event B), you multiply the probabilities along the path.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <alert>Add down the columns (The "OR" Rule):</alert> To find the overall probability of different paths that lead to a successful outcome (e.g., Path 1 <term>or</term> Path 2), you add their final probabilities together.
+                    </p>
+                </li>
+            </ul>
+        </p>
+    </insight>
 
-    <xi:include href="subsubsec-binary-tree-diagrams.ptx" />
+    <example xml:id="example-independent-tree">
+        <statement>
+            <p>
+                A fair coin is tossed twice. Draw a tree diagram to represent this information and use it to find the probability of getting two Heads.
+            </p>
+        </statement>
+        <solution>
+            <p>
+                The events are independent because the result of the first toss does not affect the second toss. The probability of getting a Head (H) or Tail (T) is always <m>0.5</m>.
+            </p>
+            <image xml:id="tikz-coin-toss">
+                <latex-image>
+                    \begin{tikzpicture}[grow=right, sloped, level 1/.style={sibling distance=3cm, level distance=3.5cm}, level 2/.style={sibling distance=1.5cm, level distance=3.5cm}]
+                      \node {}
+                        child { node {Tail (T)}
+                          child { node {Tail (T,T)} edge from parent node[below] {$0.5$} }
+                          child { node {Head (T,H)} edge from parent node[above] {$0.5$} }
+                          edge from parent node[below] {$0.5$}
+                        }
+                        child { node {Head (H)}
+                          child { node {Tail (H,T)} edge from parent node[below] {$0.5$} }
+                          child { node {Head (H,H)} edge from parent node[above] {$0.5$} }
+                          edge from parent node[above] {$0.5$}
+                        };
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+            <p>
+                To find the probability of getting two Heads (H,H), we trace the top path and multiply the probabilities along the branches:
+            </p>
+            <p>
+                <m>P(H \text{ and } H) = 0.5 \times 0.5 = 0.25</m>
+            </p>
+        </solution>
+    </example>
 
-    <xi:include href="subsubsec-larger-tree-diagrams.ptx" />
+    <example xml:id="example-dependent-tree">
+        <statement>
+            <p>
+                A bag contains <m>5</m> Red marbles and <m>3</m> Blue marbles. Two marbles are drawn from a bag one after the other at random <term>without replacement</term>. Draw a tree diagram and find the probability of drawing two marbles of the same color.
+            </p>
+        </statement>
+        <solution>
+            <p>
+                Because the marbles are not replaced, the total number of marbles drops from <m>8</m> to <m>7</m> for the second draw.
+            </p>
+            <image xml:id="tikz-marbles">
+                <latex-image>
+                    \begin{tikzpicture}[grow=right, sloped, level 1/.style={sibling distance=4cm, level distance=3.5cm}, level 2/.style={sibling distance=2cm, level distance=3.5cm}]
+                      \node {}
+                        child { node {Blue}
+                          child { node {Blue (B,B)} edge from parent node[below] {$\frac{2}{7}$} }
+                          child { node {Red (B,R)} edge from parent node[above] {$\frac{5}{7}$} }
+                          edge from parent node[below] {$\frac{3}{8}$}
+                        }
+                        child { node {Red}
+                          child { node {Blue (R,B)} edge from parent node[below] {$\frac{3}{7}$} }
+                          child { node {Red (R,R)} edge from parent node[above] {$\frac{4}{7}$} }
+                          edge from parent node[above] {$\frac{5}{8}$}
+                        };
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+            <p>
+                We need the probability of (Red AND Red) OR (Blue AND Blue).
+            </p>
+            <p>
+                <m>P(R, R) = \frac{5}{8} \times \frac{4}{7} = \frac{20}{56}</m>
+            </p>
+            <p>
+                <m>P(B, B) = \frac{3}{8} \times \frac{2}{7} = \frac{6}{56}</m>
+            </p>
+            <p>
+                Adding the outcomes together (since they are mutually exclusive):
+                <m>P(\text{Same Color}) = \frac{20}{56} + \frac{6}{56} = \frac{26}{56} = \frac{13}{28}</m>
+            </p>
+        </solution>
+    </example>
+
+    <example xml:id="example-coach-tree">
+        <statement>
+            <p>
+                You are on a football team. There is a <m>0.6</m> chance that Sam will be the coach today, and a <m>0.4</m> chance it will be Alex. 
+                If Sam is coach, the chance of you being the Goalkeeper is <m>0.5</m>. If Alex is coach, the chance of you being Goalkeeper is <m>0.3</m>. 
+                What is the overall probability that you will be the Goalkeeper today?
+            </p>
+        </statement>
+        <solution>
+            <image xml:id="tikz-coach-goalie">
+                <latex-image>
+                    \begin{tikzpicture}[grow=right, sloped, level 1/.style={sibling distance=3cm, level distance=4cm}, level 2/.style={sibling distance=1.5cm, level distance=4cm}]
+                      \node {}
+                        child { node {Alex}
+                          child { node {No Goalie} edge from parent node[below] {$0.7$} }
+                          child { node {Goalie} edge from parent node[above] {$0.3$} }
+                          edge from parent node[below] {$0.4$}
+                        }
+                        child { node {Sam}
+                          child { node {No Goalie} edge from parent node[below] {$0.5$} }
+                          child { node {Goalie} edge from parent node[above] {$0.5$} }
+                          edge from parent node[above] {$0.6$}
+                        };
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+            <p>
+                There are two successful paths where you end up as the Goalkeeper:
+                <ol>
+                    <li>Sam is coach AND you are Goalie: <m>0.6 \times 0.5 = 0.3</m></li>
+                    <li>Alex is coach AND you are Goalie: <m>0.4 \times 0.3 = 0.12</m></li>
+                </ol>
+            </p>
+            <p>
+                Add the probabilities of these two paths together:
+                <m>0.3 + 0.12 = 0.42</m>. 
+            </p>
+            <p>
+                There is a <m>42\%</m> chance you will be the Goalkeeper today.
+            </p>
+        </solution>
+    </example>
+
+    <example xml:id="example-farming-tree">
+        <statement>
+            <p>
+                A farmer in Eldoret is planting maize. The probability that there will be adequate rain this season is <m>0.7</m>. 
+                If it rains, the probability of a good harvest is <m>0.8</m>. If it does not rain, the probability of a good harvest drops to <m>0.2</m>.
+                Calculate the probability that the farmer will have a good harvest.
+            </p>
+        </statement>
+        <solution>
+            <image xml:id="tikz-harvest">
+                <latex-image>
+                    \begin{tikzpicture}[grow=right, sloped, level 1/.style={sibling distance=3.5cm, level distance=4cm}, level 2/.style={sibling distance=1.5cm, level distance=4cm}]
+                      \node {}
+                        child { node {No Rain}
+                          child { node {Bad Harvest} edge from parent node[below] {$0.8$} }
+                          child { node {Good Harvest} edge from parent node[above] {$0.2$} }
+                          edge from parent node[below] {$0.3$}
+                        }
+                        child { node {Rain}
+                          child { node {Bad Harvest} edge from parent node[below] {$0.2$} }
+                          child { node {Good Harvest} edge from parent node[above] {$0.8$} }
+                          edge from parent node[above] {$0.7$}
+                        };
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+            <p>
+                To find the probability of a Good Harvest, we calculate the probabilities of the two paths that lead to it:
+            </p>
+            <p>
+                Path 1 (Rain AND Good): <m>0.7 \times 0.8 = 0.56</m>
+            </p>
+            <p>
+                Path 2 (No Rain AND Good): <m>0.3 \times 0.2 = 0.06</m>
+            </p>
+            <p>
+                Overall probability of a good harvest = <m>0.56 + 0.06 = 0.62</m>.
+            </p>
+        </solution>
+    </example>
+
+    <example xml:id="auto_7px58k09">
+        <statement>
+            <p xml:id="auto_v1x97w8e">
+                A fair coin is tossed twice.
+            </p>
+            <p xml:id="auto_h1ib3tvt">
+                <ol xml:id="auto_co5iiq0h" marker="a).">
+                    <li xml:id="auto_q90f95mu">
+                        <p xml:id="auto_qqhrgfkt">
+                            Draw a tree diagram showing all possible outcomes.
+                        </p>
+                    </li>
+                    <li xml:id="auto_ae0ininn">
+                        <p xml:id="auto_f0yezm7s">
+                            What is the probability of getting exactly one head?
+                        </p>
+                    </li>
+                    <li xml:id="auto_74cog498">
+                        <p xml:id="auto_wg31effx">
+                            What is the probability of getting at least one tail?
+                        </p>
+                    </li>
+                    <li xml:id="auto_ut86d796">
+                        <p xml:id="auto_nbmht68w">
+                            What is the probability of getting two heads?
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </statement>
+        <solution>
+            <p xml:id="auto_xryzt3eo">
+                <ol xml:id="auto_n9gcdljd" marker="a.)">
+                    <li xml:id="auto_gmzmhuqb">
+                        <p xml:id="auto_quo3dcvk">
+                            Tree diagram showing all possible outcomes.
+                        </p>
+                        <image width="60%">
+                            <latex-image label="tree-diagram-head">
+                                \begin{tikzpicture}[
+                                    grow=right,
+                                    sibling distance=1.1cm,
+                                    level distance=0.8cm,
+                                    edge from parent/.style={draw,thick},
+                                    scale=2.4,
+                                    every node/.style={font=\footnotesize, inner sep=2pt}
+                                    ]
+
+                                    \node[circle, draw, thick] (Start) {}
+                                    child { node[circle, draw] (H) {H}
+                                        child { node[circle, draw, yshift=0.8cm] (HT_H) {HT}
+                                        edge from parent node[below, midway, font=\scriptsize] {$\frac{1}{2}$}
+                                        }
+                                        child { node[circle, draw, yshift=-0.8cm] (HH_H) {HH}
+                                        edge from parent node[above, midway, font=\scriptsize] {$\frac{1}{2}$}
+                                        }
+                                        edge from parent node[below, midway, font=\scriptsize] {$\frac{1}{2}$}
+                                    }
+                                    child { node[circle, draw] (T) {T}
+                                        child { node[circle, draw, yshift=0.8cm] (TT_T) {TT}
+                                        edge from parent node[below, midway, font=\scriptsize] {$\frac{1}{2}$}
+                                        }
+                                        child { node[circle, draw, yshift=-0.8cm] (TH_T) {TH}
+                                        edge from parent node[above, midway, font=\scriptsize] {$\frac{1}{2}$}
+                                        }
+                                        edge from parent node[above, midway, font=\scriptsize] {$\frac{1}{2}$}
+                                    };
+                                \end{tikzpicture}
+                            </latex-image>
+                            
+                        </image>
+                    </li>
+                    <li xml:id="auto_oql2w3b3">
+                        <p xml:id="auto_q7xoc7rn">
+                            Probability of getting exactly one head
+                        </p>
+                        <p xml:id="auto_kemgjv2b">
+                            The favorable outcomes are <m>\textbf{HT and TH}</m>.
+                        </p>
+                        <p xml:id="auto_tkpqtch4">
+                            <md>
+                                <mrow> \textbf{P(HT) + P(TH)} </mrow>
+                            </md>
+                        </p>
+                        <p xml:id="auto_kjgub445">
+                            <md>
+                                <mrow> \frac{1}{4} \, + \, \frac{1}{4} \, = \frac{2}{4} </mrow>
+                            </md>
+                        </p>
+                        <p xml:id="auto_4zn8l1g4">
+                            <md>
+                                <mrow>\frac{2}{4} \,= \, \frac{1}{2} </mrow>
+                            </md>
+                        </p>
+                    </li>
+                    <li xml:id="auto_24ozgbr0">
+                        <p xml:id="auto_k38r9d6c">
+                            Probability of getting at least one tail
+                        </p>
+                        <p xml:id="auto_0sijk0h8">
+                            The favorable outcomes are <m>\textbf{ HT, TH, TT (all outcomes except HH)}</m>.
+                        </p>
+                        <p xml:id="auto_cuzdj3pt">
+                            <md>
+                                <mrow> \textbf{P(at least one tail) = P(HT) + P(TH) + P(TT)} </mrow>
+                            </md>
+                        </p>
+                        <p xml:id="auto_f8svnp87">
+                            <md>
+                                <mrow> \frac{1}{4} \, + \, \frac{1}{4} \, + \, \frac{1}{4}</mrow>
+                            </md>
+                        </p>
+                        <p xml:id="auto_2kfdz6u2">
+                            <md>
+                                <mrow>= \frac{3}{4} </mrow>
+                            </md>
+                        </p>
+                    </li>
+                    <li xml:id="auto_15hnczs2">
+                        <p xml:id="auto_vg8qxohi">
+                            Probability of getting two heads
+                        </p>
+                        <p xml:id="auto_u16qop7o">
+                            Only one outcome satisfies this condition: <m>HH</m>.
+                        </p>
+                        <p xml:id="auto_1busm3ew">
+                            <md>
+                                <mrow> \textbf{P(HH) = } \frac{1}{4} </mrow>
+                            </md>
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </solution>
+    </example>
+    <example xml:id="auto_tr0gu6d8">
+        <statement>
+            <p xml:id="auto_63t2i1rt">
+                A bag contains 3 red and 2 blue balls. A ball is drawn without replacement.
+            </p>
+            <p xml:id="auto_h1tn9wba">
+                <ol xml:id="auto_fdfte3b6" marker="a).">
+                    <li xml:id="auto_3ehg6l1t">
+                        <p xml:id="auto_dn4ff0vl">
+                            Draw a tree diagram showing the possible outcomes.
+                        </p>
+                    </li>
+                    <li xml:id="auto_gqt3c08k">
+                        <p xml:id="auto_o3w0a8c7">
+                            What is the probability of drawing a red ball followed by a blue ball?
+                        </p>
+                    </li>
+                    <li xml:id="auto_hwr7agfv">
+                        <p xml:id="auto_uym3kk0v">
+                            What is the probability of drawing two red balls?
+                        </p>
+                    </li>
+                    <li xml:id="auto_ymczyai0">
+                        <p xml:id="auto_b7r5eb5b">
+                            What is the probability of drawing at least one blue ball?
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </statement>
+        <solution>
+            <p xml:id="auto_r531eid7">
+                Here is the tree diagram
+            </p>
+            <image width="60%">
+                <latex-image label="Tree-diagram-red">
+                    \begin{tikzpicture}[
+                        grow=right,
+                        sibling distance=1.1cm,
+                        level distance=0.8cm,
+                        edge from parent/.style={draw,thick},
+                        scale=2.5,
+                        every node/.style={font=\footnotesize, inner sep=2pt}
+                        ]
+
+                        \node[circle, draw, thick] (Start) {}
+                        child { node[circle, draw] (B) {B}
+                            child { node[circle, draw, yshift=0.8cm] (BB_B) {BB}
+                            edge from parent node[below, midway, font=\scriptsize] {$\frac{1}{4}$}
+                            }
+                            child { node[circle, draw, yshift=-0.8cm] (BR_B) {BR}
+                            edge from parent node[above, midway, font=\scriptsize] {$\frac{3}{4}$}
+                            }
+                            edge from parent node[below, midway, font=\scriptsize] {$\frac{2}{5}$}
+                        }
+                        child { node[circle, draw] (R) {R}
+                            child { node[circle, draw, yshift=0.8cm] (RR_R) {RR}
+                            edge from parent node[below, midway, font=\scriptsize] {$\frac{2}{4}$}
+                            }
+                            child { node[circle, draw, yshift=-0.8cm] (BR_R) {BR}
+                            edge from parent node[above, midway, font=\scriptsize] {$\frac{2}{4}$}
+                            }
+                            edge from parent node[above, midway, font=\scriptsize] {$\frac{3}{5}$}
+                        };
+
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+            <p xml:id="auto_shyjemnn">
+                Assign Probabilities
+                <ol xml:id="auto_fguiaaxa" marker="a).">
+                    <li xml:id="auto_sti7hl1c">
+                        <p xml:id="auto_5jo2lr7u">
+                            The probability of drawing a red ball first is
+                        </p>
+                        <p xml:id="auto_l98nqgru">
+                            <md>
+                                <mrow>\textbf{P(R)} = \frac{3}{5} </mrow>
+                            </md>
+                        </p>
+                        <p xml:id="auto_rw98w5x4">
+                            <ul xml:id="auto_x3xfdha6">
+                                <li xml:id="auto_4eupntt7">
+                                    <p xml:id="auto_zrgjfo98">
+                                        If the first ball is red, the probability of drawing a red ball second is;
+                                    </p>
+                                    <p xml:id="auto_qietxmie">
+                                        <md>
+                                            <mrow>\textbf{P(R/R)} = \frac{2}{4} \,= \, \frac{1}{2} </mrow>
+                                        </md>
+                                    </p>
+                                </li>
+                                <li xml:id="auto_lmdtswd6">
+                                    <p xml:id="auto_l51vqqum">
+                                        If the first ball is red, the probability of drawing a blue ball second is
+                                    </p>
+                                    <p xml:id="auto_adr8hps7">
+                                        <md>
+                                            <mrow>\textbf{P(B/R)} = \frac{2}{4} \,= \, \frac{1}{2} </mrow>
+                                        </md>
+                                    </p>
+                                </li>
+                            </ul>
+                        </p>
+                        <p xml:id="auto_a8mb9qlb">
+                            The probability of drawing a blue ball first is:
+                        </p>
+                        <p xml:id="auto_zvpnzu1u">
+                            <md>
+                                <mrow> \textbf{P(B)} = \frac{2}{5}  </mrow>
+                            </md>
+                        </p>
+                        <p xml:id="auto_035slljz">
+                            <ul xml:id="auto_3sfzmxm3">
+                                <li xml:id="auto_gui8cdb1">
+                                    <p xml:id="auto_s3b2a6jl">
+                                        If the first ball is blue, the probability of drawing a red ball second is:
+                                    </p>
+                                    <p xml:id="auto_xcvxujbh">
+                                        <md>
+                                            <mrow> \textbf{P(R/B)} = \frac{3}{4} </mrow>
+                                        </md>
+                                    </p>
+                                </li>
+                                <li xml:id="auto_kkqajz53">
+                                    <p xml:id="auto_owoauktw">
+                                        If the first ball is blue, the probability of drawing another blue ball is:
+                                    </p>
+                                    <p xml:id="auto_8rupl57i">
+                                        <md>
+                                            <mrow> \textbf{P(B/B)} = \frac{1}{4} </mrow>
+                                        </md>
+                                    </p>
+                                </li>
+                            </ul>
+                        </p>
+                    </li>
+                    <li xml:id="auto_84h90t6l">
+                        <p xml:id="auto_1j217dxj">
+                            Probability of drawing a red ball followed by a blue ball
+                        </p>
+                        <p xml:id="auto_qcwhl51t">
+                            Favorable outcome: RB
+                        </p>
+                        <p xml:id="auto_dx6wdn5u">
+                            <md>
+                                <mrow> \textbf{P(RB)} = \textbf{P(R)} \, \times \, \textbf{P(B|R)}  </mrow>
+                            </md>
+                        </p>
+                        <p xml:id="auto_pnrf5w91">
+                            <md>
+                                <mrow> = \frac{3}{5} \,\times \, \frac{2}{4} = \frac{6}{20} = \frac{3}{10}</mrow>
+                            </md>
+                        </p>
+                    </li>
+                    <li xml:id="auto_c106zo2p">
+                        <p xml:id="auto_3uxluftt">
+                            Probability of drawing two red balls
+                        </p>
+                        <p xml:id="auto_yhu2jd88">
+                            Favorable outcome: RR
+                        </p>
+                        <p xml:id="auto_rvh2iwk4">
+                            <md>
+                                <mrow> \textbf{P(RR)} = \textbf{P(R)} \, \times \, \textbf{P(R|R)} </mrow>
+                            </md>
+                        </p>
+                        <p xml:id="auto_59f75wya">
+                            <md>
+                                <mrow> = \frac{3}{5} \,\times \, \frac{2}{4} = \frac{6}{20} = \frac{3}{10} </mrow>
+                            </md>
+                        </p>
+                    </li>
+                    <li xml:id="auto_9wcimc0e">
+                        <p xml:id="auto_invvhsik">
+                             Probability of drawing at least one blue ball
+                        </p>
+                        <p xml:id="auto_n945ksi4">
+                            <md>
+                                <mrow>\text{P(at least one blue)} \, = \, \textbf{1 - P(two red)} </mrow>
+                            </md>
+                        </p>
+                        <p xml:id="auto_e76tx73q">
+                            <md>
+                                <mrow> 1 - \frac{3}{10} \, = \, \frac{7}{10} </mrow>
+                            </md>
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </solution>
+    </example>
+    <example xml:id="auto_8pm8chdh">
+        <statement>
+            <p xml:id="auto_vqbe5axi">
+                A student at a shop is choosing a meal and a drink. This is what is available
+            </p>
+            <p xml:id="auto_fwticj5g">
+                <ul xml:id="auto_3ird2ops">
+                    <li xml:id="auto_93thhdaq">
+                        <p xml:id="auto_1k811ssf">
+                           <m>\textbf{ Meals}</m> ; Bread (B), Andazi (A), Chapati (Ch)
+                        </p>
+                    </li>
+                    <li xml:id="auto_rjkbeh02">
+                        <p xml:id="auto_xi9oxurc">
+                            <m>\textbf{Drinks}</m> ; Juice (J), Soda (S)
+                        </p>
+                    </li>
+                </ul>
+            </p>
+            <p xml:id="auto_xx03dgr6">
+                The student buys one meal at one drink
+            </p>
+            <p xml:id="auto_ei7783fv">
+                what is the probability of ;
+                <ol xml:id="auto_9c489a6v">
+                    <li xml:id="auto_gtjjjgh5">
+                        <p xml:id="auto_m5zqbf3p">
+                            Choosing Andazi and Soda?
+                        </p>
+                    </li>
+                    <li xml:id="auto_athnbvmp">
+                        <p xml:id="auto_fw0j9k9j">
+                            Choosing Juice as a drink?
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </statement>
+        <solution>
+            <p xml:id="auto_3wlu7m2t">
+                <ol xml:id="auto_r5tx5lsn">
+                    <li xml:id="auto_xofu753k">
+                        <p xml:id="auto_vhvkdafj">
+                            The Sample Space where the possible meal-drink combinations are :
+                        </p>
+                        <p xml:id="auto_q7q4ysrs">
+                            <md>
+                                <mrow> \textbf{S = { (B,J), (B,S), (A,J), (A,S), (Ch,J), (Ch,S)} } </mrow>
+                            </md>
+                        </p>
+                        <p xml:id="auto_x10vp2pf">
+                            There are <m> \textbf{3 meals} \times \textbf{2 drinks = 6 total choices}. </m>
+                        </p>
+                    </li>
+                    <li xml:id="auto_qxq2r3sr">
+                        <p xml:id="auto_4mynt1v2">
+                            the Tree Diagram
+                        </p>
+                        <image width="60%">
+                            <latex-image label="Tree diagram">
+                                \begin{tikzpicture}[
+                                    grow=right,
+                                    sibling distance=1.1cm, % Increased sibling distance
+                                    level distance=0.8cm, % Increased level distance
+                                    edge from parent/.style={draw,thick},
+                                    scale=1.5,
+                                    every node/.style={font=\footnotesize, inner sep=2pt}
+                                    ]
+
+                                    \node[circle, draw, thick] (Start) {}
+                                    child { node[circle, draw] (B) {B}
+                                        child { node[circle, draw, xshift=0.5cm, yshift=0.5cm] (J_B) {J} }
+                                        child { node[circle, draw, xshift=0.5cm, yshift=-0.5cm] (S_B) {S} }
+                                        edge from parent node[below, midway, font=\scriptsize] {$\frac{1}{3}$}
+                                    }
+                                    child { node[circle, draw] (A) {A}
+                                        child { node[circle, draw, xshift=0.5cm, yshift=0.5cm] (J_A) {J} }
+                                        child { node[circle, draw, xshift=0.5cm, yshift=-0.5cm] (S_A) {S} }
+                                        edge from parent node[above, midway, font=\scriptsize] {$\frac{1}{3}$}
+                                    }
+                                    child { node[circle, draw] (Ch) {Ch}
+                                        child { node[circle, draw, xshift=0.5cm, yshift=0.5cm] (J_Ch) {J} }
+                                        child { node[circle, draw, xshift=0.5cm, yshift=-0.5cm] (S_Ch) {S} }
+                                        edge from parent node[above, midway, font=\scriptsize] {$\frac{1}{3}$}
+                                    };
+
+                                    \path (B) -- (J_B) node[midway, below, font=\scriptsize] {$\frac{1}{2}$};
+                                    \path (B) -- (S_B) node[midway, above, font=\scriptsize] {$\frac{1}{2}$};
+                                    \path (A) -- (J_A) node[midway, below, font=\scriptsize] {$\frac{1}{2}$};
+                                    \path (A) -- (S_A) node[midway, above, font=\scriptsize] {$\frac{1}{2}$};
+                                    \path (Ch) -- (J_Ch) node[midway, below, font=\scriptsize] {$\frac{1}{2}$};
+                                    \path (Ch) -- (S_Ch) node[midway, above, font=\scriptsize] {$\frac{1}{2}$};
+
+                                \end{tikzpicture}
+                            </latex-image>
+                            
+                        </image>
+                    </li>
+                    <li xml:id="auto_fw0h7s4e">
+                        <p xml:id="auto_nw6u1akn"> Now we find the probabilities
+                            <ol xml:id="auto_055xvljn" marker="i.">
+                                <li xml:id="auto_vi8x89hf">
+                                    <p xml:id="auto_1o6482su">
+                                        Probability of Choosing an Andazi and Soda
+                                    </p>
+                                    <p xml:id="auto_50i4ar89">
+                                        <md>
+                                            <mrow> \textbf{P(A and S)} = \frac{1}{3} \times \frac{1}{2} </mrow>
+                                        </md>
+                                    </p>
+                                    <p xml:id="auto_7lv0rhco">
+                                        <md>
+                                            <mrow> = \frac{1}{6} </mrow>
+                                        </md>
+                                    </p>
+                                </li>
+                                <li xml:id="auto_zv5unto2">
+                                    <p xml:id="auto_vv48u20v">
+                                        Probability of Choosing Juice as a Drink
+                                    </p>
+                                    <p xml:id="auto_1ivujad0">
+                                        There are 3 favorable outcomes that is (B, J) , (A, J), (Ch, J)
+                                    </p>
+                                    <p xml:id="auto_urd0m1px">
+                                        there are <m>3</m> out of <m>6</m> possible choices, so the probability is:
+                                    </p>
+                                    <p xml:id="auto_27q0u5tx">
+                                        <md>
+                                            <mrow> \textbf{P(J)} = \frac{3}{6} = \frac{1}{2} \,or\, \textbf{50}\%</mrow>
+                                        </md>
+                                    </p>
+                                </li>
+                            </ol>
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </solution>
+    </example>
+
+
+    <exercises xml:id="exercises-probability-trees">
+        <exercise>
+            <statement>
+                <p>
+                    A spinner has <m>3</m> equal sections colored Red, Green, and Yellow. You spin it twice. Draw a tree diagram and find the probability that the spinner lands on Red both times.
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    The probability of Red on any spin is <m>\frac{1}{3}</m>. 
+                </p>
+                <p>
+                    <m>P(\text{Red and Red}) = \frac{1}{3} \times \frac{1}{3} = \frac{1}{9}</m>.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    A jar contains <m>4</m> orange sweets and <m>6</m> lemon sweets. Sarah takes one sweet at random, eats it, and then takes another one. Calculate the probability that she eats two sweets of different flavors.
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    Total sweets initially = <m>10</m>. This is without replacement.
+                </p>
+                <p>
+                    Path 1 (Orange, then Lemon): <m>\frac{4}{10} \times \frac{6}{9} = \frac{24}{90}</m>
+                </p>
+                <p>
+                    Path 2 (Lemon, then Orange): <m>\frac{6}{10} \times \frac{4}{9} = \frac{24}{90}</m>
+                </p>
+                <p>
+                    Total probability = <m>\frac{24}{90} + \frac{24}{90} = \frac{48}{90} = \frac{8}{15}</m>.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    Juma can commute to work by bus or by matatu. The probability he takes a bus is <m>0.6</m>. If he takes the bus, the probability he is late is <m>0.2</m>. If he takes a matatu, the probability he is late is <m>0.3</m>. What is the probability Juma arrives on time?
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    Probability of taking a matatu = <m>1 - 0.6 = 0.4</m>.
+                </p>
+                <p>
+                    Probability of being on time if bus = <m>1 - 0.2 = 0.8</m>.
+                </p>
+                <p>
+                    Probability of being on time if matatu = <m>1 - 0.3 = 0.7</m>.
+                </p>
+                <p>
+                    Path 1 (Bus and On Time) = <m>0.6 \times 0.8 = 0.48</m>
+                </p>
+                <p>
+                    Path 2 (Matatu and On Time) = <m>0.4 \times 0.7 = 0.28</m>
+                </p>
+                <p>
+                    Total probability = <m>0.48 + 0.28 = 0.76</m>.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    A student is taking a Math exam and a Science exam. The probability of passing Math is <m>0.7</m>. If the student passes Math, the probability of passing Science is <m>0.8</m>. If the student fails Math, the probability of passing Science drops to <m>0.4</m>. Calculate the probability that the student passes exactly one exam.
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    Passing exactly one exam means either (Pass Math AND Fail Science) OR (Fail Math AND Pass Science).
+                </p>
+                <p>
+                    Path 1 (Pass Math, Fail Science): <m>0.7 \times (1 - 0.8) = 0.7 \times 0.2 = 0.14</m>
+                </p>
+                <p>
+                    Path 2 (Fail Math, Pass Science): <m>(1 - 0.7) \times 0.4 = 0.3 \times 0.4 = 0.12</m>
+                </p>
+                <p>
+                    Total probability = <m>0.14 + 0.12 = 0.26</m>.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    A school committee is being chosen from a group of <m>3</m> teachers and <m>5</m> students. Two members are selected at random, one after the other. Find the probability that the committee contains at least one teacher.
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    "At least one teacher" is easiest to calculate by finding the probability of "No teachers" (meaning Student AND Student) and subtracting from <m>1</m>.
+                </p>
+                <p>
+                    Total people = <m>8</m>. 
+                </p>
+                <p>
+                    <m>P(\text{Student, Student}) = \frac{5}{8} \times \frac{4}{7} = \frac{20}{56} = \frac{5}{14}</m>.
+                </p>
+                <p>
+                    <m>P(\text{At least one teacher}) = 1 - \frac{5}{14} = \frac{9}{14}</m>.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    In a phone manufacturing plant, Machine A produces <m>60\%</m> of the phones, while Machine B produces <m>40\%</m>. Historically, <m>5\%</m> of the phones from Machine A are defective, and <m>2\%</m> of the phones from Machine B are defective. If a phone is chosen at random, what is the probability that it is defective?
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    Path 1 (Machine A and Defective) = <m>0.60 \times 0.05 = 0.030</m>
+                </p>
+                <p>
+                    Path 2 (Machine B and Defective) = <m>0.40 \times 0.02 = 0.008</m>
+                </p>
+                <p>
+                    Total probability = <m>0.030 + 0.008 = 0.038</m> (or <m>3.8\%</m>).
+                </p>
+            </answer>
+        </exercise>
+        <introduction xml:id="auto_c14qs1c9">
+            <p xml:id="auto_c8bgpoxr">
+                using Tree diagrams solve;
+            </p>
+        </introduction>
+        <exercise xml:id="auto_2in0x3s9">
+            <statement>
+                <p xml:id="auto_ae5nxsi0">
+                    A coin is tossed three times. What is the probability of getting exactly two heads?
+                </p>
+            </statement>
+        </exercise>
+        <exercise xml:id="auto_lulww58b">
+            <statement>
+                <p xml:id="auto_lvvi39wh">
+                    You have two bags. Bag 1 has 3 blue marbles and 1 red marble. Bag 2 has 2 blue marbles and 2 red marbles. 
+                    You pick one marble from each bag. What is the probability of picking two blue marbles?
+                </p>
+            </statement>
+        </exercise>
+        <exercise xml:id="auto_rvpi95pa">
+            <statement>
+                <p xml:id="auto_el8ekqe5">
+                    A store sells two types of phone cases. 30% are black, 70% are clear. 
+                    Two phone cases are sold independently. What is the probability that one is black and the other is clear?
+                </p>
+            </statement>
+        </exercise>
+        <exercise xml:id="auto_psfgmqqg">
+            <statement>
+                <p xml:id="auto_h9u0vlh8">
+                    A student takes two true/false quizzes. What is the probability that they get both quizzes completely correct?
+                </p>
+            </statement>
+        </exercise>
+        <exercise xml:id="auto_nqobam7m">
+            <statement>
+                <p xml:id="auto_k4yl0cva">
+                    A teacher assigns homework on Monday and Tuesday. 
+                    There's a 80% chance of homework on Monday and a 80% chance on Tuesday. What is the probability there is homework on both days?
+                </p>
+            </statement>
+        </exercise>
+        <exercise xml:id="auto_63a40dwb">
+            <statement>
+                <p xml:id="auto_djjisxwo">
+                    A student has a 60% chance of completing their math homework on time and a 75% chance of completing their English homework on time. 
+                    Assuming these events are independent, what is the probability that the student completes both assignments on time?
+                </p>
+            </statement>
+        </exercise>
+    </exercises>
+    <exercise xml:id="ex-determining-the-probability-of-independent-events">
+        <stack label="stk-determining-the-probability-of-independent-events" source="stack/top/3-0-Statistics-Probability/Probability-1/Tree-Diagrams-and-Independent-Events/Determining-the-probability-of-independent-events.xml" />
+    </exercise>
+    <exercise xml:id="ex-example-of-tree-diagram">
+        <stack label="stk-example-of-tree-diagram" source="stack/top/3-0-Statistics-Probability/Probability-1/Tree-Diagrams-and-Independent-Events/example-of-tree-diagram.xml" />
+    </exercise>
 </subsection>

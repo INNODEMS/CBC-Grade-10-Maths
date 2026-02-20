@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This is the publication file for a newly generated PreTeXt book.     -->
+<!-- By changing the values of attributes here, you can change how        -->
+<!-- the output looks and functions.  For the complete documentation      -->
+<!-- of publication-file options, see                                     -->
+<!-- https://pretextbook.org/doc/guide/html/publisher-file-reference.html -->
+
+<!-- Commented settings below illustrate some possible changes you can    -->
+<!-- make from the default values.                                        -->
+
+<publication>
+  <common>
+    <!-- Level at which are html files generated (chapter/section/etc): -->
+      <chunking level="3" />
+
+    <!-- Depth for table of contents.  0 means no TOC -->
+      <tableofcontents level="4" />
+
+    <!-- Visibility of exercise components where they first appear.          -->
+    <!-- There are four components (statement/hint/answer/solution) for each -->
+    <!-- of five exercise types (inline/divisional/worksheet/reading/        -->
+    <!-- project).                                                           -->
+      <!--<exercise-inline statement="yes" hint="yes" answer="no" solution="no" />-->
+      <!--<exercise-divisional statement="yes" hint="yes" answer="no" solution="yes" />-->
+      <!--<exercise-worksheet statement="yes" hint="yes" answer="no" solution="no" />-->
+      <!--<exercise-reading statement="yes" hint="yes" answer="no" solution="no" />-->
+      <!--<exercise-project statement="yes" hint="yes" answer="yes" solution="yes" />-->
+
+    <!-- Style of fill-in-the-blanks: -->
+      <!--<fillin textstyle="underline" mathstyle="shade" />-->
+
+    <!-- You can set a watermark: -->
+      <!-- <watermark scale="0.5">DRAFT</watermark> -->
+
+    <!-- Mermaid diagram themes -->
+      <!-- <mermaid theme="default" /> -->  
+
+    <!-- QR code image: set path to an image to put in center of QR codes -->
+      <!-- <qrcode image="image.png" /> -->
+  </common>
+
+
+  <!-- Set where external assets and generated assets will be   -->
+  <!-- stored or created.  Directories are relative to the main -->
+  <!-- source PreTeXt file                                      -->
+  <source>
+    <!-- Paths to folders containing external assets and generated assets -->
+    <!-- relative to your main source file.                               -->
+    <directories external="../assets" generated="../generated-assets" />
+
+    <!-- Set which marked elements are included in this version: -->
+    <!-- See
+    https://pretextbook.org/doc/guide/html/publication-file-source.html#publication-file-source-version -->
+    <!-- Current versions are "resources" and "teacher" -->
+    <version include="resources teacher outcomes print"/>
+    
+
+  </source>
+
+  <stack server="https://stackapi-1-43834256136.europe-west1.run.app"/>
+
+  <numbering>
+    <!-- the divisions element describes the numbering of divisions.  -->
+    <!-- @part-structure should be "decorative" or "structural",      -->
+    <!-- were the latter would restart numbering chapters within each -->
+    <!-- part (this only matters if your book has parts).             -->
+    <!-- The attribute @chapter-start give the number of the first    -->
+    <!-- chapter.  @level says how deep (chapter->section->subsection)-->
+    <!-- numbering should appear.                                     -->
+    <!-- For use with a book organized by part, you can set the -->
+    <!--  @part-structure to "decorative" or "structural" -->
+      <!--<divisions part-structure="decorative" chapter-start="0" level="2"/>-->
+
+    <!-- The next elements say how the levels deep to break up the    -->
+    <!-- numbering of the respective elements. Can't be more than the -->
+    <!-- @level on divisions above.                                   -->
+      <!--<blocks level="2" />-->
+      <!--<projects level="2" />-->
+      <!--<equations level="2" />-->
+      <!--<footnotes level="2" />-->
+  </numbering>
+
+  <!-- LaTeX specific options: set @print="yes" to get pdf set up   -->
+  <!-- for printing; set @sides="two" if the printing would be two- -->
+  <!-- sided.  @pageref="yes/no" controls whether page number are   -->
+  <!-- included in cross-references                                 -->
+  <latex>
+  <!-- Replace the <latex> tag above with the one below to try these-->
+  <!--
+    <latex
+          print="no"
+          sides="one"
+          open-odd="no"
+          pageref="no"
+          font-size="10"
+          draft="no"
+          latex-style="dyslexic-font"
+      > 
+  -->
+
+    <!-- Control text justification and bottom page behavior. Add content intended for \geometry{} inside the <geometry> element. -->
+    <!--
+      <page right-alignment="flush" bottom-alignment="ragged" crop-marks="letter">
+        <geometry></geometry>
+      </page>
+    -->
+
+    <!-- The asymptote/@links set to "yes" would produce  -->
+    <!-- links the html version of asymptote graphics.    -->
+      <!--<asymptote links="no" />-->
+
+    <!-- Covers: provide paths to pdfs for front and back covers: -->
+      <!--<covers front="cover-front.pdf" back="cover-back.pdf" />-->
+    <!-- Set @formatted to "no" to remove formatting on worksheets: -->
+      <!--<worksheets formatted="yes" />-->
+  </latex>
+
+  <!-- To use WeBWorK, you need a server.  -->
+    <!-- <webwork server="https://webwork-ptx.aimath.org" /> -->
+    <!-- @course, @coursepassword, @user, and @userpassword can also be set. -->
+    <!-- You can also set how tasks are revealed for webwork problems using the @task-reveal attribute on the above-->
+
+</publication>
