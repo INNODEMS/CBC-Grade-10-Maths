@@ -110,6 +110,32 @@
       </p>
       
     </activity>
+    <p>
+        In the activity above, you determined the line of reflection by folding the graph paper.
+        However, there are other methods to determine the line of reflection. In the next example, you will determine the line of reflection using algebraic methods.
+    </p>
+    <p>
+        You will need to use the following properties of reflection:
+        <ul>
+        <li>
+            The line of reflection is the perpendicular bisector of the line segment connecting a point and its image.
+        </li>
+        <li>
+            The distance from the object to the mirror line is the same as that of mirror line to the image.
+        </li>
+        </ul>
+    </p>
+    <p>
+        You will also need to use the following properties of lines:
+        <ul>
+        <li>
+            The gradient of a line is the change in y-coordinates divided by the change in x-coordinates.
+        </li>
+        <li>
+            The equation of a line can be expressed as <me>y - y_1 = m (x - x_1)</me> where <m>(x_1,y_1)</m> is a point on the line and <m>m</m> is the gradient of the line.
+        </li>
+        </ul>
+    </p>
 
     <example xml:id="auto_677go4pw">
       <statement>
@@ -185,6 +211,84 @@
           <me>y - -1 = -1 (x - 1)</me>
           <me>y + 1 = -x + 1</me>
           <me>y = -x</me>
+        </p>
+      </solution>
+    </example>
+
+    <example>
+      <statement>
+        <p>
+          From the figure below, determine the equation of the line of reflection.
+        </p>
+        <image>
+          <shortdescription></shortdescription>
+          <latex-image>
+             \begin{tikzpicture}
+                % Draw the grid lines
+                \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+
+                 % Draw the axes
+                \draw[thin,-&gt;] (-5,0) -- (5,0) node[right] {x-axis};
+                \foreach \x in {-4,...,4}{
+                \draw(\x,.25)--(\x,-.25) node[below]{\x};
+                }
+              
+                \draw[thin,-&gt;] (0,-5) -- (0,5) node[above] {y-axis}; 
+                \foreach \y/\ytext in {-4/-4,-3/-3,-2/-2,-1/-1,0/0,1/1,2/2,3/3,4/4}
+                \draw[shift={(0,\y)}] (2pt,0pt) -- (-2pt,0pt) node[left] {$\ytext$};
+
+                % Define original square nodes
+                \coordinate (A) at (1,1);
+                \coordinate (B) at (3,1);
+                \coordinate (C) at (3,3);
+                \coordinate (D) at (1,3);
+
+                % Draw the original square using nodes
+                \fill[blue,opacity=0.3] (A) -- (B) -- (C) -- (D) -- cycle;
+                \draw[blue,thick] (A) -- (B) -- (C) -- (D) -- cycle;
+
+                % Label original nodes (positioned relative to nodes)
+                \node[blue,below left] at (A) {A};
+                \node[blue,below right] at (B) {B};
+                \node[blue,above right] at (C) {C};
+                \node[blue,above left] at (D) {D};
+
+                % Define image square nodes (updated positions)
+                \coordinate (Aprime) at (4,4);
+                \coordinate (Bprime) at (4,2);
+                \coordinate (Cprime) at (2,2);
+                \coordinate (Dprime) at (2,4);
+
+                % Draw the image square using nodes
+                \fill[red,opacity=0.3] (Aprime) -- (Bprime) -- (Cprime) -- (Dprime) -- cycle;
+                \draw[red,thick] (Aprime) -- (Bprime) -- (Cprime) -- (Dprime) -- cycle;
+
+                % Label image nodes (positioned relative to nodes)
+                \node[red,above right] at (Aprime) {A'};
+                \node[red,below right] at (Bprime) {B'};
+                \node[red,below left] at (Cprime) {C'};
+                \node[red,above left] at (Dprime) {D'};
+              \end{tikzpicture}
+          </latex-image>
+        </image>
+      </statement>
+      <solution>
+        <p>
+          The coordinates of <m>A \text{ and } A'</m> are <m>(1,1) \text{ and } (4,4),</m> so the line of reflection is the perpendicular bisector of the segment joining these points.
+        </p>
+        <p>
+          The midpoint of <m>AA'</m> is:
+          <me>\left( \frac{1 + 4}{2},\frac{1 + 4}{2} \right) = (2.5,2.5)</me>
+        </p>
+        <p>
+          The gradient of the segment <m>AA'</m> is <me>m_{AA'} = \frac{4 - 1}{4 - 1} = 1.</me>
+          The line of reflection is perpendicular to this segment, so its gradient is <me>m = -1.</me>
+        </p>
+        <p>
+          Using point <m>(2.5,2.5)</m> and slope <m>-1</m>, the equation is:
+          <me>y - 2.5 = -1(x - 2.5)</me>
+          <me>y - 2.5 = -x + 2.5</me>
+          <me>y = -x + 5</me>
         </p>
       </solution>
     </example>
