@@ -110,7 +110,32 @@
       </p>
       
     </activity>
-
+       <p>
+         In the activity above, you determined the line of reflection by folding the graph paper.
+         However, there are other methods to determine the line of reflection. In the next example, you will determine the line of reflection using algebraic methods.
+       </p>
+       <p>
+          You will need to use the following properties of reflection:
+          <ul>
+            <li>
+              The line of reflection is the perpendicular bisector of the line segment connecting a point and its image.
+            </li>
+            <li>
+              The distance from the object to the mirror line is the same as that of mirror line to the image.
+            </li>
+          </ul>
+       </p>
+       <p>
+          You will also need to use the following properties of lines:
+          <ul>
+            <li>
+              The gradient of a line is the change in y-coordinates divided by the change in x-coordinates.
+            </li>
+            <li>
+              The equation of a line can be expressed as <me>y - y_1 = m (x - x_1)</me> where <m>(x_1,y_1)</m> is a point on the line and <m>m</m> is the gradient of the line.
+            </li>
+          </ul>
+       </p>
     <example xml:id="auto_677go4pw">
       <statement>
         <p xml:id="auto_6n243pfq">
@@ -167,7 +192,7 @@
           Connect point <m>C \text{ to } C'</m> with a line. The line of reflection is the perpendicular bisector of <m>C \text{ and } C'.</m>
         </p>
         <p xml:id="auto_d3mhgy8m">
-          From the properties of reflection, the distance from the object to the mirror line is the same as that of mirror line to the image.
+           From the properties of reflection, the distance from the object to the mirror line is the same as that of mirror line to the image.
            Therefore, the line of reflection passes through the midpoint of the line connecting <m>C \text{ to } C'.</m>
         </p>
         <p xml:id="auto_da1u3v20">
@@ -188,13 +213,89 @@
         </p>
       </solution>
     </example>
+    <example>
+      <statement>
+        <p>
+          From the figure below, determine the equation of the line of reflection.
+        </p>
+        <image>
+          <shortdescription></shortdescription>
+          <latex-image>
+            \begin{tikzpicture}
+               % Draw the grid lines
+               \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+
+                % Draw the axes
+               \draw[thin,-&gt;] (-5,0) -- (5,0) node[right] {x-axis};
+               \foreach \x in {-4,...,4}{
+               \draw(\x,.25)--(\x,-.25) node[below]{\x};
+               }
+              
+               \draw[thin,-&gt;] (0,-5) -- (0,5) node[above] {y-axis}; 
+               \foreach \y/\ytext in {-4/-4,-3/-3,-2/-2,-1/-1,0/0,1/1,2/2,3/3,4/4}
+               \draw[shift={(0,\y)}] (2pt,0pt) -- (-2pt,0pt) node[left] {$\ytext$};
+
+               % Draw the original square
+              
+               \fill[blue,opacity=0.3] (1,1) -- (3,1) -- (3,3) -- (1,3) -- cycle;
+               \draw[blue,thick] (1,1) -- (3,1) -- (3,3) -- (1,3) -- cycle;
+
+               \node[blue] at (0.8,1) {A};
+               \node[blue] at (3.2,1) {B};
+               \node[blue] at (3.2,3) {C};
+               \node[blue] at (0.8,3) {D};
+
+               
+               % Draw the image square
+               
+               \fill[red,opacity=0.3] (3,2) -- (5,2) -- (5,4) -- (3,4) -- cycle;
+               \draw[red,thick] (3,2) -- (5,2) -- (5,4) -- (3,4) -- cycle;
+
+               \node[red] at (2.8,2) {A'};
+               \node[red] at (5.2,2) {B'};
+               \node[red] at (5.2,4) {C'};
+               \node[red] at (2.8,4) {D'};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </statement>
+      <solution>
+        <p>
+          The coordinates of <m>A \text{ and } A'</m> are at <m>(1,1) \text{ and } (3,2),</m> tells you that the line of reflection passes through <m>(1,1) \text{ and } (3,2).</m>
+        </p>
+        <p>
+          Connect point <m>B \text{ to } B'</m> with a line. The line of reflection is the perpendicular bisector of <m>B \text{ and } B'.</m>
+        </p>
+        <p>
+           From the properties of reflection, the distance from the object to the mirror line is the same as that of mirror line to the image.
+           Therefore, the line of reflection passes through the midpoint of the line connecting <m>B \text{ to } B'.</m>
+        </p>
+        <p>
+          Coordinates for <m>B \text{ is }(3,1)</m> and that of <m>B' \text{ is } (5,2).</m>
+          The mid point of line <m>BB'</m> is: 
+          <me>\left(    \frac{3 + 5}{2},\frac{1 + 2}{2}   \right) = (4,1.5)</me>
+        </p>
+        <p>
+          Since you know that the line of reflection passes through <m>(1,1) \text{ and } (4,1.5),</m> the gradient of the reflection line is:
+          <me>m = \frac{1.5 - 1}{4 - 1} = \frac{0.5}{3} = \frac{1}{6}</me>
+        </p>
+        <p>
+          Therefore taking points <m>(x,y) \text { and } (4,1.5),</m> the equation of the line of reflection is :
+          <me>y - y_1 = m (x - x_1)</me>
+          <me>y - 1.5 = \frac{1}{6} (x - 4)</me>
+          <me>y - 1.5 = \frac{1}{6}x - \frac{4}{6}</me>
+          <me>y = \frac{1}{6}x - \frac{4}{6} + 1.5</me>
+          <me>y = \frac{1}{6}x + \frac{5}{6}</me>
+        </p>
+      </solution>
+    </example>
 
     <exercises xml:id="exercises-determining-the-equation-of-a-mirror-line-given-an-object-and-its-image">
       <exercise xml:id="auto_6rgjlk9d">
         <statement>
-          <p xml:id="auto_fp1qhdtb">
-            Determine if the transformation is a reflection. If it is a reflection, what is the equation of the mirror line?
-          </p>
+           <p xml:id="auto_fp1qhdtb">
+             Determine if the transformation is a reflection. If it is a reflection, what is the equation of the mirror line?
+           </p>
 
           <sidebyside>
         <image>
@@ -276,6 +377,13 @@
       </image>
       </sidebyside>
       </statement>
+      <answer>
+         <p>
+           The transformation in the first image is not a reflection. 
+           The transformation in the second image is a reflection and 
+           the equation of the mirror line is <m>y = -x + 1.</m>
+         </p>
+      </answer>
       </exercise>
 
       <exercise xml:id="auto_4tbofx7k">
@@ -285,6 +393,11 @@
            Find the equation of the line of reflection.
         </p>
       </statement>
+      <answer>
+        <p>
+          The line of reflection is the x-axis and its equation is <m>y = 0.</m>
+        </p>
+      </answer>
       </exercise>
 
       <exercise xml:id="auto_5urtn6tt">
@@ -294,6 +407,10 @@
            Find the equation of the line of reflection.
         </p>
       </statement>
+      <answer>
+        <p>
+          The line of reflection is the line <m>y = x - 1.</m>
+        </p>
       </exercise>
 
       <exercise xml:id="auto_4i8a6s2s">
@@ -302,11 +419,38 @@
             <m>O(0,0)</m> is the centre of a circle of radius <m>2\,cm.</m> If <m>O'(2,0)</m> is the reflection of the centre of the circle, find the equation of the line of reflection. 
           </p>
         </statement>
+        <answer>
+          <p>
+            The line of reflection is the vertical line <m>x = 1.</m>
+          </p>
+      </exercise>
+      <exercise>
+        <statement>
+          <p xml:id="">
+            The vertices of a triangle are <m>A(1,2),\, B(3,4)\text{ and }C(5,4).</m> The vertices of the  image are <m>A'(-1,2),\, B'(-3,4)\text{ and }C'(-5,4).</m>
+             Find the equation of the line of reflection.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            The line of reflection is the y-axis and its equation is <m>x = 0.</m>
+          </p>
+        </answer>
+      </exercise>
+      <exercise>
+        <statement>
+          <p xml:id="">
+            The vertices of a triangle are <m>A(1,2),\, B(3,4)\text{ and }C(5,4).</m> The vertices of the  image are <m>A'(-1,-2),\, B'(-3,-4)\text{ and }C'(-5,-4).</m>
+             Find the equation of the line of reflection.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            The line of reflection is the line <m>y = -x.</m>
+          </p>
+        </answer>
       </exercise>
     </exercises>
-
-       
-  
 
             <exercise  label="ex-describing-a-transformation">
                 <stack label="stk-describing-a-transformation" source="stack/top/2-0-Measurement-Geometry/2-2-Reflection-and-Congruence/2-2-5-Determining-the-Equation-of-a-Mirror-Line/Describing-a-transformation.xml" />
