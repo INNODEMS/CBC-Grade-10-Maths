@@ -1,6 +1,341 @@
 <subsection xml:id="subsec-rotation-in-real-life">
-    <title>Rotation in Real-Life</title>
-    <p>
-        TODO
-    </p>
+    <title>Rotation in Real Life</title>
+    <objectives component="outcomes">
+        <introduction>
+            <dl>
+                <li>
+                    <title>Strand</title>
+                    <p>
+                        2.0 Measurements and Geometry
+                    </p>
+                </li>
+                <li>
+                    <title>Sub-Strand</title>
+                    <p>
+                        2.3 Rotation
+                    </p>
+                </li>
+            </dl>
+        </introduction>
+        <ul>
+            <li>Appreciate the application of rotation in real-life situations</li>
+        </ul>
+    </objectives>
+    
+    <activity xml:id="activity-applications-of-rotation">
+        <introduction>
+            <p>
+                <alert>Group activity.</alert>
+            </p>
+            <p>
+                Rotation is used in many everyday tools and machines to make work easier and more efficient. In this activity, you will explore how rotation is applied in real-life situations.
+            </p>
+        </introduction>
+
+        <task>
+            <statement>
+                <p>
+                    Identify three everyday objects that use rotation to function (for example, a steering wheel, a water tap, or a screwdriver). For each object:
+                </p>
+                <p>
+                    <ul>
+                        <li>Describe how the object rotates.</li>
+                        <li>Identify the axis or fixed point of rotation.</li>
+                        <li>Explain the purpose of the rotation.</li>
+                    </ul>
+                </p>
+            </statement>
+        </task>
+
+        <task>
+            <statement>
+                <p>
+                    Choose one rotating object and discuss how changing the speed or direction of rotation would affect its use. Give a real-life example to support your explanation.
+                </p>
+            </statement>
+        </task>
+
+        <task>
+            <statement>
+                <p>
+                    Many machines use rotating parts to reduce effort or save time. Discuss how rotation improves efficiency in one machine used at home, school, or in the community.
+                </p>
+            </statement>
+        </task>
+    </activity>
+
+
+    <insight xml:id="insight-real-life-rotation">
+        <p>
+            In practical situations, the <term>centre of rotation</term> is usually a physical feature such as a hinge on a door, an axle in a wheel, or a shaft in a machine. This fixed point or axis allows the object to rotate smoothly and in a controlled manner.
+        </p>
+        <p>
+            Understanding both the centre of rotation and the angle through which an object turns is essential in many fields. Engineers use these ideas to design efficient machines, from simple mechanisms like door hinges and bicycle gears to complex systems such as car engines and industrial machinery.
+        </p>
+        <p>
+            Scientists also rely on rotational concepts to explain natural phenomena, including the rotation of the Earth and the motion of planets in space.
+        </p>
+    </insight>
+
+   <example xml:id="example-ferris-wheel">
+        <statement>
+            <p>
+                Suppose a Ferris wheel completes one full rotation every <m>4</m> minutes. If a passenger gets on at the bottom, 
+                through what angle will they have rotated after exactly <m>1</m> minute?
+            </p>
+        </statement>
+        <solution>
+            <p>
+                To find the angle of rotation, we must determine what fraction of a full circle the Ferris wheel covers in the given time.
+            </p>
+            <p>
+                <ul>
+                    <li><p>A full rotation is <m>360^\circ</m>.</p></li>
+                    <li><p>The time for a full rotation is <m>4</m> minutes.</p></li>
+                    <li><p>The angle of rotation per minute is <m>\frac{360^\circ}{4} = 90^\circ</m>.</p></li>
+                </ul>
+            </p>
+            <p>
+                Therefore, after <m>1</m> minute, the passenger has rotated through an angle of <m>90^\circ</m>.
+            </p>
+        </solution>
+    </example>
+
+    <example xml:id="example-gears">
+        <statement>
+            <p>
+                Suppose Gear A has <m>10</m> teeth and is interlocked with a larger Gear B, which has <m>30</m> teeth. If Gear A is rotated one full turn (<m>360^\circ</m>) in the clockwise direction, what is the angle and direction of rotation for Gear B?
+            </p>
+        </statement>
+        <solution>
+            <p>
+                When dealing with gears, the number of teeth determines how much one gear turns relative to the other.
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            <alert>Direction:</alert> Interlocking gears always rotate in opposite directions. Since Gear A rotates clockwise, Gear B must rotate <term>counter-clockwise</term>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <alert>Angle:</alert> Gear B is larger and has <m>3</m> times as many teeth as Gear A (<m>\frac{30}{10} = 3</m>). This means Gear B will only complete <m>\frac{1}{3}</m> of a rotation for every full rotation of Gear A.
+                        </p>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                Angle of rotation for Gear B <m>= \frac{360^\circ}{3} = 120^\circ</m>. 
+            </p>
+            <p>
+                Gear B rotates <m>120^\circ</m> in a counter-clockwise direction.
+            </p>
+        </solution>
+    </example>
+
+    <example xml:id="example-earth-rotation">
+        <statement>
+            <image width="50%">
+                <latex-image label="earth_rotation_axis">
+                    \begin{tikzpicture}
+                        % Define the tilt angle of the Earth
+                        \def\tilt{23.5}
+
+                        % Draw the Earth (shaded sphere)
+                        \shade[ball color=cyan!40, opacity=0.9] (0,0) circle (2.5);
+
+                        % Draw the Equator to give a 3D perspective
+                        \begin{scope}[rotate=\tilt]
+                            % Front half of the equator
+                            \draw[thick, black!70] (-2.5,0) arc (180:360:2.5 and 0.4);
+                            % Back half of the equator (dashed)
+                            \draw[thick, dashed, black!50] (2.5,0) arc (0:180:2.5 and 0.4);
+                            
+                            % Label the Equator
+                            \node[right] at (2.5,0) {Equator};
+                        \end{scope}
+
+                        % Draw the Axis of Rotation
+                        % Internal dashed part
+                        \draw[ultra thick, red, dashed] (-90+\tilt:2.5) -- (90+\tilt:2.5);
+                        % External bottom part (South Pole)
+                        \draw[ultra thick, red] (-90+\tilt:2.5) -- (-90+\tilt:3.5) node[below, text=black] {South Pole};
+                        % External top part (North Pole)
+                        \draw[ultra thick, red] (90+\tilt:2.5) -- (90+\tilt:3.5) node[above, text=black] {North Pole};
+
+                        % Draw the rotation arrow near the North Pole
+                        \begin{scope}[rotate=\tilt, shift={(0, 2.8)}]
+                            \draw[-&gt;, ultra thick, blue] (-1,0) arc (180:360:1 and 0.25);
+                            \draw[dashed, thick, blue] (1,0) arc (0:180:1 and 0.25);
+                            \node[right, blue] at (1.1, 0.2) {Rotation};
+                        \end{scope}
+                        
+                        % Label the axis
+                        \node[red, left] at (90+\tilt:3) {Axis};
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+            <p>
+                The Earth completes one full rotation (<m>360^\circ</m>) approximately every <m>24</m> hours. Through what angle does the Earth rotate in an <m>8</m> - hour period?
+            </p>
+        </statement>
+        <solution>
+            <p>
+                We can find the angle by calculating the rate of rotation per hour.
+            </p>
+            <p>
+                <ul>
+                    <li><p>A full rotation of <m>360^\circ</m> takes <m>24</m> hours.</p></li>
+                    <li><p>Angle of rotation per hour <m>= \frac{360^\circ}{24} = 15^\circ</m>.</p></li>
+                </ul>
+            </p>
+            <p>
+                To find the rotation for an <m>8</m>-hour period, we multiply the hourly rate by <m>8</m>:
+            </p>
+            <p>
+                <m>15^\circ \times 8 = 120^\circ</m>.
+            </p>
+            <p>
+                The Earth rotates through an angle of <m>120^\circ</m> during an <m>8</m>-hour school day.
+            </p>
+        </solution>
+    </example>
+
+    <exercises xml:id="exercises-rotation-in-real-life">
+        <exercise>
+            <statement>
+                <image width="40%">
+                    <shortdescription></shortdescription>
+                    <latex-image>
+                        \begin{tikzpicture}[line cap=round,line join=round]
+                            % Draw the clock face (circle)
+                            \draw [fill=white, thick] (0,0) circle (3cm);
+                            
+                            % Draw the ticks and numbers
+                            \foreach \angle / \label in {
+                                90/12, 60/1, 30/2, 0/3, -30/4, -60/5, 
+                                -90/6, -120/7, -150/8, -180/9, -210/10, -240/11
+                            } {
+                                \draw[thick] (\angle:2.8cm) -- (\angle:2.9cm);
+                                \node at (\angle:2.4cm) {\textbf{\label}};
+                            }
+                            
+                            % Draw the center dot
+                            \fill [black] (0,0) circle (3pt);
+                            
+                            % Draw the Minute Hand (Pointing to 12) - Initial position
+                            \draw [ultra thick, blue, -&gt;] (0,0) -- (90:2.0cm);
+                            
+                            % Draw the Hour Hand (Pointing to 3)
+                            \draw [ultra thick, black, -&gt;] (0,0) -- (0:1.5cm);
+
+                            % Optional: Draw a dashed minute hand at 3 to show the 15-minute rotation
+                            \draw [dashed, thick, blue!60] (0,0) -- (0:2.0cm);
+                            
+                            % Draw the angle of rotation arc
+                            \draw [-&gt;, red, thick] (80:0.8cm) arc (80:10:0.8cm);
+                            \node [red] at (45:1.1cm) {$90^\circ$};
+
+                            \end{tikzpicture}
+                    </latex-image>
+                </image>
+                <p>
+                    The minute hand of a clock rotates around the center of the clock face. How many degrees does the minute hand rotate in <m>15</m> minutes?
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    A full clock face is <m>360^\circ</m>, which represents <m>60</m> minutes. 
+                </p>
+                <p>
+                    In <m>15</m> minutes, it covers a quarter of the clock face: <m>\frac{15}{60} \times 360^\circ = 90^\circ</m>.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    A driver in a matatu turns the steering wheel one and a half times to navigate a sharp corner on a narrow road. Calculate the total angle of rotation in degrees.
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    One full rotation is <m>360^\circ</m>.
+                </p>
+                <p>
+                    One and a half rotations = <m>1.5 \times 360^\circ = 540^\circ</m>.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    A classroom door is opened from a closed position until it rests flat against the wall next to it. Assuming the wall is completely flush with the door frame, what is the angle of rotation, and what physical part of the door acts as the centre of rotation?
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    The angle of rotation is <m>180^\circ</m> (a half-turn).
+                </p>
+                <p>
+                    The metal hinges connecting the door to the frame act as the centre of rotation.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    The Earth rotates <m>360^\circ</m> on its axis every <m>24</m> hours. How many degrees does the Earth rotate in exactly <m>2</m> hours?
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    Rotation per hour = <m>\frac{360^\circ}{24} = 15^\circ</m> per hour.
+                </p>
+                <p>
+                    In <m>2</m> hours, the Earth rotates <m>2 \times 15^\circ = 30^\circ</m>.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    A ceiling fan has <m>3</m> identical blades that are evenly spaced around its central motor. Calculate the angle between any two adjacent blades.
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    The total angle around the center is <m>360^\circ</m>. 
+                </p>
+                <p>
+                    Since the <m>3</m> blades are evenly spaced, the angle between adjacent blades is <m>\frac{360^\circ}{3} = 120^\circ</m>.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    A water pump wheel at a farm completes <m>5</m> full rotations every minute. How many degrees does a single point on the edge of the wheel rotate in exactly <m>12</m> seconds?
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    Total rotations per minute (<m>60</m> seconds) = <m>5</m>.
+                </p>
+                <p>
+                    Rotations in <m>12</m> seconds = <m>\frac{12}{60} \times 5 = \frac{1}{5} \times 5 = 1</m> full rotation.
+                </p>
+                <p>
+                    Since it completes exactly <m>1</m> full rotation, the point rotates <m>360^\circ</m>.
+                </p>
+            </answer>
+        </exercise>
+    </exercises>
+
 </subsection>
