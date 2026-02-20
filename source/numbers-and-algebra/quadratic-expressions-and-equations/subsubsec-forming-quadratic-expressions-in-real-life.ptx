@@ -22,9 +22,128 @@
         </ul>
     </objectives>
 
-     <p>
+    <p>
         Quadratic expressions often arise when working with area and geometric situations.
     </p>
+
+    <activity>
+        <title>Design a frame</title>
+        <statement>
+            <p>
+                Imagine you are framing a picture for someone. The picture is 7 cm <m>\times</m> 5 cm, and you want to make a custom wood frame of uniform width <m>x</m> around all four sides. In terms of <m>x</m>:
+            </p>
+            <image width="90%">
+            <shortdescription>Framed picture with dimensions</shortdescription>
+            <latex-image>
+            \begin{tikzpicture}[scale=1]
+
+                % Define colors
+                \definecolor{frameColor}{RGB}{220, 220, 220} % Neutral gray
+                \definecolor{photoColor}{RGB}{255, 255, 255} % White
+
+                % 1. The Outer Frame (Total Area)
+                \draw[thick, fill=frameColor] (-1.5,-1.5) rectangle (8.5,6.5);
+                
+                % 2. The Inner Photo
+                \draw[thick, fill=photoColor] (0,0) rectangle (7,5);
+                \node at (3.5, 2.5) {\textbf{5 $\times$ 7 Photo}};
+
+                % 3. Dimension Arrows for the Frame Width (x)
+                % Left side x
+                \draw[&lt;-&gt;, &gt;=Stealth] (-1.5, 2.5) -- (0, 2.5) node[midway, above] {$x$};
+                % Right side x
+                \draw[&lt;-&gt;, &gt;=Stealth] (7, 2.5) -- (8.5, 2.5) node[midway, above] {$x$};
+                % Top side x
+                \draw[&lt;-&gt;, &gt;=Stealth] (3.5, 5) -- (3.5, 6.5) node[midway, right] {$x$};
+                % Bottom side x
+                \draw[&lt;-&gt;, &gt;=Stealth] (3.5, 0) -- (3.5, -1.5) node[midway, right] {$x$};
+
+                % 4. Total Dimension Labels
+                % Total Width label at the bottom
+                \draw[decorate, decoration={brace, amplitude=10pt, mirror}] (-1.5,-2) -- (8.5,-2) node[midway, below=10pt] {Total Length = $7 + 2x$};
+                
+                % Total Length label at the right
+                \draw[decorate, decoration={brace, amplitude=10pt}] (9, 6.5) -- (9, -1.5) node[midway, right=10pt] {Total Width = $5 + 2x$};
+
+            \end{tikzpicture}
+            </latex-image>
+            </image>
+            <ol>
+                <li><p>What are the widths and height of the framed picture?</p></li>
+                <li><p>What is the total area of the framed picture?</p></li>
+                <li><p>What is the total area of the frame without the picture (in other words, how much wood do you need)?</p></li>
+                <li><p>Write each of the expressions in standard form. Geometrically, what does the quadratic, linear and constant terms represent?</p></li>
+            </ol>
+        </statement>
+    </activity>
+
+    <paragraphs>
+        <title>Conclusion</title>
+        <p>
+            In the picture below we can see which parts of the expression correspond to the different areas of the frame. The four corners (yellow) represent the <m>x^2</m> term, the four sides (blue) represent the <m>x</m> term, and the photo (white) represents the constant term:
+        </p>
+        <ul>
+            <li>Area = <m>4x^2 + 24x + 35</m></li>
+            <li>1 photo: <m>35 \text{ cm}^2</m></li>
+            <li>4 sides: <m>7x + 7x + 5x + 5x = 24x \text{ cm}^2</m></li>
+            <li>4 corners: <m>4x^2 \text{ cm}^2</m></li>    
+        </ul>
+        <image width="80%">
+            <shortdescription>Quadratic expression as area of a framed picture</shortdescription>
+        <latex-image>
+            \begin{tikzpicture}[scale=1]
+
+                % Define colors
+                \definecolor{cornerColor}{RGB}{255, 215, 0} % Gold
+                \definecolor{sideColor}{RGB}{100, 180, 200}  % Teal-ish
+                \definecolor{photoColor}{RGB}{240, 240, 240} % Light Gray
+
+                % 1. The Original Photo (The Constant 'c')
+                \fill[photoColor] (0,0) rectangle (7,5);
+                \node at (3.5, 2.5) {\textbf{Photo (35)}};
+                \draw (0,0) rectangle (7,5);
+
+                % 2. The Side Strips (The Linear Term 'bx')
+                % Top and Bottom strips
+                \fill[sideColor] (0,5) rectangle (7,6.5);
+                \fill[sideColor] (0,0) rectangle (7,-1.5);
+                \node at (3.5, 5.75) {$7x$};
+                \node at (3.5, -0.75) {$7x$};
+                
+                % Left and Right strips
+                \fill[sideColor] (-1.5,0) rectangle (0,5);
+                \fill[sideColor] (7,0) rectangle (8.5,5);
+                \node[rotate=90] at (-0.75, 2.5) {$5x$};
+                \node[rotate=270] at (7.75, 2.5) {$5x$};
+
+                % 3. The Corners (The Quadratic Term 'ax^2')
+                \fill[cornerColor] (-1.5,5) rectangle (0,6.5);   % Top-Left
+                \fill[cornerColor] (7,5) rectangle (8.5,6.5);    % Top-Right
+                \fill[cornerColor] (-1.5,0) rectangle (0,-1.5);  % Bottom-Left
+                \fill[cornerColor] (7,0) rectangle (8.5,-1.5);   % Bottom-Right
+                
+                \node at (-0.75, 5.75) {$x^2$};
+                \node at (7.75, 5.75) {$x^2$};
+                \node at (-0.75, -0.75) {$x^2$};
+                \node at (7.75, -0.75) {$x^2$};
+
+                % Outlines for clarity
+                \draw[dashed] (-1.5,-1.5) grid[step=1.5] (8.5,6.5);
+                \draw[thick] (-1.5,-1.5) rectangle (8.5,6.5);
+
+                % Labels for dimensions
+                \draw[&lt;-&gt;] (-1.5, 7) -- (0, 7) node[midway, above] {$x$};
+                \draw[&lt;-&gt;] (0, 7) -- (7, 7) node[midway, above] {$7$};
+                \draw[&lt;-&gt;] (7, 7) -- (8.5, 7) node[midway, above] {$x$};
+                
+                \draw[&lt;-&gt;] (-2.2, 0) -- (-2.2, 5) node[midway, left] {$5$};
+                \draw[&lt;-&gt;] (-2.2, 5) -- (-2.2, 6.5) node[midway, left] {$x$};
+                \draw[&lt;-&gt;] (-2.2, 0) -- (-2.2, -1.5) node[midway, left] {$x$};
+
+            \end{tikzpicture}
+        </latex-image>
+        </image>
+    </paragraphs>
 
     <example>
         <statement>
@@ -61,6 +180,19 @@
             </p>
             <p>
                 The area is expressed as a quadratic expression.
+            </p>
+        </solution>
+    </example>
+
+    <example xml:id="ex-football-home-away">
+        <statement>
+            <p>
+                A local football league has <m>n</m> teams. Each pair of teams plays two matches: one at Team A's home ground and one at Team B's home ground. How many matches are played in total? Express your answer as a quadratic expression in <m>n</m>.
+            </p>
+        </statement>
+        <solution>
+            <p>
+                Each of the <m>n</m> teams will play <m>n-1</m> matches in its home ground (one against each other team), because there are <m>n-1</m> other teams to play against (a team cannot play itself). So the total number of ordered matches is <m>n(n-1)</m> which expands to <m>n^2 - n</m>.
             </p>
         </solution>
     </example>
@@ -137,6 +269,38 @@
             </p>
         </solution>
     </example>
+
+    <insight>
+        <title>Quadratic expressions describe interacting growth</title>
+        <p>
+            Quadratic expressions are not just numbers; they describe multidimensional growth. In many real-life
+            situations a quadratic term appears because two independent linear factors interact with each other.
+        </p>
+        <p>
+            A quadratic expression represents the accumulation of different types of growth in a single system:
+        </p>
+        <ul>
+            <li>
+                <p>
+                    The <m>ax^2</m> term captures the "compounding" or "area" effect where a change in <m>x</m>
+                    impacts the result in two directions at once (for example, the four corners of a frame or a
+                    change that affects both price and quantity).
+                </p>
+            </li>
+            <li>
+                <p>
+                    The <m>bx</m> term captures linear growth, where a change in <m>x</m> affects only one dimension
+                    (for example, side strips of a frame).
+                </p>
+            </li>
+            <li>
+                <p>
+                    The constant term represents the baseline or starting state before any changes were made.
+                </p>
+            </li>
+        </ul>
+    </insight>
+
     <exercises xml:id="exercises-forming-quadratic-expressions-in-real-life">
     
     <exercise>
