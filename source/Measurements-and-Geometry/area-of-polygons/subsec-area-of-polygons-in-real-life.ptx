@@ -1,7 +1,7 @@
 <subsection xml:id="subsec-area-of-polygons-in-real-life" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Area of Polygons in Real-Life</title>
     <objectives component="outcomes">
-        <introduction>
+    <introduction>
             <dl>
                 <li>
                     <title>Strand</title>
@@ -18,14 +18,630 @@
             </dl>
         </introduction>
         <ul>
-            <li>Work out the area of a sector of a circle in real-life situations</li>
-            <li>Apply the area of a part of a circle in real-life situations</li>
-            <li>Explore the use of the area of a part of a circle in real-life situations</li>
+            <li>Explore the area of polygons as used in real-life situations</li>
         </ul>
     </objectives>
     <introduction>
         <p>
-            TODO
+            In everyday life students there are  many situations where they need to
+            estimate the area of a piece of land, a roof, a classroom floor or the
+            cover of a water tank.
+        </p>
+        <p>
+            In this section we learn how to apply area formulas for triangles,
+            quadrilaterals, regular polygons and irregular polygons. 
         </p>
     </introduction>
+
+    <p><strong>Summary of area techniques</strong></p>
+    <dl>
+        <li>
+            <title>Triangles</title>
+            <p>Use <m>A=\tfrac12ab\sin C</m> for two sides and included angle, Heron's formula if all three sides are known.</p>
+        </li>
+        <li>
+            <title>Quadrilaterals</title>
+            <p>Split into two triangles along a diagonal and add; rectangles and parallelograms use base <m>\times</m> height.</p>
+        </li>
+        <li>
+            <title>Regular <m>n</m>-gons</title>
+            <p>Divide into <m>n</m> congruent triangles with vertex angle <m>360^\circ/n</m>.</p>
+        </li>
+        <li>
+            <title>Irregular polygons</title>
+            <p>Decompose into triangles or other familiar shapes; measure and estimate when necessary.</p>
+        </li>
+    </dl>
+
+    <!-- EXAMPLE: triangular plot -->
+    <example xml:id="ex-triangular-plot">
+        <title>Area of a Triangular Plot</title>
+        <statement>
+            <p>
+                A farmer near Eldoret has a triangular plot of land. Two sides measure
+                <m>50\,\text{m}</m> and <m>80\,\text{m}</m>, and the angle between them is
+                <m>60^\circ</m>. Estimate the area of the plot.
+            </p>
+        </statement>
+        <solution>
+            <p>
+                Use the formula for the area of a triangle when two sides and the
+                included angle are known:
+            </p>
+            <md>
+                <mrow>A \amp= \frac{1}{2} ab \sin C</mrow>
+            </md>
+            <p>
+                Substituting the given values:
+            </p>
+            <md>
+                <mrow>A \amp= \frac{1}{2} \times 50 \times 80 \times \sin 60^\circ</mrow>
+                <mrow>\amp= 2000 \times \frac{\sqrt3}{2}</mrow>
+                <mrow>\amp= 1000\sqrt3 \approx 1732\,\text{m}^2</mrow>
+            </md>
+            <p>
+                The triangular plot has area approximately <m>1732\,\text{m}^2</m>.
+            </p>
+        </solution>
+    </example>
+        
+
+    <!-- EXAMPLE: surveyor field -->
+    <example xml:id="ex-survey-field">
+        <title>Surveying an Irregular Field</title>
+        <statement>
+            <p>
+                A surveyor in Kisumu is measuring a piece of land that is not quite a
+                rectangle, as shown below.  He records the lengths of the four sides:
+                <m>AB=100\,\text{m}, BC=80\,\text{m},
+                CD=120\,\text{m}, DA=90\,\text{m}</m>, and he also measures the
+                diagonal <m>AC=150\,\text{m}</m>.  The angle between <m>AB</m> and
+                <m>AC</m> at point A is <m>35^\circ</m>, and the angle between <m>AC</m>
+                and <m>CD</m> at point C is <m>60^\circ</m>.  Estimate the total area
+                of the field by splitting it into two triangles.
+            </p>
+            <image width="55%">
+            <latex-image label="ex-survey-field-diag">
+                \begin{tikzpicture}[scale=0.6]
+                    % coordinates for quadrilateral
+                    \coordinate (A) at (0,0);
+                    \coordinate (B) at (5.5,0);
+                    \coordinate (C) at (6,2.5);
+                    \coordinate (D) at (1,3);
+                    % draw sides
+                    \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
+                    % diagonal
+                    \draw[thick,dashed] (A) -- (C);
+                    % point labels
+                    \node[below left] at (A) {A};
+                    \node[below right] at (B) {B};
+                    \node[above right] at (C) {C};
+                    \node[above left] at (D) {D};
+                    % side lengths
+                    \node[below] at ($(A)!0.5!(B)$) {100 m};
+                    \node[right] at ($(B)!0.5!(C)$) {80 m};
+                    \node[above] at ($(C)!0.5!(D)$) {120 m};
+                    \node[left] at ($(D)!0.5!(A)$) {90 m};
+                    % diagonal length
+                    \node[above left] at ($(A)!0.5!(C)$) {150 m};
+                    % angle markers
+                    \draw pic[draw=black,angle radius=1.2cm,"$35^\circ$"] {angle=B--A--C};
+                    \draw pic[draw=black,angle radius=1.2cm,"$60^\circ$"] {angle=D--C--A};
+                \end{tikzpicture}
+            </latex-image>
+            </image>
+        </statement>
+        <solution>
+            <p>
+                Split the field along the diagonal <m>AC</m>, giving triangles
+                <m>ABC</m> and <m>ACD</m>.  We find each area using the formula
+                <m>\frac12 ab\sin C</m> and then add them.
+            </p>
+            <p>
+                For triangle <m>ABC</m>:
+            </p>
+            <md>
+                <mrow>A_{ABC} \amp= \frac12 \times 100 \times 150 \times \sin 35^\circ</mrow>
+                <mrow>\amp\approx 7500 \times 0.574 \approx 4305\,\text{m}^2</mrow>
+            </md>
+            <p>
+                For triangle <m>ACD</m>:
+            </p>
+            <md>
+                <mrow>A_{ACD} \amp= \frac12 \times 150 \times 120 \times \sin 60^\circ</mrow>
+                <mrow>\amp= 9000 \times \frac{\sqrt3}{2} \approx 7794\,\text{m}^2</mrow>
+            </md>
+            <p>
+                Adding the two areas gives a total of about
+                <m>4305 + 7794 \approx 12\,099\,\text{m}^2</m>, so the irregular field covers
+                roughly <m>12\,100\,\text{m}^2</m>.
+            </p>
+        </solution>
+    </example>
+
+    <!-- EXAMPLE: pavilion and forecourt -->
+    <example xml:id="ex-pavilion-forecourt">
+        <title>Area of a Pavilion and Forecourt</title>
+        <statement>
+            <p>
+                A village school in Kilifi wants to pave a new outdoor area consisting
+                of a regular hexagonal pavilion attached to a triangular forecourt.
+                The hexagon will have sides of <m>6\,\text{m}</m> and the forecourt is
+                a triangle with two sides <m>6\,\text{m}</m>, meeting the hexagon at an angle of <m>60^\circ</m> as shown below.
+            </p>
+            <image width="60%">
+            <latex-image label="ex-pavilion-forecourt-diag">
+                \begin{tikzpicture}[scale=0.4]
+                    % regular hexagon centre (0,0) radius 6
+                    \foreach \i in {0,60,...,300} {
+                        \coordinate (H\i) at (\i:6);
+                    }
+                    \draw[thick] (H0) -- (H60) -- (H120) -- (H180) -- (H240) -- (H300) -- cycle;
+                    % triangle attached at H0
+                    \coordinate (A) at (H60);
+                    \coordinate (B) at ($(A)+(120:6)$);
+                    \coordinate (C) at (H120);
+                    \draw[thick] (A) -- (B) -- (C) -- cycle;
+                    % labels
+                    \node[above right] at (A) {A};
+                    \node[above] at (B) {B};
+                    \node[above left] at (C) {C};
+                    % side lengths hexagon (optional omitted for clarity)
+                    \node[above right] at ($(H0)!0.5!(H60)$) {6 m};
+                    % triangle sides
+                    \node[above right] at ($(A)!0.5!(B)$) {6 m};
+                    \node[below] at ($(A)!0.5!(C)$) {6 m};
+                    % angle marker at A
+                    \draw pic[draw=black,angle radius=1cm,"$60^\circ$"] {angle=B--A--C};
+                \end{tikzpicture}
+            </latex-image>
+            </image>
+            <p>
+                Estimate the total area that must be tiled, and then find the cost if
+                tiles are <m>5\,500</m> Kenyan shillings per square metre. Give your answer rounded to the nearest shilling.
+            </p>
+        </statement>
+        <solution>
+            <p>
+                The total area is the sum of the hexagon and triangle areas.
+            </p>
+            <p>
+                For the hexagon, divide it into 6 identical triangles by joining the
+                centre to each corner.  Each triangle has two sides of length
+                <m>6\,\text{m}</m> and the angle between them at the centre is
+                <m>360^\circ/6 = 60^\circ </m>.
+            </p>
+            <p>
+                Use the sine formula <m>A=\tfrac12ab\sin C</m> for one such triangle:
+            </p>
+            <md>
+                <mrow>A_{small} \amp= \frac12 \times 6 \times 6 \times \sin 60^\circ</mrow>
+                <mrow>\amp= 18 \times \frac{\sqrt3}{2} = 9\sqrt3\, \text{m}^2</mrow>
+            </md>
+            <p>
+                Multiplying by 6 gives
+            </p>
+            <md>
+                <mrow>A_{hex} \amp= 6 \times 9\sqrt3 = 54\sqrt3\,\text{m}^2</mrow>
+            </md>
+            <p>
+                Triangle: the forecourt is a triangle with sides 6 m and 6m and an
+                included angle of 60°.  We apply the same sine formula
+                <m>A=\tfrac12ab\sin C</m> to find its area:
+            </p>
+            <md>
+                <mrow>A_{tri} \amp= \frac12 \times 6 \times 6 \times \sin 60^\circ</mrow>
+                <mrow>\amp= 18 \times \frac{\sqrt3}{2} = 9\sqrt3\,\text{m}^2</mrow>
+            </md>
+            <p>
+                Total area is
+                <m>54\sqrt3 + 9\sqrt3 = 63\sqrt3 \approx 109.1\,\text{m}^2</m>.  At <m>5,500\,\text{KSh/m}^2</m> the paving will cost approximately
+            </p>
+            <md>
+                <mrow>\text{Cost} \amp= 63\sqrt3 \times 5\,500 \approx 600\,156\,\text{KSh}</mrow>
+            </md>
+            <p>
+                So the school should budget <m>600\,156</m> Kenyan shillings.
+            </p>
+        </solution>
+    </example>
+
+    <exercises xml:id="exercises-polygons-real">
+        <title>Exercises</title>
+
+    <!-- EXAMPLE: Kisumu triangular plot (Heron's formula) -->
+    <exercise xml:id="ex-kisumu-triangular-plot">
+        <statement>
+            <p>
+                A landowner near Kisumu has a triangular plot whose three
+                boundary lengths are measured as <m>50\, \text{m}</m>, <m>65\,\text{m}</m> and <m>77\,\text{m}</m>. There is no convenient
+                angle to measure. Find the area of the plot.
+            </p>
+        </statement>
+        <solution>
+            <p>
+                Use Heron's formula. First compute the semi-perimeter
+                <me>s=\tfrac{1}{2}(a+b+c)</me>.
+            </p>
+            <md>
+                <mrow>s = \tfrac{1}{2}(50+65+77) = 96\,\text{m}</mrow>
+                <mrow>A = \sqrt{s(s-a)(s-b)(s-c)}</mrow>
+                <mrow>\quad= \sqrt{96\times46\times31\times19}</mrow>
+                <mrow>\quad= \sqrt{2\,601\,024} \approx 1612.8\,\text{m}^2</mrow>
+            </md>
+            <!-- <p>
+                <em>Note:</em> Heron's formula is especially useful when only side
+                lengths are available (for example when measuring fence lengths);
+                the area can then be used for estimating seed, fertiliser or
+                fencing costs.
+            </p> -->
+        </solution>
+    </exercise>
+
+        <exercise xml:id="ex-pentagonal-garden">
+            <statement>
+                <p>A Mombasa school wants a regular octagonal flower bed, where the distance from the center to a vertex is <m>4\,\text{m}</m>. Calculate the area of the bed, giving your answer exactly in simplest surd form.</p>
+            </statement>
+            <solution>
+                <p>Join the centre to each vertex to form 8 congruent isosceles triangles. Each triangle has two equal sides of length <m>R</m> (the circumradius) and vertex angle <m>\theta=360^\circ/8=45^\circ</m>.</p>
+
+                <p>The area of one triangle is
+                <md>
+                    <mrow>A_{triangle}=\tfrac{1}{2}R^{2}\sin\theta=\tfrac{1}{2}R^{2}\sin45^\circ=\tfrac{1}{2}R^{2}\cdot\dfrac{\sqrt{2}}{2}=\dfrac{R^{2}}{2\sqrt{2}}</mrow>
+                </md>
+                </p>
+
+                <p>Multiplying by 8 gives the octagon area
+                <md>
+                    <mrow>A_{octagon}=8A_{triangle}=8\cdot\dfrac{R^{2}}{2\sqrt{2}}=2\sqrt{2}\;R^{2}</mrow>
+                </md>
+                </p>
+
+                <p>With <m>R=4\,\text{m}</m> we obtain
+                <md>
+                    <mrow>A=2\sqrt{2}\times 4^{2}=32\sqrt{2}\,\text{m}^{2}</mrow>
+                </md>
+                </p>
+
+                <p>The exact area is <m>32\sqrt{2}\,\text{m}^{2}</m>. (Approx. <m>45.25\,\text{m}^{2}</m>.)</p>
+            </solution>
+        </exercise>
+
+        <exercise xml:id="ex-irregular-pentagon">
+            <statement>
+                <p>
+                    An irregular pentagon has been split into three triangles by
+                    drawing diagonals from vertex <m>A</m> to vertices
+                    <m>C</m> and <m>D</m> as shown in the diagram. The side-lengths
+                    of the three triangles are given; use Heron's formula to find
+                    the area of each triangle and hence the total area of the
+                    pentagon.
+                </p>
+                <p>
+                    Triangle side-lengths (metres):
+                </p>
+                <ul>
+                    <li><m>\triangle ABC:</m> 8, 9, 11</li>
+                    <li><m>\triangle ACD:</m> 11, 7, 10</li>
+                    <li><m>\triangle ADE:</m> 10, 12, 9</li>
+                </ul>
+                <image width="60%">
+                <latex-image label="exercise-irreg-pentagon">
+                    \begin{tikzpicture}[scale=1]
+                        % pentagon vertices
+                        \coordinate (A) at (0,0);
+                        \coordinate (B) at (2,0.2);
+                        \coordinate (C) at (3.8,1.2);
+                        \coordinate (D) at (2,2.6);
+                        \coordinate (E) at (-1.2,0.5);
+                        % outer polygon
+                        \draw[thick] (A) -- (B) -- (C) -- (D) -- (E) -- cycle;
+                        % diagonals from A
+                        \draw[thick,dashed] (A) -- (C) (A) -- (D);
+                        % labels for vertices
+                        \foreach \p/\pos in {A/below left,B/below,C/right,D/above right,E/above}
+                            \node[\pos] at (\p) {\p};
+                        % edge labels
+                        \node[below] at ($(A)!0.5!(B)$) {8 m};
+                        \node[below right] at ($(B)!0.5!(C)$) {9 m};
+                        \node[right] at ($(C)!0.5!(D)$) {7 m};
+                        \node[above left] at ($(D)!0.5!(E)$) {12 m};
+                        \node[left] at ($(E)!0.5!(A)$) {9 m};
+                        % diagonal labels (shared between triangles)
+                        \node[above] at ($(A)!0.5!(C)$) {11 m};
+                        \node[right] at ($(A)!0.5!(D)$) {10 m};
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+                <p>
+                    Calculate the area to one decimal place and give the final
+                    answer in square metres.
+                </p>
+            </statement>
+            <hint>
+                <p>Use Heron's formula: for sides <m>a,b,c</m>, semi-perimeter
+                <m>s=\tfrac12(a+b+c)</m> and area
+                <m>A=\sqrt{s(s-a)(s-b)(s-c)}</m>.</p>
+            </hint>
+            <solution>
+                <p>We compute each triangle's area using Heron's formula.</p>
+                <md>
+                    <mrow>\triangle ABC:\quad s=\tfrac12(8+9+11)=14</mrow>
+                    <mrow>\quad A_{ABC}=\sqrt{14(14-8)(14-9)(14-11)}=\sqrt{1260}\approx35.5\,\text{m}^2</mrow>
+                    <mrow>\triangle ACD:\quad s=\tfrac12(11+7+10)=14</mrow>
+                    <mrow>\quad A_{ACD}=\sqrt{14(14-11)(14-7)(14-10)}=\sqrt{1176}\approx34.3\,\text{m}^2</mrow>
+                    <mrow>\triangle ADE:\quad s=\tfrac12(10+12+9)=15.5</mrow>
+                    <mrow>\quad A_{ADE}=\sqrt{15.5(15.5-10)(15.5-12)(15.5-9)}\approx44.1\,\text{m}^2</mrow>
+                    <mrow>\text{Total area} = 35.5+34.3+44.1 \approx 113.9\,\text{m}^2</mrow>
+                </md>
+                <p>The pentagon therefore has area approximately <m>113.9\,\text{m}^2</m>.</p>
+            </solution>
+        </exercise>
+
+    <exercise xml:id="ex-window-pane-grid">
+        <statement>
+            <p> 
+                A carpenter in Nairobi is making a rectangular window with a grid of six glass panes (arranged in 3 rows and 2 columns). Each glass pain is a square with length <m>30\,\text{cm}</m>. The frame is made of wood, and the external borders should be <m>10\,\text{cm}</m> on all sides, while the internal borders should be <m>5\,\text{cm}</m>
+            </p>
+            <image width="55%">
+            <latex-image label="exercise-window-grid-diag">
+                \begin{tikzpicture}[x=0.5cm,y=0.5cm]
+                    \def\pane{3}
+                    \def\f{1}
+                    \def\d{0.5}
+                    \def\W{8.5}
+                    \def\H{12}
+
+                    % outer rectangle (filled to represent wooden frame)
+                    \coordinate (SW) at (0,0);
+                    \coordinate (NE) at (\W,\H);
+                    \fill[brown!50] (SW) rectangle (NE);
+
+                    % Draw panes as white rectangles so the frame and dividers
+                    % remain visible as the brown background between panes.
+                    \draw[thin] (\f,\f) rectangle (\f+\pane,\f+\pane);
+                    \fill[white] (\f,\f) rectangle (\f+\pane,\f+\pane);
+                    \draw[thin] (\f+\pane+\d,\f) rectangle (\f+2*\pane+\d,\f+\pane);
+                    \fill[white] (\f+\pane+\d,\f) rectangle (\f+2*\pane+\d,\f+\pane);
+                    \draw[thin] (\f,\f+\pane+\d) rectangle (\f+\pane,\f+2*\pane+\d);
+                    \fill[white] (\f,\f+\pane+\d) rectangle (\f+\pane,\f+2*\pane+\d);
+                    \draw[thin] (\f+\pane+\d,\f+\pane+\d) rectangle (\f+2*\pane+\d,\f+2*\pane+\d);
+                    \fill[white] (\f+\pane+\d,\f+\pane+\d) rectangle (\f+2*\pane+\d,\f+2*\pane+\d);
+                    \draw[thin] (\f,\f+2*\pane+2*\d) rectangle (\f+\pane,\f+3*\pane+2*\d);
+                    \fill[white] (\f,\f+2*\pane+2*\d) rectangle (\f+\pane,\f+3*\pane+2*\d);
+                    \draw[thin] (\f+\pane+\d,\f+2*\pane+2*\d) rectangle (\f+2*\pane+\d,\f+3*\pane+2*\d);
+                    \fill[white] (\f+\pane+\d,\f+2*\pane+2*\d) rectangle (\f+2*\pane+\d,\f+3*\pane+2*\d);
+
+                    % Optional outer outline for clarity
+                    \draw[line width=0.6pt] (SW) rectangle (NE);
+                \end{tikzpicture}
+            </latex-image>
+            </image>
+            <ol>
+                <li>Determine the total area of glass required in <m>\text{m}^2</m></li>
+                <li>Find the width and length of the frame in meters </li>
+                <li>By subtracting the glass area from the total area, find the area of wood required for the frame and dividers.</li>
+            </ol>
+        </statement>
+        <solution>
+            <p>
+                We need to convert to meters to ensure our answers are in the correct units.
+            </p>
+            <p>
+                <ol>
+                    <li>
+                        <p>
+                            Each pane has area <m>0.3\,\text{m} \times 0.3\,\text{m} = 0.09\,\text{m}^2</m>. With 6 panes, the total glass area is <m>6 \times 0.09 = 0.54\,\text{m}^2</m>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The total width of the frame is the sum of the widths of the panes, internal dividers and external borders. Since there is one internal divider between the two columns of panes, the total width is
+                            <md>
+                                <mrow> W = 2 \times 0.1 + 1 \times 0.05 + 2 \times 0.3 = 0.85\,\text{m} </mrow>
+                            </md>
+                            For the height, there are two internal dividers, so
+                            <md>
+                                <mrow> H = 2 \times 0.1 + 2 \times 0.05 + 3 \times 0.3 = 1.2\,\text{m} </mrow>
+                            </md>                  
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The total area of the window is <m>W \times H = 0.85\,\text{m} \times 1.2\,\text{m} = 1.02\,\text{m}^2</m>. Subtracting the glass area gives the area of wood required:
+                            <md>
+                                \text{Wood Area} = 1.02 - 0.54 = 0.48 \text{ m}^2
+                            </md>
+                            
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </solution>
+    </exercise>
+    <exercise>
+        <statement>
+            <p>
+                Footballs are created using a pattern of 12 regular pentagons and 20 regular hexagons, as shown below.
+                <image source="AI-soccer-ball.png" width="50%">
+                <shortdescription>Football</shortdescription>
+                </image>
+            </p>
+            <p>
+                Let's consider just one petal, consisting of one pentagon surrounded by five hexagons, as shown below. The side length is <m>10 \text{cm}</m>.
+            </p>
+            <p>
+                <image>
+                    <latex-image>
+                \begin{tikzpicture}[scale=2, line join=round]
+                % pentagon circumradius (adjust for size)
+                    \pgfmathsetmacro{\Rp}{1}
+                    \pgfmathsetmacro{\sineThirtySix}{sin(36)}
+                    \pgfmathsetmacro{\cosineThirtySix}{cos(36)}
+                    % hexagon circumradius so hex side = pentagon side: Rh = 2*Rp*sin(36)
+                    \pgfmathsetmacro{\Rh}{2*\Rp*\sineThirtySix}
+                    % distance from pentagon centre to hexagon centre so sides meet:
+                    % D = apothem_p + apothem_h = Rp*cos(36) + Rh*cos(30)
+                    \pgfmathsetmacro{\D}{\Rp*\cosineThirtySix + \Rh*cos(30)}
+
+                % draw pentagon vertices (angles start at 90 so a point is "up")
+                \foreach \i in {0,1,2,3,4} {
+                    \pgfmathsetmacro{\ang}{90+72*\i}
+                    \coordinate (P\i) at (\ang:\Rp);
+                }
+
+                % filled central pentagon
+                \draw[very thick, fill=black!10] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- cycle;
+
+                % draw five hexagons around the pentagon
+                \foreach \i in {0,1,2,3,4} {
+                    \pgfmathsetmacro{\cang}{90+72*\i+36} % direction from origin to hex centre (midpoint of pentagon edge)
+                    \coordinate (C\i) at (\cang:\D);
+                    % vertices of hexagon: base rotation = cang+150, then +60*k
+                    \draw[very thick, fill=white] 
+                    ($(C\i)+({\cang+150}:\Rh)$) --
+                    ($(C\i)+({\cang+210}:\Rh)$) --
+                    ($(C\i)+({\cang+270}:\Rh)$) --
+                    ($(C\i)+({\cang+330}:\Rh)$) --
+                    ($(C\i)+({\cang+30}:\Rh)$) --
+                    ($(C\i)+({\cang+90}:\Rh)$) -- cycle;
+                }
+
+                % thin seam lines to emphasize shared edges (optional)
+                \foreach \i in {0,1,2,3,4} {
+                    \pgfmathsetmacro{\angA}{90+72*\i}
+                    \pgfmathsetmacro{\angB}{90+72*\i+72}
+                    \draw[line width=0.6pt] (\angA:\Rp) -- (\angB:\Rp);
+                }
+                \node[below] at ($(P2)!0.5!(P3)$) {10 cm};
+                \end{tikzpicture}
+
+                </latex-image>
+                </image>
+                </p>
+                <ol>
+                    <li>
+                        <p>
+                            Find the area of the central pentagon
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Find the area of the six hexagons, and thus the area of the petal
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Why can't we just glue together 12 petals? How many should we use?
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Calculate the total area of the 12 pentagons and 20 hexagons, and thus the surface area of the net.
+                        </p>
+                    </li>
+                </ol>
+        </statement>
+         <solution>
+            <ol>
+                <li>
+                    <p> To find the area of the pentagon, divide it into 5 triangles from the center, whose bases are the edges (length <m>10 \text{cm}</m>). Draw the height <m>h</m> for the center <m>O</m> to the edge (bisecting it at <m>F</m>).</p>
+                    <image>
+                        <latex-image>
+                            \begin{tikzpicture}[scale=2]
+                            \def\R{1.6} % circumradius
+                            % pentagon vertices (one point upwards)
+                            \foreach \i in {0,...,4}{
+                                \pgfmathsetmacro{\ang}{90+72*\i}
+                                \coordinate (P\i) at (\ang:\R);
+                            }
+                            \coordinate (O) at (0,0);
+
+                            % draw pentagon
+                            \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- cycle;
+
+                            % highlight one interior triangle (central triangle O-P0-P1)
+                            \fill[blue!12] (O) -- (P0) -- (P1) -- cycle;
+                            \draw[thick] (O) -- (P0) (O) -- (P1);
+
+                            % midpoint of side P0--P1 (foot of apothem)
+                            \coordinate (M01) at ($(P0)!0.5!(P1)$);
+                            \node[above left] at (M01) {F};
+                            \node[above left] at ($(M01)!0.5!(P0)$) {5 cm};
+
+                            % apothem from centre to midpoint (perpendicular to side)
+                            \draw[red,thick] (O) -- node[left] {$h$} (M01);
+
+                            % right-angle marker at M01 between OM01 and M01P0
+                            \draw pic["",draw=black,angle radius=3mm] {right angle=O--M01--P0};
+                            \draw pic[draw=black,angle radius=15mm, "$36^\circ$"] {angle=P0--O--M01};
+                            
+
+                            % mark side length s on side P0--P1
+                            \draw ($(P0)!0.5!(P4)$) node[above right] {10 cm};
+
+                            % mark circumradius R to one vertex
+                            \draw[gray,dashed] (O) -- node[right] {$R$} (P0);
+
+                            % labels for points
+                            \node[below left] at (O) {O};
+                            \node[above] at (P0) {A};
+                            \node[above left] at (P1) {B};
+                            \node[below left] at (P2) {C};
+                            \node[below right] at (P3) {D};
+                            \node[above right] at (P4) {E};
+                            \end{tikzpicture}
+                        </latex-image>
+                        
+                    </image>
+                    
+                    <p>The angle <m>\angle AOB</m> is <m>360^\circ/5=72^\circ</m>, so since <m>F</m> bisects <m>AB</m>, <m>\angle AOF = 72/2 = 36^\circ</m>. Using trigonometry, we have: </p>
+                    <md>
+                        <mrow> \tan 36^\circ \amp = \frac{5}{h} </mrow> 
+                        <mrow> h \amp = \frac{5}{\tan 36^\circ}</mrow>
+                        <mrow> \amp \approx 6.8819 </mrow>
+                    </md>
+                    <p>Area of one triangle is <m>\tfrac{1}{2}\times10\times h\approx34.41\,\text{cm}^2</m>, so the pentagon area is <m>5\times34.41\approx172.05\,\text{cm}^2</m>.</p>
+                </li>
+
+                <li>
+                    <p> The hexagon can be split into 6 equilateral triangles of length <m>10\,\text{cm}</m>, so each has area </p>
+                    <md>
+                        <mrow> A_{\text{triangle}} \amp = \frac{1}{2} \times 10 \times 10 \times \sin 60^\circ  </mrow>
+                        <mrow> \amp = \frac{1}{2} \times 100 \times \frac{\sqrt{3}}{2} </mrow>
+                        <mrow> \amp = 25\sqrt{3} </mrow>
+                    </md>
+                    <p>So the total area of a hexagon is: </p>
+                    <md>
+                        <mrow>A_{\text{hexagon}}=6 \times 25\sqrt{3} = 150\sqrt{3}</mrow>
+                    </md>
+                    <p>Thus the petal has total area: </p>
+                    <md>
+                        <mrow>A_{\text{petal}} \amp = 5 A_{\text{hexagon}} + A_{\text{pentagon}} </mrow>
+                        <mrow> \amp = 5 \times 150\sqrt{3} + 172.05 </mrow>
+                        <mrow> \amp \approx 1471\,\text{cm}^2 </mrow>
+                    </md>
+                    
+                </li>
+
+                <li>
+                    <p>To get 12 pentagons would require 12 petals, which would give <m>5 \times 12 = 60</m> hexagons, which is too many. The correct net uses 20 hexagons, so we need to use only 4 petals, giving <m>4 \times 5 = 20</m> hexagons and <m>4</m> pentagons. We then add the remaining 8 pentagons separately to get the total of 12 pentagons.</p>
+                </li>
+
+                <li>
+                    <p> We have </p>
+                    <md>
+                        <mrow> A_{\text{ball}} \amp = 4 \times A_{\text{petal}} + 8 \times A_{\text{pentagon}} </mrow>
+                        <mrow> \amp = 4 \times 1471 + 8 \times 172.05 </mrow>
+                        <mrow> \amp \approx 6,056\,\text{cm}^2 </mrow>
+                    </md>
+                </li>
+            </ol>
+        </solution>
+
+
+        
+    </exercise>
+        </exercises>
+
 </subsection>
