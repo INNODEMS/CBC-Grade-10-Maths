@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Congruence Triangles (JSXGraph Demo)</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/1.4.0/jsxgraph.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/1.4.0/jsxgraphcore.js"></script>
-</head>
-<body>
-    <!-- Based on jsxgraph-template.html  [oai_citation:0‡jsxgraph-template.html](sediment://file_00000000357c71fdae9f962dd120a7ae) -->
-    <div id="jsxgraph-congruence-triangles" class="jxgbox" style="width: 900px; height: 675px; border: 1px solid #ccc;"></div>
-
-    <script>
 /* congruence-triangles.js
    Congruence via rigid motions: translate + rotate triangles.
 
@@ -331,6 +317,3 @@
     board.on('update', showCheckIfMatched);
 
 })();
-    </script>
-</body>
-</html>
