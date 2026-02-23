@@ -1,9 +1,5 @@
-/* congruence-triangles.js
+/* congruence-overlap.js
    Congruence via rigid motions: translate + rotate triangles.
-
-   Controls:
-   - Drag P (anchor) to translate a triangle.
-   - Drag H (handle) on the circle around P to rotate the triangle about P.
 */
 
 (function () {
@@ -12,7 +8,7 @@
     // -----------------------------
     // Board setup
     // -----------------------------
-    var board = JXG.JSXGraph.initBoard('jsxgraph-congruence-triangles', {
+    var board = JXG.JSXGraph.initBoard('jsxgraph-congruence-overlap', {
         boundingbox: [-6, 6, 6, -6],
         keepAspectRatio: true,
         axis: false,
@@ -69,7 +65,7 @@
 
         var M = board.create('point', [Mx0, My0], {
             name: '',
-            size: 4,
+            size: 8,
             face: 'circle',
             strokeColor: strokeColor,
             fillColor: strokeColor,
@@ -180,9 +176,9 @@
     // Choose a "nice" scalene triangle so congruence is visually meaningful.
     // Center the fixed (black) triangle at the board center by using the same
     // shape as `localCongruent` but shifted so its centroid is at (0,0).
-    var fixedA = board.create('point', [-5/3, -1], { name: 'A', size: 3, fixed: true, strokeColor: '#000000', fillColor: '#000000' });
-    var fixedB = board.create('point', [7/3, -1], { name: 'B', size: 3, fixed: true, strokeColor: '#000000', fillColor: '#000000' });
-    var fixedC = board.create('point', [-2/3,  2], { name: 'C', size: 3, fixed: true, strokeColor: '#000000', fillColor: '#000000' });
+    var fixedA = board.create('point', [-5/3, -3], { name: 'A', size: 3, fixed: true, strokeColor: '#000000', fillColor: '#000000' });
+    var fixedB = board.create('point', [7/3, -3], { name: 'B', size: 3, fixed: true, strokeColor: '#000000', fillColor: '#000000' });
+    var fixedC = board.create('point', [-2/3,  0], { name: 'C', size: 3, fixed: true, strokeColor: '#000000', fillColor: '#000000' });
 
     board.create('polygon', [fixedA, fixedB, fixedC], {
         fillColor: '#000000',
@@ -194,9 +190,9 @@
     board.create('text', [0, 5.6,
         'Are the blue and red triangles congruent to the black triangle?'
     ], { fontSize: 18, fixed: true, anchorX: 'middle' });
+    board.create('text', [0, 5, 'Try to translate (using the central dot) and rotate (using the vertices)'], { fontSize: 16, fixed: true, anchorX:'middle'});
+    board.create('text', [0, 4.6, 'the blue and red triangle so they overlap with the black triangle.'], { fontSize: 16, fixed: true, anchorX:'middle'});
 
-    board.create('text', [-5.5, -1.5, 'Fixed triangle (black)'], { fontSize: 16, fixed: true, strokeColor: '#000000' });
-    board.create('text', [-5.5, 4.8, 'Translate using the central dot; drag vertices to rotate'], { fontSize: 12, fixed: true });
 
     // -----------------------------
     // Local coordinate models
@@ -222,7 +218,7 @@
     // Congruent (blue): same size/shape as fixed, but initially rotated/translated.
     var blueTri = createRigidTriangle({
         localVerts: localCongruent,
-        anchor: [3, 2],
+        anchor: [-2, 0],
         handleAngle: Math.PI / 2,
         handleRadius: 2.0,
         fillColor: '#2a6fdb',
@@ -234,7 +230,7 @@
     // Not congruent (red): different shape.
     var redTri = createRigidTriangle({
         localVerts: localNonCongruent,
-        anchor: [4, -4],
+        anchor: [5, 0],
         handleAngle: Math.PI / 2,
         handleRadius: 2.0,
         fillColor: '#d64545',
@@ -247,25 +243,28 @@
     var fixedPts = [fixedA, fixedB, fixedC];
 
     // Status indicators and labels
-    var statusBlue = board.create('text', [-1.6, 4.6, '\u2716'], {
+    var statusBlue = board.create('text', [-3, -5, '\u2716'], {
         fontSize: 44,
         strokeColor: '#c0392b',
         fillColor: '#c0392b',
         fixed: true,
         visible: true,
-        anchorX: 'middle'
+        anchorX: 'middle',
+        anchorY: 'middle'
     });
-    var statusBlueLabel = board.create('text', [-3.6, 4.6, 'Blue triangle matching with black'], { fontSize: 12, fixed: true, anchorX: 'left' });
+    var statusBlueLabel = board.create('text', [-3, -4, 'Blue triangle matching with black'], { fontSize: 16, fixed: true, anchorX: 'middle' });
+    var statusBlueCongruent = board.create('text', [-3, -5.7, 'Blue triangle is congruent to the black!'], { fontSize: 16, fixed: true, anchorX: 'middle', visible: false});
 
-    var statusRed = board.create('text', [1.6, 4.6, '\u2716'], {
+    var statusRed = board.create('text', [3, -5, '\u2716'], {
         fontSize: 44,
         strokeColor: '#c0392b',
         fillColor: '#c0392b',
         fixed: true,
         visible: true,
-        anchorX: 'middle'
+        anchorX: 'middle',
+        anchorY: 'middle',
     });
-    var statusRedLabel = board.create('text', [-0.4, 4.6, 'Red triangle matching with black'], { fontSize: 12, fixed: true, anchorX: 'left' });
+    var statusRedLabel = board.create('text', [3, -4, 'Red triangle matching with black'], { fontSize: 16, fixed: true, anchorX: 'middle' });
 
     // Check function: compare triangle vertices to fixed triangle vertices for both blue and red
     function showCheckIfMatched() {
@@ -285,9 +284,11 @@
             if (maxdB <= tol) {
                 statusBlue.setText('\u2714');
                 statusBlue.setAttribute({ strokeColor: '#0a8f2c', fillColor: '#0a8f2c', visible: true });
+                statusBlueCongruent.setAttribute({visible:true});
             } else {
                 statusBlue.setText('\u2716');
                 statusBlue.setAttribute({ strokeColor: '#c0392b', fillColor: '#c0392b', visible: true });
+                statusBlueCongruent.setAttribute({visible:false});
             }
         }
 
