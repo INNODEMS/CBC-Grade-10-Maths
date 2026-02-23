@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Reflection with Translation</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/1.4.0/jsxgraph.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/1.4.0/jsxgraphcore.js"></script>
+
+<style>
+.jxgbox { width: 700px; height: 350px; border: 1px solid #ccc; border-radius: 8px; }
+</style>
+</head>
+<body>
+
+<div id="jsxgraph-reflect-polygon-multi" class="jxgbox"></div>
+
+<script>
+/* reflect-polygon-multi-translate.js
+   - Vertices are individually draggable.
+   - Drag inside the polygon to translate the entire figure.
+   - Reflection across x = 0 updates dynamically.
+*/
+
+/* global JXG */
+(function () {
+  'use strict';
+
+  const BOARD_ID = 'jsxgraph-reflect-polygon-multi';
+  const BB = [-8, 5, 8, -5];
+  const MIRROR_X = 0;
+
+  function reflectX(x) {
+    return 2 * MIRROR_X - x;
+  }
+
+  const board = JXG.JSXGraph.initBoard(BOARD_ID, {
+    boundingbox: BB,
+    axis: false,
+    grid: false,
+    keepAspectRatio: true,
+    showNavigation: false,
+    pan: { enabled: false },
+    zoom: { enabled: false }
+  });
+
+  board.renderer.container.style.backgroundColor = '#fbfbfb';
+
+  // ---------------- Mirror Line ----------------
+  const topPoint = board.create('point', [MIRROR_X, BB[1]], { visible: false, fixed: true });
+  const botPoint = board.create('point', [MIRROR_X, BB[3]], { visible: false, fixed: true });
+
+  board.create('line', [topPoint, botPoint], {
+    straightFirst: false,
+    straightLast: false,
+    strokeColor: '#222',
+    strokeWidth: 2,
+    dash: 2,
+    name: 'x = 0',
+    withLabel: true,
+    fixed: true
+  });
+
+  // ---------------- Original Vertices ----------------
+  const vertices = [
+    board.create('point', [-6.2, -1.5], { name: 'A', size: 4 }),
+    board.create('point', [-5.0,  1.8], { name: 'B', size: 4 }),
+    board.create('point', [-3.6,  0.9], { name: 'C', size: 4 }),
+    board.create('point', [-4.1, -2.2], { name: 'D', size: 4 }),
+    board.create('point', [-5.7, -2.6], { name: 'E', size: 4 })
+  ];
+
+  const polygon = board.create('polygon', vertices, {
+    fillColor: '#2b6cb0',
+    fillOpacity: 0.25,
+    strokeColor: '#2b6cb0',
+    strokeWidth: 3
+  });
+
+  // ---------------- Translation Logic ----------------
+  let startMouse = null;
+  let startPositions = [];
+
+  polygon.on('down', function (e) {
+    startMouse = board.getUsrCoordsOfMouse(e);
+    startPositions = vertices.map(pt => [pt.X(), pt.Y()]);
+  });
+
+  polygon.on('drag', function (e) {
+    if (!startMouse) return;
+
+    const currentMouse = board.getUsrCoordsOfMouse(e);
+    const dx = currentMouse[0] - startMouse[0];
+    const dy = currentMouse[1] - startMouse[1];
+
+    vertices.forEach(function (pt, i) {
+      pt.moveTo([
+        startPositions[i][0] + dx,
+        startPositions[i][1] + dy
+      ]);
+    });
+  });
+
+  polygon.on('up', function () {
+    startMouse = null;
+  });
+
+  // ---------------- Reflection ----------------
+  const reflectedVertices = vertices.map(function (pt) {
+    return board.create('point', [
+      function () { return reflectX(pt.X()); },
+      function () { return pt.Y(); }
+    ], { visible: false, fixed: true });
+  });
+
+  board.create('polygon', reflectedVertices, {
+    fillColor: '#c53030',
+    fillOpacity: 0.18,
+    strokeColor: '#c53030',
+    strokeWidth: 3,
+    dash: 1
+  });
+
+})();
+</script>
+
+</body>
+</html>

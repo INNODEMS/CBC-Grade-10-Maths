@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSXGraph</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/1.4.0/jsxgraphcore.js"></script>
+</head>
+<body>
+    <div id="jxgbox" class="jxgbox" style="width: 500px; height: 400px;"></div>
+    <script>
+        /* reflect-polygon.js
+   Drag a polygon around on the left; show its reflection in a vertical mirror line.
+
+   Notes:
+   - No axes or grid (clean visual).
+   - The polygon is defined by offsets from a single draggable "handle" point.
+   - The reflected polygon is computed by reflecting each vertex across x = MIRROR_X.
+
+   Intended for Grade 10 transformations: reflection across a vertical line.
+*/
+
+/* global JXG */
+(function () {
+  'use strict';
+
+  // ---------- Configuration ----------
+  const BOARD_ID = 'jsxgraph-reflect-polygon'; // must match the <div> id in PreTeXt/HTML
+  const BB = [-8, 5, 8, -5];                  // [left, top, right, bottom]
+  const MIRROR_X = 0;                         // mirror line is x = MIRROR_X
+  const CLAMP_MARGIN = 0.25;                  // keep handle slightly left of mirror line
+
+  // Polygon shape relative to the handle point H (a simple "house" pentagon)
+  // (Avoid magic numbers by collecting them here.)
+  const OFFSETS = [
+    [-2.2, -1.2],
+    [-2.2,  1.0],
+    [-1.1,  2.1],
+    [ 0.0,  1.0],
+    [ 0.0, -1.2]
+  ];
+
+  // Styling (kept centralized for easy edits)
+  const STYLE_ORIGINAL = {
+    fillColor: '#2b6cb0',
+    fillOpacity: 0.25,
+    strokeColor: '#2b6cb0',
+    strokeWidth: 3,
+    vertices: { visible: false }
+  };
+
+  const STYLE_REFLECTION = {
+    fillColor: '#c53030',
+    fillOpacity: 0.18,
+    strokeColor: '#c53030',
+    strokeWidth: 3,
+    dash: 1,
+    vertices: { visible: false }
+  };
+
+  // ---------- Helpers ----------
+  function reflectX(x) {
+    return 2 * MIRROR_X - x;
+  }
+
+  // ---------- Board ----------
+  const board = JXG.JSXGraph.initBoard(BOARD_ID, {
+    boundingbox: BB,
+    axis: false,
+    grid: false,
+    keepAspectRatio: true,
+    showCopyright: false,
+    showNavigation: false,
+    pan: { enabled: false },
+    zoom: { enabled: false }
+  });
+
+  // Soft background (optional, but helps the mirror line stand out)
+  board.renderer.container.style.backgroundColor = '#fbfbfb';
+
+  // Mirror line x = MIRROR_X
+  const topPoint = board.create('point', [MIRROR_X, BB[1]], { visible: false, fixed: true });
+  const botPoint = board.create('point', [MIRROR_X, BB[3]], { visible: false, fixed: true });
+
+  board.create('line', [topPoint, botPoint], {
+    straightFirst: false,
+    straightLast: false,
+    strokeColor: '#444',
+    strokeWidth: 2,
+    dash: 2,
+    fixed: true,
+    name: '',
+    withLabel: false
+  });
+
+  board.create('text', [MIRROR_X + 0.15, BB[1] - 0.6, 'mirror'], {
+    fontSize: 14,
+    strokeColor: '#444',
+    anchorX: 'left',
+    fixed: true
+  });
+
+  // Draggable handle point (the only thing students need to drag)
+  const H = board.create('point', [-4.5, 0], {
+    name: '',
+    size: 5,
+    face: 'o',
+    strokeColor: '#1a202c',
+    fillColor: '#1a202c',
+    highlight: true
+  });
+
+  // Keep the handle on the left side so the “original” stays left of the mirror.
+  H.on('drag', function () {
+    const x = H.X();
+    const y = H.Y();
+    if (x > MIRROR_X - CLAMP_MARGIN) {
+      H.moveTo([MIRROR_X - CLAMP_MARGIN, y]);
+    }
+  });
+
+  // Build the original polygon vertices from the handle + offsets
+  const originalPts = OFFSETS.map(([dx, dy]) =>
+    board.create('point', [
+      function () { return H.X() + dx; },
+      function () { return H.Y() + dy; }
+    ], { visible: false, name: '', fixed: false })
+  );
+
+  // And the reflected vertices
+  const reflectedPts = OFFSETS.map(([dx, dy]) =>
+    board.create('point', [
+      function () { return reflectX(H.X() + dx); },
+      function () { return H.Y() + dy; }
+    ], { visible: false, name: '', fixed: true })
+  );
+
+  // Draw polygons
+  board.create('polygon', originalPts, STYLE_ORIGINAL);
+  board.create('polygon', reflectedPts, STYLE_REFLECTION);
+
+  // Optional labels (kept small + out of the way)
+  board.create('text', [-7.6, 4.5, 'original'], { fontSize: 14, strokeColor: '#2b6cb0', fixed: true });
+  board.create('text', [ 5.3, 4.5, 'reflection'], { fontSize: 14, strokeColor: '#c53030', fixed: true });
+})();
+    </script>
+</body>
+</html>
