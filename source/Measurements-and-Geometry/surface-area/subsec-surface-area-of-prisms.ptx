@@ -40,10 +40,10 @@
                 </p>
                 <p>
                     <term>Materials Needed:</term>
-                    <ol>
+                    <ol marker="a)">
                         <li>
                             <p>
-                                Solids made of cardboard or plastic (cube, rectangular prism, cylinder, cone, pyramid, sphere)
+                                Solids cube, or cuboid wood waste blocks
                             </p>
                         </li>
                         <li>
@@ -53,12 +53,12 @@
                         </li>
                         <li>
                             <p>
-                                Scissors, rulers, tape, glue and String (for measuring curved edges like the circumference of a circle)
+                                Rulers
                             </p>
                         </li>
                         <li>
                             <p>
-                                Pre-made nets of solids (optional)
+                                Pre-made nets of cubes or cuboids (optional)
                             </p>
                         </li>
                     </ol>
@@ -66,9 +66,9 @@
                 <sidebyside widths="50% 50%">
                     <p>
                         <term>Instructions:</term>
-                        <ul>
+                        <ol marker="i)">
                             <li>
-                                <p>Choose one solid object (e.g., cube, cone, cylinder).</p>
+                                <p>Choose one solid object (cube or cuboid).</p>
                             </li>
                             <li>
                                 <p>Create a net for the chosen object (either by unfolding a model or using drawn net templates).</p>
@@ -82,23 +82,49 @@
                             <li>
                                 <p>Add up all face areas.</p>
                             </li>
-                        </ul>
+                        </ol>
                     </p>
-                    <image width="65%">
-                        <latex-image label="cube-net-surface-area">
-                            \begin{tikzpicture}
-                                \draw (0,0) rectangle (4,4);
-                                \draw (4,0) rectangle (8,4);
-                                \draw (-4,0) rectangle (0,4);
-                                \draw (0,4) rectangle (4,8);
-                                \draw (0,-4) rectangle (4,0);
-                                \draw (0,-8) rectangle (4,-4);
+                    <image width="70%">
+                    <latex-image label="borders-squares-identical">
+                        \begin{tikzpicture}
+                            % Missing line
+                            \draw (0,4) -- (4,4);
+                            
+                            
+                            \fill[gray!30] (0,0) -- (0,4) -- (4,4) -- (4,0) -- cycle;
+                            
+                            % Drawing the edges
+                            \draw (0,-8) -- (0,-4) -- (0,0) -- (0,4) -- (0,8) -- (4,8) -- (4,4) -- (4,0) -- (4,-4) -- (4,-8) -- (0,-8) -- cycle;
+                            \draw (-4,0) -- (0,0) -- (4,0) -- (8,0) -- (8,-4) -- (4,-4) -- (0,-4) -- (-4,-4) -- (-4,0);
+                            
+                            % Adding dimension labels
+                            \node[left] at (0,6) {8 cm};
+                            \node[right] at (4,6) {8 cm};
+                            \node[right] at (4,2) {8 cm};
+                            \node[left] at (0,2) {8 cm};
+                            \node[above] at (2,8) {8 cm};
+                            \node[below] at (2,-8) {8 cm};
+                            \node[below] at (6,0) {8 cm};
+                            \node[below] at (-2,0) {8 cm};
+                            
+                            % Adding rectangle labels
+                            \node at (2,6) {A};
+                            \node at (2,2) {B};
+                            \node at (2,-2) {C};
+                            \node at (2,-6) {D};
+                            \node at (-2,-2) {E};
+                            \node at (6,-2) {F};
 
-                                \node at (2,2) {8 cm};
-                            \end{tikzpicture}
-                        </latex-image>
+                        \end{tikzpicture}
+                    </latex-image>
                     </image>
                 </sidebyside>
+                <p>
+                    What will happen if the surface area doubles in size?
+                </p>
+                <p>
+                    Why do bigger cubes have more surface area?
+                </p>
             </statement>
         </activity>
 
@@ -121,12 +147,27 @@
             <p>
                 where <m>l</m> = length, <m>w</m> = width, <m>h</m> = height.
             </p>
+            <p>
+                A <m>\textbf{prism}</m> is a geometric object with two identical, parallel bases and straight sides connecting them.
+            </p>
+            <p>
+                The surface area of a cube or cuboid is the total area of all its faces. It can be calculated by finding the area of each face and then adding them together.
+            </p>
+            <p>
+                A <m>\textbf{cuboid}</m> is also called a rectangular Prism. A <m> \textbf{cube}</m> is a rectangular prism with all sides of equal length.
+            </p>
+            <p>
+                Examples of right prisms are  cylinders, rectangular prisms, cubes and triangular prisms.
+            </p>
+            <p>
+                <m>\textbf{Types of Prisms}</m> include rectangular and cube prisms, Triangular Prisms and Cylinders.
+            </p>
         </insight>
 
         <example>
             <statement>
                 <p>
-                    Work out the surface area of a cube whose side is 8 cm.
+                    Work out the surface area of a cube whose side is <m>12 \ \text{cm}</m>.
                 </p>
             </statement>
             <solution>
@@ -136,13 +177,13 @@
                         S.A = 6s^2
                     </me>
                     <me>
-                        = 6(8^2)
+                        = 6(12^2)
                     </me>
                     <me>
-                        = 6(64)
+                        = 6(144)
                     </me>
                     <me>
-                        = 384 \text{ cm}^2
+                        = 864 \text{ cm}^2
                     </me>
                 </p>
             </solution>
@@ -151,17 +192,179 @@
         <example>
             <statement>
                 <p>
-                    Find the surface area of a rectangular prism measuring <m>8 \text{cm}</m> by <m>3 \text{cm}</m> by <m>14 \text{cm}</m>.
+                   Find the surface area of the following rectangular prism:
+                </p>   
+                   <image width="50%">
+                    <latex-image label="rectangular-prism-one" >
+                        \begin{tikzpicture}
+                            % Set background color
+                            \fill[cyan!50] (-1, -0.5) rectangle (8, 3.5);
+
+                            % Draw the front face
+                            \draw[thick] (0,0) -- (5,0) -- (5,2) -- (0,2) -- cycle;
+
+                            % Draw the top face
+                            \draw[thick] (0,2) -- (2,3) -- (7,3) -- (5,2);
+                            \draw[dashed] (2,3) -- (2,1);
+
+                            % Draw the side face
+                            \draw[thick] (5,0) -- (7,1) -- (7,3);
+                            \draw[dashed] (2,1) -- (7,1);
+                            \draw[dashed] (0,0) -- (2,1);
+                            % Dimension labels
+                            \node[below] at (2.5,0) {8 cm};
+                            \node[below] at (7,0.8) {14 cm};
+                            \node[left] at (0,1) {3 cm};
+                        \end{tikzpicture}
+                    </latex-image>
+                   </image> 
+            </statement>
+            <solution>
+                <p>
+                     Sketch and label the net of the prism.
+                </p>
+                <image width="50%">
+                <latex-image label="rectangular-prism-two">
+                    \begin{tikzpicture}[rotate=90]
+                        % Set background color
+                        \fill[cyan!50] (-5, -2) rectangle (8, 12.5);
+
+                        % Draw main rectangle
+                        \draw[thick] (-5,0) rectangle (8,10);
+
+                        % Vertical overlapping rectangle
+                        \draw[thick] (2,-2) --(2,10);
+                        \draw[thick] (-3,0) --(-3,-2) --(2,-2) --(2,0);
+                        % Vertical division lines
+                        \draw[thick] (-3,10) -- (-3,0);
+                        \draw[thick] (4,10) -- (4,0);
+                        \draw[thick] (-3,10) --(-3,12) --(2,12) --(2,10);
+
+                        % Dimension labels
+                        \node[above] at (3,10) {\huge 2 cm};
+                        \node[above] at (0,12) {\huge  8 cm};
+                        \node[above] at (5,10) { \huge  8 cm};
+                        \node[right] at (7,5) {\huge  14 cm};
+                        \node[above] at (-4, 10) {\huge  2 cm};
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+                <p>
+                     Find the areas of the different shapes in the ne
+                </p>
+                <p>
+                    <md>
+                        <mrow>\text{large rectangle} = \amp \text{ perimeter of small rectangle} \times \text{length} </mrow>
+                        <mrow> = \amp (3+8+3+8)\text{cm} \times 14\text{cm} </mrow>
+                        <mrow> = \amp 22\text{cm}  \times 14\text{cm}  </mrow>
+                        <mrow> = \amp 308\text{cm}^2  </mrow>
+                    </md>
+                    <md>
+                        <mrow> 2 \, \text{small rectangle} \amp = 2(8 \text{cm} \times 3\text{cm} ) </mrow>
+                        <mrow> = \amp 2(18) \,\text{cm}  </mrow>
+                        <mrow> = \amp 36\text{cm}^2 </mrow>
+                    </md>
+                </p>
+                <p>
+                     Find the sum of the areas of the faces
+                </p>
+                <p>
+                    <md>
+                    <mrow>\text{large rectangle}  + \text{small rectangle} = \amp (308 + 36)\text{cm}^2 </mrow>
+                        <mrow> = \amp 344 \, \text{cm}^2</mrow>
+                    </md> 
+                </p>
+                <p>
+                    The surface area of the rectangular prism is <m>344 \, \text{cm}^2</m>
+                </p>
+            </solution>
+        </example>
+
+        <example>
+            <statement>
+                <p>
+                    Work out the surface area of the cube whose side is <m>8 \, \text{cm}</m>.
+                </p>
+            </statement>
+            <solution>
+            <image width="70%">
+                    <latex-image label="borders-surface-area-cube">
+                        \begin{tikzpicture}
+                            % Drawing the vertical part of the net with different colors
+                            \fill[yellow!10] (0,-8) -- (0,-4) -- (0,0) -- (0,4) --(4,4)   -- (4,-4) -- (4,-8) -- (0,-8) -- cycle;
+                            \fill[blue!20](0,4) --(4,4) --(4,8) --(0,8) --cycle;
+                            % Missing line
+                            \draw (0,4) -- (4,4);
+
+                            % Drawing the horizontal part of the net with different colors
+                            \fill[blue!20] (-4,0) -- (0,0) -- (4,0) -- (8,0) -- (8,-4) -- (4,-4) -- (0,-4) -- (-4,-4) -- (-4,0);
+
+                            \fill[blue!20] (0,-4) -- (0,0) -- (4,0) -- (4,-4) -- cycle;
+                            \fill[cyan!20] (-4,-4) -- (0,-4) -- (0,0) -- (-4,0) -- cycle;
+                            \fill[cyan!20] (4,-4) -- (8,-4) -- (8,0) -- (4,0) -- cycle;
+
+                            % Drawing the edges
+                            \draw (0,-8) -- (0,-4) -- (0,0) -- (0,4) -- (0,8) -- (4,8) -- (4,4) -- (4,0) -- (4,-4) -- (4,-8) -- (0,-8) -- cycle;
+                            \draw (-4,0) -- (0,0) -- (4,0) -- (8,0) -- (8,-4) -- (4,-4) -- (0,-4) -- (-4,-4) -- (-4,0);
+
+                            % Adding dimension labels
+                            \node[left] at (0,6) {8 cm};
+                            \node[right] at (4,6) {8 cm};
+                            \node[right] at (4,2) {8 cm};
+                            \node[left] at (0,2) {8 cm};
+                            \node[above] at (2,8) {8 cm};
+                            \node[below] at (2,-8) {8 cm};
+                            \node[below] at (6,0) {8 cm};
+                            \node[below] at (-2,0) {8 cm};
+
+                            % Adding rectangle labels
+                            \node at (2,6) {A};
+                            \node at (2,2) {B};
+                            \node at (2,-2) {C};
+                            \node at (2,-6) {D};
+                            \node at (-2,-2) {E};
+                            \node at (6,-2) {F};
+
+                        \end{tikzpicture}
+                    </latex-image>
+                    </image>
+
+                <p>
+                    The surface area of the cube is:
+                </p>
+                <p>
+                    The area of one face.
+                <md>
+                    
+                    <mrow> = \amp 8 \,\text{cm} \times 8 \, \text{cm} </mrow>
+                    <mrow> = \amp 64 \, \text{cm}^2</mrow>
+                </md>
+                    There are 6 faces therefore the surface area of the cube is;
+                <md>    
+                    <mrow> = \amp  6 \, \times 64 \, \text{cm}^2</mrow>
+                    <mrow> = \amp 384 \, \text{cm}^2</mrow>
+                </md> 
+                </p>
+                <p xml:id="auto_vmvoo6nc">
+                    The surface area of the cube is 384 <m>\text{cm}^2</m>
+                </p>
+            </solution>
+        </example>
+
+        <example>
+            <statement>
+                <p>
+                    Find the surface area of a rectangular prism measuring <m>8 \, \text{cm}</m> by <m>3 \, \text{cm}</m> by <m>14 \, \text{cm}</m>.
                 </p>
             </statement>
             <solution>
                 <p>
-                    The surface area of the rectangular prism is calculated using the formula:
+                    The surface area of the rectangular prism is calculated as:
                     <me>
                         S.A = 2(lw + lh + wh)
                     </me>
                     <me>
-                        = 2(8 \times 3 + 8 \times 14 + 3 \times 14)
+                        = 2((8 \times 3) + (8 \times 14) + (3 \times 14))
                     </me>
                     <me>
                         = 2(24 + 112 + 42)
@@ -175,6 +378,316 @@
                 </p>
             </solution>
         </example>
+
+        <exercise  label="ex-calculating-the-surface-area-of-the-cube-from-its-net">
+            <stack label="stk-calculating-the-surface-area-of-the-cube-from-its-net" source="stack/top/2-0-Measurement-Geometry/2-7-Surface-Area-and-Volume-of-Solids/2-7-1-Surface-area-of-Prisms/Calculating-the-surface-area-of-the-cube-from-its-net-.xml" />
+        </exercise>
+
+        <exercise  label="ex-calculating-the-surface-area-of-a-cube">
+            <stack label="stk-calculating-the-surface-area-of-a-cube" source="stack/top/2-0-Measurement-Geometry/2-7-Surface-Area-and-Volume-of-Solids/2-7-1-Surface-area-of-Prisms/Calculating-the-Surface-Area-of-a-cube.xml" />
+        </exercise>
+
+        <exercise  label="ex-determining-the-surface-area-of-the-closed-cuboid-from-its-net">
+            <stack label="stk-determining-the-surface-area-of-the-closed-cuboid-from-its-net" source="stack/top/2-0-Measurement-Geometry/2-7-Surface-Area-and-Volume-of-Solids/2-7-2-Surface-area-of-a-cuboid/Determining-the-surface-area-of-the-closed-cuboid-from-its-net-.xml" />
+        </exercise>
+
+        <exercise  label="ex-surface-area-of-an-open-rectangular-chalk-box">
+            <stack label="stk-surface-area-of-an-open-rectangular-chalk-box" source="stack/top/2-0-Measurement-Geometry/2-7-Surface-Area-and-Volume-of-Solids/2-7-2-Surface-area-of-a-cuboid/Surface-Area-of-an-Open-Rectangular-Chalk-Box.xml" />
+        </exercise>
+
+        <exercises>
+            <exercise>
+                <statement>
+                    <p>
+                        A cube has side length <m>9 \, \text{cm}</m>. Find its total surface area.
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        <m>486 \, \text{cm}^2</m>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A rectangular box measures <m>12 \, \text{cm}</m> by <m>7 \, \text{cm}</m> by <m>5 \, \text{cm}</m>. Calculate its total surface area.
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        <m>382 \, \text{cm}^2</m>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A pet shop wants to construct a cube-shaped aquarium with a side length of <m>1.2</m> meters. The aquarium needs to be made entirely of glass, including the base and all four vertical sides, <m> \textbf{but the top will remain open}.</m> If the cost of glass is Ksh. <m>750</m> per square meter, find the total cost of constructing the aquarium.
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        <m>Ksh. 10,800</m>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A cuboid-shaped water tank measures <m>4 \, \text{m}</m> by <m>3 \, \text{m}</m> by <m>2 \, \text{m}</m>. Only the four walls and the base are painted. Find the area painted.
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        <m>52 \, \text{m}^2</m>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A large wooden dice with sides measuring <m>12 \, \text{cm}</m> each is to be painted on all six faces. If one milliliter of paint covers <m>5 \, \text{cm}^2</m>, calculate the total amount of paint required to cover the dice completely.
+                    </p>
+                </statement>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A cube has a side length of <m>25 \, \text{cm}</m>. If the cost of the cardboard material is Ksh.<m>110</m> per square centimeter, determine the total cost of making one box. How much would it cost to produce <m>500</m> such boxes?
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        The total cost of making one box is <m>Ksh. 82,500</m>.
+                    </p>
+                    <p>
+                        The total cost of producing <m>500</m> boxes is <m>Ksh. 41,250,000</m>.
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <sidebyside>
+                        <p>
+                            A rectangular cardboard box has dimensions of <m>10 \, \text{cm}</m> by <m>8 \, \text{cm}</m> by <m>5 \, \text{cm}</m>. Calculate its total surface area of the material required to construct the box.
+                        </p>
+                        <image width="50%">
+                            <latex-image label="cuboid-one-two-net-example-net">
+                                \begin{tikzpicture}
+                                    \coordinate (A) at (0,0,0);
+                                    \coordinate (B) at (6,0,0);
+                                    \coordinate (C) at (6,4,0);
+                                    \coordinate (D) at (0,4,0);
+                                    \coordinate (E) at (0,0,5);
+                                    \coordinate (F) at (6,0,5);
+                                    \coordinate (G) at (6,4,5);
+                                    \coordinate (H) at (0,4,5);
+                                    
+                                    % Draw the front face
+                                    \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
+                                    % Draw the back face
+                                    \draw[thick] (E) -- (F) -- (G) -- (H) -- cycle;
+                                    % Draw the top face
+                                    \draw[thick] (D) -- (C) -- (G) -- (H) -- cycle;
+                                    % Draw the side face
+                                    \draw[thick] (B) -- (C) -- (G) -- (F) -- cycle;
+                                    
+                                    % Draw the edges
+                                    \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
+                                    \draw[thick] (E) -- (F) -- (G) -- (H) -- cycle;
+                                    \draw[thick] (A) -- (E);
+                                    \draw[thick] (B) -- (F);
+                                    \draw[thick] (C) -- (G);
+                                    \draw[thick] (D) -- (H);
+                                    % Adding dimensions
+                                    \node[below] at (1,-2,0) {10 cm};
+                                    
+                                    \node[right] at (7,3,3) {8 cm};
+                                    
+                                    \node[right] at (6,0,2.5) {5 cm};
+                                \end{tikzpicture}  
+                            </latex-image>
+                        </image>
+                    </sidebyside>
+                </statement>
+                <answer>
+                    <p>
+                        <m>340 \, \text{cm}^2</m>.
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        <ol>
+                            <li>
+                                <p>
+                                    A gift shop sells a rectangular gift box with dimensions <m>30 \, \text{cm}</m> by <m>20 \, \text{cm}</m> by <m>12 \, \text{cm}</m>. If the shop owner wants to wrap the entire box, including all its faces, calculate the minimum amount of wrapping paper needed. If the wrapping paper is sold in rolls of <m>1 \, \text{m}^2</m>, how many rolls would be needed to wrap <m>50</m> boxes?
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    A gift box is being wrapped for a special occasion, and it has dimensions of <m>20 \, \text{cm}</m> in length, <m>12 \, \text{cm}</m> in width, and <m>10 \, \text{cm}</m> in height. Calculate the exact amount of wrapping paper required to cover the entire box without any overlap.
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        <ol>
+                            <li>
+                                <p>
+                                    <m>12 \, \text{rolls}</m>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <m>1120 \, \text{cm}^2</m>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A metallic shipping box measures <m>25 \, \text{cm}</m> by <m>15 \, \text{cm}</m> by <m>10 \, \text{cm}</m>. Calculate the total amount of sheet metal required to construct the box, assuming no material is wasted.
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        <m>1300 \, \text{cm}^2</m>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <sidebyside>
+                    <p>
+                        The total surface area of a cuboid is given as <m>484 \, \text{cm}^2</m> and two of its dimensions are <m>8 \, \text{cm}</m> and <m>6 \, \text{cm}</m>. Determine the missing height (h) of the cuboid.
+                    </p>
+                    <image width="50%">
+                        <latex-image label="cuboid-one-net-example-one">
+                            \begin{tikzpicture}
+                                \coordinate (A) at (0,0,0);
+                                \coordinate (B) at (6,0,0);
+                                \coordinate (C) at (6,4,0);
+                                \coordinate (D) at (0,4,0);
+                                \coordinate (E) at (0,0,5);
+                                \coordinate (F) at (6,0,5);
+                                \coordinate (G) at (6,4,5);
+                                \coordinate (H) at (0,4,5);
+                                
+                                % Draw the front face
+                                \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
+                                % Draw the back face
+                                \draw[thick] (E) -- (F) -- (G) -- (H) -- cycle;
+                                % Draw the top face
+                                \draw[thick] (D) -- (C) -- (G) -- (H) -- cycle;
+                                % Draw the side face
+                                \draw[thick] (B) -- (C) -- (G) -- (F) -- cycle;
+                                
+                                % Draw the edges
+                                \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
+                                \draw[thick] (E) -- (F) -- (G) -- (H) -- cycle;
+                                \draw[thick] (A) -- (E);
+                                \draw[thick] (B) -- (F);
+                                \draw[thick] (C) -- (G);
+                                \draw[thick] (D) -- (H);
+                                % Adding dimensions
+                                \node[below] at (1,-2,0) {8 cm};
+                                
+                                \node[right] at (7,3,3) {6 cm};
+                                
+                                \node[right] at (6,0,2.5) { ? cm};
+                            \end{tikzpicture}  
+                        </latex-image>
+                        </image>
+                    </sidebyside>
+                </statement>
+                <answer>
+                    <p>
+                        <m> \approx 13.86 \, \text{cm}</m>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        The school's storage room has dimensions of <m>4 \, \text{m} \times 5 \, \text{m} \times 3 \, \text{m}</m>. If the walls, floor and ceiling need to be painted, determine the total area that will be covered with paint. 
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        <m>94 \, \text{m}^2</m>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A classroom has a length of <m>10</m> meters, a width of <m>8</m> meters and a height of <m>4</m> meters. The four walls and the ceiling need to be painted, but the floor is covered with tiles. If one litre of paint covers <m>5</m> square meters, calculate the total area to be painted and determine the amount of paint required.
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        Total area to be painted: <m>160 \, \text{m}^2</m>
+                    </p>
+                    <p>
+                        Amount of paint required: <m>32 \, \text{litres}</m>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        <m>\textbf{Awasii company}</m> is designing packaging box with dimensions <m>25 \, \text{cm}</m> by <m>15 \, \text{cm}</m> by <m>10 \, \text{cm}</m>. The company wants to reduce costs by using the minimum possible material while ensuring the entire box is covered. Calculate the total surface area of the box and determine the cost of producing <m>1,000</m> such boxes if the material costs Ksh. <m>135</m> per square centimeter.
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        Total surface area of the box: <m>1300 \, \text{cm}^2</m>
+                    </p>
+                    <p>
+                        Cost of producing 1,000 boxes: Ksh. <m>135,000</m>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A metal storage container is shaped like a cuboid with dimensions <m>6 \, \text{m}</m> by <m>4 \, \text{m}</m> by <m>3 \, \text{m}</m>. The container needs to be insulated on all its surfaces except for one of the <m>6 \, \text{m}</m> by <m>4 \, \text{m}</m> walls, which serves as the entrance. If the insulation material costs Ksh.<m>295</m> per square meter, determine the total cost of insulating the container.
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        Total surface area of the container: <m>108 \, \text{m}^2</m>
+                    </p>
+                    <p>
+                        Area to be insulated: <m>96 \, \text{m}^2</m>
+                    </p>
+                    <p>
+                        Total cost of insulating the container: Ksh. <m>28,320</m>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A cube-shaped metal water tank with a side length of <m>2.5</m> meters is being coated with a protective layer on all its surfaces to prevent rusting. If the coating material costs Ksh.<m>150</m> per square meter, calculate the total cost to coat the entire tank.
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        Total cost to coat the tank: Ksh. <m>5,625</m>
+                    </p>
+                </answer>
+            </exercise>
+        </exercises>
+
     </subsubsection>
 
     <subsubsection xml:id="subsubsec-surface-area-of-triangular-prisms">
@@ -182,178 +695,423 @@
         <activity>
             <statement>
                 <p>
-                    A triangular prism has two identical triangular bases and three rectangular faces.
+                    <term>Work in groups:</term> Form groups of <m>2</m> or <m>3</m> students.
+                </p>
+                <p>
+                    <term>Materials Needed:</term>
+                    <ol>
+                        <li>
+                            <p>
+                                Pen or pencil
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Grid/graph paper or plain paper
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Rulers
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Pre-made nets of triangular prisms (optional)
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+                <p>
+                    <term>Instructions:</term>
                 </p>
 
-                <sidebyside widths="45% 45%">
-                    <image width="60%">
+                <sidebyside widths="45% 45%" valign="middle">
+                    <image>
                         <latex-image label="triangular-prism-solid">
-                            \begin{tikzpicture}
+                            \begin{tikzpicture}[scale=1, every node/.style={scale=0.8}]
+                                % prism vertices
                                 \coordinate (A) at (0,0,0);
                                 \coordinate (B) at (3,0,0);
-                                \coordinate (C) at (1.5,2,0);
-                                \coordinate (D) at (0,0,3);
-                                \coordinate (E) at (3,0,3);
-                                \coordinate (F) at (1.5,2,3);
+                                \coordinate (C) at (1.5,4,0); % Increased height for 10cm scale
+                                \coordinate (D) at (0,0,4);
+                                \coordinate (E) at (3,0,4);
+                                \coordinate (F) at (1.5,4,4);
 
-                                \draw (A)--(B)--(C)--cycle;
-                                \draw (D)--(E)--(F)--cycle;
-                                \draw (A)--(D);
+                                % faces (Rear)
+                                \draw[-] (A)--(B)--(C)--cycle;
+                                
+                                % Connecting edges
+                                \draw (A)--(D) node[midway, left, sloped] {9 cm};
                                 \draw (B)--(E);
                                 \draw (C)--(F);
+                                
+                                % Front face
+                                \draw[thick] (D)--(E)--(F)--cycle;
+
+                                % Measurements on the front triangular base
+                                % Base label
+                                \draw[-] (0,-0.3,4) -- (3,-0.3,4) node[midway, below] {8 cm};
+                                % Height dashed line
+                                \draw[dashed] (1.5,0,4) -- (1.5,4,4) node[midway, right] {10 cm};
+                                % Right angle marker
+                                \draw (1.5,0.2,4) -- (1.7,0.2,4) -- (1.7,0,4);
                             \end{tikzpicture}
                         </latex-image>
                     </image>
 
-                    <image width="60%">
+                    <image>
                         <latex-image label="triangular-prism-net">
-                            \begin{tikzpicture}
+                            \begin{tikzpicture}[scale=0.6, every node/.style={scale=0.8}]
+                                % Main rectangular body
                                 \draw (0,0) rectangle (8,4);
+                                % Triangular flaps
                                 \draw (0,4) -- (4,7) -- (8,4);
                                 \draw (0,0) -- (4,-3) -- (8,0);
+
+                                % Labels
+                                \node[left] at (0,2) {Length ($l$)};
+                                \node[below] at (4,0) {Base ($b$)};
+                                \draw[dashed] (4,4) -- (4,7) node[midway, right] {Height ($h$)};
+                                
+                                % Optional: width of the side rectangles
+                                % \node[above] at (2,4.5) {side}; 
                             \end{tikzpicture}
                         </latex-image>
                     </image>
                 </sidebyside>
-
-                <ol>
-                    <li>Find the area of one triangular base.</li>
-                    <li>Multiply by 2 for both bases.</li>
-                    <li>Find the perimeter of the triangle.</li>
-                    <li>Multiply the perimeter by the prism length to get the lateral area.</li>
-                    <li>Add all areas together.</li>
-                </ol>
+                <p>
+                    <ol marker="a)">
+                        <li>
+                            <p>
+                                In your group, draw a triangular prism and its net on paper.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Label the dimensions of the triangular base and the length of the prism.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Calculate the area of the triangular base.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Calculate the perimeter of the triangular base.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Multiplying the perimeter of the base by the length of the prism to get the lateral area.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Add the areas of the two triangular bases and the lateral area.
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+                <p>
+                    A triangular prism has two identical triangular bases and three rectangular faces.
+                </p>
             </statement>
         </activity>
         <insight>
+            <p>
+                A <m>\textbf{triangular prism}</m> is a geometric object with two identical triangular bases and three rectangular lateral faces. Its surface area is the total area of all its faces, measured in square units (<m>\text{cm}^2 \text{,} \, \text{m}^2</m>, etc.).
+            </p>
+            <p>
+                The surface area of a prism can be calculated as:
+            </p>
             <p>
                 <me>
                     \text{Surface Area of a Prism} = 2(\text{Area of Base}) + (\text{Perimeter of Base} \times \text{Length})
                 </me>
             </p>
-        </insight>
-        <example>
-            <statement>
-                <p>
-                    Find the surface area of a triangular prism with base <m>8 \text{cm}</m>, triangle height <m>3 \text{cm}</m>, and length <m>12 \text{cm}</m>.
-                </p>
-            </statement>
-            <solution>
-                <p>
-                    The area of one triangular base is:
-                    <me>
-                        \text{Area of triangle} = \frac{1}{2} \times 8 \times 3 = 12
-                    </me>
-                    <me>
-                        \text{Two bases} = 24
-                    </me>
-                    <me>
-                        \text{Perimeter} = 8 + 5 + 5 = 18
-                    </me>
-                    <me>
-                        \text{Lateral area} = 18 \times 12 = 216
-                    </me>
-                    <me>
-                        \text{Total S.A} = 24 + 216 = 240 \text{ cm}^2
-                    </me>
-                </p>
-            </solution>
-        </example>
-
-
-        <activity>
-            <statement>
-                <p>
-                    A triangular prism has two identical triangular bases and three rectangular faces.
-                </p>
-
-                <sidebyside widths="45% 45%">
-                    <image width="60%">
-                        <latex-image label="triangular-prism-solidd">
-                            \begin{tikzpicture}
-                                \coordinate (A) at (0,0,0);
-                                \coordinate (B) at (3,0,0);
-                                \coordinate (C) at (1.5,2,0);
-                                \coordinate (D) at (0,0,3);
-                                \coordinate (E) at (3,0,3);
-                                \coordinate (F) at (1.5,2,3);
-
-                                \draw (A)--(B)--(C)--cycle;
-                                \draw (D)--(E)--(F)--cycle;
-                                \draw (A)--(D);
-                                \draw (B)--(E);
-                                \draw (C)--(F);
-                            \end{tikzpicture}
-                        </latex-image>
-                    </image>
-
-                    <image width="60%">
-                        <latex-image label="triangular-prism-nett">
-                            \begin{tikzpicture}
-                                \draw (0,0) rectangle (8,4);
-                                \draw (0,4) -- (4,7) -- (8,4);
-                                \draw (0,0) -- (4,-3) -- (8,0);
-                            \end{tikzpicture}
-                        </latex-image>
-                    </image>
-                </sidebyside>
-
-                <ol>
-                    <li>Find the area of one triangular base.</li>
-                    <li>Multiply by <m>2</m> for both bases.</li>
-                    <li>Find the perimeter of the triangle.</li>
-                    <li>Multiply the perimeter by the prism length to get the lateral area.</li>
-                    <li>Add all areas together.</li>
-                </ol>
-            </statement>
-        </activity>
-
-        <insight>
             <p>
-                 The surface area of a prism can be calculated using the formula:
+                Where:
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            The area of the base is the area of the triangle;
+                            <me>
+                                \text{Area of triangle} = \frac{1}{2} \times \text{base} \times \text{height}
+                            </me>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The perimeter is the sum of the sides of the triangle;
+                            <me>
+                                \text{Perimeter} = \text{side}_1 + \text{side}_2 + \text{side}_3
+                            </me>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The length is the distance between the two triangular bases.
+                            <me>
+                                \text{Length} = \text{distance between bases}
+                            </me>
+                        </p>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                This works for any prism, including rectangular prisms, triangular prisms, and cylinders (where the base is a circle).
+            </p>
+            <p>
+                And we can summarize it as:
                 <me>
-                    \text{Surface Area of a Prism}
-                    =
-                    2(\text{Area of Base})
-                    +
-                    (\text{Perimeter of Base} \times \text{Length})
+                    \text{Surface Area} = 2B + Ph
                 </me>
+                where <m>B</m> is the area of the base, <m>P</m> is the perimeter of the base, and <m>h</m> is the height (or length) of the prism.
             </p>
         </insight>
-
         <example>
             <statement>
                 <p>
-                Find the surface area of a triangular prism with base <m>8 \text{cm}</m>, triangle height <m>3 \text{cm}</m>, and length <m>12 \text{cm}</m>.
+                    Find the surface area of a triangular prism with base <m>8 \, \text{cm}</m>, triangle height <m>3 \, \text{cm}</m>, and length <m>12 \, \text{cm}</m>.
                 </p>
             </statement>
             <solution>
+                <sidebyside widths="40% 50%">
+                <image width="50%">
+                    <shortdescription>Triangular Prism example</shortdescription>
+                <latex-image label="surface-area-triangular-prism-example">
+                    \begin{tikzpicture}  
+                        % Define points
+                        \coordinate (A) at (0,0,0);
+                        \coordinate (B) at (3,0,0);
+                        \coordinate (C) at (1.5,2,0);
+                        \coordinate (D) at (0,0,3);
+                        \coordinate (E) at (3,0,3);
+                        \coordinate (F) at (1.5,2,3);
+
+                        % Draw the base (now at the bottom) with shading
+                        \fill[gray!30] (A) -- (B) -- (C) -- cycle;
+
+                        % Draw the base edges
+                        \draw[thin] (A) -- (B) -- (C) -- cycle;
+
+                        % Draw vertical edges
+                        \draw[thin] (A) -- (D);
+                        \draw[thin] (B) -- (E);
+                        \draw[thin] (C) -- (F);
+
+                        % Draw top face
+                        \draw[thin] (D) -- (E) -- (F) -- cycle;
+
+                        % Draw hidden lines
+                        \draw[dashed] (D) -- (F);
+                        \draw[dashed] (D) -- (E);
+                        \draw[dashed] (E) -- (F);
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+            
+                    <image width="50%"> 
+                    <shortdescription> Net of a triangular prism example.</shortdescription>
+                    <latex-image label="surface-area-triangular-prism-net-example">
+                        \begin{tikzpicture}
+                            % Define base rectangle
+                            \draw[thick,dashed] (0,0) rectangle (8,8);
+
+                            % Triangular faces
+                            \draw[very thick] (0,0) -- (4,-4) -- (8,0);
+                            \draw[very thick] (0,8) -- (4,12) -- (8,8);
+                            \fill[gray!50] (0,8) -- (4,12) -- (8,8);
+
+                            % Fold lines (dashed)
+                            \draw[thick,dashed] (4,12) -- (4,8);
+                            \draw[thick,dashed] (4,-4) -- (4,0);
+                            \draw[very thick] (8,0) --(12,0) --(12,8) --(8,8);
+                            \draw[very thick] (0,0) --(-4,0) --(-4,8) --(0,8);
+                            
+                            % Labels
+                            \node[above] at (4,10) {\huge 3 cm};
+                            \node[below] at (4,-2) {\huge 3 cm};
+                            \node[above] at (4,0.5) {\huge 8 cm};
+                            \node[right] at (8,4) {\huge 12 cm};
+                        \end{tikzpicture}
+                    </latex-image>
+                </image>
+                </sidebyside>
                 <p>
                     The area of one triangular base is:
                     <me>
-                        \text{Area of triangle} = \frac{1}{2} \times 8 \times 3 = 12
+                        \text{Area of triangle} = \frac{1}{2} \times 8 \times 3 = 12 \, \text{ cm}^2
                     </me>
                     <me>
-                        \text{Two bases} = 24
+                        \text{Two bases} = 2 \times 12 = 24 \, \text{ cm}^2
                     </me>
                     <me>
-                        \text{Perimeter} = 8 + 5 + 5 = 18
+                        \text{Perimeter} = 8 + 3 + 3 = 14 \, \text{ cm}
                     </me>
                     <me>
-                        \text{Lateral area} = 18 \times 12 = 216
+                        \text{Lateral area} = 14 \times 12 = 168 \, \text{ cm}^2
                     </me>
                     <me>
-                        \text{Total S.A} = 24 + 216 = 240 \text{ cm}^2
+                        \text{Total S.A} = 24 + 168
+                    </me>
+                    <me>
+                        = 192 \, \text{ cm}^2
                     </me>
                 </p>
             </solution>
         </example>
+
+        <example>
+            <statement>
+                <p>
+                Find the Surface area of the triangular prism with a slant height of <m>5 \, \text{cm}</m>, height of the triangular prism <m>12 \, \text{cm}</m> and a base of <m>8 \, \text{cm}</m>. 
+                </p>
+            </statement>
+            <solution>
+                <p>
+                Step 1: Find the area of the base.
+                </p>
+                <p>
+                    The triangular base has a slant height of <m>5 \, \text{cm}</m> and base <m>8 \, \text{cm}</m>. Using pythagorean relationship height is:
+                    <md>
+                        <mrow> = \amp \sqrt{(5\,\text{cm})^2 - (4\, \text{cm})^2}</mrow>
+                        <mrow> = \amp \sqrt{25 \, \text{cm} -16\, \text{cm}} = 3\, \text{cm}</mrow>
+                        <mrow> \text{area of a triangle} = \amp \frac{1}{2}\times b \times h</mrow>
+                        <mrow> = \amp \frac{1}{2} \times  8 \, \text{cm} \times 3 \, \text{cm} </mrow>
+                        <mrow> = \amp 12  \,\text{cm}^2</mrow>
+                    </md>
+                </p>
+                <p>
+                Step 2: Add the area of the base with the lateral area.
+                </p>
+                <p>
+                    <md>
+                        <mrow>\text{Surface Area} = \amp  \text{area of base} + \text{lateral area}</mrow>
+                        <mrow>\text{Lateral area} = \amp \text{Perimeter of Base} \times \text{Length}</mrow>
+                        <mrow> = \amp (8 + 3 + 3) \, \text{cm} \times 12 \, \text{cm}</mrow>
+                        <mrow> = \amp 14 \, \text{cm} \times 12 \, \text{cm}</mrow>
+                        <mrow> = \amp 168\, \text{cm}^2</mrow>
+                        <mrow>\text{Total Surface Area} = \amp 24\, \text{cm}^2 + 168\, \text{cm}^2</mrow>
+                        <mrow> = \amp 192\, \text{cm}^2</mrow>
+                    </md>
+                </p>
+                <p>
+                    The surface area of the triangular prism is <m>192 \, \text{cm}^2</m>.
+                </p>
+            </solution>
+        </example>
+
+        <exercises xml:id="exercises-triangular-prism-surface-area">
+            <exercise>
+                <statement>
+                    <p>
+                        A triangular prism has a triangular base of <m>13 \, \text{cm}</m> and the height of the prism <m>9 \, \text{cm}</m>. Calculate the total surface area .
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        <m>306 \, \text{cm}^2</m>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A triangular prism has a triangular base of base <m>10 \, \text{cm}</m> and height <m>6 \, \text{cm}</m>. The two equal sides of the triangle are <m>8 \, \text{cm}</m> each. The length of the prism is <m>15 \, \text{cm}</m>. Find its total surface area.
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        <m>280 \, \text{cm}^2</m>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A prism is constructed with a triangular base of base <m>8 \, \text{cm}</m> and height <m>12 \, \text{cm}</m>. Determine the area of the triangular base, then use the given dimensions to compute the total surface area.
+                    </p>
+                    <image source="triangular-prism.png" width="50%">
+                        <shortdescription>${0:}</shortdescription>
+                    </image>
+                </statement>
+                <answer>
+                    <p>
+                        The area of the triangular base is <m>48 \, \text{cm}^2</m>.
+                    </p>
+                    <p>
+                        The total surface area of the prism = <m>240 \, \text{cm}^2</m>.
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        The total surface area of a triangular prism is measured as <m>360 \, \text{cm}^2</m> and its height is 20 cm. If the triangular base has sides measuring <m>9 \, \text{cm}</m>, <m>12 \, \text{cm}</m>, and <m>15 \, \text{cm}</m>, verify that this value is correct by calculating the surface area from the given dimensions.
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        To calculate the surface area, we first find the area of the triangular base using Heron's formula. The semi-perimeter (s) is calculated as:
+                        <me>
+                            s = \frac{9 + 12 + 15}{2} = 18 \, \text{cm}
+                        </me>
+                        The area of the triangle is then calculated as:
+                        <me>
+                            \text{Area} = \sqrt{s(s - 9)(s - 12)(s - 15)} = \sqrt{18(18 - 9)(18 - 12)(18 - 15)} = \sqrt{18 \times 9 \times 6 \times 3} = \sqrt{2916} = 54 \, \text{cm}^2
+                        </me>
+                        The perimeter of the base is:
+                        <me>
+                            P = 9 + 12 + 15 = 36 \, \text{cm}
+                        </me>
+                        The lateral area is calculated as:
+                        <me>
+                            \text{Lateral Area} = P \times \text{Height} = 36 \, \text{cm} \times 20 \, \text{cm} = 720 \, \text{cm}^2
+                        </me>
+                        Finally, the total surface area is:
+                        <me>
+                            \text{Total Surface Area} = 2 \times \text{Area of Base} + \text{Lateral Area} = 2 \times 54 \, \text{cm}^2 + 720 \, \text{cm}^2 = 108 \, \text{cm}^2 + 720 \, \text{cm}^2 = 828 \, \text{cm}^2
+                        </me>
+                        Therefore, the surface area is <m>828 \, \text{cm}^2</m>.
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A bridge support structure has the shape of a triangular prism, with a base measuring <m>10 \, \text{cm}</m>, <m>17 \, \text{cm}</m>, and <m>21 \, \text{cm}</m>, and a height of <m>50 \, \text{cm}</m>. Paint needs to be applied to coat its entire surface. Compute the total surface area, which will be painted.
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        <m>2568\,\text{cm}^2</m>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A glass showcase is designed in the shape of a triangular prism, with a triangular base of <m>5 \, \text{cm}</m>, a height of <m>12 \, \text{cm}</m>, and a prism length of <m>20 \, \text{cm}</m>. If all faces are to be made of glass, calculate the total glass area required.
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        <m>880 \, \text{cm}^2</m>
+                    </p>
+                </answer>
+            </exercise>
+        </exercises>
 
         <exercises>
             <exercise>
                 <statement>
                     <p>
-                        A cube has side length <m>9 \text{cm}</m>. Find its total surface area.
+                        A small storage room is designed with an edge length of <m>4</m> meters each side. The floor, four walls, and ceiling all need to be tiled. If each tile covers an area of <m>0.5</m> square meters, determine the total number of tiles required to fully cover the interior of the room.
                     </p>
                 </statement>
                 <answer>
@@ -373,6 +1131,13 @@
                         <m>382 \text{ cm}^2</m>
                     </p>
                 </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
+                        A company is designing a cube-shaped promotional stand with a side length of <m>5</m> meters. The stand will be covered with high-quality wallpaper on all six faces. If one roll of wallpaper covers <m>10</m> square meters, determine the number of rolls required to fully cover the cube.
+                    </p>
+                </statement>
             </exercise>
             <exercise>
                 <statement>
@@ -413,6 +1178,31 @@
             <exercise>
                 <statement>
                     <p>
+                        If a litre of paint covers an area of <m>2 \, \text{m}^2</m>, how much paint does a painter need to cover:
+                        <ol marker="a)">
+                            <li>
+                                <p>
+                                    A rectangular swimming pool with dimensions <m>4 \, \text{m}</m> by <m>3 \, \text{m}</m> by <m>5 \, \text{m}</m> (the inside walls and floor only)
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    the inside walls and floor of a circular reservoir with diameter <m>7 \, \text{m}</m> and height <m>5 \, \text{m}</m>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                </statement>
+                <answer>
+                    <p>
+                        a) <m>47 \, \text{litres}</m>
+                        b) <m>77 \, \text{litres}</m>
+                    </p>
+                </answer>
+            </exercise>
+            <exercise>
+                <statement>
+                    <p>
                         A triangular tent is shaped like a triangular prism. The triangular cross-section has base <m>4 \text{m}</m> and height <m>3 \text{m}</m>. The slant sides are <m>5 \text{m}</m> each. The length of the tent is <m>6 \text{m}</m>. Find the total surface area of the tent canvas (including the two triangular ends).
                     </p>
                 </statement>
@@ -423,6 +1213,22 @@
                 </answer>
             </exercise>
         </exercises>
-    </subsubsection>
 
+        <exercise  label="ex-finding-the-surface-area-of-a-composite-solid">
+            <stack label="stk-finding-the-surface-area-of-a-composite-solid" source="stack/top/2-0-Measurement-Geometry/2-7-Surface-Area-and-Volume-of-Solids/2-7-5-Surface-Area-of-a-Triangular-Prism/Finding-the-Surface-Area-of-a-Composite-Solid.xml" />
+        </exercise>
+
+        <exercise  label="ex-finding-the-surface-area-of-a-triangular-prism">
+            <stack label="stk-finding-the-surface-area-of-a-triangular-prism" source="stack/top/2-0-Measurement-Geometry/2-7-Surface-Area-and-Volume-of-Solids/2-7-5-Surface-Area-of-a-Triangular-Prism/Finding-the-Surface-Area-of-a-Triangular-Prism.xml" />
+        </exercise>
+
+        <exercise  label="ex-finding-the-surface-area-of-a-triangular-prism-tent-problem">
+            <stack label="stk-finding-the-surface-area-of-a-triangular-prism-tent-problem" source="stack/top/2-0-Measurement-Geometry/2-7-Surface-Area-and-Volume-of-Solids/2-7-5-Surface-Area-of-a-Triangular-Prism/Finding-the-Surface-Area-of-a-Triangular-Prism-(Tent-Problem).xml" />
+        </exercise>
+
+        <exercise  label="ex-volume-and-surface-area-of-a-rectangular-block">
+            <stack label="stk-volume-and-surface-area-of-a-rectangular-block" source="stack/top/2-0-Measurement-Geometry/2-7-Surface-Area-and-Volume-of-Solids/2-7-2-Surface-area-of-a-cuboid/Volume-and-Surface-Area-of-a-Rectangular-Block-.xml" />
+        </exercise>
+
+    </subsubsection>
 </subsection>
