@@ -133,115 +133,126 @@
                 </statement>
             </task>
         </activity>
+        <figure xml:id="interactive-area-scale-factors">
+            <caption>Interactive Exploration of Area Scale Factors</caption>
+            <interactive xml:id="area-scale-factors" platform="jsxgraph" width="100%" aspect="3:2" source="jsxgraph/area-scale-factors.js">
+                <slate xml:id="jsxgraph-area-scale-factors" surface="jsxboard" aspect="3:2" />
+                <instructions xml:id="area-scale-instructions">
+                    <p>
+                        Use the slider <m>k</m> at the top left to change the linear scale factor of the blue parallelogram. You can also click and drag the vertices of the original yellow parallelogram (<m>P</m>, <m>Q</m>, and <m>R</m>) to change its shape. 
+                    </p>
+                    <p>
+                        Observe the dynamically calculated bases (<m>b</m> and <m>b'</m>) and perpendicular heights (<m>h</m> and <m>h'</m>). Notice how the Area Scale Factor perfectly matches the square of the linear scale factor (<m>k^2</m>) no matter how you reshape the original figure.
+                    </p>
+                </instructions>
+            </interactive>
+        </figure>
+        <insight>
+            <p xml:id="auto_x2wdx5w6">
+                Area scale factor is the ratio of the area of the image to area of the object.
+            </p>
 
-        <p xml:id="auto_gihiyyqm">
-             <m>\textbf{Key Takeaway}</m>
-        </p>
+            <p xml:id="auto_wg1ezl8b"> 
+                Area scale factor is the square of linear scale factor.
+            </p>
+            <p xml:id="auto_pxs6g86b">
+                In the Figures below, the parallelogram <m>P'Q'R'S'</m> represents the enlarged image of paralellogram <m>PQRS</m>, transformed by a scale factor of <m>2</m>.
+            </p>
+            <sidebyside>
+            <image width="30%">
+                <shortdescription></shortdescription>
+                <latex-image label="parallelogram">
+                    \begin{tikzpicture}
+                        \coordinate (P) at (0,0);
+                        \coordinate (Q) at (4,0);
+                        \coordinate (R) at (6,3);
+                        \coordinate (S) at (2,3);
 
-        <p xml:id="auto_x2wdx5w6">
-            Area scale factor is the ratio of the area of the image to area of the object.
-        </p>
+                        % Draw parallelogram with yellow fill
+                        \fill[yellow!80] (P) -- (Q) -- (R) -- (S) -- cycle;
+                        \draw[purple, thick] (P) -- (Q) -- (R) -- (S) -- cycle;
 
-        <p xml:id="auto_wg1ezl8b"> 
-            Area scale factor is the square of linear scale factor.
-        </p>
-        <p xml:id="auto_pxs6g86b">
-            In the Figures below, the parallelogram <m>P'Q'R'S'</m> represents the enlarged image of paralellogram <m>PQRS</m>, transformed by a scale factor of <m>2</m>.
-        </p>
-        <sidebyside>
-        <image width="30%">
-            <shortdescription></shortdescription>
-            <latex-image label="parallelogram">
-                \begin{tikzpicture}
-                    \coordinate (P) at (0,0);
-                    \coordinate (Q) at (4,0);
-                    \coordinate (R) at (6,3);
-                    \coordinate (S) at (2,3);
+                        % Label vertices
+                        \node[below left] at (P) {\textbf{P}};
+                        \node[below right] at (Q) {\textbf{Q}};
+                        \node[above right] at (R) {\textbf{R}};
+                        \node[above left] at (S) {\textbf{S}};
 
-                    % Draw parallelogram with yellow fill
-                    \fill[yellow!80] (P) -- (Q) -- (R) -- (S) -- cycle;
-                    \draw[purple, thick] (P) -- (Q) -- (R) -- (S) -- cycle;
+                            % Add dimension lines
+                        
+                        \node[below] at (2,-0.3) {\textbf{5 cm}};
+                        \node[left] at (3,1.5) {\textbf{7 cm}}; % Height label
+                    ;
 
-                    % Label vertices
-                    \node[below left] at (P) {\textbf{P}};
-                    \node[below right] at (Q) {\textbf{Q}};
-                    \node[above right] at (R) {\textbf{R}};
-                    \node[above left] at (S) {\textbf{S}};
+                        % Define the foot of the perpendicular
+                        \coordinate (T) at (2,0);
 
-                        % Add dimension lines
-                    
-                    \node[below] at (2,-0.3) {\textbf{5 cm}};
-                    \node[left] at (3,1.5) {\textbf{7 cm}}; % Height label
-                ;
+                        % Draw perpendicular line from S to PQ
+                        \draw[blue, thick] (S) -- (T);
 
-                    % Define the foot of the perpendicular
-                    \coordinate (T) at (2,0);
+                        % Label the new point
+                        \node[below] at (T) {\textbf{T}};
 
-                    % Draw perpendicular line from S to PQ
-                    \draw[blue, thick] (S) -- (T);
+                        % Add right-angle symbol
+                        \draw (2,0.3) -- (2.3,0.3) -- (2.3,0);
+                    \end{tikzpicture}
+                </latex-image>
+                
+            </image>
 
-                    % Label the new point
-                    \node[below] at (T) {\textbf{T}};
+            <image>
+                <shortdescription></shortdescription>
+                <latex-image label="parallelogram1">
+                    \begin{tikzpicture}
+                % Define coordinates
+                        \coordinate (P') at (0,0);
+                        \coordinate (Q') at (8,0);
+                        \coordinate (R') at (12,6);
+                        \coordinate (S') at (4,6);
+                        \coordinate (T') at (4,0); % Foot of perpendicular
 
-                    % Add right-angle symbol
-                    \draw (2,0.3) -- (2.3,0.3) -- (2.3,0);
-                \end{tikzpicture}
-            </latex-image>
-            
-        </image>
+                        % Draw parallelogram with blue fill
+                        \fill[blue!30] (P') -- (Q') -- (R') -- (S') -- cycle;
+                        \draw[blue, thick] (P') -- (Q') -- (R') -- (S') -- cycle;
 
-        <image>
-            <shortdescription></shortdescription>
-            <latex-image label="parallelogram1">
-                \begin{tikzpicture}
-             % Define coordinates
-                    \coordinate (P') at (0,0);
-                    \coordinate (Q') at (8,0);
-                    \coordinate (R') at (12,6);
-                    \coordinate (S') at (4,6);
-                    \coordinate (T') at (4,0); % Foot of perpendicular
+                        % Label vertices with larger, bold text
+                        \node[below left, scale=1.2] at (P') {\textbf{P'}};
+                        \node[below right, scale=1.2] at (Q') {\textbf{Q'}};
+                        \node[above right, scale=1.2] at (R') {\textbf{R'}};
+                        \node[above left, scale=1.2] at (S') {\textbf{S'}};
 
-                    % Draw parallelogram with blue fill
-                    \fill[blue!30] (P') -- (Q') -- (R') -- (S') -- cycle;
-                    \draw[blue, thick] (P') -- (Q') -- (R') -- (S') -- cycle;
+                        % Draw perpendicular line from S to PQ
+                        \draw[blue, thick, dashed] (S') -- (T');
 
-                    % Label vertices with larger, bold text
-                    \node[below left, scale=1.2] at (P') {\textbf{P'}};
-                    \node[below right, scale=1.2] at (Q') {\textbf{Q'}};
-                    \node[above right, scale=1.2] at (R') {\textbf{R'}};
-                    \node[above left, scale=1.2] at (S') {\textbf{S'}};
+                        % Label perpendicular foot
+                        \node[below, scale=1.2] at (T') {\textbf{T}};
 
-                    % Draw perpendicular line from S to PQ
-                    \draw[blue, thick, dashed] (S') -- (T');
+                        % Right-angle symbol
+                        \draw[thick] (4,0.6) -- (4.6,0.6) -- (4.6,0);
 
-                    % Label perpendicular foot
-                    \node[below, scale=1.2] at (T') {\textbf{T}};
+                        % Dimension labels with larger text
+                        \node[below, scale=1.4] at (4,-0.6) {\textbf{10 cm}};
+                        \node[left, scale=1.4] at (5.8,3) {\textbf{14 cm}}; % Height label
+                    \end{tikzpicture}
+                </latex-image>
+                
+            </image>
 
-                    % Right-angle symbol
-                    \draw[thick] (4,0.6) -- (4.6,0.6) -- (4.6,0);
+            </sidebyside>
 
-                    % Dimension labels with larger text
-                    \node[below, scale=1.4] at (4,-0.6) {\textbf{10 cm}};
-                    \node[left, scale=1.4] at (5.8,3) {\textbf{14 cm}}; % Height label
-                \end{tikzpicture}
-            </latex-image>
-            
-        </image>
-
-        </sidebyside>
-
-        <p xml:id="auto_scxom0zr">
-            <md>
-                <mrow>\text{Area of a parallelogram}= \amp base \times height </mrow>
-                <mrow>\text{Area of PQRS} =\amp 5\, cm \times 7\, cm </mrow>
-                <mrow>= \amp 35\, cm^2</mrow>
-                <mrow>\text{Area of P'Q'R'S'}= \amp 10\, cm \times 14\, cm</mrow>
-                <mrow>= \amp 140\, cm^2</mrow>
-                <mrow>\text{Area scale factor}= \amp \frac{\text{Area of the image}}{\text{area of the object}}</mrow>
-                <mrow>\frac{\text{Area of P'Q'R'S'}}{\text{Area of PQRS}}= \amp \frac{140\, cm^2}{35\, cm^2}</mrow>
-                <mrow>= \amp 4</mrow>
-            </md>
-        </p>
+            <p xml:id="auto_scxom0zr">
+                <md>
+                    <mrow>\text{Area of a parallelogram}= \amp base \times height </mrow>
+                    <mrow>\text{Area of PQRS} =\amp 5\, cm \times 7\, cm </mrow>
+                    <mrow>= \amp 35\, cm^2</mrow>
+                    <mrow>\text{Area of P'Q'R'S'}= \amp 10\, cm \times 14\, cm</mrow>
+                    <mrow>= \amp 140\, cm^2</mrow>
+                    <mrow>\text{Area scale factor}= \amp \frac{\text{Area of the image}}{\text{area of the object}}</mrow>
+                    <mrow>\frac{\text{Area of P'Q'R'S'}}{\text{Area of PQRS}}= \amp \frac{140\, cm^2}{35\, cm^2}</mrow>
+                    <mrow>= \amp 4</mrow>
+                </md>
+            </p>
+        </insight>
 
         <example xml:id="auto_hbvxg679">
             <statement>
