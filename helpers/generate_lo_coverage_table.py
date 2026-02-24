@@ -95,7 +95,7 @@ def generate_ptx(lo_data, fmv_mapping, output_path):
         '<!-- AUTO-GENERATED FILE - DO NOT EDIT MANUALLY -->',
         '<!-- Regenerate using: python3 helpers/generate_lo_coverage_table.py -->',
         '',
-        '<preface xml:id="preface-lo-coverage-table" xmlns:xi="http://www.w3.org/2001/XInclude">',
+        '<appendix xml:id="appendix-lo-coverage-table" xmlns:xi="http://www.w3.org/2001/XInclude">',
         '    <title>Learning Outcomes Coverage Table</title>',
         '',
         '    <p>',
@@ -140,7 +140,7 @@ def generate_ptx(lo_data, fmv_mapping, output_path):
             lines.append('')
         lines.append('    </paragraphs>')
         lines.append('')
-    lines.append('</preface>')
+    lines.append('</appendix>')
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines))
     print(f"Generated: {output_path}")
@@ -149,7 +149,7 @@ def generate_ptx(lo_data, fmv_mapping, output_path):
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     lo_csv_path = os.path.join(script_dir, 'Learning Outcomes.csv')
-    fmv_csv_path = os.path.join(script_dir, 'File Matching Validated.csv')
+    fmv_csv_path = os.path.join(script_dir, 'Automatic Links.csv')
     output_path = os.path.join(script_dir, '..', 'source', 'lo-coverage-table.ptx')
     lo_data = parse_learning_outcomes(lo_csv_path)
     fmv_mapping = parse_file_matching_validated(fmv_csv_path)
