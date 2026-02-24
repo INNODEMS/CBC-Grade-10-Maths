@@ -24,7 +24,7 @@ with open(CONFIG_PATH, encoding='utf-8') as cfg_file:
     _ids_config = json.load(cfg_file)
 
 SPREADSHEET_ID = _ids_config['file_matching_spreadsheet_id']
-RANGE_NAME = "'File Matching'"  # Sheet/tab name
+RANGE_NAME = "'Automatic Links'"  # Sheet/tab name
 
 flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
 creds = flow.run_local_server(port=0)
@@ -112,7 +112,7 @@ def validate_paths(base_dir: str = '..') -> None:
     write_validated_to_sheet(headers, sheet_rows)
 
 
-def write_validated_to_sheet(headers, rows, sheet_name: str = 'File Matching Validated') -> None:
+def write_validated_to_sheet(headers, rows, sheet_name: str = 'Automatic Links Validated') -> None:
     """Write validated data into a dedicated sheet, overwriting only that sheet."""
     sheet = service.spreadsheets()
 
