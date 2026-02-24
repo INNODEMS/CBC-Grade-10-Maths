@@ -7,7 +7,7 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 
-OUTPUT_CSV = 'File Matching Validated.csv'
+OUTPUT_CSV = 'Automatic Links.csv'
 
 PTX_COL = 'PTX Path'
 LP_COL = 'Lesson Plan Path'
@@ -23,7 +23,7 @@ CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'google_ids.json')
 with open(CONFIG_PATH, encoding='utf-8') as cfg_file:
     _ids_config = json.load(cfg_file)
 
-SPREADSHEET_ID = _ids_config['file_matching_spreadsheet_id']
+SPREADSHEET_ID = _ids_config['automatic_links_spreadsheet_id']
 RANGE_NAME = "'Automatic Links'"  # Sheet/tab name
 
 flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
@@ -112,7 +112,7 @@ def validate_paths(base_dir: str = '..') -> None:
     write_validated_to_sheet(headers, sheet_rows)
 
 
-def write_validated_to_sheet(headers, rows, sheet_name: str = 'Automatic Links Validated') -> None:
+def write_validated_to_sheet(headers, rows, sheet_name: str = 'Automatic Links Upload') -> None:
     """Write validated data into a dedicated sheet, overwriting only that sheet."""
     sheet = service.spreadsheets()
 
