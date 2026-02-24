@@ -33,6 +33,46 @@ This single command will:
 <!-- 2. Deploy the custom STACK JavaScript integration file -->
 3. Launch the book in your browser
 
+#### Issue with long file paths on Windows
+
+By default, Windows has a maximum **path length of 260 characters (MAX_PATH).**
+When the total path exceeds 260 characters, Windows can’t access the file → “undefined control sequence” or missing image.
+
+While building a PreTeXt project on Windows using MiKTeX , the build produced errors related to missing files / undefined control sequences when accessing image assets and generated files.
+
+The **build eventually succeeded, but some assets were not processed correctly.**
+
+This occurred even after a fresh MiKTeX installation.
+
+##### Fix / Workaround
+
+Enable long path support in Windows Registry:
+
+**Press Win + R**
+
+Run:
+
+**regedit**
+
+Navigate to:
+
+HKEY_LOCAL_MACHINE
+  → SYSTEM
+    → CurrentControlSet
+      → Control
+        → FileSystem
+
+Set:
+
+LongPathsEnabled = 1
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/876494b1-ca64-4873-be14-b06208459c24" />
+
+**Restart Windows**
+
+After enabling this, the PreTeXt build completed correctly and assets were resolved.
+
+
 ### Manual Build Process
 
 If you need more control over the build process:

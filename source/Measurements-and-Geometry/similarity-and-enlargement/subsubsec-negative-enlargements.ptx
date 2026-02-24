@@ -118,40 +118,121 @@
             </statement>
         </task>
     </activity>
+    <figure>
+        <caption>Negative Enlargement of a Rectangle</caption>
+        <interactive xml:id="negative-enlargement" platform="jsxgraph" aspect="4:3" source="jsxgraph/negative_enlargement.js" width="100%">
+            <slate xml:id="jsxgraph-negative-enlargement" surface="jsxboard" aspect="4:3" />
+            <instructions xml:id="negative-enlargement-instructions">
+                <p>Use the scale factor slider at the top left to vary the scale factor <m>k</m> between <m>-3</m> and <m>3</m>. Observe how a negative scale factor inverts the rectangle across the center of enlargement <m>O</m>, appearing on the opposite side of the dashed construction lines. You can drag the center <m>O</m>, or the diagonal vertices <m>A</m> and <m>C</m> to resize the original rectangle.</p>
+            </instructions>
+        </interactive>
+    </figure>
 
-    <!-- Key Takeaway -->
-    <p><m>\textbf{Key Takeaway}</m></p>
+    <insight>
+        <p>
+            <ul>
+                <li>
+                    <p><alert>A negative enlargement</alert> is a transformation where the image is produced on the <m>\textbf{opposite side}</m> of the center of enlargement from the original shape. The scale factor is negative, indicating a change in orientation.</p>
+                </li>
 
-    <p>
-        <ul>
-            <li>
-                <p>A <m>\textbf{negative enlargement}</m> is a transformation where the image is produced on the <m>\textbf{opposite side}</m> of the center of enlargement from the original shape. The scale factor is negative, indicating a change in orientation.</p>
-            </li>
+                <li>
+                    <p>When the scale factor is negative (e.g., <m>-2</m>), both the size and position of the shape change. The image is enlarged (or reduced) and rotated <m>180^\circ</m> about the center of enlargement. The magnitude of the scale factor determines how much larger or smaller the image becomes.</p>
+                </li>
 
-            <li>
-                <p>When the scale factor is negative (e.g., <m>-2</m>), both the size and position of the shape change. The image is enlarged (or reduced) and rotated <m>180°</m> about the center of enlargement. The magnitude of the scale factor determines how much larger or smaller the image becomes.</p>
-            </li>
+                <li>
+                    <p>For a negative enlargement with scale factor <m>k</m> 
+                        (where <m>k &lt; 0</m>):
+                    </p>
+                    <p>
+                        <ul>
+                            <li>The distance from center to image point is <m>|k|</m> times the distance from center to object point</li>
+                            <li>The image point lies on the opposite side of the center along the same line</li>
+                            <li>All corresponding sides are proportional: <m>\frac{OA'}{OA} = \frac{OB'}{OB} = \frac{OC'}{OC} = k</m></li>
+                            <li>The shapes remain similar but with opposite orientation</li>
+                        </ul>
+                    </p>
+                </li>
 
-            <li>
-                <p>For a negative enlargement with scale factor <m>k</m> 
-                    (where <m>k &gt; 0</m>):</p>
-                <ul>
-                    <li>The distance from center to image point is <m>|k|</m> times the distance from center to object point</li>
-                    <li>The image point lies on the opposite side of the center along the same line</li>
-                    <li>All corresponding sides are proportional: <m>\frac{OA'}{OA} = \frac{OB'}{OB} = \frac{OC'}{OC} = k</m></li>
-                    <li>The shapes remain similar but with opposite orientation</li>
-                </ul>
-            </li>
+                <li>
+                    <p>Negative enlargements are useful in real-world applications such as reflections in optics, creating mirror images, and understanding symmetry transformations in geometry.</p>
+                </li>
+            </ul>
+        </p>
+    </insight>
 
-            <li>
-                <p>Negative enlargements are useful in real-world applications such as reflections in optics, creating mirror images, and understanding symmetry transformations in geometry.</p>
-            </li>
-        </ul>
-    </p>
+    <paragraphs>
+        <title>Negative scale factor</title>
+        <p xml:id="auto_gx5hn80e">
+                In the provided diagram, rectangle <m>ABCD</m> has been enlarged to form rectangle <m>A'B'C'D'</m>, with point <m>O</m> as the center of the enlargement.
+            </p>
+
+            <figure xml:id="rectangle">
+                <caption></caption>
+            <image>
+                <shortdescription></shortdescription>
+                <latex-image label="rectangle">
+                    \begin{tikzpicture}
+                        % Axes
+                        \draw[-&gt;] (-4,0) -- (7,0) node[right] {\footnotesize $x$};
+                        \draw[-&gt;] (0,-3) -- (0,5) node[above] {\footnotesize $y$};
+
+                        % Origin
+                        \node[circle,draw,inner sep=1pt] (O) at (0,0) {};
+
+                        % Large rectangle (ABCD) - Orange with fill
+                        \coordinate (A) at (1,1);
+                        \coordinate (B) at (1,4);
+                        \coordinate (C) at (6,4);
+                        \coordinate (D) at (6,1);
+                        
+                        \filldraw[thick, orange, fill=orange!30] (A) -- (B) -- (C) -- (D) -- cycle;
+                        
+                        % Small rectangle (A'B'C'D') - Yellow with fill
+                        \coordinate (A') at (-1,-1);
+                        \coordinate (B') at (-1,-2);
+                        \coordinate (C') at (-3,-2);
+                        \coordinate (D') at (-3,-1);
+                        
+                        \filldraw[thick, yellow, fill=yellow!30] (A') -- (B') -- (C') -- (D') -- cycle;
+
+                        % Projection lines from the origin with different colors
+                        \draw[dashed, red] (O) -- (A);
+                        \draw[dashed, blue] (O) -- (B);
+                        \draw[dashed, green] (O) -- (C);
+                        \draw[dashed, purple] (O) -- (D);
+                        
+                        \draw[dashed, red!80!black] (O) -- (A');
+                        \draw[dashed, blue!80!black] (O) -- (B');
+                        \draw[dashed, green!80!black] (O) -- (C');
+                        \draw[dashed, purple!80!black] (O) -- (D');
+
+                        % Points Labels
+                        \node[above right] at (A) {\footnotesize A};
+                        \node[above left] at (B) {\footnotesize B};
+                        \node[above right] at (C) {\footnotesize C};
+                        \node[below right] at (D) {\footnotesize D};
+                        
+                        \node[below right] at (A') {\footnotesize A'};
+                        \node[below left] at (B') {\footnotesize B'};
+                        \node[below left] at (C') {\footnotesize C'};
+                        \node[below right] at (D') {\footnotesize D'};
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+    </paragraphs>
+    <note>
+        <p xml:id="auto_prx4ew64">
+            If an enlargement has a negative scale factor, the image is formed on the opposite side of the center and is inverted (Upside down).
+        </p>
+        <p xml:id="auto_o0tx4biy">
+            The rectangle <m>ABCD</m> has been enlarged by a scale factor of <m>-\frac{1}{2}</m>
+        </p>
+    </note>
 
     <!-- Example 1: Scale factor -2 -->
     <example xml:id="example-neg-enlarge-scale-2">
-        <title>Negative Enlargement with Scale Factor <m>-2</m></title>
+        <!-- <title>Negative Enlargement with Scale Factor <m>-2</m></title> -->
         <statement>
             <p>Triangle <m>PQR</m> has vertices at <m>P(4, 2)</m>, <m>Q(2, 4)</m>, and <m>R(6, 4)</m>. Find the vertices of the image triangle <m>P'Q'R'</m> after a negative enlargement with center at the origin <m>O(0, 0)</m> and scale factor <m>-2</m>.</p>
         </statement>
@@ -177,7 +258,7 @@
 
     <!-- Example 2: Scale factor -1/2 -->
     <example xml:id="example-neg-enlarge-scale-half">
-        <title>Negative Enlargement with Scale Factor <m>-\frac{1}{2}</m></title>
+        <!-- <title>Negative Enlargement with Scale Factor <m>-\frac{1}{2}</m></title> -->
         <statement>
             <p>Given rectangle <m>ABCD</m> with vertices at <m>A(3, 2)</m>, <m>B(6, 2)</m>, <m>C(6, 4)</m>, and <m>D(3, 4)</m>, find the image <m>A'B'C'D'</m> after a negative enlargement with center at point <m>O(0, 0)</m> and scale factor <m>-\frac{1}{2}</m>.</p>
         </statement>
@@ -210,7 +291,7 @@
 
     <!-- Example 3: Multiple scale factors -->
     <example xml:id="example-neg-enlarge-compare">
-        <title>Comparing Different Negative Scale Factors</title>
+        <!-- <title>Comparing Different Negative Scale Factors</title> -->
         <statement>
             <p>Given that triangle <m>ABC</m> has vertices <m>A(4, 6)</m>, <m>B(6, 2)</m>, and <m>C(2, 2)</m>, find the vertices of its image after a negative enlargement with origin as the center and the following scale factors:</p>
             <p>
@@ -261,72 +342,60 @@
             </p>
         </solution>
     </example>
-
-    <!-- Visual Representation -->
-    <p><m>\textbf{Visual Representation of Negative Enlargement}</m></p>
-
-    <p>In the provided diagram, rectangle <m>ABCD</m> in the first quadrant has been enlarged to form rectangle <m>A'B'C'D'</m> in the third quadrant, with point <m>O</m> as the center of the enlargement.</p>
-
-    <figure xml:id="fig-rectangle-neg-enlarge">
-        <caption>Negative Enlargement of a Rectangle with Scale Factor <m>-\frac{1}{2}</m></caption>
-        <image>
-            <shortdescription>A coordinate plane showing original rectangle ABCD and its negative enlargement A'B'C'D' with center at origin O.</shortdescription>
-            <latex-image label="rectangle2">
-                \begin{tikzpicture}
-                    % Axes
-                    \draw[-&gt;] (-4,0) -- (7,0) node[right] {\footnotesize $x$};
-                    \draw[-&gt;] (0,-3) -- (0,5) node[above] {\footnotesize $y$};
-
-                    % Origin
-                    \node[circle,draw,inner sep=1pt] (O) at (0,0) {};
-                    \node[above left] at (O) {O};
-
-                    % Original rectangle (ABCD) - Orange with fill
-                    \coordinate (A) at (1,1);
-                    \coordinate (B) at (1,4);
-                    \coordinate (C) at (6,4);
-                    \coordinate (D) at (6,1);
+    <example xml:id="auto_p3796q48">
+            <statement>
+                <p xml:id="auto_ys1eofyp">
                     
-                    \filldraw[thick, orange, fill=orange!30] (A) -- (B) -- (C) -- (D) -- cycle;
-                    
-                    % Image rectangle (A'B'C'D') - Yellow with fill
-                    \coordinate (A') at (-1,-1);
-                    \coordinate (B') at (-1,-2);
-                    \coordinate (C') at (-3,-2);
-                    \coordinate (D') at (-3,-1);
-                    
-                    \filldraw[thick, yellow, fill=yellow!30] (A') -- (B') -- (C') -- (D') -- cycle;
+                </p>
+                <p xml:id="auto_ymjkgt6d">
+                    Enlarge the triangle <m>ABC</m> by scale factor of <m>-1</m> about the point <m>O</m>.
+                </p>
 
-                    % Projection lines from the origin
-                    \draw[dashed, red] (O) -- (A);
-                    \draw[dashed, red!80!black] (O) -- (A');
-                    \draw[dashed, blue] (O) -- (B);
-                    \draw[dashed, blue!80!black] (O) -- (B');
-                    \draw[dashed, green] (O) -- (C);
-                    \draw[dashed, green!80!black] (O) -- (C');
-                    \draw[dashed, purple] (O) -- (D);
-                    \draw[dashed, purple!80!black] (O) -- (D');
+                <figure xml:id="object-enlarge">
+                    <caption></caption>
+                    <image source="object-enl.png">
+                        <shortdescription></shortdescription>
+                    </image>
+                </figure>
+            </statement>
 
-                    % Point Labels
-                    \node[above right] at (A) {\footnotesize A};
-                    \node[above left] at (B) {\footnotesize B};
-                    \node[above right] at (C) {\footnotesize C};
-                    \node[below right] at (D) {\footnotesize D};
-                    
-                    \node[below right] at (A') {\footnotesize A'};
-                    \node[below left] at (B') {\footnotesize B'};
-                    \node[below left] at (C') {\footnotesize C'};
-                    \node[below right] at (D') {\footnotesize D'};
-                \end{tikzpicture}
-            </latex-image>
-        </image>
-    </figure>
+            <solution>
+                <p xml:id="auto_mqxwjpq2">
+                    The centre of enlargement is <m>O</m>, the origin. 
+                </p>
 
-    <!-- Visual Representation -->
-    <p><m>\textbf{Note on Negative Scale Factors:}</m></p>
-    <p>If an enlargement has a negative scale factor, the image is formed on the opposite side of the center of enlargement and is inverted (rotated 180°). In the diagram above, rectangle <m>ABCD</m> has been enlarged by a scale factor of <m>-\frac{1}{2}</m>, resulting in rectangle <m>A'B'C'D'</m>.</p>
+                <p xml:id="auto_xgwui35x">
+                    Draw a line from point <m>A</m> through <m>O</m> and extend the line upwards through the centre of enlargement.
+                </p>
 
-    <!-- STACK Questions -->
+                <p xml:id="auto_gh3girp0">
+                    Measure the distance from point <m>O</m> to point <m>A</m>.
+                     Since the scale factor is <m>-1</m>, and the distance from <m>OA=5</m>, then <m>OA'=-1\times 5=-5</m> 
+                </p>
+                <image source="step1.png">
+                    <shortdescription></shortdescription>
+                </image>
+
+                <p xml:id="auto_e8jjr2hj">
+                   Similarly draw the lines from point <m>B</m> through <m>O</m> and <m>C</m> through <m>O</m> and extend the line upwards through the centre of enlargement.
+                   Measure the distance from point <m>O</m> to point <m>B'</m> and  <m>O</m> to point <m>C'</m> and multipy by the scale factor <m>-1</m> to get the new distance from  <m>O</m> to point <m>B</m> and  <m>O</m> to point <m>C</m>
+                </p>
+                <image source="step2.png">
+                    <shortdescription></shortdescription>
+                </image>
+
+                <p xml:id="auto_5r4x42p1">
+                    Join up the points to make the new triangle <m>A'B'C'</m>
+                </p>
+
+                <figure xml:id="step">
+                    <caption></caption>
+                    <image source="step3.png">
+                        <shortdescription></shortdescription>
+                    </image>
+                </figure>
+            </solution>
+        </example>
 
     <!-- Practice Exercises -->
     <exercises xml:id="exercises-negative-enlargements">
@@ -397,5 +466,5 @@
         </exercise>
 
     </exercises>
-   
+
 </subsubsection>

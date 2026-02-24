@@ -23,7 +23,313 @@
     </objectives>
     <introduction>
         <p>
-            TODO
+            Volume tells us how much space an object or container holds. In everyday life we use volume to know how much water fits in a jerrycan, how much grain a sack will carry, or how much fuel a drum can store. Knowing how to calculate volume helps families and communities measure and plan for storage, transport and household needs, and it is useful in farming, construction and cooking.
+        </p>
+        <p>
+            In this section we practice simple formulas for common shapes (box, cylinder, cone) and learn to convert between litres and cubic metres so the results are useful in ordinary situations.
         </p>
     </introduction>
+
+
+    <activity>
+        <statement>
+            <ul>
+                <li>
+                    <p>
+                        Think about different containers you might find in school or at home, and that you might want to carry water or store flour in.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        For example, this could include jars, barrels, boxes, ...
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        For each, determine what kind of shape it is and estimate its dimensions. Try to compute its volume.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Which of these containers can store the largest amount of water or flour?
+                    </p>
+                </li>
+            </ul>
+        </statement>
+    </activity>
+
+    <example xml:id="ex-jerrycan-volume">
+        <statement>
+            <p>
+                A metal jerrycan is roughly a rectangular box of dimensions 35 cm by 20 cm by 30 cm. Estimate how many litres of water it can hold.
+            </p>
+        </statement>
+        <solution>
+            <paragraphs>
+                <title>Compute the Volume</title>
+                <p>
+                    Volume of a box is <m>V = lwh</m>. Convert centimetres to metres: <m>l=0.35\,m,\; w=0.20\,m,\; h=0.30\,m.</m>
+                    Thus <m>V = 0.35\times0.20\times0.30 = 0.021\,\text{m}^3.</m>
+                </p>
+                <p>
+                    Convert cubic metres to litres: <m>1\,\text{m}^3 = 1000\,\text{L}</m>, so <m>V = 0.021\times1000 = 21\,\text{L}.</m>
+                </p>
+            </paragraphs>
+        </solution>
+    </example>
+
+    <example xml:id="ex-water-drum-cylinder">
+        <statement>
+            <p>
+                A cylindrical water drum has radius 0.25 m and height 1.0 m. Find its volume in litres.
+            </p>
+        </statement>
+        <solution>
+            <p>
+                Volume of a cylinder: <m>V=\pi r^2 h.</m> So <m>V=\pi\times(0.25)^2\times1.0\approx\pi\times0.0625\approx0.19635\,\text{m}^3.</m>
+                In litres: <m>0.19635\times1000\approx196\,\text{L}.</m>
+            </p>
+        </solution>
+    </example>
+
+    <example xml:id="ex-cone-borehole">
+        <statement>
+            <p>
+                A small borehole is shaped like a cone with height 1.2 m and base radius 0.15 m. Estimate the volume of water it can hold in litres.
+            </p>
+        </statement>
+        <solution>
+            <p>Volume of a cone: <m>V=\tfrac{1}{3}\pi r^2 h</m>. So <m>V=\tfrac{1}{3}\pi(0.15)^2(1.2)\approx\tfrac{1}{3}\pi\times0.027\approx0.0283\,\text{m}^3</m>, which is about <m>28\,\text{L}.</m></p>
+        </solution>
+    </example>
+
+
+        <example xml:id="ex-vol-triangular-prism-roof">
+            <statement>
+                <p>
+                    The storage space under a roof forms a triangular prism. The triangular cross-section has base 4 m and height 1.2 m, and the attic runs 6 m along the house. Estimate the storage volume in cubic metres and litres.
+                </p>
+                <image width="50%">
+                    <shortdescription>Triangular prism roof</shortdescription>
+                    <latex-image>
+                        \tdplotsetmaincoords{75}{110}
+
+                        \begin{tikzpicture}[tdplot_main_coords, scale=0.8]
+                            % Dimensions: 
+                            % Width (x) = 4m (-2 to 2)
+                            % Length (y) = 6m (0 to 6)
+                            % Height (z) = 1.2m
+                            
+                            % Front Face Vertices
+                            \coordinate (F1) at (-2,0,0);
+                            \coordinate (F2) at (2,0,0);
+                            \coordinate (F_peak) at (0,0,1.2);
+                            
+                            % Back Face Vertices
+                            \coordinate (B1) at (-2,6,0);
+                            \coordinate (B2) at (2,6,0);
+                            \coordinate (B_peak) at (0,6,1.2);
+
+                            % Draw Hidden Lines (Back base)
+                            \draw[dashed, gray] (B1) -- (B2);
+                            \draw[dashed, gray] (F1) -- (B1);
+
+                            % Draw the Floor
+                            \fill[gray!10, opacity=0.5] (F1) -- (F2) -- (B2) -- (B1) -- cycle;
+                            \draw[thick] (F1) -- (F2) -- (B2);
+
+                            % Draw Gable Ends
+                            \draw[thick, fill=brown!20, fill opacity=0.3] (F1) -- (F2) -- (F_peak) -- cycle;
+                            \draw[thick] (B1) -- (B_peak) -- (B2);
+
+                            % Draw Ridge Line (The Peak)
+                            \draw[thick, orange!80!black] (F_peak) -- (B_peak);
+                            
+                            % Draw Slanted Roof Edges
+                            \draw[thick] (F1) -- (B1); % Side edge
+                            \draw[thick] (F2) -- (B2); % Side edge
+
+                            % Dimensions Labels
+                            \draw[&lt;-&gt;] (-2,-0.5,0) -- (2,-0.5,0) node[midway, below] {4m};
+                            \draw[&lt;-&gt;] (2.5,0,0) -- (2.5,6,0) node[midway, right] {6m};
+                            \draw[&lt;-&gt;, red] (0,0,0) -- (0,0,1.2) node[midway, left] {1.2m};
+
+                        \end{tikzpicture}
+
+                    </latex-image>
+                </image>
+            </statement>
+            <solution>
+                <p>
+                    Area of triangle = <m>\tfrac{1}{2}bh = 0.5\times4\times1.2 = 2.4\,\text{m}^2</m>. Volume = area × length = <m>2.4\times6 = 14.4\,\text{m}^3</m>, which is <m>14{,}400\,\text{L}.</m>
+                </p>
+            </solution>
+        </example>
+
+    <example xml:id="ex-composite-stack">
+        <title>Composite Solid: Cylinder with Cone Top</title>
+        <statement>
+            <p>
+                A container is made by placing a cone (height 0.5 m, base radius 0.3 m) on top of a cylinder (height 1.0 m, same radius 0.3 m). Find the total volume in litres.
+            </p>
+        </statement>
+        <solution>
+            <p>Cylinder: <m>V_c=\pi r^2 h=\pi\times0.3^2\times1.0=\pi\times0.09\approx0.283\,\text{m}^3.</m></p>
+            <p>Cone: <m>V_k=\tfrac{1}{3}\pi r^2 h=\tfrac{1}{3}\pi\times0.09\times0.5=0.015\pi\approx0.047\,\text{m}^3.</m></p>
+            <p>Total: <m>0.283+0.047\approx0.330\,\text{m}^3\approx330\,\text{L}.</m></p>
+        </solution>
+    </example>
+
+    <example xml:id="ex-pyramidal-frustum-pond">
+        <title>Pond</title>
+        <statement>
+            <p>
+                A shallow pond is shaped like a frustum of a square pyramid. The water surface is a square 12 m by 12 m, the bottom is a square 6 m by 6 m, and the depth is 1.5 m. Estimate the volume of water in the pond in cubic metres and litres.
+            </p>
+            <image width="60%">
+                <shortdescription>Pyramidal frustum pond</shortdescription>
+                <latex-image>
+                    \tdplotsetmaincoords{70}{20}
+
+                    \begin{tikzpicture}[tdplot_main_coords, scale=0.5]
+                        % Define Dimensions (scaled for visibility)
+                        % Bottom square (6x6) -&gt; coordinates -3 to 3
+                        % Top square (12x12) -&gt; coordinates -6 to 6
+                        % Height 1.5
+                        
+                        % Vertices - Bottom
+                        \coordinate (B1) at (-3,-3,0);
+                        \coordinate (B2) at (3,-3,0);
+                        \coordinate (B3) at (3,3,0);
+                        \coordinate (B4) at (-3,3,0);
+                        
+                        % Vertices - Top
+                        \coordinate (T1) at (-6,-6,3);
+                        \coordinate (T2) at (6,-6,3);
+                        \coordinate (T3) at (6,6,3);
+                        \coordinate (T4) at (-6,6,3);
+
+                        % Draw Bottom Base (dashed for hidden lines)
+                        \draw[thick, dashed] (B1) -- (B2) -- (B3) -- (B4) -- cycle;
+
+                        % Draw Water (Blue fill with transparency)
+                        \fill[blue!20, opacity=0.6] (T1) -- (T2) -- (T3) -- (T4) -- cycle;
+
+                        % Draw Slanted Edges
+                        \draw[thick] (B1) -- (T1);
+                        \draw[thick] (B2) -- (T2);
+                        \draw[thick] (B3) -- (T3);
+                        \draw[thick] (B4) -- (T4);
+
+                        % Draw Top Rim
+                        \draw[thick, blue!80!black] (T1) -- (T2) -- (T3) -- (T4) -- cycle;
+
+                        % Annotations
+                        \draw[&lt;-&gt;] (-6,-7,3) -- (6,-7,3) node[midway, below] {12m};
+                        \draw[&lt;-&gt;] (-3,-4,0) -- (3,-4,0) node[midway, below] {6m};
+                        \draw[&lt;-&gt;, red] (7,6,0) -- (7,6,3) node[midway, right] {h = 1.5m};
+
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+        </statement>
+        <solution>
+            <p>
+                For a pyramidal frustum the volume is <m>V=\tfrac{h}{3}(A_1 + A_2 + \sqrt{A_1A_2})</m> where <m>A_1</m> and <m>A_2</m> are the areas of the top and bottom squares. Here <m>A_1=12^2=144</m> and <m>A_2=6^2=36</m>, so <m>\sqrt{A_1A_2}=\sqrt{144\times36}=72</m>. Thus
+                <m>V=\tfrac{1.5}{3}(144+36+72)=0.5\times252=126\,\text{m}^3</m>, which is about <m>126{,}000\,\text{L}.</m>
+            </p>
+        </solution>
+    </example>
+
+    <exercises xml:id="exercises-volume-real-life">
+        <title>Exercises</title>
+
+        <exercise xml:id="ex-vol-grain-trough">
+            <statement>
+                <p>
+                    A farmer fills a rectangular trough 2.0 m long, 0.5 m wide and 0.4 m deep with water. How many litres of water does the trough hold?
+                </p>
+            </statement>
+            <answer>
+                <p>400 L</p>
+            </answer>
+            <solution>
+                <p>Volume: <m>2.0\times0.5\times0.4=0.4\,\text{m}^3</m>. In litres: <m>0.4\times1000=400\,\text{L}.</m></p>
+            </solution>
+        </exercise>
+
+        <exercise xml:id="ex-vol-water-drum">
+            <statement>
+                <p>
+                    A drum has radius 0.30 m and height 0.9 m. Estimate its capacity in litres. (Use <m>\pi\approx3.14</m>.)
+                </p>
+            </statement>
+            <answer>
+                <p>About 254 L</p>
+            </answer>
+            <solution>
+                <p>Volume: <m>V=\pi r^2 h = 3.14\times0.3^2\times0.9 = 3.14\times0.09\times0.9 \approx 0.254\,\text{m}^3</m>. In litres: <m>0.254\times1000\approx254\,\text{L}.</m></p>
+            </solution>
+        </exercise>
+
+        <exercise xml:id="ex-sphere-tank">
+            <statement>
+                <p>
+                    A spherical water tank has diameter 1.2 m. How many litres can it hold? (Use <m>\pi\approx3.14</m>.)
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    approximately <m>904\,\text{L}.</m>
+                </p>
+            </answer>
+            <solution>
+                <p>Radius <m>r=0.6\,\text{m}.</m> Volume: <m>V=\tfrac{4}{3}\pi r^3=\tfrac{4}{3}\times3.14\times0.6^3\approx\tfrac{4}{3}\times3.14\times0.216\approx0.904\,\text{m}^3</m>, about <m>904\,\text{L}.</m></p>
+            </solution>
+        </exercise>
+
+        <exercise xml:id="ex-vol-pyramid-roof">
+            <statement>
+                <p>
+                    A small store has a square pyramidal roof under which we want to store grain. The base of the pyramidal roof is 4 m by 4 m and its height 2.5 m. Estimate the volume of the the space under the roof  in cubic metres.
+                </p>
+            </statement>
+            <answer>
+                <p>Approximately 13.3 m^3 (≈ 13,333 L)</p>
+            </answer>
+            <solution>
+                <p>Volume of a pyramid: <m>V=\tfrac{1}{3}Bh</m> where <m>B</m> is base area. Here <m>B=4\times4=16\,\text{m}^2</m> and <m>h=2.5\,\text{m}</m>, so <m>V=\tfrac{1}{3}\times16\times2.5=\tfrac{40}{3}\approx13.33\,\text{m}^3.</m></p>
+            </solution>
+        </exercise>
+
+        <exercise xml:id="ex-vol-sand-pile">
+            <statement>
+                <p>
+                    A conical sand pile has base radius 1.2 m and height 0.8 m. Estimate the volume of sand in cubic metres and litres. (Use <m>\pi\approx3.14</m>.)
+                </p>
+            </statement>
+            <answer>
+                <p>About 1.21 m^3 (≈ 1,210 L)</p>
+            </answer>
+            <solution>
+                <p>Volume of a cone: <m>V=\tfrac{1}{3}\pi r^2 h</m>. With <m>r=1.2, h=0.8</m> we get <m>V=\tfrac{1}{3}\times3.14\times1.2^2\times0.8\approx1.206\,\text{m}^3</m>, about <m>1{,}206\,\text{L}.</m></p>
+            </solution>
+        </exercise>
+
+    </exercises>
+
+    <insight>
+        <title>Volume in Everyday Life</title>
+        <ul>
+            <li>
+                Volume measures how much a container holds; use formulas for boxes and cylinders for common containers.
+            </li>
+            <li>
+                Always use consistent units: convert centimetres to metres before computing volume, then convert cubic metres to litres by multiplying by 1000.
+            </li>
+            <li>
+                Estimating volumes helps with storage, transport, planning for water and grain, and with simple cost calculations in rural and urban settings alike.
+            </li>
+        </ul>
+    </insight>
 </subsection>
