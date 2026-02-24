@@ -25,7 +25,7 @@ service = build('drive', 'v3', credentials=creds)
 
 def sanitize_filename(name):
     cleaned = name.rstrip().lower()
-    cleaned = re.sub(r"[';:]", "", cleaned)
+    cleaned = re.sub(r"[,';:]", "", cleaned)
     cleaned = re.sub(r"\s+", "-", cleaned)
     return cleaned
 

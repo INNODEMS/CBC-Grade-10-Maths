@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate a PreTeXt syllabus alignment table from File Matching Validated.csv
+Generate a PreTeXt syllabus alignment table from Automatic Links.csv
 
 This script reads the syllabus mapping CSV and generates a PreTeXt-formatted
 table that links strands and substrands to the corresponding sections in the book.
@@ -221,7 +221,7 @@ def generate_ptx(data, output_path):
 def main():
     # Get paths relative to this script
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    csv_path = os.path.join(script_dir, 'File Matching Validated.csv')
+    csv_path = os.path.join(script_dir, 'Automatic Links.csv')
     source_dir = os.path.join(script_dir, '..', 'source')
     output_path = os.path.join(source_dir, 'syllabus-alignment.ptx')
     
