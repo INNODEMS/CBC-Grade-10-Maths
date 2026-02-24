@@ -30,7 +30,7 @@ The book will be available in multiple formats, including web, PDF, and print. T
 
 This single command will:
 1. Build the PreTeXt book
-<!-- 2. Deploy the custom STACK JavaScript integration file -->
+2. Deploy the custom STACK JavaScript integration file
 3. Launch the book in your browser
 
 #### Issue with long file paths on Windows
@@ -82,20 +82,20 @@ If you need more control over the build process:
    pretext build web
    ```
 
-<!-- 2. **Copy custom STACK integration file (required for STACK questions to render properly):**
+2. **Copy custom STACK integration file (required for STACK questions to render properly):**
    ```bash
    copy /Y "assets\pretext\js\pretext-stack\stackapicalls.js" "output\web\_static\pretext\js\pretext-stack\stackapicalls.js"
-   ``` -->
+   ```
 
 3. **View the book in browser:**
    ```bash
    pretext view web
    ```
 
-<!-- ### Important Notes
-- The custom `stackapicalls.js` file in the `assets` directory is essential for STACK questions to render correctly
+#### Important Notes
+- The custom `stackapicalls.js` file in the `assets` directory is essential for multi-line LaTeX in STACK questions to render correctly
 - This file must be copied to the output folder after each build
-- The automated script handles this automatically -->
+- The automated script handles this automatically
 
 ### Quality Assurance
 
