@@ -116,7 +116,8 @@ def cmd_add_objectives(_: argparse.Namespace) -> None:
         section = (row.get('Section') or '').strip()
         if not chapter or not section:
             continue
-        los = [row.get(f'LO {i}','').strip() for i in range(1,5) if row.get(f'LO {i}')]
+        los = [row.get(f'LO {i}','').strip() for i in range(1,5) if row.get(f'LO {i}') != pd.NA]
+        print(los)
         los = [lo for lo in los if lo]
         if not los:
             continue
