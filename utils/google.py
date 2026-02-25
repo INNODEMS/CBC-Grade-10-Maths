@@ -1,0 +1,104 @@
+"""Google API helpers for the CBC‑Grade‑10‑Maths project.
+
+This module centralises authentication and service creation for both
+Google Drive and Sheets.  The existing helper scripts duplicate this
+boilerplate; moving it here means other modules can import and reuse it.
+
+The functions in this file are deliberately lightweight wrappers around
+`googleapiclient.discovery.build`.  They expect a `credentials.json`
+file in the ``utils/secret`` subdirectory (previously placed alongside the
+script) and will store OAUTH tokens in a local `token.pickle` if needed.
+"""
+
+from __future__ import annotations
+
+import os
+import pickle
+from pathlib import Path
+from typing import Any
+
+from google.auth.transport.requests import Request
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+
+
+# configuration lives in the "secret" subdirectory to avoid
+# accidentally committing sensitive information.
+CONFIG_PATH = Path(__file__).resolve().parent / "secret" / "google_ids.json"
+CREDENTIALS_FILE = Path(__file__).resolve().parent / "secret" / "credentials.json"
+TOKEN_FILE = Path(__file__).resolve().parent / "token.pickle"
+
+
+# scopes used in this repository; extra scopes can be passed to the helpers.
+DEFAULT_SCOPES: list[str] = [
+    "https://www.googleapis.com/auth/drive.readonly",
+    "https://www.googleapis.com/auth/spreadsheets",
+]
+
+
+def _get_credentials(scopes: list[str] | None = None) -> Any:
+    """Return valid credentials, performing the OAuth flow if necessary.
+
+    The scopes list may be extended by callers; a cached token will be
+    re‑used when possible.
+    """
+
+    scopes = scopes or DEFAULT_SCOPES
+    creds = None
+
+    # load existing token if present
+    if TOKEN_FILE.exists():
+        with open(TOKEN_FILE, "rb") as f:
+            creds = pickle.load(f)
+
+    # refresh if expired
+    if creds and creds.valid and not creds.expired:
+        return creds
+
+    if creds and creds.expired and creds.refresh_token:
+        creds.refresh(Request())
+    else:
+        if not CREDENTIALS_FILE.exists():
+            raise FileNotFoundError(f"credentials.json not found at {CREDENTIALS_FILE}")
+
+        flow = InstalledAppFlow.from_client_secrets_file(str(CREDENTIALS_FILE), scopes)
+        creds = flow.run_local_server(port=0)
+
+    # cache for next time
+    with open(TOKEN_FILE, "wb") as f:
+        pickle.dump(creds, f)
+
+    return creds
+
+
+def get_drive_service(scopes: list[str] | None = None) -> Any:
+    """Return a Google Drive API service object.
+
+    Additional scopes may be supplied, but the default is
+    ``drive.readonly``.
+    """
+    creds = _get_credentials(scopes or ["https://www.googleapis.com/auth/drive.readonly"])
+    return build("drive", "v3", credentials=creds)
+
+
+def get_sheets_service(scopes: list[str] | None = None) -> Any:
+    """Return a Google Sheets API service object.
+
+    The default scope is ``spreadsheets``.  Callers that need write
+    access may supply expanded scopes.
+    """
+    creds = _get_credentials(scopes or ["https://www.googleapis.com/auth/spreadsheets"])
+    return build("sheets", "v4", credentials=creds)
+
+
+def load_ids_config() -> dict[str, Any]:
+    """Return the JSON object from ``google_ids.json``.
+
+    Helper for other modules that need folder/spreadsheet IDs.
+    """
+    if not CONFIG_PATH.exists():
+        raise FileNotFoundError(f"google_ids.json not found at {CONFIG_PATH}")
+    import json
+
+    with open(CONFIG_PATH, encoding="utf-8") as f:
+        return json.load(f)
