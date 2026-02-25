@@ -16,8 +16,9 @@ import sys
 import csv
 import pandas as pd
 
-from . import google, csvtools, ptx, reports
-from .content import syllabus_tables
+from .helpers import google, csvtools
+from .audits import reports, audit_questions
+from .content import syllabus_tables, add_labels
 from .content import objectives, resources, namespace
 
 # path to the automatic links CSV; use cached location
@@ -25,6 +26,8 @@ AUTOMATIC_LINKS_PATH = csvtools.cached_file("Automatic Links.csv")
 # path to the learning outcomes CSV (always cached)
 LEARNING_OUTCOMES_PATH = csvtools.cached_file("Learning Outcomes.csv")
 
+
+@google.retry_on_auth_failure
 
 def cmd_pull_plans(args: argparse.Namespace) -> None:
     print("pull-plans: starting")
@@ -73,17 +76,20 @@ def cmd_pull_plans(args: argparse.Namespace) -> None:
                 print(f"Downloaded: {pdf_path.name}")
 
     dest = Path("assets/lesson_plans")
-    if args.clean and dest.exists():
+    clean = getattr(args, 'clean', False)
+    if clean and dest.exists():
         print(f"pull-plans: cleaning {dest}")
         shutil.rmtree(dest)
-    download_folder(folder_id, dest, only_missing=args.new)
+    download_folder(folder_id, dest, only_missing=getattr(args, 'new', False))
     print("pull-plans: done")
 
 
 def cmd_validate_paths(args: argparse.Namespace) -> None:
     print("validate-paths: starting")
-    base = Path(args.base_dir) if args.base_dir else Path(".")
-    if args.cached:
+    base_dir = getattr(args, 'base_dir', None)
+    base = Path(base_dir) if base_dir else Path(".")
+
+    if getattr(args, 'cached', False):
         print("validate-paths: reading cached CSV")
         rows = csvtools.read_links_csv()
     else:
@@ -93,7 +99,7 @@ def cmd_validate_paths(args: argparse.Namespace) -> None:
     # write back to cache (the default location in utils/cached-csv)
     csvtools.write_links_csv(validated)
     print(f"validate-paths: processed {len(rows)} rows")
-    if args.no_write:
+    if getattr(args, 'no_write', False):
         print("validate-paths: skipped sheet upload")
     else:
         reports.write_validated_to_sheet(validated)
@@ -103,7 +109,7 @@ def cmd_validate_paths(args: argparse.Namespace) -> None:
 
 def cmd_add_objectives(_: argparse.Namespace) -> None:
     # read csv, compute numbering, iterate
-    df = pd.read_csv(AUTOMATIC_LINKS_PATH, encoding='utf-8')
+    df = pd.read_csv(AUTOMATIC_LINKS_PATH, encoding='utf-8', na_filter=False)
     numbering = objectives.build_numbering(df)
     chap_map = numbering['chapter_num']
     sec_map = numbering['section_num']
@@ -116,8 +122,7 @@ def cmd_add_objectives(_: argparse.Namespace) -> None:
         section = (row.get('Section') or '').strip()
         if not chapter or not section:
             continue
-        los = [row.get(f'LO {i}','').strip() for i in range(1,5) if row.get(f'LO {i}') != pd.NA]
-        print(los)
+        los = [row.get(f'LO {i}','').strip() for i in range(1,5) if row.get(f'LO {i}')]
         los = [lo for lo in los if lo]
         if not los:
             continue
@@ -220,28 +225,39 @@ def cmd_generate_lo(_: argparse.Namespace) -> None:
     print("generate-lo: done")
 
 
-def main(argv=None):
+
+# this helper builds the parser so tests can exercise argument parsing without
+# triggering any of the command actions.
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Utility commands for the project")
     sub = parser.add_subparsers(dest='command')
 
-    pull_parser = sub.add_parser('pull-plans', help='download lesson plans from Drive')
-    pull_parser.add_argument(
+    # parent parsers expose flags that are shared with the 'all' command.
+    pull_parent = argparse.ArgumentParser(add_help=False)
+    pull_parent.add_argument(
         '--new', action='store_true', help='only download plans that are not already present'
     )
-    pull_parser.add_argument(
+    pull_parent.add_argument(
         '--clean', action='store_true', help='remove existing lesson plans before downloading'
     )
-    vparser = sub.add_parser('validate-paths', help='verify and annotate CSV rows with file existence')
-    vparser.add_argument('--base-dir', help='root of repo (defaults to current working directory)')
-    vparser.add_argument(
+
+    validate_parent = argparse.ArgumentParser(add_help=False)
+    validate_parent.add_argument('--base-dir', help='root of repo (defaults to current working directory)')
+    validate_parent.add_argument(
         '--cached', action='store_true', help='use locally cached Automatic Links.csv instead of fetching from sheet'
     )
     # by default we upload results back to the sheet; use --no-write-sheet to
     # suppress this behaviour
-    vparser.add_argument(
+    validate_parent.add_argument(
         '--no-write-sheet', action='store_true', dest='no_write',
         help='do not upload validation results back to a sheet (default is to write)'
     )
+
+    pull_parser = sub.add_parser('pull-plans', parents=[pull_parent],
+                                help='download lesson plans from Drive')
+    vparser = sub.add_parser('validate-paths', parents=[validate_parent],
+                             help='verify and annotate CSV rows with file existence')
+
     sub.add_parser('add-objectives', help='insert objectives blocks into PTX files')
     sub.add_parser('add-resources', help='insert/upgrade resource boxes for lesson plans')
     sub.add_parser('audit-pdfs', help='report lesson-plan PDFs not referenced by any source file')
@@ -249,7 +265,22 @@ def main(argv=None):
     sub.add_parser('generate-syllabus', help='create syllabus-alignment.ptx from CSV data')
     sub.add_parser('generate-lo', help='create lo-coverage-table.ptx from CSV and outcome data')
     sub.add_parser('syllabus-tables', help='generate both syllabus and LO coverage tables')
-    sub.add_parser('all', help='execute the typical workflow in order')
+
+    # bring the standalone helpers into the official CLI
+    sub.add_parser('audit-questions', help='run the STACK/image/pdf audit routines')
+    addlabels_parser = sub.add_parser('add-labels', help='add xml:id labels to PTX elements')
+    addlabels_parser.add_argument(
+        "--search-dir", dest="search_dir", default="source",
+        help="Directory or file to process (defaults to ./source).",
+    )
+
+    sub.add_parser('all', parents=[pull_parent, validate_parent],
+                    help='execute the typical workflow in order')
+    return parser
+
+
+def main(argv=None):
+    parser = build_parser()
 
     args = parser.parse_args(argv)
     if not args.command:
@@ -276,6 +307,12 @@ def main(argv=None):
         # convenience wrapper that runs both generators
         cmd_generate_syllabus(args)
         cmd_generate_lo(args)
+    elif args.command == 'audit-questions':
+        # run the helper script logic
+        audit_questions.run_audit()
+    elif args.command == 'add-labels':
+        # delegate to the module; it handles printing itself
+        add_labels.main(search_dir=getattr(args, 'search_dir', None))
     elif args.command == 'all':
         # chain typical workflow
         cmd_pull_plans(args)
@@ -286,6 +323,8 @@ def main(argv=None):
         cmd_namespace(args)
         cmd_generate_syllabus(args)
         cmd_generate_lo(args)
+        # run the audit/questions step here too
+        audit_questions.run_audit()
     else:
         parser.error(f"unknown command {args.command}")
 

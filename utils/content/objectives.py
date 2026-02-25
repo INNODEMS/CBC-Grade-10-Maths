@@ -8,7 +8,7 @@ links CSV.
 from __future__ import annotations
 from typing import List, Dict
 
-from ..ptx import detect_newline, indent_of_line
+from ..helpers.text import detect_newline, indent_of_line
 import pandas as pd
 
 

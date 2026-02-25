@@ -3,7 +3,7 @@
 from pathlib import Path
 import tempfile
 
-from utils import reports
+from utils.audits import reports
 
 
 def test_find_unreferenced_pdfs(tmp_path: Path):
@@ -26,7 +26,7 @@ def test_audit_xml_ids(tmp_path: Path):
     # create csv and a ptx file
     csv_path = tmp_path / "links.csv"
     csv_path.write_text("Chapter,PTX Exists,PTX Path,Section Filecase,Subsection Filecase,Subsubsection Filecase\n" +
-                       "Ch,YES,foo.ptx,s1,ss1,\n")
+                       "Ch,YES,foo.ptx,s1,,\n")
     source = tmp_path / "source"
     source.mkdir()
     ptx = source / "foo.ptx"

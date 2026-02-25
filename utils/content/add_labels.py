@@ -13,11 +13,16 @@ TARGET_TAGS = [
 ]
 FILE_EXTENSION = '.ptx'
 EXCLUDE = 'resources-blurb-'
-SEARCH_DIR = '../source'
+
+
+# default path is repository root being current working directory
+DEFAULT_SEARCH_DIR = Path('source')
+
 
 def generate_label(length=8):
     chars = string.ascii_lowercase + string.digits
     return 'auto_' + ''.join(random.choices(chars, k=length))
+
 
 def process_content(content):
     for tag in TARGET_TAGS:
@@ -32,6 +37,7 @@ def process_content(content):
         
         content = re.sub(pattern, replace_func, content)
     return content
+
 
 def iter_ptx_files(path):
     if not os.path.exists(path):
@@ -48,7 +54,9 @@ def iter_ptx_files(path):
                 yield os.path.join(root, file)
 
 
-def main(*, search_dir=SEARCH_DIR):
+def main(*, search_dir=None):
+    if search_dir is None:
+        search_dir = DEFAULT_SEARCH_DIR
     for file_path in iter_ptx_files(search_dir):
         with open(file_path, 'r', encoding='utf-8') as f:
             original_content = f.read()
@@ -60,12 +68,13 @@ def main(*, search_dir=SEARCH_DIR):
                 f.write(new_content)
             print(f"Updated: {file_path}")
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Add xml:id labels to PreTeXt files.")
     parser.add_argument(
         "--search-dir",
         dest="search_dir",
-        default=SEARCH_DIR,
+        default=str(DEFAULT_SEARCH_DIR),
         help="Directory or file to process (defaults to ./source).",
     )
 

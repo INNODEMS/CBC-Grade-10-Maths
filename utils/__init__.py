@@ -5,7 +5,10 @@ other code can write ``from utils import csvtools, reports`` instead of
 mentioning the submodules directly.
 """
 
-from . import google, csvtools, ptx, reports
+# expose a convenient flat import surface while the files live in
+# more specific packages beneath ``helpers`` and ``audits``.
+from .helpers import google, csvtools, text
+from .audits import reports, audit_questions
 from . import content
 
-__all__ = ["google", "csvtools", "ptx", "reports", "content"]
+__all__ = ["google", "csvtools", "text", "reports", "audit_questions", "content"]

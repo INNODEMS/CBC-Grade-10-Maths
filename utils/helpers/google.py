@@ -86,6 +86,54 @@ def _get_credentials(scopes: list[str] | None = None) -> Any:
     return creds
 
 
+
+# helper used by callers that perform API requests.  When a token has
+# expired the first request will raise ``HttpError`` with a 401/403 status.
+# our strategy is to remove the cached token and retry the entire operation
+# once; the next call into :func:`_get_credentials` will prompt the user for
+# fresh credentials (or refresh the token automatically).  the decorator
+# can be applied to any function that may interact with Google APIs.
+from googleapiclient.errors import HttpError
+import functools
+
+
+def _is_auth_failure(exc: Exception) -> bool:
+    """Return true if *exc* is an authorization error from the API.
+
+    The :class:`HttpError` raised by ``googleapiclient`` carries the HTTP
+    response on ``exc.resp``.
+    """
+    if not isinstance(exc, HttpError):
+        return False
+    status = getattr(exc.resp, "status", None)
+    return status in (401, 403)
+
+
+def retry_on_auth_failure(func):
+    """Decorator that reruns *func* one time after clearing token file.
+
+    This is suitable for light-weight wrappers such as
+    :func:`fetch_links_from_sheet` where retrying the entire body is safe.
+    """
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as exc:  # cover HttpError and friends
+            if _is_auth_failure(exc):
+                # blow away cached token so that _get_credentials will
+                # initiate the OAuth flow again.
+                try:
+                    TOKEN_FILE.unlink()
+                except OSError:
+                    pass
+                # second attempt; if it fails again let the exception bubble
+                return func(*args, **kwargs)
+            raise
+
+    return wrapper
+
+
 def get_drive_service(scopes: list[str] | None = None) -> Any:
     """Return a Google Drive API service object.
 

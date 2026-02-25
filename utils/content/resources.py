@@ -7,7 +7,7 @@ be unit‑tested independently.
 from __future__ import annotations
 from typing import Optional, Tuple
 
-from ..ptx import detect_newline
+from ..helpers.text import detect_newline
 
 
 # ------------------------------------------------------------------

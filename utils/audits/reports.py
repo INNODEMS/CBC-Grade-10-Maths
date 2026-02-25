@@ -12,10 +12,12 @@ import csv
 from pathlib import Path
 from typing import Iterable, Tuple, List, Dict, Any
 
-from . import csvtools, google
+from ..helpers import csvtools, google
 
 
 # --- sheet interaction --------------------------------------------------
+
+@google.retry_on_auth_failure
 
 def fetch_links_from_sheet() -> list[dict[str, str]]:
     """Download the "Automatic Links" sheet and return its rows.
@@ -39,6 +41,8 @@ def fetch_links_from_sheet() -> list[dict[str, str]]:
     rows_data = values[1:]
     return [dict(zip(headers, row)) for row in rows_data]
 
+
+@google.retry_on_auth_failure
 
 def write_validated_to_sheet(
     rows: Iterable[Dict[str, str]],
