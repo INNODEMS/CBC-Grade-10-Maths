@@ -2,7 +2,7 @@
 
 from pathlib import Path
 import tempfile
-from utils import tables
+from utils.content import syllabus_tables as tables
 
 
 def test_parse_links_and_generate(tmp_path: Path):

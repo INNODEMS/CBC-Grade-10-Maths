@@ -16,7 +16,8 @@ import sys
 import csv
 import pandas as pd
 
-from . import google, csvtools, ptx, reports, tables
+from . import google, csvtools, ptx, reports
+from .content import syllabus_tables as tables
 from .content import objectives, resources, namespace
 
 
@@ -196,7 +197,7 @@ def cmd_generate_syllabus(_: argparse.Namespace) -> None:
 def cmd_generate_lo(_: argparse.Namespace) -> None:
     print("generate-lo: starting")
     lo_rows = []
-    with open('Learning Outcomes.csv', encoding='utf-8-sig') as f:
+    with open('utils/cached-csv/Learning Outcomes.csv', encoding='utf-8-sig') as f:
         reader = csv.DictReader(f)
         lo_rows = [row for row in reader]
     rows = csvtools.read_links_csv()
@@ -234,6 +235,7 @@ def main(argv=None):
     sub.add_parser('namespace', help='add xmlns:xi attribute to subsection/subsubsection tags')
     sub.add_parser('generate-syllabus', help='create syllabus-alignment.ptx from CSV data')
     sub.add_parser('generate-lo', help='create lo-coverage-table.ptx from CSV and outcome data')
+    sub.add_parser('syllabus-tables', help='generate both syllabus and LO coverage tables')
     sub.add_parser('all', help='execute the typical workflow in order')
 
     args = parser.parse_args(argv)
@@ -256,6 +258,10 @@ def main(argv=None):
     elif args.command == 'generate-syllabus':
         cmd_generate_syllabus(args)
     elif args.command == 'generate-lo':
+        cmd_generate_lo(args)
+    elif args.command == 'syllabus-tables':
+        # convenience wrapper that runs both generators
+        cmd_generate_syllabus(args)
         cmd_generate_lo(args)
     elif args.command == 'all':
         # chain typical workflow

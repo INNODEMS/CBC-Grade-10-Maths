@@ -102,9 +102,9 @@ def generate_syllabus_ptx(data: OrderedDict, output_path: Path) -> None:
     lines: List[str] = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<!-- AUTO-GENERATED FILE - DO NOT EDIT MANUALLY -->',
-        '<!-- Regenerate using utils.tables.generate_syllabus_ptx -->',
+        '<!-- Regenerate using utils.content.syllabus_tables.generate_syllabus_ptx -->',
         '',
-        '<preface xml:id="preface-syllabus-alignment" xmlns:xi="http://www.w3.org/2001/XInclude">',
+        '<appendix xml:id="appendix-syllabus-alignment" xmlns:xi="http://www.w3.org/2001/XInclude">',
         '    <title>Syllabus Alignment</title>',
         '',
         '    <p>',
@@ -151,7 +151,7 @@ def generate_syllabus_ptx(data: OrderedDict, output_path: Path) -> None:
         lines.append('')
         lines.append('    </paragraphs>')
         lines.append('')
-    lines.append('</preface>')
+    lines.append('</appendix>')
     lines.append('')
     output_path.write_text('\n'.join(lines), encoding='utf-8')
     print(f"Generated: {output_path}")
@@ -218,7 +218,7 @@ def generate_lo_coverage_ptx(
     lines: List[str] = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<!-- AUTO-GENERATED FILE - DO NOT EDIT MANUALLY -->',
-        '<!-- Regenerate using utils.tables.generate_lo_coverage_ptx -->',
+        '<!-- Regenerate using utils.content.syllabus_tables.generate_lo_coverage_ptx -->',
         '',
         '<appendix xml:id="appendix-lo-coverage-table" xmlns:xi="http://www.w3.org/2001/XInclude">',
         '    <title>Learning Outcomes Coverage Table</title>',

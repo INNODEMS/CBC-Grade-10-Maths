@@ -5,7 +5,7 @@ other code can write ``from utils import csvtools, reports`` instead of
 mentioning the submodules directly.
 """
 
-from . import google, csvtools, ptx, reports, tables
+from . import google, csvtools, ptx, reports
 from . import content
 
-__all__ = ["google", "csvtools", "ptx", "reports", "tables", "content"]
+__all__ = ["google", "csvtools", "ptx", "reports", "content"]
