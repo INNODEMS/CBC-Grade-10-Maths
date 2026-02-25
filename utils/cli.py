@@ -14,12 +14,14 @@ import argparse
 from pathlib import Path
 import sys
 import csv
+import pandas as pd
 
 from . import google, csvtools, ptx, reports, tables
 from .content import objectives, resources, namespace
 
 
 def cmd_pull_plans(args: argparse.Namespace) -> None:
+    print("pull-plans: starting")
     ids = google.load_ids_config()
     folder_id = ids.get("lesson_plans_folder_id")
     if not folder_id:
@@ -66,28 +68,35 @@ def cmd_pull_plans(args: argparse.Namespace) -> None:
 
     dest = Path("assets/lesson_plans")
     if args.clean and dest.exists():
+        print(f"pull-plans: cleaning {dest}")
         shutil.rmtree(dest)
     download_folder(folder_id, dest, only_missing=args.new)
+    print("pull-plans: done")
 
 
 def cmd_validate_paths(args: argparse.Namespace) -> None:
+    print("validate-paths: starting")
     base = Path(args.base_dir) if args.base_dir else Path(".")
-    if args.from_sheet:
-        rows = reports.fetch_links_from_sheet()
-    else:
+    if args.cached:
+        print("validate-paths: reading cached CSV")
         rows = csvtools.read_links_csv()
+    else:
+        print("validate-paths: fetching from sheet")
+        rows = reports.fetch_links_from_sheet()
     validated = reports.validate_paths(rows, base)
-    # write back to cache and also mirror to current working directory
+    # write back to cache (the default location in utils/cached-csv)
     csvtools.write_links_csv(validated)
-    # optionally keep a copy in cwd for convenience
-    csvtools.write_links_csv(validated, Path("Automatic Links.csv"))
-    if args.write_sheet:
+    print(f"validate-paths: processed {len(rows)} rows")
+    if args.no_write:
+        print("validate-paths: skipped sheet upload")
+    else:
         reports.write_validated_to_sheet(validated)
+        print("validate-paths: uploaded results to sheet")
+    print("validate-paths: done")
 
 
 def cmd_add_objectives(_: argparse.Namespace) -> None:
     # read csv, compute numbering, iterate
-    import pandas as pd
     df = pd.read_csv('Automatic Links.csv', encoding='utf-8')
     numbering = objectives.build_numbering(df)
     chap_map = numbering['chapter_num']
@@ -116,9 +125,11 @@ def cmd_add_objectives(_: argparse.Namespace) -> None:
         else:
             skipped += 1
     print(f"objectives added: {added}, skipped-existing: {skipped}")
+    print("add-objectives: done")
 
 
 def cmd_add_resources(_: argparse.Namespace) -> None:
+    print("add-resources: starting")
     import pandas as pd
     df = pd.read_csv('Automatic Links.csv', encoding='utf-8')
     added=removed=upgraded=onlylesson=0
@@ -147,9 +158,11 @@ def cmd_add_resources(_: argparse.Namespace) -> None:
         if content_text!=orig:
             path.write_text(content_text, encoding='utf-8')
     print(f"resources added: {added}, only lesson: {onlylesson}, removed old: {removed}, upgraded: {upgraded}")
+    print("add-resources: done")
 
 
 def cmd_audit_pdfs(_: argparse.Namespace) -> None:
+    print("audit-pdfs: starting")
     base = Path('.')
     unref = reports.find_unreferenced_pdfs(base)
     if unref:
@@ -158,24 +171,30 @@ def cmd_audit_pdfs(_: argparse.Namespace) -> None:
             print(p)
     else:
         print('All PDFs are referenced.')
+    print("audit-pdfs: done")
 
 
 def cmd_namespace(_: argparse.Namespace) -> None:
+    print("namespace: starting")
     base = Path('.')
     count=0
     for path in base.joinpath('source').rglob('*.ptx'):
         changed = namespace.process_file(path)
         count += changed
     print(f"Updated {count} tags.")
+    print("namespace: done")
 
 
 def cmd_generate_syllabus(_: argparse.Namespace) -> None:
+    print("generate-syllabus: starting")
     rows = csvtools.read_links_csv()
     data = tables.parse_links(rows, Path('source'))
     tables.generate_syllabus_ptx(data, Path('source/syllabus-alignment.ptx'))
+    print("generate-syllabus: done")
 
 
 def cmd_generate_lo(_: argparse.Namespace) -> None:
+    print("generate-lo: starting")
     lo_rows = []
     with open('Learning Outcomes.csv', encoding='utf-8-sig') as f:
         reader = csv.DictReader(f)
@@ -184,6 +203,7 @@ def cmd_generate_lo(_: argparse.Namespace) -> None:
     fmv = tables.parse_file_matching_validated(rows)
     lo_data = tables.parse_learning_outcomes(lo_rows)
     tables.generate_lo_coverage_ptx(lo_data, fmv, Path('source/lo-coverage-table.ptx'))
+    print("generate-lo: done")
 
 
 def main(argv=None):
@@ -200,10 +220,13 @@ def main(argv=None):
     vparser = sub.add_parser('validate-paths', help='verify and annotate CSV rows with file existence')
     vparser.add_argument('--base-dir', help='root of repo (defaults to current working directory)')
     vparser.add_argument(
-        '--from-sheet', action='store_true', help='fetch data from Google Sheets instead of local CSV'
+        '--cached', action='store_true', help='use locally cached Automatic Links.csv instead of fetching from sheet'
     )
+    # by default we upload results back to the sheet; use --no-write-sheet to
+    # suppress this behaviour
     vparser.add_argument(
-        '--write-sheet', action='store_true', help='upload validation results back to a sheet'
+        '--no-write-sheet', action='store_true', dest='no_write',
+        help='do not upload validation results back to a sheet (default is to write)'
     )
     sub.add_parser('add-objectives', help='insert objectives blocks into PTX files')
     sub.add_parser('add-resources', help='insert/upgrade resource boxes for lesson plans')

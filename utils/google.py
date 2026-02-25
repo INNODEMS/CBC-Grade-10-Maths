@@ -53,13 +53,26 @@ def _get_credentials(scopes: list[str] | None = None) -> Any:
         with open(TOKEN_FILE, "rb") as f:
             creds = pickle.load(f)
 
-    # refresh if expired
+    # if we already have credentials that are valid and cover the
+    # requested scopes, return them immediately.
     if creds and creds.valid and not creds.expired:
-        return creds
+        if hasattr(creds, "scopes"):
+            existing = set(creds.scopes)
+            needed = set(scopes)
+            if needed.issubset(existing):
+                return creds
+        else:
+            # unknown scopes, conservatively re‑auth
+            pass
 
+    # if we have expired credentials with a refresh token, refresh them
     if creds and creds.expired and creds.refresh_token:
-        creds.refresh(Request())
-    else:
+        try:
+            creds.refresh(Request())
+        except Exception:
+            creds = None  # fall through to reauth
+    
+    if not creds or creds.expired:
         if not CREDENTIALS_FILE.exists():
             raise FileNotFoundError(f"credentials.json not found at {CREDENTIALS_FILE}")
 
