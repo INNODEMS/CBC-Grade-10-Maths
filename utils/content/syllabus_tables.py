@@ -52,13 +52,16 @@ def parse_links(rows: Iterable[Dict[str, str]], source_dir: Path) -> OrderedDict
     substrand_numbers: Dict[str, Dict[str, str]] = {}
 
     for row in rows:
+        ptx_path = row.get('PTX Path', '').strip()
+        # skip geometry extras that aren't meant to appear in the tables
+        if any(term in ptx_path.lower() for term in ("nonagon", "decagon")):
+            continue
         chapter = row.get('Chapter', '').strip()
         section = row.get('Section', '').strip()
         subsection = row.get('Subsection', '').strip()
         subsubsection = row.get('Subsubsection', '').strip()
         in_syllabus = row.get('In Syllabus', '').strip()
         ptx_exists = row.get('PTX Exists', '').strip()
-        ptx_path = row.get('PTX Path', '').strip()
         if in_syllabus not in ['Yes', 'Extension'] or ptx_exists != 'YES':
             continue
         if not chapter:
@@ -181,6 +184,9 @@ def parse_learning_outcomes(lo_rows: Iterable[Dict[str, str]]) -> OrderedDict:
 def parse_file_matching_validated(rows: Iterable[Dict[str, str]]) -> Dict[str, Dict[str, Dict[str, List[str]]]]:
     mapping: Dict[str, Dict[str, Dict[str, List[str]]]] = {}
     for row in rows:
+        ptx_path = row.get('PTX Path','').strip()
+        if any(term in ptx_path.lower() for term in ("nonagon","decagon")):
+            continue
         orig_strand = row.get('Chapter','').strip()
         section = row.get('Section','').strip()
         strand = orig_strand

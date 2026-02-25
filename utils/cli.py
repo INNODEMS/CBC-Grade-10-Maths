@@ -17,7 +17,7 @@ import csv
 import pandas as pd
 
 from . import google, csvtools, ptx, reports
-from .content import syllabus_tables as tables
+from .content import syllabus_tables
 from .content import objectives, resources, namespace
 
 
@@ -189,21 +189,28 @@ def cmd_namespace(_: argparse.Namespace) -> None:
 def cmd_generate_syllabus(_: argparse.Namespace) -> None:
     print("generate-syllabus: starting")
     rows = csvtools.read_links_csv()
-    data = tables.parse_links(rows, Path('source'))
-    tables.generate_syllabus_ptx(data, Path('source/syllabus-alignment.ptx'))
+    data = syllabus_tables.parse_links(rows, Path('source'))
+    syllabus_tables.generate_syllabus_ptx(data, Path('source/syllabus-alignment.ptx'))
     print("generate-syllabus: done")
 
 
 def cmd_generate_lo(_: argparse.Namespace) -> None:
     print("generate-lo: starting")
     lo_rows = []
-    with open('utils/cached-csv/Learning Outcomes.csv', encoding='utf-8-sig') as f:
-        reader = csv.DictReader(f)
-        lo_rows = [row for row in reader]
+    lo_path = Path(__file__).resolve().parent / "cached-csv" / "Learning Outcomes.csv"
+    if not lo_path.is_file():
+        print(f"generate-lo: no learning outcomes CSV found at {lo_path}")
+    else:
+        print(f"generate-lo: reading outcomes from {lo_path}")
+        with open(lo_path, encoding='utf-8-sig') as f:
+            reader = csv.DictReader(f)
+            lo_rows = [row for row in reader]
+    print(f"generate-lo: read {len(lo_rows)} learning outcomes rows")
     rows = csvtools.read_links_csv()
-    fmv = tables.parse_file_matching_validated(rows)
-    lo_data = tables.parse_learning_outcomes(lo_rows)
-    tables.generate_lo_coverage_ptx(lo_data, fmv, Path('source/lo-coverage-table.ptx'))
+    fmv = syllabus_tables.parse_file_matching_validated(rows)
+    lo_data = syllabus_tables.parse_learning_outcomes(lo_rows)
+    print(f"generate-lo: generated lo_data with {sum(len(v) for d in lo_data.values() for v in d.values())} entries")
+    syllabus_tables.generate_lo_coverage_ptx(lo_data, fmv, Path('source/lo-coverage-table.ptx'))
     print("generate-lo: done")
 
 
