@@ -1,26 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Reflection Across y = mx + c</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/1.4.0/jsxgraph.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/1.4.0/jsxgraphcore.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js"></script>
-</head>
-<body>
-
-<div id="jsxgraph-reflection-quad-dynamic-line"
-    class="jxgbox"
-    style="width: 900px; height: 900px;">
-</div>
-
-<script>
-/* Embedded reflection-quad-dynamic-line.js */
 JXG.Options.text.useMathJax = true;
 (function () {
     'use strict';
 
-    const BOARD_ID = 'jsxgraph-reflection-quad-dynamic-line';
+    const BOARD_ID = 'jsxgraph-equation-mirror-line';
     const BOUNDING_BOX = [-7, 7, 7, -7];
 
     const board = JXG.JSXGraph.initBoard(BOARD_ID, {
@@ -38,8 +20,8 @@ JXG.Options.text.useMathJax = true;
     // create fixed, hidden vertices so the box cannot be moved
     const _boxP1 = board.create('point', [-6.8, 6.9], { fixed: true, visible: false });
     const _boxP2 = board.create('point', [-2.3, 6.9], { fixed: true, visible: false });
-    const _boxP3 = board.create('point', [-2.3, 5], { fixed: true, visible: false });
-    const _boxP4 = board.create('point', [-6.8, 5], { fixed: true, visible: false });
+    const _boxP3 = board.create('point', [-2.3, 4.8], { fixed: true, visible: false });
+    const _boxP4 = board.create('point', [-6.8, 4.8], { fixed: true, visible: false });
 
     board.create('polygon', [_boxP1, _boxP2, _boxP3, _boxP4], {
         fillColor: '#ffffff',
@@ -52,9 +34,9 @@ JXG.Options.text.useMathJax = true;
     });
 
     // Replace sliders with input fields so users can type m and c
-    var inputM = board.create('input', [-6.2, 5.5, '-0.1', 'm = '], { fontSize: 22 , cssStyle: 'width: 50px'});
+    var inputM = board.create('input', [-6.4, 5.3, '-0.5', 'm = '], { fontSize: 16 , cssStyle: 'width: 40px'});
 
-    var inputC = board.create('input', [-4.2, 5.5, '-0.5', 'c = '], { fontSize: 22 , cssStyle: 'width: 50px'});
+    var inputC = board.create('input', [-4.2, 5.3, '-0.5', 'c = '], { fontSize: 16 , cssStyle: 'width: 40px'});
     // ensure the board updates when either input value changes
     if (inputM.rendNodeInput) {
         inputM.rendNodeInput.addEventListener('change', function () { board.update(); });
@@ -75,7 +57,7 @@ JXG.Options.text.useMathJax = true;
             name: 'Mirror Line',
             withLabel: true,
             layer: 5,
-            label: { fontSize: 22, offset: [50, -50] }
+            label: { fontSize: 18, offset: [50, -50] }
         }
     );
 
@@ -133,11 +115,11 @@ JXG.Options.text.useMathJax = true;
             strokeWidth: 3
         }
     );
-    var line = board.create('text', [-4.55, 6.5, 'Equation of Mirror Line'], { fixed: true, anchorX: 'middle', anchorY: 'middle', fontSize: 22 });
+    var line = board.create('text', [-4.55, 6.5, 'Equation of Mirror Line'], { fixed: true, anchorX: 'middle', anchorY: 'middle', fontSize: 16 });
 
     var eqn = board.create('text',
     [
-        -6.2, 6.1,
+        -6.3, 6,
             function () {
             const m = (parseFloat(inputM.Value()) || 0).toFixed(2);
             const cnum = parseFloat(inputC.Value()) || 0;
@@ -154,7 +136,7 @@ JXG.Options.text.useMathJax = true;
         fixed: true,
         anchorX: 'left',
         anchorY: 'middle',
-        fontSize: 22
+        fontSize: 16
     }
     );
 
@@ -164,7 +146,3 @@ JXG.Options.text.useMathJax = true;
     
 
 })();
-</script>
-
-</body>
-</html>
