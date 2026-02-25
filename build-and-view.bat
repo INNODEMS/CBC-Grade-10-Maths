@@ -7,17 +7,17 @@ if %errorlevel% neq 0 (
     exit /b %errorlevel%
 )
 
-@REM echo.
-@REM echo Copying custom STACK JS file...
-@REM copy /Y "assets\pretext\js\pretext-stack\stackapicalls.js" "output\web\_static\pretext\js\pretext-stack\stackapicalls.js" >nul
+echo.
+echo Copying custom STACK JS file...
+copy /Y "assets\pretext\js\pretext-stack\stackapicalls.js" "output\web\_static\pretext\js\pretext-stack\stackapicalls.js" >nul
 
-@REM if %errorlevel% neq 0 (
-@REM     echo Failed to copy custom JS file!
-@REM     exit /b %errorlevel%
-@REM )
+if %errorlevel% neq 0 (
+    echo Failed to copy custom JS file!
+    exit /b %errorlevel%
+)
 
-@REM echo Custom stackapicalls.js deployed successfully!
-@REM echo.
+echo Custom stackapicalls.js deployed successfully!
+echo.
 
 echo Launching browser...
 pretext view web
