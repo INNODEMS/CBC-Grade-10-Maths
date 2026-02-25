@@ -5,28 +5,29 @@ from lxml import etree
 from slugify import slugify
 from pathlib import Path
 
-# Configuration
-ASSET_FILES_ROOT = '../assets'      # The tree containing the STACK questions
-PTX_FILES_ROOT = '../source'      # The tree containing files that reference the XMLs
+# Configuration: assume commands run from repository root
+ASSET_FILES_ROOT = Path('assets')      # tree containing the STACK questions
+PTX_FILES_ROOT = Path('source')       # tree containing files that reference the XMLs
+
 
 def get_all_asset_files(root_dir, extension=".xml"):
     """Recursively finds all .xml files in a directory tree."""
     xml_files = set()
-    for root, _, files in os.walk(root_dir):
+    for root, _, files in os.walk(str(root_dir)):
         for file in files:
             if file.endswith(extension) and "gitsync_category" not in file:
-                # Store relative path from the root_dir
-                rel_path = os.path.relpath(os.path.join(root, file), start=os.path.dirname(root_dir))
+                # store relative path from the root_dir
+                rel_path = os.path.relpath(os.path.join(root, file), start=os.path.dirname(str(root_dir)))
                 xml_files.add(rel_path.replace("assets/", ""))
     return xml_files
+
 
 def get_referenced_sources(root_dir, tag="stack"):
     """Collects all 'source' attributes from <stack /> tags."""
     references = []
-    # Regex to find: <stack ... source="path/to/file.xml" ... />
     stack_pattern = re.compile('<' + tag + r'\s+[^>]*source="([^"]+)"')
 
-    for root, _, files in os.walk(root_dir):
+    for root, _, files in os.walk(str(root_dir)):
         for file in files:
             if file.endswith('.ptx'):
                 path = os.path.join(root, file)
@@ -36,9 +37,11 @@ def get_referenced_sources(root_dir, tag="stack"):
                     references.extend(matches)
     return references
 
+
 def get_label_from_filepath(path):
     filename = Path(path).stem
     return slugify(filename)
+
 
 def write_orphaned(orphans, orphan_include_file):
     with open(orphan_include_file, "w") as f:
@@ -49,7 +52,8 @@ def write_orphaned(orphans, orphan_include_file):
                     <!--<title></title>-->
                     <stack label="stk-{slug}" source="{orphan}"/>
                 </exercise>
-            """)
+            """
+)
 
             static = os.path.join("generated-assets", "stack", f"stk-{slug}.ptx")
             if not os.path.isfile(static):
@@ -57,6 +61,7 @@ def write_orphaned(orphans, orphan_include_file):
                     fs.write("<stack-static>\n"
                             "<statement><p>Go to the online version of this book to view this question.</p></statement>\n"
                             "</stack-static>")
+
 
 def audit_includes(extensions, tag, orphan_include_file=None):
     # 1. Collect data
@@ -98,11 +103,12 @@ def audit_includes(extensions, tag, orphan_include_file=None):
 
     return actual_files
 
+
 def check_deployed_variants(stack_files):
     missing_seeds = []
     missing_tests = []
     for file_path in stack_files:
-        file_path = os.path.join(ASSET_FILES_ROOT, file_path)
+        file_path = os.path.join(str(ASSET_FILES_ROOT), file_path)
 
         # Use a parser that preserves comments and CDATA
         parser = etree.XMLParser(strip_cdata=False, remove_blank_text=False)
@@ -145,6 +151,7 @@ def run_audit():
     print("\n\n--- Starting STACK Audit ---\n")
     stack_files = audit_includes(".xml", "stack", orphan_include_file="orphaned.ptx")
     check_deployed_variants(stack_files)
+
 
 if __name__ == "__main__":
     run_audit()
