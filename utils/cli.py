@@ -20,6 +20,11 @@ from . import google, csvtools, ptx, reports
 from .content import syllabus_tables
 from .content import objectives, resources, namespace
 
+# path to the automatic links CSV; use cached location
+AUTOMATIC_LINKS_PATH = csvtools.cached_file("Automatic Links.csv")
+# path to the learning outcomes CSV (always cached)
+LEARNING_OUTCOMES_PATH = csvtools.cached_file("Learning Outcomes.csv")
+
 
 def cmd_pull_plans(args: argparse.Namespace) -> None:
     print("pull-plans: starting")
@@ -98,7 +103,7 @@ def cmd_validate_paths(args: argparse.Namespace) -> None:
 
 def cmd_add_objectives(_: argparse.Namespace) -> None:
     # read csv, compute numbering, iterate
-    df = pd.read_csv('Automatic Links.csv', encoding='utf-8')
+    df = pd.read_csv(AUTOMATIC_LINKS_PATH, encoding='utf-8')
     numbering = objectives.build_numbering(df)
     chap_map = numbering['chapter_num']
     sec_map = numbering['section_num']
@@ -132,7 +137,7 @@ def cmd_add_objectives(_: argparse.Namespace) -> None:
 def cmd_add_resources(_: argparse.Namespace) -> None:
     print("add-resources: starting")
     import pandas as pd
-    df = pd.read_csv('Automatic Links.csv', encoding='utf-8')
+    df = pd.read_csv(AUTOMATIC_LINKS_PATH, encoding='utf-8')
     added=removed=upgraded=onlylesson=0
     base=Path('.')
     for row in df.to_dict(orient='records'):
@@ -197,7 +202,7 @@ def cmd_generate_syllabus(_: argparse.Namespace) -> None:
 def cmd_generate_lo(_: argparse.Namespace) -> None:
     print("generate-lo: starting")
     lo_rows = []
-    lo_path = Path(__file__).resolve().parent / "cached-csv" / "Learning Outcomes.csv"
+    lo_path = LEARNING_OUTCOMES_PATH
     if not lo_path.is_file():
         print(f"generate-lo: no learning outcomes CSV found at {lo_path}")
     else:
