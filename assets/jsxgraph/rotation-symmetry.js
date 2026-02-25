@@ -1,24 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Reflection Across y = mx + c</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/1.4.0/jsxgraph.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/1.4.0/jsxgraphcore.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js"></script>
-</head>
-<body>
-
-<div id="jsxgraph-rotation-symmetry"
-    class="jxgbox"
-    style="width: 900px; height: 900px;">
-</div>
-
-<script>
-/* rotation-symmetry.js
-   Congruence via rigid motions: translate + rotate triangles.
-*/
-
 (function () {
     'use strict';
 
@@ -162,7 +141,7 @@
     });
 
     // Check for overlap (rotational symmetry)
-    var checkmark = board.create('text', [0, -3.7, '\u2716'], {
+    var checkmark = board.create('text', [0, -3.85, '\u2716'], {
         fontSize: 44,
         strokeColor: '#c0392b',
         fillColor: '#c0392b',
@@ -188,6 +167,10 @@
     });
 
     function showCheckIfMatched() {
+        var tol = 0.08; // slightly larger tolerance
+        var n = rotPts.length;
+        var matched = false;
+        var matchedShift = -1;
         if (allFound) {
             // once complete, keep permanent message and checkmark
             checkmark.setText('\u2714');
@@ -196,11 +179,6 @@
             checkLabel.setAttribute({ visible: true });
             return;
         }
-
-        var tol = 0.02; // slightly larger tolerance
-        var n = rotPts.length;
-        var matched = false;
-        var matchedShift = -1;
 
         // try all cyclic shifts to allow vertex-order rotation
         for (var shift = 0; shift < n; shift++) {
@@ -253,7 +231,3 @@
     board.on('update', showCheckIfMatched);
 
 })();
-</script>
-
-</body>
-</html>
