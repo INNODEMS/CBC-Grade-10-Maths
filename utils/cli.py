@@ -29,6 +29,7 @@ def cmd_pull_plans(args: argparse.Namespace) -> None:
     # simple replication of old script's behaviour
     from googleapiclient.http import MediaIoBaseDownload
     import io
+    import shutil
     
     def sanitize_filename(name: str) -> str:
         cleaned = name.rstrip().lower()
@@ -63,7 +64,10 @@ def cmd_pull_plans(args: argparse.Namespace) -> None:
                     status, done = downloader.next_chunk()
                 print(f"Downloaded: {pdf_path.name}")
 
-    download_folder(folder_id, Path("../assets/lesson_plans"), only_missing=args.only_missing)
+    dest = Path("assets/lesson_plans")
+    if args.clean and dest.exists():
+        shutil.rmtree(dest)
+    download_folder(folder_id, dest, only_missing=args.new)
 
 
 def cmd_validate_paths(args: argparse.Namespace) -> None:
@@ -186,8 +190,12 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description="Utility commands for the project")
     sub = parser.add_subparsers(dest='command')
 
-    sub.add_parser('pull-plans', help='download lesson plans from Drive').add_argument(
-        '--only-missing', action='store_true', help='skip files that already exist locally'
+    pull_parser = sub.add_parser('pull-plans', help='download lesson plans from Drive')
+    pull_parser.add_argument(
+        '--new', action='store_true', help='only download plans that are not already present'
+    )
+    pull_parser.add_argument(
+        '--clean', action='store_true', help='remove existing lesson plans before downloading'
     )
     vparser = sub.add_parser('validate-paths', help='verify and annotate CSV rows with file existence')
     vparser.add_argument('--base-dir', help='root of repo (defaults to current working directory)')
