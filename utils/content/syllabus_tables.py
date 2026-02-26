@@ -136,7 +136,7 @@ def generate_syllabus_ptx(data: OrderedDict, output_path: Path) -> None:
             if len(xrefs) > 1:
                 topics_content = '<ul>\n'
                 for title, xml_id in entries:
-                    topics_content += f'                            <li>§<xref ref="{xml_id}" text="global"/><nbsp/><xref ref="{xml_id}" text="title"/></li>\n'
+                    topics_content += f'                            <li><m>\S</m><xref ref="{xml_id}" text="global"/><nbsp/><xref ref="{xml_id}" text="title"/></li>\n'
                 topics_content += '                        </ul>'
             else:
                 topics_content = xrefs[0] if xrefs else '<mdash/>'
@@ -258,7 +258,7 @@ def generate_lo_coverage_ptx(
                     xml_ids += fmv_mapping.get(strand, {}).get(substrand, {}).get(outcome, [])
                 else:
                     xml_ids = fmv_mapping.get(strand, {}).get(substrand, {}).get(outcome, [])
-                refs = [f'§<xref ref="{xml_id}" text="global"/>' for xml_id in xml_ids]
+                refs = [f'<m>\S</m><xref ref="{xml_id}" text="global"/>' for xml_id in xml_ids]
                 coverage = ', '.join(refs) if refs else '<mdash/>'
                 lines.append('            <row bottom="minor">')
                 lines.append(f'                <cell>({letter}) {outcome}</cell>')

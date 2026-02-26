@@ -26,8 +26,10 @@ SECTION_COL = "Section"
 def cached_dir() -> Path:
     """Return the path to the `utils/cached-csv` directory, creating it if
     necessary."""
-    d = Path(__file__).resolve().parent / "cached-csv"
-    d.mkdir(exist_ok=True)
+    # place the cached CSV directory alongside `utils/` rather than inside
+    # the `helpers` package so paths refer to `utils/cached-csv` as intended.
+    d = Path(__file__).resolve().parent.parent / "cached-csv"
+    d.mkdir(parents=True, exist_ok=True)
     return d
 
 
