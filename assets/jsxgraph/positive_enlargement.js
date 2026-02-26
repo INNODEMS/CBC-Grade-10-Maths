@@ -13,7 +13,7 @@ var board = JXG.JSXGraph.initBoard('jsxgraph-enlargement', {
 
 // 2. Create the Scale Factor Slider
 // range is [0, 4] with a default starting value of 2
-var k = board.create('slider', [[-4, 9], [1, 9], [0, 2, 4]], {
+var k = board.create('slider', [[1, -1.5], [6, -1.5], [0, 2, 4]], {
     name: 'Scale Factor (k)',
     snapWidth: 0.1,
     label: {fontSize: 16, strokeColor: 'black'}
@@ -28,9 +28,9 @@ var O = board.create('point', [0, 0], {
 });
 
 // 4. Create the Original Triangle Points (Draggable)
-var A = board.create('point', [2, 3], {name: 'A', color: 'blue'});
-var B = board.create('point', [1, 1], {name: 'B', color: 'blue'});
-var C = board.create('point', [4, 1], {name: 'C', color: 'blue'});
+var A = board.create('point', [3, 4.5], {name: 'A', color: 'blue'});
+var B = board.create('point', [1.5, 11.5], {name: 'B', color: 'blue'});
+var C = board.create('point', [6, 2], {name: 'C', color: 'blue'});
 
 // 5. Create the Original Polygon
 var polyABC = board.create('polygon', [A, B, C], {
@@ -74,9 +74,9 @@ var polyAprime = board.create('polygon', [A_prime, B_prime, C_prime], {
 //     return "k = " + k.Value().toFixed(2);
 // }], {fontSize: 16});
 
-board.create('text', [6, 7.5, function() {
+board.create('text', [9, -3, function() {
     var OA = O.Dist(A);
     var OA_prime = O.Dist(A_prime);
     var ratio = (OA === 0) ? 0 : (OA_prime / OA);
-    return "OA' / OA = " + ratio.toFixed(2);
-}], {fontSize: 16});
+    return "OA' = " + OA_prime.toFixed(2) + ", OA = " + OA.toFixed(2) + "<br/>OA'/OA = " + ratio.toFixed(2);
+}], {fontSize: 16, anchorX:'middle'});

@@ -15,10 +15,14 @@ var board = JXG.JSXGraph.initBoard('jsxgraph-negative-enlargement', {
 // 2. Create the Scale Factor Slider
 // Range is [-3, 3] with a default starting value of -1 to immediately show negative enlargement
 var k = board.create('slider', [[-8, 8.5], [-3, 8.5], [-3, -1, 3]], {
-    name: 'Scale Factor (k)',
     snapWidth: 0.1,
-    label: {fontSize: 16, strokeColor: 'black'}
+    label: false
 });
+
+// Label centered below the slider showing the dynamic value
+board.create('text', [-5, 7.6, function() {
+    return "Scale Factor (k) = " + k.Value().toFixed(2);
+}], {fontSize: 16, anchorX: 'middle'});
 
 // 3. Create the Center of Enlargement (Draggable Origin)
 var O = board.create('point', [0, 0], {
@@ -86,6 +90,13 @@ var polyAprime = board.create('polygon', [A_prime, B_prime, C_prime, D_prime], {
     fillOpacity: 0.1,
     borders: {strokeColor: 'blue', strokeWidth: 2}
 });
+
+board.create('text', [-5, 5, function() {
+    var OA = O.Dist(A);
+    var OA_prime = (k.Value() > 0) ? O.Dist(A_prime) : -O.Dist(A_prime);
+    var ratio = (OA === 0) ? 0 : (OA_prime / OA);
+    return "OA' = " + OA_prime.toFixed(2) + ", OA = " + OA.toFixed(2) + "<br/>OA'/OA = " + ratio.toFixed(2);
+}], {fontSize: 16, anchorX:'middle'});
 
 // 9. Educational Text Displaying Current Scale Factor
 // board.create('text', [3, 8.5, function() {
