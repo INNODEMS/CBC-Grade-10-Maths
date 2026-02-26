@@ -9,250 +9,125 @@
 </head>
 <body>
 
-<div id="jsxgraph-rotation-symmetry"
+<div id="jsxgraph-similarity-intro"
     class="jxgbox"
     style="width: 900px; height: 900px;">
 </div>
 
 <script>
-/* rotation-symmetry.js
-   Congruence via rigid motions: translate + rotate triangles.
-*/
 
-(function () {
-    'use strict';
 
-    // -----------------------------
-    // Board setup
-    // -----------------------------
-    var board = JXG.JSXGraph.initBoard('jsxgraph-rotation-symmetry', {
-        boundingbox: [-5, 5, 5, -5],
-        keepAspectRatio: true,
-        axis: false,
-        grid: false,
-        showCopyright: false,
-        showNavigation: false
-    });
 
-    const title = board.create('text', [0, 4.5, 'Rotate the star to find its symmetries'], {
-        fontSize: 18,
-        fixed: true,
-        anchorX: 'middle',
-        visible: true
-    });
+var board = JXG.JSXGraph.initBoard('jsxgraph-similarity-intro', {
+    boundingbox: [-2, 25, 35, -5],
+    axis: false,
+    grid: true,
+    showCopyright: false,
+    showNavigation: false,
+    pan: { enabled: false },
+    zoom: { enabled: false }
+});
 
-    // -----------------------------
-    // Utility helpers
-    // -----------------------------
-    function rotX(x, y, theta) {
-        return x * Math.cos(theta) - y * Math.sin(theta);
-    }
+/* ----------------------------
+   1. Scale Factor Slider
+---------------------------- */
 
-    function rotY(x, y, theta) {
-        return x * Math.sin(theta) + y * Math.cos(theta);
-    }
+var k = board.create('slider', [[2, 22], [15, 22], [0.5, 2, 4]], {
+    name: 'k',
+    size: 6,
+    baseline: { strokeWidth: 4 },
+    highline: { strokeWidth: 4 },
+    label: { fontSize: 16 }
+});
 
-    // Star vertices generator (5-pointed star, centered at origin, radius = 3)
-    function starVertices(center, radius, points) {
-        var verts = [];
-        var step = Math.PI * 2 / points;
-        var innerRadius = radius * 0.5;
-        for (var i = 0; i < points; i++) {
-            var angle = Math.PI / 2 + i * step;
-            verts.push({ x: center.x + radius * Math.cos(angle), y: center.y + radius * Math.sin(angle) });
-            angle += step / 2;
-            verts.push({ x: center.x + innerRadius * Math.cos(angle), y: center.y + innerRadius * Math.sin(angle) });
-        }
-        return verts;
-    }
+/* ----------------------------
+   2. Original Triangle ABC
+---------------------------- */
+// FIX: Removed "fixed: true" so the student can drag the vertices
+var A = board.create('point', [0, 0], {name: 'A', color: 'blue', size: 4, label: {offset: [-15, -15]}});
+var B = board.create('point', [7, 0], {name: 'B', color: 'blue', size: 4});
+var C = board.create('point', [30/7, (6 * Math.sqrt(24)) / 7], {name: 'C', color: 'blue', size: 4});
 
-    // Draw a star, allow rotation only (no translation), leave original behind
-    // move entire star up by 0.5 units
-    var center = { x: 0, y: 0.5 };
-    var starRadius = 3;
-    var starVerts = starVertices(center, starRadius, 5); // 10 points (5 outer, 5 inner)
+var polyABC = board.create('polygon', [A, B, C], {
+    fillColor: '#aaddff',
+    hasInnerArea: true, // Allows dragging the entire triangle by clicking its center
+    borders: {strokeColor: 'blue', strokeWidth: 2}
+});
 
-    // Draw original star (purple, fixed)
-    var origPts = starVerts.map(function (v) {
-        return board.create('point', [v.x, v.y], {
-            visible: false,
-            fixed: true
-        });
-    });
-    var origPoly = board.create('polygon', origPts, {
-        fillColor: 'purple',
-        fillOpacity: 0.5,
-        strokeColor: 'purple',
-        strokeWidth: 2,
-        vertices: { visible: false }
-    });
+/* ----------------------------
+   3. Similar Triangle PQR
+---------------------------- */
 
-    // Rotatable star (movable by rotation only)
-    var theta = 0;
-    var rotPts = starVerts.map(function (v, idx) {
-        // color the top-right outer vertex differently
-        var color = '#2a6fdb';
-        var fill = '#2a6fdb';
-        // outer vertices appear at even indices: 0,2,4,6,8; top-right outer is index 2
-        if (idx === 2) {
-            color = '#e74c3c';
-            fill = '#e74c3c';
-        }
-        return board.create('point', [
-            function () {
-                return center.x + rotX(v.x - center.x, v.y - center.y, theta);
-            },
-            function () {
-                return center.y + rotY(v.x - center.x, v.y - center.y, theta);
-            }
-        ], {
-            name: '',
-            visible: true,
-            fixed: true,
-            size: 3,
-            strokeColor: color,
-            fillColor: fill
-        });
-    });
-    var rotPoly = board.create('polygon', rotPts, {
-        fillColor: '#2a6fdb',
-        fillOpacity: 0.25,
-        strokeColor: '#2a6fdb',
-        strokeWidth: 2,
-        vertices: { visible: false }
-    });
+var P = board.create('point', [
+    function() { return A.X() + 12; },
+    function() { return A.Y(); }
+], {name: 'P', color: 'red', fixed: true, label: {offset: [-15, -15]}});
 
-    // Rotation by dragging any vertex
-    var rotating = false;
-    var rotStartAng = 0;
-    var rotStartTheta = 0;
+var Q = board.create('point', [
+    function() { return P.X() + k.Value() * (B.X() - A.X()); },
+    function() { return P.Y() + k.Value() * (B.Y() - A.Y()); }
+], {name: 'Q', color: 'red', fixed: true});
 
-    function angleMouseToCenter(evt) {
-        var pos = board.getUsrCoordsOfMouse(evt);
-        return Math.atan2(pos[1] - center.y, pos[0] - center.x);
-    }
+var R = board.create('point', [
+    function() { return P.X() + k.Value() * (C.X() - A.X()); },
+    function() { return P.Y() + k.Value() * (C.Y() - A.Y()); }
+], {name: 'R', color: 'red', fixed: true});
 
-    board.on('down', function (evt) {
-        var pos = board.getUsrCoordsOfMouse(evt);
-        rotating = false;
-        for (var i = 0; i < rotPts.length; i++) {
-            var vx = rotPts[i].X();
-            var vy = rotPts[i].Y();
-            var dx = pos[0] - vx;
-            var dy = pos[1] - vy;
-            if (Math.sqrt(dx * dx + dy * dy) < 0.35) {
-                rotating = true;
-                rotStartAng = Math.atan2(pos[1] - center.y, pos[0] - center.x);
-                rotStartTheta = theta;
-                break;
-            }
-        }
-    });
+var polyPQR = board.create('polygon', [P, Q, R], {
+    fillColor: '#ffddaa',
+    borders: {strokeColor: 'red', strokeWidth: 2}
+});
 
-    board.on('move', function (evt) {
-        if (!rotating) return;
-        var pos = board.getUsrCoordsOfMouse(evt);
-        var ang = Math.atan2(pos[1] - center.y, pos[0] - center.x);
-        theta = rotStartTheta + (ang - rotStartAng);
-        board.update();
-    });
+/* ----------------------------
+   4. Side Length & Angle Labels
+---------------------------- */
 
-    board.on('up', function () {
-        rotating = false;
-    });
+function lengthText(pt1, pt2) {
+    return function() {
+        return pt1.Dist(pt2).toFixed(1) + " cm";
+    };
+}
 
-    // Check for overlap (rotational symmetry)
-    var checkmark = board.create('text', [0, -3.7, '\u2716'], {
-        fontSize: 44,
-        strokeColor: '#c0392b',
-        fillColor: '#c0392b',
-        fixed: true,
-        visible: true,
-        anchorX: 'middle',
-        anchorY: 'middle'
-    });
-    var checkLabel = board.create('text', [0, -2.6, 'Rotational symmetry achieved!'], {
-        fontSize: 18,
-        fixed: true,
-        anchorX: 'middle',
-        visible: false
-    });
-    // counter display
-    var symCount = 0;
-    var seenSym = {};
-    var allFound = false;
-    var counterText = board.create('text', [0, -3.3, 'Symmetries found: 0'], {
-        fontSize: 18,
-        fixed: true,
-        anchorX: 'middle'
-    });
+// Helper function to calculate angles in degrees dynamically
+function angleText(pt1, pt2, pt3) {
+    return function() {
+        var rad = JXG.Math.Geometry.rad(pt1, pt2, pt3);
+        return (rad * 180 / Math.PI).toFixed(0) + "°";
+    };
+}
 
-    function showCheckIfMatched() {
-        if (allFound) {
-            // once complete, keep permanent message and checkmark
-            checkmark.setText('\u2714');
-            checkmark.setAttribute({ strokeColor: '#0a8f2c', fillColor: '#0a8f2c', visible: true });
-            checkLabel.setText('All symmetries found!');
-            checkLabel.setAttribute({ visible: true });
-            return;
-        }
+/* --- Original Triangle Labels --- */
 
-        var tol = 0.02; // slightly larger tolerance
-        var n = rotPts.length;
-        var matched = false;
-        var matchedShift = -1;
+board.create('midpoint', [A, B], {name: lengthText(A,B), size: 0, label: {offset: [0, -20]}, fontSize:14, color:'blue'}); // Invisible point to help position the label
 
-        // try all cyclic shifts to allow vertex-order rotation
-        for (var shift = 0; shift < n; shift++) {
-            var maxd = 0;
-            for (var i = 0; i < n; i++) {
-                var rx = rotPts[i].X();
-                var ry = rotPts[i].Y();
-                var j = (i + shift) % n;
-                var ox = origPts[j].X();
-                var oy = origPts[j].Y();
-                var d = Math.sqrt((rx - ox) * (rx - ox) + (ry - oy) * (ry - oy));
-                if (d > maxd) maxd = d;
-            }
-            if (maxd <= tol) {
-                matched = true;
-                matchedShift = shift;
-                break;
-            }
-        }
+board.create('midpoint', [A, C], {name: lengthText(A,C), size: 0, label: {offset: [-30, 20]}, fontSize:14, color:'blue'}); // Invisible point to help position the label
 
-        if (matched) {
-            checkmark.setText('\u2714');
-            checkmark.setAttribute({ strokeColor: '#0a8f2c', fillColor: '#0a8f2c', visible: true });
-            checkLabel.setAttribute({ visible: true });
-            // update counter if new symmetry
-            // only 5 true symmetries (k*2pi/5) correspond to shifts that are multiples of 2
-            var order = 5;
-            var k = Math.round(matchedShift / 2) % order;
-            if (!seenSym[k]) {
-                seenSym[k] = true;
-                symCount++;
-                counterText.setText('Symmetries found: ' + symCount);
-            }
-        } else {
-            checkmark.setText('\u2716');
-            checkmark.setAttribute({ strokeColor: '#c0392b', fillColor: '#c0392b', visible: true });
-            checkLabel.setAttribute({ visible: false });
-        }
+board.create('midpoint', [B, C], {name: lengthText(B,C), size: 0, label: {offset: [10, 10]}, fontSize:14, fontColor:'blue'}); // Invisible point to help position the label
 
-        if (symCount >= 5) {
-            allFound = true;
-            checkLabel.setText('All symmetries found!');
-            checkLabel.setAttribute({ visible: true });
-            checkmark.setText('\u2714');
-            checkmark.setAttribute({ strokeColor: '#0a8f2c', fillColor: '#0a8f2c', visible: true });
-        }
-    }
+// Interior angles for ABC
+board.create('angle', [B, A, C], {name: angleText(B, A, C), radius: 1.2, fillColor: '#00FF00'});
+board.create('angle', [C, B, A], {name: angleText(C, B, A), radius: 1.2, fillColor: '#00FF00'});
+board.create('angle', [A, C, B], {name: angleText(A, C, B), radius: 1.2, fillColor: '#00FF00'});
 
-    setInterval(showCheckIfMatched, 150);
-    board.on('update', showCheckIfMatched);
+/* --- Similar Triangle Labels --- */
 
-})();
+board.create('midpoint', [P, Q], {name: lengthText(P,Q), size: 0, label: {offset: [0, -20]}, fontSize:16, color:'red', anchorX:'middle'}); // Invisible point to help position the label
+
+board.create('midpoint', [P, R], {name: lengthText(P,R), size: 0, label: {offset: [-40, 40]}, fontSize:16, color:'red'}); // Invisible point to help position the label
+
+board.create('midpoint', [Q, R], {name: lengthText(Q,R), size: 0, label: {offset: [10, 10]}, fontSize:16, fontColor:'red'}); // Invisible point to help position the label
+// Corresponding interior angles for PQR
+board.create('angle', [Q, P, R], {name: angleText(Q, P, R), radius: 1, fillColor: '#FFD700'});
+board.create('angle', [R, Q, P], {name: angleText(R, Q, P), radius: 1, fillColor: '#FFD700'});
+board.create('angle', [P, R, Q], {name: angleText(P, R, Q), radius: 1, fillColor: '#FFD700'});
+
+/* ----------------------------
+   5. Smooth Slider Update
+---------------------------- */
+
+k.on('drag', function() {
+    board.update();
+});
 </script>
 
 </body>
