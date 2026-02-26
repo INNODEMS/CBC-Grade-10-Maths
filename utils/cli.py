@@ -263,8 +263,6 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser('add-objectives', help='insert objectives blocks into PTX files')
     sub.add_parser('add-resources', help='insert/upgrade resource boxes for lesson plans')
     sub.add_parser('audit-pdfs', help='report lesson-plan PDFs not referenced by any source file')
-    ipb = sub.add_parser('insert-plan-breaks', help='generate and insert <insertions> pagebreaks for lesson plans')
-    ipb.add_argument('--split', action='store_true', dest='split', help='also split publication PDF into sections after inserting breaks')
     sub.add_parser('namespace', help='add xmlns:xi attribute to subsection/subsubsection tags')
     sub.add_parser('generate-syllabus', help='create syllabus-alignment.ptx from CSV data')
     sub.add_parser('generate-lo', help='create lo-coverage-table.ptx from CSV and outcome data')
@@ -351,21 +349,3 @@ def main(argv=None):
 
 if __name__ == '__main__':
     main()
-
-
-
-get_outline returns a list of the pdf outline like so:
-[('Preface', 3), ('Numbers and Algebra', 10), ('Real Numbers', 10), ('Classification of Numbers', 10), ('Even and Odd Numbers', 11), ('Prime and Composite Numbers', 14), ('Rational and Irrational Numbers', 19), ('Reciprocals of Numbers', 23), ('Reciprocals using Division', 24), ('Reciprocals Using Tables and Calculators', 29), ('Finding reciprocals of numbers using mathematical tables', 29), ('Finding reciprocals using a calculator', 35), ....
-
-Open Automatic Links.csv using pandas.
-
-Iterate through this outline. Convert the title to title case using the following function:
-
-def sanitize_filename(name: str) -> str:
-        cleaned = name.rstrip().lower()
-        import re
-        cleaned = re.sub(r"[,';:]", "", cleaned)
-        cleaned = re.sub(r"\s+", "-", cleaned)
-        return cleaned
-
-THEN, try to match the converted title to the Subsubsection Filecase column of the csv. If this fails, try match to the Subsection
