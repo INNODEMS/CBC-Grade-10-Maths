@@ -20,6 +20,8 @@ from .helpers import google, csvtools
 from .audits import reports, audit_questions
 from .content import syllabus_tables, add_labels
 from .content import objectives, resources, namespace
+from .content import lesson_plan_breaks
+from .content import split_lesson_plans
 
 # path to the automatic links CSV; use cached location
 AUTOMATIC_LINKS_PATH = csvtools.cached_file("Automatic Links.csv")
@@ -261,6 +263,8 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser('add-objectives', help='insert objectives blocks into PTX files')
     sub.add_parser('add-resources', help='insert/upgrade resource boxes for lesson plans')
     sub.add_parser('audit-pdfs', help='report lesson-plan PDFs not referenced by any source file')
+    sub.add_parser('insert-plan-breaks', help='generate and insert <insertions> pagebreaks for lesson plans')
+    sub.add_parser('split-plans', help='split combined lesson-plans PDF into per-lesson PDFs')
     sub.add_parser('namespace', help='add xmlns:xi attribute to subsection/subsubsection tags')
     sub.add_parser('generate-syllabus', help='create syllabus-alignment.ptx from CSV data')
     sub.add_parser('generate-lo', help='create lo-coverage-table.ptx from CSV and outcome data')
@@ -307,6 +311,22 @@ def main(argv=None):
         # convenience wrapper that runs both generators
         cmd_generate_syllabus(args)
         cmd_generate_lo(args)
+    elif args.command == 'insert-plan-breaks':
+        # delegate to the content module
+        csv = 'utils/cached-csv/Automatic Links.csv'
+        pub = 'publication/publication-lesson-plans.ptx'
+        try:
+            lesson_plan_breaks.generate_and_insert(csv, pub, dry_run=False)
+            print('insert-plan-breaks: done')
+        except Exception as exc:
+            print('insert-plan-breaks: failed:', exc)
+    elif args.command == 'split-plans':
+        try:
+            # call the module's CLI entrypoint to respect its args
+            split_lesson_plans.main()
+            print('split-plans: done')
+        except Exception as exc:
+            print('split-plans: failed:', exc)
     elif args.command == 'audit-questions':
         # run the helper script logic
         audit_questions.run_audit()
