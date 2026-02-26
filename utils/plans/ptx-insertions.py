@@ -6,13 +6,8 @@ an ordered list of xmlids for all subsubsections and for subsections that
 have no subsubsections. It writes a single
   <insertions pagebreaks="id1 id2 ..." />
 between the markers in publication/publication-lesson-plans.ptx.
-
-Unlike the standalone script, this module does not create a .bak file.
-It exposes `generate_and_insert(csv_path, pub_path, dry_run)` for reuse by
-the project's CLI.
 """
-
-from __future__ import annotations
+import argparse
 import csv
 import os
 from typing import List
@@ -33,34 +28,61 @@ def basename_xmlid(ptx_path: str | None) -> str | None:
 
 
 def build_xmlids(rows: List[dict]) -> List[str]:
-    subsections_with_subsubs = set()
-    for r in rows:
-        subsub = (r.get('Subsubsection') or '').strip()
-        if subsub:
-            key = (r.get('Chapter','').strip(), r.get('Section','').strip(), r.get('Subsection','').strip())
-            subsections_with_subsubs.add(key)
+    """Return a list of xml:id strings representing every section, subsection,
+    and subsubsection seen in the CSV.
 
+    The CSV doesn't contain explicit rows for sections, so we synthesise the
+    section-level xmlid from the ``Section Filecase`` (or falling back to the
+    name if the filecase is missing).  Subsections and subsubsections are
+    handled similarly, but the CSV rows themselves correspond naturally to
+    those levels.  The output list preserves the order in which the sections
+    and their children appear in the CSV and filters out duplicates.
+    """
     xmlids: List[str] = []
     seen = set()
+
+    def make_id(prefix: str, filecase: str | None, name: str | None,
+                ptx_path: str | None) -> str | None:
+        # prefer explicit filecase from CSV, otherwise fall back to the path
+        # basename or the name text
+        if filecase:
+            return f"{prefix}{filecase}"
+        if ptx_path:
+            base = basename_xmlid(ptx_path)
+            if base:
+                return base
+        if name:
+            cleaned = name.strip().lower().replace(' ', '-')
+            if cleaned:
+                return f"{prefix}{cleaned}"
+        return None
+
     for r in rows:
-        chapter = r.get('Chapter','').strip()
-        section = r.get('Section','').strip()
-        subsection = r.get('Subsection','').strip()
-        subsub = (r.get('Subsubsection') or '').strip()
+        section_fc = r.get('Section Filecase','').strip()
+        subsection_fc = r.get('Subsection Filecase','').strip()
+        subsub_fc = r.get('Subsubsection Filecase','').strip()
+        section_name = r.get('Section','').strip()
+        subsection_name = r.get('Subsection','').strip()
+        subsub_name = r.get('Subsubsection','').strip()
         ptx_path = (r.get('PTX Path') or '').strip()
 
-        if subsub:
-            xid = basename_xmlid(ptx_path) or subsub
-        else:
-            key = (chapter, section, subsection)
-            if key in subsections_with_subsubs:
-                continue
-            xid = basename_xmlid(ptx_path) or ('subsec-' + subsection.replace(' ', '-').lower())
+        # section level
+        sec_id = make_id('sec-', section_fc, section_name, ptx_path)
+        if sec_id and sec_id not in seen:
+            seen.add(sec_id)
+            xmlids.append(sec_id)
 
-        if not xid or xid in seen:
-            continue
-        seen.add(xid)
-        xmlids.append(xid)
+        # subsection level
+        subsec_id = make_id('subsec-', subsection_fc, subsection_name, ptx_path)
+        if subsec_id and subsec_id not in seen:
+            seen.add(subsec_id)
+            xmlids.append(subsec_id)
+
+        # subsubsection level
+        subsub_id = make_id('subsubsec-', subsub_fc, subsub_name, ptx_path)
+        if subsub_id and subsub_id not in seen:
+            seen.add(subsub_id)
+            xmlids.append(subsub_id)
 
     return xmlids
 
@@ -90,28 +112,22 @@ def replace_in_publication(pub_path: str, tag: str) -> None:
         f.write(new_text)
 
 
-def generate_and_insert(csv_path: str, pub_path: str, dry_run: bool = False) -> str:
+def generate_and_insert(csv_path: str, pub_path: str) -> str:
     rows = read_rows(csv_path)
     xmlids = build_xmlids(rows)
     tag = make_insertions_tag(xmlids)
-    if dry_run:
-        return tag
     replace_in_publication(pub_path, tag)
     return tag
 
 
 def main():
-    import argparse
     parser = argparse.ArgumentParser(description='Insert lesson-plan pagebreaks into publication file')
     parser.add_argument('--csv', default=os.path.join('utils', 'cached-csv', 'Automatic Links.csv'))
     parser.add_argument('--pub', default=os.path.join('publication', 'publication-lesson-plans.ptx'))
     parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args()
-    out = generate_and_insert(args.csv, args.pub, dry_run=args.dry_run)
-    if args.dry_run:
-        print(out)
-    else:
-        print('Wrote insertions to', args.pub)
+    generate_and_insert(args.csv, args.pub)
+    print('Wrote insertions to', args.pub)
 
 
 if __name__ == '__main__':

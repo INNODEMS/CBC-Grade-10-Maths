@@ -20,8 +20,8 @@ from .helpers import google, csvtools
 from .audits import reports, audit_questions
 from .content import syllabus_tables, add_labels
 from .content import objectives, resources, namespace
-from .content import lesson_plan_breaks
-from .content import splits_plans
+from .plans import lesson_plan_breaks
+from .plans import split_plans
 
 # path to the automatic links CSV; use cached location
 AUTOMATIC_LINKS_PATH = csvtools.cached_file("Automatic Links.csv")
@@ -323,7 +323,7 @@ def main(argv=None):
         # optionally run the PDF splitter on the generated publication
         if getattr(args, 'split', False):
             try:
-                splits_plans.split_pdf_by_leaves('output/plans/main.pdf', 'output/plans')
+                split_plans.split_pdf_by_leaves('output/plans/main.pdf', 'output/plans')
                 print('insert-plan-breaks: PDF split complete')
             except Exception as exc:
                 print('insert-plan-breaks: PDF split failed:', exc)
@@ -351,3 +351,21 @@ def main(argv=None):
 
 if __name__ == '__main__':
     main()
+
+
+
+get_outline returns a list of the pdf outline like so:
+[('Preface', 3), ('Numbers and Algebra', 10), ('Real Numbers', 10), ('Classification of Numbers', 10), ('Even and Odd Numbers', 11), ('Prime and Composite Numbers', 14), ('Rational and Irrational Numbers', 19), ('Reciprocals of Numbers', 23), ('Reciprocals using Division', 24), ('Reciprocals Using Tables and Calculators', 29), ('Finding reciprocals of numbers using mathematical tables', 29), ('Finding reciprocals using a calculator', 35), ....
+
+Open Automatic Links.csv using pandas.
+
+Iterate through this outline. Convert the title to title case using the following function:
+
+def sanitize_filename(name: str) -> str:
+        cleaned = name.rstrip().lower()
+        import re
+        cleaned = re.sub(r"[,';:]", "", cleaned)
+        cleaned = re.sub(r"\s+", "-", cleaned)
+        return cleaned
+
+THEN, try to match the converted title to the Subsubsection Filecase column of the csv. If this fails, try match to the Subsection
