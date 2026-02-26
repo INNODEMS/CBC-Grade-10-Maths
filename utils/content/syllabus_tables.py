@@ -134,10 +134,9 @@ def generate_syllabus_ptx(data: OrderedDict, output_path: Path) -> None:
         for substrand_name, entries in substrands.items():
             xrefs = [f'<xref ref="{xml_id}" text="global"/><nbsp/><xref ref="{xml_id}" text="title"/>' for _, xml_id in entries]
             if len(xrefs) > 1:
-                topics_content = '<ul>\n'
+                topics_content = ''
                 for title, xml_id in entries:
-                    topics_content += f'                            <li><m>\S</m><xref ref="{xml_id}" text="global"/><nbsp/><xref ref="{xml_id}" text="title"/></li>\n'
-                topics_content += '                        </ul>'
+                    topics_content += f'<line>§<xref ref="{xml_id}" text="global"/><nbsp/><xref ref="{xml_id}" text="title"/></line>\n'
             else:
                 topics_content = xrefs[0] if xrefs else '<mdash/>'
             lines.append('                <row bottom="minor">')
@@ -258,7 +257,7 @@ def generate_lo_coverage_ptx(
                     xml_ids += fmv_mapping.get(strand, {}).get(substrand, {}).get(outcome, [])
                 else:
                     xml_ids = fmv_mapping.get(strand, {}).get(substrand, {}).get(outcome, [])
-                refs = [f'<m>\S</m><xref ref="{xml_id}" text="global"/>' for xml_id in xml_ids]
+                refs = [f'<m>§</m><xref ref="{xml_id}" text="global"/>' for xml_id in xml_ids]
                 coverage = ', '.join(refs) if refs else '<mdash/>'
                 lines.append('            <row bottom="minor">')
                 lines.append(f'                <cell>({letter}) {outcome}</cell>')
