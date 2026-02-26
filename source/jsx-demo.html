@@ -9,125 +9,127 @@
 </head>
 <body>
 
-<div id="jsxgraph-similarity-intro"
+<div id="jsxgraph-area-scale-factors"
     class="jxgbox"
     style="width: 900px; height: 900px;">
 </div>
-
 <script>
-
-
-
-var board = JXG.JSXGraph.initBoard('jsxgraph-similarity-intro', {
-    boundingbox: [-2, 25, 35, -5],
+JXG.Options.text.useMathJax = true;
+var board = JXG.JSXGraph.initBoard('jsxgraph-area-scale-factors', {
+    boundingbox: [-5, 30, 35, -10],
     axis: false,
-    grid: true,
-    showCopyright: false,
+    grid: false,
     showNavigation: false,
-    pan: { enabled: false },
-    zoom: { enabled: false }
+    showCopyright: false
 });
 
 /* ----------------------------
-   1. Scale Factor Slider
+   1. Scale Factor Slider (1 → 5)
 ---------------------------- */
-
-var k = board.create('slider', [[2, 22], [15, 22], [0.5, 2, 4]], {
-    name: 'k',
+var k = board.create('slider', [[1, 26], [18, 26], [1, 2, 5]], {
+    name: 'Linear Scale Factor (k)',
+    snapWidth: 0.1,
     size: 6,
-    baseline: { strokeWidth: 4 },
-    highline: { strokeWidth: 4 },
-    label: { fontSize: 16 }
+    label: {fontSize: 18}
 });
 
 /* ----------------------------
-   2. Original Triangle ABC
+   2. Original Parallelogram (Draggable)
 ---------------------------- */
-// FIX: Removed "fixed: true" so the student can drag the vertices
-var A = board.create('point', [0, 0], {name: 'A', color: 'blue', size: 4, label: {offset: [-15, -15]}});
-var B = board.create('point', [7, 0], {name: 'B', color: 'blue', size: 4});
-var C = board.create('point', [30/7, (6 * Math.sqrt(24)) / 7], {name: 'C', color: 'blue', size: 4});
 
-var polyABC = board.create('polygon', [A, B, C], {
-    fillColor: '#aaddff',
-    hasInnerArea: true, // Allows dragging the entire triangle by clicking its center
-    borders: {strokeColor: 'blue', strokeWidth: 2}
+var P = board.create('point', [0, -5], {name: 'P'});
+var Q = board.create('point', [6, -5], {name: 'Q'});
+var R = board.create('point', [6, 1], {name: 'R', fixed: true});
+
+var S = board.create('point', [0, 1], {name: 'S', fixed: true});
+
+var polyOriginal = board.create('polygon', [P, Q, R, S], {
+    fillColor: '#FFFF99',
+    fillOpacity: 0.5,
+    borders: {strokeWidth: 2}
 });
 
+/* Perpendicular height removed for square demo */
+
 /* ----------------------------
-   3. Similar Triangle PQR
+   4. Measurement Labels (Original)
 ---------------------------- */
 
-var P = board.create('point', [
-    function() { return A.X() + 12; },
-    function() { return A.Y(); }
-], {name: 'P', color: 'red', fixed: true, label: {offset: [-15, -15]}});
+board.create('midpoint', [P, Q], 
+    {name: 'b = ' + P.Dist(Q).toFixed(2), 
+    label: {fontSize:18, anchorX:'middle', anchorY:'top', offset: [0, -10]}, size:0}
+); // Midpoint for base label
 
-var Q = board.create('point', [
-    function() { return P.X() + k.Value() * (B.X() - A.X()); },
-    function() { return P.Y() + k.Value() * (B.Y() - A.Y()); }
-], {name: 'Q', color: 'red', fixed: true});
 
-var R = board.create('point', [
-    function() { return P.X() + k.Value() * (C.X() - A.X()); },
-    function() { return P.Y() + k.Value() * (C.Y() - A.Y()); }
-], {name: 'R', color: 'red', fixed: true});
+board.create('midpoint', [Q, R], {name: 'h = ' + R.Dist(Q).toFixed(2), label: {fontSize:18, anchorX:'left', anchorY:'middle', offset: [10, 0]}, size:0}); // Midpoint for base label
 
-var polyPQR = board.create('polygon', [P, Q, R], {
-    fillColor: '#ffddaa',
-    borders: {strokeColor: 'red', strokeWidth: 2}
+// height label removed for square demo
+
+/* ----------------------------
+   5. Scaled Image
+---------------------------- */
+
+var Pp = board.create('point', [11, -5], {name: "P'", fixed: true});
+
+var Qp = board.create('point', [
+    function(){ return 11 + k.Value()*(Q.X()-P.X()); },
+    function(){ return k.Value()*(Q.Y()-P.Y()) - 5; }
+], {name: "Q'", fixed: true});
+
+var Rp = board.create('point', [
+    function(){ return 11 + k.Value()*(R.X()-P.X()); },
+    function(){ return k.Value()*(R.Y()-P.Y()) - 5; }
+], {name: "R'", fixed: true});
+
+var Sp = board.create('point', [
+    function(){ return 11 + k.Value()*(S.X()-P.X()); },
+    function(){ return k.Value()*(S.Y()-P.Y()) -5; }
+], {name: "S'", fixed: true});
+
+var polyImage = board.create('polygon', [Pp, Qp, Rp, Sp], {
+    fillColor: '#ADD8E6',
+    fillOpacity: 0.5,
+    borders: {strokeWidth: 2}
 });
 
-/* ----------------------------
-   4. Side Length & Angle Labels
----------------------------- */
-
-function lengthText(pt1, pt2) {
-    return function() {
-        return pt1.Dist(pt2).toFixed(1) + " cm";
-    };
-}
-
-// Helper function to calculate angles in degrees dynamically
-function angleText(pt1, pt2, pt3) {
-    return function() {
-        var rad = JXG.Math.Geometry.rad(pt1, pt2, pt3);
-        return (rad * 180 / Math.PI).toFixed(0) + "°";
-    };
-}
-
-/* --- Original Triangle Labels --- */
-
-board.create('midpoint', [A, B], {name: lengthText(A,B), size: 0, label: {offset: [0, -20]}, fontSize:14, color:'blue'}); // Invisible point to help position the label
-
-board.create('midpoint', [A, C], {name: lengthText(A,C), size: 0, label: {offset: [-30, 20]}, fontSize:14, color:'blue'}); // Invisible point to help position the label
-
-board.create('midpoint', [B, C], {name: lengthText(B,C), size: 0, label: {offset: [10, 10]}, fontSize:14, fontColor:'blue'}); // Invisible point to help position the label
-
-// Interior angles for ABC
-board.create('angle', [B, A, C], {name: angleText(B, A, C), radius: 1.2, fillColor: '#00FF00'});
-board.create('angle', [C, B, A], {name: angleText(C, B, A), radius: 1.2, fillColor: '#00FF00'});
-board.create('angle', [A, C, B], {name: angleText(A, C, B), radius: 1.2, fillColor: '#00FF00'});
-
-/* --- Similar Triangle Labels --- */
-
-board.create('midpoint', [P, Q], {name: lengthText(P,Q), size: 0, label: {offset: [0, -20]}, fontSize:16, color:'red', anchorX:'middle'}); // Invisible point to help position the label
-
-board.create('midpoint', [P, R], {name: lengthText(P,R), size: 0, label: {offset: [-40, 40]}, fontSize:16, color:'red'}); // Invisible point to help position the label
-
-board.create('midpoint', [Q, R], {name: lengthText(Q,R), size: 0, label: {offset: [10, 10]}, fontSize:16, fontColor:'red'}); // Invisible point to help position the label
-// Corresponding interior angles for PQR
-board.create('angle', [Q, P, R], {name: angleText(Q, P, R), radius: 1, fillColor: '#FFD700'});
-board.create('angle', [R, Q, P], {name: angleText(R, Q, P), radius: 1, fillColor: '#FFD700'});
-board.create('angle', [P, R, Q], {name: angleText(P, R, Q), radius: 1, fillColor: '#FFD700'});
+/* Image perpendicular removed for square demo */
 
 /* ----------------------------
-   5. Smooth Slider Update
+   7. Measurement Labels (Image)
 ---------------------------- */
 
-k.on('drag', function() {
-    board.update();
-});
+board.create('midpoint', [Pp, Qp], 
+    {name: () => "b' = " + Pp.Dist(Qp).toFixed(2), 
+    label: {fontSize:18, anchorX:'middle', anchorY:'top', offset: [0, -10]}, size:0}
+); // Midpoint for base label
+
+
+board.create('midpoint', [Qp, Rp], {name: () => "h' = " + Rp.Dist(Qp).toFixed(2), label: {fontSize:18, anchorX:'left', anchorY:'middle', offset: [10, 0]}, size:0}); // Midpoint for base label
+
+// image height label removed for square demo
+
+/* ----------------------------
+   8. Area Scale Factor Display (Moved Left)
+---------------------------- */
+
+board.create('text', [2, 22,
+    function(){
+        var ratio = polyImage.Area()/polyOriginal.Area();
+        return "\\(\\text{Area Scale Factor} = \\frac{\\text{Area of Image}}{\\text{Area of Original}}" + "= \\frac{" + polyImage.Area().toFixed(2) + "}{" + polyOriginal.Area().toFixed(2) + "} = " + ratio.toFixed(2) + "\\)";
+}], {fontSize:20});
+
+board.create('text', [9.7, 20,
+        () => "\\(k^2 = " + (k.Value()*k.Value()).toFixed(2) + "\\)"], {fontSize:20});
+
+board.create('midpoint', [P, R], 
+    {name: () => 'Area = ' + polyOriginal.Area().toFixed(2), 
+    label: {fontSize:18, anchorX:'middle', anchorY:'top'}, size:0}
+);
+
+board.create('midpoint', [Pp, Rp], 
+    {name: () => 'Area = ' + polyImage.Area().toFixed(2), 
+    label: {fontSize:18, anchorX:'middle', anchorY:'top'}, size:0}
+);
 </script>
 
 </body>
