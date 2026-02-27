@@ -10,6 +10,7 @@ Consider the two figures shown on the coordinate grid.
 </h3>
 
 <div style="text-align:center;">
+
 [[jsxgraph]]
 var board = JXG.JSXGraph.initBoard(divid, {
     boundingbox: [-10,8,10,-8],
@@ -41,43 +42,76 @@ board.create('polygon',[S,T,V],{
 </div>
 
 <p>
-<b>a)</b> Are the two figures congruent?  
+<b>a)</b> Are the two figures congruent?
 <br>
-[[input:ans1]] [[validation:ans1]][[feedback:prt1]]
+[[input:ans1]]
+[[validation:ans1]]
+[[feedback:prt1]]
 </p>
 
 <p>
-<b>b)</b> If they are congruent, describe a sequence of transformations
-that maps the first figure onto the second.
+<b>b)</b> If they are congruent, describe the transformation that maps the first figure onto the second.
 <br>
-[[input:ans2]] [[validation:ans2]] [[feedback:prt2]]
-</p>
-
-<p>
-<i>Use words such as: translation, rotation.</i>
+[[input:ans2]]
+[[validation:ans2]]
+[[feedback:prt2]]
 </p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<h3>Worked solution</h3>
+      <text><![CDATA[<h3>Worked Solution</h3>
 
 <p>
-The two figures are <b>congruent</b> because all corresponding side lengths
-and angles are equal.
+Two figures in the plane are <strong>congruent</strong> if one can be obtained from the other by a <strong>rigid transformation</strong> (also called an isometry).
 </p>
 
 <p>
-One way to map the first figure onto the second is:
+Rigid transformations preserve:
 </p>
-
 <ul>
-<li>Apply {@rot_text@}</li>
-<li>Then translate the figure by the vector
-\(\langle {@tx@}, {@ty@} \rangle\)</li>
+<li>All side lengths</li>
+<li>All angles</li>
+<li>The overall shape and size of the figure</li>
 </ul>
 
 <p>
-Since only rigid motions (translations and rotations) are used,
-the figures are congruent.
+The main rigid transformations in the plane are:
+</p>
+<ul>
+<li><strong>Translation</strong> – shifting every point by the same vector</li>
+<li><strong>Rotation</strong> – turning the figure around a fixed point</li>
+<li><strong>Reflection</strong> – flipping the figure across a line</li>
+</ul>
+
+<p>
+Any combination of these transformations is still rigid.
+</p>
+
+<hr>
+
+<p><strong>How to analyze this problem:</strong></p>
+
+<ol>
+<li>
+Check whether the side lengths of the two triangles are the same.
+If distances are preserved, congruence is possible.
+</li>
+
+<li>
+Determine the type of transformation:
+<ul>
+<li>If every vertex is shifted by the same vector → it is a <strong>translation</strong>.</li>
+<li>If the triangle appears turned (possibly together with a shift) → it is a <strong>rotation and translation</strong>.</li>
+<li>If the triangle is stretched (for example, one coordinate is scaled differently) → distances are not preserved and the figures are <strong>not congruent</strong>.</li>
+</ul>
+</li>
+</ol>
+
+<p>
+Remember:
+</p>
+
+<p style="text-align:center;">
+<strong>Congruent figures have exactly the same shape and size.</strong>
 </p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -85,10 +119,10 @@ the figures are congruent.
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[/* Base triangle (kept central) */
+      <text><![CDATA[/* Base triangle */
 Ax: -3;
 Ay: 1;
 
@@ -98,42 +132,65 @@ By: 4;
 Cx: 2;
 Cy: 2;
 
-/* Random translation (small, safe) */
-tx: rand(4) + 3;   /* 3 to 6 */
-ty: rand(4) - 2;   /* -2 to 1 */
+/* Random translation */
+tx: rand(4) + 3;
+ty: rand(4) - 2;
 
-/* Rotation choice */
-rot: rand(2);  /* 0 or 1 */
+/* Mode selector
+   0 = translation
+   1 = rotation + translation
+   2 = not congruent
+*/
+mode: rand(3);
 
 /* Image triangle */
-Sx: if rot=0 then Ax+tx else -Ax+tx;
-Sy: if rot=0 then Ay+ty else -Ay+ty;
+if mode=0 then (
+    Sx: Ax+tx,  Sy: Ay+ty,
+    Tx: Bx+tx,  Ty: By+ty,
+    Vx: Cx+tx,  Vy: Cy+ty
+)
+elseif mode=1 then (
+    Sx: -Ax+tx,  Sy: -Ay+ty,
+    Tx: -Bx+tx,  Ty: -By+ty,
+    Vx: -Cx+tx,  Vy: -Cy+ty
+)
+else (
+    /* Not congruent */
+    Sx: Ax+tx,  Sy: 2*Ay+ty,
+    Tx: Bx+tx,  Ty: 2*By+ty,
+    Vx: Cx+tx,  Vy: 2*Cy+ty
+);
 
-Tx: if rot=0 then Bx+tx else -Bx+tx;
-Ty: if rot=0 then By+ty else -By+ty;
+/* Congruence flag */
+is_cong: if mode=2 then false else true;
 
-Vx: if rot=0 then Cx+tx else -Cx+tx;
-Vy: if rot=0 then Cy+ty else -Cy+ty;
-/* Normalise student answer: yes/no -> 1/0 */
-ans1n :
-  if is(ans1 = "yes") or is(ans1 = "Yes") then 1
-  elseif is(ans1 = "no") or is(ans1 = "No") then 0
-  else -1;
+/* Part (a) permutation */
+ta_cong_opts:
+    random_permutation([
+        ["Yes", is_cong],
+        ["No", not is_cong]
+    ]);
 
+/* Part (b) correct transformation */
+ta_trans:
+    if mode=0 then "translation"
+    elseif mode=1 then "rotation and translation"
+    else "not possible";
 
-/* Correct answers */
-ta_cong: 1;
-ta_trans: if rot=0 then "translation" else "rotation and translation";
-
-/* Feedback text */
-rot_text: if rot=0 then "a translation only" else "a 180° rotation followed by a translation";
-]]></text>
+/* Part (b) permutation */
+ta_trans_opts:
+    random_permutation([
+        ["Translation", is(ta_trans="translation")],
+        ["Rotation and translation", is(ta_trans="rotation and translation")],
+        ["Not possible", is (ta_trans="not possible")]
+    ]);]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta@}</text>
+      <text>{@ta_cong_opts@}
+{@ta_trans_opts@}</text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -162,8 +219,8 @@ rot_text: if rot=0 then "a translation only" else "a 180° rotation followed by 
     <variantsselectionseed/>
     <input>
       <name>ans1</name>
-      <type>algebraic</type>
-      <tans>ta_cong</tans>
+      <type>dropdown</type>
+      <tans>ta_cong_opts</tans>
       <boxsize>5</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -180,8 +237,8 @@ rot_text: if rot=0 then "a translation only" else "a 180° rotation followed by 
     </input>
     <input>
       <name>ans2</name>
-      <type>algebraic</type>
-      <tans>ta_trans</tans>
+      <type>dropdown</type>
+      <tans>ta_trans_opts</tans>
       <boxsize>10</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -212,8 +269,8 @@ ans1n:
         <name>0</name>
         <description/>
         <answertest>AlgEquiv</answertest>
-        <sans>ans1n</sans>
-        <tans>1</tans>
+        <sans>ans1</sans>
+        <tans>mcq_correct(ta_cong_opts)[1]</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -247,7 +304,7 @@ ans1n:
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans2</sans>
-        <tans>ta_trans</tans>
+        <tans>mcq_correct(ta_trans_opts)[1]</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -268,22 +325,40 @@ ans1n:
         </falsefeedback>
       </node>
     </prt>
+    <deployedseed>857132351</deployedseed>
+    <deployedseed>971388850</deployedseed>
+    <deployedseed>1534292840</deployedseed>
+    <deployedseed>1601563579</deployedseed>
+    <deployedseed>6018392</deployedseed>
+    <deployedseed>791449302</deployedseed>
+    <deployedseed>1459531543</deployedseed>
+    <deployedseed>657126177</deployedseed>
+    <deployedseed>938872360</deployedseed>
+    <deployedseed>1126133842</deployedseed>
+    <deployedseed>198963845</deployedseed>
+    <deployedseed>1087731050</deployedseed>
+    <deployedseed>756695139</deployedseed>
+    <deployedseed>1185236779</deployedseed>
+    <deployedseed>330037547</deployedseed>
+    <deployedseed>734253068</deployedseed>
+    <deployedseed>1766727706</deployedseed>
+    <deployedseed>1857425860</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>ta_cong</value>
+        <value>first(mcq_correct(ta_cong_opts))</value>
       </testinput>
       <testinput>
         <name>ans2</name>
-        <value>ta_trans</value>
+        <value>first(mcq_correct(ta_trans_opts))</value>
       </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-F</expectedanswernote>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
       </expected>
       <expected>
         <name>prt2</name>
