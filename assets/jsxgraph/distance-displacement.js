@@ -1,6 +1,5 @@
-
 var board = JXG.JSXGraph.initBoard('jxgbox-anim-dist-disp', {
-    boundingbox: [-5, 5, 8, -2],
+    boundingbox: [-4, 5, 7, -2],
     axis: true,
     grid: false,
     showNavigation: false,
@@ -50,8 +49,12 @@ var car = board.create('text', [
 ], {
     fontSize: 28,
     anchorX: 'middle',
-    anchorY: 'middle'
+    anchorY: 'middle',
+    cssStyle: 'transform: scaleX(-1);' // Flip the car icon to face right
 });
+
+// Rotation state: false = facing right; true = rotated anticlockwise (upwards)
+var rotated = false;
 
 // Distance Path (Red)
 var pathTrace = board.create('curve', [[-3], [0]], {
@@ -77,7 +80,7 @@ pathTrace.updateDataArray = function () {
 };
 
 // Distance Text (Top)
-board.create('text', [-3.1, 4.6, function () {
+board.create('text', [0.5, 4.6, function () {
 
     var dist = 0;
 
@@ -87,15 +90,16 @@ board.create('text', [-3.1, 4.6, function () {
         dist = 9 + 3 * (progress - 1);
     }
 
-    return "Distance Traveled: " + dist.toFixed(2) + " km";
+    return "Distance Travelled: " + dist.toFixed(2) + " km";
 
 }], {
     color: 'red',
-    fontSize: 16
+    fontSize: 16,
+    anchorX: 'left' 
 });
 
 // Displacement Text (Below Distance)
-board.create('text', [-2.3, 4.2, function () {
+board.create('text', [0.5, 4.2, function () {
 
     if (progress < 2) return "";
 
@@ -107,7 +111,8 @@ board.create('text', [-2.3, 4.2, function () {
 
 }], {
     color: 'blue',
-    fontSize: 16
+    fontSize: 16,
+    anchorX: 'left'
 });
 
 // Displacement Line
@@ -125,7 +130,7 @@ function animate() {
 
     if (!animationRunning) return;
 
-    progress += 0.01;
+    progress += 0.004;
 
     if (progress > 2) {
         progress = 2;
@@ -136,9 +141,17 @@ function animate() {
     if (progress <= 1) {
         carX = -3 + 9 * progress;
         carY = 0;
+        if (rotated) {
+            car.setAttribute({ cssStyle: 'transform: scaleX(-1);' });
+            rotated = false;
+        }
     } else {
         carX = 6;
         carY = 3 * (progress - 1);
+        if (!rotated) {
+            car.setAttribute({ cssStyle: 'transform: scaleX(-1) rotate(-270deg);' });
+            rotated = true;
+        }
     }
 
     board.update();
@@ -152,6 +165,10 @@ board.create('button', [-4, -1, '▶ Start Journey', function () {
     carX = -3;
     carY = 0;
     pEnd.setAttribute({ visible: false });
+
+    // ensure car faces right at start
+    rotated = false;
+    car.setAttribute({ cssStyle: 'transform: scaleX(-1);' });
 
     animationRunning = true;
     animate();
@@ -173,6 +190,10 @@ board.create('button', [1.5, -1, '⟲ Restart', function () {
     // Move car back to Home
     carX = -3;
     carY = 0;
+
+    // ensure car faces right after restart
+    rotated = false;
+    car.setAttribute({ cssStyle: 'transform: scaleX(-1);' });
 
     // Hide destination
     pEnd.setAttribute({ visible: false });

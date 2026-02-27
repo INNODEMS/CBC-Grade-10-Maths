@@ -72,33 +72,33 @@ var angleRight = board.create('angle', [C, B, A], {
 // Column Headers
 board.create('text', [0, -1.0, function() {
     return "<b>Angle &theta; = " + s.Value() + "&deg;</b>";
-}], { fontSize: 14, color: 'blue' });
+}], { fontSize: 15, color: 'blue' });
 
 board.create('text', [6, -1.0, function() {
     return "<b>Angle &phi; = " + (90 - s.Value()) + "&deg;</b>";
-}], { fontSize: 14, color: 'green' });
+}], { fontSize: 15, color: 'green' });
 
 // SINE COMP
 board.create('text', [0, -2.0, function() {
     var val = Math.sin(s.Value() * Math.PI / 180).toFixed(3);
     return "sin(&theta;) = BC / AC = <b>" + val + "</b>";
-}], { fontSize: 13 });
+}], { fontSize: 14 });
 
 board.create('text', [6, -2.0, function() {
     var val = Math.cos((90 - s.Value()) * Math.PI / 180).toFixed(3);
     return "cos(&phi;) = BC / AC = <b>" + val + "</b>";
-}], { fontSize: 13 });
+}], { fontSize: 14 });
 
 // COSINE COMP
 board.create('text', [0, -3.0, function() {
     var val = Math.cos(s.Value() * Math.PI / 180).toFixed(3);
     return "cos(&theta;) = AB / AC = <b>" + val + "</b>";
-}], { fontSize: 13 });
+}], { fontSize: 14 });
 
 board.create('text', [6, -3.0, function() {
     var val = Math.sin((90 - s.Value()) * Math.PI / 180).toFixed(3);
     return "sin(&phi;) = AB / AC = <b>" + val + "</b>";
-}], { fontSize: 13 });
+}], { fontSize: 14 });
 
 // Summary Note
 // board.create('text', [2, -4.5, function() {
