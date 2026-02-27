@@ -26,9 +26,9 @@ from googleapiclient.discovery import build
 # accidentally committing sensitive information.  We write the token into
 # the same folder so that it is kept alongside the credentials rather than
 # the public source tree.
-CONFIG_PATH = Path(__file__).resolve().parent / "secret" / "google_ids.json"
-CREDENTIALS_FILE = Path(__file__).resolve().parent / "secret" / "credentials.json"
-TOKEN_FILE = Path(__file__).resolve().parent / "secret" / "token.pickle"
+CONFIG_PATH = Path("utils") / "secret" / "google_ids.json"
+CREDENTIALS_FILE = Path("utils") / "secret" / "credentials.json"
+TOKEN_FILE = Path("utils") / "secret" / "token.pickle"
 
 
 # scopes used in this repository; extra scopes can be passed to the helpers.
