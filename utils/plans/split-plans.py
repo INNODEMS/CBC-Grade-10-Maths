@@ -42,7 +42,7 @@ def sanitize_filename(name: str) -> str:
 
 def main():
     parser = argparse.ArgumentParser(description="Split a PDF at lowest-level outline items.")
-    parser.add_argument("pdf", nargs="?", default="output/plans/main.pdf")
+    parser.add_argument("pdf", nargs="?", default="output/plans-print/main.pdf")
     parser.add_argument("--out", "-o", default="generated-assets/plans")
     args = parser.parse_args()
     
