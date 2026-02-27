@@ -58,26 +58,60 @@ board.create('polygon',[S,T,V],{
 </p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<h3>Worked solution</h3>
+      <text><![CDATA[<h3>Worked Solution</h3>
 
 <p>
-The two figures are <b>congruent</b> because all corresponding side lengths
-and angles are equal.
+Two figures in the plane are <strong>congruent</strong> if one can be obtained from the other by a <strong>rigid transformation</strong> (also called an isometry).
 </p>
 
 <p>
-One way to map the first figure onto the second is:
+Rigid transformations preserve:
 </p>
-
 <ul>
-<li>Apply {@rot_text@}</li>
-<li>Then translate the figure by the vector
-\(\langle {@tx@}, {@ty@} \rangle\)</li>
+<li>All side lengths</li>
+<li>All angles</li>
+<li>The overall shape and size of the figure</li>
 </ul>
 
 <p>
-Since only rigid motions (translations and rotations) are used,
-the figures are congruent.
+The main rigid transformations in the plane are:
+</p>
+<ul>
+<li><strong>Translation</strong> – shifting every point by the same vector</li>
+<li><strong>Rotation</strong> – turning the figure around a fixed point</li>
+<li><strong>Reflection</strong> – flipping the figure across a line</li>
+</ul>
+
+<p>
+Any combination of these transformations is still rigid.
+</p>
+
+<hr>
+
+<p><strong>How to analyze this problem:</strong></p>
+
+<ol>
+<li>
+Check whether the side lengths of the two triangles are the same.
+If distances are preserved, congruence is possible.
+</li>
+
+<li>
+Determine the type of transformation:
+<ul>
+<li>If every vertex is shifted by the same vector → it is a <strong>translation</strong>.</li>
+<li>If the triangle appears turned (possibly together with a shift) → it is a <strong>rotation and translation</strong>.</li>
+<li>If the triangle is stretched (for example, one coordinate is scaled differently) → distances are not preserved and the figures are <strong>not congruent</strong>.</li>
+</ul>
+</li>
+</ol>
+
+<p>
+Remember:
+</p>
+
+<p style="text-align:center;">
+<strong>Congruent figures have exactly the same shape and size.</strong>
 </p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -146,16 +180,17 @@ ta_trans:
 /* Part (b) permutation */
 ta_trans_opts:
     random_permutation([
-        ["Translation", ta_trans="translation"],
-        ["Rotation and translation", ta_trans="rotation and translation"],
-        ["Not possible", ta_trans="not possible"]
+        ["Translation", is(ta_trans="translation")],
+        ["Rotation and translation", is(ta_trans="rotation and translation")],
+        ["Not possible", is (ta_trans="not possible")]
     ]);]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta_cong@}</text>
+      <text>{@ta_cong_opts@}
+{@ta_trans_opts@}</text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -235,7 +270,7 @@ ans1n:
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>ta_cong</tans>
+        <tans>mcq_correct(ta_cong_opts)[1]</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -269,7 +304,7 @@ ans1n:
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans2</sans>
-        <tans>ta_trans</tans>
+        <tans>mcq_correct(ta_trans_opts)[1]</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -290,22 +325,40 @@ ans1n:
         </falsefeedback>
       </node>
     </prt>
+    <deployedseed>857132351</deployedseed>
+    <deployedseed>971388850</deployedseed>
+    <deployedseed>1534292840</deployedseed>
+    <deployedseed>1601563579</deployedseed>
+    <deployedseed>6018392</deployedseed>
+    <deployedseed>791449302</deployedseed>
+    <deployedseed>1459531543</deployedseed>
+    <deployedseed>657126177</deployedseed>
+    <deployedseed>938872360</deployedseed>
+    <deployedseed>1126133842</deployedseed>
+    <deployedseed>198963845</deployedseed>
+    <deployedseed>1087731050</deployedseed>
+    <deployedseed>756695139</deployedseed>
+    <deployedseed>1185236779</deployedseed>
+    <deployedseed>330037547</deployedseed>
+    <deployedseed>734253068</deployedseed>
+    <deployedseed>1766727706</deployedseed>
+    <deployedseed>1857425860</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>ta_cong</value>
+        <value>first(mcq_correct(ta_cong_opts))</value>
       </testinput>
       <testinput>
         <name>ans2</name>
-        <value>ta_trans</value>
+        <value>first(mcq_correct(ta_trans_opts))</value>
       </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-F</expectedanswernote>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
       </expected>
       <expected>
         <name>prt2</name>
