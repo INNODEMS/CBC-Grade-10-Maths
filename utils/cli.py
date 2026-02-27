@@ -20,6 +20,8 @@ from .helpers import google, csvtools
 from .audits import reports, audit_questions
 from .content import syllabus_tables, add_labels
 from .content import objectives, resources, namespace
+from .plans import lesson_plan_breaks
+from .plans import split_plans
 
 # path to the automatic links CSV; use cached location
 AUTOMATIC_LINKS_PATH = csvtools.cached_file("Automatic Links.csv")
@@ -307,6 +309,22 @@ def main(argv=None):
         # convenience wrapper that runs both generators
         cmd_generate_syllabus(args)
         cmd_generate_lo(args)
+    elif args.command == 'insert-plan-breaks':
+        # delegate to the content module
+        csv = 'utils/cached-csv/Automatic Links.csv'
+        pub = 'publication/publication-lesson-plans.ptx'
+        try:
+            lesson_plan_breaks.generate_and_insert(csv, pub, dry_run=False)
+            print('insert-plan-breaks: done')
+        except Exception as exc:
+            print('insert-plan-breaks: failed:', exc)
+        # optionally run the PDF splitter on the generated publication
+        if getattr(args, 'split', False):
+            try:
+                split_plans.split_pdf_by_leaves('output/plans/main.pdf', 'output/plans')
+                print('insert-plan-breaks: PDF split complete')
+            except Exception as exc:
+                print('insert-plan-breaks: PDF split failed:', exc)
     elif args.command == 'audit-questions':
         # run the helper script logic
         audit_questions.run_audit()
