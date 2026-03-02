@@ -23,13 +23,8 @@ jobs:
             - name: install deps
               run: pip install -r requirements.txt
 
-            - name: Update TeX Live manager
-              run: |
-                wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
-                sh update-tlmgr-latest.sh --update
-
             - name: install tex dependencies
-              run: tlmgr install tkz-euclide tikz-3dplot
+              run: tlmgr update --self && tlmgr install tkz-euclide tikz-3dplot
 
             - name: install local ptx files
               run: pretext --version
