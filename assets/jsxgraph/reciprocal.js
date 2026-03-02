@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Graph of y = 1/x with draggable point</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.12.2/distrib/jsxgraph.css" />
-    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.12.2/distrib/jsxgraphcore.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js"></script>
-</head>
-<body>
-
-<div id="jsxgraph-reciprocal-grid"
-    class="jxgbox"
-    style="width: 900px; height: 900px;">
-</div>
-
-<script>
-    /* reciprocal-grid.js
+/* reciprocal-grid.js
    f(x)=1/x with grid lines every 0.1 units.
    Uses explicit axes (axis:false) and a grid tied to those axes.
 */
@@ -26,8 +9,8 @@ JXG.Options.text.useMathJax = true;
     // Board configuration
     // ----------------------------
     var BOARD_ID = "jsxgraph-reciprocal-grid";
-    var X_MIN = -0.5, X_MAX = 5.5;
-    var Y_MIN = -0.5, Y_MAX = 5.5;
+    var X_MIN = -0.5, X_MAX = 3.5;
+    var Y_MIN = -0.5, Y_MAX = 3.5;
 
     var board = JXG.JSXGraph.initBoard(BOARD_ID, {
         boundingbox: [X_MIN, Y_MAX, X_MAX, Y_MIN],
@@ -118,7 +101,7 @@ JXG.Options.text.useMathJax = true;
         withLabel: false
     });
 
-    board.create("text", [0.5, 4.8, "\\(f(x)=\\frac{1}{x}\\)"], {
+    board.create("text", [0.5, 4.8, '\\[f(x)=\\frac{1}{x}\\]'], {
         fontSize: 16,
         fixed: true,
         anchorX: "left",
@@ -244,7 +227,3 @@ JXG.Options.text.useMathJax = true;
     });
     
 })();
-</script>
-
-</body>
-</html>
