@@ -14,9 +14,9 @@ A car starts from rest and accelerates uniformly to a velocity of \({@vmax@}\,\m
 <p><strong>(a)</strong> Draw the velocity–time graph by dragging the blue points B, C, and D to their correct positions. Point A \((0,0)\) is fixed.</p>
 
 [[jsxgraph width="700px" height="500px"
-  input-ref-B="B"
-  input-ref-C="C"
-  input-ref-D="D"
+  input-ref-ansB="refB"
+  input-ref-ansC="refC"
+  input-ref-ansD="refD"
 ]]
 
 var board = JXG.JSXGraph.initBoard(divid, {
@@ -38,7 +38,7 @@ var A = board.create('point', [0, 0], {
 
 // Draggable student points
 var B = board.create('point', {#B_init#}, {
-  name: '',
+  name: 'B',
   size: 4,
   color: 'blue',
   snapToGrid: true,
@@ -70,20 +70,20 @@ board.create('segment', [B, C], { strokeWidth: 2 });
 board.create('segment', [C, D], { strokeWidth: 2 });
 
 // STACK bindings (full point bindings)
-stack_jxg.bind_point('B', B);
-stack_jxg.bind_point('C', C);
-stack_jxg.bind_point('D', D);
+stack_jxg.bind_point(refB, B);
+stack_jxg.bind_point(refC, C);
+stack_jxg.bind_point(refD, D);
 
 board.unsuspendUpdate();
 [[/jsxgraph]]
 
 <div style="display:none">
-  [[input:B]] [[validation:B]] [[feedback:prtB]]
-  [[input:C]] [[validation:C]] [[feedback:prtC]]
-  [[input:D]] [[validation:D]] [[feedback:prtD]]
+  [[input:ansB]] [[validation:ansB]] 
+  [[input:ansC]] [[validation:ansC]] 
+  [[input:ansD]] [[validation:ansD]]
 </div>
 
-
+[[feedback:prtB]][[feedback:prtC]]  [[feedback:prtD]]
 <hr>
 
 <p><strong>(b)</strong> Calculate the total distance travelled.</p>
@@ -152,17 +152,18 @@ This area is the sum of:
 </p>
 
 <ul>
-<li>a triangle during acceleration: \(\displaystyle \frac12 {@vmax@}\cdot{@t1@}\),</li>
-<li>a rectangle at constant velocity: \(\displaystyle {@vmax@}\cdot{@t2@}\),</li>
-<li>a triangle during deceleration: \(\displaystyle \frac12 {@vmax@}\cdot{@t3@}\).</li>
+
+<li>a triangle during acceleration: \( \frac{1}{2} \times {@vmax@}\times {@t1@}\),</li>
+<li>a rectangle at constant velocity: \( {@vmax@}\times {@t2@}\),</li>
+<li>a triangle during deceleration: \( \frac{1}{2} \times {@vmax@} \times {@t3@}\).</li>
 </ul>
 
 <p>
 Hence,
-\[
-s = \frac12 {@vmax@}({@t1@}+{@t3@}) + {@vmax@}\cdot{@t2@}
+\(
+s = \frac{1}{2} \times {@vmax@}({@t1@}+{@t3@}) + {@vmax@}\times{@t2@}
    = {@stot@}\ \mathrm{m}.
-\]
+\)
 </p>
 
 <hr>
@@ -173,11 +174,11 @@ s = \frac12 {@vmax@}({@t1@}+{@t3@}) + {@vmax@}\cdot{@t2@}
 The average velocity over the whole journey is defined as
 </p>
 
-\[
+\(
 \bar v = \frac{\text{total distance}}{\text{total time}}
        = \frac{{@stot@}}{{@T@}}
        = {@vavg@}\ \mathrm{m\,s^{-1}}.
-\]
+\)
 
 <hr>
 
@@ -214,7 +215,7 @@ The negative sign indicates that the velocity is decreasing.
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>/* Random parameters */
@@ -358,7 +359,7 @@ ta_d    : d;
       <options/>
     </input>
     <input>
-      <name>B</name>
+      <name>ansB</name>
       <type>algebraic</type>
       <tans>B_model</tans>
       <boxsize>15</boxsize>
@@ -371,12 +372,12 @@ ta_d    : d;
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>0</mustverify>
-      <showvalidation>0</showvalidation>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
-      <name>C</name>
+      <name>ansC</name>
       <type>algebraic</type>
       <tans>C_model</tans>
       <boxsize>15</boxsize>
@@ -389,12 +390,12 @@ ta_d    : d;
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>0</mustverify>
-      <showvalidation>0</showvalidation>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
-      <name>D</name>
+      <name>ansD</name>
       <type>algebraic</type>
       <tans>D_model</tans>
       <boxsize>15</boxsize>
@@ -407,8 +408,8 @@ ta_d    : d;
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>0</mustverify>
-      <showvalidation>0</showvalidation>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <prt>

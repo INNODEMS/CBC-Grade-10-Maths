@@ -19,11 +19,25 @@ window.addEventListener('load', function() {
         // and inline-block to ensure it respects that spacing.
         reviewAnchor.style.display = 'inline-block';
         reviewAnchor.style.marginRight = '8px'; 
-        reviewAnchor.style.marginLeft = '-30px'; // Adjust this number if it's too far left
+        reviewAnchor.style.marginLeft = '3px'; // Adjust this number if it's too far left
         reviewAnchor.style.verticalAlign = 'middle';
         reviewAnchor.style.textDecoration = 'none';
 
         reviewAnchor.innerHTML = `<span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">rate_review</span>`;
+
+        // Make permalink/review content always visible
+        permLink.style.opacity = '1';
+        permLink.style.visibility = 'visible';
+
+        // Move the original anchor further left but now hide it until hovered over
+        originalAnchor.style.marginLeft = '-80px';
+        originalAnchor.style.opacity = '0';
+        permLink.addEventListener('mouseenter', () => {
+            originalAnchor.style.opacity = '1';
+        });
+        permLink.addEventListener('mouseleave', () => {
+            originalAnchor.style.opacity = '0';
+        });
 
         // 4. Insert BEFORE the original link
         // This keeps the original link in its "native" position

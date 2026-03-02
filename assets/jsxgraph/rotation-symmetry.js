@@ -1,0 +1,233 @@
+(function () {
+    'use strict';
+
+    // -----------------------------
+    // Board setup
+    // -----------------------------
+    var board = JXG.JSXGraph.initBoard('jsxgraph-rotation-symmetry', {
+        boundingbox: [-5, 5, 5, -5],
+        keepAspectRatio: true,
+        axis: false,
+        grid: false,
+        showCopyright: false,
+        showNavigation: false
+    });
+
+    const title = board.create('text', [0, 4.5, 'Rotate the star to find its symmetries'], {
+        fontSize: 18,
+        fixed: true,
+        anchorX: 'middle',
+        visible: true
+    });
+
+    // -----------------------------
+    // Utility helpers
+    // -----------------------------
+    function rotX(x, y, theta) {
+        return x * Math.cos(theta) - y * Math.sin(theta);
+    }
+
+    function rotY(x, y, theta) {
+        return x * Math.sin(theta) + y * Math.cos(theta);
+    }
+
+    // Star vertices generator (5-pointed star, centered at origin, radius = 3)
+    function starVertices(center, radius, points) {
+        var verts = [];
+        var step = Math.PI * 2 / points;
+        var innerRadius = radius * 0.5;
+        for (var i = 0; i < points; i++) {
+            var angle = Math.PI / 2 + i * step;
+            verts.push({ x: center.x + radius * Math.cos(angle), y: center.y + radius * Math.sin(angle) });
+            angle += step / 2;
+            verts.push({ x: center.x + innerRadius * Math.cos(angle), y: center.y + innerRadius * Math.sin(angle) });
+        }
+        return verts;
+    }
+
+    // Draw a star, allow rotation only (no translation), leave original behind
+    // move entire star up by 0.5 units
+    var center = { x: 0, y: 0.5 };
+    var starRadius = 3;
+    var starVerts = starVertices(center, starRadius, 5); // 10 points (5 outer, 5 inner)
+
+    // Draw original star (purple, fixed)
+    var origPts = starVerts.map(function (v) {
+        return board.create('point', [v.x, v.y], {
+            visible: false,
+            fixed: true
+        });
+    });
+    var origPoly = board.create('polygon', origPts, {
+        fillColor: 'purple',
+        fillOpacity: 0.5,
+        strokeColor: 'purple',
+        strokeWidth: 2,
+        vertices: { visible: false }
+    });
+
+    // Rotatable star (movable by rotation only)
+    var theta = 0;
+    var rotPts = starVerts.map(function (v, idx) {
+        // color the top-right outer vertex differently
+        var color = '#2a6fdb';
+        var fill = '#2a6fdb';
+        // outer vertices appear at even indices: 0,2,4,6,8; top-right outer is index 2
+        if (idx === 2) {
+            color = '#e74c3c';
+            fill = '#e74c3c';
+        }
+        return board.create('point', [
+            function () {
+                return center.x + rotX(v.x - center.x, v.y - center.y, theta);
+            },
+            function () {
+                return center.y + rotY(v.x - center.x, v.y - center.y, theta);
+            }
+        ], {
+            name: '',
+            visible: true,
+            fixed: true,
+            size: 3,
+            strokeColor: color,
+            fillColor: fill
+        });
+    });
+    var rotPoly = board.create('polygon', rotPts, {
+        fillColor: '#2a6fdb',
+        fillOpacity: 0.25,
+        strokeColor: '#2a6fdb',
+        strokeWidth: 2,
+        vertices: { visible: false }
+    });
+
+    // Rotation by dragging any vertex
+    var rotating = false;
+    var rotStartAng = 0;
+    var rotStartTheta = 0;
+
+    function angleMouseToCenter(evt) {
+        var pos = board.getUsrCoordsOfMouse(evt);
+        return Math.atan2(pos[1] - center.y, pos[0] - center.x);
+    }
+
+    board.on('down', function (evt) {
+        var pos = board.getUsrCoordsOfMouse(evt);
+        rotating = false;
+        for (var i = 0; i < rotPts.length; i++) {
+            var vx = rotPts[i].X();
+            var vy = rotPts[i].Y();
+            var dx = pos[0] - vx;
+            var dy = pos[1] - vy;
+            if (Math.sqrt(dx * dx + dy * dy) < 0.35) {
+                rotating = true;
+                rotStartAng = Math.atan2(pos[1] - center.y, pos[0] - center.x);
+                rotStartTheta = theta;
+                break;
+            }
+        }
+    });
+
+    board.on('move', function (evt) {
+        if (!rotating) return;
+        var pos = board.getUsrCoordsOfMouse(evt);
+        var ang = Math.atan2(pos[1] - center.y, pos[0] - center.x);
+        theta = rotStartTheta + (ang - rotStartAng);
+        board.update();
+    });
+
+    board.on('up', function () {
+        rotating = false;
+    });
+
+    // Check for overlap (rotational symmetry)
+    var checkmark = board.create('text', [0, -3.85, '\u2716'], {
+        fontSize: 44,
+        strokeColor: '#c0392b',
+        fillColor: '#c0392b',
+        fixed: true,
+        visible: true,
+        anchorX: 'middle',
+        anchorY: 'middle'
+    });
+    var checkLabel = board.create('text', [0, -2.6, 'Rotational symmetry achieved!'], {
+        fontSize: 18,
+        fixed: true,
+        anchorX: 'middle',
+        visible: false
+    });
+    // counter display
+    var symCount = 0;
+    var seenSym = {};
+    var allFound = false;
+    var counterText = board.create('text', [0, -3.3, 'Symmetries found: 0'], {
+        fontSize: 18,
+        fixed: true,
+        anchorX: 'middle'
+    });
+
+    function showCheckIfMatched() {
+        var tol = 0.08; // slightly larger tolerance
+        var n = rotPts.length;
+        var matched = false;
+        var matchedShift = -1;
+        if (allFound) {
+            // once complete, keep permanent message and checkmark
+            checkmark.setText('\u2714');
+            checkmark.setAttribute({ strokeColor: '#0a8f2c', fillColor: '#0a8f2c', visible: true });
+            checkLabel.setText('All symmetries found!');
+            checkLabel.setAttribute({ visible: true });
+            return;
+        }
+
+        // try all cyclic shifts to allow vertex-order rotation
+        for (var shift = 0; shift < n; shift++) {
+            var maxd = 0;
+            for (var i = 0; i < n; i++) {
+                var rx = rotPts[i].X();
+                var ry = rotPts[i].Y();
+                var j = (i + shift) % n;
+                var ox = origPts[j].X();
+                var oy = origPts[j].Y();
+                var d = Math.sqrt((rx - ox) * (rx - ox) + (ry - oy) * (ry - oy));
+                if (d > maxd) maxd = d;
+            }
+            if (maxd <= tol) {
+                matched = true;
+                matchedShift = shift;
+                break;
+            }
+        }
+
+        if (matched) {
+            checkmark.setText('\u2714');
+            checkmark.setAttribute({ strokeColor: '#0a8f2c', fillColor: '#0a8f2c', visible: true });
+            checkLabel.setAttribute({ visible: true });
+            // update counter if new symmetry
+            // only 5 true symmetries (k*2pi/5) correspond to shifts that are multiples of 2
+            var order = 5;
+            var k = Math.round(matchedShift / 2) % order;
+            if (!seenSym[k]) {
+                seenSym[k] = true;
+                symCount++;
+                counterText.setText('Symmetries found: ' + symCount);
+            }
+        } else {
+            checkmark.setText('\u2716');
+            checkmark.setAttribute({ strokeColor: '#c0392b', fillColor: '#c0392b', visible: true });
+            checkLabel.setAttribute({ visible: false });
+        }
+
+        if (symCount >= 5) {
+            allFound = true;
+            checkLabel.setText('All symmetries found!');
+            checkLabel.setAttribute({ visible: true });
+            checkmark.setText('\u2714');
+            checkmark.setAttribute({ strokeColor: '#0a8f2c', fillColor: '#0a8f2c', visible: true });
+        }
+    }
+
+    setInterval(showCheckIfMatched, 150);
+    board.on('update', showCheckIfMatched);
+
+})();

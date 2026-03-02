@@ -5,8 +5,7 @@
       <text>25.3 Reflections</text>
     </name>
     <questiontext format="html">
-      <text><![CDATA[<p>For this question, your browser may ask whether you want to "leave the page". In this case, you should click leave and your answer will be saved.</p>
-<p><br></p>
+      <text><![CDATA[<p>For this question, your browser may ask whether you want to "leave the page". In this case, you should click leave and your answer will be saved.</p> <p><br></p>
 
 <center>
 [[jsxgraph height="500px" width="500px"]]
@@ -24,7 +23,7 @@
     var initTipCoords = {#initTip#};
     var refCenCoords = {#refCen#};
 
-    // Fixed initial shape
+    // Fixed initial shape (PINK)
 
     var vertexStyle = {
       visible:false,
@@ -81,7 +80,7 @@
       }
     });
 
-    // Fixed reflected shape
+    // Fixed reflected shape (NOW GREEN)
 
     var fixedCen = board.create("point", refCenCoords, vertexStyle);
 
@@ -131,54 +130,12 @@
     board.create("polygon", fixedPointList.slice(1), {
       fixed:true,
       highlight:false,
+      fillColor:"ForestGreen",
+      fillOpacity:0.7,
       borders:{
         visible:false
       }
     });
-
-    // Draggable shape
-
-    var dragPointStyle = {
-      showInfoBox:false,
-      withLabel:false
-    };
-
-    var dragTip = board.create("point", initTipCoords, dragPointStyle);
-    
-    dragPointStyle.snapToGrid = true;
-    var dragCen = board.create("point", initCenCoords, dragPointStyle);
-
-    vertexStyle.fixed = false;
-
-    var dragPointList = [
-      dragCen,
-      dragTip,
-      board.create("point", [initFixedPointList[2].X(), initFixedPointList[2].Y()], vertexStyle),
-      board.create("point", [initFixedPointList[3].X(), initFixedPointList[3].Y()], vertexStyle),
-      board.create("point", [initFixedPointList[4].X(), initFixedPointList[4].Y()], vertexStyle),
-      board.create("point", [initFixedPointList[5].X(), initFixedPointList[5].Y()], vertexStyle),
-      board.create("point", [initFixedPointList[6].X(), initFixedPointList[6].Y()], vertexStyle),
-      board.create("point", [initFixedPointList[7].X(), initFixedPointList[7].Y()], vertexStyle),
-    ];
-
-    var dragArrow = board.create("group", dragPointList);
-    dragArrow.setRotationCenter(dragCen);
-    dragArrow.setRotationPoints(dragTip);
-
-    board.create("polygon", dragPointList.slice(1), {
-      fixed:true,
-      highlight:false,
-      fillColor:"pink",
-      fillOpacity:0.7,
-      borders:{
-        fixed:true,
-        highlight:false,
-        strokeColor:"black"
-      }
-    });
-
-    stack_jxg.bind_point(sR2, dragCen);
-    stack_jxg.bind_point(sR3, dragTip);
 
     board.unsuspendUpdate();
 
@@ -198,7 +155,7 @@
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text><![CDATA[/* Initial position */
@@ -471,6 +428,7 @@ node4_test: if abs((coeff(lhs(ans1)-rhs(ans1),x,0)/coeff(lhs(ans1)-rhs(ans1),y))
     board.create("polygon", fixedPointList.slice(1), {
       fixed:true,
       highlight:false,
+      fillColor:"ForestGreen",
       borders:{
         visible:false
       }
