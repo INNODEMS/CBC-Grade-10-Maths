@@ -112,7 +112,7 @@ JXG.Options.text.useMathJax = true;
     // ----------------------------
     // Draggable point P as glider on f(x)=1/x
     // ----------------------------
-    var P = board.create('glider', [4, 0.25, fPos], {
+    var P = board.create('glider', [2, 0.5, fPos], {
         name: 'P',
         size: 4,
         strokeColor: '#e74c3c',
