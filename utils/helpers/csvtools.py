@@ -1,4 +1,4 @@
-"""CSV utilities for the CBC‑Grade‑10‑Maths project.
+"""CSV utilities for the CBC-Grade-10-Maths project.
 
 This module knows about the field names used in the various spreadsheets and
 provides simple helpers for reading and writing the "Automatic Links" data.
@@ -26,8 +26,10 @@ SECTION_COL = "Section"
 def cached_dir() -> Path:
     """Return the path to the `utils/cached-csv` directory, creating it if
     necessary."""
-    d = Path(__file__).resolve().parent / "cached-csv"
-    d.mkdir(exist_ok=True)
+    # place the cached CSV directory alongside `utils/` rather than inside
+    # the `helpers` package so paths refer to `utils/cached-csv` as intended.
+    d = Path(__file__).resolve().parent.parent / "cached-csv"
+    d.mkdir(parents=True, exist_ok=True)
     return d
 
 
@@ -42,7 +44,7 @@ def read_links_csv(path: Path | str | None = None) -> list[dict[str, str]]:
     """Read a CSV and return a list of rows as dictionaries.
 
     If *path* is omitted the file `Automatic Links.csv` in the cached directory
-    is used.  The input file is assumed to use UTF‑8 encoding.  Leading/
+    is used.  The input file is assumed to use UTF8 encoding.  Leading/
     trailing whitespace is stripped from each value.
     """
     if path is None:

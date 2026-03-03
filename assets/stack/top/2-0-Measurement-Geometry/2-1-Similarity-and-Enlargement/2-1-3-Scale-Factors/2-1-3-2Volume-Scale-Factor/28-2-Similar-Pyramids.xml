@@ -150,7 +150,16 @@
 
     };
 
-    print_pyram(6, 1, 3);
+    print_pyram(6, 1, 3, [0,0,0], [0,0,0], {
+    fixed:true,
+    highlight:false,
+    fillColor:"#00FF00",  // This makes it green!
+    fillOpacity:0.7,      // Optional: adjust transparency
+    borders:{
+        fixed:true,
+        highlight:false
+    }
+});
     print_pyram(6, redHeight/greenHeight, 3*redHeight/greenHeight, [0,0,3*(1-redHeight/greenHeight)], [0,0,0], {
         fixed:true,
         highlight:false,
@@ -226,7 +235,7 @@
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2018080600</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text><![CDATA[dp(num, dp) := block(if num*10^dp-floor(num*10^dp)<0.5 then return(float(floor(num*10^dp)/(10^dp))) else return(float(ceiling(num*10^dp)/(10^dp))));
@@ -349,7 +358,7 @@ greenVol:greenArea*greenHeight/3;]]></text>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>1.0000000</truescore>
+        <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>1</truenextnode>
         <trueanswernote>prt1-1-T</trueanswernote>
@@ -357,7 +366,7 @@ greenVol:greenArea*greenHeight/3;]]></text>
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
@@ -374,7 +383,7 @@ greenVol:greenArea*greenHeight/3;]]></text>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
-        <truescore>0.0000000</truescore>
+        <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
@@ -384,7 +393,7 @@ greenVol:greenArea*greenHeight/3;]]></text>
 <br>Therefore the angle at the base of the red pyramid is <b>equal to</b> the angle at the base of the green.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-2-F</falseanswernote>
@@ -420,7 +429,7 @@ node5_test: if abs(ans2-greenArea*lenRat)<=0.1 then 1 else 0;]]></text>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>1.0000000</truescore>
+        <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>1</truenextnode>
         <trueanswernote>prt2-1-T</trueanswernote>
@@ -428,7 +437,7 @@ node5_test: if abs(ans2-greenArea*lenRat)<=0.1 then 1 else 0;]]></text>
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>2</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
@@ -445,7 +454,7 @@ node5_test: if abs(ans2-greenArea*lenRat)<=0.1 then 1 else 0;]]></text>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
-        <truescore>0.0000000</truescore>
+        <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt2-2-T</trueanswernote>
@@ -459,7 +468,7 @@ node5_test: if abs(ans2-greenArea*lenRat)<=0.1 then 1 else 0;]]></text>
 <p>\(A_R = {@float(redArea)@} {cm}^2\)</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt2-2-F</falseanswernote>
@@ -476,7 +485,7 @@ node5_test: if abs(ans2-greenArea*lenRat)<=0.1 then 1 else 0;]]></text>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>0.5000000</truescore>
+        <truescore>0.5</truescore>
         <truepenalty/>
         <truenextnode>1</truenextnode>
         <trueanswernote>prt2-3-T</trueanswernote>
@@ -485,7 +494,7 @@ node5_test: if abs(ans2-greenArea*lenRat)<=0.1 then 1 else 0;]]></text>
 <br>Since the red pyramid is smaller than the green, your answer should be <b>less than</b> \({@float(greenArea)@}{cm}^2\).</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>3</falsenextnode>
         <falseanswernote>prt2-3-F</falseanswernote>
@@ -502,7 +511,7 @@ node5_test: if abs(ans2-greenArea*lenRat)<=0.1 then 1 else 0;]]></text>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>0.5000000</truescore>
+        <truescore>0.5</truescore>
         <truepenalty/>
         <truenextnode>1</truenextnode>
         <trueanswernote>prt2-4-T</trueanswernote>
@@ -511,7 +520,7 @@ node5_test: if abs(ans2-greenArea*lenRat)<=0.1 then 1 else 0;]]></text>
 <br>Remember that the ratio between corresponding areas is equal to the <b>square</b> of the ratio between corresponding lengths.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>4</falsenextnode>
         <falseanswernote>prt2-4-F</falseanswernote>
@@ -528,7 +537,7 @@ node5_test: if abs(ans2-greenArea*lenRat)<=0.1 then 1 else 0;]]></text>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
-        <truescore>0.0000000</truescore>
+        <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>1</truenextnode>
         <trueanswernote>prt2-5-T</trueanswernote>
@@ -538,7 +547,7 @@ node5_test: if abs(ans2-greenArea*lenRat)<=0.1 then 1 else 0;]]></text>
 <br>Also, since the red pyramid is smaller than the green, your answer should be <b>less than</b> \({@float(greenArea)@}{cm}^2\).</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>1</falsenextnode>
         <falseanswernote>prt2-5-F</falseanswernote>
@@ -577,7 +586,7 @@ node6_test: if abs(ans3-redVol/lenRat)<=0.1 or abs(ans3-redVol/lenRat^2)<=0.1 th
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>1.0000000</truescore>
+        <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>1</truenextnode>
         <trueanswernote>prt3-1-T</trueanswernote>
@@ -585,7 +594,7 @@ node6_test: if abs(ans3-redVol/lenRat)<=0.1 or abs(ans3-redVol/lenRat^2)<=0.1 th
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>2</falsenextnode>
         <falseanswernote>prt3-1-F</falseanswernote>
@@ -602,7 +611,7 @@ node6_test: if abs(ans3-redVol/lenRat)<=0.1 or abs(ans3-redVol/lenRat^2)<=0.1 th
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
-        <truescore>0.0000000</truescore>
+        <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt3-2-T</trueanswernote>
@@ -617,7 +626,7 @@ node6_test: if abs(ans3-redVol/lenRat)<=0.1 or abs(ans3-redVol/lenRat^2)<=0.1 th
 <p>\(V_G = {@dp(greenVol,2)@} {cm}^3\) <i>(tp 2pd)</i></p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt3-2-F</falseanswernote>
@@ -634,7 +643,7 @@ node6_test: if abs(ans3-redVol/lenRat)<=0.1 or abs(ans3-redVol/lenRat^2)<=0.1 th
         <testoptions>1</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>0.6670000</truescore>
+        <truescore>0.667</truescore>
         <truepenalty/>
         <truenextnode>1</truenextnode>
         <trueanswernote>prt3-3-T</trueanswernote>
@@ -643,7 +652,7 @@ node6_test: if abs(ans3-redVol/lenRat)<=0.1 or abs(ans3-redVol/lenRat^2)<=0.1 th
 <br>However, you have not rounded your answer correctly to 2dp.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>3</falsenextnode>
         <falseanswernote>prt3-3-F</falseanswernote>
@@ -660,7 +669,7 @@ node6_test: if abs(ans3-redVol/lenRat)<=0.1 or abs(ans3-redVol/lenRat^2)<=0.1 th
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>0.3330000</truescore>
+        <truescore>0.333</truescore>
         <truepenalty/>
         <truenextnode>1</truenextnode>
         <trueanswernote>prt3-4-T</trueanswernote>
@@ -669,7 +678,7 @@ node6_test: if abs(ans3-redVol/lenRat)<=0.1 or abs(ans3-redVol/lenRat^2)<=0.1 th
 <br>Since the green pyramid is larger than the red, your answer should be <b>greater than</b> \({@float(redVol)@}{cm}^3\).</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>4</falsenextnode>
         <falseanswernote>prt3-4-F</falseanswernote>
@@ -686,7 +695,7 @@ node6_test: if abs(ans3-redVol/lenRat)<=0.1 or abs(ans3-redVol/lenRat^2)<=0.1 th
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>0.3330000</truescore>
+        <truescore>0.333</truescore>
         <truepenalty/>
         <truenextnode>1</truenextnode>
         <trueanswernote>prt3-5-T</trueanswernote>
@@ -695,7 +704,7 @@ node6_test: if abs(ans3-redVol/lenRat)<=0.1 or abs(ans3-redVol/lenRat^2)<=0.1 th
 <br>Remember that the ratio between corresponding volumes is equal to the <b>cube</b> of the ratio between corresponding lengths.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>5</falsenextnode>
         <falseanswernote>prt3-5-F</falseanswernote>
@@ -712,7 +721,7 @@ node6_test: if abs(ans3-redVol/lenRat)<=0.1 or abs(ans3-redVol/lenRat^2)<=0.1 th
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
-        <truescore>0.0000000</truescore>
+        <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>1</truenextnode>
         <trueanswernote>prt3-6-T</trueanswernote>
@@ -722,7 +731,7 @@ node6_test: if abs(ans3-redVol/lenRat)<=0.1 or abs(ans3-redVol/lenRat^2)<=0.1 th
 <br>Also, since the green pyramid is larger than the red, your answer should be <b>greater than</b> \({@float(redVol)@}{cm}^2\).</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>1</falsenextnode>
         <falseanswernote>prt3-6-F</falseanswernote>

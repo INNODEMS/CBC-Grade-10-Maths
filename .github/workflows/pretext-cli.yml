@@ -57,6 +57,13 @@ jobs:
               run: |
                 cp -r output/student/ output/web/
 
+            - name: build deploy target print
+              run: pretext build print
+
+            - name: Copy built PDF into assets folder
+              run: |
+                cp output/print/main.pdf assets/CBC-Grade-10-Maths.pdf
+
             - name: stage deployment
               run: pretext deploy --stage-only
 
