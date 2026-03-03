@@ -70,36 +70,14 @@
         <p xml:id="auto_wltpymms">
             In Grade <m>8</m>, you learned how to use mathematical tables to find squares, square roots, and reciprocals of numbers. Here we will use the mathematical tables to determine logarithms to base <m>10</m>.
         </p>
-        <p xml:id="auto_yzyfj893">
-            Here is an extract of a logarithm table to base <m>10</m>
-        </p>
         <table xml:id="log-table">
             <title>Base 10 Logarithm Table</title>
             <xi:include href="log-table.ptx"/>
         </table>
-
-        <example>
-            <statement>
-            <title>Finding Logs Using the Table</title>
-            <image source="finding-logs.png">                
-            </image>
-            <p>
-                Use the table
-            </p>
-            </statement>    
-        </example>
-
-
-        <p xml:id="auto_1fdrnvo2">
-            <term>Positive Numbers greater than <m>1</m></term>
-        </p>
         <activity>
             <p>
-                <term>Work in groups with logarithm tables to explore the following:</term> 
-            </p>
-            <p>
                 <term>Understanding the Table Structure</term>
-                <ol marker="1.">
+                <ol marker="(a)">
                     <li>
                         <p>
                             Examine your logarithm table. What do you notice about its structure?
@@ -121,7 +99,7 @@
                                 </li>
                                 <li>
                                     <p>
-                                        The middle columns, titled <alert>Mean Difference</alert>, which contains the digits <m>0</m><ndash/><m>9</m>
+                                        The right columns, titled <alert>Mean Difference</alert>, which contains the digits <m>0</m><ndash/><m>9</m>
                                     </p>
                                 </li>
                             </ul>
@@ -132,69 +110,160 @@
                             What do you think each part represents?
                         </p>
                     </li>
-                </ol>
-            </p>
-            <p>
-                <term>Finding Logarithms</term>
-            </p>
-            <p>
-                Try to find the logarithms of these numbers using the table:
-            </p>
-            <p>
-                <ol marker="(i)">
                     <li>
                         <p>
-                           log(<m>47</m>) 
+                            What happens to the numbers in the table as you go down the middle columns (the first decimal columns)? Or across the middle columns (i.e. from <m>0</m> to <m>9</m>?)
                         </p>
                     </li>
                     <li>
                         <p>
-                            log(<m>473</m>)
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            log(<m>4.73</m>)
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            log(<m>0.0473</m>)
+                            What happens to the numbers in the table as you go down the right columns (the mean difference columns)? Or across the right columns (i.e. from <m>0</m> to <m>9</m>?)
                         </p>
                     </li>
                 </ol>
             </p>
+        </activity>
+        <example>
+            <statement>
+            <title>Finding Logs Using the Table</title>
             <p>
-                <term>Discussion Questions:</term>
+                Use the table to find:
+                <ol marker="(a)">
+                    <li>
+                        <m>\log_{10}(14.67)</m>
+                    </li>
+                    <li>
+                        <m>\log_{10}(146.7)</m>
+                    </li>
+                    <li>
+                        <m>\log_{10}(0.01467)</m>
+                    </li>
+                </ol>
             </p>
             <p>
+                You may find <xref ref="fig-finding-logs"/> helpful:
+            </p>
+            <figure xml:id="fig-finding-logs">
+                <caption>Help finding <m>\log_{10}(14.67)</m></caption>
+                <image source="finding-logs.png">                
+                </image>
+            </figure>
+            </statement>    
+            <solution>
                 <ol marker="(a)">
                     <li>
                         <p>
-                           How does the position of the decimal point affect the logarithm? 
+                            To use the table, we need to split <m>14.67</m> into three components.
+                            <ul>
+                                <li>
+                                    <p>
+                                        The <alert>integer</alert> part, left of the decimal, is <m>14</m>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        The <alert>first decmial</alert>, which is the digit immediately to the right of the decimal: <m>6</m>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        The <alert>second decimal</alert>, following the first decimal, is <m>7</m>
+                                    </p>
+                                </li>
+                            </ul>
+                        </p>
+                        <p>
+                            We can use the table to find the <term>mantissa</term> of <m>\log_{10}(14.67)</m>. This is the decimal part of the answer. The steps are as follows:
+                        </p>
+                        <ol marker="1.">
+                            <li>
+                                <p>
+                                    As shown in <xref ref="fig-finding-logs"/>, we use the <alert>integer</alert> part <m>(14)</m> to find which row of the table we need, which is highlighted in <m>\color{purple}{\text{purple}}</m>.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Next, we use the <alert>first decimal</alert> <m>(6)</m> to find the column, which is highlighted in <m>\color{green}{\text{green}}</m>. Where the row and column overlap (show in the <m>\color{red}{\text{red}}</m> box) we have the main part of the mantissa: <m>1644</m>.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    However, we are taking <m>\log_{10}(14.67)</m>, not just <m>\log_{10}(14.6)</m>. So we need to adjust our mantissa using the <alert>second decimal</alert> <m>(7)</m>. Locate the column for this under the <alert>Mean Difference</alert> part of the table (coloured in <m>\color{blue}{\text{blue}}</m>), and find where this intersects with the row from before. This is shown in <m>\color{orange}{\text{orange}}</m>, with mean difference <m>21</m> in our example.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    We add this adjustment to the main part of our mantissa, to get the mantissa as: <m>1644+21 = 1665</m>
+                                </p>
+                            </li>
+                        </ol>
+                        <p>
+                            Thus, we know that <m>\log_{10}(14.67) = X.1665</m>. But we need to find <m>X</m>, called the <term>characteristic</term>.
+                        </p>
+                        <p>
+                            There is an easy shortcut:
+                            <md>
+                                X = \text{Number of digits before the decimal} - 1
+                            </md>
+                            So with <m>14.67</m>, we have 2 digits before the decimal (<m>14</m> has two digits), so <m>X = 2 - 1 = 1</m>
+                        </p>
+                        <p>
+                            Thus <m>\log_{10}(14.67) = 1.665</m>
                         </p>
                     </li>
                     <li>
                         <p>
-                            What pattern do you notice between log(<m>47</m>), log(<m>473</m>), and log(<m>4.73</m>)?
+                            If we try the same procedure as (a) with <m>\log_{10}(146.7)</m>, we run into a problem: there's no row for <m>146</m>! The table only works directly for <m>\log_{10}(x)</m> when <m>10 \le x &lt; 100 </m>.
                         </p>
-                    </li>
-                    <li>
                         <p>
-                            How do you handle numbers less than <m>1</m>?
+                            Remembering our logarithm laws from <xref ref="subsubsec-logarithms-of-products-and-ratios" text="title"/>, we know that:
+                            <md>
+                                \log_{10}(146.7) = \log_{10}\left(10 \times 14.67\right) = \log_{10}(10) + \log_{10}(14.67)
+                            </md>
+                            So we can shift the decimal so there are only two digits to the left of it <m>(14)</m>, and calculate the mantissa using the same procedure as (a).
                         </p>
-                    </li>
-                    <li>
                         <p>
-                            Why do we need the "Mean Difference" columns?
+                            You now need to find the mantissa of <m>\log_{10}(14.67)</m> using the steps in (a). As we've just done that, we'll reuse our answer of <m>.1665</m>
+                        </p>
+                        <p>
+                            For the characteristic, the same rule applies:
+                            <md>
+                                X = \text{Number of digits before the decimal} - 1
+                            </md>
+                            So with our <em>original</em> number <m>146.77</m>, we have 3 digits before the decimal (<m>146</m> has three digits), so <m>X = 3 - 1 = 2</m>
+                        </p>
+                        <p>
+                            Why is this still true? Since <m>146.7</m> has an extra digit left of the decimal than <m>14.67</m>, we get a <m>\log_{10}(10)</m> term from the logarithm rule. And <m>\log_{10}(10) = 1</m>, so our characteristic is bigger by <m>1</m>, the exact number of extra digits.
+                        </p>
+                        <p>
+                            Hence combining the characteristic and the mantissa, we have <m>\log_{10}(146.7) = 2.1665</m>
                         </p>
                     </li>
+                    <p>
+                        We also need to transform <m>\log_{10}(0.01467)</m> to get it into the correct form. We can use the logarithm rule for quotients to write:
+                        <md>
+                            \log_{10}(0.01467) = \log_{10}\left(\frac{14.67}{1000}) = \log_{10}(14.67) - \log_{10}(1000)
+                        </md>
+                    </p>
+                    <p>
+                        Like (a) and (b), our mantissa is <m>.1665</m>. But now our characteristic will be <em>negative</em>:
+                        <md>
+                            X = -\left(\text{Number of zeros after the decimal} + 1\right)
+                        </md>
+                        In this case, we have 1 zero after the decimal, so <m>X = -(2 + 1) = -3</m>. We write this as <m>\bar{3}</m> to indicate that it's negative.
+                    </p>
+                    <p>
+                        So we have <m>\log_{10}(0.01467) = \bar{3}.1665</m>
+                    </p>
+                    <p>
+                        It's typical to write this answer using negatives. To do this, we need to subtract the mantissa from the characteristic:
+                        <md>
+                            \log_{10}(0.01467) = -3 + 0.1665 = -2.8335
+                        </md>
+                    </p>
                 </ol>
-            </p>
-            <p>
-                <alert>Teacher's Role:</alert> The teacher circulates among groups, asking probing questions (e.g., "What happens to the characteristic when you multiply by <m>10</m>?", "How do you read the mantissa for a <m>3</m>-digit number?"). The teacher uses student discoveries to bridge to formal instruction.
-            </p>
-        </activity>
+            </solution>
+        </example>
         <insight>
             <p>
                 Structure of a Common Logarithm:
@@ -240,30 +309,30 @@
                 <alert>Finding the Mantissa (5-Step Process):</alert>
             </p>
             <p>
-                <ol marker="(1.)">
+                <ol marker="1.">
                     <li>
                         <p>
-                            Write the number in standard form <m>(A \times 10^n</m> where <m>1 \le A &lt; 10)</m>
+                            Move the decimal so that there are only two digits to the left of it.
                         </p>
                     </li>
                     <li>
                         <p>
-                            Locate the first two digits in the first column of the log table
+                            Locate the row corresponding to the first two digits (the <alert>integer</alert>) in the table.
                         </p>
                     </li>
                     <li>
                         <p>
-                            Move across to the column for the third digit
+                            Move across to the column for the first decimal digit, and write down the main part of he mantissa where the row and column intersect.
                         </p>
                     </li>
                     <li>
                         <p>
-                            Add the mean difference for the fourth digit (if applicable)
+                            Use the second decimal digit to find the mean difference column in the table and add the value in the corresponding row to the main part of the mantissa.
                         </p>
                     </li>
                     <li>
                         <p>
-                            Combine characteristic <m>+</m> mantissa
+                            Combine characteristic and mantissa, subtracting if necessary.
                         </p>
                     </li>
                 </ol>
@@ -289,222 +358,104 @@
                 </ol>
             </p>
             <p>
-                <alert>Remember:</alert> he mantissa is ALWAYS positive. Only the characteristic can be negative. Also, always verify your table reading with a calculator when possible.
+                <alert>Remember:</alert> The mantissa is ALWAYS positive. Only the characteristic can be negative. Also, always verify your table reading with a calculator when possible.
             </p>
         </insight>
 
         <example xml:id="auto_pz9erh8d">
             <statement>
                 <p xml:id="auto_zsai5pza">
-                    <ol xml:id="auto_ll6shvm9">
-                        <li xml:id="auto_h4wn0biu">
-                            <p xml:id="auto_my8fvtyk">
-                                Find <m>\log (472.8)</m> using a logarithm table.
-                            </p>
-                        </li>
-                    </ol>
+                    Find <m>\log (472.8)</m> using a logarithm table.
                 </p>
             </statement>
             <solution>
-                <p xml:id="auto_v5du29c1">
-                    Using a logarithm table, follow these steps:
+                <p>
+                    First, we split <m>472.8</m> into its components. Since the table only works for numbers with two digits before the decimal, we shift the decimal to get <m>47.28</m>:
+                    <ul>
+                        <li><p><alert>Integer</alert>: <m>47</m></p></li>
+                        <li><p><alert>First decimal</alert>: <m>2</m></p></li>
+                        <li><p><alert>Second decimal</alert>: <m>8</m></p></li>
+                    </ul>
                 </p>
-                <p xml:id="auto_y3qxzqf7">
-                    <ol xml:id="auto_8dk6za1r">
-                        <li xml:id="auto_rorfmciu">
-                            <p xml:id="auto_junb4lkp">
-                                Identify the characteristic:
-                            </p>
-                            <p xml:id="auto_cqyrrfe7">
-                                Write <m>472.8</m> in standard form
-                            </p>
-                            <p xml:id="auto_g1j85ggl">
-                                <me>\log (472.8) = \log (4.728 \times 10^2)</me>
-                            </p>
-                            <p xml:id="auto_pbgpeawl">
-                                The characteristic is <m>2</m> since <m>10^2 \leq 472.8 \lt 10^3</m>.
-                            </p>
-                        </li>
-                        <li xml:id="auto_jxkji9ip">
-                            <p xml:id="auto_pvbsuqgn">
-                                Find the mantissa from the log table:
-                            </p>
-                            <p xml:id="auto_tw3qlef2">
-                                Locate <m>47</m> in the first column and move to the column labeled <m>2</m>.
-                            </p>
-                            <p xml:id="auto_fa8agnf0">
-                                Read the value: <m>0.6749</m>.
-                            </p>
-                            <p xml:id="auto_pmv5dm8p">
-                                <me>
-                                    \log (472) = 0.6749
-                                </me>
-                            </p>
-                        </li>
-                        <li xml:id="auto_y6on3amy">
-                            <p xml:id="auto_rnvg7zl8">
-                                Apply the mean difference for <m>8</m>:
-                            </p>
-                            <p xml:id="auto_l8ie8pnb">
-                                From the table, the mean difference for <m>8</m> is <m>0.0007</m>.
-                            </p>
-                            <p xml:id="auto_lscesrbj">
-                                Add this to the mantissa:
-                            </p>
-                            <p xml:id="auto_ceixi9w4">
-                                <me>
-                                    0.6749 + 0.0007 = 0.6756
-                                </me>
-                            </p>
-                        </li>
-                        <li xml:id="auto_i0z1hmhy">
-                            <p xml:id="auto_60gyi1gi">
-                                Combine with the characteristic
-                            </p>
-                            <p xml:id="auto_fe8h5cbq">
-                                Therefore;
-                            </p>
-                            <p xml:id="auto_xdpw1ij8">
-                                <me>
-                                    \log (472.8) = 2.6756
-                                </me>
-                            </p>
-                        </li>
-                    </ol>
+                <p>
+                    From the table: row <m>47</m>, first decimal column <m>2</m> gives <m>6739</m>. The mean difference for <m>8</m> is <m>7</m>.
                 </p>
-                <p xml:id="auto_75ocm74b">
-                    Using a calculator, we can confirm that <m>\log (472.8) \approx 2.6756</m>, matching the value obtained from the logarithm table.
+                <p>
+                    So the mantissa is <m>6739 + 7 = 6746</m>, i.e. <m>.6746</m>
+                </p>
+                <p>
+                    For the characteristic: <m>472.8</m> has <m>3</m> digits before the decimal, so <m>X = 3 - 1 = 2</m>.
+                </p>
+                <p>
+                    Therefore:
+                    <me>
+                        \log (472.8) = 2.6746
+                    </me>
+                </p>
+                <p>
+                    Using a calculator, we can confirm that <m>\log (472.8) \approx 2.6747</m>, which closely matches the table value.
                 </p>
             </solution>
         </example>
 
-        <p xml:id="auto_fldh94th">
-            <term>Positive Numbers less than <m>1</m></term>
-        </p>
         <example xml:id="auto_lr4e3wd0">
             <statement>
                 <p xml:id="auto_r6es835q">
-                    Use logarithm tables to solve <m>\log 0.00534</m>
+                    Use logarithm tables to find <m>\log 0.00534</m>
                 </p>
             </statement>
             <solution>
-                <p xml:id="auto_p46510do">
-                    Since <m>0.00534</m> cannot be read directly from the table, first we need to write it in standard form;
-                </p>
-                <p xml:id="auto_qergrz7m">Standard form of 
-                    <me>
-                        0.00534 = 5.34 \times 10^{-3}
-                    </me>
-                </p>
-                <p xml:id="auto_u1i8fl4w">
-                    Here, the characteristic is <m>-3</m> and the mantissa is the logarithm of <m>5.34</m>.
-                </p>
-                <p xml:id="auto_4x1tivf9">
-                    Using the logarithm table:
-                </p>
-                <p xml:id="auto_cjxx38fy">
-                    <ul xml:id="auto_xzbd0vqf">
-                        <li xml:id="auto_3bpj7ska">
-                            <p xml:id="auto_s66c5601">Locate <m>53</m> in the first column.</p>
-                        </li>
-                        <li xml:id="auto_jic2cnth">
-                            <p xml:id="auto_v3j1q1t5">Move to the column labeled <m>4</m>.</p>
-                        </li>
-                        <li xml:id="auto_eae4ohe1">
-                            <p xml:id="auto_5jxrfegk">Read the value: <m>\log(5.34) = 0.7272</m>.</p>
-                        </li>
+                <p>
+                    First, we shift the decimal to get two digits before it: <m>53.4</m>.
+                    <ul>
+                        <li><p><alert>Integer</alert>: <m>53</m></p></li>
+                        <li><p><alert>First decimal</alert>: <m>4</m></p></li>
+                        <li><p>No second decimal.</p></li>
                     </ul>
                 </p>
-                <p xml:id="auto_p5hrylc5">
-                    Now, apply the logarithm property:
+                <p>
+                    From the table: row <m>53</m>, first decimal column <m>4</m> gives <m>7275</m>. No mean difference is needed.
                 </p>
-                <p xml:id="auto_6krsxsgs">
-                    <me>\log(0.00534) = \log(5.34) + \log(10^{-3})</me>
+                <p>
+                    So the mantissa is <m>.7275</m>
                 </p>
-                <p xml:id="auto_uglpxwig">
-                    Since <m>\log(10^{-3}) = -3</m>, we substitute:
+                <p>
+                    For the characteristic: <m>0.00534</m> has <m>2</m> zeros after the decimal point, so <m>X = -(2 + 1) = -3</m>, written as <m>\bar{3}</m>.
                 </p>
-                <p xml:id="auto_0ofdh1hm">
-                    <me>\log(0.00534) = 0.7272 - 3</me>
+                <p>
+                    Therefore:
+                    <me>
+                        \log (0.00534) = \bar{3}.7275
+                    </me>
+                    which, as a negative number, is <m>-3 + 0.7275 = -2.2725</m>.
                 </p>
-                <p xml:id="auto_fht5hi3o">
-                    <me>= \bar{3}.7272</me>
-                </p>
-                <p xml:id="auto_cr0ohjgf">
-                    The bar over <m>3</m> represents a negative characteristic.
-                </p>
-                <p xml:id="auto_hmq59myp">
-                    <me>\therefore \log 0.00534 = \bar{3}.7272</me>
+                <p>
+                    Using a calculator, we can confirm that <m>\log (0.00534) \approx -2.2725</m>, matching the table value.
                 </p>
             </solution>
         </example>
 
+        <exercise xml:id="auto_36x3bjb6">
+            <title>Computing Simple Logarithms</title>
+
+            <introduction xml:id="auto_aaa6qoea">
+                <p xml:id="auto_jlqjd5xj">Load the question by clicking the button below.</p>
+            </introduction>
+
+            <stack label="computing-simple-logs" source="stack/top/1-0-Numbers-Algebra/Indices-and-Logarithms/Logarithms/Determining-Common-Logarithms-Using-Mathematical-Tables-and-Calc/Computing-simple-logarithms.xml"/>
+        </exercise>
+
+        <exercise xml:id="auto_x4096meg">
+            <title>Determining Common Logarithms Using a Calculator</title>
+
+            <introduction xml:id="auto_hae62406">
+                <p xml:id="auto_u5sex221">Load the question by clicking the button below.</p>
+            </introduction>
+
+            <stack label="common-logs-calculator" source="stack/top/1-0-Numbers-Algebra/Indices-and-Logarithms/Logarithms/Determining-Common-Logarithms-Using-Mathematical-Tables-and-Calc/Determining-common-logarithms-using-a-calculator.xml"/>
+        </exercise>
+
         <exercises xml:id="exercises-Determining-common-logarithms-using-mathematical-tables-and-calculators">
-            <exercise xml:id="auto_tlp0ss1t">
-                <statement>
-                    <p xml:id="auto_s4u1m9r8">
-                        Express the following numbers in standard form.
-                    </p>
-                    <p xml:id="auto_t53i5mut">
-                        <ol xml:id="auto_aeagwwtx" marker="(a)" cols="2">
-                            <li xml:id="auto_ejyvdle0">
-                                <p xml:id="auto_f1x6kzo1">
-                                    <m>4820</m>
-                                </p>
-                            </li>
-                            <li xml:id="auto_ipa8qxk1">
-                                <p xml:id="auto_z8sm418c">
-                                    <m>37.6</m>
-                                </p>
-                            </li>
-                            <li xml:id="auto_88vuh0ma">
-                                <p xml:id="auto_03a5k2pf">
-                                    <m>672000</m>
-                                </p>
-                            </li>
-                            <li xml:id="auto_bm17ez3c">
-                                <p xml:id="auto_by08hkhh">
-                                    <m>321000</m>
-                                </p>
-                            </li>
-                            <li xml:id="auto_tgjxwoqz">
-                                <p xml:id="auto_7vtt4h51">
-                                    <m>0.000485</m>
-                                </p>
-                            </li>
-                            <li xml:id="auto_c31zxfzd">
-                                <p xml:id="auto_3ceeuj9a">
-                                    <m>91800</m>
-                                </p>
-                            </li>
-                            <li xml:id="auto_0c9yb107">
-                                <p xml:id="auto_zbc9md8k">
-                                    <m>5.27 \times 10^5</m>
-                                </p>
-                            </li>
-                            <li xml:id="auto_9ezhe16h">
-                                <p xml:id="auto_so1cz1wg">
-                                    <m>0.000672</m>
-                                </p>
-                            </li>
-                        </ol>
-                    </p>
-                </statement>
-            <answer>
-                <p xml:id="auto_zjpzae3x">
-                    <ol xml:id="auto_z2ujuzx6" marker="(a)">
-                        <li xml:id="auto_zar4mn58"><m>4.82 \times 10^{3}</m></li>
-                        <li xml:id="auto_7iebpwvl"><m>3.76 \times 10^{1}</m></li>
-                        <li xml:id="auto_5t00v92b"><m>6.72 \times 10^{5}</m></li>
-                        <li xml:id="auto_ynb7c7jk"><m>3.21 \times 10^{5}</m></li>
-                        <li xml:id="auto_4c097nfh"><m>4.85 \times 10^{-4}</m></li>
-                        <li xml:id="auto_e7m4ubhj"><m>9.18 \times 10^{4}</m></li>
-                        <li xml:id="auto_0w7pn0ud"><m>5.27 \times 10^{5}</m></li>
-                        <li xml:id="auto_06m0oiso"><m>6.72 \times 10^{-4}</m></li>
-                    </ol>
-                </p>
-            </answer>
-            </exercise>
             <exercise xml:id="auto_i61mukpf">
                 <statement>
                     <p xml:id="auto_ejjtmd2s">
@@ -564,50 +515,6 @@
                 </p>
             </answer>
             </exercise>
-            <exercise>
-                <statement>
-                    <p>
-                        Given that <m>\log_{10} 2 \approx 0.3010</m> and <m>\log_{10} 3 \approx 0.4771</m>, evaluate:
-                    </p>
-                    <p>
-                        <ol marker="(a)" cols="2">
-                            <li><m>\log_{10} 6</m></li>
-                            <li><m>\log_{10} 1.5</m></li>
-                            <li><m>\log_{10} 5</m></li>
-                        </ol>
-                    </p>
-                </statement>
-                <answer>
-                    <p>
-                        <ol marker="(a)">
-                            <li><m>\log_{10}(2 \times 3) = 0.3010 + 0.4771 = 0.7781</m></li>
-                            <li><m>\log_{10}(3 \div 2) = 0.4771 - 0.3010 = 0.1761</m></li>
-                            <li><m>\log_{10}(10 \div 2) = 1 - 0.3010 = 0.6990</m></li>
-                        </ol>
-                    </p>
-                </answer>
-            </exercise>
         </exercises>
-
-
-        <exercise xml:id="auto_36x3bjb6">
-            <title>Computing Simple Logarithms</title>
-
-            <introduction xml:id="auto_aaa6qoea">
-                <p xml:id="auto_jlqjd5xj">Load the question by clicking the button below.</p>
-            </introduction>
-
-            <stack label="computing-simple-logs" source="stack/top/1-0-Numbers-Algebra/Indices-and-Logarithms/Logarithms/Determining-Common-Logarithms-Using-Mathematical-Tables-and-Calc/Computing-simple-logarithms.xml"/>
-        </exercise>
-
-        <exercise xml:id="auto_x4096meg">
-            <title>Determining Common Logarithms Using a Calculator</title>
-
-            <introduction xml:id="auto_hae62406">
-                <p xml:id="auto_u5sex221">Load the question by clicking the button below.</p>
-            </introduction>
-
-            <stack label="common-logs-calculator" source="stack/top/1-0-Numbers-Algebra/Indices-and-Logarithms/Logarithms/Determining-Common-Logarithms-Using-Mathematical-Tables-and-Calc/Determining-common-logarithms-using-a-calculator.xml"/>
-        </exercise>
 
 </subsubsection>
