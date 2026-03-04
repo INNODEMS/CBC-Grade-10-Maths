@@ -24,7 +24,10 @@ jobs:
               run: pip install -r requirements.txt
 
             - name: install tex dependencies
-              run: tlmgr update --self && tlmgr install tkz-euclide tikz-3dplot
+              run: |
+                tlmgr option repository https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2025/tlnet-final
+                tlmgr update --self
+                tlmgr install tkz-euclide tikz-3dplot longdivision
 
             - name: install local ptx files
               run: pretext --version
