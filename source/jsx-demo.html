@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Graph of y = 1/x with draggable point</title>
+    <title>Rotational Symmetry of Solids</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.12.2/distrib/jsxgraph.css" />
     <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.12.2/distrib/jsxgraphcore.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js"></script>
 </head>
 <body>
 
@@ -15,234 +14,344 @@
 </div>
 
 <script>
-    /* reciprocal-grid.js
-   f(x)=1/x with grid lines every 0.1 units.
-   Uses explicit axes (axis:false) and a grid tied to those axes.
-*/
-JXG.Options.text.useMathJax = true;
+/* Rotational Symmetry of a Square Prism (3D)
+ *
+ * A square prism (4×4 base, height 2) has 8 rotational symmetries:
+ *   – identity
+ *   – 3 rotations about z  (90°, 180°, 270°)
+ *   – 4 half-turns about horizontal axes
+ *       (x-axis, y-axis, y = x diagonal, y = −x diagonal)
+ *
+ * Three sliders let the student rotate the solid in 90° steps about
+ * the x-, y- and z-axes.  Of the 64 slider combinations, exactly 8
+ * map the prism onto itself.  A tracker counts each new symmetry
+ * discovered.
+ */
 (function () {
-    "use strict";
-    // ----------------------------
-    // Board configuration
-    // ----------------------------
-    var BOARD_ID = "jsxgraph-reciprocal-grid";
-    var X_MIN = -0.5, X_MAX = 5.5;
-    var Y_MIN = -0.5, Y_MAX = 5.5;
+    'use strict';
 
-    var board = JXG.JSXGraph.initBoard(BOARD_ID, {
-        boundingbox: [X_MIN, Y_MAX, X_MAX, Y_MIN],
-        keepAspectRatio: true,
-        axis: false,              // IMPORTANT: we build axes ourselves
-        grid:false,
-        showCopyright: false,
-        showNavigation: false
+    /* ==============================================================
+     * Board
+     * ============================================================== */
+    var board = JXG.JSXGraph.initBoard('jsxgraph-rotation-symmetry', {
+        boundingbox: [-10, 10, 10, -10],
+        keepaspectratio: true,
+        axis: false,
+        showcopyright: false,
+        shownavigation: false,
+        movetarget: null,
+        pan: { enabled: false },
+        browserpan: false,
+        zoom: { enabled: false }
     });
 
-    // ----------------------------
-    // Axes with ticks:
-    // major tick every 1 unit, 9 minor ticks -> 0.1-unit subdivisions
-    // ----------------------------
-    // Standard x-axis through the origin
-    var xAxis = board.create('axis', [[0, 0], [1, 0]], {
-        ticks: {
-            strokeColor: '#666',
-            strokeWidth: 1,
-            minorTicks: 9,
-            majorHeight: 20,
-            minorHeight: 10,
-            ticksDistance: 1,
-            drawZero: false,
-            drawLabels: true
+    /* ==============================================================
+     * 3D View
+     * ============================================================== */
+    var view = board.create('view3d',
+        [[-7, -3], [14, 10],
+         [[-7, 7], [-5, 5], [-5, 5]]],
+        {
+            projection: 'central',
+            trackball: { enabled: false },
+            depthOrder: { enabled: true },
+
+            axesPosition: 'center',
+            xAxis: { visible: true, strokeColor: '#cccccc', strokeWidth: 1 },
+            yAxis: { visible: true, strokeColor: '#cccccc', strokeWidth: 1 },
+            zAxis: { visible: true, strokeColor: '#cccccc', strokeWidth: 1 },
+
+            xPlaneRear:  { visible: false, mesh3d: { visible: false } },
+            yPlaneRear:  { visible: false, mesh3d: { visible: false } },
+            zPlaneRear:  { visible: false, mesh3d: { visible: false } },
+            xPlaneFront: { visible: false, mesh3d: { visible: false } },
+            yPlaneFront: { visible: false, mesh3d: { visible: false } },
+            zPlaneFront: { visible: false, mesh3d: { visible: false } },
+
+            xPlaneRearYAxis: { visible: false }, xPlaneRearZAxis: { visible: false },
+            yPlaneRearXAxis: { visible: false }, yPlaneRearZAxis: { visible: false },
+            zPlaneRearXAxis: { visible: false }, zPlaneRearYAxis: { visible: false },
+            xPlaneFrontYAxis: { visible: false }, xPlaneFrontZAxis: { visible: false },
+            yPlaneFrontXAxis: { visible: false }, yPlaneFrontZAxis: { visible: false },
+            zPlaneFrontXAxis: { visible: false }, zPlaneFrontYAxis: { visible: false },
+
+            az:   { slider: { visible: false } },
+            el:   { slider: { visible: false } },
+            bank: { slider: { visible: false } }
         }
-    });
-    // Standard y-axis through the origin
-    var yAxis = board.create('axis', [[0, 0], [0, 1]], {
-        ticks: {
-            strokeColor: '#666',
-            strokeWidth: 1,
-            minorTicks: 9,
-            majorHeight: 20,
-            minorHeight: 10,
-            ticksDistance: 1,
-            drawZero: false,
-            drawLabels: true,
-            // draw ticks on the left side of the vertical axis
-            majorTickEndings: [0, 1],
-            tickEndings: [0, 1],
-            label: {
-                anchorX: 'right',
-                offset: [-6, 0]
-            }
-        }
+    );
+    view.setView(0.8, 0.3, 0);
+
+    /* ==============================================================
+     * Title
+     * ============================================================== */
+    board.create('text', [0, 8.5,
+        'Rotate the square prism to find its symmetries'], {
+        fontSize: 18, fixed: true, anchorX: 'middle'
     });
 
-    // ----------------------------
-    // Grid: major lines every 1 unit, minor lines every 0.1 unit
-    // minorElements: 9 means 9 minor elements between each major
-    // => minorStep = majorStep / (minorElements + 1) = 1/10 = 0.1
-    // ----------------------------
-    var grid = board.create('grid', [xAxis, yAxis], {
-        majorStep: 1,
-        minorElements: 9,
-        major: {
-            face: 'line',
-            strokeColor: '#bbb',
-            strokeOpacity: 1
+    /* ==============================================================
+     * Rotation sliders  (snap at 90° = π/2)
+     * ============================================================== */
+    var sliderBase = {
+        baseline: {
+            highlight: false, strokeWidth: 10,
+            lineCap: 'round', strokeColor: '#eeeeee'
         },
-        minor: {
-            face: 'line',
-            strokeColor: '#ddd',
-            strokeOpacity: 0.8
+        highline: {
+            highlight: false, strokeWidth: 10,
+            lineCap: 'round', strokeColor: '#dddddd'
         },
-        includeBoundaries: false
+        point1: { frozen: false, fixed: true },
+        point2: { frozen: false, fixed: true },
+        drawLabel: false,
+        face: 'o',
+        size: 8,
+        strokeWidth: 0,
+        highlightStrokeWidth: 4,
+        ticks: { visible: false },
+        visible: true
+    };
+
+    var tx = board.create('slider',
+        [[-8.5, -7], [-4.5, -7], [0, 0, 1.5 * Math.PI]],
+        Object.assign({}, sliderBase, {
+            fillColor: '#e74c3c',
+            highlightFillColor: '#c0392b',
+            highlightStrokeColor: '#c0392b'
+        })
+    );
+    var ty = board.create('slider',
+        [[-2, -7], [2, -7], [0, 0, 1.5 * Math.PI]],
+        Object.assign({}, sliderBase, {
+            fillColor: '#27ae60',
+            highlightFillColor: '#1e8449',
+            highlightStrokeColor: '#1e8449'
+        })
+    );
+    var tz = board.create('slider',
+        [[4.5, -7], [8.5, -7], [0, 0, 1.5 * Math.PI]],
+        Object.assign({}, sliderBase, {
+            fillColor: '#2980b9',
+            highlightFillColor: '#1f6f97',
+            highlightStrokeColor: '#1f6f97'
+        })
+    );
+
+    // Labels above sliders
+    board.create('text', [-6.5, -6, 'Rotate X'], {
+        fontSize: 13, fixed: true, anchorX: 'middle', strokeColor: '#e74c3c'
+    });
+    board.create('text', [0, -6, 'Rotate Y'], {
+        fontSize: 13, fixed: true, anchorX: 'middle', strokeColor: '#27ae60'
+    });
+    board.create('text', [6.5, -6, 'Rotate Z'], {
+        fontSize: 13, fixed: true, anchorX: 'middle', strokeColor: '#2980b9'
     });
 
-    // ----------------------------
-    // Function: f(x) = 1/x (split at x=0)
-    // ----------------------------
-    function recip(x) {
-        return 1 / x;
+    // Degree read-outs below sliders
+    board.create('text', [-6.5, -8.2, function () {
+        return Math.round(tx.Value() * 180 / Math.PI) % 360 + '\u00B0';
+    }], { fontSize: 14, fixed: true, anchorX: 'middle', strokeColor: '#e74c3c' });
+
+    board.create('text', [0, -8.2, function () {
+        return Math.round(ty.Value() * 180 / Math.PI) % 360 + '\u00B0';
+    }], { fontSize: 14, fixed: true, anchorX: 'middle', strokeColor: '#27ae60' });
+
+    board.create('text', [6.5, -8.2, function () {
+        return Math.round(tz.Value() * 180 / Math.PI) % 360 + '\u00B0';
+    }], { fontSize: 14, fixed: true, anchorX: 'middle', strokeColor: '#2980b9' });
+
+    /* ==============================================================
+     * Square-prism geometry  (base 4×4, height 2)
+     *
+     *  Vertices:  (±2, ±2, ±1)
+     *  6 faces, each a different colour.
+     * ============================================================== */
+    var a = 2, c = 1;
+    var verts = [
+        [-a, -a, -c], [ a, -a, -c], [ a,  a, -c], [-a,  a, -c],
+        [-a, -a,  c], [ a, -a,  c], [ a,  a,  c], [-a,  a,  c]
+    ];
+    var faces = [
+        [0, 1, 2, 3],   // bottom  (z = −1)
+        [4, 5, 6, 7],   // top     (z = +1)
+        [0, 1, 5, 4],   // front   (y = −2)
+        [2, 3, 7, 6],   // back    (y = +2)
+        [1, 2, 6, 5],   // right   (x = +2)
+        [0, 3, 7, 4]    // left    (x = −2)
+    ];
+    var faceColors = [
+        '#0072b2',   // blue   – bottom
+        '#e69f00',   // orange – top
+        '#f0e442',   // yellow – front
+        '#009e73',   // green  – back
+        '#56b4e9',   // sky    – right
+        '#d55e00'    // red    – left
+    ];
+
+    /* Reference prism  (fixed, opaque, left side) */
+    var xOff = 3;
+    var refVerts = verts.map(function (v) {
+        return [v[0] - xOff, v[1], v[2]];
+    });
+    var refPrism = view.create('polyhedron3d', [refVerts, faces], {
+        fillColorArray: faceColors,
+        fillOpacity: 0.8,
+        strokeColor: '#333333',
+        strokeWidth: 1.5
+    });
+
+    /* Transforms for the rotating prism:
+       1. Translate from reference position to origin  (+xOff)
+       2. Apply slider-driven rotations about origin
+       3. Translate to the right-hand position         (+xOff) */
+    var trToOrigin = view.create('transform3d',
+        [xOff, 0, 0], { type: 'translate' });
+    var trX = view.create('transform3d',
+        [function () { return tx.Value(); }], { type: 'rotateX' });
+    var trY = view.create('transform3d',
+        [function () { return ty.Value(); }], { type: 'rotateY' });
+    var trZ = view.create('transform3d',
+        [function () { return tz.Value(); }], { type: 'rotateZ' });
+    var trToRight = view.create('transform3d',
+        [xOff, 0, 0], { type: 'translate' });
+
+    /* Movable prism  (copy of reference, rotated, placed on right) */
+    view.create('polyhedron3d',
+        [refPrism, [trToOrigin, trX, trY, trZ, trToRight]], {
+        fillColorArray: faceColors,
+        fillOpacity: 0.85,
+        strokeColor: 'black',
+        strokeWidth: 2
+    });
+
+    /* ==============================================================
+     * Symmetry detection
+     * ============================================================== */
+    var totalSym = 8;
+    var symCount = 0;
+    var seenSym  = {};
+    var allFound = false;
+
+    /* Check / cross icon */
+    var checkmark = board.create('text', [0, -3.8, '\u2716'], {
+        fontSize: 36,
+        strokeColor: '#c0392b', fillColor: '#c0392b',
+        fixed: true, anchorX: 'middle', anchorY: 'middle'
+    });
+
+    /* Status message (shown only on a match) */
+    var statusLabel = board.create('text', [0, -4.5, ''], {
+        fontSize: 15, fixed: true, anchorX: 'middle',
+        strokeColor: '#0a8f2c'
+    });
+
+    /* Running counter */
+    var counterText = board.create('text',
+        [0, -5.2, 'Symmetries found: 0 / ' + totalSym], {
+        fontSize: 16, fixed: true, anchorX: 'middle'
+    });
+
+    /* ----------------------------------------------------------
+     * Rotation-matrix algebra
+     *
+     * Transforms are applied X → Y → Z, so the combined matrix
+     * is  M = Rz · Ry · Rx.
+     * ---------------------------------------------------------- */
+    function rotMat(ax, ay, az) {
+        var cx = Math.cos(ax), sx = Math.sin(ax),
+            cy = Math.cos(ay), sy = Math.sin(ay),
+            cz = Math.cos(az), sz = Math.sin(az);
+        return [
+            [cy * cz, sx * sy * cz - cx * sz, cx * sy * cz + sx * sz],
+            [cy * sz, sx * sy * sz + cx * cz, cx * sy * sz - sx * cz],
+            [-sy,     sx * cy,                 cx * cy                ]
+        ];
     }
 
-    var EPS = 0.1; // gap around x=0 so the curve does not draw across the asymptote
+    function mulMV(M, v) {
+        return [
+            M[0][0] * v[0] + M[0][1] * v[1] + M[0][2] * v[2],
+            M[1][0] * v[0] + M[1][1] * v[1] + M[1][2] * v[2],
+            M[2][0] * v[0] + M[2][1] * v[1] + M[2][2] * v[2]
+        ];
+    }
 
-    board.create("functiongraph", [recip, X_MIN, -EPS], {
-        strokeColor: "#1f77b4",
-        strokeWidth: 3,
-        withLabel: false
-    });
+    /* Snap a slider value to the nearest multiple of π/2 */
+    function snapAngle(v) {
+        return Math.round(v / (Math.PI / 2)) * (Math.PI / 2);
+    }
 
-    var fPos = board.create("functiongraph", [recip, EPS, X_MAX], {
-        strokeColor: "#1f77b4",
-        strokeWidth: 3,
-        withLabel: false
-    });
+    /* Distance-squared between two 3-vectors */
+    function dist2(a, b) {
+        var dx = a[0] - b[0], dy = a[1] - b[1], dz = a[2] - b[2];
+        return dx * dx + dy * dy + dz * dz;
+    }
 
-    board.create("text", [0.5, 4.8, "\\(f(x)=\\frac{1}{x}\\)"], {
-        fontSize: 16,
-        fixed: true,
-        anchorX: "left",
-        anchorY: "top",
-        useMathJax: true
-    });
+    /* Does the rotated vertex match any original vertex? */
+    var TOL2 = 0.001 * 0.001;          // squared tolerance
+    function vertexMatches(rv) {
+        return verts.some(function (ov) {
+            return dist2(rv, ov) < TOL2;
+        });
+    }
 
-    // ----------------------------
-    // Draggable point P as glider on f(x)=1/x
-    // ----------------------------
-    var P = board.create('glider', [4, 0.25, fPos], {
-        name: 'P',
-        size: 4,
-        strokeColor: '#e74c3c',
-        fillColor: '#e74c3c'
-    });
+    /* ----------------------------------------------------------
+     * Main check loop  (called on board update & periodically)
+     * ---------------------------------------------------------- */
+    function checkSymmetry() {
+        var ax = snapAngle(tx.Value()),
+            ay = snapAngle(ty.Value()),
+            az = snapAngle(tz.Value());
+        var M = rotMat(ax, ay, az);
 
-    // Projection points: Px on x-axis, Py on y-axis
-    var Px = board.create('point', [
-        function () { return P.X(); },
-        function () { return 0; }
-    ], {
-        visible: false
-    });
+        /* Does M map every vertex to another vertex of the prism? */
+        var matched = verts.every(function (v) {
+            return vertexMatches(mulMV(M, v));
+        });
 
-    var Py = board.create('point', [
-        function () { return 0; },
-        function () { return P.Y(); }
-    ], {
-        visible: false
-    });
+        if (matched) {
+            /* Green tick */
+            checkmark.setText('\u2714');
+            checkmark.setAttribute({
+                strokeColor: '#0a8f2c', fillColor: '#0a8f2c'
+            });
 
-    var O = board.create('point', [0, 0], {
-        visible: false
-    });
+            /* Identify rotation uniquely by its action on two basis
+               vectors (two columns of M suffice). */
+            var r = function (x) { return Math.round(x); };
+            var k = mulMV(M, [1, 0, 0]).map(r).join(',') + '|' +
+                    mulMV(M, [0, 1, 0]).map(r).join(',');
 
-    // Rectangle: O -> Px -> P -> Py -> O
-    board.create('polygon', [O, Px, P, Py], {
-        fillColor: 'rgba(277, 0, 0, 0.15)',
-        borders: {
-            strokeColor: '#E30000',
-            strokeWidth: 1.5
-        },
-        vertices: { visible: false },
-        hasInnerPoints: false,
-        fixed: true
-    });
+            if (!seenSym[k]) {
+                seenSym[k] = true;
+                symCount++;
+                counterText.setText(
+                    'Symmetries found: ' + symCount + ' / ' + totalSym);
+            }
 
-    board.create('polygon', [[0, 0], [2, 0], [2, 0.5], [0, 0.5]], {
-                fillColor: 'grey',
-        fillOpacity: 0.1,
-        borders: {
-            strokeColor: 'black',
-            strokeWidth: 0.8
-        },
-        vertices: { visible: false },
-        hasInnerPoints: false,
-        fixed: true
-     });
-
-    board.create('polygon', [[0, 0], [3, 0], [3, 0.3333], [0, 0.3333]], {
-        fillColor: 'grey',
-        fillOpacity: 0.1,
-        borders: {
-            strokeColor: 'black',
-            strokeWidth: 0.8
-        },
-        vertices: { visible: false },
-        hasInnerPoints: false,
-        fixed: true
-     });
-
-     board.create('polygon', [[0, 0], [1, 0], [1, 1], [0, 1]], {
-        fillColor: 'grey',
-        fillOpacity: 0.1,
-        borders: {
-            strokeColor: 'black',
-            strokeWidth: 0.8
-        },
-        vertices: { visible: false },
-        hasInnerPoints: false,
-        fixed: true
-     });
-
-        board.create('polygon', [[0, 0], [0, 2], [0.5, 2], [0.5, 0]], {
-        fillColor: 'grey',
-        fillOpacity: 0.1,
-        borders: {
-            strokeColor: 'black',
-            strokeWidth: 0.8
-        },
-        vertices: { visible: false },
-        hasInnerPoints: false,
-        fixed: true
-     });
-
-    // Labels showing coordinates on the axes
-    board.create('text', [
-        function () { return P.X(); },
-        -0.3,
-        function () { return 'x = ' + P.X().toFixed(3); }
-    ], {
-        fontSize: 14,
-        anchorX: 'middle',
-        color: '#2980b9',
-        fixed: true
-    });
-
-    // Area label in the centre of the rectangle
-    board.create('text', [
-        function () { return P.X() / 2; },
-        function () { return P.Y() / 2; },
-        function () {
-            var area = Math.abs(P.X() * P.Y());
-            return 'Area = ' + area.toFixed(2);
+            if (symCount >= totalSym && !allFound) {
+                allFound = true;
+            }
+            statusLabel.setText(allFound
+                ? 'All ' + totalSym + ' symmetries found! \uD83C\uDF89'
+                : 'Rotational symmetry!');
+        } else {
+            /* Red cross */
+            checkmark.setText('\u2716');
+            checkmark.setAttribute({
+                strokeColor: '#c0392b', fillColor: '#c0392b'
+            });
+            if (!allFound) {
+                statusLabel.setText('');
+            }
         }
-    ], {
-        fontSize: 14,
-        anchorX: 'middle',
-        anchorY: 'middle',
-        color: '#E30000',
-        fixed: true
-    });
-    
+    }
+
+    setInterval(checkSymmetry, 150);
+    board.on('update', checkSymmetry);
+
 })();
 </script>
 
