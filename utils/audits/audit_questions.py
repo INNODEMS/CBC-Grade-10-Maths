@@ -1,9 +1,16 @@
 import os
 import re
+import csv
 from collections import Counter
 from lxml import etree
 from slugify import slugify
 from pathlib import Path
+
+from ..helpers.csvtools import read_links_csv, cached_file, PTX_COL
+from ..audits.reports import write_validated_to_sheet
+
+## Usage: in the root directory:
+# python3 -m utilis.audits.audit_questions
 
 # Configuration: assume commands run from repository root
 ASSET_FILES_ROOT = Path('assets')      # tree containing the STACK questions
@@ -99,6 +106,7 @@ def audit_includes(extensions, tag, orphan_include_file=None):
         print(f"   [-] {o}")
     if not orphans: print("   None")
     if orphan_include_file:
+        print(orphans)
         write_orphaned(orphans, orphan_include_file)
 
     return actual_files
@@ -143,14 +151,108 @@ def check_deployed_variants(stack_files):
     if not missing_tests: print("   None")
 
 
+# ------------------------------------------------------------------
+# Stack-by-section catalogue (merged from audit_stack_by_section)
+# ------------------------------------------------------------------
+
+# Regex for extracting source attributes from <stack .../> tags in a
+# single file (same pattern as get_referenced_sources, but per-file).
+_STACK_PATTERN = re.compile(r'<stack\s+[^>]*source="([^"]+)"')
+
+# Columns from Automatic Links that we carry over into the catalogue CSV
+_CATALOGUE_COLS = [
+    "Chapter",
+    "Section",
+    "Subsection",
+    "Subsubsection",
+    "In Syllabus",
+    PTX_COL,
+]
+
+
+def get_stack_sources_in_file(ptx_path: Path) -> list[str]:
+    """Return an ordered list of stack source attributes found in *ptx_path*."""
+    if not ptx_path.is_file():
+        return []
+    content = ptx_path.read_text(encoding="utf-8", errors="ignore")
+    return _STACK_PATTERN.findall(content)
+
+
+def build_stack_catalogue() -> list[dict[str, str]]:
+    """Read Automatic Links and return rows augmented with stack question columns."""
+    rows = read_links_csv()
+    max_questions = 0
+    output_rows: list[dict[str, str]] = []
+
+    for row in rows:
+        ptx_rel = row.get(PTX_COL, "").strip()
+        ptx_path = PTX_FILES_ROOT / ptx_rel if ptx_rel else None
+
+        sources = get_stack_sources_in_file(ptx_path) if ptx_path else []
+        max_questions = max(max_questions, len(sources))
+
+        out = {col: row.get(col, "") for col in _CATALOGUE_COLS}
+        out["Stack Count"] = str(len(sources))
+        for i, src in enumerate(sources, start=1):
+            out[f"Stack Q{i}"] = src
+
+        output_rows.append(out)
+
+    # Ensure every row has the same set of Stack Q columns
+    for out in output_rows:
+        for i in range(1, max_questions + 1):
+            out.setdefault(f"Stack Q{i}", "")
+
+    return output_rows
+
+
+def write_stack_catalogue(
+    output_rows: list[dict[str, str]], dest: Path | None = None
+) -> Path:
+    """Write the catalogue to a CSV file and return the path."""
+    if dest is None:
+        dest = cached_file("Stack Questions by Section.csv")
+
+    # Build ordered fieldnames
+    fieldnames = list(_CATALOGUE_COLS) + ["Stack Count"]
+    # Determine max question index
+    q_cols = sorted(
+        (k for k in output_rows[0] if k.startswith("Stack Q")),
+        key=lambda k: int(k.removeprefix("Stack Q")),
+    )
+    fieldnames += q_cols
+
+    with dest.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in output_rows:
+            writer.writerow(row)
+
+    return dest
+
+
+def run_stack_catalogue() -> None:
+    """Build and write the stack-by-section catalogue, printing a summary."""
+    output_rows = build_stack_catalogue()
+    dest = write_stack_catalogue(output_rows)
+    total = sum(int(r["Stack Count"]) for r in output_rows)
+    sections_with = sum(1 for r in output_rows if int(r["Stack Count"]) > 0)
+    print(f"\n--- Stack-by-Section Catalogue ---")
+    print(f"Wrote {dest}")
+    print(f"  {len(output_rows)} sections, {sections_with} with STACK questions, {total} questions total")
+    print(f"Exporting to Google Sheet")
+    write_validated_to_sheet(output_rows, sheet_name="STACK Audit Upload")
+
+
 def run_audit():
     print("--- Starting IMAGE Audit ---\n")
     audit_includes((".png", ".jpg", ".jpeg", ".webp"), "image")
     print("--- Starting PDF Audit ---\n")
     audit_includes((".pdf"), "dataurl")
     print("\n\n--- Starting STACK Audit ---\n")
-    stack_files = audit_includes(".xml", "stack", orphan_include_file="orphaned.ptx")
+    stack_files = audit_includes(".xml", "stack", orphan_include_file="utils/audits/orphaned.ptx")
     check_deployed_variants(stack_files)
+    run_stack_catalogue()
 
 
 if __name__ == "__main__":
