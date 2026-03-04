@@ -187,7 +187,7 @@
         strokeWidth: 2
     });
 
-    board.create('text', [0, 5.6,
+    board.create('text', [0, 5.55,
         'Are the blue and red triangles congruent to the black triangle?'
     ], { fontSize: 18, fixed: true, anchorX: 'middle' });
     board.create('text', [0, 5, 'Try to translate (using the central dot) and rotate (using the vertices)'], { fontSize: 16, fixed: true, anchorX:'middle'});

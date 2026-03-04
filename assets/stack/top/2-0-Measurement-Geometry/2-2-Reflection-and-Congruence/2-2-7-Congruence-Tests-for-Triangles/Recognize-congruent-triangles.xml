@@ -6,6 +6,7 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>Are the two triangles shown below congruent? </p><p>[[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p> 
+<p>State the test of congruence criterion.</p><p>[[input:ans2]] [[validation:ans2]][[feedback:prt2]]</p>
 (a).[[jsxgraph]]
 var board = JXG.JSXGraph.initBoard('jxgbox', {
     boundingbox: [-6, 7, 6, -1],
@@ -156,24 +157,28 @@ rotatePoint(R, 60, center);
 [[/jsxgraph]]]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text/>
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>Yes, the two triangular plots are congruent because all three corresponding sides are equal</p>
+<p>The congruence criterion used is Side-Side-Side (SSS)</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text><![CDATA[ta:random_permutation([["yes", true],["no", false]]);
+ta_1:random_permutation([["SSS", true],["SAS", false],["ASA", false],["AAS", false],["NONE", false]]);
 ]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta1@}</text>
+      <text>{@ta@}
+{@ta_1@}</text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -220,8 +225,8 @@ rotatePoint(R, 60, center);
     </input>
     <input>
       <name>ans2</name>
-      <type>checkbox</type>
-      <tans>ta1</tans>
+      <type>dropdown</type>
+      <tans>ta_1</tans>
       <boxsize>15</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -232,8 +237,8 @@ rotatePoint(R, 60, center);
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>1</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
       <options/>
     </input>
     <prt>
@@ -272,7 +277,7 @@ rotatePoint(R, 60, center);
     </prt>
     <prt>
       <name>prt2</name>
-      <value>2.0000000</value>
+      <value>1.0000000</value>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
@@ -280,10 +285,10 @@ rotatePoint(R, 60, center);
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Checks for the correct criterion</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans2</sans>
-        <tans>mcq_correct(ta1)[1]</tans>
+        <tans>mcq_correct(ta_1)[1]</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
