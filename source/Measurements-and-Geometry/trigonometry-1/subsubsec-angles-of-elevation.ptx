@@ -161,95 +161,123 @@
                 </li>
             </ol>
         </p>
-        
-        
     </activity>
-    <p xml:id="auto_8djnzjx1">
-            <m>\textbf{Extended Activity }</m>
-    </p>
-    
-    <p xml:id="auto_8j19f36o">
-        <m>\textbf{Key Takeaway}</m>
-    </p>
-    <p xml:id="auto_yscvhm3r">
-        A <m>\textbf{clinometer}</m> (or inclinometer) is a tool used to measure the angle of elevation
-        (looking up) and the angle of depression (looking down).
-    </p>
-    <p xml:id="auto_yytb21om">
-        The figure below shows a person standing on the ground, looking at an object at the top. This forms an angle of elevation. 
-        When looking down from a higher point, it forms an angle of depression.
-    </p>
-    <image width="50%">
-    <latex-image label="Dippression1">
-        \begin{tikzpicture}
-            % Ground Line
-            \draw[thick] (-1,-0.5) -- (7,-0.5);
-
-
-            % Observer (Person)
-            \draw[thick] (1,0) -- (1,2); % Body
-            \draw[thick,fill=cyan] (1,2) circle (0.2); % Head
-            \draw[thick] (1,2) -- (0.5,1.5); % Left Arm
-            \draw[thick] (1,2) -- (1.5,1.5); % Right Arm
-            \draw[thick] (1,0) -- (0.7,-0.5); % Left Leg
-            \draw[thick] (1,0) -- (1.3,-0.5); % Right Leg
-
-            % Eye Level Line
-            \draw[dashed] (1,2) -- (7,2);
-
-            % Angles of Elevation and Depression
-            \draw[very thick] (1,2) -- (6,4.5); % Angle of Elevation
-            \draw[very thick] (1,2) -- (6,0.5); % Angle of Depression
-
-            % Labels for Angles
-            \path (3.5,2) ++(15:1.5) node { Angle of elevation};
-            \path (3.5,2) ++(-15:1.5) node { Angle of depression};
-
-            % Objects at higher and lower positions
-            \draw[thick] (6,4.5) rectangle (7.5,4.9);
-            \draw[thick] (6,0.5) rectangle (7.5,0.9);
-
-            % Labels for Objects
-            \node at (6.7,4.65) {\(\mathbf{Object}\)};
-            \node at (6.7,0.65) {\(\mathbf{Object}\)};
-
-            % Indicating angles
-            \draw[very thick] (1.8,2) arc[start angle=0, end angle=25, radius=0.8];
-            \draw[very thick] (1.8,2) arc[start angle=0, end angle=-25, radius=0.8];
-
-            % Angle Labels
-            \node [right]at (2.3,2.35) {$\theta_1$};
-            \node[right] at (2.3,1.65) {$\theta_2$};
-            \node[below] at (7,0) {Ground};
-        \end{tikzpicture}
-    </latex-image>
+    <exploration xml:id="exploration-angle-elevation">
+        <title>Understanding Angle of Elevation</title>
         
-        
-    </image>
-    <p xml:id="auto_qusnz2j5">
-        The dashed line is the horizontal line.
-    </p>
-    <p xml:id="auto_sznz6n4b">
-        <ul xml:id="auto_6rb3o64m">
-            <li xml:id="auto_4h6y2k5v">
-                <p xml:id="auto_w4dv0svt">
-                    <m>\textbf{Angle of Elevation:}</m>  The angle measured upward from a horizontal line to an object above.
-                </p>
-            </li>
-            <li xml:id="auto_t2tmwvvp">
-                <p xml:id="auto_6uzhfslt">
-                    <m>\textbf{Angle of Depression:}</m> The angle measured downward from a horizontal line to an object below.
-                </p>
+        <introduction>
+            <p>
+                The <term>angle of elevation</term> is the angle formed between the <term>horizontal line of sight</term> from an observer's eye and the <term>direct line of sight</term> to an object located <alert>higher</alert> than the observer. 
+            </p>
+            <p>
+                It is measured by starting at the horizontal plane and tilting the eye upward. Use the interactive tool below and follow <xref ref="inst-elevation" text="custom">the guiding steps below</xref> to explore how distance and height affect this key trigonometric angle.
+            </p>
+        </introduction>
 
-                
-            </li>
-        </ul>
-    </p>
+        <figure xml:id="fig-angle-elevation-interactive">
+            <caption>Interactive: Observer and Tall Object illustrating Angle of Elevation</caption>
+            <interactive xml:id="interactive-elevation" platform="jsxgraph" width="95%" aspect="3:2" source="jsxgraph/angle-of-elevation.js">
+                <slate xml:id="jsxgraph-elevation" surface="jsxboard" aspect="3:2"/>
+                <instructions xml:id="inst-elevation">
+                    <p>
+                        Use this simulation to investigate real-world applications of trigonometry:
+                    </p>
+                    <p>  
+                        <ul>
+                            <li>
+                                <alert>Establish the Right Triangle:</alert> Notice the dashed lines. Where is the right-angle located in this real-world scenario? How are the terms "Horizontal" and "Height" related to "Adjacent" and "Opposite" sides?
+                            </li>
+                            <li>
+                                <alert>Move the Observer:</alert> Drag the observer's eye (the blue point <m>P</m>) horizontally along the ground line. As you get closer to the object, what happens to the height of the object? <term>Remember</term> the angle is fixed by the slider.
+                            </li>
+                            <li>
+                                <alert>Adjust the Angle:</alert> While holding the observer in one place, use the slider to increase the angle <m>\theta</m>. How does changing the angle affect the final height calculation?
+                            </li>
+                            <li>
+                                <alert>The Role of Tangent:</alert> Look at the trigonometric data. How do we use the <term>tangent</term> function to solve this problem if we know how far away the object is (<m>d</m>) and the angle of elevation (<m>\theta</m>)?
+                            </li>
+                        </ul>
+                    </p>
+                </instructions>
+            </interactive>
+        </figure>
+    </exploration>
+    <insight>
+        <p xml:id="auto_yscvhm3r">
+            <term>A clinometer</term> (or inclinometer) is a tool used to measure the angle of elevation
+            (looking up) and the angle of depression (looking down).
+        </p>
+        <p xml:id="auto_yytb21om">
+            The figure below shows a person standing on the ground, looking at an object at the top. This forms an angle of elevation. 
+            When looking down from a higher point, it forms an angle of depression.
+        </p>
+        <image width="50%">
+        <latex-image label="Dippression1">
+            \begin{tikzpicture}
+                % Ground Line
+                \draw[thick] (-1,-0.5) -- (7,-0.5);
 
-    
 
-    
+                % Observer (Person)
+                \draw[thick] (1,0) -- (1,2); % Body
+                \draw[thick,fill=cyan] (1,2) circle (0.2); % Head
+                \draw[thick] (1,2) -- (0.5,1.5); % Left Arm
+                \draw[thick] (1,2) -- (1.5,1.5); % Right Arm
+                \draw[thick] (1,0) -- (0.7,-0.5); % Left Leg
+                \draw[thick] (1,0) -- (1.3,-0.5); % Right Leg
 
+                % Eye Level Line
+                \draw[dashed] (1,2) -- (7,2);
+
+                % Angles of Elevation and Depression
+                \draw[very thick] (1,2) -- (6,4.5); % Angle of Elevation
+                \draw[very thick] (1,2) -- (6,0.5); % Angle of Depression
+
+                % Labels for Angles
+                \path (3.5,2) ++(15:1.5) node { Angle of elevation};
+                \path (3.5,2) ++(-15:1.5) node { Angle of depression};
+
+                % Objects at higher and lower positions
+                \draw[thick] (6,4.5) rectangle (7.5,4.9);
+                \draw[thick] (6,0.5) rectangle (7.5,0.9);
+
+                % Labels for Objects
+                \node at (6.7,4.65) {\(\mathbf{Object}\)};
+                \node at (6.7,0.65) {\(\mathbf{Object}\)};
+
+                % Indicating angles
+                \draw[very thick] (1.8,2) arc[start angle=0, end angle=25, radius=0.8];
+                \draw[very thick] (1.8,2) arc[start angle=0, end angle=-25, radius=0.8];
+
+                % Angle Labels
+                \node [right]at (2.3,2.35) {$\theta_1$};
+                \node[right] at (2.3,1.65) {$\theta_2$};
+                \node[below] at (7,0) {Ground};
+            \end{tikzpicture}
+        </latex-image>
+            
+            
+        </image>
+        <p xml:id="auto_qusnz2j5">
+            The dashed line is the horizontal line.
+        </p>
+        <p xml:id="auto_sznz6n4b">
+            <ul xml:id="auto_6rb3o64m">
+                <li xml:id="auto_4h6y2k5v">
+                    <p xml:id="auto_w4dv0svt">
+                        <term>Angle of Elevation:</term>  The angle measured upward from a horizontal line to an object above.
+                    </p>
+                </li>
+                <li xml:id="auto_t2tmwvvp">
+                    <p xml:id="auto_6uzhfslt">
+                        <term>Angle of Depression:</term> The angle measured downward from a horizontal line to an object below.
+                    </p>
+
+                    
+                </li>
+            </ul>
+        </p>
+    </insight>
 
     <example xml:id="auto_d4pubc7c">
         <statement>
