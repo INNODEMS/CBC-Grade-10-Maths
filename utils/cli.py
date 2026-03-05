@@ -23,8 +23,6 @@ from .helpers import google, csvtools
 from .audits import reports, audit_questions
 from .content import syllabus_tables, add_labels
 from .content import objectives, resources, namespace
-from .plans import lesson_plan_breaks
-from .plans import split_plans
 
 # path to the automatic links CSV; use cached location
 AUTOMATIC_LINKS_PATH = csvtools.cached_file("Automatic Links.csv")
@@ -50,7 +48,7 @@ def cmd_pull_plans(args: argparse.Namespace) -> None:
         cleaned = re.sub(r"\s+", "-", cleaned)
         return cleaned
 
-    def download_folder(folder_id: str, local_path: Path, only_missing: bool, fileType: str = ".pdf") -> None:
+    def download_folder(folder_id: str, local_path: Path, only_missing: bool, fileType: str) -> None:
         if fileType == ".pdf":
             mimeType = 'application/pdf'
         elif fileType == ".md":
@@ -82,12 +80,12 @@ def cmd_pull_plans(args: argparse.Namespace) -> None:
                     status, done = downloader.next_chunk()
                 print(f"Downloaded: {downloaded_path.name}")
 
-    dest = Path("assets/lesson_plans")
+    dest = Path(getattr(args, 'dest', "assets/lesson_plans"))
     clean = getattr(args, 'clean', False)
     if clean and dest.exists():
         print(f"pull-plans: cleaning {dest}")
         shutil.rmtree(dest)
-    download_folder(folder_id, dest, only_missing=getattr(args, 'new', False))
+    download_folder(folder_id, dest, only_missing=getattr(args, 'new', False), fileType=getattr(args, 'file_type', '.pdf'))
     print("pull-plans: done")
 
 
@@ -262,6 +260,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     pull_parser = sub.add_parser('pull-plans', parents=[pull_parent],
                                 help='download lesson plans from Drive')
+    pull_parser.add_argument(
+        '--dest', default='assets/lesson_plans',
+        help='destination directory for downloaded lesson plans (default: assets/lesson_plans)'
+    )
+    pull_parser.add_argument(
+        '--file-type', default='.pdf', choices=['.pdf', '.md'], help='file type to download (default: .pdf)'
+    )
     vparser = sub.add_parser('validate-paths', parents=[validate_parent],
                              help='verify and annotate CSV rows with file existence')
 
@@ -314,22 +319,22 @@ def main(argv=None):
         # convenience wrapper that runs both generators
         cmd_generate_syllabus(args)
         cmd_generate_lo(args)
-    elif args.command == 'insert-plan-breaks':
-        # delegate to the content module
-        csv = 'utils/cached-csv/Automatic Links.csv'
-        pub = 'publication/publication-lesson-plans.ptx'
-        try:
-            lesson_plan_breaks.generate_and_insert(csv, pub, dry_run=False)
-            print('insert-plan-breaks: done')
-        except Exception as exc:
-            print('insert-plan-breaks: failed:', exc)
-        # optionally run the PDF splitter on the generated publication
-        if getattr(args, 'split', False):
-            try:
-                split_plans.split_pdf_by_leaves('output/plans/main.pdf', 'output/plans')
-                print('insert-plan-breaks: PDF split complete')
-            except Exception as exc:
-                print('insert-plan-breaks: PDF split failed:', exc)
+    # elif args.command == 'insert-plan-breaks':
+    #     # delegate to the content module
+    #     csv = 'utils/cached-csv/Automatic Links.csv'
+    #     pub = 'publication/publication-lesson-plans.ptx'
+    #     try:
+    #         lesson_plan_breaks.generate_and_insert(csv, pub, dry_run=False)
+    #         print('insert-plan-breaks: done')
+    #     except Exception as exc:
+    #         print('insert-plan-breaks: failed:', exc)
+    #     # optionally run the PDF splitter on the generated publication
+    #     if getattr(args, 'split', False):
+    #         try:
+    #             split_plans.split_pdf_by_leaves('output/plans/main.pdf', 'output/plans')
+    #             print('insert-plan-breaks: PDF split complete')
+    #         except Exception as exc:
+    #             print('insert-plan-breaks: PDF split failed:', exc)
     elif args.command == 'audit-questions':
         # run the helper script logic
         audit_questions.run_audit()
