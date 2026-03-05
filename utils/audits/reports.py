@@ -46,7 +46,7 @@ def fetch_links_from_sheet() -> list[dict[str, str]]:
 
 def write_validated_to_sheet(
     rows: Iterable[Dict[str, str]],
-    sheet_name: str = "Automatic Links Upload",
+    sheet_name: str = "Automatic Links Upload"
 ) -> None:
     """Write *rows* back to a (possibly new) sheet in the same workbook.
 
