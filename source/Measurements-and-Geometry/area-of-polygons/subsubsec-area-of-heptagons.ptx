@@ -102,9 +102,8 @@
             </p>
         </statement>
     </activity>
-     <p xml:id="auto_63nn7etb">
-            <m>\textbf{Key Takeaway}</m>
-        </p>
+
+<insight>
     <p xml:id="auto_upizzgj7">
         <m>\textbf{Properties of a Regular Heptagon.}</m>.
     </p>
@@ -163,11 +162,20 @@
     </p><p xml:id="auto_azw4ftgh">
         <m>\textbf{Study Questions}</m>
     </p>
-    <ol>
-        <li>What is the sum of all interior angles of a heptagon?</li>
-        <li>How do we calculate the measure of one interior angle of a regular heptagon?</li>
-        <li>Can you find heptagons in real life?</li>
-    </ol>
+    <p>
+        <ol marker="(i)">
+            <li>What is the sum of all interior angles of a heptagon?</li>
+            <li>How do we calculate the measure of one interior angle of a regular heptagon?</li>
+            <li>Can you find heptagons in real life?</li>
+        </ol>
+    </p>
+    
+</insight>
+
+     <p xml:id="auto_63nn7etb">
+            <m>\textbf{Key Takeaway}</m>
+        </p>
+    
     <example xml:id="auto_su2co55q">
         <statement>
             <sidebyside>
@@ -222,6 +230,80 @@
      
     </example>
 
+    <example>
+        <statement>
+            <p>
+                Find the area of the regular heptagon given that its side measures <m>20</m> cm.
+            </p>        
+        </statement>
+        <solution>
+            <p>
+                <ol marker="Step 1:">
+                    <li>
+                        <p>
+                            Sketch the heptagon
+                        </p>
+                        <image>
+                            <latex-image>
+                                \begin{tikzpicture}
+                                    \def\R{4.5} % radius of circumcircle
+                                    \foreach \i in {0,...,6} {
+                                        \coordinate (P\i) at ({360/7*\i}:\R);
+                                    }
+                                    \draw[thick] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- cycle;
+                                    \filldraw[black] (0,0) circle (2pt) node[below] {\small O};
+                                    \path (P0) -- (P1) node[midway, above] {\small 20 cm};
+                                    \foreach \i in {0,...,6} {
+                                        \node[font=\small] at (P\i) [above right] {$P_{\i}$};
+                                    }
+                                \end{tikzpicture}
+                            </latex-image>
+                        </image>
+                    </li>
+                    <li>
+                        <p>
+                            Find the interior angle of the heptagon
+                        </p>
+                        <p>
+                            Let the interior angle be <m>\theta</m>, we can calculate it by
+                        </p>
+                        <p>
+                            <m>\theta = \frac{900}{7} \approx 128.57 ^\circ</m>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Calculate the angle formed at the centre by the triangle extracted
+                        </p>
+                        <p>
+                            <m>\beta = \frac{360}{7} \approx 51.43^\circ</m>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Find the area of the triangle formed. Notice that the base angles of the triangle formed is half the interior angle <m>\theta</m>
+                        </p>
+                        <p>
+                            <md>
+                                <mrow>\text{Area} = \amp \frac{1}{2} \times \text{Base} \times \text{Height}</mrow>
+                                <mrow>= \amp \frac{1}{2} \times 20 \times 10 \times \tan 64.285^\circ</mrow>
+                                <mrow>= \amp 100 \tan 64.285^\circ </mrow>
+                                <mrow>= \amp 207.65 \; \text{cm}^2</mrow>
+                            </md>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The regular heptagon have <m>7</m> equal triangles, therefore its area is given by
+                        </p>
+                        <p>
+                            <m> 7 \times 207.65 \; \text{cm}^2  = 1453.55 \; \text{cm}^2</m>
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </solution>
+    </example>
     <exercises xml:id="exercises-heptagons">
         <title>Exercises</title>
 
