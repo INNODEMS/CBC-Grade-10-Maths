@@ -100,9 +100,9 @@
                 </p>
             </li>
             <li>
-                <title>Learning Experience</title>
+                <title>Interactive Exploration</title>
                 <p>
-                    Draw axes with origin <m>O</m>. Plot <m>A(2,1)</m>, <m>B(4,1)</m>, <m>C(3,3)</m>. Form <m>\triangle ABC</m>. For each vertex, draw a line THROUGH the origin to the OTHER SIDE. Mark a point at the SAME distance from <m>O</m> on the opposite side as <m>A'</m>, <m>B'</m>, <m>C'</m>. Form <m>\triangle A'B'C'</m>. Write the coordinates. Compare with the original. Note the orientation.
+                    If you have an internet connection, demonstrate negative enlargements using <xref ref="exploration-neg-enlargement"/> 
                 </p>
             </li>
         </dl>
@@ -185,15 +185,19 @@
             </statement>
         </task>
     </activity>
+    <exploration xml:id="exploration-neg-enlargement">
+        <title>Trying Out Negative Enlargements</title>
     <figure>
         <caption>Negative Enlargement of a Rectangle</caption>
-        <interactive xml:id="negative-enlargement" platform="jsxgraph" aspect="4:3" source="jsxgraph/negative_enlargement.js" width="100%">
-            <slate xml:id="jsxgraph-negative-enlargement" surface="jsxboard" aspect="4:3" />
+        <interactive xml:id="negative-enlargement" platform="jsxgraph" aspect="1:1" source="jsxgraph/negative_enlargement.js" width="90%">
+            <slate xml:id="jsxgraph-negative-enlargement" surface="jsxboard" aspect="1:1" />
             <instructions xml:id="negative-enlargement-instructions">
                 <p>Use the scale factor slider at the top left to vary the scale factor <m>k</m> between <m>-3</m> and <m>3</m>. Observe how a negative scale factor inverts the rectangle across the center of enlargement <m>O</m>, appearing on the opposite side of the dashed construction lines. You can drag the center <m>O</m>, or the diagonal vertices <m>A</m> and <m>C</m> to resize the original rectangle.</p>
             </instructions>
         </interactive>
     </figure>
+
+    </exploration>
 
     <axiom component="lesson-plan">
         <title>Structured Instruction</title>
@@ -213,61 +217,6 @@
             </li>
             </dl>
         </p>
-        <paragraphs>
-            <title>Key Takeaways</title>
-            <ol>
-                <li>
-                    <p>
-                        <alert>Negative Scale Factor:</alert> The image is on the OPPOSITE side of the centre and is INVERTED.
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <alert>Coordinate Rule:</alert> For an enlargement centred at the origin with scale factor <m>k</m>, the image of <m>(x,y)</m> is <m>(kx, ky)</m>. When <m>k</m> is negative, the signs change.
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <alert>Special Cases:</alert> <m>k = -1</m>: same size, inverted. <m>|k| \gt 1</m> (e.g. <m>k = -2</m>): larger AND inverted. <m>0 \gt k \gt -1</m> (e.g. <m>k = -\frac{1}{2}</m>): smaller AND inverted.
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <alert>Key Insight:</alert> The <q>negative</q> controls DIRECTION (opposite side), the absolute value controls SIZE.
-                    </p>
-                </li>
-            </ol>
-        </paragraphs>
-        <paragraphs>
-            <title>Comparison Table: Positive vs Negative Scale Factor</title>
-            <tabular halign="left">
-                <row header="yes" bottom="minor">
-                    <cell>Property</cell>
-                    <cell>Positive SF</cell>
-                    <cell>Negative SF</cell>
-                </row>
-                <row>
-                    <cell>Position</cell>
-                    <cell>Same side of centre</cell>
-                    <cell>Opposite side of centre</cell>
-                </row>
-                <row>
-                    <cell>Orientation</cell>
-                    <cell>Same as object</cell>
-                    <cell>Inverted (rotated <m>180^\circ</m>)</cell>
-                </row>
-                <row>
-                    <cell><m>|k| \gt 1</m></cell>
-                    <cell>Larger</cell>
-                    <cell>Larger AND inverted</cell>
-                </row>
-                <row>
-                    <cell><m>|k| \lt 1</m></cell>
-                    <cell>Smaller</cell>
-                    <cell>Smaller AND inverted</cell>
-                </row>
-            </tabular>
-        </paragraphs>
     </axiom>
 
     <insight>
@@ -297,7 +246,42 @@
 
                 <li>
                     <p>Negative enlargements are useful in real-world applications such as reflections in optics, creating mirror images, and understanding symmetry transformations in geometry.</p>
+                <li>
+                    <table>
+                        <title>Comparison of Positive and Negative Scale Factor</title>
+                    <tabular halign="left">
+                <row header="yes" bottom="minor">
+                    <cell>Property</cell>
+                    <cell>Positive SF</cell>
+                    <cell>Negative SF</cell>
+                </row>
+                <row>
+                    <cell>Position</cell>
+                    <cell>Same side of centre</cell>
+                    <cell>Opposite side of centre</cell>
+                </row>
+                <row>
+                    <cell>Orientation</cell>
+                    <cell>Same as object</cell>
+                    <cell>Inverted (rotated <m>180^\circ</m>)</cell>
+                </row>
+                <row>
+                    <cell><m>|k| \gt 1</m></cell>
+                    <cell>Larger</cell>
+                    <cell>Larger AND inverted</cell>
+                </row>
+                <row>
+                    <cell><m>|k| \lt 1</m></cell>
+                    <cell>Smaller</cell>
+                    <cell>Smaller AND inverted</cell>
+                </row>
+            </tabular>
+        </table>
+        </li>
                 </li>
+                    <p>
+                        <alert>Special Cases:</alert> <m>k = -1</m>: same size, inverted. <m>|k| \gt 1</m> (e.g. <m>k = -2</m>): larger AND inverted. <m>0 \gt k \gt -1</m> (e.g. <m>k = -\frac{1}{2}</m>): smaller AND inverted.
+                    </p>
             </ul>
         </p>
     </insight>
@@ -396,18 +380,6 @@
             </li>
             </dl>
         </p>
-        <paragraphs>
-            <title>Answer Key</title>
-            <p>
-                <alert>Problem 1:</alert> Enlarge <m>\triangle ABC</m> by scale factor <m>-1</m> about the origin. Draw lines through <m>O</m> to the opposite side. <m>OA = OA' = 5</m> units on the opposite side.
-            </p>
-            <p>
-                <alert>Problem 2:</alert> A circle has radius <m>22.4</m> cm and is enlarged by scale factor <m>0.25</m>. New radius <m>= 22.4 \times 0.25 = 5.6</m> cm. Circumference <m>= 2 \times \frac{22}{7} \times 5.6 = 35.2</m> cm.
-            </p>
-            <p>
-                <alert>Problem 3:</alert> <m>\triangle ABC</m>: <m>A(-2,9)</m>, <m>B(8,7)</m>, <m>C(5,4)</m>. Scale factor <m>\frac{1}{2}</m> about the origin. <m>A'\left(-1, \frac{9}{2}\right)</m>, <m>B'\left(4, \frac{7}{2}\right)</m>, <m>C'\left(\frac{5}{2}, 2\right)</m>.
-            </p>
-        </paragraphs>
     </axiom>
 
     <!-- Example 1: Scale factor -2 -->
@@ -607,56 +579,6 @@
             </li>
             </dl>
         </p>
-        <paragraphs>
-            <title>Answer Key</title>
-            <p>
-                <alert>Q1.</alert> <m>X(4,0)</m>, <m>Y(6,3)</m>, <m>Z(5,4)</m>. Centre <m>(1,1)</m>.
-                <ol marker="(a)">
-                    <li>
-                        <p>
-                            Scale factor <m>-2</m>: <m>X'=(-5,3)</m>, <m>Y'=(-9,-3)</m>, <m>Z'=(-7,-5)</m>.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Scale factor <m>\frac{1}{2}</m>: <m>X'=(2.5, 0.5)</m>, <m>Y'=(3.5, 2)</m>, <m>Z'=(3, 2.5)</m>.
-                        </p>
-                    </li>
-                </ol>
-            </p>
-            <p>
-                <alert>Q2.</alert> <m>A(2,6)</m>, <m>B(4,6)</m>, <m>C(4,2)</m>. Centre <m>(0,2)</m>, scale factor <m>-1</m>. <m>A'=(-2,-2)</m>, <m>B'=(-4,-2)</m>, <m>C'=(-4,2)</m>.
-            </p>
-            <p>
-                <alert>Q3.</alert> <m>P(1,4)</m>, <m>Q(3,4)</m>, <m>R(3,1)</m>. Origin centre.
-                <ol marker="(a)">
-                    <li>
-                        <p>
-                            Scale factor <m>-\frac{1}{4}</m>: <m>P'\left(-\frac{1}{4}, -1\right)</m>, <m>Q'\left(-\frac{3}{4}, -1\right)</m>, <m>R'\left(-\frac{3}{4}, -\frac{1}{4}\right)</m>.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Scale factor <m>-3</m>: <m>P'=(-3,-12)</m>, <m>Q'=(-9,-12)</m>, <m>R'=(-9,-3)</m>.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Scale factor <m>2</m>: <m>P'=(2,8)</m>, <m>Q'=(6,8)</m>, <m>R'=(6,2)</m>.
-                        </p>
-                    </li>
-                </ol>
-            </p>
-            <p>
-                <alert>Q4.</alert> Rectangle <m>5 \times 9</m>. Scale factor <m>-2</m>. Image: <m>10 \times 18</m>, inverted.
-            </p>
-            <p>
-                <alert>Q5.</alert> Photo width <m>10 \to 25</m>. Height <m>15 \to 37.5</m> cm.
-            </p>
-            <p>
-                <alert>Q6.</alert> Map <m>1:50{,}000</m>. <m>8</m> cm <m>\to 4</m> km.
-            </p>
-        </paragraphs>
     </axiom>
 
     <!-- Practice Exercises -->
@@ -763,44 +685,6 @@
                 </row>
             </tabular>
         </table>
-
-        <paragraphs>
-            <title>Extension Activities</title>
-            <ol>
-                <li>
-                    <p>
-                        <m>\triangle PQR</m>: <m>P(1,1)</m>, <m>Q(3,1)</m>, <m>R(2,3)</m>.
-                        <ol marker="(a)">
-                            <li>
-                                <p>
-                                    Scale factor <m>-2</m> about origin: <m>P'=(-2,-2)</m>, <m>Q'=(-6,-2)</m>, <m>R'=(-4,-6)</m>.
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    Scale factor <m>-\frac{1}{2}</m> of the image: <m>P''=(1,1)</m>, <m>Q''=(3,1)</m>, <m>R''=(2,3)</m>.
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    Combined scale factor <m>= (-2) \times \left(-\frac{1}{2}\right) = 1</m>, which returns to the original triangle.
-                                </p>
-                            </li>
-                        </ol>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        Area <m>= 6</m> cm<m>^2</m>, scale factor <m>-3</m>. Area scale factor <m>= (-3)^2 = 9</m>. New area <m>= 6 \times 9 = 54</m> cm<m>^2</m>.
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        A building is <m>12</m> m tall with a shadow of <m>8</m> m. A model has scale factor <m>-\frac{1}{100}</m>. Model height <m>= 12</m> cm, shadow <m>= 8</m> cm, inverted.
-                    </p>
-                </li>
-            </ol>
-        </paragraphs>
     </axiom>
 
     <xi:include href="../../resources-assessment.ptx" />
