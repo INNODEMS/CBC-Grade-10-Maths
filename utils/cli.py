@@ -15,13 +15,14 @@ from pathlib import Path
 import sys
 import csv
 import pandas as pd
+from googleapiclient.http import MediaIoBaseDownload
+import io
+import shutil
 
 from .helpers import google, csvtools
 from .audits import reports, audit_questions
 from .content import syllabus_tables, add_labels
 from .content import objectives, resources, namespace
-from .plans import lesson_plan_breaks
-from .plans import split_plans
 
 # path to the automatic links CSV; use cached location
 AUTOMATIC_LINKS_PATH = csvtools.cached_file("Automatic Links.csv")
@@ -39,10 +40,6 @@ def cmd_pull_plans(args: argparse.Namespace) -> None:
         print(f"lesson_plans_folder_id not found in {google.CONFIG_PATH}")
         return
     service = google.get_drive_service()
-    # simple replication of old script's behaviour
-    from googleapiclient.http import MediaIoBaseDownload
-    import io
-    import shutil
     
     def sanitize_filename(name: str) -> str:
         cleaned = name.rstrip().lower()
@@ -51,7 +48,13 @@ def cmd_pull_plans(args: argparse.Namespace) -> None:
         cleaned = re.sub(r"\s+", "-", cleaned)
         return cleaned
 
-    def download_folder(folder_id: str, local_path: Path, only_missing: bool) -> None:
+    def download_folder(folder_id: str, local_path: Path, only_missing: bool, fileType: str) -> None:
+        if fileType == ".pdf":
+            mimeType = 'application/pdf'
+        elif fileType == ".md":
+            mimeType = 'text/markdown'
+        else:
+            raise ValueError(f"Unsupported file type: {fileType}")
         if not local_path.exists():
             local_path.mkdir(parents=True)
         results = service.files().list(
@@ -63,26 +66,26 @@ def cmd_pull_plans(args: argparse.Namespace) -> None:
             cleaned = sanitize_filename(item['name'])
             path = local_path / cleaned
             if item['mimeType'] == 'application/vnd.google-apps.folder':
-                download_folder(item['id'], path, only_missing)
+                download_folder(item['id'], path, only_missing, fileType)
             elif item['mimeType'] == 'application/vnd.google-apps.document':
-                pdf_path = path.with_suffix('.pdf')
-                if only_missing and pdf_path.exists():
-                    print(f"Skipping (already exists): {pdf_path}")
+                downloaded_path = path.with_suffix(fileType)
+                if only_missing and downloaded_path.exists():
+                    print(f"Skipping (already exists): {downloaded_path}")
                     continue
-                request = service.files().export_media(fileId=item['id'], mimeType='application/pdf')
-                fh = io.FileIO(str(pdf_path), 'wb')
+                request = service.files().export_media(fileId=item['id'], mimeType=mimeType)
+                fh = io.FileIO(str(downloaded_path), 'wb')
                 downloader = MediaIoBaseDownload(fh, request)
                 done = False
                 while not done:
                     status, done = downloader.next_chunk()
-                print(f"Downloaded: {pdf_path.name}")
+                print(f"Downloaded: {downloaded_path.name}")
 
-    dest = Path("assets/lesson_plans")
+    dest = Path(getattr(args, 'dest', "assets/lesson_plans"))
     clean = getattr(args, 'clean', False)
     if clean and dest.exists():
         print(f"pull-plans: cleaning {dest}")
         shutil.rmtree(dest)
-    download_folder(folder_id, dest, only_missing=getattr(args, 'new', False))
+    download_folder(folder_id, dest, only_missing=getattr(args, 'new', False), fileType=getattr(args, 'file_type', '.pdf'))
     print("pull-plans: done")
 
 
@@ -257,6 +260,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     pull_parser = sub.add_parser('pull-plans', parents=[pull_parent],
                                 help='download lesson plans from Drive')
+    pull_parser.add_argument(
+        '--dest', default='assets/lesson_plans',
+        help='destination directory for downloaded lesson plans (default: assets/lesson_plans)'
+    )
+    pull_parser.add_argument(
+        '--file-type', default='.pdf', choices=['.pdf', '.md'], help='file type to download (default: .pdf)'
+    )
     vparser = sub.add_parser('validate-paths', parents=[validate_parent],
                              help='verify and annotate CSV rows with file existence')
 
@@ -309,22 +319,22 @@ def main(argv=None):
         # convenience wrapper that runs both generators
         cmd_generate_syllabus(args)
         cmd_generate_lo(args)
-    elif args.command == 'insert-plan-breaks':
-        # delegate to the content module
-        csv = 'utils/cached-csv/Automatic Links.csv'
-        pub = 'publication/publication-lesson-plans.ptx'
-        try:
-            lesson_plan_breaks.generate_and_insert(csv, pub, dry_run=False)
-            print('insert-plan-breaks: done')
-        except Exception as exc:
-            print('insert-plan-breaks: failed:', exc)
-        # optionally run the PDF splitter on the generated publication
-        if getattr(args, 'split', False):
-            try:
-                split_plans.split_pdf_by_leaves('output/plans/main.pdf', 'output/plans')
-                print('insert-plan-breaks: PDF split complete')
-            except Exception as exc:
-                print('insert-plan-breaks: PDF split failed:', exc)
+    # elif args.command == 'insert-plan-breaks':
+    #     # delegate to the content module
+    #     csv = 'utils/cached-csv/Automatic Links.csv'
+    #     pub = 'publication/publication-lesson-plans.ptx'
+    #     try:
+    #         lesson_plan_breaks.generate_and_insert(csv, pub, dry_run=False)
+    #         print('insert-plan-breaks: done')
+    #     except Exception as exc:
+    #         print('insert-plan-breaks: failed:', exc)
+    #     # optionally run the PDF splitter on the generated publication
+    #     if getattr(args, 'split', False):
+    #         try:
+    #             split_plans.split_pdf_by_leaves('output/plans/main.pdf', 'output/plans')
+    #             print('insert-plan-breaks: PDF split complete')
+    #         except Exception as exc:
+    #             print('insert-plan-breaks: PDF split failed:', exc)
     elif args.command == 'audit-questions':
         # run the helper script logic
         audit_questions.run_audit()
