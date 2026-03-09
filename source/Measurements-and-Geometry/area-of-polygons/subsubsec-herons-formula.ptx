@@ -629,68 +629,78 @@
         </exercise>
 
         <exercise xml:id="ex-heron-find-side">
+            <title>A Challenging Question </title>
             <statement>
                 <p>
-                    A triangle has two sides of length <m>13</m> cm and <m>14</m> cm, and its area is <m>84 \, \text{cm}^2</m>. Use Heron's formula to find the length of the third side.
+                    A triangle has two sides of length <m>2</m> cm and <m>2</m> cm, and its area is <m>\sqrt{3} \, \text{cm}^2</m>. Use Heron's formula to find the length of the third side.
                 </p>
             </statement>
+            <hint>
+                <p>
+                    You will need to use your quadratic identities from <xref ref="subsec-quadratic-identities"/>, and your factorisation skills from <xref ref="subsubsec-factorising-monic-quadratics"/>. If you encounter an expression in the form <m>c^4 + ac^2 + b = 0</m>, you can use the substitution <m>u = c^2</m> to transform it into a quadratic, and solve for <m>u</m>.
+                </p>
+            </hint>
             <answer>
-                <p><m>15</m> cm</p>
+                <p><m>2</m> cm or <m>2\sqrt{3}</m> cm</p>
             </answer>
             <solution>
                 <p>
-                    Let <m>a = 13</m>, <m>b = 14</m>, and <m>c</m> be the unknown side. By Heron's formula,
+                    Let <m>a = 2</m>, <m>b = 2</m>, and <m>c</m> be the unknown side. By Heron's formula,
                     <md>
                         <mrow>A \amp = \sqrt{s(s-a)(s-b)(s-c)}</mrow>
                     </md>
-                    where <m>s = \frac{13 + 14 + c}{2} = \frac{27 + c}{2}</m>.
+                    where <m>s = \frac{2 + 2 + c}{2} = \frac{4 + c}{2}</m>.
                 </p>
                 <p>
-                    Since <m>A = 84</m>, we square both sides:
+                    Since <m>A = \sqrt{3}</m>, we square both sides:
                     <md>
-                        <mrow>84^2 \amp = s(s-13)(s-14)(s-c)</mrow>
-                        <mrow>7056 \amp = \frac{27+c}{2} \cdot \frac{c+1}{2} \cdot \frac{c-1}{2} \cdot \frac{27-c}{2}</mrow>
+                        <mrow>3 \amp = s(s-2)(s-2)(s-c)</mrow>
+                        <mrow>3 \amp = \frac{4+c}{2} \cdot \frac{c}{2} \cdot \frac{c}{2} \cdot \frac{4-c}{2}</mrow>
                     </md>
                 </p>
                 <p>
                     Simplify by grouping:
                     <md>
-                        <mrow>7056 \amp = \frac{(27+c)(27-c)}{4} \cdot \frac{(c+1)(c-1)}{4}</mrow>
-                        <mrow>7056 \amp = \frac{(729 - c^2)(c^2 - 1)}{16}</mrow>
+                        <mrow>3 \amp = \frac{(4+c)(4-c)}{4} \cdot \frac{c \cdot c}{4}</mrow>
+                        <mrow>3 \amp = \frac{(16 - c^2) \cdot c^2}{16}</mrow>
+                    </md>
+                </p>
+                <p>
+                    Multiply both sides by 16:
+                    <md>
+                        <mrow>48 \amp = c^2(16 - c^2)</mrow>
+                        <mrow>48 \amp = 16c^2 - c^4</mrow>
+                        <mrow>c^4 - 16c^2 + 48 \amp = 0</mrow>
                     </md>
                 </p>
                 <p>
                     Let <m>u = c^2</m>:
                     <md>
-                        <mrow>7056 \times 16 \amp = (729 - u)(u - 1)</mrow>
-                        <mrow>112\,896 \amp = 729u - 729 - u^2 + u</mrow>
-                        <mrow>u^2 - 730u + 113\,625 \amp = 0</mrow>
+                        <mrow>u^2 - 16u + 48 \amp = 0</mrow>
                     </md>
                 </p>
                 <p>
-                    Using the quadratic formula:
+                    Factorise: we need two numbers that multiply to <m>48</m> and add to <m>-16</m>. These are <m>-4</m> and <m>-12</m>.
                     <md>
-                        <mrow>u \amp = \frac{730 \pm \sqrt{730^2 - 4(113\,625)}}{2}</mrow>
-                        <mrow>\amp = \frac{730 \pm \sqrt{532\,900 - 454\,500}}{2}</mrow>
-                        <mrow>\amp = \frac{730 \pm \sqrt{78\,400}}{2}</mrow>
-                        <mrow>\amp = \frac{730 \pm 280}{2}</mrow>
+                        <mrow>(u - 4)(u - 12) \amp = 0</mrow>
                     </md>
+                    So <m>u = 4</m> or <m>u = 12</m>.
                 </p>
                 <p>
-                    So <m>u = 505</m> or <m>u = 225</m>.
+                    Since <m>c^2 = u</m>, we get <m>c = \sqrt{4} = 2</m> or <m>c = \sqrt{12} = 2\sqrt{3} \approx 3.46</m>.
                 </p>
                 <p>
-                    Since <m>c^2 = u</m>, we get <m>c = \sqrt{225} = 15</m> or <m>c = \sqrt{505} \approx 22.47</m>.
+                    We check the triangle inequality: both values satisfy <m>c \lt a + b = 4</m>, so both give valid triangles.
                 </p>
                 <p>
-                    We check the triangle inequality: for <m>c = \sqrt{505} \approx 22.47</m>, we need <m>c \lt a + b = 27</m>, which holds, so both are valid triangles. However, <m>c = 15</m> gives the well-known 13-14-15 triangle.
-                </p>
-                <p>
-                    Verification: with <m>c = 15</m>, <m>s = \frac{13+14+15}{2} = 21</m>.
+                    Verification: with <m>c = 2</m>, <m>s = \frac{2+2+2}{2} = 3</m>.
                     <md>
-                        <mrow>A \amp = \sqrt{21 \times 8 \times 7 \times 6} = \sqrt{7056} = 84 \, \text{cm}^2 \quad \checkmark</mrow>
+                        <mrow>A \amp = \sqrt{3 \times 1 \times 1 \times 1} = \sqrt{3} \, \text{cm}^2 \quad \checkmark</mrow>
                     </md>
-                    The third side is <m>15</m> cm.
+                    (This is the equilateral triangle with side 2.)
+                </p>
+                <p>
+                    The third side is <m>2</m> cm or <m>2\sqrt{3}</m> cm.
                 </p>
             </solution>
         </exercise>
