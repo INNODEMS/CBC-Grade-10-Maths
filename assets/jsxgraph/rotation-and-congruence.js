@@ -49,7 +49,7 @@ var D = board.create('point', [-3, -3], {
 // Slider range: [-360, default -90, 360]
 var angleSlider = board.create('slider', [[-6, 4.5], [1, 4.5], [-360, -90, 360]], {
     name: 'Angle',
-    suffixLabel: '°',
+    postLabel: '°',
     snapWidth: 5,
     strokeColor: 'black',
     fillColor: 'black'
