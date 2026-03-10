@@ -34,6 +34,36 @@
         </p>
     </introduction>
 
+    <axiom component="lesson-plan">
+        <title>Phase 1: Problem-Solving and Discovery</title>
+        <dl>
+            <li>
+                <title>Suggested Time</title>
+                <p>15 minutes</p>
+            </li>
+            <li>
+                <title>Grouping</title>
+                <p>Work in pairs or small groups</p>
+            </li>
+            <li>
+                <title>Teacher's Role</title>
+                <p>
+                    This anchor activity connects trigonometry to a tangible, hands-on design task. Students apply sine, cosine, and tangent to calculate real measurements for building a kite.
+                </p>
+                <p>
+                    <alert>Facilitation Strategy:</alert>
+                </p>
+                <p>
+                    <ul>
+                        <li>Ensure students draw and label their diagrams clearly before calculating</li>
+                        <li>Prompt groups to identify which trigonometric ratio applies to each part of the kite</li>
+                        <li>Encourage students to check their answers make physical sense (e.g. the spar should be shorter than the spine)</li>
+                        <li>Use the extension task for groups that finish early</li>
+                    </ul>
+                </p>
+            </li>
+        </dl>
+    </axiom>
     <!-- ACTIVITY -->
     <activity xml:id="activity-trig-real-life-design">
         <title>Designing a Kite</title>
@@ -114,13 +144,75 @@
             </statement>
         </task>
     </activity>
+
+        <axiom component="lesson-plan">
+        <title>Phase 2: Structured Instruction</title>
+        <dl>
+            <li>
+                <title>Suggested Time</title>
+                <p>10 minutes</p>
+            </li>
+            <li>
+                <title>Grouping</title>
+                <p>Whole class</p>
+            </li>
+            <li>
+                <title>Teacher's Role</title>
+                <p>
+                    Summarise the insights from the Learner experience, and suggest general techniques for dealing with trigonometry in real-life.
+                </p>
+            </li>
+        </dl>
+    </axiom>
     <insight>
         <p>
             The learner experience shows how trigonometry can be used in design and construction. By calculating the length of kite's edge using the given measurements, you can create a precise plan for building a kite. Trigonometry therefore helps us solve problems where direct measurements are difficult to find, allowing us to find unknown measurements based on known values.
         </p>
+        <p>
+        <alert>Key Problem-Solving Steps:</alert>
+        </p>
+        <p>
+            <ol>
+                <li>Draw and label a clear right-angled triangle from the context</li>
+                <li>Identify the known and unknown sides/angles</li>
+                <li>Choose the correct trigonometric ratio (SOH CAH TOA)</li>
+                <li>Substitute, solve, and check the answer is reasonable</li>
+            </ol>
+        </p>
     </insight>
 
     <!-- EXAMPLES SECTION -->
+         <axiom component="lesson-plan">
+        <title>Phase 3: Practice and Application</title>
+        <dl>
+            <li>
+                <title>Suggested Time</title>
+                <p>10 minutes</p>
+            </li>
+            <li>
+                <title>Grouping</title>
+                <p>Individual work, then compare with a partner</p>
+            </li>
+            <li>
+                <title>Teacher's Role</title>
+                <p>
+                    Assign the exercises for independent practice. The earlier exercises use exact special angle values, while later exercises and the Challenging Problems group require calculator use and multi-step reasoning.
+                </p>
+                <p>
+                    <alert>Suggested Exercise Allocation:</alert>
+                </p>
+                <p>
+                    <ul>
+                        <li><em>Core (all students):</em> Ladder, flag pole, hillside path, and parallelogram exercises</li>
+                        <li><em>Extension (advanced):</em> Challenging Problems (equilateral garden, airplane altitude)</li>
+                    </ul>
+                </p>
+                <p>
+                    Circulate and check that students are correctly identifying the right triangle in each scenario before they begin calculating.
+                </p>
+            </li>
+        </dl>
+    </axiom>
 
     <example xml:id="ex-tree-shadow">
         <title>Finding the Height of an Acacia Tree</title>
@@ -342,7 +434,57 @@
         </solution>
     </example>
 
-    <example xml:id="ex-rhombus-diagonals">
+    <!-- EXERCISES SECTION -->
+
+    <exercises xml:id="exercises-trig-real-life">
+        <title>Exercises</title>
+
+        <exercise xml:id="ex-ladder-wall">
+            <statement>
+                <p>
+                    A ladder is leaning against a wall, forming an angle of <m>60^\circ</m> with the ground.
+                    If the ladder is <m>10\,\text{m}</m> long, find the exact height it reaches on the wall.
+                </p>
+                <image width="45%">
+                <latex-image label="exercise-ladder-wall-new">
+                    \begin{tikzpicture}
+                        % Ground line
+                        \draw[very thick] (-0.5,0) -- (4,0);
+                        % Wall
+                        \draw[very thick, brown, fill=brown!10] (3,0) -- (3,5.5) -- (3.3,5.5) -- (3.3,0) -- cycle;
+                        % Ladder
+                        \draw[very thick, blue] (0,0) -- (3,5.196);
+                        % Ladder rungs
+                        \draw[thick, blue] (0.4,0.69) -- (0.65,0.55);
+                        \draw[thick, blue] (0.8,1.39) -- (1.05,1.25);
+                        \draw[thick, blue] (1.2,2.08) -- (1.45,1.94);
+                        \draw[thick, blue] (1.6,2.77) -- (1.85,2.63);
+                        \draw[thick, blue] (2.0,3.46) -- (2.25,3.32);
+                        \draw[thick, blue] (2.4,4.16) -- (2.65,4.02);
+                        % Right angle mark
+                        \draw (2.7,0) -- (2.7,0.3) -- (3,0.3);
+                        % Angle at ground
+                        \draw (0.8,0) arc[start angle=0, end angle=60, radius=0.8cm];
+                        \node at (1.2,0.5) {$60^\circ$};
+                        % Labels
+                        \node[left] at (1.2,2.8) {$10\,\text{m}$};
+                        \node[right] at (3.1,2.6) {$h = ?$};
+                    \end{tikzpicture}
+                </latex-image>
+                </image>
+            </statement>
+            <answer>
+                <p>
+                    Using sine: <m>h = 10 \times \sin\,60^\circ = 10 \times \frac{\sqrt{3}}{2} = 5\sqrt{3}\,\text{m}</m>
+                </p>
+                <p>
+                    The ladder reaches exactly <m>5\sqrt{3}\,\text{m}</m> (approximately <m>8.66\,\text{m}</m>) up the wall.
+                </p>
+            </answer>
+        </exercise>
+
+
+    <exercise xml:id="ex-rhombus-diagonals">
         <title>Diagonals of a Rhombus Tile</title>
         <statement>
             <p>
@@ -361,8 +503,8 @@
                     % Center point
                     \fill (3,0) circle (0.08);
                     % Angle marks
-                    \draw (0.6,0) arc[start angle=0, end angle=30, radius=0.6cm];
-                    \draw (0.6,0) arc[start angle=0, end angle=-30, radius=0.6cm];
+                    \draw (0.6,0) arc[start angle=0, end angle=30, radius=0.7cm];
+                    \draw (0.6,0) arc[start angle=0, end angle=-30, radius=0.7cm];
                     \node at (1.1,0.35) {$30^\circ$};
                     \node at (1.1,-0.35) {$30^\circ$};
                     % Right angle at center
@@ -373,7 +515,7 @@
                     \node[below, blue] at (3,-0.2) {$d_1$};
                     \node[right, red] at (3.2,0.9) {$d_2$};
                     % Angle label at vertex
-                    \node at (0.3,0) {$60^\circ$};
+                    \node at (0.45,0) {$60^\circ$};
                 \end{tikzpicture}
             </latex-image>
             </image>
@@ -404,9 +546,9 @@
                 The diagonals are <m>10\sqrt{3} \approx 17.32\,\text{cm}</m> and <m>10\,\text{cm}</m>.
             </p>
         </solution>
-    </example>
+    </exercise>
 
-    <example xml:id="ex-roof-pitch">
+    <exercise xml:id="ex-roof-pitch">
         <title>Constructing a Mabati Roof</title>
         <statement>
             <p>
@@ -479,9 +621,9 @@
                 Each side of the mabati roof is exactly <m>\frac{10\sqrt{3}}{3}\,\text{m}</m>, which is approximately <m>5.77\,\text{m}</m>.
             </p>
         </solution>
-    </example>
+    </exercise>
 
-    <example xml:id="ex-hexagon-beehive">
+    <exercise xml:id="ex-hexagon-beehive">
         <title>Dimensions of a Hexagonal Beehive Frame</title>
         <statement>
             <p>
@@ -560,56 +702,7 @@
                 <me>\text{Width} = 2r = 2 \times 6 = 12\,\text{cm}</me>
             </p>
         </solution>
-    </example>
-
-    <!-- EXERCISES SECTION -->
-
-    <exercises xml:id="exercises-trig-real-life">
-        <title>Exercises</title>
-
-        <exercise xml:id="ex-ladder-wall">
-            <statement>
-                <p>
-                    A ladder is leaning against a wall, forming an angle of <m>60^\circ</m> with the ground.
-                    If the ladder is <m>10\,\text{m}</m> long, find the exact height it reaches on the wall.
-                </p>
-                <image width="45%">
-                <latex-image label="exercise-ladder-wall-new">
-                    \begin{tikzpicture}
-                        % Ground line
-                        \draw[very thick] (-0.5,0) -- (4,0);
-                        % Wall
-                        \draw[very thick, brown, fill=brown!10] (3,0) -- (3,5.5) -- (3.3,5.5) -- (3.3,0) -- cycle;
-                        % Ladder
-                        \draw[very thick, blue] (0,0) -- (3,5.196);
-                        % Ladder rungs
-                        \draw[thick, blue] (0.4,0.69) -- (0.65,0.55);
-                        \draw[thick, blue] (0.8,1.39) -- (1.05,1.25);
-                        \draw[thick, blue] (1.2,2.08) -- (1.45,1.94);
-                        \draw[thick, blue] (1.6,2.77) -- (1.85,2.63);
-                        \draw[thick, blue] (2.0,3.46) -- (2.25,3.32);
-                        \draw[thick, blue] (2.4,4.16) -- (2.65,4.02);
-                        % Right angle mark
-                        \draw (2.7,0) -- (2.7,0.3) -- (3,0.3);
-                        % Angle at ground
-                        \draw (0.8,0) arc[start angle=0, end angle=60, radius=0.8cm];
-                        \node at (1.2,0.5) {$60^\circ$};
-                        % Labels
-                        \node[left] at (1.2,2.8) {$10\,\text{m}$};
-                        \node[right] at (3.1,2.6) {$h = ?$};
-                    \end{tikzpicture}
-                </latex-image>
-                </image>
-            </statement>
-            <answer>
-                <p>
-                    Using sine: <m>h = 10 \times \sin\,60^\circ = 10 \times \frac{\sqrt{3}}{2} = 5\sqrt{3}\,\text{m}</m>
-                </p>
-                <p>
-                    The ladder reaches exactly <m>5\sqrt{3}\,\text{m}</m> (approximately <m>8.66\,\text{m}</m>) up the wall.
-                </p>
-            </answer>
-        </exercise>
+    </exercise>
 
         <exercise xml:id="ex-flag-pole">
             <statement>
@@ -1209,5 +1302,44 @@
         </exercisegroup>
 
     </exercises>
+
+    <axiom component="lesson-plan">
+        <title>Differentiation</title>
+
+        <table>
+            <title>Differentiation</title>
+            <tabular halign="left">
+                <row header="yes" bottom="minor">
+                    <cell>Learner Group</cell>
+                    <cell>Strategy &amp; Learning Experience</cell>
+                    <cell></cell>
+                </row>
+                <row>
+                    <cell>Struggling Learners (Support)</cell>
+                    <cell>
+                        Provide pre-drawn diagrams with the right triangle already identified and labelled. Let students focus on choosing the ratio and calculating.
+                    </cell>
+                    <cell></cell>
+                </row>
+                <row>
+                    <cell>On-Level Learners (Core)</cell>
+                    <cell>
+                        Complete all activities and core exercises as presented, drawing their own diagrams from word problems.
+                    </cell>
+                    <cell></cell>
+                </row>
+                <row>
+                    <cell>Advanced Learners (Challenge)</cell>
+                    <cell>
+                        Attempt the Challenging Problems and create their own real-life trigonometry problem set in a Kenyan context for classmates to solve.
+                    </cell>
+                    <cell></cell>
+                </row>
+            </tabular>
+        </table>
+    </axiom>
+
+    <xi:include href="../../resources-assessment.ptx" />
+    <xi:include href="../../resources-reflection.ptx"/>
     
 </subsection>
