@@ -12,7 +12,7 @@ TARGET_TAGS = [
     "p", "li", 
 ]
 FILE_EXTENSION = '.ptx'
-EXCLUDE = 'resources-blurb-'
+EXCLUDE = 'resources-'
 
 
 # default path is repository root being current working directory
