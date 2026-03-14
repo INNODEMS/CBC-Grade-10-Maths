@@ -560,94 +560,116 @@
           </p>
 
           <sidebyside>
+            <image>
+            <shortdescription>Line of reflection</shortdescription>
+            <latex-image label="Object_image_exercise1">
+            \begin{tikzpicture}
+                
+                % Draw the grid lines
+                \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+
+                % Draw the axes
+                \draw[thin,-&gt;] (-5,0) -- (5,0) node[right] {x-axis};
+                \foreach \x in {-4,...,4}{
+                \draw(\x,.25)--(\x,-.25) node[below]{\x};
+                }
+
+                \draw[thin,-&gt;] (0,-5) -- (0,5) node[above] {y-axis}; 
+                \foreach \y/\ytext in {-4/-4,-3/-3,-2/-2,-1/-1,0/0,1/1, 2/2, 3/3, 4/4}
+                \draw[shift={(0,\y)}] (2pt,0pt) -- (-2pt,0pt) node[left] {$\ytext$};
+
+
+                % Draw the original object
+                \fill[blue,opacity=0.3] (1,2) -- (3,4) -- (4,1) --cycle;
+                \draw[blue,thick] (1,2) -- (3,4) -- (4,1) -- cycle;
+                \node[blue] at (.8,2) {A};
+                \node[blue] at (3.2,4) {B};
+                \node[blue] at (4.2,.8) {C};
+                
+
+                % Calculate and draw the image
+                \fill[red,opacity=0.3](3,0) -- (5,2) -- (2,3) -- cycle;
+                \draw[red,thick] (3,0) -- (5,2) -- (2,3) -- cycle;
+                \node[red] at (2.8,0) {A'};
+                \node[red] at (5.2,2) {B'};
+                \node[red] at (2,3.2){C'};
+                
+            \end{tikzpicture}
+            </latex-image>
+        </image>
+
         <image>
-        <shortdescription>Line of reflection</shortdescription>
-        <latex-image label="Object_image_exercise1">
-          \begin{tikzpicture}
-            
-            % Draw the grid lines
-            \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+            <shortdescription>Line of reflection</shortdescription>
+            <latex-image label="Object_image_exercise2">
+            \begin{tikzpicture}
+                
+                % Draw the grid lines
+                \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
 
-            % Draw the axes
-            \draw[thin,-&gt;] (-5,0) -- (5,0) node[right] {x-axis};
-            \foreach \x in {-4,...,4}{
-            \draw(\x,.25)--(\x,-.25) node[below]{\x};
-             }
+                % Draw the axes
+                \draw[thin,-&gt;] (-5,0) -- (5,0) node[right] {x-axis};
+                \foreach \x in {-4,...,4}{
+                \draw(\x,.25)--(\x,-.25) node[below]{\x};
+                }
 
-            \draw[thin,-&gt;] (0,-5) -- (0,5) node[above] {y-axis}; 
-            \foreach \y/\ytext in {-4/-4,-3/-3,-2/-2,-1/-1,0/0,1/1, 2/2, 3/3, 4/4}
-            \draw[shift={(0,\y)}] (2pt,0pt) -- (-2pt,0pt) node[left] {$\ytext$};
-
-
-            % Draw the original object
-            \fill[blue,opacity=0.3] (1,2) -- (3,4) -- (4,1) --cycle;
-            \draw[blue,thick] (1,2) -- (3,4) -- (4,1) -- cycle;
-            \node[blue] at (.8,2) {A};
-            \node[blue] at (3.2,4) {B};
-            \node[blue] at (4.2,.8) {C};
-            
-
-            % Calculate and draw the image
-            \fill[red,opacity=0.3](3,0) -- (5,2) -- (2,3) -- cycle;
-            \draw[red,thick] (3,0) -- (5,2) -- (2,3) -- cycle;
-            \node[red] at (2.8,0) {A'};
-            \node[red] at (5.2,2) {B'};
-            \node[red] at (2,3.2){C'};
-            
-          \end{tikzpicture}
-        </latex-image>
-      </image>
-
-      <image>
-        <shortdescription>Line of reflection</shortdescription>
-        <latex-image label="Object_image_exercise2">
-          \begin{tikzpicture}
-            
-            % Draw the grid lines
-            \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
-
-            % Draw the axes
-            \draw[thin,-&gt;] (-5,0) -- (5,0) node[right] {x-axis};
-            \foreach \x in {-4,...,4}{
-            \draw(\x,.25)--(\x,-.25) node[below]{\x};
-             }
-
-            \draw[thin,-&gt;] (0,-5) -- (0,5) node[above] {y-axis}; 
-            \foreach \y/\ytext in {-4/-4,-3/-3,-2/-2,-1/-1,0/0,1/1, 2/2, 3/3, 4/4}
-            \draw[shift={(0,\y)}] (2pt,0pt) -- (-2pt,0pt) node[left] {$\ytext$};
+                \draw[thin,-&gt;] (0,-5) -- (0,5) node[above] {y-axis}; 
+                \foreach \y/\ytext in {-4/-4,-3/-3,-2/-2,-1/-1,0/0,1/1, 2/2, 3/3, 4/4}
+                \draw[shift={(0,\y)}] (2pt,0pt) -- (-2pt,0pt) node[left] {$\ytext$};
 
 
-            % Draw the original object
-            \fill[orange,opacity=0.3] (-4,-1) -- (-1,-1) -- (-1,-4) -- (-4,-4) --cycle;
-            \draw[orange,thick] (-4,-1) -- (-1,-1) -- (-1,-4) -- (-4,-4) -- cycle;
-            \node[orange] at (-4.2,-1) {A};
-            \node[orange] at (-.8,-1) {B};
-            \node[orange] at (-.8,-4) {C};
-            \node[orange] at (-4.2,-4) {D};
-            
+                % Draw the original object
+                \fill[orange,opacity=0.3] (-4,-1) -- (-1,-1) -- (-1,-4) -- (-4,-4) --cycle;
+                \draw[orange,thick] (-4,-1) -- (-1,-1) -- (-1,-4) -- (-4,-4) -- cycle;
+                \node[orange] at (-4.2,-1) {A};
+                \node[orange] at (-.8,-1) {B};
+                \node[orange] at (-.8,-4) {C};
+                \node[orange] at (-4.2,-4) {D};
+                
 
-            % Calculate and draw the image
-            \fill[purple,opacity=0.3](1,4) -- (4,4) -- (4,1) -- (1,1) -- cycle;
-            \draw[purple,thick] (1,4) -- (4,4) -- (4,1) -- (1,1) -- cycle;
-            \node[purple] at (1,4.2) {A'};
-            \node[purple] at (4,4.2) {B'};
-            \node[purple] at (4.2,1){C'};
-            \node[purple] at (.8,1){D'};
+                % Calculate and draw the image
+                \fill[purple,opacity=0.3](1,4) -- (4,4) -- (4,1) -- (1,1) -- cycle;
+                \draw[purple,thick] (1,4) -- (4,4) -- (4,1) -- (1,1) -- cycle;
+                \node[purple] at (1,4.2) {A'};
+                \node[purple] at (4,4.2) {B'};
+                \node[purple] at (4.2,1){C'};
+                \node[purple] at (.8,1){D'};
 
-          \end{tikzpicture}
-        </latex-image>
-      </image>
-      </sidebyside>
-      </statement>
+            \end{tikzpicture}
+            </latex-image>
+        </image>
+        </sidebyside>
+        </statement>
+        <answer>
+            <p>
+                <ol marker="(i)">
+                    <li>
+                        <p>
+                            Neither a Reflection nor a Rotation
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Neither a Reflection nor a Rotation
+                        </p>
+                    </li>
+                </ol>
+            </p>
+        </answer>
+
       </exercise>
 
       <exercise xml:id="auto_4tbofx7k">
-      <statement>
-        <p xml:id="auto_eolr3t9o">
-          The vertices of a triangle are <m>A(1,2),\, B(3,4)\text{ and }C(5,4).</m> The vertices of the  image are <m>A'(1,-2),\, B'(3,-4)\text{ and }C'(5,-4).</m>
-           Find the equation of the line of reflection.
-        </p>
-      </statement>
+        <statement>
+            <p xml:id="auto_eolr3t9o">
+            The vertices of a triangle are <m>A(1,2),\, B(3,4)\text{ and }C(5,4).</m> The vertices of the  image are <m>A'(1,-2),\, B'(3,-4)\text{ and }C'(5,-4).</m>
+            Find the equation of the line of reflection.
+            </p>
+        </statement>
+        <answer>
+            <p>
+                <m>y = 0</m>
+            </p>
+        </answer>
       </exercise>
 
       <exercise xml:id="auto_5urtn6tt">
