@@ -544,38 +544,48 @@
                     The following histogram shows the height of students in a grade 10 class.
                 </p>
                 <image width="70%">
-                    <latex-image label = "int6">
+                    <latex-image>
                         \begin{tikzpicture}
-                            % Draw fine grid (10x smaller squares)
+                            % Draw fine grid
                             \draw[gray!30, very thin, step=0.1] (0,0) grid (7,4.0);
 
                             % Draw main grid
                             \draw[gray!70, thin, step=1] (0,0) grid (7,4.0);
 
-                            % Draw axes with extended y-axis
-                            \draw[thick,->] (0,0) -- (7,0);
-                            \draw[thick,->] (0,0) -- (0,4.0);
+                            % Draw axes
+                            \draw[thick,-&gt;] (0,0) -- (7,0);
+                            \draw[thick,-&gt;] (0,0) -- (0,4.0);
 
-                            % Label x-axis (representing height intervals)
-                            \foreach \x/\label in {1/140, 2/145, 3/155, 4/170, 5/190, 6/200} {
-                                \node[below] at (\x,0) {\label};
+                            % X-axis tick marks at class boundaries
+                            \foreach \x in {1,1.5,2.5,4,6,6.5}{
+                                \draw (\x,0) -- (\x,-0.08);
                             }
 
-                            % Label y-axis (scaled up to 4.0)
-                            \foreach \y in {0,1.0,2.0,3.0,4.0} {
+                            % Vertical X-axis labels (class boundaries, shifted down)
+                            \node[rotate=90] at (1,-0.3) {\small 140};
+                            \node[rotate=90] at (1.5,-0.3) {\small 145};
+                            \node[rotate=90] at (2.5,-0.3) {\small 155};
+                            \node[rotate=90] at (4,-0.3) {\small 170};
+                            \node[rotate=90] at (6,-0.3) {\small 190};
+                            \node[rotate=90] at (6.5,-0.3) {\small 200};
+
+                            % Y-axis labels
+                            \foreach \y in {0,1.0,2.0,3.0,4.0}{
                                 \node[left] at (0,\y) {\small \y};
                             }
 
-                            % Draw histogram bars (taller bars for better visibility)
-                            \draw[thick,fill=blue!60] (1,0) rectangle (1.5,1.6);  % 140-145, density 1.6
-                            \draw[thick,fill=blue!60] (1.5,0) rectangle (2.5,2.0); % 145-155, density 2.0
-                            \draw[thick,fill=blue!60] (2.5,0) rectangle (4,2.0);  % 155-170, density 2.0
-                            \draw[thick,fill=blue!60] (4,0) rectangle (6,0.9);   % 170-190, density 0.9
-                            \draw[thick,fill=blue!60] (6,0) rectangle (6.5,1.0);  % 190-200, density 1.0
+                            % Histogram bars
+                            \draw[thick,fill=blue!60] (1,0) rectangle (1.5,1.6);   % 140-145
+                            \draw[thick,fill=blue!60] (1.5,0) rectangle (2.5,2.0); % 145-155
+                            \draw[thick,fill=blue!60] (2.5,0) rectangle (4,2.0);   % 155-170
+                            \draw[thick,fill=blue!60] (4,0) rectangle (6,0.9);     % 170-190
+                            \draw[thick,fill=blue!60] (6,0) rectangle (6.5,1.0);   % 190-200
 
-                            % Axis Labels
-                            \node[below] at (3.5,-0.3) {\scriptsize \textbf{Height (cm)}};
+                            % Axis labels
+                            \node[below] at (3.5,-0.5) {\scriptsize \textbf{Height (cm)}};
                             \node[rotate=90] at (-0.8,2) {\scriptsize \textbf{Frequency Density}};
+
+                            % Title
                             \node[above] at (3.5,4.0) {\scriptsize \textbf{Histogram of Heights}};
                         \end{tikzpicture}
                     </latex-image>
@@ -611,6 +621,37 @@
                     </li>
                 </ol>
             </statement>
+            <answer>
+                <p>
+                    <ol marker="(a)">
+                        <li>
+                            <p>
+                                <m>20</m> individuals
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>145-155, 155-170</m>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>86</m> students
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                A histogram is used to represent continuous data while a bar graph is used for categorical or discrete data.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Right skewed
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+            </answer>
         </exercise>
         <exercise xml:id="auto_mayy62wa">
             <statement>
@@ -620,45 +661,57 @@
                 <image width="50%">
                     <latex-image label = "int8">
                         \begin{tikzpicture}
-                            % Draw fine grid (Each main grid square has 10x10 smaller squares)
-                            \draw[gray!30, very thin, step=0.1] (0,0) grid (7.5,12);
 
-                            % Draw main grid
-                            \draw[gray!70, thin, step=1] (0,0) grid (7.5,12);
+                        % Draw fine grid
+                        \draw[gray!30, very thin, step=0.1] (0,0) grid (7.5,12);
 
-                            % Draw axes
-                            \draw[thick,->] (0,0) -- (7.5,0);
-                            \draw[thick,->] (0,0) -- (0,12);
-                            \node[below] at (3.5,-0.8) { \small{Rainfall (mm)}};
-                            \node[rotate=90] at (-0.8,6.5) {\small{Frequency}};
+                        % Draw main grid
+                        \draw[gray!70, thin, step=1] (0,0) grid (7.5,12);
 
-                            % X-axis labels (Mid-points of class intervals)
-                            \foreach \x/\label in {1/35.5, 2/41.5, 3/47.5, 4/53.5, 5/59.5, 6/65.5}
-                                \node[below] at (\x,-0.3) {\label};
+                        % Draw axes
+                        \draw[thick,-&gt;] (0,0) -- (7.5,0);
+                        \draw[thick,-&gt;] (0,0) -- (0,12);
 
-                            % Y-axis labels
-                            \foreach \y in {2,4,6,8,10,12}
-                                \node[left] at (-0.3,\y) {\y};
+                        % Axis labels
+                        \node[below] at (3.75,-1.3) {\small Rainfall (mm)};
+                        \node[rotate=90] at (-0.8,6) {\small Frequency};
 
-                            % Histogram bars
-                            \draw[fill=blue!60] (0.5,0) rectangle (1.5,6);
-                            \draw[fill=blue!60] (1.5,0) rectangle (2.5,8);
-                            \draw[fill=blue!60] (2.5,0) rectangle (3.5,10);
-                            \draw[fill=blue!60] (3.5,0) rectangle (4.5,9);
-                            \draw[fill=blue!60] (4.5,0) rectangle (5.5,8);
-                            \draw[fill=blue!60] (5.5,0) rectangle (6.5,9);
+                        % X-axis tick marks
+                        \foreach \x in {0.5,1.5,2.5,3.5,4.5,5.5,6.5}
+                            \draw (\x,0) -- (\x,-0.15);
 
-                            % Frequency polygon (connecting midpoints)
-                            \draw[thick, black] 
-                                (0,0) -- (1,6) -- (2,8) -- (3,10) -- (4,9) -- (5,8) -- (6,9) -- (7,0);
+                        % Vertical class boundary labels at the edges of bars
+                        \node[rotate=90] at (0.5,-0.6) {\small 35.5};
+                        \node[rotate=90] at (1.5,-0.6) {\small 41.5};
+                        \node[rotate=90] at (2.5,-0.6) {\small 47.5};
+                        \node[rotate=90] at (3.5,-0.6) {\small 53.5};
+                        \node[rotate=90] at (4.5,-0.6) {\small 59.5};
+                        \node[rotate=90] at (5.5,-0.6) {\small 65.5};
+                        \node[rotate=90] at (6.5,-0.6) {\small 71.5};
 
-                            % Marking points on the frequency polygon
-                            \foreach \x/\y in {1/6, 2/8, 3/10, 4/9, 5/8, 6/9} {
-                                \fill[black] (\x,\y) circle (3pt);
-                            }
+                        % Y-axis labels
+                        \foreach \y in {2,4,6,8,10,12}
+                            \node[left] at (0,\y) {\small \y};
 
-                            % Graph Title
-                            \node[above] at (3.5,12) {\Large \textbf{Rainfall Distribution}};
+                        % Histogram bars (edges align with boundaries)
+                        \draw[fill=blue!60] (0.5,0) rectangle (1.5,6);
+                        \draw[fill=blue!60] (1.5,0) rectangle (2.5,8);
+                        \draw[fill=blue!60] (2.5,0) rectangle (3.5,10);
+                        \draw[fill=blue!60] (3.5,0) rectangle (4.5,9);
+                        \draw[fill=blue!60] (4.5,0) rectangle (5.5,8);
+                        \draw[fill=blue!60] (5.5,0) rectangle (6.5,9);
+
+                        % Frequency polygon
+                        \draw[thick]
+                        (0,0) -- (1,6) -- (2,8) -- (3,10) -- (4,9) -- (5,8) -- (6,9) -- (7,0);
+
+                        % Points on polygon
+                        \foreach \x/\y in {1/6,2/8,3/10,4/9,5/8,6/9}
+                            \fill (\x,\y) circle (2.5pt);
+
+                        % Graph title
+                        \node[above] at (3.75,12) {\Large \textbf{Rainfall Distribution}};
+
                         \end{tikzpicture}
                     </latex-image>
                 </image>
@@ -702,6 +755,59 @@
                     </ol>
                 </p>
             </statement>
+            <answer>
+                <p>
+                    <ol marker="(a)">
+                        <li>
+                            <p>
+                               Bell shaped 
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>53.5-65.5</m> range
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>46</m> observations
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>47.5-53.5</m> range
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>47.5-53.5</m> range
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <m>47.5-53.5</m> range
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Seasonal weather patterns
+                            </p>
+                            <p>
+                                Wind direction and moisture content
+                            </p>
+                            <p>
+                                Temperature changes
+                            </p>
+                            <p>
+                                Topography (mountains and valleys)
+                            </p>
+                            <p>
+                                Climate variability
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+            </answer>
             
         </exercise>
     </exercises>
