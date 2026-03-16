@@ -256,52 +256,150 @@
             </ul>
         </p>
     </axiom>
+    <exploration xml:id="exploration-annulus-area">
+        <title>Exploring the Area of an Annulus</title>
+        <introduction>
+            <p>
+                An <term>annulus</term> is the region between two concentric circles—one larger circle and one smaller circle that share the same center.
+                In this exploration, you will use sliders to change the <em>outer radius</em> and <em>inner radius</em> of the circles. As the radii change,
+                observe how the shaded ring (the annulus) changes and how its area is calculated.
+            </p>
 
+            <p>
+                Before starting, review the <xref ref="instructions-annulus-area" text="custom">instructions below</xref> to understand how to use the interactive.
+            </p>
+        </introduction>
+        <figure xml:id="fig-annulus-area-interactive">
+            <caption>Interactive: Area of an Annulus</caption>
+            <interactive xml:id="interactive-annulus-area"
+                platform="jsxgraph"
+                width="90%"
+                aspect="4:3"
+                source="jsxgraph/annulus-area.js">
+                <sidebyside width="90%">
+                    <stack>
+                        <slate xml:id="box_annulus_geometry" surface="jsxboard" aspect="4:2"/>
+                        <slate xml:id="box_annulus_panel" surface="jsxboard" aspect="4:1"/>
+                    </stack>
+                </sidebyside>
 
-    <p xml:id="auto_kfaptp6k">
-        <m>\textbf{Key Takeaway}</m>
-    </p>
-    <p xml:id="auto_5b0dugpr">
-        An <m>\textbf{annulus}</m> is the region between two concentric circles that share the same center but have different
-        radii as shown below. 
-    </p>
-     <image width="50%">
-    <latex-image label="Annulus">
-        \begin{tikzpicture}
-            % Draw the outer circle in blue
-            \fill[very thick,cyan] (0,0) circle (2);
-            % Draw the inner circle in white
-            \fill[very thick ,white] (0,0) circle (1);
-            
-            % Draw radius lines
-            \draw[very thick,thick,-&gt;] (0,0) -- (0:1) ;
-            \draw[very thick,-&gt;] (0,0) -- (120:2) node[midway, right] {$R$};
-            
-            % Draw center mark
-            \draw[very thick] (-0.15,0) -- (0.15,0);
-            \draw[very thick] (0,-0.15) -- (0,0.15);
-            
-           
-            
-            \node [below]at (0.5,0) {$r$};
-        \end{tikzpicture}
-    </latex-image>
-        
-        
-    </image>
+                <instructions xml:id="instructions-annulus-area">
 
-    <p xml:id="auto_c17z5qgh"> The area of an annulus (a ring-shaped object) is found by subtracting the area of the smaller, inner circle from the area of the larger, outer circle. </p>
-    <p xml:id="auto_xjy7tsa8"> The formula is: </p>
-    <p xml:id="auto_4tox43h8"> 
-        <md>
-            <mrow> A_\text{annulus} = \amp A_\text{outer circle} - A_\text{inner circle} </mrow>
-            <mrow> = \amp \pi R^2 - \pi r^2 </mrow>
-            <mrow> = \amp \pi (R^2 - r^2) </mrow> 
-        </md> 
-    </p> 
-    <p xml:id="auto_af8fvgiy"> Where: <ul xml:id="auto_ogslfnio"> 
-    <li xml:id="auto_6isof0n0"><m>R</m> is the radius of the outer circle</li> 
-    <li xml:id="auto_xnhhqj5g"><m>r</m> is the radius of the inner circle</li> </ul> </p>
+                    <p>
+                        <ol>
+                            <li>Use the slider labeled <c>R</c> to adjust the <em>outer radius</em> of the larger circle.</li>
+                            <li>Use the slider labeled <c>r</c> to adjust the <em>inner radius</em> of the smaller circle.</li>
+                            <li>Observe how the shaded region between the circles changes as the radii change.</li>
+                            <li>
+                                <p>
+                                    Look at the calculation panel below the diagram.
+                                </p> 
+                                <p>
+                                    <ul>
+                                        <li>The area of the outer circle,</li>
+                                        <li>The area of the inner circle, and</li>
+                                        <li>The area of the annulus.</li>
+                                    </ul>
+                                </p>
+                            </li>
+                            <li>Notice how the area of the annulus is computed by subtracting the inner circle’s area from the outer circle’s area.</li>
+                        </ol>
+                    </p>
+                    <p>
+                        Use the interactive to investigate the following questions:
+                        <ol>
+
+                            <li>
+                                <p>
+                                    Start with an outer radius of about <m>8</m> and an inner radius of about <m>4</m>.
+                                    How does the shaded annulus compare visually to the areas of the two circles?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Slowly increase the outer radius while keeping the inner radius fixed.
+                                    What happens to the annulus area? Why do you think this occurs?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Keep the outer radius fixed and increase the inner radius.
+                                    What happens to the annulus area as the inner circle grows larger?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Try making the inner radius very small. What does the annulus begin to look like?
+                                    What does this suggest about the relationship between the annulus area and the area of a circle?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Can you write a formula for the area of an annulus using the radii <m>R</m> and <m>r</m>?
+                                    Compare your formula with the calculations shown in the panel.
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    If two annuli have the same difference between their radii (for example, <m>R - r = 2</m>),
+                                    do they always have the same area? Use the sliders to test your conjecture.
+                                </p>
+                            </li>
+
+                        </ol>
+                    </p>
+                </instructions>
+            </interactive>
+        </figure>
+    </exploration>
+    <insight>
+        <p xml:id="auto_5b0dugpr">
+            An <m>\textbf{annulus}</m> is the region between two concentric circles that share the same center but have different
+            radii as shown below. 
+        </p>
+        <image width="50%">
+        <latex-image label="Annulus">
+            \begin{tikzpicture}
+                % Draw the outer circle in blue
+                \fill[very thick,cyan] (0,0) circle (2);
+                % Draw the inner circle in white
+                \fill[very thick ,white] (0,0) circle (1);
+                
+                % Draw radius lines
+                \draw[very thick,thick,-&gt;] (0,0) -- (0:1) ;
+                \draw[very thick,-&gt;] (0,0) -- (120:2) node[midway, right] {$R$};
+                
+                % Draw center mark
+                \draw[very thick] (-0.15,0) -- (0.15,0);
+                \draw[very thick] (0,-0.15) -- (0,0.15);
+                
+            
+                
+                \node [below]at (0.5,0) {$r$};
+            \end{tikzpicture}
+        </latex-image>
+            
+            
+        </image>
+
+        <p xml:id="auto_c17z5qgh"> The area of an annulus (a ring-shaped object) is found by subtracting the area of the smaller, inner circle from the area of the larger, outer circle. </p>
+        <p xml:id="auto_xjy7tsa8"> The formula is: </p>
+        <p xml:id="auto_4tox43h8"> 
+            <md>
+                <mrow> A_\text{annulus} = \amp A_\text{outer circle} - A_\text{inner circle} </mrow>
+                <mrow> = \amp \pi R^2 - \pi r^2 </mrow>
+                <mrow> = \amp \pi (R^2 - r^2) </mrow> 
+            </md> 
+        </p> 
+        <p xml:id="auto_af8fvgiy"> Where: <ul xml:id="auto_ogslfnio"> 
+        <li xml:id="auto_6isof0n0"><m>R</m> is the radius of the outer circle</li> 
+        <li xml:id="auto_xnhhqj5g"><m>r</m> is the radius of the inner circle</li> </ul> </p>
+    </insight>
 
     <axiom component="lesson-plan">
         <title>Phase 3: Practice and Application</title>
@@ -412,59 +510,64 @@
     <p xml:id="auto_33n5xs5g">
         <m>\textbf{Exercises}</m>
     </p>
-    <p xml:id="auto_is7kwcm1">
-        <ol xml:id="auto_l5b7ewmi">
-            <li xml:id="auto_85thd8w1">
-                <p xml:id="auto_vpqa19ll">
+    <exercises xml:id="exercises-area-of-an-annulus">
+        <exercise>
+            <statement>
+                <p>
                     A ring-shaped garden has an outer radius of <m>12</m> meters and an inner 
                     radius of <m>7</m> meters. Find the area of the garden.
                 </p>
-            </li>
-            <li xml:id="auto_a6g6uysf">
-                <p xml:id="auto_bsv87mdz">
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
                     A circular tabletop has a hole in the middle for an umbrella.
                     The outer radius of the table is <m>1.5 \,m</m>, and the hole has 
                     a radius of <m>0.5 m</m> as shown below.
                 </p>
-
                 <image width="50%">
-                <latex-image label="Annulus4">
-                    \begin{tikzpicture}
-                        % Outer circle
-                        \fill[cyan] (0,0) circle (3);
-                        % Inner hole
-                        \fill[white] (0,0) circle (1);
-                        
-                        % Radius lines
-                        \draw[thick,-&gt;] (0,0) -- (0:1) node[midway, above] {\textbf{$0.5$ m}};
-                        \draw[thick,-&gt;] (0,0) -- (150:3) node[midway, above] {\textbf{$1.5$ m}};
-                        
-                        % Center mark
-                        \draw[thick] (-0.1,0) -- (0.1,0);
-                        \draw[thick] (0,-0.1) -- (0,0.1);
-                    \end{tikzpicture}
-                </latex-image>
-                    
+                    <latex-image label="Annulus4">
+                        \begin{tikzpicture}
+                            % Outer circle
+                            \fill[cyan] (0,0) circle (3);
+                            % Inner hole
+                            \fill[white] (0,0) circle (1);
+                            
+                            % Radius lines
+                            \draw[thick,-&gt;] (0,0) -- (0:1) node[midway, above] {\textbf{$0.5$ m}};
+                            \draw[thick,-&gt;] (0,0) -- (150:3) node[midway, above] {\textbf{$1.5$ m}};
+                            
+                            % Center mark
+                            \draw[thick] (-0.1,0) -- (0.1,0);
+                            \draw[thick] (0,-0.1) -- (0,0.1);
+                        \end{tikzpicture}
+                    </latex-image>
                 </image>
-
                 <p xml:id="auto_6jvamgjz">
                     Find the area of the tabletop.
                 </p>
-            </li>
-            <li xml:id="auto_7m9sqw2o">
-                <p xml:id="auto_t3dqhslp">
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
                     A circular swimming pool has an outer radius of <m>8</m> meters, 
                     and a smaller circular island is in the center with 
                     a radius of <m>2</m> meters. Find the area of the water surface.
                 </p>
-            </li>
-            <li xml:id="auto_f03glyu0">
-                <p xml:id="auto_sdw7seog">
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
                     A steel pipe has an outer diameter of <m>80</m> units and an inner diameter of
                     <m>60</m> units, what is the area of the cross-section?
                 </p>
-            </li>
-            <li xml:id="auto_52h7sudv">
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
                 <p xml:id="auto_gg1dum6y">
                     Find the area of the figure below; use <m>\pi=3.142</m>
                 </p>
@@ -487,8 +590,10 @@
                 </latex-image>
                     
                 </image>
-            </li>
-            <li xml:id="auto_nwvyjayb">
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
                 <p xml:id="auto_47juwe31">
                     What is the area of the annulus shown; (Leave your answer to <m>3</m> 
                     significant figures).
@@ -520,29 +625,19 @@
                     
                     
                 </image>
-
-            </li>
-        </ol>
-    </p>
-
-    
+            </statement>
+        </exercise>
+    </exercises>
+   
     <xi:include href="../../resources-checkpoint.ptx" />
 
+    <exercise  label="ex-determining-the-area-of-an-annulus">
+        <stack label="stk-determining-the-area-of-an-annulus" source="stack/top/2-0-Measurement-Geometry/2-6-Area-of-a-Part-of-a-Circle/2-6-1-Area-of-an-Annulus/Determining-the-Area-of-an-Annulus.xml" />
+    </exercise>
 
-
-
-
-    
-
-
-            <exercise  label="ex-determining-the-area-of-an-annulus">
-                <stack label="stk-determining-the-area-of-an-annulus" source="stack/top/2-0-Measurement-Geometry/2-6-Area-of-a-Part-of-a-Circle/2-6-1-Area-of-an-Annulus/Determining-the-Area-of-an-Annulus.xml" />
-            </exercise>
-                
-
-            <exercise  label="ex-calculating-the-area-of-a-wheel-region">
-                <stack label="stk-calculating-the-area-of-a-wheel-region" source="stack/top/2-0-Measurement-Geometry/2-6-Area-of-a-Part-of-a-Circle/2-6-1-Area-of-an-Annulus/Calculating-the-Area-of-a-Wheel-Region.xml" />
-            </exercise>
+    <exercise  label="ex-calculating-the-area-of-a-wheel-region">
+        <stack label="stk-calculating-the-area-of-a-wheel-region" source="stack/top/2-0-Measurement-Geometry/2-6-Area-of-a-Part-of-a-Circle/2-6-1-Area-of-an-Annulus/Calculating-the-Area-of-a-Wheel-Region.xml" />
+    </exercise>
 
     <axiom component="lesson-plan">
         <title>Differentiation</title>

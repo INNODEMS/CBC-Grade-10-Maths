@@ -189,6 +189,119 @@
         </p>
         
     </activity>
+    
+    <exploration xml:id="exploration-area-of-a-sector">
+        <title>Exploring the Area of a Sector</title>
+
+        <introduction>
+            <p>
+                A <term>sector</term> is a portion of a circle formed by two radii and the arc between them. 
+                The size of a sector depends on two quantities: the <em>radius</em> of the circle and the 
+                <em>central angle</em> that defines the sector.
+            </p>
+
+            <p>
+                In this exploration, you will adjust the radius and the central angle using sliders. 
+                As you change these values, observe how the shaded sector changes and how its area 
+                relates to the area of the entire circle.
+            </p>
+
+            <p>
+                Before beginning, review the <xref ref="instructions-area-of-sector" text="custom">instructions below</xref> 
+                to understand how to use the interactive.
+            </p>
+        </introduction>
+
+        <figure xml:id="fig-area-of-sector-interactive">
+            <caption>
+                Interactive: Investigating the Area of a Sector
+            </caption>
+
+            <interactive xml:id="interactive-area-of-sector"
+                platform="jsxgraph"
+                width="95%"
+                aspect="4:3"
+                source="jsxgraph/area-of-sector.js">
+
+                <slate xml:id="jsxgraph-area-of-a-sector" surface="jsxboard" aspect="4:3"/>
+
+                <instructions xml:id="instructions-area-of-sector">
+
+                    <p>
+                        <ol>
+                            <li>Use the <c>Radius (r)</c> slider to change the size of the circle.</li>
+                            <li>Use the <c>Angle (θ)</c> slider to adjust the central angle of the sector.</li>
+                            <li>Observe how the shaded sector changes as the angle increases or decreases.</li>
+                            <li>
+                                <p>
+                                    Look at the calculation panel below the diagram. It shows:
+                                    <ul>
+                                        <li>The area of the full circle,</li>
+                                        <li>The fraction of the circle represented by the angle <m>\theta/360</m>, and</li>
+                                        <li>The resulting sector area.</li>
+                                    </ul>
+                                </p>
+                            </li>
+                            <li>Notice how the sector area changes when either the radius or the angle changes.</li>
+                        </ol>
+                    </p>
+
+                    <p>
+                        Use the interactive to explore the following questions:
+                        <ol>
+
+                            <li>
+                                <p>
+                                    Set the angle to about <m>90^\circ</m>. What fraction of the circle does this sector represent?
+                                    Compare the sector area with the full circle area shown in the panel.
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Keep the radius fixed and increase the angle gradually from 
+                                    <m>30^\circ</m> to <m>180^\circ</m>. How does the sector area change?
+                                    What pattern do you notice?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Set the angle to <m>360^\circ</m>. What does the sector become?
+                                    What does the sector area equal in this case?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Fix the angle at <m>60^\circ</m>. Now increase the radius.
+                                    How does changing the radius affect the sector area?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Compare two sectors with the same radius but different angles.
+                                    How does the ratio <m>\theta/360</m> relate to the size of the sector?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Based on your observations, write a formula for the area of a sector
+                                    in terms of the radius <m>r</m> and the angle <m>\theta</m>.
+                                    How does your formula match the calculation shown in the panel?
+                                </p>
+                            </li>
+
+                        </ol>
+                    </p>
+
+                </instructions>
+
+            </interactive>
+        </figure>
+    </exploration>
 
     <axiom component="lesson-plan">
         <title>Phase 2: Structured Instruction</title>
@@ -215,83 +328,80 @@
             </ul>
         </p>
     </axiom>
+    <insight>
+        <p xml:id="auto_hnpbn8dv">
+            A <alert>sector</alert> is a region bounded by two radii and an arc.
+        </p>
+        <p xml:id="auto_yfzk880n">
+            <term>Minor sector</term> is one whose area is less than a half of the area of the circle.
+        </p>
+        <p xml:id="auto_gkwpw70i">
+            <term>Major sector</term> is onewhose area is greater than a half of the 
+            area of the circle.
+        </p>
+        <p xml:id="auto_sve1kqni">
+            See the figure below;
+        </p>
+        <image width="80%">
+        <latex-image label="Sector">
+            \begin{tikzpicture}
+                % Draw the circle
+                \draw[very thick] (0,0) circle(2cm);
 
-    <p xml:id="auto_dxkpsrfz">
-        <m>\textbf{Key Takeaway}</m>
-    </p>
-    
-    <p xml:id="auto_hnpbn8dv">
-        A <m>\textbf{sector}</m> is a region bounded by two radii and an arc.
-    </p>
-    <p xml:id="auto_yfzk880n">
-        <term>Minor sector</term> is one whose area is less than a half of the area of the circle.
-    </p>
-    <p xml:id="auto_gkwpw70i">
-        <term>Major sector</term> is onewhose area is greater than a half of the 
-        area of the circle.
-    </p>
-    <p xml:id="auto_sve1kqni">
-        See the figure below;
-    </p>
-    <image width="80%">
-    <latex-image label="Sector">
-        \begin{tikzpicture}
-            % Draw the circle
-            \draw[very thick] (0,0) circle(2cm);
+                % Define sector angles
+                \fill[pattern=north east lines] (0,0) -- (30:2cm) arc (30:150:2cm) -- cycle;
 
-            % Define sector angles
-            \fill[pattern=north east lines] (0,0) -- (30:2cm) arc (30:150:2cm) -- cycle;
-
-            % Draw sector boundaries
-            \draw[very thick] (0,0) -- (30:2cm);
-            \draw[very thick] (0,0) -- (150:2cm);
+                % Draw sector boundaries
+                \draw[very thick] (0,0) -- (30:2cm);
+                \draw[very thick] (0,0) -- (150:2cm);
+                
+                % Label the center
+                \node[circle,fill=black,inner sep=1.5pt,label=below:$O$] at (0,0) {};
+                
+                % Label the minor and major sectors
+                \node[right] at (3,-1) {\textbf{Major sector}};
+                \node[above] at (0,3) {\textbf{Minor sector}};
+                
+                % Guide lines to labels
+                \draw[-&gt;] (1,-1) -- (3,-1);
+                \draw[-&gt;] (0,1) -- (0,3);
+            \end{tikzpicture}
+        </latex-image>
             
-            % Label the center
-            \node[circle,fill=black,inner sep=1.5pt,label=below:$O$] at (0,0) {};
+        </image>
             
-            % Label the minor and major sectors
-            \node[right] at (3,-1) {\textbf{Major sector}};
-            \node[above] at (0,3) {\textbf{Minor sector}};
-            
-            % Guide lines to labels
-            \draw[-&gt;] (1,-1) -- (3,-1);
-            \draw[-&gt;] (0,1) -- (0,3);
-        \end{tikzpicture}
-    </latex-image>
+        <p xml:id="auto_0c5uwj6v">
+            <term>The Area of a Sector</term>
+        </p>
         
-    </image>
-        
-    <p xml:id="auto_0c5uwj6v">
-        <term>The Area of a Sector</term>
-    </p>
-    
-    <p xml:id="auto_j40v4f6t">
-        <md>
-            <mrow> \text{Area of a Sector}=\amp \frac{\theta}{360} \times  \pi r^2</mrow>
-        </md>
-    </p>
-    <p xml:id="auto_kgzr7gy4">
-        where:
-    </p>
-    <p xml:id="auto_mbf2gigq">
-        <ul xml:id="auto_qvfb8ln6">
-            <li xml:id="auto_l2638y88">
-                <p xml:id="auto_vspfbr93">
-                    <m>\theta</m> is in degrees,
-                </p>
-            </li>
-            <li xml:id="auto_4l1p71bd">
-                <p xml:id="auto_oqrtapbr">
-                    <m>r</m> is the radius of the circle,
-                </p>
-            </li>
-            <li xml:id="auto_wpib4x6f">
-                <p xml:id="auto_di6a1zio">
-                    <m>\pi \,≈ \,3.142\, \text{or} \, \frac{22}{7}.</m>
-                </p>
-            </li>
-        </ul>
-    </p>
+        <p xml:id="auto_j40v4f6t">
+            <md>
+                <mrow> \text{Area of a Sector}=\amp \frac{\theta}{360} \times  \pi r^2</mrow>
+            </md>
+        </p>
+        <p xml:id="auto_kgzr7gy4">
+            where:
+        </p>
+        <p xml:id="auto_mbf2gigq">
+            <ul xml:id="auto_qvfb8ln6">
+                <li xml:id="auto_l2638y88">
+                    <p xml:id="auto_vspfbr93">
+                        <m>\theta</m> is in degrees,
+                    </p>
+                </li>
+                <li xml:id="auto_4l1p71bd">
+                    <p xml:id="auto_oqrtapbr">
+                        <m>r</m> is the radius of the circle,
+                    </p>
+                </li>
+                <li xml:id="auto_wpib4x6f">
+                    <p xml:id="auto_di6a1zio">
+                        <m>\pi \,≈ \,3.142\, \text{or} \, \frac{22}{7}.</m>
+                    </p>
+                </li>
+            </ul>
+        </p>
+    </insight>
 
     <axiom component="lesson-plan">
         <title>Phase 3: Practice and Application</title>
@@ -515,14 +625,10 @@
             </ol>
         </p>
     </axiom>
-    
 
-    <p xml:id="auto_bpuoxche">
-        <m>\textbf{Exercises}</m>
-    </p>
-    <p xml:id="auto_ochw673u">
-        <ol xml:id="auto_tyxth8op">
-            <li xml:id="auto_ncxs535v">
+    <exercises xml:id="exercises-area-of-a-sector">
+        <exercise>
+            <statement>
                 <p xml:id="auto_18ca02iu">
                     A sector of a circle of radius <m>r</m>is
                     subtended at the centre by an angle
@@ -530,7 +636,7 @@
                     if:
                 </p>
                 <p xml:id="auto_hsnoosjc">
-                    <ol xml:id="auto_o25w5mot" marker="(a)">
+                    <ol marker="(a)">
                         <li xml:id="auto_7ksa03t8">
                             <p xml:id="auto_fo5he4ro">
                                 <m>r=10\,m ,\quad \theta=264^\circ</m>
@@ -548,27 +654,33 @@
                         </li>
                     </ol>
                 </p>
-            </li>
-            <li xml:id="auto_gxad0j11">
-                <p xml:id="auto_h0b42qnb">
-                    The area of a sector of a circle is <m> \,cm^2</m>
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
+                    The area of a sector of a circle is <m> 154 \,cm^2</m>
                     . Find the radius of the circle if the
                     angle subtended at the centre is <m>140^\circ</m>. (Take <m>\pi= \frac{22}{7}</m>)
                 </p>
-            </li>
-            <li xml:id="auto_grh3zrrc">
-                <p xml:id="auto_ob1q6v8j">
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
                     A goat is tethered at the corner of a
                     fenced rectangular grazing field. If
                     the length of the rope is <m>21 \,m</m>, what
                     is its grazing area?
                 </p>
-            </li>
-            <li xml:id="auto_zazfe8q5">
-                <p xml:id="auto_q2lqt3jn">
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
                     Shown below is a sector of a circle, with radius <m>x\,cm</m> 
                 </p>
-                <image width="60%">
+                <image width="40%">
                 <latex-image label="sector5">
                     \begin{tikzpicture}
                          % Define the radius and angle
@@ -591,41 +703,31 @@
                     
                 </image>
 
-                <p xml:id="auto_6qmdw55d">
+                <p>
                     The area of the sector is <m>18 \pi \,cm^2</m>
                 </p>
-                <p xml:id="auto_s13s598w">
+                <p>
                     Find the length of <m>x</m>
                 </p>
-            </li>
-            <li xml:id="auto_c5o5w3mw">
-                <p xml:id="auto_fkau7mez">
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
                     A sector has an angle of <m>\frac{\pi}{3}</m> radians and a radius of <m>8 \,cm</m>. Find its area.
                 </p>
-            </li>
-            
-        </ol>
-    </p>
+            </statement>
+        </exercise>
+    </exercises>
+ 
+    <exercise  label="ex-determining-the-angle-of-a-sector">
+        <stack label="stk-determining-the-angle-of-a-sector" source="stack/top/2-0-Measurement-Geometry/2-6-Area-of-a-Part-of-a-Circle/2-6-2-Area-of-a-Sector-of-a-Circle/Determining-the-Angle-of-a-Sector-.xml" />
+    </exercise>
+        
 
-
-
-    
-    
-
-
-
-
-    
-
-
-            <exercise  label="ex-determining-the-angle-of-a-sector">
-                <stack label="stk-determining-the-angle-of-a-sector" source="stack/top/2-0-Measurement-Geometry/2-6-Area-of-a-Part-of-a-Circle/2-6-2-Area-of-a-Sector-of-a-Circle/Determining-the-Angle-of-a-Sector-.xml" />
-            </exercise>
-                
-
-            <exercise  label="ex-calculating-the-area-of-a-sector">
-                <stack label="stk-calculating-the-area-of-a-sector" source="stack/top/2-0-Measurement-Geometry/2-6-Area-of-a-Part-of-a-Circle/2-6-2-Area-of-a-Sector-of-a-Circle/Calculating-the-area-of-a-sector.xml" />
-            </exercise>
+    <exercise  label="ex-calculating-the-area-of-a-sector">
+        <stack label="stk-calculating-the-area-of-a-sector" source="stack/top/2-0-Measurement-Geometry/2-6-Area-of-a-Part-of-a-Circle/2-6-2-Area-of-a-Sector-of-a-Circle/Calculating-the-area-of-a-sector.xml" />
+    </exercise>
 
     <axiom component="lesson-plan">
         <title>Differentiation</title>
