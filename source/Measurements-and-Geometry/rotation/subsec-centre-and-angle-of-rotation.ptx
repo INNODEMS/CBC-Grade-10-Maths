@@ -364,15 +364,69 @@
                 <image source="image-object-rectangle.png">
                     <shortdescription></shortdescription>
                 </image>
-
-                <p xml:id="auto_2kequnq4">
-                   (a). By construction,find and label the centre <m>O</m> of roration.
-                </p>
-
-                <p xml:id="auto_jywnm2jg">
-                    (b) Determine the angle of rotation.
+                <p>
+                    <ol marker="(a)">
+                        <li>
+                            <p>
+                                By construction,find and label the centre <m>O</m> of roration.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Determine the angle of rotation.
+                            </p>
+                        </li>
+                    </ol>
                 </p>
             </statement>
+            <answer>
+                <p>
+                    <ol marker="(a)">
+                        <li>
+                            \begin{tikzpicture}[scale=1]
+                            \draw[step=1cm,gray,very thin] (-2,-2) grid (8,6);
+                            \coordinate (A) at (0,0);
+                            \coordinate (B) at (4,0);
+                            \coordinate (C) at (4,3);
+                            \coordinate (D) at (0,3);
+                            \draw[blue,thick] (A) -- (B) -- (C) -- (D) -- cycle;
+                            \node[left] at (A) {A};
+                            \node[right] at (B) {B};
+                            \node[right] at (C) {C};
+                            \node[left] at (D) {D};
+                            % Rotated rectangle A'B'C'D'
+                            \coordinate (Ap) at (2,2);
+                            \coordinate (Bp) at (5,3);
+                            \coordinate (Cp) at (5,6);
+                            \coordinate (Dp) at (2,5);
+                            \draw[red,thick] (Ap) -- (Bp) -- (Cp) -- (Dp) -- cycle;
+                            \node[left] at (Ap) {A'};
+                            \node[right] at (Bp) {B'};
+                            \node[right] at (Cp) {C'};
+                            \node[left] at (Dp) {D'};
+                            \draw[dashed] (A) -- (Ap);
+                            \draw[dashed] (B) -- (Bp);
+                            \path (A) -- (Ap) coordinate[midway] (M1);
+                            \path (B) -- (Bp) coordinate[midway] (M2);
+                            \draw[green,thick] (M1) ++(0,1.5) -- ++(0,-3); 
+                            \draw[green,thick] (M2) ++(1,0) -- ++(-2,0);  
+                            \coordinate (O) at (intersection of green line 1 and green line 2); % approximate
+                            \node[below right] at (O) {O};
+                            \draw[dotted] (O) -- (A);
+                            \draw[dotted] (O) -- (Ap);
+                            \draw[-&gt;,orange,thick] (O) ++(0.5,0) arc[start angle=0,end angle=45,radius=0.5];
+                            \node[orange,right] at (O) {$\theta$};
+
+                            \end{tikzpicture}
+                        </li>
+                        <li>
+                            <p>
+                                <m>45^\circ</m>
+                            </p>
+                        </li>
+                    </ol>
+                </p>
+            </answer>
         </exercise>
             
         </exercises>
