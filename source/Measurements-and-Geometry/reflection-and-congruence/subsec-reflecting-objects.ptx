@@ -600,15 +600,19 @@
             <image>
                 <latex-image>
                     \begin{tikzpicture}
-                    \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
-                    \fill[orange!50, even odd rule]
-                    (90:3) -- (234:3) -- (18:3) -- (162:3) -- (306:3) -- cycle;
-                    \draw[black,thick,-&gt;] (-4,4) -- (4,-4) node[above right] {$M$};
-                    \begin{scope}[rotate=90,scale=-1]
-                    \fill[blue!40, even odd rule]
-                    (90:3) -- (234:3) -- (18:3) -- (162:3) -- (306:3) -- cycle;
-                    \end{scope}
+                        % Grid
+                        \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
 
+                        % Original star
+                        \fill[orange!50, even odd rule, opacity=0.8]
+                            (90:3) -- (234:3) -- (18:3) -- (162:3) -- (306:3) -- cycle;
+
+                        % Reflected star across y = -x
+                        \fill[blue!40, even odd rule, opacity=0.8]
+                            (180:3) -- (36:3) -- (252:3) -- (108:3) -- (324:3) -- cycle;
+
+                        % Mirror line
+                        \draw[black,thick,-&gt;] (-4,4) -- (4,-4) node[above right] {$M:\;y=-x$};
                     \end{tikzpicture}
                 </latex-image>
                 
