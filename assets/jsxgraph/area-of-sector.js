@@ -8,27 +8,27 @@ const board = JXG.JSXGraph.initBoard('jsxgraph-area-of-a-sector', {
 
     // ---------- 2. SLIDERS ----------
     // Radius Slider (r)
-    const sR = board.create('slider', [[1, 14], [6, 14], [1, 7, 10]], {
+    const sR = board.create('slider', [[-14, 13.5], [-2, 13.5], [1, 6, 10]], {
         name: 'r', withLabel: false, snapWidth: 0.1
     });
-    board.create('text', [1, 15, 'Radius (r)'], { fontSize: 13, fontWeight: 'bold' });
-    board.create('text', [6.5, 14, () => sR.Value().toFixed(1)], { fontSize: 13 });
+    board.create('text', [-10, 15, 'Radius (r)'], { fontSize: 13, fontWeight: 'bold' });
+    board.create('text', [-1.5, 13.5, () => sR.Value().toFixed(1)], { fontSize: 13 });
 
     // Angle Slider (θ)
-    const sTheta = board.create('slider', [[8.5, 14], [13.5, 14], [0, 90, 360]], {
+    const sTheta = board.create('slider', [[2, 13.5], [14, 13.5], [0, 90, 360]], {
         name: 'θ', withLabel: false, snapWidth: 1
     });
-    board.create('text', [8.5, 15, 'Angle (θ°)'], { fontSize: 13, fontWeight: 'bold' });
-    board.create('text', [14, 14, () => sTheta.Value().toFixed(0) + '°'], { fontSize: 13 });
+    board.create('text', [6, 15, 'Angle (θ°)'], { fontSize: 13, fontWeight: 'bold' });
+    board.create('text', [14.5, 13.5, () => sTheta.Value().toFixed(0) + '°'], { fontSize: 13 });
 
     // ---------- 3. GEOMETRY ----------
-    const center = board.create('point', [0, 1], { name: 'C', fixed: true, size: 3, color: 'black' });
-    const p1 = board.create('point', [() => sR.Value(), 1], { visible: false });
+    const center = board.create('point', [1, 3], { name: 'C', fixed: true, size: 3, color: 'black' });
+    const p1 = board.create('point', [() => 1 + sR.Value(), 3], { visible: false });
     
     // Polar coordinates for the second point of the sector
     const p2 = board.create('point', [
-        () => sR.Value() * Math.cos(sTheta.Value() * Math.PI / 180),
-        () => 1 + sR.Value() * Math.sin(sTheta.Value() * Math.PI / 180)
+        () => 1+ sR.Value() * Math.cos(sTheta.Value() * Math.PI / 180),
+        () => 3 + sR.Value() * Math.sin(sTheta.Value() * Math.PI / 180)
     ], { visible: false });
 
     // Ghost Circle for reference
@@ -52,7 +52,7 @@ const board = JXG.JSXGraph.initBoard('jsxgraph-area-of-a-sector', {
         const sectorArea = ((theta / 360) * Math.PI * r * r).toFixed(2);
         const ratio = (theta / 360).toFixed(3);
 
-        return "<div style='background:#ffffff; padding:15px; border:2px solid #e65100; border-radius:8px; width:550px; font-family:sans-serif; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);'>" +
+        return "<div style='background:#ffffff; padding:15px; border:2px solid #e65100; border-radius:8px; width:500px; font-family:sans-serif; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);'>" +
                "<table style='width:100%; text-align:center; border-collapse: collapse;'>" +
                "<tr>" +
                "<td style='width:33%'><b>Full Area (πr²)</b><br>π × " + r.toFixed(1) + "²<br>≈ " + circleArea + "</td>" +
