@@ -9,24 +9,24 @@ const board = JXG.JSXGraph.initBoard('jsxboard-annular-sector', {
 
 // ---------- 2. SLIDERS ----------
 // Outer Radius (R)
-const sR = board.create('slider', [[-10, 15], [-2, 15], [1, 9, 12]], {
+const sR = board.create('slider', [[-15, 15], [-7, 15], [1, 9, 12]], {
     name: 'R', withLabel: false, snapWidth: 0.1
 });
-board.create('text', [-10, 16, 'Outer Radius (R)'], { fontSize: 12, fontWeight: 'bold' });
-board.create('text', [-1.5, 15, () => sR.Value().toFixed(1)], { fontSize: 12,fixed: true });
+board.create('text', [-15, 16.5, 'Outer Radius (R)'], { fontSize: 12, fontWeight: 'bold', withLabel: false});
+board.create('text', [-6.5, 15, () => sR.Value().toFixed(1)], { fontSize: 12,fixed: true });
 
 // Inner Radius (r)
-const sr = board.create('slider', [[2, 15], [10, 15], [0, 5, 12]], {
+const sr = board.create('slider', [[8, 15], [15, 15], [0, 5, 12]], {
     name: 'r', withLabel: false, snapWidth: 0.1
 });
-board.create('text', [2, 16, 'Inner Radius (r)'], { fontSize: 12, fontWeight: 'bold' });
-board.create('text', [10.5, 15, () => sr.Value().toFixed(1)], { fontSize: 12,fixed: true});
+board.create('text', [8, 16.5, 'Inner Radius (r)'], { fontSize: 12, fontWeight: 'bold', withLabel: false });
+board.create('text', [15.5, 15, () => Math.min(sr.Value(), sR.Value() - 0.3).toFixed(1)], { fontSize: 12,fixed: true});
 
 // Angle (θ)
 const sTheta = board.create('slider', [[-4, 13], [4, 13], [0, 90, 360]], {
     name: 'θ', withLabel: false, snapWidth: 1
 });
-board.create('text', [-4, 14, 'Central Angle (θ°)'], { fontSize: 12, fontWeight: 'bold' });
+board.create('text', [-4, 14.5, 'Central Angle (θ°)'], { fontSize: 12, fontWeight: 'bold' });
 board.create('text', [4.5, 13, () => sTheta.Value().toFixed(0) + '°'], { fontSize: 12,fixed: true });
 
 // ---------- 3. GEOMETRY ----------

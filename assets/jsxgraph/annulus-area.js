@@ -1,6 +1,6 @@
 
 const brdGeometry = JXG.JSXGraph.initBoard('box_annulus_geometry', {
-    boundingbox: [-12, 12, 18, -12],
+    boundingbox: [-12, 10, 12, -14],
     axis: false,
     grid: false,
     showNavigation: false,
@@ -8,34 +8,23 @@ const brdGeometry = JXG.JSXGraph.initBoard('box_annulus_geometry', {
     keepaspectratio: true
 });
 
-const brdPanel = JXG.JSXGraph.initBoard('box_annulus_panel', {
-    boundingbox: [0, 6, 10, -1],
-    axis: false,
-    grid: false,
-    showNavigation: false,
-    showCopyright: false
-});
+brdGeometry.create('text',[-10,9,'Outer Radius (R)'],{fontSize:13,fontWeight:'bold',fixed:true, strokeColor:'#00bcd4', fillColor:'#00bcd4'});
 
-brdGeometry.addChild(brdPanel);
-
-const sR = brdGeometry.create('slider', [[10,8],[15,8],[1,8,10]], {
+const sR = brdGeometry.create('slider', [[-10,7.5],[-3,7.5],[1,5,7]], {
     name:'R',
-    snapWidth:0.5,
     fillColor:'#00bcd4',
     strokeColor:'#00bcd4'
 });
 
+brdGeometry.create('text',[2,9,'Inner Radius (r)'],{fontSize:13,fontWeight:'bold',fixed:true, strokeColor:'#e74c3c', fillColor:'#e74c3c'});
 
-brdGeometry.create('text',[10,9,'Outer Radius (R)'],{fontSize:13,fontWeight:'bold',fixed:true});
-
-const sr = brdGeometry.create('slider', [[10,5],[15,5],[0,4,10]], {
+const sr = brdGeometry.create('slider', [[2,7.5],[9,7.5],[0,2,6.5]], {
     name:'r',
-    snapWidth:0.5,
-    fillColor:'#7f8c8d',
-    strokeColor:'#7f8c8d'
+    fillColor:'#e74c3c',
+    strokeColor:'#e74c3c'
 });
 
-brdGeometry.create('text',[10,6,'Inner Radius (r)'],{fontSize:13,fontWeight:'bold',fixed:true});
+
 
 const center = brdGeometry.create('point',[0,0],{name:'C',fixed:true,size:3});
 
@@ -65,7 +54,7 @@ strokeColor:'#e74c3c',
 strokeWidth:3
 });
 
-brdPanel.create('text',[1,2.5,function(){
+brdGeometry.create('text',[-10,-10,function(){
 
 const R=sR.Value();
 const r=Math.min(sr.Value(),sR.Value()-0.5);
@@ -74,12 +63,12 @@ const areaOuter=(Math.PI*R*R).toFixed(2);
 const areaInner=(Math.PI*r*r).toFixed(2);
 const annulusArea=(areaOuter-areaInner).toFixed(2);
 
-return "<div style='background:white;padding:15px;border:2px solid #2c3e50;border-radius:8px;width:240px;font-family:sans-serif;'>"+
-"<b style='font-size:16px;'>Calculation:</b><hr>"+
-"Area<sub>Outer</sub>: π("+R+")² ≈ "+areaOuter+"<br>"+
-"Area<sub>Inner</sub>: π("+r+")² ≈ "+areaInner+"<br><br>"+
+return "<div style='background:white;padding:10px;border:2px solid #2c3e50;border-radius:8px;width:220px;font-family:sans-serif;'>"+
+"<b style='font-size:15px;'>Calculation:</b><hr>"+
+"Area<sub>Outer</sub>: π("+R.toFixed(2)+")² ≈ "+areaOuter+"<br>"+
+"Area<sub>Inner</sub>: π("+r.toFixed(2)+")² ≈ "+areaInner+"<br><br>"+
 "<b style='color:#00838f;'>Annulus Area:</b><br>"+
 "A = "+areaOuter+" − "+areaInner+"<br>"+
 "<b>A ≈ "+annulusArea+" units²</b></div>";
 
-}],{fontSize:14,fixed:true});
+}],{fontSize:14,fixed:true, xAnchor:'middle', yAnchor:'middle'});
