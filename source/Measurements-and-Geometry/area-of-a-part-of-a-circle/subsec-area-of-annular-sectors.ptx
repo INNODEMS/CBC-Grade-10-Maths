@@ -289,6 +289,119 @@
             </ol>
         </p>
     </activity>
+    <exploration xml:id="exploration-annular-sector-area">
+
+        <title>Exploring the Area of an Annular Sector</title>
+
+        <introduction>
+            <p>
+                In this exploration, you will adjust three quantities:
+                the <em>outer radius</em>, the <em>inner radius</em>, and the <em>central angle</em>.
+                Observe how these values affect the shaded region and the calculated area of the annular sector.
+            </p>
+
+            <p>
+                Before beginning, review the <xref ref="instructions-annular-sector" text="custom">instructions below</xref>
+                to understand how to interact with the diagram.
+            </p>
+        </introduction>
+        <figure xml:id="fig-annular-sector-interactive">
+            <caption>
+                Interactive: Investigating the Area of an Annular Sector
+            </caption>
+
+            <interactive xml:id="interactive-annular-sector"
+                platform="jsxgraph"
+                width="90%"
+                aspect="4:3"
+                source="jsxgraph/annular-sector.js">
+
+                <slate xml:id="jsxboard-annular-sector" surface="jsxboard" width="90%" aspect="4:3"/>
+
+                <instructions xml:id="instructions-annular-sector">
+
+                    <p>
+                        <ol>
+                            <li>Use the slider labeled <c>Outer Radius (R)</c> to change the size of the larger circle.</li>
+                            <li>Use the slider labeled <c>Inner Radius (r)</c> to change the size of the inner circle.</li>
+                            <li>Use the slider labeled <c>Central Angle (θ)</c> to adjust the size of the angle that forms the sector.</li>
+                            <li>Observe the shaded region between the two arcs. This region is the <em>annular sector</em>.</li>
+                            <li>
+                                <p>
+                                    Look at the calculation panel below the diagram. It shows:
+                                    <ul>
+                                        <li>The area of the full annulus,</li>
+                                        <li>The fraction of the circle determined by the angle <m>\theta/360</m>, and</li>
+                                        <li>The resulting area of the annular sector.</li>
+                                    </ul>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+
+                    <p>
+                        Use the interactive to investigate the following questions:
+                        <ol>
+
+                            <li>
+                                <p>
+                                    Set the central angle to about <m>90^\circ</m>. 
+                                    What fraction of the full annulus does the shaded region represent?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Keep the radii fixed and increase the central angle from 
+                                    <m>30^\circ</m> to <m>180^\circ</m>. 
+                                    How does the shaded region change? What happens to the calculated area?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Fix the central angle and increase the outer radius while keeping the inner radius the same.
+                                    How does this affect the size of the annular sector?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Keep the outer radius fixed and increase the inner radius.
+                                    What happens to the thickness of the ring and the area of the annular sector?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Try making the inner radius very small.
+                                    What does the shaded region begin to resemble?
+                                    How does this relate to the area of a regular sector of a circle?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Based on your observations, how could you write a formula for the area of an annular sector
+                                    using the outer radius <m>R</m>, the inner radius <m>r</m>, and the angle <m>\theta</m>?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Compare the area of the annular sector with the area of the entire annulus.
+                                    How does the ratio <m>\theta/360</m> determine the portion of the annulus that is shaded?
+                                </p>
+                            </li>
+
+                        </ol>
+                    </p>
+
+                </instructions>
+
+            </interactive>
+        </figure>
+    </exploration>
 
     <axiom component="lesson-plan">
         <title>Structured Instruction</title>
@@ -319,65 +432,61 @@
         </dl>
     </axiom>
 
-    <p xml:id="auto_gmr02xjk">
-        <m>\textbf{Key Takeaway}</m>
-    </p>
-     <p xml:id="auto_05ljau5o">
-        An <m>\textbf{annular sector}</m> is the region enclosed between two concentric sectors of a circle with different radii but
-        the same central angle. It is similar to a sector but with a smaller sector removed from a larger one.
-    </p>
+    <insight>
+        <p xml:id="auto_05ljau5o">
+            An <m>\textbf{annular sector}</m> is the region enclosed between two concentric sectors of a circle with different radii but
+            the same central angle. It is similar to a sector but with a smaller sector removed from a larger one.
+        </p>
+        <image width="60%">
+        <latex-image label="Ann1">
+            \begin{tikzpicture}
+                    % Define radii and angle
+                \def\R{3}  % Outer radius
+                \def\r{2}  % Inner radius
+                \def\a{40} % Half of the total angle theta
 
+                % Draw concentric circles
+                \draw[dashed,very thick] (0,0) circle (\R);
+                \draw[dashed,very thick] (0,0) circle (\r);
+                
+                % Draw annular sector
+                \fill[green!30,very thick] (\a:\r) arc (\a:-\a:\r) -- (-\a:\R) arc (-\a:\a:\R) -- cycle;
+
+                % Draw sector boundaries
+                \draw[very thick, blue] (0,0) -- (\a:\R);
+                \draw[thick, red] (0,0) -- (-\a:\R);
+                \draw[thick] (\a:\R) arc (\a:-\a:\R);
+                \draw[thick] (\a:\r) arc (\a:-\a:\r);
+
+                % Draw angle arc (theta) touching both red radii
+                \draw[thick, blue] (\a:1) arc (\a:-\a:1);
+                
+                % Label for theta
+                \node[blue,right] at (1,0.3) {\Large $\theta$};
+
+                % L
+                \node at (\a+5:\R-0.3) {\Large $R$}; % Outer radius label
+                \node[below] at (0.5,-0.7) {\Large $r$}; % Inner radius label
+                \draw [very thick,blue,&lt;-&gt;]  (0,-0.1)--(1.4,-1.4);
+            \end{tikzpicture}
+        </latex-image>
+            
+        </image>
+
+        <p xml:id="auto_bi2fhtee">
+            Having the knowledge of the area of a sector and the area of an annulus it is very easy to identify the area of an 
+            annular sector.
+        </p>
+                
     
-           
-    <image width="60%">
-    <latex-image label="Ann1">
-        \begin{tikzpicture}
-                % Define radii and angle
-            \def\R{3}  % Outer radius
-            \def\r{2}  % Inner radius
-            \def\a{40} % Half of the total angle theta
+        <p xml:id="auto_46yildd1">
+            <m>\textbf{Area of an annular sector}</m>
+        </p>
 
-            % Draw concentric circles
-            \draw[dashed,very thick] (0,0) circle (\R);
-            \draw[dashed,very thick] (0,0) circle (\r);
-            
-            % Draw annular sector
-            \fill[green!30,very thick] (\a:\r) arc (\a:-\a:\r) -- (-\a:\R) arc (-\a:\a:\R) -- cycle;
-
-            % Draw sector boundaries
-            \draw[very thick, blue] (0,0) -- (\a:\R);
-            \draw[thick, red] (0,0) -- (-\a:\R);
-            \draw[thick] (\a:\R) arc (\a:-\a:\R);
-            \draw[thick] (\a:\r) arc (\a:-\a:\r);
-
-            % Draw angle arc (theta) touching both red radii
-            \draw[thick, blue] (\a:1) arc (\a:-\a:1);
-            
-            % Label for theta
-            \node[blue,right] at (1,0.3) {\Large $\theta$};
-
-            % L
-            \node at (\a+5:\R-0.3) {\Large $R$}; % Outer radius label
-            \node[below] at (0.5,-0.7) {\Large $r$}; % Inner radius label
-            \draw [very thick,blue,&lt;-&gt;]  (0,-0.1)--(1.4,-1.4);
-        \end{tikzpicture}
-    </latex-image>
-        
-    </image>
-
-    <p xml:id="auto_bi2fhtee">
-        Having the knowledge of the area of a sector and the area of an annulus it is very easy to identify the area of an 
-        annular sector.
-    </p>
-            
-   
-    <p xml:id="auto_46yildd1">
-        <m>\textbf{Area of an annular sector}</m>
-    </p>
-
-    <p xml:id="auto_tz76scxi">
-        Area of an annular sector is: <me>A=\frac{\theta}{360} \times \pi(R^2-r^2)</me>
-    </p>
+        <p xml:id="auto_tz76scxi">
+            Area of an annular sector is: <me>A=\frac{\theta}{360} \times \pi(R^2-r^2)</me>
+        </p>
+    </insight>
 
     <axiom component="lesson-plan">
         <title>Practice and Application</title>
@@ -531,9 +640,86 @@
             </li>
         </dl>
     </axiom>
+    <exercises xml:id="exercises-annular-sector">
+        <exercise>
+            <statement>
+                <p>
+                    A clock's minute hand moves <m>150^\circ </m> in <m>25</m> minutes. The minute 
+                    hand is <m>15 \,cm</m> long, and the inner radius is <m>5 \,cm</m> Calculate the cleaned area.
+                </p>
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
+                    A windshield wiper moves through <m>110^\circ</m>. 
+                    The blade is <m>45 \,cm</m> long, and the pivot distance is <m>15\, cm</m>.  Calculate the cleaned area.
+                </p>
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
+                    A circular table has a decorative border that is <m>10\, cm</m> wide. 
+                    The border covers a central angle of <m>120^\circ</m>, and the outer radius is <m>40\, cm</m>. 
+                    Find the area of the border.
+                </p>
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
+                    A mechanical arm sweeps through <m>180°</m>. 
+                    The outer radius is <m>8\, m</m>, and the inner radius is 
+                    <m>2 \,m</m>. Determine the area covered.
+                </p>
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                <p>
+                    The shaded region in the figure
+                    below shows the area swept out on a
+                    flat windscreen by a wiper.
+                    Calculate the area of this region.
+                </p>
+                <image width="60%">
+                    <latex-image  label="Ann4">
+                        \begin{tikzpicture}[scale=0.5]
+                            % Sector (area swept by wiper)
+                            \fill[pattern=north east lines] (0,0) -- (100:16) arc (100:0:16) -- cycle;
+                            
+                            \fill[fill=white,very thick] (0,0) -- (100:14) arc (100:0:14) -- cycle;
+                            
+                            \fill[fill=blue] (0,0) -- (100:1) arc (100:0:1) -- cycle;
+
+                            
+
+                            % Lines for sector
+                            \draw [very thick] (0,0) -- (100:16);
+                            \draw [very thick] (0,0) -- (0:16);
+                            \draw  [very thick] (100:16) arc (100:0:16);
+
+                            % Angle label
+                            \node [right] at (0.9, 0.8) {$120^\circ$};
+                            \draw[&lt;-&gt;,below,blue,very thick] (0,-0.2)--(14,-0.2);
+                            \draw[&lt;-&gt;,below,blue,very thick] (14,-0.2)--(16,-0.2);
+
+                            % Length labels
+                            \node[below] at (0:9) {16 cm};
+                            \node[above left] at (100:14.5) {4 cm};
+
+                            % Wiper label
+                            \node[left] at (100:16) {Wiper};
+                        \end{tikzpicture}
+                    </latex-image>  
+                </image>
+            </statement>
+        </exercise>
+    </exercises>
+
 
     <xi:include href="../../resources-checkpoint.ptx" />
-
 
     <exercise  label="ex-calculating-the-area-swept-by-a-windscreen-wiper">
         <stack label="stk-calculating-the-area-swept-by-a-windscreen-wiper" source="stack/top/2-0-Measurement-Geometry/2-6-Area-of-a-Part-of-a-Circle/2-6-3-Area-of-an-Annular-Sector/Calculating-the-Area-Swept-by-a-Windscreen-Wiper.xml" />
@@ -543,108 +729,6 @@
     <exercise  label="ex-calculating-areas-of-a-mechanical-arm-sweep">
         <stack label="stk-calculating-areas-of-a-mechanical-arm-sweep" source="stack/top/2-0-Measurement-Geometry/2-6-Area-of-a-Part-of-a-Circle/2-6-3-Area-of-an-Annular-Sector/Calculating-Areas-of-a-Mechanical-Arm-Sweep.xml" />
     </exercise>
-
-    <exercises>
-        <exercise>
-            <statement>
-                <p>
-                    A clock's minute hand moves <m>150^\circ </m> in <m>25</m> minutes. The minute 
-                    hand is <m>15 \,cm</m> long, and the inner radius is <m>5 \,cm</m> Calculate the cleaned area.
-                </p>
-            </statement>
-            <answer>
-                <p>
-                    <m>261.7 \;\text{cm}^2</m>
-                </p>
-            </answer>
-        </exercise>
-        <exercise>
-            <statement>
-                <p>
-                    A windshield wiper moves through <m>110^\circ</m>. 
-                    The blade is <m>45 \,cm</m> long, and the pivot distance is <m>15\, cm</m>.  Calculate the cleaned area.
-                </p>
-            </statement>
-            <answer>
-                <p>
-                    <m>1728.1 \;\text{cm}^2</m>
-                </p>
-            </answer>
-        </exercise>
-        <exercise>
-            <statement>
-                <p>
-                     A car wiper has an outer radius <m>=40 \,cm</m>, an  inner radius <m>r=10\,cm</m>, and a central angle <m>=120^\circ</m>. Find the area cleaned by the wiper?
-                </p>
-            </statement>
-            <answer>
-                <p>
-                    <m>1571 \;\text{cm}^2</m>
-                </p>
-            </answer>
-        </exercise>
-        <exercise>
-            <statement>
-                <p>
-                    A mechanical arm sweeps through <m>180^\circ</m>. 
-                    The outer radius is <m>8</m> m, and the inner radius is 
-                    <m>2</m> m. Determine the area covered.
-                </p>
-            </statement>
-            <answer>
-                <p>
-                    <m>94.26 \;\text{m}^2</m>
-                </p>
-            </answer>
-        </exercise>
-        <exercise>
-            <statement>
-                <p>
-                The shaded region in the figure
-                below shows the area swept out on a
-                flat windscreen by a wiper.
-                Calculate the area of this region.
-                </p>
-                <image width="60%">
-            <latex-image  label="Ann4">
-                \begin{tikzpicture}[scale=0.5]
-                    % Sector (area swept by wiper)
-                    \fill[pattern=north east lines] (0,0) -- (100:16) arc (100:0:16) -- cycle;
-                    
-                    \fill[fill=white,very thick] (0,0) -- (100:14) arc (100:0:14) -- cycle;
-                    
-                    \fill[fill=blue] (0,0) -- (100:1) arc (100:0:1) -- cycle;
-
-                    
-
-                    % Lines for sector
-                    \draw [very thick] (0,0) -- (100:16);
-                    \draw [very thick] (0,0) -- (0:16);
-                    \draw  [very thick] (100:16) arc (100:0:16);
-
-                    % Angle label
-                    \node [right] at (0.9, 0.8) {$120^\circ$};
-                    \draw[&lt;-&gt;,below,blue,very thick] (0,-0.2)--(14,-0.2);
-                    \draw[&lt;-&gt;,below,blue,very thick] (14,-0.2)--(16,-0.2);
-
-                    % Length labels
-                    \node[below] at (0:9) {16 cm};
-                    \node[above left] at (100:14.5) {4 cm};
-
-                    % Wiper label
-                    \node[left] at (100:16) {Wiper};
-                \end{tikzpicture}
-            </latex-image>
-            </image>
-            </statement>
-            <answer>
-                <p>
-                    <m>62.84 \;\text{cm}^2</m>
-                </p>
-            </answer>
-        </exercise>
-    </exercises>
-
 
     <axiom component="lesson-plan">
         <title>Differentiation Strategies</title>
