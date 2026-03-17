@@ -115,7 +115,7 @@
     
     <activity xml:id="auto_4y511x5c">
         <p xml:id="auto_qukpaxt8">
-            <m>\textbf{Work in groups}</m>
+            <alert>Work in groups</alert>
         </p>
         <p xml:id="auto_iqsukdch">
             <term>What you require;</term> 
@@ -124,23 +124,23 @@
             <ul xml:id="auto_9qncgj50">
                 <li xml:id="auto_sply8hjw">
                     <p xml:id="auto_frrgc2bb">
-                        A compass,
+                        A compass
                     </p>
                 </li>
                 <li xml:id="auto_umb8f72n">
                     <p xml:id="auto_twkucj2a">
-                        A ruler,
+                        A ruler
                     </p>
                 </li>
                 <li xml:id="auto_27yfoo4f">
                     <p xml:id="auto_yiy9czon">
-                        A protractor,
+                        A protractor
                     </p>
                 </li>
                 
                 <li xml:id="auto_e41n449p">
                     <p xml:id="auto_fo13cjkc">
-                        A scientific calculator,
+                        A scientific calculator
                     </p>
                 </li>
                 <li xml:id="auto_ritankly">
@@ -188,6 +188,124 @@
             </ol>
         </p>
     </activity>
+    <exploration xml:id="exploration-area-of-a-segment">
+        <title>Exploring the Area of a Circular Segment</title>
+
+        <introduction>
+            <p>
+                A <term>circular segment</term> is the region between a chord of a circle and the arc it cuts off.
+                It can be formed by taking a sector of a circle and removing the triangle formed by the two radii.
+            </p>
+
+            <p>
+                In this exploration, you will adjust the <em>radius</em> and the <em>central angle</em>.
+                Observe how the shaded region changes and how its area is related to both a sector and a triangle.
+            </p>
+
+            <p>
+                Before starting, review the <xref ref="instructions-area-of-segment" text="custom">instructions below</xref>
+                to understand how to use the interactive.
+            </p>
+        </introduction>
+
+        <figure xml:id="fig-area-of-segment-interactive">
+            <caption>
+                Interactive: Investigating the Area of a Circular Segment
+            </caption>
+
+            <interactive xml:id="interactive-area-of-segment"
+                platform="jsxgraph"
+                width="90%"
+                aspect="4:3"
+                source="jsxgraph/segment-area.js">
+
+                <slate xml:id="jsxboard-segment-area" surface="jsxboard" aspect="4:3" width="90%"/>
+
+                <instructions xml:id="instructions-area-of-segment">
+
+                    <p>
+                        <ol>
+                            <li>Use the <c>Radius (r)</c> slider to change the size of the circle.</li>
+                            <li>Use the <c>Angle (θ)</c> slider to adjust the central angle (between <m>0^\circ</m> and <m>180^\circ</m>).</li>
+                            <li>Observe the shaded region. This is the <em>circular segment</em>.</li>
+                            <li>Notice the triangle drawn inside the sector. The segment is formed by subtracting this triangle from the sector.</li>
+                            <li>
+                                <p>
+                                    Look at the calculation panel, which shows:
+                                    <ul>
+                                        <li>The area of the sector,</li>
+                                        <li>The area of the triangle, and</li>
+                                        <li>The resulting area of the segment.</li>
+                                    </ul>
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+
+                    <p>
+                        Use the interactive to investigate the following questions:
+                        <ol>
+
+                            <li>
+                                <p>
+                                    Set the angle to about <m>60^\circ</m>. 
+                                    How does the shaded segment compare to the sector? 
+                                    Which part is being removed to form the segment?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Increase the angle gradually from <m>30^\circ</m> to <m>150^\circ</m>.
+                                    How does the shape of the segment change? 
+                                    What happens to its area?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    At what angle does the segment appear largest? 
+                                    Explain your reasoning based on what you observe.
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Keep the angle fixed and increase the radius.
+                                    How does the segment area change? 
+                                    What does this suggest about the role of the radius in the formula?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Compare the sector area and triangle area for different angles.
+                                    How does their difference determine the segment area?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    When the angle is very small, what happens to the segment?
+                                    What does this suggest about the relationship between the arc and the chord?
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Based on your observations, how would you describe a formula for the area of a segment
+                                    using the sector area and the triangle area?
+                                </p>
+                            </li>
+
+                        </ol>
+                    </p>
+
+                </instructions>
+
+            </interactive>
+        </figure>
+    </exploration>
 
     <axiom component="lesson-plan">
         <title>Phase 2: Structured Instruction</title>
@@ -215,70 +333,68 @@
         </p>
     </axiom>
 
-    <p xml:id="auto_xyagzjvv">
-        <m>\textbf{Key Takeaway}</m>
-    </p>
-
-    <p xml:id="auto_ipgxjwa2">
-        A <m>\textbf{segment} </m> is the region of a circle bounded by a chord and an arc as shown in the figure below.
-    </p>
-    <image width="50%">
-    <latex-image label="Segment1">
-        \begin{tikzpicture}
-            % Draw the circle
-            \draw[thick] (0,0) circle (3);
+    <insight>
+        <p xml:id="auto_ipgxjwa2">
+            A <alert>segment</alert> is the region of a circle bounded by a chord and an arc as shown in the figure below.
+        </p>
+        <image width="50%">
+        <latex-image label="Segment1">
+            \begin{tikzpicture}
+                % Draw the circle
+                \draw[thick] (0,0) circle (3);
+                
+                % Define points for the chord
+                \coordinate (A) at (3,0);
+                \coordinate (B) at (-1.5,2.598);
+                \coordinate (O) at (0,0);
+                
+                % Draw the chord
+                \draw[thick] (A) -- (B);
+                
+                % Draw the radii
+                \draw[thick] (O) -- (A);
+                \draw[thick] (O) -- (B);
+                
+                % Shade the segment (Use a darker blue)
+                \fill[blue!60, opacity=0.7] (A) arc[start angle=0, end angle=120, radius=3cm] -- (B) -- cycle;
+                
+                % Draw the arc (on top for visibility)
+                \draw[thick] (A) arc[start angle=0, end angle=120, radius=3cm];
+                
+                % Label the points
+                \node[right] at (3,0) {A};
+                \node[above] at (B) {B};
+                \node[below] at (O) {O};
+                
+                % Mark the angle
+                \draw[thick] (0.8,0) arc[start angle=0, end angle=120, radius=0.8cm];
+                \node at (0.7,0.6) {\(\theta\)};
+                
+                \draw [very thick,-&gt;](1,2.8)--(2,3) ;
+                \draw [very thick,-&gt;](1,1.15)--(3.5,1);
+                
+                
+                \node [right] at (2,3){\textbf{Arc}};
+                \node [right] at (3.5,1){\textbf{Chord}};
+                \node [below] at (1.5,0){$r=q$};
+            \end{tikzpicture}
+        </latex-image>
             
-            % Define points for the chord
-            \coordinate (A) at (3,0);
-            \coordinate (B) at (-1.5,2.598);
-            \coordinate (O) at (0,0);
             
-            % Draw the chord
-            \draw[thick] (A) -- (B);
-            
-            % Draw the radii
-            \draw[thick] (O) -- (A);
-            \draw[thick] (O) -- (B);
-            
-            % Shade the segment (Use a darker blue)
-            \fill[blue!60, opacity=0.7] (A) arc[start angle=0, end angle=120, radius=3cm] -- (B) -- cycle;
-            
-            % Draw the arc (on top for visibility)
-            \draw[thick] (A) arc[start angle=0, end angle=120, radius=3cm];
-            
-            % Label the points
-            \node[right] at (3,0) {A};
-            \node[above] at (B) {B};
-            \node[below] at (O) {O};
-            
-            % Mark the angle
-            \draw[thick] (0.8,0) arc[start angle=0, end angle=120, radius=0.8cm];
-            \node at (0.7,0.6) {\(\theta\)};
-            
-            \draw [very thick,-&gt;](1,2.8)--(2,3) ;
-            \draw [very thick,-&gt;](1,1.15)--(3.5,1);
-            
-            
-            \node [right] at (2,3){\textbf{Arc}};
-            \node [right] at (3.5,1){\textbf{Chord}};
-            \node [below] at (1.5,0){$r=q$};
-        \end{tikzpicture}
-    </latex-image>
-        
-        
-    </image>
-    <p xml:id="auto_4q6m19gg">
-        The shaded region is a segment of the circle with centre <m>O</m> and the radius <m>q</m>
-    </p>
-    <p xml:id="auto_l6untf5n">
-        <m>\textbf{Area of a segment of a circle.}</m>
-    </p>
-    <p xml:id="auto_o772lg7b">
-        The area of a segment is given by;
-    </p>
-    <p xml:id="auto_dnm05m86">
-        <m> \text{Area of a segment}=\text{Area of sector}-\text{Area of  triangle}</m>
-    </p>
+        </image>
+        <p xml:id="auto_4q6m19gg">
+            The shaded region is a segment of the circle with centre <m>O</m> and the radius <m>q</m>
+        </p>
+        <p xml:id="auto_l6untf5n">
+            <m>\textbf{Area of a segment of a circle.}</m>
+        </p>
+        <p xml:id="auto_o772lg7b">
+            The area of a segment is given by;
+        </p>
+        <p xml:id="auto_dnm05m86">
+            <m> \text{Area of a segment}=\text{ Area of sector}-\text{ Area of  triangle}</m>
+        </p>
+    </insight>
 
     <axiom component="lesson-plan">
         <title>Phase 3: Practice and Application</title>
@@ -299,39 +415,37 @@
                 A chord in a circle of radius <m>7\, cm</m> subtends an angle of <m> 75^\circ</m> at the center as shown below. Find the area of the segment.
             </p>
             <image width="50%">
-            <latex-image label="Segment2">
-                \begin{tikzpicture}
-                    % Draw the circle
-                    \draw[thick] (0,0) circle (3);
+                <latex-image label="Segment2">
+                    \begin{tikzpicture}
+                        % Draw the circle
+                        \draw[thick] (0,0) circle (3);
+                        
+                        % Define points for the chord
+                        \coordinate (A) at (3,0);
+                        \coordinate (B) at (0,3);
+                        \coordinate (O) at (0,0);
+                        
+                        % Draw the chord
+                        \draw[thick] (A) -- (B);
+                        
+                        % Draw the radii
+                        \draw[thick] (O) -- (A);
+                        \draw[thick] (O) -- (B);
+                        
+                        % Shade the segment (darker blue for visibility)
+                        \fill[very thick,green!60, opacity=0.7] (A) arc[start angle=0, end angle=90, radius=3cm] -- (B) -- cycle;
+                        
+                        % Draw the arc
+                        \draw[thick] (A) arc[start angle=0, end angle=90, radius=3cm];
+                        
                     
-                    % Define points for the chord
-                    \coordinate (A) at (3,0);
-                    \coordinate (B) at (0,3);
-                    \coordinate (O) at (0,0);
-                    
-                    % Draw the chord
-                    \draw[thick] (A) -- (B);
-                    
-                    % Draw the radii
-                    \draw[thick] (O) -- (A);
-                    \draw[thick] (O) -- (B);
-                    
-                    % Shade the segment (darker blue for visibility)
-                    \fill[very thick,green!60, opacity=0.7] (A) arc[start angle=0, end angle=90, radius=3cm] -- (B) -- cycle;
-                    
-                    % Draw the arc
-                    \draw[thick] (A) arc[start angle=0, end angle=90, radius=3cm];
-                    
-                
-                    
-                    % Mark the angle
-                    \draw[very thick] (0.7,0) arc[start angle=0, end angle=90, radius=0.7cm];
-                    \node [right]at (0.7,0.5) {\(75^\circ\)};
-                    \node[left] at (0,1.5){\textbf{7 cm}};
-                \end{tikzpicture}
-            </latex-image>
-            
-                
+                        
+                        % Mark the angle
+                        \draw[very thick] (0.7,0) arc[start angle=0, end angle=90, radius=0.7cm];
+                        \node [right]at (0.7,0.5) {\(75^\circ\)};
+                        \node[left] at (0,1.5){\textbf{7 cm}};
+                    \end{tikzpicture}
+                </latex-image>
             </image>
         </statement>
         <solution>
@@ -446,27 +560,27 @@
                 <ol xml:id="auto_g4ly6fts" marker="(a)">
                     <li xml:id="auto_mfca45km">
                         <p xml:id="auto_orrbpwf8">
-                            the distance ON.
+                            The distance ON.
                         </p>
                     </li>
                     <li xml:id="auto_fx9kagip">
                         <p xml:id="auto_cha81re8">
-                            the area of the sector OXPY.
+                            The area of the sector OXPY.
                         </p>
                     </li>
                     <li xml:id="auto_ofh60v7t">
                         <p xml:id="auto_cnbgyspf">
-                            the area of triangle OXY
+                            The area of triangle OXY
                         </p>
                     </li>
                     <li xml:id="auto_b1qon853">
                         <p xml:id="auto_d459mmln">
-                            the area of the minor segment.
+                            The area of the minor segment.
                         </p>
                     </li>
                     <li xml:id="auto_20bnrgew">
                         <p xml:id="auto_tof1vq87">
-                            the area of the major segment.
+                            The area of the major segment.
                         </p>
                     </li>
                 </ol>
@@ -660,59 +774,55 @@
                     4</m> cm and BD <m>= 2</m> cm. 
                 </p>
                 <image width="50%">
-                <latex-image label="Segment4">
-                    \begin{tikzpicture}[scale=1.2]
-                        
-                        % Coordinates
-                        \coordinate (O) at (0,3);
-                        \coordinate (A) at (-2,0);
-                        \coordinate (C) at (2,0);
-                        \coordinate (D) at (0,0);
-                        \coordinate (B) at (0,-1);
+                    <latex-image label="Segment4">
+                        \begin{tikzpicture}[scale=1.2]
+                            
+                            % Coordinates
+                            \coordinate (O) at (0,3);
+                            \coordinate (A) at (-2,0);
+                            \coordinate (C) at (2,0);
+                            \coordinate (D) at (0,0);
+                            \coordinate (B) at (0,-1);
 
-                        % Lines
-                        \draw [fill=white,very thick](O) -- (A) -- (C) -- cycle; % Triangle OAC
-                        \draw (A) -- (C);
-                        \draw [very thick](D) -- (B);
+                            % Lines
+                            \draw [fill=white,very thick](O) -- (A) -- (C) -- cycle; % Triangle OAC
+                            \draw (A) -- (C);
+                            \draw [very thick](D) -- (B);
 
-                        % Arc
-                        \draw [very thick] (A) to[out=-60,in=-120] (C);
+                            % Arc
+                            \draw [very thick] (A) to[out=-60,in=-120] (C);
 
-                        % Right angle mark
-                        \draw (0,-0.2) -- (0.2,-0.2) -- (0.2,0);
+                            % Right angle mark
+                            \draw (0,-0.2) -- (0.2,-0.2) -- (0.2,0);
 
-                        % Labels
-                        \node[above] at (O) {O};
-                        \node[left] at (A) {A};
-                        \node[right] at (C) {C};
-                        \node[above] at (D) {D};
-                        \node[below] at (B) {B};
-                        \node[above right] at (-1,0) {4 cm};
-                        \node[right] at (0,-0.5) {2 cm};
-                    \end{tikzpicture}
-                </latex-image>
+                            % Labels
+                            \node[above] at (O) {O};
+                            \node[left] at (A) {A};
+                            \node[right] at (C) {C};
+                            \node[above] at (D) {D};
+                            \node[below] at (B) {B};
+                            \node[above right] at (-1,0) {4 cm};
+                            \node[right] at (0,-0.5) {2 cm};
+                        \end{tikzpicture}
+                    </latex-image>
                     
                 </image>
-
-
-                <p xml:id="auto_tiigme4w">
-                    Calculate:
-                </p>
-                <p xml:id="auto_nvsiy821">
-                    <ol xml:id="auto_g2mz9mas" marker="(a)">
-                        <li xml:id="auto_k6n3ndzi">
-                            <p xml:id="auto_h0j8soil">
-                                the radius OA of the circle.
+                <p>
+                    Calculate the following:
+                    <ol marker="(a)">
+                        <li>
+                            <p>
+                                The radius OA of the circle.
                             </p>
                         </li>
-                        <li xml:id="auto_ws0il1jx">
-                            <p xml:id="auto_r97gfgfo">
-                                the area of the sector OABC.
+                        <li>
+                            <p>
+                                The area of the sector OABC.
                             </p>
                         </li>
-                        <li xml:id="auto_8j5njjfn">
-                            <p xml:id="auto_djaf8sa9">
-                                the area of the segment ABCD
+                        <li>
+                            <p>
+                                The area of the segment ABCD.
                             </p>
                         </li>
                     </ol>
@@ -773,37 +883,36 @@
                     forming a chord that subtends an angle of <m>120^\circ</m> at the center as shown below.
                 </p>
                 <image width="50%">
-                <latex-image label="Segment5">
-                    \begin{tikzpicture}
-                        % Draw the circle
-                        \draw[very thick] (0,0) circle (3);
+                    <latex-image label="Segment5">
+                        \begin{tikzpicture}
+                            % Draw the circle
+                            \draw[very thick] (0,0) circle (3);
+                            
+                            % Define points for the chord
+                            \coordinate (A) at (3,0);
+                            \coordinate (B) at (-1.5,2.598);
+                            \coordinate (O) at (0,0);
+                            
+                            % Draw the chord
+                            \draw[thick] (A) -- (B);
+                            
+                            % Draw the radii
+                            \draw[thick] (O) -- (A);
+                            \draw[thick] (O) -- (B);
+                            
+                            % Shade the segment (darker for visibility)
+                            \fill[cyan!60, opacity=0.7] (A) arc[start angle=0, end angle=120, radius=3cm] -- (B) -- cycle;
+                            
+                            % Draw the arc
+                            \draw[thick] (A) arc[start angle=0, end angle=120, radius=3cm];
+                            
                         
-                        % Define points for the chord
-                        \coordinate (A) at (3,0);
-                        \coordinate (B) at (-1.5,2.598);
-                        \coordinate (O) at (0,0);
-                        
-                        % Draw the chord
-                        \draw[thick] (A) -- (B);
-                        
-                        % Draw the radii
-                        \draw[thick] (O) -- (A);
-                        \draw[thick] (O) -- (B);
-                        
-                        % Shade the segment (darker for visibility)
-                        \fill[cyan!60, opacity=0.7] (A) arc[start angle=0, end angle=120, radius=3cm] -- (B) -- cycle;
-                        
-                        % Draw the arc
-                        \draw[thick] (A) arc[start angle=0, end angle=120, radius=3cm];
-                        
-                    
-                        % Mark the angle
-                        \draw[thick] (0.7,0) arc[start angle=0, end angle=120, radius=0.7cm];
-                        \node [right]at (0.5,0.3) {\(120^\circ\)};
-    
-                    \end{tikzpicture}
-                </latex-image>
-                   
+                            % Mark the angle
+                            \draw[thick] (0.7,0) arc[start angle=0, end angle=120, radius=0.7cm];
+                            \node [right]at (0.5,0.3) {\(120^\circ\)};
+        
+                        \end{tikzpicture}
+                    </latex-image>
                 </image>
                 <p>
                     Determine the area of the segment formed
@@ -839,19 +948,14 @@
     
 
 
+    <exercise  label="ex-finding-the-area-of-segment">
+        <stack label="stk-finding-the-area-of-segment" source="stack/top/2-0-Measurement-Geometry/2-6-Area-of-a-Part-of-a-Circle/2-6-4-Area-of-a-Segment-of-a-Circle/Finding-the-area-of-segment-.xml" />
+    </exercise>
+        
 
-
-    
-
-
-            <exercise  label="ex-finding-the-area-of-segment">
-                <stack label="stk-finding-the-area-of-segment" source="stack/top/2-0-Measurement-Geometry/2-6-Area-of-a-Part-of-a-Circle/2-6-4-Area-of-a-Segment-of-a-Circle/Finding-the-area-of-segment-.xml" />
-            </exercise>
-                
-
-            <exercise  label="ex-finding-the-area-of-a-circular-segment">
-                <stack label="stk-finding-the-area-of-a-circular-segment" source="stack/top/2-0-Measurement-Geometry/2-6-Area-of-a-Part-of-a-Circle/2-6-4-Area-of-a-Segment-of-a-Circle/Finding-the-Area-of-a-Circular-Segment.xml" />
-            </exercise>
+    <exercise  label="ex-finding-the-area-of-a-circular-segment">
+        <stack label="stk-finding-the-area-of-a-circular-segment" source="stack/top/2-0-Measurement-Geometry/2-6-Area-of-a-Part-of-a-Circle/2-6-4-Area-of-a-Segment-of-a-Circle/Finding-the-Area-of-a-Circular-Segment.xml" />
+    </exercise>
 
     <axiom component="lesson-plan">
         <title>Differentiation</title>
