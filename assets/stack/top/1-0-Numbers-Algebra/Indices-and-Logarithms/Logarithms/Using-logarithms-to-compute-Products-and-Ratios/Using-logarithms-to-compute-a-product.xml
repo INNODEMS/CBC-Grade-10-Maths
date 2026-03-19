@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Using logarithms to compute a product</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+Given that:
+\[
+\log A = {@L_a@}, \quad \log B = {@L_b@}
+\]
+</p>
+
+<p>
+Use logarithms to find the value of:
+</p>
+
+<p>
+\[
+A \times B
+\]
+</p>
+
+<p>
+Give your answer correct to 3 decimal places.
+</p>
+
+<p>
+[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+Step 1: Use the product rule:
+</p>
+
+<p>
+\[
+\text{log} (AB) = \text{log} A + \text{log} B
+\]
+</p>
+
+<p>
+\[
+= {@L_a@} + {@L_b@}
+\]
+</p>
+
+<p>
+\[
+= {@L_sum@}
+\]
+</p>
+
+<p>
+Step 2: Take the antilogarithm:
+</p>
+
+<p>
+\[
+AB = 10^{@L_sum@}
+\]
+</p>
+
+<p>
+\[
+= {@ans_round@}
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Given logarithms */
+L_a: float(rand(3000)/10000 + 0.2);
+L_b: float(rand(3000)/10000 + 0.2);
+
+/* Sum of logs */
+L_sum: L_a + L_b;
+
+/* Final answer (antilog) */
+ans: 10^(L_sum);
+
+/* Rounded answer */
+ans_round: float(round(ans*1000)/1000);
+
+/* mistakes */
+m1: L_sum;
+m2: L_a * L_b;
+m3: 10^(L_a * L_b);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ans_round@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Using logarithms to compute products</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to compute a product using logarithms by applying the product rule and taking the antilogarithm.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ans_round</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ans_round</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>stopped at logs</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>L_sum</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You added the logarithms correctly, but you must take the antilogarithm to get the final answer.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>multiplied logs</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Logarithms of products are added, not multiplied.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1858551122</deployedseed>
+    <deployedseed>1986058488</deployedseed>
+    <deployedseed>606058045</deployedseed>
+    <deployedseed>890683016</deployedseed>
+    <deployedseed>1065319550</deployedseed>
+    <deployedseed>1998060725</deployedseed>
+    <deployedseed>1506196143</deployedseed>
+    <deployedseed>561670275</deployedseed>
+    <deployedseed>1220336574</deployedseed>
+    <deployedseed>708828949</deployedseed>
+    <deployedseed>1565162204</deployedseed>
+    <deployedseed>877060734</deployedseed>
+    <deployedseed>238645232</deployedseed>
+    <deployedseed>1807972291</deployedseed>
+    <deployedseed>1671144004</deployedseed>
+    <deployedseed>24566618</deployedseed>
+    <deployedseed>1432841774</deployedseed>
+    <deployedseed>397821997</deployedseed>
+    <deployedseed>543593780</deployedseed>
+    <deployedseed>136963031</deployedseed>
+    <deployedseed>882480093</deployedseed>
+    <deployedseed>1887129889</deployedseed>
+    <deployedseed>1687812590</deployedseed>
+    <deployedseed>310275213</deployedseed>
+    <deployedseed>1869665570</deployedseed>
+    <deployedseed>1440483862</deployedseed>
+    <deployedseed>665735310</deployedseed>
+    <deployedseed>1707972495</deployedseed>
+    <deployedseed>2100493919</deployedseed>
+    <deployedseed>56453876</deployedseed>
+    <deployedseed>1131188155</deployedseed>
+    <deployedseed>305175622</deployedseed>
+    <deployedseed>834143395</deployedseed>
+    <deployedseed>1061872303</deployedseed>
+    <deployedseed>2039565507</deployedseed>
+    <deployedseed>731289845</deployedseed>
+    <deployedseed>461820597</deployedseed>
+    <deployedseed>1185992347</deployedseed>
+    <deployedseed>1345319005</deployedseed>
+    <deployedseed>541525022</deployedseed>
+    <deployedseed>419207793</deployedseed>
+    <deployedseed>365984305</deployedseed>
+    <deployedseed>1558158995</deployedseed>
+    <deployedseed>1110296774</deployedseed>
+    <deployedseed>2114800910</deployedseed>
+    <deployedseed>132451840</deployedseed>
+    <deployedseed>602997681</deployedseed>
+    <deployedseed>1010513106</deployedseed>
+    <deployedseed>1031830942</deployedseed>
+    <deployedseed>1428569545</deployedseed>
+    <deployedseed>377620473</deployedseed>
+    <deployedseed>1401866089</deployedseed>
+    <deployedseed>1823122365</deployedseed>
+    <deployedseed>639480532</deployedseed>
+    <deployedseed>1313119350</deployedseed>
+    <deployedseed>1758564827</deployedseed>
+    <deployedseed>154869777</deployedseed>
+    <deployedseed>963826447</deployedseed>
+    <deployedseed>1486499061</deployedseed>
+    <deployedseed>533861875</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ans_round</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

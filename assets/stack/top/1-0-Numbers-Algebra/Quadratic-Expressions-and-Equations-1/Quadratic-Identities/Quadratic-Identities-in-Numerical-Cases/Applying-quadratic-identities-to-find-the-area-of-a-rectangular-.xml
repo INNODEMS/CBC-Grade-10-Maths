@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Applying quadratic identities to find the area of a rectangular field</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A rectangular field has length \((x + {@a@})\) metres and width \((x - {@a@})\) metres.
+(a) Express the area of the field as a simplified quadratic expression using a quadratic identity.
+</p>
+
+<p>
+[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+</p>
+
+<p>
+(b) If \(x = {@xv@}\), find the area of the field.
+</p>
+
+<p>
+[[input:ans2]] [[validation:ans2]] [[feedback:prt2]] \(m^2\)
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+Area of a rectangle = length × width.
+</p>
+
+<p>
+So the area is:
+</p>
+
+<p>
+\[
+(x + {@a@})(x - {@a@})
+\]
+</p>
+
+<p>
+Step 1: Recognise the identity.
+</p>
+
+<p>
+\[
+(a+b)(a-b) = a^2 - b^2
+\]
+</p>
+
+<p>
+Here,
+</p>
+
+<p>
+\[
+a = x, \quad b = {@a@}
+\]
+</p>
+
+<p>
+Step 2: Apply the identity.
+</p>
+
+<p>
+\[
+(x + {@a@})(x - {@a@}) = x^2 - {@a^2@}
+\]
+</p>
+
+<p>
+Step 3: Substitute \(x = {@xv@}\).
+</p>
+
+<p>
+\[
+x^2 - {@a^2@} = {@xv^2@} - {@a^2@}
+\]
+</p>
+
+<p>
+\[
+= {@area_val@}
+\]
+</p>
+
+<p>
+Therefore, the area of the field is <strong>{@area_val@} \(m^2\)</strong>.
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Difference between dimensions */
+a: rand(6) + 3;      /* 3–8 */
+
+/* Value of x for evaluation */
+xv: rand(10) + 10;   /* 10–19 */
+
+/* Area expression */
+expr: expand((x + a)*(x - a));
+
+/* Numerical area */
+area_val: subst(x = xv, expr);
+
+/* Common mistakes */
+m1: x^2 + a^2;
+m2: (x + a)^2;
+m3: (x - a)^2;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@expr@}, {@area_val@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Quadratic identities in numerical cases</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to apply the difference of squares identity to form a quadratic expression for the area of a rectangle and then evaluate it by substituting a given value.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>expr</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>area_val</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>expr</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>added squares</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Check the identity. (𝑥+𝑎)(𝑥−𝑎) is a difference of squares, not 𝑥^2+𝑎^2.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>treated as perfect square</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>This is not a perfect square. The factors have different signs.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Use the identity (𝑎+𝑏)(𝑎−𝑏)= a^2 - b^2</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>area_val</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>m3</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>First find the quadratic expression for the area, then substitute</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1093224062</deployedseed>
+    <deployedseed>1440345792</deployedseed>
+    <deployedseed>1318125236</deployedseed>
+    <deployedseed>614740546</deployedseed>
+    <deployedseed>329302784</deployedseed>
+    <deployedseed>980018517</deployedseed>
+    <deployedseed>1994980015</deployedseed>
+    <deployedseed>1179869169</deployedseed>
+    <deployedseed>2015259517</deployedseed>
+    <deployedseed>228193628</deployedseed>
+    <deployedseed>1510956523</deployedseed>
+    <deployedseed>1551528871</deployedseed>
+    <deployedseed>2124022704</deployedseed>
+    <deployedseed>978598854</deployedseed>
+    <deployedseed>758650585</deployedseed>
+    <deployedseed>33413575</deployedseed>
+    <deployedseed>65852018</deployedseed>
+    <deployedseed>1479274962</deployedseed>
+    <deployedseed>1489105591</deployedseed>
+    <deployedseed>1425130254</deployedseed>
+    <deployedseed>833204571</deployedseed>
+    <deployedseed>1301972623</deployedseed>
+    <deployedseed>1353942560</deployedseed>
+    <deployedseed>268692549</deployedseed>
+    <deployedseed>1364581285</deployedseed>
+    <deployedseed>1011103100</deployedseed>
+    <deployedseed>306091778</deployedseed>
+    <deployedseed>832904661</deployedseed>
+    <deployedseed>1923599963</deployedseed>
+    <deployedseed>557516718</deployedseed>
+    <deployedseed>947381882</deployedseed>
+    <deployedseed>413746547</deployedseed>
+    <deployedseed>1227172652</deployedseed>
+    <deployedseed>355312445</deployedseed>
+    <deployedseed>875422947</deployedseed>
+    <deployedseed>1319019861</deployedseed>
+    <deployedseed>1472204804</deployedseed>
+    <deployedseed>54317802</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>expr</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>area_val</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

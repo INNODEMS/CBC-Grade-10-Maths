@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Forming a quadratic equation from the product of two expressions</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+The product of two expressions \((x + {@a@})\) and \((x + {@b@})\) is {@k@}.
+Form a quadratic equation in \(x\) and write it in standard quadratic form.
+</p>
+
+<p>
+[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+The statement “the product is {@k@}” means:
+</p>
+
+<p>
+\[
+(x + {@a@})(x + {@b@}) = {@k@}
+\]
+</p>
+
+<p>
+Step 1: Expand the product.
+</p>
+
+<p>
+\[
+(x + {@a@})(x + {@b@}) = x^2 + ({@a+b@})x + {@a*b@}
+\]
+</p>
+
+<p>
+So the equation becomes:
+</p>
+
+<p>
+\[
+x^2 + ({@a+b@})x + {@a*b@} = {@k@}
+\]
+</p>
+
+<p>
+Step 2: Rearrange to standard form by subtracting {@k@} from both sides.
+</p>
+
+<p>
+\[
+x^2 + ({@a+b@})x + {@a*b@} - {@k@} = 0
+\]
+</p>
+
+<p>
+Therefore, the required quadratic equation is:
+</p>
+
+<p>
+\[
+\boxed{x^2 + ({@a+b@})x + {@a*b - k@} = 0}
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random constants */
+a: rand(6) + 1;
+b: rand(6) + 1;
+k: rand(20) + 5;
+
+/* Expanded product */
+prod: expand((x + a)*(x + b));
+
+/* Standard LHS (expression that should equal 0) */
+lhs: expand(prod - k);
+
+/* Standard equation */
+standard_eqn: lhs = 0;
+
+/* Common mistakes */
+m1: prod;                     /* only expanded */
+m2: expand(prod + k);         /* added instead of subtracted */
+m3: expand(x^2 + (a + b)*x - k); /* missed constant a*b */
+m4: lhs;                      /* wrote expression but forgot =0 */</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@prod@}, {@standard_eqn@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Formation of quadratic equations</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to form a quadratic equation from a relationship involving the product of two algebraic expressions and rewrite it in standard quadratic form.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>standard_eqn</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>standard_eqn</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>mistake1</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You expanded the product correctly, but you must subtract {@k@} and write the equation equal to zero.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>mistake2</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Check the rearrangement step. {@k@} should be subtracted so the equation equals zero.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>mistake3</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Check the expansion carefully. The constant term from multiplying the brackets is {@a*b@}.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>First expand (x+@a@)(x+@b@), then move {@k@} to the left side so the equation equals zero.</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1859486354</deployedseed>
+    <deployedseed>256761712</deployedseed>
+    <deployedseed>773724483</deployedseed>
+    <deployedseed>326699762</deployedseed>
+    <deployedseed>1101029575</deployedseed>
+    <deployedseed>1909414556</deployedseed>
+    <deployedseed>828308456</deployedseed>
+    <deployedseed>189278515</deployedseed>
+    <deployedseed>1619735185</deployedseed>
+    <deployedseed>1010074486</deployedseed>
+    <deployedseed>382256220</deployedseed>
+    <deployedseed>1458804560</deployedseed>
+    <deployedseed>812189789</deployedseed>
+    <deployedseed>240027512</deployedseed>
+    <deployedseed>1999517991</deployedseed>
+    <deployedseed>1096054215</deployedseed>
+    <deployedseed>1407085484</deployedseed>
+    <deployedseed>1019789739</deployedseed>
+    <deployedseed>1018912112</deployedseed>
+    <deployedseed>794040206</deployedseed>
+    <deployedseed>1075590780</deployedseed>
+    <deployedseed>1660360980</deployedseed>
+    <deployedseed>198650540</deployedseed>
+    <deployedseed>208796019</deployedseed>
+    <deployedseed>104259027</deployedseed>
+    <deployedseed>1415627244</deployedseed>
+    <deployedseed>422215611</deployedseed>
+    <deployedseed>739697628</deployedseed>
+    <deployedseed>1716336080</deployedseed>
+    <deployedseed>1466916566</deployedseed>
+    <deployedseed>1318907364</deployedseed>
+    <deployedseed>1433007619</deployedseed>
+    <deployedseed>808256017</deployedseed>
+    <deployedseed>690469311</deployedseed>
+    <deployedseed>1011398385</deployedseed>
+    <deployedseed>613462761</deployedseed>
+    <deployedseed>2043765314</deployedseed>
+    <deployedseed>1960373352</deployedseed>
+    <deployedseed>808372035</deployedseed>
+    <deployedseed>994234379</deployedseed>
+    <deployedseed>1490321743</deployedseed>
+    <deployedseed>1110792762</deployedseed>
+    <deployedseed>367768414</deployedseed>
+    <deployedseed>1779917369</deployedseed>
+    <deployedseed>447180135</deployedseed>
+    <deployedseed>1641118450</deployedseed>
+    <deployedseed>1841090004</deployedseed>
+    <deployedseed>2055584736</deployedseed>
+    <deployedseed>642439873</deployedseed>
+    <deployedseed>1349776757</deployedseed>
+    <deployedseed>199542817</deployedseed>
+    <deployedseed>552013014</deployedseed>
+    <deployedseed>1519352895</deployedseed>
+    <deployedseed>1620304126</deployedseed>
+    <deployedseed>1543141819</deployedseed>
+    <deployedseed>1030684223</deployedseed>
+    <deployedseed>1248621572</deployedseed>
+    <deployedseed>2033126880</deployedseed>
+    <deployedseed>703883933</deployedseed>
+    <deployedseed>1929257500</deployedseed>
+    <deployedseed>1775476765</deployedseed>
+    <deployedseed>753289894</deployedseed>
+    <deployedseed>1096177713</deployedseed>
+    <deployedseed>923397182</deployedseed>
+    <deployedseed>101153982</deployedseed>
+    <deployedseed>301046107</deployedseed>
+    <deployedseed>1157637013</deployedseed>
+    <deployedseed>1063918820</deployedseed>
+    <deployedseed>786047798</deployedseed>
+    <deployedseed>93635726</deployedseed>
+    <deployedseed>1736104774</deployedseed>
+    <deployedseed>121756176</deployedseed>
+    <deployedseed>1435145689</deployedseed>
+    <deployedseed>1796693776</deployedseed>
+    <deployedseed>1644288007</deployedseed>
+    <deployedseed>501384299</deployedseed>
+    <deployedseed>1184090641</deployedseed>
+    <deployedseed>1727275404</deployedseed>
+    <deployedseed>25094703</deployedseed>
+    <deployedseed>1668862017</deployedseed>
+    <deployedseed>1166772959</deployedseed>
+    <deployedseed>1033632155</deployedseed>
+    <deployedseed>1831256399</deployedseed>
+    <deployedseed>961478687</deployedseed>
+    <deployedseed>1958061631</deployedseed>
+    <deployedseed>75074323</deployedseed>
+    <deployedseed>1277797598</deployedseed>
+    <deployedseed>1675918195</deployedseed>
+    <deployedseed>1719714776</deployedseed>
+    <deployedseed>1798517901</deployedseed>
+    <deployedseed>1952068432</deployedseed>
+    <deployedseed>1322908290</deployedseed>
+    <deployedseed>2144098929</deployedseed>
+    <deployedseed>1538456991</deployedseed>
+    <deployedseed>1500854963</deployedseed>
+    <deployedseed>32402598</deployedseed>
+    <deployedseed>548840229</deployedseed>
+    <deployedseed>494360511</deployedseed>
+    <deployedseed>612221911</deployedseed>
+    <deployedseed>1127330202</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>standard_eqn</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

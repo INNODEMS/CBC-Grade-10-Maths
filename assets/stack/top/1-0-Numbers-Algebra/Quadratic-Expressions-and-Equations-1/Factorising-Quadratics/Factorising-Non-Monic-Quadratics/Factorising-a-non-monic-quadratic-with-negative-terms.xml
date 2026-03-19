@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Factorising a non-monic quadratic with negative terms</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Factorise the following quadratic expression completely:
+\[
+{@expr@}
+\]
+</p>
+
+<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+We want to factorise:
+</p>
+
+<p>
+\[
+{@expr@}
+\]
+</p>
+
+<p>
+Step 1: Identify the coefficients.
+</p>
+
+<p>
+Coefficient of \(x^2\) = {@A@}
+</p>
+
+<p>
+Coefficient of \(x\) = {@B@}
+</p>
+
+<p>
+Constant term = {@C@}
+</p>
+
+<p>
+Step 2: Multiply the coefficient of \(x^2\) and the constant.
+</p>
+
+<p>
+\[
+{@A@} \times {@C@} = {@A*C@}
+\]
+</p>
+
+<p>
+Step 3: Find two numbers whose product is {@A*C@} and whose sum is {@B@}.
+</p>
+
+<p>
+These numbers are {@a*c@} and {@-b@}.
+</p>
+
+<p>
+Step 4: Split the middle term.
+</p>
+
+<p>
+\[
+{@A@}x^2 + {@a*c@}x - {@b@}x + {@C@}
+\]
+</p>
+
+<p>
+Step 5: Factorise by grouping.
+</p>
+
+<p>
+\[
+{@A@}x(x + {@c@}) - {@b@}(x + {@c@})
+\]
+</p>
+
+<p>
+Step 6: Factor the common bracket.
+</p>
+
+<p>
+\[
+({@a@}x - {@b@})(x + {@c@})
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random factors */
+a: rand(4) + 2;   /* coefficient of x */
+b: rand(4) + 1;
+c: rand(4) + 1;
+
+/* Construct quadratic */
+expr: expand((a*x - b)*(x + c));
+
+/* Correct factorisation */
+correct: (a*x - b)*(x + c);
+
+/* Coefficients for explanation */
+A: a;
+B: a*c - b;
+C: -b*c;
+
+/* Common mistakes */
+m1: (a*x + b)*(x + c);
+m2: (a*x - b)^2;
+m3: x*(a*x + B) + C;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@expr@}, {@correct@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Factorising non-monic quadratic expressions</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to factorise a non-monic quadratic expression with negative terms by applying the product–sum method and grouping.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>correct</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>correct</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>mistake1</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Check the signs in the factors. The middle term should be negative.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>mistake2</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>This quadratic is not a perfect square. Check the coefficients again.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>mistake3</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You started splitting the middle term but did not complete the factorisation. Remember to factor by grouping.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Multiply the coefficient of 𝑥^2 and the constant term. Then find two numbers whose product and sum match the middle term, split the middle term, and factor by grouping.</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>61850921</deployedseed>
+    <deployedseed>1895844304</deployedseed>
+    <deployedseed>397841353</deployedseed>
+    <deployedseed>1615519319</deployedseed>
+    <deployedseed>876070936</deployedseed>
+    <deployedseed>953773183</deployedseed>
+    <deployedseed>1384066896</deployedseed>
+    <deployedseed>683423498</deployedseed>
+    <deployedseed>1702285295</deployedseed>
+    <deployedseed>1562650279</deployedseed>
+    <deployedseed>1561569086</deployedseed>
+    <deployedseed>1504629255</deployedseed>
+    <deployedseed>1274069205</deployedseed>
+    <deployedseed>1790734096</deployedseed>
+    <deployedseed>2130241716</deployedseed>
+    <deployedseed>1623781530</deployedseed>
+    <deployedseed>1813007268</deployedseed>
+    <deployedseed>1838396408</deployedseed>
+    <deployedseed>463570402</deployedseed>
+    <deployedseed>692611386</deployedseed>
+    <deployedseed>121674618</deployedseed>
+    <deployedseed>671826274</deployedseed>
+    <deployedseed>1698711421</deployedseed>
+    <deployedseed>788125208</deployedseed>
+    <deployedseed>1948025769</deployedseed>
+    <deployedseed>785485710</deployedseed>
+    <deployedseed>662131088</deployedseed>
+    <deployedseed>1609934291</deployedseed>
+    <deployedseed>759505888</deployedseed>
+    <deployedseed>1730529268</deployedseed>
+    <deployedseed>1521448483</deployedseed>
+    <deployedseed>1543848042</deployedseed>
+    <deployedseed>384656222</deployedseed>
+    <deployedseed>316741251</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>correct</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Application of vectors in real life</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A ferry travels due East across a wide river at a constant speed of <b>{@v_ship@} km/h</b>. At the same time, the river current is flowing due North at a constant speed of <b>{@v_current@} km/h</b>.</p>
+<p>The ferry continues this journey for <b>{@time_h@} hours</b>.</p>
+
+
+[[jsxgraph width="400px" height="400px"]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-2, 12, 12, -2], 
+    axis: true,
+    showCopyright: false
+});
+
+var v_s = {#v_ship#} / 3; // Scaling for visibility
+var v_c = {#v_current#} / 3;
+
+// Ship Velocity Vector
+var p1 = board.create('point', [0, 0], {visible: false});
+var p2 = board.create('point', [v_s, 0], {name: 'Ship Velocity', color: 'blue'});
+board.create('arrow', [p1, p2], {strokeColor: 'blue', strokeWidth: 3});
+
+// Current Velocity Vector
+var p3 = board.create('point', [v_s, v_c], {name: 'Current', color: 'green'});
+board.create('arrow', [p2, p3], {strokeColor: 'green', strokeWidth: 3});
+
+// Resultant Velocity Vector
+board.create('arrow', [p1, p3], {strokeColor: 'red', strokeWidth: 2, dash: 2});
+board.create('text', [v_s/2, v_c+0.5, "Resultant Path"], {color: 'red'});
+[[/jsxgraph]]
+
+<p>Find the :</p>
+<ol type="a">
+    <li>Magnitude of the resultant velocity of the ferry. [[input:ans1]] km/h [[validation:ans1]][[feedback:prt1]]</li>
+    <li>Total displacement of the ferry from its starting point. [[input:ans2]] km [[validation:ans2]][[feedback:prt2]]</li>
+</ol>
+<p><i>(Give your answers to 1 decimal place.)</i></p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>To solve this, we treat the velocities as perpendicular components of a vector.</p>
+
+<p><b>(a) Resultant Velocity</b></p>
+<p>Using Pythagoras' Theorem:</p>
+<p>\(\begin{align}
+v_R &= \sqrt{v_{\text{ship}}^2 + v_{\text{current}}^2} \\
+&= \sqrt{{@v_ship@}^2 + {@v_current@}^2} \\
+&= {@ta_velocity@} \,\text{ km/h}
+\end{align}\)</p>
+
+<p><b>(b) Total Displacement</b></p>
+<p>Displacement can be found by multiplying the resultant velocity by time, or by finding the components of distance first:</p>
+<p>\(\begin{align}
+\text{Distance East} &= {@v_ship@} \times {@time_h@} = {@dist_east@} \text{ km} \\
+\text{Distance North} &= {@v_current@} \times {@time_h@} = {@dist_north@} \text{ km} \\\\
+s_R &= \sqrt{{@dist_east@}^2 + {@dist_north@}^2} \\
+&= {@ta_displacement@} \text{ km}
+\end{align}\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomized speeds and times */
+v_ship: 15 + rand(10);     /* Speed of ship in km/h */
+v_current: 3 + rand(5);    /* Speed of water current in km/h */
+time_h: 2 + rand(3);       /* Time spent traveling in hours */
+
+/* Calculations for the Resultant Vector */
+/* Assuming ship goes East (x-axis) and current goes North (y-axis) */
+dist_east: v_ship * time_h;
+dist_north: v_current * time_h;
+
+/* Resultant Displacement (Magnitude) */
+disp_mag: sqrt(dist_east^2 + dist_north^2);
+ta_displacement: float(round(disp_mag * 10) / 10);
+
+/* Resultant Velocity (Magnitude) */
+vel_mag: sqrt(v_ship^2 + v_current^2);
+ta_velocity: float(round(vel_mag * 10) / 10);
+
+/* Angle (Direction) from East */
+direction_deg: (180/float(%pi)) * atan(v_current/v_ship);
+ta_direction: float(round(direction_deg * 10) / 10);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta_displacement@}</p>
+<p>{@ta_velocity@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta_velocity</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta_displacement</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta_velocity</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>ta_displacement</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1581750465</deployedseed>
+    <deployedseed>2074942563</deployedseed>
+    <deployedseed>1378075903</deployedseed>
+    <deployedseed>1704925861</deployedseed>
+    <deployedseed>1952006518</deployedseed>
+    <deployedseed>168796978</deployedseed>
+    <deployedseed>125816065</deployedseed>
+    <deployedseed>589943946</deployedseed>
+    <deployedseed>1230444552</deployedseed>
+    <deployedseed>84153358</deployedseed>
+    <deployedseed>926944047</deployedseed>
+    <deployedseed>478815179</deployedseed>
+    <deployedseed>518887672</deployedseed>
+    <deployedseed>1004028627</deployedseed>
+    <deployedseed>1942532711</deployedseed>
+    <deployedseed>1065108397</deployedseed>
+    <deployedseed>582003752</deployedseed>
+    <deployedseed>456229321</deployedseed>
+    <deployedseed>1274805436</deployedseed>
+    <deployedseed>1524192670</deployedseed>
+  </question>
+</quiz>

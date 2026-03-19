@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating midpoint and plotting a frequency polygon from grouped data.</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The following grouped data represent the distribution of exam scores for grade 10 students at Mpakani school.</p>
+
+<table border="1" style="margin-left:auto;margin-right:auto;text-align:center;">
+<tr>
+<th>Class Interval</th>
+<th>Frequency</th>
+</tr>
+<tr><td>0–10</td><td>{@f1@}</td></tr>
+<tr><td>10–20</td><td>{@f2@}</td></tr>
+<tr><td>20–30</td><td>{@f3@}</td></tr>
+<tr><td>30–40</td><td>{@f4@}</td></tr>
+<tr><td>40–50</td><td>{@f5@}</td></tr>
+</table>
+
+<br>
+
+<p><b>1.</b> Compute the class midpoints.</p>
+
+<p>
+Enter them as a list:
+</p>
+
+[[input:ans_mid]]
+[[validation:ans_mid]]
+
+<br><br>
+
+<p><b>2.</b> Determine the coordinates of the points used to draw the frequency polygon.</p>
+
+<p>
+Enter the coordinates as ordered pairs.
+</p>
+
+<br><br>
+
+[[input:ans_poly]]
+[[validation:ans_poly]]
+
+<br><br>
+
+<p><b>3.</b> Plot the frequency polygon on the graph.</p>
+
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid,{
+boundingbox:[-5,12,55,-1],
+axis:true,
+showCopyright:false
+});
+
+/* Histogram bars */
+board.create('polygon',[[0,0],[0,4],[10,4],[10,0]]);
+board.create('polygon',[[10,0],[10,7],[20,7],[20,0]]);
+board.create('polygon',[[20,0],[20,10],[30,10],[30,0]]);
+board.create('polygon',[[30,0],[30,6],[40,6],[40,0]]);
+board.create('polygon',[[40,0],[40,3],[50,3],[50,0]]);
+
+/* Points students should place */
+var p1 = board.create('point',[5,4],{name:'',size:3});
+var p2 = board.create('point',[15,7],{name:'',size:3});
+var p3 = board.create('point',[25,10],{name:'',size:3});
+var p4 = board.create('point',[35,6],{name:'',size:3});
+var p5 = board.create('point',[45,3],{name:'',size:3});
+
+/* Polygon line */
+board.create('line',[p1,p2]);
+board.create('line',[p2,p3]);
+board.create('line',[p3,p4]);
+board.create('line',[p4,p5]);
+
+[[/jsxgraph]]]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p><b>Step 1: Determine the class midpoints</b></p>
+
+<p>The midpoint of a class interval is found using the formula</p>
+
+\[
+\text{Midpoint}=\frac{\text{Lower boundary}+\text{Upper boundary}}{2}.
+\]
+
+<p>Applying this to each class interval:</p>
+
+<ul>
+<li>\((0+10)/2 = 5\)</li>
+<li>\((10+20)/2 = 15\)</li>
+<li>\((20+30)/2 = 25\)</li>
+<li>\((30+40)/2 = 35\)</li>
+<li>\((40+50)/2 = 45\)</li>
+</ul>
+
+<p>Therefore, the list of class midpoints is</p>
+
+\[
+{@ta_mid@}
+\]
+
+---
+
+<p><b>Step 2: Determine the frequency polygon points</b></p>
+
+<p>A frequency polygon is obtained by plotting points whose coordinates are:</p>
+
+\[
+(\text{class midpoint},\ \text{frequency})
+\]
+
+<p>Using the midpoints and the frequencies from the table we obtain:</p>
+
+<ul>
+<li>\(({@m1@}, {@f1@})\)</li>
+<li>\(({@m2@}, {@f2@})\)</li>
+<li>\(({@m3@}, {@f3@})\)</li>
+<li>\(({@m4@}, {@f4@})\)</li>
+<li>\(({@m5@}, {@f5@})\)</li>
+</ul>
+
+<p>So the frequency polygon points are</p>
+
+\[
+({@m1@},{@f1@}),({@m2@},{@f2@}),({@m3@},{@f3@}),({@m4@},{@f4@}),({@m5@},{@f5@})
+\]
+
+---
+
+<p><b>Step 3: Construct the frequency polygon</b></p>
+
+<p>Plot the points above on the graph and connect them with straight line segments in order of increasing midpoint.</p>
+
+<p>The resulting polygon shows how the frequencies vary across the class intervals and provides a visual representation of the distribution.</p>
+
+<p>Frequency polygons are useful because they make it easier to compare distributions and identify trends in the data.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Class width */
+w:10;
+
+/* Random starting point */
+start: rand(5)*5;   /* e.g. 0,5,10,15,20 */
+
+/* Class intervals */
+c1l:start;        c1u:start+w;
+c2l:c1u;          c2u:c2l+w;
+c3l:c2u;          c3u:c3l+w;
+c4l:c3u;          c4u:c4l+w;
+c5l:c4u;          c5u:c5l+w;
+
+/* Frequencies */
+f1: rand(8)+2;
+f2: rand(8)+2;
+f3: rand(8)+2;
+f4: rand(8)+2;
+f5: rand(8)+2;
+
+/* Midpoints */
+m1:(c1l+c1u)/2;
+m2:(c2l+c2u)/2;
+m3:(c3l+c3u)/2;
+m4:(c4l+c4u)/2;
+m5:(c5l+c5u)/2;
+
+/* Correct midpoint list */
+ta_mid:[m1,m2,m3,m4,m5];
+
+/* Frequency polygon coordinates */
+ta_poly:[[m1,f1],[m2,f2],[m3,f3],[m4,f4],[m5,f5]];</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta1@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Monica SHERILY</p>
+<p id="reviewer"></p>
+<p id="reviewer"> </p>
+<p id="description">Given a frequency table for the distribution scores of an exam.The student is required to draw a histogram to show the distribution of the exams marks.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed>Histogram and Frequency Polygon.</variantsselectionseed>
+    <input>
+      <name>ans_mid</name>
+      <type>algebraic</type>
+      <tans>ta_mid</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_poly</name>
+      <type>algebraic</type>
+      <tans>ta_poly</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+  </question>
+</quiz>

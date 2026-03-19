@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the volume of a given composite solid</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A water tank consists of a cylindrical part with a hemispherical top. The radius of the tank is <b>{@r@} m</b> and the height of the cylindrical part is <b>{@h_cyl@} m</b>.</p>
+
+[[jsxgraph width="400px" height="400px"]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    /* [left, top, right, bottom] - ensuring enough head-room for the dome */
+    boundingbox: [-10, 20, 10, -5], 
+    axis: false,
+    showCopyright: false
+});
+
+var R = {#r#};
+var H = {#h_cyl#};
+var p = 0.4; /* Perspective squash factor */
+
+/* 1. The Hemispherical Dome (The Outer Arc) */
+/* This MUST be drawn without the 'p' factor to look like a real dome */
+board.create('curve', [
+    function(t){ return R * Math.cos(t); },
+    function(t){ return H + R * Math.sin(t); },
+    0, Math.PI
+], {strokeColor: 'black', strokeWidth: 3});
+
+/* 2. The Seam (Where cylinder meets hemisphere) */
+/* We only draw the FRONT half of this ellipse to show the 'edge' */
+board.create('curve', [
+    function(t){ return R * Math.cos(t); },
+    function(t){ return H + (R * p) * Math.sin(t); },
+    Math.PI, 2 * Math.PI
+], {strokeColor: 'black', strokeWidth: 2});
+
+/* 3. Vertical Sides of the Cylinder */
+board.create('segment', [[-R, 0], [-R, H]], {strokeColor: 'black', strokeWidth: 2});
+board.create('segment', [[R, 0], [R, H]], {strokeColor: 'black', strokeWidth: 2});
+
+/* 4. Base of Cylinder */
+/* Front solid curve */
+board.create('curve', [
+    function(t){ return R * Math.cos(t); },
+    function(t){ return (R * p) * Math.sin(t); },
+    Math.PI, 2 * Math.PI
+], {strokeColor: 'black', strokeWidth: 2});
+/* Back dashed curve */
+board.create('curve', [
+    function(t){ return R * Math.cos(t); },
+    function(t){ return (R * p) * Math.sin(t); },
+    0, Math.PI
+], {strokeColor: 'black', strokeWidth: 1, dash: 2});
+
+/* 5. Labels - Matching your color requirements */
+// Height (Red)
+board.create('segment', [[-R - 2, 0], [-R - 2, H]], {strokeColor: 'red', strokeWidth: 2});
+board.create('text', [-R - 5, H/2, "{#h_cyl#} m"], {color: 'red', fontSize: 16, fontWeight: 'bold'});
+
+// Radius (Blue)
+board.create('segment', [[0, 0], [R, 0]], {strokeColor: 'blue', strokeWidth: 3});
+board.create('text', [R/2, -1.5, "{#r#} m"], {color: 'blue', fontSize: 16, fontWeight: 'bold'});
+
+[[/jsxgraph]]
+
+<p>Find the total volume of water the tank can hold. (Write \(\pi\) as %pi)</p>
+<p>Volume = [[input:ans1]] \(m^3\) [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3> Worked solution</h3>
+
+<p>To find the total volume, we sum the cylindrical and hemispherical volumes.</p>
+<p>
+\(\begin{align}
+\text{Volume of Cylinder } (V_1) &= \pi r^2 h \\
+&= \pi \times {@r@}^2 \times {@h_cyl@} \\
+&= {@V_cyl@} \text{ m}^3 \\\\
+\text{Volume of Hemisphere } (V_2) &= \frac{2}{3} \pi r^3 \\
+&= \frac{2}{3} \times \pi \times {@r@}^3 \\
+&= {@V_hemi@} \text{ m}^3 \\\\
+\text{Total Volume } (V) &= V_1 + V_2 \\
+&= {@V_cyl@} + {@V_hemi@} \\
+&={@ta@} \text{ m}^3
+\end{align}\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. Define randomized dimensions */
+r: 2 + rand(4);          /* Radius: 2 to 5 m */
+h_cyl: 6 + rand(6);      /* Height: 6 to 11 m */
+
+/* 2. Volume of Cylinder: V1 = pi * r^2 * h */
+V_cyl: %pi * r^2 * h_cyl;
+
+/* 3. Volume of Hemisphere: V2 = 2/3 * pi * r^3 */
+V_hemi: (2/3) * %pi * r^3;
+
+/* 4. Total Volume and Teacher Answer */
+total_v: V_cyl + V_hemi;
+ta: total_v;
+
+/* 5. Variables for the worked solution display */
+r2: r^2;
+r3: r^3;
+
+/* 6. JSXGraph scaling */
+r_draw: r/2;
+h_draw: h_cyl/2;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@V_cyl@}</p>
+<p>{@V_hemi@}</p>
+<p>{@ta@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct volume</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>808107760</deployedseed>
+    <deployedseed>708650341</deployedseed>
+    <deployedseed>384174072</deployedseed>
+    <deployedseed>898031383</deployedseed>
+    <deployedseed>2104859368</deployedseed>
+    <deployedseed>1178670652</deployedseed>
+    <deployedseed>1982263825</deployedseed>
+    <deployedseed>181799371</deployedseed>
+    <deployedseed>615403841</deployedseed>
+    <deployedseed>1676284756</deployedseed>
+    <deployedseed>1749925273</deployedseed>
+    <deployedseed>147569464</deployedseed>
+    <deployedseed>2089302795</deployedseed>
+    <deployedseed>923240522</deployedseed>
+    <deployedseed>1521511538</deployedseed>
+    <deployedseed>703078621</deployedseed>
+    <deployedseed>1461648602</deployedseed>
+    <deployedseed>772582071</deployedseed>
+  </question>
+</quiz>

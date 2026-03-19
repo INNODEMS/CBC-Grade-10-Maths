@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Quadratic equation from stacking classroom chairs</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+During a school event, chairs are arranged in rows in the hall. There are \(x\) rows of chairs, and each row has \( (x + {@k@}) \) chairs. Altogether, {@T@} chairs were arranged.
+</p>
+
+<p>(a) Form a quadratic equation representing the situation.</p>
+<p>[[input:eqn1]] [[validation:eqn1]] [[feedback:prt1]]</p>
+
+<p>(b) Determine the value of \(x\).</p>
+<p>\(x =\) [[input:ans1]] [[validation:ans1]] [[feedback:prt2]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+Let the number of chairs in the first row be \(x\).
+</p>
+
+<p>
+The next row has \(x + {@k@}\) chairs.
+</p>
+
+<p>
+To find the total number of chairs arranged, we multiply the number of rows by the number of chairs in the next row. This gives the total number of chairs arranged in the hall.
+</p>
+
+<p>
+Therefore,
+</p>
+
+<p>
+\[
+x(x + {@k@}) = {@T@}
+\]
+</p>
+
+<p>
+Step 1: Expand the expression.
+</p>
+
+<p>
+\[
+x^2 + {@k@}x = {@T@}
+\]
+</p>
+
+<p>
+Step 2: Rearrange the equation into standard quadratic form.
+</p>
+
+<p>
+\[
+x^2 + {@k@}x - {@T@} = 0
+\]
+</p>
+
+<p>
+Step 3: Factorise the quadratic expression.
+</p>
+
+<p>
+\[
+(x - {@r@})(x + {@r + k@}) = 0
+\]
+</p>
+
+<p>
+Step 4: Solve the equation.
+</p>
+
+<p>
+\[
+x = {@r@} \quad \text{or} \quad x = -{@r + k@}
+\]
+</p>
+
+<p>
+Since the number of chairs cannot be negative,
+</p>
+
+<p>
+\[
+x = {@r@}
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Base number of chairs in first row */
+r: rand(7) + 4;
+
+/* Difference between the two rows */
+k: rand(4) + 2;
+
+/* Total chairs */
+T: r*(r + k);
+
+/* LHS expression (standard form) */
+expr: expand(x*(x + k) - T);
+
+/* Correct quadratic equation */
+qeq: expr = 0;
+
+/* Correct value of x */
+sol: r;
+
+/* Mistakes for equation part */
+m1: expand(x*(x + k));        /* forgot to include total T */
+m2: expand(x*(x + k) + T);    /* wrong sign */
+m3: expr;                     /* wrote expression only, not an equation */
+
+/* Mistakes for solution part */
+m4: sqrt(T);                  /* square-root shortcut */
+m5: -r - k;                   /* negative root */</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@qeq@}, {@sol@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Quadratic equations in real-life situations</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to form a quadratic equation from a real-life classroom situation involving rows of chairs, and then solve the equation to determine the unknown quantity.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>sol</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>eqn1</name>
+      <type>algebraic</type>
+      <tans>qeq</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>eqn1</sans>
+        <tans>qeq</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>forgot to include total T </description>
+        <answertest>AlgEquiv</answertest>
+        <sans>eqn1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You formed the product but did not include the total {@T@}.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>wrong sign</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>eqn1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>The total should be subtracted to form an equation equal to zero.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>wrote expression only, not an equation</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>eqn1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>That’s the correct expression, but write it as an equation by adding “= 0”.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Feedback: Start from x(x+@k@)=@T@ then rearrange to standard form.</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>sol</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Square-root shortcut</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m4</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>This requires solving a quadratic equation, not taking a square root.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Negative root</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m4</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>That solution is negative, so it does not make sense for chairs.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Solve the correct quadratic equation you formed in part (a).</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1017619104</deployedseed>
+    <deployedseed>2025936836</deployedseed>
+    <deployedseed>162636307</deployedseed>
+    <deployedseed>1676320229</deployedseed>
+    <deployedseed>1343340477</deployedseed>
+    <deployedseed>2129744239</deployedseed>
+    <deployedseed>1952439169</deployedseed>
+    <deployedseed>827552270</deployedseed>
+    <deployedseed>243366119</deployedseed>
+    <deployedseed>1376876844</deployedseed>
+    <deployedseed>875591216</deployedseed>
+    <deployedseed>1808768083</deployedseed>
+    <deployedseed>1931043450</deployedseed>
+    <deployedseed>2049769629</deployedseed>
+    <deployedseed>1196309378</deployedseed>
+    <deployedseed>1510594026</deployedseed>
+    <deployedseed>1848273161</deployedseed>
+    <deployedseed>782246914</deployedseed>
+    <deployedseed>710598860</deployedseed>
+    <deployedseed>997427932</deployedseed>
+    <deployedseed>317451354</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>sol</value>
+      </testinput>
+      <testinput>
+        <name>eqn1</name>
+        <value>qeq</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

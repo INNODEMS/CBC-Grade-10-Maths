@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Factorising a monic quadratic expression</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Factorise the following quadratic expression:
+\[
+{@expr@}
+\]
+</p>
+
+<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+We want to factorise:
+</p>
+
+<p>
+\[
+{@expr@}
+\]
+</p>
+
+<p>
+Step 1: Identify the coefficient of \(x\) and the constant term.
+</p>
+
+<p>
+The coefficient of \(x\) is \({@a + b@}\) and the constant term is \({@a*b@}\).
+</p>
+
+<p>
+Step 2: Find two numbers that:
+</p>
+
+<ul>
+<li>multiply to give \({@a*b@}\)</li>
+<li>add to give \({@a + b@}\)</li>
+</ul>
+
+<p>
+The numbers are \({@a@}\) and \({@b@}\) because:
+</p>
+
+<p>
+\[
+{@a@} \times {@b@} = {@a*b@}
+\]
+</p>
+
+<p>
+\[
+{@a@} + {@b@} = {@a + b@}
+\]
+</p>
+
+<p>
+Step 3: Write the factorised form:
+</p>
+
+<p>
+\[
+(x + {@a@})(x + {@b@})
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random integers for factors */
+a: rand(8) + 1;
+b: rand(8) + 1;
+
+/* Quadratic expression */
+expr: expand((x + a)*(x + b));
+
+/* Correct factorisation */
+correct: (x + a)*(x + b);
+
+/* Common mistakes */
+m1: (x + a + b);
+m2: (x + a)^2;
+m3: x^2 + a*x + b;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@expr@}, {@correct@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Factorising monic quadratic expressions</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to factorise a monic quadratic expression by finding two numbers whose product equals the constant term and whose sum equals the coefficient of the linear term.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>correct</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>correct</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>mistake 1</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>This is not factorisation. You need two brackets.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>mistake2</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>The quadratic is not a perfect square. Check the middle term.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Find two numbers whose product is the constant term and whose sum is the coefficient of x</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>223903754</deployedseed>
+    <deployedseed>1272226390</deployedseed>
+    <deployedseed>537932119</deployedseed>
+    <deployedseed>1825490103</deployedseed>
+    <deployedseed>652873364</deployedseed>
+    <deployedseed>1769321384</deployedseed>
+    <deployedseed>189737162</deployedseed>
+    <deployedseed>432014874</deployedseed>
+    <deployedseed>1345275658</deployedseed>
+    <deployedseed>1269680341</deployedseed>
+    <deployedseed>779241502</deployedseed>
+    <deployedseed>2025744519</deployedseed>
+    <deployedseed>1932478312</deployedseed>
+    <deployedseed>2145169240</deployedseed>
+    <deployedseed>59875360</deployedseed>
+    <deployedseed>1383034838</deployedseed>
+    <deployedseed>1466198745</deployedseed>
+    <deployedseed>229103065</deployedseed>
+    <deployedseed>720370501</deployedseed>
+    <deployedseed>401024494</deployedseed>
+    <deployedseed>690690656</deployedseed>
+    <deployedseed>1177531976</deployedseed>
+    <deployedseed>2016024041</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>correct</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>
