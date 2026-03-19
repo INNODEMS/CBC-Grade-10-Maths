@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding volume of a frustum given dimensions.</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A frustum has a bottom radius of {#R#} cm, a top radius of {#r#} cm, and a height of {#h#} cm.</p>
+
+[[jsxgraph width="400px" height="400px"]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    /* Bounding box set to comfortably fit the max scaled values (Rdraw max=5, hdraw max=10) */
+    boundingbox: [-8, 12, 8, -4], 
+    axis: false,
+    showCopyright: false
+});
+
+/* 1. Pull the random variables directly from STACK */
+var R = {#R#};
+var r = {#r#};
+var h = {#h#};
+
+var Rdraw = {#Rdraw#};
+var rdraw = {#rdraw#};
+var hdraw = {#hdraw#};
+
+/* 2. Define the structural points */
+var C0 = board.create('point', [0, 0], {visible: false});        // Bottom center
+var C1 = board.create('point', [0, hdraw], {visible: false});    // Top center
+var RB = board.create('point', [Rdraw, 0], {visible: false});    // Right bottom
+var RT = board.create('point', [rdraw, hdraw], {visible: false});// Right top
+var LB = board.create('point', [-Rdraw, 0], {visible: false});   // Left bottom
+var LT = board.create('point', [-rdraw, hdraw], {visible: false});// Left top
+
+/* 3. Draw the solid sides of the bucket */
+board.create('segment', [LB, LT], {strokeWidth: 2, strokeColor: '#333333'});
+board.create('segment', [RB, RT], {strokeWidth: 2, strokeColor: '#333333'});
+
+/* 4. Draw the 3D ellipses for top and bottom */
+// Top face (solid)
+board.create('curve', [
+    function(t){ return rdraw * Math.cos(t); },
+    function(t){ return hdraw + (rdraw * 0.25) * Math.sin(t); },
+    0, 2*Math.PI
+], {strokeWidth: 2, strokeColor: '#333333', fillColor: '#e0f7fa', fillOpacity: 0.8});
+
+// Bottom face (front edge solid, back edge dashed)
+board.create('curve', [
+    function(t){ return Rdraw * Math.cos(t); },
+    function(t){ return (Rdraw * 0.25) * Math.sin(t); },
+    Math.PI, 2*Math.PI
+], {strokeWidth: 2, strokeColor: '#333333'});
+
+board.create('curve', [
+    function(t){ return Rdraw * Math.cos(t); },
+    function(t){ return (Rdraw * 0.25) * Math.sin(t); },
+    0, Math.PI
+], {strokeWidth: 1, dash: 2, strokeColor: '#666666'});
+
+/* 5. Draw dashed internal lines for Height and Radii */
+board.create('segment', [C0, C1], {strokeWidth: 2, dash: 2, strokeColor: '#ff0000'}); // Height
+board.create('segment', [C1, RT], {strokeWidth: 2, dash: 2, strokeColor: '#0000ff'}); // Top Radius
+board.create('segment', [C0, RB], {strokeWidth: 2, dash: 2, strokeColor: '#0000ff'}); // Bottom Radius
+
+/* 6. Add dynamic text labels */
+// Top radius label
+board.create('text', [rdraw/2 - 0.5, hdraw + 0.5, r + " cm"], {fontSize: 14});
+// Bottom radius label
+board.create('text', [Rdraw/2 - 0.5, -0.8, R + " cm"], {fontSize: 14});
+// Height label
+board.create('text', [-1.5, hdraw/2, h + " cm"], {fontSize: 14, strokeColor: '#ff0000'});
+
+[[/jsxgraph]]
+<p>
+Calculate the volume of the container in litres.
+</p>
+
+<p>
+(Recall \(1\text{ litre}=1000\text{ cm}^3\))
+<br>
+Write \(\pi\) as %pi and \(\times\) as *
+</p>
+
+<p>
+Volume = [[input:ans1]] litres  
+[[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3> Worked solution</h3>
+<p>
+To find the volume of a frustum we use
+\[V=\frac{1}{3}\pi h(R^2+Rr+r^2)
+\]
+</p>
+<p>
+Where: \( R\) = Bottom (larger) radius <br>\(r\) = Top (smaller) radius<br>\(h\) = Vertical height
+</p>
+<p>
+Substitute the given values of \(R, r\) and \(h\)  into the formula<br>
+\(R^2 = {@R@}^2 = {@R^2@}\)<br>
+\(r^2 = {@r@}^2 = {@r^2@} \)<br>
+\(R \times r = {@R@} \times {@r@} = {@R*r@}\)
+</p>
+<p>
+Solving for \(R^2 + Rr + r^2\): <br>
+  \({@R^2@} +  {@R@} \times {@r@} + {@r^2@}  = {@bracket_value@}\)
+</p>
+<p>
+Next multiply \({@bracket_value@}\) by the height<br>
+\({@bracket_value@} \times {@h@} = {@height_bracket_value@}\)
+</p>
+<p>
+Now we have :<br>
+\( V= \frac{1}{3}\pi \times {@height_bracket_value@}\)
+</p>
+<p>
+\(= {@V@}\)
+<p>
+
+<p> 
+Converting cm\(^3\) to litres we have: <br>
+</p>
+<p>
+\(= \frac{{@V@} \,\,\text{cm}^3} {1000\,\, \text{cm}^3} \times 1\,\, \text{litre} \) 
+</p>
+<p>
+\(= {@ta@}\)
+</p>
+<p>
+Hence \(V= {@ta@}\) litres
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Random radius and height */
+R: rand(13)+8;     /* bottom radius 8–20 cm */
+r: rand(7)+3;      /* top radius 3–9 cm */
+h: rand(31)+10;    /* height 10–40 cm */
+
+/* Ensure r < R */
+if r >= R then r: R-1;
+
+bracket_value:R^2 + R*r + r^2;
+height_bracket_value: bracket_value *h;
+
+/* Volume calculation */
+V: (1/3)*%pi*h*(bracket_value);
+
+/* Convert to litres */
+V_litre: V/1000;
+
+/* Teacher answer */
+ta: V_litre;
+
+/* Scaled dimensions for drawing */
+Rdraw: R/4;
+rdraw: r/4;
+hdraw: h/4;]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@r@}</p>
+<p>{@R@}</p>
+<p>{@h@}</p>
+<p>{@ta@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct volume of a frustum</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect volume</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans</sans>
+        <tans>V</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you calculated the volume in cm\(^3\) but forgot to convert it to litres. Please look at the worked solution below.<p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>402664438</deployedseed>
+    <deployedseed>1314252873</deployedseed>
+    <deployedseed>1661518637</deployedseed>
+    <deployedseed>1243586778</deployedseed>
+    <deployedseed>473553648</deployedseed>
+    <deployedseed>1929669854</deployedseed>
+    <deployedseed>30746752</deployedseed>
+    <deployedseed>1772342510</deployedseed>
+    <deployedseed>1020945115</deployedseed>
+    <deployedseed>129883667</deployedseed>
+    <deployedseed>962337411</deployedseed>
+    <deployedseed>74795208</deployedseed>
+    <deployedseed>500805816</deployedseed>
+    <deployedseed>448992272</deployedseed>
+    <deployedseed>108710396</deployedseed>
+    <deployedseed>1131282680</deployedseed>
+    <deployedseed>740850305</deployedseed>
+    <deployedseed>328616177</deployedseed>
+    <deployedseed>1428476031</deployedseed>
+    <deployedseed>357529660</deployedseed>
+  </question>
+</quiz>

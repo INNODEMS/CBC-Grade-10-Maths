@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Factorising a quadratic expression using the difference of squares identity</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Factorise the following expression completely:
+\[
+{@expr@}
+\]
+</p>
+
+<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+Here we use the identity:
+</p>
+
+<p>
+\[
+a^2 - b^2 = (a-b)(a+b)
+\]
+</p>
+
+<p>
+Step 1: Identify the two square terms.
+</p>
+
+<p>
+\[
+{@expr@}
+\]
+</p>
+
+<p>
+\[
+{@A@}x^2 = ({@a@}x)^2
+\]
+</p>
+
+<p>
+\[
+{@B@} = {@b@}^2
+\]
+</p>
+
+<p>
+So the expression has the form:
+</p>
+
+<p>
+\[
+({@a@}x)^2 - {@b@}^2
+\]
+</p>
+
+<p>
+Step 2: Apply the difference of squares identity.
+</p>
+
+<p>
+\[
+({@a@}x)^2 - {@b@}^2 =
+({@a@}x - {@b@})({@a@}x + {@b@})
+\]
+</p>
+
+<p>
+Therefore, the factorised form is:
+</p>
+
+<p>
+\[
+({@a@}x - {@b@})({@a@}x + {@b@})
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random constants */
+a: rand(30) + 2;
+b: rand(30) + 2;
+
+/* Square values */
+A: a^2;
+B: b^2;
+
+/* Expression */
+expr: A*x^2 - B;
+
+/* Correct factorisation */
+correct: (a*x - b)*(a*x + b);
+
+/* Common mistakes */
+m1: (a*x - b)^2;
+m2: (a*x + b)^2;
+m3: (a*x - b)*(a*x - b);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@expr@}, {@correct@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Quadratic identities – difference of squares</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to recognise a quadratic expression of the form a²x² − b² and factorise it using the difference of two squares identity.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>correct</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>correct</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>m1</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>This is not a perfect square. Use (a−b)(a+b)</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>m2</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>A sum of squares does not factorise this way.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>m3</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Factorise using 𝑎^2−𝑏^2 = (a−b)(a+b).</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Identify the two squares, then write (a−b)(a+b).</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1706220305</deployedseed>
+    <deployedseed>2119174434</deployedseed>
+    <deployedseed>1244132622</deployedseed>
+    <deployedseed>644811346</deployedseed>
+    <deployedseed>1859460432</deployedseed>
+    <deployedseed>1751044758</deployedseed>
+    <deployedseed>374288865</deployedseed>
+    <deployedseed>222701433</deployedseed>
+    <deployedseed>363179829</deployedseed>
+    <deployedseed>117255343</deployedseed>
+    <deployedseed>1344489889</deployedseed>
+    <deployedseed>36400344</deployedseed>
+    <deployedseed>131543897</deployedseed>
+    <deployedseed>327659802</deployedseed>
+    <deployedseed>2085817222</deployedseed>
+    <deployedseed>1800932706</deployedseed>
+    <deployedseed>1567432408</deployedseed>
+    <deployedseed>944893218</deployedseed>
+    <deployedseed>677798242</deployedseed>
+    <deployedseed>86203204</deployedseed>
+    <deployedseed>2131916775</deployedseed>
+    <deployedseed>231548643</deployedseed>
+    <deployedseed>1958937631</deployedseed>
+    <deployedseed>804249429</deployedseed>
+    <deployedseed>1454406616</deployedseed>
+    <deployedseed>889542533</deployedseed>
+    <deployedseed>169625867</deployedseed>
+    <deployedseed>827169675</deployedseed>
+    <deployedseed>865709358</deployedseed>
+    <deployedseed>535875879</deployedseed>
+    <deployedseed>892473767</deployedseed>
+    <deployedseed>2082638605</deployedseed>
+    <deployedseed>283618374</deployedseed>
+    <deployedseed>1007235874</deployedseed>
+    <deployedseed>741974741</deployedseed>
+    <deployedseed>1719537733</deployedseed>
+    <deployedseed>59983171</deployedseed>
+    <deployedseed>614196263</deployedseed>
+    <deployedseed>795273870</deployedseed>
+    <deployedseed>1208046671</deployedseed>
+    <deployedseed>44304866</deployedseed>
+    <deployedseed>285531541</deployedseed>
+    <deployedseed>306884498</deployedseed>
+    <deployedseed>687346285</deployedseed>
+    <deployedseed>610545661</deployedseed>
+    <deployedseed>2036100708</deployedseed>
+    <deployedseed>2083392399</deployedseed>
+    <deployedseed>1379893059</deployedseed>
+    <deployedseed>470503728</deployedseed>
+    <deployedseed>588353613</deployedseed>
+    <deployedseed>396888155</deployedseed>
+    <deployedseed>749437505</deployedseed>
+    <deployedseed>968601331</deployedseed>
+    <deployedseed>1870042209</deployedseed>
+    <deployedseed>1657768155</deployedseed>
+    <deployedseed>1178184649</deployedseed>
+    <deployedseed>1103167427</deployedseed>
+    <deployedseed>387013293</deployedseed>
+    <deployedseed>817727885</deployedseed>
+    <deployedseed>479544554</deployedseed>
+    <deployedseed>1081803675</deployedseed>
+    <deployedseed>2133335795</deployedseed>
+    <deployedseed>943796844</deployedseed>
+    <deployedseed>450740684</deployedseed>
+    <deployedseed>2052586788</deployedseed>
+    <deployedseed>1589481520</deployedseed>
+    <deployedseed>1604617954</deployedseed>
+    <deployedseed>1185878559</deployedseed>
+    <deployedseed>433143340</deployedseed>
+    <deployedseed>219047196</deployedseed>
+    <deployedseed>1748117531</deployedseed>
+    <deployedseed>968980644</deployedseed>
+    <deployedseed>1856663667</deployedseed>
+    <deployedseed>609117997</deployedseed>
+    <deployedseed>1479633609</deployedseed>
+    <deployedseed>890992493</deployedseed>
+    <deployedseed>1038274815</deployedseed>
+    <deployedseed>1925531395</deployedseed>
+    <deployedseed>50434764</deployedseed>
+    <deployedseed>1612015279</deployedseed>
+    <deployedseed>877397342</deployedseed>
+    <deployedseed>146168151</deployedseed>
+    <deployedseed>1944895947</deployedseed>
+    <deployedseed>388312235</deployedseed>
+    <deployedseed>116597140</deployedseed>
+    <deployedseed>488740068</deployedseed>
+    <deployedseed>1926949674</deployedseed>
+    <deployedseed>641265604</deployedseed>
+    <deployedseed>297992601</deployedseed>
+    <deployedseed>1738866287</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>correct</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

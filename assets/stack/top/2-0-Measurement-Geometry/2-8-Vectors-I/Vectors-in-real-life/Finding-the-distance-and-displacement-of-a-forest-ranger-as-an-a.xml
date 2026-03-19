@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the distance and displacement of a forest ranger as an application of vectors in real life</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A forest ranger starts at a base station and travels \({@d1@}\) km due North to a lookout tower. From the tower, the ranger then travels \({@d2@}\) km due East to reach a remote campsite.</p>
+
+[[jsxgraph width="400px" height="400px"]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-2, 10, 10, -2], 
+    axis: true,
+    showCopyright: false
+});
+
+var n = {#d1#};
+var e = {#d2#};
+
+// Origin (Base Station)
+var p1 = board.create('point', [0, 0], {name: 'Base', fixed: true});
+// Lookout Tower
+var p2 = board.create('point', [0, n], {name: 'Tower', color: 'blue'});
+// Campsite
+var p3 = board.create('point', [e, n], {name: 'Camp', color: 'green'});
+
+// Path segments (Vectors)
+board.create('arrow', [p1, p2], {strokeColor: 'blue', strokeWidth: 3});
+board.create('arrow', [p2, p3], {strokeColor: 'green', strokeWidth: 3});
+
+// Resultant Displacement
+board.create('arrow', [p1, p3], {strokeColor: 'red', strokeWidth: 2, dash: 2});
+[[/jsxgraph]]
+
+<p>Using the knowledge of vectors, calculate:</p>
+<ol>
+    <li>The total distance travelled by the ranger. [[input:ans1]] km [[validation:ans1]][[feedback:prt1]]</li>
+    <li>The magnitude of the ranger's total displacement from the base station. [[input:ans2]] km [[validation:ans2]][[feedback:prt2]]
+</li>
+</ol>
+<p><i>(Round your displacement to 2 decimal places.)</i></p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3> Worked Solution</h3>
+<p>To differentiate between scalar and vector quantities:</p>
+
+<p><b>(a) Total Distance (Scalar Sum)</b></p>
+<p>Distance only considers the path length regardless of direction:</p>
+<p>
+\(\begin{align}
+\text{Distance} &= d_1 + d_2 \\
+&= {@d1@} + {@d2@} \\
+&= {@ta1@} \text{ km}
+\end{align}\)
+</p>
+
+<p><b>(b) Displacement (Vector Magnitude)</b></p>
+<p>Displacement is the straight-line distance from the start point to the end point. Since the movements are perpendicular (North and East), we use Pythagoras:</p>
+<p>
+\(\begin{align}
+|\vec{s}| &= \sqrt{d_{\text{North}}^2 + d_{\text{East}}^2} \\
+&= \sqrt{{@d1@}^2 + {@d2@}^2} \\
+&= \sqrt{{@d1^2 + d2^2@}} \\
+&= {@ta2@} \text{ km}
+\end{align}\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomized movement distances */
+d1: 4 + rand(5);        /* First leg (North) 4-8 km */
+d2: 3 + rand(4);        /* Second leg (East) 3-6 km */
+
+/* Calculated Resultants */
+total_dist: d1 + d2;
+displacement_mag: float(sqrt(d1^2 + d2^2));
+
+/* Correct Answers rounded for STACK */
+ta1: total_dist;
+ta2: float(round(displacement_mag * 100) / 100);
+
+/* Heading/Bearing Calculation */
+bearing: float(round((180/float(%pi)) * atan(d2/d1) * 10) / 10);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta1@}</p>
+<p>{@ta2@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>690909233</deployedseed>
+    <deployedseed>769314233</deployedseed>
+    <deployedseed>674782386</deployedseed>
+    <deployedseed>465402956</deployedseed>
+    <deployedseed>1165695950</deployedseed>
+    <deployedseed>1318176770</deployedseed>
+    <deployedseed>1509122306</deployedseed>
+    <deployedseed>2008579080</deployedseed>
+    <deployedseed>883718581</deployedseed>
+  </question>
+</quiz>

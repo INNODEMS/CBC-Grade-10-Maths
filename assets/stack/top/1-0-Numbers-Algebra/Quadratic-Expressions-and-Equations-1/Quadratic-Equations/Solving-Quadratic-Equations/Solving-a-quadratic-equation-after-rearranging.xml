@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Solving a quadratic equation after rearranging</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+Solve the quadratic equation:
+\[
+{@lhs@} = {@rhs@}
+\]
+</p>
+
+<p>
+Write the solutions for \(x\).
+</p>
+
+<p>
+\(x =\) [[input:ans1]] [[validation:ans1]]  \(\;or\;\) \(x =\) [[input:ans2]] [[validation:ans2]]
+</p>
+<p>[[feedback:prt1]]  \(\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  \) [[feedback:prt2]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+The equation given is:
+</p>
+
+<p>
+\[
+{@lhs@} = {@rhs@}
+\]
+</p>
+
+<p>
+Step 1: Subtract {@rhs@} from both sides so that the equation equals zero.
+</p>
+
+<p>
+\[
+{@lhs@} - {@rhs@} = 0
+\]
+</p>
+
+<p>
+This simplifies to:
+</p>
+
+<p>
+\[
+{@standard@} = 0
+\]
+</p>
+
+<p>
+Step 2: Factorise the quadratic expression.
+</p>
+
+<p>
+\[
+{@standard@}
+\]
+</p>
+
+<p>
+\[
+= (x - {@r1@})(x - {@r2@})
+\]
+</p>
+
+<p>
+Step 3: Apply the zero product rule.
+</p>
+
+<p>
+If the product of two expressions is zero, then at least one of the expressions must be zero.
+</p>
+
+<p>
+\[
+x - {@r1@} = 0 \quad \text{or} \quad x - {@r2@} = 0
+\]
+</p>
+
+<p>
+Step 4: Solve each equation.
+</p>
+
+<p>
+\[
+x = {@r1@}
+\]
+</p>
+
+<p>
+or
+</p>
+
+<p>
+\[
+x = {@r2@}
+\]
+</p>
+
+<p>
+Therefore, the solutions of the quadratic equation are:
+</p>
+
+<p>
+\[
+x = {@r1@},\;\;or\;\; x = {@r2@}
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random integer roots */
+r1: rand(7) - 3;
+r2: rand(7) + 2;
+
+/* Construct quadratic from roots */
+expr: expand((x - r1)*(x - r2));
+
+/* Rearranged equation form */
+k: rand(6) + 2;
+
+/* Equation presented to students */
+lhs: expr + k*x;
+rhs: k*x;
+
+/* Standard form */
+standard: expr;
+
+/* Correct solutions */
+sol1: r1;
+sol2: r2;
+
+/* Common mistakes */
+m1: -r1;
+m2: -r2;
+m3: r1 + r2;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@sol1@}, {@sol2@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Solving quadratic equations</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to rearrange a quadratic equation into standard form, factorise it, and determine the solutions using the zero product principle.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>sol1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>sol2</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>sol1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>mistake1</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Check the sign when solving the factor.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>mistake2</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>First rearrange the equation so that one side equals zero, then factorise and solve.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>sol2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>mistake3</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>sol2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You added the roots instead of solving the factors.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>After factorising the quadratic, set each bracket equal to zero and solve.</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1709664530</deployedseed>
+    <deployedseed>922363856</deployedseed>
+    <deployedseed>868437635</deployedseed>
+    <deployedseed>764771468</deployedseed>
+    <deployedseed>126943490</deployedseed>
+    <deployedseed>141253609</deployedseed>
+    <deployedseed>1517858597</deployedseed>
+    <deployedseed>1595916599</deployedseed>
+    <deployedseed>241166190</deployedseed>
+    <deployedseed>2029130510</deployedseed>
+    <deployedseed>980250277</deployedseed>
+    <deployedseed>437980404</deployedseed>
+    <deployedseed>1694500969</deployedseed>
+    <deployedseed>1101595863</deployedseed>
+    <deployedseed>1322918738</deployedseed>
+    <deployedseed>1114186933</deployedseed>
+    <deployedseed>838830182</deployedseed>
+    <deployedseed>2110925807</deployedseed>
+    <deployedseed>1662311516</deployedseed>
+    <deployedseed>143096244</deployedseed>
+    <deployedseed>1335690113</deployedseed>
+    <deployedseed>1185508811</deployedseed>
+    <deployedseed>1674939638</deployedseed>
+    <deployedseed>654237730</deployedseed>
+    <deployedseed>2103619598</deployedseed>
+    <deployedseed>808676372</deployedseed>
+    <deployedseed>556821801</deployedseed>
+    <deployedseed>1580556419</deployedseed>
+    <deployedseed>2110190522</deployedseed>
+    <deployedseed>596930792</deployedseed>
+    <deployedseed>1345755662</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>sol1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>sol2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

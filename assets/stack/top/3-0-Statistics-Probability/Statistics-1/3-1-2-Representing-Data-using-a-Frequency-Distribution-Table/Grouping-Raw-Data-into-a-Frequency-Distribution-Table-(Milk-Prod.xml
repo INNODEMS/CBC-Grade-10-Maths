@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Grouping Raw Data into a Frequency Distribution Table (Milk Production)</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[A dairy farm recorded the amount of milk (in liters) produced by its cows during the month of January.
+
+The milk production values for {@n@} cows are:
+
+\[
+{@data@}
+\]
+
+Group the data into the following frequency distribution table.
+
+<table border="1" style="text-align:center">
+
+<tr>
+<th>Milk Produced (liters)</th>
+<th>Frequency</th>
+</tr>
+
+<tr>
+<td>200–239</td>
+<td>[[input:ans1]] [[validation:ans1]]</td>
+</tr>
+
+<tr>
+<td>240–279</td>
+<td>[[input:ans2]] [[validation:ans2]]</td>
+</tr>
+
+<tr>
+<td>280–319</td>
+<td>[[input:ans3]] [[validation:ans3]]</td>
+</tr>
+
+<tr>
+<td>320–359</td>
+<td>[[input:ans4]] [[validation:ans4]]</td>
+</tr>
+
+</table>
+
+<br>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[The raw data represent the milk production (in liters) of {@n@} cows during January.
+
+\[
+{@data@}
+\]
+
+We group the values into the given intervals.
+
+### Interval 200–239
+
+Values in this range:
+
+\[
+{sublist(data,lambda([x], x>=200 and x<=239))}
+\]
+
+Frequency:
+
+\[
+{@f1@}
+\]
+
+### Interval 240–279
+
+Values in this range:
+
+\[
+{sublist(data,lambda([x], x>=240 and x<=279))}
+\]
+
+Frequency:
+
+\[
+{@f2@}
+\]
+
+### Interval 280–319
+
+Values in this range:
+
+\[
+{sublist(data,lambda([x], x>=280 and x<=319))}
+\]
+
+Frequency:
+
+\[
+{@f3@}
+\]
+
+### Interval 320–359
+
+Values in this range:
+
+\[
+{sublist(data,lambda([x], x>=320 and x<=359))}
+\]
+
+Frequency:
+
+\[
+{@f4@}
+\]
+
+The frequencies add up to the total number of cows:
+
+\[
+{@f1@}+{@f2@}+{@f3@}+{@f4@} = {@n@}
+\]
+
+Thus the completed frequency distribution table is correct.]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Number of cows */
+n : rand(6) + 12;
+
+/* Milk production values (liters) */
+data : makelist(rand(160)+200,i,1,n);
+
+/* Class intervals */
+c1_low : 200$
+c1_high : 239$
+
+c2_low : 240$
+c2_high : 279$
+
+c3_low : 280$
+c3_high : 319$
+
+c4_low : 320$
+c4_high : 359$
+
+/* Frequency calculations */
+f1 : length(sublist(data,lambda([x], x>=c1_low and x<=c1_high)));
+f2 : length(sublist(data,lambda([x], x>=c2_low and x<=c2_high)));
+f3 : length(sublist(data,lambda([x], x>=c3_low and x<=c3_high)));
+f4 : length(sublist(data,lambda([x], x>=c4_low and x<=c4_high)));]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>This question assesses students' ability to group raw data into a frequency distribution table.
+
+Randomisation:
+
+* The number of cows `n` is randomly generated between 12 and 18.
+* A list `data` contains randomly generated milk production values between 200 and 359 liters.
+* Students must classify the values into four class intervals:
+
+  * 200–239
+  * 240–279
+  * 280–319
+  * 320–359
+
+Frequencies are automatically computed using Maxima by counting how many values in the list fall within each interval.
+
+Teacher answers:
+ans1 = f1
+ans2 = f2
+ans3 = f3
+ans4 = f4
+
+The sum of all frequencies equals the number of cows `n`.</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>f1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>f2</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>f3</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>f4</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+  </question>
+</quiz>

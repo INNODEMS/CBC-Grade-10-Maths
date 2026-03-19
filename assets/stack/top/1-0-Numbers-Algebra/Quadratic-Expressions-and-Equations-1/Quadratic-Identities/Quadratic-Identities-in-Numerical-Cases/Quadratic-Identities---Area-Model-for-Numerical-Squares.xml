@@ -5,11 +5,7 @@
       <text>Quadratic Identities - Area Model for Numerical Squares</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>We can use the quadratic identity \((a+b)^2 = a^2 + 2ab + b^2\) to calculate squares of large numbers mentally.</p>
-
-<p>Imagine a square garden with a side length of <strong>{@total_num@} m</strong>. We can split this length into <strong>{@base_val@} m</strong> and <strong>{@offset_val@} m</strong>.</p>
-
-<p>Use the <strong>Area Model</strong> diagram below to calculate the area of each section, and then find the total area of the garden.</p>
+      <text><![CDATA[<p>The <strong>area model</strong> diagram below is a representation of a square garden with a side length of <strong>{@total_num@} m</strong>. Calculate the area of each split section, when it's length is split into <strong>{@base_val@} m</strong> and <strong>{@offset_val@} m</strong>, then find the <strong>total area</strong> of the garden.</p>
 
 [[jsxgraph]]
 /* Define specific drawing coordinates to ensure the diagram looks good */
@@ -76,7 +72,6 @@ board.create('polygon', [split_x, p2, split_y_right, center], {fillColor:'#fff3c
 board.create('text', [b_draw + o_draw/2, b_draw/2, "C"], {fontSize:16});
 [[/jsxgraph]]
 
-<p><strong>Part 1: Find the area of each section.</strong></p>
 <table>
     <tr>
         <td>Area A (Big Square):</td>
@@ -96,8 +91,6 @@ board.create('text', [b_draw + o_draw/2, b_draw/2, "C"], {fontSize:16});
     </tr>
 </table>
 
-<p><strong>Part 2: Total Area</strong></p>
-<p>Add the four areas together to find the total area of the garden (which equals \({@total_num@}^2\)).</p>
 <p>Total Area = [[input:ans5]] \(m^2\) [[validation:ans5]] [[feedback:prt5]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
@@ -468,5 +461,59 @@ exp_step : sconcat("(", base_val, " + ", offset_val, ")^2");]]></text>
     <deployedseed>387103360</deployedseed>
     <deployedseed>420723206</deployedseed>
     <deployedseed>63787581</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>area_A</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>area_B</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>area_C</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>area_D</value>
+      </testinput>
+      <testinput>
+        <name>ans5</name>
+        <value>total_area</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt4</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt4-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt5</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt5-1-T</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>

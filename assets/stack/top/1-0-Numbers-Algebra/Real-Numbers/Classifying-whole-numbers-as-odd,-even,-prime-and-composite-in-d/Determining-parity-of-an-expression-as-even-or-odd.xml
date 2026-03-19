@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Determining parity of an expression as even or odd</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+Determine whether the following number is even or odd.
+\[
+{@a@}^2 + {@b@}
+\]
+</p>
+
+<p>
+[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+First evaluate the square:
+</p>
+
+<p>
+\[
+{@a@}^2 = {@sq@}
+\]
+</p>
+
+<p>
+Now add {@b@}:
+</p>
+
+<p>
+\[
+{@sq@} + {@b@} = {@expr@}
+\]
+</p>
+
+<p>
+Since {@expr@} {@ if mod(expr,2)=0 then "is divisible by 2" else "is not divisible by 2" @},
+the number is <strong>{@t_ans1@}</strong>.
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Random integers */
+a: rand(20) + 10;
+b: rand(20) + 5;
+
+/* Evaluate */
+sq: a^2;
+expr: sq + b;
+
+/* Dropdown matrix (THIS is what makes it work) */
+m_ans1: [
+    ["Even", is(mod(expr,2) = 0)],
+    ["Odd", is(mod(expr,2) = 1)]
+];
+
+/* Teacher answer (for worked solution only) */
+t_ans1: if mod(expr,2) = 0 then "Even" else "Odd";
+
+/* Feedback */
+fb_wrong1: if t_ans1 = "Even" then 
+    sconcat("Incorrect. ", a, "^2 = ", sq, ", and ", sq, " + ", b, " = ", expr, ", which is EVEN.")
+else 
+    sconcat("Incorrect. ", a, "^2 = ", sq, ", and ", sq, " + ", b, " = ", expr, ", which is ODD.");]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@expr@}, {@m_ans1@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Even and odd numbers</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to determine whether an expression involving powers and addition results in an even or odd number.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>dropdown</type>
+      <tans>m_ans1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for correct answer</description>
+        <answertest>String</answertest>
+        <sans>ans1</sans>
+        <tans>t_ans1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>First work out the square, then add the other number and check whether the result is divisible by 2.</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>97634385</deployedseed>
+    <deployedseed>388687175</deployedseed>
+    <deployedseed>103216289</deployedseed>
+    <deployedseed>446893969</deployedseed>
+    <deployedseed>960370188</deployedseed>
+    <deployedseed>48868216</deployedseed>
+    <deployedseed>756721755</deployedseed>
+    <deployedseed>1011451910</deployedseed>
+    <deployedseed>1189834224</deployedseed>
+    <deployedseed>1315176303</deployedseed>
+    <deployedseed>1626179838</deployedseed>
+    <deployedseed>1303308386</deployedseed>
+    <deployedseed>653481524</deployedseed>
+    <deployedseed>380953802</deployedseed>
+    <deployedseed>1563950993</deployedseed>
+    <deployedseed>583019705</deployedseed>
+    <deployedseed>2135302790</deployedseed>
+    <deployedseed>910625644</deployedseed>
+    <deployedseed>41748008</deployedseed>
+    <deployedseed>1096844365</deployedseed>
+    <deployedseed>1847736574</deployedseed>
+    <deployedseed>230947926</deployedseed>
+    <deployedseed>1360265013</deployedseed>
+    <deployedseed>1384570465</deployedseed>
+    <deployedseed>1795171453</deployedseed>
+    <deployedseed>484396166</deployedseed>
+    <deployedseed>76165954</deployedseed>
+    <deployedseed>1382423925</deployedseed>
+    <deployedseed>199133644</deployedseed>
+    <deployedseed>1403059023</deployedseed>
+    <deployedseed>577299175</deployedseed>
+    <deployedseed>231340177</deployedseed>
+    <deployedseed>496781975</deployedseed>
+    <deployedseed>1010313843</deployedseed>
+    <deployedseed>2001377440</deployedseed>
+    <deployedseed>818016677</deployedseed>
+    <deployedseed>1149079380</deployedseed>
+    <deployedseed>1918505597</deployedseed>
+    <deployedseed>1652370901</deployedseed>
+    <deployedseed>1591047891</deployedseed>
+    <deployedseed>556563015</deployedseed>
+    <deployedseed>503729778</deployedseed>
+    <deployedseed>1638482342</deployedseed>
+    <deployedseed>929671086</deployedseed>
+    <deployedseed>1964890581</deployedseed>
+    <deployedseed>1333311925</deployedseed>
+    <deployedseed>315447464</deployedseed>
+    <deployedseed>172930896</deployedseed>
+    <deployedseed>1848889680</deployedseed>
+    <deployedseed>1656173322</deployedseed>
+    <deployedseed>13697885</deployedseed>
+    <deployedseed>1393334007</deployedseed>
+    <deployedseed>830270079</deployedseed>
+    <deployedseed>1847126172</deployedseed>
+    <deployedseed>276395140</deployedseed>
+    <deployedseed>300892697</deployedseed>
+    <deployedseed>85856671</deployedseed>
+    <deployedseed>1870656477</deployedseed>
+    <deployedseed>1947536700</deployedseed>
+    <deployedseed>1954446597</deployedseed>
+    <deployedseed>484964345</deployedseed>
+    <deployedseed>715293448</deployedseed>
+    <deployedseed>993653896</deployedseed>
+    <deployedseed>916390715</deployedseed>
+    <deployedseed>1088317974</deployedseed>
+    <deployedseed>410126378</deployedseed>
+    <deployedseed>1632052471</deployedseed>
+    <deployedseed>545115897</deployedseed>
+    <deployedseed>862771142</deployedseed>
+    <deployedseed>880480389</deployedseed>
+    <deployedseed>525047732</deployedseed>
+    <deployedseed>16067362</deployedseed>
+    <deployedseed>222167727</deployedseed>
+    <deployedseed>28243954</deployedseed>
+    <deployedseed>1996216241</deployedseed>
+    <deployedseed>447698730</deployedseed>
+    <deployedseed>720588302</deployedseed>
+    <deployedseed>1717330147</deployedseed>
+    <deployedseed>2039182975</deployedseed>
+    <deployedseed>1109254125</deployedseed>
+    <deployedseed>1478261626</deployedseed>
+    <deployedseed>135862152</deployedseed>
+    <deployedseed>538623793</deployedseed>
+    <deployedseed>671089364</deployedseed>
+    <deployedseed>119102997</deployedseed>
+    <deployedseed>874885351</deployedseed>
+    <deployedseed>234864873</deployedseed>
+    <deployedseed>782147052</deployedseed>
+    <deployedseed>889071372</deployedseed>
+    <deployedseed>223572872</deployedseed>
+    <deployedseed>955132737</deployedseed>
+    <deployedseed>159733623</deployedseed>
+    <deployedseed>639941438</deployedseed>
+    <deployedseed>550239283</deployedseed>
+    <deployedseed>860610789</deployedseed>
+    <deployedseed>639237303</deployedseed>
+    <deployedseed>1729354963</deployedseed>
+    <deployedseed>104923524</deployedseed>
+    <deployedseed>308134182</deployedseed>
+    <deployedseed>420605535</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>first(mcq_correct(m_ans1))</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

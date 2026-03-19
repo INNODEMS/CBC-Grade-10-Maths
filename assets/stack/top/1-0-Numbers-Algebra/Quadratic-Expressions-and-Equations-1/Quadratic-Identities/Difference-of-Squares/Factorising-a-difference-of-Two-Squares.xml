@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Factorising a difference of Two Squares</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Factorise the following expression completely:
+\[
+{@expr@}
+\]
+</p>
+<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+We start by recognising the structure of the expression:
+</p>
+
+<p>
+\[
+{@expr@}
+\]
+</p>
+
+<p>
+This expression has the form:
+</p>
+
+<p>
+\[
+a^2 - b^2
+\]
+</p>
+
+<p>
+The identity is the <strong>difference of two squares</strong>:
+</p>
+
+<p>
+\[
+a^2 - b^2 = (a - b)(a + b)
+\]
+</p>
+
+<p>
+Step 1: Identify the two squares.
+</p>
+
+<p>
+\[
+x^2 = (x)^2
+\]
+</p>
+
+<p>
+\[
+{@a@}^2 = ({@a@})^2
+\]
+</p>
+
+<p>
+So here:
+</p>
+
+<p>
+\[
+a = x \quad \text{and} \quad b = {@a@}
+\]
+</p>
+
+<p>
+Step 2: Apply the identity.
+</p>
+
+<p>
+\[
+x^2 - {@a@}^2 = (x - {@a@})(x + {@a@})
+\]
+</p>
+
+<p>
+Therefore, the factorised form is:
+</p>
+
+<p>
+\[
+(x - {@a@})(x + {@a@})
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Random constant: 2 to 41 (40 values) */
+a: rand(40) + 2;
+
+/* Expression */
+expr: x^2 - a^2;
+
+/* Correct factorisation */
+correct: (x - a)*(x + a);
+
+/* Common mistakes */
+m1: (x - a)^2;
+m2: (x + a)^2;
+m3: (x - a)*(x - a);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@expr@}, {@correct@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Quadratic identities – difference of squares</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to factorise an expression of the form x^2 − a^2 by applying the difference of two squares identity and writing the result as two brackets.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>correct</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>correct</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>m1</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>This is not a perfect square. Use (𝑎−𝑏)(𝑎+𝑏)</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>m2</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Check the sign. 𝑥^2−𝑎^2 is a difference, not a sum.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>m3</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>The factors must be conjugates: (x-a) and (x+a).</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Use 𝑎^2−𝑏^2=(a−b)(a+b).</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>2120482342</deployedseed>
+    <deployedseed>1865387291</deployedseed>
+    <deployedseed>53272969</deployedseed>
+    <deployedseed>1187210688</deployedseed>
+    <deployedseed>1998801386</deployedseed>
+    <deployedseed>387764619</deployedseed>
+    <deployedseed>1869613122</deployedseed>
+    <deployedseed>1567362385</deployedseed>
+    <deployedseed>1849820823</deployedseed>
+    <deployedseed>1892216546</deployedseed>
+    <deployedseed>114160506</deployedseed>
+    <deployedseed>1120472290</deployedseed>
+    <deployedseed>97591822</deployedseed>
+    <deployedseed>2107747991</deployedseed>
+    <deployedseed>1270939537</deployedseed>
+    <deployedseed>756136026</deployedseed>
+    <deployedseed>2029013892</deployedseed>
+    <deployedseed>948256152</deployedseed>
+    <deployedseed>1100062356</deployedseed>
+    <deployedseed>1946283825</deployedseed>
+    <deployedseed>1204811540</deployedseed>
+    <deployedseed>2062380950</deployedseed>
+    <deployedseed>2120440716</deployedseed>
+    <deployedseed>1391433923</deployedseed>
+    <deployedseed>861551647</deployedseed>
+    <deployedseed>2145383859</deployedseed>
+    <deployedseed>1788928323</deployedseed>
+    <deployedseed>884327508</deployedseed>
+    <deployedseed>1004253748</deployedseed>
+    <deployedseed>1734671711</deployedseed>
+    <deployedseed>412724475</deployedseed>
+    <deployedseed>140593965</deployedseed>
+    <deployedseed>295648032</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>correct</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

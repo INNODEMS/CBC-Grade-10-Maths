@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Quadratic equation from school fundraising ticket sales</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+During a school fundraising event, tickets were sold in two groups. The first group sold \(x\) tickets, while the second group sold \(x + {@k@}\) tickets. Altogether, {@T@} tickets were sold.
+</p>
+
+<p>
+(a) Form a quadratic equation representing this situation.
+</p>
+
+<p>
+<strong>Equation</strong> [[input:eqn1]] [[validation:eqn1]] [[feedback:prt1]]
+</p>
+
+<p>
+(b) Determine the value of \(x\).
+</p>
+
+<p>
+\(x =\) [[input:ans1]] [[validation:ans1]] [[feedback:prt2]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+Let the number of tickets sold by the first group be \(x\).
+</p>
+
+<p>
+The second group sold \(x + {@k@}\) tickets.
+</p>
+
+<p>
+The total number of tickets sold was {@T@}.
+</p>
+
+<p>
+Step 1: Form the equation.
+</p>
+
+<p>
+\[
+x(x + {@k@}) = {@T@}
+\]
+</p>
+
+<p>
+Step 2: Expand the expression.
+</p>
+
+<p>
+\[
+x^2 + {@k@}x = {@T@}
+\]
+</p>
+
+<p>
+Step 3: Rearrange the equation into standard quadratic form.
+</p>
+
+<p>
+\[
+x^2 + {@k@}x - {@T@} = 0
+\]
+</p>
+
+<p>
+Step 4: Factorise the quadratic expression.
+</p>
+
+<p>
+\[
+(x - {@n@})(x + {@n + k@}) = 0
+\]
+</p>
+
+<p>
+Step 5: Solve each factor.
+</p>
+
+<p>
+First factor:
+</p>
+
+<p>
+\[
+x - {@n@} = 0
+\]
+</p>
+
+<p>
+Add {@n@} to both sides:
+</p>
+
+<p>
+\[
+x = {@n@}
+\]
+</p>
+
+<p>
+Second factor:
+</p>
+
+<p>
+\[
+x + {@n + k@} = 0
+\]
+</p>
+
+<p>
+Subtract {@n + k@} from both sides:
+</p>
+
+<p>
+\[
+x = -{@n + k@}
+\]
+</p>
+
+<p>
+Since the number of tickets sold cannot be negative, we reject the negative solution.
+</p>
+
+<p>
+Therefore,
+</p>
+
+<p>
+\[
+x = {@n@}
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* number of tickets in first group */
+n: rand(8) + 6;
+
+/* extra tickets in second group */
+k: rand(5) + 2;
+
+/* total tickets sold */
+T: n*(n + k);
+
+/* quadratic expression */
+expr: expand(x*(x + k) - T);
+
+/* correct equation */
+eq_correct: expr = 0;
+
+/* correct solution */
+sol: n;
+
+/* equation mistakes */
+m1: expand(x*(x + k));
+m2: expand(x*(x + k) + T);
+m3: expr;
+
+/* solution mistakes */
+m4: sqrt(T);
+m5: n + k;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@eq_correct@}, {@sol@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Quadratic equations in real-life situations</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to model a real-life situation involving ticket sales using a quadratic equation and determine the unknown quantity.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>sol</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>eqn1</name>
+      <type>algebraic</type>
+      <tans>eq_correct</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>eqn1</sans>
+        <tans>eq_correct</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Forgot total</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>eqn1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You expanded the expression but did not include the total number of tickets.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Wrong sign</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>eqn1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>The total number of tickets should be subtracted so the equation equals zero.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Expression only</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>eqn1</sans>
+        <tans>m4</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>That is the correct expression, but you must write it as an equation equal to zero.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Start from the relationship 𝑥(𝑥+@𝑘@)=@𝑇@, then rearrange the equation so that one side equals zero.</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>sol</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Square root shortcut</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m4</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>This problem requires solving a quadratic equation.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Using second value</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>-n-k</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>This value is negative and does not make sense in the context of ticket sales.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Solve the correct quadratic equation you formed in part (a).</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1197610366</deployedseed>
+    <deployedseed>420580774</deployedseed>
+    <deployedseed>2147439914</deployedseed>
+    <deployedseed>1472972434</deployedseed>
+    <deployedseed>242788045</deployedseed>
+    <deployedseed>2139108850</deployedseed>
+    <deployedseed>1128351785</deployedseed>
+    <deployedseed>1920527799</deployedseed>
+    <deployedseed>1096254289</deployedseed>
+    <deployedseed>124770160</deployedseed>
+    <deployedseed>1173034478</deployedseed>
+    <deployedseed>1857807415</deployedseed>
+    <deployedseed>1465465038</deployedseed>
+    <deployedseed>882106644</deployedseed>
+    <deployedseed>313342956</deployedseed>
+    <deployedseed>287608332</deployedseed>
+    <deployedseed>122830078</deployedseed>
+    <deployedseed>2051452947</deployedseed>
+    <deployedseed>2008180094</deployedseed>
+    <deployedseed>526086773</deployedseed>
+    <deployedseed>1293366520</deployedseed>
+    <deployedseed>1033516123</deployedseed>
+    <deployedseed>989478182</deployedseed>
+    <deployedseed>642051859</deployedseed>
+    <deployedseed>479352895</deployedseed>
+    <deployedseed>2135886082</deployedseed>
+    <deployedseed>594560742</deployedseed>
+    <deployedseed>681771648</deployedseed>
+    <deployedseed>268330994</deployedseed>
+    <deployedseed>1640773362</deployedseed>
+    <deployedseed>1646518621</deployedseed>
+    <deployedseed>743494388</deployedseed>
+    <deployedseed>1094166181</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>sol</value>
+      </testinput>
+      <testinput>
+        <name>eqn1</name>
+        <value>eq_correct</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

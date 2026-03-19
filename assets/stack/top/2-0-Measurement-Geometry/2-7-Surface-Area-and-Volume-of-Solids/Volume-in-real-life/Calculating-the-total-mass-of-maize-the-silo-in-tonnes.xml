@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the total mass of maize the silo in tonnes</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p><b>Agricultural Storage: The Grain Silo</b></p>
+<p>A farmer uses a steel silo to store maize. The silo consists of a cylindrical main body and a conical hopper at the bottom to allow the grain to flow out easily. The dimensions are:</p>
+<ul>
+    <li>Internal diameter of the silo = <b>{@diam@} m</b></li>
+    <li>Height of the cylindrical part = <b>{@h_cyl@} m</b></li>
+    <li>Vertical depth of the conical hopper = <b>{@h_cone@} m</b></li>
+</ul>
+[[jsxgraph width="400px" height="500px"]]
+
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-10, 18, 10, -12],
+    axis: false,
+    showCopyright: false
+});
+
+var R = {#r#};
+var H_cyl = {#h_cyl#};
+var H_cone = {#h_cone#};
+var p = 0.35;   // perspective factor
+
+/* --- TOP ELLIPSE --- */
+board.create('curve', [
+    function(t){ return R*Math.cos(t); },
+    function(t){ return H_cyl + p*R*Math.sin(t); },
+    0, 2*Math.PI
+], {strokeWidth:2});
+
+/* --- CYLINDER WALLS --- */
+board.create('segment', [[-R,0],[-R,H_cyl]], {strokeWidth:2});
+board.create('segment', [[R,0],[R,H_cyl]], {strokeWidth:2});
+
+/* --- HOPPER SEAM (front arc only) --- */
+board.create('curve', [
+    function(t){ return R*Math.cos(t); },
+    function(t){ return p*R*Math.sin(t); },
+    Math.PI, 2*Math.PI
+], {strokeWidth:2});
+
+/* --- CONE --- */
+var apex = [0,-H_cone];
+
+board.create('segment',[[-R,0],apex],{strokeWidth:2});
+board.create('segment',[[R,0],apex],{strokeWidth:2});
+
+/* --- DIMENSION: DIAMETER --- */
+board.create('segment', [[-R,H_cyl],[R,H_cyl]], {
+    strokeColor:'blue',
+    dash:2,
+    strokeWidth:2
+});
+
+board.create('text', [0,H_cyl+1.5,"{#diam#} m"], {
+    color:'blue',
+    fontSize:14,
+    anchorX:'middle'
+});
+
+/* --- CYLINDER HEIGHT --- */
+board.create('segment', [[R+1.5,0],[R+1.5,H_cyl]], {
+    strokeColor:'red',
+    strokeWidth:2
+});
+
+board.create('text',[R+2.5,H_cyl/2,"{#h_cyl#} m"],{
+    color:'red',
+    fontSize:14
+});
+
+/* --- CONE HEIGHT --- */
+board.create('segment', [[R+1.5,-H_cone],[R+1.5,0]], {
+    strokeColor:'green',
+    strokeWidth:2
+});
+
+board.create('text',[R+2.5,-H_cone/2,"{#h_cone#} m"],{
+    color:'green',
+    fontSize:14
+});
+
+[[/jsxgraph]]
+
+
+
+
+<p>If the density of maize is <b>750 kg/m³</b>, calculate the total mass of maize the silo can hold in <b>tonnes</b>.</p>
+<p>Total Mass = [[input:ans1]] tonnes [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p><b>Step 1: Find the Radius</b><br>
+Diameter is {@diam@} m, so \(r = {@r@}\) m.</p>
+
+<p><b>Step 2: Calculate Volumes</b></p>
+\begin{align}
+V_{\text{cylinder}} &= \pi r^2 h \\
+&= \pi \times {@r@}^2 \times {@h_cyl@} \\
+&= {@V_cyl@} \text{ m}^3 \\\\
+V_{\text{cone}} &= \frac{1}{3} \pi r^2 h \\
+&= \frac{1}{3} \times \pi \times {@r@}^2 \times {@h_cone@} \\
+&= {@V_cone@} \text{ m}^3 \\\\
+\text{Total Volume} &= {@V_cyl@} + {@V_cone@} = {@total_m3@} \text{ m}^3
+\end{align}
+
+<p><b>Step 3: Convert to Mass (Tonnes)</b></p>
+\begin{align}
+\text{Mass in kg} &= \text{Volume} \times \text{Density} \\
+&= {@total_m3@} \times 750 = {@total_mass_kg@} \text{ kg} \\\\
+\text{Mass in Tonnes} &= \frac{@total_mass_kg@}{1000} \\
+&= \mathbf{{@ta@} \text{ tonnes}}
+\end{align}]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. Dimensions */
+r: 3 + rand(3);          /* Radius: 3, 4, or 5 m */
+h_cyl: 8 + rand(5);      /* Height: 8 to 12 m */
+h_cone: 3 + rand(3);     /* Cone depth: 3, 4, or 5 m */
+diam: 2 * r;
+
+/* 2. Volume Calculations (pi = 3.142) */
+V_cyl: %pi* r^2 * h_cyl;
+V_cone: (1/3) * %pi * r^2 * h_cone;
+total_m3: V_cyl + V_cone;
+
+/* 3. Mass Calculation (Density of Maize = 750 kg/m3) */
+density: 750;
+total_mass_kg: total_m3 * density;
+total_tonnes: total_mass_kg / 1000;
+
+/* Teacher Answer (Rounded to 2 decimal places) */
+ta: total_tonnes;
+
+/* 4. Display Variables */
+r2: r^2;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1770654405</deployedseed>
+    <deployedseed>742686789</deployedseed>
+    <deployedseed>1239887385</deployedseed>
+    <deployedseed>1865162303</deployedseed>
+    <deployedseed>1787026980</deployedseed>
+    <deployedseed>688644559</deployedseed>
+    <deployedseed>1395578868</deployedseed>
+    <deployedseed>1010875986</deployedseed>
+    <deployedseed>704814496</deployedseed>
+    <deployedseed>841956979</deployedseed>
+    <deployedseed>2011444037</deployedseed>
+    <deployedseed>1347717058</deployedseed>
+    <deployedseed>612367845</deployedseed>
+    <deployedseed>2042397251</deployedseed>
+    <deployedseed>633154059</deployedseed>
+    <deployedseed>681417345</deployedseed>
+    <deployedseed>2124327579</deployedseed>
+    <deployedseed>1463573851</deployedseed>
+    <deployedseed>1994148959</deployedseed>
+    <deployedseed>1922178257</deployedseed>
+  </question>
+</quiz>

@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Grouping ungrouped data</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<h3>
+Measures of Central Tendency (Real Life Data)
+</h3>
+
+<p>
+Below are salaries of <b>{@N@}</b> employees in Bidco Africa company in Kenyan Shillings.
+</p>
+
+<p>
+The recorded salaries are shown below:
+</p>
+
+<p style="text-align:center;">
+\({@raw_data@}\)
+</p>
+
+<p>
+Using the data above, answer the following questions.
+</p>
+
+<p>
+<b>(a)</b> Calculate the <b>mean monthly salary</b>.
+</p>
+
+<p>
+Mean = [[input:ans1]] [[validation:ans1]]
+</p>
+
+<p>
+<b>(b)</b> Determine the <b>median monthly salary</b>.
+</p>
+
+<p>
+Median = [[input:ans2]] [[validation:ans2]]
+</p>
+
+<p>
+<b>(c)</b> Determine the <b>mode of the salaries</b>.
+</p>
+
+<p>
+Mode = [[input:ans3]] [[validation:ans3]]
+</p>
+
+<p>
+[[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution </h3>
+
+<p>
+Central tendency describes the value that represents the centre of a dataset.
+The three most common measures are the <b>mean</b>, <b>median</b>, and <b>mode</b>.
+</p>
+
+<h4>1. Mean</h4>
+
+<p>
+The mean is calculated by dividing the sum of all values by the number of observations. That is 
+\[
+\text{Mean} = \frac{\sum x}{N}
+\]
+</p>
+<p>
+For this dataset:
+</p>
+
+<p>
+Total number of employees: <b>{@N@}</b>
+</p>
+
+<p>
+Correct Mean:
+</p>
+
+<p>
+<b>{@mean_val@} KES</b>
+</p>
+
+---
+
+<h4>2. Median</h4>
+
+<p>
+The median is the middle value when the data is arranged in ascending order.
+</p>
+
+<p>
+Since the dataset contains <b>{@N@}</b> values (an odd number), the median position is:
+</p>
+
+<p>
+\[
+\frac{N+1}{2} = \frac{@N@+1}{2}
+\]
+</p>
+
+<p>
+Correct Median:
+</p>
+
+<p>
+<b>{@median_val@} KES</b>
+</p>
+
+---
+
+<h4>3. Mode</h4>
+
+<p>
+The mode is the value that appears most frequently in the dataset.
+</p>
+
+<p>
+The table below shows the frequency of each salary.
+The mode is highlighted.
+</p>
+
+<table border="1" style="border-collapse:collapse; text-align:center;">
+<tr>
+<th>Salary (KES)</th>
+<th>Frequency</th>
+</tr>
+
+{@freq_table_rows@}
+
+</table>
+
+<p>
+Therefore, the <b>Mode</b> is:
+</p>
+
+<p>
+<b>{@ta_mode@} KES</b>
+</p>
+
+---
+
+<h4>Interpretation</h4>
+
+<ul>
+<li><b>Mean</b> gives the overall average salary.</li>
+<li><b>Median</b> represents the middle salary when ordered.</li>
+<li><b>Mode</b> shows the most common salary in the company.</li>
+</ul>
+
+<p>
+These three measures help statisticians understand how income or other real-world data is distributed.
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* ============================= */
+/* 1. DATA GENERATION */
+/* ============================= */
+
+/* Pool of realistic monthly salaries in KES */
+pool: [25000, 28000, 30000, 32000, 35000, 38000, 40000, 42000, 45000, 50000, 55000, 60000];
+
+/* Select 55 salaries randomly from the pool */
+raw_data: makelist(random_permutation(pool)[1], k, 1, 55);
+
+N: length(raw_data);
+
+
+/* ============================= */
+/* 2. MEAN CALCULATIONS */
+/* ============================= */
+
+sum_x: apply("+", raw_data);
+mean_val: float(sum_x / N);
+ta1:mean_val;
+
+/* ============================= */
+/* 3. MEDIAN CALCULATIONS */
+/* ============================= */
+
+sorted_data: sort(raw_data);
+
+/* Position for odd number of observations */
+med_pos: (N + 1) / 2;
+median_val: sorted_data[med_pos];
+ta2:median_val;
+
+/* ============================= */
+/* 4. MODE CALCULATIONS */
+/* ============================= */
+
+unique_vals: unique(raw_data);
+
+/* Frequency of each salary */
+freqs: map(lambda([x], length(sublist(raw_data, lambda([y], y=x)))), unique_vals);
+
+max_freq: lmax(freqs);
+
+/* Identify salaries with highest frequency */
+mode_indices: sublist_indices(freqs, lambda([x], x=max_freq));
+
+modes: map(lambda([idx], unique_vals[idx]), mode_indices);
+
+/* Handle single or multiple modes */
+ta_mode: if length(modes)=1 then modes[1] else setify(modes);
+ta3:ta_mode;
+
+/* ============================= */
+/* 5. FEEDBACK TABLE GENERATION */
+/* ============================= */
+
+/* Sorted unique values for table */
+u_vals: sort(unique_vals);
+
+u_freqs: map(lambda([x], length(sublist(raw_data, lambda([y], y=x)))), u_vals);
+
+/* Generate HTML table rows */
+freq_table_rows: "";
+for i:1 thru length(u_vals) do (
+   row_style: if u_freqs[i] = max_freq then "background-color:#d4edda;font-weight:bold;" else "",
+   freq_table_rows: sconcat(
+       freq_table_rows,
+       "<tr style='", row_style, "'><td>", u_vals[i], "</td><td>", u_freqs[i], "</td></tr>"
+   )
+);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[QN: sconcat(
+"CentralTendencyData | N=", string(N),
+" | data=", string(raw_data),
+" | mean=", string(ta_mean),
+" | median=", string(ta_median),
+" | mode=", string(ta_mode)
+);]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta3</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>
