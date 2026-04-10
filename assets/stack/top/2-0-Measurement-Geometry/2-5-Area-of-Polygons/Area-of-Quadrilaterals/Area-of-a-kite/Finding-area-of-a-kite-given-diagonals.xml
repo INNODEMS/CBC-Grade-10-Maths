@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding area of a kite given diagonals</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A kite has diagonals measuring <b>{#d1#} {#unit#}</b> and <b>{#d2#} cm</b>.</p>
+<p>Find its area.</p>
+
+[[jsxgraph width="300px" height="400px"]]
+var board = JXG.JSXGraph.initBoard(divid, {boundingbox: [-10, 15, 10, -15], axis: false, showCopyright: false});
+
+// Define the vertices of the kite based on diagonals
+// Vertical diagonal (d1) and Horizontal diagonal (d2)
+var top = board.create('point', [0, {#d1/2#}], {visible: false});
+var bottom = board.create('point', [0, -{#d1/2#}], {visible: false});
+var left = board.create('point', [-{#d2/2#}, 0], {visible: false});
+var right = board.create('point', [{#d2/2#}, 0], {visible: false});
+
+// Draw the Kite
+board.create('polygon', [top, right, bottom, left], {
+    fillColor: 'none', 
+    strokeColor: 'black', 
+    strokeWidth: 2
+});
+
+// Draw the dashed diagonal lines
+board.create('segment', [top, bottom], {dash: 2, strokeColor: 'gray'});
+board.create('segment', [left, right], {dash: 2, strokeColor: 'gray'});
+
+// Labels for the diagonals
+board.create('text', [0.5, 0, '{#d1#} cm'], {fontSize: 14});
+board.create('text', [-1, -1, '{#d2#} cm'], {fontSize: 14});
+[[/jsxgraph]]
+
+<p>Area = [[input:ans1]] cm\(^2\) [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>To find the area of a kite, we use the formula involving the lengths of its diagonals \(d_1\) and \(d_2\):</p>
+
+\[ \text{Area} = \frac{1}{2} \times d_1 \times d_2 \]
+
+<p>Substituting the given values:</p>
+
+\[ \text{Area} = \frac{1}{2} \times {@d1@} \times {@d2@} \]
+\[ \text{Area} = {@ta@} \text{ {#unit#}}^2 \]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize diagonals d1 and d2 between 6 and 20 */
+/* We use a while loop to ensure they aren't the same number */
+d1: 6 + rand(15);
+d2: 6 + rand(15);
+while d1 = d2 do (
+    d2: 6 + rand(15)
+);
+
+/* Calculate the correct area */
+/* Area = 1/2 * d1 * d2 */
+ta: (1/2) * d1 * d2;
+
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>157500944</deployedseed>
+    <deployedseed>726877123</deployedseed>
+    <deployedseed>463369358</deployedseed>
+    <deployedseed>515787951</deployedseed>
+    <deployedseed>2106786377</deployedseed>
+    <deployedseed>1495670714</deployedseed>
+    <deployedseed>921156749</deployedseed>
+    <deployedseed>377028503</deployedseed>
+    <deployedseed>367773299</deployedseed>
+    <deployedseed>717612307</deployedseed>
+    <deployedseed>654356256</deployedseed>
+    <deployedseed>1575669784</deployedseed>
+    <deployedseed>372360953</deployedseed>
+    <deployedseed>78881201</deployedseed>
+    <deployedseed>1266765335</deployedseed>
+    <deployedseed>24280828</deployedseed>
+    <deployedseed>1739303959</deployedseed>
+    <deployedseed>1015945765</deployedseed>
+    <deployedseed>1616636894</deployedseed>
+    <deployedseed>1264459165</deployedseed>
+  </question>
+</quiz>

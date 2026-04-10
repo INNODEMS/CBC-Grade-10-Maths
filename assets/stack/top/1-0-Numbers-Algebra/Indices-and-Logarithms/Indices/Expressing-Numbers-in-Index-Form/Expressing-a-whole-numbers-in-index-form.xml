@@ -2,49 +2,57 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Expressing a whole numbers in index form</text>
+      <text>Expressing a whole number in index form</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Write the number \({@number@}\) in index form.</p>
-<p><b>Note:</b>Your answer should be written as \(a^b\).</p>
+      <text><![CDATA[<p>Write the number \({@number@}\) in index form with a prime base.</p>
+<p><b>Note:</b> Your answer should be written as \(a^b\), where \(a\) is <b>prime</b>.</p>
 
 <p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
     </questiontext>
-    <generalfeedback format="moodle_auto_format">
+    <generalfeedback format="html">
       <text><![CDATA[<h3>Worked Solution</h3>
 
 <p>The number given is \({@number@}\).</p>
 
 <p>We check if it can be written as repeated multiplication of the same base.</p>
 
-<p>\({@number@} = {@base@} \times {@base@} \times \dots \times {@base@} \ \ ({@exp@} \ \ \text  times) \)</p>
+<p>\({@number@} = {@expanded@}\)</p>
 
-<p>Therefore, the index form is 
-\[
-{@base@}^{@exp@}.
-\]
-</p>]]></text>
+<p>Therefore, the index form is \({@base@}^{@exp@}\).</p>]]></text>
     </generalfeedback>
     <defaultgrade>2</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Random base and exponent (use explicit lists for rand) */
-base: rand([2,3,4,5,6,7,8,9]);
-exp:  rand([2,3,4,5]);
+      <text><![CDATA[/* Random base and exponent (use explicit lists for rand) 
+   Only prime base to avoid issues with multiple answers */
+
+simp: false;
+
+base: rand([2,3,5,7,11]); 
+exp: if base <= 3 then rand([2,3,4,5]) else rand([2,3]);
 
 /* Compute the actual number */
-number: base^exp;
+ta: base^exp;
+number: ev(base^exp, simp);
 
 /* Common mistakes for targeted PRT feedback */
 m1: base * exp;      /* multiplying base and exponent instead of exponentiation */
 m2: exp ^ base;      /* reversing exponent and base */
 m3: base + exp;      /* adding them */
-</text>
+
+/* String for general feedback */
+expanded:
+  if exp = 2 then sconcat(base, "\\times ", base)
+  elseif exp = 3 then sconcat(base, "\\times ", base, "\\times ", base)
+  elseif exp = 4 then sconcat(base, "\\times ", base, "\\times ", base, "\\times ", base)
+  else sconcat(base, "\\times ", base, "\\times ", base, "\\times ", base, "\\times ", base);
+]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -111,18 +119,43 @@ m3: base + exp;      /* adding them */
         <text/>
       </feedbackvariables>
       <node>
-        <name>1</name>
-        <description>Checks for correct answer</description>
+        <name>2</name>
+        <description>Equivalent answer</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>base^exp</tans>
+        <tans>ta</tans>
         <testoptions/>
         <quiet>0</quiet>
-        <truescoremode>=</truescoremode>
+        <truescoremode>-</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>3</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>4</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Correct base</description>
+        <answertest>EqualComAss</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt1-2-T</trueanswernote>
+        <trueanswernote>prt1-4-T</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
@@ -130,9 +163,34 @@ m3: base + exp;      /* adding them */
         <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt1-2-F</falseanswernote>
+        <falseanswernote>prt1-4-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text>Make sure you have a prime base, and write using index form</text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>4</name>
+        <description>exp^base wrong order</description>
+        <answertest>EqualComAss</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>-</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-5-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Make sure you have your base and exponent the correct way around.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-5-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Double check your multiplication. Is your answer equal to \({@number@}\)?</text>
         </falsefeedback>
       </node>
     </prt>

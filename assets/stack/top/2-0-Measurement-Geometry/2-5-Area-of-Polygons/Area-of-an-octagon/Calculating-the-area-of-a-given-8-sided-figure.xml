@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the area of a given 8 sided figure</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A regular octagon has center <b>O</b>. If the distance from the center to a vertex is <b>OA = {#r#} cm</b>, find the total area of the octagon.</p>
+<p>Give your answer correct to 2 decimal places.</p>
+
+[[jsxgraph width="400px" height="400px"]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-10, 10, 10, -10],
+    axis: false,
+    showNavigation: false,
+    showCopyright: false
+});
+
+var n = 8;
+var R = 7; // Visual radius
+
+/* Create Vertices */
+var points = [];
+for (var i = 0; i < n; i++) {
+    var angle = (2 * Math.PI * i / n);
+    points.push(board.create('point', [R * Math.cos(angle), R * Math.sin(angle)], {visible: false}));
+}
+
+/* Create Octagon */
+board.create('polygon', points, {
+    fillColor: '#f0f0f0',
+    borders: {strokeWidth: 2, strokeColor: 'black'}
+});
+
+var O = board.create('point', [0, 0], {name: 'O', color: 'black', size: 3});
+var A = points[0];
+var B = points[1];
+
+/* Show the triangle slice from the example */
+board.create('segment', [O, A], {dash: 2, strokeColor: 'gray'});
+board.create('segment', [O, B], {dash: 2, strokeColor: 'gray'});
+
+/* Labels */
+board.create('text', [3.5, 0.5, "{#r#} cm"], {fontSize: 14});
+board.create('text', [2.5, 3.5, "{#r#} cm"], {fontSize: 14});
+
+/* Angle Arc */
+board.create('angle', [A, O, B], {radius: 1.5, name: "45°"});
+[[/jsxgraph]]
+
+<p>Area = [[input:ans1]] cm<sup>2</sup> [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>A regular octagon is composed of <b>8 congruent isosceles triangles</b> meeting at the centre <b>O</b>.</p>
+
+<p><b>Step 1: Identify the properties of one triangle (\(\triangle AOB\))</b></p>
+<ul>
+    <li>The two equal sides (radii) are \(r = {@r@}\text{ cm}\).</li>
+    <li>The central angle is calculated as \(360^\circ \div 8 = 45^\circ\).</li>
+</ul>
+
+<p><b>Step 2: Calculate the area of one triangle</b></p>
+<p>Using the Sine Rule for Area, \(\text{Area} = \frac{1}{2}ab\sin C\):</p>
+
+\[ \text{Area of } \triangle AOB = \frac{1}{2} \times {@r@} \times {@r@} \times \sin(45^\circ) \]
+\[ \text{Area of } \triangle AOB = \frac{1}{2} \times {@r^2@} \times 0.7071 \]
+\[ \text{Area of } \triangle AOB \approx {@round(area_tri*10000)/10000@}\text{ cm}^2 \]
+
+<p><b>Step 3: Calculate the total area of the octagon</b></p>
+<p>Since there are 8 such triangles in the octagon:</p>
+
+\[ \text{Total Area} = 8 \times \text{Area of } \triangle AOB \]
+\[ \text{Total Area} = 8 \times {@round(area_tri*10000)/10000@} \]
+\[ \text{Total Area} = {@ta@}\text{ cm}^2 \]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. Randomize the radius OA (between 5 and 15) */
+r: 5 + rand(11);
+
+/* 2. Constants for an Octagon */
+n: 8;
+central_angle: 360/n;
+rad_angle: float((central_angle * %pi) / 180);
+
+/* 3. Calculate Area of one triangle: 1/2 * r * r * sin(45) */
+area_tri_exact: (1/2) * r^2 * sin(rad_angle);
+area_tri: float(area_tri_exact);
+
+/* 4. Total Area of Octagon */
+ta_exact: n * area_tri_exact;
+ta_1: float(ta_exact);
+ta:decimalplaces(ta_1,2)
+
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>440720895</deployedseed>
+    <deployedseed>353001401</deployedseed>
+    <deployedseed>2047623150</deployedseed>
+    <deployedseed>1182815431</deployedseed>
+    <deployedseed>1730250268</deployedseed>
+    <deployedseed>1747869386</deployedseed>
+    <deployedseed>119929694</deployedseed>
+    <deployedseed>2111480428</deployedseed>
+  </question>
+</quiz>

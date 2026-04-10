@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the coordinates of the triangle vertices after the enlargement</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The vertices of triangle \(\triangle ABC\) are <b>A({@x1@}, {@y1@})</b>, <b>B({@x2@}, {@y2@})</b>, and <b>C({@x3@}, {@y3@})</b>. The triangle is enlarged with a centre of enlargement at (0, 0) and a scale factor of {@sf@}.</p>
+
+[[jsxgraph width="400px" height="400px"]]
+var board = JXG.JSXGraph.initBoard(divid, {boundingbox: [-10, 10, 10, -10], axis: true, showCopyright: false});
+
+// Original Shape
+var poly1 = board.create('polygon', [{#pA#}, {#pB#}, {#pC#}], {fillColor: 'blue', fillOpacity: 0.3, name: 'Original'});
+
+// Lines of projection through the origin to help visualize negative SF
+board.create('line', [[0,0], {#pA#}], {dash: 1, strokeColor: 'gray', fixed: true});
+board.create('line', [[0,0], {#pB#}], {dash: 1, strokeColor: 'gray', fixed: true});
+board.create('line', [[0,0], {#pC#}], {dash: 1, strokeColor: 'gray', fixed: true});
+[[/jsxgraph]]
+<p>Find the coordinates of the image vertices after the enlargement. Write your answers in the form [x,y].</p>
+<ul>
+    <li>A' = [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</li>
+    <li>B' = [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]</li>
+    <li>C' = [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</li>
+</ul>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<b>Step 1: Apply the Enlargement Rule</b>
+<p>When the centre of enlargement is the origin \((0,0)\), we multiply each coordinate by the scale factor \(k\):</p>
+<p>\[ (x, y) \rightarrow (k \cdot x, k \cdot y) \]</p>
+
+<b>Step 2: Calculate the New Coordinates</b>
+<p>Given the scale factor \(k = {@sf@}\):</p>
+<ul>
+    <li>A({@x1@}, {@y1@}) \(\rightarrow\) ({@sf@} \(\cdot\) {@x1@}, {@sf@} \(\cdot\) {@y1@}) = <b>{@pA_prime@}</b></li>
+    <li>B({@x2@}, {@y2@}) \(\rightarrow\) ({@sf@} \(\cdot\) {@x2@}, {@sf@} \(\cdot\) {@y2@}) = <b>{@pB_prime@}</b></li>
+    <li>C({@x3@}, {@y3@}) \(\rightarrow\) ({@sf@} \(\cdot\) {@x3@}, {@sf@} \(\cdot\) {@y3@}) = <b>{@pC_prime@}</b></li>
+</ul>
+[[jsxgraph width="450px" height="450px"]]
+var board2 = JXG.JSXGraph.initBoard(divid, {boundingbox: [-15, 15, 15, -15], axis: true, showCopyright: false});
+
+// Original Triangle (Blue)
+var poly_orig = board2.create('polygon', [{#pA#}, {#pB#}, {#pC#}], {fillColor: 'blue', fillOpacity: 0.2, strokeColor: 'blue', name: 'Original', withLabel: true});
+
+// Enlarged Image (Red, Inverted, Opposite Side)
+var poly_image = board2.create('polygon', [{#pA_prime#}, {#pB_prime#}, {#pC_prime#}], {fillColor: 'red', fillOpacity: 0.3, strokeColor: 'red', name: 'Image', withLabel: true});
+
+// Lines passing through origin to show negative SF
+board2.create('line', [[0,0], {#pA#}], {dash: 1, strokeColor: 'gray', fixed: true});
+board2.create('line', [[0,0], {#pB#}], {dash: 1, strokeColor: 'gray', fixed: true});
+board2.create('line', [[0,0], {#pC#}], {dash: 1, strokeColor: 'gray', fixed: true});
+[[/jsxgraph]]
+
+<p>Because the scale factor is negative, the image appears on the opposite side of the centre of enlargement and is inverted compared to the original shape.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* 1. Define a simple triangle in the first quadrant */
+x1: 2 + rand(3); y1: 2 + rand(3);
+x2: x1 + 2;      y2: y1;
+x3: x1;          y3: y1 + 2;
+
+/* 2. Define a negative scale factor */
+sf: -1 * (1 + rand(2)); /* Either -1 or -2 */
+
+/* 3. Calculate Image Coordinates (Centre of enlargement is [0,0]) */
+/* Rule: (x, y) -> (k*x, k*y) */
+pA: [x1, y1];
+pB: [x2, y2];
+pC: [x3, y3];
+
+pA_prime: [sf*x1, sf*y1];
+pB_prime: [sf*x2, sf*y2];
+pC_prime: [sf*x3, sf*y3];]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@pA_prime@}</p>
+<p>{@pB_prime@}</p>
+<p>{@pC_prime@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>pA_prime</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>pB_prime</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>pC_prime</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>pA_prime</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>pB_prime</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>pC_prime</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1666803330</deployedseed>
+    <deployedseed>2122486863</deployedseed>
+    <deployedseed>749663529</deployedseed>
+    <deployedseed>118109352</deployedseed>
+    <deployedseed>809781115</deployedseed>
+    <deployedseed>1591711929</deployedseed>
+    <deployedseed>1448805300</deployedseed>
+    <deployedseed>1551793124</deployedseed>
+    <deployedseed>1651473038</deployedseed>
+    <deployedseed>1467676167</deployedseed>
+  </question>
+</quiz>
