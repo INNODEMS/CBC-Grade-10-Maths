@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the area of a kite</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A kite has diagonals of lengths <strong>{@d1@} cm</strong> and <strong>{@d2@} cm</strong>.
+</p>
+
+<p>
+The diagonals of a kite bisect each other at right angles.
+</p>
+
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-10, 10, 10, -10],
+    axis: false,
+    showCopyright: false
+});
+
+// STACK values
+var d1 = {#d1#};
+var d2 = {#d2#};
+
+var h1 = d1/2;
+var h2 = d2/2;
+
+// Points
+var A = board.create('point', [0, h2], {name: 'A'});
+var B = board.create('point', [-h1, 0], {name: 'B'});
+var C = board.create('point', [h1, 0], {name: 'C'});
+var D = board.create('point', [0, -h2], {name: 'D'});
+
+// Kite
+board.create('polygon', [A, B, D, C], {
+    fillColor: '#e6f2ff',
+    borders: {strokeColor: 'black', strokeWidth: 2}
+});
+
+// Diagonals
+board.create('segment', [A, D], {dash: 2});
+board.create('segment', [B, C], {dash: 2});
+
+// Labels
+board.create('text', [h1/2, 0.5, d1 + " cm"]);
+board.create('text', [0.5, h2/2, d2 + " cm"]);
+[[/jsxgraph]]
+<ol>
+<li>
+<p>Calculate the area of the kite.</p>
+<p>Area = [[input:ans1]] cm² [[validation:ans1]] [[feedback:prt1]]</p>
+</li>
+<li>
+<p>Use the diagonals to calculate the length of a side.</p>
+
+<p>
+Length = [[input:ans2]] cm [[validation:ans2]] [[feedback:prt2]]
+</p>
+</li>
+<li>
+<p>Find the size of the angles of the kite (in degrees).</p>
+<p>
+Angle 1 = [[input:ans3]]° [[validation:ans3]] [[feedback:prt3]]<br>
+Angle 2 = [[input:ans4]]° [[validation:ans4]] [[feedback:prt4]]
+</p>
+<p><i>(Give your answer to 1 decimal places where possible)</i></p>
+</li>
+</ol>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p><strong>(a) Area of the kite</strong></p>
+<p>
+The area of a kite is given by:
+\[
+\text{Area} = \frac{1}{2} \times d_1 \times d_2
+\]
+</p>
+
+<p>
+Substituting the values:
+\[
+\text{Area} = \frac{1}{2} \times {@d1@} \times {@d2@}
+\]
+</p>
+
+<p>
+\[
+\text{Area} = {@ta1@} \text{ cm}^2
+\]
+</p>
+
+<p><strong>(b) Length of the kite</strong></p>
+
+<p>
+The diagonals of a kite bisect each other at right angles, forming right-angled triangles.
+</p>
+
+<p>
+Half of each diagonal is:
+\[
+\frac{d_1}{2} = {@h1@}, \quad \frac{d_2}{2} = {@h2@}
+\]
+</p>
+
+<p>
+Using Pythagoras’ theorem to find the side length:
+\[
+\text{side}^2 = {@h1@}^2 + {@h2@}^2
+\]
+</p>
+
+<p>
+\[
+\text{side} = \sqrt{{@h1@}^2 + {@h2@}^2} = {@ta2@}
+\]
+</p>
+<p><strong>(c) Angles of the kite</strong></p>
+
+<p>
+The diagonals form right triangles, allowing us to use trigonometry.
+</p>
+
+<p>
+Consider one of the triangles:
+\[
+\tan\left(\frac{\theta}{2}\right) = \frac{{@h2@}}{{@h1@}}
+\]
+</p>
+
+<p>
+\[
+\frac{\theta}{2} = \tan^{-1}\left(\frac{{@h2@}}{{@h1@}}\right)
+\]
+</p>
+
+<p>
+\[
+\theta = 2 \tan^{-1}\left(\frac{{@h2@}}{{@h1@}}\right)
+\]
+</p>
+
+<p>
+\[
+\theta = {@ta3@}^\circ
+\]
+</p>
+<p>
+The other angle in the kite is:
+\[
+180^\circ - {@ta3@} = {@ta4@}^\circ
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Diagonals */
+d1 : rand(6) + 10;   /* e.g. 11–16 */
+d2 : rand(6) + 8;    /* e.g. 9–14 */
+
+/* Half diagonals */
+h1 : d1/2;
+h2 : d2/2;
+
+/* Area */
+ta1 : (1/2)*d1*d2;
+
+/* Side length using Pythagoras */
+ta2 : sqrt(h1^2 + h2^2);
+
+/* Angles (in degrees) */
+/* Half-angle using tan */
+theta_half : atan(h2/h1);
+theta : 2*theta_half;
+
+/* Convert to degrees */
+ta_3 : float(2*atan(h2/h1)*180/%pi);
+ta3: decimalplaces(ta_3,1);
+ta4 : 180 - ta3;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta1@}</p>
+<p>{@ta2@}</p>
+<p>{@ta3@}</p>
+<p>{@ta4@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta3</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>ta4</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ta3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>ta4</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>690319429</deployedseed>
+    <deployedseed>1658405230</deployedseed>
+    <deployedseed>1918439045</deployedseed>
+    <deployedseed>918531924</deployedseed>
+    <deployedseed>2078961599</deployedseed>
+    <deployedseed>1030954686</deployedseed>
+    <deployedseed>603148528</deployedseed>
+    <deployedseed>902415633</deployedseed>
+    <deployedseed>538964727</deployedseed>
+    <deployedseed>537459617</deployedseed>
+    <deployedseed>1267808215</deployedseed>
+    <deployedseed>249137070</deployedseed>
+    <deployedseed>2129310224</deployedseed>
+    <deployedseed>1011032446</deployedseed>
+    <deployedseed>1674221689</deployedseed>
+    <deployedseed>1408075407</deployedseed>
+  </question>
+</quiz>

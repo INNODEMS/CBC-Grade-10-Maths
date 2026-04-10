@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the area of a farmer's trapezium-shaped field</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A farmer is designing a trapezium-shaped field. The two parallel sides measure {@a@} m and {@b@} m. The sloping sides are equal in length.</p>
+
+<p>
+To calculate how much land is available for planting, the farmer needs to determine the area of the field.
+</p>
+
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-2, 12, 20, -2],
+    axis: false,
+    showCopyright: false
+});
+
+// STACK variables
+var a = {#a#};
+var b = {#b#};
+var h = {#h#};
+var slant = {#slant#};
+
+var x_offset = 2;
+var diff = (a - b) / 2;
+
+// Points
+var p1 = board.create('point', [x_offset, 0], {visible: false});
+var p2 = board.create('point', [x_offset + a, 0], {visible: false});
+var p3 = board.create('point', [x_offset + a - diff, h], {visible: false});
+var p4 = board.create('point', [x_offset + diff, h], {visible: false});
+
+// Polygon
+board.create('polygon', [p1, p2, p3, p4], {
+    fillColor: '#e6f2ff',
+    borders: {strokeColor: 'black', strokeWidth: 2}
+});
+
+// Labels
+board.create('text', [x_offset + a/2, -0.7, a + " m"]);
+board.create('text', [x_offset + a/2, h + 0.7, b + " m"]);
+board.create('text', [x_offset + diff/2 - 1.5, h/2, slant.toFixed(1) + " m"]);
+board.create('text', [x_offset + a - diff/2 + 0.5, h/2, slant.toFixed(1) + " m"]);
+
+// Height line
+board.create('segment', [p4, [x_offset + diff, 0]], {
+    dash: 2,
+    strokeColor: 'gray'
+});
+board.create('text', [x_offset + diff + 0.2, h/2, "h"]);
+[[/jsxgraph]]
+
+<p>
+Calculate the area of the field.
+</p>
+
+<p>
+Area = [[input:ans1]] m² [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+
+<p>
+The area of a trapezium is given by:
+\[
+\text{Area} = \frac{1}{2}(a + b) \times h
+\]
+where:
+<ul>
+<li>\(a\) and \(b\) are the lengths of the parallel sides</li>
+<li>\(h\) is the perpendicular height</li>
+</ul>
+</p>
+
+<p>
+From the diagram:
+<ul>
+<li>Bottom base: \(a = {@a@}\)</li>
+<li>Top base: \(b = {@b@}\)</li>
+<li>Height: \(h = {@h@}\)</li>
+</ul>
+</p>
+
+<p>Substitute into the formula</strong></p>
+<p>
+\[
+\text{Area} = \frac{1}{2}({@a@} + {@b@}) \times {@h@}
+\]
+</p>
+
+<p>
+\[
+\text{Area} = {@ta1@} \text{ m}^2
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Parallel sides */
+a : rand(6) + 10;
+b : rand(5) + 4;
+
+if b >= a then (tmp:a, a:b+2, b:tmp-2);
+
+/* Height */
+h : rand(5) + 4;
+
+/* Geometry */
+diff : (a - b)/2;
+slant : float(sqrt(h^2 + diff^2));
+
+/* Area */
+ta1 : (1/2)*(a + b)*h;
+
+/* --- Common mistakes --- */
+
+/* 1. Missing 1/2 factor */
+mistake1 : (a + b)*h;
+
+/* 2. Using slanted side instead of height */
+mistake2 : (1/2)*(a + b)*slant;
+
+/* 3. Adding all four sides (treating like perimeter idea) */
+mistake3 : (1/2)*(a + b + 2*slant)*h;]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta1@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You seem to have forgotten to multiply the product of base and height by the factor 1/2. Kindly check at the step by step worked solution.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have used the slanted side instead of the perpendicular height to find the area. Please look at the worked solution below.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have incorrectly used all four sides. Remember only the parallel sides are used to find the area as by the formula. Check on the worked solution below.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>595980039</deployedseed>
+    <deployedseed>1280638758</deployedseed>
+    <deployedseed>1034010481</deployedseed>
+    <deployedseed>1029743426</deployedseed>
+    <deployedseed>99590559</deployedseed>
+    <deployedseed>2070594798</deployedseed>
+    <deployedseed>2029004031</deployedseed>
+    <deployedseed>1945324297</deployedseed>
+    <deployedseed>6860950</deployedseed>
+    <deployedseed>1439883486</deployedseed>
+    <deployedseed>168352162</deployedseed>
+    <deployedseed>2072715401</deployedseed>
+    <deployedseed>1420469363</deployedseed>
+    <deployedseed>1802718925</deployedseed>
+    <deployedseed>2057960336</deployedseed>
+    <deployedseed>1795377839</deployedseed>
+    <deployedseed>698509993</deployedseed>
+    <deployedseed>361953432</deployedseed>
+    <deployedseed>554637946</deployedseed>
+    <deployedseed>1968582307</deployedseed>
+    <deployedseed>1291603022</deployedseed>
+    <deployedseed>1972864690</deployedseed>
+    <deployedseed>320227623</deployedseed>
+    <deployedseed>57447607</deployedseed>
+    <deployedseed>1055123211</deployedseed>
+    <deployedseed>1078800958</deployedseed>
+  </question>
+</quiz>

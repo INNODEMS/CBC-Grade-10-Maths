@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the area of a given octagon floor tile</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A regular octagon-shaped floor tile has a side length of \({@s@}\) cm and an apothem (the perpendicular distance from the centre to a side) of \({@a@}\) cm.</p>
+
+[[jsxgraph width="400px" height="400px"]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-8, 8, 8, -8],
+    axis: false,
+    showNavigation: false,
+    showCopyright: false
+});
+
+var n = 8;
+var R = 6;
+
+/* Vertices - slightly rotated for optimal label placement */
+var points = [];
+for (var i = 0; i < n; i++) {
+    var angle = (2 * Math.PI * i / n) + (Math.PI / 8); 
+    points.push(board.create('point', [
+        R * Math.cos(angle),
+        R * Math.sin(angle)
+    ], {visible: false}));
+}
+
+/* Octagon (Green Polygon) */
+board.create('polygon', points, {
+    fillColor: 'none',
+    borders: {strokeWidth: 2, strokeColor: '#2e7d32'}
+});
+
+/* Center Point (Black Dot) - Label 'o' removed */
+var O = board.create('point', [0, 0], {color: 'black', size: 4, withLabel: false});
+
+var pA = points[0];
+var pB = points[1];
+var M_apo = board.create('midpoint', [pA, pB], {visible: false});
+
+/* Apothem (Dashed Red Line) */
+board.create('segment', [O, M_apo], {
+    dash: 2, 
+    strokeWidth: 2, 
+    strokeColor: 'red'
+});
+
+/* 1. Rotated Apothem Label (Float value, e.g., '4.8 cm') */
+board.create('text', [
+    (O.X() + M_apo.X()) / 2 - 0.6, // Offset slightly to the right of the line
+    (O.Y() + M_apo.Y()) / 2 + 0.3, // Offset slightly above the line
+    "{#a#} cm"
+], {
+    fontSize: 14,
+    color: 'red',
+    anchorX: 'left',
+    rotate: function() {
+        /* Calculate the angle of the apothem segment */
+        var angle_apo = Math.atan2(M_apo.Y() - O.Y(), M_apo.X() - O.X()) * 180 / Math.PI;
+        /* Ensure text doesn't appear upside down */
+        return (angle_apo > 90 || angle_apo < -90) ? angle_apo + 180 : angle_apo;
+    }
+});
+
+/* 2. Side Label (Blue segment) */
+var segSide = board.create('segment', [pA, pB], {
+    strokeColor: 'blue', 
+    strokeWidth: 3
+});
+
+/* Calculate angle and position for the side label */
+board.create('text', [
+    M_apo.X() + 0.5, 
+    M_apo.Y() + 0.5, 
+    "{#s#} cm"
+], {
+    color: 'blue', 
+    fontSize: 14,
+    anchorX: 'left',
+    rotate: function() {
+        var ang_side = Math.atan2(pB.Y() - pA.Y(), pB.X() - pA.X()) * 180 / Math.PI;
+        return (ang_side > 90 || ang_side < -90) ? ang_side + 180 : ang_side;
+    }
+});
+[[/jsxgraph]]
+<p>Calculate the total area of the octagon floor tile.</p>
+
+<p style="text-align: center;">
+Area = [[input:ans1]] cm<sup>2</sup> [[validation:ans1]][[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>A regular octagon can be split into <b>8 identical triangles</b>. Each triangle has a base (the side of the octagon) and a height (the apothem).</p>
+
+<p><b>Step 1: Calculate the area of one triangle</b></p>
+<p>Using the formula \(\text{Area} = \frac{1}{2} \times \text{base} \times \text{height}\):</p>
+
+\[ \text{Area of one triangle} = \frac{1}{2} \times {@s@} \times {@a@} \]
+\[ \text{Area of one triangle} = {@area_tri@} \text{ cm}^2 \]
+
+<p><b>Step 2: Calculate the total area of the octagon</b></p>
+<p>Since the octagon is made of 8 such triangles:</p>
+
+\[ \text{Total Area} = 8 \times \text{Area of one triangle} \]
+\[ \text{Total Area} = 8 \times {@area_tri@} \]
+\[ \text{Total Area} = {@ta@} \text{ cm}^2 \]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. Randomize the side length s (between 4 and 10) */
+s: 4 + rand(7);
+
+/* 2. Calculate a realistic apothem (a = s / (2*tan(22.5))) */
+/* For a regular octagon, the apothem is approx 1.2071 * side */
+a_exact: float(s / (2 * tan(%pi/8)));
+a: decimalplaces(a_exact,2);
+
+/* 3. Calculate Area of ONE triangle: 1/2 * base * height */
+area_tri: (1/2) * s * a;
+
+/* 4. Total Area of Octagon: 8 * area of one triangle */
+/* Using the formula A = 4 * s * a */
+ta_1: float(4 * s * a);
+ta: decimalplaces(ta_1,2);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@a@}</p>
+<p>{@s@}</p>
+<p>{@ta@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>991618801</deployedseed>
+    <deployedseed>1128938935</deployedseed>
+    <deployedseed>2069773578</deployedseed>
+    <deployedseed>670088745</deployedseed>
+    <deployedseed>1688865820</deployedseed>
+    <deployedseed>1697675931</deployedseed>
+    <deployedseed>301395870</deployedseed>
+  </question>
+</quiz>

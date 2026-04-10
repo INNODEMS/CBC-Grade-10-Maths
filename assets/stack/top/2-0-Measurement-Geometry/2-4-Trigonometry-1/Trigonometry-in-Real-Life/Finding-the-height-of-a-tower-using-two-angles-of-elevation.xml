@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the height of a tower using two angles of elevation</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A student stands some distance from a tower and observes the angle of elevation of the top to be {@theta1@}\(^\circ\). The student then walks {@d@} m closer to the tower and observes the angle to be {@theta2@}°. Find the height of the tower.
+</p>
+
+<p>
+Give your answer correct to <b>2 decimal places</b>.
+</p>
+
+<p>
+Height = [[input:ans1]] m [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+Let the distance from the second position (the closer point) to the tower be \(x\) m.
+</p>
+
+<p>
+Since the student walked {@d@} m closer, the distance from the first position to the tower was:
+</p>
+
+<p>
+\[
+x + {@d@}
+\]
+</p>
+
+<p>
+Step 1: Form an equation from the first position.
+</p>
+
+<p>
+\[
+\tan {@theta1@}^\circ = \frac{h}{x + {@d@}}
+\]
+</p>
+
+<p>
+So,
+</p>
+
+<p>
+\[
+h = (x + {@d@})\tan {@theta1@}^\circ
+\]
+</p>
+
+<p>
+Step 2: Form an equation from the second position.
+</p>
+
+<p>
+\[
+\tan {@theta2@}^\circ = \frac{h}{x}
+\]
+</p>
+
+<p>
+So,
+</p>
+
+<p>
+\[
+h = x\tan {@theta2@}^\circ
+\]
+</p>
+
+<p>
+Step 3: Since both expressions are equal to \(h\), equate them:
+</p>
+
+<p>
+\[
+(x + {@d@})\tan {@theta1@}^\circ = x\tan {@theta2@}^\circ
+\]
+</p>
+
+<p>
+Substitute \(\tan 30^\circ = \frac{1}{\sqrt{3}}\) and \(\tan 60^\circ = \sqrt{3}\):
+</p>
+
+<p>
+\[
+(x + {@d@})\cdot \frac{1}{\sqrt{3}} = x\sqrt{3}
+\]
+</p>
+
+<p>
+Multiply both sides by \(\sqrt{3}\):
+</p>
+
+<p>
+\[
+x + {@d@} = 3x
+\]
+</p>
+
+<p>
+\[
+{@d@} = 2x
+\]
+</p>
+
+<p>
+\[
+x = \frac{@d@}{2}
+\]
+</p>
+
+<p>
+Step 4: Find the height using \(h = x\tan 60^\circ\).
+</p>
+
+<p>
+\[
+h = \frac{@d@}{2}\times \sqrt{3}
+\]
+</p>
+
+<p>
+\[
+h \approx {@h_round@}\text{ m}
+\]
+</p>
+
+<p>
+Therefore, the height of the tower is:
+</p>
+
+<p>
+\[
+\boxed{{@h_round@} \text{ m}}
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Angles in degrees for display */
+theta1: 30;
+theta2: 60;
+
+/* Angles in radians for calculation */
+t1: theta1*%pi/180;
+t2: theta2*%pi/180;
+
+/* Distance walked closer to the tower */
+d: rand(5) + 5;
+
+/* Correct height formula */
+h: d * tan(t1) * tan(t2) / (tan(t2) - tan(t1));
+
+/* Rounded answer */
+h_round: float(round(h*100)/100);
+
+/* Mistakes */
+m1: d*tan(t1);
+m2: d*tan(t2);
+m3: d*(tan(t2)-tan(t1));</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@h_round@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Trigonometry in real-life</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to determine the height of a tower using two angles of elevation and trigonometric relationships.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>h_round</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>h_round</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>used only the first angle</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>This question involves two observation points. Use both angles.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>used only the second angle</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You used only one triangle. Form equations for both positions.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>subtracted tangents directly</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Do not subtract the tangent values directly. First form two equations, then eliminate the distance.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Form two tangent equations using the two positions, then solve for the height.</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>210400214</deployedseed>
+    <deployedseed>1836429689</deployedseed>
+    <deployedseed>1267256514</deployedseed>
+    <deployedseed>1763807463</deployedseed>
+    <deployedseed>36153250</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>h_round</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

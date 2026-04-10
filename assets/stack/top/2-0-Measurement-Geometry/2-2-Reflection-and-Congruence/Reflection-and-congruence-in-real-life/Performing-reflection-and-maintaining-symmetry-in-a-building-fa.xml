@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Performing reflection and maintaining symmetry in a  building facade</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>An architect is designing a building with a perfectly symmetric facade. The center of the building is aligned with the y-axis. The left side of the building contains a circular window at <b>W{@w_left@}</b> and a main entrance door at <b>D{@d_left@}</b></p>
+
+[[jsxgraph width="400px" height="400px"]]
+var board = JXG.JSXGraph.initBoard(divid, {boundingbox: [-7, 8, 7, -1], axis: true, showCopyright: false});
+
+// Axis of Symmetry
+board.create('line', [[0,0], [0,1]], {strokeColor: 'red', dash: 2, name: 'Symmetry Axis', withLabel: true});
+
+// Left side features
+board.create('point', [{#w_left[1]#}, {#w_left[2]#}], {name: 'Window (Left)', color: 'blue', size: 4});
+board.create('point', [{#d_left[1]#}, {#d_left[2]#}], {name: 'Door (Left)', color: 'brown', size: 5, face: 'square'});
+[[/jsxgraph]]
+
+
+<ol>
+    <li>To maintain symmetry, where should the corresponding window and door be placed on the right side of the building? <br>
+       <p> Window (Right) = [[input:ans1]],</p><p> Door (Right) = [[input:ans2]]</p>[[validation:ans1]][[feedback:prt1]] [[validation:ans2]][[feedback:prt2]]
+    </li>
+    <li>In architectural terms, the two halves of the building are said to be identical. Does this mean the right half is congruent to the left half? <br>
+    <p>    [[input:ans3]]</p>[[validation:ans3]] [[feedback:prt3]]
+    </li>
+</ol>
+
+<p><i>(Enter your answer in the form [x, y])</i></p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>Worked Solution</p>
+
+<b>Step 1: The Reflection Rule</b>
+<p>Because the building is symmetric about the line \(x = 0\), every point on the left \((x, y)\) must have a corresponding point on the right \((-x, y)\).</p>
+<ul>
+    <li>Window (Left) {@w_left@} \(\to\) Window (Right) ({@-w_left[1]@}, {@w_left[2]@})</li>
+    <li>Door (Left) {@d_left@} \(\to\) Door (Right) ({@-d_left[1]@}, {@d_left[2]@})</li>
+</ul>
+
+<b>Step 2: Congruence</b>
+<p>Reflection is a rigid motion. In architecture, symmetry implies that the two halves are exact mirror images. Since the size of the windows, doors, and walls remain unchanged during a reflection, the two sides are congruent.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* 1. Define possible x and y coordinates for features */
+/* Features must be on the left side (negative x) */
+x_pool: [-5, -4, -3, -2];
+y_pool: [0, 1, 2, 3, 4, 5, 6];
+
+/* Shuffle to pick unique locations for a window and a door */
+x_coords: random_permutation(x_pool);
+y_coords: random_permutation(y_pool);
+
+/* Feature 1: Window (W) */
+w_left: [x_coords[1], y_coords[1]];
+/* Feature 2: Door (D) */
+d_left: [x_coords[2], y_coords[2]];
+
+/* 2. Reflection across the Axis of Symmetry (x = 0) */
+/* Rule: (x, y) -> (-x, y) */
+w_right: [-w_left[1], w_left[1]];
+d_right: [-d_left[1], d_left[1]];
+ta1:[-w_left[1], w_left[2]];
+ta2:[-d_left[1], d_left[2]];
+
+/* 3. Dropdown Options for Congruence */
+ta:random_permutation([["True", true], ["False", false]]);
+]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta1@}</p>
+<p>{@ta2@}</p>
+<p>{@ta@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>dropdown</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>mcq_correct(ta)[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1770642532</deployedseed>
+    <deployedseed>54013818</deployedseed>
+    <deployedseed>1182140157</deployedseed>
+    <deployedseed>1460363297</deployedseed>
+    <deployedseed>1598120424</deployedseed>
+    <deployedseed>1957117713</deployedseed>
+    <deployedseed>227337780</deployedseed>
+    <deployedseed>2081440092</deployedseed>
+    <deployedseed>307426577</deployedseed>
+    <deployedseed>536107444</deployedseed>
+    <deployedseed>1024596998</deployedseed>
+    <deployedseed>350626758</deployedseed>
+    <deployedseed>1699741171</deployedseed>
+    <deployedseed>1047733641</deployedseed>
+    <deployedseed>415802676</deployedseed>
+    <deployedseed>1205926904</deployedseed>
+    <deployedseed>1137196154</deployedseed>
+    <deployedseed>1623847117</deployedseed>
+    <deployedseed>1555171787</deployedseed>
+    <deployedseed>675369926</deployedseed>
+    <deployedseed>1116431142</deployedseed>
+    <deployedseed>145163378</deployedseed>
+    <deployedseed>1540144635</deployedseed>
+    <deployedseed>309346102</deployedseed>
+    <deployedseed>1927502037</deployedseed>
+    <deployedseed>1561709688</deployedseed>
+    <deployedseed>413601271</deployedseed>
+    <deployedseed>1429199066</deployedseed>
+    <deployedseed>971392994</deployedseed>
+    <deployedseed>915592654</deployedseed>
+    <deployedseed>1286229865</deployedseed>
+    <deployedseed>637100304</deployedseed>
+    <deployedseed>1618158599</deployedseed>
+    <deployedseed>1161890928</deployedseed>
+    <deployedseed>52654931</deployedseed>
+    <deployedseed>646516084</deployedseed>
+    <deployedseed>4370634</deployedseed>
+    <deployedseed>2053130234</deployedseed>
+    <deployedseed>495068278</deployedseed>
+    <deployedseed>522306068</deployedseed>
+  </question>
+</quiz>

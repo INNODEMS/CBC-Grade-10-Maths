@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Reflection and congruence in real life</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A landscape designer is planning a symmetrical garden. They place a triangular flower bed on one side of a central pathway (represented by the y-axis). The vertices of this flower bed are at:</p>
+<ul>
+    <li><b>A({@x1@}, {@y1@})</b></li>
+    <li><b>B({@x2@}, {@y2@})</b></li>
+    <li><b>C({@x3@}, {@y3@})</b></li>
+</ul>
+
+[[jsxgraph width="400px" height="400px"]]
+var board = JXG.JSXGraph.initBoard(divid, {boundingbox: [-8, 8, 8, -2], axis: true, showCopyright: false});
+
+// Central Pathway (y-axis)
+board.create('line', [[0,0], [0,1]], {strokeColor: 'black', dash: 2, name: 'Pathway', withLabel: true});
+
+// Original Flower Bed
+var p1 = board.create('point', [{#x1#}, {#y1#}], {name: 'A', color: 'blue'});
+var p2 = board.create('point', [{#x2#}, {#y2#}], {name: 'B', color: 'blue'});
+var p3 = board.create('point', [{#x3#}, {#y3#}], {name: 'C', color: 'blue'});
+board.create('polygon', [p1, p2, p3], {fillColor: 'blue', fillOpacity: 0.2});
+[[/jsxgraph]]
+
+<ol>
+    <li>The designer reflects this flower bed across the y-axis to create a matching bed on the other side. Determine the coordinates of the reflected vertices: <br>
+<p><i>(Enter coordinates as [x, y]).</i></p>
+     <p>   A' = [[input:ans1]], </p> <p>B' = [[input:ans2]],</p><p> C' = [[input:ans3]]</p>
+<p> [[validation:ans1]][[feedback:prt1]][[validation:ans2]][[feedback:prt2]][[validation:ans3]] [[feedback:prt3]]</p>
+    </li>
+    <li>Is the reflected flower bed congruent to the original flower bed? \(\,\) [[input:ans4]] [[validation:ans4]] [[feedback:prt4]]
+</li>
+</ol>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3> Worked Solution</h3>
+
+<b>Step 1: Apply the Reflection Rule</b>
+<p>When a point \(x, y\) is reflected across the y-axis, the x-coordinate changes sign, while the y-coordinate remains the same: \(x, y\) \(\rightarrow (-x, y)\).</p>
+<ul>
+    <li>A({@x1@}, {@y1@}) \(\rightarrow\) <b>A'({@rx1@}, {@ry1@})</b></li>
+    <li>B({@x2@}, {@y2@}) \(\rightarrow\) <b>B'({@rx2@}, {@ry2@})</b></li>
+    <li>C({@x3@}, {@y3@}) \(\rightarrow\) <b>C'({@rx3@}, {@ry3@})</b></li>
+</ul>
+
+<b>Step 2: Understand Congruence</b>
+<p>A reflection is an isometry (a rigid transformation). This means the size and shape of the object are preserved. Because the side lengths and internal angles do not change, the two flower beds are congruent.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Define vertices of a triangular flower bed in the first quadrant */
+/* Randomizing to ensure a unique triangle for each student */
+x1: 1 + rand(2);   /* 1 or 2 */
+y1: 1 + rand(2);   /* 1 or 2 */
+x2: x1 + 2 + rand(2);
+y2: y1;
+x3: x1 + 1;
+y3: y1 + 3 + rand(2);
+
+/* Reflection across the y-axis (x -> -x) */
+rx1: -x1; ry1: y1;
+rx2: -x2; ry2: y2;
+rx3: -x3; ry3: y3;
+
+/* Teacher Answers for the coordinates */
+ta_v1: [rx1, ry1];
+ta_v2: [rx2, ry2];
+ta_v3: [rx3, ry3];
+
+/* Congruence check (always true for reflection) */
+ta:random_permutation([["yes", true],["no", false]]);
+]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta@}</p>
+<p>[{@x1@}, {@y1@}] \(\rightarrow\) <b>A'([{@rx1@}, {@ry1@}])</b></p>
+< p>B([{@x2@}, {@y2@}]) \(\rightarrow\) <b>B'([{@rx2@}, {@ry2@}])</b></p>
+ <p>C([{@x3@}, {@y3@}]) \(\rightarrow\) <b>C'([{@rx3@}, {@ry3@}])</b></p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>[rx1, ry1]</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>[rx2, ry2]</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>[rx3, ry3]</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>dropdown</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>[rx1, ry1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>[rx2, ry2]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>[rx3, ry3]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>mcq_correct(ta)[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>2047576587</deployedseed>
+    <deployedseed>1913479623</deployedseed>
+    <deployedseed>1539315720</deployedseed>
+    <deployedseed>628988484</deployedseed>
+    <deployedseed>886833839</deployedseed>
+    <deployedseed>1193232083</deployedseed>
+    <deployedseed>1688978063</deployedseed>
+    <deployedseed>31353943</deployedseed>
+    <deployedseed>1156960718</deployedseed>
+    <deployedseed>1400099871</deployedseed>
+    <deployedseed>742306185</deployedseed>
+    <deployedseed>1102910597</deployedseed>
+    <deployedseed>1114777579</deployedseed>
+    <deployedseed>1802811201</deployedseed>
+    <deployedseed>346689921</deployedseed>
+    <deployedseed>1640464283</deployedseed>
+    <deployedseed>674310310</deployedseed>
+    <deployedseed>536356464</deployedseed>
+    <deployedseed>751871127</deployedseed>
+    <deployedseed>992287189</deployedseed>
+    <deployedseed>1642396802</deployedseed>
+    <deployedseed>1937192143</deployedseed>
+  </question>
+</quiz>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the area of an irregular piece of land</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A surveyor recorded the following measurements for an irregular piece of land <b>AEDF</b> using a baseline <b>AD</b>. Vertices <b>E</b> and <b>F</b> are on opposite sides of the baseline.</p>
+
+<ul>
+    <li>Baseline segments: AB = {#d1#} m, BC = {#d2#} m, and CD = {#d3#} m.</li>
+    <li>Left Offset: BE = {#hL#} m (perpendicular to AD at B).</li>
+    <li>Right Offset: CF = {#hR#} m (perpendicular to AD at C).</li>
+</ul>
+
+[[jsxgraph width="400px" height="500px"]]
+var board = JXG.JSXGraph.initBoard(divid, {boundingbox: [-10, 28, 20, -6], axis: false, showCopyright: false});
+
+// Vertical Baseline AD
+var A = board.create('point', [0, 0], {name: 'A', fixed: true, color: 'black'});
+var B = board.create('point', [0, {#d1#}], {name: 'B', fixed: true, color: 'black'});
+var C = board.create('point', [0, {#d1+d2#}], {name: 'C', fixed: true, color: 'black'});
+var D = board.create('point', [0, {#d1+d2+d3#}], {name: 'D', fixed: true, color: 'black'});
+
+// Offsets
+var E = board.create('point', [-{#hL#}, {#d1#}], {name: 'E', color: 'blue'});
+var F = board.create('point', [{#hR#}, {#d1+d2#}], {name: 'F', color: 'red'});
+
+// Polygon AEDF
+board.create('polygon', [A, E, D, F], {fillColor: '#fdf2e9', borders: {strokeWidth: 2, strokeColor: 'black'}});
+
+// Construction Lines
+board.create('segment', [A, D], {dash: 1, strokeColor: 'black'});
+board.create('segment', [B, E], {dash: 2, strokeColor: 'blue'});
+board.create('segment', [C, F], {dash: 2, strokeColor: 'red'});
+
+// Labels
+board.create('text', [-{#hL/2#}, {#d1+0.5#}, "{#hL#}m"], {color: 'blue'});
+board.create('text', [{#hR/2#}, {#d1+d2+0.5#}, "{#hR#}m"], {color: 'red'});
+[[/jsxgraph]]
+
+<p>Calculate the total area of the land <b>AEDF</b>.</p>
+
+<p>Area = [[input:ans1]] m<sup>2</sup> [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>To calculate the total area, we find the area of the triangles on the left side and the right side of the baseline <b>AD</b> separately.</p>
+
+<p>Left Side (Triangle AED):</p>
+<p>The vertex <b>E</b> forms two triangles with the baseline, or one large triangle with base <b>AD</b>.</p>
+\(\begin{align} \text{Base AD} &= {@d1@} + {@d2@} + {@d3@}\\
+&= {@d1+d2+d3@} \text{ m} \\
+ \text{Area (Left)} &= \frac{1}{2} \times \text{Base (AD)} \times \text{Height (BE)} \\
+ \text{Area (Left)} &= \frac{1}{2} \times {@d1+d2+d3@} \times {@hL@} \\
+&= {@area_left1 + area_left2@} \text{ m}^2 \end{align}\)
+
+<p> Right Side (Triangle AFD):</p>
+\(\begin{align} \text{Area (Right)} &= \frac{1}{2} \times \text{Base (AD)} \times \text{Height (CF)} \\
+\text{Area (Right)} &= \frac{1}{2} \times {@d1+d2+d3@} \times {@hR@}\\
+ &= {@area_right1 + area_right2@} \text{ m}^2 \end{align}\)
+
+<p>Total Area:</p>
+\(\begin{align} \text{Total Area} =& {@area_left1 + area_left2@} + {@area_right1 + area_right2@}\\
+ &= {@ta@} \text{ m}^2 \end{align}\)]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Baseline segments along AD: AB, BC, CD */
+d1: 5 + rand(3); /* AB */
+d2: 6 + rand(4); /* BC */
+d3: 4 + rand(3); /* CD */
+
+/* Offsets to the Left (L) and Right (R) */
+hL: 4 + rand(3); /* Offset at B to vertex E (Left) */
+hR: 5 + rand(3); /* Offset at C to vertex F (Right) */
+
+/* Area Calculations */
+/* Left Side: Triangle ABE + Triangle EBD */
+/* Area ABE = 1/2 * base(AB) * height(hL) */
+area_left1: 1/2 * d1 * hL;
+/* Area EBD = 1/2 * base(BD) * height(hL). Note: BD = d2 + d3 */
+area_left2: 1/2 * (d2 + d3) * hL;
+
+/* Right Side: Triangle ACF + Triangle FCD */
+/* Area ACF = 1/2 * base(AC) * height(hR). Note: AC = d1 + d2 */
+area_right1: 1/2 * (d1 + d2) * hR;
+/* Area FCD = 1/2 * base(CD) * height(hR) */
+area_right2: 1/2 * d3 * hR;
+
+/* Total Area */
+ta: area_left1 + area_left2 + area_right1 + area_right2;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1397658389</deployedseed>
+    <deployedseed>1682359857</deployedseed>
+    <deployedseed>699991172</deployedseed>
+    <deployedseed>1939649486</deployedseed>
+    <deployedseed>1367477470</deployedseed>
+    <deployedseed>1780821914</deployedseed>
+    <deployedseed>1537995920</deployedseed>
+    <deployedseed>756591619</deployedseed>
+    <deployedseed>2014623907</deployedseed>
+    <deployedseed>874514879</deployedseed>
+    <deployedseed>434741128</deployedseed>
+    <deployedseed>1938356479</deployedseed>
+    <deployedseed>2017829611</deployedseed>
+    <deployedseed>1679294368</deployedseed>
+    <deployedseed>1504765895</deployedseed>
+  </question>
+</quiz>

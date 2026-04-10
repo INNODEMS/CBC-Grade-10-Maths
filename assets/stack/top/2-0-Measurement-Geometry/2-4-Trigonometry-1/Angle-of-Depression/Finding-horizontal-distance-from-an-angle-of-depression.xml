@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding horizontal distance from an angle of depression</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+An observer is standing on a <b>{@place@}</b> in {@area@}. The observer looks down at a {@objectname@} on level ground. The angle of depression is <b>{@theta@}&deg;</b>, and the vertical height of the observation point above the ground is <b>{@h@} m</b>.
+</p>
+
+<p>
+Use the diagram below to find the horizontal distance from the foot of the {@place@} to the {@objectname@}.
+</p>
+
+<div style="margin:10px 0;">
+<svg width="420" height="260" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Ground -->
+  <line x1="40" y1="200" x2="380" y2="200" stroke="black" stroke-width="2"/>
+
+  <!-- Cliff -->
+  <line x1="80" y1="200" x2="80" y2="60" stroke="black" stroke-width="2"/>
+
+  <!-- Horizontal reference line -->
+  <line x1="80" y1="60" x2="320" y2="60" stroke="black" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+  <!-- Line of sight -->
+  <line x1="80" y1="60" x2="300" y2="200" stroke="black" stroke-width="2"/>
+
+  <!-- Right angle marker -->
+  <path d="M80 185 L95 185 L95 200" fill="none" stroke="black" stroke-width="1.5"/>
+
+  <!-- Angle arc -->
+  <path d="M110 60 A30 30 0 0 1 100 85" fill="none" stroke="black" stroke-width="1.5"/>
+
+  <!-- Labels -->
+  <text x="50" y="135" font-size="15">17 m</text>
+  <text x="115" y="80" font-size="15">30°</text>
+
+  <text x="150" y="220" font-size="15">distance = ? m</text>
+
+  <!-- Object labels -->
+  <text x="60" y="50" font-size="14">Observer</text>
+  <text x="290" y="215" font-size="14">Rock</text>
+
+  <!-- Ground label -->
+  <text x="360" y="195" font-size="13">Ground</text>
+
+  <!-- Cliff label -->
+  <text x="20" y="120" font-size="13" transform="rotate(-90 20,120)">Cliff</text>
+
+</svg>
+</div>
+
+<p>
+Distance = [[input:ans1]] <b>m</b> [[validation:ans1]] [[feedback:prt1]]
+</p>
+
+<p>
+Give your answer correct to <b>1 decimal place</b>.
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+Step 1: Identify the angle and the sides.
+</p>
+
+<p>
+The angle of depression is measured from the horizontal line.
+The vertical height is the <b>opposite</b> side, and the horizontal distance is the <b>adjacent</b> side.
+</p>
+
+<p>
+Step 2: Choose the correct trigonometric ratio.
+</p>
+
+<p>
+\[
+\tan \theta=\frac{\text{opposite}}{\text{adjacent}}
+\]
+</p>
+
+<p>
+So,
+\[
+\tan({@theta@}^\circ)=\frac{@h@}{d}
+\]
+</p>
+
+<p>
+Step 3: Make \(d\) the subject.
+</p>
+
+<p>
+\[
+d=\frac{@h@}{\tan({@theta@}^\circ)}
+\]
+</p>
+
+<p>
+Step 4: Substitute and calculate.
+</p>
+
+<p>
+\[
+d=\frac{@h@}{\tan({@theta@}^\circ)} \approx {@dist1@}
+\]
+</p>
+
+<p>
+Therefore, the horizontal distance is:
+</p>
+
+<p>
+\[
+\boxed{@dist1@} \text{ m}
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Core variables */
+h: rand(6)+12;          /* height: 13 to 18 m */
+theta: rand(4)*5+25;    /* angle: 30,35,40,45 */
+dist: h/tan(theta*%pi/180);
+
+/* Rounded answer for display in note if needed */
+dist1: float(round(dist*10)/10);
+
+/* Context */
+place: rand(["watch tower","cliff","building","platform"]);
+objectname: rand(["goat","tree stump","rock","water drum"]);
+area: rand(["Kajiado","Narok","Machakos","Laikipia","Kitui"]);
+
+/* Diagram control */
+xbase: 40;
+ytop: 30;
+xright: 220;
+yground: 170;
+
+/*------Mistakes--------*/
+m1: h*tan(theta*%pi/180)
+m2: h/sin(theta*%pi/180)
+m3: h/cos(theta*%pi/180)]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@dist1@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Angles of depression</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to read a diagram, identify the angle of depression, form a right triangle, and use tangent to calculate horizontal distance.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>dist1</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>dist1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>mistake1</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>ou used tangent in the wrong way. Here, height is opposite and distance is adjacent, so use
+
+tan (𝜃) = \frac {height}{distance}</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>mistake2</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Do not use sine here. The known sides are the opposite side and the adjacent side.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>mistake3</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Cosine does not match the known sides in this diagram. Use tangent.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Use tan (𝜃) = frac {opposite}{adjacent} = \frac {ℎ}{𝑑}. Then make 𝑑 the subject.</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>640670286</deployedseed>
+    <deployedseed>994175837</deployedseed>
+    <deployedseed>1005564156</deployedseed>
+    <deployedseed>1955130857</deployedseed>
+    <deployedseed>1633598514</deployedseed>
+    <deployedseed>1333746376</deployedseed>
+    <deployedseed>108893728</deployedseed>
+    <deployedseed>1610001168</deployedseed>
+    <deployedseed>709663774</deployedseed>
+    <deployedseed>732158530</deployedseed>
+    <deployedseed>1925123028</deployedseed>
+    <deployedseed>1562209850</deployedseed>
+    <deployedseed>321712818</deployedseed>
+    <deployedseed>563335993</deployedseed>
+    <deployedseed>264367585</deployedseed>
+    <deployedseed>444398857</deployedseed>
+    <deployedseed>1825872656</deployedseed>
+    <deployedseed>1708666798</deployedseed>
+    <deployedseed>1891167263</deployedseed>
+    <deployedseed>644476747</deployedseed>
+    <deployedseed>590482341</deployedseed>
+    <deployedseed>2062400016</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>dist1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding area of heptagon given side length and apothem</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A school garden is in the shape of a regular heptagon. The side length is <b>{#s#} m</b> and the apothem (the distance from the center to the midpoint of a side) is <b>{#a#} m</b>.</p>
+
+[[jsxgraph width="400px" height="400px"]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-8, 8, 8, -8],
+    axis: false,
+    showNavigation: false,
+    showCopyright: false
+});
+
+var n = 7;
+var R = 5;
+
+/* Create Vertices */
+var points = [];
+for (var i = 0; i < n; i++) {
+    var angle = (2 * Math.PI * i / n) + (Math.PI / 2); 
+    points.push(board.create('point', [R * Math.cos(angle), R * Math.sin(angle)], {visible: false}));
+}
+
+/* Create Polygon */
+board.create('polygon', points, {
+    withLines: true,
+    fillColor: '#dfefff',
+    borders: {strokeWidth: 2, strokeColor: '#0072b2'}
+});
+
+var O = board.create('point', [0, 0], {visible: false});
+
+/* 1. Apothem Label (Aligned to the dashed line) */
+var M_apo = board.create('midpoint', [points[0], points[1]], {visible: false});
+board.create('segment', [O, M_apo], {dash: 2, strokeWidth: 2, strokeColor: '#0072b2'});
+
+board.create('text', [
+    (O.X() + M_apo.X()) / 2, 
+    (O.Y() + M_apo.Y()) / 2 + 0.3, 
+    "{#a#} m"
+], {
+    fontSize: 14,
+    anchorX: 'middle',
+    rotate: function() {
+        var ang = Math.atan2(M_apo.Y() - O.Y(), M_apo.X() - O.X()) * 180 / Math.PI;
+        return (ang > 90 || ang < -90) ? ang + 180 : ang;
+    }
+});
+
+/* 2. Side Length Label (Aligned to the boundary) */
+var p1 = points[1];
+var p2 = points[2];
+var M_side = board.create('midpoint', [p1, p2], {visible: false});
+
+board.create('text', [
+    M_side.X() - 0.5, 
+    M_side.Y() + 0.5, 
+    "{#s#} m"
+], {
+    fontSize: 14,
+    anchorX: 'middle',
+    rotate: function() {
+        var ang = Math.atan2(p2.Y() - p1.Y(), p2.X() - p1.X()) * 180 / Math.PI;
+        return (ang > 90 || ang < -90) ? ang + 180 : ang;
+    }
+});
+[[/jsxgraph]]
+
+<p>Calculate the area of the heptagon garden.</p>
+
+<p style="text-align: center;">
+Area = [[input:ans1]] m<sup>2</sup> [[validation:ans1]][[feedback:prt1]]
+</p>
+<p><i>(Leave your answer to 2 decimal places)</i></p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>The area \(A\) of a regular polygon with \(n\) sides, side length \(s\), and apothem \(a\) is given by the formula:</p>
+
+\[ A = \frac{n}{2} \times s \times a \]
+
+<p>For a heptagon (\(n = 7\)):</p>
+
+\[ A = \frac{7}{2} \times s \times a \]
+
+\(\begin{align} 
+ \text{A} &= \frac{7}{2} \times {@s@} \times {@a@} \\
+\text{A} &= \frac{7}{2} \times {@ta_1@} \\
+\text{A} &= {@ta@} \text{ m}^2 \end{align}\)]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. Randomize side length s */
+s: 6 + rand(10); 
+
+/* 2. Calculate a realistic apothem a for a regular heptagon */
+/* Formula: a = s / (2 * tan(180/7)) */
+a_exact: float(s / (2 * tan(%pi/7)));
+/* We provide a rounded version for the student to use, as in your screenshot */
+a: decimalplaces(a_exact,2);
+
+/* 3. Calculate Area using the requested formula: A = 7/2 * s * a */
+ta1: s*a;
+ta_1: decimalplaces(ta1,2);
+ta_whole: (7/2) * s * a;
+ta: decimalplaces(ta_whole,2);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1061271887</deployedseed>
+    <deployedseed>2047753637</deployedseed>
+    <deployedseed>432417389</deployedseed>
+    <deployedseed>1518007119</deployedseed>
+    <deployedseed>235112635</deployedseed>
+    <deployedseed>296609905</deployedseed>
+    <deployedseed>1561251541</deployedseed>
+    <deployedseed>765775477</deployedseed>
+  </question>
+</quiz>

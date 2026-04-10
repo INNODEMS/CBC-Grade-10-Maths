@@ -6,41 +6,53 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
-The magnitude of an earthquake is measured using a logarithmic scale. An earthquake of magnitude {@m2@} and another of magnitude {@m1@} are recorded.
+On a {@day1@} {@time1@}, two earthquakes were recorded in {@region1@} at {@station@}. The first earthquake had magnitude {@m_small@}, and the second had magnitude {@m_large@}.
 </p>
 
 <p>
-Find how many times more powerful the larger earthquake is compared to the smaller one.
+(a) Find the difference in magnitude between the two earthquakes.
 </p>
 
 <p>
 [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+</p>
+
+<p>
+(b) Using logarithmic principles, determine how many times more powerful the larger earthquake is compared to the smaller one.
+</p>
+
+<p>
+[[input:ans2]] [[validation:ans2]] [[feedback:prt2]]
 </p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
 
 <p>
-The difference in magnitude is:
+Step 1: Find the difference in magnitude:
 </p>
 
 <p>
 \[
-{@m2@} - {@m1@} = {@diff@}
+{@m_large@} - {@m_small@} = {@diff@}
 \]
 </p>
 
 <p>
-Each increase of 1 in magnitude means 10 times more intensity.
+Step 2: Understand the logarithmic scale.
 </p>
 
 <p>
-So the ratio is:
+Each increase of 1 in magnitude means the intensity becomes 10 times greater.
+</p>
+
+<p>
+Step 3: Apply the rule:
 </p>
 
 <p>
 \[
-10^{@diff@}
+\text{Intensity ratio} = 10^{@diff@}
 \]
 </p>
 
@@ -48,6 +60,10 @@ So the ratio is:
 \[
 = {@ratio@}
 \]
+</p>
+
+<p>
+Therefore, the larger earthquake is {@ratio@} times more powerful than the smaller one.
 </p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -58,20 +74,41 @@ So the ratio is:
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* magnitudes */
-m1: rand(3) + 4;
-m2: m1 + rand(2) + 1;
+      <text><![CDATA[/* Base magnitudes */
+m_small: rand(3) + 3;        /* 3–5 */
+gap: rand(3) + 1;            /* 1–3 */
+m_large: m_small + gap;
 
-/* difference */
-diff: m2 - m1;
+/* Difference */
+diff: m_large - m_small;
 
-/* ratio of intensity */
+/* Intensity ratio */
 ratio: 10^diff;
 
-/* mistakes */
-m_wrong1: diff;
-m_wrong2: m1 + m2;
-m_wrong3: 10^(m1 + m2);</text>
+/* Distractors (core mistakes) */
+m1: diff;
+m2: 10^(m_small + m_large);
+m3: m_large * m_small;
+m4: 10^(m_small);
+m5: 10^(m_large);
+
+/* Additional random variables (for STACK richness & variation) */
+region1: rand(["Nakuru","Turkana","Garissa","Kisumu","Kitale"]);
+region2: rand(["Mombasa","Eldoret","Naivasha","Nyeri","Machakos"]);
+day1: rand(["Monday","Tuesday","Wednesday","Thursday","Friday"]);
+time1: rand(["morning","afternoon","evening"]);
+station: rand(["Station A","Station B","Station C","Station D"]);
+
+noise1: rand(5)+1;
+noise2: rand(5)+2;
+noise3: rand(5)+3;
+noise4: rand(5)+4;
+noise5: rand(5)+5;
+noise6: rand(5)+6;
+noise7: rand(5)+7;
+noise8: rand(5)+8;
+noise9: rand(5)+9;
+noise10: rand(5)+10;]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -114,6 +151,24 @@ The question requires the learner to apply logarithmic concepts to compare earth
     <input>
       <name>ans1</name>
       <type>algebraic</type>
+      <tans>diff</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
       <tans>ratio</tans>
       <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
@@ -142,7 +197,7 @@ The question requires the learner to apply logarithmic concepts to compare earth
         <description>checks for the correct answer</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>ratio</tans>
+        <tans>diff</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -164,10 +219,10 @@ The question requires the learner to apply logarithmic concepts to compare earth
       </node>
       <node>
         <name>1</name>
-        <description>used difference only</description>
+        <description>mistake1</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>m_wrong1</tans>
+        <tans>m_small + m_large</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
@@ -176,7 +231,7 @@ The question requires the learner to apply logarithmic concepts to compare earth
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text>The difference gives the exponent, not the final answer.</text>
+          <text>Find the difference, not the sum.</text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -184,7 +239,116 @@ The question requires the learner to apply logarithmic concepts to compare earth
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
-          <text>Each increase of 1 in magnitude means 10 times more intensity.</text>
+          <text>Difference = larger magnitude − smaller magnitude.</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ratio</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>used difference only</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>The difference gives the exponent. Raise 10 to that power.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>added magnitudes</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Do not add magnitudes. Use their difference.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt2-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>used one magnitude</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>m4</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Use the difference between magnitudes, not a single value.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
         </falsefeedback>
       </node>
     </prt>

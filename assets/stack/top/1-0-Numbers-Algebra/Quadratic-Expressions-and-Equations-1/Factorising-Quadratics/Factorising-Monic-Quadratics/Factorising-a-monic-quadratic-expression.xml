@@ -88,9 +88,8 @@ expr: expand((x + a)*(x + b));
 correct: (x + a)*(x + b);
 
 /* Common mistakes */
-m1: (x + a + b);
-m2: (x + a)^2;
-m3: x^2 + a*x + b;</text>
+m1: x^2 + (a+b)*x + a*b*x;
+m2: x^2 + a*x + b;</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -101,7 +100,7 @@ m3: x^2 + a*x + b;</text>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
 <p id="concept">Factorising monic quadratic expressions</p>
-<p id="reviewer"></p>
+<p id="reviewer">Ben Lloyd-Hurwitz</p>
 <p id="reviewer"></p>
 
 <p id="description">
@@ -158,11 +157,11 @@ The question requires the learner to factorise a monic quadratic expression by f
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description>checks for the correct answer</description>
-        <answertest>AlgEquiv</answertest>
+        <description>Checks for the correct answer in factored form</description>
+        <answertest>FacForm</answertest>
         <sans>ans1</sans>
         <tans>correct</tans>
-        <testoptions/>
+        <testoptions>x</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -195,7 +194,7 @@ The question requires the learner to factorise a monic quadratic expression by f
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text>This is not factorisation. You need two brackets.</text>
+          <text>You have not factored the quadratic. Find two numbers whose product is \({@a*b@} \) and whose sum is \({@a+b@}\)</text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -220,7 +219,7 @@ The question requires the learner to factorise a monic quadratic expression by f
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-3-T</trueanswernote>
         <truefeedback format="html">
-          <text>The quadratic is not a perfect square. Check the middle term.</text>
+          <text>Once you find your two numbers, remember to factorise.</text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -228,7 +227,7 @@ The question requires the learner to factorise a monic quadratic expression by f
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-3-F</falseanswernote>
         <falsefeedback format="html">
-          <text>Find two numbers whose product is the constant term and whose sum is the coefficient of x</text>
+          <text>Find two numbers whose product is \({@a*b@} \) and whose sum is \({@a+b@}\)</text>
         </falsefeedback>
       </node>
     </prt>

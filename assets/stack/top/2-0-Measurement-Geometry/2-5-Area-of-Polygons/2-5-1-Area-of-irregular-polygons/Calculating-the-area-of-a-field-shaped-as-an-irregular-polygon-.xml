@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the area of a field shaped as an irregular polygon.</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The diagram below represents a field in the shape of an irregular polygon. A baseline <b>AD</b> is drawn, and offsets are taken to vertices <b>E</b> and <b>F</b>.</p>
+
+<ul>
+    <li>Segments along baseline: AB = <b>{#d1#} m</b>, BC = <b>{#d2#} m</b>, CD = <b>{#d3#} m</b></li>
+    <li>Perpendicular offsets: BE = <b>{#h1#} m</b>, CF = <b>{#h2#} m</b></li>
+</ul>
+
+[[jsxgraph width="500px" height="300px"]]
+var board = JXG.JSXGraph.initBoard(divid, {boundingbox: [-2, 20, 30, -8], axis: false, showCopyright: false});
+
+// Points on Baseline
+var A = board.create('point', [0, 0], {name: 'A', fixed: true, color: 'black'});
+var B = board.create('point', [{#d1#}, 0], {name: 'B', fixed: true, color: 'black'});
+var C = board.create('point', [{#d1+d2#}, 0], {name: 'C', fixed: true, color: 'black'});
+var D = board.create('point', [{#d1+d2+d3#}, 0], {name: 'D', fixed: true, color: 'black'});
+
+// Offsets
+var E = board.create('point', [{#d1#}, {#h1#}], {name: 'E', fixed: true, color: 'blue'});
+var F = board.create('point', [{#d1+d2#}, {#h2#}], {name: 'F', fixed: true, color: 'blue'});
+
+// Draw Polygon Boundary
+board.create('polygon', [A, E, F, D], {fillColor: '#ffffd1', borders: {strokeWidth: 2, strokeColor: 'black'}});
+
+// Draw Internal Construction Lines
+board.create('segment', [A, D], {dash: 1, strokeColor: 'gray'});
+board.create('segment', [B, E], {dash: 2, strokeColor: 'red'});
+board.create('segment', [C, F], {dash: 2, strokeColor: 'red'});
+
+// Add labels for segments
+board.create('text', [{#d1/2#}, -0.5, "{#d1#}m"], {anchorX: 'middle'});
+board.create('text', [{#d1 + d2/2#}, -0.5, "{#d2#}m"], {anchorX: 'middle'});
+board.create('text', [{#d1 + d2 + d3/2#}, -0.5, "{#d3#}m"], {anchorX: 'middle'});
+[[/jsxgraph]]
+
+<p>Calculate the total area of the field <b>AEFD</b>.</p>
+
+<p>Area = [[input:ans1]] m<sup>2</sup> [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>To find the total area, we divide the irregular polygon into simpler geometric shapes: two triangles and one trapezium.</p>
+
+<ol>
+    <li>Area of Triangle ABE:
+        \[ \text{Area} = \frac{1}{2} \times \text{base} \times \text{height}\]
+       \[ = \frac{1}{2} \times {@d1@} \times {@h1@} \]
+      \[ = {@area1@} \text{ m}^2 \]
+    </li>
+    <li>Area of Trapezium BCFE:</b>
+        \[ \text{Area} = \frac{1}{2}(a+b)h \]
+         \[= \frac{1}{2} \times ({@h1@} + {@h2@}) \times {@d2@}\]
+         \[ = {@area2@} \text{ m}^2 \]
+    </li>
+    <li>Area of Triangle CFD:
+        \[ \text{Area} = \frac{1}{2} \times \text{base} \times \text{height} \]
+         \[ = \frac{1}{2} \times {@d3@} \times {@h2@} \]
+         \[= {@area3@} \text{ m}^2 \]
+    </li>
+</ol>
+
+<p>Total Area:</p>
+\[ \text{Total Area} = {@area1@} + {@area2@} + {@area3@}\]
+\[ = {@ta@} \text{ m}^2 \]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. Define segments along the baseline AD */
+/* AB = d1, BC = d2, CD = d3 */
+d1: 4 + rand(4);
+d2: 5 + rand(5);
+d3: 4 + rand(4);
+
+/* 2. Define perpendicular offsets (heights) */
+h1: 3 + rand(4); /* Offset at point B to vertex E */
+h2: 5 + rand(4); /* Offset at point C to vertex F */
+
+/* 3. Calculate areas of individual shapes */
+/* Triangle 1 (Left): 1/2 * d1 * h1 */
+area1: 1/2 * d1 * h1;
+
+/* Trapezium (Middle): 1/2 * (h1 + h2) * d2 */
+area2: 1/2 * (h1 + h2) * d2;
+
+/* Triangle 2 (Right): 1/2 * d3 * h2 */
+area3: 1/2 * d3 * h2;
+
+/* 4. Total Area */
+ta: area1 + area2 + area3;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta@}</p>
+<p>{@d1@}</p>
+<p>{@d2@}</p>
+<p>{@d3@}</p>
+<p>{@h1@}</p>
+<p>{@h2@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>896576377</deployedseed>
+    <deployedseed>1962427968</deployedseed>
+    <deployedseed>1852368762</deployedseed>
+    <deployedseed>1685670138</deployedseed>
+    <deployedseed>2087332171</deployedseed>
+    <deployedseed>916968295</deployedseed>
+    <deployedseed>88465709</deployedseed>
+    <deployedseed>765080077</deployedseed>
+    <deployedseed>1979937919</deployedseed>
+    <deployedseed>1498160018</deployedseed>
+    <deployedseed>244014447</deployedseed>
+    <deployedseed>890091514</deployedseed>
+    <deployedseed>503678906</deployedseed>
+    <deployedseed>463911896</deployedseed>
+    <deployedseed>1980976402</deployedseed>
+    <deployedseed>338199295</deployedseed>
+    <deployedseed>1455905774</deployedseed>
+    <deployedseed>1294351197</deployedseed>
+    <deployedseed>995271648</deployedseed>
+    <deployedseed>683072441</deployedseed>
+    <deployedseed>972536704</deployedseed>
+    <deployedseed>848731989</deployedseed>
+    <deployedseed>1496668203</deployedseed>
+    <deployedseed>1602148821</deployedseed>
+    <deployedseed>1828945218</deployedseed>
+    <deployedseed>2139461533</deployedseed>
+    <deployedseed>50602549</deployedseed>
+    <deployedseed>1629304880</deployedseed>
+    <deployedseed>1131703511</deployedseed>
+    <deployedseed>908260170</deployedseed>
+    <deployedseed>389319786</deployedseed>
+    <deployedseed>623736832</deployedseed>
+    <deployedseed>187975533</deployedseed>
+    <deployedseed>366875496</deployedseed>
+    <deployedseed>678312098</deployedseed>
+    <deployedseed>1856392945</deployedseed>
+    <deployedseed>1016730634</deployedseed>
+    <deployedseed>845999927</deployedseed>
+    <deployedseed>618920609</deployedseed>
+    <deployedseed>1290086011</deployedseed>
+  </question>
+</quiz>

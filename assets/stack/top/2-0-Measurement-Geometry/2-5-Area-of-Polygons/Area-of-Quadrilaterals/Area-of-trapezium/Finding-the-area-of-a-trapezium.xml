@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the area of a trapezium</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A trapezium has parallel sides of lengths {@a@} cm and {@b@} cm. The non-parallel sides are each {@slant@} cm.</p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-2, 20, 30, -8],
+    axis: false,
+    showCopyright: false
+});
+
+// Inject STACK variables
+var a = {#a#};
+var b = {#b#};
+var h = {#h#};
+var slant = {#slant#};
+
+// Geometry
+var x_offset = 2;
+var diff = (a - b) / 2;
+
+// Points
+var p1 = board.create('point', [x_offset, 0], {name: '', visible: false});
+var p2 = board.create('point', [x_offset + a, 0], {name: '', visible: false});
+var p3 = board.create('point', [x_offset + a - diff, h], {name: '', visible: false});
+var p4 = board.create('point', [x_offset + diff, h], {name: '', visible: false});
+
+// Polygon
+board.create('polygon', [p1, p2, p3, p4], {
+    fillColor: '#f0f0f0',
+    borders: {strokeColor: 'black', strokeWidth: 2}
+});
+
+// Labels
+board.create('text', [x_offset + a/2, -0.5, a + " cm"]);
+board.create('text', [x_offset + a/2, h + 0.5, b + " cm"]);
+board.create('text', [x_offset + diff/2 - 1.5, h/2, slant + " cm"]);
+board.create('text', [x_offset + a - diff/2 + 0.5, h/2, slant + " cm"]);
+
+// Height line
+board.create('segment', [p4, [x_offset + diff, 0]], {
+    dash: 2,
+    strokeColor: 'gray'
+});
+board.create('text', [x_offset + diff + 0.2, h/2, "h"]);
+[[/jsxgraph]]
+
+<p>Calculate the area of the trapezium.</p>
+
+<p>Area = [[input:ans1]] cm \(^2\) [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p><b>Step 1: Find the base of the side triangle.</b><br>
+Because the trapezium is isosceles, the difference between the parallel sides is shared equally:</p>
+\[ \text{Side base} = \frac{{@a@} - {@b@}}{2} = {@diff_single@} \text{ cm} \]
+
+<p><b>Step 2: Calculate height (\(h\)) using Pythagoras.</b></p>
+\[ h^2 + {@diff_single@}^2 = {@slant@}^2 \]
+\[ h^2 + {@diff_single^2@} = {@slant^2@} \]
+\[ h^2 = {@h_sq@} \implies h = {@h@} \text{ cm} \]
+
+<p><b>Step 3: Calculate the Area.</b></p>
+\[ \text{Area} = \frac{1}{2}(a + b)h \]
+\[ \text{Area} = \frac{1}{2}({@a@} + {@b@}) \times {@h@} \]
+\[ \text{Area} = {@ta1@} \text{ cm}^2 \]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Geometry logic */
+k : rand([1, 2, 3]);
+base_diff : 2 * k;
+h : 4 * k;
+slant : 5 * k;
+b : rand_with_step(4, 10, 1);
+a : b + (2 * base_diff);
+/* 3. Pre-calculate values for the worked solution */
+diff_single : (a - b) / 2;
+h_sq : slant^2 - diff_single^2;
+sum_ab : a + b;
+
+/* Answer */
+ta1 : (1/2) * (a + b) * h;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta1@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1638636112</deployedseed>
+    <deployedseed>2062139254</deployedseed>
+    <deployedseed>1979672541</deployedseed>
+    <deployedseed>1999375373</deployedseed>
+    <deployedseed>1665724912</deployedseed>
+    <deployedseed>1456236159</deployedseed>
+    <deployedseed>1050987421</deployedseed>
+    <deployedseed>204408378</deployedseed>
+    <deployedseed>1185300262</deployedseed>
+    <deployedseed>1225331879</deployedseed>
+    <deployedseed>2099981059</deployedseed>
+    <deployedseed>1024168345</deployedseed>
+    <deployedseed>1814785684</deployedseed>
+    <deployedseed>1226237958</deployedseed>
+    <deployedseed>1896745709</deployedseed>
+  </question>
+</quiz>
