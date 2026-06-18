@@ -4,7 +4,7 @@
 var board = JXG.JSXGraph.initBoard('jsxgraph-similarity-intro', {
     boundingbox: [-2, 25, 35, -5],
     axis: false,
-    grid: true,
+    grid: false,
     showCopyright: false,
     showNavigation: false,
     pan: { enabled: false },
