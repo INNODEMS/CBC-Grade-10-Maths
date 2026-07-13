@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Is the given line a line of symmetry?</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The dashed line is drawn on the shape below.</p>
+<p>Decide whether the dashed line is a <b>line of symmetry</b> of the shape. (A line of symmetry divides a shape into two halves that are exact mirror images of each other.)</p>
+[[jsxgraph height='400px' width='460px']]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-2, 12, 16, -2],
+    keepaspectratio: true, axis: false,
+    showNavigation: false, showCopyright: false,
+    pan: { enabled: false }, zoom: { enabled: false }
+});
+
+var V = {#worldV#};
+var A = {#lineA#};
+var B = {#lineB#};
+
+var pts = V.map(function (c) {
+    return board.create('point', c, { visible: false, fixed: true });
+});
+board.create('polygon', pts, {
+    fillColor: '#9467bd', fillOpacity: 0.30,
+    borders: { strokeColor: '#6a3d9a', strokeWidth: 3 },
+    fixed: true, vertices: { visible: false }
+});
+board.create('line', [A, B], {
+    strokeColor: '#d62728', dash: 2, strokeWidth: 2,
+    straightFirst: false, straightLast: false, fixed: true
+});
+
+board.renderer.svgRoot.style.pointerEvents = "none";
+[[/jsxgraph]]
+<div>Is the dashed line a line of symmetry? [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</div>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<p>{@reasonTxt@}</p>
+<p>The orange shape below is the original reflected in the dashed line. It is a line of symmetry exactly when the orange copy lands back on the original.</p>
+[[jsxgraph height='400px' width='460px']]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-2, 12, 16, -2],
+    keepaspectratio: true, axis: false,
+    showNavigation: false, showCopyright: false,
+    pan: { enabled: false }, zoom: { enabled: false }
+});
+
+var V = {#worldV#};
+var A = {#lineA#};
+var B = {#lineB#};
+
+var pts = V.map(function (c) {
+    return board.create('point', c, { visible: false, fixed: true });
+});
+board.create('polygon', pts, {
+    fillColor: '#9467bd', fillOpacity: 0.30,
+    borders: { strokeColor: '#6a3d9a', strokeWidth: 3 },
+    fixed: true, vertices: { visible: false }
+});
+board.create('line', [A, B], {
+    strokeColor: '#d62728', dash: 2, strokeWidth: 2,
+    straightFirst: false, straightLast: false, fixed: true
+});
+
+// Reflection of the shape in the dashed line
+var mirror = board.create('line', [A, B], { visible: false });
+var refl = board.create('transform', [mirror], { type: 'reflect' });
+var rpts = pts.map(function (P) { return board.create('point', [P, refl], { visible: false }); });
+board.create('polygon', rpts, {
+    fillColor: '#ff7f0e', fillOpacity: 0.25,
+    borders: { strokeColor: '#ff7f0e', strokeWidth: 2, dash: 2 },
+    fixed: true, vertices: { visible: false }
+});
+
+board.renderer.svgRoot.style.pointerEvents = "none";
+[[/jsxgraph]]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[cx : 7;
+cy : 6;
+templates : [
+  [[-1.6,-1.5],[1.6,-1.5],[0,2.6]],
+  [[0,-2.4],[1.5,0.2],[0,2.6],[-1.5,0.2]],
+  [[-2.2,-1.6],[2.2,-1.6],[1.2,1.8],[-1.2,1.8]],
+  [[-1.7,-1.8],[1.7,-1.8],[1.7,0.6],[0,2.4],[-1.7,0.6]],
+  [[0,-2.2],[1.8,-0.8],[1.4,1.2],[0,2.2],[-1.4,1.2],[-1.8,-0.8]]
+];
+ti : rand(5) + 1;
+baseV : templates[ti];
+phi : rand(360);
+ta : rand([true, false]);
+ncase : if ta then 0 else rand(3) + 1;   /* 0 axis (yes); 1 wrong angle; 2 off-centre; 3 broken */
+pj : rand(length(baseV)) + 1;
+locV : if ncase = 3
+       then append(makelist(baseV[k], k, 1, pj - 1), [baseV[pj] + [1.2, 0.8]], makelist(baseV[k], k, pj + 1, length(baseV)))
+       else baseV;
+rad(a) := float(a * %pi / 180);
+cphi : cos(rad(phi));
+sphi : sin(rad(phi));
+worldpt(p) := [float(cx + p[1]*cphi - p[2]*sphi), float(cy + p[1]*sphi + p[2]*cphi)];
+worldV : map(worldpt, locV);
+axisAngle : 90 + phi;
+delta : ([30,45,60,90,120,135])[rand(6)+1] * (if rand(2) = 0 then 1 else -1);
+alpha : if ncase = 1 then axisAngle + delta else axisAngle;
+offd : if ncase = 2 then 1.7 * (if rand(2) = 0 then 1 else -1) else 0;
+LL : 5.2;
+ca : cos(rad(alpha));
+sa : sin(rad(alpha));
+ppx : cos(rad(alpha + 90));
+ppy : sin(rad(alpha + 90));
+lineA : [float(cx + LL*ca + offd*ppx), float(cy + LL*sa + offd*ppy)];
+lineB : [float(cx - LL*ca + offd*ppx), float(cy - LL*sa + offd*ppy)];
+reasonTxt : if ncase = 0
+      then "Yes. Folding the shape along the dashed line maps it exactly onto itself, so the line is a line of symmetry."
+    elseif ncase = 1
+      then "No. This shape does have a line of symmetry, but the dashed line is not it: the dashed line is at the wrong angle, so the two halves are not mirror images."
+    elseif ncase = 2
+      then "No. A line of symmetry must pass through the centre of the shape. The dashed line is parallel to the true axis of symmetry but shifted to one side, so it does not split the shape into mirror-image halves."
+    else "No. This shape is not symmetric at all: there is no line you could fold along to make the two halves match, and reflecting it in the dashed line does not return the original.";]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>shape {@ti@}, rotation {@phi@}&deg;, case {@ncase@} (0=axis,1=angle,2=offset,3=broken), answer = {@ta@}.</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>boolean</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite. A line is a line of symmetry only if folding the shape along it makes the two halves land exactly on top of each other &mdash; every point matching its mirror image, and the line passing through the middle of the shape. Look again: are the two sides really mirror images, and does the line pass through the centre?</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1523456789</deployedseed>
+    <deployedseed>248901337</deployedseed>
+    <deployedseed>1902884471</deployedseed>
+    <deployedseed>733120945</deployedseed>
+    <deployedseed>1044556621</deployedseed>
+    <deployedseed>1998112003</deployedseed>
+    <deployedseed>562773410</deployedseed>
+    <deployedseed>1287654902</deployedseed>
+    <deployedseed>499001872</deployedseed>
+    <deployedseed>1760443128</deployedseed>
+    <deployedseed>820134567</deployedseed>
+    <deployedseed>1355024890</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Correct decision for this variant.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Opposite (wrong) decision routes to the teaching feedback.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>not ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-1-F</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

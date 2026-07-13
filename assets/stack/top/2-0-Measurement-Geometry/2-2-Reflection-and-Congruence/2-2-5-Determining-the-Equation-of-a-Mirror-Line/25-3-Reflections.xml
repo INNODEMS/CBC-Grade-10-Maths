@@ -2,13 +2,12 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>25.3 Reflections</text>
+      <text>Finding Line of Reflection Interactively</text>
     </name>
     <questiontext format="html">
-      <text><![CDATA[<p>For this question, your browser may ask whether you want to "leave the page". In this case, you should click leave and your answer will be saved.</p> <p><br></p>
-
-<center>
-[[jsxgraph height="500px" width="500px"]]
+      <text><![CDATA[Your goal is to find the equation of the line of reflection between the fixed green and pink arrows.
+        <center>
+[[jsxgraph input-ref-ans2="ref_P" input-ref-ans3="ref_Q" height="500px" width="500px"]]
 
     JXG.Options.text.useMathJax=true;
     var board = JXG.JSXGraph.initBoard(divid, {
@@ -16,7 +15,11 @@
       showCopyright:false,
       showNavigation:false,
       keepaspectratio:true,
-      axis:true
+      axis:true,
+      defaultAxes: {
+            x: { ticks: { insertTicks: false, ticksDistance: 1, minorTicks: 0, drawLabels: true } },
+            y: { ticks: { insertTicks: false, ticksDistance: 1, minorTicks: 0, drawLabels: true } }
+        }
     });
 
     var initCenCoords = {#initCen#};
@@ -35,7 +38,7 @@
 
     var constLine1 = board.create("line", [initFixedCen, initFixedTip], {visible:false});
     var constLine2 = board.create("perpendicular", [
-      [5*initFixedCen.X()/2-3*initFixedTip.X()/2, 5*initFixedCen.Y()/2-3*initFixedTip.Y()/2], 
+      [5*initFixedCen.X()/2-3*initFixedTip.X()/2, 5*initFixedCen.Y()/2-3*initFixedTip.Y()/2],
       constLine1
     ], {visible:false});
     var constLine3 = board.create("parallel", [
@@ -80,7 +83,7 @@
       }
     });
 
-    // Fixed reflected shape (NOW GREEN)
+    // Fixed reflected shape (GREEN)
 
     var fixedCen = board.create("point", refCenCoords, vertexStyle);
 
@@ -92,7 +95,7 @@
 
     var constLine1 = board.create("line", [fixedCen, fixedTip], {visible:false});
     var constLine2 = board.create("perpendicular", [
-      [5*fixedCen.X()/2-3*fixedTip.X()/2, 5*fixedCen.Y()/2-3*fixedTip.Y()/2], 
+      [5*fixedCen.X()/2-3*fixedTip.X()/2, 5*fixedCen.Y()/2-3*fixedTip.Y()/2],
       constLine1
     ], {visible:false});
     var constLine3 = board.create("parallel", [
@@ -137,155 +140,54 @@
       }
     });
 
+    // ---- Movable line of reflection (bound to ans2/ans3; marked) ----
+    // Two draggable purple points define the line. Its equation is never shown.
+    var dragP = board.create("point", [-5, 1], {
+      name:"", size:4, strokeColor:"purple", fillColor:"purple",
+      snapToGrid:true, snapSizeX:1, snapSizeY:1, label:{visible:false}
+    });
+    var dragQ = board.create("point", [-2, 1], {
+      name:"", size:4, strokeColor:"purple", fillColor:"purple",
+      snapToGrid:true, snapSizeX:1, snapSizeY:1, label:{visible:false}
+    });
+    var userLine = board.create("line", [dragP, dragQ], {
+      strokeColor:"purple", strokeWidth:2, dash:2, highlight:false
+    });
+
+    // Live reflection of the PINK shape across the movable line (yellow).
+    var userReflPts = [];
+    for (var i=1; i<initFixedPointList.length; i++){
+      userReflPts.push(board.create("reflection", [initFixedPointList[i], userLine], {visible:false, fixed:true}));
+    }
+    board.create("polygon", userReflPts, {
+      fixed:true,
+      highlight:false,
+      fillColor:"gold",
+      fillOpacity:0.55,
+      borders:{ visible:true, strokeColor:"darkorange", strokeWidth:2, dash:2 }
+    });
+
+    // Bind the two purple points to the STACK inputs so the line is marked.
+    stack_jxg.bind_point(ref_P, dragP);
+    stack_jxg.bind_point(ref_Q, dragQ);
+
     board.unsuspendUpdate();
 
 [[/jsxgraph]]
 </center>
 
-<p ><br> Find the equation of the line of reflection between the fixed green and pink arrows.</p>
-<p align="left">[[input:ans1]] [[validation:ans1]]</p>
-<p hidden align="left"><b>(2)</b></p>
-<p >[[feedback:prt1]]</p>]]></text>
+<p>The yellow arrow is the reflection of the pink arrow on the test purple line. Move the purple line (by dragging its points or clicking and dragging the line itself) so that the yellow arrow lands exactly on top of the green arrow.</p>
+<div align="left">[[feedback:prt2]]</div>
+
+<p><br>Find the equation of the line of reflection between the fixed green and pink arrows.</p>
+<div align="left">[[input:ans1]] [[validation:ans1]]</div>
+<div align="left">[[feedback:prt1]]</div>
+<div align="left">[[feedback:prt3]]</div>
+
+<div style="display:none">[[input:ans2]] [[validation:ans2]] [[input:ans3]] [[validation:ans3]]</div>]]></text>
     </questiontext>
-    <generalfeedback format="moodle_auto_format">
-      <text/>
-    </generalfeedback>
-    <defaultgrade>5</defaultgrade>
-    <penalty>0.1</penalty>
-    <hidden>0</hidden>
-    <idnumber/>
-    <stackversion>
-      <text>2026010500</text>
-    </stackversion>
-    <questionvariables>
-      <text><![CDATA[/* Initial position */
-initCen:[rand([1,-1])*rand([2,3,4]), rand([1,-1])*rand([2,3,4])];
-initTipOffset:random_permutation([0,rand([1,-1])*2]);
-initTip:[first(initCen)+first(initTipOffset), second(initCen)+second(initTipOffset)];
-
-/* Reflected shape */
-cenTrans:rand_with_prohib(4, min(abs(first(initCen)),abs(second(initCen)))+4, [abs(first(initCen))+abs(second(initCen))]);
-refCen:[first(initCen)+(if first(initCen)>=0 then -1 else 1)*cenTrans, second(initCen)+(if second(initCen)>=0 then -1 else 1)*cenTrans];
-
-/* Finding line of reflection */
-cenMid: [(first(initCen)+first(refCen))/2,(second(initCen)+second(refCen))/2];
-tans1: if sign(first(initCen))=sign(second(initCen)) then y=first(cenMid)+second(cenMid)-x else y=x+second(cenMid)-first(cenMid);
-
-/* Random variables for (b) */
-refAxis:rand(["x","y"]);
-refCenB: if refAxis="x" then [first(initCen), -second(initCen)] else [-first(initCen), second(initCen)];
-transCenB: [(if first(refCenB)>=0 then 1 else -1)*rand_with_prohib(2,4,[abs(first(refCenB))]), (if second(refCenB)>=0 then 1 else -1)*rand_with_prohib(2,4,[abs(second(refCenB))])];
-transVec:matrix([first(transCenB)-first(refCenB)],[second(transCenB)-second(refCenB)]);
-
-/* Solving for rotation point for (b) */
-tans3: if refAxis="x" then [first(first(transVec))+first(initTip), first(second(transVec))-second(initTip)] else [first(first(transVec))-first(initTip), first(second(transVec))+second(initTip)];]]></text>
-    </questionvariables>
-    <specificfeedback format="html">
-      <text/>
-    </specificfeedback>
-    <questionnote format="moodle_auto_format">
-      <text><![CDATA[<p>Initial position: {@initCen@}, {@initTip@}</p>
-<p> {@tans1@}</p>]]></text>
-    </questionnote>
-    <questiondescription format="moodle_auto_format">
-      <text/>
-    </questiondescription>
-    <questionsimplify>1</questionsimplify>
-    <assumepositive>0</assumepositive>
-    <assumereal>0</assumereal>
-    <prtcorrect format="html">
-      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
-    </prtcorrect>
-    <prtpartiallycorrect format="html">
-      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
-    </prtpartiallycorrect>
-    <prtincorrect format="html">
-      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
-    </prtincorrect>
-    <decimals>.</decimals>
-    <scientificnotation>*10</scientificnotation>
-    <multiplicationsign>none</multiplicationsign>
-    <sqrtsign>1</sqrtsign>
-    <complexno>i</complexno>
-    <inversetrig>cos-1</inversetrig>
-    <logicsymbol>lang</logicsymbol>
-    <matrixparens>(</matrixparens>
-    <isbroken>0</isbroken>
-    <variantsselectionseed/>
-    <input>
-      <name>ans1</name>
-      <type>algebraic</type>
-      <tans>tans1</tans>
-      <boxsize>15</boxsize>
-      <strictsyntax>1</strictsyntax>
-      <insertstars>1</insertstars>
-      <syntaxhint/>
-      <syntaxattribute>0</syntaxattribute>
-      <forbidwords/>
-      <allowwords/>
-      <forbidfloat>1</forbidfloat>
-      <requirelowestterms>0</requirelowestterms>
-      <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
-      <options/>
-    </input>
-    <prt>
-      <name>prt1</name>
-      <value>2.0000000</value>
-      <autosimplify>1</autosimplify>
-      <feedbackstyle>1</feedbackstyle>
-      <feedbackvariables>
-        <text><![CDATA[/* Node 1: Check correct answer */
-/* Node 2: Worked solution */
-/* Node 3: Correct coefficient of x (+1) */
-node3_test: if abs((coeff(lhs(ans1)-rhs(ans1),x)/coeff(lhs(ans1)-rhs(ans1),y))-(coeff(lhs(tans1)-rhs(tans1),x)/coeff(lhs(tans1)-rhs(tans1),y)))<=0.0001 then 1 else 0;
-
-/* Node 4: Correct y-intercept (+1) */
-node4_test: if abs((coeff(lhs(ans1)-rhs(ans1),x,0)/coeff(lhs(ans1)-rhs(ans1),y))-(coeff(lhs(tans1)-rhs(tans1),x,0)/coeff(lhs(tans1)-rhs(tans1),y)))<=0.0001 then 1 else 0;]]></text>
-      </feedbackvariables>
-      <node>
-        <name>0</name>
-        <description/>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans1</sans>
-        <tans>tans1</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
-        <truepenalty/>
-        <truenextnode>1</truenextnode>
-        <trueanswernote>prt1-1-T</trueanswernote>
-        <truefeedback format="html">
-          <text/>
-        </truefeedback>
-        <falsescoremode>=</falsescoremode>
-        <falsescore>0</falsescore>
-        <falsepenalty/>
-        <falsenextnode>2</falsenextnode>
-        <falseanswernote>prt1-1-F</falseanswernote>
-        <falsefeedback format="html">
-          <text/>
-        </falsefeedback>
-      </node>
-      <node>
-        <name>1</name>
-        <description/>
-        <answertest>AlgEquiv</answertest>
-        <sans>1</sans>
-        <tans>1</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>+</truescoremode>
-        <truescore>0</truescore>
-        <truepenalty/>
-        <truenextnode>-1</truenextnode>
-        <trueanswernote>prt1-2-T</trueanswernote>
-        <truefeedback format="html">
-          <text><![CDATA[<p><br>Here is a worked solution:</p>
-<p>To find the line of reflection between two shapes, you can join up similar points on each shape.
-<br>The line of reflection is then given by the perpendicular bisectors of all these lines.</p>
+    <generalfeedback format="html">
+      <text><![CDATA[<p>To find the line of reflection between two shapes, join up matching points on each shape. The line of reflection is the perpendicular bisector of every such join.</p>
 <p><br></p>
 
 <center>
@@ -297,7 +199,11 @@ node4_test: if abs((coeff(lhs(ans1)-rhs(ans1),x,0)/coeff(lhs(ans1)-rhs(ans1),y))
       showCopyright:false,
       showNavigation:false,
       keepaspectratio:true,
-      axis:true
+      axis:true,
+      defaultAxes: {
+            x: { ticks: { insertTicks: false, ticksDistance: 1, minorTicks: 0, drawLabels: true } },
+            y: { ticks: { insertTicks: false, ticksDistance: 1, minorTicks: 0, drawLabels: true } }
+        }
     });
 
     var initCenCoords = {#initCen#};
@@ -316,7 +222,7 @@ node4_test: if abs((coeff(lhs(ans1)-rhs(ans1),x,0)/coeff(lhs(ans1)-rhs(ans1),y))
 
     var constLine1 = board.create("line", [initFixedCen, initFixedTip], {visible:false});
     var constLine2 = board.create("perpendicular", [
-      [5*initFixedCen.X()/2-3*initFixedTip.X()/2, 5*initFixedCen.Y()/2-3*initFixedTip.Y()/2], 
+      [5*initFixedCen.X()/2-3*initFixedTip.X()/2, 5*initFixedCen.Y()/2-3*initFixedTip.Y()/2],
       constLine1
     ], {visible:false});
     var constLine3 = board.create("parallel", [
@@ -371,7 +277,7 @@ node4_test: if abs((coeff(lhs(ans1)-rhs(ans1),x,0)/coeff(lhs(ans1)-rhs(ans1),y))
       strokeColor:"blue",
       dash:1
     });
-    
+
     var cenMid = board.create("midpoint", [initCenCoords,refCenCoords], {visible:false});
 
     var refLine = board.create("perpendicular", [cenMid, cenJoin], {
@@ -390,7 +296,7 @@ node4_test: if abs((coeff(lhs(ans1)-rhs(ans1),x,0)/coeff(lhs(ans1)-rhs(ans1),y))
 
     var constLine1 = board.create("line", [fixedCen, fixedTip], {visible:false});
     var constLine2 = board.create("perpendicular", [
-      [5*fixedCen.X()/2-3*fixedTip.X()/2, 5*fixedCen.Y()/2-3*fixedTip.Y()/2], 
+      [5*fixedCen.X()/2-3*fixedTip.X()/2, 5*fixedCen.Y()/2-3*fixedTip.Y()/2],
       constLine1
     ], {visible:false});
     var constLine3 = board.create("parallel", [
@@ -437,7 +343,174 @@ node4_test: if abs((coeff(lhs(ans1)-rhs(ans1),x,0)/coeff(lhs(ans1)-rhs(ans1),y))
 [[/jsxgraph]]
 </center>
 
-<p><br>The equation of this line is: {@tans1@}</p>]]></text>
+<p><br>The equation of the line of reflection is: {@tans1@}</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>5</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Initial position */
+initCen:[rand([1,-1])*rand([2,3,4]), rand([1,-1])*rand([2,3,4])];
+initTipOffset:random_permutation([0,rand([1,-1])*2]);
+initTip:[first(initCen)+first(initTipOffset), second(initCen)+second(initTipOffset)];
+
+/* Reflected shape */
+cenTrans:rand_with_prohib(4, min(abs(first(initCen)),abs(second(initCen)))+4, [abs(first(initCen))+abs(second(initCen))]);
+refCen:[first(initCen)+(if first(initCen)>=0 then -1 else 1)*cenTrans, second(initCen)+(if second(initCen)>=0 then -1 else 1)*cenTrans];
+
+/* Finding line of reflection */
+cenMid: [(first(initCen)+first(refCen))/2,(second(initCen)+second(refCen))/2];
+tans1: if sign(first(initCen))=sign(second(initCen)) then y=first(cenMid)+second(cenMid)-x else y=x+second(cenMid)-first(cenMid);
+
+/* Gradient/intercept of the mirror, and two lattice points on it (model answer for the draggable line) */
+grad1: if sign(first(initCen))=sign(second(initCen)) then -1 else 1;
+icpt1: if sign(first(initCen))=sign(second(initCen)) then first(cenMid)+second(cenMid) else second(cenMid)-first(cenMid);
+lpt1: [0, icpt1];
+lpt2: [2, 2*grad1+icpt1];]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="moodle_auto_format">
+      <text><![CDATA[<p>Initial position: {@initCen@}, {@initTip@}</p>
+<p> {@tans1@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="moodle_auto_format">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>(</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>tans1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>1</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>lpt1</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options>hideanswer</options>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>lpt2</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options>hideanswer</options>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>3.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text><![CDATA[/* Node 0: full-mark check via AlgEquiv */
+/* Node 2: correct gradient (coefficient of x relative to y) */
+node3_test: if abs((coeff(lhs(ans1)-rhs(ans1),x)/coeff(lhs(ans1)-rhs(ans1),y))-(coeff(lhs(tans1)-rhs(tans1),x)/coeff(lhs(tans1)-rhs(tans1),y)))<=0.0001 then 1 else 0;
+
+/* Node 3: correct y-intercept (relative to y) */
+node4_test: if abs((coeff(lhs(ans1)-rhs(ans1),x,0)/coeff(lhs(ans1)-rhs(ans1),y))-(coeff(lhs(tans1)-rhs(tans1),x,0)/coeff(lhs(tans1)-rhs(tans1),y)))<=0.0001 then 1 else 0;]]></text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>tans1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>1</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -462,7 +535,7 @@ node4_test: if abs((coeff(lhs(ans1)-rhs(ans1),x,0)/coeff(lhs(ans1)-rhs(ans1),y))
         <truenextnode>3</truenextnode>
         <trueanswernote>prt1-3-T</trueanswernote>
         <truefeedback format="html">
-          <text><![CDATA[<p><br>The coefficient of \(x\) in your equation is correct.</p>]]></text>
+          <text><![CDATA[<p><br>The gradient (coefficient of \(x\)) in your equation is correct.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -470,7 +543,7 @@ node4_test: if abs((coeff(lhs(ans1)-rhs(ans1),x,0)/coeff(lhs(ans1)-rhs(ans1),y))
         <falsenextnode>3</falsenextnode>
         <falseanswernote>prt1-3-F</falseanswernote>
         <falsefeedback format="html">
-          <text><![CDATA[<p><br>The coefficient of \(x\) in your equation is not correct.</p>]]></text>
+          <text><![CDATA[<p><br>The gradient (coefficient of \(x\)) in your equation is not correct &mdash; try apply the formula for the gradient of a line.</p>]]></text>
         </falsefeedback>
       </node>
       <node>
@@ -487,7 +560,7 @@ node4_test: if abs((coeff(lhs(ans1)-rhs(ans1),x,0)/coeff(lhs(ans1)-rhs(ans1),y))
         <truenextnode>1</truenextnode>
         <trueanswernote>prt1-4-T</trueanswernote>
         <truefeedback format="html">
-          <text><![CDATA[<p>The \(y\) intercept in your equation is correct.</p>]]></text>
+          <text><![CDATA[<p>The \(y\)-intercept in your equation is correct.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -495,7 +568,108 @@ node4_test: if abs((coeff(lhs(ans1)-rhs(ans1),x,0)/coeff(lhs(ans1)-rhs(ans1),y))
         <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-4-F</falseanswernote>
         <falsefeedback format="html">
-          <text><![CDATA[<p>The \(y\) intercept in your equation is not correct.</p>]]></text>
+          <text><![CDATA[<p>The \(y\)-intercept in your equation is not correct. Where does the line intersect the \(y\)-axis?</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>2.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text><![CDATA[/* Does the student's line (through the two purple points) coincide with the mirror? */
+mline: lhs(tans1)-rhs(tans1);
+resP: float(ev(mline, x=first(ans2), y=second(ans2)));
+resQ: float(ev(mline, x=first(ans3), y=second(ans3)));
+lineOK: if is(abs(resP)<0.01) and is(abs(resQ)<0.01) and is(ans2#ans3) then 1 else 0;]]></text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>lineOK</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><span style="color:green;"><i class="fa fa-check"></i></span> Your mirror line is in the right place: the yellow reflection lands on the green arrow.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The yellow reflection does not yet sit on the green arrow. Keep dragging the purple points until the two shapes coincide.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>0.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>0</feedbackstyle>
+      <feedbackvariables>
+        <text><![CDATA[/* Recompute whether the drawn line is correct (feedback vars are per-PRT). */
+mline: lhs(tans1)-rhs(tans1);
+resP: float(ev(mline, x=first(ans2), y=second(ans2)));
+resQ: float(ev(mline, x=first(ans3), y=second(ans3)));
+lineOK: if is(abs(resP)<0.01) and is(abs(resQ)<0.01) and is(ans2#ans3) then 1 else 0;]]></text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>tans1</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>lineOK</sans>
+        <tans>1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><span style="color:orange;"><i class="fa fa-lightbulb-o"></i></span> Your <b>mirror line on the diagram is correct</b>, but the equation you typed is not. Read the equation off your line: it has gradient \(+1\) or \(-1\), and its \(y\)-intercept is where the purple line crosses the \(y\)-axis.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
         </falsefeedback>
       </node>
     </prt>
@@ -519,53 +693,106 @@ node4_test: if abs((coeff(lhs(ans1)-rhs(ans1),x,0)/coeff(lhs(ans1)-rhs(ans1),y))
     <deployedseed>1105319228</deployedseed>
     <deployedseed>1735394977</deployedseed>
     <deployedseed>1555269935</deployedseed>
-    <deployedseed>933930267</deployedseed>
-    <deployedseed>821318970</deployedseed>
-    <deployedseed>1466201168</deployedseed>
-    <deployedseed>1098007214</deployedseed>
-    <deployedseed>466890089</deployedseed>
-    <deployedseed>1978455876</deployedseed>
-    <deployedseed>1561432726</deployedseed>
-    <deployedseed>430726401</deployedseed>
-    <deployedseed>1103748554</deployedseed>
-    <deployedseed>1811135742</deployedseed>
-    <deployedseed>394407459</deployedseed>
-    <deployedseed>1384493325</deployedseed>
-    <deployedseed>451985791</deployedseed>
-    <deployedseed>677495543</deployedseed>
-    <deployedseed>1329418238</deployedseed>
-    <deployedseed>1530068533</deployedseed>
-    <deployedseed>1974682743</deployedseed>
-    <deployedseed>1775311258</deployedseed>
-    <deployedseed>2076482931</deployedseed>
-    <deployedseed>395356493</deployedseed>
-    <deployedseed>1749399767</deployedseed>
-    <deployedseed>1056400289</deployedseed>
-    <deployedseed>1533212410</deployedseed>
-    <deployedseed>1417043047</deployedseed>
-    <deployedseed>348222912</deployedseed>
-    <deployedseed>1568955292</deployedseed>
-    <deployedseed>882890924</deployedseed>
-    <deployedseed>815174674</deployedseed>
-    <deployedseed>905787463</deployedseed>
-    <deployedseed>512285680</deployedseed>
-    <deployedseed>1967028846</deployedseed>
-    <deployedseed>1744580796</deployedseed>
-    <deployedseed>1465411116</deployedseed>
-    <deployedseed>647544959</deployedseed>
-    <deployedseed>1091056875</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>Correct equation and correct line: full marks.</description>
       <testinput>
         <name>ans1</name>
         <value>tans1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>lpt1</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>lpt2</value>
       </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-2-T</expectedanswernote>
+        <expectedanswernote>prt1-1-T | prt1-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Line placed correctly, but typed equation has the wrong intercept: prt3 nudge fires.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>if sign(first(initCen))=sign(second(initCen)) then y=first(cenMid)+second(cenMid)-x+1 else y=x+second(cenMid)-first(cenMid)+1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>lpt1</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>lpt2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.5000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-1-F | prt1-3-T | prt1-4-F | prt1-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-F | prt3-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>Correct equation but line left at its (wrong) starting position: line scores 0, no nudge.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>tans1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>[-5,1]</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>[-2,1]</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T | prt1-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt2-1-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
       </expected>
     </qtest>
   </question>

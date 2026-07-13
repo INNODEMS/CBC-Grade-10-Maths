@@ -2,164 +2,111 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Recognize congruent triangles</text>
+      <text>Recognize congruent triangles (which test?)</text>
     </name>
-    <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Are the two triangles shown below congruent? </p><p>[[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p> 
-<p>State the test of congruence criterion.</p><p>[[input:ans2]] [[validation:ans2]][[feedback:prt2]]</p>
-(a).[[jsxgraph]]
-var board = JXG.JSXGraph.initBoard('jxgbox', {
-    boundingbox: [-6, 7, 6, -1],
-    axis: false,
-    showNavigation: false,
-    showCopyright: false
+    <questiontext format="html">
+      <text><![CDATA[<p>The two triangles below have some equal parts marked. <b>Matching tick marks</b> (&#124;, &#124;&#124;, &#124;&#124;&#124;) show sides that are equal, and <b>matching arcs</b> show angles that are equal. A small square shows a right angle.</p>
+
+[[jsxgraph width='780px' height='356px']]
+var b = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-1.5, 5.0, 13.8, -2.0],
+    keepaspectratio: true, axis: false,
+    showNavigation: false, showCopyright: false,
+    pan: {enabled: false}, zoom: {enabled: false}
 });
 
-// Points with labels only (no circles), labels positioned outside
-var A = board.create('point', [0, 3], {
-    name: 'A',
-    fixed: true,
-    visible: false,
-    label: {offset: [0, 15], visible: true, fontSize: 14} // above point
-});
+var V1 = {#V1#}, V2 = {#V2#};
+var ST1 = {#st1#}, ST2 = {#st2#};
+var AA1 = {#aa1#}, AA2 = {#aa2#};
+var Lab1 = ['A', 'B', 'C'], Lab2 = ['D', 'E', 'F'];
 
-var B = board.create('point', [-2.5, 2], {
-    name: 'B',
-    fixed: true,
-    visible: false,
-    label: {offset: [-15, -10], visible: true, fontSize: 14} // left below
-});
-
-var C = board.create('point', [2.5, 0], {
-    name: 'C',
-    fixed: true,
-    visible: false,
-    label: {offset: [15, -10], visible: true, fontSize: 14} // right below
-});
-
-// Triangle sides
-var AB = board.create('segment', [A, B]);
-var AC = board.create('segment', [A, C]);
-var BC = board.create('segment', [B, C]);
-
-// Angles inside the triangle
-board.create('angle', [B, A, C], {   // Angle at A
-    radius: 0.6,
-    withLabel: true,
-    name: '100°',
-    label: {offset: [0, 0], fontSize: 12}
-});
-
-board.create('angle', [C, B, A], {   // Angle at B
-    radius: 0.8,
-    withLabel: true,
-    name: '40°',
-    label: {offset: [0, 0], fontSize: 12}
-});
-
-board.create('angle', [A, C, B], {   // Angle at C
-    radius: 0.8,
-    withLabel: true,
-    name: '40°',
-    label: {offset: [0, 0], fontSize: 12}
-});
-
-// Side length labels
-board.create('text', [1.0, 2.0, '9 cm'], {fontSize: 12});    // AC
-board.create('text', [-1.0, 1.1, '7 cm'], {fontSize: 12});   // AB
-board.create('text', [-1.6, 2.6, '5 cm'], {fontSize: 12});     // BC
-[[/jsxgraph]]
-
-
-(b)
-[[jsxgraph]]
-var board = JXG.JSXGraph.initBoard('jxgbox', {
-    boundingbox: [-6, 7, 6, -1],
-    axis: false,
-    showNavigation: false,
-    showCopyright: false
-});
-
-// Points with labels only (no circles), labels positioned outside
-var P = board.create('point', [0, 3], {
-    name: 'P',
-    fixed: true,
-    visible: false,
-    label: {offset: [0, 15], visible: true, fontSize: 14}
-});
-
-var Q = board.create('point', [-2.5, 2], {
-    name: 'Q',
-    fixed: true,
-    visible: false,
-    label: {offset: [-15, -10], visible: true, fontSize: 14}
-});
-
-var R = board.create('point', [2.5, 0], {
-    name: 'R',
-    fixed: true,
-    visible: false,
-    label: {offset: [15, -10], visible: true, fontSize: 14}
-});
-
-// Triangle sides
-var PQ = board.create('segment', [P, Q]);
-var PR = board.create('segment', [P, R]);
-var QR = board.create('segment', [Q, R]);
-
-// Angles inside the triangle
-board.create('angle', [Q, P, R], {   // Angle at P
-    radius: 0.6,
-    withLabel: true,
-    name: '100°',
-    label: {offset: [0, 0], fontSize: 12}
-});
-
-board.create('angle', [R, Q, P], {   // Angle at Q
-    radius: 0.8,
-    withLabel: true,
-    name: '40°',
-    label: {offset: [0, 0], fontSize: 12}
-});
-
-board.create('angle', [P, R, Q], {   // Angle at R
-    radius: 0.8,
-    withLabel: true,
-    name: '40°',
-    label: {offset: [0, 0], fontSize: 12}
-});
-
-// Side length labels (substituted)
-board.create('text', [1.5, 1.5, '7 cm'], {fontSize: 12});   // PR (was 9)
-board.create('text', [-0.6, 1.7, '5 cm'], {fontSize: 12});  // PQ (was 7)
-board.create('text', [1.6, 3.4, '9 cm'], {fontSize: 12});   // QR (was 5)
-
-// --- Rotation Function ---
-function rotatePoint(p, angleDeg, center) {
-    var angleRad = angleDeg * Math.PI / 180;
-    var x = p.X() - center[0];
-    var y = p.Y() - center[1];
-    var xNew = x * Math.cos(angleRad) - y * Math.sin(angleRad) + center[0];
-    var yNew = x * Math.sin(angleRad) + y * Math.cos(angleRad) + center[1];
-    p.setPosition(JXG.COORDS_BY_USER, [xNew, yNew]);
+function centroid(V) {
+    return [(V[0][0] + V[1][0] + V[2][0]) / 3,
+            (V[0][1] + V[1][1] + V[2][1]) / 3];
+}
+function labelOffset(V, i) {
+    var c = centroid(V);
+    var dx = V[i][0] - c[0], dy = V[i][1] - c[1];
+    var m = Math.sqrt(dx * dx + dy * dy) || 1;
+    return [16 * dx / m, 16 * dy / m];
+}
+function drawTicks(p, q, n) {
+    var mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2;
+    var dx = q[0] - p[0], dy = q[1] - p[1];
+    var len = Math.sqrt(dx * dx + dy * dy) || 1;
+    var ux = dx / len, uy = dy / len;      // along the side
+    var nx = -uy, ny = ux;                 // perpendicular
+    var h = 0.17, sp = 0.14, start = -(n - 1) / 2;
+    for (var j = 0; j < n; j++) {
+        var off = (start + j) * sp;
+        var cx = mx + ux * off, cy = my + uy * off;
+        b.create('segment', [[cx - nx * h, cy - ny * h], [cx + nx * h, cy + ny * h]],
+            {strokeColor: '#d00000', strokeWidth: 2, fixed: true, highlight: false});
+    }
+}
+function drawAngle(pA, pV, pB, code) {
+    if (code === 4) {                      // right-angle square
+        var vx = pV.X(), vy = pV.Y();
+        var a = [pA.X() - vx, pA.Y() - vy], bb = [pB.X() - vx, pB.Y() - vy];
+        var la = Math.sqrt(a[0] * a[0] + a[1] * a[1]) || 1;
+        var lb = Math.sqrt(bb[0] * bb[0] + bb[1] * bb[1]) || 1;
+        var ua = [a[0] / la, a[1] / la], ub = [bb[0] / lb, bb[1] / lb];
+        var s = 0.42;
+        var c1 = [vx + ua[0] * s, vy + ua[1] * s];
+        var c2 = [vx + ua[0] * s + ub[0] * s, vy + ua[1] * s + ub[1] * s];
+        var c3 = [vx + ub[0] * s, vy + ub[1] * s];
+        b.create('segment', [c1, c2], {strokeColor: '#0a7d00', strokeWidth: 2, fixed: true, highlight: false});
+        b.create('segment', [c2, c3], {strokeColor: '#0a7d00', strokeWidth: 2, fixed: true, highlight: false});
+    } else {
+        for (var j = 0; j < code; j++) {
+            b.create('angle', [pA, pV, pB], {
+                radius: 0.55 + j * 0.17, withLabel: false,
+                fillColor: '#0a7d00', fillOpacity: 0,
+                strokeColor: '#0a7d00', strokeWidth: 2,
+                fixed: true, highlight: false
+            });
+        }
+    }
+}
+function drawTriangle(V, Lab, ST, AA) {
+    var P = [];
+    for (var i = 0; i < 3; i++) {
+        P.push(b.create('point', V[i], {
+            name: Lab[i], fixed: true, size: 1,
+            fillColor: '#222', strokeColor: '#222',
+            label: {fontSize: 15, offset: labelOffset(V, i)}
+        }));
+    }
+    b.create('segment', [P[0], P[1]], {strokeColor: '#0057b7', strokeWidth: 2, fixed: true, highlight: false});
+    b.create('segment', [P[1], P[2]], {strokeColor: '#0057b7', strokeWidth: 2, fixed: true, highlight: false});
+    b.create('segment', [P[2], P[0]], {strokeColor: '#0057b7', strokeWidth: 2, fixed: true, highlight: false});
+    for (var k = 0; k < 3; k++) {          // side k is opposite vertex k
+        if (ST[k] > 0) { drawTicks(V[(k + 1) % 3], V[(k + 2) % 3], ST[k]); }
+    }
+    // signed area: >0 = counter-clockwise, <0 = clockwise (flipped copy)
+    var ccw = ((V[1][0] - V[0][0]) * (V[2][1] - V[0][1]) -
+               (V[1][1] - V[0][1]) * (V[2][0] - V[0][0])) > 0;
+    for (var k = 0; k < 3; k++) {          // angle at vertex k
+        if (AA[k] > 0) {
+            var arm1 = ccw ? P[(k + 1) % 3] : P[(k + 2) % 3];
+            var arm2 = ccw ? P[(k + 2) % 3] : P[(k + 1) % 3];
+            drawAngle(arm1, P[k], arm2, AA[k]);  // order keeps the arc on the interior
+        }
+    }
 }
 
-// Rotation center (around point P)
-var center = [P.X(), P.Y()];
+drawTriangle(V1, Lab1, ST1, AA1);
+drawTriangle(V2, Lab2, ST2, AA2);
+[[/jsxgraph]]
 
-// Rotate each point 60° anticlockwise
-rotatePoint(P, 60, center);
-rotatePoint(Q, 60, center);
-rotatePoint(R, 60, center);
-
-
-
-[[/jsxgraph]]]]></text>
+<p>Which congruence test proves that the two triangles are congruent? If the marked information is <b>not enough</b> to guarantee congruence, choose &ldquo;not necessarily congruent&rdquo;.</p>
+<div>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</div>]]></text>
     </questiontext>
-    <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<h3>Worked Solution</h3>
-<p>Yes, the two triangular plots are congruent because all three corresponding sides are equal</p>
-<p>The congruence criterion used is Side-Side-Side (SSS)</p>]]></text>
+    <generalfeedback format="html">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>{@casewhy@}</p>
+<p><b>Answer:</b> {@ansdisp@}.</p>
+<p>Remember the valid tests for triangle congruence: <b>SSS</b>, <b>SAS</b> (the equal angle must be <i>between</i> the two equal sides), <b>ASA</b> and <b>AAS</b>, and <b>RHS</b> for right-angled triangles. Equal angles alone (AAA) give <i>similar</i> triangles, and two sides with a non-included angle (SSA) do not fix the triangle.</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -169,16 +116,101 @@ rotatePoint(R, 60, center);
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[ta:random_permutation([["yes", true],["no", false]]);
-ta_1:random_permutation([["SSS", true],["SAS", false],["ASA", false],["AAS", false],["NONE", false]]);
-]]></text>
+      <text><![CDATA[listmin(l) := apply(min, l);
+rot(p, th) := [p[1]*cos(th) - p[2]*sin(th), p[1]*sin(th) + p[2]*cos(th)];
+placeRight(pts) := block([xs, ys, tx, ty],
+    xs : map(first, pts), ys : map(second, pts),
+    tx : 7 - listmin(xs), ty : 0 - listmin(ys),
+    map(lambda([p], [p[1] + tx, p[2] + ty]), pts));
+/* fl = 1 keeps orientation, fl = -1 reflects (flips) the triangle before rotating */
+rigid(pts, th, fl) := map(lambda([p], rot([p[1], fl*p[2]], th)), pts);
+scaleRot(pts, k, th, fl) := map(lambda([p], rot([k*p[1], fl*k*p[2]], th)), pts);
+
+/* base triangles (both listed counter-clockwise) */
+Vbase  : [[0, 0], [4.4, 0], [0.9, 2.9]];   /* scalene */
+Vright : [[0, 0], [4.0, 0], [0, 3.0]];     /* right angle at vertex 0 */
+
+/* orientation of the second (copied) triangle */
+th : float(rand([%pi/9, %pi/6, 2*%pi/9, 5*%pi/18, %pi/3, 7*%pi/18, 4*%pi/9, 5*%pi/9, 11*%pi/18, 2*%pi/3]));
+
+/* fl = -1 makes the copy a flipped (reflected) as well as rotated version */
+fl : rand([1, -1]);
+
+/* choose one of 7 marking cases */
+cs : rand(7) + 1;
+
+/* defaults (used by cases 1-4) */
+V1 : Vbase;
+V2 : placeRight(rigid(Vbase, th, fl));
+st1 : [0, 0, 0]; st2 : [0, 0, 0];
+aa1 : [0, 0, 0]; aa2 : [0, 0, 0];
+ansval : "SSS"; ansdisp : "SSS";
+casewhy : "";
+
+if cs = 1 then (
+    st1 : [1, 2, 3], st2 : [1, 2, 3],
+    ansval : "SSS", ansdisp : "SSS (Side-Side-Side)",
+    casewhy : "All three pairs of corresponding sides are marked equal, so the triangles are congruent by SSS."
+) elseif cs = 2 then (
+    /* SAS: two sides (opposite B and C) with the included angle at A */
+    st1 : [0, 1, 2], st2 : [0, 1, 2],
+    aa1 : [1, 0, 0], aa2 : [1, 0, 0],
+    ansval : "SAS", ansdisp : "SAS (Side-Angle-Side)",
+    casewhy : "Two pairs of sides are equal and the angle between them (the included angle) is equal, so the triangles are congruent by SAS."
+) elseif cs = 3 then (
+    /* ASA: angles at A and B with the included side AB (opposite C) */
+    st1 : [0, 0, 1], st2 : [0, 0, 1],
+    aa1 : [1, 2, 0], aa2 : [1, 2, 0],
+    ansval : "ASA", ansdisp : "ASA (Angle-Side-Angle)",
+    casewhy : "Two pairs of angles are equal and the side between them (the included side) is equal, so the triangles are congruent by ASA."
+) elseif cs = 4 then (
+    /* AAS: angles at A and B with a non-included side AC (opposite B) */
+    st1 : [0, 1, 0], st2 : [0, 1, 0],
+    aa1 : [1, 2, 0], aa2 : [1, 2, 0],
+    ansval : "AAS", ansdisp : "AAS (Angle-Angle-Side)",
+    casewhy : "Two pairs of angles are equal and a pair of corresponding sides that is not between them is equal, so the triangles are congruent by AAS."
+) elseif cs = 5 then (
+    /* RHS: right angle at A, equal hypotenuse (opposite A) and one leg AB (opposite C) */
+    V1 : Vright,
+    V2 : placeRight(rigid(Vright, th, fl)),
+    st1 : [1, 0, 2], st2 : [1, 0, 2],
+    aa1 : [4, 0, 0], aa2 : [4, 0, 0],
+    ansval : "RHS", ansdisp : "RHS (Right angle-Hypotenuse-Side)",
+    casewhy : "Both triangles have a right angle, an equal hypotenuse and one equal shorter side, so they are congruent by RHS."
+) elseif cs = 6 then (
+    /* AAA: equiangular but the second triangle is shrunk - similar, not congruent */
+    V2 : placeRight(scaleRot(Vbase, 0.9, th, fl)),
+    aa1 : [1, 2, 3], aa2 : [1, 2, 3],
+    ansval : "NONE", ansdisp : "Not necessarily congruent (only similar)",
+    casewhy : "Only the three angles are marked equal (AAA). Equal angles guarantee the same shape but not the same size, so the triangles are similar, not necessarily congruent."
+) else (
+    /* SSA: two sides and a non-included angle - the ambiguous case */
+    V1 : [[0, 0], [5, 0], [4.789, 2.992]],
+    V2 : placeRight([[0, 0], [5, 0], [2.401, 1.5]]),
+    st1 : [2, 0, 1], st2 : [2, 0, 1],
+    aa1 : [1, 0, 0], aa2 : [1, 0, 0],
+    ansval : "NONE", ansdisp : "Not necessarily congruent (ambiguous SSA case)",
+    casewhy : "Two sides and a non-included angle (SSA) are marked equal. This does not fix a unique triangle - the same two sides and angle can form two different triangles - so they are not necessarily congruent."
+);
+
+V1 : float(V1);
+V2 : float(V2);
+
+/* dropdown options: [value, correct?, displayed label] */
+opts : [["SSS", is(ansval = "SSS"), "SSS (Side-Side-Side)"],
+        ["SAS", is(ansval = "SAS"), "SAS (Side-Angle-Side)"],
+        ["ASA", is(ansval = "ASA"), "ASA (Angle-Side-Angle)"],
+        ["AAS", is(ansval = "AAS"), "AAS (Angle-Angle-Side)"],
+        ["RHS", is(ansval = "RHS"), "RHS (Right angle-Hypotenuse-Side)"],
+        ["NONE", is(ansval = "NONE"), "Not necessarily congruent"]];
+ta : random_permutation(opts);
+correctv : mcq_correct(ta)[1];]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta@}
-{@ta_1@}</text>
+      <text>Case {@cs@}: {@ansval@}</text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -219,24 +251,6 @@ ta_1:random_permutation([["SSS", true],["SAS", false],["ASA", false],["AAS", fal
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
-      <options/>
-    </input>
-    <input>
-      <name>ans2</name>
-      <type>dropdown</type>
-      <tans>ta_1</tans>
-      <boxsize>15</boxsize>
-      <strictsyntax>1</strictsyntax>
-      <insertstars>0</insertstars>
-      <syntaxhint/>
-      <syntaxattribute>0</syntaxattribute>
-      <forbidwords/>
-      <allowwords/>
-      <forbidfloat>1</forbidfloat>
-      <requirelowestterms>0</requirelowestterms>
-      <checkanswertype>0</checkanswertype>
       <mustverify>0</mustverify>
       <showvalidation>0</showvalidation>
       <options/>
@@ -251,77 +265,116 @@ ta_1:random_permutation([["SSS", true],["SAS", false],["ASA", false],["AAS", fal
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Correct test chosen?</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>mcq_correct(ta)[1]</tans>
+        <tans>correctv</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt1-1-T</trueanswernote>
+        <trueanswernote>prt1-correct</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description><![CDATA[Did the student say "not congruent"?]]></description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans><![CDATA["NONE"]]></tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-saidnone</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Look again &mdash; the marked parts here <b>are</b> enough to prove the triangles congruent. Count the tick marks (equal sides) and arcs (equal angles), and check whether an equal angle sits <i>between</i> two equal sides.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
-    </prt>
-    <prt>
-      <name>prt2</name>
-      <value>1.0000000</value>
-      <autosimplify>1</autosimplify>
-      <feedbackstyle>1</feedbackstyle>
-      <feedbackvariables>
-        <text/>
-      </feedbackvariables>
       <node>
-        <name>0</name>
-        <description>Checks for the correct criterion</description>
+        <name>2</name>
+        <description><![CDATA[Is the correct answer "not congruent"?]]></description>
         <answertest>AlgEquiv</answertest>
-        <sans>ans2</sans>
-        <tans>mcq_correct(ta_1)[1]</tans>
+        <sans>correctv</sans>
+        <tans><![CDATA["NONE"]]></tans>
         <testoptions/>
-        <quiet>0</quiet>
+        <quiet>1</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
+        <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt2-1-T</trueanswernote>
+        <trueanswernote>prt1-shouldbenone</trueanswernote>
         <truefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Be careful: the marks here do <b>not</b> pin down a unique triangle. Equal angles fix the shape but not the size, and two sides with a non-included equal angle can be arranged into two different triangles. Check whether enough <i>sides</i> are marked equal to fix the size.</p>]]></text>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt2-1-F</falseanswernote>
+        <falseanswernote>prt1-wrongtest</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>The triangles are congruent, but that is not the matching test. Re-read the marks: are you given three equal sides, two sides and the angle <i>between</i> them, two angles and a side, or a right angle with the hypotenuse and a side?</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>979441476</deployedseed>
+    <deployedseed>1001</deployedseed>
+    <deployedseed>1002</deployedseed>
+    <deployedseed>1003</deployedseed>
+    <deployedseed>1004</deployedseed>
+    <deployedseed>1005</deployedseed>
+    <deployedseed>1006</deployedseed>
+    <deployedseed>1007</deployedseed>
+    <deployedseed>1008</deployedseed>
+    <deployedseed>1009</deployedseed>
+    <deployedseed>1010</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>Model answer scores full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>first(mcq_correct(ta))</value>
+        <value>correctv</value>
       </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>prt1-correct</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description><![CDATA[Choosing "not congruent" on a congruent variant is wrong and routed to saidnone. (Valid on seeds whose answer is a real test.)]]></description>
+      <testinput>
+        <name>ans1</name>
+        <value><![CDATA["NONE"]]></value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-saidnone</expectedanswernote>
       </expected>
     </qtest>
   </question>

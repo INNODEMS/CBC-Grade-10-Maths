@@ -70,28 +70,48 @@ board.renderer.svgRoot.style.pointerEvents = "none";
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[ta:random_permutation([["O", true],["B", false],["A'", false],["B'", false]]);
+      <text><![CDATA[ta1:random_permutation([["O", true],["B", false],["A'", false],["B'", false]]);
 
 OB:rand(10)+2;
 OA:rand_with_prohib(2,5,[OB]);
-K:rand([2,3,4,5]);
-OB1:K*OB;
 AB:rand_with_prohib(2,5,[OB,OA]);
+
+/* scale factor */
+K:rand([2,3,4,5]);
+
+/*Lengths of new triangle */
+OB1:K*OB;
 OA1:K*OA;
+
+
 BB1:OB1-OB;
-ta1:K;
-ta2:K*AB;
-ta3:OA1;]]></text>
+
+ta2:K;
+ta3:K*AB;
+ta4:OA1;]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>\(A'B'\) = {@ta2@}</p>
-<p>\(OA'\) = {@ta3@}</p>]]></text>
+      <text><![CDATA[<p>\(OB'\) = {@OB@}</p>
+<p>\(OA\) = {@OA@}</p>
+<p>\(AB\) = {@AB@}</p>
+
+<p>\(OA1\) = {@OA1@}</p>
+<p>\(OB1\) = {@OB1@}</p>
+<p>\(BB1\) = {@BB1@}</p>
+
+<p>\(K\) = {@K@}</p>
+
+
+<p>\({@ta1@}\)</p>
+<p>\({@ta2@}\)</p>
+<p>\({@ta3@}\)</p>
+<p>\({@ta4@}\)</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -121,7 +141,7 @@ ta3:OA1;]]></text>
     <input>
       <name>ans1</name>
       <type>dropdown</type>
-      <tans>ta</tans>
+      <tans>ta1</tans>
       <boxsize>15</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -139,7 +159,7 @@ ta3:OA1;]]></text>
     <input>
       <name>ans2</name>
       <type>algebraic</type>
-      <tans>ta1</tans>
+      <tans>ta2</tans>
       <boxsize>5</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -157,7 +177,7 @@ ta3:OA1;]]></text>
     <input>
       <name>ans3</name>
       <type>algebraic</type>
-      <tans>ta2</tans>
+      <tans>ta3</tans>
       <boxsize>5</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -175,7 +195,7 @@ ta3:OA1;]]></text>
     <input>
       <name>ans4</name>
       <type>algebraic</type>
-      <tans>ta3</tans>
+      <tans>ta4</tans>
       <boxsize>5</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -201,9 +221,9 @@ ta3:OA1;]]></text>
       <node>
         <name>0</name>
         <description/>
-        <answertest>EqualComAss</answertest>
+        <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>mcq_correct(ta)[1]</tans>
+        <tans>mcq_correct(ta1)[1]</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -237,7 +257,7 @@ ta3:OA1;]]></text>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans2</sans>
-        <tans>ta1</tans>
+        <tans>ta2</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -271,7 +291,7 @@ ta3:OA1;]]></text>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans3</sans>
-        <tans>ta2</tans>
+        <tans>ta3</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -305,7 +325,7 @@ ta3:OA1;]]></text>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans4</sans>
-        <tans>ta3</tans>
+        <tans>ta4</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
