@@ -6,196 +6,168 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
-Mogaka, a Grade 10 student, sketches a diagram of an ice-cream container consisting of
-a conical container with ice cream at the bottom, as shown in the diagram below.</p>
+Mogaka, a Grade 10 student, sketches an ice-cream container made of a cone with a scoop of ice cream, a hemisphere, forming a dome on top, as shown in the diagram below.</p>
 [[jsxgraph]]
 const brd = JXG.JSXGraph.initBoard(divid, {
-    boundingbox: [-8, 18, 8, -8],
+    boundingbox: [-9, 11, 9, -13],
     axis: false,
     showNavigation: false,
-    showCopyright: false
-  });
+    showCopyright: false,
+    keepAspectRatio: true
+});
 
-  const r = 6;
-  const h = 10;
+const r = 6;      // schematic radius (drawing only)
+const h = 10;     // schematic cone height (drawing only)
+const k = 0.32;   // vertical squash for the perspective ellipse
 
-  // Base ellipse (top of hemisphere and base of cone)
-  const base = brd.create('curve', [
+// --- Hemisphere dome: upper semicircle sitting on the rim ---
+brd.create('curve', [
     t => r * Math.cos(t),
-    t => 0.7 * r * Math.sin(t),
+    t => r * Math.sin(t),
+    0, Math.PI
+], {strokeColor: '#1f3c88', strokeWidth: 2, fillColor: '#90caf9', fillOpacity: 0.7});
+
+// --- Cone with the apex at the bottom ---
+const V  = brd.create('point', [0, -h], {visible: false});
+const Lp = brd.create('point', [-r, 0], {visible: false});
+const Rp = brd.create('point', [ r, 0], {visible: false});
+brd.create('segment', [V, Lp], {strokeColor: 'black', strokeWidth: 2});
+brd.create('segment', [V, Rp], {strokeColor: 'black', strokeWidth: 2});
+
+// --- Rim: the circle where the cone meets the hemisphere (drawn as a filled ellipse) ---
+brd.create('curve', [
+    t => r * Math.cos(t),
+    t => k * r * Math.sin(t),
     0, 2 * Math.PI
-  ], {strokeColor: 'black'});
+], {strokeColor: 'black', strokeWidth: 1.5, fillColor: '#90caf9', fillOpacity: 0.7});
 
-  // Hemisphere: only lower half, sharing same rim (y ≤ 0)
-  const hemi = brd.create('curve', [
-    t => r * Math.cos(t),
-    t => 0.7 * r * Math.sin(t),   // same vertical scale
-    0, Math.PI                    // from left to right, lower part
-  ], {strokeColor: 'blue', strokeWidth: 2, fillColor: '#90caf9', fillOpacity: 0.6});
+// --- Vertical height of the cone (dashed) ---
+const O = brd.create('point', [0, 0], {visible: false});
+brd.create('segment', [V, O], {strokeColor: 'black', dash: 2});
 
-  // Apex of cone
-  const A = brd.create('point', [0, h], {visible: false});
-  const L = brd.create('point', [-r, 0], {visible: false});
-  const R = brd.create('point', [ r, 0], {visible: false});
+// --- Base radius (dashed) ---
+brd.create('segment', [O, Rp], {strokeColor: 'black', dash: 2});
 
-  // Cone sides
-  brd.create('segment', [A, L], {strokeColor: 'black'});
-  brd.create('segment', [A, R], {strokeColor: 'black'});
-
-  // Height (dashed)
-  const O = brd.create('point', [0, 0], {visible: false});
-  brd.create('segment', [A, O], {strokeColor: 'black', dash: 2});
-
-  // Radius on base (dashed)
-  brd.create('segment', [O, R], {strokeColor: 'black', dash: 2});
-brd.create('segment', [O, L], {strokeColor: 'black', dash: 2});
-
-  // Labels
-  brd.create('text', [0.3, 5, '{#height_of_the_cone#} m'], {anchorX: 'left'});
-  brd.create('text', [-2.5, 0.7, '{#base_radius_of_the_cone#} m'], {anchorX: 'left'});
-  brd.create('text', [-4, 6.5, ' {#slantheight_of_the_cone#} m'], {rotate: -60});
-  
-  /* Semicircle (lower half) */
-    brd.create('curve', [
-        t => r * Math.cos(t),
-        t => -r * Math.sin(t),
-        0, Math.PI
-    ], {
-        strokeWidth: 2,
-        strokeColor: '#1f3c88',
-        fillColor: '#90caf9',
-        fillOpacity: 0.6
-    });
-
+// --- Labels (show the randomised dimensions) ---
+brd.create('text', [0.4, -5,   '{#height_of_the_cone#} cm'],      {anchorX: 'left', fontSize: 14});
+brd.create('text', [2.6, -1.2, '{#base_radius_of_the_cone#} cm'], {anchorX: 'left', fontSize: 14});
+brd.create('text', [3.6, -4.7, '{#slantheight_of_the_cone#} cm'], {anchorX: 'left', fontSize: 14});
 [[/jsxgraph]]
 <p>
-    Determine the total surface area of the sketched ice-cream container.
-  </p>
-<p>\(\text{Total surface area of the ice-cream}=\)[[input:ans1]]\(\,\text{m}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+Take \(\pi=\dfrac{22}{7}\). Determine the total (external) surface area of the ice-cream container, giving your answer to <strong>2 decimal places</strong>.</p>
+<div>\(\text{Total surface area}=\) [[input:ans1]] \(\,\text{cm}^2\) [[validation:ans1]] [[feedback:prt1]]</div>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<p>
-The ice-cream container is made up of two solid shapes:
-</p>
-
-<p>
-• a <strong>cone</strong><br>
-• a <strong>hemisphere</strong>
+The container is made of two solids joined at a circle: a <strong>cone</strong> and a <strong>hemisphere</strong>. Only the <strong>curved surfaces</strong> are exposed; the circular face where the cone and hemisphere meet is inside the solid, so it is not part of the surface area.
 </p>
 <p>
-Only the <strong>curved surfaces</strong> are exposed.  
-The circular face where the cone and hemisphere meet is not included in the surface area.
-</p>
-<p>
-From the diagram:
-</p>
-<p>
-Radius of the cone and hemisphere = {@base_radius_of_the_cone@} m<br>
-Height of the cone = {@height_of_the_cone@} m<br>
-Slant height of the cone = {@slantheight_of_the_cone@} m
+From the diagram, with \(\pi=\dfrac{22}{7}\):<br>
+Radius \(r = {@base_radius_of_the_cone@}\) cm<br>
+Vertical height \(h = {@height_of_the_cone@}\) cm<br>
+Slant height \(l = {@slantheight_of_the_cone@}\) cm
 </p>
 <p><strong>Step 1: Curved surface area of the cone</strong></p>
-
 <p>
-The formula for the curved surface area of a cone is:
-<br>
-\(
-\text{Curved surface area} = \pi r l
-\)
-</p>
-<p>
-Substituting the given values:
-<br>
 \(
 \begin{align}
-\text{Area of cone}
+\text{Curved surface area of cone} &= \pi r l \\
 &= \frac{22}{7} \times {@base_radius_of_the_cone@} \times {@slantheight_of_the_cone@} \\
-&=\frac{22}{7} \times {@R_times_l@}\\
-&= {@Area_cone@}\ \text{m}^2
+&= \frac{22}{7} \times {@R_times_l@} \\
+&= {@Area_cone@}\ \text{cm}^2
 \end{align}
 \)
 </p>
 <p><strong>Step 2: Curved surface area of the hemisphere</strong></p>
 <p>
-The formula for the curved surface area of a hemisphere is:
-<br>
-\(
-\text{Curved surface area} = 2\pi r^2
-\)
-</p>
-<p>
-Substituting the value of the radius:
-<br>
 \(
 \begin{align}
-\text{Area of hemisphere}
+\text{Curved surface area of hemisphere} &= 2 \pi r^2 \\
 &= 2 \times \frac{22}{7} \times ({@base_radius_of_the_cone@})^2 \\
-&=2 \times \frac{22}{7} \times {@R1@}\\
-&={@Hemisphere_area@}\\
-&= {@Hemishere_Area@}\ \text{m}^2
+&= 2 \times \frac{22}{7} \times {@R1@} \\
+&= {@Hemisphere_area@}\ \text{cm}^2
 \end{align}
 \)
 </p>
-<p><strong>Step 3: Total surface area of the ice-cream container</strong></p>
+<p><strong>Step 3: Total surface area</strong></p>
 <p>
-The total surface area is obtained by adding the curved surface area of the cone
-and the curved surface area of the hemisphere.<br>
-
+Keep full accuracy until the last line, then round to 2 decimal places:<br>
 \(
 \begin{align}
-\text{Total surface area}
-&= {@Area_cone@} + {@Hemishere_Area@} \\
-&={@SA@}\\
-&= {@Surface_Area@}\ \text{m}^2
+\text{Total surface area} &= \pi r l + 2\pi r^2 \\
+&= {@Area_cone@} + {@Hemisphere_area@} \\
+&= {@Surface_Area@}\ \text{cm}^2
 \end{align}
 \)
 </p>]]></text>
     </generalfeedback>
-    <defaultgrade>15</defaultgrade>
+    <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/*The triplets of the Triangle.*/
-list_of_the_values:[[3,4,5],[6,8,10],[9,12,15],[5, 12, 13],[7, 24, 25],[8, 15, 17],
-    [9, 40, 41],[11, 60, 61],[12, 35, 37],[13, 84, 85],[16, 63, 65],[20, 21, 29],[33, 56, 65],
-    [36, 77, 85],[39, 80, 89],[48, 55, 73],[60, 91, 109],[65, 72, 97],[80, 99, 121],[15, 20, 25],
-    [35, 72, 85],[36, 77, 85],[39, 80, 89],[72, 24, 72]];
-index:1+rand(24);
+      <text>/* List of Pythagorean triples: [radius, height, slant height] */
+list_of_the_values:[
+    [3,4,5],[6,8,10],[9,12,15],[5,12,13],[7,24,25],[8,15,17],
+    [9,40,41],[11,60,61],[12,35,37],[13,84,85],[16,63,65],
+    [20,21,29],[33,56,65],[36,77,85],[39,80,89],[48,55,73],
+    [60,91,109],[65,72,97],[80,99,121],[15,20,25],[35,72,85],
+    [36,77,85],[39,80,89],[80,84,116]
+];
+
+/* Randomly choose one set of dimensions */
+index:1+rand(length(list_of_the_values));
 choose_one:list_of_the_values[index];
-/*The */
+
 base_radius_of_the_cone:choose_one[1];
 height_of_the_cone:choose_one[2];
 slantheight_of_the_cone:choose_one[3];
-/*Computing the total surface area of the cone.*/
-R_times_l:base_radius_of_the_cone*slantheight_of_the_cone;
 
-/*Curved surface area of the cone*/
-Area:22/7 *R_times_l;
-area_1:float(Area);
-Area_cone:decimalplaces(area_1,3);
+/* Short aliases */
+r:base_radius_of_the_cone;
+l:slantheight_of_the_cone;
+h:height_of_the_cone;
 
-/*Curved surface area of the hemisphere*/
-R1:base_radius_of_the_cone^2;
-Hemisphere_area:2*22/7*base_radius_of_the_cone^2;
-Hemishere_Area:float(Hemisphere_area);
+/* Students are told to use pi = 22/7 */
+mypi:22/7;
 
-/*Total external surface area*/
-SA:area_1+Hemishere_Area;
-Surface_Area:round(SA);</text>
+/* Exact exposed areas: curved cone (pi r l) + curved hemisphere (2 pi r^2) */
+Area_cone_exact:mypi*r*l;
+Hemisphere_exact:2*mypi*r^2;
+SA_exact:Area_cone_exact+Hemisphere_exact;
+
+/* Values rounded to 2 d.p. for display and marking */
+Area_cone:float(round(100*Area_cone_exact)/100);
+Hemisphere_area:float(round(100*Hemisphere_exact)/100);
+Surface_Area:float(round(100*SA_exact)/100);
+
+/* Worked-solution helpers */
+R_times_l:r*l;
+R1:r^2;
+
+/* ----------------------------------------------------------- */
+/* Common student mistakes (rounded to 2 d.p. to match marking) */
+/* ----------------------------------------------------------- */
+
+/* Mistake 1: used the surface area of a whole sphere (4 pi r^2)
+   instead of a hemisphere (2 pi r^2) */
+sphere_mistake:float(round(100*(Area_cone_exact + 4*mypi*r^2))/100);
+
+/* Mistake 2: included the cone's circular base (pi r^2) */
+fullcone_mistake:float(round(100*(Area_cone_exact + mypi*r^2 + Hemisphere_exact))/100);
+
+/* Mistake 3: found the VOLUME of the solid instead of the surface area:
+   (1/3) pi r^2 h  +  (2/3) pi r^3 */
+volume_mistake:float(round(100*( (1/3)*mypi*r^2*h + (2/3)*mypi*r^3 ))/100);</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>\(\text{The dimension of the Ice cream are}\)</p>
-<p>\(\text{Radius}={@base_radius_of_the_cone@}\,\text{m}\)</p>
-<p>\(\text{The vertical height}={@height_of_the_cone@}\,\text{m}\)</p>
-<p>\(\text{The slant height}={@slantheight_of_the_cone@}\,\text{m}\)</p>
-<p>\(\text{The total surface area}={@Surface_Area@}^2\,\text{m}\)</p>]]></text>
+      <text><![CDATA[<p>\(r={@base_radius_of_the_cone@}\) cm, \(h={@height_of_the_cone@}\) cm, \(l={@slantheight_of_the_cone@}\) cm; total surface area \(={@Surface_Area@}\ \text{cm}^2\).</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -224,7 +196,7 @@ Surface_Area:round(SA);</text>
     <variantsselectionseed/>
     <input>
       <name>ans1</name>
-      <type>algebraic</type>
+      <type>numerical</type>
       <tans>Surface_Area</tans>
       <boxsize>7</boxsize>
       <strictsyntax>1</strictsyntax>
@@ -233,11 +205,11 @@ Surface_Area:round(SA);</text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <prt>
@@ -250,27 +222,103 @@ Surface_Area:round(SA);</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description>Checks for the correct answer.</description>
-        <answertest>AlgEquiv</answertest>
+        <description>Correct total surface area (to 2 d.p.).</description>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>Surface_Area</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt1-1-T</trueanswernote>
+        <trueanswernote>prt1-correct</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Used the surface area of a whole sphere instead of a hemisphere.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>sphere_mistake</tans>
+        <testoptions>0.5</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-sphere</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have used the curved surface area of a whole sphere, \(4\pi r^2\). Only the exposed <strong>hemisphere</strong> should be included, and the circular face where it meets the cone is internal, so it is not counted.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Included the circular base of the cone.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>fullcone_mistake</tans>
+        <testoptions>0.5</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-base</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have included the circular base of the cone, \(\pi r^2\). Because the cone is joined to the hemisphere at that circle, the face is internal and is not part of the external surface area. Use only the <strong>curved</strong> surface of the cone, plus the curved part of the hemisphere.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Found the volume of the solid instead of the surface area.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>volume_mistake</tans>
+        <testoptions>0.5</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-volume</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you have found the <strong>volume</strong> of the container, \(\tfrac{1}{3}\pi r^2 h + \tfrac{2}{3}\pi r^3\), rather than its surface area. Volume measures the space inside (in \(\text{cm}^3\)); here you need the <strong>area</strong> of the outside surface (in \(\text{cm}^2\)).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-other</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite. The external surface is the <strong>curved</strong> surface of the cone plus the <strong>curved</strong> surface of the hemisphere:</p>
+<p>Use \(\pi=\tfrac{22}{7}\) and give your answer to 2 decimal places.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -286,7 +334,7 @@ Surface_Area:round(SA);</text>
     <deployedseed>264638322</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>Correct answer (to 2 d.p.) gets full marks.</description>
       <testinput>
         <name>ans1</name>
         <value>Surface_Area</value>
@@ -295,21 +343,63 @@ Surface_Area:round(SA);</text>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>prt1-correct</expectedanswernote>
       </expected>
     </qtest>
     <qtest>
       <testcase>2</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>Whole-sphere mistake is diagnosed and scores 0.</description>
       <testinput>
         <name>ans1</name>
-        <value>Surface_Area</value>
+        <value>sphere_mistake</value>
       </testinput>
       <expected>
         <name>prt1</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-sphere</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>Including the cone's base is diagnosed and scores 0.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>fullcone_mistake</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-base</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>4</testcase>
+      <description>An unrecognised wrong answer falls through to the general hint.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>0</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-other</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>5</testcase>
+      <description>Finding the volume instead of the surface area is diagnosed and scores 0.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>volume_mistake</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-volume</expectedanswernote>
       </expected>
     </qtest>
   </question>

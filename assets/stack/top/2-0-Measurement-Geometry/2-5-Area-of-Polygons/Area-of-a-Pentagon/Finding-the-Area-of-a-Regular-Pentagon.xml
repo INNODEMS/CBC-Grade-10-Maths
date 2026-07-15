@@ -182,7 +182,7 @@ area_triangle_d : decimalplaces(area_triangle, 1);
 /* Area of pentagon */
 area_pentagon : 5 * area_triangle;
 ta_exact : decimalplaces(area_pentagon, 1);
-ta : round(area_pentagon);
+ta1: round(area_pentagon);
 
 /* ---------- Randomised mistake generation (NO conditionals) ---------- */
 
@@ -214,47 +214,7 @@ feedback : mistake_feedback[mistake_number];
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p><strong>Purpose of the question</strong></p>
-
-<p>
-This question assesses students’ ability to calculate the area of a regular pentagon by
-decomposing it into five congruent isosceles triangles with a common centre.
-The emphasis is on correct geometric reasoning rather than memorisation of a single formula.
-</p>
-
-<p><strong>Mathematical approach</strong></p>
-
-<p>
-Students are expected to recognise that the pentagon can be split into five identical triangles,
-each with base equal to the side length of the pentagon and height obtained by dropping a
-perpendicular from the centre to the base.
-The perpendicular height must be calculated using Pythagoras’ theorem.
-</p>
-
-<p><strong>Use of the diagram</strong></p>
-
-<ul>
-  <li>The JSXGraph figure is centred at \(O\) and is provided to support visualisation.</li>
-  <li>The slanted sides represent the distance from the centre to a vertex.</li>
-  <li>The dashed segment represents the perpendicular height used in the area calculation.</li>
-  <li>The diagram is illustrative only and is not used for validation.</li>
-</ul>
-
-<p><strong>Design choices</strong></p>
-
-<ul>
-  <li>All values are generated to ensure a valid right triangle.</li>
-  <li>No conditional statements are used in the question variables.</li>
-  <li>Common incorrect strategies are anticipated and handled in the PRT.</li>
-</ul>
-
-<p><strong>Common student difficulties</strong></p>
-
-<ul>
-  <li>Using the slanted side instead of the perpendicular height.</li>
-  <li>Using half the base as the height.</li>
-  <li>Calculating the area of only one triangle and forgetting to multiply by five.</li>
-</ul>]]></text>
+      <text>{@ta1@}</text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Monica Sherily</p>
@@ -287,7 +247,7 @@ The perpendicular height must be calculated using Pythagoras’ theorem.
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>ta</tans>
+      <tans>ta1</tans>
       <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -336,5 +296,75 @@ The perpendicular height must be calculated using Pythagoras’ theorem.
         </falsefeedback>
       </node>
     </prt>
+    <deployedseed>404107258</deployedseed>
+    <deployedseed>1208046095</deployedseed>
+    <deployedseed>1852468895</deployedseed>
+    <deployedseed>936331563</deployedseed>
+    <deployedseed>346189755</deployedseed>
+    <deployedseed>1835566648</deployedseed>
+    <deployedseed>764251822</deployedseed>
+    <deployedseed>664016470</deployedseed>
+    <deployedseed>1480651678</deployedseed>
+    <deployedseed>411788114</deployedseed>
+    <deployedseed>403306236</deployedseed>
+    <deployedseed>869316976</deployedseed>
+    <deployedseed>584605846</deployedseed>
+    <deployedseed>2017442244</deployedseed>
+    <deployedseed>495128563</deployedseed>
+    <deployedseed>1619283471</deployedseed>
+    <deployedseed>1522795602</deployedseed>
+    <deployedseed>1825102366</deployedseed>
+    <deployedseed>847770146</deployedseed>
+    <deployedseed>2033574599</deployedseed>
+    <deployedseed>156356757</deployedseed>
+    <deployedseed>80755900</deployedseed>
+    <deployedseed>1727800016</deployedseed>
+    <deployedseed>1784772340</deployedseed>
+    <deployedseed>1728945908</deployedseed>
+    <deployedseed>996935779</deployedseed>
+    <deployedseed>2035715110</deployedseed>
+    <deployedseed>1996445353</deployedseed>
+    <deployedseed>1361983137</deployedseed>
+    <deployedseed>492746565</deployedseed>
+    <deployedseed>833061516</deployedseed>
+    <deployedseed>1027625165</deployedseed>
+    <deployedseed>1302030072</deployedseed>
+    <deployedseed>523245577</deployedseed>
+    <deployedseed>1453999703</deployedseed>
+    <deployedseed>1832362477</deployedseed>
+    <deployedseed>1994607854</deployedseed>
+    <deployedseed>1344438466</deployedseed>
+    <deployedseed>1252482131</deployedseed>
+    <deployedseed>1863638755</deployedseed>
+    <deployedseed>2118616108</deployedseed>
+    <deployedseed>1633665723</deployedseed>
+    <deployedseed>2100004262</deployedseed>
+    <deployedseed>1323253132</deployedseed>
+    <deployedseed>924467589</deployedseed>
+    <deployedseed>241372917</deployedseed>
+    <deployedseed>1607815998</deployedseed>
+    <deployedseed>1531409858</deployedseed>
+    <deployedseed>146774169</deployedseed>
+    <deployedseed>799075935</deployedseed>
+    <deployedseed>1915410360</deployedseed>
+    <deployedseed>1522736089</deployedseed>
+    <deployedseed>1764458293</deployedseed>
+    <deployedseed>2089082964</deployedseed>
+    <deployedseed>1287238881</deployedseed>
+    <deployedseed>1186616084</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>

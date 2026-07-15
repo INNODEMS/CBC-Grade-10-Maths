@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Surface area of a storage box, made of a hemisphere and a cylinder</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A designer is creating a decorative storage container by joining a hemisphere to the top of a cylinder, as shown below.
+</p>
+
+[[jsxgraph]]
+const brd = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-10, 10, 10, -12],
+    axis: false,
+    showNavigation: false,
+    showCopyright: false,
+    keepAspectRatio: true
+});
+
+const r = 4;      // schematic radius
+const h = 8;      // schematic cylinder height
+const k = 0.30;   // ellipse squash factor
+
+// ---------- Cylinder ----------
+
+// Cylinder sides
+const L1 = brd.create('point', [-r,-h], {visible:false});
+const L2 = brd.create('point', [-r,0],  {visible:false});
+const R1 = brd.create('point', [ r,-h], {visible:false});
+const R2 = brd.create('point', [ r,0],  {visible:false});
+
+brd.create('segment',[L1,L2],{
+    strokeColor:'black',
+    strokeWidth:2
+});
+
+brd.create('segment',[R1,R2],{
+    strokeColor:'black',
+    strokeWidth:2
+});
+
+// Bottom ellipse
+brd.create('curve',[
+    t => r*Math.cos(t),
+    t => -h + k*r*Math.sin(t),
+    0,2*Math.PI
+],{
+    strokeColor:'black',
+    strokeWidth:1.5
+});
+
+// Top join ellipse (visible front)
+brd.create('curve',[
+    t => r*Math.cos(t),
+    t => k*r*Math.sin(t),
+    0,Math.PI
+],{
+    strokeColor:'black',
+    strokeWidth:1.5
+});
+
+// Top join ellipse (hidden back)
+brd.create('curve',[
+    t => r*Math.cos(t),
+    t => k*r*Math.sin(t),
+    Math.PI,2*Math.PI
+],{
+    strokeColor:'black',
+    strokeWidth:1,
+    dash:2
+});
+
+// ---------- Hemisphere ----------
+
+// Hemisphere dome
+brd.create('curve',[
+    t => r*Math.cos(t),
+    t => r*Math.sin(t),
+    0,Math.PI
+],{
+    strokeColor:'#1f3c88',
+    strokeWidth:2,
+    fillColor:'#90caf9',
+    fillOpacity:0.5
+});
+
+// ---------- Dimension lines ----------
+
+// Radius
+const O = brd.create('point',[0,-h],{visible:false});
+const Rad = brd.create('point',[r,-h],{visible:false});
+
+brd.create('segment',[O,Rad],{
+    dash:2
+});
+
+brd.create('text',[
+    r/2,
+    -h-1,
+    '{#radius#} cm'
+]);
+
+// Height
+const H1 = brd.create('point',[-6,0],{visible:false});
+const H2 = brd.create('point',[-6,-h],{visible:false});
+
+brd.create('segment',[H1,H2],{
+    strokeWidth:1,
+    dash:2
+});
+
+brd.create('text',[
+    -8,
+    -h/2,
+    '{#height#} cm'
+]);
+
+[[/jsxgraph]]
+
+<p>
+The cylinder has:
+</p>
+
+<ul>
+<li>radius <b>{@radius@} cm</b></li>
+<li>height <b>{@height@} cm</b></li>
+</ul>
+
+
+<p>
+Calculate the total external surface area of the container. Use \(\pi=\frac{22}{7}\).
+</p>
+
+<p>
+[[input:ans1]]\(\text{cm}^2\)  [[feedback:prt1]]
+</p>
+<p>[[validation:ans1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Solution</h3>
+
+<p>
+To calculate the total external surface area of the composite solid, identify only the surfaces that are exposed.
+</p>
+
+<ul>
+<li>Curved surface area of the cylinder:
+\[
+2\pi rh
+\]
+</li>
+
+<li>Curved surface area of the hemisphere:
+\[
+2\pi r^2
+\]
+</li>
+
+<li>Circular base of the cylinder:
+\[
+\pi r^2
+\]
+</li>
+</ul>
+
+<p>
+The circular face where the hemisphere joins the cylinder is inside the solid and is <strong>not</strong> part of the external surface area.
+</p>
+
+<p>
+Therefore,
+</p>
+
+\[
+\begin{aligned}
+\text{Total Surface Area}
+&=2\pi rh+2\pi r^2+\pi r^2\\
+&=2\pi rh+3\pi r^2.
+\end{aligned}
+\]
+
+<p>
+Substituting
+\[
+r={@radius@}\text{ cm},\qquad
+h={@height@}\text{ cm}
+\]
+
+gives
+
+\[
+2\times\frac{22}{7}\times {@radius@}\times {@height@}
++
+3\times\frac{22}{7}\times {@radius@}^2
+=
+{@Total_surface_area@}\text{ cm}^2.
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* List of dimensions: [radius, height] */
+list_of_the_values:[
+    [3,8],[4,10],[5,12],[6,15],[7,16],
+    [8,20],[9,24],[10,25],[12,30],[15,36],
+    [16,40],[18,45],[20,48],[24,60],[25,64]
+];
+
+/* Randomly select one set of dimensions */
+index:1+rand(length(list_of_the_values));
+choose_one:list_of_the_values[index];
+
+radius:choose_one[1];
+height:choose_one[2];
+
+/* Use π ≈ 22/7 */
+pi_value:22/7;
+
+/* Surface areas */
+Cylinder_curved_area:2*pi_value*radius*height;
+Hemisphere_curved_area:2*pi_value*radius^2;
+Cylinder_base_area:pi_value*radius^2;
+
+/* Correct total external surface area */
+Total_surface_area:round(Cylinder_curved_area + Hemisphere_curved_area + Cylinder_base_area);
+
+
+/* Common student misconceptions */
+
+/* Uses sphere instead of hemisphere */
+Sphere_mistake:round(Cylinder_curved_area+4*pi_value*radius^2+Cylinder_base_area);
+
+/* Omits the cylinder base */
+No_base_mistake:round(Cylinder_curved_area+Hemisphere_curved_area);
+
+/* Includes both circular bases of the cylinder */
+Two_bases_mistake:round(Cylinder_curved_area +Hemisphere_curved_area + 2*Cylinder_base_area);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta1@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>Total_surface_area</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Calculating of the correct surface area</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>Total_surface_area</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>180490832</deployedseed>
+  </question>
+</quiz>

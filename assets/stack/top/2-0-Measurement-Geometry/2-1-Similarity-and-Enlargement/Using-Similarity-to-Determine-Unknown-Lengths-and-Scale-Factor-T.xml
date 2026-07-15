@@ -2,45 +2,68 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Classifying primary and secondary data</text>
+      <text>Using Similarity to Determine Unknown Lengths and Scale Factor Test</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Classify each of the following data collection activities as either <strong>Primary Data</strong> or <strong>Secondary Data</strong>:</p>
+      <text><![CDATA[<p>In the diagram shown below, triangle \(OA'B'\) is an enlargement of triangle \(OAB\). </p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+    boundingbox: [-12, 10, 4, -4],
+    axis: false,
+    pan: { enabled: false },
+    zoom: { enabled: false },
+    showNavigation: false
+});
 
-<div class="card mb-3">
-  <div class="card-body">
-    <p><strong>(a)</strong> {@scen_1@}</p>
-    [[input:ans1]] [[validation:ans1]][[feedback:prt1]]
-  </div>
-</div>
+/* === Static points (not to scale) === */
+var O  = board.create('point', [0,0], {name:'O', fixed:true, size:2});
+var A  = board.create('point', [-4,0], {name:'A', fixed:true, visible:false}); // invisible
+var B  = board.create('point', [-4,3], {name:'B', fixed:true, visible:false}); // invisible
+var A1 = board.create('point', [-8,0], {name:"A'", fixed:true, size:2});
+var B1 = board.create('point', [-8,6], {name:"B'", fixed:true, size:2});
 
-<div class="card mb-3">
-  <div class="card-body">
-    <p><strong>(b)</strong> {@scen_2@}</p>
-    [[input:ans2]] [[validation:ans2]][[feedback:prt2]]
-  </div>
-</div>
+/* === Draw edges === */
+function edge(P1,P2){ return board.create('segment',[P1,P2],{strokeWidth:2,fixed:true}); }
+edge(O,A); edge(A,B); edge(B,O);         // Original triangle
+edge(O,A1); edge(A1,B1); edge(B1,O);     // Enlarged triangle
+edge(A,A1); edge(B,B1);                   // Connectors
 
-<div class="card mb-3">
-  <div class="card-body">
-    <p><strong>(c)</strong> {@scen_3@}</p>
-    [[input:ans3]] [[validation:ans3]][[feedback:prt3]]
-  </div>
-</div>
+/* === Labels with just numbers === */
+// Original triangle
+board.create('text', [() => (O.X()+A.X())/2, () => (O.Y()+A.Y())/2 - 0.3, "{#OA#} cm"]);
+board.create('text', [() => (A.X()+B.X())/2, () => (A.Y()+B.Y())/2 + 0.3, "{#AB#} cm"]);
+board.create('text', [() => (O.X()+B.X())/2, () => (O.Y()+B.Y())/2 + 0.3, "{#OB#} cm"]);
 
-<div class="card mb-3">
-  <div class="card-body">
-    <p><strong>(d)</strong> {@scen_4@}</p>
-    [[input:ans4]] [[validation:ans4]][[feedback:prt4]]
-  </div>
-</div>]]></text>
+// Enlarged triangle
+board.create('text', [() => (O.X()+A1.X())/2, () => (O.Y()+A1.Y())/2 - 0.3, "A"]);
+board.create('text', [() => (O.X()+B1.X())/2, () => (O.Y()+B1.Y())/2 + 0.3, "B"]);
+
+// Connector BB'
+board.create('text', [() => (B.X()+B1.X())/2, () => (B.Y()+B1.Y())/2 + 0.3, "{#BB1#} cm"]);
+
+/* Prevent interaction */
+board.renderer.svgRoot.style.pointerEvents = "none";
+[[/jsxgraph]]
+
+<p>(a). Identify the centre of enlargement.</p>
+<p>[[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p>
+<p>(b). Find the scale factor of the enlargement.</p>
+<p>[[input:ans2]] [[validation:ans2]][[feedback:prt2]]</p>
+<p>(c). Calculate the lengths of</p>
+  <p>  (i). \(A'B'\) [[input:ans3]] cm[[validation:ans3]][[feedback:prt3]]
+             </p>
+  <p>  (ii). \(OA'\) [[input:ans4]] cm[[validation:ans4]][[feedback:prt4]]
+             </p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked solution</h3>
-<ul>
-    <li><strong>Primary Data:</strong> This is data that you collect <em>yourself</em> for a specific purpose. It is "fresh" and original. (Examples: Counting cars, interviewing people, measuring height).</li>
-    <li><strong>Secondary Data:</strong> This is data that <em>someone else</em> has already collected. You are just using it. (Examples: Census reports, newspaper articles, textbooks, internet searches).</li>
-</ul>]]></text>
+<p>(a).The centre of enlargement is \(O\).</p>
+<p>(b). Scale factor = \(\frac {OB'}{OB} = \frac{{@OB1@}}{{@OB@}} = {@K@}\)</p>
+<p>(c). (i). \(\frac{OB'}{OB} = \frac{A'B'}{AB} \Rightarrow \frac{{@OB1@}}{{@OB@}} = \frac{A'B'}{{@AB@}}\)</p>
+<p>\(\quad \quad \quad \quad A'B'= \frac{{@AB@}\times{@OB1@}}{{@AB@}}={@ta2@}\) cm</p>
+
+<p> (ii). \(\frac{OB'}{OB} = \frac{OA'}{OA} \Rightarrow \frac{{@OB1@}}{{@OB@}} = \frac{OA'}{{@OA@}}\)</p>
+<p>\(\quad \quad \quad \quad OA'= \frac{{@OB1@}\times{@OA@}}{{@OB@}}={@ta3@}\) cm</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -50,99 +73,28 @@
       <text>2025073100</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[/* --- SCENARIO POOLS --- */
+      <text><![CDATA[ta:[["O", true],["B", false],["A'", false],["B'", false]];
 
-/* List of Primary Data Scenarios (Collection) */
-pool_primary: [
-    "You stand at the school gate and count the number of cars passing by.",
-    "You interview 20 students to ask them about their favorite lunch meal.",
-    "You measure the height of every seedling in your agriculture plot yourself.",
-    "You conduct a science experiment to see how fast ice melts.",
-    "You hand out a questionnaire to your neighbors about water usage."
-];
-
-/* List of Secondary Data Scenarios (Existing Sources) */
-pool_secondary: [
-    "You look up the population of Kenya in the 2019 Census report.",
-    "You read a newspaper article to find out yesterday's football scores.",
-    "You use a graph from a textbook to analyze rainfall patterns from 1990.",
-    "You search the internet for the current exchange rate of the Dollar.",
-    "You analyze patient records from a hospital archive for a history project."
-];
-
-/* --- SELECTION & RANDOMIZATION --- */
-
-/* Select 4 unique scenarios: 2 Primary and 2 Secondary to ensure balance */
-/* We shuffle the pools first to get random ones */
-shuffled_p: random_permutation(pool_primary);
-shuffled_s: random_permutation(pool_secondary);
-
-/* Assign scenarios to the 4 parts (a, b, c, d) */
-/* We mix the order: P, S, S, P or similar. Let's do P, S, P, S for simplicity in coding, but we can randomize the display order if needed. */
-/* Here I map them explicitly to variables for clarity */
-
-scen_1: shuffled_p[1]; /* Primary */
-scen_2: shuffled_s[1]; /* Secondary */
-scen_3: shuffled_p[2]; /* Primary */
-scen_4: shuffled_s[2]; /* Secondary */
-
-
-/* --- 1. SETUP FOR PART A (Primary) --- */
-correct_text_1: "Primary Data";
-wrong_text_1: "Secondary Data";
-
-/* Build the list using your format */
-correct_ans_1: rand_selection([[1, true, correct_text_1]], 1);
-wrong_ans_1: rand_selection([[2, false, wrong_text_1]], 1);
-
-ta_1: random_permutation(append(correct_ans_1, wrong_ans_1));
-final_options_1: map(third, ta_1);
-
-
-/* --- 2. SETUP FOR PART B (Secondary) --- */
-correct_text_2: "Secondary Data";
-wrong_text_2: "Primary Data";
-
-correct_ans_2: rand_selection([[1, true, correct_text_2]], 1);
-wrong_ans_2: rand_selection([[2, false, wrong_text_2]], 1);
-
-ta_2: random_permutation(append(correct_ans_2, wrong_ans_2));
-final_options_2: map(third, ta_2);
-
-
-/* --- 3. SETUP FOR PART C (Primary) --- */
-correct_text_3: "Primary Data";
-wrong_text_3: "Secondary Data";
-
-correct_ans_3: rand_selection([[1, true, correct_text_3]], 1);
-wrong_ans_3: rand_selection([[2, false, wrong_text_3]], 1);
-
-ta_3: random_permutation(append(correct_ans_3, wrong_ans_3));
-final_options_3: map(third, ta_3);
-
-
-/* --- 4. SETUP FOR PART D (Secondary) --- */
-correct_text_4: "Secondary Data";
-wrong_text_4: "Primary Data";
-
-correct_ans_4: rand_selection([[1, true, correct_text_4]], 1);
-wrong_ans_4: rand_selection([[2, false, wrong_text_4]], 1);
-
-ta_4: random_permutation(append(correct_ans_4, wrong_ans_4));
-final_options_4: map(third, ta_4);]]></text>
+OB:rand(10)+2;
+OA:rand_with_prohib(2,5,[OB]);
+K:rand([2,3,4,5]);
+OB1:K*OB;
+AB:rand_with_prohib(2,5,[OB,OA]);
+OA1:K*OA;
+BB1:OB1-OB;
+ta1:K;
+ta2:K*AB;
+ta3:OA1;]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@1@}</text>
+      <text><![CDATA[<p>\(A'B'\) = {@ta2@}</p>
+<p>\(OA'\) = {@ta3@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
-      <text><![CDATA[<p id="author">Daniel Murunga</p>
-<p id="concept"></p>
-<p id="reviewer"></p>
-<p id="reviewer"></p>
-<p id="description">In this classification question, students are presented with four randomized real-world research scenarios (e.g., conducting an experiment vs. reading a government report). They must identify whether each activity represents <strong>Primary Data</strong> collection or <strong>Secondary Data</strong> collection.</p>]]></text>
+      <text/>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -169,7 +121,7 @@ final_options_4: map(third, ta_4);]]></text>
     <input>
       <name>ans1</name>
       <type>dropdown</type>
-      <tans>ta_1</tans>
+      <tans>ta</tans>
       <boxsize>15</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -182,13 +134,13 @@ final_options_4: map(third, ta_4);]]></text>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
       <showvalidation>3</showvalidation>
-      <options/>
+      <options>shuffle</options>
     </input>
     <input>
       <name>ans2</name>
-      <type>dropdown</type>
-      <tans>ta_2</tans>
-      <boxsize>15</boxsize>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>5</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -204,9 +156,9 @@ final_options_4: map(third, ta_4);]]></text>
     </input>
     <input>
       <name>ans3</name>
-      <type>dropdown</type>
-      <tans>ta_3</tans>
-      <boxsize>15</boxsize>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>5</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -222,9 +174,9 @@ final_options_4: map(third, ta_4);]]></text>
     </input>
     <input>
       <name>ans4</name>
-      <type>dropdown</type>
-      <tans>ta_4</tans>
-      <boxsize>15</boxsize>
+      <type>algebraic</type>
+      <tans>ta3</tans>
+      <boxsize>5</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -249,9 +201,9 @@ final_options_4: map(third, ta_4);]]></text>
       <node>
         <name>0</name>
         <description/>
-        <answertest>AlgEquiv</answertest>
+        <answertest>EqualComAss</answertest>
         <sans>ans1</sans>
-        <tans>mcq_correct(ta_1)[1]</tans>
+        <tans>mcq_correct(ta)[1]</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -274,7 +226,7 @@ final_options_4: map(third, ta_4);]]></text>
     </prt>
     <prt>
       <name>prt2</name>
-      <value>1.0000000</value>
+      <value>2.0000000</value>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
@@ -285,7 +237,7 @@ final_options_4: map(third, ta_4);]]></text>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans2</sans>
-        <tans>mcq_correct(ta_2)[1]</tans>
+        <tans>ta1</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -308,7 +260,7 @@ final_options_4: map(third, ta_4);]]></text>
     </prt>
     <prt>
       <name>prt3</name>
-      <value>1.0000000</value>
+      <value>3.0000000</value>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
@@ -319,7 +271,7 @@ final_options_4: map(third, ta_4);]]></text>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans3</sans>
-        <tans>mcq_correct(ta_3)[1]</tans>
+        <tans>ta2</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -342,7 +294,7 @@ final_options_4: map(third, ta_4);]]></text>
     </prt>
     <prt>
       <name>prt4</name>
-      <value>1.0000000</value>
+      <value>4.0000000</value>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
@@ -353,7 +305,7 @@ final_options_4: map(third, ta_4);]]></text>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans4</sans>
-        <tans>mcq_correct(ta_4)[1]</tans>
+        <tans>ta3</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -374,25 +326,44 @@ final_options_4: map(third, ta_4);]]></text>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>660633</deployedseed>
+    <deployedseed>842258310</deployedseed>
+    <deployedseed>898158260</deployedseed>
+    <deployedseed>313475464</deployedseed>
+    <deployedseed>1222965442</deployedseed>
+    <deployedseed>1093556149</deployedseed>
+    <deployedseed>275363241</deployedseed>
+    <deployedseed>335671725</deployedseed>
+    <deployedseed>974834232</deployedseed>
+    <deployedseed>631992674</deployedseed>
+    <deployedseed>160309941</deployedseed>
+    <deployedseed>1155744774</deployedseed>
+    <deployedseed>1731449008</deployedseed>
+    <deployedseed>979266588</deployedseed>
+    <deployedseed>422670948</deployedseed>
+    <deployedseed>981099574</deployedseed>
+    <deployedseed>693395756</deployedseed>
+    <deployedseed>1899989681</deployedseed>
+    <deployedseed>996243196</deployedseed>
+    <deployedseed>1269531791</deployedseed>
+    <deployedseed>1542588172</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>first(mcq_correct(ta_1))</value>
+        <value>first(mcq_correct(ta))</value>
       </testinput>
       <testinput>
         <name>ans2</name>
-        <value>first(mcq_correct(ta_2))</value>
+        <value>ta1</value>
       </testinput>
       <testinput>
         <name>ans3</name>
-        <value>first(mcq_correct(ta_3))</value>
+        <value>ta2</value>
       </testinput>
       <testinput>
         <name>ans4</name>
-        <value>first(mcq_correct(ta_4))</value>
+        <value>ta3</value>
       </testinput>
       <expected>
         <name>prt1</name>

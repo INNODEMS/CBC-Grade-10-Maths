@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Reflection and tessellation - predict the fish colour (Escher)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Inspired by artist <a href="https://mcescher.com/gallery/symmetry/#iLightbox[gallery_image_1]/99">M.C Escher's drawings</a>, in the diagram below four mirrors (blue dashed) at \(x=\pm m\) and \(y=\pm k\) surround four coloured fish.  Press <strong>Reflect</strong> to reflect everything across the four walls. It stops <em>one reflection short</em> of the green target \(\times\): the fish that will cover the target is not drawn.</p>
+<p><strong>What colour will the fish be that covers the target \(\times\) on the next reflection?</strong></p>
+[[jsxgraph height='560px' width='560px']]
+var b = JXG.JSXGraph.initBoard(divid, {
+  boundingbox:[-11, 11, 11, -11], axis:true, grid:false,
+  showCopyright:false, showNavigation:false, keepaspectratio:true
+});
+
+var px = {#px#}, py = {#py#}, fx = {#fx#}, fy = {#fy#}, bs = {#bs#}, br = {#br#};
+var fs = 0.6, ex = 0.8, ey = 0.16;
+var qx = px + fs*ex, qy = py + fs*ey;
+var Lmax = {#maxlevel#};   // reflect cap: one short of the target
+var level = 0;
+
+// opaque panel behind the sliders
+b.create('polygon', [[-10.3,-8.5],[-0.5,-8.5],[-0.5,-10.4],[-10.3,-10.4]],
+  {fillColor:'#eef1f4', fillOpacity:0.85, layer:6, fixed:true, highlight:false,
+   borders:{strokeColor:'#9aa7b1', strokeWidth:1}, vertices:{visible:false}});
+
+// the two sliders (exploration only)
+var m = b.create('slider', [[-9.9,-9.0],[-3.6,-9.0],[1, 2, 3]], {name:'m', snapWidth:0.05, digits:2});
+var k = b.create('slider', [[-9.9,-9.9],[-3.6,-9.9],[1, 2, 3]], {name:'k', snapWidth:0.05, digits:2});
+
+// lightly shaded fundamental box [-m,m] x [-k,k]
+var bx = [
+  b.create('point',[function(){return -m.Value();},function(){return -k.Value();}],{visible:false,fixed:true}),
+  b.create('point',[function(){return  m.Value();},function(){return -k.Value();}],{visible:false,fixed:true}),
+  b.create('point',[function(){return  m.Value();},function(){return  k.Value();}],{visible:false,fixed:true}),
+  b.create('point',[function(){return -m.Value();},function(){return  k.Value();}],{visible:false,fixed:true})
+];
+b.create('polygon', bx, {fillColor:'#1f6feb', fillOpacity:0.06, layer:0, fixed:true,
+  highlight:false, borders:{visible:false}, vertices:{visible:false}});
+
+// the four mirror lines x = +-m, y = +-k
+function vLine(sg){
+  var p1=b.create('point',[function(){return sg*m.Value();},-40],{visible:false,fixed:true});
+  var p2=b.create('point',[function(){return sg*m.Value();}, 40],{visible:false,fixed:true});
+  b.create('line',[p1,p2],{strokeColor:'#1f6feb',strokeWidth:1.5,dash:2,layer:1,
+    straightFirst:true,straightLast:true,fixed:true,highlight:false});
+}
+function hLine(sg){
+  var p1=b.create('point',[-40,function(){return sg*k.Value();}],{visible:false,fixed:true});
+  var p2=b.create('point',[ 40,function(){return sg*k.Value();}],{visible:false,fixed:true});
+  b.create('line',[p1,p2],{strokeColor:'#1f6feb',strokeWidth:1.5,dash:2,layer:1,
+    straightFirst:true,straightLast:true,fixed:true,highlight:false});
+}
+vLine(1); vLine(-1); hLine(1); hLine(-1);
+
+// fish motif
+var FX = [1.35,1.1,0.6,0.32,0.08,-0.05,-0.5,-1.15,-0.72,-1.15,-0.5,-0.05,0.08,0.32,0.6,1.1,1.35];
+var FY = [0.0,0.25,0.36,0.68,0.66,0.44,0.46,0.82,0.0,-0.82,-0.46,-0.44,-0.66,-0.68,-0.36,-0.25,0.0];
+var PAL = ['#d64545', '#f0a848', '#3a8f8f', '#cee1aa'];
+
+function fishAt(epsx, epsy, s, r){
+  var lvl = Math.abs(s) + Math.abs(r);
+  var hx = ((((s % 2) + 2) % 2) + (epsx === -1 ? 1 : 0)) % 2;
+  var hy = ((((r % 2) + 2) % 2) + (epsy === -1 ? 1 : 0)) % 2;
+  var ci = 2*hx + hy;
+  var cur = b.create('curve', [[0],[0]], {fillColor:PAL[ci], fillOpacity:0.9,
+    strokeColor:'#2f2417', strokeWidth:1, layer:2, fixed:true, highlight:false,
+    visible:function(){ return lvl <= level; }});
+  cur.updateDataArray = function(){
+    if (lvl > level){ this.dataX = []; this.dataY = []; return; }
+    var mm=m.Value(), kk=k.Value(), Ex=epsx*qx+2*mm*s, Ey=epsy*qy+2*kk*r, X=[], Y=[], i;
+    for (i = 0; i < FX.length; i++){
+      X.push(Ex + epsx*fs*(FX[i]-ex));
+      Y.push(Ey + epsy*fs*(FY[i]-ey));
+    }
+    this.dataX = X; this.dataY = Y;
+  };
+  b.create('point', [
+    function(){ return epsx*qx + 2*m.Value()*s; },
+    function(){ return epsy*qy + 2*k.Value()*r; }
+  ], {size:1.5, strokeColor:'#111', fillColor:'#111', layer:3, fixed:true,
+      highlight:false, withLabel:false, visible:function(){ return lvl <= level; }});
+}
+var sgn = [1, -1];
+for (var a = 0; a < 2; a++){
+  for (var c = 0; c < 2; c++){
+    for (var s = -Lmax; s <= Lmax; s++){
+      for (var r = -Lmax; r <= Lmax; r++){
+        if (Math.abs(s) + Math.abs(r) <= Lmax) fishAt(sgn[a], sgn[c], s, r);
+      }
+    }
+  }
+}
+
+// target: rides with the sliders, on the eye of the hidden fish (bs,br,fx,fy)
+b.create('point', [
+  function(){ return fx*qx + 2*m.Value()*bs; },
+  function(){ return fy*qy + 2*k.Value()*br; }
+], {name:'target', size:8, face:'x', strokeWidth:5, layer:8,
+  strokeColor:'#0b8043', fixed:true, highlight:false,
+  label:{offset:[10, 10], anchorX:'left', fontSize:15, strokeColor:'#0b8043'}});
+
+// big Reflect / Reset controls (visual only) + level read-out
+var refBtn = b.create('button', [-9.9, 9.9, 'Reflect', function(){ if (level < Lmax){ level++; b.update(); } }]);
+var resBtn = b.create('button', [-4.6, 9.9, 'Reset',   function(){ level = 0; b.update(); }]);
+function bigBtn(btn, bg){
+  if (btn && btn.rendNodeButton){
+    var s = btn.rendNodeButton.style;
+    s.fontSize='18px'; s.padding='10px 22px'; s.fontWeight='bold';
+    s.background=bg; s.color='#fff'; s.border='none'; s.borderRadius='6px'; s.cursor='pointer';
+  }
+}
+bigBtn(refBtn, '#1f6feb'); bigBtn(resBtn, '#777');
+b.create('text', [0.6, 9.9, function(){ return 'reflections: ' + level; }],
+  {fontSize:15, fixed:true, highlight:false, color:'#333'});
+
+b.update();
+[[/jsxgraph]]
+<p>Use the sliders \(m\) and \(k\) to move the pattern if you want, but this will not impact the answer.</p>
+<p style="margin-top:8px">Colour key:
+<span style="display:inline-block;width:14px;height:14px;background:#d64545;border:1px solid #444;vertical-align:middle"></span> red&nbsp;&nbsp;
+<span style="display:inline-block;width:14px;height:14px;background:#f0a848;border:1px solid #444;vertical-align:middle"></span> orange&nbsp;&nbsp;
+<span style="display:inline-block;width:14px;height:14px;background:#3a8f8f;border:1px solid #444;vertical-align:middle"></span> teal&nbsp;&nbsp;
+<span style="display:inline-block;width:14px;height:14px;background:#cee1aa;border:1px solid #444;vertical-align:middle"></span> green</p>
+<div>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</div>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p>Reflecting the motif makes a lattice of <strong>congruent</strong> fish. The colour follows a <em>perfect colouring</em>: each mirror you cross flips the colour in a fixed way, so a fish's colour is settled by how many mirrors separate it from the motif.</p>
+<p>Below, the pattern is drawn at the last step before the target. The <span style="color:#7b1fa2"><strong>purple-outlined fish</strong></span> is the mirror image of the target &mdash; the same distance from the mirror, on the same row &mdash; and it folds across onto the target. Press <strong>Reflect</strong> to reflect it over and reveal the colour &mdash; <strong>{@colourword@}</strong>.</p>
+[[jsxgraph height='430px' width='430px']]
+var b = JXG.JSXGraph.initBoard(divid, {
+  boundingbox:[-11, 11, 11, -11], axis:true, grid:false,
+  showCopyright:false, showNavigation:false, keepaspectratio:true
+});
+var px={#px#}, py={#py#}, fx={#fx#}, fy={#fy#}, bs={#bs#}, br={#br#};
+var fs=0.6, ex=0.8, ey=0.16, qx=px+fs*ex, qy=py+fs*ey;
+var m0=2, k0=2;
+var targetlevel = Math.abs(bs)+Math.abs(br);
+var level = targetlevel - 1;   // start one short
+var Lmax  = targetlevel;
+
+function vLine(sg){ var p1=b.create('point',[sg*m0,-40],{visible:false,fixed:true}), p2=b.create('point',[sg*m0,40],{visible:false,fixed:true});
+  b.create('line',[p1,p2],{strokeColor:'#1f6feb',strokeWidth:1.5,dash:2,layer:1,straightFirst:true,straightLast:true,fixed:true,highlight:false}); }
+function hLine(sg){ var p1=b.create('point',[-40,sg*k0],{visible:false,fixed:true}), p2=b.create('point',[40,sg*k0],{visible:false,fixed:true});
+  b.create('line',[p1,p2],{strokeColor:'#1f6feb',strokeWidth:1.5,dash:2,layer:1,straightFirst:true,straightLast:true,fixed:true,highlight:false}); }
+vLine(1); vLine(-1); hLine(1); hLine(-1);
+
+var FX=[1.35,1.1,0.6,0.32,0.08,-0.05,-0.5,-1.15,-0.72,-1.15,-0.5,-0.05,0.08,0.32,0.6,1.1,1.35];
+var FY=[0.0,0.25,0.36,0.68,0.66,0.44,0.46,0.82,0.0,-0.82,-0.46,-0.44,-0.66,-0.68,-0.36,-0.25,0.0];
+var PAL=['#d64545','#f0a848','#3a8f8f','#cee1aa'];
+function ciOf(epsx,epsy,s,r){ var hx=((((s%2)+2)%2)+(epsx===-1?1:0))%2, hy=((((r%2)+2)%2)+(epsy===-1?1:0))%2; return 2*hx+hy; }
+function verts(epsx,epsy,s,r){ var Ex=epsx*qx+2*m0*s, Ey=epsy*qy+2*k0*r, X=[],Y=[],i; for(i=0;i<FX.length;i++){ X.push(Ex+epsx*fs*(FX[i]-ex)); Y.push(Ey+epsy*fs*(FY[i]-ey)); } return [X,Y]; }
+function fishAt(epsx,epsy,s,r){
+  var lvl=Math.abs(s)+Math.abs(r), v=verts(epsx,epsy,s,r);
+  b.create('curve',[v[0],v[1]],{fillColor:PAL[ciOf(epsx,epsy,s,r)],fillOpacity:0.9,strokeColor:'#2f2417',strokeWidth:1,layer:2,fixed:true,highlight:false,visible:function(){return lvl<=level;}});
+  b.create('point',[epsx*qx+2*m0*s, epsy*qy+2*k0*r],{size:1.5,strokeColor:'#111',fillColor:'#111',layer:3,fixed:true,highlight:false,withLabel:false,visible:function(){return lvl<=level;}});
+}
+var sgn=[1,-1];
+for (var a=0;a<2;a++){ for (var c=0;c<2;c++){ for (var s=-Lmax;s<=Lmax;s++){ for (var r=-Lmax;r<=Lmax;r++){ if (Math.abs(s)+Math.abs(r)<=Lmax) fishAt(sgn[a],sgn[c],s,r); } } } }
+
+// source fish = mirror image of the target across the nearer vertical mirror
+// (same row, same distance from the mirror, other side). Folding it over reveals the target.
+var teX=fx*qx+2*m0*bs, teY=fy*qy+2*k0*br;
+var mirrorX = (bs > 0 ? m0 : -m0);
+var seX = 2*mirrorX - teX, seY = teY;
+var sepsx = -fx, sepsy = fy, sX=[], sY=[], j;
+for (j=0;j<FX.length;j++){ sX.push(seX + sepsx*fs*(FX[j]-ex)); sY.push(seY + sepsy*fs*(FY[j]-ey)); }
+b.create('curve',[sX,sY],{strokeColor:'#7b1fa2',strokeWidth:4,fillOpacity:0,layer:4,fixed:true,highlight:false,visible:function(){return level<Lmax;}});
+b.create('arrow',[[seX,seY],[teX,teY]],{strokeColor:'#7b1fa2',strokeWidth:2,layer:5,fixed:true,highlight:false,visible:function(){return level<Lmax;}});
+b.create('point',[teX,teY],{name:'target',size:8,face:'x',strokeWidth:5,strokeColor:'#0b8043',layer:8,fixed:true,highlight:false,label:{offset:[10,10],anchorX:'left',fontSize:14,strokeColor:'#0b8043'}});
+
+var refBtn=b.create('button',[-8.5,8.3,'Reflect',function(){ if(level<Lmax){ level++; b.update(); } }]);
+var resBtn=b.create('button',[-4.3,8.3,'Reset',function(){ level=targetlevel-1; b.update(); }]);
+function bigBtn(btn,bg){ if(btn&&btn.rendNodeButton){ var s=btn.rendNodeButton.style; s.fontSize='16px'; s.padding='8px 18px'; s.fontWeight='bold'; s.background=bg; s.color='#fff'; s.border='none'; s.borderRadius='6px'; s.cursor='pointer'; } }
+bigBtn(refBtn,'#1f6feb'); bigBtn(resBtn,'#777');
+b.update();
+[[/jsxgraph]]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.25</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025010100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[px : rand([-1,1]);
+py : rand([-1,1]);
+fx : rand([-1,1]);
+fy : rand([-1,1]);
+bs : rand([-2,2]);
+br : rand([-1,1]);
+/* fish geometry - MUST match the JSXGraph fish (fs, ex, ey) */
+fs : 0.6;
+ex : 0.8;
+ey : 0.16;
+qx : px + fs*ex;
+qy : py + fs*ey;
+/* colour of the hidden target fish: perfect colouring by mirror-crossing parity */
+hx0 : mod(mod(bs,2) + (if fx = -1 then 1 else 0), 2);
+hy0 : mod(mod(br,2) + (if fy = -1 then 1 else 0), 2);
+ci : 2*hx0 + hy0;
+correctval : ci + 1;
+cnames : ["red","orange","teal","green"];
+colourword : cnames[correctval];
+ta : makelist([j, is(j = correctval), cnames[j]], j, 1, 4);
+/* target is (|bs|+|br|) boxes out; reflect stops one short */
+targetlevel : abs(bs) + abs(br);
+maxlevel : targetlevel - 1;]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="moodle_auto_format">
+      <text>motif \(({@px@},{@py@})\), target fish (fx={@fx@},fy={@fy@},bs={@bs@},br={@br@}) is {@colourword@}</text>
+    </questionnote>
+    <questiondescription format="moodle_auto_format">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text>Correct.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text>Partially correct.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text>Incorrect.</text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>dot</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>radio</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Chosen colour equals the target fish's colour?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>correctval</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-correct</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Correct. You can find a fish this colour as the target an identical distance across the mirror.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-wrong</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite. How far away is the target from each of the mirrors? Which colour fish has the same distance to the mirror as the target?</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1013</deployedseed>
+    <deployedseed>2027</deployedseed>
+    <deployedseed>3041</deployedseed>
+    <deployedseed>4053</deployedseed>
+    <deployedseed>5069</deployedseed>
+    <deployedseed>6087</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Correct colour chosen</description>
+      <testinput>
+        <name>ans1</name>
+        <value>correctval</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-correct</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>A wrong colour chosen</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ev(mod(correctval,4)+1,simp)</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-wrong</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

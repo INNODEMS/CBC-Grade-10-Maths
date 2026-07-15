@@ -2,7 +2,7 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Determining  the Surface Area of a cone.</text>
+      <text>Determining  the Surface Area of a sphere</text>
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>Find the surface area of the solid shown in the diagram below. \(\text{Use}\, \pi= \frac{22}{7}.\)</p>
@@ -94,7 +94,7 @@ From the diagram, the radius is \( r = {@r@} \) cm and
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>/* Randomize the radius */
@@ -106,7 +106,10 @@ R:r^2;
 
 /* Area formula */
 A_1:pi_val * r^2;
-A : 4*pi_val * r^2;</text>
+A : 4*pi_val * r^2;
+
+/* Mistake 1 forgetting to add the 4 in the formula ( 4*pi_val * r^2)*/
+sphere_mistake: pi_val*r^2;</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -185,8 +188,37 @@ A : 4*pi_val * r^2;</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Forgetting to multiply by the leading 4 in the formula</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>sphere_mistake</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p> 
+Good attempt! However you forgot include the leading 4, during the process of multiplication 
+</p>
+<p> The correct formula is: </p>
+<p>\(\text{Surface Area} = 4\pi r^2\) </p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>

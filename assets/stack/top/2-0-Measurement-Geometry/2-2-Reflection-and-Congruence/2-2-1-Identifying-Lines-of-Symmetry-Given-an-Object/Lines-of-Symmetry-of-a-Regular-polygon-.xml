@@ -5,340 +5,230 @@
       <text>Lines of Symmetry of a Regular polygon.</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Calculate the number of lines of symmetry for each regular polygon shown below.</p>
-<p>(a).</p>
-[[jsxgraph]]
-var board = JXG.JSXGraph.initBoard('jxgbox', {
+      <text><![CDATA[<p>A <b>line of symmetry</b> divides a shape into two halves that are mirror images of each other. Work out the number of lines of symmetry for each regular polygon shown below.</p>
+<p><b>Tip:</b> drag the red point to rotate the dashed axis about the centre, then press <b>Reflect</b>. If the orange copy lands exactly on the polygon, the dashed line is a line of symmetry. Press <b>Reset</b> to start again.</p>
+<p>(a)</p>
+[[jsxgraph height='380px' width='460px']]
+var board = JXG.JSXGraph.initBoard(divid, {
     boundingbox: [-2, 12, 16, -2],
-    axis: true,
+    keepaspectratio: true,
+    axis: false,
+    showNavigation: false,
+    showCopyright: false,
     pan: { enabled: false },
-    zoom: { enabled: false },
-    showNavigation: false
+    zoom: { enabled: false }
 });
 
-/* === Rotating Regular Pentagon === */
-
-// Fixed centre and radius
-var cx = 7;
-var cy = 6;
-var r  = 4;
-
-// Random rotation angle (±)
-var angle = (Math.random() * 360) * (Math.random() < 0.5 ? -1 : 1);
-
-// Random fill colour
-var colours = ['#1f77b4', '#d62728', '#2ca02c', '#9467bd', '#ff7f0e'];
-var fillColour = colours[Math.floor(Math.random() * colours.length)];
-
-// Degrees → radians
+var n  = {#n1#};
+var cx = 7, cy = 6, r = 4;
+var rot = Math.random() * 360;
 function deg(d){ return d * Math.PI / 180; }
 
-// Pentagon vertices with rotation
-function v(theta){
-    return [
-        cx + r * Math.cos(deg(theta + angle)),
-        cy + r * Math.sin(deg(theta + angle))
-    ];
+// Polygon (vertices hidden, only the filled shape shows)
+var verts = [];
+for (var i = 0; i < n; i++) {
+    var th = 90 + i * 360 / n + rot;
+    verts.push(board.create('point',
+        [cx + r * Math.cos(deg(th)), cy + r * Math.sin(deg(th))],
+        { visible: false, fixed: true }));
+}
+board.create('polygon', verts, {
+    fillColor: '#1f77b4', fillOpacity: 0.30,
+    borders: { strokeColor: '#1f77b4', strokeWidth: 3 },
+    fixed: true, vertices: { visible: false }
+});
+
+// Draggable axis constrained through the centre
+var C = board.create('point', [cx, cy], { name: '', size: 2, color: '#555', fixed: true });
+var guide = board.create('circle', [C, r + 1.6], { visible: false });
+var D = board.create('glider', [cx + (r + 1.6), cy, guide],
+    { name: 'drag', size: 4, color: '#d62728', label: { offset: [10, 8] }, withLabel: true });
+var mirror = board.create('line', [C, D],
+    { strokeColor: '#d62728', dash: 2, strokeWidth: 2, fixed: true });
+
+// Reflected copy (hidden until the button is pressed)
+var refl = board.create('transform', [mirror], { type: 'reflect' });
+var rverts = verts.map(function (P) {
+    return board.create('point', [P, refl], { visible: false });
+});
+var rpoly = board.create('polygon', rverts, {
+    fillColor: '#ff7f0e', fillOpacity: 0.35,
+    borders: { strokeColor: '#ff7f0e', strokeWidth: 3, dash: 2 },
+    visible: false, fixed: true, vertices: { visible: false }
+});
+
+function setReflVisible(v) {
+    rpoly.setAttribute({ visible: v });
+    for (var i = 0; i < rpoly.borders.length; i++) {
+        rpoly.borders[i].setAttribute({ visible: v });
+    }
+    board.update();
 }
 
-// Invisible vertices
-var P = board.create('point', v(90),  {visible:false, fixed:true});
-var Q = board.create('point', v(18),  {visible:false, fixed:true});
-var R = board.create('point', v(-54), {visible:false, fixed:true});
-var S = board.create('point', v(-126),{visible:false, fixed:true});
-var T = board.create('point', v(162), {visible:false, fixed:true});
+var shown = false;
+var reflectBtn = board.create('button', [-1.3, 0.4, 'Reflect', function () {
+    shown = !shown;
+    setReflVisible(shown);
+    reflectBtn.rendNodeButton.innerHTML = shown ? 'Hide reflection' : 'Reflect';
+}], { fixed: true });
 
-// Filled polygon
-var pentagon = board.create('polygon', [P,Q,R,S,T], {
-    fillColor: fillColour,
-    fillOpacity: 0.35,
-    borders: {
-        strokeWidth: 3,
-        strokeColor: fillColour
-    },
-    fixed: true
-});
+board.create('button', [5.2, 0.4, 'Reset', function () {
+    D.moveTo([cx + (r + 1.6), cy]);
+    shown = false;
+    setReflVisible(false);
+    reflectBtn.rendNodeButton.innerHTML = 'Reflect';
+}], { fixed: true });
 
-// Figure label
-board.create('text', [
-    cx - 1.7,
-    cy - r - 1.2,
-    // "Regular Pentagon"
-], {
-    fontSize: 16,
-    fontWeight: 'bold',
-    fixed: true
-});
-
-/* Prevent interaction */
-board.renderer.svgRoot.style.pointerEvents = "none";
-
+board.create('text', [cx, 11.3, 'Drag the red point, then press Reflect'],
+    { anchorX: 'middle', fontSize: 12, fixed: true, color: '#333' });
 [[/jsxgraph]]
-
-<p>[[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p>
-<p>(b).</p>
-[[jsxgraph]]
-var board = JXG.JSXGraph.initBoard('jxgbox', {
+<div>Number of lines of symmetry: [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</div>
+<p>(b)</p>
+[[jsxgraph height='380px' width='460px']]
+var board = JXG.JSXGraph.initBoard(divid, {
     boundingbox: [-2, 12, 16, -2],
-    axis: true,
+    keepaspectratio: true,
+    axis: false,
+    showNavigation: false,
+    showCopyright: false,
     pan: { enabled: false },
-    zoom: { enabled: false },
-    showNavigation: false
+    zoom: { enabled: false }
 });
 
-/* === Rotating Square (No Symmetry Lines) === */
-
-// Fixed centre and half-diagonal
-var cx = 7;
-var cy = 6;
-var r  = 4;
-
-// Random rotation (CW or CCW)
-var angle = (Math.random() * 360) * (Math.random() < 0.5 ? -1 : 1);
-
-// Random fill colour
-var fillColours = ['#cfe2f3', '#f4cccc', '#d9ead3', '#ead1dc', '#fff2cc'];
-var fillColour = fillColours[Math.floor(Math.random() * fillColours.length)];
-
-// Degrees → radians
+var n  = {#n2#};
+var cx = 7, cy = 6, r = 4;
+var rot = Math.random() * 360;
 function deg(d){ return d * Math.PI / 180; }
 
-// Vertex generator (90° apart)
-function v(theta){
-    return [
-        cx + r * Math.cos(deg(theta + angle)),
-        cy + r * Math.sin(deg(theta + angle))
-    ];
+var verts = [];
+for (var i = 0; i < n; i++) {
+    var th = 90 + i * 360 / n + rot;
+    verts.push(board.create('point',
+        [cx + r * Math.cos(deg(th)), cy + r * Math.sin(deg(th))],
+        { visible: false, fixed: true }));
+}
+board.create('polygon', verts, {
+    fillColor: '#2ca02c', fillOpacity: 0.30,
+    borders: { strokeColor: '#2ca02c', strokeWidth: 3 },
+    fixed: true, vertices: { visible: false }
+});
+
+var C = board.create('point', [cx, cy], { name: '', size: 2, color: '#555', fixed: true });
+var guide = board.create('circle', [C, r + 1.6], { visible: false });
+var D = board.create('glider', [cx + (r + 1.6), cy, guide],
+    { name: 'drag', size: 4, color: '#d62728', label: { offset: [10, 8] }, withLabel: true });
+var mirror = board.create('line', [C, D],
+    { strokeColor: '#d62728', dash: 2, strokeWidth: 2, fixed: true });
+
+var refl = board.create('transform', [mirror], { type: 'reflect' });
+var rverts = verts.map(function (P) {
+    return board.create('point', [P, refl], { visible: false });
+});
+var rpoly = board.create('polygon', rverts, {
+    fillColor: '#ff7f0e', fillOpacity: 0.35,
+    borders: { strokeColor: '#ff7f0e', strokeWidth: 3, dash: 2 },
+    visible: false, fixed: true, vertices: { visible: false }
+});
+
+function setReflVisible(v) {
+    rpoly.setAttribute({ visible: v });
+    for (var i = 0; i < rpoly.borders.length; i++) {
+        rpoly.borders[i].setAttribute({ visible: v });
+    }
+    board.update();
 }
 
-// Invisible vertices
-var A = board.create('point', v(45),  {visible:false, fixed:true});
-var B = board.create('point', v(135), {visible:false, fixed:true});
-var C = board.create('point', v(225), {visible:false, fixed:true});
-var D = board.create('point', v(315), {visible:false, fixed:true});
+var shown = false;
+var reflectBtn = board.create('button', [-1.3, 0.4, 'Reflect', function () {
+    shown = !shown;
+    setReflVisible(shown);
+    reflectBtn.rendNodeButton.innerHTML = shown ? 'Hide reflection' : 'Reflect';
+}], { fixed: true });
 
-// Square (filled)
-board.create('polygon', [A,B,C,D], {
-    fillColor: fillColour,
-    fillOpacity: 0.5,
-    borders: {
-        strokeWidth: 3,
-        strokeColor: '#000'
-    },
-    fixed: true
-});
+board.create('button', [5.2, 0.4, 'Reset', function () {
+    D.moveTo([cx + (r + 1.6), cy]);
+    shown = false;
+    setReflVisible(false);
+    reflectBtn.rendNodeButton.innerHTML = 'Reflect';
+}], { fixed: true });
 
-// Label
-board.create('text', [
-    cx - 1.9,
-    cy - r - 1.3,
-    // "Square"
-], {
-    fontSize: 16,
-    fontWeight: 'bold',
-    fixed: true
-});
-
-/* Prevent interaction */
-board.renderer.svgRoot.style.pointerEvents = "none";
-
+board.create('text', [cx, 11.3, 'Drag the red point, then press Reflect'],
+    { anchorX: 'middle', fontSize: 12, fixed: true, color: '#333' });
 [[/jsxgraph]]
-<p>[[input:ans2]] [[validation:ans2]][[feedback:prt2]]</p>]]></text>
+<div>Number of lines of symmetry: [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]</div>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<p>(a). A regular pentagon has \(5\) lines of symmetry as shown below.</p>
-[[jsxgraph]]
-var board = JXG.JSXGraph.initBoard('jxgbox', {
+      <text><![CDATA[<p>A regular polygon with \(n\) sides has exactly \(n\) lines of symmetry &mdash; one for every vertex. (When \(n\) is odd each axis runs from a vertex to the midpoint of the opposite side; when \(n\) is even, half the axes join opposite vertices and half join the midpoints of opposite sides.)</p>
+<p>(a) The regular \({@n1@}\)-gon has \({@ta1@}\) lines of symmetry, shown below.</p>
+[[jsxgraph height='360px' width='440px']]
+var board = JXG.JSXGraph.initBoard(divid, {
     boundingbox: [-2, 12, 16, -2],
-    axis: true,
-    pan: { enabled: false },
-    zoom: { enabled: false },
-    showNavigation: false
+    keepaspectratio: true, axis: false,
+    showNavigation: false, showCopyright: false,
+    pan: { enabled: false }, zoom: { enabled: false }
 });
-
-/* === Rotating Regular Pentagon with Coloured Symmetry Lines === */
-
-// Fixed centre and radius
-var cx = 7;
-var cy = 6;
-var r  = 4;
-
-// Random rotation (CW or CCW)
-var angle = (Math.random() * 360) * (Math.random() < 0.5 ? -1 : 1);
-
-// Random fill colour (avoid clash with symmetry lines)
-var fillColours = ['#cfe2f3', '#f4cccc', '#d9ead3', '#ead1dc', '#fff2cc'];
-var fillColour = fillColours[Math.floor(Math.random() * fillColours.length)];
-
-// Degrees → radians
+var n = {#n1#};
+var cx = 7, cy = 6, r = 4;
+var rot = Math.random() * 360;
 function deg(d){ return d * Math.PI / 180; }
 
-// Vertex generator
-function v(theta){
-    return [
-        cx + r * Math.cos(deg(theta + angle)),
-        cy + r * Math.sin(deg(theta + angle))
-    ];
+var verts = [];
+for (var i = 0; i < n; i++) {
+    var th = 90 + i * 360 / n + rot;
+    verts.push(board.create('point',
+        [cx + r * Math.cos(deg(th)), cy + r * Math.sin(deg(th))],
+        { visible: false, fixed: true }));
 }
-
-// Invisible vertices
-var P = board.create('point', v(90),  {visible:false, fixed:true});
-var Q = board.create('point', v(18),  {visible:false, fixed:true});
-var R = board.create('point', v(-54), {visible:false, fixed:true});
-var S = board.create('point', v(-126),{visible:false, fixed:true});
-var T = board.create('point', v(162), {visible:false, fixed:true});
-
-// Pentagon (filled)
-board.create('polygon', [P,Q,R,S,T], {
-    fillColor: fillColour,
-    fillOpacity: 0.5,
-    borders: {
-        strokeWidth: 3,
-        strokeColor: '#000'
-    },
-    fixed: true
+board.create('polygon', verts, {
+    fillColor: '#cfe2f3', fillOpacity: 0.5,
+    borders: { strokeColor: '#000', strokeWidth: 3 },
+    fixed: true, vertices: { visible: false }
 });
 
-// === Coloured symmetry lines (bounded at vertices) ===
-var symmetryData = [
-    {angle: 90,   colour: '#e41a1c'},
-    {angle: 18,   colour: '#377eb8'},
-    {angle: -54,  colour: '#4daf4a'},
-    {angle: -126, colour: '#984ea3'},
-    {angle: 162,  colour: '#ff7f00'}
-];
-
-symmetryData.forEach(function(s){
-
-    var A = board.create('point', [
-        cx + r*Math.cos(deg(s.angle + angle)),
-        cy + r*Math.sin(deg(s.angle + angle))
-    ], {visible:false, fixed:true});
-
-    var B = board.create('point', [
-        cx - r*Math.cos(deg(s.angle + angle)),
-        cy - r*Math.sin(deg(s.angle + angle))
-    ], {visible:false, fixed:true});
-
-    board.create('segment', [A, B], {
-        strokeColor: s.colour,
-        strokeWidth: 2,
-        fixed: true
-    });
-});
-
-// Label
-board.create('text', [
-    cx - 2.8,
-    cy - r - 1.3,
-    // "Lines of symmetry of a regular pentagon"
-], {
-    fontSize: 15,
-    fontWeight: 'bold',
-    fixed: true
-});
-
-/* Prevent interaction */
-board.renderer.svgRoot.style.pointerEvents = "none";
+var palette = ['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#a65628','#f781bf','#999999'];
+for (var k = 0; k < n; k++) {
+    var a = deg(90 + k * 180 / n + rot);
+    var A = board.create('point', [cx + r*Math.cos(a), cy + r*Math.sin(a)], { visible: false, fixed: true });
+    var B = board.create('point', [cx - r*Math.cos(a), cy - r*Math.sin(a)], { visible: false, fixed: true });
+    board.create('segment', [A, B], { strokeColor: palette[k % palette.length], strokeWidth: 2, fixed: true });
+}
 [[/jsxgraph]]
-
-
-<p>(b). The square has \(4\) lines of symmetry.</p>
-[[jsxgraph]]
-var board = JXG.JSXGraph.initBoard('jxgbox', {
+<p>(b) The regular \({@n2@}\)-gon has \({@ta2@}\) lines of symmetry, shown below.</p>
+[[jsxgraph height='360px' width='440px']]
+var board = JXG.JSXGraph.initBoard(divid, {
     boundingbox: [-2, 12, 16, -2],
-    axis: true,
-    pan: { enabled: false },
-    zoom: { enabled: false },
-    showNavigation: false
+    keepaspectratio: true, axis: false,
+    showNavigation: false, showCopyright: false,
+    pan: { enabled: false }, zoom: { enabled: false }
 });
-
-/* === Rotating Square with Lines of Symmetry === */
-
-// Fixed centre and half-diagonal
-var cx = 7;
-var cy = 6;
-var r  = 4;   // distance from centre to vertex
-
-// Random rotation (CW or CCW)
-var angle = (Math.random() * 360) * (Math.random() < 0.5 ? -1 : 1);
-
-// Random fill colour
-var fillColours = ['#cfe2f3', '#f4cccc', '#d9ead3', '#ead1dc', '#fff2cc'];
-var fillColour = fillColours[Math.floor(Math.random() * fillColours.length)];
-
-// Degrees → radians
+var n = {#n2#};
+var cx = 7, cy = 6, r = 4;
+var rot = Math.random() * 360;
 function deg(d){ return d * Math.PI / 180; }
 
-// Vertex generator (90° apart)
-function v(theta){
-    return [
-        cx + r * Math.cos(deg(theta + angle)),
-        cy + r * Math.sin(deg(theta + angle))
-    ];
+var verts = [];
+for (var i = 0; i < n; i++) {
+    var th = 90 + i * 360 / n + rot;
+    verts.push(board.create('point',
+        [cx + r * Math.cos(deg(th)), cy + r * Math.sin(deg(th))],
+        { visible: false, fixed: true }));
 }
-
-// Invisible vertices
-var A = board.create('point', v(45),   {visible:false, fixed:true});
-var B = board.create('point', v(135),  {visible:false, fixed:true});
-var C = board.create('point', v(225),  {visible:false, fixed:true});
-var D = board.create('point', v(315),  {visible:false, fixed:true});
-
-// Square (filled)
-board.create('polygon', [A,B,C,D], {
-    fillColor: fillColour,
-    fillOpacity: 0.5,
-    borders: {
-        strokeWidth: 3,
-        strokeColor: '#000'
-    },
-    fixed: true
+board.create('polygon', verts, {
+    fillColor: '#d9ead3', fillOpacity: 0.5,
+    borders: { strokeColor: '#000', strokeWidth: 3 },
+    fixed: true, vertices: { visible: false }
 });
 
-// === Lines of symmetry ===
-// 4 lines: 2 diagonals, 2 through midpoints
-var symmetryData = [
-    {angle: 45,  colour: '#e41a1c'}, // diagonal
-    {angle: 135, colour: '#377eb8'}, // diagonal
-    {angle: 0,   colour: '#4daf4a'}, // vertical
-    {angle: 90,  colour: '#984ea3'}  // horizontal
-];
-
-symmetryData.forEach(function(s){
-
-    var A1 = board.create('point', [
-        cx + r*Math.cos(deg(s.angle + angle)),
-        cy + r*Math.sin(deg(s.angle + angle))
-    ], {visible:false, fixed:true});
-
-    var B1 = board.create('point', [
-        cx - r*Math.cos(deg(s.angle + angle)),
-        cy - r*Math.sin(deg(s.angle + angle))
-    ], {visible:false, fixed:true});
-
-    board.create('segment', [A1, B1], {
-        strokeColor: s.colour,
-        strokeWidth: 2,
-        fixed: true
-    });
-});
-
-// Label
-board.create('text', [
-    cx - 2.2,
-    cy - r - 1.3,
-    // "Lines of symmetry of a square"
-], {
-    fontSize: 15,
-    fontWeight: 'bold',
-    fixed: true
-});
-
-/* Prevent interaction */
-board.renderer.svgRoot.style.pointerEvents = "none";
+var palette = ['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#a65628','#f781bf','#999999'];
+for (var k = 0; k < n; k++) {
+    var a = deg(90 + k * 180 / n + rot);
+    var A = board.create('point', [cx + r*Math.cos(a), cy + r*Math.sin(a)], { visible: false, fixed: true });
+    var B = board.create('point', [cx - r*Math.cos(a), cy - r*Math.sin(a)], { visible: false, fixed: true });
+    board.create('segment', [A, B], { strokeColor: palette[k % palette.length], strokeWidth: 2, fixed: true });
+}
 [[/jsxgraph]]]]></text>
     </generalfeedback>
-    <defaultgrade>1</defaultgrade>
+    <defaultgrade>2</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
@@ -346,15 +236,17 @@ board.renderer.svgRoot.style.pointerEvents = "none";
       <text>2025073100</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[ta:random_permutation([["2", false],["5", true],["0", false],["4", false]]);
-
-ta1:random_permutation([["2", false],["4", true],["1", false],["3", false]]);]]></text>
+      <text>perm : random_permutation([3, 4, 5, 6]);
+n1 : perm[1];
+n2 : perm[2];
+ta1 : n1;
+ta2 : n2;</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>lines of symmetry for the regular pentagon = {@ta@}</p>]]></text>
+      <text><![CDATA[<p>(a) regular {@n1@}-gon &rarr; {@ta1@} lines; (b) regular {@n2@}-gon &rarr; {@ta2@} lines.</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -383,9 +275,9 @@ ta1:random_permutation([["2", false],["4", true],["1", false],["3", false]]);]]>
     <variantsselectionseed/>
     <input>
       <name>ans1</name>
-      <type>radio</type>
-      <tans>ta</tans>
-      <boxsize>15</boxsize>
+      <type>numerical</type>
+      <tans>ta1</tans>
+      <boxsize>4</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -396,14 +288,14 @@ ta1:random_permutation([["2", false],["4", true],["1", false],["3", false]]);]]>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
       <name>ans2</name>
-      <type>radio</type>
-      <tans>ta1</tans>
-      <boxsize>15</boxsize>
+      <type>numerical</type>
+      <tans>ta2</tans>
+      <boxsize>4</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -414,7 +306,7 @@ ta1:random_permutation([["2", false],["4", true],["1", false],["3", false]]);]]>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <prt>
@@ -430,7 +322,7 @@ ta1:random_permutation([["2", false],["4", true],["1", false],["3", false]]);]]>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>mcq_correct(ta)[1]</tans>
+        <tans>ta1</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -444,16 +336,41 @@ ta1:random_permutation([["2", false],["4", true],["1", false],["3", false]]);]]>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1/2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you have counted only one family of axes &mdash; for example just the diagonals, or just the lines through the midpoints of the sides. A regular polygon also has the <em>other</em> family. Use the <b>Reflect</b> tool to rotate the axis right around and count <em>every</em> position where the copy lands exactly on the shape.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite. Every line of symmetry passes through the centre. Use the <b>Reflect</b> tool: rotate the dashed axis and count each position where the reflected copy sits exactly on top of the polygon.</p>]]></text>
+        </falsefeedback>
+      </node>
     </prt>
     <prt>
       <name>prt2</name>
-      <value>2.0000000</value>
+      <value>1.0000000</value>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
@@ -464,7 +381,7 @@ ta1:random_permutation([["2", false],["4", true],["1", false],["3", false]]);]]>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans2</sans>
-        <tans>mcq_correct(ta1)[1]</tans>
+        <tans>ta2</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -478,10 +395,35 @@ ta1:random_permutation([["2", false],["4", true],["1", false],["3", false]]);]]>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2/2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you have counted only one family of axes &mdash; for example just the diagonals, or just the lines through the midpoints of the sides. A regular polygon also has the <em>other</em> family. Use the <b>Reflect</b> tool to rotate the axis right around and count <em>every</em> position where the copy lands exactly on the shape.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite. Every line of symmetry passes through the centre. Use the <b>Reflect</b> tool: rotate the dashed axis and count each position where the reflected copy sits exactly on top of the polygon.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -499,16 +441,50 @@ ta1:random_permutation([["2", false],["4", true],["1", false],["3", false]]);]]>
     <deployedseed>1477996121</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>Both parts correct: n1 and n2 lines of symmetry.</description>
       <testinput>
         <name>ans1</name>
-        <value>first(mcq_correct(ta))</value>
+        <value>ta1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta2</value>
       </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Generic wrong answer (n+1, always an integer) routes to the generic hint branch on every variant.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta1+1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta2+1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-2-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt2-2-F</expectedanswernote>
       </expected>
     </qtest>
   </question>
