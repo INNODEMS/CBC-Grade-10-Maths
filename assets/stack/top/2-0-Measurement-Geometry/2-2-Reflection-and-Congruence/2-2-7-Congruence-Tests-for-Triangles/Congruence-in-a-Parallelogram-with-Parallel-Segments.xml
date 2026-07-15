@@ -2,102 +2,71 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Congruence in a Parallelogram with Parallel Segments</text>
+      <text>Congruence in Quadrilaterals (parallelogram / kite / trapezium)</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>In the figure below, <strong>{@letter@}{@letter1@}{@letter3@}{@letter2@}</strong> is a parallelogram. Point <strong>{@letter4@}</strong> lies on <strong>{@letter@}{@letter2@}</strong> and point <strong>{@letter5@}</strong> lies on <strong>{@letter1@}{@letter3@}</strong>. The line <strong>{@letter1@}{@letter4@}</strong> is parallel to <strong>{@letter2@}{@letter5@}</strong>. Are triangles \(
-\triangle {@letter@}{@letter1@}{@letter4@} \, \text{and} \, \triangle {@letter3@}{@letter2@}{@letter5@}\) congruent?</p>
+      <text><![CDATA[<p>
+[[ if test="isP" ]]In the figure below, \({@va@}{@vb@}{@vc@}{@vd@}\) is a <strong>parallelogram</strong>. Point \({@ve@}\) lies on \({@va@}{@vb@}\) and point \({@vf@}\) lies on \({@vd@}{@vc@}\).[[ if test="iscong" ]] The segment \({@vd@}{@ve@}\) is parallel to \({@vb@}{@vf@}\).[[/ if]][[/ if]][[ if test="isK" ]]In the figure below, \({@va@}{@vb@}{@vc@}{@vd@}\) is a <strong>kite</strong> with \({@va@}{@vb@} = {@va@}{@vd@}\) and \({@vc@}{@vb@} = {@vc@}{@vd@}\).[[ if test="iscong" ]] The diagonal \({@va@}{@vc@}\) is drawn.[[ else ]] The diagonal \({@vb@}{@vd@}\) is drawn.[[/ if]][[/ if]][[ if test="isTr" ]]In the figure below, \({@va@}{@vb@}{@vc@}{@vd@}\) is a <strong>trapezium</strong> with \({@va@}{@vb@}\) parallel to \({@vd@}{@vc@}\).[[ if test="iscong" ]] The legs are equal: \({@va@}{@vd@} = {@vb@}{@vc@}\).[[/ if]] The diagonals \({@va@}{@vc@}\) and \({@vb@}{@vd@}\) are drawn.[[/ if]]
+</p>
+<p>Are triangles \(\triangle {@t1a@}{@t1b@}{@t1c@}\) and \(\triangle {@t2a@}{@t2b@}{@t2c@}\) congruent?</p>
 
-[[jsxgraph]]
+[[jsxgraph height='420px' width='560px']]
 var board = JXG.JSXGraph.initBoard(divid, {
-    boundingbox: [-1, 6, 9, -2],
+    boundingbox: {#bbox#},
     axis: false,
+    keepaspectratio: true,
     showCopyright: false,
     showNavigation: false
 });
 
-/* Base points for the parallelogram */
-var A = board.create('point', [0, 4], {name: '{#letter#}', fixed: true});
-var B = board.create('point', [1, 0], {name: '{#letter1#}', fixed: true});
-var D = board.create('point', [6, 4], {name: '{#letter2#}', fixed: true});
+/* Vertices */
+var P1 = board.create('point', {#c1#}, {name:'{#va#}', label:{offset:{#o1#}}, size:2, fixed:true, highlight:false, strokeColor:'#000', fillColor:'#000'});
+var P2 = board.create('point', {#c2#}, {name:'{#vb#}', label:{offset:{#o2#}}, size:2, fixed:true, highlight:false, strokeColor:'#000', fillColor:'#000'});
+var P3 = board.create('point', {#c3#}, {name:'{#vc#}', label:{offset:{#o3#}}, size:2, fixed:true, highlight:false, strokeColor:'#000', fillColor:'#000'});
+var P4 = board.create('point', {#c4#}, {name:'{#vd#}', label:{offset:{#o4#}}, size:2, fixed:true, highlight:false, strokeColor:'#000', fillColor:'#000'});
+var P5 = board.create('point', {#c5#}, {name:'{#ve#}', label:{offset:{#o5#}}, size:2, fixed:true, highlight:false, visible:{#show5#}, strokeColor:'#000', fillColor:'#000'});
+var P6 = board.create('point', {#c6#}, {name:'{#vf#}', label:{offset:{#o6#}}, size:2, fixed:true, highlight:false, visible:{#show6#}, strokeColor:'#000', fillColor:'#000'});
 
-/* Construct C so that ABCD is a parallelogram */
-var C = board.create('point', [
-    function(){ return B.X() + (D.X() - A.X()); },
-    function(){ return B.Y() + (D.Y() - A.Y()); }
-], {name: '{#letter3#}', fixed: true});
-
-/* Draw parallelogram sides */
-board.create('segment', [A, B]);
-board.create('segment', [B, C]);
-board.create('segment', [C, D]);
-board.create('segment', [D, A]);
-
-/* Points E on AD and F on BC */
-var E = board.create('point', [
-    function(){ return (A.X() + D.X())/2; },
-    function(){ return (A.Y() + D.Y())/2; }
-], {name: '{#letter4#}', fixed: true});
-
-var F = board.create('point', [
-    function(){ return (B.X() + C.X())/2; },
-    function(){ return (B.Y() + C.Y())/2; }
-], {name: '{#letter5#}', fixed: true});
-
-/* Draw BE and DF (parallel lines) */
-board.create('segment', [B, E], {
-    strokeWidth: 2,
-    strokeColor: 'black'
+/* Outline of the quadrilateral */
+board.create('polygon', [P1, P2, P3, P4], {
+    fillOpacity: 0,
+    fixed: true,
+    highlight: false,
+    borders: {strokeColor:'#1f77b4', strokeWidth:2, highlight:false},
+    vertices: {visible:false}
 });
 
-board.create('segment', [D, F], {
-    strokeWidth: 2,
-    strokeColor: 'black'
+/* The two triangles under comparison */
+board.create('polygon', {#tri1#}, {
+    fillColor:'#ff7f0e', fillOpacity:0.30, fixed:true, highlight:false,
+    borders:{strokeColor:'#000', strokeWidth:2, highlight:false},
+    vertices:{visible:false}
 });
-
-/* Optional arrows to emphasise parallelism */
-board.create('arrow', [E, D], {strokeWidth: 2});
-board.create('arrow', [B, F], {strokeWidth: 2});
-
+board.create('polygon', {#tri2#}, {
+    fillColor:'#2ca02c', fillOpacity:0.30, fixed:true, highlight:false,
+    borders:{strokeColor:'#000', strokeWidth:2, highlight:false},
+    vertices:{visible:false}
+});
 [[/jsxgraph]]
-<p>[[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+
+<div>[[input:ans1]] [[validation:ans1]][[feedback:prt1]]</div>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked solution</h3>
-<p>
-We are given that <strong>{@letter@}{@letter1@}{@letter3@}{@letter2@}</strong> is a parallelogram and that <strong>{@letter1@}{@letter4@} ∥ {@letter2@}{@letter5@}</strong>.
-</p>
-<p>
-<strong>Step 1: Equal angles</strong><br>
-Since the lines <strong>{@letter1@}{@letter4@}</strong> and <strong>{@letter2@}{@letter5@}</strong> are parallel,
-the angles</p><p>
-\(
-\angle {@letter@}{@letter1@}{@letter4@} \, = \, \angle {@letter3@}{@letter2@}{@letter5@}\)  <em>(Opposite angles of a parallelogram)</em>.
-</p>
-
-<p>
-<strong>Step 2: Equal sides</strong><br>
-In a parallelogram, opposite sides are equal in length.
-Hence,</p> <p>
-\(\quad \quad \quad \quad \quad \quad
- {@letter@}{@letter1@}= {@letter3@}{@letter2@}.
-\)
-</p>
-
-<p>
-<strong>Step 3: Triangle congruence</strong><br>
-We now have:
-<ul>
-  <li>one pair of equal angles,</li>
-  <li>a second pair of equal angles (by parallel lines),</li>
-  <li>the included sides equal.</li>
-</ul>
-Therefore,
-\(
-\triangle ABE \cong \triangle CDF
-\)
-by the <strong>ASA</strong> congruence criterion.
-</p>]]></text>
+[[ if test="isP" ]][[ if test="iscong" ]]<p><strong>Yes &mdash; the triangles are congruent.</strong></p>
+<p>In parallelogram \({@va@}{@vb@}{@vc@}{@vd@}\), opposite sides are equal, so \({@va@}{@vd@} = {@vc@}{@vb@}\), and opposite angles are equal, so \(\angle {@va@} = \angle {@vc@}\).</p>
+<p>Because \({@vd@}{@ve@} \parallel {@vb@}{@vf@}\), the points \({@ve@}\) and \({@vf@}\) sit symmetrically, which forces \({@va@}{@ve@} = {@vc@}{@vf@}\).</p>
+<p>Two sides and the included angle now match, so \(\triangle {@t1a@}{@t1b@}{@t1c@} \cong \triangle {@t2a@}{@t2b@}{@t2c@}\) by <strong>SAS</strong>. (Equivalently, a half-turn about the centre of the parallelogram carries one triangle exactly onto the other.)</p>[[ else ]]<p><strong>No &mdash; the triangles are not congruent.</strong></p>
+<p>We still have \({@va@}{@vd@} = {@vc@}{@vb@}\) (opposite sides) and \(\angle {@va@} = \angle {@vc@}\) (opposite angles). But \({@ve@}\) and \({@vf@}\) are <em>not</em> placed symmetrically &mdash; the segments \({@vd@}{@ve@}\) and \({@vb@}{@vf@}\) are not parallel &mdash; so \({@va@}{@ve@} \neq {@vc@}{@vf@}\).</p>
+<p>Two matching parts are equal but the third differs, so the triangles are <strong>not</strong> congruent.</p>[[/ if]][[/ if]][[ if test="isK" ]][[ if test="iscong" ]]<p><strong>Yes &mdash; the triangles are congruent.</strong></p>
+<p>The diagonal \({@va@}{@vc@}\) is the axis of symmetry of the kite. We are given \({@va@}{@vb@} = {@va@}{@vd@}\) and \({@vc@}{@vb@} = {@vc@}{@vd@}\), and \({@va@}{@vc@}\) is common to both triangles.</p>
+<p>Therefore \(\triangle {@t1a@}{@t1b@}{@t1c@} \cong \triangle {@t2a@}{@t2b@}{@t2c@}\) by <strong>SSS</strong>.</p>[[ else ]]<p><strong>No &mdash; the triangles are not congruent.</strong></p>
+<p>Both triangles stand on the shared base \({@vd@}{@vb@}\). Vertex \({@va@}\) is equidistant from \({@vd@}\) and \({@vb@}\), and so is \({@vc@}\), so each triangle is isosceles on that base.</p>
+<p>However \({@va@}{@vd@} \neq {@vc@}{@vd@}\) (the kite is not a rhombus), so the equal sides have different lengths in the two triangles. They are <strong>not</strong> congruent &mdash; even though they look alike.</p>[[/ if]][[/ if]][[ if test="isTr" ]][[ if test="iscong" ]]<p><strong>Yes &mdash; the triangles are congruent.</strong></p>
+<p>The trapezium is isosceles, so the legs are equal, \({@va@}{@vd@} = {@vb@}{@vc@}\), and therefore the diagonals are equal, \({@va@}{@vc@} = {@vb@}{@vd@}\).</p>
+<p>Triangles \(\triangle {@t1a@}{@t1b@}{@t1c@}\) and \(\triangle {@t2a@}{@t2b@}{@t2c@}\) share the base \({@vd@}{@vc@}\), have equal legs, and equal diagonals, so they are congruent by <strong>SSS</strong>.</p>[[ else ]]<p><strong>No &mdash; the triangles are not congruent.</strong></p>
+<p>This trapezium is <em>not</em> isosceles: the legs \({@va@}{@vd@}\) and \({@vb@}{@vc@}\) have different lengths, so the diagonals \({@va@}{@vc@}\) and \({@vb@}{@vd@}\) are unequal too.</p>
+<p>The two triangles share the base \({@vd@}{@vc@}\) but their other sides differ, so they are <strong>not</strong> congruent.</p>[[/ if]][[/ if]]]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -107,19 +76,77 @@ by the <strong>ASA</strong> congruence criterion.
       <text>2025073100</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[ta:random_permutation([["yes", true],["no", false]]);
- letter:rand([A,M,Q,U,Y]);
- letter1:rand([B,F,N,R,V]);
- letter2:rand([C,G,K,S,W]);
- letter3:rand([D,H,L,P,T]);
- letter4:rand([E,I,J]);
- letter5:rand([X,O,Z]);]]></text>
+      <text><![CDATA[/* ---- choose the variant ---- */
+shape  : rand([1,2,3]);          /* 1 = parallelogram, 2 = kite, 3 = trapezium */
+iscong : rand([true,false]);     /* true = congruent case, false = distractor */
+isP    : is(shape=1);
+isK    : is(shape=2);
+isTr   : is(shape=3);
+
+/* ---- random vertex labels ---- */
+letters : random_permutation([A,B,C,E,F,G,H,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z]);
+va : letters[1];  vb : letters[2];  vc : letters[3];  vd : letters[4];
+ve : letters[5];  vf : letters[6];
+
+/* extra points hidden unless the parallelogram needs them */
+show5 : false;  show6 : false;
+
+/* ---- geometry ---- */
+if shape = 1 then (
+    /* parallelogram: va=top-left, vb=top-right, vc=bottom-right, vd=bottom-left */
+    c1 : [0,4],  c2 : [6,4],  c3 : [7,0],  c4 : [1,0],
+    c5 : [3,4],                                   /* E on top edge va-vb   */
+    c6 : if iscong then [4,0] else [5.5,0],       /* F on bottom edge vd-vc */
+    show5 : true,  show6 : true,
+    bbox : [-1.5,6,9,-1.5],
+    tri1 : [c1,c4,c5],  tri2 : [c3,c2,c6],
+    t1a : va, t1b : vd, t1c : ve,
+    t2a : vc, t2b : vb, t2c : vf,
+    shapename : "parallelogram"
+);
+
+if shape = 2 then (
+    /* kite: va=top, vb=right, vc=bottom, vd=left; axis is va-vc */
+    c1 : [3,5],  c2 : [6,3],  c3 : [3,0],  c4 : [0,3],
+    c5 : [0,0],  c6 : [0,0],
+    bbox : [-1.5,6,7.5,-1.5],
+    if iscong then (
+        tri1 : [c1,c2,c3],  tri2 : [c1,c4,c3],
+        t1a : va, t1b : vb, t1c : vc,
+        t2a : va, t2b : vd, t2c : vc
+    ) else (
+        tri1 : [c1,c4,c2],  tri2 : [c3,c4,c2],
+        t1a : va, t1b : vd, t1c : vb,
+        t2a : vc, t2b : vd, t2c : vb
+    ),
+    shapename : "kite"
+);
+
+if shape = 3 then (
+    /* trapezium: va=top-left, vb=top-right, vc=bottom-right, vd=bottom-left; va vb || vd vc */
+    c3 : [7,0],  c4 : [0,0],                       /* base vertices C, D fixed */
+    if iscong then ( c1 : [2,4],  c2 : [5,4] )     /* isosceles top */
+              else ( c1 : [1,4],  c2 : [4,4] ),    /* scalene top   */
+    c5 : [0,0],  c6 : [0,0],
+    bbox : [-1.5,6,9,-1.5],
+    tri1 : [c1,c3,c4],  tri2 : [c2,c4,c3],
+    t1a : va, t1b : vc, t1c : vd,
+    t2a : vb, t2b : vd, t2c : vc,
+    shapename : "trapezium"
+);
+
+/* ---- label offsets (pixels) ---- */
+o1 : [-8,12];  o2 : [12,8];  o3 : [12,-8];  o4 : [-12,-8];  o5 : [0,14];  o6 : [0,-16];
+
+/* ---- correct answer ---- */
+ta : random_permutation( if iscong then [["yes",true],["no",false]]
+                                    else [["yes",false],["no",true]] );]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta@}</text>
+      <text>{@shapename@}, congruent = {@iscong@}</text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -194,15 +221,19 @@ by the <strong>ASA</strong> congruence criterion.
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Not quite. Look carefully at which sides and angles are <em>forced</em> to be equal by the information given, and whether that is enough to fix the whole triangle. The worked solution below explains this case.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>1744203641</deployedseed>
-    <deployedseed>855242518</deployedseed>
+    <deployedseed>1000001</deployedseed>
+    <deployedseed>1000002</deployedseed>
+    <deployedseed>1000008</deployedseed>
+    <deployedseed>1000009</deployedseed>
+    <deployedseed>1000010</deployedseed>
+    <deployedseed>1356393856</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>Correct answer scores full marks.</description>
       <testinput>
         <name>ans1</name>
         <value>first(mcq_correct(ta))</value>
@@ -212,6 +243,20 @@ by the <strong>ASA</strong> congruence criterion.
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Wrong answer scores zero.</description>
+      <testinput>
+        <name>ans1</name>
+        <value><![CDATA[if is(mcq_correct(ta)[1]="yes") then "no" else "yes"]]></value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-1-F</expectedanswernote>
       </expected>
     </qtest>
   </question>

@@ -2,21 +2,14 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Finding the Surface Area and Capacity of a Goblet</text>
+      <text>Finding the Surface Area of a goblet</text>
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
 A goblet is made up of a hemisphere mounted on top of a cylindrical base. The hemisphere has a radius of \({@r@} \,\text{m}\), and the cylindrical base has the same radius with a height of \({@h@} \,\text{m}\).</p>
 <p>Answer the following:</p>
-<ol type='i'>
-  <li><p>Find the <strong>total external surface area</strong> of the goblet.</p>
-   <p>\(\text{Surface area}=\)[[input:ans1]]\(\,\text{m}^2\)[[validation:ans1]][[feedback:prt1]]</p>
-    </li>
-  <li><p>Determine the <strong>maximum volume of liquid</strong> the goblet can hold.</p>
-   <p>\(\text{Volume}=\)[[input:ans2]]\(\,\text{m}^3\)[[validation:ans2]][[feedback:prt2]]</p>
-
-    </li>
-</ol>]]></text>
+<p>Find the <strong>total external surface area</strong> of the goblet. Take \(\pi=\dfrac{22}{7}\)</p>
+   <p>\(\text{Surface area}=\)[[input:ans1]]\(\,\text{m}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<p><strong>Worked Solution</strong></p>
@@ -74,56 +67,14 @@ Height of the cylindrical base = {@h@} m
     &= {@Total_SA_val@} \,\text{m}^2
     \end{align}
     \)
-    </p>
-  </li>
-  
-  <li>
-    <p><strong>Determine the maximum volume of liquid the goblet can hold</strong></p>
-    
-    <p>
-    Step 1: Volume of the cylinder<br>
-
-    \(
-    \begin{align}
-    V_{\text{cylinder}} &= \pi r^2 h \\
-    &= \frac{22}{7} \times ({@r@})^2 \times {@h@} \\
-    &= {@Vol_cyl@} \,\text{m}^3
-    \end{align}
-    \)
-    </p>
-    
-    <p>
-    Step 2: Volume of the hemisphere<br>
-
-    \(
-    \begin{align}
-    V_{\text{hemisphere}} &= \frac{2}{3} \pi r^3 \\
-    &= \frac{2}{3} \times \frac{22}{7} \times ({@r@})^3 \\
-    &= {@Vol_hemi@} \,\text{m}^3
-    \end{align}
-    \)
-    </p>
-    
-    <p>
-    Step 3: Total volume of goblet<br>
-
-    \(
-    \begin{align}
-    V_{\text{total}} &= {@Vol_cyl@} + {@Vol_hemi@} \\
-    &= {@Total_Vol_val@} \,\text{m}^3
-    \end{align}
-    \)
-    </p>
-  </li>
-</ol>
-]]></text>
+    </p>]]></text>
     </generalfeedback>
     <defaultgrade>15</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>/* Randomize radius and height around 40 (±5) */
@@ -135,21 +86,23 @@ R_H:r*h;
 CSA_cyl: 2*22/7*r*h;
 CSA_cyl_val: float(CSA_cyl);
 
+
 /* Step 2: Curved surface area of hemisphere */
 R:r^2;
-CSA_hemi: 2*22/7*r^2;
+CSA_hemi: 2*22/7*(r^2);
 CSA_hemi_val: float(CSA_hemi);
 
 /* Step 3: Total external surface area */
 Total_SA: CSA_cyl + CSA_hemi;
 Total_SA_val: float(Total_SA);
 
-/* Step 4: Volume of the goblet (cylinder + hemisphere) */
-Vol_cyl: 22/7*r^2*h;
-Vol_hemi: (2/3)*22/7*r^3;
-Total_Vol: Vol_cyl + Vol_hemi;
-Total_Vol_val1: float(Total_Vol);
-Total_Vol_val:round(Total_Vol_val1);</text>
+/*Common student mistake*/
+
+/*Mistake 1: Using the surface area of a whole cylinder (2 pi (r^2)+ 2 pi r h) instead of the curved surface of the cylinder(2 pi r h)*/
+
+whole_cylinder_mistake:CSA_hemi+(2*22/7*(r^2)+2*22/7*r*h);
+
+</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -157,8 +110,7 @@ Total_Vol_val:round(Total_Vol_val1);</text>
     <questionnote format="html">
       <text><![CDATA[<p>\(\text{The radius of the Goblet}={@r@}\,\text{m}\)</p>
 <p>\(\text{The height of the Goblet}={@h@}\,\text{m}\)</p>
-<p>\(\text{The Surface area of the Goblet}={@Total_SA@}\,\text{m}^2\)</p>
-<p>\(\text{The volume of the Goblet}={@Total_Vol_val@}\,\text{m}^3\)</p>]]></text>
+<p>\(\text{The Surface area of the Goblet}={@Total_SA@}\,\text{m}^2\)</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -203,24 +155,6 @@ Total_Vol_val:round(Total_Vol_val1);</text>
       <showvalidation>3</showvalidation>
       <options/>
     </input>
-    <input>
-      <name>ans2</name>
-      <type>algebraic</type>
-      <tans>Total_Vol_val</tans>
-      <boxsize>7</boxsize>
-      <strictsyntax>1</strictsyntax>
-      <insertstars>0</insertstars>
-      <syntaxhint/>
-      <syntaxattribute>0</syntaxattribute>
-      <forbidwords/>
-      <allowwords/>
-      <forbidfloat>1</forbidfloat>
-      <requirelowestterms>0</requirelowestterms>
-      <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
-      <options/>
-    </input>
     <prt>
       <name>prt1</name>
       <value>1.0000000</value>
@@ -232,58 +166,51 @@ Total_Vol_val:round(Total_Vol_val1);</text>
       <node>
         <name>0</name>
         <description>Checks for the correct surface area</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>Total_SA</tans>
-        <testoptions/>
+        <testoptions>0.005</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt1-1-T</trueanswernote>
+        <trueanswernote>prt1-correct</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-0-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
-    </prt>
-    <prt>
-      <name>prt2</name>
-      <value>1.0000000</value>
-      <autosimplify>1</autosimplify>
-      <feedbackstyle>1</feedbackstyle>
-      <feedbackvariables>
-        <text/>
-      </feedbackvariables>
       <node>
-        <name>0</name>
-        <description>Checks for the correct Volume of the goblet.</description>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans2</sans>
-        <tans>Total_Vol_val</tans>
-        <testoptions/>
+        <name>1</name>
+        <description>Using the formula for surface area of a full cylinder</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>whole_cylinder_mistake</tans>
+        <testoptions>0.5</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
+        <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt2-1-T</trueanswernote>
+        <trueanswernote>prt1-whole-cylinder</trueanswernote>
         <truefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Good attempt! Unfortunately, you have the formula for the surface area of a whole cylinder. Which is :</p>
+
+<p>\(2\times\frac{22}{7}r^2 + 2\times\frac{22}{7}rh\)</p>]]></text>
         </truefeedback>
-        <falsescoremode>=</falsescoremode>
+        <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt2-1-F</falseanswernote>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -306,21 +233,11 @@ Total_Vol_val:round(Total_Vol_val1);</text>
         <name>ans1</name>
         <value>Total_SA</value>
       </testinput>
-      <testinput>
-        <name>ans2</name>
-        <value>Total_Vol_val</value>
-      </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt1-1-T</expectedanswernote>
-      </expected>
-      <expected>
-        <name>prt2</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt2-1-T</expectedanswernote>
       </expected>
     </qtest>
   </question>

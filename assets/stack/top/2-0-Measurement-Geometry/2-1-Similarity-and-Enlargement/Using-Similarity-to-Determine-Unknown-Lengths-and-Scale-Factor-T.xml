@@ -2,51 +2,98 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Exact Values of Sine, Cosine, and Tangent Without a Calculator</text>
+      <text>Using Similarity to Determine Unknown Lengths and Scale Factor Test</text>
     </name>
-    <questiontext format="html">
-      <text><![CDATA[<p>Without using a calculator, determine the exact value of each of the following trigonometric expressions: </p>
-<ol type="a">
-<li>\(\sin 120^{\circ}= \) [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
-<li>\(\sin 150^{\circ}= \) [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]
-<li>\(\cos 120^{\circ}= \) [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]
-<li>\(\cos 150^{\circ}= \) [[input:ans4]] [[validation:ans4]] [[feedback:prt4]]
-<li>\(\tan 120^{\circ}= \) [[input:ans5]] [[validation:ans5]] [[feedback:prt5]]
-<li>\(\tan 150^{\circ}= \) [[input:ans6]] [[validation:ans6]] [[feedback:prt6]]
-</ol>]]></text>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>In the diagram shown below, triangle \(OA'B'\) is an enlargement of triangle \(OAB\). </p>
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+    boundingbox: [-12, 10, 4, -4],
+    axis: false,
+    pan: { enabled: false },
+    zoom: { enabled: false },
+    showNavigation: false
+});
+
+/* === Static points (not to scale) === */
+var O  = board.create('point', [0,0], {name:'O', fixed:true, size:2});
+var A  = board.create('point', [-4,0], {name:'A', fixed:true, visible:false}); // invisible
+var B  = board.create('point', [-4,3], {name:'B', fixed:true, visible:false}); // invisible
+var A1 = board.create('point', [-8,0], {name:"A'", fixed:true, size:2});
+var B1 = board.create('point', [-8,6], {name:"B'", fixed:true, size:2});
+
+/* === Draw edges === */
+function edge(P1,P2){ return board.create('segment',[P1,P2],{strokeWidth:2,fixed:true}); }
+edge(O,A); edge(A,B); edge(B,O);         // Original triangle
+edge(O,A1); edge(A1,B1); edge(B1,O);     // Enlarged triangle
+edge(A,A1); edge(B,B1);                   // Connectors
+
+/* === Labels with just numbers === */
+// Original triangle
+board.create('text', [() => (O.X()+A.X())/2, () => (O.Y()+A.Y())/2 - 0.3, "{#OA#} cm"]);
+board.create('text', [() => (A.X()+B.X())/2, () => (A.Y()+B.Y())/2 + 0.3, "{#AB#} cm"]);
+board.create('text', [() => (O.X()+B.X())/2, () => (O.Y()+B.Y())/2 + 0.3, "{#OB#} cm"]);
+
+// Enlarged triangle
+board.create('text', [() => (O.X()+A1.X())/2, () => (O.Y()+A1.Y())/2 - 0.3, "A"]);
+board.create('text', [() => (O.X()+B1.X())/2, () => (O.Y()+B1.Y())/2 + 0.3, "B"]);
+
+// Connector BB'
+board.create('text', [() => (B.X()+B1.X())/2, () => (B.Y()+B1.Y())/2 + 0.3, "{#BB1#} cm"]);
+
+/* Prevent interaction */
+board.renderer.svgRoot.style.pointerEvents = "none";
+[[/jsxgraph]]
+
+<p>(a). Identify the centre of enlargement.</p>
+<p>[[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p>
+<p>(b). Find the scale factor of the enlargement.</p>
+<p>[[input:ans2]] [[validation:ans2]][[feedback:prt2]]</p>
+<p>(c). Calculate the lengths of</p>
+  <p>  (i). \(A'B'\) [[input:ans3]] cm[[validation:ans3]][[feedback:prt3]]
+             </p>
+  <p>  (ii). \(OA'\) [[input:ans4]] cm[[validation:ans4]][[feedback:prt4]]
+             </p>]]></text>
     </questiontext>
-    <generalfeedback format="html">
-      <text><![CDATA[<ol type="a">
-<li> \( \sin 120^\circ=\sin (180-60)=\sin 60^\circ=\dfrac{\sqrt{3}}{2} \)
-<li> \( \sin 150^\circ=\sin (180-30)=\sin 30^\circ=\dfrac{1}{2} \)
-<li> \(\cos 120^\circ=-\cos 60=-\dfrac{1}{2} \)
-<li> \(\cos 150^\circ=-\cos 30^\circ=-\dfrac{\sqrt{3}}{2} \)
-<li> \( \tan120^\circ=\dfrac{\frac{\sqrt{3}}{2}}{-\frac{1}{2}}=-\sqrt{3} \)
-<li> \( \tan150^\circ=\dfrac{\frac{1}{2}}{-\frac{\sqrt{3}}{2}}=-\frac{1}{\sqrt{3}} \)
-</ol>]]></text>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>(a).The centre of enlargement is \(O\).</p>
+<p>(b). Scale factor = \(\frac {OB'}{OB} = \frac{{@OB1@}}{{@OB@}} = {@K@}\)</p>
+<p>(c). (i). \(\frac{OB'}{OB} = \frac{A'B'}{AB} \Rightarrow \frac{{@OB1@}}{{@OB@}} = \frac{A'B'}{{@AB@}}\)</p>
+<p>\(\quad \quad \quad \quad A'B'= \frac{{@AB@}\times{@OB1@}}{{@AB@}}={@ta2@}\) cm</p>
+
+<p> (ii). \(\frac{OB'}{OB} = \frac{OA'}{OA} \Rightarrow \frac{{@OB1@}}{{@OB@}} = \frac{OA'}{{@OA@}}\)</p>
+<p>\(\quad \quad \quad \quad OA'= \frac{{@OB1@}\times{@OA@}}{{@OB@}}={@ta3@}\) cm</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2026010500</text>
+      <text>2025073100</text>
     </stackversion>
     <questionvariables>
-      <text>ta1 : sqrt(3)/2;
-ta2 : 1/2;
-ta3 : -1/2;
-ta4 : -sqrt(3)/2;
-ta5 : -sqrt(3);
-ta6 : -1/sqrt(3);</text>
+      <text><![CDATA[ta:[["O", true],["B", false],["A'", false],["B'", false]];
+
+OB:rand(10)+2;
+OA:rand_with_prohib(2,5,[OB]);
+K:rand([2,3,4,5]);
+OB1:K*OB;
+AB:rand_with_prohib(2,5,[OB,OA]);
+OA1:K*OA;
+BB1:OB1-OB;
+ta1:K;
+ta2:K*AB;
+ta3:OA1;]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
-    <questionnote format="moodle_auto_format">
-      <text/>
+    <questionnote format="html">
+      <text><![CDATA[<p>\(A'B'\) = {@ta2@}</p>
+<p>\(OA'\) = {@ta3@}</p>]]></text>
     </questionnote>
-    <questiondescription format="moodle_auto_format">
+    <questiondescription format="html">
       <text/>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
@@ -63,7 +110,7 @@ ta6 : -1/sqrt(3);</text>
     </prtincorrect>
     <decimals>.</decimals>
     <scientificnotation>*10</scientificnotation>
-    <multiplicationsign>dot</multiplicationsign>
+    <multiplicationsign>none</multiplicationsign>
     <sqrtsign>1</sqrtsign>
     <complexno>i</complexno>
     <inversetrig>cos-1</inversetrig>
@@ -73,32 +120,32 @@ ta6 : -1/sqrt(3);</text>
     <variantsselectionseed/>
     <input>
       <name>ans1</name>
-      <type>algebraic</type>
-      <tans>ta1</tans>
-      <boxsize>6</boxsize>
+      <type>dropdown</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
       <syntaxattribute>0</syntaxattribute>
-      <forbidwords>sin</forbidwords>
+      <forbidwords/>
       <allowwords/>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
       <showvalidation>3</showvalidation>
-      <options/>
+      <options>shuffle</options>
     </input>
     <input>
       <name>ans2</name>
       <type>algebraic</type>
-      <tans>ta2</tans>
-      <boxsize>6</boxsize>
+      <tans>ta1</tans>
+      <boxsize>5</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
       <syntaxattribute>0</syntaxattribute>
-      <forbidwords>sin</forbidwords>
+      <forbidwords/>
       <allowwords/>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
@@ -110,13 +157,13 @@ ta6 : -1/sqrt(3);</text>
     <input>
       <name>ans3</name>
       <type>algebraic</type>
-      <tans>ta3</tans>
-      <boxsize>6</boxsize>
+      <tans>ta2</tans>
+      <boxsize>5</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
       <syntaxattribute>0</syntaxattribute>
-      <forbidwords>cos</forbidwords>
+      <forbidwords/>
       <allowwords/>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
@@ -128,49 +175,13 @@ ta6 : -1/sqrt(3);</text>
     <input>
       <name>ans4</name>
       <type>algebraic</type>
-      <tans>ta4</tans>
-      <boxsize>6</boxsize>
+      <tans>ta3</tans>
+      <boxsize>5</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
       <syntaxattribute>0</syntaxattribute>
-      <forbidwords>cos</forbidwords>
-      <allowwords/>
-      <forbidfloat>1</forbidfloat>
-      <requirelowestterms>0</requirelowestterms>
-      <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
-      <options/>
-    </input>
-    <input>
-      <name>ans5</name>
-      <type>algebraic</type>
-      <tans>ta5</tans>
-      <boxsize>6</boxsize>
-      <strictsyntax>1</strictsyntax>
-      <insertstars>0</insertstars>
-      <syntaxhint/>
-      <syntaxattribute>0</syntaxattribute>
-      <forbidwords>tan</forbidwords>
-      <allowwords/>
-      <forbidfloat>1</forbidfloat>
-      <requirelowestterms>0</requirelowestterms>
-      <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
-      <options/>
-    </input>
-    <input>
-      <name>ans6</name>
-      <type>algebraic</type>
-      <tans>ta6</tans>
-      <boxsize>6</boxsize>
-      <strictsyntax>1</strictsyntax>
-      <insertstars>0</insertstars>
-      <syntaxhint/>
-      <syntaxattribute>0</syntaxattribute>
-      <forbidwords>tan</forbidwords>
+      <forbidwords/>
       <allowwords/>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
@@ -190,9 +201,9 @@ ta6 : -1/sqrt(3);</text>
       <node>
         <name>0</name>
         <description/>
-        <answertest>AlgEquiv</answertest>
+        <answertest>EqualComAss</answertest>
         <sans>ans1</sans>
-        <tans>ta1</tans>
+        <tans>mcq_correct(ta)[1]</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -215,7 +226,7 @@ ta6 : -1/sqrt(3);</text>
     </prt>
     <prt>
       <name>prt2</name>
-      <value>1.0000000</value>
+      <value>2.0000000</value>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
@@ -226,7 +237,7 @@ ta6 : -1/sqrt(3);</text>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans2</sans>
-        <tans>ta2</tans>
+        <tans>ta1</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -249,7 +260,7 @@ ta6 : -1/sqrt(3);</text>
     </prt>
     <prt>
       <name>prt3</name>
-      <value>1.0000000</value>
+      <value>3.0000000</value>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
@@ -260,7 +271,7 @@ ta6 : -1/sqrt(3);</text>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans3</sans>
-        <tans>ta3</tans>
+        <tans>ta2</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -283,7 +294,7 @@ ta6 : -1/sqrt(3);</text>
     </prt>
     <prt>
       <name>prt4</name>
-      <value>1.0000000</value>
+      <value>4.0000000</value>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
@@ -294,7 +305,7 @@ ta6 : -1/sqrt(3);</text>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans4</sans>
-        <tans>ta4</tans>
+        <tans>ta3</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -315,100 +326,44 @@ ta6 : -1/sqrt(3);</text>
         </falsefeedback>
       </node>
     </prt>
-    <prt>
-      <name>prt5</name>
-      <value>1.0000000</value>
-      <autosimplify>1</autosimplify>
-      <feedbackstyle>1</feedbackstyle>
-      <feedbackvariables>
-        <text/>
-      </feedbackvariables>
-      <node>
-        <name>0</name>
-        <description/>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans5</sans>
-        <tans>ta5</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
-        <truepenalty/>
-        <truenextnode>-1</truenextnode>
-        <trueanswernote>prt5-1-T</trueanswernote>
-        <truefeedback format="html">
-          <text/>
-        </truefeedback>
-        <falsescoremode>=</falsescoremode>
-        <falsescore>0</falsescore>
-        <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt5-1-F</falseanswernote>
-        <falsefeedback format="html">
-          <text/>
-        </falsefeedback>
-      </node>
-    </prt>
-    <prt>
-      <name>prt6</name>
-      <value>1.0000000</value>
-      <autosimplify>1</autosimplify>
-      <feedbackstyle>1</feedbackstyle>
-      <feedbackvariables>
-        <text/>
-      </feedbackvariables>
-      <node>
-        <name>0</name>
-        <description/>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans6</sans>
-        <tans>ta6</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
-        <truepenalty/>
-        <truenextnode>-1</truenextnode>
-        <trueanswernote>prt6-1-T</trueanswernote>
-        <truefeedback format="html">
-          <text/>
-        </truefeedback>
-        <falsescoremode>=</falsescoremode>
-        <falsescore>0</falsescore>
-        <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt6-1-F</falseanswernote>
-        <falsefeedback format="html">
-          <text/>
-        </falsefeedback>
-      </node>
-    </prt>
+    <deployedseed>842258310</deployedseed>
+    <deployedseed>898158260</deployedseed>
+    <deployedseed>313475464</deployedseed>
+    <deployedseed>1222965442</deployedseed>
+    <deployedseed>1093556149</deployedseed>
+    <deployedseed>275363241</deployedseed>
+    <deployedseed>335671725</deployedseed>
+    <deployedseed>974834232</deployedseed>
+    <deployedseed>631992674</deployedseed>
+    <deployedseed>160309941</deployedseed>
+    <deployedseed>1155744774</deployedseed>
+    <deployedseed>1731449008</deployedseed>
+    <deployedseed>979266588</deployedseed>
+    <deployedseed>422670948</deployedseed>
+    <deployedseed>981099574</deployedseed>
+    <deployedseed>693395756</deployedseed>
+    <deployedseed>1899989681</deployedseed>
+    <deployedseed>996243196</deployedseed>
+    <deployedseed>1269531791</deployedseed>
+    <deployedseed>1542588172</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description/>
+      <description>Test case assuming the teacher's input gets full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>ta1</value>
+        <value>first(mcq_correct(ta))</value>
       </testinput>
       <testinput>
         <name>ans2</name>
-        <value>ta2</value>
+        <value>ta1</value>
       </testinput>
       <testinput>
         <name>ans3</name>
-        <value>ta3</value>
+        <value>ta2</value>
       </testinput>
       <testinput>
         <name>ans4</name>
-        <value>ta4</value>
-      </testinput>
-      <testinput>
-        <name>ans5</name>
-        <value>ta5</value>
-      </testinput>
-      <testinput>
-        <name>ans6</name>
-        <value>ta6</value>
+        <value>ta3</value>
       </testinput>
       <expected>
         <name>prt1</name>
@@ -433,18 +388,6 @@ ta6 : -1/sqrt(3);</text>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt4-1-T</expectedanswernote>
-      </expected>
-      <expected>
-        <name>prt5</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt5-1-T</expectedanswernote>
-      </expected>
-      <expected>
-        <name>prt6</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt6-1-T</expectedanswernote>
       </expected>
     </qtest>
   </question>
