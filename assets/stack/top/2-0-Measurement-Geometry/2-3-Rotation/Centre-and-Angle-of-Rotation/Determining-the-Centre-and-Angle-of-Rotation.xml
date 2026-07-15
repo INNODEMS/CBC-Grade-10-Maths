@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Determining the Centre and Angle of Rotation</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Triangle <b>\(\triangle A'B'C'\)</b> is the image of triangle <b>\(\triangle ABC\)</b> after a rotation. Use the coordinates provided and the principles of geometric construction to find the transformation details.</p>
+
+<ul>
+    <li>Original: <b>A({@x1@}, {@y1@})</b>, <b>B({@x2@}, {@y2@})</b>, <b>C({@x3@}, {@y3@})</b></li>
+    <li>Image: <b>A'{@pA_prime@}</b>, <b>B'{@pB_prime@}</b>, <b>C'{@pC_prime@}</b></li>
+</ul>
+
+[[jsxgraph width="450px" height="450px"]]
+var board = JXG.JSXGraph.initBoard(divid, {boundingbox: [-10, 10, 10, -10], axis: true, showCopyright: false});
+
+// Original Triangle
+var poly1 = board.create('polygon', [{#pA#}, {#pB#}, {#pC#}], {fillColor: 'blue', fillOpacity: 0.2, name: '△ABC', withLabel: true});
+
+// Image Triangle
+var poly2 = board.create('polygon', [{#pA_prime#}, {#pB_prime#}, {#pC_prime#}], {fillColor: 'red', fillOpacity: 0.2, name: "△A'B'C'", withLabel: true});
+[[/jsxgraph]]
+
+<ol>
+    <li>Find the coordinates of the centre of rotation (O). <br>
+        O = [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+    </li>
+    <li>Find the angle of rotation in degrees. <br>
+        Angle = [[input:ans2]]° [[validation:ans2]] [[feedback:prt2]]
+    </li>
+</ol>
+
+<p><i>(Note: Use negative values for clockwise rotation and positive for anti-clockwise.)</i></p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<b>Step 1: Join corresponding points and construct perpendicular bisectors</b>
+<p>Join point <b>C</b> to <b>C'</b>. The perpendicular bisector of the segment \(CC'\) passes through all points equidistant from C and C'.</p>
+
+<b>Step 2: Find the intersection of bisectors</b>
+<p>Similarly, join point <b>B</b> to <b>B'</b> and construct its perpendicular bisector. The point where these two bisectors intersect is the <b>centre of rotation, O</b>.</p>
+\(\begin{align}
+O &= ({@cx@}, {@cy@})
+\end{align}\)
+
+
+<p>Constructing a third perpendicular bisector for \(AA'\) would also intersect at the same point \(O\).</p>
+
+<b>Step 4: Measure the angle</b>
+<p>Join point <b>C</b> and <b>C'</b> to the centre <b>O</b>. Measure the angle \(\angle COC'\) using a protractor or coordinate geometry.</p>
+\(\begin{align}
+\text{Angle} &= \mathbf{{@ta2@}^\circ} \text{ (Clockwise)}
+\end{align}\)
+
+[[jsxgraph width="400px" height="400px"]]
+var b2 = JXG.JSXGraph.initBoard(divid, {boundingbox: [-10, 10, 10, -10], axis: true, showCopyright: false});
+b2.create('polygon', [{#pA#}, {#pB#}, {#pC#}], {fillColor: 'blue', fillOpacity: 0.1});
+b2.create('polygon', [{#pA_prime#}, {#pB_prime#}, {#pC_prime#}], {fillColor: 'red', fillOpacity: 0.1});
+
+// Centre point
+var O = b2.create('point', [{#cx#}, {#cy#}], {name: 'O', color: 'black', fixed: true});
+
+// Construction lines for Step 4
+b2.create('segment', [O, {#pC#}], {dash: 1, strokeColor: 'gray'});
+b2.create('segment', [O, {#pC_prime#}], {dash: 1, strokeColor: 'gray'});
+b2.create('angle', [{#pC_prime#}, O, {#pC#}], {radius: 1});
+[[/jsxgraph]]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* 1. Define Rotation Parameters */
+/* Centre O is fixed at [1, 1] for this randomization */
+/* Randomize centre between -2 and 2 on both axes */
+cx: -2 + rand(5); 
+cy: -2 + rand(5); 
+/* 2. Define Original Triangle ABC */
+x1: -4; y1: 2;
+x2: -6; y2: 4;
+x3: -7; y3: 1;
+pA: [x1, y1]; pB: [x2, y2]; pC: [x3, y3];
+
+/* 3. Rotation (90 degrees clockwise / -90 degrees) */
+/* Rule: (x,y) -> (y-cy+cx, -(x-cx)+cy) */
+rotate_pt(p) := [p[2]-cy+cx, -(p[1]-cx)+cy];
+
+pA_prime: rotate_pt(pA);
+pB_prime: rotate_pt(pB);
+pC_prime: rotate_pt(pC);
+
+/* 4. Teacher Answers */
+ta1: [cx, cy];
+ta2: -90; /* Clockwise */]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta1@}</p>
+<p>{@ta2@}</p>
+<p>Original: <b>A({@x1@}, {@y1@})</b>, <b>B({@x2@}, {@y2@})</b>, <b>C({@x3@}, {@y3@})</b></p>
+<p>Image: <b>A'{@pA_prime@}</b>, <b>B'{@pB_prime@}</b>, <b>C'{@pC_prime@}</b></p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>778528468</deployedseed>
+    <deployedseed>1866532935</deployedseed>
+    <deployedseed>656131369</deployedseed>
+    <deployedseed>883318024</deployedseed>
+    <deployedseed>231438056</deployedseed>
+    <deployedseed>1022192067</deployedseed>
+    <deployedseed>1711056096</deployedseed>
+    <deployedseed>1016895120</deployedseed>
+    <deployedseed>1535254477</deployedseed>
+    <deployedseed>383386427</deployedseed>
+    <deployedseed>243440731</deployedseed>
+    <deployedseed>1897997840</deployedseed>
+    <deployedseed>660349435</deployedseed>
+    <deployedseed>1327394302</deployedseed>
+    <deployedseed>56025019</deployedseed>
+    <deployedseed>842754476</deployedseed>
+    <deployedseed>1650205648</deployedseed>
+    <deployedseed>2058884722</deployedseed>
+    <deployedseed>64077921</deployedseed>
+    <deployedseed>634729320</deployedseed>
+    <deployedseed>1865439977</deployedseed>
+  </question>
+</quiz>

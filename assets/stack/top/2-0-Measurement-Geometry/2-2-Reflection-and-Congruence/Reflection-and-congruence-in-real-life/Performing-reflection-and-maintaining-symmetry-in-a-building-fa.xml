@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Reflection and symmetry in a building facade (interactive)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>An architect is finishing a scale drawing of a building on a metre grid. {@intro@} The <b style="color:#c00">red dashed line</b> is the line of symmetry.</p>
+
+<p>{@task@}</p>
+
+[[jsxgraph input-ref-ans1="rW" input-ref-ans2="rD" width="480px" height="480px"]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: {#bbox#}, keepaspectratio: true,
+    axis: true, showNavigation: false, showCopyright: false,
+    pan: {enabled: false}, zoom: {enabled: false},
+    defaultAxes: {
+            x: { ticks: { insertTicks: false, ticksDistance: 1, minorTicks: 0, drawLabels: true } },
+            y: { ticks: { insertTicks: false, ticksDistance: 1, minorTicks: 0, drawLabels: true } }
+        }
+});
+
+var cH   = {#cH#};                 // 1 = lake (reflect in y=0), 0 = facade (reflect in x=0)
+var WL   = {#WL#}, DL = {#DL#}, TL = {#TL#};
+var SH   = {#shellL#};
+var parkW = {#parkW#}, parkD = {#parkD#};
+
+function mir(p) { return cH ? [p[0], -p[1]] : [-p[0], p[1]]; }
+
+// a point whose position is (getC()[0]+dx, getC()[1]+dy), updating live
+function fpt(getC, dx, dy) {
+    return board.create('point',
+        [function () { return getC()[0] + dx; }, function () { return getC()[1] + dy; }],
+        {visible: false, fixed: true});
+}
+function poly(P, col, op, dash) {
+    board.create('polygon', P, {
+        fillColor: col, fillOpacity: op,
+        borders: {strokeColor: col, strokeWidth: 2, dash: dash},
+        vertices: {visible: false}, fixed: true, highlight: false, hasInnerPoints: false
+    });
+}
+function shell(pts, given) {
+    var P = pts.map(function (q) { return board.create('point', q, {visible: false, fixed: true}); });
+    poly(P, given ? '#e7e2d6' : '#dced', given ? 0.6 : 0.45, given ? 0 : 2);
+}
+function tri(pts, col) {
+    var P = pts.map(function (q) { return board.create('point', q, {visible: false, fixed: true}); });
+    poly(P, col, 0.55, 0);
+}
+function windowAt(getC, col) {        
+    var h = 1;
+    poly([fpt(getC, -h, -h), fpt(getC, h, -h), fpt(getC, h, h), fpt(getC, -h, h)], col, 0.2, 0);
+    board.create('segment', [fpt(getC, 0, -h), fpt(getC, 0, h)], {strokeColor: col, strokeWidth: 1, fixed: true, highlight: false});
+    board.create('segment', [fpt(getC, -h, 0), fpt(getC, h, 0)], {strokeColor: col, strokeWidth: 1, fixed: true, highlight: false});
+}
+function doorAt(getC, col) {             // 1.4 m wide, 2.6 m tall, centred on getC
+    var hw = 0.5, hh = 1;
+    poly([fpt(getC, -hw, -hh), fpt(getC, hw, -hh), fpt(getC, hw, hh), fpt(getC, -hw, hh)], col, 0.3, 0);
+    board.create('point', [function () { return getC()[0]; }, function () { return getC()[1]; }],
+        {name: '', size: 1, fixed: true, fillColor: col, strokeColor: col, highlight: false});
+}
+
+// mirror line / horizon
+if (cH) {
+    board.create('line', [[-9, 0], [9, 0]], {strokeColor: '#c00', dash: 2, straightFirst: false, straightLast: false, fixed: true, highlight: false});
+    board.create('text', [5.4, 0.4, 'water (y = 0)'], {fontSize: 12, color: '#c00', fixed: true});
+} else {
+    board.create('line', [[0, -9], [0, 9]], {strokeColor: '#c00', dash: 2, fixed: true, highlight: false});
+    board.create('text', [0.3, 7.4, 'x = 0'], {fontSize: 12, color: '#c00', fixed: true});
+}
+
+// building shell: given half + mirrored (decorative) half
+shell(SH, true);
+shell(SH.map(mir), false);
+
+// given (original) features
+windowAt(function () { return WL; }, '#1e6fd0');
+doorAt(function () { return DL; }, '#8a5a2b');
+
+// triangular pediment above the door: original + reflected (both drawn) - the congruence subject
+tri(TL, '#e08a00');
+tri(TL.map(mir), '#e08a00');
+
+// draggable markers for the reflected window and door
+var pW = board.create('point', parkW, {name: 'Window', size: 4, fillColor: '#1e6fd0', strokeColor: '#12508f',
+    snapToGrid: true, snapSizeX: 0.5, snapSizeY: 0.5, label: {offset: [8, 8], fontSize: 13}});
+var pD = board.create('point', parkD, {name: 'Door', size: 4, fillColor: '#8a5a2b', strokeColor: '#5e3d1c',
+    snapToGrid: true, snapSizeX: 0.5, snapSizeY: 0.5, label: {offset: [8, 8], fontSize: 13}});
+windowAt(function () { return [pW.X(), pW.Y()]; }, '#1e6fd0');
+doorAt(function () { return [pD.X(), pD.Y()]; }, '#8a5a2b');
+
+stack_jxg.bind_point(rW, pW);
+stack_jxg.bind_point(rD, pD);
+[[/jsxgraph]]
+
+<div style="display:none">[[input:ans1]] [[validation:ans1]] [[input:ans2]] [[validation:ans2]]</div>
+<div>[[feedback:prt1]]</div>
+<div>[[feedback:prt2]]</div>
+
+<p>The architect added a triangular pediment (the orange triangle) above the door, and mirrored it onto the reflected side. Is the reflected pediment congruent to the original one?</p>
+<div>[[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</div>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p><b>The reflection rule.</b> {@rulewords@} So each feature keeps one coordinate and has the other negated:</p>
+<ul>
+  <li>Window: original {@WL@} \(\to\) reflection {@ta1@}</li>
+  <li>Door: original {@DL@} \(\to\) reflection {@ta2@}</li>
+</ul>
+<p>A mirror image sits the <b>same perpendicular distance</b> from the line of symmetry as the original, but on the opposite side.</p>
+<p><b>Congruence.</b> A reflection is a rigid motion (an isometry): it preserves every length and angle. The reflected pediment is therefore <b>congruent</b> to the original &mdash; the same size and shape, just mirror-reversed (its orientation is flipped). It is <i>not</i> merely similar, and reflection never changes size.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>3</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* 1 = symmetric facade about x = 0 ; 2 = building reflected in a lake (y = 0) */
+cs : rand(2) + 1;
+cH : if cs = 2 then 1 else 0;
+
+if cs = 1 then (
+    bbox : [-8, 8, 8, -8],
+    shellL : [[0, 0], [-6, 0], [-6, 5], [0, 7]],
+    wx : rand([-3, -2]), wy : rand([3, 4]),
+    dx : rand([-1, -2]), dy : 1,
+    parkW : [3, -3.5], parkD : [6, -3.5],
+    intro : "The front (facade) of the building must be symmetric about its vertical centre line.",
+    task : "Drag the Window and Door markers onto the empty right-hand side so that the facade is symmetric.",
+    rulewords : "The facade is symmetric about the line \\(x = 0\\), so every point \\((x, y)\\) maps to \\((-x, y)\\).",
+    mirrorword : "vertical centre line (x = 0)"
+) else (
+    bbox : [-8, 8, 8, -8],
+    shellL : [[-5, 0], [5, 0], [5, 5], [0, 7], [-5, 5]],
+    wx : rand([-3, -2]), wy : rand([3, 4]),
+    dx : rand([1, 2]), dy : 1,
+    parkW : [-6, 6.5], parkD : [6, 6.5],
+    intro : "The building stands beside a calm lake and is reflected in the water. The waterline is the line of symmetry.",
+    task : "Drag the Window and Door markers below the water so they show the correct reflection of the building.",
+    rulewords : "The reflection is in the waterline \\(y = 0\\), so every point \\((x, y)\\) maps to \\((x, -y)\\).",
+    mirrorword : "waterline (y = 0)"
+);
+
+WL : [wx, wy];
+DL : [dx, dy];
+
+/* triangular pediment above the door (drawn on the given side, then mirrored) */
+TL : [[dx - 1, 2*dy], [dx + 1,2*dy], [dx, 2*dy + 1]];
+
+/* reflection rule, and the wrong-line reflection used for diagnostics */
+refl(p) := if cH = 1 then [p[1], -p[2]] else [-p[1], p[2]];
+othr(p) := if cH = 1 then [-p[1], p[2]] else [p[1], -p[2]];
+
+ta1 : refl(WL);
+ta2 : refl(DL);
+sameW : WL;      axisW : othr(WL);
+sameD : DL;      axisD : othr(DL);
+
+/* congruence dropdown: [value, correct?, displayed label] */
+tac : random_permutation([
+    ["yes",     true,  "Yes - it is congruent (same size and shape, just mirror-reversed)"],
+    ["similar", false, "No - the reflected triangle is only similar, not congruent"],
+    ["resized", false, "No - reflection changes the size of the triangle"]]);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>Case {@cs@}: W {@WL@} to {@ta1@}, D {@DL@} to {@ta2@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options>hideanswer</options>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options>hideanswer</options>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>dropdown</type>
+      <tans>tac</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>dc    : sqrt((ans1[1] - ta1[1])^2 + (ans1[2] - ta1[2])^2);
+dsame : sqrt((ans1[1] - sameW[1])^2 + (ans1[2] - sameW[2])^2);
+daxis : sqrt((ans1[1] - axisW[1])^2 + (ans1[2] - axisW[2])^2);</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Window placed correctly?</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>dc</sans>
+        <tans>0</tans>
+        <testoptions>0.35</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-correct</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Window placed correctly.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Left on the same side as the original?</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>dsame</sans>
+        <tans>0</tans>
+        <testoptions>0.35</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-notcrossed</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>The window marker is still on the same side as the original &mdash; it hasn't crossed the line of symmetry. A mirror image must be the same distance from the line, but on the <b>opposite</b> side.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Reflected in the wrong line?</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>daxis</sans>
+        <tans>0</tans>
+        <testoptions>0.35</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-wrongline</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You reflected in the wrong direction. The line of symmetry here is the <b>{@mirrorword@}</b>, so the marker should flip across <i>that</i> line, not the other one.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-other</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The window isn't in the symmetric position yet. It must be the same perpendicular distance from the line of symmetry as the original window, on the opposite side.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>dc    : sqrt((ans2[1] - ta2[1])^2 + (ans2[2] - ta2[2])^2);
+dsame : sqrt((ans2[1] - sameD[1])^2 + (ans2[2] - sameD[2])^2);
+daxis : sqrt((ans2[1] - axisD[1])^2 + (ans2[2] - axisD[2])^2);</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Door placed correctly?</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>dc</sans>
+        <tans>0</tans>
+        <testoptions>0.35</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-correct</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Door placed correctly.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Left on the same side as the original?</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>dsame</sans>
+        <tans>0</tans>
+        <testoptions>0.35</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-notcrossed</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>The door marker is still on the same side as the original &mdash; it hasn't crossed the line of symmetry. A mirror image must be the same distance from the line, but on the <b>opposite</b> side.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Reflected in the wrong line?</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>daxis</sans>
+        <tans>0</tans>
+        <testoptions>0.35</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-wrongline</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You reflected in the wrong direction. The line of symmetry here is the <b>{@mirrorword@}</b>, so the marker should flip across <i>that</i> line, not the other one.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-other</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The door isn't in the symmetric position yet. It must be the same perpendicular distance from the line of symmetry as the original door, on the opposite side.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Congruent?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>mcq_correct(tac)[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-correct</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt3-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Similar misconception?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans><![CDATA["similar"]]></tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-similar</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Similar means "same shape". These are more than that: a reflection preserves every length and angle, so the two triangles are exactly the same size &mdash; they are <b>congruent</b>.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Resize misconception?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans><![CDATA["resized"]]></tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-resized</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>A reflection is a rigid motion &mdash; it flips the shape over the line but never stretches or shrinks it. The mirror image is the same size, so it is <b>congruent</b>.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-other</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1001</deployedseed>
+    <deployedseed>1002</deployedseed>
+    <deployedseed>1003</deployedseed>
+    <deployedseed>1004</deployedseed>
+    <deployedseed>1005</deployedseed>
+    <deployedseed>1006</deployedseed>
+    <deployedseed>1007</deployedseed>
+    <deployedseed>1008</deployedseed>
+    <deployedseed>1009</deployedseed>
+    <deployedseed>1010</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>All correct: reflected window and door, congruent.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta2</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>mcq_correct(tac)[1]</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-correct</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-correct</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-correct</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description><![CDATA[Did not cross the line (window & door left on original) and chose "similar".]]></description>
+      <testinput>
+        <name>ans1</name>
+        <value>sameW</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>sameD</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value><![CDATA["similar"]]></value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-notcrossed</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt2-notcrossed</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt3-similar</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description><![CDATA[Reflected in the wrong line (window & door).]]></description>
+      <testinput>
+        <name>ans1</name>
+        <value>axisW</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>axisD</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value><![CDATA["resized"]]></value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-wrongline</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt2-wrongline</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt3-resized</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

@@ -2,13 +2,13 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Reflect shape on an axis</text>
+      <text>Reflect shape in a 45-degree line</text>
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
-The red shape is shown on the coordinate plane.
-Reflect it in the <strong>y-axis</strong>.
+The red shape is shown on the coordinate plane, together with the dashed mirror line \( y = {@lineexpr@} \).
 </p>
+<p>Reflect the shape in the line \( y = {@lineexpr@} \) by dragging the blue vertices to their image positions.</p>
 
 [[jsxgraph
   input-ref-sP1="sP1"
@@ -20,10 +20,30 @@ Reflect it in the <strong>y-axis</strong>.
 ]]
 
 var board = JXG.JSXGraph.initBoard(divid, {
-  boundingbox: [-4, 8, 7, -2],
+  boundingbox: [-6, 9, 9, -6],
   axis: true,
-  grid: true,
-  showCopyright: false
+  keepaspectratio: true,
+  showCopyright: false,
+  grid: false,
+  pan: { enabled: false },
+  zoom: { enabled: false },
+  defaultAxes: {
+    x: { ticks: { insertTicks: false, ticksDistance: 1, minorTicks: 0, drawLabels: true } },
+    y: { ticks: { insertTicks: false, ticksDistance: 1, minorTicks: 0, drawLabels: true } }
+  }
+});
+board.create('grid', [], { gridX: 1, gridY: 1 });
+
+// ----------------------------
+// Mirror line  y = x + c  (45 degrees)
+// ----------------------------
+var c = {#c#};
+board.create('line', [[0, c], [1, 1 + c]], {
+  dash: 2, strokeColor: '#888888', strokeWidth: 2,
+  fixed: true, highlight: false
+});
+board.create('text', [6.2, 6.2 + c, 'mirror line'], {
+  fontSize: 12, color: '#888888', fixed: true, anchorX: 'left'
 });
 
 // ----------------------------
@@ -34,10 +54,7 @@ var teacherPts = [];
 
 for (var i = 0; i < teacherShape.length; i++) {
   teacherPts.push(
-    board.create('point', teacherShape[i], {
-      visible: false,
-      fixed: true
-    })
+    board.create('point', teacherShape[i], { visible: false, fixed: true })
   );
 }
 
@@ -45,11 +62,7 @@ for (var i = 0; i < teacherPts.length; i++) {
   board.create('segment', [
     teacherPts[i],
     teacherPts[(i + 1) % teacherPts.length]
-  ], {
-    strokeColor: 'red',
-    strokeWidth: 3,
-    fixed: true
-  });
+  ], { strokeColor: 'red', strokeWidth: 3, fixed: true });
 }
 
 // ----------------------------
@@ -61,24 +74,16 @@ var studentPts = [];
 for (var i = 0; i < studentShape.length; i++) {
   studentPts.push(
     board.create('point', studentShape[i], {
-      color: 'blue',
-      snapToGrid: true,
-      withLabel: false
+      color: 'blue', size: 3, snapToGrid: true, withLabel: false
     })
   );
 }
 
-// Draw edges (non-draggable)
 for (var i = 0; i < studentPts.length; i++) {
   board.create('segment', [
     studentPts[i],
     studentPts[(i + 1) % studentPts.length]
-  ], {
-    strokeColor: 'blue',
-    strokeWidth: 2,
-    fixed: true,
-    highlight: false
-  });
+  ], { strokeColor: 'blue', strokeWidth: 2, fixed: true, highlight: false });
 }
 
 // ----------------------------
@@ -108,47 +113,61 @@ board.unsuspendUpdate();
 [[feedback:prt1]]]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<h3>Worked Solution</h3>
+      <text><![CDATA[<h3>Worked solution</h3>
 
-<p>To reflect a shape in the <strong>y-axis</strong>, we use the transformation rule:</p>
+<p>Reflect each vertex straight across the dashed line \( y = {@lineexpr@} \): its image sits the same perpendicular distance away, on the other side. Join the images in the same order to get the green shape.</p>
 
-\[
-(x, y) \longrightarrow (-x, y)
-\]
+<p>The thin lines join each vertex to its image. Each one meets the mirror line at a right angle, and the line cuts it exactly in half.</p>
 
-<p>This means:</p>
-<ul>
-<li>The <strong>x-coordinate changes sign</strong>.</li>
-<li>The <strong>y-coordinate remains the same</strong>.</li>
-</ul>
+[[jsxgraph height='430px' width='430px']]
+var board = JXG.JSXGraph.initBoard(divid, {
+  boundingbox: [-6, 9, 9, -6],
+  axis: true, keepaspectratio: true, showCopyright: false, grid: false,
+  pan: { enabled: false }, zoom: { enabled: false },
+  defaultAxes: {
+    x: { ticks: { insertTicks: false, ticksDistance: 1, minorTicks: 0, drawLabels: true } },
+    y: { ticks: { insertTicks: false, ticksDistance: 1, minorTicks: 0, drawLabels: true } }
+  }
+});
+board.create('grid', [], { gridX: 1, gridY: 1 });
 
-<hr>
+var c = {#c#};
+board.create('line', [[0, c], [1, 1 + c]], {
+  dash: 2, strokeColor: '#888888', strokeWidth: 2, fixed: true, highlight: false
+});
+board.create('text', [6.2, 6.2 + c, 'y = x' + (c === 0 ? '' : (c > 0 ? ' + ' + c : ' - ' + (-c)))], {
+  fontSize: 12, color: '#888888', fixed: true, anchorX: 'left'
+});
 
-<p><strong>Original vertices of the red shape:</strong></p>
+function drawShape(coords, col, fillop) {
+  var pts = coords.map(function (p) {
+    return board.create('point', p, { visible: false, fixed: true });
+  });
+  board.create('polygon', pts, {
+    fillColor: col, fillOpacity: fillop,
+    borders: { strokeColor: col, strokeWidth: 3 },
+    fixed: true, vertices: { visible: false }
+  });
+}
 
-\[
-{@base_shape@}
-\]
+var origPts = {#base_shape#};
+var reflPts = {#reflected_shape#};
+drawShape(origPts, '#d62728', 0.15);   // original (red)
+drawShape(reflPts, '#2ca02c', 0.30);   // reflected (green)
 
-<p>Applying the reflection rule \((x,y)\rightarrow(-x,y)\) to each vertex gives:</p>
+// Perpendicular construction lines: each vertex joined to its image
+for (var i = 0; i < origPts.length; i++) {
+  board.create('segment', [origPts[i], reflPts[i]], {
+    strokeColor: '#555555', strokeWidth: 1, dash: 2, fixed: true, highlight: false
+  });
+  board.create('point', [
+    (origPts[i][0] + reflPts[i][0]) / 2,
+    (origPts[i][1] + reflPts[i][1]) / 2
+  ], { size: 1, color: '#555555', fixed: true, withLabel: false, highlight: false });
+}
 
-\[
-{@reflected_shape@}
-\]
-
-<hr>
-
-<p><strong>Explanation:</strong></p>
-
-<p>Each point keeps the same vertical position (same \(y\)-value) but moves the same horizontal distance to the opposite side of the y-axis.</p>
-
-<p>This creates a mirror image of the original shape across the y-axis.</p>
-
-<p><strong>Final Answer:</strong> The reflected shape has vertices</p>
-
-\[
-{@reflected_shape@}
-\]]]></text>
+board.renderer.svgRoot.style.pointerEvents = "none";
+[[/jsxgraph]]]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -158,14 +177,21 @@ board.unsuspendUpdate();
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Random parameters */
-start_x: rand([-3, -2]);
-start_y: rand([-1, 1, 2]);
-length: rand([4, 5]);
-height: rand([3, 4, 5]);
+      <text><![CDATA[/* 45-degree mirror line  y = x + c  (never an axis) */
+c : rand([-1, 0, 1]);
+lineexpr : x + c;
+
+/* L-shape size and placement */
+length : rand([3, 4]);
+height : rand([3, 4]);
+gap : rand([1, 2]);
+bx : rand([2, 3]);
+by : bx + c - height - gap;   /* guarantees the whole shape sits strictly below the line */
+start_x : bx;
+start_y : by;
 
 /* Base L-shape (teacher shape) */
-base_shape: [
+base_shape : [
   [start_x, start_y],
   [start_x + length, start_y],
   [start_x + length - 1, start_y + 1],
@@ -174,18 +200,24 @@ base_shape: [
   [start_x, start_y + height]
 ];
 
-/* Reflection across the y-axis */
-reflected_shape: map(lambda([p], [-p[1], p[2]]), base_shape);
+/* Reflection across y = x + c :  (x,y) -> (y - c, x + c) */
+reflected_shape : map(lambda([p], [p[2] - c, p[1] + c]), base_shape);
 
-/* Completely unrelated student starting shape */
-student_shape: [[4,1],[5,1],[6,3],[6,4],[5,6],[4,6]];
-</text>
+/* Student's draggable starting shape: a copy on the FAR side of the line
+   (upper-left), clear of the red original and not the answer. */
+student_shape : map(lambda([p], [p[1] - 7, p[2] + 4]), base_shape);
+
+/* Targets used only by the question tests */
+t_trans : map(lambda([p], [p[1] + 2, p[2] + 1]), base_shape);   /* a translation of the original */
+t_yaxis : map(lambda([p], [-p[1], p[2]]), base_shape);          /* reflection in the y-axis */
+t_xaxis : map(lambda([p], [p[1], -p[2]]), base_shape);          /* reflection in the x-axis */
+wrong_shift : map(lambda([p], [p[1] + 1, p[2]]), reflected_shape);]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@base_shape@},</text>
+      <text><![CDATA[<p>line y = {@lineexpr@}; base {@base_shape@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -326,11 +358,17 @@ student_shape: [[4,1],[5,1],[6,3],[6,4],[5,6],[4,6]];
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
-        <text>student_shape: sort([sP1, sP2, sP3, sP4, sP5, sP6]);</text>
+        <text><![CDATA[student_shape : sort([sP1, sP2, sP3, sP4, sP5, sP6]);
+cent(P) := block([m : length(P), ax, ay], ax : apply("+", map(first, P))/m, ay : apply("+", map(second, P))/m, sort(map(lambda([q], [q[1] - ax, q[2] - ay]), P)));
+stu_c : cent([sP1, sP2, sP3, sP4, sP5, sP6]);
+base_c : cent(base_shape);
+refl_yaxis : sort(map(lambda([p], [-p[1], p[2]]), base_shape));
+refl_xaxis : sort(map(lambda([p], [p[1], -p[2]]), base_shape));
+refl_yx : sort(map(lambda([p], [p[2], p[1]]), base_shape));]]></text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Correct reflection?</description>
         <answertest>AlgEquiv</answertest>
         <sans>student_shape</sans>
         <tans>sort(reflected_shape)</tans>
@@ -347,10 +385,110 @@ student_shape: [[4,1],[5,1],[6,3],[6,4],[5,6],[4,6]];
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Translation (moved but not flipped)?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>stu_c</sans>
+        <tans>base_c</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have <strong>slid</strong> the shape to a new position, but it is still facing the same way. A reflection <strong>flips</strong> the shape over the dashed line, like a mirror image, so it ends up back-to-front. Picture folding the paper along the line: the shape should land on the far side, turned over.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Reflected in the y-axis?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>student_shape</sans>
+        <tans>refl_yaxis</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have reflected in the <strong>y-axis</strong> (the vertical line), not the dashed 45&deg; line. Use the dashed line as your mirror: each vertex should end up the same perpendicular distance from <em>that</em> line, straight across it on the other side.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Reflected in the x-axis?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>student_shape</sans>
+        <tans>refl_xaxis</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have reflected in the <strong>x-axis</strong> (the horizontal line), not the dashed 45&deg; line. Reflect in the dashed line instead: look straight across it at right angles, and place each vertex the same distance beyond it.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>4</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>4</name>
+        <description>Reflected in y = x (line through the origin)?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>student_shape</sans>
+        <tans>refl_yx</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-5-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Close! You have reflected in the line \(y = x\) through the origin, but the mirror line here is the <em>parallel</em> line \(y = {@lineexpr@}\). Measure the perpendicular distance to the <strong>dashed</strong> line, which is shifted to one side of \(y = x\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-5-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not yet. Picture folding the plane along the dashed line so the two sides meet. Each vertex should map to the point straight across the line, the same perpendicular distance away on the opposite side.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -376,7 +514,7 @@ student_shape: [[4,1],[5,1],[6,3],[6,4],[5,6],[4,6]];
     <deployedseed>1199367907</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>Correct reflection gets full marks.</description>
       <testinput>
         <name>sP1</name>
         <value>reflected_shape[1]</value>
@@ -406,6 +544,142 @@ student_shape: [[4,1],[5,1],[6,3],[6,4],[5,6],[4,6]];
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description><![CDATA[Translation only -> translation diagnostic.]]></description>
+      <testinput>
+        <name>sP1</name>
+        <value>t_trans[1]</value>
+      </testinput>
+      <testinput>
+        <name>sP2</name>
+        <value>t_trans[2]</value>
+      </testinput>
+      <testinput>
+        <name>sP3</name>
+        <value>t_trans[3]</value>
+      </testinput>
+      <testinput>
+        <name>sP4</name>
+        <value>t_trans[4]</value>
+      </testinput>
+      <testinput>
+        <name>sP5</name>
+        <value>t_trans[5]</value>
+      </testinput>
+      <testinput>
+        <name>sP6</name>
+        <value>t_trans[6]</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description><![CDATA[Reflected in the y-axis -> y-axis diagnostic.]]></description>
+      <testinput>
+        <name>sP1</name>
+        <value>t_yaxis[1]</value>
+      </testinput>
+      <testinput>
+        <name>sP2</name>
+        <value>t_yaxis[2]</value>
+      </testinput>
+      <testinput>
+        <name>sP3</name>
+        <value>t_yaxis[3]</value>
+      </testinput>
+      <testinput>
+        <name>sP4</name>
+        <value>t_yaxis[4]</value>
+      </testinput>
+      <testinput>
+        <name>sP5</name>
+        <value>t_yaxis[5]</value>
+      </testinput>
+      <testinput>
+        <name>sP6</name>
+        <value>t_yaxis[6]</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>4</testcase>
+      <description><![CDATA[Reflected in the x-axis -> x-axis diagnostic.]]></description>
+      <testinput>
+        <name>sP1</name>
+        <value>t_xaxis[1]</value>
+      </testinput>
+      <testinput>
+        <name>sP2</name>
+        <value>t_xaxis[2]</value>
+      </testinput>
+      <testinput>
+        <name>sP3</name>
+        <value>t_xaxis[3]</value>
+      </testinput>
+      <testinput>
+        <name>sP4</name>
+        <value>t_xaxis[4]</value>
+      </testinput>
+      <testinput>
+        <name>sP5</name>
+        <value>t_xaxis[5]</value>
+      </testinput>
+      <testinput>
+        <name>sP6</name>
+        <value>t_xaxis[6]</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-4-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>5</testcase>
+      <description><![CDATA[Other wrong shape -> generic hint.]]></description>
+      <testinput>
+        <name>sP1</name>
+        <value>wrong_shift[1]</value>
+      </testinput>
+      <testinput>
+        <name>sP2</name>
+        <value>wrong_shift[2]</value>
+      </testinput>
+      <testinput>
+        <name>sP3</name>
+        <value>wrong_shift[3]</value>
+      </testinput>
+      <testinput>
+        <name>sP4</name>
+        <value>wrong_shift[4]</value>
+      </testinput>
+      <testinput>
+        <name>sP5</name>
+        <value>wrong_shift[5]</value>
+      </testinput>
+      <testinput>
+        <name>sP6</name>
+        <value>wrong_shift[6]</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-5-F</expectedanswernote>
       </expected>
     </qtest>
   </question>

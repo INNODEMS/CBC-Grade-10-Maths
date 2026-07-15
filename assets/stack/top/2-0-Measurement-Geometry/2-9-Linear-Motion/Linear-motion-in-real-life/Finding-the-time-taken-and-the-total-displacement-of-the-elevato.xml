@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the time taken and the total displacement of the elevator</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>An elevator in a tall office building starts from rest on the ground floor. It accelerates uniformly at \({@a_up@}\) m/s² until it reaches a cruising speed of \({@v_max@}\) m/s.</p>
+
+<p>The elevator maintains this constant speed for \({@t_const@}\) seconds before decelerating uniformly at the same rate to stop at the top floor.</p>
+
+[[jsxgraph width="500px" height="350px"]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-1, 8, 15, -2], 
+    axis: true,
+    showCopyright: false,
+   defaultAxes: {
+    x: {
+        name: 'Time (s)',
+        withLabel: true,
+        label: {
+            position: 'rt',
+            offset: [-60, -30]
+        }
+    },
+    y: {
+        name: 'Velocity (m/s)',
+        withLabel: true,
+        label: {
+            position: 'rt',
+            offset: [-20, -60],
+            anchorX: 'middle',
+            anchorY: 'middle',
+            rotate: 90
+        }
+    }
+}
+});
+
+var v0 = {#v_max#};
+var t1 = {#t_accel#};
+var t2 = {#t_accel + t_const#};
+var t3 = {#t_total#};
+
+// Draw the V-T Graph
+board.create('segment', [[0, 0], [t1, v0]], {strokeColor: 'green', strokeWidth: 3, name: 'Accel'});
+board.create('segment', [[t1, v0], [t2, v0]], {strokeColor: 'blue', strokeWidth: 3, name: 'Constant'});
+board.create('segment', [[t2, v0], [t3, 0]], {strokeColor: 'red', strokeWidth: 3, name: 'Decel'});
+
+// Labels
+// board.create('text', [-0.8, v0, v0 + " m/s"], {color: 'blue'});
+[[/jsxgraph]]
+
+<ol>
+    <li>Calculate the time taken for the elevator to reach its cruising speed. [[input:ans1]] s [[validation:ans1]] [[feedback:prt1]]</li>
+    <li>Calculate the total height (vertical displacement) of the building from the ground floor to the top floor. [[input:ans2]] m [[validation:ans2]] [[feedback:prt2]]</li>
+</ol>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>The elevator starts from rest \(u = 0\) and accelerates uniformly. We use the acceleration formula:</p>
+\(\begin{align}
+v &= u + at \\
+{@v_max@} &= 0 + ({@a_up@} \times t_1) \\
+t_1 &= \frac{{@v_max@}}{{@a_up@}} \\
+t_1 &= {@ta1@} \text{ s}
+\end{align}\)
+<p>To find the total displacement (height) of the elevator, we calculate the area under each section of the Velocity-Time graph:</p>
+
+<b>Step 1: Distance during Acceleration</b>
+<p>The elevator accelerates from 0 to {@v_max@} m/s:</p>
+\(\begin{align}
+s_1 &= \frac{1}{2} \times \text{base} \times \text{height} \\
+s_1 &= 0.5 \times {@ta1@} \times {@v_max@} \\
+s_1 &= {@dist_accel@} \text{ m}
+\end{align}\)
+
+<p>Step 2: Distance at Constant Velocity</p>
+<p>The elevator travels at a steady speed for {@t_const@} seconds:</p>
+\(\begin{align}
+s_2 &= \text{velocity} \times \text{time} \\
+s_2 &= {@v_max@} \times {@t_const@} \\
+s_2 &= {@dist_const@} \text{ m}
+\end{align}\)
+
+<p>Step 3: Total Displacement</p>
+<p>Assuming symmetrical deceleration, the total height is the sum of all phases:</p>
+\(\begin{align}
+s_{total} &= s_{accel} + s_{const} + s_{decel} \\
+s_{total} &= {@dist_accel@} + {@dist_const@} + {@dist_accel@} \\
+s_{total} &= {@ta2@} \text{ m}
+\end{align}\)]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. Motion Parameters */
+a_up: 1 + rand(3);     /* Acceleration: 1 to 2 m/s^2 */
+v_max: 3 + rand(3);          /* Constant velocity: 3 to 5 m/s */
+t_const: 4 + rand(5);        /* Time at constant velocity: 4 to 8 s */
+
+/* 2. Time Calculations */
+t_accel: v_max / a_up;       /* Time to reach max speed (v = u + at) */
+t_decel: t_accel;            /* Assume symmetrical deceleration */
+t_total: (2 * t_accel) + t_const;
+
+/* 3. Displacement Calculations (Area under V-T Graph) */
+dist_accel: 1/2 * v_max * t_accel;
+dist_const: v_max * t_const;
+total_disp: (2 * dist_accel) + dist_const;
+
+/* 4. Teacher Answers */
+ta1: t_accel;
+ta2: total_disp;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@a_up@}</p>
+<p>{@v_max@}</p>
+<p>{@t_const@}</p>
+<p>{@ta1@}</p>
+<p>{@ta2@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1611644716</deployedseed>
+    <deployedseed>234660620</deployedseed>
+    <deployedseed>2139789246</deployedseed>
+    <deployedseed>1455094838</deployedseed>
+    <deployedseed>2077728117</deployedseed>
+    <deployedseed>854383022</deployedseed>
+    <deployedseed>946821935</deployedseed>
+    <deployedseed>1774835337</deployedseed>
+    <deployedseed>877281599</deployedseed>
+    <deployedseed>785265598</deployedseed>
+    <deployedseed>831958555</deployedseed>
+    <deployedseed>441936922</deployedseed>
+    <deployedseed>546846154</deployedseed>
+    <deployedseed>203533700</deployedseed>
+    <deployedseed>1010751959</deployedseed>
+    <deployedseed>323400082</deployedseed>
+    <deployedseed>2022846663</deployedseed>
+    <deployedseed>155282634</deployedseed>
+    <deployedseed>664992258</deployedseed>
+    <deployedseed>2105317926</deployedseed>
+  </question>
+</quiz>

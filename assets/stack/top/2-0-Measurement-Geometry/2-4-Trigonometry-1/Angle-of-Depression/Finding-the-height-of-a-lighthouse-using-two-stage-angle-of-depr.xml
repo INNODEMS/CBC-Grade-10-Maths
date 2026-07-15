@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the height of a lighthouse using two-stage angle-of-depression reasoning</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A student stands on a deck near the top of a {@structure@} at the coast of {@coast@}. The student's eyes are <b>{@eye@} m</b> above the deck floor shown in the diagram. The student looks down at a {@item@} floating on the sea. The angle of depression to the {@item@} is <b>{@theta@}&deg;</b>. The horizontal distance from the base of the {@structure@} to the {@item@} is <b>{@d@} m</b>.
+</p>
+
+<p>
+Find the total height of the {@structure@} above sea level.
+</p>
+
+<div style="margin:10px 0;">
+<svg width="520" height="300" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Sea level / ground -->
+  <line x1="55" y1="225" x2="405" y2="225" stroke="black" stroke-width="2"/>
+
+  <!-- Viewing platform vertical -->
+  <line x1="95" y1="225" x2="95" y2="75" stroke="black" stroke-width="2"/>
+
+  <!-- Deck floor -->
+  <line x1="95" y1="140" x2="145" y2="140" stroke="black" stroke-width="2"/>
+
+  <!-- Eye-above-deck segment -->
+  <line x1="145" y1="140" x2="145" y2="115" stroke="black" stroke-width="1.5"/>
+
+  <!-- Eye point -->
+  <circle cx="145" cy="115" r="3" fill="black"/>
+
+  <!-- Horizontal through eye -->
+  <line x1="145" y1="115" x2="280" y2="115" stroke="black" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+  <!-- Line of sight -->
+  <line x1="145" y1="115" x2="330" y2="225" stroke="black" stroke-width="2"/>
+
+  <!-- Right angle marker -->
+  <path d="M95 210 L108 210 L108 225" fill="none" stroke="black" stroke-width="1.5"/>
+
+  <!-- Angle arc -->
+  <path d="M165 115 A22 22 0 0 1 158 131" fill="none" stroke="black" stroke-width="1.5"/>
+
+  <!-- Labels near the top -->
+  <text x="150" y="110" font-size="14">eye</text>
+  <text x="118" y="128" font-size="15">{@eye@} m</text>
+  <text x="170" y="129" font-size="15">{@theta@}°</text>
+
+  <!-- Left-side label -->
+  <text x="18" y="155" font-size="15">height = ?</text>
+
+  <!-- Deck label -->
+  <text x="120" y="156" font-size="13">deck</text>
+
+  <!-- Bottom labels -->
+  <text x="210" y="245" font-size="15">{@d@} m</text>
+  <text x="316" y="244" font-size="14">{@item@}</text>
+  <text x="336" y="214" font-size="13">sea level</text>
+
+</svg>
+</div>
+
+<p>
+Distance = [[input:ans1]] <b>m</b> [[validation:ans1]] [[feedback:prt1]]
+</p>
+
+<p>
+Give your answer correct to <b>1 decimal place</b>.
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+Step 1: Identify the right triangle.
+</p>
+
+<p>
+The angle of depression is measured from the horizontal through the student's eye.
+The horizontal distance is {@d@} m.
+The unknown vertical drop from the eye to the sea is the opposite side.
+</p>
+
+<p>
+Step 2: Use tangent.
+</p>
+
+<p>
+\[
+\tan({@theta@}^\circ)=\frac{\text{vertical drop}}{@d@}
+\]
+</p>
+
+<p>
+Let the vertical drop be \(x\).
+Then
+\[
+x={@d@}\tan({@theta@}^\circ)
+\]
+</p>
+
+<p>
+\[
+x \approx {@m1r@}
+\]
+</p>
+
+<p>
+Step 3: Add the eye height above the deck.
+</p>
+
+<p>
+The total height of the {@structure@} is:
+</p>
+
+<p>
+\[
+\text{height} = x + {@eye@}
+\]
+</p>
+
+<p>
+\[
+\text{height} \approx {@m1r@} + {@eye@} = {@height1@}
+\]
+</p>
+
+<p>
+Therefore, the total height of the {@structure@} above sea level is:
+</p>
+
+<p>
+\[
+\boxed{@height1@} \text{ m}
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Core variables */
+d: rand(5)*2+12;          /* 14,16,18,20,22 m */
+theta: rand(4)*5+30;      /* 35,40,45,50 */
+eye: rand(3)+2;           /* observer eye level above deck: 3 to 5 m */
+
+extra: d*tan(theta*%pi/180);   /* vertical drop from eye level to object */
+height_total: eye + extra;     /* total height above sea level */
+height1: float(round(height_total*10)/10);
+
+/* Context */
+structure: rand(["lighthouse","watch tower","harbour post","viewing platform"]);
+item: rand(["boat","fishing canoe","buoy","small raft"]);
+coast: rand(["Mombasa","Kilifi","Lamu","Malindi"]);
+
+/* Distractors */
+m1: extra;                         /* forgot to add eye level */
+m2: d/sin(theta*%pi/180);          /* used wrong trig ratio */
+m3: d*cos(theta*%pi/180)+eye;      /* wrong trig usage */
+m1r: float(round(m1*10)/10);
+m2r: float(round(m2*10)/10);
+m3r: float(round(m3*10)/10);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@height1@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Angles of depression</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to interpret a diagram involving an angle of depression, use tangent to find a vertical distance, and then complete a second step to determine the full height of the structure.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>height1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>height1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>437833503</deployedseed>
+    <deployedseed>1628130676</deployedseed>
+    <deployedseed>2118279710</deployedseed>
+    <deployedseed>414840799</deployedseed>
+    <deployedseed>870931264</deployedseed>
+    <deployedseed>283332879</deployedseed>
+    <deployedseed>925168717</deployedseed>
+    <deployedseed>612765916</deployedseed>
+    <deployedseed>392529148</deployedseed>
+    <deployedseed>1608217044</deployedseed>
+    <deployedseed>1220648543</deployedseed>
+    <deployedseed>627230587</deployedseed>
+    <deployedseed>1863833878</deployedseed>
+    <deployedseed>1608000847</deployedseed>
+    <deployedseed>506424403</deployedseed>
+    <deployedseed>239204194</deployedseed>
+    <deployedseed>343483079</deployedseed>
+    <deployedseed>322641757</deployedseed>
+    <deployedseed>1463891247</deployedseed>
+    <deployedseed>1010800237</deployedseed>
+    <deployedseed>530275822</deployedseed>
+    <deployedseed>1577514403</deployedseed>
+    <deployedseed>781039037</deployedseed>
+    <deployedseed>1664861974</deployedseed>
+    <deployedseed>1410085946</deployedseed>
+    <deployedseed>799014538</deployedseed>
+    <deployedseed>996282193</deployedseed>
+    <deployedseed>1890937952</deployedseed>
+    <deployedseed>2142639444</deployedseed>
+    <deployedseed>1078152700</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>height1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

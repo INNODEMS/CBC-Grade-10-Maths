@@ -2,7 +2,7 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Determining  the Radius of a Sphere.</text>
+      <text>Determining  the diameter of a Sphere, given the surface area</text>
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[A company is designing a spherical water tank. The total external surface area of the tank, which will be painted, is \({@A@}\,\text{m}^2\). Using this information, determine the diameter of the spherical tank.
@@ -55,7 +55,7 @@ r &=  \frac{\sqrt{7 \times {@A@}}}{\sqrt{88}}        \\
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>/* Randomize the radius */
@@ -67,7 +67,10 @@ R:r^2;
 
 /* Area formula */
 A_1:pi_val * r^2;
-A : 4*pi_val * r^2;</text>
+A : 4*pi_val * r^2;
+
+/*Mistake 1 of finding the radius instead of diameter*/
+wrong_diameter: D/2;</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -147,8 +150,35 @@ A : 4*pi_val * r^2;</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>wrong_diameter</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p> Good work! However, you calculated the radius instead of the diameter</p>
+<p> The correct formula for getting the diameter is multiplying the radius by two. That is : </p>
+<p>\(\text{Diameter}= 2r\) </p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>

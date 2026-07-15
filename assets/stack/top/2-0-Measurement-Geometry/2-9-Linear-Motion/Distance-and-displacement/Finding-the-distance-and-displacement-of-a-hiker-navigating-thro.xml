@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the distance and displacement of a hiker navigating through a flat forest area using a compass</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A hiker is navigating through a flat forest area using a compass. The hiker performs the following movements from their base camp:</p>
+<ul>
+    <li>First, they walk \({@d_east@}\) km East to reach a lookout point.</li>
+    <li>From the lookout point, they then walk \({@d_north@}\) km North to reach a waterfall.</li>
+</ul>
+
+
+<ol>
+    <li>What is the total distance the hiker travelled from the base camp to the waterfall? [[input:ans1]] km [[validation:ans1]] [[feedback:prt1]]</li>
+    <li>What is the magnitude of the hiker's displacement (the straight-line distance) from the base camp to the waterfall? [[input:ans2]] km [[validation:ans2]] [[feedback:prt2]]</li>
+</ol>
+
+
+
+[[jsxgraph width="400px" height="400px"]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-2, 15, 15, -2], 
+    axis: true,
+    showCopyright: false,
+    defaultAxes: {
+        x: { name: 'East (km)', withLabel: true },
+        y: { 
+            name: 'North (km)', 
+            withLabel: true, 
+            label: { rotate: 90, offset: [-30, 10] } 
+        }
+    }
+});
+
+var e_val = {#d_east#};
+var n_val = {#d_north#};
+
+// Start and Key Points
+var p1 = board.create('point', [0, 0], {name: 'Base Camp', fixed: true, size: 3, color: 'black'});
+var p2 = board.create('point', [e_val, 0], {name: 'Lookout', size: 2, color: 'blue'});
+var p3 = board.create('point', [e_val, n_val], {name: 'Waterfall', size: 3, color: 'red'});
+
+// Path taken
+board.create('arrow', [p1, p2], {strokeColor: 'blue', strokeWidth: 2});
+board.create('arrow', [p2, p3], {strokeColor: 'blue', strokeWidth: 2});
+
+// Displacement Vector
+board.create('segment', [p1, p3], {dash: 2, strokeColor: 'green', name: 'Displacement', withLabel: true});
+[[/jsxgraph]]]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution </p>
+<p>To analyze the hiker's motion, we distinguish between the path taken (distance) and the change in position (displacement):</p>
+
+<b>1. Distance Travelled</b>
+<p>Distance is the total length of the hiker's path:</p>
+\(\begin{align}
+\text{Distance} &= \text{Distance East} + \text{Distance North} \\
+&= {@d_east@} \text{ km} + {@d_north@} \text{ km} \\
+&= {@ta1@} \text{ km}
+\end{align}\)
+
+<b>2. Displacement</b>
+<p>Because the hiker turned at a 90° angle (from East to North), the displacement is the hypotenuse of a right-angled triangle. We use the Pythagorean theorem:</p>
+\(\begin{align}
+\text{Displacement} &= \sqrt{(\text{East})^2 + (\text{North})^2} \\
+&= \sqrt{({@d_east@})^2 + ({@d_north@})^2} \\
+&= \sqrt{{@disp_sq@}} \\
+&= {@ta2@} \text{ km}
+\end{align}\)]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. Randomized Distances for a Hiker */
+d_east: 6 + rand(7);    /* East distance: 6 to 12 km */
+d_north: 5 + rand(6);   /* North distance: 5 to 10 km */
+
+/* 2. Calculations */
+/* Scalar sum for total distance */
+total_dist: d_east + d_north;
+
+/* Vector resultant for displacement */
+disp_sq: (d_east^2) + (d_north^2);
+displacement: sqrt(disp_sq);
+
+/* 3. Teacher Answers */
+ta1: total_dist;
+ta2: displacement;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta1@}</p>
+<p>{@ta2@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1234767231</deployedseed>
+    <deployedseed>2093544217</deployedseed>
+    <deployedseed>78862472</deployedseed>
+    <deployedseed>63359178</deployedseed>
+    <deployedseed>1249240615</deployedseed>
+    <deployedseed>1695127973</deployedseed>
+    <deployedseed>1820616581</deployedseed>
+    <deployedseed>366744042</deployedseed>
+    <deployedseed>1848214788</deployedseed>
+    <deployedseed>894317253</deployedseed>
+    <deployedseed>1215526961</deployedseed>
+    <deployedseed>1906666250</deployedseed>
+    <deployedseed>1612922794</deployedseed>
+    <deployedseed>407144695</deployedseed>
+    <deployedseed>1250769231</deployedseed>
+    <deployedseed>1771752064</deployedseed>
+    <deployedseed>296793890</deployedseed>
+    <deployedseed>1526449162</deployedseed>
+    <deployedseed>1332628635</deployedseed>
+    <deployedseed>1287469590</deployedseed>
+  </question>
+</quiz>

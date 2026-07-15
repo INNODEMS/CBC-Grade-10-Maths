@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the area of a triangle using Heron’s Formula</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+The sides of a triangle measure <b>a</b> = {@a@} cm, <b>b</b> = {@b@} cm, and <b>c</b> = {@c@} cm. Find the area of the triangle using Heron’s formula.
+</p>
+
+<div style="text-align:center; margin:10px 0;">
+<svg width="320" height="220" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="60,180 260,180 140,40" fill="none" stroke="black" stroke-width="2"/>
+  <text x="145" y="195" font-size="16">c</text>
+  <text x="88" y="108" font-size="16">b</text>
+  <text x="205" y="108" font-size="16">a</text>
+  <circle cx="60" cy="180" r="3" fill="black"/>
+  <circle cx="260" cy="180" r="3" fill="black"/>
+  <circle cx="140" cy="40" r="3" fill="black"/>
+  <text x="45" y="198" font-size="14">A</text>
+  <text x="265" y="198" font-size="14">B</text>
+  <text x="145" y="32" font-size="14">C</text>
+</svg>
+</div>
+
+<p>
+Give your answer correct to <b>2 decimal places</b>.
+</p>
+
+<p>
+Area = [[input:ans1]] \(\text{cm}^2\) [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+The sides of the triangle are {@a@} cm, {@b@} cm and {@c@} cm.
+</p>
+
+<p>
+Step 1: Find the semi-perimeter.
+</p>
+
+<p>
+\[
+s = \frac{a+b+c}{2}
+\]
+</p>
+
+<p>
+\[
+s = \frac{{@a@}+{@b@}+{@c@}}{2}
+\]
+</p>
+
+<p>
+\[
+s = {@s@}
+\]
+</p>
+
+<p>
+Step 2: Write Heron’s formula.
+</p>
+
+<p>
+\[
+A=\sqrt{s(s-a)(s-b)(s-c)}
+\]
+</p>
+
+<p>
+Step 3: Substitute the values.
+</p>
+
+<p>
+\[
+A=\sqrt{{@s@}({@s@}-{@a@})({@s@}-{@b@})({@s@}-{@c@})}
+\]
+</p>
+
+<p>
+Step 4: Simplify the brackets.
+</p>
+
+<p>
+\[
+A=\sqrt{{@s@}\times {@s-a@}\times {@s-b@}\times {@s-c@}}
+\]
+</p>
+
+<p>
+Step 5: Evaluate the square root.
+</p>
+
+<p>
+\[
+A \approx {@A_round@}\text{ cm}^2
+\]
+</p>
+
+<p>
+Therefore, the area of the triangle is:
+</p>
+
+<p>
+\[
+Area =  {@A_round@}\text{ cm}^2
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Sides of triangle */
+a: rand(6) + 4;
+b: rand(6) + 5;
+c: rand(6) + 6;
+
+/* Ensure triangle inequality */
+while a + b <= c or a + c <= b or b + c <= a do (
+  a: rand(6) + 4,
+  b: rand(6) + 5,
+  c: rand(6) + 6
+);
+
+/* Semi-perimeter */
+s: (a + b + c)/2;
+
+/* Area */
+A: sqrt(s*(s-a)*(s-b)*(s-c));
+
+/* Rounded */
+A_round: float(round(A*100)/100);
+
+/* Mistakes */
+m1: s*(s-a)*(s-b)*(s-c);
+m2: (a+b+c)/3;
+m3: sqrt(a*b*c);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@A_round@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Area of triangles using Heron’s formula</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to find the area of a triangle from its three sides by first determining the semi-perimeter and then applying Heron’s formula.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>A_round</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>A_round</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Missing square root</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Remember to take the square root at the final step.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>wrong semi-perimeter</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Semi-perimeter is half the perimeter, not one-third.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Use \(s = \frac {a+b+c}{2}\) then apply Heron’s formula.</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>2134446128</deployedseed>
+    <deployedseed>1543944270</deployedseed>
+    <deployedseed>230348320</deployedseed>
+    <deployedseed>1006628543</deployedseed>
+    <deployedseed>457613133</deployedseed>
+    <deployedseed>1889508662</deployedseed>
+    <deployedseed>119112692</deployedseed>
+    <deployedseed>1478236209</deployedseed>
+    <deployedseed>1949637159</deployedseed>
+    <deployedseed>2053412572</deployedseed>
+    <deployedseed>1271997242</deployedseed>
+    <deployedseed>829057507</deployedseed>
+    <deployedseed>282224834</deployedseed>
+    <deployedseed>2138264888</deployedseed>
+    <deployedseed>1969472850</deployedseed>
+    <deployedseed>1845949518</deployedseed>
+    <deployedseed>562977532</deployedseed>
+    <deployedseed>1883976018</deployedseed>
+    <deployedseed>495405051</deployedseed>
+    <deployedseed>1668416808</deployedseed>
+    <deployedseed>424059734</deployedseed>
+    <deployedseed>798928074</deployedseed>
+    <deployedseed>1232740694</deployedseed>
+    <deployedseed>1649214470</deployedseed>
+    <deployedseed>1154870832</deployedseed>
+    <deployedseed>1870330078</deployedseed>
+    <deployedseed>1827253651</deployedseed>
+    <deployedseed>2056997166</deployedseed>
+    <deployedseed>1437197684</deployedseed>
+    <deployedseed>806434262</deployedseed>
+    <deployedseed>1846016670</deployedseed>
+    <deployedseed>820547331</deployedseed>
+    <deployedseed>1211931833</deployedseed>
+    <deployedseed>472907766</deployedseed>
+    <deployedseed>1336823729</deployedseed>
+    <deployedseed>2046355881</deployedseed>
+    <deployedseed>2080592477</deployedseed>
+    <deployedseed>1384953290</deployedseed>
+    <deployedseed>245987172</deployedseed>
+    <deployedseed>1613761530</deployedseed>
+    <deployedseed>331534042</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>A_round</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

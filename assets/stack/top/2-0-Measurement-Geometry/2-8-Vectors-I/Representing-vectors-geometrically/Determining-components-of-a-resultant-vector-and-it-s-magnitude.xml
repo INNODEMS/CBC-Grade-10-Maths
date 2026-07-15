@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Determining components of a resultant vector and it's magnitude</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>In a 2D coordinate system, vector <b>a</b> point from the origin to <b>A({@ax@}, {@ay@})</b> and vector <b>b</b> point from the origin to <b>B({@bx@}, {@by@})</b>.</p>
+
+[[jsxgraph width="400px" height="400px"]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-1, 12, 12, -1], 
+    axis: true, 
+    showCopyright: false
+});
+
+var origin = board.create('point', [0, 0], {name: 'O', size: 2, fixed: true, color: 'black'});
+var pA = board.create('point', [{#ax#}, {#ay#}], {name: 'A', size: 3, fixed: true});
+var pB = board.create('point', [{#bx#}, {#by#}], {name: 'B', size: 3, fixed: true});
+
+var vecA = board.create('arrow', [origin, pA], {strokeColor: 'blue', name: 'a', withLabel: true});
+var vecB = board.create('arrow', [origin, pB], {strokeColor: 'red', name: 'b', withLabel: true});
+
+// The subtraction vector (a - b) points from the tip of b to the tip of a
+board.create('arrow', [pB, pA], {strokeColor: 'green', dash: 2, withLabel: true});
+[[/jsxgraph]]
+
+
+<p>Determine the components of the resultant vector \(\mathbf{a} - \mathbf{b}\).</p>
+<ol>
+    <li>\(\mathbf{a} - \mathbf{b}\) =  [[input:ans1]] \(, \) [[input:ans2]] [[validation:ans1]] [[feedback:prt1]] [[validation:ans2]] [[feedback:prt2]]</li>
+</ol>
+
+<ol start="2">
+    <li>
+<p>Calculate the magnitude of the resultant vector above.</p>
+<p>\(|\mathbf{a} - \mathbf{b}| = \) [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</p>
+</li>
+</ol>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<b> 1: Determine the Resultant Components </b>
+<p>To find \(\mathbf{a} - \mathbf{b}\), we subtract the corresponding components of vector \(\mathbf{b}\) from vector \(\mathbf{a}\):</p>
+\(\begin{align}
+\mathbf{a} - \mathbf{b} &= (x_a - x_b, y_a - y_b) \\
+&= ({@ax@} - {@bx@}, {@ay@} - {@by@}) \\
+&= \mathbf{({@ta1@}, {@ta2@})}
+\end{align}\)
+
+<b>2: Calculate the Magnitude</b>
+<p>The magnitude is the geometric length of the resulting vector (the dashed green line in the graph):</p>
+\(\begin{align}
+|\mathbf{a} - \mathbf{b}| &= \sqrt{x_{\text{comp}}^2 + y_{\text{comp}}^2} \\
+&= \sqrt{({@ta1@})^2 + ({@ta2@})^2} \\
+&= \sqrt{{@mag_sq@}} \\
+&= \mathbf{{@ta3@}}
+\end{align}\)]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. Define vectors a and b (from origin to points A and B) */
+ax: 5 + rand(5);  /* x-component of a: 5 to 9 */
+ay: 2 + rand(3);  /* y-component of a: 2 to 4 */
+bx: 1 + rand(3);  /* x-component of b: 1 to 3 */
+by: 5 + rand(4);  /* y-component of b: 5 to 8 */
+
+/* 2. Subtraction Operation: R = a - b */
+ta1: ax - bx;
+ta2: ay - by;
+
+/* 3. Magnitude Calculation for the Resultant */
+mag_sq: (ta1^2) + (ta2^2);
+ta3: sqrt(mag_sq);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta1@}</p>
+<p>{@ta2@}</p>
+<p>{@ta3@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta3</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ta3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1831466226</deployedseed>
+    <deployedseed>1946988736</deployedseed>
+    <deployedseed>1095425043</deployedseed>
+    <deployedseed>308812989</deployedseed>
+    <deployedseed>1183747103</deployedseed>
+    <deployedseed>26437321</deployedseed>
+    <deployedseed>1529176118</deployedseed>
+    <deployedseed>826174213</deployedseed>
+    <deployedseed>19363436</deployedseed>
+    <deployedseed>1630603985</deployedseed>
+    <deployedseed>886910108</deployedseed>
+    <deployedseed>1920297331</deployedseed>
+    <deployedseed>387999931</deployedseed>
+    <deployedseed>664029197</deployedseed>
+    <deployedseed>525322446</deployedseed>
+    <deployedseed>1616250997</deployedseed>
+    <deployedseed>1520873740</deployedseed>
+    <deployedseed>1981614758</deployedseed>
+    <deployedseed>2027150491</deployedseed>
+    <deployedseed>1428750347</deployedseed>
+  </question>
+</quiz>

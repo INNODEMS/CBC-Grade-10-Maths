@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the perimeter of the original and image triangle after the enlargement.</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A right-angled triangle has side lengths of \({@base@}\) cm, \({@height@}\) cm, and \({@hypotenuse@}\) cm.</p>
+
+<p>This triangle undergoes an enlargement with a scale factor of <b>\(k = {@sf@}\)</b>.</p>
+<ol>
+    <li>Calculate the perimeter of the original triangle. <br>
+        [[input:ans1]] cm[[validation:ans1]][[feedback:prt1]]
+    </li>
+    <li>Calculate the perimeter of the image triangle after the enlargement. <br>
+        [[input:ans2]] cm [[validation:ans2]][[feedback:prt2]]
+    </li>
+</ol>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3> Worked Solution</h3>
+
+<b>Step 1: Perimeter of the Original Triangle</b>
+<p>The perimeter is the sum of all side lengths:</p>
+\(\begin{align}
+P_{\text{original}} &= {@base@} + {@height@} + {@hypotenuse@} \\
+&= \mathbf{{@ta1@} \text{ cm}}
+\end{align}\)
+
+<b>Step 2: Understanding the Effect of a Negative Scale Factor</b>
+<p>A negative scale factor, such as \(k = {@sf@}\), indicates that the image is inverted and on the opposite side of the center of enlargement. However, physical lengths cannot be negative.</p>
+<p>When calculating the dimensions of the image, we multiply the original lengths by the absolute value of the scale factor (\(|k|\)):</p>
+\[ \text{Image Length} = \text{Original Length} \times |k| \]
+
+<b>Step 3: Perimeter of the Image</b>
+<p>We apply the scale factor to the original perimeter:</p>
+\(\begin{align}
+P_{\text{image}} &= P_{\text{original}} \times |{@sf@}| \\
+&= {@ta1@} \times {@abs(sf)@} \\
+&= {@ta2@} \text{ cm}
+\end{align}\)]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* 1. Define side lengths of a triangle */
+/* We'll use a 3-4-5 right triangle for clean numbers */
+base: 3 * (1 + rand(2));   /* 3 or 6 */
+height: 4 * (base/3);      /* 4 or 8 */
+hypotenuse: 5 * (base/3);  /* 5 or 10 */
+
+/* 2. Calculate Original Perimeter */
+ta1: base + height + hypotenuse;
+
+/* 3. Define a Negative Scale Factor */
+/* Note: We use a non-integer to make it challenging */
+sf: -0.5 - (2.5 * rand(3)); /* -0.5, -1.0, or -1.5 */
+
+/* 4. Teacher Answer: Perimeter of Image */
+/* Perimeter scales by the absolute value of k */
+ta2: ta1 * abs(sf);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta1@}</p>
+<p>{@ta2@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>175256248</deployedseed>
+    <deployedseed>1517121981</deployedseed>
+    <deployedseed>45122618</deployedseed>
+    <deployedseed>250427656</deployedseed>
+    <deployedseed>1850980060</deployedseed>
+  </question>
+</quiz>

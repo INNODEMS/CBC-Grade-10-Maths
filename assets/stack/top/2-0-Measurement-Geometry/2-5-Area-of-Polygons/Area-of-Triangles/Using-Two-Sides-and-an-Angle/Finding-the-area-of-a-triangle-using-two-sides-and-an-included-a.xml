@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the area of a triangle using two sides and an included angle</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+Find the area of a triangle with sides {@a@} cm and {@b@} cm and included angle {@C@}°.
+</p>
+
+<p>
+Give your answer correct to <b>2 decimal places</b>.
+</p>
+
+<p>
+Area = [[input:ans1]] \(\text{cm}^2\) [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+Step 1: Use the formula:
+</p>
+
+<p>
+\[
+A = \frac{1}{2}ab\sin C
+\]
+</p>
+
+<p>
+Step 2: Substitute the values:
+</p>
+
+<p>
+\[
+A = \frac{1}{2} \times {@a@} \times {@b@} \times \sin {@C@}^\circ
+\]
+</p>
+
+<p>
+Step 3: Evaluate:
+</p>
+
+<p>
+\[
+A = {@A_round@}\text{ cm}^2
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Sides */
+a: rand(6) + 4;
+b: rand(6) + 5;
+
+/* Angle in degrees */
+angles: [30,45,60];
+C: angles[rand(3) + 1];
+
+/* Convert to radians */
+Cr: C*%pi/180;
+
+/* Area */
+A: (1/2)*a*b*sin(Cr);
+
+/* Rounded */
+A_round: float(round(A*100)/100);
+
+/* Mistakes */
+m1: a*b*sin(Cr);
+m2: (1/2)*a*b*cos(Cr);
+m3: (1/2)*(a+b)*sin(Cr);</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@A_round@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Area of triangle using two sides and included angle</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to calculate the area of a triangle using the formula involving two sides and the included angle.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>A_round</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>A_round</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Missing ½</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Remember the formula includes ½</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>used cosine</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Use sine of the included angle, not cosine.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Wrong expression</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Use the product of the two sides, not their sum</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Use 1/2 ab Sin C</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1866367407</deployedseed>
+    <deployedseed>622686252</deployedseed>
+    <deployedseed>2059529496</deployedseed>
+    <deployedseed>370027447</deployedseed>
+    <deployedseed>2032579982</deployedseed>
+    <deployedseed>29367769</deployedseed>
+    <deployedseed>926084747</deployedseed>
+    <deployedseed>1027443519</deployedseed>
+    <deployedseed>1745993297</deployedseed>
+    <deployedseed>45723803</deployedseed>
+    <deployedseed>753590681</deployedseed>
+    <deployedseed>1571590088</deployedseed>
+    <deployedseed>221641577</deployedseed>
+    <deployedseed>2065657315</deployedseed>
+    <deployedseed>467986432</deployedseed>
+    <deployedseed>1874869537</deployedseed>
+    <deployedseed>1603691300</deployedseed>
+    <deployedseed>781567657</deployedseed>
+    <deployedseed>2105342696</deployedseed>
+    <deployedseed>1855795732</deployedseed>
+    <deployedseed>1205333177</deployedseed>
+    <deployedseed>1680451996</deployedseed>
+    <deployedseed>326917606</deployedseed>
+    <deployedseed>935315130</deployedseed>
+    <deployedseed>1219013814</deployedseed>
+    <deployedseed>1405410811</deployedseed>
+    <deployedseed>1993487118</deployedseed>
+    <deployedseed>1110873511</deployedseed>
+    <deployedseed>100842407</deployedseed>
+    <deployedseed>2078394543</deployedseed>
+    <deployedseed>1870013856</deployedseed>
+    <deployedseed>1049245140</deployedseed>
+    <deployedseed>851918929</deployedseed>
+    <deployedseed>1514906872</deployedseed>
+    <deployedseed>51605187</deployedseed>
+    <deployedseed>1000605375</deployedseed>
+    <deployedseed>1410317013</deployedseed>
+    <deployedseed>1732837767</deployedseed>
+    <deployedseed>443703423</deployedseed>
+    <deployedseed>1556533006</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>A_round</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

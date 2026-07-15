@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the area of a rectangular classroom floor</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A classroom floor is rectangular. Its length is {@l@} m and its width is {@w@} m. Find the area of the floor.
+</p>
+
+<p>
+Area = [[input:ans1]] \(\text {m}^2\) [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+The area of a rectangle is found using the formula:
+</p>
+
+<p>
+\[
+A = l \times w
+\]
+</p>
+
+<p>
+Here,
+</p>
+
+<p>
+\[
+l = {@l@}\text{ m}, \quad w = {@w@}\text{ m}
+\]
+</p>
+
+<p>
+Step 1: Substitute the given values into the formula.
+</p>
+
+<p>
+\[
+A = {@l@} \times {@w@}
+\]
+</p>
+
+<p>
+Step 2: Multiply.
+</p>
+
+<p>
+\[
+A = {@A@}
+\]
+</p>
+
+<p>
+Therefore, the area of the classroom floor is:
+</p>
+
+<p>
+\[
+{{@A@}\text{ m}^2}
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Length and width */
+l: rand(20) + 10;
+w: rand(6) + 3;
+
+/* Area */
+A: l*w;
+
+/* Common mistakes */
+m1: 2*(l+w);    /* perimeter */
+m2: l+w;        /* adds dimensions */
+m3: l^2;        /* treats it like a square */</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@A@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Area of squares and rectangles</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to calculate the area of a rectangle in a real-life context by applying the formula A = l × w.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>A</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>A</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>perimeter</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text>You found the perimeter. For area of a rectangle, multiply length by width.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>adds dimensions</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text>Do not add the dimensions. Area is found by multiplying length and width.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>treats it like a square</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text>This is a rectangle, not a square. Use length × width.</text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text>Use the formula 𝐴 = 𝑙 × 𝑤.</text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1625955102</deployedseed>
+    <deployedseed>1343242645</deployedseed>
+    <deployedseed>18364447</deployedseed>
+    <deployedseed>1132299342</deployedseed>
+    <deployedseed>1526459133</deployedseed>
+    <deployedseed>364806423</deployedseed>
+    <deployedseed>940218495</deployedseed>
+    <deployedseed>733243965</deployedseed>
+    <deployedseed>1968332171</deployedseed>
+    <deployedseed>97358640</deployedseed>
+    <deployedseed>122152339</deployedseed>
+    <deployedseed>1132842238</deployedseed>
+    <deployedseed>100020260</deployedseed>
+    <deployedseed>508716007</deployedseed>
+    <deployedseed>1269530015</deployedseed>
+    <deployedseed>1165917317</deployedseed>
+    <deployedseed>1799772397</deployedseed>
+    <deployedseed>93015378</deployedseed>
+    <deployedseed>2076485226</deployedseed>
+    <deployedseed>1493711172</deployedseed>
+    <deployedseed>1949515574</deployedseed>
+    <deployedseed>2041758577</deployedseed>
+    <deployedseed>963141787</deployedseed>
+    <deployedseed>929815754</deployedseed>
+    <deployedseed>1576674450</deployedseed>
+    <deployedseed>1563285690</deployedseed>
+    <deployedseed>562887564</deployedseed>
+    <deployedseed>767489163</deployedseed>
+    <deployedseed>267018310</deployedseed>
+    <deployedseed>404917961</deployedseed>
+    <deployedseed>643185030</deployedseed>
+    <deployedseed>9391436</deployedseed>
+    <deployedseed>1642274797</deployedseed>
+    <deployedseed>1893496863</deployedseed>
+    <deployedseed>2057002408</deployedseed>
+    <deployedseed>1437663837</deployedseed>
+    <deployedseed>1728627476</deployedseed>
+    <deployedseed>1656849106</deployedseed>
+    <deployedseed>281080887</deployedseed>
+    <deployedseed>111852800</deployedseed>
+    <deployedseed>308281109</deployedseed>
+    <deployedseed>463513497</deployedseed>
+    <deployedseed>1046729861</deployedseed>
+    <deployedseed>669628187</deployedseed>
+    <deployedseed>735837454</deployedseed>
+    <deployedseed>1048336796</deployedseed>
+    <deployedseed>75762259</deployedseed>
+    <deployedseed>14297322</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>A</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

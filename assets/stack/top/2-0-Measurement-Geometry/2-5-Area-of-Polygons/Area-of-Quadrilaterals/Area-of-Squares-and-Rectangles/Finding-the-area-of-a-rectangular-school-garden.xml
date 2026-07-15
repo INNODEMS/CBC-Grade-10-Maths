@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the area of a rectangular school garden</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A school is preparing a rectangular garden for planting {@crop@}. The garden measures {@l@} m in length and {@w@} m in width. Find the area of the garden.
+</p>
+
+<p>
+Give your answer correct to <b>2 decimal places</b>.
+</p>
+
+<p>
+Area = [[input:ans1]] \(\text {m}^2\) [[validation:ans1]] [[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>
+The garden is rectangular.
+</p>
+
+<p>
+The formula for the area of a rectangle is:
+</p>
+
+<p>
+\[
+A = l \times w
+\]
+</p>
+
+<p>
+Step 1: Identify the dimensions.
+</p>
+
+<p>
+\[
+l = {@l@}\text{ m}, \quad w = {@w@}\text{ m}
+\]
+</p>
+
+<p>
+Step 2: Substitute into the formula.
+</p>
+
+<p>
+\[
+A = {@l@} \times {@w@}
+\]
+</p>
+
+<p>
+Step 3: Multiply.
+</p>
+
+<p>
+\[
+A = {@A@}
+\]
+</p>
+
+<p>
+Step 4: Round to 2 decimal places.
+</p>
+
+<p>
+\[
+A \approx {@A_round@}\text{ m}^2
+\]
+</p>
+
+<p>
+Therefore, the area of the garden is:
+</p>
+
+<p>
+\[
+\boxed{{@A_round@}\text{ m}^2}
+\]
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Length and width as decimals (1 d.p.) */
+l: float((rand(120)+90)/10);   /* 9.0 to 20.0 */
+w: float((rand(50)+30)/10);    /* 3.0 to 8.0 */
+
+/* Area */
+A: l*w;
+
+/* Rounded answer (2 d.p.) */
+A_round: float(round(A*100)/100);
+
+/* Context */
+crop: rand(["vegetables","flowers","maize","spinach","kales"]);
+
+/* Mistakes */
+m1: 2*(l+w);
+m2: l+w;
+m3: l^2;]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@A_round@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Michael Onyimbo</p>
+<p id="concept">Area of squares and rectangles</p>
+<p id="reviewer"></p>
+<p id="reviewer"></p>
+
+<p id="description">
+The question requires the learner to determine the area of a rectangular garden in a real-life context by applying the formula A = l × w.
+</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>A_round</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>A_round</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>91189781</deployedseed>
+    <deployedseed>2101330734</deployedseed>
+    <deployedseed>249095846</deployedseed>
+    <deployedseed>1368928684</deployedseed>
+    <deployedseed>1544411920</deployedseed>
+    <deployedseed>1570633349</deployedseed>
+    <deployedseed>415960683</deployedseed>
+    <deployedseed>349545741</deployedseed>
+    <deployedseed>242496275</deployedseed>
+    <deployedseed>302887566</deployedseed>
+    <deployedseed>13708877</deployedseed>
+    <deployedseed>37360914</deployedseed>
+    <deployedseed>616261315</deployedseed>
+    <deployedseed>1601924556</deployedseed>
+    <deployedseed>988898255</deployedseed>
+    <deployedseed>1611259318</deployedseed>
+    <deployedseed>407555980</deployedseed>
+    <deployedseed>323486374</deployedseed>
+    <deployedseed>815276626</deployedseed>
+    <deployedseed>572309493</deployedseed>
+    <deployedseed>496530584</deployedseed>
+    <deployedseed>744574523</deployedseed>
+    <deployedseed>1180129557</deployedseed>
+    <deployedseed>1277638312</deployedseed>
+    <deployedseed>234773182</deployedseed>
+    <deployedseed>1984009191</deployedseed>
+    <deployedseed>596476321</deployedseed>
+    <deployedseed>362982530</deployedseed>
+    <deployedseed>410284720</deployedseed>
+    <deployedseed>1750218294</deployedseed>
+    <deployedseed>371849529</deployedseed>
+    <deployedseed>809490338</deployedseed>
+    <deployedseed>637798878</deployedseed>
+    <deployedseed>787089238</deployedseed>
+    <deployedseed>1303110528</deployedseed>
+    <deployedseed>908778598</deployedseed>
+    <deployedseed>344470975</deployedseed>
+    <deployedseed>1209683515</deployedseed>
+    <deployedseed>956846105</deployedseed>
+    <deployedseed>52695941</deployedseed>
+    <deployedseed>182363165</deployedseed>
+    <deployedseed>792119291</deployedseed>
+    <deployedseed>821863423</deployedseed>
+    <deployedseed>1090844855</deployedseed>
+    <deployedseed>86032904</deployedseed>
+    <deployedseed>692314254</deployedseed>
+    <deployedseed>480162133</deployedseed>
+    <deployedseed>1136192812</deployedseed>
+    <deployedseed>21527826</deployedseed>
+    <deployedseed>1363301802</deployedseed>
+    <deployedseed>430391495</deployedseed>
+    <deployedseed>244440672</deployedseed>
+    <deployedseed>705416050</deployedseed>
+    <deployedseed>611004669</deployedseed>
+    <deployedseed>1488553296</deployedseed>
+    <deployedseed>1466102720</deployedseed>
+    <deployedseed>1330212660</deployedseed>
+    <deployedseed>415262289</deployedseed>
+    <deployedseed>1024007526</deployedseed>
+    <deployedseed>719494303</deployedseed>
+    <deployedseed>713002447</deployedseed>
+    <deployedseed>1505324852</deployedseed>
+    <deployedseed>1909974798</deployedseed>
+    <deployedseed>449676431</deployedseed>
+    <deployedseed>179737887</deployedseed>
+    <deployedseed>446956257</deployedseed>
+    <deployedseed>245980931</deployedseed>
+    <deployedseed>1052772189</deployedseed>
+    <deployedseed>639813631</deployedseed>
+    <deployedseed>1428769096</deployedseed>
+    <deployedseed>899222618</deployedseed>
+    <deployedseed>1650029880</deployedseed>
+    <deployedseed>1462392811</deployedseed>
+    <deployedseed>4576510</deployedseed>
+    <deployedseed>1323969943</deployedseed>
+    <deployedseed>1971761300</deployedseed>
+    <deployedseed>429002695</deployedseed>
+    <deployedseed>1098293392</deployedseed>
+    <deployedseed>2007136678</deployedseed>
+    <deployedseed>1681235062</deployedseed>
+    <deployedseed>315677261</deployedseed>
+    <deployedseed>2067036131</deployedseed>
+    <deployedseed>1663305813</deployedseed>
+    <deployedseed>1896525435</deployedseed>
+    <deployedseed>432065783</deployedseed>
+    <deployedseed>1469407190</deployedseed>
+    <deployedseed>1026891972</deployedseed>
+    <deployedseed>531207720</deployedseed>
+    <deployedseed>1413884147</deployedseed>
+    <deployedseed>964917877</deployedseed>
+    <deployedseed>1565830556</deployedseed>
+    <deployedseed>1342450260</deployedseed>
+    <deployedseed>136327304</deployedseed>
+    <deployedseed>857081004</deployedseed>
+    <deployedseed>46028255</deployedseed>
+    <deployedseed>1995850795</deployedseed>
+    <deployedseed>1015499108</deployedseed>
+    <deployedseed>1006484947</deployedseed>
+    <deployedseed>1030974874</deployedseed>
+    <deployedseed>1580873826</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>A_round</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

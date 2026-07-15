@@ -5,101 +5,89 @@
       <text>Describing a transformation</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Below you can see two triangles:</p>
+      <text><![CDATA[<p>The diagram shows two triangles:</p>
 <ul>
-  <li>\(\triangle ABC\) is the original triangle.</li>
-  <li>\(\triangle A_1B_1C_1\) is the image after a transformation.</li>
+  <li>\(\triangle ABC\) (blue) is the original.</li>
+  <li>\(\triangle A_1B_1C_1\) (red) is its image after a single transformation.</li>
 </ul>
 
-<p>Look at the diagram and <strong>describe the transformation</strong> that maps  \(\triangle ABC\) onto \(\triangle A_1B_1C_1\).  
-(For example, state whether it is a reflection, rotation, or enlargement, and include any necessary details such as the axis, angle, centre, or scale factor.)</p>
-
-
-<p>
-  [[jsxgraph]]
-  var board = JXG.JSXGraph.initBoard(divid, {
-      boundingbox: [-8, 9, 9, -8],
+[[jsxgraph height='420px' width='420px']]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-7, 7, 7, -7],
     keepaspectratio: true,
     showCopyright: false,
     axis: true,
-    showNavigation: true
-  });
+    showNavigation: false,
+    pan: { enabled: false },
+    zoom: { enabled: false },
+    defaultAxes: {
+            x: { ticks: { insertTicks: false, ticksDistance: 1, minorTicks: 0, drawLabels: true } },
+            y: { ticks: { insertTicks: false, ticksDistance: 1, minorTicks: 0, drawLabels: true } }
+        }
+});
 
-  // triangle 1
-  var A = board.create('point', [{#x1#}, {#y1#}], { name: 'A', size: 2, fixed: true, visible: true});
-  var B = board.create('point', [{#x2#}, {#y2#}], { name: 'B', size: 2, fixed: true, visible: true});
-  var C = board.create('point', [{#x3#}, {#y3#}], { name: 'C', size: 2, fixed: true, visible: true});
+var A = board.create('point', [{#x1#}, {#y1#}], { name: 'A', size: 2, fixed: true, color: '#1f77b4' });
+var B = board.create('point', [{#x2#}, {#y2#}], { name: 'B', size: 2, fixed: true, color: '#1f77b4' });
+var C = board.create('point', [{#x3#}, {#y3#}], { name: 'C', size: 2, fixed: true, color: '#1f77b4' });
+board.create('polygon', [A, B, C], {
+    borders: { strokeColor: '#1f77b4', strokeWidth: 2 },
+    fillColor: '#1f77b4', fillOpacity: 0.15, fixed: true, vertices: { visible: false }
+});
 
-// Create a polygon using the defined points
-  var triangle1 = board.create('polygon', [A,B,C], { borders: { strokeColor: 'blue' }, fillColor: 'lightblue' });
+var A1 = board.create('point', [{#xx1#}, {#yy1#}], { name: 'A_1', size: 2, fixed: true, color: '#d62728' });
+var B1 = board.create('point', [{#xx2#}, {#yy2#}], { name: 'B_1', size: 2, fixed: true, color: '#d62728' });
+var C1 = board.create('point', [{#xx3#}, {#yy3#}], { name: 'C_1', size: 2, fixed: true, color: '#d62728' });
+board.create('polygon', [A1, B1, C1], {
+    borders: { strokeColor: '#d62728', strokeWidth: 2 },
+    fillColor: '#d62728', fillOpacity: 0.15, fixed: true, vertices: { visible: false }
+});
+[[/jsxgraph]]
 
-  // triangle 2
-  var A1 = board.create('point', [{#xx1#}, {#yy1#}], { name: 'A_1', size: 2, fixed: true, visible: true});
-  var B1 = board.create('point', [{#xx2#}, {#yy2#}], { name: 'B_1', size: 2, fixed: true, visible: true});
-  var C1 = board.create('point', [{#xx3#}, {#yy3#}], { name: 'C_1', size: 2, fixed: true, visible: true});
-
-// Create a polygon using the defined points
-var triangle2 = board.create('polygon', [A1, B1, C1], { borders: { strokeColor: 'blue' }, fillColor: 'red' });
-  [[/jsxgraph]]
-</p>
-
-<p>Describe the transformation which maps \(\triangle ABC\) on to\(\triangle A_1B_1C_1\).</p>
-<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+<p>Which of the following best describes the transformation that maps \(\triangle ABC\) onto \(\triangle A_1B_1C_1\)?</p>
+<div>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</div>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<p><strong>Feedback</strong></p>
-<p>The correct answer should be this is a {@description@}.  </p>
-<p>Now lets do a simple exercise to see all the <b>other kinds of transformation</b></p>
+      <text><![CDATA[<p><strong>Answer:</strong> {@description@}.</p>
+<p>A reflection flips the shape over a mirror line, so the image is "back to front": each vertex ends up the same perpendicular distance from the line, on the opposite side.</p>
+<p><em>Explore:</em> drag the blue vertices to make your own triangle, choose a mirror line, and compare with your group. Use <strong>Clear</strong> to start again.</p>
 
-<p>Drag the blue points to make a triangle of your own choice, then click a buttons and discuss with your colleagues.</p>
-
-[[jsxgraph]]
+[[jsxgraph height='420px' width='420px']]
 var board = JXG.JSXGraph.initBoard(divid, {
-    boundingbox: [-8, 9, 9, -8],
-    axis: true,
-    keepaspectratio: true,
-    showCopyright: false
+    boundingbox: [-9, 9, 9, -9],
+    axis: true, keepaspectratio: true, showCopyright: false
 });
 
-// Original triangle
-var A = board.create('point', [2,1], {name:'A', size:2, color:'blue'});
-var B = board.create('point', [4,2], {name:'B', size:2, color:'blue'});
-var C = board.create('point', [1,4], {name:'C', size:2, color:'blue'});
-var poly = board.create('polygon', [A,B,C], {
-    borders:{strokeColor:'blue'},
-    fillColor:'lightblue'
-});
+var A = board.create('point', [{#x1#}, {#y1#}], { name: 'A', size: 2, color: 'blue', snapToGrid: true });
+var B = board.create('point', [{#x2#}, {#y2#}], { name: 'B', size: 2, color: 'blue', snapToGrid: true });
+var C = board.create('point', [{#x3#}, {#y3#}], { name: 'C', size: 2, color: 'blue', snapToGrid: true });
+board.create('polygon', [A, B, C], { borders: { strokeColor: 'blue' }, fillColor: 'lightblue', fillOpacity: 0.3 });
 
-// Function to apply a transformation matrix
-function applyTransformation(matrix) {
-    // Calculate new coordinates
-    var Ax = matrix[0][0]*A.X() + matrix[0][1]*A.Y();
-    var Ay = matrix[1][0]*A.X() + matrix[1][1]*A.Y();
-    var Bx = matrix[0][0]*B.X() + matrix[0][1]*B.Y();
-    var By = matrix[1][0]*B.X() + matrix[1][1]*B.Y();
-    var Cx = matrix[0][0]*C.X() + matrix[0][1]*C.Y();
-    var Cy = matrix[1][0]*C.X() + matrix[1][1]*C.Y();
+var imgObjs = [];
+function clearImg() { imgObjs.forEach(function (o) { board.removeObject(o); }); imgObjs = []; }
 
-    // Draw the image triangle in red
-    var A1 = board.create('point', [Ax, Ay], {name:'A₁', size:2, color:'red', fixed:true});
-    var B1 = board.create('point', [Bx, By], {name:'B₁', size:2, color:'red', fixed:true});
-    var C1 = board.create('point', [Cx, Cy], {name:'C₁', size:2, color:'red', fixed:true});
-    board.create('polygon', [A1,B1,C1], {
-        borders:{strokeColor:'red'},
-        fillColor:'pink'
-    });
+function reflectShow(mapFn, lp, lq) {
+    clearImg();
+    imgObjs.push(board.create('line', [lp, lq], { strokeColor: '#888888', dash: 2, strokeWidth: 2 }));
+    var a = board.create('point', mapFn(A), { name: 'A_1', color: 'red', size: 2, fixed: true });
+    var b = board.create('point', mapFn(B), { name: 'B_1', color: 'red', size: 2, fixed: true });
+    var c = board.create('point', mapFn(C), { name: 'C_1', color: 'red', size: 2, fixed: true });
+    var g = board.create('polygon', [a, b, c], { borders: { strokeColor: 'red' }, fillColor: 'pink', fillOpacity: 0.3 });
+    imgObjs.push(a, b, c, g);
 }
 
-// Buttons
-var btnReflectX = board.create('button', [-7,8,"Reflect in X-axis", function(){
-    applyTransformation([[1,0],[0,-1]]);
+board.create('button', [-8.5, 8, 'Reflect in x-axis', function () {
+    reflectShow(function (P) { return [P.X(), -P.Y()]; }, [0, 0], [1, 0]);
 }]);
-
-var btnReflectY = board.create('button', [-7,7,"Reflect in Y-axis", function(){
-    applyTransformation([[-1,0],[0,1]]);
+board.create('button', [-8.5, 6.7, 'Reflect in y-axis', function () {
+    reflectShow(function (P) { return [-P.X(), P.Y()]; }, [0, 0], [0, 1]);
 }]);
-
-
+board.create('button', [-8.5, 5.4, 'Reflect in y = x', function () {
+    reflectShow(function (P) { return [P.Y(), P.X()]; }, [0, 0], [1, 1]);
+}]);
+board.create('button', [-8.5, 4.1, 'Reflect in y = -x', function () {
+    reflectShow(function (P) { return [-P.Y(), -P.X()]; }, [0, 0], [1, -1]);
+}]);
+board.create('button', [-8.5, 2.8, 'Clear', function () { clearImg(); }]);
 [[/jsxgraph]]]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -107,171 +95,153 @@ var btnReflectY = board.create('button', [-7,7,"Reflect in Y-axis", function(){
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[obj_1:matrix([2, 1, 4], [4, 2, 1]);  /*triangle 1*/
-obj_2:matrix([2, 3, 5], [2, 7, 1]);  /*triangle 2*/
-obj_3:matrix([1, 4, 5], [4, 2, 3]);  /*triangle 3*/
-obj_4:matrix([4, 1, 2], [4, 2, -1]); /*triangle 4*/
-obj_5:matrix([2, 4, 5], [-2, 3, 0]); /*triangle 5*/
-obj_6:matrix([2, 4, 5], [-1, -3, 2]); /*triangle 6*/
-obj:rand([obj_1,obj_2,obj_3,obj_4,obj_5,obj_6]);
+      <text><![CDATA[/* Curated (triangle, line) variants.  line = [kind, off]:
+   kind 1 = horizontal y = off ; 2 = vertical x = off ; 3 = y = x + off ; 4 = y = -x + off.
+   Each triangle sits fully on one side of its line, so the image is clear of the original,
+   and all coordinates stay on the board. */
+variants : [
+  [[[-4,-3],[-4,-1],[1,-4]],1,0],
+  [[[-2,-3],[2,-4],[3,-2]],1,0],
+  [[[-4,-4],[-4,1],[-2,-4]],2,0],
+  [[[2,0],[3,-3],[4,2]],2,0],
+  [[[-2,0],[0,3],[2,4]],3,0],
+  [[[-2,-3],[2,-4],[3,-2]],3,0],
+  [[[-4,-3],[-4,-1],[1,-4]],4,0],
+  [[[-4,-4],[-4,1],[-2,-4]],4,0],
+  [[[-2,0],[2,1],[3,0]],1,3],
+  [[[-3,2],[0,0],[0,2]],1,3],
+  [[[-1,-1],[0,2],[2,-1]],1,-2],
+  [[[-2,0],[2,1],[3,0]],1,-2],
+  [[[-4,-4],[-4,1],[-2,-4]],2,1],
+  [[[-4,-4],[-1,1],[0,-2]],2,1],
+  [[[-1,-1],[0,2],[2,-1]],2,-2],
+  [[[-1,-1],[0,2],[1,-2]],2,-2],
+  [[[-2,0],[0,3],[2,4]],3,1],
+  [[[-2,-3],[2,-4],[3,-2]],3,1],
+  [[[-2,0],[0,3],[2,4]],3,-1],
+  [[[-2,4],[2,2],[3,4]],3,-1],
+  [[[-3,0],[1,-3],[1,-1]],4,1],
+  [[[-4,-3],[-4,-1],[1,-4]],4,1],
+  [[[-4,-3],[-4,-1],[1,-4]],4,-2],
+  [[[-4,-4],[-4,1],[-2,-4]],4,-2]
+];
 
-x1:row(col(obj,1),1)[1][1]; y1:row(col(obj,1),2)[1][1];
-x2:row(col(obj,2),1)[1][1]; y2:row(col(obj,2),2)[1][1];  
-x3:row(col(obj,3),1)[1][1]; y3:row(col(obj,3),2)[1][1]; 
+V : rand(variants);
+tri : V[1];
+kind : V[2];
+off : V[3];
 
-trans1: matrix([1,0],[0,-1]);      /*Transformation matrix1 - reflection x-axis */
-trans2: matrix([-1,0],[0,1]);      /*Transformation matrix2 - reflection y-axis */
-trans3: matrix([0,-1],[-1,0]);        /*Transformation matrix3 - reflection y=-x */
-trans4: matrix([0,1],[1,0]);        /*Transformation matrix4 - reflection y=x */
+/* general line reflection */
+reflp(p) := if kind = 1 then [p[1], 2*off - p[2]]
+            elseif kind = 2 then [2*off - p[1], p[2]]
+            elseif kind = 3 then [p[2] - off, p[1] + off]
+            else [off - p[2], off - p[1]];
 
-trans:rand([trans1,trans2,trans3,trans4]);
-img: trans.obj;                	/* Image */
+orig : tri;
+img : map(reflp, tri);
 
-/*coordinates Image of PQR*/
-P_im1:col(img,1); Q_im1:col(img,2); R_im1:col(img,3);
-P_im:transpose(col(img,1)); Q_im:transpose(col(img,2)); R_im:transpose(col(img,3));
+x1 : orig[1][1]; y1 : orig[1][2];
+x2 : orig[2][1]; y2 : orig[2][2];
+x3 : orig[3][1]; y3 : orig[3][2];
+xx1 : img[1][1]; yy1 : img[1][2];
+xx2 : img[2][1]; yy2 : img[2][2];
+xx3 : img[3][1]; yy3 : img[3][2];
 
-xx1:row(col(img,1),1)[1][1]; yy1:row(col(img,1),2)[1][1];
-xx2:row(col(img,2),1)[1][1]; yy2:row(col(img,2),2)[1][1];  
-xx3:row(col(img,3),1)[1][1]; yy3:row(col(img,3),2)[1][1]; 
+/* human-readable description of a line given [kind, off] */
+desc(k, o) := if k = 1 then (if o = 0 then "Reflection in the x-axis" else sconcat("Reflection in the line y = ", o))
+  elseif k = 2 then (if o = 0 then "Reflection in the y-axis" else sconcat("Reflection in the line x = ", o))
+  elseif k = 3 then (if o = 0 then "Reflection in the line y = x" else sconcat("Reflection in the line y = x ", if o > 0 then sconcat("+ ", o) else sconcat("- ", -o)))
+  else (if o = 0 then "Reflection in the line y = -x" else sconcat("Reflection in the line y = -x ", if o > 0 then sconcat("+ ", o) else sconcat("- ", -o)));
 
-tt:matrix([a,b],[c,d]);
+description : desc(kind, off);
 
-ta1:obj;
-ta2:img;
-ta3:trans;
-description: if ta3=trans1 then "Reflection on the x-axis" 
-elseif ta3=trans2 then "Reflection on the y-axis" 
-elseif ta3=trans3 then "Reflection on the line y+x=0" 
-elseif ta3=trans4 then "Reflection on the line y=x" 
-else "This is not a transformation"; 
- 
-ta:random_permutation([[description,true],["Recflection on the line y = x+1",false],["This transformation is a rotation",false],["This is not a transformation",false],["Recflection on the line y = 3",false]]);]]></text>
+/* wrong-line distractor: the "confusable" partner line -- swap the axis
+   (y = k  <->  x = k) or flip the diagonal's sign (y = x + c  <->  y = -x + c).
+   This is always a different line, so it is a genuine near-miss
+   (e.g. correct x = -2  gives the distractor  y = -2). */
+swapline(k, o) := if k = 1 then [2, o] elseif k = 2 then [1, o] elseif k = 3 then [4, o] else [3, o];
+wsel : swapline(kind, off);
+wrongline_desc : desc(wsel[1], wsel[2]);
+
+/* MCQ options: token value, correct?, display text */
+ta : random_permutation([
+  [opt_correct,   true,  description],
+  [opt_wrongline, false, wrongline_desc],
+  [opt_rot,       false, "This transformation is a rotation"],
+  [opt_trans,     false, "This is a translation (a slide, with no turning or flipping)"],
+  [opt_none,      false, "This is not a transformation"]
+]);
+
+kindcode : kind;
+lineoff : off;]]></text>
     </questionvariables>
     <specificfeedback format="html">
-      <text><![CDATA[<p>Recall that a <strong>transformation</strong> is a rule that moves or changes a figure to produce an image. The animation below illustrates how a transformation acts on a triangle.</p>
-<p></p>
+      <text><![CDATA[<p>The animation below shows this reflection: \(\triangle ABC\) flips across the dashed mirror line onto \(\triangle A_1B_1C_1\).</p>
 
-[[jsxgraph]]
-    // Initialize the JSXGraph board
+[[jsxgraph height='420px' width='420px']]
 var board = JXG.JSXGraph.initBoard(divid, {
-    boundingbox: [-10, 10, 10, -10],
-    axis: true,
-    keepaspectratio: true,
-    showCopyright: false
+    boundingbox: [-7, 7, 7, -7],
+    axis: true, keepaspectratio: true, showCopyright: false,
+    showNavigation: false, pan: { enabled: false }, zoom: { enabled: false }
 });
 
-    // Create a point with coordinates (x, y)
-    var p1 = board.create('point', [{#x1#}, {#y1#}], {name: 'A', size: 0.5, color: 'blue', visible: true, fixed: true});
-    var p2 = board.create('point', [{#x2#}, {#y2#}], {name: 'B', size: 0.5, color: 'red', visible: true, fixed: true});
-    var p3 = board.create('point', [{#x3#}, {#y3#}], {name: 'C', size: 0.5, color: 'black', visible: true, fixed: true});
+var kind = {#kindcode#};
+var off = {#lineoff#};
 
-    // Create a triangle by connecting the three points
-    const triangle = board.create('polygon', [p1, p2, p3], {
-        borders: {strokeColor: 'purple', strokeWidth: 1},
-        fillColor: 'lightblue',
-        fillOpacity: 0.3
-    });
+// mirror line for the actual reflection
+var lp, lq;
+if (kind === 1) { lp = [0, off]; lq = [1, off]; }
+else if (kind === 2) { lp = [off, 0]; lq = [off, 1]; }
+else if (kind === 3) { lp = [0, off]; lq = [1, 1 + off]; }
+else { lp = [0, off]; lq = [1, off - 1]; }
+board.create('line', [lp, lq], { strokeColor: '#888888', dash: 2, strokeWidth: 2, fixed: true, highlight: false });
 
-  // --- Transformations ---
-  // 1) Enlargement (scale factor 2) about origin (0,0)
-  const p1_s = board.create('point', [function() { return 2 * p1.X(); }, function() { return 2 * p1.Y(); }], {name: 'A_1', visible: false});
-  const p2_s = board.create('point', [function() { return 2 * p2.X(); }, function() { return 2 * p2.Y(); }], {name: 'B_1', visible: false});
-  const p3_s = board.create('point', [function() { return 2 * p3.X(); }, function() { return 2 * p3.Y(); }], {name: 'C_1', visible: false});
-  const triangle_scaled = board.create('polygon', [p1_s, p2_s, p3_s], {
-    borders: {strokeColor: 'blue', strokeWidth: 1, dash: 2},
-    fillOpacity: 0.0
-  });
+var ox = [{#x1#}, {#x2#}, {#x3#}], oy = [{#y1#}, {#y2#}, {#y3#}];
+var ix = [{#xx1#}, {#xx2#}, {#xx3#}], iy = [{#yy1#}, {#yy2#}, {#yy3#}];
 
-  // 2) Reflect the scaled triangle across the line y = -x
-  const p1_r = board.create('point', [function() { return -p1_s.Y(); }, function() { return -p1_s.X(); }], {name: 'A_2', visible: true, size: 0.5});
-  const p2_r = board.create('point', [function() { return -p2_s.Y(); }, function() { return -p2_s.X(); }], {name: 'B_2', visible: true, size: 0.5});
-  const p3_r = board.create('point', [function() { return -p3_s.Y(); }, function() { return -p3_s.X(); }], {name: 'C_2', visible: true, size: 0.5});
-  const triangle_reflected = board.create('polygon', [p1_r, p2_r, p3_r], {
-    borders: {strokeColor: 'green', strokeWidth: 1, dash: 1},
-    fillOpacity: 0.0
-  });
+// original (blue) and image (red) fixed
+var oP = [], iP = [];
+for (var i = 0; i < 3; i++) {
+    oP.push(board.create('point', [ox[i], oy[i]], { visible: false, fixed: true }));
+    iP.push(board.create('point', [ix[i], iy[i]], { visible: false, fixed: true }));
+}
+board.create('polygon', oP, { borders: { strokeColor: '#1f77b4', strokeWidth: 2 }, fillColor: '#1f77b4', fillOpacity: 0.12, fixed: true, vertices: { visible: false } });
+board.create('polygon', iP, { borders: { strokeColor: '#d62728', strokeWidth: 2, dash: 2 }, fillColor: '#d62728', fillOpacity: 0.10, fixed: true, vertices: { visible: false } });
 
-  // 3) Rotate the reflected triangle by -90° about the origin (clockwise 90°)
-  const p1_rot = board.create('point', [function() { return p1_r.Y(); }, function() { return -p1_r.X(); }], {name: 'A_3', visible: true, size: 0.5});
-  const p2_rot = board.create('point', [function() { return p2_r.Y(); }, function() { return -p2_r.X(); }], {name: 'B_3', visible: true, size: 0.5});
-  const p3_rot = board.create('point', [function() { return p3_r.Y(); }, function() { return -p3_r.X(); }], {name: 'C_3', visible: true, size: 0.5});
-  const triangle_rotated = board.create('polygon', [p1_rot, p2_rot, p3_rot], {
-    borders: {strokeColor: 'orange', strokeWidth: 1},
-    fillColor: 'orange',
-    fillOpacity: 0.18
-  });
+var labs = ['A', 'B', 'C'];
+for (var i = 0; i < 3; i++) {
+    board.create('text', [ox[i] + 0.2, oy[i] + 0.3, labs[i]], { fontSize: 11, color: '#1f77b4', fixed: true });
+    board.create('text', [ix[i] + 0.2, iy[i] + 0.3, labs[i] + '₁'], { fontSize: 11, color: '#d62728', fixed: true });
+}
 
-  // 4) Rotate the triangle by 180° (multiply both coordinates by -1)
-  const p1_rot2 = board.create('point', [function() { return -p1_rot.X(); }, function() { return -p1_rot.Y(); }], {name: 'A_4', visible: true, size: 0.5});
-  const p2_rot2 = board.create('point', [function() { return -p2_rot.X(); }, function() { return -p2_rot.Y(); }], {name: 'B_4', visible: true, size: 0.5});
-  const p3_rot2 = board.create('point', [function() { return -p3_rot.X(); }, function() { return -p3_rot.Y(); }], {name: 'C_4', visible: true, size: 0.5});
-  const triangle_rotated2 = board.create('polygon', [p1_rot2, p2_rot2, p3_rot2], {
-    borders: {strokeColor: 'purple', strokeWidth: 1},
-    fillColor: 'purple',
-    fillOpacity: 0.18
-  });
+// animated triangle sliding original -> image and back
+var s = 0, dir = 1;
+function lerp(i) { return [(1 - s) * ox[i] + s * ix[i], (1 - s) * oy[i] + s * iy[i]]; }
+var aP = [];
+for (var i = 0; i < 3; i++) {
+    (function (j) {
+        aP.push(board.create('point',
+            [function () { return lerp(j)[0]; }, function () { return lerp(j)[1]; }],
+            { visible: false }));
+    })(i);
+}
+board.create('polygon', aP, { borders: { strokeColor: '#2ca02c', strokeWidth: 3 }, fillColor: '#2ca02c', fillOpacity: 0.25, fixed: true, vertices: { visible: false } });
 
-  // Automatic looping animation
-  // Compute animated coordinates for a single point (px,py) given s in [0,1]
-  function animCoords(px, py, s) {
-    // stage 1: scale from 1 -> 2 (s in [0,1/3])
-    if (s <= 1/3) {
-      const t = s * 3;
-      return [(1 + t) * px, (1 + t) * py];
-    }
-    // stage 2: interpolate between scaled (2x,2y) and reflected (-2y,-2x) (s in (1/3,2/3])
-    if (s <= 2/3) {
-      const t = (s - 1/3) * 3;
-      const sx = 2 * px, sy = 2 * py;
-      const rx = -sy, ry = -sx; // reflection across y = -x
-      return [(1 - t) * sx + t * rx, (1 - t) * sy + t * ry];
-    }
-    // stage 3: interpolate between reflected (-2y,-2x) and rotated (-2x,2y) (s in (2/3,0.83])
-    if (s <= 0.83) {
-      const t = (s - 2/3) * 6;
-      const rx = -2 * py, ry = -2 * px; // reflected
-      const rotx = -2 * px, roty = 2 * py; // rotated
-      return [(1 - t) * rx + t * rotx, (1 - t) * ry + t * roty];
-    }
-    // stage 4: interpolate to final 180° rotation (s in (0.83,1])
-    const t = (s - 0.83) * 6;
-    const rotx = -2 * px, roty = 2 * py; // current rotated
-    const finalx = 2 * px, finaly = -2 * py; // 180° rotated
-    return [(1 - t) * rotx + t * finalx, (1 - t) * roty + t * finaly];
-  }
-
-  // Animated points (hidden) driven by a global t variable
-  let animT = 0;
-  const a1 = board.create('point', [function() { return animCoords(p1.X(), p1.Y(), animT)[0]; }, function() { return animCoords(p1.X(), p1.Y(), animT)[1]; }], {visible: false});
-  const a2 = board.create('point', [function() { return animCoords(p2.X(), p2.Y(), animT)[0]; }, function() { return animCoords(p2.X(), p2.Y(), animT)[1]; }], {visible: false});
-  const a3 = board.create('point', [function() { return animCoords(p3.X(), p3.Y(), animT)[0]; }, function() { return animCoords(p3.X(), p3.Y(), animT)[1]; }], {visible: false});
-
-  // Animated triangle polygon
-  const triangle_anim = board.create('polygon', [a1, a2, a3], {
-    borders: {strokeColor: 'red', strokeWidth: 3},
-    fillColor: 'red',
-    fillOpacity: 0.15
-  });
-
-  // Looping automatic animation
-  const dt = 0.0028; // change per frame
-  setInterval(function() {
-    animT += dt;
-    if (animT > 1) animT = 0; // loop
+setInterval(function () {
+    s += dir * 0.01;
+    if (s >= 1) { s = 1; dir = -1; }
+    if (s <= 0) { s = 0; dir = 1; }
     board.update();
-  }, 30);
-  // animation runs automatically via the interval above
+}, 30);
 
-[[/jsxgraph]]
-<br>]]></text>
+board.renderer.svgRoot.style.pointerEvents = "none";
+[[/jsxgraph]]]]></text>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>Transformation \(\implies\) {@trans@} </p>
-<p>Description {@description@}</p>]]></text>
+      <text><![CDATA[<p>{@description@} (kind {@kindcode@}, off {@lineoff@}); triangle {@orig@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -326,7 +296,7 @@ var board = JXG.JSXGraph.initBoard(divid, {
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Correct description?</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>mcq_correct(ta)[1]</tans>
@@ -343,8 +313,108 @@ var board = JXG.JSXGraph.initBoard(divid, {
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Reflection, but wrong line?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>opt_wrongline</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have correctly spotted that this is a <strong>reflection</strong> &mdash; but that is not the right mirror line. The mirror line lies halfway between each point and its image, at right angles to the line joining them. Look at where just one vertex, say \(A\), maps to.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Chose rotation?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>opt_rot</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Look at the orientation. Under a <strong>rotation</strong> the triangle would keep its sense (going \(A\rightarrow B\rightarrow C\) the same way round). Here \(\triangle A_1B_1C_1\) is a mirror image &mdash; flipped over &mdash; so it is a reflection, not a rotation.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Chose translation?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>opt_trans</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>A <strong>translation</strong> slides every point the same distance in the same direction, keeping the shape facing the same way. Here the image has been flipped over, so it is a reflection, not a translation.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>4</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>4</name>
+        <description><![CDATA[Chose "not a transformation"?]]></description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>opt_none</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-5-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It <em>is</em> a transformation: every point of \(\triangle ABC\) has a matching image point in \(\triangle A_1B_1C_1\), the same shape and size. Decide whether it has been slid, turned, or flipped.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-5-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -354,9 +424,17 @@ var board = JXG.JSXGraph.initBoard(divid, {
     <deployedseed>2141205395</deployedseed>
     <deployedseed>1877432223</deployedseed>
     <deployedseed>2000490574</deployedseed>
+    <deployedseed>145530277</deployedseed>
+    <deployedseed>908471222</deployedseed>
+    <deployedseed>1633028841</deployedseed>
+    <deployedseed>77412650</deployedseed>
+    <deployedseed>1290556743</deployedseed>
+    <deployedseed>1994871005</deployedseed>
+    <deployedseed>560221389</deployedseed>
+    <deployedseed>1841002267</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>Correct description gets full marks.</description>
       <testinput>
         <name>ans1</name>
         <value>first(mcq_correct(ta))</value>
@@ -366,6 +444,62 @@ var board = JXG.JSXGraph.initBoard(divid, {
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description><![CDATA[Wrong reflection line -> reflection diagnostic.]]></description>
+      <testinput>
+        <name>ans1</name>
+        <value>opt_wrongline</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description><![CDATA[Rotation distractor -> rotation diagnostic.]]></description>
+      <testinput>
+        <name>ans1</name>
+        <value>opt_rot</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>4</testcase>
+      <description><![CDATA[Translation distractor -> translation diagnostic.]]></description>
+      <testinput>
+        <name>ans1</name>
+        <value>opt_trans</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-4-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>5</testcase>
+      <description><![CDATA["Not a transformation" -> that diagnostic.]]></description>
+      <testinput>
+        <name>ans1</name>
+        <value>opt_none</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-5-T</expectedanswernote>
       </expected>
     </qtest>
   </question>
