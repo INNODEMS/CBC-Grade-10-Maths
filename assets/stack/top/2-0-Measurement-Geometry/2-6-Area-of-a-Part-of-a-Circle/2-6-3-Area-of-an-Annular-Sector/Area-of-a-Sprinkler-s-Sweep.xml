@@ -2,10 +2,14 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Calculating the Area Swept by a Windscreen Wiper</text>
+      <text>Area of a Sprinkler's Sweep</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>The shaded region in the diagram below represents the area swept out by a windscreen wiper on a flat windscreen. Calculate the area of the shaded region correct to \(3\,\text{decimal places}\).</p>
+      <text><![CDATA[<p>A circular fountain sits at the centre of a garden. A sprinkler head, mounted on a post at the fountain's centre \(O\), rotates and sprays water outward, watering the lawn beyond the fountain's edge over an angle of \({@theta@}^\circ\).</p>
+
+<p>The fountain has a radius of \({@r@}\,\text{cm}\), and the sprinkler's water reaches a maximum distance of \({@R@}\,\text{cm}\) from \(O\).</p>
+
+<p>Calculate the area of lawn watered by the sprinkler (the shaded region shown), correct to \(3\,\text{decimal places}\). (Use \(\pi=\frac{22}{7}\))</p>
 
 [[jsxgraph]]
 var brd = JXG.JSXGraph.initBoard('jxgbox', {
@@ -16,7 +20,7 @@ var brd = JXG.JSXGraph.initBoard('jxgbox', {
         keepAspectRatio: true
     });
 
-    // Centre of rotation, now visible and labelled
+    // Centre O: the sprinkler post, at the centre of the fountain
     var O = brd.create('point', [-2, -2], {
         name: 'O',
         visible: true,
@@ -25,51 +29,46 @@ var brd = JXG.JSXGraph.initBoard('jxgbox', {
         label: { offset: [-14, -12], fontSize: 16 }
     });
 
-    // Fixed DISPLAY radii (keeps the picture a sensible size regardless of the
-    // true randomized R, which can range up to ~187 cm)
+    // Fixed DISPLAY radii, independent of true R and r values (which vary in cm)
     var R_outer = 10;
-    var R_inner = 6;
+    var R_inner = 4;
 
-    // The angle is NOT decoupled: it uses the real randomized theta,
-    // since the sector's shape is the one thing students can visually verify
+    // Real swept angle drives the diagram shape
     var angleDeg = {#theta#};
     var angle = angleDeg * Math.PI / 180;
 
-    // Outer sector
+    // Outer sector boundary (maximum reach of the water)
     var P = brd.create('point', [O.X() + R_outer, O.Y()], {visible: false});
     var Q = brd.create('point', [O.X() + R_outer * Math.cos(angle), O.Y() + R_outer * Math.sin(angle)], {visible: false});
     brd.create('sector', [O, P, Q], {
-        fillOpacity: 0.2,
+        fillColor: '#8fd19e',
+        fillOpacity: 0.5,
         strokeWidth: 2,
-        strokeColor: 'black'
+        strokeColor: 'darkgreen'
     });
 
-    // Inner sector (cuts out the centre, leaving only the annular sector shaded)
+    // Inner sector, filled to represent the fountain (unwatered, cuts out the centre)
     var Pin = brd.create('point', [O.X() + R_inner, O.Y()], {visible: false});
     var Qin = brd.create('point', [O.X() + R_inner * Math.cos(angle), O.Y() + R_inner * Math.sin(angle)], {visible: false});
     brd.create('sector', [O, Pin, Qin], {
-        fillColor: 'white',
-        fillOpacity: 1,
+        fillColor: '#4a90d9',
+        fillOpacity: 0.8,
         strokeWidth: 0
     });
 
-    // Hatching lines between inner and outer arcs
-    for (var t = 0; t <= 1; t += 0.05) {
-        (function (s) {
-            var a = angle * s;
-            var x1 = O.X() + R_inner * Math.cos(a), y1 = O.Y() + R_inner * Math.sin(a);
-            var x2 = O.X() + R_outer * Math.cos(a), y2 = O.Y() + R_outer * Math.sin(a);
-            brd.create('segment', [[x1, y1], [x2, y2]], {
-                strokeColor: 'blue',
-                strokeWidth: 1
-            });
-        })(t);
-    }
+    // Full fountain circle outline (dashed), to show it's a full circular fountain,
+    // even though only part of its boundary lies within the swept angle
+    brd.create('circle', [O, R_inner], {
+        strokeColor: '#4a90d9',
+        strokeWidth: 1,
+        dash: 2,
+        fillOpacity: 0
+    });
 
-    // Base line along the starting radius
+    // Base line marking the start of the sweep
     var baseEnd = brd.create('point', [O.X() + R_outer, O.Y()], {visible: false});
-    brd.create('segment', [O, baseEnd], {strokeColor: 'blue', strokeWidth: 2});
-    brd.create('text', [O.X() + R_outer / 2 - 1, O.Y() - 1, function() { return {#R#} + ' cm'; }]);
+    brd.create('segment', [O, baseEnd], {strokeColor: 'darkgreen', strokeWidth: 2});
+    brd.create('segment', [O, Q], {strokeColor: 'darkgreen', strokeWidth: 2});
 
     // Angle marker showing theta
     brd.create('angle', [baseEnd, O, Q], {
@@ -77,66 +76,58 @@ var brd = JXG.JSXGraph.initBoard('jxgbox', {
         name: function() { return angleDeg + '°'; }
     });
 
-    // Wiper label, positioned along the bisector of the swept angle
+    // Fountain radius label
     brd.create('text', [
-        function() { return O.X() + (R_inner + R_outer) / 2 * Math.cos(angle / 2); },
-        function() { return O.Y() + (R_inner + R_outer) / 2 * Math.sin(angle / 2) + 0.6; },
-        'Wiper'
+        function() { return O.X() + (R_inner / 2) * Math.cos(angle / 2); },
+        function() { return O.Y() + (R_inner / 2) * Math.sin(angle / 2) + 0.6; },
+        function() { return {#r#} + ' cm'; }
     ]);
 
-    // Wiper length label
+    // Outer reach label
     brd.create('text', [
-        function() { return O.X() + (R_inner + 0.5) * Math.cos(angle / 2); },
-        function() { return O.Y() + (R_inner + 0.5) * Math.sin(angle / 2) - 0.8; },
-        function() { return {#Wiper#} + ' cm'; }
+        function() { return O.X() + ((R_inner + R_outer) / 2) * Math.cos(angle / 2); },
+        function() { return O.Y() + ((R_inner + R_outer) / 2) * Math.sin(angle / 2) + 0.6; },
+        function() { return {#R#} + ' cm'; }
     ]);
+
+    // "Fountain" label near the inner circle
+    brd.create('text', [O.X() - R_inner - 1.5, O.Y() + 1, 'Fountain']);
 [[/jsxgraph]]
 
-<p>\(\text{Area of the region swept}=\)[[input:ans1]]\(\,\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+<p>\(\text{Area of lawn watered}=\)[[input:ans1]]\(\,\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<p><strong>Worked Solution:</strong></p>
-<p>The shaded region represents the area swept out by the windscreen wiper. From the diagram:</p>
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>The watered lawn forms an annular sector — a sector-shaped region with the fountain's circle removed from the centre. From the problem:</p>
 <ul>
-    <li>Sector angle: \({@theta@}^\circ\)</li>
-    <li>Outer radius of the sweep: \({@R@}\,\text{cm}\)</li>
-    <li>Wiper length: \({@Wiper@}\,\text{cm}\)</li>
+    <li>Sweep angle: \({@theta@}^\circ\)</li>
+    <li>Fountain radius (inner): \(r={@r@}\,\text{cm}\)</li>
+    <li>Sprinkler's maximum reach (outer): \(R={@R@}\,\text{cm}\)</li>
 </ul>
 
-<p><strong>Step 1: Find the inner radius \(r\).</strong></p>
-<p>
-\(
-\begin{align}
-r &= R - \text{Wiper length} \\
-&= {@R@} - {@Wiper@} \\
-&= {@r@}\,\text{cm}
-\end{align}
-\)
-</p>
-
-<p><strong>Step 2: Write the formula for the area of an annular sector.</strong></p>
+<p><strong>Step 1: Write the formula for the area of an annular sector.</strong></p>
 <p>
 \[
 A = \frac{\theta}{360} \times \pi (R^2 - r^2)
 \]
 </p>
 
-<p><strong>Step 3: Substitute the values and compute the area.</strong></p>
+<p><strong>Step 2: Substitute the values and compute the area.</strong></p>
 <p>
-\(
+\[
 \begin{align}
 A &= \frac{{@theta@}}{360} \times \frac{22}{7} \times \left({@R@}^2 - {@r@}^2\right) \\
 &= \frac{{@theta@}}{360} \times \frac{22}{7} \times \left({@R_sq@} - {@r_sq@}\right) \\
 &= \frac{{@theta@}}{360} \times \frac{22}{7} \times {@Radius_difference@} \\
 &= {@A_val@}\,\text{cm}^2
 \end{align}
-\)
+\]
 </p>
 
 <p>Rounded to \(3\) decimal places:</p>
-<p>\(\text{Area of the region swept} \approx {@A_3dp@}\,\text{cm}^2\)</p>]]></text>
+<p>\(\text{Area of lawn watered} \approx {@A_3dp@}\,\text{cm}^2\)</p>]]></text>
     </generalfeedback>
-    <defaultgrade>15</defaultgrade>
+    <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
@@ -144,15 +135,15 @@ A &= \frac{{@theta@}}{360} \times \frac{22}{7} \times \left({@R@}^2 - {@r@}^2\ri
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Randomize the sector angle: realistic wiper sweep, 60° to 180°, steps of 10° */
+      <text>/* Randomize the sweep angle of the sprinkler, 60° to 180°, steps of 10° */
 theta: rand_with_step(60, 180, 10);
 
-/* Randomize the wiper length (difference between outer and inner radius) */
-Wiper: rand_with_step(7, 47, 7);
+/* Randomize the fountain's radius (inner radius, unwatered) */
+r: rand_with_step(7, 63, 7);
 
-/* Randomize the outer radius, then derive inner radius from Wiper */
-R: rand_with_step(7, 140, 7) + Wiper;
-r: R - Wiper;
+/* Randomize the sprinkler's reach beyond the fountain, then derive R */
+Reach: rand_with_step(7, 105, 7);
+R: r + Reach;
 
 /* pi = 22/7 as specified */
 Pi_val: 22/7;
@@ -162,20 +153,21 @@ R_sq: R^2;
 r_sq: r^2;
 Radius_difference: R_sq - r_sq;
 
-/* Area of the annular sector (shaded region) */
+/* Area of the annular sector (watered lawn) */
 A: (theta/360) * Pi_val * Radius_difference;
 A_val: float(A);
 
-/* Round to 3 decimal places for the final displayed/marked answer */
+/* Round to 3 decimal places */
 A_3dp: float(decimalplaces(A, 3));</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>\(\text{The wiper Radius}={@Wiper@}\,\text{cm}\)</p>
-<p>\(\text{The radius of the windscreen}={@R@}\,\text{cm}\)</p>
-<p>\(\text{The area of the region swept}={@A_3sf@}\,\text{cm}^2\)</p>]]></text>
+      <text><![CDATA[<p>\({@theta@}\)</p>
+<p>\({@R@}\)</p>
+<p>\({@Radius_difference@}\)</p>
+<p>\({@A_3dp@}\)</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -205,7 +197,7 @@ A_3dp: float(decimalplaces(A, 3));</text>
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>A_3sf</tans>
+      <tans>A_3dp</tans>
       <boxsize>7</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -230,10 +222,10 @@ A_3dp: float(decimalplaces(A, 3));</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description>Checks for the correct area of the region swept.</description>
+        <description/>
         <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
-        <tans>A_3sf</tans>
+        <tans>A_3dp</tans>
         <testoptions>3</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -254,29 +246,25 @@ A_3dp: float(decimalplaces(A, 3));</text>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>1667736289</deployedseed>
-    <deployedseed>1324045935</deployedseed>
-    <deployedseed>1079081036</deployedseed>
-    <deployedseed>458840914</deployedseed>
-    <deployedseed>1729903595</deployedseed>
-    <deployedseed>560098719</deployedseed>
-    <deployedseed>309496913</deployedseed>
-    <deployedseed>1968870677</deployedseed>
-    <deployedseed>1854829465</deployedseed>
-    <deployedseed>1781027088</deployedseed>
-    <qtest>
-      <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
-      <testinput>
-        <name>ans1</name>
-        <value>A_3sf</value>
-      </testinput>
-      <expected>
-        <name>prt1</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
-      </expected>
-    </qtest>
+    <deployedseed>1301836439</deployedseed>
+    <deployedseed>2056324318</deployedseed>
+    <deployedseed>1995711814</deployedseed>
+    <deployedseed>1529412908</deployedseed>
+    <deployedseed>443145729</deployedseed>
+    <deployedseed>1709609970</deployedseed>
+    <deployedseed>1316683630</deployedseed>
+    <deployedseed>1235607459</deployedseed>
+    <deployedseed>202117726</deployedseed>
+    <deployedseed>1728242339</deployedseed>
+    <deployedseed>1513390704</deployedseed>
+    <deployedseed>2075590544</deployedseed>
+    <deployedseed>1428766618</deployedseed>
+    <deployedseed>760454964</deployedseed>
+    <deployedseed>659327262</deployedseed>
+    <deployedseed>1881032683</deployedseed>
+    <deployedseed>77286921</deployedseed>
+    <deployedseed>50458808</deployedseed>
+    <deployedseed>1983908705</deployedseed>
+    <deployedseed>2025673596</deployedseed>
   </question>
 </quiz>

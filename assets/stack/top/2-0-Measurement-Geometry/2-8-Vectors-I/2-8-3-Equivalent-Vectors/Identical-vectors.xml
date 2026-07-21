@@ -9,7 +9,7 @@
 
 [[jsxgraph input-ref-ans1='ans1Ref']]
 
-var board = JXG.JSXGraph.initBoard(divid, { boundingbox : [-5.5, 5.5, 5.5, -5.5], axis : true });
+var board = JXG.JSXGraph.initBoard(divid, { boundingbox : [-8.5, 8.5, 8.5, -8.5], axis : true });
 
 var p1 = board.create('point', {#p1#}, { name : 'p_1', fixed: true });
 var p2 = board.create('point', {#p2#}, { name : 'p_2', fixed: true, lastArrow: {type: 2, size: 8, highlightSize: 6} });
@@ -51,7 +51,7 @@ stack_jxg.bind_point_relative(ans1Ref, p3, p4);
 <div style="text-align: center;">
 [[jsxgraph width="500px" height="500px"]]
 JXG.Options.text.useMathJax = true;
-var board = JXG.JSXGraph.initBoard(divid, { boundingbox : [-5.5, 5.5, 5.5, -5.5], axis : true, showNavigation:false, showCopyright:false});
+var board = JXG.JSXGraph.initBoard(divid, { boundingbox : [-8.5, 8.5, 8.5, -8.5], axis : true, showNavigation:false, showCopyright:false});
 
 // The target fixed vector (Blue)
 var p1 = board.create('point', {#p1#}, { name : 'p_1', fixed: true, size:3, color:'#0000ff' });
@@ -64,7 +64,9 @@ var p3_sol = board.create('point', {#p3#}, { name : 'p_3', fixed: true, size:3, 
 // We calculate the correct p4 position relative to p3 using the vector component v1
 var p4x_sol = {#p3x#} + {#v1[1]#};
 var p4y_sol = {#p3y#} + {#v1[2]#};
+
 var p4_sol = board.create('point', [p4x_sol, p4y_sol], { name : 'p_4', fixed: true, size:3, color:'#009900' });
+
 board.create('arrow', [p3_sol, p4_sol], { fixed : true, strokeWidth : 4, strokeOpacity : .8, color:'#009900' });
 
 [[/jsxgraph]]
@@ -77,7 +79,7 @@ board.create('arrow', [p3_sol, p4_sol], { fixed : true, strokeWidth : 4, strokeO
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>p1x: rand_with_step(-5, 0, 1);
@@ -86,8 +88,8 @@ p2x: p1x+rand_with_step(1, 4, 1);
 p2y: p1y+rand_with_step(1, 5, 1);
 v1: [p2x-p1x, p2y-p1y];
 
-p3x: rand_with_step(0, 5, 1);
-p3y: rand_with_step(-5, 0, 1);
+p3x: rand_with_step(0, 3, 1);
+p3y: rand_with_step(-3, 0, 1);
 p4x: p3x+rand_with_step(-5, -1, 1);
 p4y: p3y+rand_with_step(1, 5, 1);
 

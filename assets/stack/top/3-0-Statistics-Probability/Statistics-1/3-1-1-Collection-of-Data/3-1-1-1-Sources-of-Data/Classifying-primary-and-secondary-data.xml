@@ -10,36 +10,44 @@
 <div class="card mb-3">
   <div class="card-body">
     <p><strong>(a)</strong> {@scen_1@}</p>
-    [[input:ans1]] [[validation:ans1]][[feedback:prt1]]
+    [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
   </div>
 </div>
 
 <div class="card mb-3">
   <div class="card-body">
     <p><strong>(b)</strong> {@scen_2@}</p>
-    [[input:ans2]] [[validation:ans2]][[feedback:prt2]]
+    [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]
   </div>
 </div>
 
 <div class="card mb-3">
   <div class="card-body">
     <p><strong>(c)</strong> {@scen_3@}</p>
-    [[input:ans3]] [[validation:ans3]][[feedback:prt3]]
+    [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]
   </div>
 </div>
 
 <div class="card mb-3">
   <div class="card-body">
     <p><strong>(d)</strong> {@scen_4@}</p>
-    [[input:ans4]] [[validation:ans4]][[feedback:prt4]]
+    [[input:ans4]] [[validation:ans4]] [[feedback:prt4]]
   </div>
 </div>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked solution</h3>
+<p>Ask, for each activity: <em>who</em> gathered the data?</p>
 <ul>
-    <li><strong>Primary Data:</strong> This is data that you collect <em>yourself</em> for a specific purpose. It is "fresh" and original. (Examples: Counting cars, interviewing people, measuring height).</li>
-    <li><strong>Secondary Data:</strong> This is data that <em>someone else</em> has already collected. You are just using it. (Examples: Census reports, newspaper articles, textbooks, internet searches).</li>
+    <li><strong>Primary Data:</strong> data you collect <em>yourself</em>, first-hand, for this specific purpose. (Examples: counting cars, interviewing people, measuring plants, running an experiment.)</li>
+    <li><strong>Secondary Data:</strong> data that <em>someone else</em> has already collected and published, which you are simply re-using. (Examples: a census report, a newspaper article, a textbook graph, an internet search.)</li>
+</ul>
+<p>For this variant:</p>
+<ul>
+    <li><strong>(a)</strong> {@scen_1@} &rarr; <strong>{@type_1@}</strong></li>
+    <li><strong>(b)</strong> {@scen_2@} &rarr; <strong>{@type_2@}</strong></li>
+    <li><strong>(c)</strong> {@scen_3@} &rarr; <strong>{@type_3@}</strong></li>
+    <li><strong>(d)</strong> {@scen_4@} &rarr; <strong>{@type_4@}</strong></li>
 </ul>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -52,97 +60,74 @@
     <questionvariables>
       <text><![CDATA[/* --- SCENARIO POOLS --- */
 
-/* List of Primary Data Scenarios (Collection) */
+/* Primary Data scenarios (data collected first-hand) */
 pool_primary: [
     "You stand at the school gate and count the number of cars passing by.",
-    "You interview 20 students to ask them about their favorite lunch meal.",
+    "You interview 20 students to ask them about their favourite lunch meal.",
     "You measure the height of every seedling in your agriculture plot yourself.",
     "You conduct a science experiment to see how fast ice melts.",
-    "You hand out a questionnaire to your neighbors about water usage."
+    "You hand out a questionnaire to your neighbours about water usage."
 ];
 
-/* List of Secondary Data Scenarios (Existing Sources) */
+/* Secondary Data scenarios (data already collected by someone else) */
 pool_secondary: [
     "You look up the population of Kenya in the 2019 Census report.",
     "You read a newspaper article to find out yesterday's football scores.",
-    "You use a graph from a textbook to analyze rainfall patterns from 1990.",
+    "You use a graph from a textbook to analyse rainfall patterns from 1990.",
     "You search the internet for the current exchange rate of the Dollar.",
-    "You analyze patient records from a hospital archive for a history project."
+    "You analyse patient records from a hospital archive for a history project."
 ];
 
-/* --- SELECTION & RANDOMIZATION --- */
+/* --- SELECTION --- */
+/* Pick 2 distinct primary and 2 distinct secondary scenarios */
+sp: random_permutation(pool_primary);
+ss: random_permutation(pool_secondary);
 
-/* Select 4 unique scenarios: 2 Primary and 2 Secondary to ensure balance */
-/* We shuffle the pools first to get random ones */
-shuffled_p: random_permutation(pool_primary);
-shuffled_s: random_permutation(pool_secondary);
+/* Tag each chosen scenario with its correct classification */
+tagged: [
+    [sp[1], "Primary Data"],
+    [sp[2], "Primary Data"],
+    [ss[1], "Secondary Data"],
+    [ss[2], "Secondary Data"]
+];
 
-/* Assign scenarios to the 4 parts (a, b, c, d) */
-/* We mix the order: P, S, S, P or similar. Let's do P, S, P, S for simplicity in coding, but we can randomize the display order if needed. */
-/* Here I map them explicitly to variables for clarity */
+/* --- RANDOMISE POSITION --- */
+/* Shuffle so the correct-answer sequence varies between variants          */
+/* (fixes the old fixed P,S,P,S pattern that could be answered by rote).   */
+items: random_permutation(tagged);
 
-scen_1: shuffled_p[1]; /* Primary */
-scen_2: shuffled_s[1]; /* Secondary */
-scen_3: shuffled_p[2]; /* Primary */
-scen_4: shuffled_s[2]; /* Secondary */
+scen_1: items[1][1];  type_1: items[1][2];
+scen_2: items[2][1];  type_2: items[2][2];
+scen_3: items[3][1];  type_3: items[3][2];
+scen_4: items[4][1];  type_4: items[4][2];
 
+/* --- DROPDOWN OPTIONS --- */
+/* Value 1 = "Primary Data", value 2 = "Secondary Data".                   */
+/* Correctness flag depends on this part's type; display order shuffled.   */
+opts_for(t) := random_permutation([
+    [1, is(t = "Primary Data"),   "Primary Data"],
+    [2, is(t = "Secondary Data"), "Secondary Data"]
+]);
 
-/* --- 1. SETUP FOR PART A (Primary) --- */
-correct_text_1: "Primary Data";
-wrong_text_1: "Secondary Data";
+ta_1: opts_for(type_1);
+ta_2: opts_for(type_2);
+ta_3: opts_for(type_3);
+ta_4: opts_for(type_4);
 
-/* Build the list using your format */
-correct_ans_1: rand_selection([[1, true, correct_text_1]], 1);
-wrong_ans_1: rand_selection([[2, false, wrong_text_1]], 1);
-
-ta_1: random_permutation(append(correct_ans_1, wrong_ans_1));
-final_options_1: map(third, ta_1);
-
-
-/* --- 2. SETUP FOR PART B (Secondary) --- */
-correct_text_2: "Secondary Data";
-wrong_text_2: "Primary Data";
-
-correct_ans_2: rand_selection([[1, true, correct_text_2]], 1);
-wrong_ans_2: rand_selection([[2, false, wrong_text_2]], 1);
-
-ta_2: random_permutation(append(correct_ans_2, wrong_ans_2));
-final_options_2: map(third, ta_2);
-
-
-/* --- 3. SETUP FOR PART C (Primary) --- */
-correct_text_3: "Primary Data";
-wrong_text_3: "Secondary Data";
-
-correct_ans_3: rand_selection([[1, true, correct_text_3]], 1);
-wrong_ans_3: rand_selection([[2, false, wrong_text_3]], 1);
-
-ta_3: random_permutation(append(correct_ans_3, wrong_ans_3));
-final_options_3: map(third, ta_3);
-
-
-/* --- 4. SETUP FOR PART D (Secondary) --- */
-correct_text_4: "Secondary Data";
-wrong_text_4: "Primary Data";
-
-correct_ans_4: rand_selection([[1, true, correct_text_4]], 1);
-wrong_ans_4: rand_selection([[2, false, wrong_text_4]], 1);
-
-ta_4: random_permutation(append(correct_ans_4, wrong_ans_4));
-final_options_4: map(third, ta_4);]]></text>
+/* Short summary of this variant for the question note */
+variantnote: sconcat("a=", type_1, ", b=", type_2, ", c=", type_3, ", d=", type_4);]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@1@}</text>
+      <text>{@variantnote@}</text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Daniel Murunga</p>
-<p id="concept"></p>
-<p id="reviewer"></p>
-<p id="reviewer"></p>
-<p id="description">In this classification question, students are presented with four randomized real-world research scenarios (e.g., conducting an experiment vs. reading a government report). They must identify whether each activity represents <strong>Primary Data</strong> collection or <strong>Secondary Data</strong> collection.</p>]]></text>
+<p id="concept">Sources of data: classifying activities as primary or secondary data collection.</p>
+<p id="reviewer">Ben (STACK audit)</p>
+<p id="description">In this classification question, students are presented with four randomised real-world research scenarios (e.g., conducting an experiment vs. reading a government report). They must identify whether each activity represents <strong>Primary Data</strong> collection or <strong>Secondary Data</strong> collection. The four scenarios (two primary, two secondary) are shuffled across the parts so the correct sequence differs between variants, and each wrong answer receives a diagnostic hint.</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -177,11 +162,11 @@ final_options_4: map(third, ta_4);]]></text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
       <options/>
     </input>
     <input>
@@ -195,11 +180,11 @@ final_options_4: map(third, ta_4);]]></text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
       <options/>
     </input>
     <input>
@@ -213,11 +198,11 @@ final_options_4: map(third, ta_4);]]></text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
       <options/>
     </input>
     <input>
@@ -231,11 +216,11 @@ final_options_4: map(third, ta_4);]]></text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
       <options/>
     </input>
     <prt>
@@ -268,7 +253,7 @@ final_options_4: map(third, ta_4);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Not quite. Ask yourself: did <em>you</em> gather this data first-hand for this task (that would make it <strong>primary</strong>), or was it already collected and published by someone else, so you are only re-using it (<strong>secondary</strong>)?</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -302,7 +287,7 @@ final_options_4: map(third, ta_4);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Not quite. Ask yourself: did <em>you</em> gather this data first-hand for this task (that would make it <strong>primary</strong>), or was it already collected and published by someone else, so you are only re-using it (<strong>secondary</strong>)?</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -336,7 +321,7 @@ final_options_4: map(third, ta_4);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt3-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Not quite. Ask yourself: did <em>you</em> gather this data first-hand for this task (that would make it <strong>primary</strong>), or was it already collected and published by someone else, so you are only re-using it (<strong>secondary</strong>)?</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -370,29 +355,33 @@ final_options_4: map(third, ta_4);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt4-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Not quite. Ask yourself: did <em>you</em> gather this data first-hand for this task (that would make it <strong>primary</strong>), or was it already collected and published by someone else, so you are only re-using it (<strong>secondary</strong>)?</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
     <deployedseed>660633</deployedseed>
+    <deployedseed>121212</deployedseed>
+    <deployedseed>247613</deployedseed>
+    <deployedseed>883051</deployedseed>
+    <deployedseed>519274</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>All four parts correct: full marks on every PRT.</description>
       <testinput>
         <name>ans1</name>
-        <value>first(mcq_correct(ta_1))</value>
+        <value>mcq_correct(ta_1)[1]</value>
       </testinput>
       <testinput>
         <name>ans2</name>
-        <value>first(mcq_correct(ta_2))</value>
+        <value>mcq_correct(ta_2)[1]</value>
       </testinput>
       <testinput>
         <name>ans3</name>
-        <value>first(mcq_correct(ta_3))</value>
+        <value>mcq_correct(ta_3)[1]</value>
       </testinput>
       <testinput>
         <name>ans4</name>
-        <value>first(mcq_correct(ta_4))</value>
+        <value>mcq_correct(ta_4)[1]</value>
       </testinput>
       <expected>
         <name>prt1</name>
@@ -417,6 +406,50 @@ final_options_4: map(third, ta_4);]]></text>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt4-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>All four parts wrong (opposite classification): fires each F branch with the diagnostic.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>3-mcq_correct(ta_1)[1]</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>3-mcq_correct(ta_2)[1]</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>3-mcq_correct(ta_3)[1]</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>3-mcq_correct(ta_4)[1]</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-1-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt2-1-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt3-1-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt4</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt4-1-F</expectedanswernote>
       </expected>
     </qtest>
   </question>

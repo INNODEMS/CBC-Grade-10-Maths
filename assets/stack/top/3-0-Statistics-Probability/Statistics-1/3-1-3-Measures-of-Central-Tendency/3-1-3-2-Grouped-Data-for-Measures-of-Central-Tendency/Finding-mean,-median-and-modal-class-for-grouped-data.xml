@@ -5,165 +5,70 @@
       <text>Finding mean, median and modal class for grouped data</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p> A researcher collects data on daily rainfall (in mm) over a month and organises it into \(10\) equal class intervals as shown below.</p>
-<table border="1" cellpadding="5" cellspacing="0">
-<tr><th>Rainfall (mm)</th><th>Frequency</th></tr>
-<tr><td>0 – 9</td><td>{@freq[1]@}</td></tr>
-<tr><td>10 – 19</td><td>{@freq[2]@}</td></tr>
-<tr><td>20 – 29</td><td>{@freq[3]@}</td></tr>
-<tr><td>30 – 39</td><td>{@freq[4]@}</td></tr>
-<tr><td>40 – 49</td><td>{@freq[5]@}</td></tr>
-<tr><td>50 – 59</td><td>{@freq[6]@}</td></tr>
-<tr><td>60 – 69</td><td>{@freq[7]@}</td></tr>
-<tr><td>70 – 79</td><td>{@freq[8]@}</td></tr>
-<tr><td>80 – 89</td><td>{@freq[9]@}</td></tr>
-<tr><td>90 – 100</td><td>{@freq[10]@}</td></tr>
-</table>
-
-<p>
-<p>Analyze the rainfall distribution and determine the central tendency measures listed below.</p></p>
-<p>
-a) Modal class: [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]<br>
-b) Mean rainfall (mm): [[input:ans2]] [[validation:ans2]][[feedback:prt2]]<br>
-c) Median rainfall (mm): [[input:ans3]] [[validation:ans3]][[feedback:prt3]]
-</p>
-<p><em>Enter the modal class as an interval in the form <code>[a,b]</code>. Round numerical answers to 2 decimal places.</em></p>]]></text>
-    </questiontext>
-    <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<h4>Worked Solution</h4>
-<p>To calculate the statistics, we first need to complete the frequency distribution table with the Midpoint (\(x\)), Cumulative Frequency (\(CF\)), and the product of frequency and midpoint (\(fx\)).</p>
-
-<table border="1">
-    <thead style="background-color: #f2f2f2;">
-        <tr>
-            <th>Class Interval</th>
-            <th>Midpoint (\(x\))</th>
-            <th>Frequency (\(f\))</th>
-            <th>Cumulative Frequency (\(CF\))</th>
-            <th>\(fx\)</th>
-        </tr>
+      <text><![CDATA[<p>The table shows daily rainfall (in mm) recorded at a weather station over <strong>{@N@}</strong> days. Complete the table, then use it to find the measures of central tendency. <em>Round the mean and median to 2 decimal places.</em></p>
+<table border="1" style="border-collapse:collapse; text-align:center;">
+    <thead style="background-color:#e0e0e0;">
+        <tr><th>Rainfall (mm)</th><th>Frequency \(f\)</th><th>Midpoint \(x\)</th><th>\(fx\)</th><th>Cumulative freq (CF)</th></tr>
     </thead>
     <tbody>
         <tr>
-            <td>{@classes[1][1]@} – {@classes[1][2]@}</td>
-            <td>{@midpoints[1]@}</td>
-            <td>{@freq[1]@}</td>
-            <td>{@cumfreq[1]@}</td>
-            <td>{@midpoints[1]*freq[1]@}</td>
+            <td style="text-align:center;">{@lb[1]@} &ndash; {@ub[1]@}</td>
+            <td style="text-align:center;">{@freq[1]@}</td>
+            <td style="text-align:center;">[[input:ans_m1]] [[validation:ans_m1]] [[feedback:prt_m1]]</td>
+            <td style="text-align:center;">[[input:ans_fx1]] [[validation:ans_fx1]] [[feedback:prt_fx1]]</td>
+            <td style="text-align:center;">[[input:ans_cf1]] [[validation:ans_cf1]] [[feedback:prt_cf1]]</td>
         </tr>
         <tr>
-            <td>{@classes[2][1]@} – {@classes[2][2]@}</td>
-            <td>{@midpoints[2]@}</td>
-            <td>{@freq[2]@}</td>
-            <td>{@cumfreq[2]@}</td>
-            <td>{@midpoints[2]*freq[2]@}</td>
+            <td style="text-align:center;">{@lb[2]@} &ndash; {@ub[2]@}</td>
+            <td style="text-align:center;">{@freq[2]@}</td>
+            <td style="text-align:center;">[[input:ans_m2]] [[validation:ans_m2]] [[feedback:prt_m2]]</td>
+            <td style="text-align:center;">[[input:ans_fx2]] [[validation:ans_fx2]] [[feedback:prt_fx2]]</td>
+            <td style="text-align:center;">[[input:ans_cf2]] [[validation:ans_cf2]] [[feedback:prt_cf2]]</td>
         </tr>
         <tr>
-            <td>{@classes[3][1]@} – {@classes[3][2]@}</td>
-            <td>{@midpoints[3]@}</td>
-            <td>{@freq[3]@}</td>
-            <td>{@cumfreq[3]@}</td>
-            <td>{@midpoints[3]*freq[3]@}</td>
+            <td style="text-align:center;">{@lb[3]@} &ndash; {@ub[3]@}</td>
+            <td style="text-align:center;">{@freq[3]@}</td>
+            <td style="text-align:center;">[[input:ans_m3]] [[validation:ans_m3]] [[feedback:prt_m3]]</td>
+            <td style="text-align:center;">[[input:ans_fx3]] [[validation:ans_fx3]] [[feedback:prt_fx3]]</td>
+            <td style="text-align:center;">[[input:ans_cf3]] [[validation:ans_cf3]] [[feedback:prt_cf3]]</td>
         </tr>
         <tr>
-            <td>{@classes[4][1]@} – {@classes[4][2]@}</td>
-            <td>{@midpoints[4]@}</td>
-            <td>{@freq[4]@}</td>
-            <td>{@cumfreq[4]@}</td>
-            <td>{@midpoints[4]*freq[4]@}</td>
+            <td style="text-align:center;">{@lb[4]@} &ndash; {@ub[4]@}</td>
+            <td style="text-align:center;">{@freq[4]@}</td>
+            <td style="text-align:center;">[[input:ans_m4]] [[validation:ans_m4]] [[feedback:prt_m4]]</td>
+            <td style="text-align:center;">[[input:ans_fx4]] [[validation:ans_fx4]] [[feedback:prt_fx4]]</td>
+            <td style="text-align:center;">[[input:ans_cf4]] [[validation:ans_cf4]] [[feedback:prt_cf4]]</td>
         </tr>
         <tr>
-            <td>{@classes[5][1]@} – {@classes[5][2]@}</td>
-            <td>{@midpoints[5]@}</td>
-            <td>{@freq[5]@}</td>
-            <td>{@cumfreq[5]@}</td>
-            <td>{@midpoints[5]*freq[5]@}</td>
+            <td style="text-align:center;">{@lb[5]@} &ndash; {@ub[5]@}</td>
+            <td style="text-align:center;">{@freq[5]@}</td>
+            <td style="text-align:center;">[[input:ans_m5]] [[validation:ans_m5]] [[feedback:prt_m5]]</td>
+            <td style="text-align:center;">[[input:ans_fx5]] [[validation:ans_fx5]] [[feedback:prt_fx5]]</td>
+            <td style="text-align:center;">[[input:ans_cf5]] [[validation:ans_cf5]] [[feedback:prt_cf5]]</td>
         </tr>
-        <tr>
-            <td>{@classes[6][1]@} – {@classes[6][2]@}</td>
-            <td>{@midpoints[6]@}</td>
-            <td>{@freq[6]@}</td>
-            <td>{@cumfreq[6]@}</td>
-            <td>{@midpoints[6]*freq[6]@}</td>
-        </tr>
-        <tr>
-            <td>{@classes[7][1]@} – {@classes[7][2]@}</td>
-            <td>{@midpoints[7]@}</td>
-            <td>{@freq[7]@}</td>
-            <td>{@cumfreq[7]@}</td>
-            <td>{@midpoints[7]*freq[7]@}</td>
-        </tr>
-        <tr>
-            <td>{@classes[8][1]@} – {@classes[8][2]@}</td>
-            <td>{@midpoints[8]@}</td>
-            <td>{@freq[8]@}</td>
-            <td>{@cumfreq[8]@}</td>
-            <td>{@midpoints[8]*freq[8]@}</td>
-        </tr>
-        <tr>
-            <td>{@classes[9][1]@} – {@classes[9][2]@}</td>
-            <td>{@midpoints[9]@}</td>
-            <td>{@freq[9]@}</td>
-            <td>{@cumfreq[9]@}</td>
-            <td>{@midpoints[9]*freq[9]@}</td>
-        </tr>
-        <tr>
-            <td>{@classes[10][1]@} – {@classes[10][2]@}</td>
-            <td>{@midpoints[10]@}</td>
-            <td>{@freq[10]@}</td>
-            <td>{@cumfreq[10]@}</td>
-            <td>{@midpoints[10]*freq[10]@}</td>
-        </tr>
-        <tr style="font-weight: bold; background-color: #f9f9f9;">
-            <td colspan="2">Total (\(\Sigma\)):</td>
-            <td>\({@N@}\)</td>
+        <tr style="font-weight:bold; background-color:#f2f2f2;">
+            <td>Total</td>
+            <td>{@N@}</td>
             <td></td>
-            <td>\({@sum_fx@}\)</td>
+            <td>[[input:ans_sumfx]] [[validation:ans_sumfx]] [[feedback:prt_sumfx]]</td>
+            <td></td>
         </tr>
     </tbody>
 </table>
-
-<br>
-<p><strong>a) Modal Class</strong></p>
-<p>The modal class is the class interval with the highest frequency.</p>
-<p>From the table, the highest frequency is <strong>{@maxf@}</strong>.</p>
-<p>Therefore, the modal class is <strong>{@modal_class[1]@} – {@modal_class[2]@}</strong>.</p>
-
-<br>
-<p><strong>b) Median Rainfall</strong></p>
-<p>First, determine the median position:</p>
-\( \text{Position } = \frac{N}{2} = \frac{@N@}{2} = {@median_pos@} \)
-<p>Looking at the <em>Cumulative Frequency (CF)</em> column, the value just before {@median_pos@} is {@cf_before@}, and the next class reaches {@if median_index=1 then cumfreq[1] else cumfreq[median_index]@}.</p>
-<p>Thus, the Median Class is <strong>{@L@} – {@classes[median_index][2]@}</strong>.</p>
-
-<p>Now, apply the median formula:</p>
-\( \text{Median} = L + \left( \frac{\frac{N}{2} - CF}{f} \right) \times c \)
-<p>Where:</p>
-<ul>
-    <li>\(L = {@L@}\) (Lower boundary of the median class)</li>
-    <li>\(\frac{N}{2} = {@median_pos@}\)</li>
-    <li>\(CF = {@cf_before@}\) (Cumulative frequency before the median class)</li>
-    <li>\(f = {@f_med@}\) (Frequency of the median class)</li>
-    <li>\(c = {@h@}\) (Class width)</li>
-</ul>
-
-\( \text{Median} = {@L@} + \left( \frac{{@median_pos@} - {@cf_before@}}{@f_med@} \right) \times {@h@} \)
-\( \text{Median} = {@L@} + \left( \frac{@median_pos - cf_before@}{@f_med@} \right) \times {@h@} \)
-\( \text{Median} \approx \mathbf{@decimalplaces(median_rain, 2)@} \text{ mm} \)
-
-<br>
-<p><strong>c) Mean Rainfall</strong></p>
-<p>The mean is calculated using the formula:</p>
-\( \bar{x} = \frac{\Sigma fx}{\Sigma f} \)
-
-<p>From the table totals:</p>
-<ul>
-    <li>\(\Sigma fx = {@sum_fx@}\)</li>
-    <li>\(\Sigma f = {@N@}\)</li>
-</ul>
-
-\( \bar{x} = \frac{@sum_fx@}{@N@} \)
-\( \bar{x} \approx \mathbf{@decimalplaces(mean_rain, 2)@} \text{ mm} \)]]></text>
+<p><strong>a)</strong> Modal class (enter as an interval <code>[a,b]</code>): [[input:ans_mode]] [[validation:ans_mode]] [[feedback:prt_mode]]</p>
+<p><strong>b)</strong> Estimated mean rainfall (2 d.p.): [[input:ans_mean]] [[validation:ans_mean]] [[feedback:prt_mean]]</p>
+<p><strong>c)</strong> Median rainfall (2 d.p.): [[input:ans_median]] [[validation:ans_median]] [[feedback:prt_median]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h4>Worked solution</h4>
+<p>Complete each column: midpoint \(x=\tfrac{\text{lower}+\text{upper}}{2}\), then \(fx\), and the running cumulative frequency:</p>
+<table border="1" style="border-collapse:collapse; text-align:center;"><thead><tr><th>Rainfall</th><th>\(f\)</th><th>\(x\)</th><th>\(fx\)</th><th>CF</th></tr></thead><tbody><tr><td>{@lb[1]@}&ndash;{@ub[1]@}</td><td>{@freq[1]@}</td><td>{@midpts[1]@}</td><td>{@fxs[1]@}</td><td>{@cf[1]@}</td></tr><tr><td>{@lb[2]@}&ndash;{@ub[2]@}</td><td>{@freq[2]@}</td><td>{@midpts[2]@}</td><td>{@fxs[2]@}</td><td>{@cf[2]@}</td></tr><tr><td>{@lb[3]@}&ndash;{@ub[3]@}</td><td>{@freq[3]@}</td><td>{@midpts[3]@}</td><td>{@fxs[3]@}</td><td>{@cf[3]@}</td></tr><tr><td>{@lb[4]@}&ndash;{@ub[4]@}</td><td>{@freq[4]@}</td><td>{@midpts[4]@}</td><td>{@fxs[4]@}</td><td>{@cf[4]@}</td></tr><tr><td>{@lb[5]@}&ndash;{@ub[5]@}</td><td>{@freq[5]@}</td><td>{@midpts[5]@}</td><td>{@fxs[5]@}</td><td>{@cf[5]@}</td></tr><tr style="font-weight:bold;"><td>Total</td><td>{@N@}</td><td></td><td>{@sum_fx@}</td><td></td></tr></tbody></table>
+<p><strong>a) Modal class</strong> &mdash; the class with the highest frequency: <strong>{@modal_interval@}</strong>.</p>
+<p><strong>b) Mean</strong></p>
+\[ \bar{x} = \frac{\sum fx}{\sum f} = \frac{ {@sum_fx@} }{ {@N@} } \approx {@mean_disp@} \text{ mm} \]
+<p><strong>c) Median</strong> &mdash; the median class is \( {@lb[med_idx]@}\text{ - }{@ub[med_idx]@} \):</p>
+\[ \text{Median} = L + \left(\frac{\frac{N}{2} - CF}{f}\right)\times C \]
+\[ \text{Median} = {@L_med@} + \left(\frac{ {@med_pos@} - {@cf_prev@} }{ {@f_med@} }\right)\times {@cw@} \approx {@median_disp@} \text{ mm} \]]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -173,83 +78,45 @@ c) Median rainfall (mm): [[input:ans3]] [[validation:ans3]][[feedback:prt3]]
       <text>2025073100</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[/* Fixed class intervals */
-classes: [
- [0,9], [10,19], [20,29], [30,39], [40,49],
- [50,59], [60,69], [70,79], [80,89], [90,100]
-];
-
-/* Randomised frequencies */
-freq: [rand(3)+1,rand(4)+2,rand(5)+3,rand(6)+4,rand(7)+5,rand(8)+6,rand(7)+5,rand(6)+4,rand(5)+3,rand(4)+2];
-
-/* Basic quantities */
-k: length(freq);
+      <text><![CDATA[/* Grouped data: 5 rainfall classes, width 10 */
+lb: [0,10,20,30,40];
+ub: [9,19,29,39,49];
+cw: 10;  nc: 5;
+/* Design-backwards: random frequencies 3..8 */
+freq: makelist(rand(6)+3, i, 1, nc);
 N: apply("+", freq);
-
-/* Class midpoints */
-midpoints: map(lambda([c], (float(c[1]+c[2])/2)), classes);
-
-/* --- NEW: Calculate fx column explicitly for the table and sum --- */
-/* Multiply Frequency * Midpoint element-wise */
-fx_list: map("*", freq, midpoints);
-
-/* Sum of fx */
-sum_fx: apply("+", fx_list);
-
-/* Mean rainfall */
-mean_rain: float(sum_fx / N);
-
+/* Correct column values */
+midpts: map(lambda([l,u],(l+u)/2), lb, ub);
+fxs: map("*", freq, midpts);
+sum_fx: apply("+", fxs);
+cf: []; run: 0;
+for i:1 thru nc do (run: run+freq[i], cf: endcons(run, cf));
+mean_est: float(sum_fx / N);
+mean_disp: round(mean_est*100)/100.0;
 /* Modal class */
 maxf: lmax(freq);
-modal_index: 1;
-for j:1 thru length(freq) do
-  if freq[j] = maxf then (
-    modal_index: j,
-    return()
-);
-modal_class: classes[modal_index];
-
-/* Cumulative frequencies */
-cumfreq: [];
-running: 0;
-for j:1 thru k do (
-  running: running + freq[j],
-  cumfreq: endcons(running, cumfreq)
-);
-
-/* Median class logic */
-median_pos: N/2;
-median_index: 1;
-
-for j:1 thru k do
-  if cumfreq[j] >= median_pos then (
-    median_index: j,
-    return()
-  );
-
-/* Median formula quantities */
-L: classes[median_index][1];
-cf_before: if median_index=1 then 0 else cumfreq[median_index-1];
-f_med: freq[median_index];
-h: classes[median_index][2] - classes[median_index][1] + 1;
-
-/* Median rainfall */
-median_rain: float(L + ((median_pos - cf_before)/f_med)*h);]]></text>
+mode_idx: sublist_indices(freq, lambda([x], x=maxf))[1];
+modal_interval: [lb[mode_idx], ub[mode_idx]];
+/* Median (grouped interpolation; L = lower class limit - see audit report Decision 1) */
+med_pos: N/2;
+med_idx: 1;
+for i:1 thru nc do (if cf[i] >= med_pos then (med_idx: i, return()));
+L_med: lb[med_idx];
+cf_prev: if med_idx=1 then 0 else cf[med_idx-1];
+f_med: freq[med_idx];
+median_est: float(L_med + ((med_pos - cf_prev)/f_med)*cw);
+median_disp: round(median_est*100)/100.0;]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>Modal class : \({@modal_class@}\)</p>
-<p>Mean rain : \({@mean_rain@}\)</p>
-<p>Median rain :\({@median_rain@}\)</p>]]></text>
+      <text>freqs {@freq@}; mean {@mean_disp@}; median {@median_disp@}; modal {@modal_interval@}</text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Daniel Murunga</p>
-<p id="concept"></p>
-<p id="reviewer"></p>
-<p id="reviewer"></p>
-<p id="description"></p>]]></text>
+<p id="reviewer">Ben (STACK audit)</p>
+<p id="description">Scaffolded grouped-data question: students complete the midpoint, fx and cumulative-frequency columns (each marked), the total sum fx, then find the modal class, estimated mean and median. The mean awards a carry-forward mark if it is consistent with the student's own sum fx.</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -274,9 +141,9 @@ median_rain: float(L + ((median_pos - cf_before)/f_med)*h);]]></text>
     <isbroken>0</isbroken>
     <variantsselectionseed/>
     <input>
-      <name>ans1</name>
+      <name>ans_cf1</name>
       <type>algebraic</type>
-      <tans>modal_class</tans>
+      <tans>cf[1]</tans>
       <boxsize>6</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -287,14 +154,86 @@ median_rain: float(L + ((median_pos - cf_before)/f_med)*h);]]></text>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
-      <name>ans2</name>
+      <name>ans_cf2</name>
       <type>algebraic</type>
-      <tans>mean_rain</tans>
+      <tans>cf[2]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_cf3</name>
+      <type>algebraic</type>
+      <tans>cf[3]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_cf4</name>
+      <type>algebraic</type>
+      <tans>cf[4]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_cf5</name>
+      <type>algebraic</type>
+      <tans>cf[5]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_fx1</name>
+      <type>algebraic</type>
+      <tans>fxs[1]</tans>
       <boxsize>6</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -305,14 +244,14 @@ median_rain: float(L + ((median_pos - cf_before)/f_med)*h);]]></text>
       <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
-      <name>ans3</name>
+      <name>ans_fx2</name>
       <type>algebraic</type>
-      <tans>median_rain</tans>
+      <tans>fxs[2]</tans>
       <boxsize>6</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -323,12 +262,228 @@ median_rain: float(L + ((median_pos - cf_before)/f_med)*h);]]></text>
       <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_fx3</name>
+      <type>algebraic</type>
+      <tans>fxs[3]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_fx4</name>
+      <type>algebraic</type>
+      <tans>fxs[4]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_fx5</name>
+      <type>algebraic</type>
+      <tans>fxs[5]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_m1</name>
+      <type>algebraic</type>
+      <tans>midpts[1]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_m2</name>
+      <type>algebraic</type>
+      <tans>midpts[2]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_m3</name>
+      <type>algebraic</type>
+      <tans>midpts[3]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_m4</name>
+      <type>algebraic</type>
+      <tans>midpts[4]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_m5</name>
+      <type>algebraic</type>
+      <tans>midpts[5]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_mean</name>
+      <type>algebraic</type>
+      <tans>mean_est</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_median</name>
+      <type>algebraic</type>
+      <tans>median_est</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_mode</name>
+      <type>algebraic</type>
+      <tans>modal_interval</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint>[a,b]</syntaxhint>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_sumfx</name>
+      <type>algebraic</type>
+      <tans>sum_fx</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <prt>
-      <name>prt1</name>
+      <name>prt_cf1</name>
       <value>1.0000000</value>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
@@ -339,15 +494,15 @@ median_rain: float(L + ((median_pos - cf_before)/f_med)*h);]]></text>
         <name>0</name>
         <description/>
         <answertest>AlgEquiv</answertest>
-        <sans>ans1</sans>
-        <tans>modal_class</tans>
+        <sans>ans_cf1</sans>
+        <tans>cf[1]</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt1-1-T</trueanswernote>
+        <trueanswernote>prt_cf1-1-T</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
@@ -355,14 +510,490 @@ median_rain: float(L + ((median_pos - cf_before)/f_med)*h);]]></text>
         <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt1-1-F</falseanswernote>
+        <falseanswernote>prt_cf1-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Cumulative frequency = this class's frequency added to the running total so far.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
     <prt>
-      <name>prt2</name>
+      <name>prt_cf2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_cf2</sans>
+        <tans>cf[2]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_cf2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_cf2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Cumulative frequency = this class's frequency added to the running total so far.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_cf3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_cf3</sans>
+        <tans>cf[3]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_cf3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_cf3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Cumulative frequency = this class's frequency added to the running total so far.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_cf4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_cf4</sans>
+        <tans>cf[4]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_cf4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_cf4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Cumulative frequency = this class's frequency added to the running total so far.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_cf5</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_cf5</sans>
+        <tans>cf[5]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_cf5-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_cf5-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Cumulative frequency = this class's frequency added to the running total so far.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_fx1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_fx1</sans>
+        <tans>fxs[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_fx1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>\(fx\) = this class's frequency \(\times\) its midpoint.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_fx2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_fx2</sans>
+        <tans>fxs[2]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_fx2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>\(fx\) = this class's frequency \(\times\) its midpoint.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_fx3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_fx3</sans>
+        <tans>fxs[3]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_fx3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>\(fx\) = this class's frequency \(\times\) its midpoint.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_fx4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_fx4</sans>
+        <tans>fxs[4]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_fx4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>\(fx\) = this class's frequency \(\times\) its midpoint.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_fx5</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_fx5</sans>
+        <tans>fxs[5]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx5-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_fx5-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>\(fx\) = this class's frequency \(\times\) its midpoint.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_m1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_m1</sans>
+        <tans>midpts[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_m1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_m1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Midpoint = (lower limit + upper limit) &divide; 2 for this class.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_m2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_m2</sans>
+        <tans>midpts[2]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_m2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_m2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Midpoint = (lower limit + upper limit) &divide; 2 for this class.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_m3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_m3</sans>
+        <tans>midpts[3]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_m3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_m3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Midpoint = (lower limit + upper limit) &divide; 2 for this class.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_m4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_m4</sans>
+        <tans>midpts[4]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_m4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_m4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Midpoint = (lower limit + upper limit) &divide; 2 for this class.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_m5</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_m5</sans>
+        <tans>midpts[5]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_m5-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_m5-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Midpoint = (lower limit + upper limit) &divide; 2 for this class.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_mean</name>
       <value>1.0000000</value>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
@@ -373,15 +1004,65 @@ median_rain: float(L + ((median_pos - cf_before)/f_med)*h);]]></text>
         <name>0</name>
         <description/>
         <answertest>NumAbsolute</answertest>
-        <sans>ans2</sans>
-        <tans>mean_rain</tans>
-        <testoptions>0.001</testoptions>
+        <sans>ans_mean</sans>
+        <tans>mean_est</tans>
+        <testoptions>0.01</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt2-1-T</trueanswernote>
+        <trueanswernote>prt_mean-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_mean-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_mean</sans>
+        <tans>ans_sumfx/N</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mean-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Carried forward: your mean is consistent with the \(\sum fx\) you entered, so you get the method mark. Re-check your \(\sum fx\) if it was not correct.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt_mean-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_mean</sans>
+        <tans>mean_est</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mean-2-T</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
@@ -389,14 +1070,14 @@ median_rain: float(L + ((median_pos - cf_before)/f_med)*h);]]></text>
         <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt2-1-F</falseanswernote>
+        <falseanswernote>prt_mean-2-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>The estimated mean is \(\bar{x}=\frac{\sum fx}{\sum f}\). Round to 2 d.p.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
     <prt>
-      <name>prt3</name>
+      <name>prt_median</name>
       <value>1.0000000</value>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
@@ -407,15 +1088,15 @@ median_rain: float(L + ((median_pos - cf_before)/f_med)*h);]]></text>
         <name>0</name>
         <description/>
         <answertest>NumAbsolute</answertest>
-        <sans>ans3</sans>
-        <tans>median_rain</tans>
-        <testoptions>0.001</testoptions>
+        <sans>ans_median</sans>
+        <tans>median_est</tans>
+        <testoptions>0.01</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt3-1-T</trueanswernote>
+        <trueanswernote>prt_median-1-T</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
@@ -423,9 +1104,77 @@ median_rain: float(L + ((median_pos - cf_before)/f_med)*h);]]></text>
         <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt3-1-F</falseanswernote>
+        <falseanswernote>prt_median-1-F</falseanswernote>
         <falsefeedback format="html">
+          <text><![CDATA[<p>Use Median = L + ((N/2 &minus; CF)/f) &times; C with the median class. Round to 2 d.p.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_mode</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_mode</sans>
+        <tans>modal_interval</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mode-1-T</trueanswernote>
+        <truefeedback format="html">
           <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_mode-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The modal class is the interval with the highest frequency. Enter as <code>[lower,upper]</code>.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_sumfx</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_sumfx</sans>
+        <tans>sum_fx</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_sumfx-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_sumfx-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>\(\sum fx\) is the total of the \(fx\) column.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -434,51 +1183,291 @@ median_rain: float(L + ((median_pos - cf_before)/f_med)*h);]]></text>
     <deployedseed>1661207783</deployedseed>
     <deployedseed>1711371500</deployedseed>
     <deployedseed>1347896261</deployedseed>
-    <deployedseed>1850708468</deployedseed>
-    <deployedseed>290456356</deployedseed>
-    <deployedseed>1692867411</deployedseed>
-    <deployedseed>1466749162</deployedseed>
-    <deployedseed>212574739</deployedseed>
-    <deployedseed>184214734</deployedseed>
-    <deployedseed>1476306339</deployedseed>
-    <deployedseed>732683843</deployedseed>
-    <deployedseed>252313055</deployedseed>
-    <deployedseed>67708434</deployedseed>
-    <deployedseed>823470201</deployedseed>
-    <deployedseed>1266922794</deployedseed>
-    <deployedseed>648840725</deployedseed>
-    <deployedseed>186502062</deployedseed>
-    <deployedseed>550180861</deployedseed>
-    <deployedseed>1465132649</deployedseed>
-    <deployedseed>757168401</deployedseed>
-    <deployedseed>811676646</deployedseed>
-    <deployedseed>1359919660</deployedseed>
-    <deployedseed>761699646</deployedseed>
-    <deployedseed>439368208</deployedseed>
-    <deployedseed>102917506</deployedseed>
-    <deployedseed>1718801351</deployedseed>
-    <deployedseed>2139866338</deployedseed>
-    <deployedseed>1750914341</deployedseed>
-    <deployedseed>1113568556</deployedseed>
-    <deployedseed>1935231042</deployedseed>
-    <deployedseed>1345132666</deployedseed>
-    <deployedseed>1800960060</deployedseed>
-    <deployedseed>1147909732</deployedseed>
-    <deployedseed>450253534</deployedseed>
-    <deployedseed>1331129744</deployedseed>
-    <deployedseed>1829911624</deployedseed>
-    <deployedseed>1329355131</deployedseed>
-    <deployedseed>1798078788</deployedseed>
-    <deployedseed>510448167</deployedseed>
-    <deployedseed>1543833354</deployedseed>
-    <deployedseed>1981832999</deployedseed>
-    <deployedseed>49740804</deployedseed>
-    <deployedseed>935622363</deployedseed>
-    <deployedseed>996905041</deployedseed>
-    <deployedseed>801285335</deployedseed>
-    <deployedseed>642025783</deployedseed>
-    <deployedseed>757725994</deployedseed>
-    <deployedseed>1582744565</deployedseed>
-    <deployedseed>2065210813</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Whole table + measures correct.</description>
+      <testinput>
+        <name>ans_cf1</name>
+        <value>cf[1]</value>
+      </testinput>
+      <testinput>
+        <name>ans_cf2</name>
+        <value>cf[2]</value>
+      </testinput>
+      <testinput>
+        <name>ans_cf3</name>
+        <value>cf[3]</value>
+      </testinput>
+      <testinput>
+        <name>ans_cf4</name>
+        <value>cf[4]</value>
+      </testinput>
+      <testinput>
+        <name>ans_cf5</name>
+        <value>cf[5]</value>
+      </testinput>
+      <testinput>
+        <name>ans_fx1</name>
+        <value>fxs[1]</value>
+      </testinput>
+      <testinput>
+        <name>ans_fx2</name>
+        <value>fxs[2]</value>
+      </testinput>
+      <testinput>
+        <name>ans_fx3</name>
+        <value>fxs[3]</value>
+      </testinput>
+      <testinput>
+        <name>ans_fx4</name>
+        <value>fxs[4]</value>
+      </testinput>
+      <testinput>
+        <name>ans_fx5</name>
+        <value>fxs[5]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m1</name>
+        <value>midpts[1]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m2</name>
+        <value>midpts[2]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m3</name>
+        <value>midpts[3]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m4</name>
+        <value>midpts[4]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m5</name>
+        <value>midpts[5]</value>
+      </testinput>
+      <testinput>
+        <name>ans_mean</name>
+        <value>mean_est</value>
+      </testinput>
+      <testinput>
+        <name>ans_median</name>
+        <value>median_est</value>
+      </testinput>
+      <testinput>
+        <name>ans_mode</name>
+        <value>modal_interval</value>
+      </testinput>
+      <testinput>
+        <name>ans_sumfx</name>
+        <value>sum_fx</value>
+      </testinput>
+      <expected>
+        <name>prt_cf1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_cf1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_cf2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_cf2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_cf3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_cf3-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_cf4</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_cf4-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_cf5</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_cf5-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_fx1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_fx1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_fx2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_fx2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_fx3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_fx3-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_fx4</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_fx4-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_fx5</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_fx5-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_m1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_m1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_m2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_m2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_m3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_m3-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_m4</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_m4-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_m5</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_m5-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_mean</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_mean-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_median</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_median-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_mode</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_mode-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_sumfx</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_sumfx-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Carry-forward: student's sum fx is wrong but mean matches it.</description>
+      <testinput>
+        <name>ans_cf1</name>
+        <value>cf[1]</value>
+      </testinput>
+      <testinput>
+        <name>ans_cf2</name>
+        <value>cf[2]</value>
+      </testinput>
+      <testinput>
+        <name>ans_cf3</name>
+        <value>cf[3]</value>
+      </testinput>
+      <testinput>
+        <name>ans_cf4</name>
+        <value>cf[4]</value>
+      </testinput>
+      <testinput>
+        <name>ans_cf5</name>
+        <value>cf[5]</value>
+      </testinput>
+      <testinput>
+        <name>ans_fx1</name>
+        <value>fxs[1]</value>
+      </testinput>
+      <testinput>
+        <name>ans_fx2</name>
+        <value>fxs[2]</value>
+      </testinput>
+      <testinput>
+        <name>ans_fx3</name>
+        <value>fxs[3]</value>
+      </testinput>
+      <testinput>
+        <name>ans_fx4</name>
+        <value>fxs[4]</value>
+      </testinput>
+      <testinput>
+        <name>ans_fx5</name>
+        <value>fxs[5]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m1</name>
+        <value>midpts[1]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m2</name>
+        <value>midpts[2]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m3</name>
+        <value>midpts[3]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m4</name>
+        <value>midpts[4]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m5</name>
+        <value>midpts[5]</value>
+      </testinput>
+      <testinput>
+        <name>ans_mean</name>
+        <value>round((sum_fx+10)/N*100)/100.0</value>
+      </testinput>
+      <testinput>
+        <name>ans_median</name>
+        <value>median_est</value>
+      </testinput>
+      <testinput>
+        <name>ans_mode</name>
+        <value>modal_interval</value>
+      </testinput>
+      <testinput>
+        <name>ans_sumfx</name>
+        <value>sum_fx+10</value>
+      </testinput>
+      <expected>
+        <name>prt_mean</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_mean-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_sumfx</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_sumfx-1-F</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>

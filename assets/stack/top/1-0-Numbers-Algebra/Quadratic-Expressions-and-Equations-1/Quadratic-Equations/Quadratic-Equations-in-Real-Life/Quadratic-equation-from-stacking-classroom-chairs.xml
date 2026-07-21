@@ -2,14 +2,14 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Quadratic equation from stacking classroom chairs</text>
+      <text>Quadratic equation from theatre seating (non-monic)</text>
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
-During a school event, chairs are arranged in rows in the hall. There are \(x\) rows of chairs, and each row has \( (x + {@k@}) \) chairs. Altogether, {@T@} chairs were arranged.
+Rows of seats are arranged in a theatre. There are \((2x - {@b@})\) rows, and each row contains \(x\) seats. Altogether, {@T@} seats are arranged.
 </p>
 
-<p>(a) Form a quadratic equation representing the situation.</p>
+<p>(a) Form a quadratic equation, in standard form, representing the situation.</p>
 <p>[[input:eqn1]] [[validation:eqn1]] [[feedback:prt1]]</p>
 
 <p>(b) Determine the value of \(x\).</p>
@@ -19,74 +19,66 @@ During a school event, chairs are arranged in rows in the hall. There are \(x\) 
       <text><![CDATA[<h3>Worked Solution</h3>
 
 <p>
-Let the number of chairs in the first row be \(x\).
+Let \(x\) be the number of seats in each row.
 </p>
 
 <p>
-The next row has \(x + {@k@}\) chairs.
-</p>
-
-<p>
-To find the total number of chairs arranged, we multiply the number of rows by the number of chairs in the next row. This gives the total number of chairs arranged in the hall.
-</p>
-
-<p>
-Therefore,
+The number of rows is \(2x - {@b@}\), and each row has \(x\) seats. Multiplying the number of rows by the number of seats per row gives the total number of seats:
 </p>
 
 <p>
 \[
-x(x + {@k@}) = {@T@}
+x(2x - {@b@}) = {@T@}
 \]
 </p>
 
 <p>
-Step 1: Expand the expression.
+Step 1: Expand the left-hand side.
 </p>
 
 <p>
 \[
-x^2 + {@k@}x = {@T@}
+2x^2 - {@b@}x = {@T@}
 \]
 </p>
 
 <p>
-Step 2: Rearrange the equation into standard quadratic form.
+Step 2: Rearrange into standard quadratic form (equal to zero).
 </p>
 
 <p>
 \[
-x^2 + {@k@}x - {@T@} = 0
+2x^2 - {@b@}x - {@T@} = 0
 \]
 </p>
 
 <p>
-Step 3: Factorise the quadratic expression.
+Step 3: Factorise. Because the coefficient of \(x^2\) is \(2\), the factors take the form \((x - r)(2x + s)\):
 </p>
 
 <p>
 \[
-(x - {@r@})(x + {@r + k@}) = 0
+{@qeq_factored@}
 \]
 </p>
 
 <p>
-Step 4: Solve the equation.
+Step 4: Apply the zero product rule and solve each factor.
 </p>
 
 <p>
 \[
-x = {@r@} \quad \text{or} \quad x = -{@r + k@}
+x = {@sol@} \quad \text{or} \quad x = {@negroot@}
 \]
 </p>
 
 <p>
-Since the number of chairs cannot be negative,
+Since the number of seats in a row cannot be negative, we reject the negative solution. Therefore:
 </p>
 
 <p>
 \[
-x = {@r@}
+x = {@sol@}
 \]
 </p>]]></text>
     </generalfeedback>
@@ -98,47 +90,51 @@ x = {@r@}
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Base number of chairs in first row */
-r: rand(7) + 4;
+      <text><![CDATA[/* Design backwards from a nice positive root r (seats per row).
+   Fixed leading coefficient 2 makes the quadratic genuinely NON-MONIC.
+   b is ODD, which guarantees the 2 does not factor out (matches the (2x-1) style). */
+b : rand([1,3,5,7]);
+/* choose r so that the number of rows (2r - b) is at least 2 and total stays reasonable */
+r : b + rand(4) + 2;          /* r >= b+2, so rows = 2r - b >= b+4 >= 5 */
+rows : 2*r - b;               /* number of rows when x = r */
+T : r*rows;                   /* total seats */
 
-/* Difference between the two rows */
-k: rand(4) + 2;
+/* standard-form expression and equation */
+expr : 2*x^2 - b*x - T;
+qeq  : expr = 0;
 
-/* Total chairs */
-T: r*(r + k);
+/* factored form for the worked solution: (x - r)(2x + (2r - b)) */
+sfac : 2*r - b;               /* the s in (2x + s) */
+qeq_factored : (x - r)*(2*x + sfac) = 0;
 
-/* LHS expression (standard form) */
-expr: expand(x*(x + k) - T);
+/* solutions */
+sol : r;                      /* the meaningful (positive) root */
+negroot : -sfac/2;            /* the rejected negative root */
 
-/* Correct quadratic equation */
-qeq: expr = 0;
+/* --- distractors for the EQUATION part (a) --- */
+me1 : 2*x^2 - b*x = T;        /* not rearranged to = 0 */
+me2 : x*(2*x - b) = T;        /* correct relationship but unexpanded / not standard form */
+me3 : 2*x^2 - b*x + T = 0;    /* sign error on the total */
+me4 : expr;                   /* wrote the expression only, forgot "= 0" */
 
-/* Correct value of x */
-sol: r;
-
-/* Mistakes for equation part */
-m1: expand(x*(x + k));        /* forgot to include total T */
-m2: expand(x*(x + k) + T);    /* wrong sign */
-m3: expr;                     /* wrote expression only, not an equation */
-
-/* Mistakes for solution part */
-m4: sqrt(T);                  /* square-root shortcut */
-m5: -r - k;                   /* negative root */</text>
+/* --- distractors for the SOLUTION part (b) --- */
+ms1 : negroot;                /* gave the negative root */
+ms3 : rows;                   /* number of rows (2x - b); also the x=s slip, same value */]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@qeq@}, {@sol@}</text>
+      <text>{@qeq@}, x = {@sol@} (rows = {@rows@}, seats/row = {@sol@}, total {@T@})</text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
-<p id="concept">Quadratic equations in real-life situations</p>
+<p id="concept">Quadratic equations in real-life situations (non-monic)</p>
 <p id="reviewer"></p>
 <p id="reviewer"></p>
 
 <p id="description">
-The question requires the learner to form a quadratic equation from a real-life classroom situation involving rows of chairs, and then solve the equation to determine the unknown quantity.
+The learner forms a non-monic quadratic equation from a real-life theatre-seating situation, rearranges it into standard form, factorises a quadratic with a leading coefficient of 2, and determines the physically meaningful solution.
 </p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
@@ -185,7 +181,7 @@ The question requires the learner to form a quadratic equation from a real-life 
       <name>eqn1</name>
       <type>algebraic</type>
       <tans>qeq</tans>
-      <boxsize>15</boxsize>
+      <boxsize>18</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -205,16 +201,21 @@ The question requires the learner to form a quadratic equation from a real-life 
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
-        <text/>
+        <text>/* Is the student's equation the standard-form quadratic (allowing any rearrangement
+   that is algebraically the same equation, e.g. terms on either side)? We test that
+   the two sides differ by the target expression. lhs - rhs of the student's entry: */
+sdiff : lhs(eqn1) - rhs(eqn1);
+/* accept if sdiff is equal to expr or to -expr (they may have written it the other way round) */
+eqn_ok : is(sdiff = expr) or is(sdiff = -expr);</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description>checks for the correct answer</description>
+        <description>Correct standard-form equation (any equivalent arrangement)</description>
         <answertest>AlgEquiv</answertest>
-        <sans>eqn1</sans>
-        <tans>qeq</tans>
+        <sans>eqn_ok</sans>
+        <tans>true</tans>
         <testoptions/>
-        <quiet>0</quiet>
+        <quiet>1</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
@@ -234,19 +235,19 @@ The question requires the learner to form a quadratic equation from a real-life 
       </node>
       <node>
         <name>1</name>
-        <description>forgot to include total T </description>
+        <description>Not rearranged to = 0</description>
         <answertest>AlgEquiv</answertest>
         <sans>eqn1</sans>
-        <tans>m1</tans>
+        <tans>me1</tans>
         <testoptions/>
-        <quiet>0</quiet>
+        <quiet>1</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text>You formed the product but did not include the total {@T@}.</text>
+          <text><![CDATA[<p>You have the right relationship, but standard form needs every term on one side so the equation equals zero. Subtract \({@T@}\) from both sides.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -259,19 +260,19 @@ The question requires the learner to form a quadratic equation from a real-life 
       </node>
       <node>
         <name>2</name>
-        <description>wrong sign</description>
+        <description>Unexpanded product form</description>
         <answertest>AlgEquiv</answertest>
         <sans>eqn1</sans>
-        <tans>m2</tans>
+        <tans>me2</tans>
         <testoptions/>
-        <quiet>0</quiet>
+        <quiet>1</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-3-T</trueanswernote>
         <truefeedback format="html">
-          <text>The total should be subtracted to form an equation equal to zero.</text>
+          <text><![CDATA[<p>That correctly describes the situation, but it is not yet in standard form. Expand the brackets and move the total across so the equation reads \(2x^2 - {@b@}x - {@T@} = 0\).</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -284,27 +285,52 @@ The question requires the learner to form a quadratic equation from a real-life 
       </node>
       <node>
         <name>3</name>
-        <description>wrote expression only, not an equation</description>
+        <description>Sign error on the total</description>
         <answertest>AlgEquiv</answertest>
         <sans>eqn1</sans>
-        <tans>m3</tans>
+        <tans>me3</tans>
         <testoptions/>
-        <quiet>0</quiet>
+        <quiet>1</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-4-T</trueanswernote>
         <truefeedback format="html">
-          <text>That’s the correct expression, but write it as an equation by adding “= 0”.</text>
+          <text><![CDATA[<p>Check the sign of the constant term. Moving \({@T@}\) from the right-hand side to the left makes it negative, giving \(-{@T@}\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>4</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>4</name>
+        <description>Wrote expression only, not an equation</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>eqn1</sans>
+        <tans>me4</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-5-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That is the correct expression, but it needs to be written as an equation. Add \(= 0\).</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt1-4-F</falseanswernote>
+        <falseanswernote>prt1-5-F</falseanswernote>
         <falsefeedback format="html">
-          <text>Feedback: Start from x(x+@k@)=@T@ then rearrange to standard form.</text>
+          <text><![CDATA[<p>Start from \(x(2x - {@b@}) = {@T@}\), then expand and rearrange to standard form \(2x^2 - {@b@}x - {@T@} = 0\).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -318,7 +344,7 @@ The question requires the learner to form a quadratic equation from a real-life 
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description>checks for the correct answer</description>
+        <description>Correct positive solution</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>sol</tans>
@@ -343,19 +369,19 @@ The question requires the learner to form a quadratic equation from a real-life 
       </node>
       <node>
         <name>1</name>
-        <description>Square-root shortcut</description>
+        <description>Gave the negative root</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>m4</tans>
+        <tans>ms1</tans>
         <testoptions/>
-        <quiet>0</quiet>
+        <quiet>1</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt2-2-T</trueanswernote>
         <truefeedback format="html">
-          <text>This requires solving a quadratic equation, not taking a square root.</text>
+          <text><![CDATA[<p>That is the other root of the quadratic, but it is negative. A number of seats cannot be negative, so choose the positive solution.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -368,27 +394,27 @@ The question requires the learner to form a quadratic equation from a real-life 
       </node>
       <node>
         <name>2</name>
-        <description>Negative root</description>
+        <description>Answered number of rows (or x=s slip) instead of seats per row</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>m4</tans>
+        <tans>ms3</tans>
         <testoptions/>
-        <quiet>0</quiet>
+        <quiet>1</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt2-3-T</trueanswernote>
+        <trueanswernote>prt2-4-T</trueanswernote>
         <truefeedback format="html">
-          <text>That solution is negative, so it does not make sense for chairs.</text>
+          <text><![CDATA[<p>That value is the number of rows, \(2x - {@b@}\) — also what you get if you solve \(2x + s = 0\) as \(x = s\) by mistake. The question asks for \(x\), the number of seats in each row. From \(2x + s = 0\), \(x = -\tfrac{s}{2}\); take the positive root instead.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt2-3-F</falseanswernote>
+        <falseanswernote>prt2-4-F</falseanswernote>
         <falsefeedback format="html">
-          <text>Solve the correct quadratic equation you formed in part (a).</text>
+          <text><![CDATA[<p>Solve the standard-form equation \(2x^2 - {@b@}x - {@T@} = 0\) by factorising, then reject the negative root.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -415,7 +441,7 @@ The question requires the learner to form a quadratic equation from a real-life 
     <deployedseed>317451354</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>Teacher's answers get full marks.</description>
       <testinput>
         <name>ans1</name>
         <value>sol</value>
@@ -435,6 +461,102 @@ The question requires the learner to form a quadratic equation from a real-life 
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Equation entered the other way round (0 = expr) still correct; solution correct.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>sol</value>
+      </testinput>
+      <testinput>
+        <name>eqn1</name>
+        <value>0 = expr</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>Equation not rearranged to zero (part a distractor).</description>
+      <testinput>
+        <name>ans1</name>
+        <value>sol</value>
+      </testinput>
+      <testinput>
+        <name>eqn1</name>
+        <value>me1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>4</testcase>
+      <description>Unexpanded product form (part a distractor).</description>
+      <testinput>
+        <name>ans1</name>
+        <value>sol</value>
+      </testinput>
+      <testinput>
+        <name>eqn1</name>
+        <value>me2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>5</testcase>
+      <description>Negative root given for x (part b distractor).</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ms1</value>
+      </testinput>
+      <testinput>
+        <name>eqn1</name>
+        <value>qeq</value>
+      </testinput>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>6</testcase>
+      <description>Answered number of rows instead of x (part b distractor).</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ms3</value>
+      </testinput>
+      <testinput>
+        <name>eqn1</name>
+        <value>qeq</value>
+      </testinput>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-4-T</expectedanswernote>
       </expected>
     </qtest>
   </question>

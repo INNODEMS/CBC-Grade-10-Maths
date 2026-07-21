@@ -228,14 +228,15 @@ The question requires the learner to rearrange a quadratic equation into standar
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
-        <text/>
+        <text>/* Accept either root in this box: true if ans1 is sol1 OR sol2. */
+box1_ok : is(ans1 = sol1) or is(ans1 = sol2);</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description>checks for the correct answer</description>
+        <description>checks for the correct answer (either root)</description>
         <answertest>AlgEquiv</answertest>
-        <sans>ans1</sans>
-        <tans>sol1</tans>
+        <sans>box1_ok</sans>
+        <tans>true</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -312,14 +313,15 @@ The question requires the learner to rearrange a quadratic equation into standar
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
-        <text/>
+        <text>/* Accept either root in this box: true if ans2 is sol1 OR sol2. */
+box2_ok : is(ans2 = sol1) or is(ans2 = sol2);</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description>checks for the correct answer</description>
+        <description>checks for the correct answer (either root)</description>
         <answertest>AlgEquiv</answertest>
-        <sans>ans2</sans>
-        <tans>sol2</tans>
+        <sans>box2_ok</sans>
+        <tans>true</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -406,6 +408,30 @@ The question requires the learner to rearrange a quadratic equation into standar
       <testinput>
         <name>ans2</name>
         <value>sol2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Roots entered in swapped order: ans1=sol2, ans2=sol1 still gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>sol2</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>sol1</value>
       </testinput>
       <expected>
         <name>prt1</name>

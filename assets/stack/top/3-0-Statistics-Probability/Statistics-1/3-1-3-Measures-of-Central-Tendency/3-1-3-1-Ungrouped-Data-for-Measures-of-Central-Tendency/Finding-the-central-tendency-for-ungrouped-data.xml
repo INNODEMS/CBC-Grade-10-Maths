@@ -10,7 +10,7 @@
 
 <p>Analyze this ungrouped data to determine the following measures of central tendency:</p>
 <p>
-<strong>a) Mean:</strong> Calculate the mean daily production.<br>
+<strong>a) Mean:</strong> Calculate the mean daily production, to 2 decimal places.<br>
 Mean = [[input:ans1]] bags [[validation:ans1]] [[feedback:prt1]]
 </p>
 
@@ -26,42 +26,14 @@ Mode = [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]
 </p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<p><strong>a) Mean</strong></p>
-<p>The mean is the sum of all observations divided by the total number of observations (\(N\)).</p>
-\( \bar{x} = \frac{\sum x}{N} \)
-\( \bar{x} = \frac{{@sum_x@}}{30} \)
-\( \bar{x} \approx {@decimalplaces(mean_val, 2)@} \text{ bags} \)
-
-
-<br>
-<p><strong>b) Median</strong></p>
-<p>To find the median, we first arrange the data in ascending order:</p>
-{@sorted_data@}
-<p>Since there are \( N=30 \) observations (an even number), the median is the average of the two middle values (the \(15^{\text{th}}\) and \(16^{\text{th}}\) terms).</p>
-<ul>
-    <li>\(15^{\text{th}}\) value: {@term15@}</li>
-    <li>\(16^{\text{th}}\) value: {@term16@}</li>
-</ul>
-\( \text{Median} = \frac{{@term15@} + {@term16@}}{2} = {@median_val@} \text{ bags} \)
-
-<br>
-<p><strong>c) Mode</strong></p>
-<p>The mode is the value that appears most frequently in the dataset. To see this clearly, we can tally the frequency of each production amount:</p>
-
-<table border="1" style="border-collapse: collapse; width: 50%; text-align: center; margin-bottom: 10px;">
-    <thead>
-        <tr style="background-color: #f2f2f2;">
-            <th>Production (Bags)</th>
-            <th>Frequency</th>
-        </tr>
-    </thead>
-    <tbody>
-        {@freq_table_rows@}
-    </tbody>
-</table>
-
-<p>From the table, the highest frequency is <strong>{@max_freq@}</strong>.</p>
-<p>The value(s) with this frequency: <strong>{@ta_mode@}</strong>.</p>]]></text>
+      <text><![CDATA[<h4>Worked solution</h4>
+<p><strong>a) Mean</strong> &mdash; sum of all values divided by the number of observations (\(N=30\)):</p>
+\[ \bar{x} = \frac{\sum x}{N} = \frac{ {@sum_x@} }{30} \approx {@mean_disp@}\text{ bags} \]
+<p><strong>b) Median</strong> &mdash; with \(N=30\) (even), average the 15th and 16th ordered values:</p>
+\[ \text{Median} = \frac{ {@term15@} + {@term16@} }{2} = {@median_val@}\text{ bags} \]
+<p><strong>c) Mode</strong> &mdash; the most frequent value (highlighted):</p>
+<table border="1" style="border-collapse:collapse; text-align:center;"><thead><tr style="background-color:#f2f2f2;"><th>Production (Bags)</th><th>Frequency</th></tr></thead><tbody>{@freq_table_rows@}</tbody></table>
+\[ \text{Mode} = {@ta_mode@}\text{ bags} \]]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -83,6 +55,7 @@ N: length(raw_data);
 /* 2. MEAN CALCULATION */
 sum_x: apply("+", raw_data);
 mean_val: float(sum_x / N);
+mean_disp: round(mean_val*100)/100.0;
 
 
 /* 3. MEDIAN CALCULATION */
@@ -143,8 +116,7 @@ for i:1 thru length(u_vals) do (
     <questiondescription format="html">
       <text><![CDATA[<p id="author"> Daniel Murunga</p>
 <p id="concept"></p>
-<p id="reviewer"></p>
-<p id="reviewer"></p>
+<p id="reviewer">Ben (STACK audit)</p>
 <p id="description">In this question, you are provided with 30 raw data points representing the daily production of cement bags at a factory. You are required to analyze this ungrouped data to calculate the mean daily production, determine the median, and identify the mode(s) of the dataset.</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
@@ -237,23 +209,73 @@ for i:1 thru length(u_vals) do (
         <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>mean_val</tans>
-        <testoptions>0.001</testoptions>
+        <testoptions>0.01</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt1-1-T</trueanswernote>
+        <trueanswernote>prt1-0-T</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>median_val</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <strong>median</strong>, not the value asked for here. Re-read which measure this part wants.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta_mode</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <strong>mode</strong>, not the value asked for here. Re-read which measure this part wants.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The mean is the sum of all values divided by the number of observations (30). Give your answer to 2 decimal places.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -277,17 +299,67 @@ for i:1 thru length(u_vals) do (
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt2-1-T</trueanswernote>
+        <trueanswernote>prt2-0-T</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>mean_val</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <strong>mean</strong>, not the value asked for here. Re-read which measure this part wants.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta_mode</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <strong>mode</strong>, not the value asked for here. Re-read which measure this part wants.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>With 30 values (even), the median is the average of the 15th and 16th values in the ordered list.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -311,17 +383,67 @@ for i:1 thru length(u_vals) do (
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt3-1-T</trueanswernote>
+        <trueanswernote>prt3-0-T</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt3-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans3</sans>
+        <tans>mean_val</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <strong>mean</strong>, not the value asked for here. Re-read which measure this part wants.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
         <falseanswernote>prt3-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>median_val</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <strong>median</strong>, not the value asked for here. Re-read which measure this part wants.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The mode is the value that occurs most often. If two occur equally often, enter them as a set, e.g. <code>{450,460}</code>.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -380,10 +502,10 @@ for i:1 thru length(u_vals) do (
     <deployedseed>1108418685</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>Correct mean, median, mode: full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>mean_val</value>
+        <value>mean_disp</value>
       </testinput>
       <testinput>
         <name>ans2</name>
@@ -397,19 +519,53 @@ for i:1 thru length(u_vals) do (
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>prt1-0-T</expectedanswernote>
       </expected>
       <expected>
         <name>prt2</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt2-1-T</expectedanswernote>
+        <expectedanswernote>prt2-0-T</expectedanswernote>
       </expected>
       <expected>
         <name>prt3</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt3-1-T</expectedanswernote>
+        <expectedanswernote>prt3-0-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Mean and median swapped: mix-up branches fire.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>median_val</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>mean_val</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>-1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt3-2-F</expectedanswernote>
       </expected>
     </qtest>
   </question>

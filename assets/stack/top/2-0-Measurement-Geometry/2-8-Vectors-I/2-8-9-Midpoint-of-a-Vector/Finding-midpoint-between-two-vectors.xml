@@ -96,6 +96,7 @@ u_sum: u1 + u2;
 /* (a) Vector PS */
 /* PS is a fraction of PR (v) */
 ta_ps: (s1 / s_sum) * v;
+ta_ps1: (-s1 / s_sum) * v; 
 
 /* (c) Vector PU - doing this early as it is simple */
 /* PU is a fraction of PQ (u) */
@@ -107,6 +108,7 @@ ta_pu: (u1 / u_sum) * u;
 vec_qr: v - u;
 vec_qt: (t1 / t_sum) * vec_qr;
 ta_pt: u + vec_qt; 
+ta_pt1: u - vec_qt;
 /* Simplify explicitly for the solution display */
 ta_pt_simp: expand(ta_pt);
 
@@ -124,11 +126,17 @@ ta_tu_simp: expand(ta_tu);</text>
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta_ps@}
-{@ta_pt@}
-{@ta_pu@}
-{@ta_st@}
-{@ta_tu@}</text>
+      <text><![CDATA[<ul>
+    <li>Point \(S\) is located on \(PR\) such that \(PS : SR = {@s1@} : {@s2@}\).</li>
+    <li>Point \(T\) lies on \(QR\) with \(QT : TR = {@t1@} : {@t2@}\).</li>
+    <li>Point \(U\) is on \(PQ\) such that \(PU : UQ = {@u1@} : {@u2@}\).</li>
+</ul>
+<br>
+<br> ans1 - {@ta_ps@}
+<br> ans2 - {@ta_pt@}
+<br> ans3 - {@ta_pu@}
+<br> ans4 - {@ta_st@}
+<br> ans5 - {@ta_tu@}]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -272,8 +280,34 @@ ta_tu_simp: expand(ta_tu);</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta_ps1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you calculated \( \overrightarrow{PS} = -\frac{ {@s1@} }{ {@s_sum@} } \mathbf{v} \), this points in the opposite direction, from S back to P.</p>
+<p><strong>Remember</strong>: \( \overrightarrow{PS} \) means the vector <em>from P to S</em>. Since S lies on PR, and \( \overrightarrow{PR} = \mathbf{v} \), moving from P towards S means moving in the <strong>same direction</strong> as \( \mathbf{v} \), so the fraction \( \frac{ {@s1@} }{ {@s_sum@} } \) should be <strong>positive</strong>, not negative.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -306,8 +340,34 @@ ta_tu_simp: expand(ta_tu);</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta_pt1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you calculated \( \overrightarrow{PT} = \mathbf{u} - \dfrac{ {@t1@} }{ {@t_sum@} }(\mathbf{v}-\mathbf{u}) \), subtracting the QT part instead of adding it.</p>
+<p><strong>Remember</strong>: \( \overrightarrow{PT} = \overrightarrow{PQ} + \overrightarrow{QT} \). You've correctly found \( \overrightarrow{QT} \) as a fraction of \( \overrightarrow{QR} \), but to get from P to T you need to travel along PQ <strong>and then continue</strong> along QT, so the two vectors should be <strong>added</strong>, not subtracted.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -426,7 +486,6 @@ ta_tu_simp: expand(ta_tu);</text>
     <deployedseed>696105427</deployedseed>
     <deployedseed>431997300</deployedseed>
     <deployedseed>822970997</deployedseed>
-    <deployedseed>1528212688</deployedseed>
     <deployedseed>921287923</deployedseed>
     <deployedseed>118698432</deployedseed>
     <deployedseed>790146061</deployedseed>

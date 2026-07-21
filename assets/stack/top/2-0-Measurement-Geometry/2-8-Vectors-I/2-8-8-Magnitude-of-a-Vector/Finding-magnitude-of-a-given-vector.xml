@@ -51,7 +51,7 @@
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>/* 1. Setup for Part (a): Pythagorean Triples (Integer Magnitude) */
@@ -67,6 +67,7 @@ ay: sel[2] * s2;
 vec_a: matrix([ax],[ay]);
 /* Answer for a */
 ta1: sqrt(ax^2 + ay^2);
+ta11: sqrt(abs(ax^2 - ay^2));
 
 /* 2. Setup for Part (b): Random Vector */
 bx: rand_with_step(-9, 9, 1);
@@ -77,7 +78,8 @@ bx: if bx=0 and by=0 then 3 else bx;
 /* Define vector b */
 vec_b: matrix([bx],[by]);
 /* Answer for b */
-ta2: sqrt(bx^2 + by^2);</text>
+ta2: sqrt(bx^2 + by^2);
+ta21: sqrt(abs(bx^2 - by^2));</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -178,8 +180,34 @@ ta2: sqrt(bx^2 + by^2);</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta11</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you calculated \( \sqrt{ \left| ({@ax@})^2 - ({@ay@})^2 \right| } \) subtracting the squares instead of \( \sqrt{ ({@ax@})^2 + ({@ay@})^2 } \).</p>
+<p>You need to add the squares before taking the square root, not subtract them.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -212,8 +240,34 @@ ta2: sqrt(bx^2 + by^2);</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta21</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you calculated \( \sqrt{ \left| ({@bx@})^2 - ({@by@})^2 \right| } \) subtracting the squares instead of \( \sqrt{ ({@bx@})^2 + ({@by@})^2 } \).</p>
+<p>You need to add the squares before taking the square root, not subtract them.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>

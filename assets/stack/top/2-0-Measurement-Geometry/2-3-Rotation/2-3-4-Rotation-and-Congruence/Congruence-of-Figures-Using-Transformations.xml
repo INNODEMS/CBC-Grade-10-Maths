@@ -2,119 +2,126 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Congruence of Figures Using Transformations</text>
+      <text>Congruence of Figures Using Rotation</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<h3 style="text-align:center;">
-Consider the two figures shown on the coordinate grid.
-</h3>
-
-<div style="text-align:center;">
-
-[[jsxgraph]]
-var board = JXG.JSXGraph.initBoard(divid, {
-    boundingbox: [-10,8,10,-8],
-    axis:true,
-    showCopyright:false
-});
-
-/* Original triangle */
-var A = board.create('point', [{#Ax#},{#Ay#}], {name:'A', size:3});
-var B = board.create('point', [{#Bx#},{#By#}], {name:'B', size:3});
-var C = board.create('point', [{#Cx#},{#Cy#}], {name:'C', size:3});
-board.create('polygon',[A,B,C],{
-    fillColor:'#a5d6a7',
-    fillOpacity:0.6,
-    borders:{strokeWidth:2}
-});
-
-/* Image triangle */
-var S = board.create('point', [{#Sx#},{#Sy#}], {name:'S', size:3});
-var T = board.create('point', [{#Tx#},{#Ty#}], {name:'T', size:3});
-var V = board.create('point', [{#Vx#},{#Vy#}], {name:'V', size:3});
-board.create('polygon',[S,T,V],{
-    fillColor:'#90caf9',
-    fillOpacity:0.6,
-    borders:{strokeWidth:2}
-});
-[[/jsxgraph]]
-
-</div>
-
-<p>
-<b>a)</b> Are the two figures congruent?
-<br>
-[[input:ans1]]
-[[validation:ans1]]
-[[feedback:prt1]]
+      <text><![CDATA[<p>
+Triangle \(ABC\) (green) and triangle \(A'B'C'\) (blue) are shown on the grid. The point \(O\) marks a fixed centre.
 </p>
 
 <p>
-<b>b)</b> If they are congruent, describe the transformation that maps the first figure onto the second.
-<br>
-[[input:ans2]]
-[[validation:ans2]]
-[[feedback:prt2]]
-</p>]]></text>
+Drag the <strong>slider</strong> to rotate the dashed copy of triangle \(ABC\) about \(O\). Use it to investigate whether triangle \(ABC\) can be turned exactly onto triangle \(A'B'C'\).
+</p>
+
+<div style="text-align:center;">
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-10, 8, 10, -8],
+    axis: true,
+    showCopyright: false,
+    showNavigation: false,
+    keepaspectratio: true,
+    grid: true
+});
+
+/* ---- Original triangle ABC (fixed) ---- */
+var A = board.create('point', [{#Ax#}, {#Ay#}], {name:'A', size:3, color:'#2e7d32', fixed:true, label:{offset:[6,6]}});
+var B = board.create('point', [{#Bx#}, {#By#}], {name:'B', size:3, color:'#2e7d32', fixed:true, label:{offset:[6,6]}});
+var C = board.create('point', [{#Cx#}, {#Cy#}], {name:'C', size:3, color:'#2e7d32', fixed:true, label:{offset:[6,6]}});
+board.create('polygon', [A, B, C], {
+    fillColor:'#a5d6a7', fillOpacity:0.55,
+    borders:{strokeColor:'#2e7d32', strokeWidth:2}, vertices:{visible:false}
+});
+
+/* ---- Image triangle A'B'C' (fixed) ---- */
+var Ap = board.create('point', [{#Sx#}, {#Sy#}], {name:"A'", size:3, color:'#1565c0', fixed:true, label:{offset:[6,6]}});
+var Bp = board.create('point', [{#Tx#}, {#Ty#}], {name:"B'", size:3, color:'#1565c0', fixed:true, label:{offset:[6,6]}});
+var Cp = board.create('point', [{#Vx#}, {#Vy#}], {name:"C'", size:3, color:'#1565c0', fixed:true, label:{offset:[6,6]}});
+board.create('polygon', [Ap, Bp, Cp], {
+    fillColor:'#90caf9', fillOpacity:0.55,
+    borders:{strokeColor:'#1565c0', strokeWidth:2}, vertices:{visible:false}
+});
+
+/* ---- Centre of rotation O ---- */
+var O = board.create('point', [{#Ox#}, {#Oy#}], {name:'O', size:4, color:'#000000', fixed:true, face:'x', strokeWidth:3, label:{offset:[8,-12]}});
+
+/* ---- Angle slider (0 to 360 degrees) ---- */
+var sl = board.create('slider', [[-9,-6.6],[-3,-6.6],[0,0,360]], {
+    name:'&theta;', snapWidth:15, precision:0,
+    fillColor:'#e65100', strokeColor:'#e65100'
+});
+
+/* rotate a point P=[x,y] about O by the slider angle (CCW, degrees) */
+function rotFn(px, py) {
+    return function() {
+        var th = sl.Value() * Math.PI / 180.0;
+        var ox = O.X(), oy = O.Y();
+        var dx = px - ox, dy = py - oy;
+        return [ox + dx*Math.cos(th) - dy*Math.sin(th),
+                oy + dx*Math.sin(th) + dy*Math.cos(th)];
+    };
+}
+var gA = board.create('point', rotFn({#Ax#},{#Ay#}), {visible:false});
+var gB = board.create('point', rotFn({#Bx#},{#By#}), {visible:false});
+var gC = board.create('point', rotFn({#Cx#},{#Cy#}), {visible:false});
+
+/* dashed "ghost" copy that the student turns with the slider */
+board.create('polygon', [gA, gB, gC], {
+    fillColor:'#ff9800', fillOpacity:0.15,
+    borders:{strokeColor:'#e65100', strokeWidth:2, dash:2}, vertices:{visible:false}
+});
+
+/* faint radii from O to each ghost vertex, to make the turning visible */
+board.create('segment', [O, gA], {strokeColor:'#e65100', strokeWidth:1, dash:1});
+[[/jsxgraph]]
+</div>
+
+<p>
+<b>a)</b> Are triangles \(ABC\) and \(A'B'C'\) congruent?
+[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+</p>
+
+<p>
+<b>b)</b> Name the single transformation that maps \(ABC\) onto \(A'B'C'\).
+[[input:ans2]] [[validation:ans2]] [[feedback:prt2]]
+</p>
+
+<p>
+<b>c)</b> If it is a rotation, state the centre of rotation as coordinates \((x, y)\) and its angle (measured anticlockwise). If it is not a rotation, enter \(O\) as any point and choose "Not applicable" for the angle.
+</p>
+<p>Centre \(O = \) [[input:ans3]] [[validation:ans3]] &nbsp;&nbsp; Angle: [[input:ans4]] [[validation:ans4]] [[feedback:prt3]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
 
 <p>
-Two figures in the plane are <strong>congruent</strong> if one can be obtained from the other by a <strong>rigid transformation</strong> (also called an isometry).
+Two figures are <strong>congruent</strong> when one can be mapped exactly onto the other by a <strong>rigid transformation</strong> (an isometry): a translation, rotation, reflection, or a combination of these. Rigid transformations preserve every side length and every angle, so the shape and size are unchanged.
 </p>
 
 <p>
-Rigid transformations preserve:
-</p>
-<ul>
-<li>All side lengths</li>
-<li>All angles</li>
-<li>The overall shape and size of the figure</li>
-</ul>
-
-<p>
-The main rigid transformations in the plane are:
-</p>
-<ul>
-<li><strong>Translation</strong> – shifting every point by the same vector</li>
-<li><strong>Rotation</strong> – turning the figure around a fixed point</li>
-<li><strong>Reflection</strong> – flipping the figure across a line</li>
-</ul>
-
-<p>
-Any combination of these transformations is still rigid.
+A <strong>rotation</strong> turns a figure about a fixed <em>centre</em> through a given <em>angle</em>. It preserves distances (so figures stay congruent) and also preserves orientation — the vertices keep the same cyclic order (here \(A\to A',\ B\to B',\ C\to C'\)).
 </p>
 
 <hr>
 
-<p><strong>How to analyze this problem:</strong></p>
-
-<ol>
-<li>
-Check whether the side lengths of the two triangles are the same.
-If distances are preserved, congruence is possible.
-</li>
-
-<li>
-Determine the type of transformation:
-<ul>
-<li>If every vertex is shifted by the same vector → it is a <strong>translation</strong>.</li>
-<li>If the triangle appears turned (possibly together with a shift) → it is a <strong>rotation and translation</strong>.</li>
-<li>If the triangle is stretched (for example, one coordinate is scaled differently) → distances are not preserved and the figures are <strong>not congruent</strong>.</li>
-</ul>
-</li>
-</ol>
+<p><strong>This variant:</strong></p>
 
 <p>
-Remember:
+{@sol_text@}
 </p>
 
-<p style="text-align:center;">
-<strong>Congruent figures have exactly the same shape and size.</strong>
+<p><strong>How to find the centre and angle of a rotation:</strong></p>
+<ul>
+<li>Join each point to its image: \(A\to A'\), \(B\to B'\), \(C\to C'\).</li>
+<li>Construct the perpendicular bisector of each segment. All the perpendicular bisectors meet at a single point — that point is the <strong>centre of rotation</strong> \(O\).</li>
+<li>The <strong>angle of rotation</strong> is the angle \(A\,\hat{O}\,A'\), measured anticlockwise.</li>
+</ul>
+
+<p>
+In the interactive figure you can confirm this: set the slider to the angle and the dashed copy of \(ABC\) lands exactly on \(A'B'C'\) when the rotation is correct.
 </p>]]></text>
     </generalfeedback>
-    <defaultgrade>1</defaultgrade>
+    <defaultgrade>4</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
@@ -122,78 +129,104 @@ Remember:
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[/* Base triangle */
-Ax: -3;
-Ay: 1;
+      <text><![CDATA[/* ---- Base triangle ABC ---- */
+Ax : -3; Ay : 1;
+Bx : -1; By : 4;
+Cx :  2; Cy : 2;
 
-Bx: -1;
-By: 4;
+/* ---- Mode: 0 = rotation (congruent), 1 = not congruent ---- */
+mode : rand(2);
 
-Cx: 2;
-Cy: 2;
+/* ---- Rotation data: angle and a safe integer centre keeping both triangles on grid ---- */
+/* curated (angle, ox, oy) triples, each verified to stay within the window */
+rotdata : [
+    [90,  -1, -4], [90,  5, 5], [90,  5, 4],
+    [180,  3,  0], [180, 2, -1], [180, 3, 4],
+    [270, -1, -4], [270, 2, -3], [270, 4, -1]
+];
+pick : rotdata[rand(length(rotdata)) + 1];
+ang : pick[1];
+ox  : pick[2];
+oy  : pick[3];
 
-/* Random translation */
-tx: rand(4) + 3;
-ty: rand(4) - 2;
-
-/* Mode selector
-   0 = translation
-   1 = rotation + translation
-   2 = not congruent
-*/
-mode: rand(3);
-
-/* Image triangle */
-if mode=0 then (
-    Sx: Ax+tx,  Sy: Ay+ty,
-    Tx: Bx+tx,  Ty: By+ty,
-    Vx: Cx+tx,  Vy: Cy+ty
-)
-elseif mode=1 then (
-    Sx: -Ax+tx,  Sy: -Ay+ty,
-    Tx: -Bx+tx,  Ty: -By+ty,
-    Vx: -Cx+tx,  Vy: -Cy+ty
-)
-else (
-    /* Not congruent */
-    Sx: Ax+tx,  Sy: 2*Ay+ty,
-    Tx: Bx+tx,  Ty: 2*By+ty,
-    Vx: Cx+tx,  Vy: 2*Cy+ty
+/* rotate a point [x,y] about (ox,oy) by ang degrees, anticlockwise (ang in {90,180,270}) */
+rotpt(px, py) := block([dx, dy],
+    dx : px - ox, dy : py - oy,
+    if ang = 90  then [ox - dy, oy + dx]
+    elseif ang = 180 then [ox - dx, oy - dy]
+    else [ox + dy, oy - dx]
 );
 
-/* Congruence flag */
-is_cong: if mode=2 then false else true;
+/* ---- Build the image triangle ---- */
+if mode = 0 then (
+    imA : rotpt(Ax, Ay),
+    imB : rotpt(Bx, By),
+    imC : rotpt(Cx, Cy),
+    Sx : imA[1], Sy : imA[2],
+    Tx : imB[1], Ty : imB[2],
+    Vx : imC[1], Vy : imC[2]
+) else (
+    /* NOT congruent: stretch by factor 2 in the y-direction, then shift.
+       Side lengths change, so this is not an isometry. */
+    sh : rand(3) + 2,
+    Sx : Ax + sh, Sy : 2*Ay - 1,
+    Tx : Bx + sh, Ty : 2*By - 1,
+    Vx : Cx + sh, Vy : 2*Cy - 1
+);
 
-/* Part (a) permutation */
-ta_cong_opts:
-    random_permutation([
-        ["Yes", is_cong],
-        ["No", not is_cong]
-    ]);
+/* ---- Congruence flag ---- */
+is_cong : if mode = 0 then true else false;
 
-/* Part (b) correct transformation */
-ta_trans:
-    if mode=0 then "translation"
-    elseif mode=1 then "rotation and translation"
-    else "not possible";
+/* ---- Part (a): Yes/No dropdown ---- */
+ta_cong_opts : [
+    ["Yes, they are congruent", is_cong],
+    ["No, they are not congruent", not is_cong]
+];
 
-/* Part (b) permutation */
-ta_trans_opts:
-    random_permutation([
-        ["Translation", is(ta_trans="translation")],
-        ["Rotation and translation", is(ta_trans="rotation and translation")],
-        ["Not possible", is (ta_trans="not possible")]
-    ]);]]></text>
+/* ---- Part (b): name the transformation ---- */
+ta_trans : if mode = 0 then "rotation" else "none";
+ta_trans_opts : [
+    ["Rotation", is(ta_trans = "rotation")],
+    ["Reflection", false],
+    ["Translation", false],
+    ["None (the figures are not congruent)", is(ta_trans = "none")]
+];
+
+/* ---- Part (c): centre (typed) and angle (dropdown) ---- */
+/* teacher's centre; for the non-congruent case any point is accepted (see PRT) */
+ta_centre : if mode = 0 then [ox, oy] else [ox, oy];
+ta_angle_opts : [
+    ["90 degrees", mode = 0 and ang = 90],
+    ["180 degrees", mode = 0 and ang = 180],
+    ["270 degrees", mode = 0 and ang = 270],
+    ["Not applicable", mode = 1]
+];
+
+/* ---- Text used in the worked solution ---- */
+sol_text : if mode = 0
+    then sconcat("The two triangles have equal side lengths and the same orientation, so they are congruent. ",
+                 "Triangle \\(ABC\\) maps onto \\(A'B'C'\\) by a rotation of ", string(ang),
+                 "\\(^\\circ\\) anticlockwise about the centre \\(O = (", string(ox), ",\\ ", string(oy), ")\\).")
+    else "The image has been stretched in the vertical direction, so its side lengths are not equal to those of the original. Distances are not preserved, therefore the two figures are not congruent and no single rigid transformation maps one onto the other.";
+
+/* ---- helper values for question tests (must live in questionvariables) ---- */
+qt_cong_right : mcq_correct(ta_cong_opts)[1];
+/* the wrong congruence option is simply the opposite Yes/No string */
+qt_cong_wrong : if is_cong then "No, they are not congruent" else "Yes, they are congruent";
+qt_trans_right : mcq_correct(ta_trans_opts)[1];
+qt_angle_right : mcq_correct(ta_angle_opts)[1];]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta_cong_opts@}
-{@ta_trans_opts@}</text>
+      <text>mode={@mode@}; cong={@is_cong@}; {@ta_trans@}; centre=({@ox@},{@oy@}); angle={@ang@}</text>
     </questionnote>
     <questiondescription format="html">
-      <text/>
+      <text><![CDATA[<p id="concept">Congruence and rotation as a rigid transformation; finding centre and angle of rotation.</p>
+<p id="description">
+The learner uses an interactive slider to rotate a copy of a triangle about a marked centre, decides whether the two triangles are congruent, names the transformation, and (for rotations) states the centre and angle. Some variants are deliberately not congruent (a non-isometric vertical stretch) so the learner must reason from side lengths rather than assume congruence.
+</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -231,8 +264,8 @@ ta_trans_opts:
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
       <options/>
     </input>
     <input>
@@ -249,8 +282,44 @@ ta_trans_opts:
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta_centre</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>1</insertstars>
+      <syntaxhint>(?,?)</syntaxhint>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
       <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>dropdown</type>
+      <tans>ta_angle_opts</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
       <options/>
     </input>
     <prt>
@@ -259,15 +328,11 @@ ta_trans_opts:
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
-        <text><![CDATA[/* Convert yes/no text answer into numeric value */
-ans1n:
-  if is(ans1 = "yes") or is(ans1 = "Yes") or is(ans1 = "YES") then 1
-  elseif is(ans1 = "no") or is(ans1 = "No") or is(ans1 = "NO") then 0
-  else -1;]]></text>
+        <text/>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Congruent yes/no correct?</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>mcq_correct(ta_cong_opts)[1]</tans>
@@ -287,13 +352,13 @@ ans1n:
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Compare the side lengths of the two triangles. Congruent figures must have exactly the same side lengths and angles. Use the slider to test whether \(ABC\) can be turned onto \(A'B'C'\).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
     <prt>
       <name>prt2</name>
-      <value>2.0000000</value>
+      <value>1.0000000</value>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
@@ -301,7 +366,7 @@ ans1n:
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Transformation named correctly?</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans2</sans>
         <tans>mcq_correct(ta_trans_opts)[1]</tans>
@@ -321,7 +386,120 @@ ans1n:
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
         <falsefeedback format="html">
+          <text><![CDATA[<p>The vertices keep the same order \(A\to A',\ B\to B',\ C\to C'\) (orientation is preserved) and every point moves along a circular arc about a fixed centre. Which single transformation does that — or are the figures not congruent at all?</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>2.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text><![CDATA[/* For rotations, the centre must match exactly. For the non-congruent case,
+   the centre is not meaningful, so we only require the angle dropdown to say
+   "Not applicable" and we accept any centre entry. */
+centre_ok : is(ans3 = ta_centre);
+angle_ok  : is(ans4 = mcq_correct(ta_angle_opts)[1]);]]></text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Is this a rotation variant?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>mode</sans>
+        <tans>0</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>1</truenextnode>
+        <trueanswernote>prt3-rot</trueanswernote>
+        <truefeedback format="html">
           <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt3-notcong</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Centre correct (rotation)?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>centre_ok</sans>
+        <tans>true</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>2</truenextnode>
+        <trueanswernote>prt3-centre-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt3-centre-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The centre of rotation is the one point that stays fixed. Find it as the intersection of the perpendicular bisectors of \(AA'\), \(BB'\) and \(CC'\), or use the slider: the correct centre is the marked point \(O\) about which the dashed copy turns onto \(A'B'C'\).</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Angle correct (rotation)?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>angle_ok</sans>
+        <tans>true</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-angle-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-angle-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Measure the turn from \(A\) to \(A'\) about \(O\), anticlockwise. Setting the slider to the angle of rotation lands the dashed triangle exactly on \(A'B'C'\).</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Not-congruent: angle marked Not applicable?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>angle_ok</sans>
+        <tans>true</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>2</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-na-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-na-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>These two figures are not congruent, so no rotation maps one onto the other. The angle of rotation is "Not applicable" here.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -337,22 +515,24 @@ ans1n:
     <deployedseed>1126133842</deployedseed>
     <deployedseed>198963845</deployedseed>
     <deployedseed>1087731050</deployedseed>
-    <deployedseed>756695139</deployedseed>
-    <deployedseed>1185236779</deployedseed>
-    <deployedseed>330037547</deployedseed>
-    <deployedseed>734253068</deployedseed>
-    <deployedseed>1766727706</deployedseed>
-    <deployedseed>1857425860</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>All four parts correct earns full marks (works for both rotation and not-congruent variants).</description>
       <testinput>
         <name>ans1</name>
-        <value>first(mcq_correct(ta_cong_opts))</value>
+        <value>qt_cong_right</value>
       </testinput>
       <testinput>
         <name>ans2</name>
-        <value>first(mcq_correct(ta_trans_opts))</value>
+        <value>qt_trans_right</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>ta_centre</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>qt_angle_right</value>
       </testinput>
       <expected>
         <name>prt1</name>
@@ -365,6 +545,44 @@ ans1n:
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>2.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote/>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Congruence question answered wrongly loses part (a).</description>
+      <testinput>
+        <name>ans1</name>
+        <value>qt_cong_wrong</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>qt_trans_right</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>ta_centre</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>qt_angle_right</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>2.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote/>
       </expected>
     </qtest>
   </question>

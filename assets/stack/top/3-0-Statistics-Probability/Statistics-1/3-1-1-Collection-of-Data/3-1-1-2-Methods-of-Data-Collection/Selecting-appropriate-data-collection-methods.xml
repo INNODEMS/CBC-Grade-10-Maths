@@ -5,21 +5,20 @@
       <text>Selecting appropriate data collection methods</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Read the following research scenario:</p>
-<p>{@q_text@}</p>
-<p>Which method of data collection is most appropriate for this scenario?</p>
-<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+      <text><![CDATA[<p>Read the following research goal:</p>
+<p><em>{@q_text@}</em></p>
+<p>Which method of data collection is <strong>most appropriate</strong> for achieving this goal?</p>
+<div>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</div>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<p><strong>Correct Answer: {@correct_text@}</strong></p>
-<p>Each method serves a specific purpose:</p>
+      <text><![CDATA[<p><strong>Most appropriate method: {@correct_text@}</strong></p>
+<p>Choose the method by matching the goal to what each method does best:</p>
 <ul>
-    <li><strong>Observation:</strong> Studying behavior in natural settings.</li>
-    <li><strong>Focus Group:</strong> Gathering deep qualitative insights from small groups.</li>
-    <li><strong>Census:</strong> Collecting data from the entire population.</li>
-    <li><strong>Experimentation:</strong> Establishing cause-and-effect (control vs treatment).</li>
-    <li><strong>Questionnaire:</strong> Gathering standardized data from large groups efficiently.</li>
-    <li><strong>Secondary Data:</strong> Using existing records or data collected by others.</li>
+    <li><strong>Observation:</strong> best when you need to record real behaviour as it naturally happens.</li>
+    <li><strong>Interview:</strong> best for deep, detailed understanding from a few people.</li>
+    <li><strong>Questionnaire:</strong> best for collecting standardised data quickly from many people.</li>
+    <li><strong>Experimentation:</strong> best for testing cause and effect under controlled conditions.</li>
+    <li><strong>Secondary Data Collection:</strong> best when the data you need already exists in records.</li>
 </ul>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -30,82 +29,50 @@
       <text>2025073100</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[/* 1. SCENARIO & CORRECT ANSWER SETUP */
-/* Define the scenarios and their matching correct method */
+      <text><![CDATA[/* --- 1. RESEARCH GOALS (goal -> most appropriate method) --- */
+/* Methods restricted to those taught in the lesson.                       */
+/* Scenarios deliberately different from the 'Identifying' question.       */
 scenarios: [
-  ["You stand in a corner and record how long customers spend in each aisle without interfering.", "Observation"],
-  ["You gather detailed opinions and feelings from a small group of 10 people regarding a new product.", "Focus Group"],
-  ["You collect data from every single household in the entire country.", "Census"],
-  ["You treat one plot with fertilizer and leave another without to compare the growth results.", "Experimentation"],
-  ["You survey 500 employees anonymously using a standard form to gather data quickly.", "Questionnaire"],
-  ["You use existing rainfall records from the Meteorological Department for your research.", "Secondary Data Collection"]
+  ["A school counsellor wants to understand, in depth, how a few students coped with exam stress and to explore their personal feelings about it.", "Interview"],
+  ["A county government wants to quickly collect the ages and occupations of 5,000 residents using one standard form.", "Questionnaire"],
+  ["A road-safety officer wants to find out how many drivers actually stop at a particular junction, watching them without their knowledge.", "Observation"],
+  ["A science teacher wants to find out whether adding sugar to water makes beans germinate faster, keeping all other conditions equal.", "Experimentation"],
+  ["A student writing a geography report needs rainfall figures for their region going back thirty years.", "Secondary Data Collection"]
 ];
 
-/* Pick a random scenario */
+/* Pick a random goal */
 rand_idx: rand(length(scenarios)) + 1;
 chosen_scenario: scenarios[rand_idx];
-
 q_text: chosen_scenario[1];
 correct_text: chosen_scenario[2];
 
-/* 2. DISTRACTOR SETUP */
-/* Master list of all possible methods */
-all_methods: [
-    "Observation", 
-    "Focus Group", 
-    "Census", 
-    "Experimentation", 
-    "Questionnaire", 
-    "Secondary Data Collection", 
-    "Face-to-Face Interview", 
-    "Telephone Survey", 
-    "Case Study"
-];
-
-/* Filter out the correct answer to ensure distractors are actually wrong */
+/* --- 2. OPTIONS: correct + 3 distinct distractors from taught methods --- */
+all_methods: ["Observation", "Interview", "Questionnaire", "Experimentation", "Secondary Data Collection"];
 wrong_pool: sublist(all_methods, lambda([x], x # correct_text));
+chosen_wrongs: rand_selection(wrong_pool, 3);
 
-/* Shuffle the wrong pool so we get random distractors every time */
-shuffled_wrongs: random_permutation(wrong_pool);
-
-/* 3. BUILD THE ANSWER LIST (Matching your sample structure) */
-
-/* Correct Answer Block: ID 1, Boolean TRUE, Text */
-correct_answer: rand_selection([
-   [1, true, correct_text]
-], 1);
-
-/* Incorrect Answers Block: ID 2-4, Boolean FALSE, Text (picked from shuffled pool) */
-incorrect_answers: rand_selection([
-   [2, false, shuffled_wrongs[1]],
-   [3, false, shuffled_wrongs[2]],
-   [4, false, shuffled_wrongs[3]]
-], 3);
-
-/* 4. FINAL PERMUTATION */
-/* Combine and shuffle to get the final list 'ta' */
+correct_answer: [[1, true, correct_text]];
+incorrect_answers: [
+   [2, false, chosen_wrongs[1]],
+   [3, false, chosen_wrongs[2]],
+   [4, false, chosen_wrongs[3]]
+];
 ta: random_permutation(append(correct_answer, incorrect_answers));
 
-/* 5. INPUT HELPER */
-/* Extract just the text strings for the STACK Radio Button list */
-/* 'third' takes the 3rd element of each sublist (the text) */
-final_options: map(third, ta);]]></text>
+/* Helper for question testing: a wrong option's value */
+wrongval(t) := first(delete(1, map(first, t)));]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta@}
-{@@}
-{@@}
-{@@}</text>
+      <text>{@correct_text@}</text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Daniel Murunga</p>
-<p id="concept"></p>
-<p id="reviewer"></p>
-<p id="reviewer"></p>
-<p id="description">In this question, you are presented with a randomized research scenario describing a specific data gathering context. You are required to identify and select the most appropriate method of data collection (such as Observation, Census, Questionnaire, etc.) that best fits the situation described.</p>]]></text>
+<p id="concept">Methods of data collection: selecting the most appropriate method for a stated research goal.</p>
+<p id="reviewer">Ben (STACK audit)</p>
+<p id="description">Students are given a randomised research goal and select the most appropriate data-collection method. Methods restricted to the five taught in the lesson; framing and scenarios are distinct from the 'Identifying data collection methods' question. Each wrong answer receives a diagnostic hint about what the correct method is best suited for.</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -140,11 +107,11 @@ final_options: map(third, ta);]]></text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
       <options>nonotanswered</options>
     </input>
     <prt>
@@ -153,11 +120,15 @@ final_options: map(third, ta);]]></text>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
-        <text/>
+        <text><![CDATA[hint: if is(correct_text = "Observation") then "This goal needs you to record real behaviour as it naturally happens, without influencing it."
+elseif is(correct_text = "Interview") then "This goal needs deep, detailed understanding from just a few people, exploring their feelings."
+elseif is(correct_text = "Questionnaire") then "This goal needs standardised data collected quickly from a large number of people."
+elseif is(correct_text = "Experimentation") then "This goal needs you to test cause and effect by controlling conditions and changing one factor."
+else "This goal can be met using data that already exists in records collected by someone else.";]]></text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Checks for the correct answer</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>mcq_correct(ta)[1]</tans>
@@ -177,7 +148,7 @@ final_options: map(third, ta);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Not quite. {@hint@} Which method fits that best?</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -186,10 +157,33 @@ final_options: map(third, ta);]]></text>
     <deployedseed>1937597875</deployedseed>
     <deployedseed>175433249</deployedseed>
     <deployedseed>1116838791</deployedseed>
-    <deployedseed>1674852064</deployedseed>
-    <deployedseed>512347684</deployedseed>
-    <deployedseed>1582430498</deployedseed>
-    <deployedseed>457310259</deployedseed>
-    <deployedseed>672466751</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Correct method selected: full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>mcq_correct(ta)[1]</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>A distractor selected: fires the F branch with the diagnostic hint.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>wrongval(ta)</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-1-F</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>
