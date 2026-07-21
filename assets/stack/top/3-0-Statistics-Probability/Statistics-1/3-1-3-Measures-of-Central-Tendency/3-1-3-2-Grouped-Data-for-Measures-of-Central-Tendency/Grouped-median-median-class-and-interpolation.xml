@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Grouped median: median class and interpolation</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The marks of a class in a test are grouped below (with the cumulative frequency, CF).</p>
+<table border="1" style="border-collapse:collapse;text-align:center;min-width:300px;">
+<tr style="background-color:#eee;"><th>Mark</th><th>Frequency (f)</th><th>CF</th></tr>
+<tr><td>1 &ndash; 10</td><td>{@f[1]@}</td><td>{@cf[1]@}</td></tr><tr><td>11 &ndash; 20</td><td>{@f[2]@}</td><td>{@cf[2]@}</td></tr><tr><td>21 &ndash; 30</td><td>{@f[3]@}</td><td>{@cf[3]@}</td></tr><tr><td>31 &ndash; 40</td><td>{@f[4]@}</td><td>{@cf[4]@}</td></tr><tr><td>41 &ndash; 50</td><td>{@f[5]@}</td><td>{@cf[5]@}</td></tr>
+</table>
+<p><strong>(a)</strong> Which is the <strong>median class</strong>? Enter it as an interval <code>[a,b]</code>: [[input:ans_class]] [[validation:ans_class]] [[feedback:prt_class]]</p>
+<p><strong>(b)</strong> Estimate the <strong>median</strong> (to 2 d.p.) using \(\text{Median}=L+\dfrac{\frac{n}{2}-CF}{f}\times C\), where \(L\) is the lower class limit: [[input:ans_med]] [[validation:ans_med]] [[feedback:prt_med]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h4>Worked solution</h4>
+<p>\(n=\sum f={@Sf@}\), so \(\frac{n}{2}={@half@}\). The median class is the first class whose CF reaches {@half@}: <strong>{@median_class@}</strong>.</p>
+<p>Using the lower class limit \(L={@L@}\), \(CF={@cfb@}\), \(f={@fm@}\), \(C={@C@}\):</p>
+\[ \text{Median} = {@L@} + \frac{ {@half@} - {@cfb@} }{ {@fm@} }\times {@C@} \approx {@median_disp@}. \]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[lowers: [1,11,21,31,41];
+uppers: [10,20,30,40,50];
+C: 10;
+f: [rand(6)+3, rand(6)+4, rand(7)+5, rand(6)+4, rand(6)+3];
+Sf: apply("+", f);
+cf: [];
+run: 0;
+for i:1 thru 5 do (run: run + f[i], cf: endcons(run, cf));
+half: Sf/2;
+medidx: 1;
+for i:1 thru 5 do (if cf[i] >= half then (medidx: i, return()));
+L: lowers[medidx];                       /* lower CLASS LIMIT */
+cfb: if medidx=1 then 0 else cf[medidx-1];
+fm: f[medidx];
+median_val: L + ((half - cfb)/fm)*C;
+median_disp: round(median_val*100)/100.0;
+median_class: [lowers[medidx], uppers[medidx]];
+/* wrong: modal class (highest frequency) */
+modidx: sublist_indices(f, lambda([x], x=lmax(f)))[1];
+modal_class: [lowers[modidx], uppers[modidx]];
+/* wrong: lower boundary convention (L-0.5) -> median 0.5 lower */
+median_boundary: median_val - 0.5;]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>class={@median_class@}, median={@median_disp@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Ben (STACK author)</p><p id="concept">Grouped median by interpolation; identify the median class then apply the formula (lower class limit).</p><p id="reviewer"></p><p id="description">Students identify the median class from cumulative frequency, then apply Median = L + ((n/2-CF)/f)*C with L the lower class limit. Diagnostics catch the modal class and the boundary (L-0.5) convention.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans_class</name>
+      <type>algebraic</type>
+      <tans>median_class</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_med</name>
+      <type>algebraic</type>
+      <tans>median_val</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt_class</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_class</sans>
+        <tans>median_class</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_class-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_class-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_class</sans>
+        <tans>modal_class</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_class-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That's the <em>modal</em> class (highest frequency), not the median class. The median class is where the cumulative frequency first reaches \(\frac{n}{2}\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_class-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Find \(\frac{n}{2}\), then read down the CF column for the first class whose CF reaches it.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_med</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_med</sans>
+        <tans>median_val</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_med-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_med-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_med</sans>
+        <tans>median_boundary</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_med-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Use the <strong>lower class limit</strong> \(L\) in the formula (as in the book), not the class boundary \(L-0.5\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_med-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Apply \(\text{Median}=L+\dfrac{\frac{n}{2}-CF}{f}\times C\) with \(L\) the lower class limit of the median class.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>22001</deployedseed>
+    <deployedseed>22003</deployedseed>
+    <deployedseed>22005</deployedseed>
+    <deployedseed>22007</deployedseed>
+    <deployedseed>22009</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Median class and value correct.</description>
+      <testinput>
+        <name>ans_class</name>
+        <value>median_class</value>
+      </testinput>
+      <testinput>
+        <name>ans_med</name>
+        <value>median_disp</value>
+      </testinput>
+      <expected>
+        <name>prt_class</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_class-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_med</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_med-0-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Boundary convention used for the median value.</description>
+      <testinput>
+        <name>ans_class</name>
+        <value>median_class</value>
+      </testinput>
+      <testinput>
+        <name>ans_med</name>
+        <value>median_boundary</value>
+      </testinput>
+      <expected>
+        <name>prt_med</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_med-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

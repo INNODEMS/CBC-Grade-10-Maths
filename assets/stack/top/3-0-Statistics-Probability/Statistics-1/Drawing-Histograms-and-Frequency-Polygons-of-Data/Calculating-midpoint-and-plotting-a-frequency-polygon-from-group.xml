@@ -5,139 +5,78 @@
       <text>Calculating midpoint and plotting a frequency polygon from grouped data.</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>The following grouped data represent the distribution of exam scores for grade 10 students at Mpakani school.</p>
-
-<table border="1" style="margin-left:auto;margin-right:auto;text-align:center;">
-<tr>
-<th>Class Interval</th>
-<th>Frequency</th>
-</tr>
-<tr><td>0–10</td><td>{@f1@}</td></tr>
-<tr><td>10–20</td><td>{@f2@}</td></tr>
-<tr><td>20–30</td><td>{@f3@}</td></tr>
-<tr><td>30–40</td><td>{@f4@}</td></tr>
-<tr><td>40–50</td><td>{@f5@}</td></tr>
+      <text><![CDATA[<p>The table shows the exam scores (out of 50) of a class of students, grouped into five class intervals.</p>
+<p><strong>1.</strong> Complete the <strong>Midpoint</strong> column of the table.</p>
+<table border="1" style="border-collapse:collapse; text-align:center; margin-bottom:10px;">
+    <thead style="background-color:#e0e0e0;">
+        <tr><th>Class interval</th><th>Frequency</th><th>Midpoint</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:center;">{@lb[1]@} &ndash; {@ub[1]@}</td>
+            <td style="text-align:center;">{@freq[1]@}</td>
+            <td style="text-align:center;">[[input:ans_m1]] [[validation:ans_m1]] [[feedback:prt_m1]]</td>
+        </tr>
+        <tr>
+            <td style="text-align:center;">{@lb[2]@} &ndash; {@ub[2]@}</td>
+            <td style="text-align:center;">{@freq[2]@}</td>
+            <td style="text-align:center;">[[input:ans_m2]] [[validation:ans_m2]] [[feedback:prt_m2]]</td>
+        </tr>
+        <tr>
+            <td style="text-align:center;">{@lb[3]@} &ndash; {@ub[3]@}</td>
+            <td style="text-align:center;">{@freq[3]@}</td>
+            <td style="text-align:center;">[[input:ans_m3]] [[validation:ans_m3]] [[feedback:prt_m3]]</td>
+        </tr>
+        <tr>
+            <td style="text-align:center;">{@lb[4]@} &ndash; {@ub[4]@}</td>
+            <td style="text-align:center;">{@freq[4]@}</td>
+            <td style="text-align:center;">[[input:ans_m4]] [[validation:ans_m4]] [[feedback:prt_m4]]</td>
+        </tr>
+        <tr>
+            <td style="text-align:center;">{@lb[5]@} &ndash; {@ub[5]@}</td>
+            <td style="text-align:center;">{@freq[5]@}</td>
+            <td style="text-align:center;">[[input:ans_m5]] [[validation:ans_m5]] [[feedback:prt_m5]]</td>
+        </tr>
+    </tbody>
 </table>
-
-<br>
-
-<p><b>1.</b> Compute the class midpoints.</p>
-
-<p>
-Enter them as a list:
-</p>
-
-[[input:ans_mid]]
-[[validation:ans_mid]]
-
-<br><br>
-
-<p><b>2.</b> Determine the coordinates of the points used to draw the frequency polygon.</p>
-
-<p>
-Enter the coordinates as ordered pairs.
-</p>
-
-<br><br>
-
-[[input:ans_poly]]
-[[validation:ans_poly]]
-
-<br><br>
-
-<p><b>3.</b> Plot the frequency polygon on the graph.</p>
-
-[[jsxgraph]]
-var board = JXG.JSXGraph.initBoard(divid,{
-boundingbox:[-5,12,55,-1],
-axis:true,
-showCopyright:false
-});
-
-/* Histogram bars */
-board.create('polygon',[[0,0],[0,4],[10,4],[10,0]]);
-board.create('polygon',[[10,0],[10,7],[20,7],[20,0]]);
-board.create('polygon',[[20,0],[20,10],[30,10],[30,0]]);
-board.create('polygon',[[30,0],[30,6],[40,6],[40,0]]);
-board.create('polygon',[[40,0],[40,3],[50,3],[50,0]]);
-
-/* Points students should place */
-var p1 = board.create('point',[5,4],{name:'',size:3});
-var p2 = board.create('point',[15,7],{name:'',size:3});
-var p3 = board.create('point',[25,10],{name:'',size:3});
-var p4 = board.create('point',[35,6],{name:'',size:3});
-var p5 = board.create('point',[45,3],{name:'',size:3});
-
-/* Polygon line */
-board.create('line',[p1,p2]);
-board.create('line',[p2,p3]);
-board.create('line',[p3,p4]);
-board.create('line',[p4,p5]);
-
-[[/jsxgraph]]]]></text>
+<p><strong>2.</strong> The histogram below is drawn from this data, but the red points of the <strong>frequency polygon</strong> are at the wrong heights. <strong>Drag each red point up or down</strong> so that its height equals the frequency of that class. Each bar follows its point, and the y-axis gridlines mark each unit.</p>
+[[jsxgraph input-ref-ans_p1="r1" input-ref-ans_p2="r2" input-ref-ans_p3="r3" input-ref-ans_p4="r4" input-ref-ans_p5="r5"]]
+var lbs = {#lb#};
+var ubs = {#ub#};
+var mids = {#midpts#};
+var inits = {#init_heights#};
+var ymax = {#ymax#};
+var board = JXG.JSXGraph.initBoard(divid, {boundingbox:[-4, ymax+2, 54, -3.5], showCopyright:false, showNavigation:false, pan:{enabled:false}, zoom:{enabled:false}});
+board.create('axis', [[0,0],[50,0]], {ticks:{drawLabels:true, ticksDistance:10, minorTicks:0}, name:'Score', withLabel:true, label:{position:'rt', offset:[-15,-15]}});
+board.create('axis', [[0,0],[0,ymax+1]], {ticks:{drawLabels:true, ticksDistance:1, minorTicks:0}, name:'Frequency', withLabel:true, label:{position:'rt', offset:[10,-5]}});
+var gy;
+for (gy = 1; gy <= ymax+1; gy++) { board.create('segment', [[0,gy],[50,gy]], {strokeColor:'#e6e6e6', strokeWidth:1, fixed:true, highlight:false}); }
+var pts = [];
+var i;
+for (i = 0; i < 5; i++) {
+  (function(idx){
+    var seg = board.create('segment', [[mids[idx],0],[mids[idx],ymax+1]], {visible:false});
+    var g = board.create('glider', [mids[idx], inits[idx], seg], {name:'', size:4, strokeColor:'#cc0000', fillColor:'#cc0000', snapToGrid:true, snapSizeY:1});
+    var tl = board.create('point', [lbs[idx], function(){return g.Y();}], {visible:false, fixed:true});
+    var tr = board.create('point', [ubs[idx], function(){return g.Y();}], {visible:false, fixed:true});
+    board.create('polygon', [[lbs[idx],0],[ubs[idx],0], tr, tl], {fillColor:'#8ec5ff', fillOpacity:0.35, borders:{strokeColor:'#337ab7', strokeWidth:1}, fixed:true, vertices:{visible:false}, withLines:true});
+    pts[idx] = g;
+  })(i);
+}
+for (i = 0; i < 4; i++) { board.create('segment', [pts[i], pts[i+1]], {strokeColor:'#0044aa', strokeWidth:2}); }
+stack_jxg.bind_point(r1, pts[0]);
+stack_jxg.bind_point(r2, pts[1]);
+stack_jxg.bind_point(r3, pts[2]);
+stack_jxg.bind_point(r4, pts[3]);
+stack_jxg.bind_point(r5, pts[4]);
+[[/jsxgraph]]
+<div style="display:none;">[[input:ans_p1]] [[validation:ans_p1]] [[input:ans_p2]] [[validation:ans_p2]] [[input:ans_p3]] [[validation:ans_p3]] [[input:ans_p4]] [[validation:ans_p4]] [[input:ans_p5]] [[validation:ans_p5]] </div>
+<div>[[feedback:prt_p1]] [[feedback:prt_p2]] [[feedback:prt_p3]] [[feedback:prt_p4]] [[feedback:prt_p5]] </div>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<h3>Worked Solution</h3>
-
-<p><b>Step 1: Determine the class midpoints</b></p>
-
-<p>The midpoint of a class interval is found using the formula</p>
-
-\[
-\text{Midpoint}=\frac{\text{Lower boundary}+\text{Upper boundary}}{2}.
-\]
-
-<p>Applying this to each class interval:</p>
-
-<ul>
-<li>\((0+10)/2 = 5\)</li>
-<li>\((10+20)/2 = 15\)</li>
-<li>\((20+30)/2 = 25\)</li>
-<li>\((30+40)/2 = 35\)</li>
-<li>\((40+50)/2 = 45\)</li>
-</ul>
-
-<p>Therefore, the list of class midpoints is</p>
-
-\[
-{@ta_mid@}
-\]
-
----
-
-<p><b>Step 2: Determine the frequency polygon points</b></p>
-
-<p>A frequency polygon is obtained by plotting points whose coordinates are:</p>
-
-\[
-(\text{class midpoint},\ \text{frequency})
-\]
-
-<p>Using the midpoints and the frequencies from the table we obtain:</p>
-
-<ul>
-<li>\(({@m1@}, {@f1@})\)</li>
-<li>\(({@m2@}, {@f2@})\)</li>
-<li>\(({@m3@}, {@f3@})\)</li>
-<li>\(({@m4@}, {@f4@})\)</li>
-<li>\(({@m5@}, {@f5@})\)</li>
-</ul>
-
-<p>So the frequency polygon points are</p>
-
-\[
-({@m1@},{@f1@}),({@m2@},{@f2@}),({@m3@},{@f3@}),({@m4@},{@f4@}),({@m5@},{@f5@})
-\]
-
----
-
-<p><b>Step 3: Construct the frequency polygon</b></p>
-
-<p>Plot the points above on the graph and connect them with straight line segments in order of increasing midpoint.</p>
-
-<p>The resulting polygon shows how the frequencies vary across the class intervals and provides a visual representation of the distribution.</p>
-
-<p>Frequency polygons are useful because they make it easier to compare distributions and identify trends in the data.</p>]]></text>
+      <text><![CDATA[<h4>Worked solution</h4>
+<p><strong>1. Midpoints.</strong> Each midpoint is \(\tfrac{\text{lower}+\text{upper}}{2}\): {@midpts@}.</p>
+<p><strong>2. Frequency polygon.</strong> Each red point should sit at the frequency of its class, i.e. at the points {@poly_points@}. Joining these points with straight segments gives the frequency polygon; each point lines up with the top of its histogram bar.</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -147,51 +86,29 @@ board.create('line',[p4,p5]);
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Class width */
-w:10;
-
-/* Random starting point */
-start: rand(5)*5;   /* e.g. 0,5,10,15,20 */
-
-/* Class intervals */
-c1l:start;        c1u:start+w;
-c2l:c1u;          c2u:c2l+w;
-c3l:c2u;          c3u:c3l+w;
-c4l:c3u;          c4u:c4l+w;
-c5l:c4u;          c5u:c5l+w;
-
-/* Frequencies */
-f1: rand(8)+2;
-f2: rand(8)+2;
-f3: rand(8)+2;
-f4: rand(8)+2;
-f5: rand(8)+2;
-
-/* Midpoints */
-m1:(c1l+c1u)/2;
-m2:(c2l+c2u)/2;
-m3:(c3l+c3u)/2;
-m4:(c4l+c4u)/2;
-m5:(c5l+c5u)/2;
-
-/* Correct midpoint list */
-ta_mid:[m1,m2,m3,m4,m5];
-
-/* Frequency polygon coordinates */
-ta_poly:[[m1,f1],[m2,f2],[m3,f3],[m4,f4],[m5,f5]];</text>
+      <text>/* Five classes (exam scores out of 50), width 10 */
+lb: [0,10,20,30,40];
+ub: [9,19,29,39,49];
+w: 10; nc: 5;
+/* Random frequencies 2..9 */
+freq: makelist(rand(8)+2, i, 1, nc);
+midpts: map(lambda([l,u],(l+u)/2), lb, ub);
+ymax: lmax(freq)+1;
+/* Wrong starting heights for the polygon (rotate the frequencies by one) */
+init_heights: append(rest(freq), [first(freq)]);
+/* Correct polygon points (for the model answer / worked solution) */
+poly_points: makelist([midpts[i], freq[i]], i, 1, nc);</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta_mid@}
-{@ta_poly@}</text>
+      <text>freqs {@freq@}; midpoints {@midpts@}</text>
     </questionnote>
     <questiondescription format="html">
-      <text><![CDATA[<p id="author">Monica SHERILY</p>
-<p id="reviewer"></p>
-<p id="reviewer"> </p>
-<p id="description">Given a frequency table for the distribution scores of an exam.The student is required to draw a histogram to show the distribution of the exams marks.</p>]]></text>
+      <text><![CDATA[<p id="author">Monica Sherily</p>
+<p id="reviewer">Ben (STACK audit)</p>
+<p id="description">Students complete the midpoint column of a grouped table, then fix a frequency polygon by dragging red points (bound to inputs) to the correct heights. Bars follow the points as rectangles; each point and midpoint is marked (partial credit).</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -214,11 +131,101 @@ ta_poly:[[m1,f1],[m2,f2],[m3,f3],[m4,f4],[m5,f5]];</text>
     <logicsymbol>lang</logicsymbol>
     <matrixparens>[</matrixparens>
     <isbroken>0</isbroken>
-    <variantsselectionseed>Histogram and Frequency Polygon.</variantsselectionseed>
+    <variantsselectionseed/>
     <input>
-      <name>ans_mid</name>
+      <name>ans_m1</name>
       <type>algebraic</type>
-      <tans>ta_mid</tans>
+      <tans>midpts[1]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_m2</name>
+      <type>algebraic</type>
+      <tans>midpts[2]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_m3</name>
+      <type>algebraic</type>
+      <tans>midpts[3]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_m4</name>
+      <type>algebraic</type>
+      <tans>midpts[4]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_m5</name>
+      <type>algebraic</type>
+      <tans>midpts[5]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_p1</name>
+      <type>algebraic</type>
+      <tans>poly_points[1]</tans>
       <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -229,14 +236,14 @@ ta_poly:[[m1,f1],[m2,f2],[m3,f3],[m4,f4],[m5,f5]];</text>
       <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
-      <name>ans_poly</name>
+      <name>ans_p2</name>
       <type>algebraic</type>
-      <tans>ta_poly</tans>
+      <tans>poly_points[2]</tans>
       <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -247,56 +254,562 @@ ta_poly:[[m1,f1],[m2,f2],[m3,f3],[m4,f4],[m5,f5]];</text>
       <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
+    <input>
+      <name>ans_p3</name>
+      <type>algebraic</type>
+      <tans>poly_points[3]</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_p4</name>
+      <type>algebraic</type>
+      <tans>poly_points[4]</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_p5</name>
+      <type>algebraic</type>
+      <tans>poly_points[5]</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt_m1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_m1</sans>
+        <tans>midpts[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_m1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_m1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Midpoint = (lower limit + upper limit) &divide; 2 for this class.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_m2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_m2</sans>
+        <tans>midpts[2]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_m2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_m2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Midpoint = (lower limit + upper limit) &divide; 2 for this class.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_m3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_m3</sans>
+        <tans>midpts[3]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_m3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_m3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Midpoint = (lower limit + upper limit) &divide; 2 for this class.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_m4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_m4</sans>
+        <tans>midpts[4]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_m4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_m4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Midpoint = (lower limit + upper limit) &divide; 2 for this class.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_m5</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_m5</sans>
+        <tans>midpts[5]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_m5-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_m5-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Midpoint = (lower limit + upper limit) &divide; 2 for this class.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_p1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>second(ans_p1)</sans>
+        <tans>freq[1]</tans>
+        <testoptions>0.5</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_p1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_p1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Drag this class's red point so its height equals the class frequency (the top of its bar).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_p2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>second(ans_p2)</sans>
+        <tans>freq[2]</tans>
+        <testoptions>0.5</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_p2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_p2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Drag this class's red point so its height equals the class frequency (the top of its bar).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_p3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>second(ans_p3)</sans>
+        <tans>freq[3]</tans>
+        <testoptions>0.5</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_p3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_p3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Drag this class's red point so its height equals the class frequency (the top of its bar).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_p4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>second(ans_p4)</sans>
+        <tans>freq[4]</tans>
+        <testoptions>0.5</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_p4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_p4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Drag this class's red point so its height equals the class frequency (the top of its bar).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_p5</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>second(ans_p5)</sans>
+        <tans>freq[5]</tans>
+        <testoptions>0.5</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_p5-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_p5-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Drag this class's red point so its height equals the class frequency (the top of its bar).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
     <deployedseed>766614922</deployedseed>
     <deployedseed>1281319364</deployedseed>
     <deployedseed>383580754</deployedseed>
     <deployedseed>923967715</deployedseed>
     <deployedseed>1311296890</deployedseed>
-    <deployedseed>556426550</deployedseed>
-    <deployedseed>1531747267</deployedseed>
-    <deployedseed>1939081072</deployedseed>
-    <deployedseed>2117700759</deployedseed>
-    <deployedseed>729233312</deployedseed>
-    <deployedseed>1619122089</deployedseed>
-    <deployedseed>1994054500</deployedseed>
-    <deployedseed>510624084</deployedseed>
-    <deployedseed>1198045525</deployedseed>
-    <deployedseed>1366631605</deployedseed>
-    <deployedseed>2080973129</deployedseed>
-    <deployedseed>503023787</deployedseed>
-    <deployedseed>1358083539</deployedseed>
-    <deployedseed>944009777</deployedseed>
-    <deployedseed>853674895</deployedseed>
-    <deployedseed>241964722</deployedseed>
-    <deployedseed>1445016446</deployedseed>
-    <deployedseed>332378954</deployedseed>
-    <deployedseed>300758212</deployedseed>
-    <deployedseed>26353296</deployedseed>
-    <deployedseed>1620999403</deployedseed>
-    <deployedseed>1160393721</deployedseed>
-    <deployedseed>1414639292</deployedseed>
-    <deployedseed>11149149</deployedseed>
-    <deployedseed>1954601365</deployedseed>
-    <deployedseed>75193014</deployedseed>
-    <deployedseed>1893786818</deployedseed>
-    <deployedseed>1861029816</deployedseed>
-    <deployedseed>318479002</deployedseed>
-    <deployedseed>1889069667</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>Midpoints correct and every polygon point at the right height.</description>
       <testinput>
-        <name>ans_mid</name>
-        <value>ta_mid</value>
+        <name>ans_m1</name>
+        <value>midpts[1]</value>
       </testinput>
       <testinput>
-        <name>ans_poly</name>
-        <value>ta_poly</value>
+        <name>ans_m2</name>
+        <value>midpts[2]</value>
       </testinput>
+      <testinput>
+        <name>ans_m3</name>
+        <value>midpts[3]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m4</name>
+        <value>midpts[4]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m5</name>
+        <value>midpts[5]</value>
+      </testinput>
+      <testinput>
+        <name>ans_p1</name>
+        <value>[midpts[1],freq[1]]</value>
+      </testinput>
+      <testinput>
+        <name>ans_p2</name>
+        <value>[midpts[2],freq[2]]</value>
+      </testinput>
+      <testinput>
+        <name>ans_p3</name>
+        <value>[midpts[3],freq[3]]</value>
+      </testinput>
+      <testinput>
+        <name>ans_p4</name>
+        <value>[midpts[4],freq[4]]</value>
+      </testinput>
+      <testinput>
+        <name>ans_p5</name>
+        <value>[midpts[5],freq[5]]</value>
+      </testinput>
+      <expected>
+        <name>prt_m1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_m1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_m2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_m2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_m3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_m3-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_m4</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_m4-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_m5</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_m5-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_p1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_p1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_p2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_p2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_p3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_p3-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_p4</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_p4-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_p5</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_p5-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Polygon points left at the wrong (rotated) starting heights.</description>
+      <testinput>
+        <name>ans_m1</name>
+        <value>midpts[1]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m2</name>
+        <value>midpts[2]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m3</name>
+        <value>midpts[3]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m4</name>
+        <value>midpts[4]</value>
+      </testinput>
+      <testinput>
+        <name>ans_m5</name>
+        <value>midpts[5]</value>
+      </testinput>
+      <testinput>
+        <name>ans_p1</name>
+        <value>[midpts[1],init_heights[1]]</value>
+      </testinput>
+      <testinput>
+        <name>ans_p2</name>
+        <value>[midpts[2],init_heights[2]]</value>
+      </testinput>
+      <testinput>
+        <name>ans_p3</name>
+        <value>[midpts[3],init_heights[3]]</value>
+      </testinput>
+      <testinput>
+        <name>ans_p4</name>
+        <value>[midpts[4],init_heights[4]]</value>
+      </testinput>
+      <testinput>
+        <name>ans_p5</name>
+        <value>[midpts[5],init_heights[5]]</value>
+      </testinput>
+      <expected>
+        <name>prt_m1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_m1-1-T</expectedanswernote>
+      </expected>
     </qtest>
   </question>
 </quiz>

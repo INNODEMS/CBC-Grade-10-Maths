@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Mean of a dataset</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The marks scored by <strong>{@n@}</strong> students in a test are:</p>
+<p style="background-color:#f9f9f9;padding:12px;border:1px solid #ddd;font-family:monospace;font-size:1.1em;">{@data_str@}</p>
+<p><strong>(a)</strong> Find the total of all the marks, \( \sum x \): [[input:ans1]] [[validation:ans1]] [[feedback:prt_sum]]</p>
+<p><strong>(b)</strong> Hence find the <strong>mean</strong> mark: [[input:ans2]] [[validation:ans2]] [[feedback:prt_mean]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h4>Worked solution</h4>
+<p><strong>(a) Total.</strong> Add all {@n@} marks:</p>
+\[ \sum x = {@sum_str@} = {@Sx@}. \]
+<p><strong>(b) Mean.</strong> Divide the total by the number of values:</p>
+\[ \bar{x} = \frac{\sum x}{n} = \frac{ {@Sx@} }{ {@n@} } = {@me@}. \]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Design backwards: pick n and an integer mean m, build data summing to n*m */
+n: rand(4)+7;              /* 7..10 students */
+m: rand(11)+10;            /* target mean 10..20 (exact) */
+np: floor(n/2);
+raw: makelist(rand(5)+1, i, 1, np);
+deltas: random_permutation(append(raw, -raw, if oddp(n) then [0] else []));
+data: makelist(m + deltas[i], i, 1, n);
+Sx: apply("+", data);      /* = n*m exactly */
+me: m;                     /* the mean */
+med: median(data);         /* a common wrong answer (the median) */
+data_str: sconcat(data[1]);
+for i:2 thru n do data_str: sconcat(data_str, ", ", data[i]);
+sum_str: sconcat(data[1]);
+for i:2 thru n do sum_str: sconcat(sum_str, " + ", data[i]);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>n={@n@}, total={@Sx@}, mean={@me@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Ben (STACK author)</p>
+<p id="concept">Mean of ungrouped data by the simple formula (Sum x)/n; total then mean.</p>
+<p id="reviewer"></p>
+<p id="description">Students find the total of a small raw dataset then the mean. Data is built backwards from a chosen integer mean so the answer is exact. Diagnostics catch giving the total without dividing, and giving the median.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>Sx</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>me</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt_mean</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>me</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mean-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_mean-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>Sx</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mean-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That's the <em>total</em> \(\sum x\), not the mean. Now divide it by the number of values, \(n = {@n@}\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt_mean-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>med</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mean-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <em>middle</em> value (the median). The mean is the total divided by how many values there are.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_mean-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The mean is \( \sum x \div n \): add all the marks, then divide by {@n@}.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_sum</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>Sx</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_sum-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_sum-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Add every mark once. Re-add carefully &mdash; it helps to add them in groups.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>24680</deployedseed>
+    <deployedseed>13579</deployedseed>
+    <deployedseed>86420</deployedseed>
+    <deployedseed>97531</deployedseed>
+    <deployedseed>55221</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Total and mean correct.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Sx</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>me</value>
+      </testinput>
+      <expected>
+        <name>prt_mean</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_mean-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_sum</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_sum-0-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Mean given as the total (forgot to divide).</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Sx</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>Sx</value>
+      </testinput>
+      <expected>
+        <name>prt_mean</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_mean-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_sum</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_sum-0-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

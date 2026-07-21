@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Median of a dataset (odd number of values)</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The heights (in cm) of <strong>{@n@}</strong> tomato seedlings were measured:</p>
+<p style="background-color:#f9f9f9;padding:12px;border:1px solid #ddd;font-family:monospace;font-size:1.1em;">{@data_str@}</p>
+<p>Find the <strong>median</strong> height. [[input:ans1]] [[validation:ans1]] [[feedback:prt_med]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h4>Worked solution</h4>
+<p>First put the heights in order:</p>
+<p style="font-family:monospace;">{@sorted@}</p>
+<p>There are \(n={@n@}\) values (odd), so the median is the \(\frac{n+1}{2}={@pos@}\)-th value:</p>
+\[ \text{Median} = {@med@}\text{ cm}. \]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[n: 2*rand(2)+7;                       /* 7 or 9 */
+data0: makelist(rand(20)+1, i, 1, n);
+sorted: sort(data0);
+med: sorted[(n+1)/2];
+data: random_permutation(data0);
+for tries:1 thru 20 do (if data[(n+1)/2] # med then return(), data: random_permutation(data0));
+unsorted_mid: data[(n+1)/2];
+pos: (n+1)/2;
+mean_val: apply("+", data)/n;
+data_str: sconcat(data[1]);
+for i:2 thru n do data_str: sconcat(data_str, ", ", data[i]);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>n={@n@}, median={@med@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Ben (STACK author)</p>
+<p id="concept">Median of ungrouped data, odd number of values: order then take the middle.</p>
+<p id="reviewer"></p>
+<p id="description">Students find the median of an odd-length list shown unordered. Diagnostics catch not sorting first, giving the position, and giving the mean.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>med</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt_med</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>med</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_med-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_med-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>unsorted_mid</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_med-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Put the heights in order first, then take the middle one &mdash; the middle of the <em>unsorted</em> list is not the median.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt_med-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>pos</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_med-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That's the <em>position</em> of the median (the \((n+1)/2\)-th value), not the value in that position. Read off the actual height there.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt_med-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>mean_val</tans>
+        <testoptions>0.05</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_med-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That's the mean. The median is the middle value once the data is in order.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_med-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Order the {@n@} heights, then the median is the middle one (the \(\frac{n+1}{2}\)-th value).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>13001</deployedseed>
+    <deployedseed>13003</deployedseed>
+    <deployedseed>13005</deployedseed>
+    <deployedseed>13007</deployedseed>
+    <deployedseed>13009</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Median correct.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>med</value>
+      </testinput>
+      <expected>
+        <name>prt_med</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_med-0-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Middle of the unsorted list (didn't sort).</description>
+      <testinput>
+        <name>ans1</name>
+        <value>unsorted_mid</value>
+      </testinput>
+      <expected>
+        <name>prt_med</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_med-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

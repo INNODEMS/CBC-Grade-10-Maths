@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Grouped median vs actual median</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The masses (in kg) of 15 parcels are listed, and also grouped for you with cumulative frequency (CF):</p>
+<p style="background-color:#f9f9f9;padding:10px;border:1px solid #ddd;font-family:monospace;">{@raw_str@}</p>
+<table border="1" style="border-collapse:collapse;text-align:center;min-width:260px;">
+<tr style="background-color:#eee;"><th>Mass (kg)</th><th>Frequency</th><th>CF</th></tr>
+<tr><td>1 &ndash; 5</td><td>{@f[1]@}</td><td>{@cf[1]@}</td></tr><tr><td>6 &ndash; 10</td><td>{@f[2]@}</td><td>{@cf[2]@}</td></tr><tr><td>11 &ndash; 15</td><td>{@f[3]@}</td><td>{@cf[3]@}</td></tr><tr><td>16 &ndash; 20</td><td>{@f[4]@}</td><td>{@cf[4]@}</td></tr><tr><td>21 &ndash; 25</td><td>{@f[5]@}</td><td>{@cf[5]@}</td></tr>
+</table>
+<p><strong>(a)</strong> Using the <em>raw</em> data, find the <strong>actual median</strong>: [[input:ans_a]] [[validation:ans_a]] [[feedback:prt_a]]</p>
+<p><strong>(b)</strong> Using the <em>grouped</em> table, estimate the median by interpolation (\(L\) is the lower class limit), to 2 d.p.: [[input:ans_g]] [[validation:ans_g]] [[feedback:prt_g]]</p>
+<p><strong>(c)</strong> Find the <strong>difference</strong> (grouped median &minus; actual median), to 2 d.p.: [[input:ans_d]] [[validation:ans_d]] [[feedback:prt_d]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h4>Worked solution</h4>
+<p><strong>Actual median:</strong> ordering the 15 values, the 8th is {@amed@} kg.</p>
+<p><strong>Grouped median:</strong> \(\frac{n}{2}={@half@}\); median class {@lowers[medidx]@}&ndash;{@uppers[medidx]@}. With \(L={@L@}\), \(CF={@cfb@}\), \(f={@fm@}\), \(C={@C@}\): grouped median \(\approx {@gmed_disp@}\).</p>
+<p><strong>Difference:</strong> \({@gmed_disp@}-{@amed@}={@diff_disp@}\). Grouping only estimates the median, so it differs from the actual value.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[raw: makelist(rand(25)+1, i, 1, 15);  /* 15 values 1..25 (odd) */
+Nn: 15;
+lowers: [1,6,11,16,21]; uppers: [5,10,15,20,25]; C: 5;
+f: makelist(length(sublist(raw, lambda([x], x>=lowers[j] and x<=uppers[j]))), j, 1, 5);
+Sf: apply("+", f);
+cf: []; run: 0; for j:1 thru 5 do (run: run+f[j], cf: endcons(run, cf));
+half: Sf/2;
+medidx: 1; for j:1 thru 5 do (if cf[j] >= half then (medidx: j, return()));
+L: lowers[medidx]; cfb: if medidx=1 then 0 else cf[medidx-1]; fm: f[medidx];
+gmed: L + ((half - cfb)/fm)*C; gmed_disp: round(gmed*100)/100.0;
+amed: sort(raw)[8];
+diff: gmed - amed; diff_disp: round(diff*100)/100.0;
+gmed_boundary: gmed - 0.5;
+raw_str: sconcat(raw[1]); for i:2 thru Nn do raw_str: sconcat(raw_str, ", ", raw[i]);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>amed={@amed@}, gmed={@gmed_disp@}, diff={@diff_disp@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Ben (STACK author)</p><p id="concept">Grouped median vs actual median: grouping estimates the median.</p><p id="reviewer"></p><p id="description">Students are given raw data and its grouped table; they find the actual median from the raw data, the grouped median by interpolation (lower class limit), and the difference.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans_a</name>
+      <type>algebraic</type>
+      <tans>amed</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_d</name>
+      <type>algebraic</type>
+      <tans>diff</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_g</name>
+      <type>algebraic</type>
+      <tans>gmed</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt_a</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_a</sans>
+        <tans>amed</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_a-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_a-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Order the 15 raw values and take the 8th (middle) one.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_d</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_d</sans>
+        <tans>diff</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_d-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_d-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Subtract: grouped median &minus; actual median.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_g</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_g</sans>
+        <tans>gmed</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_g-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_g-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_g</sans>
+        <tans>gmed_boundary</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_g-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Use the <strong>lower class limit</strong> \(L\) in the formula (as in the book), not the boundary \(L-0.5\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_g-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Median \(=L+\dfrac{\frac{n}{2}-CF}{f}\times C\), with \(L\) the lower class limit of the median class.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>23001</deployedseed>
+    <deployedseed>23003</deployedseed>
+    <deployedseed>23005</deployedseed>
+    <deployedseed>23007</deployedseed>
+    <deployedseed>23009</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Actual median, grouped median and difference correct.</description>
+      <testinput>
+        <name>ans_a</name>
+        <value>amed</value>
+      </testinput>
+      <testinput>
+        <name>ans_d</name>
+        <value>diff_disp</value>
+      </testinput>
+      <testinput>
+        <name>ans_g</name>
+        <value>gmed_disp</value>
+      </testinput>
+      <expected>
+        <name>prt_a</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_a-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_d</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_d-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_g</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_g-0-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Grouped median with boundary convention.</description>
+      <testinput>
+        <name>ans_a</name>
+        <value>amed</value>
+      </testinput>
+      <testinput>
+        <name>ans_d</name>
+        <value>diff_disp</value>
+      </testinput>
+      <testinput>
+        <name>ans_g</name>
+        <value>gmed_boundary</value>
+      </testinput>
+      <expected>
+        <name>prt_g</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_g-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

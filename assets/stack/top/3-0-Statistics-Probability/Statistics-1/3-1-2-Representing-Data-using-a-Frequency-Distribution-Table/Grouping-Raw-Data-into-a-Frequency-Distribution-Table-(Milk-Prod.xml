@@ -5,119 +5,28 @@
       <text>Grouping Raw Data into a Frequency Distribution Table (Milk Production)</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[A dairy farm recorded the amount of milk (in liters) produced by its cows during the month of January.
-
-The milk production values for {@n@} cows are:
-
-\[
-{@data@}
-\]
-
-Group the data into the following frequency distribution table.
-
+      <text><![CDATA[A dairy farm recorded the amount of milk (in litres) produced by its cows during the month of January.
+<p>The milk production values for {@n@} cows are:</p>
+\[ {@data@} \]
+<p>Group the data into the following frequency distribution table. Each value belongs to exactly one interval (endpoints included).</p>
 <table border="1" style="text-align:center">
-
-<tr>
-<th>Milk Produced (liters)</th>
-<th>Frequency</th>
-</tr>
-
-<tr>
-<td>200–239</td>
-<td>[[input:ans1]] [[validation:ans1]]</td>
-</tr>
-
-<tr>
-<td>240–279</td>
-<td>[[input:ans2]] [[validation:ans2]]</td>
-</tr>
-
-<tr>
-<td>280–319</td>
-<td>[[input:ans3]] [[validation:ans3]]</td>
-</tr>
-
-<tr>
-<td>320–359</td>
-<td>[[input:ans4]] [[validation:ans4]]</td>
-</tr>
-
-</table>
-
-<br>]]></text>
+<tr><th>Milk Produced (litres)</th><th>Frequency</th></tr>
+<tr><td>200&#8211;239</td><td>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</td></tr>
+<tr><td>240&#8211;279</td><td>[[input:ans2]] [[validation:ans2]] [[feedback:prt2]]</td></tr>
+<tr><td>280&#8211;319</td><td>[[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</td></tr>
+<tr><td>320&#8211;359</td><td>[[input:ans4]] [[validation:ans4]] [[feedback:prt4]]</td></tr>
+</table>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[The raw data represent the milk production (in liters) of {@n@} cows during January.
-
-\[
-{@data@}
-\]
-
-We group the values into the given intervals.
-
-### Interval 200–239
-
-Values in this range:
-
-\[
-{sublist(data,lambda([x], x>=200 and x<=239))}
-\]
-
-Frequency:
-
-\[
-{@f1@}
-\]
-
-### Interval 240–279
-
-Values in this range:
-
-\[
-{sublist(data,lambda([x], x>=240 and x<=279))}
-\]
-
-Frequency:
-
-\[
-{@f2@}
-\]
-
-### Interval 280–319
-
-Values in this range:
-
-\[
-{sublist(data,lambda([x], x>=280 and x<=319))}
-\]
-
-Frequency:
-
-\[
-{@f3@}
-\]
-
-### Interval 320–359
-
-Values in this range:
-
-\[
-{sublist(data,lambda([x], x>=320 and x<=359))}
-\]
-
-Frequency:
-
-\[
-{@f4@}
-\]
-
-The frequencies add up to the total number of cows:
-
-\[
-{@f1@}+{@f2@}+{@f3@}+{@f4@} = {@n@}
-\]
-
-Thus the completed frequency distribution table is correct.]]></text>
+      <text><![CDATA[<h4>Worked solution</h4>
+<p>Group the {@n@} values by counting how many fall in each interval (endpoints included).</p>
+<ul>
+<li><strong>200&#8211;239:</strong> \( {@sublist(data,lambda([x], x>=200 and x<=239))@} \) &rarr; frequency {@f1@}.</li>
+<li><strong>240&#8211;279:</strong> \( {@sublist(data,lambda([x], x>=240 and x<=279))@} \) &rarr; frequency {@f2@}.</li>
+<li><strong>280&#8211;319:</strong> \( {@sublist(data,lambda([x], x>=280 and x<=319))@} \) &rarr; frequency {@f3@}.</li>
+<li><strong>320&#8211;359:</strong> \( {@sublist(data,lambda([x], x>=320 and x<=359))@} \) &rarr; frequency {@f4@}.</li>
+</ul>
+<p>The frequencies add up to the total number of cows: {@f1@}+{@f2@}+{@f3@}+{@f4@} = {@n@}.</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -129,24 +38,12 @@ Thus the completed frequency distribution table is correct.]]></text>
     <questionvariables>
       <text><![CDATA[/* Number of cows */
 n : rand(6) + 12;
-
-/* Milk production values (liters) */
+/* Milk production values (litres), all within 200..359 */
 data : makelist(rand(160)+200,i,1,n);
-
 /* Class intervals */
-c1_low : 200$
-c1_high : 239$
-
-c2_low : 240$
-c2_high : 279$
-
-c3_low : 280$
-c3_high : 319$
-
-c4_low : 320$
-c4_high : 359$
-
-/* Frequency calculations */
+c1_low:200$ c1_high:239$ c2_low:240$ c2_high:279$
+c3_low:280$ c3_high:319$ c4_low:320$ c4_high:359$
+/* Frequencies */
 f1 : length(sublist(data,lambda([x], x>=c1_low and x<=c1_high)));
 f2 : length(sublist(data,lambda([x], x>=c2_low and x<=c2_high)));
 f3 : length(sublist(data,lambda([x], x>=c3_low and x<=c3_high)));
@@ -156,31 +53,13 @@ f4 : length(sublist(data,lambda([x], x>=c4_low and x<=c4_high)));]]></text>
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>This question assesses students' ability to group raw data into a frequency distribution table.
-
-Randomisation:
-
-* The number of cows `n` is randomly generated between 12 and 18.
-* A list `data` contains randomly generated milk production values between 200 and 359 liters.
-* Students must classify the values into four class intervals:
-
-  * 200–239
-  * 240–279
-  * 280–319
-  * 320–359
-
-Frequencies are automatically computed using Maxima by counting how many values in the list fall within each interval.
-
-Teacher answers:
-ans1 = f1
-ans2 = f2
-ans3 = f3
-ans4 = f4
-
-The sum of all frequencies equals the number of cows `n`.</text>
+      <text>Frequencies: {@f1@}, {@f2@}, {@f3@}, {@f4@} (n = {@n@}).</text>
     </questionnote>
     <questiondescription format="html">
-      <text/>
+      <text><![CDATA[<p id="author">Daniel Murunga</p>
+<p id="concept">Grouped frequency table: counting raw values into fixed class intervals of width 40.</p>
+<p id="reviewer">Ben (STACK audit)</p>
+<p id="description">Students group randomised raw milk-production data into four given class intervals. Each interval is marked separately (partial credit), with diagnostic feedback prompting a recount.</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -208,7 +87,7 @@ The sum of all frequencies equals the number of cows `n`.</text>
       <name>ans1</name>
       <type>algebraic</type>
       <tans>f1</tans>
-      <boxsize>15</boxsize>
+      <boxsize>6</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -218,15 +97,15 @@ The sum of all frequencies equals the number of cows `n`.</text>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
       <name>ans2</name>
       <type>algebraic</type>
       <tans>f2</tans>
-      <boxsize>15</boxsize>
+      <boxsize>6</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -236,15 +115,15 @@ The sum of all frequencies equals the number of cows `n`.</text>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
       <name>ans3</name>
       <type>algebraic</type>
       <tans>f3</tans>
-      <boxsize>15</boxsize>
+      <boxsize>6</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -254,15 +133,15 @@ The sum of all frequencies equals the number of cows `n`.</text>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
       <name>ans4</name>
       <type>algebraic</type>
       <tans>f4</tans>
-      <boxsize>15</boxsize>
+      <boxsize>6</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -272,9 +151,238 @@ The sum of all frequencies equals the number of cows `n`.</text>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>f1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Recount how many values fall between 200 and 239 litres (both endpoints included). Every value belongs to exactly one interval.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>f2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Recount how many values fall between 240 and 279 litres (both endpoints included). Every value belongs to exactly one interval.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>f3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Recount how many values fall between 280 and 319 litres (both endpoints included). Every value belongs to exactly one interval.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>f4</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Recount how many values fall between 320 and 359 litres (both endpoints included). Every value belongs to exactly one interval.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>660633</deployedseed>
+    <deployedseed>121212</deployedseed>
+    <deployedseed>247613</deployedseed>
+    <deployedseed>883051</deployedseed>
+    <deployedseed>519274</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>All four frequencies correct.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>f1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>f2</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>f3</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>f4</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt4</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt4-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>All four wrong (one too many): fires each F branch.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>f1+1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>f2+1</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>f3+1</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>f4+1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-1-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt2-1-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt3-1-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt4</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt4-1-F</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>

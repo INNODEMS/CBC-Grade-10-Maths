@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Data-driven recommendation: comparing two lunch queues</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A school is comparing two lunch queues to decide which to keep. The waiting times (in minutes) of 8 pupils at each queue were recorded:</p>
+<p><strong>Queue A:</strong> <span style="font-family:monospace;">{@A_str@}</span></p>
+<p><strong>Queue B:</strong> <span style="font-family:monospace;">{@B_str@}</span></p>
+<p><strong>(a)</strong> Mean waiting time for Queue A (to 2 d.p.): [[input:ans_ma]] [[validation:ans_ma]] [[feedback:prt_ma]]</p>
+<p><strong>(b)</strong> Mean waiting time for Queue B (to 2 d.p.): [[input:ans_mb]] [[validation:ans_mb]] [[feedback:prt_mb]]</p>
+<p><strong>(c)</strong> Range for Queue A: [[input:ans_ra]] [[validation:ans_ra]] [[feedback:prt_ra]]</p>
+<p><strong>(d)</strong> Range for Queue B: [[input:ans_rb]] [[validation:ans_rb]] [[feedback:prt_rb]]</p>
+<p><strong>(e)</strong> Which queue would you recommend the school keep, and why?</p>
+<p>[[input:ans_e]] [[validation:ans_e]] [[feedback:prt_e]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h4>Worked solution</h4>
+<p>Mean of A \(={@meanA_disp@}\) min, mean of B \(={@meanB_disp@}\) min. Range of A \(={@rangeA_v@}\), range of B \(={@rangeB_v@}\).</p>
+<p>Queue <strong>{@better@}</strong> has both the <em>lower mean</em> waiting time and the <em>smaller range</em>, so it is faster on average and more consistent. Recommend Queue {@better@}.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[g0: rand(3)+3;
+good: [g0, g0+1, g0+1, g0+2, g0+2, g0+3, g0+4, g0+5];   /* tight, range 5 */
+oe: rand(4)+9;
+bad: [g0, g0+1, g0+2, g0+3, g0+4, g0+5, g0+6, g0+6+oe]; /* outlier, big range */
+goodIsA: rand(2);
+A_data: if goodIsA=1 then good else bad;
+B_data: if goodIsA=1 then bad else good;
+better: if goodIsA=1 then "A" else "B";
+worse:  if goodIsA=1 then "B" else "A";
+meanA_v: apply("+",A_data)/8; meanA_disp: round(meanA_v*100)/100.0;
+meanB_v: apply("+",B_data)/8; meanB_disp: round(meanB_v*100)/100.0;
+rangeA_v: lmax(A_data)-lmin(A_data);
+rangeB_v: lmax(B_data)-lmin(B_data);
+rangeA_sum: lmax(A_data)+lmin(A_data); rangeA_high: lmax(A_data);
+rangeB_sum: lmax(B_data)+lmin(B_data); rangeB_high: lmax(B_data);
+A_str: sconcat(A_data[1]); for i:2 thru 8 do A_str: sconcat(A_str, ", ", A_data[i]);
+B_str: sconcat(B_data[1]); for i:2 thru 8 do B_str: sconcat(B_str, ", ", B_data[i]);
+opts_e: [
+ [1, true, sconcat("Queue ", better, ", because it has the lower mean waiting time and a smaller range (more consistent).")],
+ [2, false, sconcat("Queue ", worse, ", because a bigger range means more choice.")],
+ [3, false, sconcat("Queue ", worse, ", because its mean is higher.")],
+ [4, false, "It does not matter - the two means are close enough."]
+];
+ta_e: random_permutation(opts_e);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>better={@better@}, meanA={@meanA_disp@}, meanB={@meanB_disp@}, rA={@rangeA_v@}, rB={@rangeB_v@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Ben (STACK author)</p><p id="concept">Data-driven recommendation: compare two options by mean and range, then recommend with justification.</p><p id="reviewer"></p><p id="description">Mirrors the Supermarket A/B example. Students compute the mean and range of two lunch queues then recommend one via a dropbox that rewards the justification (lower mean AND smaller range = more consistent). Which queue is better is randomised.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans_e</name>
+      <type>dropdown</type>
+      <tans>ta_e</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_ma</name>
+      <type>algebraic</type>
+      <tans>meanA_v</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_mb</name>
+      <type>algebraic</type>
+      <tans>meanB_v</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_ra</name>
+      <type>algebraic</type>
+      <tans>rangeA_v</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_rb</name>
+      <type>algebraic</type>
+      <tans>rangeB_v</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt_e</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_e</sans>
+        <tans>mcq_correct(ta_e)[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_e-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_e-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_e</sans>
+        <tans>3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_e-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>For <em>waiting time</em>, a lower mean is better &mdash; so the queue with the higher mean is the worse choice.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt_e-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_e</sans>
+        <tans>2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_e-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>A bigger range means the times are more spread out (less consistent), which is worse for waiting, not better.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_e-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Compare the means (lower is better for waiting time) and the ranges (smaller is more consistent).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_ma</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_ma</sans>
+        <tans>meanA_v</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_ma-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_ma-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Add the 8 waiting times and divide by 8. Round to 2 d.p.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_mb</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_mb</sans>
+        <tans>meanB_v</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mb-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_mb-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Add the 8 waiting times and divide by 8. Round to 2 d.p.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_ra</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_ra</sans>
+        <tans>rangeA_v</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_ra-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_ra-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_ra</sans>
+        <tans>rangeA_sum</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_ra-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Range is a <em>difference</em>: highest &minus; lowest, not their sum.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt_ra-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_ra</sans>
+        <tans>rangeA_high</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_ra-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That's just the highest value. Range = highest &minus; lowest.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_ra-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Range = highest value &minus; lowest value.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_rb</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_rb</sans>
+        <tans>rangeB_v</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_rb-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_rb-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_rb</sans>
+        <tans>rangeB_sum</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_rb-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Range is a <em>difference</em>: highest &minus; lowest, not their sum.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt_rb-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_rb</sans>
+        <tans>rangeB_high</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_rb-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That's just the highest value. Range = highest &minus; lowest.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_rb-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Range = highest value &minus; lowest value.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>31001</deployedseed>
+    <deployedseed>31003</deployedseed>
+    <deployedseed>31005</deployedseed>
+    <deployedseed>31007</deployedseed>
+    <deployedseed>31009</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>All correct.</description>
+      <testinput>
+        <name>ans_e</name>
+        <value>mcq_correct(ta_e)[1]</value>
+      </testinput>
+      <testinput>
+        <name>ans_ma</name>
+        <value>meanA_disp</value>
+      </testinput>
+      <testinput>
+        <name>ans_mb</name>
+        <value>meanB_disp</value>
+      </testinput>
+      <testinput>
+        <name>ans_ra</name>
+        <value>rangeA_v</value>
+      </testinput>
+      <testinput>
+        <name>ans_rb</name>
+        <value>rangeB_v</value>
+      </testinput>
+      <expected>
+        <name>prt_e</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_e-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_ma</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_ma-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_ra</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_ra-0-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Range as sum; recommendation by higher mean.</description>
+      <testinput>
+        <name>ans_e</name>
+        <value>3</value>
+      </testinput>
+      <testinput>
+        <name>ans_ma</name>
+        <value>meanA_disp</value>
+      </testinput>
+      <testinput>
+        <name>ans_mb</name>
+        <value>meanB_disp</value>
+      </testinput>
+      <testinput>
+        <name>ans_ra</name>
+        <value>rangeA_sum</value>
+      </testinput>
+      <testinput>
+        <name>ans_rb</name>
+        <value>rangeB_v</value>
+      </testinput>
+      <expected>
+        <name>prt_e</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_e-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_ra</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_ra-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

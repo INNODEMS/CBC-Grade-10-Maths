@@ -5,51 +5,104 @@
       <text>Calculating the Area of a Wheel Region</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>A wheel consists of a circular outer rim and a circular inner hub, both having the same centre. The outer radius of the wheel is \({@R@}\,\text{cm}\), and the radius of the inner hub is \({@r@}\,\text{cm}\). Using \(\pi = 3.142\), determine the area of the wheel region.</p>
-<p>\(\text{The area of the wheel region}=\)[[input:ans1]]\(\,\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+      <text><![CDATA[<p>A wheel consists of a circular outer rim and a circular inner hub, both sharing the same centre \(O\), as shown below. The outer radius of the wheel is \({@R@}\,\text{cm}\), and the radius of the inner hub is \({@r@}\,\text{cm}\).</p>
+
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid, {
+        boundingbox: [-7, 7, 7, -7],
+        axis: false,
+        showNavigation: false,
+        showCopyright: false,
+        keepAspectRatio: true
+    });
+
+    // Centre point, labeled so students see both radii originate here
+    var O = board.create('point', [0, 0], {
+        fixed: true,
+        visible: true,
+        name: 'O',
+        size: 2,
+        label: {offset: [-14, -12]}
+    });
+
+    // Outer circle (rim) drawn first, fully shaded — represents the wheel material
+    var outer = board.create('circle', [O, 5], {
+        strokeWidth: 2,
+        strokeColor: 'black',
+        fillColor: '#f5c518',
+        fillOpacity: 1
+    });
+
+    // Inner circle (hub) drawn on top, filled white to "cut out" the centre
+    // What remains shaded is the annular rim region only
+    var inner = board.create('circle', [O, 3], {
+        strokeWidth: 2,
+        strokeColor: 'black',
+        fillColor: 'white',
+        fillOpacity: 1
+    });
+
+    // Points marking the two radii
+    var P_inner = board.create('point', [3, 0], {size: 2, fixed: true, visible: true, name: ''});
+    var P_outer = board.create('point', [-4, 3], {size: 2, fixed: true, visible: true, name: ''});
+
+    // Dashed radius segments, drawn last so they sit above the fills
+    board.create('segment', [O, P_inner], {dash: 2, strokeColor: 'black', strokeWidth: 2});
+    board.create('segment', [O, P_outer], {dash: 2, strokeColor: 'black', strokeWidth: 2});
+
+    // Radius labels
+    board.create('text', [1.2, -0.9, '{#r#} cm']);
+    board.create('text', [-2.6, 0.9, '{#R#} cm']);
+[[/jsxgraph]]
+
+<p>Using \(\pi = 3.142\), determine the area of the wheel region (the shaded rim, excluding the hub). Give your answer correct to \(3\,\text{decimal places}\).</p>
+
+<p>\(\text{Area of the wheel region}=\)[[input:ans1]]\(\,\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<p>The outer radius of the wheel \(={@R@}\,\text{cm}\).<br>
-Inner hub radius \(={@r@}\,\text{cm}\)
-</p>
-<p>Therefore,<br>
-\(
+      <text><![CDATA[<p>The outer radius (rim) is \(R={@R@}\,\text{cm}\).<br>
+The inner radius (hub) is \(r={@r@}\,\text{cm}\).</p>
+
+<p>The area of the wheel region is the area of the outer circle minus the area of the inner circle:</p>
+
+<p>
+\[
 \begin{align}
-A&=\pi(R^2-r^2)\\
-&=3.142({@R@}^2-{@r@}^2) \\
-&=3.142({@R_1@}-{@r_2@}) \\
-&=3.12 \times {@Radius_1@} \\
+A &= \pi(R^2-r^2)\\
+&=3.142\left({@R@}^2-{@r@}^2\right) \\
+&=3.142\left({@R_sq@}-{@r_sq@}\right) \\
+&=3.142 \times {@diff_sq@} \\
 &={@A@}\,\text{cm}^2
 \end{align}
-
-\)
+\]
 </p>
-<p>Therefore,<br>
-\(\text{The area of the wheel region}={@A@}\,\text{cm}^2\)
-</p>]]></text>
+
+<p>Therefore, the area of the wheel region \(\approx {@significantfigures(A,3)@}\,\text{cm}^2\) (to 3 s.f.).</p>]]></text>
     </generalfeedback>
     <defaultgrade>15</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Randomize inner radius */
-r: rand_with_step(7,70 , 7);
+      <text>/* Randomize inner radius (hub) */
+r: rand_with_step(7, 70, 7);
 
-/* Randomize outer radius greater than inner radius */
-R: r + rand_with_step(7,140 , 7);
+/* Randomize outer radius (rim), guaranteed greater than r */
+R: r + rand_with_step(7, 140, 7);
 
-/* Define pi as 22/7 */
-Pi: 3.142;
+/* Use pi = 3.142 as specified */
+Pi_val: 3.142;
 
-/* Area of the annulus */
-R_1:R^2;
-r_2:r^2;
-Radius_1:R_1-r_2;
-A: Pi * (R^2 - r^2);</text>
+/* Intermediate working values, named to match what they represent */
+R_sq: R^2;
+r_sq: r^2;
+diff_sq: R_sq - r_sq;
+
+/* Final area, to be matched to 3 significant figures in the PRT */
+A: Pi_val * diff_sq;</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -113,10 +166,10 @@ A: Pi * (R^2 - r^2);</text>
       <node>
         <name>0</name>
         <description>Checks for the correct area of the wheel region.</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>A</tans>
-        <testoptions/>
+        <testoptions>0.001</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>

@@ -43,7 +43,7 @@
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>/* 1. Generate Random Components for Vector a */
@@ -65,9 +65,11 @@ k2: rand_with_step(2, 5, 1);
 
 /* Part (a): Addition */
 ta1: vec_a + vec_b;
+wrong1: vec_a - vec_b;
 
 /* Part (b): Linear Combination (k1*a - k2*b) */
 ta2: k1*vec_a - k2*vec_b;
+wrong2: k1*vec_a + k2*vec_b;
 
 /* 5. Intermediate steps for the Worked Solution */
 /* We define these to display the multiplication steps clearly in feedback */
@@ -172,8 +174,33 @@ step1_b: k2 * vec_b;</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>wrong1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you subtracted \(\mathbf{@vec_b@}\) from \(\mathbf{@vec_a@}\) instead of adding them. Remember: vector addition is component-wise addition, add the corresponding entries, don't subtract them.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -206,8 +233,33 @@ step1_b: k2 * vec_b;</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>wrong2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you added \(\mathbf{@k1@}{@vec_a@}\) to \(\mathbf{@k2@}{@vec_b@}\) instead of subtracting them. Remember: vector subtraction is component-wise,subtract the corresponding entries, don't add them.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -231,7 +283,6 @@ step1_b: k2 * vec_b;</text>
     <deployedseed>1580163834</deployedseed>
     <deployedseed>408219878</deployedseed>
     <deployedseed>416989048</deployedseed>
-    <deployedseed>1924980549</deployedseed>
     <deployedseed>33210280</deployedseed>
     <deployedseed>1215382149</deployedseed>
     <deployedseed>1345541290</deployedseed>
@@ -253,5 +304,14 @@ step1_b: k2 * vec_b;</text>
     <deployedseed>786107690</deployedseed>
     <deployedseed>1728462728</deployedseed>
     <deployedseed>1821199061</deployedseed>
+    <deployedseed>720315999</deployedseed>
+    <deployedseed>1774937334</deployedseed>
+    <deployedseed>1163608470</deployedseed>
+    <deployedseed>1399192209</deployedseed>
+    <deployedseed>689918170</deployedseed>
+    <deployedseed>1110058942</deployedseed>
+    <deployedseed>1835539168</deployedseed>
+    <deployedseed>1199868967</deployedseed>
+    <deployedseed>1634037814</deployedseed>
   </question>
 </quiz>

@@ -5,142 +5,147 @@
       <text>Calculating the area of a sector</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Ekadeli opened a door whose width is {@r@} \(\text{m}\).
-The door is fixed at a point O. As the door opened, it swept the flow through an angle of {@theta_deg@}\(^\circ\). 
-The figure below shows the part of the floor through which the door swept. Calculate the area through which the door swept. (Use \(\pi=\frac{22}{7}\))</p>
+      <text><![CDATA[<p>Ekadeli opened a door of width \({@r@}\,\text{m}\), fixed at a hinge point \(O\). As the door swung open, it swept through an angle of \({@theta_deg@}^\circ\), tracing out the shaded region of floor shown below.</p>
+
+<p>Calculate the area of the floor swept by the door. Use \(\pi=\dfrac{22}{7}\), and give your answer correct to \(2\) decimal places.</p>
+
 [[jsxgraph]]
       var board = JXG.JSXGraph.initBoard(divid, {
-        boundingbox: [-10, 15, 15, -10],
+        boundingbox: [-2, 8, 10, -2],
         axis: false,
         showCopyright: false,
-        showNavigation: false
+        showNavigation: false,
+        keepAspectRatio: true
       });
-    
-      // Center point O
+
+      // Centre point O (the door's hinge)
       var O = board.create('point', [0, 0], {
         name: 'O',
         fixed: true,
-        size: 0,
+        size: 2,
         showInfobox: false,
-        visible: false,
-        label: { visible: false }
+        label: { offset: [-14, -12], fontSize: 16 }
       });
-       var pointO = board.create('point', [0, 0], {
-        name: 'O',
-        visible: false,
-        label: {
-        visible: true,
-        offset: [-10, -10],
-        fontSize: 16
-        }
-     });
-      
 
-    
-      // Angle BOA = 60 degrees
       var angleDeg = {#theta_deg#};
       var angleRad = angleDeg * Math.PI / 180;
-      var radius = {#r#}; // 7 cm
-    
-      // Points A and B on the circle with radius 7
-      var A = board.create('point', [radius, -1], {
+
+      // Fixed DISPLAY radius (independent of the true randomized r)
+      // This guarantees the sector always fills the board nicely,
+      // regardless of whether the real r is 1.0 m or 1.9 m.
+      var displayRadius = 6;
+
+      // Point A: door's closed position (along the horizontal)
+      var A = board.create('point', [displayRadius, 0], {
         name: 'A',
         fixed: true,
         size: 0,
-        showInfobox: false,
         visible: false,
         label: { visible: false }
       });
-    
-      var B = board.create('point', [radius * Math.cos(angleRad), radius * Math.sin(angleRad)], {
+
+      // Point B: door's open position, at the true swept angle
+      var B = board.create('point', [
+        displayRadius * Math.cos(angleRad),
+        displayRadius * Math.sin(angleRad)
+      ], {
         name: 'B',
         fixed: true,
         size: 0,
-        showInfobox: false,
         visible: false,
         label: { visible: false }
       });
-    
-     
-    
-      // Draw the arc indicating angle BOA
-      var angleArc = board.create('sector', [O, A, B], {
-        radius: 1.5,
-        fillColor: 'lightgray',
+
+      // Shaded sector representing the swept floor area
+      board.create('sector', [O, A, B], {
+        fillColor: '#e8e8e8',
+        fillOpacity: 1,
+        strokeColor: 'blue',
+        strokeWidth: 2,
+        withLabel: false
+      });
+
+      // Small arc near O to mark the angle itself
+      board.create('sector', [O, A, B], {
+        radius: 1.2,
+        fillColor: 'none',
         strokeColor: 'blue',
         strokeWidth: 1,
         withLabel: false
       });
-    
-      // Add angle label
+
+      // Angle label, positioned along the bisector of the swept angle
       board.create('text', [
-        1, 0.3,
-        function() {
-          return '{#theta_deg#}°';
-        }
+        function() { return 1.8 * Math.cos(angleRad / 2); },
+        function() { return 1.8 * Math.sin(angleRad / 2); },
+        function() { return angleDeg + '°'; }
       ], { fontSize: 14 });
-    
-      // Add label for length AO = 7 cm
+
+      // Label for the door width (radius), placed along OB, the open edge
       board.create('text', [
-        function() { return (O.X() + A.X()) / 2.7; },
-        function() { return (O.Y() + A.Y()) / 2.7 - 1; },
-        '{#r#} m'
-      ], { fontSize: 14 });   
- [[/jsxgraph]]
-<p>\(\text{Area through which the door swept is}\) [[input:ans1]] \(m^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+        function() { return displayRadius * 0.55 * Math.cos(angleRad); },
+        function() { return displayRadius * 0.55 * Math.sin(angleRad) + 0.5; },
+        function() { return {#r#} + ' m'; }
+      ], { fontSize: 14 });
+[[/jsxgraph]]
+
+<p>\(\text{Area through which the door swept}=\)[[input:ans1]]\(\,\text{m}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<p>We’re given:</p>
-<p><ul><li>The door acts like a radius of a circle, sweeping through an angle of {@theta_deg@}\(^\circ\)</li>
-<li>\(\text{Radius r}={@r@}\, \text{m}\)</li>
-<li>\(\text{Angle}\,\theta={@theta_deg@}\)</li>
-<li>\(\pi={@pi_val@}\)</li></ul></p>
-<p>The area swept is a sector of a circle, and the formula for the area of a sector is:</p>
-<p>\(\text{Area}=\frac{\theta}{360} \times {@pi_val@} r^2\)</p>
-<p>Substitute the values:</p>
-<p>\(\begin{align} \text{Area} &=\frac{{@theta_deg@}}{360} \times {@pi_val@} \times  ({@r@})^2\\
-&={@ theta_frac@} \times {@pi_val@} \times  {@r_square@} \\
-&= {@ theta_frac@} \times {@solution@}\\
-&={@area@}\,\text{m}^2
+      <text><![CDATA[<p>We are given:</p>
+<ul>
+  <li>Radius (door width): \(r={@r@}\,\text{m}\)</li>
+  <li>Angle swept: \(\theta={@theta_deg@}^\circ\)</li>
+  <li>\(\pi={@pi_val@}\)</li>
+</ul>
 
+<p>The swept floor area is a sector of a circle. The area of a sector is:</p>
+<p>\(\text{Area}=\dfrac{\theta}{360}\times \pi r^2\)</p>
 
+<p>Substituting the values:</p>
+<p>
+\(
+\begin{align}
+\text{Area} &=\dfrac{{@theta_deg@}}{360} \times {@pi_val@} \times ({@r@})^2\\
+&=\dfrac{{@theta_deg@}}{360} \times {@pi_val@} \times {@r_square@} \\
+&= {@area@}\,\text{m}^2  \\
+&= {@Area@}\,\text{m}^2 
+\end{align}
+\)
+</p>
 
-\end{align}\)</p>
-<p>Therefore, </p>
-<p>Area through which the door swept is {@Area@}\(\text{m}^2\)</p>]]></text>
+<p>Rounded to \(2\) decimal places:</p>
+<p>\(\text{Area through which the door swept}\approx {@Area@}\,\text{m}^2\)</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Randomize radius r in the range [1.0, 2.0) */
-r : rand(100)/10 + 1.0;
+      <text>/* Randomize radius r in metres, range [1.0, 2.0), to 1 decimal place */
+r: (rand(10) + 10) / 10;
 
-/* Randomize angle θ in degrees in the range [20°, 90°) */
- theta_deg: rand(60) + 25;
+/* Randomize angle theta in degrees, range [25, 85] */
+theta_deg: rand(60) + 25;
 
-/* Convert θ from degrees to fraction of a full circle */
+/* Fraction of full turn swept */
 theta_frac: theta_deg / 360;
 
-/* Use pi as 22/7 instead of 3.1416 */
-pi_val : 22/7;
-r_square:r^2;
+/* Use pi = 22/7 as specified in the question */
+pi_val: 22/7;
 
-solution:pi_val*r_square;
+r_square: r^2;
 
-/* Compute area of the sector: A = (θ/360) × π × r² */
-area : theta_frac * pi_val * r^2;
-Area:decimalplaces(area,1);
+/* Area of the sector: A = (theta/360) * pi * r^2 */
+area: theta_frac * pi_val * r_square;
+Area: float(decimalplaces(area, 2));
 
-
-/*Mistake 1  Misapplying the Arc Length Formula Instead of Area of Sector*/
-
-Area_1:theta_frac*2*pi_val*r;
-Area1:decimalplaces(Area_1,1);</text>
+/* Distractor: mistake of using arc length formula instead of sector area */
+area_arclength_mistake: theta_frac * 2 * pi_val * r;
+Area_arclength_mistake: float(decimalplaces(area_arclength_mistake, 2));</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -213,7 +218,7 @@ The formula for the area of a sector is:  \(\text{Area}=\frac{\theta}{360} \time
         <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
         <tans>Area</tans>
-        <testoptions>1</testoptions>
+        <testoptions>2</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -237,8 +242,8 @@ The formula for the area of a sector is:  \(\text{Area}=\frac{\theta}{360} \time
         <description>Checks for wrong use of the formular.</description>
         <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
-        <tans>Area1</tans>
-        <testoptions>1</testoptions>
+        <tans>Area_arclength_mistake</tans>
+        <testoptions>2</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0.1</truescore>

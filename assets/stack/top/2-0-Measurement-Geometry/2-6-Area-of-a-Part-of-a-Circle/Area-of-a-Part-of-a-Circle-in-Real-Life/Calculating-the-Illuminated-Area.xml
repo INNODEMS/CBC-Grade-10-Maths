@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating the Illuminated Area</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A night guard at a warehouse in Nairobi's Industrial Area stands at a fixed point \(O\) and sweeps a searchlight across the compound. The beam reaches a distance of \({@r@}\,\text{m}\) and sweeps through an angle of \({@theta@}^\circ\) as the guard turns.</p>
+
+<p>Calculate the area of the ground illuminated by the searchlight, correct to \(2\,\text{decimal places}\). (Use \(\pi=\frac{22}{7}\))</p>
+
+[[jsxgraph]]
+var brd = JXG.JSXGraph.initBoard('jxgbox', {
+        boundingbox: [-10, 10, 10, -3],
+        axis: false,
+        showNavigation: false,
+        showCopyright: false,
+        keepAspectRatio: true
+    });
+
+    // O: the guard's fixed position
+    var O = brd.create('point', [0, -1], {
+        name: 'O',
+        visible: true,
+        size: 2,
+        fixed: true,
+        label: { offset: [-16, -12], fontSize: 16 }
+    });
+
+    // Fixed DISPLAY radius, independent of the true r (which is in metres)
+    var displayRadius = 8;
+
+    var angleDeg = {#theta#};
+    var angleRad = angleDeg * Math.PI / 180;
+
+    // Start edge of the sweep (along the ground, roughly horizontal)
+    var P = brd.create('point', [O.X() + displayRadius, O.Y()], {visible: false});
+    // End edge of the sweep, at the true swept angle
+    var Q = brd.create('point', [
+        O.X() + displayRadius * Math.cos(angleRad),
+        O.Y() + displayRadius * Math.sin(angleRad)
+    ], {visible: false});
+
+    // Illuminated sector (searchlight beam)
+    brd.create('sector', [O, P, Q], {
+        fillColor: '#ffe066',
+        fillOpacity: 0.6,
+        strokeColor: '#e8a500',
+        strokeWidth: 2
+    });
+
+    // Guard's edges of the beam, drawn clearly
+    brd.create('segment', [O, P], {strokeColor: '#e8a500', strokeWidth: 2});
+    brd.create('segment', [O, Q], {strokeColor: '#e8a500', strokeWidth: 2});
+
+    // Angle marker
+    brd.create('angle', [P, O, Q], {
+        radius: 1.5,
+        name: function() { return angleDeg + '°'; }
+    });
+
+    // Beam-reach label, along the bisector of the angle
+    brd.create('text', [
+        function() { return O.X() + (displayRadius * 0.55) * Math.cos(angleRad / 2); },
+        function() { return O.Y() + (displayRadius * 0.55) * Math.sin(angleRad / 2) + 0.5; },
+        function() { return {#r#} + ' m'; }
+    ], { fontSize: 14 });
+
+    // Small torch/guard icon label near O
+    brd.create('text', [O.X() - 2.2, O.Y() + 0.7, 'Guard']);
+[[/jsxgraph]]
+
+<p>\(\text{Area of ground illuminated}=\)[[input:ans1]]\(\,\text{m}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>The illuminated ground forms a sector of a circle, since it is bounded by the two edges of the beam (two radii) and the arc traced as the guard turns. From the problem:</p>
+<ul>
+    <li>Angle swept: \({@theta@}^\circ\)</li>
+    <li>Beam reach (radius): \(r={@r@}\,\text{m}\)</li>
+</ul>
+
+<p><strong>Step 1: Write the formula for the area of a sector.</strong></p>
+<p>\[ A = \frac{\theta}{360} \times \pi r^2 \]</p>
+
+<p><strong>Step 2: Substitute the values and compute the area.</strong></p>
+<p>
+\(
+\begin{align}
+A &= \frac{{@theta@}}{360} \times \frac{22}{7} \times ({@r@})^2 \\
+&= \frac{{@theta@}}{360} \times \frac{22}{7} \times {@r_sq@} \\
+&= {@A@}\,\text{m}^2
+\end{align}
+\)
+</p>
+
+<p>Rounded to \(2\) decimal places:</p>
+<p>\(\text{Area of ground illuminated} \approx {@A_2dp@}\,\text{m}^2\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize the angle swept by the searchlight beam, 30° to 120°, steps of 10° */
+theta: rand_with_step(30, 120, 10);
+
+/* Randomize the beam's reach (radius) in metres, steps of 5 */
+r: rand_with_step(10, 40, 5);
+
+/* pi = 22/7 as used throughout this topic */
+Pi_val: 22/7;
+
+r_sq: r^2;
+
+/* Area of the sector (ground illuminated) */
+A: (theta/360) * Pi_val * r_sq;
+A_2dp: float(decimalplaces(A, 2));</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\({@theta@}\)</p>
+<p>\({@r@}\)</p>
+<p>\({@A_2dp@}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>A_2dp</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumDecPlaces</answertest>
+        <sans>ans1</sans>
+        <tans>A_2dp</tans>
+        <testoptions>2</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1256008763</deployedseed>
+    <deployedseed>2019574056</deployedseed>
+    <deployedseed>1004582295</deployedseed>
+    <deployedseed>1428557044</deployedseed>
+    <deployedseed>1977686126</deployedseed>
+    <deployedseed>1434363250</deployedseed>
+    <deployedseed>1651037920</deployedseed>
+    <deployedseed>411753114</deployedseed>
+    <deployedseed>1058781543</deployedseed>
+    <deployedseed>1208558027</deployedseed>
+    <deployedseed>678215022</deployedseed>
+    <deployedseed>672731763</deployedseed>
+    <deployedseed>3043417</deployedseed>
+    <deployedseed>2126421854</deployedseed>
+    <deployedseed>1258845099</deployedseed>
+    <deployedseed>524962582</deployedseed>
+    <deployedseed>1582500359</deployedseed>
+    <deployedseed>1296424102</deployedseed>
+    <deployedseed>1526151187</deployedseed>
+    <deployedseed>1289280652</deployedseed>
+  </question>
+</quiz>

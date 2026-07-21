@@ -26,11 +26,11 @@ Using the data above, answer the following questions.
 </p>
 
 <p>
-<b>(a)</b> Calculate the <b>mean monthly salary</b>.
+<b>(a)</b> Calculate the <b>mean monthly salary</b>, to 2 decimal places.
 </p>
 
 <p>
-Mean = [[input:ans1]] [[validation:ans1]]
+Mean = [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
 </p>
 
 <p>
@@ -38,7 +38,7 @@ Mean = [[input:ans1]] [[validation:ans1]]
 </p>
 
 <p>
-Median = [[input:ans2]] [[validation:ans2]]
+Median = [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]
 </p>
 
 <p>
@@ -46,11 +46,7 @@ Median = [[input:ans2]] [[validation:ans2]]
 </p>
 
 <p>
-Mode = [[input:ans3]] [[validation:ans3]]
-</p>
-
-<p>
-[[feedback:prt1]]
+Mode = [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]
 </p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
@@ -85,7 +81,7 @@ Correct Mean:
 <b>{@mean_val@} KES</b>
 </p>
 
----
+<hr>
 
 <h4>2. Median</h4>
 
@@ -99,7 +95,7 @@ Since the dataset contains <b>{@N@}</b> values (an odd number), the median posit
 
 <p>
 \[
-\frac{N+1}{2} = \frac{@N@+1}{2}
+\frac{N+1}{2} = \frac{{@N@}+1}{2}
 \]
 </p>
 
@@ -111,7 +107,7 @@ Correct Median:
 <b>{@median_val@} KES</b>
 </p>
 
----
+<hr>
 
 <h4>3. Mode</h4>
 
@@ -142,7 +138,7 @@ Therefore, the <b>Mode</b> is:
 <b>{@ta_mode@} KES</b>
 </p>
 
----
+<hr>
 
 <h4>Interpretation</h4>
 
@@ -183,6 +179,7 @@ N: length(raw_data);
 
 sum_x: apply("+", raw_data);
 mean_val: float(sum_x / N);
+mean_disp: round(mean_val*100)/100.0;
 ta1:mean_val;
 
 /* ============================= */
@@ -333,10 +330,10 @@ for i:1 thru length(u_vals) do (
       <node>
         <name>0</name>
         <description/>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>ta1</tans>
-        <testoptions/>
+        <testoptions>0.01</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -352,7 +349,75 @@ for i:1 thru length(u_vals) do (
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
+          <text><![CDATA[<p>Check your working: add every value, then divide by the number of values \(N\). Give the result to 2 decimal places.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
           <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Sort all the values in ascending order, then find the middle value. For an even count, average the two middle values.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ta3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The mode is the value that occurs most often. If two or more values tie for the most, enter them all as a set, e.g. <code>{a, b}</code>.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -426,6 +491,52 @@ for i:1 thru length(u_vals) do (
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Clearly wrong answers: each PRT fires its F branch.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta1+1000</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta2+3000</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>-1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-1-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt2-1-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt3-1-F</expectedanswernote>
       </expected>
     </qtest>
   </question>

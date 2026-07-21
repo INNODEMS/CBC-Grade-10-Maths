@@ -6,59 +6,49 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
-Evaluate the following expression using a quadratic identity:
-\[
-({@n@} + {@k@})^2
-\]
+Evaluate \({@n@}^2\) using the quadratic identity
 </p>
+<p>\((a+b)^2=a^2+2ab+b^2.\)</p>
 
-<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+<p> = [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
-
 <p>
-We use the identity:
+<p>Notice that {@n@} is close to the convenient number {@base@}, so write it as</p>
 </p>
-
+\[
+{@n@} = {@base@} {@if offset>0 then "+" else ""@} {@offset@}.
+\]
 <p>
+Use the quadratic identity:
+</p>
 \[
 (a+b)^2 = a^2 + 2ab + b^2
 \]
-</p>
-
 <p>
-Let:
+Substitute
 </p>
-
-<p>
 \[
-a = {@n@}, \quad b = {@k@}
+a={@base@}, \qquad
+b= {@if offset>0 then "" else "("@} {@offset@} {@if offset>0 then "" else ")"@}.
 \]
-</p>
-
 <p>
-Substitute into the identity:
+Then
 </p>
-
-<p>
 \[
-({@n@} + {@k@})^2 =
-{@n@}^2 + 2({@n@})({@k@}) + {@k@}^2
+({@base@} {@if offset>0 then "+" else ""@} {@offset@})^2
+=
+{@base@}^2 + 2({@base@})({@offset@}) + ({@offset@})^2
 \]
-</p>
-
-<p>
 \[
-= {@n^2@} + {@2*n*k@} + {@k^2@}
+=
+{@base^2@} + ({@2*base*offset@}) + {@offset^2@}
 \]
-</p>
-
-<p>
 \[
-= {@correct@}
-\]
-</p>]]></text>
+=
+\boxed{ {@ta@} }
+\]]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -68,30 +58,38 @@ Substitute into the identity:
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Base number close to 100 */
-n: rand(15) + 85;     /* 85–100 */
+      <text>base : rand_with_step(20,200,10);
 
-/* Small adjustment */
-k: rand(9) + 1;       /* 1–10 */
+offset : if rand(2)=0 then 2 else -2;
 
-/* Expression */
-expr: (n + k)^2;
+n : base + offset;
 
-/* Correct value */
-correct: expand(expr);
+ta : n^2;
 
 /* Common mistakes */
-m1: n^2 + k^2;
-m2: (n + k)*(n);
-m3: n^2 + 2*n + k^2;</text>
+
+/* 1. Omits the middle term: a² + b² */
+m1 : base^2 + offset^2;
+
+/* 2. Uses ±2a instead of ±2ab */
+m2 : base^2 + 2*base*sign(offset) + offset^2;
+
+/* 3. Incorrect sign on the middle term */
+m3 : base^2 - 2*base*offset + offset^2;
+
+/* 4. Squares the base only */
+m4 : base^2;
+
+/* 5. Treats (a±b)² as a² ± b² */
+m5 : base^2 + sign(offset)*offset^2;</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>{@correct@}</p>
-<p> {@expr@}</p>
-<p>({@n@} + {@k@})</p>]]></text>
+      <text><![CDATA[<p>{@ta@}</p>
+<p> {@n@}</p>
+<p>{@base@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
@@ -128,8 +126,8 @@ The question requires the learner to evaluate a numerical expression of the form
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>correct</tans>
-      <boxsize>15</boxsize>
+      <tans>ta</tans>
+      <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -154,9 +152,9 @@ The question requires the learner to evaluate a numerical expression of the form
       <node>
         <name>0</name>
         <description>checks for the correct answer</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>EqualComAss</answertest>
         <sans>ans1</sans>
-        <tans>correct</tans>
+        <tans>ta</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -190,8 +188,7 @@ The question requires the learner to evaluate a numerical expression of the form
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text>You added the squares but missed the middle term.
-Remember: (𝑎+𝑏)^2=𝑎^2+2𝑎𝑏+𝑏^2</text>
+          <text><![CDATA[<p>You forgot the 2ab term completely. Remember: (𝑎+𝑏)^2=𝑎^2+2𝑎𝑏+𝑏^2</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -216,8 +213,7 @@ Remember: (𝑎+𝑏)^2=𝑎^2+2𝑎𝑏+𝑏^2</text>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-3-T</trueanswernote>
         <truefeedback format="html">
-          <text>Check how you expanded the square.
-Both numbers must be multiplied when forming the middle term.</text>
+          <text><![CDATA[<p>Check how you expanded the square, you used 2a instead of 2ab.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -242,49 +238,58 @@ Both numbers must be multiplied when forming the middle term.</text>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-4-T</trueanswernote>
         <truefeedback format="html">
-          <text>The middle term should be 2𝑎𝑏, not just 2𝑎.</text>
+          <text><![CDATA[<p> You used the wrong sign for the middle term. Check the worked solution below./p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>4</falsenextnode>
         <falseanswernote>prt1-4-F</falseanswernote>
         <falsefeedback format="html">
           <text>Use the identity: (𝑎+𝑏)^2=𝑎^2+2𝑎𝑏+𝑏^2</text>
         </falsefeedback>
       </node>
+      <node>
+        <name>4</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-5-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You did not simplify your answer.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-5-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
     </prt>
-    <deployedseed>2100378102</deployedseed>
-    <deployedseed>1242962518</deployedseed>
-    <deployedseed>998352050</deployedseed>
-    <deployedseed>1395571434</deployedseed>
-    <deployedseed>581639744</deployedseed>
-    <deployedseed>470678023</deployedseed>
-    <deployedseed>1956799370</deployedseed>
-    <deployedseed>729969937</deployedseed>
-    <deployedseed>2027503500</deployedseed>
-    <deployedseed>1438031491</deployedseed>
-    <deployedseed>1069928606</deployedseed>
-    <deployedseed>1703831209</deployedseed>
-    <deployedseed>525810067</deployedseed>
-    <deployedseed>571780018</deployedseed>
-    <deployedseed>655577077</deployedseed>
-    <deployedseed>1284916605</deployedseed>
-    <deployedseed>909790765</deployedseed>
-    <deployedseed>1238824860</deployedseed>
-    <deployedseed>2009926277</deployedseed>
-    <deployedseed>174021271</deployedseed>
-    <deployedseed>724261883</deployedseed>
-    <deployedseed>486601753</deployedseed>
-    <deployedseed>910931476</deployedseed>
-    <deployedseed>658517681</deployedseed>
-    <deployedseed>392314580</deployedseed>
-    <deployedseed>941356635</deployedseed>
-    <deployedseed>1778316912</deployedseed>
-    <deployedseed>1833706569</deployedseed>
-    <deployedseed>1050079000</deployedseed>
-    <deployedseed>1235367976</deployedseed>
-    <deployedseed>1808923204</deployedseed>
-    <deployedseed>860005047</deployedseed>
+    <deployedseed>1222860662</deployedseed>
+    <deployedseed>1279341630</deployedseed>
+    <deployedseed>1364955254</deployedseed>
+    <deployedseed>1401621509</deployedseed>
+    <deployedseed>1035152784</deployedseed>
+    <deployedseed>1304848110</deployedseed>
+    <deployedseed>771620108</deployedseed>
+    <deployedseed>784142095</deployedseed>
+    <deployedseed>2027149288</deployedseed>
+    <deployedseed>482063284</deployedseed>
+    <deployedseed>216898668</deployedseed>
+    <deployedseed>625790673</deployedseed>
+    <deployedseed>1912696106</deployedseed>
+    <deployedseed>1767374472</deployedseed>
+    <deployedseed>867120790</deployedseed>
+    <deployedseed>1868238799</deployedseed>
   </question>
 </quiz>

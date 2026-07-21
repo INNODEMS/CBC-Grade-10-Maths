@@ -80,10 +80,13 @@ d2: 3 + rand(4);        /* Second leg (East) 3-6 km */
 /* Calculated Resultants */
 total_dist: d1 + d2;
 displacement_mag: float(sqrt(d1^2 + d2^2));
+displacement_mag1: float(abs(sqrt(d1^2 - d2^2)));
 
 /* Correct Answers rounded for STACK */
 ta1: total_dist;
+ta11: abs(d1 - d2);
 ta2: float(round(displacement_mag * 100) / 100);
+ta21: float(round(displacement_mag1 * 100) / 100);
 
 /* Heading/Bearing Calculation */
 bearing: float(round((180/float(%pi)) * atan(d2/d1) * 10) / 10);</text>
@@ -183,8 +186,33 @@ bearing: float(round((180/float(%pi)) * atan(d2/d1) * 10) / 10);</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>This is the wrong answer.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta11</tans>
+        <testoptions>.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p> You subtracted the distances. To find the total distance, we need to add the distances due North and East.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -217,8 +245,37 @@ bearing: float(round((180/float(%pi)) * atan(d2/d1) * 10) / 10);</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>This is the wrong answer.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta21</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty>0.001</truepenalty>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+You used \(\sqrt{D_{\text{due North}}^2 - D_{\text{due East}}^2}\) instead of
+\(\sqrt{D_{\text{due North}}^2 + D_{\text{due East}}^2}\).
+Since the two distances are perpendicular, use Pythagoras' theorem: add the squares of the perpendicular distances before taking the square root.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -233,5 +290,34 @@ bearing: float(round((180/float(%pi)) * atan(d2/d1) * 10) / 10);</text>
     <deployedseed>1509122306</deployedseed>
     <deployedseed>2008579080</deployedseed>
     <deployedseed>883718581</deployedseed>
+    <deployedseed>238208176</deployedseed>
+    <deployedseed>1631673723</deployedseed>
+    <deployedseed>745125309</deployedseed>
+    <deployedseed>1457479117</deployedseed>
+    <deployedseed>1729274522</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>

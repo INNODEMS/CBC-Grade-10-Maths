@@ -6,7 +6,7 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
-What is the <b>order of rotational symmetry</b> of the shape shown below?
+<b>(a)</b> What is the <b>order of rotational symmetry</b> of the shape shown below?
 </p>
 [[jsxgraph]]
 var board = JXG.JSXGraph.initBoard(divid, {
@@ -81,33 +81,69 @@ board.create('polygon', polypts, {
 [[/jsxgraph]]
 
 <p>Enter a single integer : [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
+</p>
+<p
+<p>
+<b>(b)</b> What is the <b>smallest angle of rotation</b> that maps the shape onto itself?
+</p>
+
+<p>
+Angle = [[input:ans2]]&deg;
+[[validation:ans2]]
+[[feedback:prt2]]
 </p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<h3>General feedback</h3>
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p><strong>(a) </strong> Order of rotational symmetry</p>
 
 <p>
-The shape shown is a <b>{@shape_name@}</b>.
+The <strong>order of rotational symmetry</strong> is the number of times a shape fits exactly onto itself during one complete turn of \(360^\circ\).
 </p>
 
 <p>
-The <b>order of rotational symmetry</b> is the number of distinct rotations
-less than \(360^\circ\) that map the shape exactly onto itself.
+The shape shown is a <strong>{@shape_name@}</strong>.
 </p>
 
 <p>
-For this shape, the correct order of rotational symmetry is:
+It matches itself <strong>{@order_sym@}</strong> time(s) during one full rotation.
 </p>
 
-<p style="text-align:center;">
+<p>
+Therefore, the order of rotational symmetry is
 \[
 \boxed{{@order_sym@}}
 \]
 </p>
 
+
+<p><strong>(b) Smallest angle of rotation</strong></p>
 <p>
-Try mentally rotating the shape about its centre and counting how many times
-it matches itself before a full turn.
+The smallest angle of rotation is found by dividing a full turn by the order of rotational symmetry.
+</p>
+<p>
+If a shape has rotational symmetry of order \(n\), then the smallest angle through which it can be rotated to coincide with itself is
+\[
+\frac{360^\circ}{n}.
+\]
+</p>
+
+<p>
+\[
+\text{Smallest angle}
+=
+\frac{360^\circ}{{@order_sym@}}
+=
+{@ta_angle@}^\circ
+\]
+</p>
+
+<p>
+Therefore, the smallest angle of rotation is
+\[
+\boxed{{@ta_angle@}^\circ}
+\]
 </p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -115,7 +151,7 @@ it matches itself before a full turn.
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text><![CDATA[/* List of shapes:
@@ -156,6 +192,7 @@ rot_js: float(k * %pi/2);
 
 /* Teacher's answer */
 ta: order_sym;
+ta_angle: 360/order_sym;
 ]]></text>
     </questionvariables>
     <specificfeedback format="html">
@@ -208,6 +245,24 @@ ta: order_sym;
       <showvalidation>3</showvalidation>
       <options/>
     </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta_angle</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
     <prt>
       <name>prt1</name>
       <value>1.0000000</value>
@@ -237,6 +292,40 @@ ta: order_sym;
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct angle</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta_angle</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
