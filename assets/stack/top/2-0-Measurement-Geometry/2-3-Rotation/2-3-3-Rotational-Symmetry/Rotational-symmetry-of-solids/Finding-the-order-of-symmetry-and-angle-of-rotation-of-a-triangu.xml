@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Finding the order of symmetry and angle of rotation of a triangular prism</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+The diagram below shows a <strong>triangular prism</strong>.
+A dashed line indicates one of its possible axes of rotation.
+</p>
+
+[[jsxgraph]]
+
+var board = JXG.JSXGraph.initBoard(divid,{
+    boundingbox:[-7,6,7,-5],
+    axis:false,
+    showCopyright:false
+});
+
+var axis={#axis_type#};
+
+/* Prism vertices */
+
+var A=[-4,2];
+var B=[-6,-2];
+var C=[-2,-2];
+
+var D=[2,3];
+var E=[0,-1];
+var F=[4,-1];
+
+/* Front triangle */
+
+board.create('polygon',[
+board.create('point',A,{visible:false}),
+board.create('point',B,{visible:false}),
+board.create('point',C,{visible:false})
+],{
+fillColor:'#cfe8ff',
+fillOpacity:0.4,
+borders:{strokeWidth:2}
+});
+
+/* Back triangle */
+
+board.create('polygon',[
+board.create('point',D,{visible:false}),
+board.create('point',E,{visible:false}),
+board.create('point',F,{visible:false})
+],{
+fillColor:'#cfe8ff',
+fillOpacity:0.4,
+borders:{strokeWidth:2}
+});
+
+/* Joining edges */
+
+board.create('segment',[A,D]);
+board.create('segment',[B,E]);
+board.create('segment',[C,F]);
+
+/* Axis */
+
+if(axis==1){
+
+board.create('segment',[[-1,4],[-1,-3]],{
+dash:2,
+strokeWidth:3,
+strokeColor:'red'
+});
+
+}
+else{
+
+board.create('segment',[[-5,0],[3,1]],{
+dash:2,
+strokeWidth:3,
+strokeColor:'red'
+});
+
+}
+
+[[/jsxgraph]]
+
+<p>
+<strong>{@axis_name@}</strong>
+</p>
+
+<p><b>(a)</b> Determine the order of rotational symmetry about the highlighted axis. </p>
+
+<p>Order = [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>
+<p>
+<b>(b)</b> Find the smallest angle of rotation that maps the prism onto itself about this axis. </p>
+
+<p> Angle = [[input:ans2]]° [[validation:ans2]] [[feedback:prt2]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p><strong>(a) Order of rotational symmetry</strong></p>
+
+<p>
+The <strong>order of rotational symmetry</strong> is the number of times a solid matches its original position during one complete turn of \(360^\circ\) about the given axis.
+</p>
+
+<p>
+For the axis shown, the prism matches itself <strong>{@order_sym@}</strong> time(s) in one complete rotation.
+</p>
+
+<p>
+Therefore, the order of rotational symmetry is
+\[
+\boxed{{@order_sym@}}.
+\]
+</p>
+
+<p><strong>(b) Smallest angle of rotation</strong></p>
+
+<p>
+The smallest angle of rotation is found by dividing one complete turn by the order of rotational symmetry.
+</p>
+
+<p>
+\[
+\text{Smallest angle}
+=
+\frac{360^\circ}{\text{Order}}
+=
+\frac{360^\circ}{{@order_sym@}}
+=
+{@angle_rot@}^\circ
+\]
+</p>
+
+<p>
+Therefore, the smallest angle of rotation is
+\[
+\boxed{{@angle_rot@}^\circ}.
+\]
+</p>
+
+<h4>Why?</h4>
+
+<p>
+A triangular prism has more than one axis of rotational symmetry.
+</p>
+
+<ul>
+<li>
+The axis passing through the <strong>centres of the triangular faces</strong> has rotational symmetry of <strong>order 3</strong>, because the prism looks the same after every rotation of \(120^\circ\).
+</li>
+
+<li>
+Each axis passing through the <strong>centres of a pair of opposite rectangular faces</strong> has rotational symmetry of <strong>order 2</strong>, because the prism looks the same after a rotation of \(180^\circ\).
+</li>
+</ul>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Randomise between two valid axes of a triangular prism.
+   axis_type = 1 : axis through the centres of the triangular faces.
+   axis_type = 2 : one of the three axes through the centres of opposite rectangular faces.
+*/
+
+axis_type : rand(2)+1;
+
+/* Teacher answers */
+
+order_sym :
+if axis_type=1 then 3
+else 2;
+
+axis_name :
+if axis_type=1 then
+"The axis passes through the centres of the triangular faces."
+else
+"The axis passes through the centres of a pair of opposite rectangular faces.";
+
+angle_rot : 360/order_sym;
+
+/* Teacher answers */
+
+ta1 : order_sym;
+ta2 : angle_rot;]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@ta1@}</p>
+<p>{@ta2@}</p>
+<p>{@axis_type@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct order of symmetry</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct angle of rotation</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1907436977</deployedseed>
+    <deployedseed>156946244</deployedseed>
+  </question>
+</quiz>

@@ -81,11 +81,15 @@ dist_north: v_current * time_h;
 
 /* Resultant Displacement (Magnitude) */
 disp_mag: sqrt(dist_east^2 + dist_north^2);
+disp_mag1: sqrt(dist_east^2 - dist_north^2);
 ta_displacement: float(round(disp_mag * 10) / 10);
+ta_displacement1: float(round(disp_mag1 * 10) / 10);
 
 /* Resultant Velocity (Magnitude) */
 vel_mag: sqrt(v_ship^2 + v_current^2);
+vel_mag1: sqrt(v_ship^2 - v_current^2);
 ta_velocity: float(round(vel_mag * 10) / 10);
+ta_velocity1: float(round(vel_mag1 * 10) / 10);
 
 /* Angle (Direction) from East */
 direction_deg: (180/float(%pi)) * atan(v_current/v_ship);
@@ -186,8 +190,39 @@ ta_direction: float(round(direction_deg * 10) / 10);</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>This is the wrong answer.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta_velocity1</tans>
+        <testoptions>.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+Almost correct. You appear to have used
+\(\sqrt{v_{\text{ship}}^2-v_{\text{current}}^2}\)
+instead of
+\(\sqrt{v_{\text{ship}}^2+v_{\text{current}}^2}\).
+Remember that the ship's velocity and the river current are perpendicular, so their squared magnitudes must be added when finding the magnitude of the resultant velocity.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -220,8 +255,39 @@ ta_direction: float(round(direction_deg * 10) / 10);</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>This is the wrong answer.</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>ta_displacement1</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+Almost correct. You appear to have used
+\(\sqrt{D_{\text{East}}^2-D_{\text{North}}^2}\)
+instead of
+\(\sqrt{D_{\text{East}}^2+D_{\text{North}}^2}\).
+Remember that distance due East and the distance due North are perpendicular, so their squared magnitudes must be added when finding total displacement of the ferry from its starting point.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -247,5 +313,49 @@ ta_direction: float(round(direction_deg * 10) / 10);</text>
     <deployedseed>456229321</deployedseed>
     <deployedseed>1274805436</deployedseed>
     <deployedseed>1524192670</deployedseed>
+    <deployedseed>556024774</deployedseed>
+    <deployedseed>825992882</deployedseed>
+    <deployedseed>1584792906</deployedseed>
+    <deployedseed>1034435509</deployedseed>
+    <deployedseed>723350286</deployedseed>
+    <deployedseed>1244877244</deployedseed>
+    <deployedseed>1870522795</deployedseed>
+    <deployedseed>417026567</deployedseed>
+    <deployedseed>336161084</deployedseed>
+    <deployedseed>148603976</deployedseed>
+    <deployedseed>1020208897</deployedseed>
+    <deployedseed>369357103</deployedseed>
+    <deployedseed>1192992873</deployedseed>
+    <deployedseed>1413959841</deployedseed>
+    <deployedseed>1859171391</deployedseed>
+    <deployedseed>2084107764</deployedseed>
+    <deployedseed>1422391743</deployedseed>
+    <deployedseed>653379714</deployedseed>
+    <deployedseed>928115334</deployedseed>
+    <deployedseed>215868024</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta_velocity</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta_displacement</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>

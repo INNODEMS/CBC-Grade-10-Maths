@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Reading an ungrouped frequency table</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A class sat a short test. The frequency table below shows the marks the students scored:</p>
+<table border="1" style="border-collapse:collapse; text-align:center; min-width:220px;">
+<tr style="background-color:#eee;"><th>Mark</th><th>Frequency</th></tr>
+<tr><td>{@vals[1]@}</td><td>{@freqs[1]@}</td></tr>
+<tr><td>{@vals[2]@}</td><td>{@freqs[2]@}</td></tr>
+<tr><td>{@vals[3]@}</td><td>{@freqs[3]@}</td></tr>
+<tr><td>{@vals[4]@}</td><td>{@freqs[4]@}</td></tr>
+<tr><td>{@vals[5]@}</td><td>{@freqs[5]@}</td></tr>
+<tr><td>{@vals[6]@}</td><td>{@freqs[6]@}</td></tr>
+</table>
+<p>Use the table to answer the following.</p>
+<p><strong>(a)</strong> How many students sat the test? [[input:ans1]] [[validation:ans1]] [[feedback:prt_total]]</p>
+<p><strong>(b)</strong> Which mark did the most students score? [[input:ans2]] [[validation:ans2]] [[feedback:prt_mode]]</p>
+<p><strong>(c)</strong> How many students scored <strong>more than {@k@}</strong> marks? [[input:ans3]] [[validation:ans3]] [[feedback:prt_more]]</p>
+<p><strong>(d)</strong> What is the <strong>range</strong> of the marks? [[input:ans4]] [[validation:ans4]] [[feedback:prt_range]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h4>Worked solution</h4>
+<p><strong>(a) Total students</strong> &mdash; the frequency tells you how many students got each mark, so add the frequency column:</p>
+\[ {@freqs[1]@}+{@freqs[2]@}+{@freqs[3]@}+{@freqs[4]@}+{@freqs[5]@}+{@freqs[6]@} = {@N@}. \]
+<p><strong>(b) Most common mark</strong> &mdash; the largest frequency is {@max_freq@}, which is against the mark <strong>{@mode_val@}</strong>. (The mark, not the frequency.)</p>
+<p><strong>(c) More than {@k@} marks</strong> &mdash; add the frequencies of the marks strictly greater than {@k@} (do not include {@k@} itself): total <strong>{@ans_more@}</strong>.</p>
+<p><strong>(d) Range</strong> &mdash; highest mark &minus; lowest mark \(= {@vals[6]@} - {@vals[1]@} = {@rng@}.\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* --- DESIGN BACKWARDS: build the table so every part has a clean answer --- */
+n_marks: 6;
+/* 6 distinct marks (non-consecutive) from 2..12, sorted ascending */
+allmarks: makelist(i, i, 2, 12);
+perm6: random_permutation(allmarks);
+vals: sort( makelist( perm6[i], i, 1, n_marks) );
+/* Frequencies with a UNIQUE maximum (so 'most common' is unambiguous) */
+base: makelist(rand(4)+1, i, 1, n_marks);   /* 1..4 each */
+mode_pos: rand(n_marks)+1;
+freqs: makelist( if i=mode_pos then lmax(base)+rand(2)+1 else base[i], i, 1, n_marks);
+/* Answers */
+N: apply("+", freqs);                 /* (a) total */
+mode_val: vals[mode_pos];             /* (b) most common mark */
+max_freq: freqs[mode_pos];            /* its frequency (a common wrong answer) */
+k: vals[3];                           /* threshold for (c): a middle mark */
+ans_more: apply("+", makelist( if vals[i] > k then freqs[i] else 0, i, 1, n_marks));  /* (c) */
+inc_k: ans_more + freqs[3];           /* wrong 'at least k' answer */
+rng: vals[n_marks] - vals[1];         /* (d) range */
+/* teacher answers */
+ta_ans1: N;
+ta_ans2: mode_val;
+ta_ans3: ans_more;
+ta_ans4: rng;
+/* variant note */
+variantnote: sconcat("N=", N, ", mode=", mode_val, ", >", k, "->", ans_more, ", range=", rng);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@variantnote@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Ben (STACK author)</p>
+<p id="concept">Reading an ungrouped frequency table: total, mode, threshold count, range.</p>
+<p id="reviewer"></p>
+<p id="description">Students read a completed ungrouped frequency table (test marks) and answer four interpretation questions. Each part is marked separately with diagnostics for the common misreads.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta_ans1</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta_ans2</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta_ans3</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>ta_ans4</tans>
+      <boxsize>5</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt_mode</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>mode_val</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mode-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_mode-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>vals[n_marks]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mode-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That's the <em>highest mark</em>, not the most common one. Find the largest <em>frequency</em> first, then read off the mark beside it.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt_mode-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>max_freq</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mode-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That's <em>how many</em> students (a frequency), not the mark they scored. Read the mark beside the largest frequency.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_mode-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The mode is the mark with the largest frequency. Read across from the biggest number in the frequency column.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_more</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ans_more</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_more-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_more-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>inc_k</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_more-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>The question asks for <em>more than</em> {@k@}, so do not include the students who scored exactly {@k@}.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_more-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Add the frequencies of the marks that are strictly greater than the given mark.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_range</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>rng</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_range-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_range-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>vals[n_marks]+vals[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_range-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Range is a subtraction, not a sum: highest mark &minus; lowest mark.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt_range-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>vals[n_marks]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_range-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That's just the highest mark. The range is highest &minus; lowest.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_range-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Range = highest mark &minus; lowest mark.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_total</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>N</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_total-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_total-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>n_marks</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_total-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That's how many <em>different</em> marks appear in the table. To count all the students, add up the frequency column.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_total-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Add every entry in the frequency column &mdash; the frequency is how many students got each mark.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>10101</deployedseed>
+    <deployedseed>224466</deployedseed>
+    <deployedseed>370815</deployedseed>
+    <deployedseed>519428</deployedseed>
+    <deployedseed>884213</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>All four correct.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>N</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>mode_val</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>ans_more</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>rng</value>
+      </testinput>
+      <expected>
+        <name>prt_mode</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_mode-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_more</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_more-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_range</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_range-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_total</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_total-0-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>First trap for each: row-count, highest-mark, at-least-k, sum.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>n_marks</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>vals[n_marks]</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>inc_k</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>vals[n_marks]+vals[1]</value>
+      </testinput>
+      <expected>
+        <name>prt_mode</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_mode-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_more</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_more-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_range</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_range-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_total</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_total-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>Second trap: mode=frequency, range=highest only.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>N</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>max_freq</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>ans_more</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>vals[n_marks]</value>
+      </testinput>
+      <expected>
+        <name>prt_mode</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_mode-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_more</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_more-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_range</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_range-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_total</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_total-0-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

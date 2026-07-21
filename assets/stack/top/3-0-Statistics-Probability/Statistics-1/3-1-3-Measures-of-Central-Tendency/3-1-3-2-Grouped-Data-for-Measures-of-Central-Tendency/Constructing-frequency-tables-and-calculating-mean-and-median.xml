@@ -6,8 +6,9 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>Mathematics test scores for \( {@n_students@} \) students in a class are listed below:</p>
-<p style="background-color: #f9f9f9; padding: 15px; border: 1px solid #ddd; font-family: monospace; font-size: 1.1em; line-height: 1.6;">
-\({@raw_data@}\)</p>
+<p style="background-color:#f9f9f9; padding:15px; border:1px solid #ddd; font-family:monospace; font-size:1.05em; line-height:1.8; word-wrap:break-word; overflow-wrap:break-word;">
+{@data_str@}
+</p>
 <p><strong>a)</strong> Complete the frequency distribution table below by counting the number of scores that fall into each class interval.</p>
 <table border="1">
     <thead>
@@ -26,7 +27,7 @@
         <tr><td>70 – 79</td><td>[[input:ans7]] [[validation:ans7]] [[feedback:prt7]]</td></tr>
     </tbody>
 </table>
-<p><strong>b)</strong> Identify the Modal Class: [[input:ans8]] [[validation:ans8]] [[feedback:prt_mode]]</p>
+<p><strong>b)</strong> Identify the modal class (enter as an interval <code>[a,b]</code>): [[input:ans8]] [[validation:ans8]] [[feedback:prt_mode]]</p>
 <p><strong>c)</strong> Using the table you created, calculate the following estimates (round to 2 decimal places):</p>
 <ul>
     <li>Mean Score: [[input:ans9]] [[validation:ans9]] [[feedback:prt_mean]]</li>
@@ -53,15 +54,12 @@
 <p><strong>b) Modal Class</strong></p>
 <p>The highest frequency is \({@max_freq@}\), which corresponds to the interval <strong>{@mode_str@}</strong>.</p>
 
-<p><strong>c) Estimated Mean and Median</strong></p>
-<p><strong>Mean:</strong></p>
-\( \bar{x} = \frac{\sum fx}{\sum f} = \frac{@sum_fx@}{@sum_f@} \approx \mathbf{@decimalplaces(mean_est, 2)@} \)
-
-<p><strong>Median:</strong></p>
-<p>Position = \( \frac{N}{2} = \frac{@sum_f@}{2} = {@med_pos@} \). Looking at the CF column, the median lies in the {@lower_bounds[med_idx]@} - {@upper_bounds[med_idx]@} class.</p>
-\( Median = L + \left( \frac{\frac{N}{2} - CF_{prev}}{f_{med}} \right) \times h \)
-\( Median = {@L_med@} + \left( \frac{{@med_pos@} - {@cf_prev@}}{@f_med@} \right) \times {@class_width@} \)
-\( Median \approx \mathbf{@decimalplaces(median_est, 2)@} \)]]></text>
+<p><strong>c) Estimated mean and median</strong></p>
+<p><strong>Mean</strong> &mdash; multiply each midpoint by its frequency, add, and divide by \(\sum f\):</p>
+\[ \bar{x} = \frac{\sum fx}{\sum f} = \frac{ {@sum_fx@} }{ {@sum_f@} } \approx {@mean_disp@} \]
+<p><strong>Median</strong> &mdash; the median lies in the \( {@lower_bounds[med_idx]@}\text{ - }{@upper_bounds[med_idx]@} \) class. Using interpolation with the grouped formula:</p>
+\[ \text{Median} = L + \left( \frac{\frac{N}{2} - CF}{f} \right)\times C \]
+\[ \text{Median} = {@L_med@} + \left( \frac{ {@med_pos@} - {@cf_prev@} }{ {@f_med@} } \right)\times {@class_width@} \approx {@median_disp@} \]]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -80,7 +78,7 @@ num_classes: length(lower_bounds);
 
 /* Generate 40 random test scores between 10 and 79 */
 /* We sort them only for the 'worked solution' display variable, but keep raw for the question */
-n_students: 40;
+n_students: 20;
 raw_data: makelist(rand(70)+10, k, 1, n_students);
 raw_data_sorted: sort(raw_data);
 
@@ -100,6 +98,7 @@ fx_list: map("*", freqs, midpoints);
 sum_fx: apply("+", fx_list);
 sum_f: apply("+", freqs); /* Should equal n_students */
 mean_est: float(sum_fx / sum_f);
+mean_disp: round(mean_est*100)/100.0;
 
 /* Modal Class */
 max_freq: lmax(freqs);
@@ -128,11 +127,16 @@ cf_prev: if med_idx = 1 then 0 else cum_freqs[med_idx - 1];
 h: class_width;
 
 median_est: float(L_med + ((med_pos - cf_prev) / f_med) * h);
+median_disp: round(median_est*100)/100.0;
+modal_interval: [lower_bounds[mode_idx], upper_bounds[mode_idx]];
 
-/* 4. DISPLAY HELPERS */
-/* Create a string of the raw data for display */
-data_str: sconcat(raw_data);
-for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
+/* Raw (ungrouped) mean and median - used to detect students who ignore the table */
+raw_mean: float(apply("+", raw_data) / n_students);
+raw_median: float((raw_data_sorted[n_students/2] + raw_data_sorted[n_students/2 + 1]) / 2);
+
+/* 4. DISPLAY HELPERS - comma-separated string that wraps */
+data_str: sconcat(raw_data[1]);
+for i:2 thru n_students do data_str: sconcat(data_str, ",  ", raw_data[i]);]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -146,8 +150,7 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
     <questiondescription format="html">
       <text><![CDATA[<p id="author"> Daniel Murunga</p>
 <p id="concept"></p>
-<p id="reviewer"></p>
-<p id="reviewer"></p>
+<p id="reviewer">Ben (STACK audit)</p>
 <p id="description">In this question, you are required to organize a raw dataset of student scores into a frequency distribution table using specified class intervals. Based on this table, you must then identify the modal class and calculate estimates for the mean and median scores.</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
@@ -186,8 +189,8 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
@@ -204,8 +207,8 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
       <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
@@ -222,8 +225,8 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
@@ -240,8 +243,8 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
@@ -258,8 +261,8 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
@@ -276,8 +279,8 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
@@ -294,8 +297,8 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
@@ -312,26 +315,26 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
       <name>ans8</name>
       <type>algebraic</type>
-      <tans>[mode_str]</tans>
-      <boxsize>6</boxsize>
+      <tans>modal_interval</tans>
+      <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
-      <syntaxhint/>
+      <syntaxhint>[a,b]</syntaxhint>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
@@ -348,8 +351,8 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
       <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <prt>
@@ -366,23 +369,73 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
         <answertest>NumAbsolute</answertest>
         <sans>ans9</sans>
         <tans>mean_est</tans>
-        <testoptions>0.001</testoptions>
+        <testoptions>0.01</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt_mean-1-T</trueanswernote>
+        <trueanswernote>prt_mean-0-T</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_mean-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans9</sans>
+        <tans>raw_mean</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mean-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That is the mean of the <em>raw</em> scores. Here you must <strong>estimate</strong> it from the table: multiply each class midpoint by its frequency, add, then divide by \(\sum f\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
         <falseanswernote>prt_mean-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans9</sans>
+        <tans>median_est</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mean-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <strong>median</strong>, not the mean.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_mean-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Estimate the mean with \(\bar{x}=\frac{\sum fx}{\sum f}\): midpoint \(\times\) frequency, summed, over \(\sum f\). Round to 2 d.p.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -400,23 +453,73 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
         <answertest>NumAbsolute</answertest>
         <sans>ans10</sans>
         <tans>median_est</tans>
-        <testoptions>0.001</testoptions>
+        <testoptions>0.01</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt_median-1-T</trueanswernote>
+        <trueanswernote>prt_median-0-T</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_median-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans10</sans>
+        <tans>raw_median</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_median-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That is the median of the <em>raw</em> scores. Here you must estimate it from the table using interpolation: Median = L + ((N/2 &minus; CF)/f) &times; C.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
         <falseanswernote>prt_median-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans10</sans>
+        <tans>mean_est</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_median-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <strong>mean</strong>, not the median.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_median-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Find the median class (where the cumulative frequency first reaches N/2), then Median = L + ((N/2 &minus; CF)/f) &times; C. Round to 2 d.p.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -433,7 +536,7 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans8</sans>
-        <tans>[mode_str]</tans>
+        <tans>modal_interval</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -450,7 +553,7 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt_mode-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>The modal class is the interval with the highest frequency. Enter it as an interval <code>[lower, upper]</code>.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -484,7 +587,7 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Recount how many values fall in this class interval (both endpoints included).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -518,7 +621,7 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Recount how many values fall in this class interval (both endpoints included).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -552,7 +655,7 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt3-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Recount how many values fall in this class interval (both endpoints included).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -586,7 +689,7 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt4-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Recount how many values fall in this class interval (both endpoints included).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -620,7 +723,7 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt5-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Recount how many values fall in this class interval (both endpoints included).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -654,7 +757,7 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt6-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Recount how many values fall in this class interval (both endpoints included).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -688,7 +791,7 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt7-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Recount how many values fall in this class interval (both endpoints included).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -772,7 +875,7 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
       </testinput>
       <testinput>
         <name>ans8</name>
-        <value>[mode_str]</value>
+        <value>modal_interval</value>
       </testinput>
       <testinput>
         <name>ans9</name>
@@ -782,13 +885,13 @@ for i:2 thru 30 do data_str: sconcat(data_str, ", ", raw_data[i]);]]></text>
         <name>prt_mean</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt_mean-1-T</expectedanswernote>
+        <expectedanswernote>prt_mean-0-T</expectedanswernote>
       </expected>
       <expected>
         <name>prt_median</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt_median-1-T</expectedanswernote>
+        <expectedanswernote>prt_median-0-T</expectedanswernote>
       </expected>
       <expected>
         <name>prt_mode</name>

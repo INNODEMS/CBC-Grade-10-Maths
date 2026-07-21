@@ -8,8 +8,7 @@
       <text><![CDATA[<p class="HELM_exercise">Exercise</p>
 <p>Solve the quadratic equation \({@exp@}=0\). If there is a repeated root, enter this twice.</p>
 <p>
-    <nowrap>\(x = \) [[input:ans1]] [[validation:ans1]] or \(x = \) [[input:ans2]][[validation:ans2]]
-    </nowrap>
+    \(x = \) [[input:ans1]] [[validation:ans1]] [[feedback:prt1]] or \(x = \) [[input:ans2]][[validation:ans2]] [[feedback:prt2]]
 </p>]]></text>
     </questiontext>
     <generalfeedback format="html">
@@ -20,7 +19,7 @@
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2021072200</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>aa:1+rand(5)
@@ -31,7 +30,7 @@ ta1:aa/2
 ta2:bb/3</text>
     </questionvariables>
     <specificfeedback format="html">
-      <text>[[feedback:prt1]]</text>
+      <text/>
     </specificfeedback>
     <questionnote format="moodle_auto_format">
       <text>\({@exp@}=0,\) roots \( x = {@ta1@}, x = {@ta2@} \)</text>
@@ -103,18 +102,21 @@ ta2:bb/3</text>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
-        <text/>
+        <text>/* Accept either root in this box: true if ans1 is ta1 OR ta2. */
+box1_ok : is(ans1 = ta1) or is(ans1 = ta2);
+/* factor-value slip: entered a value from a factor (sign-flipped root) */
+box1_factor : is(ans1 = -ta1) or is(ans1 = -ta2);</text>
       </feedbackvariables>
       <node>
         <name>0</name>
         <description/>
         <answertest>AlgEquiv</answertest>
-        <sans>{ans1,ans2}</sans>
-        <tans>{ta1,ta2}</tans>
+        <sans>box1_ok</sans>
+        <tans>true</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>1.0000000</truescore>
+        <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-1-T</trueanswernote>
@@ -122,10 +124,97 @@ ta2:bb/3</text>
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>box1_factor</sans>
+        <tans>true</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have identified the factor correctly, but you entered the value from the factor instead of solving the equation. Remember to set each factor equal to zero. For example, if x−1=0, then find the solution of x.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt1-1-F</falseanswernote>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>/* Accept either root in this box: true if ans2 is ta1 OR ta2. */
+box2_ok : is(ans2 = ta1) or is(ans2 = ta2);
+/* factor-value slip: entered a value from a factor (sign-flipped root) */
+box2_factor : is(ans2 = -ta1) or is(ans2 = -ta2);</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>box2_ok</sans>
+        <tans>true</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>box2_factor</sans>
+        <tans>true</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have identified the factor correctly, but you entered the value from the factor instead of solving the equation. Remember to set each factor equal to zero. For example, if x−1=0, then find the solution of x.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -175,6 +264,30 @@ ta2:bb/3</text>
         <expectedscore>0.0000000</expectedscore>
         <expectedpenalty>0.1000000</expectedpenalty>
         <expectedanswernote>prt1-1-F</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>Roots entered in swapped order: ans1=ta2, ans2=ta1 still gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta2</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
       </expected>
     </qtest>
   </question>

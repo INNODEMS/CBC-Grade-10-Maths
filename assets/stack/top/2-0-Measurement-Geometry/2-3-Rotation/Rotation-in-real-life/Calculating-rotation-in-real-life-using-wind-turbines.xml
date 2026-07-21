@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Calculating rotation in real life using wind turbines</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A wind turbine has <strong>{@blades@}</strong> equally spaced blades. It completes <strong>{@rev@}</strong> complete revolution(s) every <strong>{@total_time@} minute(s)</strong>.</p>
+
+[[jsxgraph]]
+var board = JXG.JSXGraph.initBoard(divid,{
+    boundingbox:[-7,7,7,-7],
+    axis:false,
+    keepaspectratio:true,
+    showNavigation:false,
+    showCopyright:false
+});
+var blades = {#blades#};
+
+/* Draw turbine */
+var R = 4;
+for(let i=0;i<blades;i++){
+    var a = 2*Math.PI*i/blades;
+    board.create('segment',[
+        [0,0],
+        [R*Math.cos(a),R*Math.sin(a)]
+    ],{ strokeWidth:6, strokeColor:'#8899aa', fixed:true, highlight:false });
+}
+
+/* Hub — drawn before the labelled points so A stays visible */
+board.create('circle',[[0,0],0.35],{
+    fillColor:'#444', strokeColor:'#444', fixed:true, highlight:false
+});
+
+/* Candidate points */
+var pos   = [[0,0],[0,2],[-2,0],[2,0]];
+var names = ["A","B","C","D"];
+var offs  = [[14,-14],[12,12],[-16,12],[14,12]];
+for(let i=0;i<4;i++){
+    board.create('point',pos[i],{
+        name:names[i],
+        size:3,
+        strokeColor:'#c62828',
+        fillColor:'#ffffff',
+        fixed:true,
+        highlight:false,
+        label:{ offset:offs[i], fontSize:16, cssStyle:'font-weight:bold;' }
+    });
+}
+[[/jsxgraph]]<p><b>(a)</b> Through what angle has the turbine rotated after <strong>{@elapsed@}</strong> minute(s)?</p>
+
+<p>Angle = [[input:ans1]] &deg; [[validation:ans1]] [[feedback:prt1]]</p>
+
+<p><b>(b)</b> Find the angle between two adjacent blades.</p>
+
+<p> Angle = [[input:ans2]] &deg; [[validation:ans2]] [[feedback:prt2]]</p>
+
+<p><b>(c)</b> What is the order of rotational symmetry?</p>
+
+<p>[[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</p>
+
+<p><b>(d)</b> Does rotating the turbine change its size or shape?</p>
+
+<p>[[input:ans4]] [[validation:ans4]] [[feedback:prt4]]</p>
+
+<p><b>(e)</b> Which of the four points is the centre of rotation?</p> 
+
+<p>[[input:ans5]] [[validation:ans5]] [[feedback:prt5]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+
+<p>A wind turbine rotates about a fixed point called its <strong>centre of rotation</strong>. One complete revolution is \(360^\circ\).</p>
+
+<p><strong>(a) Angle of rotation</strong></p>
+<p>The turbine completes <strong>{@rev@}</strong> revolution(s) every <strong>{@total_time@}</strong> minute(s), so it turns at a constant rate. First find the fraction of the total time that has elapsed:</p>
+\[ \frac{\text{elapsed time}}{\text{total time}} = \frac{{@elapsed@}}{{@total_time@}}. \]
+<p>In that time it completes this same fraction of its <strong>{@rev@}</strong> revolution(s). Each revolution is \(360^\circ\), so the angle turned is</p>
+\[ \frac{{@elapsed@}}{{@total_time@}} \times {@rev@} \times 360^\circ = {@angle@}^\circ. \]
+<p>\[ \boxed{ {@angle@}^\circ } \]</p>
+<p><em>Note:</em> this can exceed \(360^\circ\) — that simply means more than one full turn.</p>
+
+<p><strong>(b) Angle between adjacent blades</strong></p>
+<p>The <strong>{@blades@}</strong> blades are equally spaced around a full turn, so share \(360^\circ\) equally between them:</p>
+\[ \frac{360^\circ}{{@blades@}} = {@blade_angle@}^\circ. \]
+<p>\[ \boxed{ {@blade_angle@}^\circ } \]</p>
+
+<p><strong>(c) Order of rotational symmetry</strong></p>
+<p>The <em>order of rotational symmetry</em> is the number of times a shape fits onto itself during one complete turn. Rotating by {@blade_angle@}\(^\circ\) carries each blade onto the position of the next, so the turbine looks identical. Repeating this brings it back to the start after <strong>{@blades@}</strong> such rotations:</p>
+\[ \boxed{ {@order@} } \]
+<p>In general, a figure with \(n\) equally spaced identical arms has order \(n\), and the smallest turn that preserves it is \(360^\circ/n\).</p>
+
+<p><strong>(d) Does rotation change size or shape?</strong></p>
+<p>Rotation is a <strong>rigid transformation</strong> (an <em>isometry</em>): every point stays the same distance from the centre of rotation, so all lengths and angles are preserved. Only the <strong>orientation</strong> changes. The turbine before and after is therefore <strong>congruent</strong> to itself.</p>
+<p>So the answer is \(\boxed{\text{No}}\) — neither the size nor the shape changes.</p>
+<p><em>Compare:</em> an <em>enlargement</em> changes size (giving a <em>similar</em>, not congruent, figure), while a <em>stretch</em> changes shape. Rotation, reflection and translation are the transformations that preserve both.</p>
+
+<p><strong>(e) Centre of rotation</strong></p>
+<p>The centre of rotation is the one point that does <strong>not</strong> move when the turbine turns — every other point traces a circle around it. In the diagram this is the hub where all the blades meet, at the origin:</p>
+\[ \boxed{ \text{ {@centre@} } } \]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Number of blades */
+blades_list : [3,4,5,6];
+blades : blades_list[rand(length(blades_list))+1];
+
+/* Number of complete revolutions */
+rev : rand(3)+1;
+
+/* Total time (minutes) */
+total_time : rand(4)+2;   /* 3-6 minutes */
+
+/* Elapsed time */
+elapsed : rand(total_time-1)+1;
+
+/* Teacher answers */
+angle : 360*rev*elapsed/total_time;
+blade_angle : 360/blades;
+order : blades;
+
+/* Candidate letters. The centre of rotation is A at [0,0] in the
+   diagram, so A is the correct option; perm only shuffles the ORDER
+   in which the letters are offered. */
+letters : ["A","B","C","D"];
+perm    : random_permutation(letters);
+centre  : "A";
+
+/* (a)-(c): typed numerical answers */
+ta1 : angle;
+ta2 : blade_angle;
+ta3 : order;
+
+/* (d) dropdown: rotation is an isometry - size and shape are unchanged.
+   Distractors are the real misconceptions (confusing rotation with
+   enlargement / a shape-changing transformation). */
+ta4 : [[1, true,  "No - both size and shape stay the same"],
+       [2, false, "Yes - the size changes"],
+       [3, false, "Yes - the shape changes"],
+       [4, false, "Yes - both the size and the shape change"]];
+
+/* (e) dropdown: which labelled point is the centre of rotation?
+   Options are built from perm, so the letters appear in a random
+   order, and the one equal to `centre` is flagged correct. */
+ta5 : makelist([k, is(perm[k] = centre), sconcat("Point ", perm[k])],
+                k, 1, length(perm));
+/* The correct VALUE for each dropdown - what the PRT compares against.
+   ta4/ta5 stay as the option lists for the inputs. */
+ta4v : 1;
+
+/* For (e), find which position holds the correct letter. */
+ta5v : first(sublist_indices(perm, lambda([z], is(z = centre))));]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@rev@}</p>
+<p>{@total_time@}</p>
+<p>{@ta1@}</p>
+<p>{@ta2@}</p>
+<p>{@ta3@}</p>
+<p>{@ta4v@}</p>
+<p>{@ta5v@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta3</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>dropdown</type>
+      <tans>ta4</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans5</name>
+      <type>dropdown</type>
+      <tans>ta5</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ta3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans4</sans>
+        <tans>ta4v</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite. A rotation is a <em>rigid motion</em> (an isometry): every point keeps its distance from the centre, so the turbine's size and shape are unchanged — only its <em>orientation</em> changes. Compare this with an enlargement, which does change size.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt5</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans5</sans>
+        <tans>ta5v</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt5-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt5-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite. The centre of rotation is the one point that does <em>not</em> move when the turbine turns. Look at the diagram: which labelled point stays exactly where it is as the blades sweep around?</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>104037057</deployedseed>
+    <deployedseed>1355255180</deployedseed>
+    <deployedseed>923440160</deployedseed>
+    <deployedseed>1490054288</deployedseed>
+    <deployedseed>62554629</deployedseed>
+    <deployedseed>2055911270</deployedseed>
+    <deployedseed>854402447</deployedseed>
+    <deployedseed>919765463</deployedseed>
+    <deployedseed>124172193</deployedseed>
+    <deployedseed>1787813978</deployedseed>
+    <deployedseed>854105159</deployedseed>
+    <deployedseed>454147466</deployedseed>
+    <deployedseed>37497720</deployedseed>
+    <deployedseed>427938355</deployedseed>
+    <deployedseed>133203754</deployedseed>
+    <deployedseed>117575394</deployedseed>
+    <deployedseed>1578713145</deployedseed>
+    <deployedseed>784919345</deployedseed>
+    <deployedseed>1296491860</deployedseed>
+    <deployedseed>73514732</deployedseed>
+  </question>
+</quiz>

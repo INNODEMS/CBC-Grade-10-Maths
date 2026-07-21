@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Grouped mean by completing the fx column</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Complete the \(f x\) column for this grouped frequency table (the class midpoints \(x\) are given), then find the estimated mean.</p>
+<table border="1" style="border-collapse:collapse;text-align:center;min-width:340px;">
+<tr style="background-color:#eee;"><th>Score</th><th>Frequency (f)</th><th>Midpoint (x)</th><th>f x</th></tr>
+<tr><td>0 &ndash; 9</td><td>{@f[1]@}</td><td>{@mids[1]@}</td><td>[[input:fx1]] [[validation:fx1]] [[feedback:prt_fx1]]</td></tr><tr><td>10 &ndash; 19</td><td>{@f[2]@}</td><td>{@mids[2]@}</td><td>[[input:fx2]] [[validation:fx2]] [[feedback:prt_fx2]]</td></tr><tr><td>20 &ndash; 29</td><td>{@f[3]@}</td><td>{@mids[3]@}</td><td>[[input:fx3]] [[validation:fx3]] [[feedback:prt_fx3]]</td></tr><tr><td>30 &ndash; 39</td><td>{@f[4]@}</td><td>{@mids[4]@}</td><td>[[input:fx4]] [[validation:fx4]] [[feedback:prt_fx4]]</td></tr><tr><td>40 &ndash; 49</td><td>{@f[5]@}</td><td>{@mids[5]@}</td><td>[[input:fx5]] [[validation:fx5]] [[feedback:prt_fx5]]</td></tr>
+<tr style="font-weight:bold;background-color:#f2f2f2;"><td>Total</td><td>[[input:ans_totf]] [[validation:ans_totf]] [[feedback:prt_totf]]</td><td></td><td>[[input:ans_totfx]] [[validation:ans_totfx]] [[feedback:prt_totfx]]</td></tr>
+</table>
+<p><strong>Estimated mean</strong> \(\bar{x}=\dfrac{\sum fx}{\sum f}\), to 2 d.p.: [[input:ans_mean]] [[validation:ans_mean]] [[feedback:prt_mean]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h4>Worked solution</h4>
+<p>Each \(fx\) is the frequency times the class midpoint. Adding them, \(\sum fx = {@Sfx@}\), and \(\sum f = {@Sf@}\), so</p>
+\[ \bar{x} = \frac{ {@Sfx@} }{ {@Sf@} } \approx {@mean_disp@}. \]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[lowers: [0,10,20,30,40];
+mids: [4.5,14.5,24.5,34.5,44.5];
+f: [rand(6)+3, rand(6)+4, rand(7)+5, rand(6)+4, rand(6)+3];
+Sf: apply("+", f);
+fxv: makelist(f[i]*mids[i], i, 1, 5);
+Sfx: apply("+", fxv);
+mean_val: Sfx/Sf;
+mean_disp: round(mean_val*100)/100.0;
+low: makelist(f[i]*lowers[i], i, 1, 5);   /* wrong: f*lower */
+mean_by5: Sfx/5;]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>Sf={@Sf@}, Sfx={@Sfx@}, mean={@mean_disp@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Ben (STACK author)</p><p id="concept">Grouped mean by completing the fx column then Sfx/Sf.</p><p id="reviewer"></p><p id="description">Scaffolded grouped mean: students complete each fx = f*midpoint then compute the mean. Each row is marked separately, catching use of the lower limit instead of the midpoint.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans_mean</name>
+      <type>algebraic</type>
+      <tans>mean_val</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_totf</name>
+      <type>algebraic</type>
+      <tans>Sf</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_totfx</name>
+      <type>algebraic</type>
+      <tans>Sfx</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>fx1</name>
+      <type>algebraic</type>
+      <tans>fxv[1]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>fx2</name>
+      <type>algebraic</type>
+      <tans>fxv[2]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>fx3</name>
+      <type>algebraic</type>
+      <tans>fxv[3]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>fx4</name>
+      <type>algebraic</type>
+      <tans>fxv[4]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>fx5</name>
+      <type>algebraic</type>
+      <tans>fxv[5]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt_fx1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>fx1</sans>
+        <tans>fxv[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx1-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_fx1-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>fx1</sans>
+        <tans>low[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>This cell is frequency times the class <em>midpoint</em> \(x\), not the lower value of the class.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_fx1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Multiply this row's frequency by its midpoint \(x\).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_fx2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>fx2</sans>
+        <tans>fxv[2]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx2-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_fx2-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>fx2</sans>
+        <tans>low[2]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>This cell is frequency times the class <em>midpoint</em> \(x\), not the lower value of the class.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_fx2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Multiply this row's frequency by its midpoint \(x\).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_fx3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>fx3</sans>
+        <tans>fxv[3]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx3-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_fx3-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>fx3</sans>
+        <tans>low[3]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>This cell is frequency times the class <em>midpoint</em> \(x\), not the lower value of the class.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_fx3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Multiply this row's frequency by its midpoint \(x\).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_fx4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>fx4</sans>
+        <tans>fxv[4]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx4-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_fx4-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>fx4</sans>
+        <tans>low[4]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>This cell is frequency times the class <em>midpoint</em> \(x\), not the lower value of the class.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_fx4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Multiply this row's frequency by its midpoint \(x\).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_fx5</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>fx5</sans>
+        <tans>fxv[5]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx5-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_fx5-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>fx5</sans>
+        <tans>low[5]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_fx5-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>This cell is frequency times the class <em>midpoint</em> \(x\), not the lower value of the class.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_fx5-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Multiply this row's frequency by its midpoint \(x\).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_mean</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text>stu_mean: if is(ans_totf # 0) then ans_totfx/ans_totf else 999999999;</text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_mean</sans>
+        <tans>mean_val</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mean-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_mean-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_mean</sans>
+        <tans>mean_by5</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mean-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Divide \(\sum fx\) by \(\sum f\) (the total frequency), not by the number of rows.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt_mean-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_mean</sans>
+        <tans>stu_mean</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mean-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Well done &mdash; your mean is correctly worked out from the \(\sum f\) and \(\sum fx\) you entered. But re-check those totals above: at least one isn't right yet, so this isn't the true mean.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_mean-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Mean \(=\sum fx \div \sum f\). Round to 2 d.p.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_totf</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_totf</sans>
+        <tans>Sf</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_totf-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_totf-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Add up the frequency column.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_totfx</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_totfx</sans>
+        <tans>Sfx</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_totfx-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_totfx-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Add up the whole fx column you completed.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>21001</deployedseed>
+    <deployedseed>21003</deployedseed>
+    <deployedseed>21005</deployedseed>
+    <deployedseed>21007</deployedseed>
+    <deployedseed>21009</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>All fx and mean correct.</description>
+      <testinput>
+        <name>ans_mean</name>
+        <value>mean_disp</value>
+      </testinput>
+      <testinput>
+        <name>ans_totf</name>
+        <value>Sf</value>
+      </testinput>
+      <testinput>
+        <name>ans_totfx</name>
+        <value>Sfx</value>
+      </testinput>
+      <testinput>
+        <name>fx1</name>
+        <value>fxv[1]</value>
+      </testinput>
+      <testinput>
+        <name>fx2</name>
+        <value>fxv[2]</value>
+      </testinput>
+      <testinput>
+        <name>fx3</name>
+        <value>fxv[3]</value>
+      </testinput>
+      <testinput>
+        <name>fx4</name>
+        <value>fxv[4]</value>
+      </testinput>
+      <testinput>
+        <name>fx5</name>
+        <value>fxv[5]</value>
+      </testinput>
+      <expected>
+        <name>prt_fx1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_fx1-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_mean</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_mean-0-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>fx1 from the lower limit; mean divided by 5.</description>
+      <testinput>
+        <name>ans_mean</name>
+        <value>mean_by5</value>
+      </testinput>
+      <testinput>
+        <name>ans_totf</name>
+        <value>Sf</value>
+      </testinput>
+      <testinput>
+        <name>ans_totfx</name>
+        <value>Sfx</value>
+      </testinput>
+      <testinput>
+        <name>fx1</name>
+        <value>low[1]</value>
+      </testinput>
+      <testinput>
+        <name>fx2</name>
+        <value>fxv[2]</value>
+      </testinput>
+      <testinput>
+        <name>fx3</name>
+        <value>fxv[3]</value>
+      </testinput>
+      <testinput>
+        <name>fx4</name>
+        <value>fxv[4]</value>
+      </testinput>
+      <testinput>
+        <name>fx5</name>
+        <value>fxv[5]</value>
+      </testinput>
+      <expected>
+        <name>prt_fx1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_fx1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_mean</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_mean-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>Wrong total frequency, but mean consistent with the student's own totals (error carried forward).</description>
+      <testinput>
+        <name>ans_mean</name>
+        <value>round((Sfx/(Sf+1))*100)/100.0</value>
+      </testinput>
+      <testinput>
+        <name>ans_totf</name>
+        <value>Sf+1</value>
+      </testinput>
+      <testinput>
+        <name>ans_totfx</name>
+        <value>Sfx</value>
+      </testinput>
+      <testinput>
+        <name>fx1</name>
+        <value>fxv[1]</value>
+      </testinput>
+      <testinput>
+        <name>fx2</name>
+        <value>fxv[2]</value>
+      </testinput>
+      <testinput>
+        <name>fx3</name>
+        <value>fxv[3]</value>
+      </testinput>
+      <testinput>
+        <name>fx4</name>
+        <value>fxv[4]</value>
+      </testinput>
+      <testinput>
+        <name>fx5</name>
+        <value>fxv[5]</value>
+      </testinput>
+      <expected>
+        <name>prt_mean</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_mean-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_totf</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_totf-0-F</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

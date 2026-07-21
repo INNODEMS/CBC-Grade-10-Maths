@@ -8,39 +8,31 @@
       <text><![CDATA[<p>Select the correct definition for each of the following statistical terms from the dropdown menus:</p>
 <div class="card mb-3">
   <div class="card-body">
-    <p><strong>(a) Data Source</strong></p>
-    [[input:ans1]] [[validation:ans1]][[feedback:prt1]]
+    <p><strong>(a) Data</strong></p>
+    [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
   </div>
 </div>
 
 <div class="card mb-3">
   <div class="card-body">
-    <p><strong>(b) Raw Data</strong></p>
-    [[input:ans2]] [[validation:ans2]][[feedback:prt2]]
+    <p><strong>(b) Primary Data</strong></p>
+    [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]
   </div>
 </div>
 
 <div class="card mb-3">
   <div class="card-body">
-    <p><strong>(c) Tertiary Sources</strong></p>
-    [[input:ans3]] [[validation:ans3]][[feedback:prt3]]
-  </div>
-</div>
-
-<div class="card mb-3">
-  <div class="card-body">
-    <p><strong>(d) Primary Sources</strong></p>
-    [[input:ans4]] [[validation:ans4]][[feedback:prt4]]
+    <p><strong>(c) Secondary Data</strong></p>
+    [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]
   </div>
 </div>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked solution</h3>
 <ul>
-    <li><strong>Data Source:</strong> The origin or specific location from where statistical facts are obtained.</li>
-    <li><strong>Raw Data:</strong> Data recorded in its original form as collected (ungrouped), without any organization or processing.</li>
-    <li><strong>Tertiary Sources:</strong> These are sources that facilitate the identification and location of primary and secondary sources. Examples include bibliographies, indexes, and encyclopedias.</li>
-    <li><strong>Primary Sources:</strong> Original materials or first-hand information collected directly by the researcher for a specific purpose (e.g., surveys, interviews).</li>
+    <li><strong>Data:</strong> a collection of facts, figures, numbers, observations, or measurements that can be recorded and used to study or understand something.</li>
+    <li><strong>Primary Data:</strong> data collected first-hand by the researcher for the specific study at hand (e.g., your own surveys, experiments, or observations).</li>
+    <li><strong>Secondary Data:</strong> data that has already been collected by someone else for a different purpose, which the researcher now re-uses (e.g., a census report, a textbook, a newspaper).</li>
 </ul>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -51,119 +43,83 @@
       <text>2025073100</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[/* --- 1. SETUP FOR DATA SOURCE (Input 1) --- */
-correct_text_ds: "The specific origin, location, or medium from where statistical facts are obtained.";
+      <text><![CDATA[/* Helper: position (1-3) of the correct option (value 1) within a shuffled dropdown list */
+correctpos(ta) := first(sublist_indices(map(first, ta), lambda([v], is(v = 1))));
+/* A wrong option's value, for question testing */
+wrongval(ta)   := first(delete(1, map(first, ta)));
 
-/* Pool of wrong answers specific to Data Source */
-wrongs_ds: [
-    "The software tools used to analyze numerical information.", 
-    "The final report generated after data analysis is complete.", 
-    "A small group of people selected to represent a population.",
-    "The mathematical formula used to calculate the mean.",
-    "A graphical representation of frequency distribution."
-];
-
-/* Build the list: 1 Correct + 3 Random Wrongs */
-/* Note: Boolean set to false for distractors to maintain logical consistency */
-correct_ans_ds: rand_selection([[1, true, correct_text_ds]], 1);
-wrong_ans_ds: rand_selection([
-    [2, false, wrongs_ds[1]],
-    [3, false, wrongs_ds[2]],
-    [4, false, wrongs_ds[3]],
-    [5, false, wrongs_ds[4]],
-    [6, false, wrongs_ds[5]]
-], 3);
-
-/* Combine and Shuffle */
-ta_ds: random_permutation(append(correct_ans_ds, wrong_ans_ds));
-/* Extract just the text for the dropdown list */
-final_options_ds: map(third, ta_ds);
-
-
-/* --- 2. SETUP FOR RAW DATA (Input 2) --- */
-correct_text_rd: "Data recorded in its original form as collected, without any organization or processing.";
-
-wrongs_rd: [
-    "Data that has been summarized into frequency tables and charts.", 
-    "Conclusions and inferences drawn from a statistical study.", 
+/* --- 1. DATA (Input 1) --- */
+correct_text_da: "A collection of facts, figures, numbers, observations, or measurements that can be recorded and used to study something.";
+wrongs_da: [
+    "The final conclusions and recommendations drawn after a study is complete.",
+    "A graph or chart used to display information visually.",
     "The average value calculated from a set of numbers.",
-    "Data that has been rounded off to the nearest decimal.",
-    "Information that has been sorted alphabetically."
+    "A small group of people selected to represent a population.",
+    "The software tools used to analyse numerical information."
 ];
-
-correct_ans_rd: rand_selection([[1, true, correct_text_rd]], 1);
-wrong_ans_rd: rand_selection([
-    [2, false, wrongs_rd[1]],
-    [3, false, wrongs_rd[2]],
-    [4, false, wrongs_rd[3]],
-    [5, false, wrongs_rd[4]],
-    [6, false, wrongs_rd[5]]
+correct_ans_da: rand_selection([[1, true, correct_text_da]], 1);
+wrong_ans_da: rand_selection([
+    [2, false, wrongs_da[1]],
+    [3, false, wrongs_da[2]],
+    [4, false, wrongs_da[3]],
+    [5, false, wrongs_da[4]],
+    [6, false, wrongs_da[5]]
 ], 3);
+ta_da: random_permutation(append(correct_ans_da, wrong_ans_da));
 
-ta_rd: random_permutation(append(correct_ans_rd, wrong_ans_rd));
-final_options_rd: map(third, ta_rd);
-
-
-/* --- 3. SETUP FOR TERTIARY SOURCES (Input 3) --- */
-correct_text_ts: "Sources that compile, index, or summarize primary and secondary sources (e.g., encyclopedias).";
-
-wrongs_ts: [
-    "First-hand accounts and original data collected directly by a researcher.", 
-    "Detailed analysis and interpretation of data found in academic journals.", 
-    "The raw responses collected immediately from a survey.",
-    "Oral interviews conducted with participants.",
-    "Government records of daily transactions."
+/* --- 2. PRIMARY DATA (Input 2) --- */
+correct_text_pd: "Data collected first-hand by the researcher for the specific study at hand.";
+wrongs_pd: [
+    "Information obtained from existing records such as government censuses or textbooks.",
+    "Data that has already been published and analysed by another author.",
+    "A summary of research compiled from many other studies.",
+    "News articles reporting on a past event.",
+    "Figures copied from a published statistical report."
 ];
-
-correct_ans_ts: rand_selection([[1, true, correct_text_ts]], 1);
-wrong_ans_ts: rand_selection([
-    [2, false, wrongs_ts[1]],
-    [3, false, wrongs_ts[2]],
-    [4, false, wrongs_ts[3]],
-    [5, false, wrongs_ts[4]],
-    [6, false, wrongs_ts[5]]
+correct_ans_pd: rand_selection([[1, true, correct_text_pd]], 1);
+wrong_ans_pd: rand_selection([
+    [2, false, wrongs_pd[1]],
+    [3, false, wrongs_pd[2]],
+    [4, false, wrongs_pd[3]],
+    [5, false, wrongs_pd[4]],
+    [6, false, wrongs_pd[5]]
 ], 3);
+ta_pd: random_permutation(append(correct_ans_pd, wrong_ans_pd));
 
-ta_ts: random_permutation(append(correct_ans_ts, wrong_ans_ts));
-final_options_ts: map(third, ta_ts);
-
-
-/* --- 4. SETUP FOR PRIMARY SOURCES (Input 4) --- */
-correct_text_ps: "Original data or first-hand information collected directly by the researcher for a specific purpose.";
-
-wrongs_ps: [
-    "Information obtained from existing records like government censuses or books.", 
-    "Abstracts and indexes used to locate other research materials.", 
-    "Data that has already been manipulated and published by another author.",
-    "News articles commenting on a recent event.",
-    "Textbooks that summarize a specific field of study."
+/* --- 3. SECONDARY DATA (Input 3) --- */
+correct_text_sd: "Data already collected by someone else for a different purpose, which the researcher now re-uses.";
+wrongs_sd: [
+    "Information a researcher collects first-hand through their own surveys or experiments.",
+    "Measurements you record yourself during a science experiment.",
+    "Responses gathered directly from interviewing participants.",
+    "Original observations made by the investigator for this specific study.",
+    "First-hand counts taken by a student during fieldwork."
 ];
-
-correct_ans_ps: rand_selection([[1, true, correct_text_ps]], 1);
-wrong_ans_ps: rand_selection([
-    [2, false, wrongs_ps[1]],
-    [3, false, wrongs_ps[2]],
-    [4, false, wrongs_ps[3]],
-    [5, false, wrongs_ps[4]],
-    [6, false, wrongs_ps[5]]
+correct_ans_sd: rand_selection([[1, true, correct_text_sd]], 1);
+wrong_ans_sd: rand_selection([
+    [2, false, wrongs_sd[1]],
+    [3, false, wrongs_sd[2]],
+    [4, false, wrongs_sd[3]],
+    [5, false, wrongs_sd[4]],
+    [6, false, wrongs_sd[5]]
 ], 3);
+ta_sd: random_permutation(append(correct_ans_sd, wrong_ans_sd));
 
-ta_ps: random_permutation(append(correct_ans_ps, wrong_ans_ps));
-final_options_ps: map(third, ta_ps);]]></text>
+/* Short summary of this variant for the question note */
+variantnote: sconcat("correct positions a/b/c = ",
+    correctpos(ta_da), "/", correctpos(ta_pd), "/", correctpos(ta_sd));]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta@}
-{@@}</text>
+      <text>{@variantnote@}</text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Daniel Murunga</p>
-<p id="concept"></p>
-<p id="reviewer"></p>
-<p id="reviewer"></p>
-<p id="description">Matching definitions for Data Source, Raw Data, Tertiary Sources, and Primary Sources.</p>]]></text>
+<p id="concept">Sources of data: matching the terms Data, Primary Data and Secondary Data to their definitions.</p>
+<p id="reviewer">Ben (STACK audit)</p>
+<p id="description">Students match three statistical terms to their correct definitions using dropdown menus. Each dropdown shows the correct definition plus three distractors sampled at random from a pool of five. Terms restricted to those taught in the lesson (Data, Primary Data, Secondary Data); each wrong answer gives a diagnostic hint.</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -190,7 +146,7 @@ final_options_ps: map(third, ta_ps);]]></text>
     <input>
       <name>ans1</name>
       <type>dropdown</type>
-      <tans>ta_ds</tans>
+      <tans>ta_da</tans>
       <boxsize>15</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -198,17 +154,17 @@ final_options_ps: map(third, ta_ps);]]></text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
       <options/>
     </input>
     <input>
       <name>ans2</name>
       <type>dropdown</type>
-      <tans>ta_rd</tans>
+      <tans>ta_pd</tans>
       <boxsize>15</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -216,17 +172,17 @@ final_options_ps: map(third, ta_ps);]]></text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
       <options/>
     </input>
     <input>
       <name>ans3</name>
       <type>dropdown</type>
-      <tans>ta_ts</tans>
+      <tans>ta_sd</tans>
       <boxsize>15</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -234,29 +190,11 @@ final_options_ps: map(third, ta_ps);]]></text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
-      <options/>
-    </input>
-    <input>
-      <name>ans4</name>
-      <type>dropdown</type>
-      <tans>ta_ps</tans>
-      <boxsize>15</boxsize>
-      <strictsyntax>1</strictsyntax>
-      <insertstars>0</insertstars>
-      <syntaxhint/>
-      <syntaxattribute>0</syntaxattribute>
-      <forbidwords/>
-      <allowwords/>
-      <forbidfloat>1</forbidfloat>
-      <requirelowestterms>0</requirelowestterms>
-      <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
       <options/>
     </input>
     <prt>
@@ -272,7 +210,7 @@ final_options_ps: map(third, ta_ps);]]></text>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>mcq_correct(ta_ds)[1]</tans>
+        <tans>mcq_correct(ta_da)[1]</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -289,7 +227,7 @@ final_options_ps: map(third, ta_ps);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Not quite. <em>Data</em> is the most general term: the raw facts, figures, or observations you record &mdash; not a chart, a conclusion, or a calculation done with them.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -306,7 +244,7 @@ final_options_ps: map(third, ta_ps);]]></text>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans2</sans>
-        <tans>mcq_correct(ta_rd)[1]</tans>
+        <tans>mcq_correct(ta_pd)[1]</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -323,7 +261,7 @@ final_options_ps: map(third, ta_ps);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Not quite. <em>Primary data</em> is first-hand: collected directly by the researcher for this specific study. If someone else gathered it earlier, it is not primary.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -340,7 +278,7 @@ final_options_ps: map(third, ta_ps);]]></text>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans3</sans>
-        <tans>mcq_correct(ta_ts)[1]</tans>
+        <tans>mcq_correct(ta_sd)[1]</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -357,63 +295,29 @@ final_options_ps: map(third, ta_ps);]]></text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt3-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
-        </falsefeedback>
-      </node>
-    </prt>
-    <prt>
-      <name>prt4</name>
-      <value>1.0000000</value>
-      <autosimplify>1</autosimplify>
-      <feedbackstyle>1</feedbackstyle>
-      <feedbackvariables>
-        <text/>
-      </feedbackvariables>
-      <node>
-        <name>0</name>
-        <description/>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans4</sans>
-        <tans>mcq_correct(ta_ps)[1]</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
-        <truepenalty/>
-        <truenextnode>-1</truenextnode>
-        <trueanswernote>prt4-1-T</trueanswernote>
-        <truefeedback format="html">
-          <text/>
-        </truefeedback>
-        <falsescoremode>=</falsescoremode>
-        <falsescore>0</falsescore>
-        <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt4-1-F</falseanswernote>
-        <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Not quite. <em>Secondary data</em> was collected by someone else, for a different purpose, and is being re-used. If you gathered it yourself, it would be primary.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
     <deployedseed>1310784277</deployedseed>
+    <deployedseed>445120</deployedseed>
+    <deployedseed>739218</deployedseed>
+    <deployedseed>982004</deployedseed>
+    <deployedseed>167355</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>All three parts correct: full marks on every PRT.</description>
       <testinput>
         <name>ans1</name>
-        <value>first(mcq_correct(ta_ds))</value>
+        <value>mcq_correct(ta_da)[1]</value>
       </testinput>
       <testinput>
         <name>ans2</name>
-        <value>first(mcq_correct(ta_rd))</value>
+        <value>mcq_correct(ta_pd)[1]</value>
       </testinput>
       <testinput>
         <name>ans3</name>
-        <value>first(mcq_correct(ta_ts))</value>
-      </testinput>
-      <testinput>
-        <name>ans4</name>
-        <value>first(mcq_correct(ta_ps))</value>
+        <value>mcq_correct(ta_sd)[1]</value>
       </testinput>
       <expected>
         <name>prt1</name>
@@ -433,11 +337,39 @@ final_options_ps: map(third, ta_ps);]]></text>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt3-1-T</expectedanswernote>
       </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>All three wrong (a distractor selected): fires each F branch.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>wrongval(ta_da)</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>wrongval(ta_pd)</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>wrongval(ta_sd)</value>
+      </testinput>
       <expected>
-        <name>prt4</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt4-1-T</expectedanswernote>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-1-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt2-1-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt3-1-F</expectedanswernote>
       </expected>
     </qtest>
   </question>

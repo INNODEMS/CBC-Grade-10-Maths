@@ -9,79 +9,57 @@
 <p>The histogram below represents this data. The \(x\)-axis represents Time in Months (0 = Start of Jan, 12 = End of Dec), and the \(y\)-axis represents the Frequency Density (Rainfall Intensity in mm/month).</p>
 
 <p>
-[[jsxgraph width="750px" height="450px"]]
+[[jsxgraph width="750px" height="470px"]]
     JXG.Options.text.useMathJax = true;
-    
-    // 1. IMPORT DATA
     var x = [0, {#x1#}, {#x2#}, {#x3#}, {#x4#}, {#x5#}];
     var h = [{#h1#}, {#h2#}, {#h3#}, {#h4#}, {#h5#}];
-    
-    // Determine bounds
-    var max_h = Math.max(...h);
-    var max_x = 12;
-
-    // 2. INIT BOARD
-    // Grid:true gives the background lines. 
-    // boundingBox padded to make axes clear.
+    var max_h = Math.max.apply(null, h);
     var board = JXG.JSXGraph.initBoard(divid, {
-        boundingBox: [-1, max_h + 2, max_x + 1, -1],
-        grid: true,
-        showNavigation: false,
-        showCopyright: false,
-        zoom: {enabled: false},
-        pan: {enabled: false}
+        boundingBox: [-1.4, max_h + 2.2, 13.6, -2.2],
+        grid: false, showNavigation: false, showCopyright: false,
+        zoom: {enabled:false}, pan: {enabled:false}
     });
-
-    // 3. AXES
-    // Ticks set to distance 1 to match the integer heights
-    var yAxis = board.create("axis", [[0, 0], [0, max_h + 2]], {
-        name: "\\(Density\\)",
-        withLabel: true,
-        label: { offset: [-25, 0] },
-        ticks: { distance: 1, minorTicks: 0 } 
-    });
-
-    var xAxis = board.create("axis", [[0, 0], [max_x + 1, 0]], {
-        name: "\\(Months\\)",
-        withLabel: true,
-        label: { offset: [-10, -20] },
-        ticks: { distance: 1 }
-    });
-
-    // 4. DRAW BARS (Histogram)
-    for(let i=0; i<5; i++){
-        board.create('polygon', [
-            [x[i], 0], [x[i+1], 0], [x[i+1], h[i]], [x[i], h[i]]
-        ], {
-            fixed: true,          // Prevent dragging
-            fillColor: '#2E8B57', // SeaGreen
-            fillOpacity: 0.5,
-            borders: { 
-                strokeColor: 'black', 
-                strokeWidth: 2,
-                fixed: true 
-            },
-            vertices: { 
-                visible: false,   // No corner dots
-                fixed: true 
-            }
-        });
+    // Coarse grid: one light line per month (vertical) and per unit density (horizontal)
+    var gx, gy;
+    for (gx = 0; gx <= 12; gx++) {
+        board.create('segment', [[gx,0],[gx,max_h+1]], {strokeColor:'#e2e2e2', strokeWidth:1, fixed:true, highlight:false});
     }
-    // No Frequency Polygon drawn.
-
+    for (gy = 0; gy <= max_h+1; gy++) {
+        board.create('segment', [[0,gy],[12,gy]], {strokeColor:'#e2e2e2', strokeWidth:1, fixed:true, highlight:false});
+    }
+    // Axes: y shows numeric density; x shows no numbers (month names added below)
+    board.create('axis', [[0,0],[0,max_h+1]], {ticks:{drawLabels:true, insertTicks:false, ticksDistance:1, minorTicks:0}, lastArrow:true, highlight:false});
+    board.create('axis', [[0,0],[12,0]], {ticks:{drawLabels:false, insertTicks:false, ticksDistance:1, minorTicks:0}, lastArrow:true, highlight:false});
+    // Axis labels at the ends of the axes
+    board.create('text', [12.5, 0.45, 'Months'], {fixed:true, anchorX:'left', fontSize:15, cssStyle:'font-weight:bold;'});
+    board.create('text', [0.3, max_h+1.8, 'Frequency density (mm/month)'], {fixed:true, anchorX:'left', fontSize:15, cssStyle:'font-weight:bold;'});
+    // Month-name labels centred under each month interval
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var m;
+    for (m = 0; m < 12; m++) {
+        board.create('text', [m + 0.5, -1.0, months[m]], {fixed:true, anchorX:'middle', fontSize:12, color:'#333'});
+    }
+    // Histogram bars
+    var i;
+    for (i = 0; i < 5; i++) {
+        board.create('polygon', [[x[i],0],[x[i+1],0],[x[i+1],h[i]],[x[i],h[i]]],
+            {fixed:true, fillColor:'#2E8B57', fillOpacity:0.5,
+             borders:{strokeColor:'black', strokeWidth:2, fixed:true},
+             vertices:{visible:false, fixed:true}});
+    }
 [[/jsxgraph]]
 </p>
 
-<p><b>(a)</b> The "Monsoon" period occurs in the interval \({@x2@} < t \leq {@x3@}\). Using the frequency density shown on the graph, calculate the total rainfall (in mm) that fell during this specific month.</p>
+<p><b>(a)</b> The "Monsoon" period is <b>June</b> (the interval \({@x2@} < t \leq {@x3@}\)). Using the frequency density shown on the graph, calculate the total rainfall (in mm) that fell during June.</p>
 <p>[[input:ans1]] [[validation:ans1]]</p>
 
-<p><b>(b)</b> Estimate the cumulative rainfall (total amount of rain) recorded from the start of the year up to the middle of the 8th month (i.e., \(t = 7.5\)).</p>
+<p><b>(b)</b> Estimate the cumulative rainfall (total amount of rain) recorded from the start of the year up to the <b>middle of August</b> (i.e., \(t = 7.5\)).</p>
 <p>[[input:ans2]] [[validation:ans2]]</p>
 
-<p><b>(c)</b> Calculate what percentage of the total annual rainfall occurred during the "Monsoon" interval (\({@x2@} < t \leq {@x3@}\)). (Give your answer as a percentage rounded to 2 decimal places).</p>
+<p><b>(c)</b> Calculate what percentage of the total annual rainfall occurred during <b>June</b> (the "Monsoon", \({@x2@} < t \leq {@x3@}\)). (Give your answer as a percentage rounded to 2 decimal places).</p>
 <p>[[input:ans3]]% [[validation:ans3]]</p>
 
-<p><b>(d)</b> Calculate the <b>mean monthly rainfall</b> for the entire year.</p>
+<p><b>(d)</b> Calculate the <b>mean monthly rainfall</b> for the entire year, to 2 decimal places.</p>
 <p>[[input:ans4]] [[validation:ans4]]</p>
 
 <p>[[feedback:prt1]]</p>]]></text>
@@ -97,7 +75,7 @@
 <ul>
     <li><b>Width:</b> The interval is from {@x2@} to {@x3@}, so width = \({@w3@}\) month.</li>
     <li><b>Height:</b> Reading from the graph, the Frequency Density is {@h3@} mm/mo.</li>
-    <li><b>Calculation:</b> \( \text{Rainfall} = {@w3@} \times {@h3@} = \mathbf{@freq3@} \text{ mm} \).</li>
+    <li><b>Calculation:</b> \( \text{Rainfall} = {@w3@} \times {@h3@} = \mathbf{ {@freq3@} } \text{ mm} \).</li>
 </ul>
 
 <p><b>(b) Estimation up to \(t = 7.5\)</b></p>
@@ -116,17 +94,17 @@
     <br>Partial Rain = \({@p_width@} \times {@h4@} = {@rain_partial@}\) mm.
     </li>
 </ol>
-<p><b>Total Estimate:</b> \({@rain_prev@} + {@rain_partial@} = \mathbf{@ta2@} \text{ mm}\).</p>
+<p><b>Total Estimate:</b> \({@rain_prev@} + {@rain_partial@} = \mathbf{ {@ta2@} } \text{ mm}\).</p>
 
 <p><b>(c) Percentage Calculation</b></p>
 <p>First, calculate the Total Annual Rainfall by summing the area of all 5 bars:</p>
 \( \text{Total} = {@freq1@} + {@freq2@} + {@freq3@} + {@freq4@} + {@freq5@} = {@total_rain@} \text{ mm} \)
 <p>The percentage contribution of the Monsoon interval is:</p>
-\( \frac{@freq3@}{@total_rain@} \times 100 = \mathbf{@ta3_disp@}\% \)
+\( \frac{ {@freq3@} }{ {@total_rain@} } \times 100 = \mathbf{ {@ta3_disp@} }\% \)
 
 <p><b>(d) Mean Monthly Rainfall</b></p>
 <p>The mean monthly rainfall is the Total Rainfall divided by the total number of months (12).</p>
-\( \text{Mean} = \frac{@total_rain@}{12} = \mathbf{@ta4_disp@} \text{ mm/month} \)]]></text>
+\( \text{Mean} = \frac{ {@total_rain@} }{12} = \mathbf{ {@ta4_disp@} } \text{ mm/month} \)]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -197,14 +175,11 @@ ta4_disp: float(round(ta4*100)/100);]]></text>
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>{@1@}</p>
-<p>{@1@}</p>
-<p>{@1@}</p>]]></text>
+      <text>(a) {@ta1@}; (b) {@ta2@}; (c) {@ta3_disp@}%; (d) {@ta4_disp@}</text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Daniel Murunga</p>
-<p id="reviewer"></p>
-<p id="reviewer"> </p>
+<p id="reviewer">Ben (STACK audit)</p>
 <p id="description">
 Given a histogram representing annual rainfall grouped into unequal seasonal intervals, the student must calculate specific interval totals (using Area = Width \(\times\) Density), estimate cumulative rainfall up to a non-integer time point (linear interpolation within a bin), calculate the percentage contribution of a specific season, and determine the mean monthly rainfall.
 </p>]]></text>
@@ -309,7 +284,7 @@ Given a histogram representing annual rainfall grouped into unequal seasonal int
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
-        <text>node_test : if ta1=ans1 and ans2=ta2  and ans3=ta3 and ans4=ta4  then 1 else 0;</text>
+        <text><![CDATA[node_test : if ta1=ans1 and ans2=ta2 and abs(ans3-ta3)<0.01 and abs(ans4-ta4)<0.01 then 1 else 0;]]></text>
       </feedbackvariables>
       <node>
         <name>0</name>
@@ -414,10 +389,10 @@ Given a histogram representing annual rainfall grouped into unequal seasonal int
       <node>
         <name>4</name>
         <description/>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans3</sans>
         <tans>ta3</tans>
-        <testoptions/>
+        <testoptions>0.01</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0.25</truescore>
@@ -439,10 +414,10 @@ Given a histogram representing annual rainfall grouped into unequal seasonal int
       <node>
         <name>5</name>
         <description/>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans4</sans>
         <tans>ta4</tans>
-        <testoptions/>
+        <testoptions>0.01</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0.25</truescore>
