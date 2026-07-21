@@ -11,32 +11,40 @@ var board = JXG.JSXGraph.initBoard(divid, {
         boundingbox: [-7, 7, 7, -7],
         axis: false,
         showNavigation: false,
-        showCopyright: false
+        showCopyright: false,
+        keepAspectRatio:true
+    });
+    // Centre of circles (labeled so students can identify where radii originate)
+    var O = board.create('point', [0, 0], {
+        fixed: true,
+        visible: true,
+        name: 'O',
+        size: 2,
+        label: {offset: [-12, -12]}
     });
 
-    // Centre of circles (dot only, no label)
-    var O = board.create('point', [0, 0], {fixed: true, visible:true, name: ''});
-
-    // Inner and outer circles (concentric)
-    var inner = board.create('circle', [O, 3], {
+    // Outer circle drawn FIRST and filled — this becomes the annulus shading
+    var outer = board.create('circle', [O, 5], {
         strokeWidth: 2,
         fillColor: 'yellow',
         fillOpacity: 1
     });
 
-    var outer = board.create('circle', [O, 5], {
+    // Inner circle drawn ON TOP, filled with the background colour (white)
+    // This "cuts out" the centre, leaving only the ring (annulus) shaded
+    var inner = board.create('circle', [O, 3], {
         strokeWidth: 2,
         fillColor: 'white',
-        fillOpacity: 0.4
+        fillOpacity: 1
     });
 
     // Points on inner and outer circles
-    var P_inner = board.create('point', [3, 0], {size: 2, fixed: true, visible:true,name: ''});
-    var P_outer = board.create('point', [-4, 3], {size: 2, fixed: true, visible:true,name: ''});
+    var P_inner = board.create('point', [3, 0], {size: 2, fixed: true, visible:true, name: ''});
+    var P_outer = board.create('point', [-4, 3], {size: 2, fixed: true, visible:true, name: ''});
 
-    // Dashed segments from O to points on circles
-    board.create('segment', [O, P_inner], {dash: 2});
-    board.create('segment', [O, P_outer], {dash: 2});
+    // Dashed segments from O to points on circles (drawn last so they sit on top)
+    board.create('segment', [O, P_inner], {dash: 2, strokeColor: 'black'});
+    board.create('segment', [O, P_outer], {dash: 2, strokeColor: 'black'});
 
     // Labels for lengths
     board.create('text', [1.2, -0.8, '{#r#} cm']);
@@ -87,7 +95,7 @@ A &= \frac{22}{7} \left( ({@R@})^2 - ({@r@})^2 \right) \\
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>/* Randomize inner radius */

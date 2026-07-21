@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Which average best represents the data?</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The monthly salaries (in KES) of the 7 people who work at a small business are:</p>
+<p style="background-color:#f9f9f9;padding:12px;border:1px solid #ddd;font-family:monospace;font-size:1.05em;">{@data_str@}</p>
+<p><strong>(a)</strong> Calculate the <strong>mean</strong> salary (to 2 d.p.): KES [[input:ans_mean]] [[validation:ans_mean]] [[feedback:prt_mean]]</p>
+<p><strong>(b)</strong> Find the <strong>median</strong> salary: KES [[input:ans_med]] [[validation:ans_med]] [[feedback:prt_med]]</p>
+<p><strong>(c)</strong> Which average better represents a <strong>typical</strong> salary here, and why?</p>
+<p>[[input:ans_c]] [[validation:ans_c]] [[feedback:prt_c]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h4>Worked solution</h4>
+<p><strong>(a)</strong> Mean \(= \dfrac{ {@Ssal@} }{7} \approx {@mean_disp@}\) KES.</p>
+<p><strong>(b)</strong> In order, the middle (4th of 7) salary is the median \(= {@med@}\) KES.</p>
+<p><strong>(c)</strong> One very high salary (the owner's) pulls the <em>mean</em> well above what most staff earn, so the <strong>median</strong> ({@med@}) is the more representative "typical" salary. The median is not affected by a single extreme value.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[base: (rand(4)+20)*1000;      /* 20000..23000 */
+sgap: (rand(3)+2)*1000;       /* 2000..4000 */
+cluster: makelist(base+sgap*i, i, 0, 5);
+outlier: (rand(5)+12)*10000;  /* 120000..160000 (the owner) */
+all_sal: append(cluster, [outlier]);
+Ssal: apply("+", all_sal);
+mean_val: Ssal/7;
+mean_disp: round(mean_val*100)/100.0;
+med: sort(all_sal)[4];
+mean_by6: Ssal/6;             /* wrong: divided by 6 */
+shown: random_permutation(all_sal);
+data_str: sconcat(shown[1]);
+for i:2 thru 7 do data_str: sconcat(data_str, ", ", shown[i]);
+opts_c: [
+ [1, true, "The median, because the one very high salary pulls the mean up, away from what most staff earn."],
+ [2, false, "The mean, because it uses every salary."],
+ [3, false, "The mean, because it is always the best average."],
+ [4, false, "The mode, because it is the most common salary."]
+];
+ta_c: random_permutation(opts_c);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>mean={@mean_disp@}, median={@med@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Ben (STACK author)</p><p id="concept">Choosing a representative average when an outlier distorts the mean.</p><p id="reviewer"></p><p id="description">Salaries with one high outlier. Students compute mean and median, then choose and justify the more representative average via a dropdown. Diagnostics catch dividing by 6 and the "mean uses every value" misconception.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans_c</name>
+      <type>dropdown</type>
+      <tans>ta_c</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>0</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_mean</name>
+      <type>algebraic</type>
+      <tans>mean_val</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_med</name>
+      <type>algebraic</type>
+      <tans>med</tans>
+      <boxsize>8</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt_c</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_c</sans>
+        <tans>mcq_correct(ta_c)[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_c-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_c-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_c</sans>
+        <tans>2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_c-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>The mean <em>does</em> use every value &mdash; which is exactly why one very high salary distorts it. The median is not pulled up by the outlier, so it better represents a typical salary.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_c-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Think about which average is affected by one extreme value. The median stays in the middle of most of the data; the mean gets dragged towards the outlier.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_mean</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_mean</sans>
+        <tans>mean_val</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mean-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_mean-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_mean</sans>
+        <tans>mean_by6</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mean-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>There are 7 salaries, so divide the total by 7 (don't forget to include the owner's salary in the total, then divide by everyone).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_mean-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Add all 7 salaries, then divide by 7. Round to 2 d.p.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_med</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans_med</sans>
+        <tans>med</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_med-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_med-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Put the salaries in order and take the middle (4th) value.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>30001</deployedseed>
+    <deployedseed>30003</deployedseed>
+    <deployedseed>30005</deployedseed>
+    <deployedseed>30007</deployedseed>
+    <deployedseed>30009</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Mean, median, and reasoning correct.</description>
+      <testinput>
+        <name>ans_c</name>
+        <value>mcq_correct(ta_c)[1]</value>
+      </testinput>
+      <testinput>
+        <name>ans_mean</name>
+        <value>mean_disp</value>
+      </testinput>
+      <testinput>
+        <name>ans_med</name>
+        <value>med</value>
+      </testinput>
+      <expected>
+        <name>prt_c</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_c-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_mean</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_mean-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_med</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_med-0-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description><![CDATA[Mean over 6; chose "mean uses every value".]]></description>
+      <testinput>
+        <name>ans_c</name>
+        <value>2</value>
+      </testinput>
+      <testinput>
+        <name>ans_mean</name>
+        <value>mean_by6</value>
+      </testinput>
+      <testinput>
+        <name>ans_med</name>
+        <value>med</value>
+      </testinput>
+      <expected>
+        <name>prt_c</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_c-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_mean</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_mean-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

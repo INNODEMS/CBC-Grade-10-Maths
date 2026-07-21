@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Area of a Sprinkler's Sweep</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A circular fountain sits at the centre of a garden. A sprinkler head, mounted on a post at the fountain's centre \(O\), rotates and sprays water outward, watering the lawn beyond the fountain's edge over an angle of \({@theta@}^\circ\).</p>
+
+<p>The fountain has a radius of \({@r@}\,\text{cm}\), and the sprinkler's water reaches a maximum distance of \({@R@}\,\text{cm}\) from \(O\).</p>
+
+<p>Calculate the area of lawn watered by the sprinkler (the shaded region shown), correct to \(3\,\text{decimal places}\). (Use \(\pi=\frac{22}{7}\))</p>
+
+[[jsxgraph]]
+var brd = JXG.JSXGraph.initBoard('jxgbox', {
+        boundingbox: [-12, 12, 12, -12],
+        axis: false,
+        showNavigation: false,
+        showCopyright: false,
+        keepAspectRatio: true
+    });
+
+    // Centre O: the sprinkler post, at the centre of the fountain
+    var O = brd.create('point', [-2, -2], {
+        name: 'O',
+        visible: true,
+        size: 2,
+        fixed: true,
+        label: { offset: [-14, -12], fontSize: 16 }
+    });
+
+    // Fixed DISPLAY radii, independent of true R and r values (which vary in cm)
+    var R_outer = 10;
+    var R_inner = 4;
+
+    // Real swept angle drives the diagram shape
+    var angleDeg = {#theta#};
+    var angle = angleDeg * Math.PI / 180;
+
+    // Outer sector boundary (maximum reach of the water)
+    var P = brd.create('point', [O.X() + R_outer, O.Y()], {visible: false});
+    var Q = brd.create('point', [O.X() + R_outer * Math.cos(angle), O.Y() + R_outer * Math.sin(angle)], {visible: false});
+    brd.create('sector', [O, P, Q], {
+        fillColor: '#8fd19e',
+        fillOpacity: 0.5,
+        strokeWidth: 2,
+        strokeColor: 'darkgreen'
+    });
+
+    // Inner sector, filled to represent the fountain (unwatered, cuts out the centre)
+    var Pin = brd.create('point', [O.X() + R_inner, O.Y()], {visible: false});
+    var Qin = brd.create('point', [O.X() + R_inner * Math.cos(angle), O.Y() + R_inner * Math.sin(angle)], {visible: false});
+    brd.create('sector', [O, Pin, Qin], {
+        fillColor: '#4a90d9',
+        fillOpacity: 0.8,
+        strokeWidth: 0
+    });
+
+    // Full fountain circle outline (dashed), to show it's a full circular fountain,
+    // even though only part of its boundary lies within the swept angle
+    brd.create('circle', [O, R_inner], {
+        strokeColor: '#4a90d9',
+        strokeWidth: 1,
+        dash: 2,
+        fillOpacity: 0
+    });
+
+    // Base line marking the start of the sweep
+    var baseEnd = brd.create('point', [O.X() + R_outer, O.Y()], {visible: false});
+    brd.create('segment', [O, baseEnd], {strokeColor: 'darkgreen', strokeWidth: 2});
+    brd.create('segment', [O, Q], {strokeColor: 'darkgreen', strokeWidth: 2});
+
+    // Angle marker showing theta
+    brd.create('angle', [baseEnd, O, Q], {
+        radius: 2,
+        name: function() { return angleDeg + '°'; }
+    });
+
+    // Fountain radius label
+    brd.create('text', [
+        function() { return O.X() + (R_inner / 2) * Math.cos(angle / 2); },
+        function() { return O.Y() + (R_inner / 2) * Math.sin(angle / 2) + 0.6; },
+        function() { return {#r#} + ' cm'; }
+    ]);
+
+    // Outer reach label
+    brd.create('text', [
+        function() { return O.X() + ((R_inner + R_outer) / 2) * Math.cos(angle / 2); },
+        function() { return O.Y() + ((R_inner + R_outer) / 2) * Math.sin(angle / 2) + 0.6; },
+        function() { return {#R#} + ' cm'; }
+    ]);
+
+    // "Fountain" label near the inner circle
+    brd.create('text', [O.X() - R_inner - 1.5, O.Y() + 1, 'Fountain']);
+[[/jsxgraph]]
+
+<p>\(\text{Area of lawn watered}=\)[[input:ans1]]\(\,\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>The watered lawn forms an annular sector — a sector-shaped region with the fountain's circle removed from the centre. From the problem:</p>
+<ul>
+    <li>Sweep angle: \({@theta@}^\circ\)</li>
+    <li>Fountain radius (inner): \(r={@r@}\,\text{cm}\)</li>
+    <li>Sprinkler's maximum reach (outer): \(R={@R@}\,\text{cm}\)</li>
+</ul>
+
+<p><strong>Step 1: Write the formula for the area of an annular sector.</strong></p>
+<p>
+\[
+A = \frac{\theta}{360} \times \pi (R^2 - r^2)
+\]
+</p>
+
+<p><strong>Step 2: Substitute the values and compute the area.</strong></p>
+<p>
+\[
+\begin{align}
+A &= \frac{{@theta@}}{360} \times \frac{22}{7} \times \left({@R@}^2 - {@r@}^2\right) \\
+&= \frac{{@theta@}}{360} \times \frac{22}{7} \times \left({@R_sq@} - {@r_sq@}\right) \\
+&= \frac{{@theta@}}{360} \times \frac{22}{7} \times {@Radius_difference@} \\
+&= {@A_val@}\,\text{cm}^2
+\end{align}
+\]
+</p>
+
+<p>Rounded to \(3\) decimal places:</p>
+<p>\(\text{Area of lawn watered} \approx {@A_3dp@}\,\text{cm}^2\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Randomize the sweep angle of the sprinkler, 60° to 180°, steps of 10° */
+theta: rand_with_step(60, 180, 10);
+
+/* Randomize the fountain's radius (inner radius, unwatered) */
+r: rand_with_step(7, 63, 7);
+
+/* Randomize the sprinkler's reach beyond the fountain, then derive R */
+Reach: rand_with_step(7, 105, 7);
+R: r + Reach;
+
+/* pi = 22/7 as specified */
+Pi_val: 22/7;
+
+/* Intermediate working values */
+R_sq: R^2;
+r_sq: r^2;
+Radius_difference: R_sq - r_sq;
+
+/* Area of the annular sector (watered lawn) */
+A: (theta/360) * Pi_val * Radius_difference;
+A_val: float(A);
+
+/* Round to 3 decimal places */
+A_3dp: float(decimalplaces(A, 3));</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\({@theta@}\)</p>
+<p>\({@R@}\)</p>
+<p>\({@Radius_difference@}\)</p>
+<p>\({@A_3dp@}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>A_3dp</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumDecPlaces</answertest>
+        <sans>ans1</sans>
+        <tans>A_3dp</tans>
+        <testoptions>3</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1301836439</deployedseed>
+    <deployedseed>2056324318</deployedseed>
+    <deployedseed>1995711814</deployedseed>
+    <deployedseed>1529412908</deployedseed>
+    <deployedseed>443145729</deployedseed>
+    <deployedseed>1709609970</deployedseed>
+    <deployedseed>1316683630</deployedseed>
+    <deployedseed>1235607459</deployedseed>
+    <deployedseed>202117726</deployedseed>
+    <deployedseed>1728242339</deployedseed>
+    <deployedseed>1513390704</deployedseed>
+    <deployedseed>2075590544</deployedseed>
+    <deployedseed>1428766618</deployedseed>
+    <deployedseed>760454964</deployedseed>
+    <deployedseed>659327262</deployedseed>
+    <deployedseed>1881032683</deployedseed>
+    <deployedseed>77286921</deployedseed>
+    <deployedseed>50458808</deployedseed>
+    <deployedseed>1983908705</deployedseed>
+    <deployedseed>2025673596</deployedseed>
+  </question>
+</quiz>

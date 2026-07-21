@@ -5,12 +5,12 @@
       <text>A bag has 6 red and 4 blue balls.</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>A bag has 6 red and 4 blue balls. One ball is drawn, replaced, and then another is drawn. Find the probability that both are:</p>
+      <text><![CDATA[<p>A bag has {@redballs@} {@ball1@} and {@blueballs@} {@ball2@} balls. One ball is drawn, replaced, and then another is drawn. Find the probability that both are:</p>
 <p></p>
 <p>
      <ol type="a">
-             <li><p>Red [[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p></li>
-             <li><p>One red and one blue [[input:ans2]] [[validation:ans2]][[feedback:prt3]]</p></li>
+             <li><p>{@ball2@} [[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p></li>
+             <li><p>One {@ball1@} and one {@ball2@} [[input:ans2]] [[validation:ans2]][[feedback:prt3]]</p></li>
      </ol>
 
 </p>
@@ -37,10 +37,13 @@
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>blueballs:rand(10)+2;
-redballs : rand(10)+rand(4);
-ball1:rand([red, yellow, green, purple, orange]);
-ball2:rand([blue, black ,white ,pink , brown]);</text>
+      <text>ball1:rand(10)+2;
+ball2 : rand(10)+rand(4);
+pball1: ball1/(ball1 + ball2);
+pball2: ball2/(ball1 + ball2);
+ball1c:rand([red, yellow, green, purple, orange]);
+ball2c:rand([blue, black ,white ,pink , brown]);
+ta:pball2 * pball2;</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -83,7 +86,7 @@ ball2:rand([blue, black ,white ,pink , brown]);</text>
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>ta1</tans>
+      <tans>ta</tans>
       <boxsize>15</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -129,7 +132,7 @@ ball2:rand([blue, black ,white ,pink , brown]);</text>
         <description>Checks for the correct answer.</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>ta1</tans>
+        <tans>ta</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>

@@ -2,54 +2,55 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Reflection and congruence in real life</text>
+      <text>Reflecting a Flower Bed</text>
     </name>
-    <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>A landscape designer is planning a symmetrical garden. They place a triangular flower bed on one side of a central pathway (represented by the y-axis). The vertices of this flower bed are at:</p>
+    <questiontext format="html">
+      <text><![CDATA[<p>A landscape designer is planning a symmetrical garden. They place a triangular flower bed on one side of a central pathway (the \(y\)-axis, shown dashed). The vertices of the flower bed are:</p>
 <ul>
-    <li><b>A({@x1@}, {@y1@})</b></li>
-    <li><b>B({@x2@}, {@y2@})</b></li>
-    <li><b>C({@x3@}, {@y3@})</b></li>
+  <li><b>A({@x1@}, {@y1@})</b></li>
+  <li><b>B({@x2@}, {@y2@})</b></li>
+  <li><b>C({@x3@}, {@y3@})</b></li>
 </ul>
-
-[[jsxgraph width="400px" height="400px"]]
-var board = JXG.JSXGraph.initBoard(divid, {boundingbox: [-8, 8, 8, -2], axis: true, showCopyright: false});
-
-// Central Pathway (y-axis)
-board.create('line', [[0,0], [0,1]], {strokeColor: 'black', dash: 2, name: 'Pathway', withLabel: true});
-
-// Original Flower Bed
-var p1 = board.create('point', [{#x1#}, {#y1#}], {name: 'A', color: 'blue'});
-var p2 = board.create('point', [{#x2#}, {#y2#}], {name: 'B', color: 'blue'});
-var p3 = board.create('point', [{#x3#}, {#y3#}], {name: 'C', color: 'blue'});
-board.create('polygon', [p1, p2, p3], {fillColor: 'blue', fillOpacity: 0.2});
+[[jsxgraph width="440px" height="440px"]]
+var board = JXG.JSXGraph.initBoard(divid, {
+  boundingbox: [-8, 8, 8, -8], axis: true, grid: true, showCopyright: false, showNavigation: false,
+  keepaspectratio: true, pan: {enabled: false}, zoom: {enabled: false},
+  defaultAxes: {
+    x: {ticks: {ticksDistance: 1, insertTicks: false, minorTicks: 0, drawLabels: true, label: {fontSize: 9}}},
+    y: {ticks: {ticksDistance: 1, insertTicks: false, minorTicks: 0, drawLabels: true, label: {fontSize: 9}}}
+  }
+});
+// central pathway = the y-axis
+board.create('line', [[0,-100],[0,100]], {strokeColor:'#0b8043', dash:2, strokeWidth:2,
+  straightFirst:true, straightLast:true, fixed:true, highlight:false});
+board.create('text', [0.3, 7.4, 'pathway'], {fontSize:12, color:'#0b8043', fixed:true, highlight:false});
+// original flower bed (fixed - students cannot move it)
+var p1 = board.create('point', [{#x1#}, {#y1#}], {name:'A', color:'#1f6feb', fixed:true, highlight:false, showInfobox:false, label:{offset:[6,6]}});
+var p2 = board.create('point', [{#x2#}, {#y2#}], {name:'B', color:'#1f6feb', fixed:true, highlight:false, showInfobox:false, label:{offset:[6,6]}});
+var p3 = board.create('point', [{#x3#}, {#y3#}], {name:'C', color:'#1f6feb', fixed:true, highlight:false, showInfobox:false, label:{offset:[6,6]}});
+board.create('polygon', [p1, p2, p3], {fillColor:'#1f6feb', fillOpacity:0.2,
+  borders:{strokeColor:'#1f6feb', strokeWidth:2}, fixed:true, highlight:false, vertices:{visible:true, fixed:true}});
 [[/jsxgraph]]
-
-<ol>
-    <li>The designer reflects this flower bed across the y-axis to create a matching bed on the other side. Determine the coordinates of the reflected vertices: <br>
-<p><i>(Enter coordinates as [x, y]).</i></p>
-     <p>   A' = [[input:ans1]], </p> <p>B' = [[input:ans2]],</p><p> C' = [[input:ans3]]</p>
-<p> [[validation:ans1]][[feedback:prt1]][[validation:ans2]][[feedback:prt2]][[validation:ans3]] [[feedback:prt3]]</p>
-    </li>
-    <li>Is the reflected flower bed congruent to the original flower bed? \(\,\) [[input:ans4]] [[validation:ans4]] [[feedback:prt4]]
-</li>
-</ol>]]></text>
+<p><b>1.</b> The designer reflects the flower bed across the \(y\)-axis to make a matching bed on the other side. Enter the coordinates of each reflected vertex.</p>
+<div>\(A' = \Big(\) [[input:ans1x]] \(,\) [[input:ans1y]] \(\Big)\) &nbsp; [[feedback:prt1]]</div>
+<div>[[validation:ans1x]] [[validation:ans1y]]</div>
+<div>\(B' = \Big(\) [[input:ans2x]] \(,\) [[input:ans2y]] \(\Big)\) &nbsp; [[feedback:prt2]]</div>
+<div>[[validation:ans2x]] [[validation:ans2y]]</div>
+<div>\(C' = \Big(\) [[input:ans3x]] \(,\) [[input:ans3y]] \(\Big)\) &nbsp; [[feedback:prt3]]</div>
+<div>[[validation:ans3x]] [[validation:ans3y]]</div>
+<p><b>2.</b> Is the reflected flower bed congruent to the original flower bed? &nbsp; [[input:ans4]] [[validation:ans4]] [[feedback:prt4]]</p>]]></text>
     </questiontext>
-    <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<h3> Worked Solution</h3>
-
-<b>Step 1: Apply the Reflection Rule</b>
-<p>When a point \(x, y\) is reflected across the y-axis, the x-coordinate changes sign, while the y-coordinate remains the same: \(x, y\) \(\rightarrow (-x, y)\).</p>
+    <generalfeedback format="html">
+      <text><![CDATA[<h4>Worked solution</h4>
+<p><b>Step 1: apply the reflection rule.</b> Reflecting a point in the \(y\)-axis reverses the sign of the \(x\)-coordinate and leaves the \(y\)-coordinate unchanged: \[ (x,\,y) \;\longrightarrow\; (-x,\,y). \] (Reflecting in the <em>x</em>-axis would do the opposite, \((x,y)\to(x,-y)\) &mdash; a common slip.)</p>
 <ul>
-    <li>A({@x1@}, {@y1@}) \(\rightarrow\) <b>A'({@rx1@}, {@ry1@})</b></li>
-    <li>B({@x2@}, {@y2@}) \(\rightarrow\) <b>B'({@rx2@}, {@ry2@})</b></li>
-    <li>C({@x3@}, {@y3@}) \(\rightarrow\) <b>C'({@rx3@}, {@ry3@})</b></li>
+  <li>A({@x1@}, {@y1@}) \(\rightarrow\) <b>A'({@rx1@}, {@ry1@})</b></li>
+  <li>B({@x2@}, {@y2@}) \(\rightarrow\) <b>B'({@rx2@}, {@ry2@})</b></li>
+  <li>C({@x3@}, {@y3@}) \(\rightarrow\) <b>C'({@rx3@}, {@ry3@})</b></li>
 </ul>
-
-<b>Step 2: Understand Congruence</b>
-<p>A reflection is an isometry (a rigid transformation). This means the size and shape of the object are preserved. Because the side lengths and internal angles do not change, the two flower beds are congruent.</p>]]></text>
+<p><b>Step 2: congruence.</b> A reflection is an <em>isometry</em> (a rigid motion): it preserves every length and angle. The two flower beds therefore have identical side lengths and angles, so they are <b>congruent</b>.</p>]]></text>
     </generalfeedback>
-    <defaultgrade>1</defaultgrade>
+    <defaultgrade>4</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
@@ -57,37 +58,33 @@ board.create('polygon', [p1, p2, p3], {fillColor: 'blue', fillOpacity: 0.2});
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[/* Define vertices of a triangular flower bed in the first quadrant */
-/* Randomizing to ensure a unique triangle for each student */
-x1: 1 + rand(2);   /* 1 or 2 */
-y1: 1 + rand(2);   /* 1 or 2 */
-x2: x1 + 2 + rand(2);
-y2: y1;
-x3: x1 + 1;
-y3: y1 + 3 + rand(2);
+      <text><![CDATA[/* Triangular flower bed in the first quadrant (right of the pathway = y-axis) */
+x1 : 1 + rand(2);
+y1 : 1 + rand(2);
+x2 : x1 + 2 + rand(2);
+y2 : y1;
+x3 : x1 + 1;
+y3 : y1 + 3 + rand(2);
 
-/* Reflection across the y-axis (x -> -x) */
-rx1: -x1; ry1: y1;
-rx2: -x2; ry2: y2;
-rx3: -x3; ry3: y3;
+/* Reflection in the y-axis: (x,y) -> (-x, y) */
+rx1 : -x1;  ry1 : y1;
+rx2 : -x2;  ry2 : y2;
+rx3 : -x3;  ry3 : y3;
 
-/* Teacher Answers for the coordinates */
-ta_v1: [rx1, ry1];
-ta_v2: [rx2, ry2];
-ta_v3: [rx3, ry3];
+/* Wrong-axis distractor: reflection in the x-axis (x,y) -> (x, -y) */
+wx1 : [x1, -y1];
+wx2 : [x2, -y2];
+wx3 : [x3, -y3];
 
-/* Congruence check (always true for reflection) */
-ta:random_permutation([["yes", true],["no", false]]);
-]]></text>
+/* Congruence: a reflection is an isometry, so the beds are always congruent */
+ta : [["yes", true, "Yes, they are congruent"], ["no", false, "No, they are not congruent"]];
+correctcong : "yes";]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>{@ta@}</p>
-<p>[{@x1@}, {@y1@}] \(\rightarrow\) <b>A'([{@rx1@}, {@ry1@}])</b></p>
-< p>B([{@x2@}, {@y2@}]) \(\rightarrow\) <b>B'([{@rx2@}, {@ry2@}])</b></p>
- <p>C([{@x3@}, {@y3@}]) \(\rightarrow\) <b>C'([{@rx3@}, {@ry3@}])</b></p>]]></text>
+      <text>A({@x1@},{@y1@}), B({@x2@},{@y2@}), C({@x3@},{@y3@}) \(\to\) A'({@rx1@},{@ry1@}), B'({@rx2@},{@ry2@}), C'({@rx3@},{@ry3@})</text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -115,10 +112,10 @@ ta:random_permutation([["yes", true],["no", false]]);
     <isbroken>0</isbroken>
     <variantsselectionseed/>
     <input>
-      <name>ans1</name>
-      <type>algebraic</type>
-      <tans>[rx1, ry1]</tans>
-      <boxsize>8</boxsize>
+      <name>ans1x</name>
+      <type>numerical</type>
+      <tans>rx1</tans>
+      <boxsize>4</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -128,15 +125,15 @@ ta:random_permutation([["yes", true],["no", false]]);
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
+      <mustverify>0</mustverify>
       <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
-      <name>ans2</name>
-      <type>algebraic</type>
-      <tans>[rx2, ry2]</tans>
-      <boxsize>8</boxsize>
+      <name>ans1y</name>
+      <type>numerical</type>
+      <tans>ry1</tans>
+      <boxsize>4</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -146,15 +143,15 @@ ta:random_permutation([["yes", true],["no", false]]);
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
-      <name>ans3</name>
-      <type>algebraic</type>
-      <tans>[rx3, ry3]</tans>
-      <boxsize>8</boxsize>
+      <name>ans2x</name>
+      <type>numerical</type>
+      <tans>rx2</tans>
+      <boxsize>4</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -164,8 +161,62 @@ ta:random_permutation([["yes", true],["no", false]]);
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2y</name>
+      <type>numerical</type>
+      <tans>ry2</tans>
+      <boxsize>4</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3x</name>
+      <type>numerical</type>
+      <tans>rx3</tans>
+      <boxsize>4</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3y</name>
+      <type>numerical</type>
+      <tans>ry3</tans>
+      <boxsize>4</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
@@ -179,7 +230,7 @@ ta:random_permutation([["yes", true],["no", false]]);
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>0</mustverify>
@@ -196,27 +247,77 @@ ta:random_permutation([["yes", true],["no", false]]);
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>A': detect reflection in the x-axis (wrong axis)</description>
         <answertest>AlgEquiv</answertest>
-        <sans>ans1</sans>
-        <tans>[rx1, ry1]</tans>
+        <sans>[ans1x, ans1y]</sans>
+        <tans>wx1</tans>
         <testoptions/>
-        <quiet>0</quiet>
+        <quiet>1</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
+        <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt1-1-T</trueanswernote>
+        <trueanswernote>prt1-xaxis</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That is the reflection of \(A\) in the \(x\)-axis. Look again at which line the flower bed is being reflected in.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-n0</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>A' x-coordinate</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1x</sans>
+        <tans>rx1</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0.5</truescore>
+        <truepenalty/>
+        <truenextnode>2</truenextnode>
+        <trueanswernote>prt1-xok</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-xbad</falseanswernote>
         <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite &mdash; re-check the \(x\)-coordinate of \(A'\).</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>A' y-coordinate</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1y</sans>
+        <tans>ry1</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-yok</trueanswernote>
+        <truefeedback format="html">
           <text/>
+        </truefeedback>
+        <falsescoremode>+</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-ybad</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite &mdash; re-check the \(y\)-coordinate of \(A'\).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -230,27 +331,77 @@ ta:random_permutation([["yes", true],["no", false]]);
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>B': detect reflection in the x-axis (wrong axis)</description>
         <answertest>AlgEquiv</answertest>
-        <sans>ans2</sans>
-        <tans>[rx2, ry2]</tans>
+        <sans>[ans2x, ans2y]</sans>
+        <tans>wx2</tans>
         <testoptions/>
-        <quiet>0</quiet>
+        <quiet>1</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
+        <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt2-1-T</trueanswernote>
+        <trueanswernote>prt2-xaxis</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That is the reflection of \(B\) in the \(x\)-axis. Look again at which line the flower bed is being reflected in.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-n0</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>B' x-coordinate</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2x</sans>
+        <tans>rx2</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0.5</truescore>
+        <truepenalty/>
+        <truenextnode>2</truenextnode>
+        <trueanswernote>prt2-xok</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt2-xbad</falseanswernote>
         <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite &mdash; re-check the \(x\)-coordinate of \(B'\).</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>B' y-coordinate</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2y</sans>
+        <tans>ry2</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-yok</trueanswernote>
+        <truefeedback format="html">
           <text/>
+        </truefeedback>
+        <falsescoremode>+</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-ybad</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite &mdash; re-check the \(y\)-coordinate of \(B'\).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -264,27 +415,77 @@ ta:random_permutation([["yes", true],["no", false]]);
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>C': detect reflection in the x-axis (wrong axis)</description>
         <answertest>AlgEquiv</answertest>
-        <sans>ans3</sans>
-        <tans>[rx3, ry3]</tans>
+        <sans>[ans3x, ans3y]</sans>
+        <tans>wx3</tans>
         <testoptions/>
-        <quiet>0</quiet>
+        <quiet>1</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
+        <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt3-1-T</trueanswernote>
+        <trueanswernote>prt3-xaxis</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That is the reflection of \(C\) in the \(x\)-axis. Look again at which line the flower bed is being reflected in.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt3-n0</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>C' x-coordinate</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3x</sans>
+        <tans>rx3</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0.5</truescore>
+        <truepenalty/>
+        <truenextnode>2</truenextnode>
+        <trueanswernote>prt3-xok</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt3-xbad</falseanswernote>
         <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite &mdash; re-check the \(x\)-coordinate of \(C'\).</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>C' y-coordinate</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3y</sans>
+        <tans>ry3</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.5</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-yok</trueanswernote>
+        <truefeedback format="html">
           <text/>
+        </truefeedback>
+        <falsescoremode>+</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-ybad</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite &mdash; re-check the \(y\)-coordinate of \(C'\).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -298,27 +499,27 @@ ta:random_permutation([["yes", true],["no", false]]);
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Congruence choice</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans4</sans>
-        <tans>mcq_correct(ta)[1]</tans>
+        <tans>correctcong</tans>
         <testoptions/>
-        <quiet>0</quiet>
+        <quiet>1</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt4-1-T</trueanswernote>
+        <trueanswernote>prt4-T</trueanswernote>
         <truefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Correct. A reflection is an isometry (a rigid motion): it preserves every length and angle, so the reflected bed is congruent to the original.</p>]]></text>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt4-1-F</falseanswernote>
+        <falseanswernote>prt4-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>A reflection is a rigid motion (an isometry): it preserves all lengths and angles, so the image is always congruent to the original.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -332,17 +533,173 @@ ta:random_permutation([["yes", true],["no", false]]);
     <deployedseed>31353943</deployedseed>
     <deployedseed>1156960718</deployedseed>
     <deployedseed>1400099871</deployedseed>
-    <deployedseed>742306185</deployedseed>
-    <deployedseed>1102910597</deployedseed>
-    <deployedseed>1114777579</deployedseed>
-    <deployedseed>1802811201</deployedseed>
-    <deployedseed>346689921</deployedseed>
-    <deployedseed>1640464283</deployedseed>
-    <deployedseed>674310310</deployedseed>
-    <deployedseed>536356464</deployedseed>
-    <deployedseed>751871127</deployedseed>
-    <deployedseed>992287189</deployedseed>
-    <deployedseed>1642396802</deployedseed>
-    <deployedseed>1937192143</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>All correct</description>
+      <testinput>
+        <name>ans1x</name>
+        <value>rx1</value>
+      </testinput>
+      <testinput>
+        <name>ans1y</name>
+        <value>ry1</value>
+      </testinput>
+      <testinput>
+        <name>ans2x</name>
+        <value>rx2</value>
+      </testinput>
+      <testinput>
+        <name>ans2y</name>
+        <value>ry2</value>
+      </testinput>
+      <testinput>
+        <name>ans3x</name>
+        <value>rx3</value>
+      </testinput>
+      <testinput>
+        <name>ans3y</name>
+        <value>ry3</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value><![CDATA["yes"]]></value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-n0 | prt1-xok | prt1-yok</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-n0 | prt2-xok | prt2-yok</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-n0 | prt3-xok | prt3-yok</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt4</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt4-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>A' reflected in the x-axis (wrong axis) - diagnostic fires</description>
+      <testinput>
+        <name>ans1x</name>
+        <value>x1</value>
+      </testinput>
+      <testinput>
+        <name>ans1y</name>
+        <value>ev(-y1,simp)</value>
+      </testinput>
+      <testinput>
+        <name>ans2x</name>
+        <value>rx2</value>
+      </testinput>
+      <testinput>
+        <name>ans2y</name>
+        <value>ry2</value>
+      </testinput>
+      <testinput>
+        <name>ans3x</name>
+        <value>rx3</value>
+      </testinput>
+      <testinput>
+        <name>ans3y</name>
+        <value>ry3</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value><![CDATA["yes"]]></value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-xaxis</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-n0 | prt2-xok | prt2-yok</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-n0 | prt3-xok | prt3-yok</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt4</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt4-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>B' y-coordinate wrong (partial) and wrong congruence</description>
+      <testinput>
+        <name>ans1x</name>
+        <value>rx1</value>
+      </testinput>
+      <testinput>
+        <name>ans1y</name>
+        <value>ry1</value>
+      </testinput>
+      <testinput>
+        <name>ans2x</name>
+        <value>rx2</value>
+      </testinput>
+      <testinput>
+        <name>ans2y</name>
+        <value>ev(ry2+1,simp)</value>
+      </testinput>
+      <testinput>
+        <name>ans3x</name>
+        <value>rx3</value>
+      </testinput>
+      <testinput>
+        <name>ans3y</name>
+        <value>ry3</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value><![CDATA["no"]]></value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-n0 | prt1-xok | prt1-yok</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.5000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-n0 | prt2-xok | prt2-ybad</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-n0 | prt3-xok | prt3-yok</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt4</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt4-F</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>

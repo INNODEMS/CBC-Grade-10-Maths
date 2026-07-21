@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Grouped mean vs actual mean</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>The test scores of 20 students are listed below:</p>
+<p style="background-color:#f9f9f9;padding:12px;border:1px solid #ddd;font-family:monospace;">{@raw_str@}</p>
+<p><strong>(a)</strong> Group the data by completing the frequency table:</p>
+<table border="1" style="border-collapse:collapse;text-align:center;min-width:220px;">
+<tr style="background-color:#eee;"><th>Score</th><th>Frequency</th></tr>
+<tr><td>0 &ndash; 9</td><td>[[input:f1]] [[validation:f1]] [[feedback:prt_f1]]</td></tr><tr><td>10 &ndash; 19</td><td>[[input:f2]] [[validation:f2]] [[feedback:prt_f2]]</td></tr><tr><td>20 &ndash; 29</td><td>[[input:f3]] [[validation:f3]] [[feedback:prt_f3]]</td></tr><tr><td>30 &ndash; 39</td><td>[[input:f4]] [[validation:f4]] [[feedback:prt_f4]]</td></tr><tr><td>40 &ndash; 49</td><td>[[input:f5]] [[validation:f5]] [[feedback:prt_f5]]</td></tr>
+</table>
+<p><strong>(b)</strong> Using the <em>grouped</em> table (class midpoints), estimate the mean, to 2 d.p.: [[input:ans_g]] [[validation:ans_g]] [[feedback:prt_g]]</p>
+<p><strong>(c)</strong> Using the <em>raw</em> data, calculate the <strong>actual</strong> mean, to 2 d.p.: [[input:ans_a]] [[validation:ans_a]] [[feedback:prt_a]]</p>
+<p><strong>(d)</strong> Find the <strong>difference</strong> (grouped mean &minus; actual mean), to 2 d.p.: [[input:ans_d]] [[validation:ans_d]] [[feedback:prt_d]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h4>Worked solution</h4>
+<p><strong>Grouped mean:</strong> using midpoints, \(\bar{x}\approx\dfrac{ {@Sfx@} }{ {@Sf@} }={@gmean_disp@}\).</p>
+<p><strong>Actual mean:</strong> from the raw data, \(\dfrac{\sum x}{20}={@amean_disp@}\).</p>
+<p><strong>Difference:</strong> \({@gmean_disp@}-{@amean_disp@}={@diff_disp@}\).</p>
+<p>Grouping replaces every value in a class by its midpoint, so information is lost and the grouped mean is only an <em>estimate</em>. That's why it differs from the actual mean.</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[raw: makelist(rand(50), i, 1, 20);   /* 20 scores, 0..49 */
+Nn: 20;
+lowers: [0,10,20,30,40]; uppers: [9,19,29,39,49]; mids: [4.5,14.5,24.5,34.5,44.5];
+f: makelist(length(sublist(raw, lambda([x], x>=lowers[j] and x<=uppers[j]))), j, 1, 5);
+Sf: apply("+", f);
+fx: makelist(f[j]*mids[j], j, 1, 5);
+Sfx: apply("+", fx);
+gmean: Sfx/Sf; gmean_disp: round(gmean*100)/100.0;
+amean: apply("+",raw)/Nn; amean_disp: round(amean*100)/100.0;
+diff: gmean - amean; diff_disp: round(diff*100)/100.0;
+neg_diff: -diff;
+Sfx_lower: sum(f[j]*lowers[j], j, 1, 5);
+raw_str: sconcat(raw[1]); for i:2 thru Nn do raw_str: sconcat(raw_str, ", ", raw[i]);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>gmean={@gmean_disp@}, amean={@amean_disp@}, diff={@diff_disp@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text><![CDATA[<p id="author">Ben (STACK author)</p><p id="concept">Grouping introduces error: compare the estimated (grouped) mean with the actual mean.</p><p id="reviewer"></p><p id="description">Students group 20 raw scores, compute the grouped (midpoint) mean and the actual mean, and their difference - showing that grouping only estimates the mean.</p>]]></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans_a</name>
+      <type>algebraic</type>
+      <tans>amean</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_d</name>
+      <type>algebraic</type>
+      <tans>diff</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans_g</name>
+      <type>algebraic</type>
+      <tans>gmean</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>f1</name>
+      <type>algebraic</type>
+      <tans>f[1]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>f2</name>
+      <type>algebraic</type>
+      <tans>f[2]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>f3</name>
+      <type>algebraic</type>
+      <tans>f[3]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>f4</name>
+      <type>algebraic</type>
+      <tans>f[4]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>f5</name>
+      <type>algebraic</type>
+      <tans>f[5]</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>0</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt_a</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_a</sans>
+        <tans>amean</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_a-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_a-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_a</sans>
+        <tans>gmean</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_a-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That's the <em>grouped</em> estimate. The <em>actual</em> mean uses the raw data: add all 20 exact scores and divide by 20.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_a-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Add all 20 raw scores and divide by 20. Round to 2 d.p.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_d</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_d</sans>
+        <tans>diff</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_d-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_d-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_d</sans>
+        <tans>neg_diff</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_d-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have the difference the wrong way round. The question asks for <em>grouped &minus; actual</em>.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_d-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Subtract: grouped mean &minus; actual mean.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_f1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>f1</sans>
+        <tans>f[1]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_f1-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_f1-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Recount how many scores fall in this class (endpoints included).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_f2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>f2</sans>
+        <tans>f[2]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_f2-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_f2-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Recount how many scores fall in this class (endpoints included).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_f3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>f3</sans>
+        <tans>f[3]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_f3-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_f3-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Recount how many scores fall in this class (endpoints included).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_f4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>f4</sans>
+        <tans>f[4]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_f4-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_f4-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Recount how many scores fall in this class (endpoints included).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_f5</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>f5</sans>
+        <tans>f[5]</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_f5-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_f5-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Recount how many scores fall in this class (endpoints included).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt_g</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_g</sans>
+        <tans>gmean</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_g-0-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_g-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans_g</sans>
+        <tans>Sfx_lower/Sf</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_g-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Use the class <em>midpoint</em> (e.g. 4.5), not the lower value, when forming \(\sum fx\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt_g-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Grouped mean \(=\sum fx \div \sum f\), using midpoints. Round to 2 d.p.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>20001</deployedseed>
+    <deployedseed>20003</deployedseed>
+    <deployedseed>20005</deployedseed>
+    <deployedseed>20007</deployedseed>
+    <deployedseed>20009</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Grouping, both means and difference correct.</description>
+      <testinput>
+        <name>ans_a</name>
+        <value>amean_disp</value>
+      </testinput>
+      <testinput>
+        <name>ans_d</name>
+        <value>diff_disp</value>
+      </testinput>
+      <testinput>
+        <name>ans_g</name>
+        <value>gmean_disp</value>
+      </testinput>
+      <testinput>
+        <name>f1</name>
+        <value>f[1]</value>
+      </testinput>
+      <testinput>
+        <name>f2</name>
+        <value>f[2]</value>
+      </testinput>
+      <testinput>
+        <name>f3</name>
+        <value>f[3]</value>
+      </testinput>
+      <testinput>
+        <name>f4</name>
+        <value>f[4]</value>
+      </testinput>
+      <testinput>
+        <name>f5</name>
+        <value>f[5]</value>
+      </testinput>
+      <expected>
+        <name>prt_a</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_a-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_d</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_d-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_f1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_f1-0-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_g</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_g-0-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Actual mean given as the grouped estimate.</description>
+      <testinput>
+        <name>ans_a</name>
+        <value>gmean_disp</value>
+      </testinput>
+      <testinput>
+        <name>ans_d</name>
+        <value>diff_disp</value>
+      </testinput>
+      <testinput>
+        <name>ans_g</name>
+        <value>gmean_disp</value>
+      </testinput>
+      <testinput>
+        <name>f1</name>
+        <value>f[1]</value>
+      </testinput>
+      <testinput>
+        <name>f2</name>
+        <value>f[2]</value>
+      </testinput>
+      <testinput>
+        <name>f3</name>
+        <value>f[3]</value>
+      </testinput>
+      <testinput>
+        <name>f4</name>
+        <value>f[4]</value>
+      </testinput>
+      <testinput>
+        <name>f5</name>
+        <value>f[5]</value>
+      </testinput>
+      <expected>
+        <name>prt_a</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_a-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

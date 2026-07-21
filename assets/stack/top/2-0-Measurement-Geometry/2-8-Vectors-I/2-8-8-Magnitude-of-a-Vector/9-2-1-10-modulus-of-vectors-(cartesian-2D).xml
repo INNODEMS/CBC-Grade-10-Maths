@@ -24,7 +24,7 @@
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2021072200</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text><![CDATA[stack_reset_vars(true);
@@ -54,8 +54,11 @@ coefc2: b;
 
 
 ta1:sqrt(coefa1^2+coefa2^2);
+ta11: sqrt(abs(coefa1^2-coefa2^2));
 ta2:sqrt(coefb1^2+coefb2^2);
-ta3:sqrt(coefc1^2+coefc2^2);]]></text>
+ta21:sqrt(abs(coefb1^2-coefb2^2));
+ta3:sqrt(coefc1^2+coefc2^2);
+ta31:sqrt(coefc1^2-coefc2^2);]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -161,7 +164,7 @@ ta3:sqrt(coefc1^2+coefc2^2);]]></text>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>1.0000000</truescore>
+        <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-1-T</trueanswernote>
@@ -169,10 +172,36 @@ ta3:sqrt(coefc1^2+coefc2^2);]]></text>
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta11</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you calculated \( \sqrt{ \left| ({@coefa1@})^2 - ({@coefa2@})^2 \right| } \) subtracting the squares instead of \( \sqrt{ ({@coefa1@})^2 + ({@coefa2@})^2 } \).</p>
+<p>Remember: here you need to add the squares before taking the square root, not subtract them.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt1-1-F</falseanswernote>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -195,7 +224,7 @@ ta3:sqrt(coefc1^2+coefc2^2);]]></text>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>1.0000000</truescore>
+        <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt2-1-T</trueanswernote>
@@ -203,7 +232,7 @@ ta3:sqrt(coefc1^2+coefc2^2);]]></text>
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>1</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
@@ -216,19 +245,20 @@ ta3:sqrt(coefc1^2+coefc2^2);]]></text>
         <description/>
         <answertest>AlgEquiv</answertest>
         <sans>ans2</sans>
-        <tans>sqrt(coefb1^2 - coefb2^2)</tans>
+        <tans>ta21</tans>
         <testoptions/>
         <quiet>0</quiet>
-        <truescoremode>+</truescoremode>
-        <truescore>0.0000000</truescore>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt2-2-T</trueanswernote>
         <truefeedback format="html">
-          <text><![CDATA[<p>When we calculate the modulus of the vector we take \(\sqrt{{@coefb1@}^2 + (-{@coefb2@})^2}\).<br></p>]]></text>
+          <text><![CDATA[<p>It looks like you calculated \( \sqrt{ \left| ({@coefb1@})^2 - ({@coefb2@})^2 \right| } \) subtracting the squares instead of \( \sqrt{ ({@coefb1@})^2 + ({@coefb2@})^2 } \).</p>
+<p>Remember: here you need to add the squares before taking the square root, not subtract them.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt2-2-F</falseanswernote>
@@ -254,7 +284,7 @@ ta3:sqrt(coefc1^2+coefc2^2);]]></text>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>1.0000000</truescore>
+        <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt3-1-T</trueanswernote>
@@ -262,10 +292,36 @@ ta3:sqrt(coefc1^2+coefc2^2);]]></text>
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
-        <falsescore>0.0000000</falsescore>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>ta31</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you calculated \( \sqrt{a^2 - b^2} \) subtracting the squares instead of \( \sqrt{a^2 + b^2} \).</p>
+<p><strong>Remember</strong>: here you need to add the squares before taking the square root, not subtract them.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt3-1-F</falseanswernote>
+        <falseanswernote>prt3-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>

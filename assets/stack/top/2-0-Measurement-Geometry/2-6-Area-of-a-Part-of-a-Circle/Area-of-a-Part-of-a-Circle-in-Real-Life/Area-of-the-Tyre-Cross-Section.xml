@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Area of the Tyre Cross-Section</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A boda boda wheel is made up of a metal rim with a rubber tyre fitted around it. The rim has a radius of \({@r@}\,\text{cm}\), and the tyre extends a further \({@Thickness@}\,\text{cm}\) beyond the rim, giving an outer radius of \({@R@}\,\text{cm}\).</p>
+
+<p>Calculate the area of the rubber cross-section (the shaded ring shown), correct to \(2\,\text{decimal places}\). (Use \(\pi=\frac{22}{7}\))</p>
+
+[[jsxgraph]]
+var brd = JXG.JSXGraph.initBoard('jxgbox', {
+        boundingbox: [-9, 9, 9, -9],
+        axis: false,
+        showNavigation: false,
+        showCopyright: false,
+        keepAspectRatio: true
+    });
+
+    // Fixed DISPLAY radii, independent of the true R and r (which are in cm)
+    var R_outer = 6;
+    var R_inner = 3.5;
+
+    // Centre of the wheel, labelled clearly, offset AWAY from the radius lines
+    var O = brd.create('point', [0, 0], {
+        name: 'O',
+        visible: true,
+        size: 3,
+        strokeColor: 'red',
+        fillColor: 'red',
+        fixed: true,
+        label: { offset: [-8, 14], fontSize: 16, color: 'red' }
+    });
+
+    // Outer circle drawn FIRST, filled dark grey/black to represent the rubber tyre
+    var tyre = brd.create('circle', [O, R_outer], {
+        strokeWidth: 2,
+        strokeColor: 'black',
+        fillColor: '#2b2b2b',
+        fillOpacity: 1
+    });
+
+    // Inner circle drawn ON TOP, filled light silver to represent the metal rim
+    // This "cuts out" the centre, leaving only the dark ring (the tyre) shaded
+    var rim = brd.create('circle', [O, R_inner], {
+        strokeWidth: 2,
+        strokeColor: 'black',
+        fillColor: '#d9d9d9',
+        fillOpacity: 1
+    });
+
+    // Two radius lines drawn at well-separated angles so labels never overlap
+    var angleRim = 100 * Math.PI / 180;   // pointing up-left, inside the rim
+    var angleTyre = -40 * Math.PI / 180;  // pointing down-right, into the tyre
+
+    var P_rim = brd.create('point', [
+        R_inner * Math.cos(angleRim), R_inner * Math.sin(angleRim)
+    ], {size: 0, fixed: true, visible: false});
+
+    var P_tyre = brd.create('point', [
+        R_outer * Math.cos(angleTyre), R_outer * Math.sin(angleTyre)
+    ], {size: 0, fixed: true, visible: false});
+
+    // Rim radius line: bright yellow, high contrast against the grey rim fill
+    brd.create('segment', [O, P_rim], {strokeColor: '#ffcc00', strokeWidth: 3, dash: 2});
+
+    // Tyre (outer) radius line: bright cyan, high contrast against the black tyre fill
+    brd.create('segment', [O, P_tyre], {strokeColor: '#00e0ff', strokeWidth: 3, dash: 2});
+
+    // Rim radius label, placed clearly along its own line, away from O's label
+    brd.create('text', [
+        R_inner * 0.55 * Math.cos(angleRim) - 1.4,
+        R_inner * 0.55 * Math.sin(angleRim) + 0.6,
+        function() { return {#r#} + ' cm'; }
+    ], { fontSize: 14, color: '#b8860b' });
+
+    // Outer (tyre) radius label, placed along its own line, in open space
+    brd.create('text', [
+        R_outer * 0.62 * Math.cos(angleTyre) + 0.3,
+        R_outer * 0.62 * Math.sin(angleTyre) - 0.6,
+        function() { return {#R#} + ' cm'; }
+    ], { fontSize: 14, color: '#008fb3' });
+
+    // Simple legend so students can instantly tell rim from tyre
+    brd.create('text', [-8.5, -7, 'Grey = Rim'], { fontSize: 13, color: '#555555' });
+    brd.create('text', [-8.5, -7.8, 'Black = Rubber tyre'], { fontSize: 13, color: '#2b2b2b' });
+[[/jsxgraph]]
+
+<p>\(\text{Area of rubber cross-section}=\)[[input:ans1]]\(\,\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>The rubber cross-section of the tyre forms an annulus — a ring-shaped region between the outer edge of the tyre and the metal rim. From the problem:</p>
+<ul>
+    <li>Rim radius (inner): \(r={@r@}\,\text{cm}\)</li>
+    <li>Tyre thickness: \({@Thickness@}\,\text{cm}\)</li>
+</ul>
+
+<p><strong>Step 1: Find the outer radius \(R\).</strong></p>
+<p>
+\(
+\begin{align}
+R &= r + \text{Thickness} \\
+&= {@r@} + {@Thickness@} \\
+&= {@R@}\,\text{cm}
+\end{align}
+\)
+</p>
+
+<p><strong>Step 2: Write the formula for the area of an annulus.</strong></p>
+<p>\[ A = \pi (R^2 - r^2) \]</p>
+
+<p><strong>Step 3: Substitute the values and compute the area.</strong></p>
+<p>
+\(
+\begin{align}
+A &= \frac{22}{7} \times \left({@R@}^2 - {@r@}^2\right) \\
+&= \frac{22}{7} \times \left({@R_sq@} - {@r_sq@}\right) \\
+&= \frac{22}{7} \times {@Radius_difference@} \\
+&= {@A@}\,\text{cm}^2
+\end{align}
+\)
+</p>
+
+<p>Rounded to \(2\) decimal places:</p>
+<p>\(\text{Area of rubber cross-section} \approx {@A_2dp@}\,\text{cm}^2\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Realistic boda boda rim radius: 17"-18" rims -> ~20cm to 24cm radius, steps of 1 */
+r: rand_with_step(20, 24, 1);
+
+/* Realistic tyre (rubber) thickness beyond the rim: 6cm to 10cm, steps of 1 */
+Thickness: rand_with_step(6, 10, 1);
+R: r + Thickness;
+
+/* pi = 22/7 as used throughout this topic */
+Pi_val: 22/7;
+
+R_sq: R^2;
+r_sq: r^2;
+Radius_difference: R_sq - r_sq;
+
+/* Area of rubber cross-section (annulus between tyre outer edge and rim) */
+A: Pi_val * Radius_difference;
+A_2dp: float(decimalplaces(A, 2));]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\({@r@}\)</p>
+<p>\({@R@}\)</p>
+<p>\({@A_2dp@}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>A_2dp</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumDecPlaces</answertest>
+        <sans>ans1</sans>
+        <tans>A_2dp</tans>
+        <testoptions>2</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>650946378</deployedseed>
+    <deployedseed>760790517</deployedseed>
+    <deployedseed>1103359522</deployedseed>
+    <deployedseed>995474608</deployedseed>
+    <deployedseed>57391985</deployedseed>
+    <deployedseed>599132498</deployedseed>
+    <deployedseed>1396655826</deployedseed>
+    <deployedseed>1031228613</deployedseed>
+    <deployedseed>847610155</deployedseed>
+    <deployedseed>1919646655</deployedseed>
+    <deployedseed>1971313768</deployedseed>
+    <deployedseed>909694142</deployedseed>
+    <deployedseed>854159088</deployedseed>
+    <deployedseed>596207371</deployedseed>
+    <deployedseed>221635678</deployedseed>
+    <deployedseed>825729560</deployedseed>
+    <deployedseed>1527904940</deployedseed>
+    <deployedseed>259931086</deployedseed>
+    <deployedseed>1369740685</deployedseed>
+    <deployedseed>1656356281</deployedseed>
+  </question>
+</quiz>

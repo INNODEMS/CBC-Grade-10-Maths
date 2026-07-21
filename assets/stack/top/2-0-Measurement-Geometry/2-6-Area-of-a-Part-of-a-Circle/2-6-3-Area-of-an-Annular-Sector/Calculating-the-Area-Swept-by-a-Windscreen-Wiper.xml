@@ -6,21 +6,34 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>The shaded region in the diagram below represents the area swept out by a windscreen wiper on a flat windscreen. Calculate the area of the shaded region correct to \(3\,\text{decimal places}\).</p>
+
 [[jsxgraph]]
 var brd = JXG.JSXGraph.initBoard('jxgbox', {
-        boundingbox: [-12, 12, 12, -12],   // bigger bounding box
+        boundingbox: [-12, 12, 12, -12],
         axis: false,
-         showNavigation: false,
-        showCopyright: false
+        showNavigation: false,
+        showCopyright: false,
+        keepAspectRatio: true
     });
 
-    // Centre of rotation
-    var O = brd.create('point', [-2, -2], {visible: false});
+    // Centre of rotation, now visible and labelled
+    var O = brd.create('point', [-2, -2], {
+        name: 'O',
+        visible: true,
+        size: 2,
+        fixed: true,
+        label: { offset: [-14, -12], fontSize: 16 }
+    });
 
-    // Outer and inner radii
-    var R_outer = 10;   // increased for visibility
-    var R_inner = 6;    // inner radius
-    var angle = 2 * Math.PI / 3;   // 120°
+    // Fixed DISPLAY radii (keeps the picture a sensible size regardless of the
+    // true randomized R, which can range up to ~187 cm)
+    var R_outer = 10;
+    var R_inner = 6;
+
+    // The angle is NOT decoupled: it uses the real randomized theta,
+    // since the sector's shape is the one thing students can visually verify
+    var angleDeg = {#theta#};
+    var angle = angleDeg * Math.PI / 180;
 
     // Outer sector
     var P = brd.create('point', [O.X() + R_outer, O.Y()], {visible: false});
@@ -31,7 +44,7 @@ var brd = JXG.JSXGraph.initBoard('jxgbox', {
         strokeColor: 'black'
     });
 
-    // Inner sector (to cut out center)
+    // Inner sector (cuts out the centre, leaving only the annular sector shaded)
     var Pin = brd.create('point', [O.X() + R_inner, O.Y()], {visible: false});
     var Qin = brd.create('point', [O.X() + R_inner * Math.cos(angle), O.Y() + R_inner * Math.sin(angle)], {visible: false});
     brd.create('sector', [O, Pin, Qin], {
@@ -47,110 +60,114 @@ var brd = JXG.JSXGraph.initBoard('jxgbox', {
             var x1 = O.X() + R_inner * Math.cos(a), y1 = O.Y() + R_inner * Math.sin(a);
             var x2 = O.X() + R_outer * Math.cos(a), y2 = O.Y() + R_outer * Math.sin(a);
             brd.create('segment', [[x1, y1], [x2, y2]], {
-                strokeColor: 'BLUE',
+                strokeColor: 'blue',
                 strokeWidth: 1
             });
         })(t);
     }
 
-    // Base line along one radius
+    // Base line along the starting radius
     var baseEnd = brd.create('point', [O.X() + R_outer, O.Y()], {visible: false});
     brd.create('segment', [O, baseEnd], {strokeColor: 'blue', strokeWidth: 2});
-    brd.create('text', [O.X() + R_outer / 2 - 1, O.Y() - 1, '{#R#} cm']);
+    brd.create('text', [O.X() + R_outer / 2 - 1, O.Y() - 1, function() { return {#R#} + ' cm'; }]);
 
-    // Angle marker 120°
+    // Angle marker showing theta
     brd.create('angle', [baseEnd, O, Q], {
         radius: 2,
-        name: '{#theta#}°'
+        name: function() { return angleDeg + '°'; }
     });
 
-    // Wiper label
+    // Wiper label, positioned along the bisector of the swept angle
     brd.create('text', [
-        O.X() + (R_inner + 0.5) * Math.cos(angle),
-        O.Y() + (R_inner + 3) * Math.sin(angle),
+        function() { return O.X() + (R_inner + R_outer) / 2 * Math.cos(angle / 2); },
+        function() { return O.Y() + (R_inner + R_outer) / 2 * Math.sin(angle / 2) + 0.6; },
         'Wiper'
     ]);
 
-    // Label the wiper distance 4 cm
+    // Wiper length label
     brd.create('text', [
-        O.X() - R_outer / 2, 
-        O.Y() + 6, 
-        '{#Wiper#} cm'
+        function() { return O.X() + (R_inner + 0.5) * Math.cos(angle / 2); },
+        function() { return O.Y() + (R_inner + 0.5) * Math.sin(angle / 2) - 0.8; },
+        function() { return {#Wiper#} + ' cm'; }
     ]);
-
 [[/jsxgraph]]
+
 <p>\(\text{Area of the region swept}=\)[[input:ans1]]\(\,\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<p><strong>Worked Solution:</strong></p>
-
 <p>The shaded region represents the area swept out by the windscreen wiper. From the diagram:</p>
 <ul>
-    <li>Sector angle: {@theta@}°</li>
-    <li>Outer radius of the sweep: {@R@} cm</li>
-    <li>Wiper length: {@Wiper@} cm</li>
+    <li>Sector angle: \({@theta@}^\circ\)</li>
+    <li>Outer radius of the sweep: \({@R@}\,\text{cm}\)</li>
+    <li>Wiper length: \({@Wiper@}\,\text{cm}\)</li>
 </ul>
 
-<p><strong>Step 1: Find the inner radius (r) of the sector.</strong></p>
-
+<p><strong>Step 1: Find the inner radius \(r\).</strong></p>
 <p>
-\(\begin{align}
+\(
+\begin{align}
 r &= R - \text{Wiper length} \\
 &= {@R@} - {@Wiper@} \\
-&= {@r@}\ \text{cm}
-\end{align}\)
+&= {@r@}\,\text{cm}
+\end{align}
+\)
 </p>
 
 <p><strong>Step 2: Write the formula for the area of an annular sector.</strong></p>
-
 <p>
-\(\begin{align}
-A &= \frac{\theta}{360} \pi (R^2 - r^2)
-\end{align}\)
+\[
+A = \frac{\theta}{360} \times \pi (R^2 - r^2)
+\]
 </p>
 
 <p><strong>Step 3: Substitute the values and compute the area.</strong></p>
-
 <p>
-\(\begin{align}
-A &= \frac{@theta@}{360} \times \frac{22}{7} \times \left( {@R@}^2 - {@r@}^2 \right) \\
-&=\frac{@theta@}{360} \times \frac{22}{7} \times {@R_1@}-{@r_1@} \\
-&=\frac{@theta@}{360} \times \frac{22}{7} \times {@Radius_difference@} \\
-&={@A@}\\
-  &= {@A_3sf@}\ \text{cm}^2
-\end{align}\)
+\(
+\begin{align}
+A &= \frac{{@theta@}}{360} \times \frac{22}{7} \times \left({@R@}^2 - {@r@}^2\right) \\
+&= \frac{{@theta@}}{360} \times \frac{22}{7} \times \left({@R_sq@} - {@r_sq@}\right) \\
+&= \frac{{@theta@}}{360} \times \frac{22}{7} \times {@Radius_difference@} \\
+&= {@A_val@}\,\text{cm}^2
+\end{align}
+\)
 </p>
 
-<p>Therefore, <br>the area of the region swept by the wiper is \({@A_3sf@}\,\text{cm}^2\) (correct to 3 decimal places).</p>]]></text>
+<p>Rounded to \(3\) decimal places:</p>
+<p>\(\text{Area of the region swept} \approx {@A_3dp@}\,\text{cm}^2\)</p>]]></text>
     </generalfeedback>
     <defaultgrade>15</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Randomize the sector angle between 60° and 180° in steps of 10° */
-theta: rand_with_step(60, 270, 10);
+      <text>/* Randomize the sector angle: realistic wiper sweep, 60° to 180°, steps of 10° */
+theta: rand_with_step(60, 180, 10);
 
-/* Randomize the outer radius (longer radius) between 10 and 25 cm */
-Wiper: rand_with_step(7,47,7);
-R: rand_with_step(7, 140, 7)+Wiper;
-r:R-Wiper;
+/* Randomize the wiper length (difference between outer and inner radius) */
+Wiper: rand_with_step(7, 47, 7);
 
-/* Define pi */
-Pi: 22/7;
+/* Randomize the outer radius, then derive inner radius from Wiper */
+R: rand_with_step(7, 140, 7) + Wiper;
+r: R - Wiper;
 
-/* Area of the sector (shaded region) */
-R_1:R^2;
-r_1:r^2;
-Radius_difference:R_1-r_1;
-A:(theta/360) *  Pi * (R^2 - r^2);
-A_1:float(A);
+/* pi = 22/7 as specified */
+Pi_val: 22/7;
 
-/* Round to 3 significant figures for display */
-A_3sf: decimalplaces(A,3);</text>
+/* Intermediate working values */
+R_sq: R^2;
+r_sq: r^2;
+Radius_difference: R_sq - r_sq;
+
+/* Area of the annular sector (shaded region) */
+A: (theta/360) * Pi_val * Radius_difference;
+A_val: float(A);
+
+/* Round to 3 decimal places for the final displayed/marked answer */
+A_3dp: float(decimalplaces(A, 3));</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -214,7 +231,7 @@ A_3sf: decimalplaces(A,3);</text>
       <node>
         <name>0</name>
         <description>Checks for the correct area of the region swept.</description>
-        <answertest>NumAbsolute</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
         <tans>A_3sf</tans>
         <testoptions>3</testoptions>

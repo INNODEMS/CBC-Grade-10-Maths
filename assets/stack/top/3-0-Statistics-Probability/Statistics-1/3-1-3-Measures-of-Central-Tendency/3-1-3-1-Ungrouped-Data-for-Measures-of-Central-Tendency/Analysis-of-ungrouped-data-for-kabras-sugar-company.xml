@@ -5,59 +5,26 @@
       <text>Analysis of ungrouped data for kabras sugar company</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>The monthly salaries (in KES) of <strong>55 employees</strong> at <strong>Kabras Sugar Company</strong> are listed below:</p>
-<div><p>{@raw_data@}</p></div>
-
-<p>Analyze this ungrouped data to determine the measures of central tendency.</p>
-<p><strong>a) Mean Salary:</strong><br>
-Calculate the mean monthly salary.<br>
-Mean = KES [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>
-
-<p><strong>b) Median Salary:</strong><br>
-Determine the median monthly salary.<br>
-Median = KES [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]</p>
-
-<p><strong>c) Mode Salary:</strong><br>
-Identify the mode of the dataset.<br>
-<em>(Note: If there is more than one mode, enter your answer as a set, e.g., <code>{30000, 35000}</code>).</em><br>
-Mode = KES [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</p>]]></text>
+      <text><![CDATA[<p>The monthly salaries (in KES) of <strong>15 employees</strong> at <strong>Kabras Sugar Company</strong> are listed below (in ascending order):</p>
+<p style="background-color: #f9f9f9; padding: 15px; border: 1px solid #ddd; font-family: monospace; font-size: 1.05em; line-height: 1.8;">
+{@data_str@}
+</p>
+<p>Analyse this ungrouped data to determine the measures of central tendency.</p>
+<p><strong>a) Mean salary</strong> (to 2 decimal places): KES [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>
+<p><strong>b) Median salary:</strong> KES [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]</p>
+<p><strong>c) Mode salary</strong> <em>(if there is more than one mode, enter a set, e.g. <code>{30000, 35000}</code>)</em>: KES [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<p><strong>a) Mean Salary</strong></p>
-<p>The mean is the sum of all salaries divided by the total number of employees (\(N=55\)).</p>
-\( \bar{x} = \frac{\sum x}{N} \)
-\( \bar{x} = \frac{@sum_x@}{55} \)
-\( \bar{x} \approx \mathbf{@decimalplaces(mean_val, 2)@} \text{ KES} \)
-
-<br>
-<p><strong>b) Median Salary</strong></p>
-<p>To find the median, we first arrange the salaries in ascending order:</p>
-<p>{@sorted_data@}</p>
-
-<p>Since \( N=55 \) is an <strong>odd number</strong>, the median is exactly the middle value.</p>
-<p>Position of Median: \( \frac{N+1}{2} = \frac{55+1}{2} = 28^{\text{th}} \) value.</p>
-
-<p>Counting to the \( 28^{\text{th}} \) value in the sorted list, we find:</p>
-\( \text{Median} = \mathbf{@median_val@} \text{ KES} \)
-
-<br>
-<p><strong>c) Mode Salary</strong></p>
-<p>The mode is the salary that appears most frequently. We can verify this by organizing the data into a frequency table:</p>
-
-<table border="1">
-    <thead>
-        <tr style="background-color: #f2f2f2;">
-            <th>Salary (KES)</th>
-            <th>Frequency</th>
-        </tr>
-    </thead>
-    <tbody>
-        {@freq_table_rows@}
-    </tbody>
-</table>
-
-<p>The highest frequency is <strong>{@max_freq@}</strong>.</p>
-<p>The salary with this frequency is: <strong>{@ta_mode@}</strong>.</p>]]></text>
+      <text><![CDATA[<p><strong>a) Mean</strong></p>
+<p>Add all 15 salaries and divide by 15:</p>
+\[ \bar{x} = \frac{ {@sum_x@} }{15} \approx \mathbf{ {@mean_disp@} }\text{ KES} \]
+<p><strong>b) Median</strong></p>
+<p>With \(N=15\) (odd), the median is the \(\frac{15+1}{2}=8\)th value in the ordered list:</p>
+\[ \text{Median} = \mathbf{ {@median_val@} }\text{ KES} \]
+<p><strong>c) Mode</strong></p>
+<p>The mode is the most frequent salary (highlighted):</p>
+<table border="1" style="border-collapse:collapse;"><thead><tr style="background-color:#f2f2f2;"><th>Salary (KES)</th><th>Frequency</th></tr></thead><tbody>{@freq_table_rows@}</tbody></table>
+<p>Mode \(= \mathbf{ {@ta_mode@} }\text{ KES}\).</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -67,70 +34,49 @@ Mode = KES [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</p>]]></text>
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[/* 1. DATA GENERATION */
-/* Pool of realistic monthly salaries in KES */
+      <text><![CDATA[/* Pool of realistic monthly salaries in KES */
 pool: [25000, 28000, 30000, 32000, 35000, 38000, 40000, 42000, 45000, 50000, 55000, 60000];
-
-/* Select 55 salaries randomly from this pool */
-/* We use random selection with replacement to ensure we have a Mode */
-raw_data: makelist(random_permutation(pool)[1], k, 1, 55);
-
+/* 15 salaries chosen at random (with replacement so a mode exists) */
+raw_data: makelist(random_permutation(pool)[1], k, 1, 15);
 N: length(raw_data);
-
-/* 2. MEAN CALCULATIONS */
+sorted_data: sort(raw_data);
+/* Display string (comma separated, wraps in a fixed-width block) */
+data_str: sconcat(sorted_data[1]);
+for i:2 thru N do data_str: sconcat(data_str, ",  ", sorted_data[i]);
+/* Mean */
 sum_x: apply("+", raw_data);
 mean_val: float(sum_x / N);
-
-/* 3. MEDIAN CALCULATIONS */
-sorted_data: sort(raw_data);
-
-/* Logic for N=55 (Odd number) */
-/* Position is (N+1)/2 = 28 */
+mean_disp: round(mean_val*100)/100.0;
+/* Median: middle of 15 = 8th value */
 med_pos: (N + 1) / 2;
 median_val: sorted_data[med_pos];
-
-
-/* 4. MODE CALCULATIONS */
+/* Mode */
 unique_vals: unique(raw_data);
-/* Count frequency of each salary */
 freqs: map(lambda([x], length(sublist(raw_data, lambda([y], y=x)))), unique_vals);
 max_freq: lmax(freqs);
-/* Identify which salaries have the max frequency */
 mode_indices: sublist_indices(freqs, lambda([x], x=max_freq));
 modes: map(lambda([idx], unique_vals[idx]), mode_indices);
-
-/* Format Mode answer (handles single or multiple modes) */
 ta_mode: if length(modes)=1 then modes[1] else setify(modes);
-
-/* 5. FEEDBACK TABLE GENERATION */
-/* Build the HTML table rows dynamically */
+/* Frequency table rows for the worked solution */
 u_vals: sort(unique_vals);
 u_freqs: map(lambda([x], length(sublist(raw_data, lambda([y], y=x)))), u_vals);
-
 freq_table_rows: "";
 for i:1 thru length(u_vals) do (
-   /* Highlight the Mode row in green */
    row_style: if u_freqs[i] = max_freq then "background-color: #d4edda; font-weight: bold;" else "",
-   freq_table_rows: sconcat(
-       freq_table_rows,
-       "<tr style='", row_style, "'><td>", u_vals[i], "</td><td>", u_freqs[i], "</td></tr>"
-   )
+   freq_table_rows: sconcat(freq_table_rows, "<tr style='", row_style, "'><td>", u_vals[i], "</td><td>", u_freqs[i], "</td></tr>")
 );]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta_mode@}
-{@median_val@}
-{@mean_val@}</text>
+      <text>mean {@mean_disp@}; median {@median_val@}; mode {@ta_mode@}</text>
     </questionnote>
     <questiondescription format="html">
-      <text><![CDATA[<p id="author"> Daniel Murunga</p>
-<p id="concept"></p>
-<p id="reviewer"></p>
-<p id="reviewer"></p>
-<p id="description">In this question, you are provided with \(55\) raw data points representing the monthly salaries (in KES) of employees at Kabras Sugar Company. You are required to analyze this ungrouped data to calculate the mean, median, and mode salaries.</p>]]></text>
+      <text><![CDATA[<p id="author">Daniel Murunga</p>
+<p id="concept">Mean, median and mode of ungrouped data (15 values), with mix-up diagnostics.</p>
+<p id="reviewer">Ben (STACK audit)</p>
+<p id="description">Students find the mean, median and mode of 15 salaries. Each PRT detects if the student has entered a different measure (e.g. the median where the mean was asked) and says so.</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -158,7 +104,7 @@ for i:1 thru length(u_vals) do (
       <name>ans1</name>
       <type>algebraic</type>
       <tans>mean_val</tans>
-      <boxsize>6</boxsize>
+      <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -168,44 +114,44 @@ for i:1 thru length(u_vals) do (
       <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
       <name>ans2</name>
       <type>algebraic</type>
       <tans>median_val</tans>
-      <boxsize>6</boxsize>
+      <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>0</forbidfloat>
+      <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <input>
       <name>ans3</name>
       <type>algebraic</type>
       <tans>ta_mode</tans>
-      <boxsize>6</boxsize>
+      <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>0</forbidfloat>
+      <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
-      <mustverify>1</mustverify>
-      <showvalidation>3</showvalidation>
+      <mustverify>0</mustverify>
+      <showvalidation>1</showvalidation>
       <options/>
     </input>
     <prt>
@@ -222,23 +168,73 @@ for i:1 thru length(u_vals) do (
         <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>mean_val</tans>
-        <testoptions>0.001</testoptions>
+        <testoptions>0.01</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt1-1-T</trueanswernote>
+        <trueanswernote>prt1-0-T</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>median_val</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <strong>median</strong>, not the value asked for here. Re-read which measure this part wants.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta_mode</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <strong>mode</strong>, not the value asked for here. Re-read which measure this part wants.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The mean is the sum of all salaries divided by the number of employees. Give your answer to 2 decimal places.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -262,17 +258,67 @@ for i:1 thru length(u_vals) do (
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt2-1-T</trueanswernote>
+        <trueanswernote>prt2-0-T</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>mean_disp</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <strong>mean</strong>, not the value asked for here. Re-read which measure this part wants.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta_mode</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <strong>mode</strong>, not the value asked for here. Re-read which measure this part wants.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The median is the middle salary once they are arranged in ascending order (the 8th of 15 values).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -296,17 +342,67 @@ for i:1 thru length(u_vals) do (
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
-        <trueanswernote>prt3-1-T</trueanswernote>
+        <trueanswernote>prt3-0-T</trueanswernote>
         <truefeedback format="html">
           <text/>
         </truefeedback>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt3-0-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>mean_disp</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <strong>mean</strong>, not the value asked for here. Re-read which measure this part wants.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
         <falseanswernote>prt3-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>median_val</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That looks like the <strong>median</strong>, not the value asked for here. Re-read which measure this part wants.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The mode is the salary that occurs most often. If two occur equally often, enter them as a set, e.g. <code>{30000,35000}</code>.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -315,57 +411,12 @@ for i:1 thru length(u_vals) do (
     <deployedseed>381788619</deployedseed>
     <deployedseed>1480294244</deployedseed>
     <deployedseed>837797560</deployedseed>
-    <deployedseed>1025677972</deployedseed>
-    <deployedseed>2137698053</deployedseed>
-    <deployedseed>711154130</deployedseed>
-    <deployedseed>939492572</deployedseed>
-    <deployedseed>1931756128</deployedseed>
-    <deployedseed>894350476</deployedseed>
-    <deployedseed>1660413098</deployedseed>
-    <deployedseed>572853496</deployedseed>
-    <deployedseed>1774142952</deployedseed>
-    <deployedseed>743864503</deployedseed>
-    <deployedseed>151105167</deployedseed>
-    <deployedseed>1649420688</deployedseed>
-    <deployedseed>548664759</deployedseed>
-    <deployedseed>1266316635</deployedseed>
-    <deployedseed>1562633275</deployedseed>
-    <deployedseed>745363087</deployedseed>
-    <deployedseed>1135051677</deployedseed>
-    <deployedseed>499449153</deployedseed>
-    <deployedseed>1856931897</deployedseed>
-    <deployedseed>442387196</deployedseed>
-    <deployedseed>1817623465</deployedseed>
-    <deployedseed>1809838695</deployedseed>
-    <deployedseed>1894661263</deployedseed>
-    <deployedseed>290886377</deployedseed>
-    <deployedseed>1548246279</deployedseed>
-    <deployedseed>550214144</deployedseed>
-    <deployedseed>852309571</deployedseed>
-    <deployedseed>384181321</deployedseed>
-    <deployedseed>1968959735</deployedseed>
-    <deployedseed>395206597</deployedseed>
-    <deployedseed>1374187414</deployedseed>
-    <deployedseed>1022923778</deployedseed>
-    <deployedseed>1309401374</deployedseed>
-    <deployedseed>382040280</deployedseed>
-    <deployedseed>954148211</deployedseed>
-    <deployedseed>810141684</deployedseed>
-    <deployedseed>1447645588</deployedseed>
-    <deployedseed>104877042</deployedseed>
-    <deployedseed>1083007434</deployedseed>
-    <deployedseed>676607486</deployedseed>
-    <deployedseed>221205647</deployedseed>
-    <deployedseed>181282938</deployedseed>
-    <deployedseed>2122070352</deployedseed>
-    <deployedseed>891517783</deployedseed>
-    <deployedseed>541620038</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>Correct mean, median, mode: full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>mean_val</value>
+        <value>mean_disp</value>
       </testinput>
       <testinput>
         <name>ans2</name>
@@ -379,19 +430,53 @@ for i:1 thru length(u_vals) do (
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>prt1-0-T</expectedanswernote>
       </expected>
       <expected>
         <name>prt2</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt2-1-T</expectedanswernote>
+        <expectedanswernote>prt2-0-T</expectedanswernote>
       </expected>
       <expected>
         <name>prt3</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt3-1-T</expectedanswernote>
+        <expectedanswernote>prt3-0-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Mean and median swapped: mix-up branches fire.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>median_val</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>mean_disp</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>-1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt3-2-F</expectedanswernote>
       </expected>
     </qtest>
   </question>
