@@ -270,42 +270,54 @@
             </dl>
         </p>
     </axiom>
-    <insight xml:id="auto_i8pufobk">   
+    <insight xml:id="insight-rotation-congruence-keytakeaway">
+      <title>Rotation produces congruent figures</title>
       <p xml:id="auto_d7ovwcof">
-        Congruence refers to a relationship between two figures or objects, whereby, they are identical in size and shape.
-      </p>
-      <p xml:id="auto_z27zi36v">
-        Rotation is a type of transformation that repositions an object but preserves the shape and size of the object.
-        Thus, rotation produces congruent figures.
+        <term>Congruence</term> is a relationship between two figures that are identical in size and shape. <term>Rotation</term> is a transformation that repositions a figure while preserving its shape and size. Because rotation preserves every distance and every angle, a figure and its image under rotation are <alert>always congruent</alert>.
       </p>
       <p xml:id="auto_yh5nhbih">
-        <m>\Delta ABC </m> and <m>\Delta A'B'C' </m> are similar in size and shape. Therefore, they are said to be directly congruent.
+        In the animation below, <m>\Delta ABC</m> (blue) is fixed and <m>\Delta A'B'C'</m> (red) rotates about the centre <m>D</m>. However far the image turns, each side keeps the length of the side it came from, so the two triangles remain congruent throughout the motion.
       </p>
+
+      <figure xml:id="fig-rotation-congruence-keytakeaway">
+        <caption>As <m>\Delta A'B'C'</m> rotates about <m>D</m>, corresponding side lengths stay equal, so the image is always congruent to the object.</caption>
+        <interactive xml:id="interactive-rotation-congruence-keytakeaway" platform="jsxgraph" width="90%" aspect="3:4" source="jsxgraph/congruence_rotation.js">
+          <slate xml:id="jsxgraph-rotation-congruence-keytakeaway" surface="jsxboard" aspect="3:4"/>
+        </interactive>
+      </figure> 
+
       <p xml:id="auto_kfo39c4q">
+        Because <m>\Delta ABC</m> and <m>\Delta A'B'C'</m> have the same shape and size, they are said to be <term>directly congruent</term>. Note in particular that:
         <ul>
-                        <li xml:id="auto_bmj0pj3a">
-                            <p xml:id="auto_oeqnoo2h">
-                                Rotation is a <alert>rigid  transformation</alert> <mdash/> it preserves distances and angles. Therefore, the image is always congruent to the object.
-                            </p>
-                        </li>
-                        <li xml:id="auto_b8gsw956">
-                            <p xml:id="auto_ih9okmi7">
-                                <alert>Direct congruence:</alert> Rotation preserves orientation (unlike reflection, which reverses it).
-                            </p>
-                        </li>
-                        <li xml:id="auto_ji8chfs6">
-                            <p xml:id="auto_7vm6nzgh">
-                                <alert>Proving congruence after rotation:</alert> Calculate all side lengths using the distance formula, verify that corresponding sides are equal, and use SSS/SAS criteria.
-                            </p>
-                        </li>
-                        <li xml:id="auto_vk2uycva">
-                            <p xml:id="auto_q8k4gzmk">
-                                Rotation about <alert>any point</alert> preserves congruence (not just the origin).
-                            </p>
-                        </li>
-                    </ul>
-                </p>
-    </insight> 
+          <li xml:id="auto_oeqnoo2h">
+            <p>
+              Rotation is a <alert>rigid transformation</alert> <mdash/> it preserves distances and angles, so the image is always congruent to the object.
+            </p>
+          </li>
+          <li xml:id="auto_ih9okmi7">
+            <p>
+              The <alert>corresponding sides</alert> of the object and image are equal in length, and every <alert>corresponding interior angle</alert> is unchanged.
+            </p>
+          </li>
+          <li xml:id="auto_b8gsw9562">
+            <p>
+              <alert>Direct congruence:</alert> rotation preserves orientation, unlike reflection, which reverses it.
+            </p>
+          </li>
+          <li xml:id="auto_7vm6nzgh">
+            <p>
+              <alert>Proving congruence after rotation:</alert> calculate the side lengths with the distance formula, check that corresponding sides are equal, then conclude congruence by <alert>SSS</alert> (or <alert>SAS</alert>).
+            </p>
+          </li>
+          <li xml:id="auto_q8k4gzmk">
+            <p>
+              Rotation about <alert>any point</alert> preserves congruence, not just rotation about the origin.
+            </p>
+          </li>
+        </ul>
+      </p>
+      
+    </insight>
 
     <axiom component="lesson-plan">
         <title>Practice and Application / Elaborate</title>
@@ -339,80 +351,186 @@
         </p>
     </axiom>
 
-    <example xml:id="auto_25qirt36">
+    <example>
       <statement>
-        <p xml:id="auto_bo03z477">
-          Triangle <m>ABC</m> is mapped onto <m>A'B'C'</m> after a rotation of <m>-45^\circ</m> and centre of rotation <m>D.</m>
+        <p>
+          Triangle <m>ABC</m> has vertices <m>A(2,1)</m>, <m>B(5,1)</m> and <m>C(2,5)</m>. The triangle is rotated <m>90^\circ</m> anticlockwise about the origin <m>O(0,0)</m>. 
         </p>
-
-        <image>
-          <latex-image label="congruence_rotation_example">
+        <p>
+          Find the image <m>A'B'C'</m> and show that <m>\Delta ABC</m> and <m>\Delta A'B'C'</m> are congruent.
+        </p>
+        <image width="60%">
+          <latex-image label="rotation_congruence_ex1">
             \begin{tikzpicture}
+              \draw[step=1,gray,very thin] (-6,-1) grid (6,6);
+              \draw[->,thick] (-6,0)--(6,0) node[right]{$x$};
+              \draw[->,thick] (0,-1)--(0,6) node[above]{$y$};
+              \fill[red] (0,0) circle (2pt); \node[below right] at (0,0) {O};
 
-            % Draw the grid lines
-            \draw[step=1,gray,very thin] (-5,-5) grid (5,5);
+              % object
+              \draw[blue,thick] (2,1)--(5,1)--(2,5)--cycle;
+              \fill[blue!30,opacity=0.5] (2,1)--(5,1)--(2,5)--cycle;
+              \node[below] at (2,1) {A}; \node[below right] at (5,1) {B}; \node[above] at (2,5) {C};
 
-            % Define vertices of the triangle object
-            \coordinate (A) at (-2,1); 
-            \coordinate (B) at (0,4);
-            \coordinate (C) at (0,-1);
-            \coordinate (D) at (1,-2);
-
-            % Draw edges of the triangle object
-            \draw[blue,thick] (A) -- (B) -- (C) -- cycle;
-            \fill[blue!30,opacity=0.5] (A) -- (B) -- (C) -- cycle;
-
-            %Label the object vertices
-            \node[left] at (A) {A};
-            \node[above] at (B) {B};
-            \node[below] at (C) {C};
-            \node[below] at (D)  {D};
-
-            % Define vertices of the triangle image
-            \coordinate (A') at (1,2.2); 
-            \coordinate (B') at (4.6,3);
-            \coordinate (C') at (1,-.8);
-
-            % Draw edges of the triangle image
-            \draw[blue,thick] (A') -- (B') -- (C') -- cycle;
-            \fill[blue!30,opacity=0.5] (A') -- (B') -- (C') -- cycle;
-
-            %Label the image vertices
-            \node[above] at (A') {A'};
-            \node[above] at (B') {B'};
-            \node[below right] at (C') {C'};
-
-            %Transformation dotted lines
-            \draw[style=dashed,thick,red] (A) -- (D) -- (A');
-            \draw[style=dashed,thick,orange] (B) -- (D) -- (B');
-            \draw[style=dashed,thick,purple] (C) -- (D) -- (C');
-
+              % image
+              \draw[red,thick] (-1,2)--(-1,5)--(-5,2)--cycle;
+              \fill[red!25,opacity=0.5] (-1,2)--(-1,5)--(-5,2)--cycle;
+              \node[right] at (-1,2) {A'}; \node[right] at (-1,5) {B'}; \node[left] at (-5,2) {C'};
             \end{tikzpicture}
-          </latex-image>  
+          </latex-image>
         </image>
-        <p xml:id="auto_y3z48qup">
-          <ul xml:id="auto_05708fxr">
-            <li xml:id="auto_r6nonpfy">
-              <p xml:id="auto_spnpa9ol">
-                <m>\Delta ABC \text{ and } \Delta A'B'C'</m> have the same shape and size.
-              </p>
-            </li>
-            <li xml:id="auto_gdaq33df">
-              <p xml:id="auto_2zr3pfw2">
-                The length of the corresponding sides of <m>\Delta ABC \text{ and } \Delta A'B'C'</m> are the same.
-              </p>
-            </li>
-            <li xml:id="auto_8z2zi0vi">
-              <p xml:id="auto_m39mb9ef">
-                Every corresponding internal angle for the triangles remain the same.
-              </p>
-            </li>
-          </ul>
+        </statement>
+        <solution>
+        <p>
+          Under a <m>90^\circ</m> anticlockwise rotation about the origin, the point <m>(x,y)</m> maps to <m>(-y,x)</m>. Applying this rule:
         </p>
-        <p xml:id="auto_0325njvv">
-          Therefore, <m>\Delta ABC \text{ and } \Delta A'B'C'</m> are said to be <term>directly congruent.</term> 
+        <p>
+          <md>A(2,1)\mapsto A'(-1,2)</md>, <md>\qquad B(5,1)\mapsto B'(-1,5)</md>, <md>\qquad C(2,5)\mapsto C'(-5,2).</md>
         </p>
+        <p>
+          Compare corresponding side lengths using the distance formula <m>d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}</m>:
+        </p>
+        <p>
+          <md>
+            <mrow>AB \amp = \sqrt{(5-2)^2+(1-1)^2} = 3</mrow>
+            <mrow> A'B' \amp = \sqrt{(-1+1)^2+(5-2)^2} = 3 </mrow>
+          </md>
+        </p>
+        <p>
+          <md>
+             <mrow>BC \amp = \sqrt{(2-5)^2+(5-1)^2} = 5</mrow>
+             <mrow> B'C' \amp = \sqrt{(-5+1)^2+(2-5)^2} = 5 </mrow>
+          </md>
+        </p>
+        <p>
+          <md>
+           <mrow>CA \amp = \sqrt{(2-2)^2+(1-5)^2} = 4</mrow>
+           <mrow> C'A' \amp = \sqrt{(-1+5)^2+(2-2)^2} = 4 </mrow>
+          </md>
+        </p>
+        <p>
+          Each pair of corresponding sides is equal: <m>AB=A'B'</m>, <m>BC=B'C'</m> and <m>CA=C'A'</m>. 
+        </p>
+        <p>
+          Therefore, by <alert>SSS</alert>, <m>\Delta ABC \equiv \Delta A'B'C'</m>. 
+          The rotation has repositioned the triangle without changing its size or shape, so the object and image are <term>directly congruent</term>.
+        </p>
+      </solution>
+    </example>
+
+    <example>
+      <statement>
+        <p>
+          Triangle <m>ABC</m> with vertices <m>A(2,2)</m>, <m>B(5,3)</m> and <m>C(3,5)</m> is rotated <m>180^\circ</m> about the point <m>D(1,1)</m>. Find the image and verify that the two triangles are congruent.
+        </p>
+        <image width="60%">
+          <latex-image label="rotation_congruence_ex2">
+            \begin{tikzpicture}
+              \draw[step=1,gray,very thin] (-4,-4) grid (6,6);
+              \draw[->,thick] (-4,0)--(6,0) node[right]{$x$};
+              \draw[->,thick] (0,-4)--(0,6) node[above]{$y$};
+              \fill[red] (1,1) circle (2pt); \node[above right] at (1,1) {D};
+
+              % object
+              \draw[blue,thick] (2,2)--(5,3)--(3,5)--cycle;
+              \fill[blue!30,opacity=0.5] (2,2)--(5,3)--(3,5)--cycle;
+              \node[below right] at (2,2) {A}; \node[right] at (5,3) {B}; \node[above] at (3,5) {C};
+
+              % image
+              \draw[red,thick] (0,0)--(-3,-1)--(-1,-3)--cycle;
+              \fill[red!25,opacity=0.5] (0,0)--(-3,-1)--(-1,-3)--cycle;
+              \node[above left] at (0,0) {A'}; \node[left] at (-3,-1) {B'}; \node[below] at (-1,-3) {C'};
+
+              % centre lines
+              \draw[style=dashed,gray] (2,2)--(1,1)--(0,0);
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+        </statement>
+        <solution>
+        <p>
+          A rotation of <m>180^\circ</m> about <m>D(a,b)</m> maps <m>(x,y)</m> to <m>(2a-x,\;2b-y)</m>. With <m>a=1</m>, <m>b=1</m> this is <m>(x,y)\mapsto(2-x,\;2-y)</m>:
+        </p>
+        <p>
+          <md>A(2,2)\mapsto A'(0,0)</md>, <md>\qquad B(5,3)\mapsto B'(-3,-1)</md>, <md>\qquad C(3,5)\mapsto C'(-1,-3).</md>
+        </p>
+        <p>
+          Checking corresponding sides with the distance formula:
+        </p>
+        <p>
+          <md>
+            <mrow>AB \amp = \sqrt{3^2+1^2} = \sqrt{10}</mrow>
+            <mrow> A'B' \amp = \sqrt{(-3)^2+(-1)^2} = \sqrt{10} </mrow> 
+          </md>
+        </p>
+        <p>
+          <md>
+             <mrow>BC \amp = \sqrt{(-2)^2+2^2} = \sqrt{8}</mrow>
+             <mrow> B'C' \amp = \sqrt{2^2+(-2)^2} = \sqrt{8} </mrow>
+          </md>
+          
+        </p>
+        <p>
+          <md>
+            <mrow>CA \amp = \sqrt{(-1)^2+(-3)^2} = \sqrt{10}</mrow>
+            <mrow> C'A' \amp = \sqrt{1^2+3^2} = \sqrt{10} </mrow>
+          </md>
+          
+        </p>
+        <p>
+          Since <m>AB=A'B'</m>, <m>BC=B'C'</m> and <m>CA=C'A'</m>, the triangles are congruent by <alert>SSS</alert>. Note that congruence holds even though the centre of rotation is <m>D(1,1)</m>, not the origin: rotation about <alert>any point</alert> preserves shape and size.
+        </p>
+      </solution>
+    </example>
+
+    <example>
+      <statement>
+        <p>
+          Triangle <m>ABC</m> has vertices <m>A(1,2)</m>, <m>B(4,2)</m> and <m>C(1,4)</m>. It is rotated <m>-90^\circ</m> (that is, <m>90^\circ</m> clockwise) about the origin.
+           Find the image and deduce whether <m>\Delta ABC</m> and its image are congruent.
+        </p>
+        <image width="60%">
+          <latex-image label="rotation_congruence_ex3">
+            \begin{tikzpicture}
+              \draw[step=1,gray,very thin] (-2,-5) grid (6,6);
+              \draw[->,thick] (-2,0)--(6,0) node[right]{$x$};
+              \draw[->,thick] (0,-5)--(0,6) node[above]{$y$};
+              \fill[red] (0,0) circle (2pt); \node[above left] at (0,0) {O};
+
+              % object
+              \draw[blue,thick] (1,2)--(4,2)--(1,4)--cycle;
+              \fill[blue!30,opacity=0.5] (1,2)--(4,2)--(1,4)--cycle;
+              \node[left] at (1,2) {A}; \node[right] at (4,2) {B}; \node[above] at (1,4) {C};
+
+              % image
+              \draw[red,thick] (2,-1)--(2,-4)--(4,-1)--cycle;
+              \fill[red!25,opacity=0.5] (2,-1)--(2,-4)--(4,-1)--cycle;
+              \node[above right] at (2,-1) {A'}; \node[below] at (2,-4) {B'}; \node[right] at (4,-1) {C'};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
       </statement>
+      <solution>
+        <p>
+          Under a <m>-90^\circ</m> rotation about the origin, <m>(x,y)\mapsto(y,-x)</m>:
+        </p>
+        <p>
+          <md>A(1,2)\mapsto A'(2,-1)</md>, <md>\qquad B(4,2)\mapsto B'(2,-4)</md>, <md>\qquad C(1,4)\mapsto C'(4,-1).</md>
+        </p>
+        <p>
+          Comparing corresponding sides:
+        </p>
+        <p>
+          <md>
+            <mrow>AB \amp = \sqrt{3^2+0^2} = 3, \amp A'B' \amp = \sqrt{0^2+(-3)^2} = 3;</mrow>
+            <mrow>BC \amp = \sqrt{(-3)^2+2^2} = \sqrt{13}, \amp B'C' \amp = \sqrt{2^2+3^2} = \sqrt{13};</mrow>
+            <mrow>CA \amp = \sqrt{0^2+2^2} = 2, \amp C'A' \amp = \sqrt{(-2)^2+0^2} = 2.</mrow>
+          </md>
+        </p>
+        <p>
+          All three pairs of corresponding sides are equal, so <m>\Delta ABC \equiv \Delta A'B'C'</m> by <alert>SSS</alert>. A clockwise rotation is just as rigid as an anticlockwise one, so the image is congruent to the object.
+        </p>
+      </solution>
     </example>
     
     <xi:include href="../../resources-assessment-intro.ptx" />
@@ -422,187 +540,165 @@
     </exercise>
 
     <exercises xml:id="exercises-identifying-congruence-in-rotation-using-objects-and-images">
-      <exercise xml:id="auto_390ew8jq">
+      <exercise xml:id="ex-deduce-congruence-90-origin">
         <statement>
-          <p xml:id="auto_k8off74a">
-            Identify the axes of rotational symmetry and their respective order in the following:
-          </p>
-          <p xml:id="auto_keq3oc9p">
-            <ol marker="(a)">
-                <li>
-                    <p>
-                       Cylinder 
-                    </p>
-                </li>
-                <li>
-                    <p>
-                         Rectangular pyramid
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        Sphere
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        Cube
-                    </p>
-                </li>
-            </ol>
-          </p>
-        </statement>
-        <answer>
-            <p>
-                <ol marker="(a)">
-                    <li>
-                        <p>
-                            Axes is infinite
-                        </p>
-                        <p>
-                             Order 2
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Axis is <m>1</m>
-                        </p>
-                        <p>
-                            Order is <m>2</m>
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Axis is infinite
-                        </p>
-                        <p>
-                            Order is infinite
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Axes is <m>13</m>
-                        </p>
-                        <p>
-                            Order through opposite faces is <m>4</m>
-                        </p>
-                        <p>
-                            Order through opposite faces is <m>3</m>
-                        </p>
-                        <p>
-                            Order through opposite faces is <m>2</m>
-                        </p>
-                    </li>
-                </ol>
-            </p>
-        </answer>
-      </exercise>
-
-      <exercise xml:id="auto_p0b97aa0">
-        <statement>
-          <p xml:id="auto_hoezkutc">
-            Identify the axes of rotational symmetry and their respective order for the following figures:
+          <p>
+            Triangle <m>ABC</m> has vertices <m>A(1,1)</m>, <m>B(4,2)</m> and <m>C(2,4)</m>. It is rotated <m>90^\circ</m> anticlockwise about the origin, giving the image <m>A'(-1,1)</m>, <m>B'(-2,4)</m>, <m>C'(-4,2)</m>.
           </p>
           <p>
             <ol marker="(a)">
-                <li>
-                    <image width="50%">
-                        <latex-image label="square_base_pyramid_axis_of_rotation">
-                            \begin{tikzpicture}
-                                % Define vertices of the square base
-                                \coordinate (A) at (-2,-1);
-                                \coordinate (B) at (0,-1);
-                                \coordinate (C) at (1,0);  
-                                \coordinate (D) at (-1,0);  
-
-                                % Define the apex of the pyramid
-                                \coordinate (E) at (0,3);  % Center above the square base
-                                
-                                % Draw the square base
-                                \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
-                                
-                                % Draw edges connecting the apex to the base
-                                \draw[thick] (E) -- (A);
-                                \draw[thick] (E) -- (B);
-                                \draw[thick] (E) -- (C);
-                                \draw[style=dashed,thick] (E) -- (D);
-                                
-                                % Optional: Add shading for clarity
-                                \fill[blue!20,opacity=0.5] (A) -- (B) -- (C) -- (D) -- cycle;  % Shade one face
-                                \fill[red!20,opacity=0.5] (B) -- (C) -- (E) -- cycle; % Shade another face
-                                \fill[orange!20,opacity=0.5] (D) -- (C) -- (E) -- cycle; % Shade another face
-                                \fill[yellow!20,opacity=0.5] (A) -- (D) -- (E) -- cycle; % Shade another face
-
-                                \node[below] at (A) {square-base pyramid};
-
-                            \end{tikzpicture}
-                        </latex-image>
-                    </image>
-                </li>
-                <li>
-                    <image width="50%">
-                        <latex-image label="pentagonal_base_pyramid_axis_of_rotation">
-                            \begin{tikzpicture}
-                                % Define vertices of the square base
-                                \coordinate (A) at (0,0.4);
-                                \coordinate (B) at (-1,0);
-                                \coordinate (C) at (-.8,-1);  
-                                \coordinate (D) at (.8,-1); 
-                                \coordinate (E) at (1,0);  
-
-                                % Define the apex of the pyramid
-                                \coordinate (F) at (0,4);  % Center above the pentagon base
-                                
-                                % Draw the pentagon base
-                                \draw[thick] (A) -- (B) -- (C) -- (D) -- (E) -- cycle;
-                                
-                                % Draw edges connecting the apex to the base
-                                \draw[style=dashed,thick] (F) -- (A);
-                                \draw[thick] (F) -- (B);
-                                \draw[thick] (F) -- (C);
-                                \draw[thick] (F) -- (D);
-                                \draw[thick] (F) -- (E);
-                                
-                                % Optional: Add shading for clarity
-                                \fill[blue!20,opacity=0.5] (A) -- (B) -- (C) -- (D) -- (E) -- cycle;  % Shade one face
-                                \fill[red!20,opacity=0.5] (A) -- (F) -- (E) -- cycle; % Shade another face
-                                \fill[orange!20,opacity=0.5] (D) -- (F) -- (E) -- cycle; % Shade another face
-                                \fill[white!20,opacity=0.5] (C) -- (F) -- (D) -- cycle; % Shade another face
-                                \fill[brown!20,opacity=0.5] (B) -- (F) -- (C) -- cycle; % Shade another face
-                                \fill[purple!20,opacity=0.5] (B) -- (F) -- (A) -- cycle; % Shade another face
-
-                                \node[below] at (C) {pentagonal-base pyramid};
-
-                            \end{tikzpicture}
-                        </latex-image>
-                    </image>
-                </li>
+              <li>
+                <p>
+                  Use the distance formula to find the lengths of <m>AB</m>, <m>BC</m> and <m>CA</m>.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Find the lengths of the corresponding sides <m>A'B'</m>, <m>B'C'</m> and <m>C'A'</m>.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Hence explain why <m>\Delta ABC</m> and <m>\Delta A'B'C'</m> are congruent, stating the congruence criterion you have used.
+                </p>
+              </li>
             </ol>
           </p>
         </statement>
         <answer>
-            <p>
-                <ol marker="(a)">
-                    <li>
-                        <p>
-                           Axes is <m>1</m> 
-                        </p>
-                        <p>
-                            Order is <m>4</m>
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Axes is <m>1</m>
-                        </p>
-                        <p>
-                            Order is <m>5</m>
-                        </p>
-                    </li>
-                </ol>
-            </p>
+          <p>
+            <ol marker="(a)">
+              <li>
+                <p>
+                  <md>
+                    <mrow> AB \amp = \sqrt{(4-1)^2+(2-1)^2} = \sqrt{10} </mrow>
+                  </md>
+                  <md>
+                    <mrow> BC \amp = \sqrt{(2-4)^2+(4-2)^2} = \sqrt{8} </mrow>
+                  </md>
+                  <md>
+                    <mrow> CA \amp = \sqrt{(1-2)^2+(1-4)^2} = \sqrt{10} </mrow>
+                  </md>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <md>
+                    <mrow> A'B' \amp = \sqrt{(-2+1)^2+(4-1)^2} = \sqrt{10} </mrow>
+                  </md>
+                  <md>
+                    <mrow> B'C' \amp = \sqrt{(-4+2)^2+(2-4)^2} = \sqrt{8} </mrow>
+                  </md>
+                  <md>
+                    <mrow> C'A' \amp = \sqrt{(-1+4)^2+(1-2)^2} = \sqrt{10} </mrow>
+                  </md>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Each pair of corresponding sides is equal (<m>AB=A'B'</m>, <m>BC=B'C'</m>, <m>CA=C'A'</m>), so <m>\Delta ABC \equiv \Delta A'B'C'</m> by <alert>SSS</alert>. Rotation is a rigid transformation, so it preserves lengths and the image is congruent to the object.
+                </p>
+              </li>
+            </ol>
+          </p>
         </answer>
       </exercise>
+
+      <exercise xml:id="ex-deduce-congruence-180-point">
+        <statement>
+          <p>
+            Triangle <m>PQR</m> with vertices <m>P(1,2)</m>, <m>Q(3,2)</m> and <m>R(2,5)</m> is rotated <m>180^\circ</m> about the point <m>D(-1,0)</m>.
+          </p>
+          <p>
+            <ol marker="(a)">
+              <li>
+                <p>
+                  Using the rule <m>(x,y)\mapsto(2a-x,\;2b-y)</m> for a <m>180^\circ</m> rotation about <m>(a,b)</m>, find the coordinates of the image <m>P'Q'R'</m>.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Show that one pair of corresponding sides has equal length.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Deduce whether <m>\Delta PQR</m> and <m>\Delta P'Q'R'</m> are congruent, and give a reason.
+                </p>
+              </li>
+            </ol>
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <ol marker="(a)">
+              <li>
+                <p>
+                  With <m>a=-1</m>, <m>b=0</m>, the rule is <m>(x,y)\mapsto(-2-x,\;-y)</m>. So <m>P'(-3,-2)</m>, <m>Q'(-5,-2)</m>, <m>R'(-4,-5)</m>.
+                </p>
+              </li>
+              <li>
+                <p>
+                  For example, <m>PQ=\sqrt{(3-1)^2+(2-2)^2}=2</m> and <m>P'Q'=\sqrt{(-5+3)^2+(-2+2)^2}=2</m>, so <m>PQ=P'Q'</m>. (Similarly <m>QR=RP=\sqrt{10}</m> and <m>Q'R'=R'P'=\sqrt{10}</m>.)
+                </p>
+              </li>
+              <li>
+                <p>
+                  All corresponding sides are equal, so <m>\Delta PQR \equiv \Delta P'Q'R'</m> by <alert>SSS</alert>. A <m>180^\circ</m> rotation is a rigid transformation about the point <m>D</m>, so the object and image are congruent even though <m>D</m> is not the origin.
+                </p>
+              </li>
+            </ol>
+          </p>
+        </answer>
+      </exercise>
+
+        <exercise xml:id="auto_390ew8jq">
+        <statement>
+          <p xml:id="auto_k8off74a">
+          Rotate triangle P(1,1), Q(4,1), R(1,3) 90° anticlockwise about the origin. Find the coordinates of P', Q', R'. Verify that ΔPQR ≡ ΔP'Q'R' by comparing side lengths.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <ol marker="(a)">
+              <li>
+                <p>
+                  P'(−1,1), Q'(−1,4), R'(−3,1)
+                </p>
+              </li>
+              <li>
+                <p>
+                  PQ=3, PR=2, QR=√10; P'Q'=3, P'R'=2, Q'R'=√10, so congruent by SSS
+                </p>
+              </li>
+            </ol>
+          </p>
+        </answer>
+        </exercise>
+
+        <exercise xml:id="auto_p0b97aa0">
+        <statement>
+          <p xml:id="auto_hoezkutc">
+          A point A(4,2) is rotated about the origin to A'(−2,4). Determine the angle and direction of rotation. Show that the rotation is an isometry.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <ol marker="(a)">
+              <li>
+                <p>
+                  The rotation is 90° anticlockwise about the origin
+                </p>
+              </li>
+              <li>
+                <p>
+                  OA=√20=OA', so distances preserved; rotation is an isometry (rigid transformation)
+                </p>
+              </li>
+            </ol>
+          </p>
+        </answer>
+        </exercise>
 
       <!-- <li xml:id="auto_4kz9ew29">
                 <title>Problem 1</title>
