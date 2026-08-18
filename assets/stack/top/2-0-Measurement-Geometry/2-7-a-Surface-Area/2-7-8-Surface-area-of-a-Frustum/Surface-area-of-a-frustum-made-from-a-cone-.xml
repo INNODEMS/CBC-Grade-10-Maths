@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Surface area of a frustum made from a cone.</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+A right circular cone is cut by a plane parallel to its base, producing a frustum.
+The frustum has:
+</p>
+
+<ul>
+<li>lower radius \(R={@R@}\),</li>
+<li>upper radius \(r={@r@}\),</li>
+<li>vertical height \(h={@h@}\).</li>
+</ul>
+[[jsxgraph]]
+
+var board = JXG.JSXGraph.initBoard(divid,{
+    boundingbox:[-15,16,15,-3],
+    axis:false,
+    showNavigation:false,
+    showCopyright:false,
+    keepaspectratio:true
+});
+
+var R={#R#};
+var r={#r#};
+var h={#h#};
+
+var ey=0.28;
+
+/* ---------- Bottom ellipse ---------- */
+
+var xb=[],yb=[];
+for(var t=0;t<=360;t+=3){
+    xb.push(R*Math.cos(t*Math.PI/180));
+    yb.push(ey*R*Math.sin(t*Math.PI/180));
+}
+
+board.create('curve',[xb,yb],{
+    strokeWidth:2,
+    fillColor:'#4F79C7',
+    fillOpacity:0.85
+});
+
+/* ---------- Top ellipse ---------- */
+
+var xt=[],yt=[];
+for(var t=0;t<=360;t+=3){
+    xt.push(r*Math.cos(t*Math.PI/180));
+    yt.push(h+ey*r*Math.sin(t*Math.PI/180));
+}
+
+board.create('curve',[xt,yt],{
+    strokeWidth:2,
+    fillColor:'#4F79C7',
+    fillOpacity:0.85
+});
+
+/* ---------- Side edges ---------- */
+
+board.create('segment',[[-R,0],[-r,h]],{
+    strokeWidth:2
+});
+
+board.create('segment',[[R,0],[r,h]],{
+    strokeWidth:2
+});
+
+/* ---------- Height ---------- */
+
+board.create('arrow',[[0,h],[0,0]],{strokeWidth:2});
+board.create('arrow',[[0,0],[0,h]],{strokeWidth:2});
+
+board.create('text',[
+0.6,
+h/2,
+'\\(' + h + '\\,\\mathrm{cm}\\)'
+]);
+
+/* ---------- Top radius ---------- */
+
+board.create('arrow',[
+[0,h],
+[-0.72*r,h-0.72*ey*r]
+],{
+strokeWidth:2
+});
+
+board.create('text',[
+-r/2-0.8,
+h+0.4,
+'\\(' + r + '\\,\\mathrm{cm}\\)'
+]);
+
+/* ---------- Bottom radius ---------- */
+
+board.create('arrow',[
+[0,0],
+[-0.72*R,-0.72*ey*R]
+],{
+strokeWidth:2
+});
+
+board.create('text',[
+-R/2-1,
+-1,
+'\\(' + R + '\\,\\mathrm{cm}\\)'
+]);
+
+/* ---------- Slant height ---------- */
+
+board.create('arrow',[
+[R,0],
+[r,h]
+],{
+strokeWidth:2
+});
+
+board.create('text',[
+R+0.7,
+h/2,
+'\\({@sdisp@}\\,\\mathrm{cm}\\)'
+]);
+
+[[/jsxgraph]]
+<p>
+Calculate the <strong>total surface area</strong> of the frustum.
+Give your answer as an <strong>exact expression</strong> in terms of \(\pi\).
+</p>
+
+<p>[[input:ans1]][[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text/>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026063000</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Dimensions (cm) */
+R: rand(6)+6;      /* Lower radius: 6–11 cm */
+r: rand(R-2)+2;    /* Upper radius: 2,...,R-1 cm */
+h: rand(7)+4;      /* Height: 4–10 cm */
+
+/* Slant height */
+s: sqrt(h^2+(R-r)^2);
+/*my pivalue*/
+my_pi: 3.142;
+/* Correct answer */
+ta: expand(my_pi*(R^2+r^2+(R+r)*s));
+
+/* Display value of slant height (2 d.p.) */
+sdisp: float(round(100*s)/100);
+
+/* Common mistakes*/                                               
+
+/* M1: Uses the vertical height instead of the slant height */
+mistake1: expand(my_pi*(R^2+r^2+(R+r)*h));
+
+/* M2: Uses (R-r) instead of (R+r) in the lateral area formula */
+mistake2: expand(my_pi*(R^2+r^2+(R-r)*l));
+
+/* M3: Incorrect application of Pythagoras for the slant height */
+l_wrong: sqrt(h^2+R^2-r^2);
+mistake3: expand(my_pi*(R^2+r^2+(R+r)*l_wrong));</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct calculation for surface area of the frustum</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans</sans>
+        <tans>ta</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Using the vertical height instead of the slant height</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><strong>Sorry your answer is incorrect.</strong></p>
+
+<p>
+Your answer suggests that you used the <strong>vertical height</strong> instead of the <strong>slant height</strong> when calculating the curved surface area.
+</p>
+
+<p>
+Using the vertical height gives
+</p>
+
+\(
+A
+=\pi\left(
+{@R@}^{2}
++
+{@r@}^{2}
++
+({@R@}+{@r@})\times{@h@}
+\right),
+\)
+
+<p>
+which evaluates to
+</p>
+
+\(
+\boxed{{@mistake1@}\text{ cm}^{2}}.
+\)
+
+<p>
+However, the curved surface area uses the <strong>slant height</strong>, not the vertical height.
+</p>
+
+<p>
+First calculate the slant height:
+</p>
+
+\(
+s=\sqrt{{@h@}^{2}+({@R@}-{@r@})^{2}}
+={@s@}\text{ cm}.
+\)
+
+<p>
+Then substitute this value into the formula
+\(
+A=\pi\left(R^{2}+r^{2}+(R+r)s\right).
+\)
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Using R−r instead of R+r</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Incorrect</p>
+
+<p>
+Your answer indicates that you used <strong>\(R-r\)</strong> instead of <strong>\(R+r\)</strong> in the curved surface area formula.
+</p>
+
+<p>
+This gives
+</p>
+
+\(A=\pi\left({@R@}^{2}+{@r@}^{2}+({@R@}-{@r@})\times{@s@}\right),\)
+
+<p>
+which evaluates to
+</p>
+
+\(
+\boxed{{@mistake2@}\text{ cm}^{2}}.
+\)
+
+<p>
+The curved surface area of a frustum is
+</p>
+
+\(\pi(R+r)s,\)
+
+<p>
+so the two radii should be <strong>added</strong>, not subtracted.
+</p>
+
+<p>
+The correct expression is
+</p>
+
+\(
+A
+=
+\pi\left(
+R^{2}+r^{2}+(R+r)s
+\right).
+\)]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Incorrect Pythagoras</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>mistake3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p><strong>Incorrect.</strong></p>
+
+<p>
+Your answer suggests that the slant height has been calculated incorrectly.
+</p>
+
+<p>
+It appears you used
+</p>
+
+\(s=\sqrt{{@h@}^{2}+{@R@}^{2}-{@r@}^{2}}={@l_wrong@}\text{ cm},\)
+
+<p>
+which leads to
+</p>
+
+\(A=\pi\left({@R@}^{2}+{@r@}^{2}+({@R@}+{@r@})\times{@l_wrong@}\right),\)
+
+<p>
+giving
+</p>
+
+\(\boxed{{@mistake3@}\text{ cm}^{2}}.\)
+
+<p>
+The horizontal side of the right triangle is the <strong>difference of the radii</strong>,
+</p>
+
+\({@R@}-{@r@},\)
+
+<p>
+so Pythagoras should be applied as
+</p>
+
+\(
+s
+=
+\sqrt{
+{@h@}^{2}
++
+({@R@}-{@r@})^{2}
+}
+=
+{@s@}\text{ cm}.
+\)
+
+<p>
+Using this value in the surface area formula gives the correct answer.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+</quiz>

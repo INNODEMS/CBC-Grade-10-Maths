@@ -5,27 +5,28 @@
       <text>Exact Values of Sine, Cosine, and Tangent Without a Calculator</text>
     </name>
     <questiontext format="html">
-      <text><![CDATA[<p>Without using a calculator write down the following values </p>
+      <text><![CDATA[<p>Without using a calculator, write down the exact values of the following. Use e.g. <tt>sqrt(2)</tt> for \(\sqrt{2}\).</p>
 <ol type="a">
-<li>\(\sin 120^{\circ}= \) [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]
-<li>\(\sin 150^{\circ}= \) [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]
-<li>\(\cos 120^{\circ}= \) [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]
-<li>\(\cos 150^{\circ}= \) [[input:ans4]] [[validation:ans4]] [[feedback:prt4]]
-<li>\(\tan 120^{\circ}= \) [[input:ans5]] [[validation:ans5]] [[feedback:prt5]]
-<li>\(\tan 150^{\circ}= \) [[input:ans6]] [[validation:ans6]] [[feedback:prt6]]
+<li><div>\(\sin {@A1@}^{\circ} = \) [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</div></li>
+<li><div>\(\sin {@A2@}^{\circ} = \) [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]</div></li>
+<li><div>\(\cos {@A1@}^{\circ} = \) [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</div></li>
+<li><div>\(\cos {@A2@}^{\circ} = \) [[input:ans4]] [[validation:ans4]] [[feedback:prt4]]</div></li>
+<li><div>\(\tan {@A1@}^{\circ} = \) [[input:ans5]] [[validation:ans5]] [[feedback:prt5]]</div></li>
+<li><div>\(\tan {@A2@}^{\circ} = \) [[input:ans6]] [[validation:ans6]] [[feedback:prt6]]</div></li>
 </ol>]]></text>
     </questiontext>
     <generalfeedback format="html">
-      <text><![CDATA[<ol type="a">
-<li> \( \sin 120^\circ=\sin (180-60)=\sin 60^\circ=\dfrac{\sqrt{3}}{2} \)
-<li> \( \sin 150^\circ=\sin (180-30)=\sin 30^\circ=\dfrac{1}{2} \)
-<li> \(\cos 120^\circ=-\cos 60=-\dfrac{1}{2} \)
-<li> \(\cos 150^\circ=-\cos 30^\circ=-\dfrac{\sqrt{3}}{2} \)
-<li> \( \tan120^\circ=\dfrac{\frac{\sqrt{3}}{2}}{-\frac{1}{2}}=-\sqrt{3} \)
-<li> \( \tan150^\circ=\dfrac{\frac{1}{2}}{-\frac{\sqrt{3}}{2}}=-\frac{1}{\sqrt{3}} \)
+      <text><![CDATA[<p>Both angles are obtuse, so they lie in the second quadrant, where sine is positive while cosine and tangent are negative. Each exact value follows from the reference (supplementary) angle \(180^\circ - \theta\), which is one of the standard angles \(30^\circ\), \(45^\circ\) or \(60^\circ\):</p>
+<ol type="a">
+<li>\( \sin {@A1@}^\circ = \sin(180^\circ - {@A1@}^\circ) = \sin {@ref1@}^\circ = {@ta1@} \)</li>
+<li>\( \sin {@A2@}^\circ = \sin(180^\circ - {@A2@}^\circ) = \sin {@ref2@}^\circ = {@ta2@} \)</li>
+<li>\( \cos {@A1@}^\circ = -\cos {@ref1@}^\circ = {@ta3@} \)</li>
+<li>\( \cos {@A2@}^\circ = -\cos {@ref2@}^\circ = {@ta4@} \)</li>
+<li>\( \tan {@A1@}^\circ = \dfrac{\sin {@A1@}^\circ}{\cos {@A1@}^\circ} = {@ta5@} \)</li>
+<li>\( \tan {@A2@}^\circ = \dfrac{\sin {@A2@}^\circ}{\cos {@A2@}^\circ} = {@ta6@} \)</li>
 </ol>]]></text>
     </generalfeedback>
-    <defaultgrade>1</defaultgrade>
+    <defaultgrade>6</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
@@ -33,18 +34,32 @@
       <text>2020081700</text>
     </stackversion>
     <questionvariables>
-      <text>ta1 : sqrt(3)/2;
-ta2 : 1/2;
-ta3 : -1/2;
-ta4 : -sqrt(3)/2;
-ta5 : -sqrt(3);
-ta6 : -1/sqrt(3);</text>
+      <text>/* Design backwards: pick an ordered pair of distinct obtuse angles from  */
+/* the exact-value family. All variants use the same method (reference    */
+/* angle in the second quadrant) at the same difficulty.                  */
+angpair : rand([[120,135],[120,150],[135,150],[135,120],[150,120],[150,135]]);
+A1 : angpair[1];
+A2 : angpair[2];
+ref1 : 180 - A1;
+ref2 : 180 - A2;
+
+/* Model answers: Maxima evaluates these standard angles exactly. */
+ta1 : sin(A1*%pi/180);
+ta2 : sin(A2*%pi/180);
+ta3 : cos(A1*%pi/180);
+ta4 : cos(A2*%pi/180);
+ta5 : tan(A1*%pi/180);
+ta6 : tan(A2*%pi/180);
+
+/* Anticipated wrong answers: dropped minus sign in the second quadrant. */
+wrong_cos_sign : -ta3;
+wrong_tan_sign : -ta5;</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="moodle_auto_format">
-      <text/>
+      <text>\(A_1={@A1@}^\circ\), \(A_2={@A2@}^\circ\)</text>
     </questionnote>
     <questiondescription format="moodle_auto_format">
       <text/>
@@ -75,12 +90,12 @@ ta6 : -1/sqrt(3);</text>
       <name>ans1</name>
       <type>algebraic</type>
       <tans>ta1</tans>
-      <boxsize>6</boxsize>
+      <boxsize>10</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
       <syntaxattribute>0</syntaxattribute>
-      <forbidwords>sin</forbidwords>
+      <forbidwords>sin, cos, tan, cot, sec, csc</forbidwords>
       <allowwords/>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
@@ -93,12 +108,12 @@ ta6 : -1/sqrt(3);</text>
       <name>ans2</name>
       <type>algebraic</type>
       <tans>ta2</tans>
-      <boxsize>6</boxsize>
+      <boxsize>10</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
       <syntaxattribute>0</syntaxattribute>
-      <forbidwords>sin</forbidwords>
+      <forbidwords>sin, cos, tan, cot, sec, csc</forbidwords>
       <allowwords/>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
@@ -111,12 +126,12 @@ ta6 : -1/sqrt(3);</text>
       <name>ans3</name>
       <type>algebraic</type>
       <tans>ta3</tans>
-      <boxsize>6</boxsize>
+      <boxsize>10</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
       <syntaxattribute>0</syntaxattribute>
-      <forbidwords>cos</forbidwords>
+      <forbidwords>sin, cos, tan, cot, sec, csc</forbidwords>
       <allowwords/>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
@@ -129,12 +144,12 @@ ta6 : -1/sqrt(3);</text>
       <name>ans4</name>
       <type>algebraic</type>
       <tans>ta4</tans>
-      <boxsize>6</boxsize>
+      <boxsize>10</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
       <syntaxattribute>0</syntaxattribute>
-      <forbidwords>cos</forbidwords>
+      <forbidwords>sin, cos, tan, cot, sec, csc</forbidwords>
       <allowwords/>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
@@ -147,12 +162,12 @@ ta6 : -1/sqrt(3);</text>
       <name>ans5</name>
       <type>algebraic</type>
       <tans>ta5</tans>
-      <boxsize>6</boxsize>
+      <boxsize>10</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
       <syntaxattribute>0</syntaxattribute>
-      <forbidwords>tan</forbidwords>
+      <forbidwords>sin, cos, tan, cot, sec, csc</forbidwords>
       <allowwords/>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
@@ -165,12 +180,12 @@ ta6 : -1/sqrt(3);</text>
       <name>ans6</name>
       <type>algebraic</type>
       <tans>ta6</tans>
-      <boxsize>6</boxsize>
+      <boxsize>10</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
       <syntaxattribute>0</syntaxattribute>
-      <forbidwords>tan</forbidwords>
+      <forbidwords>sin, cos, tan, cot, sec, csc</forbidwords>
       <allowwords/>
       <forbidfloat>1</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
@@ -189,7 +204,7 @@ ta6 : -1/sqrt(3);</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Is sin(A1) correct?</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>ta1</tans>
@@ -209,7 +224,7 @@ ta6 : -1/sqrt(3);</text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>\({@A1@}^\circ\) is an obtuse angle in the second quadrant. Use the supplementary-angle identity \(\sin\theta = \sin(180^\circ - \theta)\) to relate it to an acute angle whose exact value you know from the standard triangles.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -223,7 +238,7 @@ ta6 : -1/sqrt(3);</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Is sin(A2) correct?</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans2</sans>
         <tans>ta2</tans>
@@ -243,7 +258,7 @@ ta6 : -1/sqrt(3);</text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>\({@A2@}^\circ\) is an obtuse angle in the second quadrant. Use the supplementary-angle identity \(\sin\theta = \sin(180^\circ - \theta)\) to relate it to an acute angle whose exact value you know from the standard triangles.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -257,7 +272,7 @@ ta6 : -1/sqrt(3);</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Is cos(A1) correct?</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans3</sans>
         <tans>ta3</tans>
@@ -274,10 +289,35 @@ ta6 : -1/sqrt(3);</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0.0000000</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt3-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Diagnostic: sign dropped on the cosine?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans3</sans>
+        <tans>wrong_cos_sign</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0.0000000</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Your value has the wrong sign. \({@A1@}^\circ\) lies in the second quadrant, where only sine is positive — cosine is negative there. Use \(\cos\theta = -\cos(180^\circ - \theta)\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Write \(\cos {@A1@}^\circ\) in terms of its reference angle \(180^\circ - {@A1@}^\circ\), remembering that cosine is negative for an obtuse angle.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -291,7 +331,7 @@ ta6 : -1/sqrt(3);</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Is cos(A2) correct?</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans4</sans>
         <tans>ta4</tans>
@@ -311,7 +351,7 @@ ta6 : -1/sqrt(3);</text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt4-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Write \(\cos {@A2@}^\circ\) in terms of its reference angle \(180^\circ - {@A2@}^\circ\), remembering that cosine is negative for an obtuse angle (second quadrant).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -325,7 +365,7 @@ ta6 : -1/sqrt(3);</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Is tan(A1) correct?</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans5</sans>
         <tans>ta5</tans>
@@ -342,10 +382,35 @@ ta6 : -1/sqrt(3);</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0.0000000</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt5-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Diagnostic: sign dropped on the tangent?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans5</sans>
+        <tans>wrong_tan_sign</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0.0000000</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt5-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Your value has the wrong sign. In the second quadrant sine is positive but cosine is negative, so their ratio \(\tan\theta = \dfrac{\sin\theta}{\cos\theta}\) must be negative.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt5-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Either use \(\tan\theta = \dfrac{\sin\theta}{\cos\theta}\) with your answers to the earlier parts, or the identity \(\tan\theta = -\tan(180^\circ - \theta)\).</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -359,7 +424,7 @@ ta6 : -1/sqrt(3);</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Is tan(A2) correct?</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans6</sans>
         <tans>ta6</tans>
@@ -379,13 +444,21 @@ ta6 : -1/sqrt(3);</text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt6-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text><![CDATA[<p>Either use \(\tan\theta = \dfrac{\sin\theta}{\cos\theta}\) with your answers to the earlier parts, or the identity \(\tan\theta = -\tan(180^\circ - \theta)\). Remember tangent is negative for an obtuse angle.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
+    <deployedseed>86</deployedseed>
+    <deployedseed>219</deployedseed>
+    <deployedseed>1024</deployedseed>
+    <deployedseed>3411</deployedseed>
+    <deployedseed>5077</deployedseed>
+    <deployedseed>9902</deployedseed>
+    <deployedseed>14477</deployedseed>
+    <deployedseed>28661</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description/>
+      <description>All six values correct: full marks on every part.</description>
       <testinput>
         <name>ans1</name>
         <value>ta1</value>
@@ -445,6 +518,70 @@ ta6 : -1/sqrt(3);</text>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt6-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Sign errors hit the diagnostics (parts c and e); other wrong answers hit the catch-all hints.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta2</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>wrong_cos_sign</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>-ta4</value>
+      </testinput>
+      <testinput>
+        <name>ans5</name>
+        <value>wrong_tan_sign</value>
+      </testinput>
+      <testinput>
+        <name>ans6</name>
+        <value>ta6+1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt3-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt4</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt4-1-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt5</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt5-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt6</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt6-1-F</expectedanswernote>
       </expected>
     </qtest>
   </question>

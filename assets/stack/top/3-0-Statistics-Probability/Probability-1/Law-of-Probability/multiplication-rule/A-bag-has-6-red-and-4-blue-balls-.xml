@@ -5,12 +5,12 @@
       <text>A bag has 6 red and 4 blue balls.</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>A bag has {@redballs@} {@ball1@} and {@blueballs@} {@ball2@} balls. One ball is drawn, replaced, and then another is drawn. Find the probability that both are:</p>
+      <text><![CDATA[<p>A bag has {@ball1@} {@ball1c@} and {@ball2@} {@ball2c@} balls. One ball is drawn, replaced, and then another is drawn. Find the probability that:</p>
 <p></p>
 <p>
      <ol type="a">
-             <li><p>{@ball2@} [[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p></li>
-             <li><p>One {@ball1@} and one {@ball2@} [[input:ans2]] [[validation:ans2]][[feedback:prt3]]</p></li>
+             <li><p>Both balls are {@ball2c@} [[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p></li>
+             <li><p>One ball is {@ball1c@} and the other is {@ball2c@} [[input:ans2]] [[validation:ans2]][[feedback:prt3]]</p></li>
      </ol>
 
 </p>
@@ -19,12 +19,19 @@
 <p></p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<p>A bag has {@redballs@} {@ball1@} and {@blueballs@} {@ball2@} balls. One ball is drawn, replaced, and then another is drawn. The probability that both are:</p>
-<p></p>
+      <text><![CDATA[<p><h3> Worked Solution</h3></p>
+<p>The probability that:</p>
 <p>
      <ol type="a">
-             <li><p>{@ball1@}</p></li>
-             <li><p>One {@ball1@} and one {@ball2@}</p></li>
+             <li><p>Both balls are {@ball2c@}</p>
+<p> To find the probability that both balls are {@ball2c@}, we multiply the probability of drawing a {@ball2c@} ball on the first turn by the probability of drawing one on the second turn.</p>
+<p>Because the first ball is replaced before the second draw, the probability stays exactly the same for both draws:</p>
+<p>{@pball2@} \(\times\) {@pball2@} = {@ta@}</p></li>
+             <li><p>One ball is {@ball1c@} and the other is {@ball2c@}</p>
+<p> To find the probability that one ball is {@ball1c@} and the other is {@ball2c@}, we calculate the probability of both possible ways and add them together:</p>
+<p><strong>First way</strong> ({@ball1c@} then {@ball2c@}): Multiply {@pball1@} \(\times\) {@pball2@}</p>
+<p>Second way ({@ball2c@} then {@ball1c@}): Multiply {@pball2@} \(\times\) {@pball1@}</p>
+<p>Since both ways have the same probability, the final calculation is:2 \(\times\) ({@pball1@} \(\times\) {@pball2@}) = {@ta1@}</p></li>
      </ol>
 
 </p>]]></text>
@@ -37,13 +44,24 @@
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>ball1:rand(10)+2;
-ball2 : rand(10)+rand(4);
-pball1: ball1/(ball1 + ball2);
-pball2: ball2/(ball1 + ball2);
-ball1c:rand([red, yellow, green, purple, orange]);
-ball2c:rand([blue, black ,white ,pink , brown]);
-ta:pball2 * pball2;</text>
+      <text>ball1: rand(10)+2;
+ball2: rand(10)+4;
+
+pball1: ball1/(ball1+ball2);
+pball2: ball2/(ball1+ball2);
+
+pball11: (ball1-1)/(ball1+ball2-1);
+pball12: ball1/(ball1+ball2-1);
+pball21: ball2/(ball1+ball2-1);
+pball22: (ball2-1)/(ball1+ball2-1);
+
+ball1c: rand([red, yellow, green, purple, orange]);
+ball2c: rand([blue, black, white, pink, brown]);
+
+ta: pball2*pball2;
+taw: pball2*pball22;
+ta1: 2*pball1*pball2;
+ta1w: pball2*pball12 + pball1*pball21;</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -104,7 +122,7 @@ ta:pball2 * pball2;</text>
     <input>
       <name>ans2</name>
       <type>algebraic</type>
-      <tans>ta2</tans>
+      <tans>ta1</tans>
       <boxsize>15</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -146,8 +164,34 @@ ta:pball2 * pball2;</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>taw</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you calculated the probability <strong>without replacement</strong>. </p>
+<p>Check the wording of the question carefully: it states the ball is <strong>replaced</strong>. Because the first ball is put back, the total number of balls in the bag does not change for the second draw. Your second probability fraction should have the exact same numerator and denominator as the first.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -166,7 +210,7 @@ ta:pball2 * pball2;</text>
         <description>Checks for the correct answer.</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans2</sans>
-        <tans>1</tans>
+        <tans>ta1</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -180,36 +224,58 @@ ta:pball2 * pball2;</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt3-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta1w</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you calculated the probability <strong>without replacement</strong>. </p>
+<p>Because the first ball is put back, the total number of balls in the bag does not change for the second draw. Your second probability fraction should have the exact same numerator and denominator as the first.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
     </prt>
-    <qtest>
-      <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
-      <testinput>
-        <name>ans1</name>
-        <value>ta1</value>
-      </testinput>
-      <testinput>
-        <name>ans2</name>
-        <value>1</value>
-      </testinput>
-      <expected>
-        <name>prt1</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
-      </expected>
-      <expected>
-        <name>prt3</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt3-1-T</expectedanswernote>
-      </expected>
-    </qtest>
+    <deployedseed>110886361</deployedseed>
+    <deployedseed>698745439</deployedseed>
+    <deployedseed>28313238</deployedseed>
+    <deployedseed>484539779</deployedseed>
+    <deployedseed>1868190754</deployedseed>
+    <deployedseed>238772431</deployedseed>
+    <deployedseed>417405764</deployedseed>
+    <deployedseed>1828172926</deployedseed>
+    <deployedseed>658067987</deployedseed>
+    <deployedseed>541047831</deployedseed>
+    <deployedseed>30282039</deployedseed>
+    <deployedseed>1948197227</deployedseed>
+    <deployedseed>410013966</deployedseed>
+    <deployedseed>1817001954</deployedseed>
+    <deployedseed>716416434</deployedseed>
+    <deployedseed>1572625601</deployedseed>
+    <deployedseed>972519857</deployedseed>
+    <deployedseed>1124684449</deployedseed>
+    <deployedseed>1913818216</deployedseed>
+    <deployedseed>817589328</deployedseed>
   </question>
 </quiz>

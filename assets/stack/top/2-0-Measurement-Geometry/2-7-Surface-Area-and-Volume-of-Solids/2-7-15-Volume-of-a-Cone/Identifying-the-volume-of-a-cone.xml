@@ -158,7 +158,7 @@ Therefore, the amount of water the funnel can hold is \({@ta@}\,\text{m}^3\).
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text>/* Random radius and height in cm */
@@ -255,8 +255,47 @@ ta : (1/3)*22/7*r_1^2*h_1;</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Forgetting the factor \(\frac{1}{3}\) in the formula for volume of a cone</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta_mistake1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have calculated the area of the circular base and multiplied it by the height, but you have not included the factor \(\frac{1}{3}\).</p>
+
+<p>The area of the circular base is</p>
+
+<p>\(B=\pi r^2={@base@}\,\text{m}^2.\)</p>
+
+<p>For a cone, the volume is one third of the product of the base area and the height:</p>
+
+<p>\(V=\frac{1}{3}Bh.\)</p>
+
+<p>You have calculated \(Bh={@B_h@}\,\text{m}^3\), which would be the volume of a cylinder with the same base and height.</p>
+
+<p>For the cone, you need to multiply this by \(\frac{1}{3}\).</p>
+
+<p>Try again using the correct formula for the volume of a cone.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>

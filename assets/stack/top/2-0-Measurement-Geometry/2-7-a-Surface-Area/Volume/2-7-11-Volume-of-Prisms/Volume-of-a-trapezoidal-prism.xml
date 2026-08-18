@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Volume of a trapezoidal prism</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+The figure below shows a trapezoidal prism. Calculate the volume of the prism.
+</p>
+
+[[jsxgraph]]
+
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+boundingbox: [-50, 350, 550, -50],
+keepAspectRatio: true,
+axis: false,
+showCopyright: false
+});
+
+/* Front trapezium */
+var A = board.create('point', [100,100], {visible:false});
+var B = board.create('point', [300,100], {visible:false});
+var C = board.create('point', [250,220], {visible:false});
+var D = board.create('point', [150,220], {visible:false});
+
+/* Back trapezium */
+var E = board.create('point', [250,150], {visible:false});
+var F = board.create('point', [450,150], {visible:false});
+var G = board.create('point', [400,270], {visible:false});
+var H = board.create('point', [300,270], {visible:false});
+
+/* Front face */
+board.create('polygon', [A,B,C,D], {
+borders:{strokeColor:'black'},
+fillColor:'cyan',
+fillOpacity:0.4,
+vertices:{visible:false}
+});
+
+/* Back face */
+board.create('polygon', [E,F,G,H], {
+borders:{strokeColor:'black'},
+fillColor:'cyan',
+fillOpacity:0.2,
+vertices:{visible:false}
+});
+
+/* Prism edges */
+board.create('segment',[A,E],{strokeColor:'black'});
+board.create('segment',[B,F],{strokeColor:'black'});
+board.create('segment',[C,G],{strokeColor:'black'});
+board.create('segment',[D,H],{strokeColor:'black'});
+
+/* Dimension labels */
+
+/* Lower parallel side b */
+board.create('text',[
+180,
+80,
+'{#b#} cm'
+],{
+fontSize:14
+});
+
+/* Upper parallel side a */
+board.create('text',[
+185,
+235,
+'{#a#} cm'
+],{
+fontSize:14
+});
+
+/* Trapezium height h */
+board.create('text',[
+85,
+165,
+'{#h#} cm'
+],{
+fontSize:14
+});
+
+/* Prism length L */
+board.create('text',[
+320,
+120,
+'{#L#} cm'
+],{
+fontSize:14
+});
+
+[[/jsxgraph]]
+
+<p>
+Volume = [[input:ans1]] cm\(^3\)
+[[validation:ans1]]
+[[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+
+<p>
+To calculate the volume of a prism, first find the area of its cross-section and then multiply by the length of the prism.
+</p>
+
+<p>
+For this question, the cross-section is a trapezium.
+</p>
+
+<p>
+The area of a trapezium is:
+</p>
+
+<p>
+Substituting the values from the diagram:
+</p>
+
+\(A=\frac{({@a@}+{@b@})\times {@h@}}{2}\)
+
+\(A={@cross_section_area@}\text{ cm}^2\)
+
+<p>
+The volume of the prism is:
+</p>
+
+Volume =\(\text{Area of cross-section}\times\text{Length}\)
+
+
+V=\({@cross_section_area@}\times{@L@}\)
+
+\(V={@ta@}\text{ cm}^3\)
+
+<p>
+Therefore, the volume of the trapezoidal prism is:
+</p>
+
+\({{@ta@}\text{ cm}^3}\)]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Parallel sides of trapezium */
+a: rand(5)+4;      /* 4..8 cm */
+b: rand(6)+9;      /* 9..14 cm */
+
+/* Trapezium height */
+h: rand(5)+3;      /* 3..7 cm */
+
+/* Prism length */
+L: rand(6)+5;      /* 5..10 cm */
+
+/* Area of trapezium */
+cross_section_area: ((a+b)*h)/2;
+
+/* Correct volume */
+ta: cross_section_area*L;
+
+
+/* Common incorrect answers */
+
+/* Forgot to multiply by prism length */
+wrong_area_only: cross_section_area;
+
+/* Used rectangle formula instead of trapezium formula */
+wrong_rectangle: b*h*L;
+
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for correct volume of trapezoidal prism</description>
+        <answertest>NumRelative</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1225396347</deployedseed>
+    <deployedseed>594446486</deployedseed>
+    <deployedseed>1897627952</deployedseed>
+    <deployedseed>384835881</deployedseed>
+    <deployedseed>1073682651</deployedseed>
+    <deployedseed>758474280</deployedseed>
+    <deployedseed>1520623443</deployedseed>
+    <deployedseed>189550869</deployedseed>
+    <deployedseed>152530544</deployedseed>
+    <deployedseed>1228297592</deployedseed>
+    <deployedseed>1881555991</deployedseed>
+    <deployedseed>642177377</deployedseed>
+    <deployedseed>1364611499</deployedseed>
+    <deployedseed>721043242</deployedseed>
+    <deployedseed>1171883374</deployedseed>
+    <deployedseed>12949548</deployedseed>
+    <deployedseed>1977036237</deployedseed>
+    <deployedseed>687175163</deployedseed>
+    <deployedseed>142392926</deployedseed>
+    <deployedseed>1868732758</deployedseed>
+    <deployedseed>1710875359</deployedseed>
+    <deployedseed>995473402</deployedseed>
+    <deployedseed>1741407704</deployedseed>
+    <deployedseed>1627288385</deployedseed>
+    <deployedseed>1580481177</deployedseed>
+    <deployedseed>796798839</deployedseed>
+    <deployedseed>1464786426</deployedseed>
+    <deployedseed>361570240</deployedseed>
+    <deployedseed>212410252</deployedseed>
+    <deployedseed>1507922953</deployedseed>
+    <deployedseed>584793636</deployedseed>
+    <deployedseed>536907482</deployedseed>
+    <deployedseed>959963283</deployedseed>
+    <deployedseed>532162691</deployedseed>
+    <deployedseed>1323614888</deployedseed>
+    <deployedseed>1403852005</deployedseed>
+    <deployedseed>478279262</deployedseed>
+    <deployedseed>1786864236</deployedseed>
+    <deployedseed>1968930078</deployedseed>
+    <deployedseed>402945039</deployedseed>
+    <deployedseed>1478982551</deployedseed>
+    <deployedseed>819780007</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Checks for correct calculation of volume of trapezoidal prism</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description/>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

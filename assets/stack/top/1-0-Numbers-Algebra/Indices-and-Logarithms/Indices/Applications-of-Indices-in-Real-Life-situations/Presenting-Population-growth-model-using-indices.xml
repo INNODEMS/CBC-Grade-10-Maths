@@ -4,52 +4,39 @@
     <name>
       <text>Presenting Population growth model using indices</text>
     </name>
-    <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>A small community in rural Kenya has an initial population of {@P0@} people. The population grows each year by a factor of {@g@}. Using indices, calculate the population after {@t@} years.</p>
-
+    <questiontext format="html">
+      <text><![CDATA[<p>A small community in rural Kenya has an initial population of {@P0@} people. The population grows each year by a factor of {@g3@}. Using indices, calculate the population after {@t@} years.</p>
 <p>Write your answer using the model:</p>
-
-<p>\[
-P(t) = P_0 \times g^t
-\]</p>
-
+<p>\[ P(t) = P_0 \times g3^t \]</p>
 <p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
     </questiontext>
-    <generalfeedback format="moodle_auto_format">
+    <generalfeedback format="html">
       <text><![CDATA[<h3>Worked Solution</h3>
-
 <p>The population model is:</p>
-
-<p>\[
-P(t) = {@P0@} \times ({@g@})^{@t@}.
-\]</p>
-
+<p>\[ P(t) = {@P0@} \times ({@g@})^{@t@}. \]</p>
 <p>Evaluating this gives:</p>
-
-<p>\[
-P(t) = {@Pt@}.
-\]</p>]]></text>
+<p>\[ P(t) = {@Pt@}. \]</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
       <text>/* Initial population */
 P0: rand_with_step(800,1500,50);
 
-/* Annual growth multiplier */
-g_choices: [103/100, 104/100, 106/100];
-g: rand(g_choices);
-
-/* Number of years */
-t: rand([3,4,5,6]);
+g1: 100 + rand(11);   /* 100 to 110 */
+g2: 95 + rand(5);     /* 95 to 99 */
+t: 1 + rand(6);       /* 1 to 6 */
+g3: g1/g2;
+g4: g2/g1;
 
 /* Final population */
-Pt: P0 * g^t;
+Pt: P0 * g3^t;
+Pt1: P0 * g4^t;
 
 /* Wrong answers */
 m1: P0 * g * t;           /* linear growth mistake */
@@ -61,27 +48,26 @@ m3: P0 * g^(t-1);         /* misses one cycle */
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@Pt@}</text>
+      <text><![CDATA[<p>{@Pt@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
 <p id="concept"></p>
 <p id="reviewer"></p>
 <p id="reviewer"></p>
-
-<p id="description"> The question requires the learner to apply exponential growth models using indices to determine the population size after a given number of years.</p>]]></text>
+<p id="description">The question requires the learner to apply exponential growth models using indices to determine the population size after a given number of years.</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
     <assumereal>0</assumereal>
     <prtcorrect format="html">
-      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+      <text><![CDATA[<p><i class="fa fa-check"></i> Correct answer, well done.</p>]]></text>
     </prtcorrect>
     <prtpartiallycorrect format="html">
-      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+      <text><![CDATA[<p><i class="fa fa-adjust"></i> Your answer is partially correct.</p>]]></text>
     </prtpartiallycorrect>
     <prtincorrect format="html">
-      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+      <text><![CDATA[<p><i class="fa fa-times"></i> Incorrect answer.</p>]]></text>
     </prtincorrect>
     <decimals>.</decimals>
     <scientificnotation>*10</scientificnotation>
@@ -138,8 +124,33 @@ m3: P0 * g^(t-1);         /* misses one cycle */
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>Pt1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>&lt;p&gt;<strong data-start="276" data-end="293">Good attempt.</strong> Check the growth factor carefully. A population that is growing should be multiplied by a factor greater than 1. Make sure you have used the given ratio in the correct order.&lt;/p&gt;</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>

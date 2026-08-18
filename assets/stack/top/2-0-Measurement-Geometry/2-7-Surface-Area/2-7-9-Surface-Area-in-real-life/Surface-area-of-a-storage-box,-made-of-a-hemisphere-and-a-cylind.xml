@@ -143,24 +143,16 @@ Calculate the total external surface area of the container. Use \(\pi=\frac{22}{
 <p>
 To calculate the total external surface area of the composite solid, identify only the surfaces that are exposed.
 </p>
+<p> The exposed surfaces are the curved surface of the cylinder, the hemisphere and the circle. Therefore the formulas to be used are : </p>
 
 <ul>
-<li>Curved surface area of the cylinder:
-\[
-2\pi rh
-\]
+<li> surface area of the curved part of the cylinder =\(2\pi rh\)
 </li>
 
-<li>Curved surface area of the hemisphere:
-\[
-2\pi r^2
-\]
+<li> Surface area of the hemisphere = \(2\pi r^2\)
 </li>
 
-<li>Circular base of the cylinder:
-\[
-\pi r^2
-\]
+<li> Since the cylinder has a circular base the formula to be used is  \(\pi r^2\)
 </li>
 </ul>
 
@@ -181,21 +173,10 @@ Therefore,
 \]
 
 <p>
-Substituting
-\[
-r={@radius@}\text{ cm},\qquad
-h={@height@}\text{ cm}
-\]
+Substituting the given values of  radius(r) and height(h) into the formula
+\(r={@radius@}\text{ cm},\qquad h={@height@}\text{ cm}\)
 
-gives
-
-\[
-2\times\frac{22}{7}\times {@radius@}\times {@height@}
-+
-3\times\frac{22}{7}\times {@radius@}^2
-=
-{@Total_surface_area@}\text{ cm}^2.
-\]
+gives; (\(2\times\frac{22}{7}\times {@radius@}\times {@height@})+(3\times\frac{22}{7}\times {@radius@}^2)= {@Total_surface_area@}\text{ cm}^2.\)
 </p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -206,19 +187,20 @@ gives
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* List of dimensions: [radius, height] */
-list_of_the_values:[
+      <text>/* List of [radius,height] pairs */
+dimensions:[
     [3,8],[4,10],[5,12],[6,15],[7,16],
     [8,20],[9,24],[10,25],[12,30],[15,36],
     [16,40],[18,45],[20,48],[24,60],[25,64]
 ];
 
-/* Randomly select one set of dimensions */
-index:1+rand(length(list_of_the_values));
-choose_one:list_of_the_values[index];
+/* Randomly choose one pair */
+idx:rand(length(dimensions))+1;
+chosen:dimensions[idx];
 
-radius:choose_one[1];
-height:choose_one[2];
+/* Extract radius and height */
+radius:chosen[1];
+height:chosen[2];
 
 /* Use π ≈ 22/7 */
 pi_value:22/7;
@@ -228,26 +210,46 @@ Cylinder_curved_area:2*pi_value*radius*height;
 Hemisphere_curved_area:2*pi_value*radius^2;
 Cylinder_base_area:pi_value*radius^2;
 
-/* Correct total external surface area */
-Total_surface_area:round(Cylinder_curved_area + Hemisphere_curved_area + Cylinder_base_area);
+/* Correct answer */
+Total_surface_area:
+round(
+    Cylinder_curved_area
+    + Hemisphere_curved_area
+    + Cylinder_base_area
+);
 
+ta:Total_surface_area;
 
-/* Common student misconceptions */
+/* Common misconceptions */
 
-/* Uses sphere instead of hemisphere */
-Sphere_mistake:round(Cylinder_curved_area+4*pi_value*radius^2+Cylinder_base_area);
+/* Using full sphere surface area */
+Sphere_mistake:
+round(
+    Cylinder_curved_area
+    + 4*pi_value*radius^2
+    + Cylinder_base_area
+);
 
-/* Omits the cylinder base */
-No_base_mistake:round(Cylinder_curved_area+Hemisphere_curved_area);
+/* Omitting the cylinder base */
+No_base_mistake:
+round(
+    Cylinder_curved_area
+    + Hemisphere_curved_area
+);
 
-/* Includes both circular bases of the cylinder */
-Two_bases_mistake:round(Cylinder_curved_area +Hemisphere_curved_area + 2*Cylinder_base_area);</text>
+/* Adding two circular bases */
+Two_bases_mistake:
+round(
+    Cylinder_curved_area
+    + Hemisphere_curved_area
+    + 2*Cylinder_base_area
+);</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta1@}</text>
+      <text><![CDATA[<p>Total_surface_area</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -319,13 +321,101 @@ Two_bases_mistake:round(Cylinder_curved_area +Hemisphere_curved_area + 2*Cylinde
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
+      <node>
+        <name>1</name>
+        <description>Forgetting to include the circular base of the storage box</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>No_base_mistake</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p> Incorrect! Seems like you forgot to add the base of the storage box to the total surface area. You used the formula: 
+</p>
+<p> \{Surface area} = 2\times\pi_value\times\(r^2)+pi_value\times\r\times\h</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
     </prt>
-    <deployedseed>180490832</deployedseed>
+    <deployedseed>1</deployedseed>
+    <deployedseed>2</deployedseed>
+    <deployedseed>3</deployedseed>
+    <deployedseed>4</deployedseed>
+    <deployedseed>5</deployedseed>
+    <deployedseed>6</deployedseed>
+    <deployedseed>7</deployedseed>
+    <deployedseed>8</deployedseed>
+    <deployedseed>9</deployedseed>
+    <deployedseed>10</deployedseed>
+    <deployedseed>11</deployedseed>
+    <deployedseed>12</deployedseed>
+    <deployedseed>13</deployedseed>
+    <deployedseed>14</deployedseed>
+    <deployedseed>15</deployedseed>
+    <deployedseed>16</deployedseed>
+    <deployedseed>17</deployedseed>
+    <deployedseed>18</deployedseed>
+    <deployedseed>19</deployedseed>
+    <deployedseed>20</deployedseed>
+    <deployedseed>21</deployedseed>
+    <deployedseed>22</deployedseed>
+    <deployedseed>23</deployedseed>
+    <deployedseed>24</deployedseed>
+    <deployedseed>25</deployedseed>
+    <deployedseed>26</deployedseed>
+    <deployedseed>27</deployedseed>
+    <deployedseed>28</deployedseed>
+    <deployedseed>29</deployedseed>
+    <deployedseed>30</deployedseed>
+    <deployedseed>31</deployedseed>
+    <deployedseed>32</deployedseed>
+    <deployedseed>33</deployedseed>
+    <deployedseed>34</deployedseed>
+    <deployedseed>35</deployedseed>
+    <deployedseed>36</deployedseed>
+    <deployedseed>37</deployedseed>
+    <deployedseed>38</deployedseed>
+    <deployedseed>39</deployedseed>
+    <deployedseed>40</deployedseed>
+    <deployedseed>41</deployedseed>
+    <deployedseed>42</deployedseed>
+    <deployedseed>43</deployedseed>
+    <deployedseed>44</deployedseed>
+    <deployedseed>45</deployedseed>
+    <deployedseed>46</deployedseed>
+    <deployedseed>47</deployedseed>
+    <deployedseed>48</deployedseed>
+    <deployedseed>49</deployedseed>
+    <deployedseed>50</deployedseed>
+    <deployedseed>51</deployedseed>
+    <deployedseed>52</deployedseed>
+    <deployedseed>53</deployedseed>
+    <deployedseed>54</deployedseed>
+    <deployedseed>55</deployedseed>
+    <deployedseed>56</deployedseed>
+    <deployedseed>57</deployedseed>
+    <deployedseed>58</deployedseed>
+    <deployedseed>59</deployedseed>
+    <deployedseed>60</deployedseed>
+    <deployedseed>61</deployedseed>
+    <deployedseed>62</deployedseed>
   </question>
 </quiz>

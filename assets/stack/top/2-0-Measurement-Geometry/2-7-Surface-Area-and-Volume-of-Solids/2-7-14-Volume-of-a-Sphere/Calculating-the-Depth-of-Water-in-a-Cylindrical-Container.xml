@@ -5,103 +5,99 @@
       <text>Calculating the Depth of Water in a Cylindrical Container</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>A spherical container has a diameter of \({@d_sph@}\,\text{cm}\) and is \(\dfrac{4}{3}\) full of water. The water is emptied into a cylindrical container of diameter \({@d_cyl@}\,\text{cm}\). Find the depth of the water in the cylindrical container.</p>
+      <text><![CDATA[<p>A spherical container has a diameter of \({@d_sph@}\,\text{cm}. The volume of water is \(\frac{4}{3}\) times the volume of the sphere.</p>
+
+<p>The water is poured into a cylindrical container with a diameter of \({@d_cyl@}\,\text{cm}.\)</p>
+
+<p>Use the volume formula for a sphere to determine the volume of water. Then find the depth of the water in the cylindrical container.</p>
+
 <p>\(\text{The depth of the water}=\)[[input:ans1]]\(\,\text{cm}\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<p><strong>Step 1: Write down the given information</strong></p>
-<p>Diameter of the sphere = {@d_sph@} cm</p>
-<p>Diameter of the cylinder = {@d_cyl@} cm</p>
-<p>Fraction of the sphere filled with water = \( \dfrac{4}{3} \)</p>
+      <text><![CDATA[<h3>Worked solution</h3>
 
-<p><strong>Step 2: Find the radii of the sphere and the cylinder</strong></p>
-<p>
-\(\begin{align}
-r_{\text{sphere}}&=\frac{\text{Diameter}}{2}\\
- &= \frac{{@d_sph@}}{2} \\
-&={@r_sph@}\,\text{cm}\\
-&\\
-r_{\text{cylinder}}
-&=\frac{\text{Diameter}}{2}\\
-&=\frac{{@d_cyl@}}{2} \\
- &= {@r_cyl@}\,\text{cm}\\
-\end{align}\)
-</p>
+<p><strong>1) Find the radius of the sphere</strong></p>
 
-<p><strong>Step 3: Find the volume of water in the sphere</strong></p>
-<p>
-\(
-\begin{align}
-V_{\text{sphere}}
-&=\frac{4}{3} \times \frac{4}{3}\pi r^3 \\
- &= \frac{4}{3} \times \frac{4}{3}\times \frac{22}{7} \times {@r_sph@}^{3} \\
-&= \frac{16}{9} \times \frac{22}{7} \times {@R_s@} \\
-&=\frac{16}{9} \times{@v@}\\
-&={@V_sphere@}\\
-&={@v_sphere@}\,\text{cm}^3
-\end{align}\)
-</p>
+<p>The diameter of the sphere is \({@d_sph@}\,\text{cm},\) so its radius is</p>
 
-<p><strong>Step 4: Write the formula for the volume of water in the cylinder</strong></p>
-<p>
-\(\begin{align}
-V_{\text{cylinder}} &= \pi r^2 h \\
-&= \frac{22}{7} \times {@r_cyl@}^2 \times h
-\end{align}\)
-</p>
+<p>\(r_{\text{sph}}=\frac{{@d_sph@}}{2}\,\text{cm}.\)</p>
 
-<p><strong>Step 5: Equate the two volumes to find the depth of water</strong></p>
-<p>
-\(\begin{align} V_{sphere}&=V_{cylinder}\\
-{@v_sphere@}&= \frac{22}{7} \times {@r_cyl@}^2 \times h\\
-h &= \frac{{@v_sphere@}}{ \frac{22}{7} \times {@r_cyl@}^2}\\
-&=\frac{{@v_sphere@}}{{@Cy@}}\\
-&={@h@}\\
-&={@depth@}\,\text{cm}
+<p><strong>2) Calculate the volume of the sphere</strong></p>
 
-\end{align}\)
-</p>
+<p>The volume of a sphere is \(V=\frac{4}{3}\pi r^3.\)</p>
 
-<p>
-Therefore,<br>
-\(\begin{align}
-\text{Depth of the water} &= {@depth@}\,\text{cm}
-\end{align}\)
-</p>]]></text>
+<p>Therefore, the volume of the sphere is</p>
+
+<p>\(V_{\text{sphere}}=\frac{4}{3}\pi\left(\frac{{@d_sph@}}{2}\right)^3={@V_sphere@}\,\text{cm}^3.\)</p>
+
+<p><strong>3) Calculate the volume of water</strong></p>
+
+<p>The volume of water is \(\frac{4}{3}\) times the volume of the sphere. Therefore,</p>
+
+<p>\(V_{\text{water}}=\frac{4}{3}V_{\text{sphere}}={@V_water@}\,\text{cm}^3.\)</p>
+
+<p><strong>4) Find the depth of the water in the cylinder</strong></p>
+
+<p>The diameter of the cylinder is \({@d_cyl@}\,\text{cm},\) so its radius is</p>
+
+<p>\(r_{\text{cyl}}=\frac{{@d_cyl@}}{2}\,\text{cm}.\)</p>
+
+<p>The volume of a cylinder is \(V=\pi r^2h.\)</p>
+
+<p>Since the volume of water is unchanged when it is poured into the cylinder,</p>
+
+<p>\(V_{\text{water}}=\pi r_{\text{cyl}}^2h.\)</p>
+
+<p>Hence,</p>
+
+<p>\(h=\frac{V_{\text{water}}}{\pi r_{\text{cyl}}^2}={@h@}\,\text{cm}.\)</p>
+
+<p>Therefore, the depth of the water is</p>
+
+<p>\(\boxed{{@Depth_cylinder@}\,\text{cm}}\).</p>]]></text>
     </generalfeedback>
     <defaultgrade>15</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[/* Randomize diameter of the cylinder */
-d_cyl : rand_with_step(6, 20, 2);   /* cylinder diameter between 6 cm and 20 cm */
+      <text>
+/* Randomize diameter of the cylinder */
+d_cyl : rand_with_step(6, 20, 2);
 
 /* Randomize diameter of the sphere (always greater than cylinder) */
-d_sph : d_cyl + rand_with_step(10, 40, 2);  /* sphere diameter > cylinder diameter */
+d_sph : d_cyl + rand_with_step(10, 40, 2);
 
-/* Heights and radii */
+/* Calculate radii */
 r_sph : d_sph / 2;
 r_cyl : d_cyl / 2;
 
-/* Fraction of sphere filled with water */
+/* The volume of water is 4/3 times the volume of the sphere */
 fraction : 4/3;
 
 /* Use pi */
 pi_val : 22/7;
 
-/* Volume of water from sphere */
-V_sphere : fraction * (4/3) * pi_val * r_sph^3;
+/* Volume of the sphere */
+V_sphere : (4/3) * pi_val * r_sph^3;
+
+/* Volume of water */
+V_water : fraction * V_sphere;
 
 /* Depth of water in the cylinder */
-h : V_sphere / (pi_val * r_cyl^2);
+h : V_water / (pi_val * r_cyl^2);
 
 /* Convert to decimal and round */
 depth : float(h);
-Depth_cylinder : decimalplaces(depth, 2);]]></text>
+Depth_cylinder : decimalplaces(depth, 2);
+V_mistake1 : (3/4) * V_sphere;
+h_mistake1 : V_mistake1 / (pi_val * r_cyl^2);
+depth_mistake1 : decimalplaces(float(h_mistake1), 2);
+
+</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -165,7 +161,7 @@ Depth_cylinder : decimalplaces(depth, 2);]]></text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description>Checcks for the correct height of the cylinder.</description>
+        <description>Checks for the correct height of the cylinder.</description>
         <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>depth</tans>
@@ -182,8 +178,47 @@ Depth_cylinder : decimalplaces(depth, 2);]]></text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Using the incorrect formula for volume of a sphere</description>
+        <answertest>NumRelative</answertest>
+        <sans>ans1</sans>
+        <tans>depth_mistake1</tans>
+        <testoptions>0.00001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have used \(\frac{3}{4}\) of the volume of the sphere instead of \(\frac{4}{3}\).</p>
+
+<p>The volume of the sphere is</p>
+
+<p>\(V_{\text{sphere}}={@V_sphere@}\,\text{cm}^3.\)</p>
+
+<p>The question states that the volume of water is \(\frac{4}{3}\) times the volume of the sphere. Therefore, the correct volume of water is</p>
+
+<p>\(V_{\text{water}}=\frac{4}{3}V_{\text{sphere}}.\)</p>
+
+<p>You have instead calculated</p>
+
+<p>\(V_{\text{mistake1}}=\frac{3}{4}V_{\text{sphere}}={@V_mistake1@}\,\text{cm}^3.\)</p>
+
+<p>Check how you have interpreted the fraction \(\frac{4}{3}\) in the question, and try again.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>

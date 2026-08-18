@@ -58,61 +58,15 @@
     
     </script>
 
-
-
-
-
-    
-
-
-
-
 </body>
 </html>
 
-
-
-
-<p><ol type="a"><li><p>Calculate the volume of the block.</p>
-<p>\(\text{Volume}=\)[[input:ans1]] \(\text{cm}^3\) [[feedback:prt1]]</p></li>
-<li><p>Calculate the total surface area of the block.</p>
-<p>\(\text{Surface area}=\)[[input:ans2]] \(\text{cm}^2\) [[feedback:prt2]]</p></li>
-<li><p>If \({@num_blocks@}\) such blocks are packed together to form a large cube-shaped structure, what is the total volume of the structure?</p>
-<p>\(\text{Total volume}=\)[[input:ans3]] \(\text{cm}^2\) [[feedback:prt3]]</p></li></ol></p>
-
-
-
-
-
-
-<p hidden> [[validation:ans1]] [[validation:ans2]] [[validation:ans3]]</p>]]></text>
+<p>Calculate the total surface area of the block.</p>
+<p>\(\text{Surface area}=\)[[input:ans1]]\(\text{ cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<p>Given:</p>
-<p>A building block has:</p>
-<p><ul><li>\(\text{Length}={@length@}\,\text{cm}\)</li>
-<li>\(\text{Width}={@width@}\,\text{cm}\)</li>
-<li>\(\text{Height}={@height@}\,\text{cm}\)</li></ul></p>
-<p>There are {@num_blocks @} such identical blocks.</p>
-<p><ol type="a"><li><p>Find the volume of one block</p>
-<p>We use the formula for the volume of a cuboid:</p>
-<p>\(\text{Volume}= \text{Length}\times \text{Width} \times \text{Height}\)</p>
+      <text><![CDATA[<h3>Worked solution</h3>
 
-
-
-<p>Where:</p>
-<p>\(l={@length@}\,\text{cm}\)</p>
-<p>\(w={@width@}\,\text{cm}\)</p>
-<p>\(h={@height@}\,\text{cm}\)</p>
-
-<p>Substitute the given values:</p>
-<p>\(\begin{align} \text{Volume} &= {@length@} \times {@width@} \times {@height@} \\
-&={@volume_one@}\,\text{cm}^3
-\end{align}\)</p>
-<p>Therefore,</p><p>The volume of the building block \(= {\color{blue}{@volume_one@}}\,\text{cm}^3\)</p></li>
-
-
-<li><p>Find the total surface area of one block</p>
 <p>The surface area of a cuboid is calculated using:</p>
 <p>\(\text{Surface Area}=2(lw+wh+hl)\)</p>
 
@@ -120,26 +74,14 @@
 &= 2({@mult_1@}+{@mult_3@}+{@mult_2@})\\
 &=2 \times {@add@} \\
 &= {@ surface_area_one@}\,\text{cm}^2
-\end{align}\)</p>
-<p>Therefore,</p>
-<p>The surface area of the building block is \({\color{blue} {@ surface_area_one@} }\,\text{cm}^2 \)</p>
-</li>
-<li><p>Find the total volume of all {@num_blocks @} blocks</p>
-<p>We already found the volume of one block is: \(= {\color{blue}{@volume_one@}}\,\text{cm}^3\)</p>
-<p>Now multiply by the number of blocks:</p>
-<p>\(\begin{align}
- \text{Total Volume}&={@volume_one@} \times {@num_blocks@} \\
-&={@total_volume@}\,\text{cm}^3
-\end{align}\)</p>
-<p>Therefore,</p>
-<p>\(\text{Total volume of }\, {@num_blocks@} \, \text{blocks}= {\color{blue} {@total_volume@}} \, \text{cm}^3\)</p></li></ol>]]></text>
+\end{align}\)</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025012100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text>/* Generate random dimensions between 5 and 20 such that all are different */
@@ -163,19 +105,12 @@ multy_times2:2*mult_3;
 /* Generate number of blocks */
   num_blocks : rand(60) + 10; /* Range: 10 to 50 */
 
-  /* Calculate volume of one block */
-  volume_one : length * width * height;
 
   /* Calculate total surface area of one block */
-  surface_area_one : 2 * (length*width + width*height + height*length);
-
-  /* Total volume of all blocks */
-  total_volume : volume_one * num_blocks;
-
-
-
-/*mistake 1 Adding the number of block instade of multiplying giving a wrong total volume*/
-total_volume1:volume_one + num_blocks;</text>
+  surface_area_one: 2 * (length*width + width*height + height*length);
+  
+/*mistake 1 Finding the volume instead of the surface area*/
+volume_one : length * width * height;</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -184,21 +119,15 @@ total_volume1:volume_one + num_blocks;</text>
       <text><![CDATA[<p>\(\text{The length}= {@length@}\)</p>
 <p>\(\text{The width}= {@width@}\)</p>
 <p>\(\text{The lheight}= {@height@}\)</p>
-<p>\(\text{The volume of the block}= {@volume_one@}\)</p>
-<p>\(\text{The surface area of the block}= {@ surface_area_one@}\)</p>
-<p>\(\text{The total volume}= {@total_volume@}\)</p>]]></text>
+<p>\(\text{The surface area of the block}= {@ surface_area_one@}\)</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Henry Onyango</p>
 <p id="reviewer"></p>
 <p id="reviewer"></p>
-<p id="description">This is a question involving the calculation of both the surface area and volume of a cuboid.
+<p id="description">This is a question involving the calculation of the surface area.
 The student is required to:</p>
-<p> <ol><li>Identify the surface area of the cuboid,</li>
-<li>Find the volume of the cuboid, and</li>
-<li>Calculate the total volume when there is more than one identical building block.</li></ol></p>
-
-<p>The building block is a closed cuboid, meaning all its faces are enclosed.<p/>]]></text>
+<p>Identify the surface area of the cuboid,</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -225,43 +154,7 @@ The student is required to:</p>
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>volume_one</tans>
-      <boxsize>9</boxsize>
-      <strictsyntax>1</strictsyntax>
-      <insertstars>0</insertstars>
-      <syntaxhint/>
-      <syntaxattribute>0</syntaxattribute>
-      <forbidwords/>
-      <allowwords/>
-      <forbidfloat>1</forbidfloat>
-      <requirelowestterms>0</requirelowestterms>
-      <checkanswertype>0</checkanswertype>
-      <mustverify>0</mustverify>
-      <showvalidation>0</showvalidation>
-      <options/>
-    </input>
-    <input>
-      <name>ans2</name>
-      <type>algebraic</type>
       <tans>surface_area_one</tans>
-      <boxsize>9</boxsize>
-      <strictsyntax>1</strictsyntax>
-      <insertstars>0</insertstars>
-      <syntaxhint/>
-      <syntaxattribute>0</syntaxattribute>
-      <forbidwords/>
-      <allowwords/>
-      <forbidfloat>1</forbidfloat>
-      <requirelowestterms>0</requirelowestterms>
-      <checkanswertype>0</checkanswertype>
-      <mustverify>0</mustverify>
-      <showvalidation>0</showvalidation>
-      <options/>
-    </input>
-    <input>
-      <name>ans3</name>
-      <type>algebraic</type>
-      <tans>total_volume </tans>
       <boxsize>9</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -286,10 +179,10 @@ The student is required to:</p>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description>Checks for the correct volume of the building block.</description>
+        <description>Checks for the correct surface area of block</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>volume_one</tans>
+        <tans>surface_area_one</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -311,10 +204,10 @@ The student is required to:</p>
       </node>
       <node>
         <name>1</name>
-        <description>Checks for writing the value of surface area instade of volume of the building block.</description>
+        <description>Calculation of volume instead of area</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>surface_area_one</tans>
+        <tans>volume_one</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
@@ -324,140 +217,37 @@ The student is required to:</p>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
           <text><![CDATA[<p>Well done for attempting the problem!</p>
-<p>I noticed that the value you provided for volume actually matches the surface area of the block — a small mix-up that many students make when first working with these two concepts.</p>
-<p>Here’s a quick reminder:</p>
-<p>Volume is found using the formula:</p>
-<p>\(\text{Volume}=\text{length} \times \text{width} \times \text{height}\)</p>]]></text>
+<p>I noticed that you worked out volume rather than the surface area </p>
+<p>You used the formula:</p>
+<p>\(\text{Volume}=\text{length} \times \text{width} \times \text{height}\)</p>
+<p>Substituting : \({@length@} \times {@width@} \times {@height@}\)</p>
+<p> To get :\({@volume_one@}\text{ cm}^3\)</p>
+<p>The correct formula for the surface area of a rectangular block is:</p>
+
+<p>
+ \(\text{Surface Area}=2(LW+LH+WH)\)
+</p>
+
+<p>Substituting the given dimensions:</p>
+
+<p>
+\(=2\bigl(({@length@}\times{@width@})+({@length@}\times{@height@})+ ({@width@}\times{@height@})\bigr)
+\)
+</p>
+
+<p>
+\(=2({@mult_1@}+{@mult_2@}+{@mult_3@})\)
+</p>
+<p>\({@surface_area_one@}\)</p>
+<p><strong>Remember:</strong> Volume measures the amount of space <em>inside</em> the block and is measured in cubic centimetres (\(\text{cm}^3\)). Surface area measures the total area covering the <em>outside</em> of the block and is measured in square centimetres (\(\text{cm}^2\)).</p>
+
+<p><strong>Tip:</strong> If the question asks you to cover, wrap, paint or label the outside of a solid, you almost always need the <strong>surface area</strong>, not the volume.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-2-F</falseanswernote>
-        <falsefeedback format="html">
-          <text/>
-        </falsefeedback>
-      </node>
-    </prt>
-    <prt>
-      <name>prt2</name>
-      <value>1.0000000</value>
-      <autosimplify>1</autosimplify>
-      <feedbackstyle>1</feedbackstyle>
-      <feedbackvariables>
-        <text/>
-      </feedbackvariables>
-      <node>
-        <name>0</name>
-        <description>Checks for the correct surface area of the building block.</description>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans2</sans>
-        <tans>surface_area_one</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
-        <truepenalty/>
-        <truenextnode>-1</truenextnode>
-        <trueanswernote>prt2-1-T</trueanswernote>
-        <truefeedback format="html">
-          <text/>
-        </truefeedback>
-        <falsescoremode>=</falsescoremode>
-        <falsescore>0</falsescore>
-        <falsepenalty/>
-        <falsenextnode>1</falsenextnode>
-        <falseanswernote>prt2-1-F</falseanswernote>
-        <falsefeedback format="html">
-          <text/>
-        </falsefeedback>
-      </node>
-      <node>
-        <name>1</name>
-        <description>Checks for writing the value of volume  instade of surface area of the building block.</description>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans2</sans>
-        <tans>volume_one</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>+</truescoremode>
-        <truescore>0</truescore>
-        <truepenalty/>
-        <truenextnode>-1</truenextnode>
-        <trueanswernote>prt2-2-T</trueanswernote>
-        <truefeedback format="html">
-          <text><![CDATA[<p>Thanks for your response. I see you gave an answer that matches the volume of the block in the section where the question asked for surface area.</p>
-<p>It looks like you may have mistaken the formula for volume \(l \times w \times h\) for the one we use to find surface area, which is:</p>
-<p>\(\text{Surface Area} = 2(lw+wh+hl)\)</p>
-<p></p>]]></text>
-        </truefeedback>
-        <falsescoremode>-</falsescoremode>
-        <falsescore>0</falsescore>
-        <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt2-2-F</falseanswernote>
-        <falsefeedback format="html">
-          <text/>
-        </falsefeedback>
-      </node>
-    </prt>
-    <prt>
-      <name>prt3</name>
-      <value>1.0000000</value>
-      <autosimplify>1</autosimplify>
-      <feedbackstyle>1</feedbackstyle>
-      <feedbackvariables>
-        <text/>
-      </feedbackvariables>
-      <node>
-        <name>0</name>
-        <description>Checks for the total volume when diferent building block is added.</description>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans3</sans>
-        <tans>total_volume</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
-        <truepenalty/>
-        <truenextnode>-1</truenextnode>
-        <trueanswernote>prt3-1-T</trueanswernote>
-        <truefeedback format="html">
-          <text/>
-        </truefeedback>
-        <falsescoremode>=</falsescoremode>
-        <falsescore>0</falsescore>
-        <falsepenalty/>
-        <falsenextnode>1</falsenextnode>
-        <falseanswernote>prt3-1-F</falseanswernote>
-        <falsefeedback format="html">
-          <text/>
-        </falsefeedback>
-      </node>
-      <node>
-        <name>1</name>
-        <description> Adding the number of block instade of multiplying giving a wrong total volume</description>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans3</sans>
-        <tans>total_volume1</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>+</truescoremode>
-        <truescore>0.3</truescore>
-        <truepenalty/>
-        <truenextnode>-1</truenextnode>
-        <trueanswernote>prt3-2-T</trueanswernote>
-        <truefeedback format="html">
-          <text><![CDATA[<p>You're really close — great effort in trying to work out the total volume for all the blocks.<p>
-<p>However, it looks like you may have added the volume of one block to the number of blocks, instead of multiplying them. This is a common slip — don't worry!<p>
-<p>Here’s how to think about it:<p>
-<p>Use multiplication when you want to find the total for several identical items.<p>]]></text>
-        </truefeedback>
-        <falsescoremode>-</falsescoremode>
-        <falsescore>0</falsescore>
-        <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt3-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -490,31 +280,11 @@ The student is required to:</p>
         <name>ans1</name>
         <value>volume_one</value>
       </testinput>
-      <testinput>
-        <name>ans2</name>
-        <value>surface_area_one</value>
-      </testinput>
-      <testinput>
-        <name>ans3</name>
-        <value>total_volume </value>
-      </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt1-1-T</expectedanswernote>
-      </expected>
-      <expected>
-        <name>prt2</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt2-1-T</expectedanswernote>
-      </expected>
-      <expected>
-        <name>prt3</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt3-1-T</expectedanswernote>
       </expected>
     </qtest>
     <qtest>
@@ -524,31 +294,11 @@ The student is required to:</p>
         <name>ans1</name>
         <value>surface_area_one</value>
       </testinput>
-      <testinput>
-        <name>ans2</name>
-        <value>volume_one</value>
-      </testinput>
-      <testinput>
-        <name>ans3</name>
-        <value>total_volume1</value>
-      </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>0.0000000</expectedscore>
         <expectedpenalty/>
         <expectedanswernote>prt1-2-T</expectedanswernote>
-      </expected>
-      <expected>
-        <name>prt2</name>
-        <expectedscore>0.0000000</expectedscore>
-        <expectedpenalty/>
-        <expectedanswernote>prt2-2-T</expectedanswernote>
-      </expected>
-      <expected>
-        <name>prt3</name>
-        <expectedscore>0.3000000</expectedscore>
-        <expectedpenalty/>
-        <expectedanswernote>prt3-2-T</expectedanswernote>
       </expected>
     </qtest>
   </question>

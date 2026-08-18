@@ -4,71 +4,65 @@
     <name>
       <text>Using logarithms with standard form</text>
     </name>
-    <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Write the number \({@value@}\) in standard form using logarithms.</p>
+    <questiontext format="html">
+      <text><![CDATA[<p>Write the number \({@value@}\) in standard logarithmic form.</p>
 
-<p>Express your answer in the form \(A \times 10^B\).</p>
+<div>Characteristic \(B = \) [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</div>
+<div>Mantissa \(\log_{10}(A) = \) [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]</div>
+<div>Therefore \(\log_{10}({@value@}) = \) [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</div>
+<p>Give the value of \(\log_{10}({@value@})\) correct to \(4\) decimal places.</p>
 
-<p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+<p><b>Hint:</b> (Express the number in standard form \(A \times 10^{B}\). )</p>]]></text>
     </questiontext>
-    <generalfeedback format="moodle_auto_format">
+    <generalfeedback format="html">
       <text><![CDATA[<h3>Worked Solution</h3>
-
-<p>We want to express the number in standard form \(A \times 10^B\).</p>
-
-<p>\({@value@} = {@coef@} \times 10^{@exp@}\).</p>
-
-<p>Using logarithms:</p>
-
-<p>\[
-\log_{10}({@value@}) = \log_{10}({@coef@}) + \log_{10}(10^{@exp@})
-\]</p>
-
-<p>\[
-= \log_{10}({@coef@}) + {@exp@}.
-\]</p>
-
-<p>Therefore the standard form is:</p>
-
-<p>\[
-{@coef@} \times 10^{@exp@}.
-\]</p>]]></text>
+<p>First write the number in standard form:</p>
+\[ {@value@} = {@coefdisp@} \times 10^{@exp@}. \]
+<p>The logarithm of a product is the sum of the logarithms, and \(\log_{10}\left(10^{@exp@}\right) = {@exp@}\), so</p>
+\[ \log_{10}({@value@}) = \log_{10}\left({@coefdisp@} \times 10^{@exp@}\right) = \log_{10}({@coefdisp@}) + {@exp@}. \]
+<p>The power \({@exp@}\) is the <em>characteristic</em>. Because \(1 \le {@coefdisp@} < 10\), the value \(\log_{10}({@coefdisp@})\) lies between \(0\) and \(1\): this is the <em>mantissa</em>, read from logarithm tables. From tables,</p>
+\[ \log_{10}({@coefdisp@}) \approx {@mant4@}, \]
+<p>and adding the characteristic and the mantissa gives</p>
+\[ \log_{10}({@value@}) \approx {@exp@} + {@mant4@} = {@ta4@}. \]]]></text>
     </generalfeedback>
-    <defaultgrade>1</defaultgrade>
+    <defaultgrade>3</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
-      <text>/* Choose a power of 10 */
-exp: rand([3,4,5,6]);
+      <text><![CDATA[/* Design backwards: build N = coef * 10^exp, then everything follows.   */
+exp : rand([3,4,5,6]);
 
-/* Number formed using power of 10 */
-number: 10^exp;
+/* Coefficient 2.0 .. 9.9 in steps of 0.1: d2 = 0 gives integer          */
+/* variants, d2 > 0 gives one-decimal variants (never coef = 1, which    */
+/* would make the mantissa zero and the question degenerate).            */
+d1 : 2 + rand(8);              /* units digit: 2 .. 9  */
+d2 : rand(10);                 /* tenths digit: 0 .. 9 */
+coef : d1 + d2/10;
 
-/* Coefficient between 1 and 9 */
-coef: rand_with_step(1,9,1);
+/* The number shown to the student: always an integer since exp >= 3.   */
+value : coef * 10^exp;
 
-/* Final number in expanded form */
-value: coef * number;
+/* Display form of the coefficient (avoid rationals like 18/5).          */
+coefdisp : if d2 = 0 then d1 else float(coef);
 
-/* Standard form components */
-A: coef;
-B: exp;
+/* Model answers.                                                        */
+mantf : float(lg(coef));                  /* mantissa, full precision    */
+taf   : float(exp + lg(coef));            /* lg(N), full precision       */
+mant4 : decimalplaces(mantf, 4);          /* mantissa to 4 d.p.          */
+ta4   : decimalplaces(taf, 4);            /* final answer to 4 d.p.      */
 
-/* Wrong answers */
-m1: coef + exp;      /* adds instead of SF */
-m2: coef * exp;      /* multiplies instead */
-m3: number;          /* gives full number instead of SF */
-</text>
+/* Anticipated wrong answers.                                            */
+wrong_char : exp + 1;          /* counted the digits of N instead        */]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
-    <questionnote format="html">
-      <text><![CDATA[<p>{@value@} = {@coef@} × 10^{@exp@}</p>]]></text>
+    <questionnote format="moodle_auto_format">
+      <text>\({@value@} = {@coefdisp@} \times 10^{@exp@}\), \(\log_{10}({@value@}) \approx {@ta4@}\)</text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
@@ -76,7 +70,7 @@ m3: number;          /* gives full number instead of SF */
 <p id="reviewer"></p>
 <p id="reviewer"></p>
 
-<p id="description"> The question requires the learner to express a large number in standard form by identifying the power of ten using the meaning of base ten logarithms.</p>]]></text>
+<p id="description"> The question requires the learner to express a large number in standard form, identify the characteristic and mantissa of its base-ten logarithm, and hence give the logarithm as a single value to 4 decimal places. The final part is marked with error carried forward.</p>]]></text>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -102,8 +96,44 @@ m3: number;          /* gives full number instead of SF */
     <variantsselectionseed/>
     <input>
       <name>ans1</name>
-      <type>algebraic</type>
-      <tans>A*10^B</tans>
+      <type>numerical</type>
+      <tans>exp</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>numerical</type>
+      <tans>mant4</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>numerical</type>
+      <tans>ta4</tans>
       <boxsize>15</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -111,7 +141,7 @@ m3: number;          /* gives full number instead of SF */
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
@@ -128,10 +158,10 @@ m3: number;          /* gives full number instead of SF */
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description>Check for correct answer</description>
+        <description>Is the characteristic correct?</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>A*10^B</tans>
+        <tans>exp</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -145,10 +175,153 @@ m3: number;          /* gives full number instead of SF */
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Diagnostic: counted the digits of N instead?</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>wrong_char</tans>
+        <testoptions/>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you have counted the digits of the number. The characteristic is the power \(B\) when the number is written in standard form \(A \times 10^{B}\) with \(1 \le A < 10\) — for a whole number this is one <em>less</em> than the number of digits.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The characteristic is the power \(B\) when the number is written in standard form \(A \times 10^{B}\) with \(1 \le A < 10\). Write \({@value@}\) in that form first.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Is the mantissa correct to within tolerance?</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>mant4</tans>
+        <testoptions>0.0005</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Diagnostic: entered the complete logarithm instead of just the mantissa?</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans2</sans>
+        <tans>taf</tans>
+        <testoptions>0.0005</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>This is the complete logarithm. The mantissa is only the decimal part, \(\log_{10}(A)\), read from the tables — a value between \(0\) and \(1\). The whole-number part belongs in the characteristic box.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The mantissa is \(\log_{10}(A)\), where \(A\) is the coefficient of the standard form \(A \times 10^{B}\). Read it from your logarithm tables, correct to \(4\) decimal places.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Is the final value correct to within tolerance?</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans3</sans>
+        <tans>ta4</tans>
+        <testoptions>0.0005</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Error carried forward: does the final value correctly add the student's own characteristic and mantissa?</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans3</sans>
+        <tans>ans1+ans2</tans>
+        <testoptions>0.0005</testoptions>
+        <quiet>1</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Your final value correctly adds your characteristic and mantissa, so this step earns its mark — but one of those two parts is not right. Check the feedback on the boxes above.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>The single value is found by adding the two parts: \(\log_{10}\left(A \times 10^{B}\right) = B + \log_{10}(A)\), the characteristic plus the mantissa. Give the result to \(4\) decimal places.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
@@ -174,16 +347,104 @@ m3: number;          /* gives full number instead of SF */
     <deployedseed>1539382092</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
+      <description>All three boxes correct: full marks everywhere.</description>
       <testinput>
         <name>ans1</name>
-        <value>A*10^B</value>
+        <value>exp</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>mant4</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>ta4</value>
       </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Digit-count characteristic, correct mantissa, consistent sum: diagnostic fires on part 1 and the final box earns its error-carried-forward mark.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>wrong_char</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>mant4</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>wrong_char + mant4</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt2-1-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt3-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>Complete logarithm entered in the mantissa box; final value inconsistent with the entered parts: mantissa diagnostic and both catch-all branches fire.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>exp + 2</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta4</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>ta4 + 1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt1-2-F</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt2</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt2-2-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt3</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt3-2-F</expectedanswernote>
       </expected>
     </qtest>
   </question>

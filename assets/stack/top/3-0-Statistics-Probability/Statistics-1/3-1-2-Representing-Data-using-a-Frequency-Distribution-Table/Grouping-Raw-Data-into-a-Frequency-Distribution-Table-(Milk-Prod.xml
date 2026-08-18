@@ -7,7 +7,9 @@
     <questiontext format="moodle_auto_format">
       <text><![CDATA[A dairy farm recorded the amount of milk (in litres) produced by its cows during the month of January.
 <p>The milk production values for {@n@} cows are:</p>
-\[ {@data@} \]
+<p style="background-color: #f9f9f9; padding: 15px; border: 1px solid #ddd; font-family: monospace; font-size: 1.05em; line-height: 1.8;">
+{@data_str@}
+</p>
 <p>Group the data into the following frequency distribution table. Each value belongs to exactly one interval (endpoints included).</p>
 <table border="1" style="text-align:center">
 <tr><th>Milk Produced (litres)</th><th>Frequency</th></tr>
@@ -40,6 +42,9 @@
 n : rand(6) + 12;
 /* Milk production values (litres), all within 200..359 */
 data : makelist(rand(160)+200,i,1,n);
+/* Display string (comma separated, wraps in a fixed-width block) */
+data_str : sconcat(data[1]);
+for i:2 thru n do data_str : sconcat(data_str, ",  ", data[i]);
 /* Class intervals */
 c1_low:200$ c1_high:239$ c2_low:240$ c2_high:279$
 c3_low:280$ c3_high:319$ c4_low:320$ c4_high:359$
@@ -98,7 +103,7 @@ f4 : length(sublist(data,lambda([x], x>=c4_low and x<=c4_high)));]]></text>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>0</mustverify>
-      <showvalidation>1</showvalidation>
+      <showvalidation>3</showvalidation>
       <options/>
     </input>
     <input>
@@ -116,7 +121,7 @@ f4 : length(sublist(data,lambda([x], x>=c4_low and x<=c4_high)));]]></text>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>0</mustverify>
-      <showvalidation>1</showvalidation>
+      <showvalidation>3</showvalidation>
       <options/>
     </input>
     <input>
@@ -134,7 +139,7 @@ f4 : length(sublist(data,lambda([x], x>=c4_low and x<=c4_high)));]]></text>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>0</mustverify>
-      <showvalidation>1</showvalidation>
+      <showvalidation>3</showvalidation>
       <options/>
     </input>
     <input>
@@ -152,7 +157,7 @@ f4 : length(sublist(data,lambda([x], x>=c4_low and x<=c4_high)));]]></text>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>0</mustverify>
-      <showvalidation>1</showvalidation>
+      <showvalidation>3</showvalidation>
       <options/>
     </input>
     <prt>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>tree diagram</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A bag contains {@n1@} {@colour1@} balls and {@n2@} {@colour2@} balls. Three balls are drawn without replacement. Use a tree diagram to determine:</p>
+
+[[jsxgraph]]
+JXG.Options.text.useMathJax = true;
+var board = JXG.JSXGraph.initBoard(divid, {
+  boundingbox: [-1.5, 6, 12, -7],
+  axis:false,
+  grid:false,
+  showNavigation:false,
+  showCopyright:false,
+  pan:false,
+  zoom:false
+});
+board.suspendUpdate();
+
+// --- CONFIG (from question variables) ---
+var n1 = {#n1#};
+var n2 = {#n2#};
+var total = n1+n2;
+var col1 = '{#colour1#}';
+var col2 = '{#colour2#}';
+var draws = 3;        // three balls drawn
+var xStep = 3.5;
+var yTop = 5;
+var yBottom = -5;
+var radius = 0.4;
+
+var nodes = [];
+var root = board.create('point',[0,0],{visible:false,fixed:true,name:''});
+nodes[0] = [{x:0, y:0, pt:root}];
+
+for (var level=1; level<=draws; level++) {
+  nodes[level] = [];
+  var count = Math.pow(2, level);
+  for (var j=0; j<count; j++) {
+    // decode path bits for levels 1..level (0 = col1, 1 = col2)
+    var bits = [];
+    for (var k=1; k<=level; k++) {
+      bits.push( (j >> (level-k)) & 1 );
+    }
+    var thisBit = bits[level-1];
+
+    var parentObj = nodes[level-1][Math.floor(j/2)];
+
+    var x = level*xStep;
+    var y = (count===1)? (yTop+yBottom)/2 : yTop - j*((yTop-yBottom)/(count-1));
+
+    var center = board.create('point',[x,y],{visible:false,fixed:true});
+    var col = (thisBit===0)? col1 : col2;
+    var letter = col.charAt(0).toUpperCase();
+
+    board.create('circle',[center,radius],{
+      strokeColor:col, strokeWidth:2, fillColor:'#fff',
+      fixed:true, withLabel:false, highlight:false
+    });
+    board.create('text',[x,y,letter],{
+      anchorX:'middle',anchorY:'middle',
+      fixed:true,fontSize:14,fontWeight:'bold',
+      color:col, highlight:false
+    });
+
+    board.create('segment',[parentObj.pt, center],{
+      strokeWidth:1,fixed:true,highlight:false
+    });
+
+    nodes[level].push({x:x,y:y,pt:center});
+  }
+}
+
+board.unsuspendUpdate();
+[[/jsxgraph]]
+
+<p>The probability of drawing exactly two {@colour1@} balls. [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>There are three possible orders in which exactly two {@colour1@} balls can be drawn:</p>
+
+[[jsxgraph]]
+JXG.Options.text.useMathJax = true;
+var board = JXG.JSXGraph.initBoard(divid, {
+  boundingbox: [-1.5, 9, 12, -9],
+  axis:false,
+  grid:false,
+  showNavigation:false,
+  showCopyright:false,
+  pan:false,
+  zoom:false
+});
+board.suspendUpdate();
+
+// --- CONFIG (from question variables) ---
+var n1 = {#n1#};
+var n2 = {#n2#};
+var total = n1+n2;
+var col1 = '{#colour1#}';
+var col2 = '{#colour2#}';
+var draws = 3;        // three balls drawn
+var xStep = 3.5;
+var radius = 0.4;
+var baseOffset = 4;   // vertical spread at level 1, halves each subsequent level
+
+var nodes = [];
+var root = board.create('point',[0,0],{visible:false,fixed:true,name:''});
+nodes[0] = [{x:0, y:0, pt:root}];
+
+for (var level=1; level<=draws; level++) {
+  nodes[level] = [];
+  var count = Math.pow(2, level);
+  var offset = baseOffset / Math.pow(2, level-1);
+  for (var j=0; j<count; j++) {
+    // decode path bits for levels 1..level (0 = col1, 1 = col2)
+    var bits = [];
+    for (var k=1; k<=level; k++) {
+      bits.push( (j >> (level-k)) & 1 );
+    }
+    var thisBit = bits[level-1];
+
+    var drawn1 = 0, drawn2 = 0;
+    for (var k=0; k<level-1; k++){
+      if (bits[k]===0) drawn1++; else drawn2++;
+    }
+    var c1before = n1-drawn1;
+    var c2before = n2-drawn2;
+    var totBefore = total-(level-1);
+    var edgeNum = (thisBit===0)? c1before : c2before;
+
+    var parentObj = nodes[level-1][Math.floor(j/2)];
+
+    var x = level*xStep;
+    // each node sits above (thisBit==0) or below (thisBit==1) its own parent
+    var y = (thisBit===0) ? parentObj.y + offset : parentObj.y - offset;
+
+    var center = board.create('point',[x,y],{visible:false,fixed:true});
+    var col = (thisBit===0)? col1 : col2;
+    var letter = col.charAt(0).toUpperCase();
+
+    board.create('circle',[center,radius],{
+      strokeColor:col, strokeWidth:2, fillColor:'#fff',
+      fixed:true, withLabel:false, highlight:false
+    });
+    board.create('text',[x,y,letter],{
+      anchorX:'middle',anchorY:'middle',
+      fixed:true,fontSize:14,fontWeight:'bold',
+      color:col, highlight:false
+    });
+
+    // stacked fraction label on the branch (MathJax)
+    var mx = (parentObj.x + x)/2;
+    var my = (parentObj.y + y)/2;
+    var offsetY = (thisBit===0)? 0.4 : -0.4;
+    board.create('text',[mx, my+offsetY, '\\(\\frac{'+edgeNum+'}{'+totBefore+'}\\)'],{
+      anchorX:'middle',anchorY:'middle',
+      fixed:true,fontSize:14,highlight:false
+    });
+
+    board.create('segment',[parentObj.pt, center],{
+      strokeWidth:1,fixed:true,highlight:false
+    });
+
+    nodes[level].push({x:x,y:y,pt:center});
+  }
+}
+
+board.unsuspendUpdate();
+[[/jsxgraph]]
+
+<ol>
+<li>
+<p>{@colour1@}, {@colour1@}, {@colour2@}</p>
+\[\frac{@n1@}{@total@}\times\frac{@n1-1@}{@total-1@}\times\frac{@n2@}{@total-2@}={@pro@}\]
+</li>
+<li>
+<p>{@colour1@}, {@colour2@}, {@colour1@}</p>
+\[\frac{@n1@}{@total@}\times\frac{@n2@}{@total-1@}\times\frac{@n1-1@}{@total-2@}={@pro1@}\]
+</li>
+<li>
+<p>{@colour2@}, {@colour1@}, {@colour1@}</p>
+\[\frac{@n2@}{@total@}\times\frac{@n1@}{@total-1@}\times\frac{@n1-1@}{@total-2@}={@pro2@}\]
+</li>
+</ol>
+<p>Add the probabilities of the three mutually exclusive outcomes:</p>
+\[(\text{Probability of exactly two} \;{@colour1@}\; \text{balls})={@pro@}+{@pro1@}+{@pro2@}={\displaystyle {@ta1@}}\]
+<p>Therefore, the probability of drawing exactly two {@colour1@} balls is</p>
+\[
+\boxed{{@ta1@}}
+\]]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026063000</text>
+    </stackversion>
+    <questionvariables>
+      <text>colour1: rand([red, green, yellow, orange]);
+colour2: rand([blue, white, black, purple]);
+
+n1: rand(4)+3;
+n2: rand(3)+2;
+
+total: n1+n2;
+
+pn1: n1/total;
+pn2: n2/total;
+
+p1n1: (n1-1)/(total-1);
+p1n2: (n2-1)/(total-1);
+
+p2n1: (n1-2)/(total-2);
+p2n2: (n2-2)/(total-2);
+
+p: n2/(total-2);
+p1: n2/(total-1);
+p2: (n1-1)/(total-2);
+p3: n1/(total-1);
+p4: (n1-1)/(total-2);
+
+pro: pn1 * p1n1 * p;
+pro1: pn1 * p1 * p4;
+pro2: pn2 * p3 * p4;
+ta1:pro + pro1 + pro2;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta1@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1624903357</deployedseed>
+    <deployedseed>783317047</deployedseed>
+    <deployedseed>82088567</deployedseed>
+    <deployedseed>1466232845</deployedseed>
+    <deployedseed>2114630104</deployedseed>
+    <deployedseed>825991536</deployedseed>
+  </question>
+</quiz>
