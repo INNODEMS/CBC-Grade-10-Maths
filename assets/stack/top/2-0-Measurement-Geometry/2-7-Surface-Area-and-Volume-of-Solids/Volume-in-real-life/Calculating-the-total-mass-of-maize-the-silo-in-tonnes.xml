@@ -130,9 +130,10 @@ h_cyl: 8 + rand(5);      /* Height: 8 to 12 m */
 h_cone: 3 + rand(3);     /* Cone depth: 3, 4, or 5 m */
 diam: 2 * r;
 
-/* 2. Volume Calculations (pi = 3.142) */
-V_cyl: %pi* r^2 * h_cyl;
-V_cone: (1/3) * %pi * r^2 * h_cone;
+
+/* 2. Volume Calculations*/
+V_cyl: pi* r^2 * h_cyl;
+V_cone: (1/3) * pi * r^2 * h_cone;
 total_m3: V_cyl + V_cone;
 
 /* 3. Mass Calculation (Density of Maize = 750 kg/m3) */
@@ -144,7 +145,32 @@ total_tonnes: total_mass_kg / 1000;
 ta: total_tonnes;
 
 /* 4. Display Variables */
-r2: r^2;</text>
+r2: r^2;
+
+/* Common mistakes */
+
+/* Forgot the cone volume */
+wrong_no_cone: V_cyl*density/1000;
+
+/* Used cylinder formula for the cone */
+wrong_cone_as_cylinder:
+    (V_cyl + pi*r^2*h_cone)*density/1000;
+
+/* Forgot to divide cone volume by 3 */
+wrong_no_third:
+    (V_cyl + pi*r^2*h_cone)*density/1000;
+
+/* Used diameter instead of radius */
+wrong_diameter:
+    ((pi*diam^2*h_cyl) +
+    (1/3)*pi*diam^2*h_cone)*density/1000;
+
+/* Calculated volume but forgot density conversion */
+wrong_volume_only:
+    total_m3;
+
+/* Calculated mass in kg but forgot to convert to tonnes */
+wrong_kg:total_mass_kg;</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -205,7 +231,7 @@ r2: r^2;</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Checks for correct calculation of maize in a silo</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>ta</tans>
@@ -222,8 +248,35 @@ r2: r^2;</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>forgetting to add volume of the cone</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>wrong_no_cone</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+You are almost there! Just a little adjusment by ensuring that you add the volume of the cone to the total volume
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
@@ -249,5 +302,19 @@ r2: r^2;</text>
     <deployedseed>1463573851</deployedseed>
     <deployedseed>1994148959</deployedseed>
     <deployedseed>1922178257</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>

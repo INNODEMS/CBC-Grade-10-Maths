@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Surface area of a cylindrical flower vase</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+<b>{@student_name@}</b> had an art project of painting the external surface of a cylindrical flower pot. The flower pot has a radius of {@radius@} cm and a height of {@height@} cm. Calculate the total external surface area that <b>{@student_name@}</b> painted.
+</p>
+
+<p>
+Give your answer in <b>cm<sup>2</sup></b>, correct to the nearest whole number.
+</p>
+
+<p>
+ Surface area = [[input:ans1]] \( \text{cm}^2 \)[[validation:ans1]][[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Solution</h3>
+
+<p>
+The flower pot is a cylinder that is open at the top.
+</p>
+
+<p>
+To find the external surface area, include:
+</p>
+
+<ul>
+<li>the curved surface area of the cylinder, and</li>
+<li>the circular base.</li>
+</ul>
+
+<p>
+Using \(\pi \approx {@pi_value@}\)
+</p>
+
+<p>
+The curved surface area of a cylinder is:
+</p>
+
+<p>
+\[
+2\pi rh
+\]
+</p>
+
+<p>
+Substituting \(r={@radius@}\) cm, \(h={@height@}\) cm and \(\pi={@pi_value@}\):
+</p>
+
+<p>
+\[
+2\times {@pi_value@}\times {@radius@}\times {@height@}
+=
+{@curved_area@}\text{ cm}^2
+\]
+</p>
+
+<p>
+The area of the circular base is:
+</p>
+
+<p>
+\[
+\pi r^2
+\]
+</p>
+
+<p>
+Substituting \(r={@radius@}\) cm and \(\pi={@pi_value@}\):
+</p>
+
+<p>
+\[
+{@pi_value@}\times {@radius@}^2
+=
+{@base_area@}\text{ cm}^2
+\]
+</p>
+
+<p>
+Adding these areas:
+</p>
+
+<p>
+\[
+{@curved_area@}
++
+{@base_area@}
+=
+{@Total_surface_area@}\text{ cm}^2
+\]
+</p>
+
+<p>
+Therefore, the total external surface area painted is
+<strong>{@Total_surface_area@} cm<sup>2</sup></strong>.
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Random student names */
+names:[
+"Mwanza",
+"Amina",
+"Fatima",
+"Grace",
+"Neema",
+"Juma",
+"Baraka",
+"Rehema",
+"Salma",
+"Hassan"
+];
+
+/* Select a random name */
+student_name:names[1+rand(length(names))];
+
+/* Possible radii (cm) */
+radius_values:[4,5,6,7,8,9,10,12,15];
+
+/* Possible heights (cm) */
+height_values:[10,12,15,18,20,24,25,30,36];
+
+/* Select a random radius */
+radius:radius_values[1+rand(length(radius_values))];
+
+/* Create a list of heights greater than the chosen radius */
+valid_heights:sublist(height_values, lambda([x], x > radius));
+
+/* Select a random valid height */
+height:valid_heights[1+rand(length(valid_heights))];
+
+/* Use π ≈ 3.142 */
+pi_value:3.142;
+
+/* Surface areas */
+
+/* Curved surface area of cylinder */
+curved_area:2*pi_value*radius*height;
+
+/* Area of circular base */
+base_area:pi_value*radius^2;
+
+/* Correct total external surface area
+   (flower pot is open at the top) */
+Total_surface_area:round(curved_area + base_area);
+
+/* Common misconceptions */
+
+/* Student omits the base */
+No_base_mistake:
+round(curved_area);
+
+/* Student incorrectly includes a top circle */
+Top_and_base_mistake:
+round(curved_area + 2*base_area);
+
+/* Student calculates volume instead */
+Volume_mistake:
+round(pi_value*radius^2*height);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>{@Total_surface_area@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>Total_surface_area</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct surface area of the flower pot</description>
+        <answertest>NumRelative</answertest>
+        <sans>ans1</sans>
+        <tans>Total_surface_area</tans>
+        <testoptions>0.005</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Ommitted the base of the flower vase</description>
+        <answertest>NumRelative</answertest>
+        <sans>ans1</sans>
+        <tans>No_base_mistake</tans>
+        <testoptions>0.005</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p> 
+Your answer is partially correct! Unfortunately, you forgot to include the base of the flower vase.
+</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>1</deployedseed>
+    <deployedseed>2</deployedseed>
+    <deployedseed>3</deployedseed>
+    <deployedseed>4</deployedseed>
+    <deployedseed>6</deployedseed>
+    <deployedseed>9</deployedseed>
+    <deployedseed>10</deployedseed>
+    <deployedseed>11</deployedseed>
+    <deployedseed>12</deployedseed>
+    <deployedseed>13</deployedseed>
+    <deployedseed>14</deployedseed>
+    <deployedseed>15</deployedseed>
+    <deployedseed>16</deployedseed>
+    <deployedseed>17</deployedseed>
+    <deployedseed>18</deployedseed>
+    <deployedseed>19</deployedseed>
+    <deployedseed>20</deployedseed>
+    <deployedseed>22</deployedseed>
+    <deployedseed>23</deployedseed>
+    <deployedseed>24</deployedseed>
+    <deployedseed>26</deployedseed>
+    <deployedseed>27</deployedseed>
+    <deployedseed>1466653968</deployedseed>
+    <deployedseed>1673457099</deployedseed>
+    <deployedseed>51569871</deployedseed>
+    <deployedseed>222065089</deployedseed>
+    <deployedseed>1395776113</deployedseed>
+    <deployedseed>1391479663</deployedseed>
+    <deployedseed>992773736</deployedseed>
+    <deployedseed>103846584</deployedseed>
+    <deployedseed>739657975</deployedseed>
+    <deployedseed>875079402</deployedseed>
+  </question>
+</quiz>

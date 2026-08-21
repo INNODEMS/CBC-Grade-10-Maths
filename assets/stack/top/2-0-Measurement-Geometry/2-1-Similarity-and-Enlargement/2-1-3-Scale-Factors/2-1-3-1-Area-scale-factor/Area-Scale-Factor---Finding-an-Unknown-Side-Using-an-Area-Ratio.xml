@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Area Scale Factor - Finding an Unknown Side Using an Area Ratio</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>Two similar regular pentagons have areas \( {@area_small@} \,\text{cm}^2\) and \( {@area_large@} \,\text{cm}^2\) respectively. A side of the smaller pentagon measures \( {@a@} \) cm.</p>
+<p>The blue pentagon below is the smaller one, with its known side marked. Drag the slider to grow the orange pentagon until its displayed area matches the larger pentagon's area, then read off the side length shown.</p>
+
+[[jsxgraph height='460px' width='560px']]
+var qden = {#qden#};
+var pnum = {#pnum#};
+var areaSmall = {#area_small#};
+var areaLarge = {#area_large#};
+var a = {#a#};
+var kTarget = pnum / qden;
+var maxK = kTarget * 1.3;
+
+function pentRadius(s) { return s / (2 * Math.sin(Math.PI / 5)); }
+function pentPts(cx, cy, s) {
+    var R = pentRadius(s);
+    var pts = [];
+    for (var i = 0; i < 5; i++) {
+        var th = Math.PI / 2 + i * 2 * Math.PI / 5;
+        pts.push([cx + R * Math.cos(th), cy + R * Math.sin(th)]);
+    }
+    return pts;
+}
+
+var Rsmall = pentRadius(a);
+var Rmax = pentRadius(a * maxK);
+var gapX = Rsmall + Rmax + 4;
+
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-(Rsmall + 2), Rmax + 5, gapX + Rmax + 2, -(Rmax + 4.5)],
+    keepaspectratio: true, axis: false, showNavigation: false, showCopyright: false,
+    pan: { enabled: false }, zoom: { enabled: false }
+});
+
+// Fixed blue pentagon, known side a
+var bp = pentPts(0, 0, a).map(function (p) {
+    return board.create('point', p, { visible: false, fixed: true });
+});
+board.create('polygon', bp, {
+    fillColor: '#4C72B0', fillOpacity: 0.35,
+    borders: { strokeColor: '#4C72B0', strokeWidth: 2 },
+    vertices: { visible: false }, hasInnerPoints: false
+});
+board.create('segment', [bp[0], bp[1]], { strokeColor: '#d62728', strokeWidth: 4, fixed: true });
+board.create('text', [0, -(Rsmall + 1.4), 'Side ' + a + ' cm, area ' + areaSmall + ' cm\u00B2'],
+    { fontSize: 13, fixed: true, anchorX: 'middle' });
+
+// Slider controlling the growth factor of the orange pentagon
+var slider = board.create('slider',
+    [[gapX - Rmax * 0.6, -(Rmax + 2.6)], [gapX + Rmax * 0.6, -(Rmax + 2.6)], [1, 1, maxK]],
+    { name: 'scale factor k', snapWidth: 0.01, size: 4 });
+
+var op = [];
+for (var i = 0; i < 5; i++) {
+    (function (i) {
+        op.push(board.create('point', [
+            function () {
+                var s = a * slider.Value(), R = pentRadius(s), th = Math.PI / 2 + i * 2 * Math.PI / 5;
+                return gapX + R * Math.cos(th);
+            },
+            function () {
+                var s = a * slider.Value(), R = pentRadius(s), th = Math.PI / 2 + i * 2 * Math.PI / 5;
+                return R * Math.sin(th);
+            }
+        ], { visible: false, fixed: true }));
+    })(i);
+}
+board.create('polygon', op, {
+    fillColor: '#DD8452', fillOpacity: 0.35,
+    borders: { strokeColor: '#DD8452', strokeWidth: 2 },
+    vertices: { visible: false }, hasInnerPoints: false
+});
+
+board.create('text', [function () { return gapX; },
+    function () { return -(pentRadius(a * slider.Value()) + 1.4); }, function () {
+    var k = slider.Value();
+    var side = (a * k).toFixed(2);
+    var area = (areaSmall * k * k).toFixed(2);
+    return 'Side ' + side + ' cm, area ' + area + ' cm\u00B2';
+}], { fontSize: 13, fixed: true, anchorX: 'middle' });
+
+board.create('text', [gapX, Rmax + 2.8, 'Target area to match: ' + areaLarge + ' cm\u00B2'],
+    { fontSize: 13, fixed: true, color: '#a00', anchorX: 'middle' });
+
+board.create('button', [gapX - Rmax * 0.5, Rmax + 3.9, 'Reveal the matching side length', function () {
+    slider.setValue(kTarget);
+    board.update();
+}], { fixed: true });
+[[/jsxgraph]]
+
+<p>Work out the length of the corresponding side of the larger pentagon. Give your answer correct to <b>2</b> decimal places.</p>
+<p>[[input:ans1]] \(\text{cm}\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>The ratio of the areas is \(\dfrac{{@area_large@}}{{@area_small@}}\). Since area scales with the square of the linear scale factor, the linear scale factor connecting the two pentagons is the square root of that area ratio.</p>
+
+[[jsxgraph height='380px' width='520px']]
+var qden = {#qden#};
+var pnum = {#pnum#};
+var areaSmall = {#area_small#};
+var areaLarge = {#area_large#};
+var a = {#a#};
+var k = pnum / qden;
+var aLarge = a * k;
+
+function pentRadius(s) { return s / (2 * Math.sin(Math.PI / 5)); }
+function pentPts(cx, cy, s) {
+    var R = pentRadius(s);
+    var pts = [];
+    for (var i = 0; i < 5; i++) {
+        var th = Math.PI / 2 + i * 2 * Math.PI / 5;
+        pts.push([cx + R * Math.cos(th), cy + R * Math.sin(th)]);
+    }
+    return pts;
+}
+function drawPent(cx, s, col, label) {
+    var pts = pentPts(cx, 0, s).map(function (p) {
+        return board.create('point', p, { visible: false, fixed: true });
+    });
+    board.create('polygon', pts, {
+        fillColor: col, fillOpacity: 0.35,
+        borders: { strokeColor: col, strokeWidth: 2 },
+        vertices: { visible: false }, hasInnerPoints: false
+    });
+    board.create('text', [cx, -(pentRadius(s) + 1.4), label], { fontSize: 13, fixed: true, anchorX: 'middle' });
+}
+
+var Rsmall = pentRadius(a);
+var Rlarge = pentRadius(aLarge);
+var gapX = Rsmall + Rlarge + 4;
+
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-(Rsmall + 2), Rlarge + 2, gapX + Rlarge + 2, -(Rlarge + 3)],
+    keepaspectratio: true, axis: false, showNavigation: false, showCopyright: false,
+    pan: { enabled: false }, zoom: { enabled: false }
+});
+drawPent(0, a, '#4C72B0', 'Side ' + a + ' cm, area ' + areaSmall + ' cm\u00B2');
+drawPent(gapX, aLarge, '#DD8452', 'Side ' + aLarge.toFixed(2) + ' cm, area ' + areaLarge + ' cm\u00B2');
+board.renderer.svgRoot.style.pointerEvents = "none";
+[[/jsxgraph]]
+
+<p>Multiplying the known side of the smaller pentagon by this linear scale factor gives the corresponding side of the larger pentagon.</p>
+<p>\( {@a@} \times \sqrt{\dfrac{{@area_large@}}{{@area_small@}}} = {@ta@} \,\text{cm}\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Linear scale factor p/q in lowest terms, p > q */
+qden : rand(3) + 2;
+pnum : qden + rand(3) + 1;
+g : gcd(pnum, qden);
+pnum : pnum / g;
+qden : qden / g;
+
+/* Base multiplier so both areas come out as whole numbers */
+m : rand(4) + 2;
+area_small : m * qden^2;
+area_large : m * pnum^2;
+
+/* Given side length of the smaller pentagon, cm */
+a : rand(6) + 4;
+
+/* Correct answer: corresponding side length of the larger pentagon */
+ta : decimalplaces(a*pnum/qden, 2);
+
+/* mistakes */
+/* Used the area ratio directly on the side length, without a square root */
+ta1 : decimalplaces(a*area_large/area_small, 2);
+/* Found the smaller pentagon's side instead of the larger one (used the reciprocal ratio) */
+ta2 : decimalplaces(a*qden/pnum, 2);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Areas {@area_small@} and {@area_large@}, known side {@a@}, unknown side = {@ta@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Correct side length?</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Used the area ratio directly on the side length, without a square root</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you multiplied the known side by the ratio of the areas, \(\dfrac{{@area_large@}}{{@area_small@}}\), directly. That ratio is the <strong>area</strong> scale factor, but a length must be scaled by the <strong>linear</strong> scale factor. Take the square root of the area ratio first, then multiply it by the known side.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Reversed the ratio, finding the smaller pentagon's side instead of the larger one</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you used \(\sqrt{\dfrac{{@area_small@}}{{@area_large@}}}\), which gives the scale factor from the larger pentagon down to the smaller one. Since the question asks for the side of the <strong>larger</strong> pentagon, divide the larger area by the smaller area before taking the square root, then multiply by the known side.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite. Divide the larger area by the smaller area to get the area scale factor, take its square root to get the linear scale factor, and then multiply the known side by that linear scale factor.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Correct answer gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Used the area ratio directly on the side length, without a square root.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>Reversed the ratio, finding the smaller side instead of the larger one.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

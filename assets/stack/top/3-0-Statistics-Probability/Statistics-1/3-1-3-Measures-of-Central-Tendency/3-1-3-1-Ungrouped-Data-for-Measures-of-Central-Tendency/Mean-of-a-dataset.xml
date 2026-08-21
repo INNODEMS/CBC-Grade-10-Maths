@@ -137,7 +137,7 @@ for i:2 thru n do sum_str: sconcat(sum_str, " + ", data[i]);]]></text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>1</falsenextnode>
+        <falsenextnode>3</falsenextnode>
         <falseanswernote>prt_mean-0-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
@@ -191,6 +191,31 @@ for i:2 thru n do sum_str: sconcat(sum_str, " + ", data[i]);]]></text>
         <falseanswernote>prt_mean-2-F</falseanswernote>
         <falsefeedback format="html">
           <text><![CDATA[<p>The mean is \( \sum x \div n \): add all the marks, then divide by {@n@}.</p>]]></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>ECF: student divided their own (incorrect) total by n correctly.</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ans1/n</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt_mean-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Your total in part (a) isn't correct, but you have divided by \( n = {@n@} \) correctly, so you earn the mark here as a follow-through. Do go back and fix your total in part (a).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt_mean-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
         </falsefeedback>
       </node>
     </prt>
@@ -279,6 +304,30 @@ for i:2 thru n do sum_str: sconcat(sum_str, " + ", data[i]);]]></text>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt_sum-0-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>ECF: wrong total in (a), but correctly divided that total by n in (b).</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Sx+1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>(Sx+1)/n</value>
+      </testinput>
+      <expected>
+        <name>prt_mean</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt_mean-3-T</expectedanswernote>
+      </expected>
+      <expected>
+        <name>prt_sum</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty>0.1000000</expectedpenalty>
+        <expectedanswernote>prt_sum-0-F</expectedanswernote>
       </expected>
     </qtest>
   </question>

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Area Scale Factor - Area of an Enlarged Rectangle</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>A rectangular photograph measures \( {@w@} \) cm by \( {@h@} \) cm. It is enlarged using a linear scale factor of \(\dfrac{{@pnum@}}{{@qden@}}\).</p>
+<p>The diagram below shows the original photograph in blue and a resizable copy in orange. Drag the slider to enlarge the orange photograph and watch how its area changes, then press the button to jump straight to the scale factor given in this question.</p>
+
+[[jsxgraph height='440px' width='560px']]
+var w = {#w#};
+var h = {#h#};
+var kTarget = {#pnum#} / {#qden#};
+var maxK = kTarget * 1.4;
+var gapX = w + 4;
+var bbXmax = gapX + w * maxK + 3;
+var bbYmax = Math.max(h, h * maxK) + 4.5;
+
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-1, bbYmax, bbXmax, -3],
+    keepaspectratio: true,
+    axis: false,
+    showNavigation: false,
+    showCopyright: false,
+    pan: { enabled: false },
+    zoom: { enabled: false }
+});
+
+// Fixed original rectangle (blue)
+var A1 = board.create('point', [0, 0], { visible: false, fixed: true });
+var B1 = board.create('point', [w, 0], { visible: false, fixed: true });
+var C1 = board.create('point', [w, h], { visible: false, fixed: true });
+var D1 = board.create('point', [0, h], { visible: false, fixed: true });
+board.create('polygon', [A1, B1, C1, D1], {
+    fillColor: '#4C72B0', fillOpacity: 0.35,
+    borders: { strokeColor: '#4C72B0', strokeWidth: 2 },
+    vertices: { visible: false }, hasInnerPoints: false
+});
+board.create('text', [w / 2, -1.4, 'Original: ' + w + ' cm by ' + h + ' cm'],
+    { anchorX: 'middle', fontSize: 13, fixed: true });
+
+// Slider controlling the enlargement factor
+var slider = board.create('slider',
+    [[gapX, h + 1.6], [gapX + Math.max(w, 3), h + 1.6], [1, kTarget, maxK]],
+    { name: 'scale factor k', snapWidth: 0.01, size: 4 });
+
+// Enlarged rectangle (orange), dynamically resized by the slider
+var A2 = board.create('point', [gapX, 0], { visible: false, fixed: true });
+var B2 = board.create('point', [function () { return gapX + w * slider.Value(); }, 0],
+    { visible: false, fixed: true });
+var C2 = board.create('point', [function () { return gapX + w * slider.Value(); },
+    function () { return h * slider.Value(); }], { visible: false, fixed: true });
+var D2 = board.create('point', [gapX, function () { return h * slider.Value(); }],
+    { visible: false, fixed: true });
+board.create('polygon', [A2, B2, C2, D2], {
+    fillColor: '#DD8452', fillOpacity: 0.35,
+    borders: { strokeColor: '#DD8452', strokeWidth: 2 },
+    vertices: { visible: false }, hasInnerPoints: false
+});
+
+board.create('text', [function () { return gapX + w * slider.Value() / 2; }, -1.4, function () {
+    var kk = slider.Value();
+    return 'Enlarged: ' + (w * kk).toFixed(2) + ' cm by ' + (h * kk).toFixed(2) +
+        ' cm, area ' + (w * h * kk * kk).toFixed(2) + ' cm\u00B2';
+}], { anchorX: 'middle', fontSize: 13, fixed: true });
+
+board.create('button', [gapX, h + 2.8, 'Reset to given scale factor', function () {
+    slider.setValue(kTarget);
+    board.update();
+}], { fixed: true });
+[[/jsxgraph]]
+
+<p>Work out the area of the enlarged photograph. Give your answer correct to <b>2</b> decimal places.</p>
+<p>[[input:ans1]] \(\text{cm}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+<p>The linear scale factor connecting the original photograph to the enlarged one is \(\dfrac{{@pnum@}}{{@qden@}}\). Because area is a two dimensional measurement, it scales with the <strong>square</strong> of the linear scale factor rather than with the linear scale factor itself, so the area scale factor here is \(\left(\dfrac{{@pnum@}}{{@qden@}}\right)^2\).</p>
+
+[[jsxgraph height='380px' width='520px']]
+var w = {#w#};
+var h = {#h#};
+var pnum = {#pnum#};
+var qden = {#qden#};
+var k = pnum / qden;
+var gapX = w + 4;
+
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-1, Math.max(h, h * k) + 2, gapX + w * k + 3, -3],
+    keepaspectratio: true, axis: false, showNavigation: false, showCopyright: false,
+    pan: { enabled: false }, zoom: { enabled: false }
+});
+
+function drawRect(x0, y0, ww, hh, col, label) {
+    var pts = [[x0, y0], [x0 + ww, y0], [x0 + ww, y0 + hh], [x0, y0 + hh]]
+        .map(function (p) { return board.create('point', p, { visible: false, fixed: true }); });
+    board.create('polygon', pts, {
+        fillColor: col, fillOpacity: 0.35,
+        borders: { strokeColor: col, strokeWidth: 2 },
+        vertices: { visible: false }, hasInnerPoints: false
+    });
+    board.create('text', [x0 + ww / 2, -1.4, label], { anchorX: 'middle', fontSize: 13, fixed: true });
+}
+drawRect(0, 0, w, h, '#4C72B0', w + ' by ' + h + ', area ' + (w * h) + ' cm\u00B2');
+drawRect(gapX, 0, w * k, h * k, '#DD8452',
+    (w * k).toFixed(2) + ' by ' + (h * k).toFixed(2) + ', area ' + (w * h * k * k).toFixed(2) + ' cm\u00B2');
+board.renderer.svgRoot.style.pointerEvents = "none";
+[[/jsxgraph]]
+
+<p>The area of the original photograph is \( {@w@} \times {@h@} = {@area1@} \,\text{cm}^2\). Multiplying this area by the area scale factor gives the area of the enlarged photograph.</p>
+<p>\( {@area1@} \times \left(\dfrac{{@pnum@}}{{@qden@}}\right)^2 = {@ta@} \,\text{cm}^2\)</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2025073100</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* Original rectangle dimensions, cm */
+w : rand(6) + 3;
+h : rand(6) + 3;
+
+/* Linear scale factor p/q in lowest terms, p > q so the photo is enlarged */
+qden : rand(3) + 2;
+pnum : qden + rand(3) + 1;
+g : gcd(pnum, qden);
+pnum : pnum / g;
+qden : qden / g;
+
+/* Area of the original photograph */
+area1 : w * h;
+
+/* Correct area of the enlarged photograph */
+ta : decimalplaces(area1 * (pnum/qden)^2, 2);
+
+/* mistakes */
+/* Forgot to square the scale factor before scaling the area */
+ta1 : decimalplaces(area1 * (pnum/qden), 2);
+/* Reversed the scale factor, dividing instead of multiplying */
+ta2 : decimalplaces(area1 / (pnum/qden)^2, 2);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>Original {@w@} by {@h@}, scale factor {@pnum@}/{@qden@}, enlarged area = {@ta@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>6</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Correct area?</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Used the linear scale factor instead of the area scale factor</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you multiplied the original area by the linear scale factor \(\dfrac{{@pnum@}}{{@qden@}}\) itself, rather than by its square. When every length in a shape is multiplied by a scale factor, the area is multiplied by that scale factor <strong>twice</strong>, so square the linear scale factor first, then multiply it by the area.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Reversed the scale factor</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you divided the original area by the square of the scale factor instead of multiplying by it. The photograph in this question is being <strong>enlarged</strong>, so its area must increase. Multiply the original area by \(\left(\dfrac{{@pnum@}}{{@qden@}}\right)^2\) rather than dividing by it.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite. First find the linear scale factor, square it to get the area scale factor, then multiply the original area by that area scale factor.</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Correct answer gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Used the linear scale factor instead of the area scale factor.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-2-T</expectedanswernote>
+      </expected>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>Reversed the scale factor.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta2</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>0.0000000</expectedscore>
+        <expectedpenalty/>
+        <expectedanswernote>prt1-3-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

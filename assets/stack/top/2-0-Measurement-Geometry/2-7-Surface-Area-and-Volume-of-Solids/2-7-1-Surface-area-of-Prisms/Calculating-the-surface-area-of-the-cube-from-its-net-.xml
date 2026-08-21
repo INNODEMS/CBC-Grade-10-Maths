@@ -162,7 +162,7 @@ for(var c=1;c<=3;c++){
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text>/*surface area of a cube*/
@@ -173,13 +173,14 @@ area_of_squareC:side*side;/*area of  square C*/
 area_of_squareD:side*side;/*area of  square D*/
 area_of_squareE:side*side;/*area of  square E*/
 area_of_squareF:side*side;/*area of  square F*/
-surface_area:area_of_squareA*6;/*total surface area of the cube from its net*/
+/*total surface area of the cube from its net*/
+surface_area:area_of_squareA*6;
 ta:surface_area;/*teacher's answer*/
 
 /*mistakes*/
 ta_1:area_of_squareA*5;/*not including all faces*/
-perimeter:(side+side+side+side)*6;
-ta_2:perimeter;</text>
+Total_edge_length:12*side;
+ta_2:Total_edge_length;</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -265,7 +266,7 @@ ta_2:perimeter;</text>
       </node>
       <node>
         <name>1</name>
-        <description><![CDATA[<p> Adding Instead of Multiplying</p>]]></description>
+        <description>Adding Instead of Multiplying</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>ta_2</tans>
@@ -277,7 +278,14 @@ ta_2:perimeter;</text>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text><![CDATA[<p>It looks like you found the perimeter instead of the area. Remember, perimeter measures the distance around the edge, but surface area is all about the space inside each face. Try squaring the side length instead — you’re close, just a small switch in the formula will get you there</p>]]></text>
+          <text><![CDATA[<p>It looks like you found the perimeter (total edge length) instead of the area. You used the formula:</p>
+<p>\( \text{Total edge length} =12 \times side\)</p>
+<p>Substituting the given measurements into the equation above, you have:</p>
+<p>\(\text{Total edge length} = 12 \times {@side@}\,\text{cm}\)</p>
+<p> which gives \({@ta_2@}\, \text{cm}\)</p>
+<p>
+<b>Remember, perimeter measures the distance around the edge, but surface area is all about the space inside each face. Try squaring the side length instead — you’re close, just a small switch in the formula will get you there!</b>
+</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>

@@ -111,18 +111,6 @@ board.create('segment', [O, gA], {strokeColor:'#e65100', strokeWidth:1, dash:1})
       <text><![CDATA[<h3>Worked Solution</h3>
 
 <p>
-Two figures are <strong>congruent</strong> when one can be mapped exactly onto the other by a <strong>rigid transformation</strong> (an isometry): a translation, rotation, reflection, or a combination of these. Rigid transformations preserve every side length and every angle, so the shape and size are unchanged.
-</p>
-
-<p>
-A <strong>rotation</strong> turns a figure about a fixed <em>centre</em> through a given <em>angle</em>. It preserves distances (so figures stay congruent) and also preserves orientation — the vertices keep the same cyclic order (here \(A\to A',\ B\to B',\ C\to C'\)).
-</p>
-
-<hr>
-
-<p><strong>This variant:</strong></p>
-
-<p>
 {@sol_text@}
 </p>
 
@@ -131,18 +119,14 @@ A <strong>rotation</strong> turns a figure about a fixed <em>centre</em> through
 <li>Join each point to its image: \(A\to A'\), \(B\to B'\), \(C\to C'\).</li>
 <li>Construct the perpendicular bisector of each segment. All the perpendicular bisectors meet at a single point — that point is the <strong>centre of rotation</strong> \(O\).</li>
 <li>The <strong>angle of rotation</strong> is the angle \(A\,\hat{O}\,A'\), measured anticlockwise.</li>
-</ul>
-
-<p>
-In the interactive figure you can confirm this: set the slider to the angle and the dashed copy of \(ABC\) lands exactly on \(A'B'C'\) when the rotation is correct.
-</p>]]></text>
+</ul>]]></text>
     </generalfeedback>
-    <defaultgrade>4</defaultgrade>
-    <penalty>0.1</penalty>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2026010500</text>
+      <text>2026062900</text>
     </stackversion>
     <questionvariables>
       <text><![CDATA[/* ---- Base triangle ABC ---- */
@@ -218,10 +202,10 @@ ta_trans_opts : [
 /* teacher's centre; for the non-congruent case any point is accepted (see PRT) */
 ta_centre : if mode = 0 then [ox, oy] else [ox, oy];
 ta_angle_opts : [
-    ["90 degrees", mode = 0 and ang = 90],
-    ["180 degrees", mode = 0 and ang = 180],
-    ["270 degrees", mode = 0 and ang = 270],
-    ["Not applicable",  mode = 1]
+    ["90 degrees",     is(mode = 0 and ang = 90)],
+    ["180 degrees",    is(mode = 0 and ang = 180)],
+    ["270 degrees",    is(mode = 0 and ang = 270)],
+    ["Not applicable", is(mode = 1)]
 ];
 
 /* ---- Text used in the worked solution ---- */
@@ -458,7 +442,7 @@ angle_ok  : is(ans4 = mcq_correct(ta_angle_opts)[1]);]]></text>
         <tans>true</tans>
         <testoptions/>
         <quiet>1</quiet>
-        <truescoremode>+</truescoremode>
+        <truescoremode>=</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>2</truenextnode>
@@ -483,7 +467,7 @@ angle_ok  : is(ans4 = mcq_correct(ta_angle_opts)[1]);]]></text>
         <tans>true</tans>
         <testoptions/>
         <quiet>1</quiet>
-        <truescoremode>+</truescoremode>
+        <truescoremode>=</truescoremode>
         <truescore>1</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
@@ -543,11 +527,11 @@ angle_ok  : is(ans4 = mcq_correct(ta_angle_opts)[1]);]]></text>
       <description>All four parts correct earns full marks (works for both rotation and not-congruent variants).</description>
       <testinput>
         <name>ans1</name>
-        <value>qt_cong_right</value>
+        <value>first(mcq_correct(ta_cong_opts))</value>
       </testinput>
       <testinput>
         <name>ans2</name>
-        <value>qt_trans_right</value>
+        <value>first(mcq_correct(ta_trans_opts))</value>
       </testinput>
       <testinput>
         <name>ans3</name>
@@ -555,7 +539,7 @@ angle_ok  : is(ans4 = mcq_correct(ta_angle_opts)[1]);]]></text>
       </testinput>
       <testinput>
         <name>ans4</name>
-        <value>qt_angle_right</value>
+        <value>first(mcq_correct(ta_angle_opts))</value>
       </testinput>
       <expected>
         <name>prt1</name>
@@ -571,9 +555,9 @@ angle_ok  : is(ans4 = mcq_correct(ta_angle_opts)[1]);]]></text>
       </expected>
       <expected>
         <name>prt3</name>
-        <expectedscore>2.0000000</expectedscore>
+        <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote/>
+        <expectedanswernote>prt3-angle-T</expectedanswernote>
       </expected>
     </qtest>
     <qtest>
@@ -602,8 +586,14 @@ angle_ok  : is(ans4 = mcq_correct(ta_angle_opts)[1]);]]></text>
         <expectedanswernote>prt1-1-F</expectedanswernote>
       </expected>
       <expected>
+        <name>prt2</name>
+        <expectedscore/>
+        <expectedpenalty/>
+        <expectedanswernote>NULL</expectedanswernote>
+      </expected>
+      <expected>
         <name>prt3</name>
-        <expectedscore>2.0000000</expectedscore>
+        <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote/>
       </expected>

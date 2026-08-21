@@ -12,7 +12,94 @@
 <li>Height: <strong>{@H@} cm</strong></li>
 </ul>
 <p>The diagram below represents the cuboid (not drawn to scale):</p>
-<p>[[jsxgraph]] // Extract STACK variables var L = {#L#}; var W = {#W#}; var H = {#H#}; var offset = W; // Offset for the back face // Dynamic bounding box var board = JXG.JSXGraph.initBoard(divid, { boundingbox: [ -1, H + offset + 1, L + offset + 2, -1 ], axis: false, showCopyright: false }); // Helper: hidden fixed point function hiddenPoint(coords) { return board.create('point', coords, { visible: false, fixed: true }); } // Front face points var A = hiddenPoint([0, 0]); var B = hiddenPoint([L, 0]); var D = hiddenPoint([0, H]); var C = hiddenPoint([L, H]); // Back face points var E = hiddenPoint([offset, offset]); var F = hiddenPoint([L + offset, offset]); var Hpt = hiddenPoint([offset, H + offset]); var G = hiddenPoint([L + offset, H + offset]); // Helper: fixed edge function edge(P, Q) { return board.create('segment', [P, Q], { fixed: true, strokeWidth: 2 }); } // Draw edges edge(A, B); edge(A, D); edge(B, C); edge(D, C); edge(E, F); edge(E, Hpt); edge(F, G); edge(Hpt, G); edge(A, E); edge(B, F); edge(C, G); edge(D, Hpt); // -------------- DIMENSION LABELS -------------- // Length label (L) along AB board.create('text', [L/2, -0.5, L + " cm"], {fixed: true, anchorX: 'middle'} ); // Height label (H) along AD board.create('text', [-0.5, H/2, H + " cm"], {fixed: true, anchorY: 'middle'} ); // Width label (W) along AE (the slanted depth edge) board.create('text', [offset/2, offset/2, W + " cm"], {fixed: true} ); [[/jsxgraph]]</p>
+[[jsxgraph]]
+
+/* STACK variables */
+var L = {#L#};
+var W = {#W#};
+var H = {#H#};
+
+var offset = W;
+
+/* Create board */
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-1, H + offset + 1, L + offset + 2, -1],
+    axis: false,
+    showCopyright: false
+});
+
+/* Hidden helper points */
+function hiddenPoint(coords) {
+    return board.create('point', coords, {
+        visible: false,
+        fixed: true
+    });
+}
+
+/* Draw edge helper */
+function edge(P, Q) {
+    return board.create('segment', [P, Q], {
+        fixed: true,
+        strokeWidth: 2
+    });
+}
+
+/* Front face */
+var A = hiddenPoint([0, 0]);
+var B = hiddenPoint([L, 0]);
+var C = hiddenPoint([L, H]);
+var D = hiddenPoint([0, H]);
+
+/* Back face */
+var E   = hiddenPoint([offset, offset]);
+var F   = hiddenPoint([L + offset, offset]);
+var G   = hiddenPoint([L + offset, H + offset]);
+var Hpt = hiddenPoint([offset, H + offset]);
+
+/* Front rectangle */
+edge(A, B);
+edge(B, C);
+edge(C, D);
+edge(D, A);
+
+/* Back rectangle */
+edge(E, F);
+edge(F, G);
+edge(G, Hpt);
+edge(Hpt, E);
+
+/* Connecting edges */
+edge(A, E);
+edge(B, F);
+edge(C, G);
+edge(D, Hpt);
+
+/* Labels */
+board.create('text', [
+    L / 2,
+    -0.5,
+    L + " cm"
+], {
+    fixed: true
+});
+
+board.create('text', [
+    -0.5,
+    H / 2,
+    H + " cm"
+], {
+    fixed: true
+});
+
+board.create('text', [
+    offset / 2,
+    offset / 2,
+    W + " cm"
+], {
+    fixed: true
+});
+
+[[/jsxgraph]]
 <p>Find the volume of the cuboid in cubic centimetres (cm³).</p>
 <p>[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
     </questiontext>
@@ -35,7 +122,7 @@
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text>/* Generate three different side lengths between 2 and 12 */

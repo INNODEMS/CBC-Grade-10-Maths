@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Volume of  a triangular prism</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+The prism has a triangular cross-section and a length as shown below. Calculate it's volume
+</p>
+[[jsxgraph]]
+
+var board = JXG.JSXGraph.initBoard('jxgbox', {
+    boundingbox: [-50, 300, 500, -50],
+    keepAspectRatio: true,
+    axis: false,
+    showCopyright: false
+});
+
+var A = board.create('point',[100,100],{visible:false});
+var B = board.create('point',[250,100],{visible:false});
+var C = board.create('point',[100,220],{visible:false});
+
+var D = board.create('point',[300,130],{visible:false});
+var E = board.create('point',[450,130],{visible:false});
+var F = board.create('point',[300,250],{visible:false});
+
+board.create('polygon',[A,B,C],{
+    fillColor:'cyan',
+    fillOpacity:0.5,
+    vertices:{visible:false}
+});
+
+board.create('polygon',[D,E,F],{
+    fillColor:'cyan',
+    fillOpacity:0.5,
+    vertices:{visible:false}
+});
+
+board.create('segment',[A,D]);
+board.create('segment',[B,E]);
+board.create('segment',[C,F]);
+
+board.create('text',[150,80,'{#b#} cm']);
+board.create('text',[60,160,'{#h#} cm']);
+board.create('text',[200,140,'{#L#} cm']);
+
+[[/jsxgraph]]
+
+
+<p>
+Volume = [[input:ans1]] cm<sup>3</sup>
+</p>
+
+[[validation:ans1]]
+
+[[feedback:prt1]]]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+
+<p>
+The volume of a rectangular prism is calculated by multiplying its three dimensions:
+</p>
+
+<p >
+   \(V=l\times w\times h\)
+</p>
+
+<p>
+For this question:
+</p>
+
+<ul>
+<li>Length = \({@l@}\) cm</li>
+<li>Width = \({@w@}\) cm</li>
+<li>Height = \({@h@}\) cm</li>
+</ul>
+
+<p>
+Substituting the values:
+</p>
+
+<p>
+   \(V={@l@}\times{@w@}\times{@h@}\)
+</p>
+
+<p>
+    \(V={@ta@}\text{ cm}^3\)
+</p>]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Right triangular prism */
+
+/* Triangle dimensions */
+b: rand(6)+4;     /* 4..9 */
+h: rand(5)+3;     /* 3..7 */
+
+/* Prism length */
+L: rand(7)+5;     /* 5..11 */
+
+/* Volume */
+ta: (b*h/2)*L;
+
+/* Common incorrect answers */
+wrong_triangle_area: b*h/2;
+</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for the correct calculation of the volume</description>
+        <answertest>NumRelative</answertest>
+        <sans>ans1</sans>
+        <tans>ta</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Wrong triangle area</description>
+        <answertest>NumRelative</answertest>
+        <sans>ans1</sans>
+        <tans>wrong_triangle_area</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+Good attempt but your answer is incorrect! Seems you used the wrong triangle\(b*h/2\) area for calculating the volume
+</p>
+<p>The correct formula for area of a triangles is:</p>
+<p>triangle_area: \((b*h)/2\)</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>293379111</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description/>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>[ prt1-1-T ]</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

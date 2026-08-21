@@ -84,8 +84,8 @@ board.unsuspendUpdate();
    <ol>
        <li>
             <p>Sample space for tossing a coin {@random_toss@}:</p>
-             <p>S = (HH, HT , TH , TT)</p>
-             <p>There are 4 equally likely outcomes.</p>
+             <p>S = {@S@}</p>
+             <p>There are {@S1@} equally likely outcomes.</p>
         </li>
        <li>
            <p>Event: getting exactly two heads</p>
@@ -93,9 +93,9 @@ board.unsuspendUpdate();
        </li>
            
               <p>Probability formula:</p>
-              <p> \(PE=\frac{Number of favorable outcomes​}{Total Outcomes} \)</p>
+              <p> \(PE=\frac{\text{Number of favorable outcomes}​}{\text{Total Outcomes}} \)</p>
               <p>The probability of getting exactly two heads when a coin is tossed {@random_toss@} is:</p>
-              <p> \(PE=\frac{1​}{4} \)</p>
+              <p> PE = {@ta1@}</p>
        </li>
     </ol>
 </p>]]></text>
@@ -105,22 +105,24 @@ board.unsuspendUpdate();
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text>random_toss1:2;
 random_toss2:3;
 random_toss:rand([random_toss1,random_toss2]);
-
-S2 = {HH, HT , TH , TT};
+S2: {HH, HT , TH , TT};
 E2: {HH};
 S3:{HHH,HHT,HTH,THH,HTT,THT,TTH,TTT};
 E3:{HHT,HTH,THH};
-PE1: E2/S2;
-PE2: E3/S3;
+S: if random_toss = random_toss1 then S2 else S3;
+S1: if random_toss = random_toss1 then length(S2) else length(S3);
+PE1: length(E2)/length(S2);
+PE2: length(E3)/length(S3);
 
-PE1_DEC:decimal_places(PE1);
-PE2_Dec:decimal_places(PE2);</text>
+ta1: if random_toss = random_toss1 then PE1 else PE2;
+
+</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>

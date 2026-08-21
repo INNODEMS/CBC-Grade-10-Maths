@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>Application of scale factors to a cylindrical model (revised)</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>An engineering firm has designed a prototype for a chemical storage tank. The prototype consists of a cylindrical body with a hemispherical top, with the dimensions shown in the diagram below.</p>
+
+<p>The firm decides to produce an industrial version of the tank by enlarging every dimension by a linear scale factor of \(k = {@k@}\).</p>
+
+[[jsxgraph width="350px" height="400px"]]
+
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-10, 20, 10, -5],
+    axis: false,
+    showCopyright: false,
+    pan: {enabled: false},
+    zoom: {enabled: false}
+});
+
+var R = {#r_p#} * 1.5;
+var H = {#h_p#} * 1.5;
+var p = 0.3;
+
+/* =====================
+   HEMISPHERICAL TOP
+===================== */
+
+// top visible arc
+board.create('curve',
+[
+    function(t){return R*Math.cos(t)},
+    function(t){return H + R*Math.sin(t)},
+    0, Math.PI
+],
+{
+    strokeColor: '#1f77b4',
+    strokeWidth: 3,
+    fixed: true,
+    highlight: false
+});
+
+// bottom hidden arc
+board.create('curve',
+[
+    function(t){return R*Math.cos(t)},
+    function(t){return H + (R*p)*Math.sin(t)},
+    Math.PI, 2*Math.PI
+],
+{
+    strokeColor: '#1f77b4',
+    dash: 2,
+    strokeWidth: 2,
+    fixed: true,
+    highlight: false
+});
+
+
+/* =====================
+   CYLINDER SIDES
+===================== */
+
+board.create('segment', [[-R,0],[-R,H]],
+{
+    strokeColor:'#2ca02c',
+    strokeWidth:3,
+    fixed: true,
+    highlight: false
+});
+
+board.create('segment', [[R,0],[R,H]],
+{
+    strokeColor:'#2ca02c',
+    strokeWidth:3,
+    fixed: true,
+    highlight: false
+});
+
+
+/* =====================
+   CYLINDER BASE
+===================== */
+
+// visible base
+board.create('curve',
+[
+    function(t){return R*Math.cos(t)},
+    function(t){return (R*p)*Math.sin(t)},
+    Math.PI,2*Math.PI
+],
+{
+    strokeColor:'#2ca02c',
+    strokeWidth:3,
+    fixed: true,
+    highlight: false
+});
+
+// hidden base
+board.create('curve',
+[
+    function(t){return R*Math.cos(t)},
+    function(t){return (R*p)*Math.sin(t)},
+    0,Math.PI
+],
+{
+    strokeColor:'#2ca02c',
+    dash:2,
+    strokeWidth:2,
+    fixed: true,
+    highlight: false
+});
+
+
+/* =====================
+   HEIGHT LABEL
+===================== */
+
+board.create('segment',
+[[R+1,0],[R+1,H]],
+{strokeWidth:2, strokeColor:'black', dash:1, fixed: true, highlight: false});
+
+board.create('text',
+[R+1.5, H/2, "Height = {#h_p#} m"],
+{fixed: true, highlight: false});
+
+
+/* =====================
+   RADIUS LABEL
+===================== */
+
+board.create('segment',
+[[0,H],[R,H]],
+{strokeWidth:2, strokeColor:'black', fixed: true, highlight: false});
+
+board.create('text',
+[R/2, H+1, "Radius = {#r_p#} m"],
+{fixed: true, highlight: false});
+
+
+/* =====================
+   TITLE LABEL
+===================== */
+
+board.create('text',[-4, H+R+2, "Prototype Tank"],
+{fixed: true, highlight: false});
+
+[[/jsxgraph]]
+
+<p>Using the information above, answer the following. Give exact values where possible and round any decimal answers to 2 decimal places.</p>
+<ol>
+    <li>Calculate the Area Scale Factor of the enlargement: [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</li>
+    <li>Calculate the Volume Scale Factor of the enlargement: [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]</li>
+    <li>Calculate the exact volume of the prototype tank (cylindrical body + hemispherical top), giving your answer in \(\text{m}^3\) correct to 2 decimal places: [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</li>
+    <li>Using your answer to part 3 and the Volume Scale Factor, calculate the volume of the industrial tank in \(\text{m}^3\), correct to 2 decimal places: [[input:ans4]] [[validation:ans4]] [[feedback:prt4]]</li>
+</ol>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>When a solid is enlarged by a <strong>linear scale factor</strong> \(k\), lengths scale by \(k\), areas scale by \(k^2\), and volumes scale by \(k^3\). Here \(k = {@k@}\).</p>
+
+<p><strong>Part 1 &mdash; Area Scale Factor</strong></p>
+<p>Areas are two-dimensional, so they are enlarged by the square of the linear scale factor:</p>
+\[\text{Area Scale Factor} = k^2 = {@k@}^2 = {@ta1@}.\]
+
+<p><strong>Part 2 &mdash; Volume Scale Factor</strong></p>
+<p>Volumes are three-dimensional, so they are enlarged by the cube of the linear scale factor:</p>
+\[\text{Volume Scale Factor} = k^3 = {@k@}^3 = {@ta2@}.\]
+
+<p><strong>Part 3 &mdash; Volume of the prototype tank</strong></p>
+<p>The prototype is a cylinder of radius \(r = {@r_p@}\) m and height \(h = {@h_p@}\) m, topped by a hemisphere of radius \(r = {@r_p@}\) m. Its volume is the sum of the two:</p>
+\[V = \underbrace{\pi r^2 h}_{\text{cylinder}} + \underbrace{\tfrac{2}{3}\pi r^3}_{\text{hemisphere}}.\]
+<p>Substituting the prototype dimensions:</p>
+\[\begin{align}
+V &= \pi \times {@r_p@}^2 \times {@h_p@} \;+\; \tfrac{2}{3}\pi \times {@r_p@}^3 \\
+  &= {@dispVcyl@} \;+\; {@dispVhemi@} \\
+  &= {@ta3@} \text{ m}^3 \;\;(\text{to 2 d.p.}).
+\end{align}\]
+
+<p><strong>Part 4 &mdash; Volume of the industrial tank</strong></p>
+<p>The industrial tank is the enlargement of the prototype, so multiply the prototype volume by the Volume Scale Factor:</p>
+\[\begin{align}
+V_{\text{industrial}} &= V_{\text{prototype}} \times k^3 \\
+&= {@ta3@} \times {@ta2@} \\
+&= {@ta4@} \text{ m}^3 \;\;(\text{to 2 d.p.}).
+\end{align}\]]]></text>
+    </generalfeedback>
+    <defaultgrade>4</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[/* 1. Linear Scale Factor (k) : prototype -> industrial tank */
+k: 5 + rand(6);                 /* k between 5 and 10 */
+
+/* 2. Prototype (Object) dimensions */
+r_p: rand(3) + 2;               /* Radius 2..4 m */
+h_p: rand(4) + 6;               /* Cylindrical height 6..9 m */
+
+/* 3. Prototype volume = cylinder + hemisphere (exact, with %pi) */
+vol_cyl:  %pi * r_p^2 * h_p;
+vol_hemi: (2/3) * %pi * r_p^3;
+vol_p_exact: vol_cyl + vol_hemi;
+
+/* Display strings for the worked solution (2 d.p. numeric pieces) */
+dispVcyl:  decimalplaces(float(vol_cyl), 2);
+dispVhemi: decimalplaces(float(vol_hemi), 2);
+
+/* 4. Scale factors */
+asf: k^2;                       /* Area Scale Factor  */
+vsf: k^3;                       /* Volume Scale Factor */
+
+/* 5. Teacher answers */
+ta1: asf;                                        /* Area Scale Factor        */
+ta2: vsf;                                        /* Volume Scale Factor       */
+ta3: decimalplaces(float(vol_p_exact), 2);       /* Prototype volume (2 d.p.) */
+ta4: decimalplaces(ta3 * vsf, 2);                /* Industrial volume (2 d.p.)*/
+
+/* 6. Helper values for targeted (wrong-answer) feedback */
+wrong_vol_asf: decimalplaces(ta3 * asf, 2);      /* used ASF instead of VSF   */]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>k = {@k@}, r_p = {@r_p@}, h_p = {@h_p@}</p>
+<p>ASF = {@ta1@}, VSF = {@ta2@}</p>
+<p>V_proto = {@ta3@}, V_industrial = {@ta4@}</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans2</name>
+      <type>algebraic</type>
+      <tans>ta2</tans>
+      <boxsize>10</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans3</name>
+      <type>algebraic</type>
+      <tans>ta3</tans>
+      <boxsize>12</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <input>
+      <name>ans4</name>
+      <type>algebraic</type>
+      <tans>ta4</tans>
+      <boxsize>14</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>k</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That is the <em>linear</em> scale factor \(k\). Area is two-dimensional, so it is enlarged by \(k^2\), not \(k\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>k^3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That is the <em>volume</em> scale factor \(k^3\). The area scale factor is \(k^2\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite. The area scale factor is the <em>square</em> of the linear scale factor: \(k^2\).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt2</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>ta2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt2-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans2</sans>
+        <tans>k^2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt2-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>That is the <em>area</em> scale factor \(k^2\). Volume is three-dimensional, so it is enlarged by \(k^3\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt2-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite. The volume scale factor is the <em>cube</em> of the linear scale factor: \(k^3\).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt3</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans3</sans>
+        <tans>ta3</tans>
+        <testoptions>0.05</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt3-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans3</sans>
+        <tans>float(vol_cyl)</tans>
+        <testoptions>0.05</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt3-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have found the volume of the cylindrical body only. Remember to add the volume of the hemispherical top, \(\tfrac{2}{3}\pi r^3\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt3-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite. The prototype volume is the cylinder plus the hemisphere: \(\pi r^2 h + \tfrac{2}{3}\pi r^3\).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <prt>
+      <name>prt4</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description/>
+        <answertest>NumRelative</answertest>
+        <sans>ans4</sans>
+        <tans>ta4</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt4-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt4-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>NumRelative</answertest>
+        <sans>ans4</sans>
+        <tans>wrong_vol_asf</tans>
+        <testoptions>0.001</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt4-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>It looks like you multiplied by the <em>area</em> scale factor \(k^2\). To scale a volume, multiply by the <em>volume</em> scale factor \(k^3\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt4-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text><![CDATA[<p>Not quite. Multiply your prototype volume from part 3 by the volume scale factor \(k^3\).</p>]]></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>779843015</deployedseed>
+    <deployedseed>1391937414</deployedseed>
+    <deployedseed>372733272</deployedseed>
+    <deployedseed>395729003</deployedseed>
+    <deployedseed>1918503176</deployedseed>
+    <deployedseed>1259174155</deployedseed>
+    <deployedseed>1582442312</deployedseed>
+    <deployedseed>1125294073</deployedseed>
+    <deployedseed>1246850767</deployedseed>
+    <deployedseed>1105629775</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Fully correct answer</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta1</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta2</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>ta3</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>ta4</value>
+      </testinput>
+    </qtest>
+    <qtest>
+      <testcase>2</testcase>
+      <description>Confusing ASF/VSF with linear and cube; cylinder-only volume; ASF-scaled volume</description>
+      <testinput>
+        <name>ans1</name>
+        <value>k</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>k^2</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>float(vol_cyl)</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>wrong_vol_asf</value>
+      </testinput>
+    </qtest>
+    <qtest>
+      <testcase>3</testcase>
+      <description>ASF given as cube (k^3) - generic wrong branch</description>
+      <testinput>
+        <name>ans1</name>
+        <value>k^3</value>
+      </testinput>
+      <testinput>
+        <name>ans2</name>
+        <value>ta2</value>
+      </testinput>
+      <testinput>
+        <name>ans3</name>
+        <value>ta3</value>
+      </testinput>
+      <testinput>
+        <name>ans4</name>
+        <value>ta4</value>
+      </testinput>
+    </qtest>
+  </question>
+</quiz>

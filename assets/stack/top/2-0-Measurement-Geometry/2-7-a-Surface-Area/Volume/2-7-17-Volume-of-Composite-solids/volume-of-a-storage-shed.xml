@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="stack">
+    <name>
+      <text>volume of a storage shed</text>
+    </name>
+    <questiontext format="moodle_auto_format">
+      <text><![CDATA[<p>
+The storage shed shown below consists of a rectangular prism and a triangular prism roof. Calculate the total volume of the shed.
+</p>
+
+<p>
+Give your answer in m\(^3\).
+</p>
+
+[[jsxgraph]]
+
+var board = JXG.JSXGraph.initBoard('jxgbox',{
+    boundingbox:[-50,450,850,-50],
+    keepAspectRatio:true,
+    axis:false,
+    showCopyright:false
+});
+
+/* Front face */
+
+var A = board.create('point',[120,80],{visible:false});
+var B = board.create('point',[360,80],{visible:false});
+
+var C = board.create('point',[360,200],{visible:false});
+var D = board.create('point',[120,200],{visible:false});
+
+/* Roof apex front */
+
+var R1 = board.create('point',[240,280],{visible:false});
+
+/* Back face offset */
+
+var dx = 220;
+var dy = 90;
+
+var E = board.create('point',[120+dx,80+dy],{visible:false});
+var F = board.create('point',[360+dx,80+dy],{visible:false});
+
+var G = board.create('point',[360+dx,200+dy],{visible:false});
+var H = board.create('point',[120+dx,200+dy],{visible:false});
+
+/* Roof apex back */
+
+var R2 = board.create('point',[240+dx,280+dy],{visible:false});
+
+/* Front rectangle */
+
+board.create('segment',[A,B]);
+board.create('segment',[B,C]);
+board.create('segment',[C,D]);
+board.create('segment',[D,A]);
+
+/* Back rectangle */
+
+board.create('segment',[E,F]);
+board.create('segment',[F,G]);
+board.create('segment',[G,H]);
+board.create('segment',[H,E]);
+
+/* Connect front and back */
+
+board.create('segment',[A,E]);
+board.create('segment',[B,F]);
+board.create('segment',[C,G]);
+board.create('segment',[D,H]);
+
+/* Front roof */
+
+board.create('segment',[D,R1]);
+board.create('segment',[R1,C]);
+
+/* Back roof */
+
+board.create('segment',[H,R2]);
+board.create('segment',[R2,G]);
+
+/* Roof ridge */
+
+board.create('segment',[R1,R2]);
+
+/* Roof side connections */
+
+board.create('segment',[D,H]);
+board.create('segment',[C,G]);
+
+/* Dimension labels */
+
+/* Length */
+
+board.create('text',[
+420,
+120,
+'{#L#} m'
+]);
+
+/* Width */
+
+board.create('text',[
+200,
+305,
+'{#w#} m'
+]);
+
+/* Wall height */
+
+board.create('text',[
+70,
+140,
+'{#h_wall#} m'
+]);
+
+/* Roof height */
+
+board.create('text',[
+250,
+235,
+'{#h_roof#} m'
+]);
+
+[[/jsxgraph]]
+
+<p>
+Volume = [[input:ans1]] m\(^3\)
+[[validation:ans1]]
+[[feedback:prt1]]
+</p>]]></text>
+    </questiontext>
+    <generalfeedback format="moodle_auto_format">
+      <text><![CDATA[<h3>Worked solution</h3>
+
+<p>
+The shed is made up of two separate solids:
+</p>
+
+<ul>
+<li>A rectangular prism (the main body of the shed)</li>
+<li>A triangular prism (the roof)</li>
+</ul>
+
+<p>
+To find the total volume, calculate the volume of each part separately and then add them together.
+</p>
+
+<p> Calculate the volume of the rectangular prism</p>
+
+<p>
+The volume of a rectangular prism is:
+</p>
+
+\(V=l\times w\times h\)
+
+<p>
+Substituting the dimensions:
+</p>
+
+\(V_{\text{rect}}=({@L@})\times({@w@})\times({@h_wall@})\)
+
+\(V_{\text{rect}}={@V_rect@}\text{ m}^3\)
+
+<p>Now calculate the volume of the triangular prism roof</p>
+
+<p>
+First find the area of the triangular cross-section:
+</p>
+
+\(A=\frac{1}{2}\times(b)\times(h)\)
+
+\(A={@cross_section_area@}\text{ m}^2\)
+
+<p>
+Now multiply this area by the length of the shed:
+</p>
+
+\(V_{\text{roof}}=({@cross_section_area@})\times({@L@})\)
+
+\(V_{\text{roof}}={@V_roof@}\text{ m}^3\)
+
+<p>Proceed to calculate the total volume</p>
+
+\(V_{\text{total}}=V_{\text{rect}}+V_{\text{roof}}\)
+
+\(V_{\text{total}}=({@V_rect@})+({@V_roof@})\)
+
+\(V_{\text{total}}={@ta@}\text{ m}^3\)
+
+<p>
+Therefore, the volume of the shed is:
+</p>
+
+\(\boxed{{@ta@}\text{ m}^3}\)]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+    <stackversion>
+      <text>2026010500</text>
+    </stackversion>
+    <questionvariables>
+      <text>/* Length of shed */
+L: rand(8)+6;          /* 6..13 m */
+
+/* Width of shed */
+w: rand(5)+4;          /* 4..8 m */
+
+/* Height of rectangular walls */
+h_wall: rand(4)+2;     /* 2..5 m */
+
+/* Height of triangular roof */
+h_roof: rand(4)+1;     /* 1..4 m */
+
+/* Volume of rectangular prism */
+V_rect: L*w*h_wall;
+
+/* Area of triangular cross-section */
+A_roof: (w*h_roof)/2;
+
+/* Volume of triangular prism roof */
+V_roof: A_roof*L;
+
+/* Total volume */
+ta: V_rect + V_roof;
+
+/* Rounded answer (2 d.p. if required) */
+ta2dp: float(round(100*ev(ta,numer))/100);
+
+/* Common mistakes */
+
+/* Rectangular prism only */
+wrong_rect_only: V_rect;
+
+/* Roof only */
+wrong_roof_only: V_roof;
+
+/* Forgot ÷2 in triangle area */
+wrong_no_half: (w*h_roof)*L + V_rect;
+
+/* Added dimensions */
+wrong_addition: L+w+h_wall+h_roof;
+
+/* Useful values */
+cross_section_area: A_roof;</text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text/>
+    </specificfeedback>
+    <questionnote format="html">
+      <text>{@ta@}</text>
+    </questionnote>
+    <questiondescription format="html">
+      <text/>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:green;"><i class="fa fa-check"></i></span> Correct answer, well done.]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:orange;"><i class="fa fa-adjust"></i></span> Your answer is partially correct.]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<span style="font-size: 1.5em; color:red;"><i class="fa fa-times"></i></span> Incorrect answer.]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>none</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <isbroken>0</isbroken>
+    <variantsselectionseed/>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta2dp</tans>
+      <boxsize>7</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint/>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords/>
+      <allowwords/>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>3</showvalidation>
+      <options/>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text/>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description>Checks for correct volume of the storage shed</description>
+        <answertest>NumRelative</answertest>
+        <sans>ans1</sans>
+        <tans>ta2dp</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text/>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Added dimensions instead of volume</description>
+        <answertest>NumRelative</answertest>
+        <sans>ans1</sans>
+        <tans>wrong_addition</tans>
+        <testoptions>0.01</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Incorrect! You added the dimensions instead of the volumes of the solids</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>207027737</deployedseed>
+    <deployedseed>693959500</deployedseed>
+    <deployedseed>1552684245</deployedseed>
+    <deployedseed>380164062</deployedseed>
+    <deployedseed>633457244</deployedseed>
+    <deployedseed>427502623</deployedseed>
+    <deployedseed>831530380</deployedseed>
+    <deployedseed>1982723369</deployedseed>
+    <deployedseed>161565953</deployedseed>
+    <deployedseed>1428875622</deployedseed>
+    <deployedseed>145697996</deployedseed>
+    <deployedseed>613932858</deployedseed>
+    <deployedseed>785024460</deployedseed>
+    <deployedseed>624458211</deployedseed>
+    <deployedseed>557572043</deployedseed>
+    <deployedseed>535437038</deployedseed>
+    <deployedseed>386637213</deployedseed>
+    <deployedseed>297931563</deployedseed>
+    <deployedseed>905393390</deployedseed>
+    <deployedseed>462898139</deployedseed>
+    <deployedseed>1070137044</deployedseed>
+    <deployedseed>767617511</deployedseed>
+    <deployedseed>273196035</deployedseed>
+    <deployedseed>1252567629</deployedseed>
+    <deployedseed>1686921518</deployedseed>
+    <deployedseed>1977124410</deployedseed>
+    <deployedseed>2114363540</deployedseed>
+    <deployedseed>818782954</deployedseed>
+    <deployedseed>953152793</deployedseed>
+    <deployedseed>1806492947</deployedseed>
+    <deployedseed>1742017009</deployedseed>
+    <deployedseed>1468689771</deployedseed>
+    <deployedseed>1315693106</deployedseed>
+    <deployedseed>2057535064</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
+  </question>
+</quiz>

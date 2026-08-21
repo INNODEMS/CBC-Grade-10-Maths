@@ -54,7 +54,7 @@
 </body>
 </html>
 
-<p>\(\text{Volume}=\)[[input:ans1]]\(\text{cm}^2\) [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+<p>\(\text{Volume}=\)[[input:ans1]]\(\text{cm}^3\) [[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<p>The volume of the cube is given by:</p>
@@ -74,14 +74,16 @@
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text>/* Random integer side between 5 and 60, then compute volume */
 Side: rand_with_step(5,65,5);   
 V: Side^3;
 simp:true;
-Volume:V;</text>
+Volume:V;
+/* Mistake1: finding the area instead of the volume*/
+Area:Side^2;</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -160,8 +162,37 @@ Volume:V;</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Checks for incorrect volume</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>Area</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p> Good attempt but your answer is incorrect! </p>
+<p>You used the found the area instead of the volume. The area is found by multiplying \(\text{Side} \times \text{Side}\) </p>
+<p>Substituting the measurements into the formula we have: </p>
+<p>\({@Side@} \times {@Side@}\)</p>
+<p>Giving a final answer of \({@Area@}\,\text{cm}^2\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>

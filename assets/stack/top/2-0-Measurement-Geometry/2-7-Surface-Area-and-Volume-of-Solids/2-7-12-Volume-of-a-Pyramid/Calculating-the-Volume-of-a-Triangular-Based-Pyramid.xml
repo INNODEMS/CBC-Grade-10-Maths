@@ -6,6 +6,102 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>The figure below shows a pyramid with a triangular base. The base of the triangle measures \({@b@}\,\text{m}\), the height of the triangle is \({@h_tri@}\,\text{m}\), and the vertical height of the pyramid is \({@H@}\,\text{m}\). Find the volume of the pyramid.</p>
+
+[[jsxgraph height='400px' width='500px']]
+    var board = JXG.JSXGraph.initBoard(divid, {
+        boundingbox: [-2.5, 8.5, 10.5, -2.5],
+        axis: false,
+        showCopyright: false,
+        keepaspectratio: true
+    });
+
+    /* Triangular base */
+    var A = board.create('point', [0, 1], {
+        name: '',
+        visible: false
+    });
+
+    var B = board.create('point', [7, 1], {
+        name: '',
+        visible: false
+    });
+
+    var C = board.create('point', [2.5, -1], {
+        name: '',
+        visible: false
+    });
+
+    /* Apex */
+    var D = board.create('point', [3.5, 7], {
+        name: '',
+        visible: false
+    });
+
+    /* Base triangle */
+    board.create('polygon', [A, B, C], {
+        fillOpacity: 0.15,
+        borders: {
+            strokeWidth: 2
+        },
+        vertices: {
+            visible: false
+        }
+    });
+
+    /* Pyramid edges */
+    board.create('segment', [D, A], {strokeWidth: 2});
+    board.create('segment', [D, B], {strokeWidth: 2});
+    board.create('segment', [D, C], {strokeWidth: 2});
+
+    /* Base edges */
+    board.create('segment', [A, B], {strokeWidth: 2});
+    board.create('segment', [B, C], {strokeWidth: 2});
+
+    /* Hidden base edge */
+    board.create('segment', [A, C], {
+        strokeWidth: 2,
+        dash: 2
+    });
+
+    /* Base length */
+    board.create('text', [3.2, 1.35, '{#b#} m'], {
+        fontSize: 16
+    });
+
+    /* Foot of triangle height on AB */
+    var E = board.create('point', [2.5, 1], {
+        name: '',
+        visible: false
+    });
+
+    /* Triangle height */
+    board.create('segment', [C, E], {
+        strokeWidth: 2,
+        dash: 2
+    });
+
+    board.create('text', [2.7, -0.05, '{#h_tri#} m'], {
+        fontSize: 16
+    });
+
+    /* Foot of vertical pyramid height */
+    var F = board.create('point', [3.5, 1], {
+        name: '',
+        visible: false
+    });
+
+    /* Vertical height */
+    board.create('segment', [D, F], {
+        strokeWidth: 2,
+        dash: 2
+    });
+
+    board.create('text', [3.8, 4.0, '{#H#} m'], {
+        fontSize: 16
+    });
+
+    board.unsuspendUpdate();
+[[/jsxgraph]]
 <p>\(\text{Volume}=\)[[input:ans1]]\(\,\text{m}^3\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
@@ -51,7 +147,7 @@ The volume of the pyramid is \( {@Volume_pyramid@}\,\text{m}^3\) </p>]]></text>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text>/* Randomize base of the triangle (b) */
@@ -72,6 +168,9 @@ V : (1/3) * Base_area * H;
 /* Convert to float and round to 2 decimal places */
 volume : float(V);
 Volume_pyramid : decimalplaces(volume, 2);
+/* Node 2 mistake: forget to multiply the base area by pyramid height */
+V_mistake1: Base_area;
+Volume_mistake1: decimalplaces(float(V_mistake2), 2);
 </text>
     </questionvariables>
     <specificfeedback format="html">
@@ -154,8 +253,45 @@ Volume_pyramid : decimalplaces(volume, 2);
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description>Failing to use the vertical height of the pyramid</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>Volume_mistake1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You have calculated the area of the triangular base, but you have not used the vertical height of the pyramid.</p>
+
+<p>The area of the triangular base is</p>
+
+<p>\(B=\frac{1}{2}b h_{\text{tri}}={@Base_area@}\,\text{cm}^2.\)</p>
+
+<p>To calculate the volume of a pyramid, you need to use the base area together with the vertical height \(H\):</p>
+
+<p>\(V=\frac{1}{3}BH.\)</p>
+
+<p>Your answer \({@Volume_mistake2@}\,\text{cm}^3\) is the area of the triangular base, not the volume of the pyramid.</p>
+
+<p>Try again by using the vertical height of the pyramid in the volume calculation.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
