@@ -2,132 +2,141 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Calculating the length of the right angled triangle</text>
+      <text>Calculating the side length of a right-angled triangle</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Determine the length of the side marked {@val_letter@} , to the nearest 2 decimal places. </p>
+      <text><![CDATA[<p>Determine the length of the side marked \({@val_letter@}\), correct to 2 decimal places.</p>
+
 [[jsxgraph]]
-var board = JXG.JSXGraph.initBoard('jxgbox', {
-    boundingbox: [-5, 5, 5, -5],
-    keepAspectRatio: true,
-     showNavigation: false,
+    var board = JXG.JSXGraph.initBoard('jxgbox', {
+        boundingbox: [-1.5, 5, 5.5, -2], // Perfectly centers a 4x3 triangle with symmetrical padding
+        keepAspectRatio: true,
+        showNavigation: false,
         showCopyright: false
-});
-
-// Function to generate random color
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
-// Pick one color for this page load
-var triangleColor = getRandomColor();
-
-// Points of the right-angled triangle (invisible, but with labels outside)
-var A = board.create('point', [0, 0], {
-    name: "A",
-    visible: false,
-    withLabel: true,
-    label: {offset: [-15, -15]}
-});
-
-var B = board.create('point', [4, 0], {
-    name: "B",
-    visible: false,
-    withLabel: true,
-    label: {offset: [10, -15]}
-});
-
-var C = board.create('point', [0, 3], {
-    name: "C",
-    visible: false,
-    withLabel: true,
-    label: {offset: [-20, 10]}
-});
-
-// Create triangle with random static color
-var triangle = board.create('polygon', [A, B, C], {
-    fillColor: triangleColor,
-    fillOpacity: 0.6
-});
-
-// Mark the right angle at A
-var rightAngle = board.create('angle', [B, A, C], {
-    radius: 0.5,
-    strokeColor: 'black',
-    name: "90°"
-});
-
-// Angle alpha at B
-// var alpha = board.create('angle', [C, B, A], {
-//     radius: 0.5,
-//     strokeColor: 'black',
-//     name: "α"
-// });
-
-// Angle theta at C
-var theta = board.create('angle', [A, C, B], {
-    radius: 0.5,
-    strokeColor: 'black',
-    name: "{#angle#}°"
-});
-
-// Set border color of triangle
-triangle.borders.forEach(function(border) {
-    border.setAttribute({
-        strokeColor: 'black'
     });
-});
 
-// Add side length labels
-board.create('text', [1.6, -0.3, "{#val_letter#} "]);   // side AB
-board.create('text', [2, 1.7, "{#hyp#}"]);    // side BC
+    // Function to generate random color
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    // Pick one color for this page load
+    var triangleColor = getRandomColor();
+
+    // Points of the right-angled triangle (invisible, but with labels outside)
+    var A = board.create('point', [0, 0], {
+        name: "A",
+        visible: false,
+        withLabel: true,
+        label: {offset: [-15, -15]}
+    });
+
+    var B = board.create('point', [4, 0], {
+        name: "B",
+        visible: false,
+        withLabel: true,
+        label: {offset: [10, -15]}
+    });
+
+    var C = board.create('point', [0, 3], {
+        name: "C",
+        visible: false,
+        withLabel: true,
+        label: {offset: [-20, 10]}
+    });
+
+    // Create triangle with random static color
+    var triangle = board.create('polygon', [A, B, C], {
+        fillColor: triangleColor,
+        fillOpacity: 0.6
+    });
+
+    // Mark the right angle at A
+    var rightAngle = board.create('angle', [B, A, C], {
+        radius: 0.4,
+        type: 'square',
+        strokeColor: 'black',
+        name: ""
+    });
+
+    // Angle theta at C
+    var theta = board.create('angle', [A, C, B], {
+        radius: 0.5,
+        strokeColor: 'black',
+        name: "{#angle#}&deg;"
+    });
+
+    // Set border color of triangle
+    triangle.borders.forEach(function(border) {
+        border.setAttribute({
+            strokeColor: 'black'
+        });
+    });
+
+    // Add side length labels (coordinates adjusted to center perfectly on the sides)
+    board.create('text', [2, -0.4, "{#val_letter#}"]);   // side AB
+    board.create('text', [2.2, 1.7, "{#hyp#}"]);    // side BC
 [[/jsxgraph]]
-<p>{@val_letter@}= [[input:ans1]] cm[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+
+<p>\({@val_letter@} =\) [[input:ans1]] cm [[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<h3>Worked solution</h3>
-<P>Sin \(\theta=\frac{Opposite}{Hypothenuse}=\frac{{@val_letter@}}{{@hyp@}}\)</P>
-<p>\({@val_letter@}= {@hyp@} \times sin ({@angle@})\)</p>
-<p>\({@val_letter@}= {@hyp@} \times {@sine_value_decimal@}= {@opposite@}={@ta@}\)</p>]]></text>
+      <text><![CDATA[<p><strong>Worked Solution:</strong></p>
+<p>
+\(
+\begin{align}
+\sin({@angle@}^\circ) &= \frac{\text{Opposite}}{\text{Hypotenuse}} \\
+&= \frac{{@val_letter@}}{{@hyp@}}
+\end{align}
+\)
+</p>
+<p>\({@val_letter@} = {@hyp@} \times \sin({@angle@}^\circ)\)</p>
+<p>\({@val_letter@} = {@hyp@} \times {@disp_sine@}\)</p>
+<p>\({@val_letter@} = {@disp_opposite@}\)</p>
+<p>\(\therefore {@val_letter@} \approx {@ta@}\) cm.</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
-      <text>/* Random angle between 5 and 90, step 5 */
-angle : 5 + 5*rand( floor((90-5)/5) + 1 );
+      <text>/* Random acute angle between 5 and 85, step 5 (excludes 90 to ensure a valid triangle) */
+angle : 5 + 5*rand(17);
 
 /* Random hypotenuse between 5 and 25 */
 hyp : 5 + rand(21);
 
-/* Sine value */
-sine_value : sin(angle * %pi/180);
-sine_value_decimal : float(sine_value);
+/* Evaluate sine to a floating-point decimal natively */
+sine_value_decimal : float(sin(angle * %pi/180));
 
-/* Opposite side */
-opposite : float(hyp * sine_value);
+/* Exact mathematical calculation for the opposite side */
+opposite : float(hyp * sine_value_decimal);
 
-/* Round to 2 decimal places */
-opposite_rounded : round(opposite*100)/100;
-ta:decimalplaces(opposite_rounded,2);
-val_letter:rand([x,y,z,m,n,p,q,r,s,t,w,a,b,c]);</text>
+/* --- NEW: Clean display variables for the worked solution --- */
+disp_sine : dispdp(sine_value_decimal, 4);
+disp_opposite : dispdp(opposite, 4);
+
+/* Display variable formatted to exactly 2 decimal places for the final answer */
+ta : dispdp(opposite, 2);
+
+/* Random variable letter for the unknown side */
+val_letter : rand([a,b,c,m,n,p,q,r,s,t,w,x,y,z]);</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
       <text><![CDATA[<p>Selected angle={@angle@}</p>
-<p>Hypothenuse side={@hyp@}</p>
-<p>Opposite side ={@ta@}</p>]]></text>
+<p>Hypotenuse side={@hyp@}</p>
+<p>Opposite side={@ta@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -182,11 +191,11 @@ val_letter:rand([x,y,z,m,n,p,q,r,s,t,w,a,b,c]);</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
-        <answertest>NumAbsolute</answertest>
+        <description>checks correct answer</description>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
-        <tans>ta</tans>
-        <testoptions>0.01</testoptions>
+        <tans>opposite</tans>
+        <testoptions>2</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -256,5 +265,29 @@ val_letter:rand([x,y,z,m,n,p,q,r,s,t,w,a,b,c]);</text>
     <deployedseed>379121288</deployedseed>
     <deployedseed>1522527974</deployedseed>
     <deployedseed>706509024</deployedseed>
+    <deployedseed>607180289</deployedseed>
+    <deployedseed>1894977432</deployedseed>
+    <deployedseed>1403787702</deployedseed>
+    <deployedseed>1027506037</deployedseed>
+    <deployedseed>1346895648</deployedseed>
+    <deployedseed>2141846759</deployedseed>
+    <deployedseed>1583684612</deployedseed>
+    <deployedseed>1095697602</deployedseed>
+    <deployedseed>691990133</deployedseed>
+    <deployedseed>2137490289</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>( prt1-1-T ]</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>

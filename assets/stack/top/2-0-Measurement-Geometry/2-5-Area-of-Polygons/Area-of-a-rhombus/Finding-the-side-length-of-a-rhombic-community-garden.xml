@@ -2,25 +2,26 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Finding area of heptagon given side length and apothem</text>
+      <text>Finding the side length of a rhombic community garden</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>A school garden is in the shape of a regular heptagon. The side length is <b>{@s@} m</b> and the apothem (the distance from the center to the midpoint of a side) is <b>{@a@} m</b>.</p>
+      <text><![CDATA[<p>A community garden features a rhombus-shaped plot for pollinator-friendly plants. The total area of the plot is exactly <b>{@Area@} m²</b>. An irrigation line running straight across one of the diagonals measures <b>{@d1@} m</b>.</p>
+
+<p>Calculate the length of one outer side of the plot (\(s\)).</p>
 
 [[jsxgraph width="500px" height="300px"]]
-    var s_val = {#s#};
-    var a_val = {#a#};
-    var n = 7;
+    var d1 = {#d1#};
+    var d2 = {#d2#};
+    var A = {#Area#};
     
-    var angle = Math.PI / n;
-    
-    // Calculate true geometric radius to maintain perfect shape
-    var R = a_val / Math.cos(angle); 
+    // Half diagonals for drawing
+    var a = d1 / 2;
+    var b = d2 / 2;
     
     // Proportional scaling
     var ratio = 500 / 300;
-    var spanY = R * 2.5;
-    var spanX = spanY * ratio;
+    var spanX = Math.max(d1 * 1.3, d2 * 1.3 * ratio);
+    var spanY = spanX / ratio;
     
     var board = JXG.JSXGraph.initBoard(BOARDID, {
         boundingbox: [-spanX/2, spanY/2, spanX/2, -spanY/2], 
@@ -28,67 +29,75 @@
         axis: false, 
         showCopyright: false,
         keepAspectRatio: true,
-        showNavigation: false 
+        showNavigation: true 
     });
 
-    // Vertices - starting rotation to ensure a flat base at the bottom
-    var points = [];
-    for (var i = 0; i < n; i++) {
-        var theta = -Math.PI/2 - Math.PI/n + (2 * Math.PI * i / n); 
-        points.push(board.create('point', [R * Math.cos(theta), R * Math.sin(theta)], {visible: false}));
-    }
+    var p1 = board.create('point', [a, 0], {name: '', visible: false});
+    var p2 = board.create('point', [0, b], {name: '', visible: false});
+    var p3 = board.create('point', [-a, 0], {name: '', visible: false});
+    var p4 = board.create('point', [0, -b], {name: '', visible: false});
+    var center = board.create('point', [0,0], {name: '', visible: false});
 
-    board.create('polygon', points, {
-        fillColor: '#e3f2fd', 
-        strokeColor: '#1565c0', 
+    // Rhombus Plot
+    board.create('polygon', [p1, p2, p3, p4], {
+        fillColor: '#fff3e0', 
+        strokeColor: '#e65100', 
         strokeWidth: 2
     });
-    
-    var center = board.create('point', [0, 0], {name: '', visible: false});
-    
-    // Connect center to bottom flat side
-    var pA = points[0];
-    var pB = points[1];
-    var mid = board.create('midpoint', [pA, pB], {visible: false});
-    
-    // Central triangle lines
-    board.create('segment', [center, pA], {strokeColor: '#90caf9', dash: 1});
-    board.create('segment', [center, pB], {strokeColor: '#90caf9', dash: 1});
-    
-    // Apothem line
-    board.create('segment', [center, mid], {dash: 2, strokeColor: '#c62828'});
-    
-    // Right angle marker
-    var rad = R * 0.15;
-    board.create('angle', [pB, mid, center], {type: 'square', radius: rad, strokeColor: '#c62828', name: ''});
 
-    // Clean horizontal pixel-gap labels
-    var gapY = spanY * 0.04; 
-    var gapX = spanX * 0.02; 
+    // Known diagonal (irrigation line)
+    board.create('segment', [p3, p1], {dash: 2, strokeColor: '#fb8c00'});
+    
+    // Unknown diagonal (faint construction line)
+    board.create('segment', [p4, p2], {dash: 2, strokeColor: '#ffe0b2'});
 
-    board.create('text', [0, mid.Y() - gapY, s_val + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 16});
-    board.create('text', [gapX, mid.Y()/2, a_val + " m"], {anchorX: 'left', anchorY: 'middle', fontSize: 16, strokeColor: '#c62828'});
+    // Right angle marker at intersection
+    var rad = Math.min(a, b) * 0.15;
+    board.create('angle', [p1, center, p2], {type: 'square', radius: rad, strokeColor: '#fb8c00', name: ''});
+
+    var gapY = spanY * 0.015; 
+    var gapX = spanX * 0.015; 
+
+    // Dynamic Labels
+    board.create('text', [a/2, -gapY, "d_1 = " + d1 + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 14});
+    board.create('text', [a/2 + gapX*2, b/2 + gapY*2, "s = ?"], {anchorX: 'left', anchorY: 'bottom', fontSize: 16, strokeColor: '#c62828'});
+    
+    board.create('text', [0, -b - gapY*4, "Area = " + A + " m²"], {anchorX: 'middle', anchorY: 'top', fontSize: 16, strokeColor: '#e65100'});
 [[/jsxgraph]]
 
-<p>Calculate the area of the heptagon garden.</p>
-
-<p>Area = [[input:ans1]] <b>\(\text{m}^2\)</b> [[validation:ans1]][[feedback:prt1]]</p>
-<p><i>(Leave your answer to 2 decimal places)</i></p>]]></text>
+<p>Side length (\(s\)) = [[input:ans1]] <b>m</b> [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
-<p>The area (\(A\)) of a regular polygon with \(n\) sides, side length \(s\), and apothem \(a\) is given by the formula:</p>
+<p><b>Step 1: Find the length of the missing diagonal (\(d_2\))</b></p>
+<p>The formula for the area of a rhombus is:</p>
 <p>
-\[ A = \frac{n}{2} \times s \times a \]
+\[ \text{Area} = \frac{d_1 \times d_2}{2} \]
+</p>
+<p>Substitute the known values (\(\text{Area} = {@Area@}\) and \(d_1 = {@d1@}\)):</p>
+<p>
+\[ \begin{aligned}
+{@Area@} &= \frac{{@d1@} \times d_2}{2} \\
+{@Area * 2@} &= {@d1@} \times d_2 \\
+d_2 &= \frac{{@Area * 2@}}{{@d1@}} \\
+d_2 &= {@d2@} \text{ m}
+\end{aligned} \]
 </p>
 
-<p>For a heptagon (\(n = 7\)):</p>
+<p><b>Step 2: Use the diagonal property to find the side length</b></p>
+<p>The diagonals of a rhombus bisect each other (cut in half) at right angles, forming four right-angled triangles inside.</p>
+<ul>
+  <li>Half of \(d_1 = \frac{{@d1@}}{2} = {@a@}\text{ m}\)</li>
+  <li>Half of \(d_2 = \frac{{@d2@}}{2} = {@b@}\text{ m}\)</li>
+</ul>
+<p>Using Pythagoras’ Theorem on one of these inner right-angled triangles, the side length (\(s\)) is the hypotenuse:</p>
 <p>
-\[ \begin{aligned} 
-A &= \frac{7}{2} \times s \times a \\
-A &= \frac{7}{2} \times {@s@} \times {@a@} \\
-A &= 3.5 \times {@ta_step@} \\
-A &= {@ta@} \text{ m}^2 
+\[ \begin{aligned}
+s^2 &= ({@a@})^2 + ({@b@})^2 \\
+s^2 &= {@a^2@} + {@b^2@} \\
+s^2 &= {@a^2 + b^2@} \\
+s &= \sqrt{{@a^2 + b^2@}} \\
+s &= {@side@} \text{ m}
 \end{aligned} \]
 </p>]]></text>
     </generalfeedback>
@@ -100,27 +109,34 @@ A &= {@ta@} \text{ m}^2
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* 1. Randomize side length s */
-s: 6 + rand(10); 
+      <text>/* Generate Pythagorean triple variables to ensure integer results */
+m : 2 + rand(8);
+n : 1 + rand(m-1);
 
-/* 2. Calculate a realistic apothem a */
-a_exact: float(s / (2 * tan(%pi/7)));
-a: decimalplaces(a_exact,2);
+/* Half diagonals and side */
+a : m^2 - n^2; 
+b : 2*m*n ;  
+c : m^2 + n^2; 
 
-/* 3. Calculations */
-ta_step: s * a;
-ta: decimalplaces((7/2) * s * a, 2);
+/* Final Variables */
+d1 : a * 2; 
+d2 : b * 2;
+Area : (d1 * d2) / 2;
+side : c;
 
-/* Common Mistakes for PRT */
-m1: decimalplaces(7 * s * a, 2);     /* Forgot 1/2 */
-m2: decimalplaces((1/2) * s * a, 2); /* Forgot 7 */
-m3: 7 * s;                           /* Perimeter */</text>
+/* Teacher Answer */
+ta : side;
+
+/* Mistakes for PRT */
+m1 : c * 4;                 /* Found perimeter instead of side length */
+m2 : d2;                    /* Found the missing diagonal and stopped early */
+m3 : float(sqrt(d1^2 + d2^2)); /* Used full diagonals in Pythagoras instead of halves */</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>Side: {@s@}, Apothem: {@a@}, Area: {@ta@}</p>]]></text>
+      <text><![CDATA[<p>Area: {@Area@}, d1: {@d1@}, d2: {@d2@}, Side: {@ta@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -175,11 +191,11 @@ m3: 7 * s;                           /* Perimeter */</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description>Float-safe grading for correct area</description>
-        <answertest>NumAbsolute</answertest>
+        <description>Checks for correct side length</description>
+        <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>ta</tans>
-        <testoptions>0.02</testoptions>
+        <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -200,11 +216,11 @@ m3: 7 * s;                           /* Perimeter */</text>
       </node>
       <node>
         <name>1</name>
-        <description>Caught missing 1/2 factor</description>
-        <answertest>NumAbsolute</answertest>
+        <description>Caught Perimeter mistake</description>
+        <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>m1</tans>
-        <testoptions>0.02</testoptions>
+        <testoptions/>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -212,7 +228,7 @@ m3: 7 * s;                           /* Perimeter */</text>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text><![CDATA[<p>You multiplied the 7 sides by the base and apothem, but you forgot the \(\frac{1}{2}\) factor for the triangle area.</p>]]></text>
+          <text><![CDATA[<p>You calculated the total perimeter of the plot. The question asked for the length of just one side.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -225,19 +241,19 @@ m3: 7 * s;                           /* Perimeter */</text>
       </node>
       <node>
         <name>2</name>
-        <description>Caught missing x7 multiplier</description>
-        <answertest>NumAbsolute</answertest>
+        <description>Caught stopping early at missing diagonal</description>
+        <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>m2</tans>
-        <testoptions>0.02</testoptions>
+        <testoptions/>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
-        <truescore>0.2</truescore>
+        <truescore>0.3</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-3-T</trueanswernote>
         <truefeedback format="html">
-          <text><![CDATA[<p>Almost there! You found the area of exactly <b>one</b> of the central triangles. A heptagon is made of 7 equal triangles, so multiply your answer by 7.</p>]]></text>
+          <text><![CDATA[<p>You successfully found the length of the missing diagonal (\(d_2\))! But you stopped too early. Use Pythagoras' theorem on half of each diagonal to find the outer side length.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -250,11 +266,11 @@ m3: 7 * s;                           /* Perimeter */</text>
       </node>
       <node>
         <name>3</name>
-        <description>Caught Perimeter mistake</description>
+        <description>Caught failing to halve diagonals before Pythagoras</description>
         <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m3</tans>
-        <testoptions>0.02</testoptions>
+        <testoptions>0.1</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -262,7 +278,7 @@ m3: 7 * s;                           /* Perimeter */</text>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-4-T</trueanswernote>
         <truefeedback format="html">
-          <text><![CDATA[<p>You calculated the perimeter of the heptagon (\(7 \times \text{side}\)). To find the area, you must multiply the perimeter by half of the apothem.</p>]]></text>
+          <text><![CDATA[<p>You used the full lengths of the diagonals in Pythagoras' theorem. You must divide each diagonal by 2 first, because the right-angled triangles are formed by the <i>halves</i> of the diagonals.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -274,16 +290,23 @@ m3: 7 * s;                           /* Perimeter */</text>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>1015144370</deployedseed>
-    <deployedseed>932572459</deployedseed>
-    <deployedseed>419138556</deployedseed>
-    <deployedseed>1599211519</deployedseed>
-    <deployedseed>926416800</deployedseed>
-    <deployedseed>200470647</deployedseed>
-    <deployedseed>2035934607</deployedseed>
-    <deployedseed>1247444050</deployedseed>
-    <deployedseed>843553953</deployedseed>
-    <deployedseed>1446257351</deployedseed>
+    <deployedseed>485268952</deployedseed>
+    <deployedseed>1185720276</deployedseed>
+    <deployedseed>1800720921</deployedseed>
+    <deployedseed>1561899063</deployedseed>
+    <deployedseed>1098482511</deployedseed>
+    <deployedseed>1867351408</deployedseed>
+    <deployedseed>305895908</deployedseed>
+    <deployedseed>1201096622</deployedseed>
+    <deployedseed>467886528</deployedseed>
+    <deployedseed>1903839676</deployedseed>
+    <deployedseed>1176625483</deployedseed>
+    <deployedseed>1223538354</deployedseed>
+    <deployedseed>324395404</deployedseed>
+    <deployedseed>1068401248</deployedseed>
+    <deployedseed>1501757165</deployedseed>
+    <deployedseed>1778201243</deployedseed>
+    <deployedseed>1749652180</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
@@ -295,7 +318,7 @@ m3: 7 * s;                           /* Perimeter */</text>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>[ prt1-1-T ]</expectedanswernote>
       </expected>
     </qtest>
   </question>

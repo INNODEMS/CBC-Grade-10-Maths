@@ -5,47 +5,66 @@
       <text>Finding area of a kite given diagonals</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>A kite has diagonals measuring <b>{#d1#} {#unit#}</b> and <b>{#d2#} cm</b>.</p>
+      <text><![CDATA[<p>A kite has diagonals measuring <b>{@d1@} cm</b> and <b>{@d2@} cm</b>.</p>
 <p>Find its area.</p>
 
-[[jsxgraph width="300px" height="400px"]]
-var board = JXG.JSXGraph.initBoard(divid, {boundingbox: [-10, 15, 10, -15], axis: false, showCopyright: false});
+[[jsxgraph width="400px" height="400px"]]
+    var d1 = {#d1#};
+    var d2 = {#d2#};
+    
+    // Dynamically calculate tight boundaries based on the generated diagonals
+    var max_x = d2/2 + 1.5;
+    var max_y = d1/2 + 1.5;
+    
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [-max_x, max_y, max_x, -max_y],
+        maxboundingbox: [-max_x - 1, max_y + 1, max_x + 1, -max_y - 1],
+        keepAspectRatio: true,
+        axis: false,
+        showCopyright: false,
+        showNavigation: true 
+    });
 
-// Define the vertices of the kite based on diagonals
-// Vertical diagonal (d1) and Horizontal diagonal (d2)
-var top = board.create('point', [0, {#d1/2#}], {visible: false});
-var bottom = board.create('point', [0, -{#d1/2#}], {visible: false});
-var left = board.create('point', [-{#d2/2#}, 0], {visible: false});
-var right = board.create('point', [{#d2/2#}, 0], {visible: false});
+    // Define the vertices of the kite based on diagonals
+    var top = board.create('point', [0, d1/2], {name: '', visible: false});
+    var bottom = board.create('point', [0, -d1/2], {name: '', visible: false});
+    var left = board.create('point', [-d2/2, 0], {name: '', visible: false});
+    var right = board.create('point', [d2/2, 0], {name: '', visible: false});
 
-// Draw the Kite
-board.create('polygon', [top, right, bottom, left], {
-    fillColor: 'none', 
-    strokeColor: 'black', 
-    strokeWidth: 2
-});
+    // Draw the Kite using original color scheme
+    board.create('polygon', [top, right, bottom, left], {
+        fillColor: 'none', 
+        strokeColor: 'black', 
+        strokeWidth: 2
+    });
 
-// Draw the dashed diagonal lines
-board.create('segment', [top, bottom], {dash: 2, strokeColor: 'gray'});
-board.create('segment', [left, right], {dash: 2, strokeColor: 'gray'});
+    // Draw the dashed diagonal lines
+    board.create('segment', [top, bottom], {dash: 2, strokeColor: 'gray'});
+    board.create('segment', [left, right], {dash: 2, strokeColor: 'gray'});
 
-// Labels for the diagonals
-board.create('text', [0.5, 0, '{#d1#} cm'], {fontSize: 14});
-board.create('text', [-1, -1, '{#d2#} cm'], {fontSize: 14});
+    // Clean dynamic labels anchored to the diagonals
+    board.create('text', [0.2, d1/4, d1 + ' cm'], {anchorX: 'left', anchorY: 'middle', fontSize: 14});
+    board.create('text', [d2/4, -0.3, d2 + ' cm'], {anchorX: 'middle', anchorY: 'top', fontSize: 14});
 [[/jsxgraph]]
 
-<p>Area = [[input:ans1]] cm\(^2\) [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+<p>Area = [[input:ans1]] <b>\(\text{cm}^2\)</b> [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
 <p>To find the area of a kite, we use the formula involving the lengths of its diagonals \(d_1\) and \(d_2\):</p>
 
+<p>
 \[ \text{Area} = \frac{1}{2} \times d_1 \times d_2 \]
+</p>
 
 <p>Substituting the given values:</p>
 
+<p>
 \[ \text{Area} = \frac{1}{2} \times {@d1@} \times {@d2@} \]
-\[ \text{Area} = {@ta@} \text{ {#unit#}}^2 \]]]></text>
+</p>
+<p>
+\[ \text{Area} = {@ta_float@} \text{ cm}^2 \]
+</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -55,25 +74,27 @@ board.create('text', [-1, -1, '{#d2#} cm'], {fontSize: 14});
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Randomize diagonals d1 and d2 between 6 and 20 */
-/* We use a while loop to ensure they aren't the same number */
+      <text>/* Randomize diagonals d1 and d2 */
 d1: 6 + rand(15);
 d2: 6 + rand(15);
+
+/* Ensure they aren't the same number to maintain a distinct kite shape */
 while d1 = d2 do (
     d2: 6 + rand(15)
 );
 
-/* Calculate the correct area */
-/* Area = 1/2 * d1 * d2 */
-ta: (1/2) * d1 * d2;
+/* Area calculated natively as float */
+ta_float: float((1/2) * d1 * d2);
 
-</text>
+/* Common Mistakes for PRT */
+m1: float(d1 * d2); /* Forgot the 1/2 multiplier */
+m2: float(d1 + d2); /* Added diagonals instead of multiplying */</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta@}</text>
+      <text><![CDATA[<p>d1: {@d1@}, d2: {@d2@}, Area: {@ta_float@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -103,7 +124,7 @@ ta: (1/2) * d1 * d2;
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>ta</tans>
+      <tans>ta_float</tans>
       <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -111,7 +132,7 @@ ta: (1/2) * d1 * d2;
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
@@ -128,10 +149,10 @@ ta: (1/2) * d1 * d2;
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>checks for the correct answer</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>ta</tans>
+        <tans>ta_float</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -145,32 +166,136 @@ ta: (1/2) * d1 * d2;
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
+      <node>
+        <name>1</name>
+        <description>Forgot 1/2 multiplier</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions>0.05</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You multiplied the diagonals together, but forgot the \(\frac{1}{2}\) multiplier in the formula.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Added diagonals</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions>0.05</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You added the diagonals together. The formula requires you to multiply them: \( \frac{1}{2} \times d_1 \times d_2 \).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
     </prt>
-    <deployedseed>157500944</deployedseed>
-    <deployedseed>726877123</deployedseed>
-    <deployedseed>463369358</deployedseed>
-    <deployedseed>515787951</deployedseed>
-    <deployedseed>2106786377</deployedseed>
-    <deployedseed>1495670714</deployedseed>
-    <deployedseed>921156749</deployedseed>
-    <deployedseed>377028503</deployedseed>
-    <deployedseed>367773299</deployedseed>
-    <deployedseed>717612307</deployedseed>
-    <deployedseed>654356256</deployedseed>
-    <deployedseed>1575669784</deployedseed>
-    <deployedseed>372360953</deployedseed>
-    <deployedseed>78881201</deployedseed>
-    <deployedseed>1266765335</deployedseed>
-    <deployedseed>24280828</deployedseed>
-    <deployedseed>1739303959</deployedseed>
-    <deployedseed>1015945765</deployedseed>
-    <deployedseed>1616636894</deployedseed>
-    <deployedseed>1264459165</deployedseed>
+    <deployedseed>1652397999</deployedseed>
+    <deployedseed>1271345372</deployedseed>
+    <deployedseed>1362411083</deployedseed>
+    <deployedseed>591093756</deployedseed>
+    <deployedseed>1421751922</deployedseed>
+    <deployedseed>1731759751</deployedseed>
+    <deployedseed>1384316529</deployedseed>
+    <deployedseed>170314057</deployedseed>
+    <deployedseed>385159528</deployedseed>
+    <deployedseed>511714266</deployedseed>
+    <deployedseed>81804709</deployedseed>
+    <deployedseed>1909924514</deployedseed>
+    <deployedseed>1851350665</deployedseed>
+    <deployedseed>217435010</deployedseed>
+    <deployedseed>505052756</deployedseed>
+    <deployedseed>516034533</deployedseed>
+    <deployedseed>1736584479</deployedseed>
+    <deployedseed>556821584</deployedseed>
+    <deployedseed>72195598</deployedseed>
+    <deployedseed>1567385670</deployedseed>
+    <deployedseed>531774079</deployedseed>
+    <deployedseed>27602711</deployedseed>
+    <deployedseed>1022332215</deployedseed>
+    <deployedseed>1574911592</deployedseed>
+    <deployedseed>2044168590</deployedseed>
+    <deployedseed>1467683541</deployedseed>
+    <deployedseed>1107050810</deployedseed>
+    <deployedseed>1645306874</deployedseed>
+    <deployedseed>661896848</deployedseed>
+    <deployedseed>288448449</deployedseed>
+    <deployedseed>1108195217</deployedseed>
+    <deployedseed>1841652363</deployedseed>
+    <deployedseed>1044953942</deployedseed>
+    <deployedseed>1306215175</deployedseed>
+    <deployedseed>1867915893</deployedseed>
+    <deployedseed>338820048</deployedseed>
+    <deployedseed>1360358776</deployedseed>
+    <deployedseed>121962330</deployedseed>
+    <deployedseed>201271544</deployedseed>
+    <deployedseed>143004048</deployedseed>
+    <deployedseed>1384007234</deployedseed>
+    <deployedseed>205091286</deployedseed>
+    <deployedseed>1543406256</deployedseed>
+    <deployedseed>567444515</deployedseed>
+    <deployedseed>1710683469</deployedseed>
+    <deployedseed>558331504</deployedseed>
+    <deployedseed>1223488073</deployedseed>
+    <deployedseed>1297246000</deployedseed>
+    <deployedseed>1779762133</deployedseed>
+    <deployedseed>645381344</deployedseed>
+    <deployedseed>1554473224</deployedseed>
+    <deployedseed>1534919896</deployedseed>
+    <deployedseed>898117560</deployedseed>
+    <deployedseed>1531964175</deployedseed>
+    <deployedseed>1301270221</deployedseed>
+    <deployedseed>1570493205</deployedseed>
+    <deployedseed>68934772</deployedseed>
+    <deployedseed>960708479</deployedseed>
+    <deployedseed>1676509242</deployedseed>
+    <deployedseed>1318003071</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta_float</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>prt1-1-T</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>

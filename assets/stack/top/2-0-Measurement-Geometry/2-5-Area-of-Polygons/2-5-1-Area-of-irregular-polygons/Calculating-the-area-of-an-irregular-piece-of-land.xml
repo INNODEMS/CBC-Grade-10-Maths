@@ -8,62 +8,124 @@
       <text><![CDATA[<p>A surveyor recorded the following measurements for an irregular piece of land <b>AEDF</b> using a baseline <b>AD</b>. Vertices <b>E</b> and <b>F</b> are on opposite sides of the baseline.</p>
 
 <ul>
-    <li>Baseline segments: AB = {#d1#} m, BC = {#d2#} m, and CD = {#d3#} m.</li>
-    <li>Left Offset: BE = {#hL#} m (perpendicular to AD at B).</li>
-    <li>Right Offset: CF = {#hR#} m (perpendicular to AD at C).</li>
+    <li>Baseline segments: AB = <b>{@d1@} m</b>, BC = <b>{@d2@} m</b>, and CD = <b>{@d3@} m</b>.</li>
+    <li>Left Offset: BE = <b>{@hL@} m</b> (perpendicular to AD at B).</li>
+    <li>Right Offset: CF = <b>{@hR@} m</b> (perpendicular to AD at C).</li>
 </ul>
 
 [[jsxgraph width="400px" height="500px"]]
-var board = JXG.JSXGraph.initBoard(divid, {boundingbox: [-10, 28, 20, -6], axis: false, showCopyright: false});
+    var d1 = {#d1#};
+    var d2 = {#d2#};
+    var d3 = {#d3#};
+    var hL = {#hL#};
+    var hR = {#hR#};
+    
+    var AD = d1 + d2 + d3;
 
-// Vertical Baseline AD
-var A = board.create('point', [0, 0], {name: 'A', fixed: true, color: 'black'});
-var B = board.create('point', [0, {#d1#}], {name: 'B', fixed: true, color: 'black'});
-var C = board.create('point', [0, {#d1+d2#}], {name: 'C', fixed: true, color: 'black'});
-var D = board.create('point', [0, {#d1+d2+d3#}], {name: 'D', fixed: true, color: 'black'});
+    // Dynamic Bounding Box ensuring a perfect fit
+    var totalW = hL + hR;
+    var spanY = AD * 1.25; 
+    var ratio = 400 / 500;
+    var spanX = spanY * ratio;
+    
+    if (totalW * 1.25 > spanX) {
+        spanX = totalW * 1.25;
+        spanY = spanX / ratio;
+    }
+    
+    var midX = (hR - hL) / 2;
+    var midY = AD / 2;
 
-// Offsets
-var E = board.create('point', [-{#hL#}, {#d1#}], {name: 'E', color: 'blue'});
-var F = board.create('point', [{#hR#}, {#d1+d2#}], {name: 'F', color: 'red'});
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [midX - spanX/2, midY + spanY/2, midX + spanX/2, midY - spanY/2], 
+        axis: false, 
+        showCopyright: false,
+        keepAspectRatio: true,
+        showNavigation: false
+    });
 
-// Polygon AEDF
-board.create('polygon', [A, E, D, F], {fillColor: '#fdf2e9', borders: {strokeWidth: 2, strokeColor: 'black'}});
+    // Vertical Baseline AD
+    var A = board.create('point', [0, 0], {name: 'A', fixed: true, color: 'black'});
+    var B = board.create('point', [0, d1], {name: 'B', fixed: true, color: 'black'});
+    var C = board.create('point', [0, d1+d2], {name: 'C', fixed: true, color: 'black'});
+    var D = board.create('point', [0, AD], {name: 'D', fixed: true, color: 'black'});
 
-// Construction Lines
-board.create('segment', [A, D], {dash: 1, strokeColor: 'black'});
-board.create('segment', [B, E], {dash: 2, strokeColor: 'blue'});
-board.create('segment', [C, F], {dash: 2, strokeColor: 'red'});
+    // Offsets
+    var E = board.create('point', [-hL, d1], {name: 'E', color: '#1565c0'});
+    var F = board.create('point', [hR, d1+d2], {name: 'F', color: '#d32f2f'});
 
-// Labels
-board.create('text', [-{#hL/2#}, {#d1+0.5#}, "{#hL#}m"], {color: 'blue'});
-board.create('text', [{#hR/2#}, {#d1+d2+0.5#}, "{#hR#}m"], {color: 'red'});
+    // Polygon AEDF
+    board.create('polygon', [A, E, D, F], {fillColor: '#fdf2e9', borders: {strokeWidth: 2, strokeColor: '#212121'}});
+
+    // Construction Lines
+    board.create('segment', [A, D], {dash: 1, strokeColor: '#757575'});
+    board.create('segment', [B, E], {dash: 2, strokeColor: '#1976d2'});
+    board.create('segment', [C, F], {dash: 2, strokeColor: '#c62828'});
+
+    // Right angle markers
+    var rad = spanY * 0.04;
+    board.create('angle', [E, B, A], {type: 'square', radius: rad, strokeColor: '#1976d2', name: ''});
+    board.create('angle', [F, C, D], {type: 'square', radius: rad, strokeColor: '#c62828', name: ''});
+
+    // Dynamic Labels with Pixel Gaps
+    var gapX = spanX * 0.02;
+    var gapY = spanY * 0.02;
+
+    // Baseline segment labels
+    board.create('text', [gapX, d1/2, d1 + " m"], {anchorX: 'left', anchorY: 'middle', fontSize: 13, strokeColor: '#757575'});
+    board.create('text', [gapX, d1 + d2/2, d2 + " m"], {anchorX: 'left', anchorY: 'middle', fontSize: 13, strokeColor: '#757575'});
+    board.create('text', [gapX, d1 + d2 + d3/2, d3 + " m"], {anchorX: 'left', anchorY: 'middle', fontSize: 13, strokeColor: '#757575'});
+
+    // Offset labels
+    board.create('text', [-hL/2, d1 + gapY, hL + " m"], {anchorX: 'middle', anchorY: 'bottom', fontSize: 14, strokeColor: '#1976d2'});
+    board.create('text', [hR/2, d1+d2 + gapY, hR + " m"], {anchorX: 'middle', anchorY: 'bottom', fontSize: 14, strokeColor: '#c62828'});
 [[/jsxgraph]]
 
 <p>Calculate the total area of the land <b>AEDF</b>.</p>
 
-<p>Area = [[input:ans1]] m<sup>2</sup> [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+<p>Area = [[input:ans1]] <b>\(\text{m}^2\)</b> [[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
 
-<p>To calculate the total area, we find the area of the triangles on the left side and the right side of the baseline <b>AD</b> separately.</p>
+<p>To calculate the total area, we find the area of the large triangles on the left and right sides of the baseline <b>AD</b> separately.</p>
 
-<p>Left Side (Triangle AED):</p>
-<p>The vertex <b>E</b> forms two triangles with the baseline, or one large triangle with base <b>AD</b>.</p>
-\(\begin{align} \text{Base AD} &= {@d1@} + {@d2@} + {@d3@}\\
-&= {@d1+d2+d3@} \text{ m} \\
- \text{Area (Left)} &= \frac{1}{2} \times \text{Base (AD)} \times \text{Height (BE)} \\
- \text{Area (Left)} &= \frac{1}{2} \times {@d1+d2+d3@} \times {@hL@} \\
-&= {@area_left1 + area_left2@} \text{ m}^2 \end{align}\)
+<p>First, find the total length of the baseline <b>AD</b>:</p>
+<p>
+\[ \begin{aligned} 
+\text{Base AD} &= {@d1@} + {@d2@} + {@d3@} \\
+&= {@AD@} \text{ m} 
+\end{aligned} \]
+</p>
 
-<p> Right Side (Triangle AFD):</p>
-\(\begin{align} \text{Area (Right)} &= \frac{1}{2} \times \text{Base (AD)} \times \text{Height (CF)} \\
-\text{Area (Right)} &= \frac{1}{2} \times {@d1+d2+d3@} \times {@hR@}\\
- &= {@area_right1 + area_right2@} \text{ m}^2 \end{align}\)
+<p><b>1. Area of Left Side (Triangle AED)</b></p>
+<p>The vertex <b>E</b> forms one large triangle with base <b>AD</b>.</p>
+<p>
+\[ \begin{aligned} 
+\text{Area (Left)} &= \frac{1}{2} \times \text{Base (AD)} \times \text{Height (BE)} \\
+&= \frac{1}{2} \times {@AD@} \times {@hL@} \\
+&= {@area_left@} \text{ m}^2 
+\end{aligned} \]
+</p>
 
-<p>Total Area:</p>
-\(\begin{align} \text{Total Area} =& {@area_left1 + area_left2@} + {@area_right1 + area_right2@}\\
- &= {@ta@} \text{ m}^2 \end{align}\)]]></text>
+<p><b>2. Area of Right Side (Triangle AFD)</b></p>
+<p>The vertex <b>F</b> forms one large triangle with base <b>AD</b>.</p>
+<p>
+\[ \begin{aligned} 
+\text{Area (Right)} &= \frac{1}{2} \times \text{Base (AD)} \times \text{Height (CF)} \\
+&= \frac{1}{2} \times {@AD@} \times {@hR@} \\
+&= {@area_right@} \text{ m}^2 
+\end{aligned} \]
+</p>
+
+<p><b>3. Total Area</b></p>
+<p>
+\[ \begin{aligned} 
+\text{Total Area} &= \text{Area (Left)} + \text{Area (Right)} \\
+&= {@area_left@} + {@area_right@} \\
+&= {@ta@} \text{ m}^2 
+\end{aligned} \]
+</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -73,36 +135,29 @@ board.create('text', [{#hR/2#}, {#d1+d2+0.5#}, "{#hR#}m"], {color: 'red'});
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Baseline segments along AD: AB, BC, CD */
-d1: 5 + rand(3); /* AB */
-d2: 6 + rand(4); /* BC */
-d3: 4 + rand(3); /* CD */
+      <text>/* Baseline segments along AD */
+d1: 5 + rand(3); 
+d2: 6 + rand(4); 
+d3: 4 + rand(3); 
+AD: d1 + d2 + d3;
 
-/* Offsets to the Left (L) and Right (R) */
-hL: 4 + rand(3); /* Offset at B to vertex E (Left) */
-hR: 5 + rand(3); /* Offset at C to vertex F (Right) */
+/* Offsets */
+hL: 4 + rand(3); 
+hR: 5 + rand(3); 
 
-/* Area Calculations */
-/* Left Side: Triangle ABE + Triangle EBD */
-/* Area ABE = 1/2 * base(AB) * height(hL) */
-area_left1: 1/2 * d1 * hL;
-/* Area EBD = 1/2 * base(BD) * height(hL). Note: BD = d2 + d3 */
-area_left2: 1/2 * (d2 + d3) * hL;
+/* Calculations */
+area_left: float((1/2) * AD * hL);
+area_right: float((1/2) * AD * hR);
+ta: float(area_left + area_right);
 
-/* Right Side: Triangle ACF + Triangle FCD */
-/* Area ACF = 1/2 * base(AC) * height(hR). Note: AC = d1 + d2 */
-area_right1: 1/2 * (d1 + d2) * hR;
-/* Area FCD = 1/2 * base(CD) * height(hR) */
-area_right2: 1/2 * d3 * hR;
-
-/* Total Area */
-ta: area_left1 + area_left2 + area_right1 + area_right2;</text>
+/* Mistakes for PRT */
+m1: float((AD * hL) + (AD * hR)); /* Forgot the 1/2 factor */</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta@}</text>
+      <text><![CDATA[<p>AD: {@AD@} | hL: {@hL@} | hR: {@hR@} | Total Area: {@ta@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -157,11 +212,11 @@ ta: area_left1 + area_left2 + area_right1 + area_right2;</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
-        <answertest>AlgEquiv</answertest>
+        <description>Float-safe grading</description>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>ta</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -174,41 +229,68 @@ ta: area_left1 + area_left2 + area_right1 + area_right2;</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
+      <node>
+        <name>1</name>
+        <description>Caught missing 1/2 factor</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions>0.05</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You forgot the \(\frac{1}{2}\) factor. The formula for the area of a triangle is \(\frac{1}{2} \times \text{base} \times \text{height}\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
     </prt>
-    <deployedseed>1397658389</deployedseed>
-    <deployedseed>1682359857</deployedseed>
-    <deployedseed>699991172</deployedseed>
-    <deployedseed>1939649486</deployedseed>
-    <deployedseed>1367477470</deployedseed>
-    <deployedseed>1780821914</deployedseed>
-    <deployedseed>1537995920</deployedseed>
-    <deployedseed>756591619</deployedseed>
-    <deployedseed>2014623907</deployedseed>
-    <deployedseed>874514879</deployedseed>
-    <deployedseed>434741128</deployedseed>
-    <deployedseed>1938356479</deployedseed>
-    <deployedseed>2017829611</deployedseed>
-    <deployedseed>1679294368</deployedseed>
-    <deployedseed>1504765895</deployedseed>
-    <qtest>
-      <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
-      <testinput>
-        <name>ans1</name>
-        <value>ta</value>
-      </testinput>
-      <expected>
-        <name>prt1</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
-      </expected>
-    </qtest>
+    <deployedseed>212685079</deployedseed>
+    <deployedseed>888130700</deployedseed>
+    <deployedseed>1772662014</deployedseed>
+    <deployedseed>313896979</deployedseed>
+    <deployedseed>159640350</deployedseed>
+    <deployedseed>654206134</deployedseed>
+    <deployedseed>875176505</deployedseed>
+    <deployedseed>1333271300</deployedseed>
+    <deployedseed>496437411</deployedseed>
+    <deployedseed>1655450039</deployedseed>
+    <deployedseed>151855583</deployedseed>
+    <deployedseed>1947754042</deployedseed>
+    <deployedseed>970381506</deployedseed>
+    <deployedseed>1723025328</deployedseed>
+    <deployedseed>165852735</deployedseed>
+    <deployedseed>2100351525</deployedseed>
+    <deployedseed>536973615</deployedseed>
+    <deployedseed>1005415546</deployedseed>
+    <deployedseed>1165019029</deployedseed>
+    <deployedseed>2072197046</deployedseed>
+    <deployedseed>1981787740</deployedseed>
+    <deployedseed>795163800</deployedseed>
+    <deployedseed>1732698915</deployedseed>
+    <deployedseed>1464887790</deployedseed>
+    <deployedseed>1190833090</deployedseed>
+    <deployedseed>978472916</deployedseed>
+    <deployedseed>1134879019</deployedseed>
+    <deployedseed>118983713</deployedseed>
+    <deployedseed>2138943827</deployedseed>
+    <deployedseed>1546661046</deployedseed>
+    <deployedseed>2087002015</deployedseed>
   </question>
 </quiz>

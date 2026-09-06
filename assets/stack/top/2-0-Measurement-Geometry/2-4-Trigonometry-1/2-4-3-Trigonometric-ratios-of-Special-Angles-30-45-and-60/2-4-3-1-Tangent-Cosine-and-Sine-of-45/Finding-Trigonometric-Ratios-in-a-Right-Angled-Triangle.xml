@@ -5,10 +5,10 @@
       <text>Finding Trigonometric Ratios in a Right-Angled Triangle</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Look at the figure below and use it to find the following trigonometric ratios:</p>
+      <text><![CDATA[<p>Consider the right-angled triangle \(PQR\) shown below. Calculate the length of \(PR\), and then determine the exact values of the following trigonometric ratios:</p>
 [[jsxgraph]]
  var board = JXG.JSXGraph.initBoard(divid, {
-        boundingbox: [-1, 4.5, 6, -1],
+        boundingbox: [-1.5, 5, 5.5, -1.5],
         axis: false,
         showNavigation: false,
         showCopyright: false
@@ -29,7 +29,7 @@
         label: {offset: [10, -10], visible: true}
     });
 
-    var P = board.create('point', [0, 3], {
+    var P = board.create('point', [0, 4], {
         name: 'P',
         fixed: true,
         visible: false,
@@ -50,54 +50,48 @@
 
     // Angle θ at R (inside)
     board.create('angle', [P, R, Q], {
-        radius: 0.6,
-        name: '45°'
+        radius: 0.8,
+        name: '45&deg;',
+        fontSize: 14
     });
 
     // Length labels
-    board.create('text', [-0.6, 1.5, '{#side#} cm']);
-    board.create('text', [2, -0.4, '{#side#} cm']);
+    board.create('text', [-0.8, 2, '{#side#} cm']);
+    board.create('text', [2, -0.6, '{#side#} cm']);
 
 [[/jsxgraph]]
 
 <ol type='i'>
-    <li>\(\text{Length of side PR }=\)[[input:ans1]]\(\,\text{cm}\)[[validation:ans1]][[feedback:prt1]]</li>
-    <li>\(Tan \,45^\circ=\)[[input:ans2]][[validation:ans2]][[feedback:prt2]]</li>
-    <li>\(Cos\,45^\circ=\)[[input:ans3]][[validation:ans3]][[feedback:prt3]]</li>
-    <li>\(Sin\,45^\circ=\)[[input:ans4]][[validation:ans4]][[feedback:prt4]]</li>
-</ol>
-
-
-
-
-
-
-<p></p>]]></text>
+    <li>\(\text{Length of side } PR =\)[[input:ans1]]\(\,\text{cm}\)[[validation:ans1]][[feedback:prt1]]</li>
+    <li>\(\tan(45^\circ)=\)[[input:ans2]][[validation:ans2]][[feedback:prt2]]</li>
+    <li>\(\cos(45^\circ)=\)[[input:ans3]][[validation:ans3]][[feedback:prt3]]</li>
+    <li>\(\sin(45^\circ)=\)[[input:ans4]][[validation:ans4]][[feedback:prt4]]</li>
+</ol>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<p><strong>Worked Solution:</strong></p>
 
-<p>Given a right-angled triangle PQR with right angle at Q and angle \( \angle R = 45^\circ \). Let the sides opposite and adjacent to the 45° angle be equal to <em>side</em> cm.</p>
+<p>Given a right-angled triangle \(PQR\) with a right angle at \(Q\) and \(\angle R = 45^\circ\). The sides opposite and adjacent to the \(45^\circ\) angle are both \({@side@}\,\text{cm}\).</p>
 
 <ol type='i'>
     <li>
-        <p>Length of side PR (hypotenuse):</p>
+        <p>Length of side \(PR\) (hypotenuse):</p>
         <p>
         Using Pythagoras theorem: <br>
         \(\begin{align}
         PR &= \sqrt{PQ^2 + QR^2} \\
         &= \sqrt{{@side@}^2 + {@side@}^2} \\
         &= \sqrt{2 \cdot {@side@}^2} \\
-        &= {@RP@}\, \text{ cm}
+        &= {@RP@}\, \text{cm}
         \end{align}\)
         </p>
     </li>
 
     <li>
-        <p>\(Tan \,45^\circ\):</p>
+        <p>\(\tan(45^\circ)\):</p>
         <p>
         \(\begin{align}
-        \tan 45^\circ &= \frac{\text{Opposite}}{\text{Adjacent}} \\
+        \tan(45^\circ) &= \frac{\text{Opposite}}{\text{Adjacent}} \\
         &= \frac{PQ}{QR} \\
         &= \frac{{@side@}}{{@side@}}\\
         &= {@tan_45@}
@@ -106,36 +100,34 @@
     </li>
 
     <li>
-        <p>\(Cos\,45^\circ\):</p>
+        <p>\(\cos(45^\circ)\):</p>
         <p>
         \(\begin{align}
-        \cos 45^\circ &= \frac{\text{Adjacent}}{\text{Hypotenuse}} \\
+        \cos(45^\circ) &= \frac{\text{Adjacent}}{\text{Hypotenuse}} \\
         &= \frac{{@side@}}{{@RP@}} \\
         &= {@cos_45@} 
-        &\approx 0.707
         \end{align}\)
         </p>
     </li>
 
     <li>
-        <p>\(Sin\,45^\circ\):</p>
+        <p>\(\sin(45^\circ)\):</p>
         <p>
         \(\begin{align}
-        \sin 45^\circ &= \frac{\text{Opposite}}{\text{Hypotenuse}} \\
+        \sin(45^\circ) &= \frac{\text{Opposite}}{\text{Hypotenuse}} \\
         &= \frac{{@side@}}{{@RP@}}\\
-        &={@sin_45@}\\
-      & \approx 0.707
+        &={@sin_45@}
         \end{align}\)
         </p>
     </li>
 </ol>]]></text>
     </generalfeedback>
-    <defaultgrade>15</defaultgrade>
+    <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text>Angle:45; /*The special angle 45*/

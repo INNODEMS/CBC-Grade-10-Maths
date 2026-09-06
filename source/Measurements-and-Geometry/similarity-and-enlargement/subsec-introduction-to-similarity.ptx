@@ -434,82 +434,115 @@
 
     <example xml:id="auto_i9u5j6ut">
         <statement>
-            <p xml:id="auto_qti1dx1b">
-                
-            </p>
             <p xml:id="auto_3l6yfe8e">
-                In the figure below, the triangles <m>PQR</m> and <m>ABC</m> are similar. Calculate the lengths marked with letters <m>x</m> and <m>y</m>.
+                In the figure below, the triangles <m>PQR</m> and <m>ABC</m> are
+                similar. Calculate the lengths marked with letters <m>x</m> and
+                <m>y</m>.
             </p>
 
             <sidebyside>
                 <image>
-                    <shortdescription></shortdescription>
+                    <shortdescription>
+                        Triangle ABC with sides 9 cm, 6 cm, and x labeled.
+                    </shortdescription>
                     <latex-image label="similar-triangle1">
                         \begin{tikzpicture}
                             % Triangle ABC (Blue fill)
-                        \fill[blue!30] (0,0) -- (5,0) -- (2,3.5) -- cycle;  % Light blue fill
-                        \draw[thick, blue] (0,0) -- (5,0) -- (2,3.5) -- cycle;
-                        
-                        % Labels for triangle ABC
-                        \node[left] at (0,0) {A};
-                        \node[right] at (5,0) {B};
-                        \node[above] at (2,3.5) {C};
-                        \node[below] at (2.5,0) {6 cm};
-                        \node[left] at (1,2) {9 cm};
-                        \node[right] at (3.5,2) {x};
+                            \fill[blue!30] (0,0) -- (5,0) -- (2,3.5) -- cycle;
+                            \draw[thick, blue] (0,0) -- (5,0) -- (2,3.5) -- cycle;
+
+                            % Labels for triangle ABC
+                            \node[left] at (0,0) {A};
+                            \node[right] at (5,0) {B};
+                            \node[above] at (2,3.5) {C};
+                            \node[below] at (2.5,0) {6 cm};
+                            \node[left] at (1,2) {9 cm};
+                            \node[right] at (3.5,2) {x};
                         \end{tikzpicture}
                     </latex-image>
-                    
                 </image>
 
                 <image>
-                    <shortdescription></shortdescription>
+                    <shortdescription>
+                        Triangle PQR with sides 12 cm, 14 cm, and y labeled.
+                    </shortdescription>
                     <latex-image label="similar-triangle2">
                         \begin{tikzpicture}
-                              % % Define triangle vertices
-                    \coordinate (P) at (0,0);
-                    \coordinate (Q) at (5,0);
-                    \coordinate (R) at (1,3);
+                            % Define triangle vertices
+                            \coordinate (P) at (0,0);
+                            \coordinate (Q) at (5,0);
+                            \coordinate (R) at (1,3);
 
-                    % Draw and fill the triangle
-                    \draw[thick, fill=red, opacity=0.5] (P) -- (Q) -- (R) -- cycle;
+                            % Draw and fill the triangle
+                            \draw[thick, fill=red, opacity=0.5] (P) -- (Q) -- (R) -- cycle;
 
-                    % Label vertices
-                    \node[above] at (R) {R};  
-                    \node[below left] at (P) {P};  
-                    \node[below right] at (Q) {Q};  
+                            % Label vertices
+                            \node[above] at (R) {R};
+                            \node[below left] at (P) {P};
+                            \node[below right] at (Q) {Q};
 
-                    % Label sides
-                    \node[below] at ($(P)!0.5!(Q)$) {y };  % Midpoint of PQ
-                    \node[right] at ($(Q)!0.5!(R)$) {14 cm};  % Midpoint of QR
-                    \node[left] at ($(P)!0.5!(R)$) {12 cm};  % Midpoint of PR
+                            % Label sides
+                            \node[below] at ($(P)!0.5!(Q)$) {y};
+                            \node[right] at ($(Q)!0.5!(R)$) {14 cm};
+                            \node[left] at ($(P)!0.5!(R)$) {12 cm};
                         \end{tikzpicture}
                     </latex-image>
-                    
                 </image>
             </sidebyside>
         </statement>
 
         <solution>
             <p xml:id="auto_lec631ly">
-                <m>AB</m> corresponds to <m>PQ</m>, <m>BC</m> corresponds to <m>QR</m>, and <m>AC</m> corresponds to <m>PR</m>.
+                Since the triangles are similar, <m>AB</m> corresponds to
+                <m>PQ</m>, <m>BC</m> corresponds to <m>QR</m>, and <m>AC</m>
+                corresponds to <m>PR</m>. This gives the ratio:
+            </p>
+
+            <p>
+                <md xml:id="auto_ratio">
+                    \frac{AB}{PQ}= \frac{AC}{PR}= \frac{BC}{QR}
+                    = \frac{6\, \text{cm}}{y}= \frac{9\, \text{cm}}{12\, \text{cm}}= \frac{x}{14\, \text{cm}}
+                </md>
             </p>
 
             <p xml:id="auto_ff9wnd09">
+                First, solve for <m>y</m> using the ratio between <m>AB\text{-}PQ</m>
+                and <m>AC\text{-}PR</m>:
+            </p>
+
+            <p>
                 <md>
-                    <mrow>\text{Therefore,} \amp \frac{AB}{PQ}= \frac{AC}{PR}= \frac {BC}{QR} </mrow>
-                    <mrow> =\amp \frac{6\, \text{cm}}{y}= \frac{9\, \text{cm}}{12\, \text{cm}}= \frac {x}{14\, \text{cm}} </mrow>
-                    <mrow> \frac{6\, \text{cm}}{y}=\amp \frac{9\, \text{cm}}{12\, \text{cm}}</mrow>
-                    <mrow> y \times 9\, \text{cm}= \amp 6\, \text{cm} \times 12\, \text{cm} </mrow>
-                    <mrow> y= \amp \frac{72\, \text{cm}^2}{9\, \text{cm}}  </mrow>
-                    <mrow> y =\amp 8\, \text{cm} </mrow>
-                    <mrow>\text{Therefore PQ}= \amp 8 \text{cm}</mrow>
-                     <mrow> \frac{9\, \text{cm}}{12\, \text{cm}}=\amp \frac{x}{14\, \text{cm}}</mrow>
-                    <mrow> x \times 12\, \text{cm}= \amp 9\, \text{cm} \times 14\, \text{cm} </mrow>
-                    <mrow> x= \amp \frac{126\, \text{cm}^2}{12\, \text{cm}}  </mrow>
-                    <mrow> x =\amp 10.5\, \text{cm} </mrow>
-                    <mrow>\text{Therefore BC}= \amp 10.5\, \text{cm}</mrow>
+                    <mrow>\frac{6\, \text{cm}}{y}=\amp \frac{9\, \text{cm}}{12\, \text{cm}}</mrow>
+                    <mrow>y \times 9\, \text{cm}= \amp 6\, \text{cm} \times 12\, \text{cm}</mrow>
+                    <mrow>y= \amp \frac{72\, \text{cm}^2}{9\, \text{cm}}</mrow>
+                    <mrow>y =\amp 8\, \text{cm}</mrow>
                 </md>
+            </p>
+
+            <p>
+                Therefore, <m>PQ = 8</m> cm.
+            </p>
+
+            <p xml:id="auto_solve_x_intro">
+                Next, solve for <m>x</m> using the ratio between <m>AC\text{-}PR</m>
+                and <m>BC\text{-}QR</m>:
+            </p>
+            <p>
+                <md>
+                    <mrow> \amp </mrow>
+                </md>
+            </p>
+            <p>
+                <md>
+                    <mrow>\frac{9\, \text{cm}}{12\, \text{cm}}=\amp \frac{x}{14\, \text{cm}}</mrow>
+                    <mrow>x \times 12\, \text{cm}= \amp 9\, \text{cm} \times 14\, \text{cm}</mrow>
+                    <mrow>x= \amp \frac{126\, \text{cm}^2}{12\, \text{cm}}</mrow>
+                    <mrow>x =\amp 10.5\, \text{cm}</mrow>
+                </md>
+            </p>
+
+            <p>
+                Therefore, <m>BC = 10.5</m> cm.
             </p>
         </solution>
     </example>
@@ -613,22 +646,10 @@
     
     <!-- STACK Questions -->
     <exercise xml:id="auto_iu0f2x5o">
-        <title>Using Similar Triangles to Find Unknown Side Lengths</title>
-
-        <introduction xml:id="auto_l8cz3pun">
-            <p xml:id="auto_og98vgig">Load the question by clicking the button below.</p>
-        </introduction>
-
         <stack label="similar-triangles-unknown-sides" source="stack/top/2-0-Measurement-Geometry/2-1-Similarity-and-Enlargement/2-1-1-Similarity/Using-Similar-Triangles-to-Find-Unknown-Side-Lengths.xml"/>
     </exercise>
 
     <exercise xml:id="auto_a3sbqzh1">
-        <title>Using Similarity to Determine Unknown Lengths and Scale Factor</title>
-
-        <introduction xml:id="auto_9l61wlqo">
-            <p xml:id="auto_qlbmy3r0">Load the question by clicking the button below.</p>
-        </introduction>
-
         <stack label="similarity-unknown-lengths-scale" source="stack/top/2-0-Measurement-Geometry/2-1-Similarity-and-Enlargement/2-1-1-Similarity/Using-Similarity-to-Determine-Unknown-Lengths-and-Scale-Factor.xml"/>
     </exercise>
 

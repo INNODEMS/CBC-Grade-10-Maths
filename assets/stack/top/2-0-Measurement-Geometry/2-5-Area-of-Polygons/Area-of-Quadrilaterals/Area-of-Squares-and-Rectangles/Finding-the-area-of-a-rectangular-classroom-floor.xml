@@ -6,11 +6,11 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
-A classroom floor is rectangular. Its length is {@l@} m and its width is {@w@} m. Find the area of the floor.
+A classroom floor is rectangular. Its length is <b>{@l@} m</b> and its width is <b>{@w@} m</b>. Find the area of the floor.
 </p>
 
 <p>
-Area = [[input:ans1]] \(\text {m}^2\) [[validation:ans1]] [[feedback:prt1]]
+Area = [[input:ans1]] <b>\(\text{m}^2\)</b> [[validation:ans1]] [[feedback:prt1]]
 </p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
@@ -62,7 +62,7 @@ Therefore, the area of the classroom floor is:
 
 <p>
 \[
-{{@A@}\text{ m}^2}
+\boxed{{@A@}\text{ m}^2}
 \]
 </p>]]></text>
     </generalfeedback>
@@ -84,13 +84,14 @@ A: l*w;
 /* Common mistakes */
 m1: 2*(l+w);    /* perimeter */
 m2: l+w;        /* adds dimensions */
-m3: l^2;        /* treats it like a square */</text>
+m3: l^2;        /* squares length */
+m4: w^2;        /* squares width */</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@A@}</text>
+      <text><![CDATA[<p>l: {@l@}, w: {@w@}, Area: {@A@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
@@ -189,7 +190,7 @@ The question requires the learner to calculate the area of a rectangle in a real
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text>You found the perimeter. For area of a rectangle, multiply length by width.</text>
+          <text><![CDATA[<p>You found the perimeter. For the area of a rectangle, multiply length by width.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -214,7 +215,7 @@ The question requires the learner to calculate the area of a rectangle in a real
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-3-T</trueanswernote>
         <truefeedback format="html">
-          <text>Do not add the dimensions. Area is found by multiplying length and width.</text>
+          <text><![CDATA[<p>Do not add the dimensions. Area is found by multiplying length and width.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -227,7 +228,7 @@ The question requires the learner to calculate the area of a rectangle in a real
       </node>
       <node>
         <name>3</name>
-        <description>treats it like a square</description>
+        <description>squares length</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>m3</tans>
@@ -239,66 +240,90 @@ The question requires the learner to calculate the area of a rectangle in a real
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-4-T</trueanswernote>
         <truefeedback format="html">
-          <text>This is a rectangle, not a square. Use length × width.</text>
+          <text><![CDATA[<p>This is a rectangle, not a square. You squared the length. Use length &times; width.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>4</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>4</name>
+        <description>squares width</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m4</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-5-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>This is a rectangle, not a square. You squared the width. Use length &times; width.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt1-4-F</falseanswernote>
+        <falseanswernote>prt1-5-F</falseanswernote>
         <falsefeedback format="html">
-          <text>Use the formula 𝐴 = 𝑙 × 𝑤.</text>
+          <text/>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>1625955102</deployedseed>
-    <deployedseed>1343242645</deployedseed>
-    <deployedseed>18364447</deployedseed>
-    <deployedseed>1132299342</deployedseed>
-    <deployedseed>1526459133</deployedseed>
-    <deployedseed>364806423</deployedseed>
-    <deployedseed>940218495</deployedseed>
-    <deployedseed>733243965</deployedseed>
-    <deployedseed>1968332171</deployedseed>
-    <deployedseed>97358640</deployedseed>
-    <deployedseed>122152339</deployedseed>
-    <deployedseed>1132842238</deployedseed>
-    <deployedseed>100020260</deployedseed>
-    <deployedseed>508716007</deployedseed>
-    <deployedseed>1269530015</deployedseed>
-    <deployedseed>1165917317</deployedseed>
-    <deployedseed>1799772397</deployedseed>
-    <deployedseed>93015378</deployedseed>
-    <deployedseed>2076485226</deployedseed>
-    <deployedseed>1493711172</deployedseed>
-    <deployedseed>1949515574</deployedseed>
-    <deployedseed>2041758577</deployedseed>
-    <deployedseed>963141787</deployedseed>
-    <deployedseed>929815754</deployedseed>
-    <deployedseed>1576674450</deployedseed>
-    <deployedseed>1563285690</deployedseed>
-    <deployedseed>562887564</deployedseed>
-    <deployedseed>767489163</deployedseed>
-    <deployedseed>267018310</deployedseed>
-    <deployedseed>404917961</deployedseed>
-    <deployedseed>643185030</deployedseed>
-    <deployedseed>9391436</deployedseed>
-    <deployedseed>1642274797</deployedseed>
-    <deployedseed>1893496863</deployedseed>
-    <deployedseed>2057002408</deployedseed>
-    <deployedseed>1437663837</deployedseed>
-    <deployedseed>1728627476</deployedseed>
-    <deployedseed>1656849106</deployedseed>
-    <deployedseed>281080887</deployedseed>
-    <deployedseed>111852800</deployedseed>
-    <deployedseed>308281109</deployedseed>
-    <deployedseed>463513497</deployedseed>
-    <deployedseed>1046729861</deployedseed>
-    <deployedseed>669628187</deployedseed>
-    <deployedseed>735837454</deployedseed>
-    <deployedseed>1048336796</deployedseed>
-    <deployedseed>75762259</deployedseed>
-    <deployedseed>14297322</deployedseed>
+    <deployedseed>826014208</deployedseed>
+    <deployedseed>34605616</deployedseed>
+    <deployedseed>1928714838</deployedseed>
+    <deployedseed>345767455</deployedseed>
+    <deployedseed>917711036</deployedseed>
+    <deployedseed>236526306</deployedseed>
+    <deployedseed>164059010</deployedseed>
+    <deployedseed>597288230</deployedseed>
+    <deployedseed>1522772841</deployedseed>
+    <deployedseed>1592625685</deployedseed>
+    <deployedseed>400869514</deployedseed>
+    <deployedseed>4781190</deployedseed>
+    <deployedseed>317422933</deployedseed>
+    <deployedseed>1519884517</deployedseed>
+    <deployedseed>1697948877</deployedseed>
+    <deployedseed>1374079791</deployedseed>
+    <deployedseed>623482548</deployedseed>
+    <deployedseed>1482310016</deployedseed>
+    <deployedseed>736614171</deployedseed>
+    <deployedseed>481037573</deployedseed>
+    <deployedseed>941119460</deployedseed>
+    <deployedseed>1115243276</deployedseed>
+    <deployedseed>723565334</deployedseed>
+    <deployedseed>1527361744</deployedseed>
+    <deployedseed>454050483</deployedseed>
+    <deployedseed>2049523733</deployedseed>
+    <deployedseed>788738515</deployedseed>
+    <deployedseed>1087944574</deployedseed>
+    <deployedseed>1492954551</deployedseed>
+    <deployedseed>430566628</deployedseed>
+    <deployedseed>1366078114</deployedseed>
+    <deployedseed>1703571741</deployedseed>
+    <deployedseed>1878977049</deployedseed>
+    <deployedseed>1068016871</deployedseed>
+    <deployedseed>1132010128</deployedseed>
+    <deployedseed>1586178936</deployedseed>
+    <deployedseed>652392454</deployedseed>
+    <deployedseed>1059305525</deployedseed>
+    <deployedseed>453550191</deployedseed>
+    <deployedseed>112496485</deployedseed>
+    <deployedseed>1066041139</deployedseed>
+    <deployedseed>1166574393</deployedseed>
+    <deployedseed>394418983</deployedseed>
+    <deployedseed>446193988</deployedseed>
+    <deployedseed>1956912005</deployedseed>
+    <deployedseed>1945588589</deployedseed>
+    <deployedseed>1008900454</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
@@ -310,7 +335,7 @@ The question requires the learner to calculate the area of a rectangle in a real
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>[ prt1-1-T ]</expectedanswernote>
       </expected>
     </qtest>
   </question>

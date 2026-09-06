@@ -5,51 +5,96 @@
       <text>Calculating the area of an amusement park that is pentagonal</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>An amusement park is the shape of a regular pentagon. Each side of the park measures \({@side@}\,\text{m}\) and the height of the pentagon park is \({@height@} \, \text{m}\).  Calculate the total area of the park.</p>
+      <text><![CDATA[<p>An amusement park is the shape of a regular pentagon. Each side of the park measures <b>\({@side@}\text{ m}\)</b> and the height of one of its central triangles is <b>\({@height@}\text{ m}\)</b>. Calculate the total area of the park.</p>
 
+[[jsxgraph width="500px" height="300px"]]
+    var s = {#side#};
+    var h_label = {#height#};
 
+    // Calculate true regular pentagon geometry to avoid visual distortion
+    var angle = Math.PI / 5; // 36 degrees
+    var true_h = (s / 2) / Math.tan(angle);
+    var R = (s / 2) / Math.sin(angle);
 
-<p>\(\text{The area of the park} =\) [[input:ans1]]\(\,\text{m}^2\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+    // Proportional scaling
+    var ratio = 500 / 300;
+    var spanX = R * 2.5;
+    var spanY = (R + true_h) * 1.5;
+    spanX = Math.max(spanX, spanY * ratio);
+    spanY = spanX / ratio;
+
+    var boundingYOffset = (R - true_h) / 2; // Centers the shape properly
+
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [-spanX/2, spanY/2 + boundingYOffset, spanX/2, -spanY/2 + boundingYOffset], 
+        maxboundingbox: [-spanX*1.5, spanY*1.5 + boundingYOffset, spanX*1.5, -spanY*1.5 + boundingYOffset],
+        axis: false, 
+        showCopyright: false,
+        keepAspectRatio: true,
+        showNavigation: true 
+    });
+
+    // Vertices of the regular pentagon
+    var p0 = board.create('point', [0, R], {visible: false});
+    var p1 = board.create('point', [-R * Math.sin(2*angle), R * Math.cos(2*angle)], {visible: false});
+    var p2 = board.create('point', [-s/2, -true_h], {visible: false});
+    var p3 = board.create('point', [s/2, -true_h], {visible: false});
+    var p4 = board.create('point', [R * Math.sin(2*angle), R * Math.cos(2*angle)], {visible: false});
+    var center = board.create('point', [0, 0], {name: '', visible: false});
+
+    // Draw Pentagon
+    board.create('polygon', [p0, p1, p2, p3, p4], {
+        fillColor: '#e8f5e9', 
+        strokeColor: '#2e7d32', 
+        strokeWidth: 2
+    });
+
+    // Draw central triangle
+    board.create('segment', [center, p2], {dash: 2, strokeColor: '#81c784'});
+    board.create('segment', [center, p3], {dash: 2, strokeColor: '#81c784'});
+
+    // Draw height (apothem)
+    var mid = board.create('point', [0, -true_h], {visible: false});
+    board.create('segment', [center, mid], {dash: 2, strokeColor: '#c62828'});
+
+    // Right angle marker
+    var rad = s * 0.15;
+    board.create('angle', [p3, mid, center], {type: 'square', radius: rad, strokeColor: '#c62828', name: ''});
+
+    // Dynamic Labels positioned via pixel gaps
+    var gapY = spanY * 0.02; 
+    var gapX = spanX * 0.02; 
+
+    board.create('text', [0, -true_h - gapY, s + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 16});
+    board.create('text', [gapX, -true_h/2, h_label + " m"], {anchorX: 'left', anchorY: 'middle', fontSize: 16, strokeColor: '#c62828'});
+[[/jsxgraph]]
+
+<p>\(\text{Total Area} = \) [[input:ans1]] <b>\(\text{m}^2\)</b> [[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<p><b>Given:</b><br>
-• Side length = {@side@} m <br>
-• Height of one triangle (from the center to the midpoint of a side) = {@height@} m
-</p>
-
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p><b>Step 1: Find the area of one triangle</b></p>
+<p>A regular pentagon can be split into 5 equal triangles from its center. For one of these triangles:</p>
+<ul>
+  <li>\(\text{Base} = \text{side length} = {@side@}\text{ m}\)</li>
+  <li>\(\text{Height} = {@height@}\text{ m}\)</li>
+</ul>
 <p>
-\(\text{Area of pentagon} = 5 \times \text{area of one triangle}\)
-</p>
-
-<p><b>Find the area of one triangle</b></p>
-
-<p>
-Each triangle has: <br>
-• Base = side of the pentagon = {@side@} m <br>
-• Height = {@height@} m <br>
-\(
-\begin{align}
+\[ \begin{aligned}
 \text{Area of one triangle} &= \frac{1}{2} \times \text{base} \times \text{height} \\
 &= \frac{1}{2} \times {@side@} \times {@height@} \\
-&= {@triangle_area@}\, \text{m}^2
-\end{align}
-\)
+&= {@triangle_area@} \text{ m}^2
+\end{aligned} \]
 </p>
 
-<p><b>Find the total area of the pentagon</b></p>
-
+<p><b>Step 2: Find the total area of the pentagon</b></p>
+<p>Since the pentagon is made of 5 equal triangles, multiply the area of one triangle by 5:</p>
 <p>
-\(
-\begin{align}
-\text{Total area} &= 5 \times \text{area of one triangle} \\
+\[ \begin{aligned}
+\text{Total Area} &= 5 \times \text{area of one triangle} \\
 &= 5 \times {@triangle_area@} \\
-&= {@total_area@}\, \text{m}^2
-\end{align}
-\)
-</p>
-
-<p>
-\(\text{Therefore, the total area of the pentagon-shaped park is } {@total_area@} \text{ m}^2.\)
+&= {@total_area@} \text{ m}^2
+\end{aligned} \]
 </p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -57,28 +102,29 @@ Each triangle has: <br>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Randomize side (even numbers between 12 m and 24 m) */
+      <text>/* Randomize side (even numbers between 12 m and 128 m) */
 side : 2 * (rand(59) + 6);
 
 /* Randomize height (even numbers less than side, between 4 m and side - 2) */
 height : 2 * (rand(floor(side/2 - 1)) + 2);
 
-/* Calculate area of one triangle */
+/* Calculations */
 triangle_area : (1/2) * side * height;
+total_area : 5 * triangle_area;
 
-/* Calculate total area of the pentagon */
-total_area : 5 * triangle_area;</text>
+/* Common Mistakes for PRT */
+m1 : 5 * side * height; /* Forgot the 1/2 in the triangle formula */
+m2 : triangle_area;     /* Forgot to multiply by 5 */
+m3 : side * height;     /* Base x Height (treating one triangle like a rectangle) */</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>\(\text{The side of the park}={@side@}\, \text{m}\)</p>
-<p>\(\text{The height of the park}={@height@}\, \text{m}\)</p>
-<p>\(\text{The total area of the park} ={@total_area @}\, \text{m}^2\)</p>]]></text>
+      <text><![CDATA[<p>Side: {@side@}, Height: {@height@}, Total Area: {@total_area@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -136,7 +182,7 @@ total_area : 5 * triangle_area;</text>
         <description>Checks for the correct area of the Park</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
-        <tans>total_area </tans>
+        <tans>total_area</tans>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
@@ -150,103 +196,188 @@ total_area : 5 * triangle_area;</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
+      <node>
+        <name>1</name>
+        <description>Caught missing 1/2 multiplier</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You multiplied the base and height by 5, but you forgot the \(\frac{1}{2}\) factor for the area of a triangle. The area of one triangle is \(\frac{1}{2} \times \text{base} \times \text{height}\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Caught failure to multiply by 5</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You successfully found the area of just <b>one</b> of the central triangles. Remember, a regular pentagon is made up of <b>5</b> equal triangles. Multiply your answer by 5.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Caught rectangle area confusion</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You multiplied the base by the height. This is the formula for a rectangle, not a pentagon. First find the area of one triangle (\(\frac{1}{2} \times b \times h\)), then multiply by 5.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
     </prt>
-    <deployedseed>186010924</deployedseed>
-    <deployedseed>1564304654</deployedseed>
-    <deployedseed>1154157900</deployedseed>
-    <deployedseed>540929435</deployedseed>
-    <deployedseed>1397138613</deployedseed>
-    <deployedseed>571375666</deployedseed>
-    <deployedseed>1612155045</deployedseed>
-    <deployedseed>1859754314</deployedseed>
-    <deployedseed>1877367945</deployedseed>
-    <deployedseed>413907649</deployedseed>
-    <deployedseed>1788488058</deployedseed>
-    <deployedseed>338987672</deployedseed>
-    <deployedseed>1437160372</deployedseed>
-    <deployedseed>263345802</deployedseed>
-    <deployedseed>492636609</deployedseed>
-    <deployedseed>24299845</deployedseed>
-    <deployedseed>779908321</deployedseed>
-    <deployedseed>1937719920</deployedseed>
-    <deployedseed>974992899</deployedseed>
-    <deployedseed>1359162162</deployedseed>
-    <deployedseed>1123388676</deployedseed>
-    <deployedseed>1700669460</deployedseed>
-    <deployedseed>248839222</deployedseed>
-    <deployedseed>1930375434</deployedseed>
-    <deployedseed>1032306604</deployedseed>
-    <deployedseed>870041193</deployedseed>
-    <deployedseed>435302336</deployedseed>
-    <deployedseed>389601898</deployedseed>
-    <deployedseed>1116109498</deployedseed>
-    <deployedseed>84065636</deployedseed>
-    <deployedseed>1821701990</deployedseed>
-    <deployedseed>1761157030</deployedseed>
-    <deployedseed>999961877</deployedseed>
-    <deployedseed>519312310</deployedseed>
-    <deployedseed>2000747856</deployedseed>
-    <deployedseed>361037671</deployedseed>
-    <deployedseed>422882134</deployedseed>
-    <deployedseed>1220947598</deployedseed>
-    <deployedseed>2119514653</deployedseed>
-    <deployedseed>1390014620</deployedseed>
-    <deployedseed>1946695340</deployedseed>
-    <deployedseed>1525252246</deployedseed>
-    <deployedseed>1019159644</deployedseed>
-    <deployedseed>1646926697</deployedseed>
-    <deployedseed>1819883164</deployedseed>
-    <deployedseed>438560407</deployedseed>
-    <deployedseed>1775187634</deployedseed>
-    <deployedseed>511859166</deployedseed>
-    <deployedseed>801082439</deployedseed>
-    <deployedseed>854756196</deployedseed>
-    <deployedseed>34650985</deployedseed>
-    <deployedseed>960151487</deployedseed>
-    <deployedseed>1166623247</deployedseed>
-    <deployedseed>764262248</deployedseed>
-    <deployedseed>1805018715</deployedseed>
-    <deployedseed>1754696703</deployedseed>
-    <deployedseed>1548104727</deployedseed>
-    <deployedseed>663317899</deployedseed>
-    <deployedseed>750835897</deployedseed>
-    <deployedseed>2125906301</deployedseed>
-    <deployedseed>421583613</deployedseed>
-    <deployedseed>166563103</deployedseed>
-    <deployedseed>125633239</deployedseed>
-    <deployedseed>350052005</deployedseed>
-    <deployedseed>1561739183</deployedseed>
-    <deployedseed>1594898780</deployedseed>
-    <deployedseed>523723027</deployedseed>
-    <deployedseed>1365334145</deployedseed>
-    <deployedseed>1728674447</deployedseed>
-    <deployedseed>1598117031</deployedseed>
-    <deployedseed>881414558</deployedseed>
-    <deployedseed>1092161938</deployedseed>
-    <deployedseed>419275926</deployedseed>
-    <deployedseed>428829347</deployedseed>
-    <deployedseed>87123615</deployedseed>
-    <deployedseed>2110593102</deployedseed>
-    <deployedseed>1090261588</deployedseed>
-    <deployedseed>1814892305</deployedseed>
-    <deployedseed>1919379979</deployedseed>
-    <deployedseed>965770745</deployedseed>
-    <deployedseed>800851194</deployedseed>
-    <deployedseed>76236133</deployedseed>
-    <deployedseed>976968092</deployedseed>
-    <deployedseed>898270112</deployedseed>
-    <deployedseed>1358649687</deployedseed>
-    <deployedseed>936705970</deployedseed>
-    <deployedseed>609685089</deployedseed>
-    <deployedseed>342000743</deployedseed>
-    <deployedseed>490542811</deployedseed>
-    <deployedseed>1295993359</deployedseed>
+    <deployedseed>498267887</deployedseed>
+    <deployedseed>1815087951</deployedseed>
+    <deployedseed>33577200</deployedseed>
+    <deployedseed>2075676544</deployedseed>
+    <deployedseed>1394887165</deployedseed>
+    <deployedseed>125446949</deployedseed>
+    <deployedseed>1387219017</deployedseed>
+    <deployedseed>1481532646</deployedseed>
+    <deployedseed>549734899</deployedseed>
+    <deployedseed>193742273</deployedseed>
+    <deployedseed>161223594</deployedseed>
+    <deployedseed>2010340738</deployedseed>
+    <deployedseed>2142282328</deployedseed>
+    <deployedseed>363125179</deployedseed>
+    <deployedseed>468458206</deployedseed>
+    <deployedseed>1466412880</deployedseed>
+    <deployedseed>1168307156</deployedseed>
+    <deployedseed>1331338041</deployedseed>
+    <deployedseed>193713287</deployedseed>
+    <deployedseed>369756708</deployedseed>
+    <deployedseed>1949970288</deployedseed>
+    <deployedseed>1866925984</deployedseed>
+    <deployedseed>1625652386</deployedseed>
+    <deployedseed>180751406</deployedseed>
+    <deployedseed>1820365071</deployedseed>
+    <deployedseed>101052328</deployedseed>
+    <deployedseed>235332422</deployedseed>
+    <deployedseed>870534127</deployedseed>
+    <deployedseed>265644777</deployedseed>
+    <deployedseed>332544104</deployedseed>
+    <deployedseed>431664193</deployedseed>
+    <deployedseed>901452578</deployedseed>
+    <deployedseed>1311191472</deployedseed>
+    <deployedseed>1416533498</deployedseed>
+    <deployedseed>422070417</deployedseed>
+    <deployedseed>2023989727</deployedseed>
+    <deployedseed>1875186831</deployedseed>
+    <deployedseed>381045434</deployedseed>
+    <deployedseed>880601152</deployedseed>
+    <deployedseed>2009596354</deployedseed>
+    <deployedseed>1062534463</deployedseed>
+    <deployedseed>1176561882</deployedseed>
+    <deployedseed>1301100678</deployedseed>
+    <deployedseed>1852080584</deployedseed>
+    <deployedseed>1777359239</deployedseed>
+    <deployedseed>734949658</deployedseed>
+    <deployedseed>862670185</deployedseed>
+    <deployedseed>551705546</deployedseed>
+    <deployedseed>535594785</deployedseed>
+    <deployedseed>1041311041</deployedseed>
+    <deployedseed>16436989</deployedseed>
+    <deployedseed>1209627481</deployedseed>
+    <deployedseed>1787554350</deployedseed>
+    <deployedseed>2054306026</deployedseed>
+    <deployedseed>952958085</deployedseed>
+    <deployedseed>94361613</deployedseed>
+    <deployedseed>1378864917</deployedseed>
+    <deployedseed>1865270901</deployedseed>
+    <deployedseed>262229224</deployedseed>
+    <deployedseed>1889814336</deployedseed>
+    <deployedseed>514021060</deployedseed>
+    <deployedseed>1014218857</deployedseed>
+    <deployedseed>57202141</deployedseed>
+    <deployedseed>1094845152</deployedseed>
+    <deployedseed>668785354</deployedseed>
+    <deployedseed>2001069689</deployedseed>
+    <deployedseed>1845311819</deployedseed>
+    <deployedseed>1164309588</deployedseed>
+    <deployedseed>1090695916</deployedseed>
+    <deployedseed>539383245</deployedseed>
+    <deployedseed>1791100399</deployedseed>
+    <deployedseed>1452522697</deployedseed>
+    <deployedseed>1661572010</deployedseed>
+    <deployedseed>530852644</deployedseed>
+    <deployedseed>474711558</deployedseed>
+    <deployedseed>1484676879</deployedseed>
+    <deployedseed>1925373530</deployedseed>
+    <deployedseed>1966779474</deployedseed>
+    <deployedseed>1221968746</deployedseed>
+    <deployedseed>1586107793</deployedseed>
+    <deployedseed>1867777262</deployedseed>
+    <deployedseed>1294950721</deployedseed>
+    <deployedseed>1612445735</deployedseed>
+    <deployedseed>298643126</deployedseed>
+    <deployedseed>825272228</deployedseed>
+    <deployedseed>831762936</deployedseed>
+    <deployedseed>428913358</deployedseed>
+    <deployedseed>1912199123</deployedseed>
+    <deployedseed>1747060025</deployedseed>
+    <deployedseed>249775401</deployedseed>
+    <deployedseed>161052482</deployedseed>
+    <deployedseed>814143939</deployedseed>
+    <deployedseed>64624095</deployedseed>
+    <deployedseed>575343308</deployedseed>
+    <deployedseed>73521416</deployedseed>
+    <deployedseed>1314722356</deployedseed>
+    <deployedseed>713920665</deployedseed>
+    <deployedseed>984851570</deployedseed>
+    <deployedseed>1786781309</deployedseed>
+    <deployedseed>1601917054</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
@@ -258,7 +389,7 @@ total_area : 5 * triangle_area;</text>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>[ prt1-1-T ]</expectedanswernote>
       </expected>
     </qtest>
   </question>

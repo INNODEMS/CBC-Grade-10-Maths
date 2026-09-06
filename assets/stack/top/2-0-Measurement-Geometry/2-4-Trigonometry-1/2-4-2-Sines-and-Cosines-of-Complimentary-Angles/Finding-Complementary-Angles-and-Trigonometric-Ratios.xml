@@ -6,7 +6,7 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
-Angles \({@letter_1@}\) and \({@letter_2@}\) are complementary. If \( {@letter_1@}\) = {@fraction@}\({@letter_2@}\) , calculate the following:
+Angles \({@letter_1@}\) and \({@letter_2@}\) are complementary. If \( {@letter_1@}\) = {@fraction@}\({@letter_2@}\) ,
 </p>
 
 <ol type="a">
@@ -20,7 +20,7 @@ Angles \({@letter_1@}\) and \({@letter_2@}\) are complementary. If \( {@letter_1
     </li>
     <li>
         <p>
-        Using a calculator, find the following correct to four significant figures:
+        Using a calculator, find the following correct to four decimal places:
         </p>
         <ol type="i">
             <li>\(\sin\, {@letter_1@}=\)[[input:ans3]][[validation:ans3]]</li>
@@ -34,15 +34,15 @@ Angles \({@letter_1@}\) and \({@letter_2@}\) are complementary. If \( {@letter_1
       <text><![CDATA[<p>When we say {@letter_1@} and {@letter_2@} are complementary, it implies that \({@letter_1@}+{@letter_2@}=90^\circ\).<br>
 Also, we have \({@letter_1@}={@fraction@}{@letter_2@}\).</p>
 
-<p>First, write \({@letter_1@}\) in terms of \({@letter_2@}\), that is,<br>
-\({@eq_1@}<br>
-{@eq_2@}</p>
+<p>First, write \({@letter_2@}\) in terms of \({@letter_1@}\), that is,<br>
+\({@eq_1@}\)<br>
+\({@eq_2@}\)</p>
 
 <p>Since \({@letter_1@}+{@letter_2@}=90^\circ\), substitute \({@eq_2@}\):<br>
 \({@frac_2*letter_1@}+{@letter_1@}=90\)<br>
-{@eq_5@}<br>
+\({@eq_5@}\)<br>
 \(\quad {@letter_1@}=\frac{90}{{@coeficient@}}\)<br>
-\(\qquad ={@Ta_1@}\)</p>
+\(\qquad ={@Ta_1@}^\circ\)</p>
 
 <p>Therefore,<br>
 <ol type='i'>
@@ -51,7 +51,7 @@ Also, we have \({@letter_1@}={@fraction@}{@letter_2@}\).</p>
 <p>\(\angle\,{@letter_2@}\)</p>
 <p>
 \(\begin{align}
-\angle \,{@letter_2@}&=90-{@Ta_1@}^\circ\\
+\angle \,{@letter_2@}&=90^\circ-{@Ta_1@}^\circ\\
 &={@Ta_2@}^\circ
 \end{align}\)
 </p>
@@ -59,43 +59,44 @@ Also, we have \({@letter_1@}={@fraction@}{@letter_2@}\).</p>
 </ol>
 </p>
 
-<p>Use your calculator to find both \(\sin\,{@Ta_1@}^\circ\) and \(\cos\,{@Ta_1@}^\circ\), and write the answers correct to 4 significant figures.<br>
+<p>Use your calculator to find both \(\sin\,{@Ta_1@}^\circ\) and \(\cos\,{@Ta_2@}^\circ\), and write the answers correct to 4 significant figures.<br>
 Therefore,
 <ol type='i'>
 <li>\(\sin\,{@Ta_1@}^\circ={@an_1@}\)</li>
 <li>\(\cos\,{@Ta_2@}^\circ={@an_2@}\)</li>
 </ol>
-</p>]]></text>
+</p>
+<p><strong>Notice:</strong> Because the angles are complementary, \(\sin\,{@Ta_1@}^\circ\) is exactly equal to \(\cos\,{@Ta_2@}^\circ\).</p>]]></text>
     </generalfeedback>
-    <defaultgrade>15</defaultgrade>
+    <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text>letter_1: rand([C,D,E,F,G,H,I,J,K,M]);
-letter_2:rand([N,O,Q,R,U,W,X,Y,Z]);
-frac:rand_with_step(1,1,1);
-frac_2:rand_with_step(2,20,2);
-fraction:frac/frac_2;
-eq_1:letter_1=fraction*letter_2;
-eq_2:letter_2=frac_2*letter_1;
-simp:false;
-eq_3:letter_1+letter_2=90;
-eq_4:frac_2*letter_1+letter_1=90;
-simp:true;
-eq_5:frac_2*letter_1+letter_1=90;
-coeficient:frac_2+1;
-eq_6:90/coeficient;
-Ta_1:round(eq_6);
-Ta_2:90-Ta_1;
+letter_2: rand([N,O,Q,R,U,W,X,Y,Z]);
+frac: 1;
+/* Only pick denominators that yield a whole number when dividing 90 by (frac_2 + 1) */
+frac_2: rand([2, 4, 8, 14]); 
+fraction: frac/frac_2;
+eq_1: letter_1=fraction*letter_2;
+eq_2: letter_2=frac_2*letter_1;
+simp: false;
+eq_3: letter_1+letter_2=90;
+eq_4: frac_2*letter_1+letter_1=90;
+simp: true;
+eq_5: frac_2*letter_1+letter_1=90;
+coeficient: frac_2+1;
+Ta_1: 90/coeficient; /* round() is no longer needed */
+Ta_2: 90-Ta_1;
 /*Part b of the question*/
-ans_1:sin(Ta_1*pi/180);
-an_1:decimalplaces(ans_1,4);
-ans_2:cos(Ta_1*pi/180);
-an_2:decimalplaces(ans_2,4);</text>
+ans_1: sin(Ta_1*pi/180);
+an_1: dispdp(ans_1,4);
+ans_2: cos(Ta_2*pi/180); /* Fixed: Was calculating cos(Ta_1) */
+an_2: dispdp(ans_2,4);</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -222,7 +223,7 @@ an_2:decimalplaces(ans_2,4);</text>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
+        <truescore>0.5</truescore>
         <truepenalty/>
         <truenextnode>1</truenextnode>
         <trueanswernote>prt1-1-T</trueanswernote>
@@ -232,10 +233,10 @@ an_2:decimalplaces(ans_2,4);</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text>Your value for \(\angle {@letter_1@}\) is incorrect.</text>
         </falsefeedback>
       </node>
       <node>
@@ -247,7 +248,7 @@ an_2:decimalplaces(ans_2,4);</text>
         <testoptions/>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
-        <truescore>0</truescore>
+        <truescore>0.5</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
@@ -260,7 +261,7 @@ an_2:decimalplaces(ans_2,4);</text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-2-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text>Your value for \(\angle {@letter_2@}\) is incorrect.</text>
         </falsefeedback>
       </node>
     </prt>
@@ -275,13 +276,13 @@ an_2:decimalplaces(ans_2,4);</text>
       <node>
         <name>0</name>
         <description>Checks for the corect value computed in the calculator.</description>
-        <answertest>NumAbsolute</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans3</sans>
-        <tans>an_1</tans>
+        <tans>ans_1</tans>
         <testoptions>4</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
+        <truescore>0.5</truescore>
         <truepenalty/>
         <truenextnode>1</truenextnode>
         <trueanswernote>prt2-1-T</trueanswernote>
@@ -291,22 +292,22 @@ an_2:decimalplaces(ans_2,4);</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt2-1-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text>Your calculation for \(\sin {@letter_1@}^\circ\) is incorrect.</text>
         </falsefeedback>
       </node>
       <node>
         <name>1</name>
         <description>Checks for the corect value computed in the calculator.</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans4</sans>
-        <tans>an_2</tans>
-        <testoptions/>
+        <tans>ans_2</tans>
+        <testoptions>4</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
-        <truescore>0</truescore>
+        <truescore>0.5</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt2-2-T</trueanswernote>
@@ -319,7 +320,7 @@ an_2:decimalplaces(ans_2,4);</text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt2-2-F</falseanswernote>
         <falsefeedback format="html">
-          <text/>
+          <text>Your calculation for \(\cos {@letter_2@}^\circ\) is incorrect.</text>
         </falsefeedback>
       </node>
     </prt>
@@ -333,6 +334,82 @@ an_2:decimalplaces(ans_2,4);</text>
     <deployedseed>644243532</deployedseed>
     <deployedseed>484132993</deployedseed>
     <deployedseed>496402449</deployedseed>
+    <deployedseed>559698325</deployedseed>
+    <deployedseed>1078371541</deployedseed>
+    <deployedseed>1047302120</deployedseed>
+    <deployedseed>1776651278</deployedseed>
+    <deployedseed>1394542424</deployedseed>
+    <deployedseed>1897513368</deployedseed>
+    <deployedseed>1054937381</deployedseed>
+    <deployedseed>17485283</deployedseed>
+    <deployedseed>142470031</deployedseed>
+    <deployedseed>1432156303</deployedseed>
+    <deployedseed>598878401</deployedseed>
+    <deployedseed>1225060345</deployedseed>
+    <deployedseed>1157804439</deployedseed>
+    <deployedseed>1179649772</deployedseed>
+    <deployedseed>1396505402</deployedseed>
+    <deployedseed>501081548</deployedseed>
+    <deployedseed>1850365025</deployedseed>
+    <deployedseed>1228590386</deployedseed>
+    <deployedseed>1561762746</deployedseed>
+    <deployedseed>876443295</deployedseed>
+    <deployedseed>784458271</deployedseed>
+    <deployedseed>1601832106</deployedseed>
+    <deployedseed>1716284061</deployedseed>
+    <deployedseed>201411463</deployedseed>
+    <deployedseed>1332468508</deployedseed>
+    <deployedseed>1746399857</deployedseed>
+    <deployedseed>680870465</deployedseed>
+    <deployedseed>1000134962</deployedseed>
+    <deployedseed>1370922448</deployedseed>
+    <deployedseed>929294030</deployedseed>
+    <deployedseed>65106470</deployedseed>
+    <deployedseed>1758242948</deployedseed>
+    <deployedseed>2136582747</deployedseed>
+    <deployedseed>1697541546</deployedseed>
+    <deployedseed>1084626956</deployedseed>
+    <deployedseed>1721729363</deployedseed>
+    <deployedseed>1073472835</deployedseed>
+    <deployedseed>2141616708</deployedseed>
+    <deployedseed>259976915</deployedseed>
+    <deployedseed>590643874</deployedseed>
+    <deployedseed>347392091</deployedseed>
+    <deployedseed>1841797955</deployedseed>
+    <deployedseed>724273637</deployedseed>
+    <deployedseed>2019312817</deployedseed>
+    <deployedseed>1474612261</deployedseed>
+    <deployedseed>2084729454</deployedseed>
+    <deployedseed>918727741</deployedseed>
+    <deployedseed>1776299407</deployedseed>
+    <deployedseed>1092865837</deployedseed>
+    <deployedseed>1658769141</deployedseed>
+    <deployedseed>595797854</deployedseed>
+    <deployedseed>966399627</deployedseed>
+    <deployedseed>659113360</deployedseed>
+    <deployedseed>880733069</deployedseed>
+    <deployedseed>944251707</deployedseed>
+    <deployedseed>1662430013</deployedseed>
+    <deployedseed>639064594</deployedseed>
+    <deployedseed>1466709014</deployedseed>
+    <deployedseed>2091481601</deployedseed>
+    <deployedseed>1632991310</deployedseed>
+    <deployedseed>646920566</deployedseed>
+    <deployedseed>900460925</deployedseed>
+    <deployedseed>1700799043</deployedseed>
+    <deployedseed>1268022297</deployedseed>
+    <deployedseed>1879254100</deployedseed>
+    <deployedseed>883225486</deployedseed>
+    <deployedseed>1095992335</deployedseed>
+    <deployedseed>1334831539</deployedseed>
+    <deployedseed>1528944517</deployedseed>
+    <deployedseed>977156498</deployedseed>
+    <deployedseed>76771976</deployedseed>
+    <deployedseed>1563999735</deployedseed>
+    <deployedseed>590244404</deployedseed>
+    <deployedseed>444420397</deployedseed>
+    <deployedseed>1574248529</deployedseed>
+    <deployedseed>2029356402</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>

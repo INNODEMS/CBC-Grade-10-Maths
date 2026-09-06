@@ -18,11 +18,6 @@
 <p></p>
 <li>{@nums[5]@}: [[input:ans5]] [[validation:ans5]] [[feedback:prt5]]</li>
 <p></p>
-<li>{@nums[6]@}: [[input:ans6]] [[validation:ans6]] [[feedback:prt6]]</li>
-<p></p>
-<li>{@nums[7]@}: [[input:ans7]] [[validation:ans7]] [[feedback:prt7]]</li>
-<p></p>
-<li>{@nums[8]@}: [[input:ans8]] [[validation:ans8]] [[feedback:prt8]]</li>
 </ol>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
@@ -70,23 +65,7 @@ A number is <strong>odd</strong> if it is not divisible by 2, meaning that when 
     <td><strong>{@t_ans5@}</strong></td>
   </tr>
 
-  <tr>
-    <td>{@nums[6]@}</td>
-    <td>{@nums[6]@} ÷ 2 = {@floor(nums[6]/2)@}, remainder {@mod(nums[6],2)@}</td>
-    <td><strong>{@t_ans6@}</strong></td>
-  </tr>
 
-  <tr>
-    <td>{@nums[7]@}</td>
-    <td>{@nums[7]@} ÷ 2 = {@floor(nums[7]/2)@}, remainder {@mod(nums[7],2)@}</td>
-    <td><strong>{@t_ans7@}</strong></td>
-  </tr>
-
-  <tr>
-    <td>{@nums[8]@}</td>
-    <td>{@nums[8]@} ÷ 2 = {@floor(nums[8]/2)@}, remainder {@mod(nums[8],2)@}</td>
-    <td><strong>{@t_ans8@}</strong></td>
-  </tr>
 </table>
 <p></p>
 <p><strong>Recall:</strong></p>
@@ -100,7 +79,7 @@ A number is <strong>odd</strong> if it is not divisible by 2, meaning that when 
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2026010500</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text><![CDATA[/* Generate 8 random integers */
@@ -137,23 +116,25 @@ m_ans5: [
 ];
 t_ans5: if mod(nums[5], 2) = 0 then "Even" else "Odd";
 
-m_ans6: [
+
+/* m_ans6: [
     ["Even", is(mod(nums[6], 2) = 0)],
     ["Odd", is(mod(nums[6], 2) = 1)]
 ];
 t_ans6: if mod(nums[6], 2) = 0 then "Even" else "Odd";
-
 m_ans7: [
     ["Even", is(mod(nums[7], 2) = 0)],
     ["Odd", is(mod(nums[7], 2) = 1)]
 ];
 t_ans7: if mod(nums[7], 2) = 0 then "Even" else "Odd";
-
 m_ans8: [
     ["Even", is(mod(nums[8], 2) = 0)],
     ["Odd", is(mod(nums[8], 2) = 1)]
 ];
 t_ans8: if mod(nums[8], 2) = 0 then "Even" else "Odd";
+ */
+
+
 
 /*mistakes*/
 /* Wrong answer feedback for each number */
@@ -181,12 +162,10 @@ fb_wrong5: if t_ans5 = "Even" then
     sconcat("Incorrect. ", nums[5], " is EVEN. Look at the last digit ", mod(nums[5],10), ": 0,2,4,6,8 are even digits.") 
 else 
     sconcat("Incorrect. ", nums[5], " is ODD. Look at the last digit ", mod(nums[5],10), ": 1,3,5,7,9 are odd digits.");
-
-fb_wrong6: if t_ans6 = "Even" then 
+/* fb_wrong6: if t_ans6 = "Even" then 
     sconcat("Incorrect. ", nums[6], " is EVEN. Look at the last digit ", mod(nums[6],10), ": 0,2,4,6,8 are even digits.") 
 else 
     sconcat("Incorrect. ", nums[6], " is ODD. Look at the last digit ", mod(nums[6],10), ": 1,3,5,7,9 are odd digits.");
-
 fb_wrong7: if t_ans7 = "Even" then 
     sconcat("Incorrect. ", nums[7], " is EVEN. Look at the last digit ", mod(nums[7],10), ": 0,2,4,6,8 are even digits.") 
 else 
@@ -195,7 +174,9 @@ else
 fb_wrong8: if t_ans8 = "Even" then 
     sconcat("Incorrect. ", nums[8], " is EVEN. Look at the last digit ", mod(nums[8],10), ": 0,2,4,6,8 are even digits.") 
 else 
-    sconcat("Incorrect. ", nums[8], " is ODD. Look at the last digit ", mod(nums[8],10), ": 1,3,5,7,9 are odd digits.");
+    sconcat("Incorrect. ", nums[8], " is ODD. Look at the last digit ", mod(nums[8],10), ": 1,3,5,7,9 are odd digits.");*/
+
+
 ]]></text>
     </questionvariables>
     <specificfeedback format="html">
@@ -315,60 +296,6 @@ n8:{@nums[8]@}-{@t_ans8@}}
       <name>ans5</name>
       <type>dropdown</type>
       <tans>m_ans5</tans>
-      <boxsize>15</boxsize>
-      <strictsyntax>1</strictsyntax>
-      <insertstars>0</insertstars>
-      <syntaxhint/>
-      <syntaxattribute>0</syntaxattribute>
-      <forbidwords/>
-      <allowwords/>
-      <forbidfloat>1</forbidfloat>
-      <requirelowestterms>0</requirelowestterms>
-      <checkanswertype>0</checkanswertype>
-      <mustverify>0</mustverify>
-      <showvalidation>0</showvalidation>
-      <options/>
-    </input>
-    <input>
-      <name>ans6</name>
-      <type>dropdown</type>
-      <tans>m_ans6</tans>
-      <boxsize>15</boxsize>
-      <strictsyntax>1</strictsyntax>
-      <insertstars>0</insertstars>
-      <syntaxhint/>
-      <syntaxattribute>0</syntaxattribute>
-      <forbidwords/>
-      <allowwords/>
-      <forbidfloat>1</forbidfloat>
-      <requirelowestterms>0</requirelowestterms>
-      <checkanswertype>0</checkanswertype>
-      <mustverify>0</mustverify>
-      <showvalidation>0</showvalidation>
-      <options/>
-    </input>
-    <input>
-      <name>ans7</name>
-      <type>dropdown</type>
-      <tans>m_ans7</tans>
-      <boxsize>15</boxsize>
-      <strictsyntax>1</strictsyntax>
-      <insertstars>0</insertstars>
-      <syntaxhint/>
-      <syntaxattribute>0</syntaxattribute>
-      <forbidwords/>
-      <allowwords/>
-      <forbidfloat>1</forbidfloat>
-      <requirelowestterms>0</requirelowestterms>
-      <checkanswertype>0</checkanswertype>
-      <mustverify>0</mustverify>
-      <showvalidation>0</showvalidation>
-      <options/>
-    </input>
-    <input>
-      <name>ans8</name>
-      <type>dropdown</type>
-      <tans>m_ans8</tans>
       <boxsize>15</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -553,108 +480,6 @@ n8:{@nums[8]@}-{@t_ans8@}}
         </falsefeedback>
       </node>
     </prt>
-    <prt>
-      <name>prt6</name>
-      <value>1.0000000</value>
-      <autosimplify>1</autosimplify>
-      <feedbackstyle>1</feedbackstyle>
-      <feedbackvariables>
-        <text/>
-      </feedbackvariables>
-      <node>
-        <name>0</name>
-        <description>Checks for correct classification of the number</description>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans6</sans>
-        <tans>t_ans6</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
-        <truepenalty/>
-        <truenextnode>-1</truenextnode>
-        <trueanswernote>prt6-1-T</trueanswernote>
-        <truefeedback format="html">
-          <text/>
-        </truefeedback>
-        <falsescoremode>=</falsescoremode>
-        <falsescore>0</falsescore>
-        <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt6-1-F</falseanswernote>
-        <falsefeedback format="html">
-          <text>{@fb_wrong6@}</text>
-        </falsefeedback>
-      </node>
-    </prt>
-    <prt>
-      <name>prt7</name>
-      <value>1.0000000</value>
-      <autosimplify>1</autosimplify>
-      <feedbackstyle>1</feedbackstyle>
-      <feedbackvariables>
-        <text/>
-      </feedbackvariables>
-      <node>
-        <name>0</name>
-        <description>Checks for correct classification of the number</description>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans7</sans>
-        <tans>t_ans7</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
-        <truepenalty/>
-        <truenextnode>-1</truenextnode>
-        <trueanswernote>prt7-1-T</trueanswernote>
-        <truefeedback format="html">
-          <text/>
-        </truefeedback>
-        <falsescoremode>=</falsescoremode>
-        <falsescore>0</falsescore>
-        <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt7-1-F</falseanswernote>
-        <falsefeedback format="html">
-          <text>{@fb_wrong7@}</text>
-        </falsefeedback>
-      </node>
-    </prt>
-    <prt>
-      <name>prt8</name>
-      <value>1.0000000</value>
-      <autosimplify>1</autosimplify>
-      <feedbackstyle>1</feedbackstyle>
-      <feedbackvariables>
-        <text/>
-      </feedbackvariables>
-      <node>
-        <name>0</name>
-        <description>Checks for correct classification of the number</description>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans8</sans>
-        <tans>t_ans8</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
-        <truepenalty/>
-        <truenextnode>-1</truenextnode>
-        <trueanswernote>prt8-1-T</trueanswernote>
-        <truefeedback format="html">
-          <text/>
-        </truefeedback>
-        <falsescoremode>=</falsescoremode>
-        <falsescore>0</falsescore>
-        <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt8-1-F</falseanswernote>
-        <falsefeedback format="html">
-          <text>{@fb_wrong8@}</text>
-        </falsefeedback>
-      </node>
-    </prt>
     <deployedseed>1542643273</deployedseed>
     <deployedseed>18109183</deployedseed>
     <deployedseed>1251031222</deployedseed>
@@ -734,18 +559,6 @@ n8:{@nums[8]@}-{@t_ans8@}}
         <name>ans5</name>
         <value>first(mcq_correct(m_ans5))</value>
       </testinput>
-      <testinput>
-        <name>ans6</name>
-        <value>first(mcq_correct(m_ans6))</value>
-      </testinput>
-      <testinput>
-        <name>ans7</name>
-        <value>first(mcq_correct(m_ans7))</value>
-      </testinput>
-      <testinput>
-        <name>ans8</name>
-        <value>first(mcq_correct(m_ans8))</value>
-      </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
@@ -775,24 +588,6 @@ n8:{@nums[8]@}-{@t_ans8@}}
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt5-1-T</expectedanswernote>
-      </expected>
-      <expected>
-        <name>prt6</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt6-1-T</expectedanswernote>
-      </expected>
-      <expected>
-        <name>prt7</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt7-1-T</expectedanswernote>
-      </expected>
-      <expected>
-        <name>prt8</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt8-1-T</expectedanswernote>
       </expected>
     </qtest>
   </question>

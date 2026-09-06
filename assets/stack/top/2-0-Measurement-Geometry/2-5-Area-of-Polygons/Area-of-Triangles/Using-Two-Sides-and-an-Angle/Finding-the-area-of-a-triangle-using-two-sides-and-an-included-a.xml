@@ -6,47 +6,98 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
-Find the area of a triangle with sides {@a@} cm and {@b@} cm and included angle {@C@}°.
+Find the area of the triangle below with sides <b>{@a@} cm</b> and <b>{@b@} cm</b> and an included angle of <b>{@C_deg@}&deg;</b>.
 </p>
+
+[[jsxgraph]]
+    var a = {#a#};
+    var b = {#b#};
+    var C_deg = {#C_deg#};
+    var C_rad = C_deg * Math.PI / 180;
+    
+    // Calculate triangle vertices
+    var p1x = 0; var p1y = 0;
+    var p2x = b; var p2y = 0;
+    var p3x = a * Math.cos(C_rad);
+    var p3y = a * Math.sin(C_rad);
+    
+    // Dynamic Bounding Box to handle both acute and obtuse angles
+    var minX = Math.min(-2, p3x - 2);
+    var maxX = Math.max(b + 3, p3x + 3);
+    var maxY = p3y + 3;
+    var minY = -2;
+    
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [minX, maxY, maxX, minY],
+        keepAspectRatio: true,
+        showNavigation: false,
+        showCopyright: false
+    });
+    
+    var p1 = board.create('point', [p1x, p1y], {visible: false});
+    var p2 = board.create('point', [p2x, p2y], {visible: false});
+    var p3 = board.create('point', [p3x, p3y], {visible: false});
+    
+    // Draw Triangle
+    var poly = board.create('polygon', [p1, p2, p3], {
+        fillColor: '#e0f7fa', fillOpacity: 0.6, 
+        borders: {strokeColor: '#006064', strokeWidth: 2.5}
+    });
+    
+    // Draw Included Angle
+    var ang = board.create('angle', [p2, p1, p3], {
+        radius: Math.min(a, b) * 0.3, 
+        name: C_deg + "°",
+        fillColor: '#80deea', fillOpacity: 0.8, strokeColor: '#006064'
+    });
+    
+    // Clean Text Labels
+    board.create('text', [b/2, -0.5, b + " cm"], {anchorX: 'middle', anchorY: 'top', fontSize: 15});
+    board.create('text', [p3x/2 - 0.5, p3y/2 + 0.5, a + " cm"], {anchorX: 'right', anchorY: 'bottom', fontSize: 15});
+[[/jsxgraph]]
 
 <p>
 Give your answer correct to <b>2 decimal places</b>.
 </p>
 
 <p>
-Area = [[input:ans1]] \(\text{cm}^2\) [[validation:ans1]] [[feedback:prt1]]
+Area = [[input:ans1]] <b>\(\text{cm}^2\)</b> [[validation:ans1]] [[feedback:prt1]]
 </p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
 
 <p>
-Step 1: Use the formula:
+<strong>Step 1: Use the sine rule for the area of a triangle.</strong>
 </p>
 
 <p>
 \[
-A = \frac{1}{2}ab\sin C
+\text{Area} = \frac{1}{2}ab\sin C
 \]
 </p>
 
 <p>
-Step 2: Substitute the values:
+<strong>Step 2: Substitute the known values.</strong>
+</p>
+
+<p>
+The two known sides are \(a = {@a@}\) and \(b = {@b@}\), and the included angle is \(C = {@C_deg@}^\circ\).
 </p>
 
 <p>
 \[
-A = \frac{1}{2} \times {@a@} \times {@b@} \times \sin {@C@}^\circ
+\text{Area} = \frac{1}{2} \times {@a@} \times {@b@} \times \sin({@C_deg@}^\circ)
 \]
 </p>
 
 <p>
-Step 3: Evaluate:
+<strong>Step 3: Evaluate.</strong>
 </p>
 
 <p>
 \[
-A = {@A_round@}\text{ cm}^2
+\text{Area} \approx {@Area_disp@} \text{ cm}^2
 \]
 </p>]]></text>
     </generalfeedback>
@@ -55,36 +106,33 @@ A = {@A_round@}\text{ cm}^2
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2026010500</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text>/* Sides */
 a: rand(6) + 4;
 b: rand(6) + 5;
 
-/* Angle in degrees */
-angles: [30,45,60];
-C: angles[rand(3) + 1];
+/* Angle */
+C_deg: rand([30, 45, 60, 120, 135, 150]);
+C_rad: C_deg * %pi / 180;
 
-/* Convert to radians */
-Cr: C*%pi/180;
+/* Area calculated natively as float */
+Area_float: float(0.5 * a * b * sin(C_rad));
 
-/* Area */
-A: (1/2)*a*b*sin(Cr);
+/* Display variable formatted to exactly 2 decimal places */
+Area_disp: dispdp(Area_float, 2);
 
-/* Rounded */
-A_round: float(round(A*100)/100);
-
-/* Mistakes */
-m1: a*b*sin(Cr);
-m2: (1/2)*a*b*cos(Cr);
-m3: (1/2)*(a+b)*sin(Cr);</text>
+/* Mistakes evaluated as floats */
+m1: float(a * b * sin(C_rad));
+m2: float(0.5 * a * b * abs(cos(C_rad)));
+m3: float(0.5 * (a + b) * sin(C_rad));</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@A_round@}</text>
+      <text><![CDATA[<p>a: {@a@}, b: {@b@}, C: {@C_deg@}, Area: {@Area_disp@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
@@ -121,7 +169,7 @@ The question requires the learner to calculate the area of a triangle using the 
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>A_round</tans>
+      <tans>Area_disp</tans>
       <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -147,10 +195,10 @@ The question requires the learner to calculate the area of a triangle using the 
       <node>
         <name>0</name>
         <description>checks for the correct answer</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
-        <tans>A_round</tans>
-        <testoptions/>
+        <tans>Area_float</tans>
+        <testoptions>2</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -172,10 +220,10 @@ The question requires the learner to calculate the area of a triangle using the 
       <node>
         <name>1</name>
         <description>Missing ½</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m1</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -183,7 +231,7 @@ The question requires the learner to calculate the area of a triangle using the 
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text>Remember the formula includes ½</text>
+          <text><![CDATA[<p>Remember, the formula for the area of a triangle requires you to multiply by \(\frac{1}{2}\).</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -197,10 +245,10 @@ The question requires the learner to calculate the area of a triangle using the 
       <node>
         <name>2</name>
         <description>used cosine</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m2</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -208,7 +256,7 @@ The question requires the learner to calculate the area of a triangle using the 
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-3-T</trueanswernote>
         <truefeedback format="html">
-          <text>Use sine of the included angle, not cosine.</text>
+          <text><![CDATA[<p>You used cosine. The area formula requires the <strong>sine</strong> of the included angle: \(\frac{1}{2}ab\sin C\).</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -221,11 +269,11 @@ The question requires the learner to calculate the area of a triangle using the 
       </node>
       <node>
         <name>3</name>
-        <description>Wrong expression</description>
-        <answertest>AlgEquiv</answertest>
+        <description>Wrong expression (addition instead of multiplication)</description>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m3</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -233,7 +281,7 @@ The question requires the learner to calculate the area of a triangle using the 
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-4-T</trueanswernote>
         <truefeedback format="html">
-          <text>Use the product of the two sides, not their sum</text>
+          <text><![CDATA[<p>You added the two side lengths together. The formula requires the <strong>product</strong> of the two sides: \(\frac{1}{2} \times a \times b \times \sin C\).</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -241,62 +289,72 @@ The question requires the learner to calculate the area of a triangle using the 
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-4-F</falseanswernote>
         <falsefeedback format="html">
-          <text>Use 1/2 ab Sin C</text>
+          <text/>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>1866367407</deployedseed>
-    <deployedseed>622686252</deployedseed>
-    <deployedseed>2059529496</deployedseed>
-    <deployedseed>370027447</deployedseed>
-    <deployedseed>2032579982</deployedseed>
-    <deployedseed>29367769</deployedseed>
-    <deployedseed>926084747</deployedseed>
-    <deployedseed>1027443519</deployedseed>
-    <deployedseed>1745993297</deployedseed>
-    <deployedseed>45723803</deployedseed>
-    <deployedseed>753590681</deployedseed>
-    <deployedseed>1571590088</deployedseed>
-    <deployedseed>221641577</deployedseed>
-    <deployedseed>2065657315</deployedseed>
-    <deployedseed>467986432</deployedseed>
-    <deployedseed>1874869537</deployedseed>
-    <deployedseed>1603691300</deployedseed>
-    <deployedseed>781567657</deployedseed>
-    <deployedseed>2105342696</deployedseed>
-    <deployedseed>1855795732</deployedseed>
-    <deployedseed>1205333177</deployedseed>
-    <deployedseed>1680451996</deployedseed>
-    <deployedseed>326917606</deployedseed>
-    <deployedseed>935315130</deployedseed>
-    <deployedseed>1219013814</deployedseed>
-    <deployedseed>1405410811</deployedseed>
-    <deployedseed>1993487118</deployedseed>
-    <deployedseed>1110873511</deployedseed>
-    <deployedseed>100842407</deployedseed>
-    <deployedseed>2078394543</deployedseed>
-    <deployedseed>1870013856</deployedseed>
-    <deployedseed>1049245140</deployedseed>
-    <deployedseed>851918929</deployedseed>
-    <deployedseed>1514906872</deployedseed>
-    <deployedseed>51605187</deployedseed>
-    <deployedseed>1000605375</deployedseed>
-    <deployedseed>1410317013</deployedseed>
-    <deployedseed>1732837767</deployedseed>
-    <deployedseed>443703423</deployedseed>
-    <deployedseed>1556533006</deployedseed>
+    <deployedseed>1107839082</deployedseed>
+    <deployedseed>2072928253</deployedseed>
+    <deployedseed>1375833527</deployedseed>
+    <deployedseed>610641191</deployedseed>
+    <deployedseed>1345259980</deployedseed>
+    <deployedseed>389520153</deployedseed>
+    <deployedseed>400334539</deployedseed>
+    <deployedseed>578656043</deployedseed>
+    <deployedseed>717131728</deployedseed>
+    <deployedseed>227223981</deployedseed>
+    <deployedseed>1214313650</deployedseed>
+    <deployedseed>391875102</deployedseed>
+    <deployedseed>335823016</deployedseed>
+    <deployedseed>397554682</deployedseed>
+    <deployedseed>168029236</deployedseed>
+    <deployedseed>1831148845</deployedseed>
+    <deployedseed>1930543653</deployedseed>
+    <deployedseed>9124657</deployedseed>
+    <deployedseed>1111836430</deployedseed>
+    <deployedseed>174851630</deployedseed>
+    <deployedseed>215064935</deployedseed>
+    <deployedseed>1096658477</deployedseed>
+    <deployedseed>1615543242</deployedseed>
+    <deployedseed>64073623</deployedseed>
+    <deployedseed>1833511883</deployedseed>
+    <deployedseed>1295203422</deployedseed>
+    <deployedseed>1852276783</deployedseed>
+    <deployedseed>561326941</deployedseed>
+    <deployedseed>565210930</deployedseed>
+    <deployedseed>1412009528</deployedseed>
+    <deployedseed>1057501135</deployedseed>
+    <deployedseed>1786304080</deployedseed>
+    <deployedseed>1208874563</deployedseed>
+    <deployedseed>1011695114</deployedseed>
+    <deployedseed>1986422133</deployedseed>
+    <deployedseed>133593616</deployedseed>
+    <deployedseed>2006855941</deployedseed>
+    <deployedseed>774833652</deployedseed>
+    <deployedseed>1692466642</deployedseed>
+    <deployedseed>4744047</deployedseed>
+    <deployedseed>1649749482</deployedseed>
+    <deployedseed>1054840634</deployedseed>
+    <deployedseed>392607407</deployedseed>
+    <deployedseed>1591652223</deployedseed>
+    <deployedseed>2113658487</deployedseed>
+    <deployedseed>604238119</deployedseed>
+    <deployedseed>954402183</deployedseed>
+    <deployedseed>1195537976</deployedseed>
+    <deployedseed>738792544</deployedseed>
+    <deployedseed>1506951240</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>A_round</value>
+        <value>Area_disp</value>
       </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>( prt1-1-T ]</expectedanswernote>
       </expected>
     </qtest>
   </question>

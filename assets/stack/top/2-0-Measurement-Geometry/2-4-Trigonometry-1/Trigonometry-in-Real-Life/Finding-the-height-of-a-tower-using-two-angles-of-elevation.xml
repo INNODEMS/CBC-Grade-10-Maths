@@ -6,8 +6,53 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
-A student stands some distance from a tower and observes the angle of elevation of the top to be {@theta1@}\(^\circ\). The student then walks {@d@} m closer to the tower and observes the angle to be {@theta2@}°. Find the height of the tower.
+A student stands some distance from a tower and observes the angle of elevation of the top to be <b>{@theta1@}\(^\circ\)</b>. The student then walks <b>{@d@} m</b> closer to the tower and observes the angle to be <b>{@theta2@}&deg;</b>. 
 </p>
+
+<p>
+Use the diagram below to find the height of the tower.
+</p>
+
+[[jsxgraph]]
+    var d = {#d#};
+    var theta1 = {#theta1#};
+    var theta2 = {#theta2#};
+    var h = {#h_float#};
+    var x_dist = {#x_float#};
+    
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [-(x_dist + d + 5), h + 5, 5, -5],
+        keepAspectRatio: true,
+        showNavigation: false,
+        showCopyright: false
+    });
+    
+    // Points
+    var base = board.create('point', [0, 0], {visible: false});
+    var top = board.create('point', [0, h], {visible: false});
+    var p2 = board.create('point', [-x_dist, 0], {name: 'Closer Point', size: 3, color: 'black', label: {offset: [-30, -15]}});
+    var p1 = board.create('point', [-(x_dist + d), 0], {name: 'Start Point', size: 3, color: 'black', label: {offset: [-30, -15]}});
+    
+    // Ground
+    board.create('segment', [[-(x_dist + d + 4), 0], [4, 0]], {strokeColor: 'black', strokeWidth: 2});
+    
+    // Tower
+    board.create('segment', [base, top], {strokeColor: '#546e7a', strokeWidth: 5});
+    
+    // Lines of sight
+    board.create('segment', [p1, top], {strokeColor: 'black', strokeWidth: 1.5});
+    board.create('segment', [p2, top], {strokeColor: 'black', strokeWidth: 1.5});
+    
+    // Angles
+    board.create('angle', [board.create('point', [1, 0], {visible:false}), base, top], {radius: (x_dist+d)*0.08, type: 'square', strokeColor: 'black'});
+    board.create('angle', [base, p1, top], {radius: (x_dist+d)*0.15, strokeColor: 'black', name: theta1 + "°"});
+    board.create('angle', [base, p2, top], {radius: x_dist*0.25, strokeColor: 'black', name: theta2 + "°"});
+    
+    // Labels
+    board.create('text', [-(x_dist + d/2), -1.5, d + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 14});
+    board.create('text', [-x_dist/2, -1.5, "x m"], {anchorX: 'middle', anchorY: 'top', fontSize: 14});
+    board.create('text', [0.5, h/2, "h = ?"], {anchorX: 'left', anchorY: 'middle', fontSize: 14});
+[[/jsxgraph]]
 
 <p>
 Give your answer correct to <b>2 decimal places</b>.
@@ -21,7 +66,7 @@ Height = [[input:ans1]] m [[validation:ans1]] [[feedback:prt1]]
       <text><![CDATA[<h3>Worked Solution</h3>
 
 <p>
-Let the distance from the second position (the closer point) to the tower be \(x\) m.
+Let the distance from the closer point to the tower be \(x\) m.
 </p>
 
 <p>
@@ -35,100 +80,104 @@ x + {@d@}
 </p>
 
 <p>
-Step 1: Form an equation from the first position.
+<strong>Step 1: Form an equation from the first position.</strong>
 </p>
 
 <p>
 \[
-\tan {@theta1@}^\circ = \frac{h}{x + {@d@}}
+\tan({@theta1@}^\circ) = \frac{h}{x + {@d@}}
 \]
 </p>
 
 <p>
 So,
-</p>
-
-<p>
 \[
-h = (x + {@d@})\tan {@theta1@}^\circ
+h = (x + {@d@})\tan({@theta1@}^\circ)
 \]
 </p>
 
 <p>
-Step 2: Form an equation from the second position.
+<strong>Step 2: Form an equation from the second position.</strong>
 </p>
 
 <p>
 \[
-\tan {@theta2@}^\circ = \frac{h}{x}
+\tan({@theta2@}^\circ) = \frac{h}{x}
 \]
 </p>
 
 <p>
 So,
-</p>
-
-<p>
 \[
-h = x\tan {@theta2@}^\circ
+h = x\tan({@theta2@}^\circ)
 \]
 </p>
 
 <p>
-Step 3: Since both expressions are equal to \(h\), equate them:
+<strong>Step 3: Equate and solve for \(x\).</strong>
+</p>
+
+<p>
+Since both expressions are equal to \(h\), equate them:
 </p>
 
 <p>
 \[
-(x + {@d@})\tan {@theta1@}^\circ = x\tan {@theta2@}^\circ
+(x + {@d@})\tan({@theta1@}^\circ) = x\tan({@theta2@}^\circ)
 \]
 </p>
 
 <p>
-Substitute \(\tan 30^\circ = \frac{1}{\sqrt{3}}\) and \(\tan 60^\circ = \sqrt{3}\):
-</p>
-
-<p>
+Expand the left side:
 \[
-(x + {@d@})\cdot \frac{1}{\sqrt{3}} = x\sqrt{3}
+x\tan({@theta1@}^\circ) + {@d@}\tan({@theta1@}^\circ) = x\tan({@theta2@}^\circ)
 \]
 </p>
 
 <p>
-Multiply both sides by \(\sqrt{3}\):
-</p>
-
-<p>
+Group the \(x\) terms on one side:
 \[
-x + {@d@} = 3x
+{@d@}\tan({@theta1@}^\circ) = x\tan({@theta2@}^\circ) - x\tan({@theta1@}^\circ)
 \]
 </p>
 
 <p>
+Factor out \(x\):
 \[
-{@d@} = 2x
+{@d@}\tan({@theta1@}^\circ) = x(\tan({@theta2@}^\circ) - \tan({@theta1@}^\circ))
 \]
 </p>
 
 <p>
+Divide to isolate \(x\):
 \[
-x = \frac{@d@}{2}
-\]
-</p>
-
-<p>
-Step 4: Find the height using \(h = x\tan 60^\circ\).
-</p>
-
-<p>
-\[
-h = \frac{@d@}{2}\times \sqrt{3}
+x = \frac{{@d@}\tan({@theta1@}^\circ)}{\tan({@theta2@}^\circ) - \tan({@theta1@}^\circ)}
 \]
 </p>
 
 <p>
 \[
-h \approx {@h_round@}\text{ m}
+x \approx {@x_disp@} \text{ m}
+\]
+</p>
+
+<p>
+<strong>Step 4: Find the height (\(h\)).</strong>
+</p>
+
+<p>
+Substitute \(x\) back into the simpler equation \(h = x\tan({@theta2@}^\circ)\):
+</p>
+
+<p>
+\[
+h = {@x_disp@} \times \tan({@theta2@}^\circ)
+\]
+</p>
+
+<p>
+\[
+h \approx {@h_disp@} \text{ m}
 \]
 </p>
 
@@ -138,7 +187,7 @@ Therefore, the height of the tower is:
 
 <p>
 \[
-\boxed{{@h_round@} \text{ m}}
+\boxed{{@h_disp@} \text{ m}}
 \]
 </p>]]></text>
     </generalfeedback>
@@ -150,33 +199,35 @@ Therefore, the height of the tower is:
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Angles in degrees for display */
-theta1: 30;
-theta2: 60;
+      <text>/* Randomized Angles */
+theta1: rand([25, 30, 35, 40]);
+theta2: theta1 + rand([10, 15, 20]); /* Ensures the second angle is always larger */
 
 /* Angles in radians for calculation */
 t1: theta1*%pi/180;
 t2: theta2*%pi/180;
 
 /* Distance walked closer to the tower */
-d: rand(5) + 5;
+d: rand(5) + 8;
 
-/* Correct height formula */
-h: d * tan(t1) * tan(t2) / (tan(t2) - tan(t1));
+/* Native Float Calculations */
+x_float: float(d * tan(t1) / (tan(t2) - tan(t1)));
+h_float: float(x_float * tan(t2));
 
-/* Rounded answer */
-h_round: float(round(h*100)/100);
+/* Display Variables */
+h_disp: dispdp(h_float, 2);
+x_disp: dispdp(x_float, 2);
 
 /* Mistakes */
-m1: d*tan(t1);
-m2: d*tan(t2);
-m3: d*(tan(t2)-tan(t1));</text>
+m1: float(d*tan(t1));
+m2: float(d*tan(t2));
+m3: float(d*(tan(t2)-tan(t1)));</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@h_round@}</text>
+      <text><![CDATA[<p>t1: {@theta1@}, t2: {@theta2@}, d: {@d@}, h: {@h_disp@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
@@ -213,7 +264,7 @@ The question requires the learner to determine the height of a tower using two a
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>h_round</tans>
+      <tans>h_disp</tans>
       <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -239,10 +290,10 @@ The question requires the learner to determine the height of a tower using two a
       <node>
         <name>0</name>
         <description>checks for the correct answer</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
-        <tans>h_round</tans>
-        <testoptions/>
+        <tans>h_float</tans>
+        <testoptions>2</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -264,10 +315,10 @@ The question requires the learner to determine the height of a tower using two a
       <node>
         <name>1</name>
         <description>used only the first angle</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m1</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -275,7 +326,7 @@ The question requires the learner to determine the height of a tower using two a
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text>This question involves two observation points. Use both angles.</text>
+          <text><![CDATA[<p>This question involves two observation points. Use both angles.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -289,10 +340,10 @@ The question requires the learner to determine the height of a tower using two a
       <node>
         <name>2</name>
         <description>used only the second angle</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m2</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -300,7 +351,7 @@ The question requires the learner to determine the height of a tower using two a
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-3-T</trueanswernote>
         <truefeedback format="html">
-          <text>You used only one triangle. Form equations for both positions.</text>
+          <text><![CDATA[<p>You used only one triangle. Form equations for both positions.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -314,10 +365,10 @@ The question requires the learner to determine the height of a tower using two a
       <node>
         <name>3</name>
         <description>subtracted tangents directly</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m3</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -325,7 +376,7 @@ The question requires the learner to determine the height of a tower using two a
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-4-T</trueanswernote>
         <truefeedback format="html">
-          <text>Do not subtract the tangent values directly. First form two equations, then eliminate the distance.</text>
+          <text><![CDATA[<p>Do not subtract the tangent values directly. First form two equations, then eliminate the distance.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -333,27 +384,59 @@ The question requires the learner to determine the height of a tower using two a
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-4-F</falseanswernote>
         <falsefeedback format="html">
-          <text>Form two tangent equations using the two positions, then solve for the height.</text>
+          <text><![CDATA[<p>Form two tangent equations using the two positions, then solve for the height.</p>]]></text>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>210400214</deployedseed>
-    <deployedseed>1836429689</deployedseed>
-    <deployedseed>1267256514</deployedseed>
-    <deployedseed>1763807463</deployedseed>
-    <deployedseed>36153250</deployedseed>
+    <deployedseed>349966057</deployedseed>
+    <deployedseed>507602024</deployedseed>
+    <deployedseed>1528618996</deployedseed>
+    <deployedseed>1239085514</deployedseed>
+    <deployedseed>373430145</deployedseed>
+    <deployedseed>260452873</deployedseed>
+    <deployedseed>569875899</deployedseed>
+    <deployedseed>1904023809</deployedseed>
+    <deployedseed>103785394</deployedseed>
+    <deployedseed>1843882439</deployedseed>
+    <deployedseed>713109519</deployedseed>
+    <deployedseed>1223864405</deployedseed>
+    <deployedseed>1283021504</deployedseed>
+    <deployedseed>1553912289</deployedseed>
+    <deployedseed>86372153</deployedseed>
+    <deployedseed>67753686</deployedseed>
+    <deployedseed>1410751751</deployedseed>
+    <deployedseed>2032609360</deployedseed>
+    <deployedseed>72206018</deployedseed>
+    <deployedseed>45266572</deployedseed>
+    <deployedseed>1061559213</deployedseed>
+    <deployedseed>2047336575</deployedseed>
+    <deployedseed>1347664214</deployedseed>
+    <deployedseed>1602342868</deployedseed>
+    <deployedseed>362893234</deployedseed>
+    <deployedseed>1436929350</deployedseed>
+    <deployedseed>212026928</deployedseed>
+    <deployedseed>1747488073</deployedseed>
+    <deployedseed>1746353100</deployedseed>
+    <deployedseed>1973277053</deployedseed>
+    <deployedseed>479923063</deployedseed>
+    <deployedseed>1543319112</deployedseed>
+    <deployedseed>79527534</deployedseed>
+    <deployedseed>1639843021</deployedseed>
+    <deployedseed>948065537</deployedseed>
+    <deployedseed>330428733</deployedseed>
+    <deployedseed>1882973785</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>h_round</value>
+        <value>h_disp</value>
       </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>( prt1-1-T ]</expectedanswernote>
       </expected>
     </qtest>
   </question>

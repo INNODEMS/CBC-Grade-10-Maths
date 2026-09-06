@@ -6,7 +6,7 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
-A piece of land is in the shape of a triangle. Two sides measure {@a@} m and {@b@} m, and the angle between them is {@C@}°. Find the area of the land.
+A piece of land is in the shape of a triangle. Two sides measure <b>{@a@} m</b> and <b>{@b@} m</b>, and the angle between them is <b>{@C@}&deg;</b>. Find the area of the land.
 </p>
 
 <p>
@@ -14,7 +14,7 @@ Give your answer correct to <b>2 decimal places</b>.
 </p>
 
 <p>
-Area = [[input:ans1]] \(\text{cm}^2\) [[validation:ans1]] [[feedback:prt1]]
+Area = [[input:ans1]] <b>\(\text{m}^2\)</b> [[validation:ans1]] [[feedback:prt1]]
 </p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
@@ -46,12 +46,12 @@ Step 3: Evaluate:
 
 <p>
 \[
-A = {@A_round@}\text{ m}^2
+A \approx {@A_disp@}\text{ m}^2
 \]
 </p>
 
 <p>
-Therefore, the area of the land is {@A_round@} \(\text{cm}^2\).
+Therefore, the area of the land is <b>{@A_disp@} \(\text{m}^2\)</b>.
 </p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -66,30 +66,29 @@ Therefore, the area of the land is {@A_round@} \(\text{cm}^2\).
 a: rand(10) + 10;
 b: rand(10) + 12;
 
-/* Angle */
-angles: [40,50,60,70];
-C: angles[rand(4) + 1];
+/* Angle safely selected from a native list, expanded to include obtuse angles */
+C: rand([40, 50, 60, 70, 80, 100, 110, 120]);
 
 /* Convert to radians */
 Cr: C*%pi/180;
 
-/* Area */
-A: (1/2)*a*b*sin(Cr);
+/* Area evaluated natively as a float */
+A_float: float(0.5*a*b*sin(Cr));
 
-/* Rounded */
-A_round: float(round(A*100)/100);
+/* Display variable formatted to exactly 2 decimal places */
+A_disp: dispdp(A_float, 2);
 
-/* Mistakes */
-m1: a*b*sin(Cr);
-m2: (1/2)*a*b*cos(Cr);
-m3: a*b;
-m4: (1/2)*(a+b)*sin(Cr);</text>
+/* Mistakes evaluated as floats for PRT catching */
+m1: float(a*b*sin(Cr));
+m2: float(0.5*a*b*abs(cos(Cr)));
+m3: float(a*b);
+m4: float(0.5*(a+b)*sin(Cr));</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@A_round@}</text>
+      <text><![CDATA[<p>a: {@a@}, b: {@b@}, C: {@C@}, Area: {@A_disp@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
@@ -126,8 +125,8 @@ The question requires the learner to apply the formula for the area of a triangl
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>A_round</tans>
-      <boxsize>15</boxsize>
+      <tans>A_disp</tans>
+      <boxsize>10</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -152,10 +151,10 @@ The question requires the learner to apply the formula for the area of a triangl
       <node>
         <name>0</name>
         <description>checks for the correct answer</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
-        <tans>A_round</tans>
-        <testoptions/>
+        <tans>A_float</tans>
+        <testoptions>2</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -177,10 +176,10 @@ The question requires the learner to apply the formula for the area of a triangl
       <node>
         <name>1</name>
         <description>Missing ½</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m1</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -188,7 +187,7 @@ The question requires the learner to apply the formula for the area of a triangl
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text>Do not forget the factor ½</text>
+          <text><![CDATA[<p>Do not forget the factor \(\frac{1}{2}\) in the area formula.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -202,10 +201,10 @@ The question requires the learner to apply the formula for the area of a triangl
       <node>
         <name>2</name>
         <description>Used cosine</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m2</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -213,7 +212,7 @@ The question requires the learner to apply the formula for the area of a triangl
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-3-T</trueanswernote>
         <truefeedback format="html">
-          <text>Use sine of the included angle.</text>
+          <text><![CDATA[<p>You used cosine instead of sine. The formula requires the sine of the included angle.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -227,10 +226,10 @@ The question requires the learner to apply the formula for the area of a triangl
       <node>
         <name>3</name>
         <description>wrong structure</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m3</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -238,7 +237,7 @@ The question requires the learner to apply the formula for the area of a triangl
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-4-T</trueanswernote>
         <truefeedback format="html">
-          <text>You must include the sine of the angle.</text>
+          <text><![CDATA[<p>You calculated the area as if it were a rectangle. You must include the sine of the angle and the \(\frac{1}{2}\) multiplier.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -252,10 +251,10 @@ The question requires the learner to apply the formula for the area of a triangl
       <node>
         <name>4</name>
         <description>Multiplied only</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m4</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -263,7 +262,7 @@ The question requires the learner to apply the formula for the area of a triangl
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-5-T</trueanswernote>
         <truefeedback format="html">
-          <text>Use the products of the two sides, not their sum</text>
+          <text><![CDATA[<p>Use the product of the two sides, not their sum. The formula is \(A = \frac{1}{2}ab\sin C\).</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -271,72 +270,72 @@ The question requires the learner to apply the formula for the area of a triangl
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-5-F</falseanswernote>
         <falsefeedback format="html">
-          <text>Use 𝐴=1/2𝑎𝑏 sin⁡ 𝐶.</text>
+          <text/>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>1997070363</deployedseed>
-    <deployedseed>679557217</deployedseed>
-    <deployedseed>1740434703</deployedseed>
-    <deployedseed>387524837</deployedseed>
-    <deployedseed>1091723594</deployedseed>
-    <deployedseed>254614642</deployedseed>
-    <deployedseed>2059136919</deployedseed>
-    <deployedseed>366270068</deployedseed>
-    <deployedseed>1389361089</deployedseed>
-    <deployedseed>1953253228</deployedseed>
-    <deployedseed>173287623</deployedseed>
-    <deployedseed>1572977946</deployedseed>
-    <deployedseed>2103235605</deployedseed>
-    <deployedseed>1531184476</deployedseed>
-    <deployedseed>654112675</deployedseed>
-    <deployedseed>831079437</deployedseed>
-    <deployedseed>87766757</deployedseed>
-    <deployedseed>442431818</deployedseed>
-    <deployedseed>426349914</deployedseed>
-    <deployedseed>619788285</deployedseed>
-    <deployedseed>719400274</deployedseed>
-    <deployedseed>459273173</deployedseed>
-    <deployedseed>77952080</deployedseed>
-    <deployedseed>1294158753</deployedseed>
-    <deployedseed>1493924435</deployedseed>
-    <deployedseed>852084016</deployedseed>
-    <deployedseed>669667053</deployedseed>
-    <deployedseed>1810431097</deployedseed>
-    <deployedseed>817951424</deployedseed>
-    <deployedseed>1883968208</deployedseed>
-    <deployedseed>992153105</deployedseed>
-    <deployedseed>1566669725</deployedseed>
-    <deployedseed>2027234066</deployedseed>
-    <deployedseed>1682311538</deployedseed>
-    <deployedseed>2041671362</deployedseed>
-    <deployedseed>1516897827</deployedseed>
-    <deployedseed>485307179</deployedseed>
-    <deployedseed>1665097965</deployedseed>
-    <deployedseed>1815192788</deployedseed>
-    <deployedseed>1463634480</deployedseed>
-    <deployedseed>1247140527</deployedseed>
-    <deployedseed>639827362</deployedseed>
-    <deployedseed>742896192</deployedseed>
-    <deployedseed>157828195</deployedseed>
-    <deployedseed>2133199526</deployedseed>
-    <deployedseed>1462354416</deployedseed>
-    <deployedseed>2102299297</deployedseed>
-    <deployedseed>501070905</deployedseed>
-    <deployedseed>187800386</deployedseed>
-    <deployedseed>1843392270</deployedseed>
+    <deployedseed>138333729</deployedseed>
+    <deployedseed>1960974099</deployedseed>
+    <deployedseed>189410767</deployedseed>
+    <deployedseed>292073592</deployedseed>
+    <deployedseed>1535652151</deployedseed>
+    <deployedseed>1340031592</deployedseed>
+    <deployedseed>1164727723</deployedseed>
+    <deployedseed>653489220</deployedseed>
+    <deployedseed>1363991053</deployedseed>
+    <deployedseed>389461981</deployedseed>
+    <deployedseed>1187477765</deployedseed>
+    <deployedseed>1136876649</deployedseed>
+    <deployedseed>1618479612</deployedseed>
+    <deployedseed>504997224</deployedseed>
+    <deployedseed>29199162</deployedseed>
+    <deployedseed>1243497406</deployedseed>
+    <deployedseed>269898528</deployedseed>
+    <deployedseed>1909113756</deployedseed>
+    <deployedseed>1896503056</deployedseed>
+    <deployedseed>1764859696</deployedseed>
+    <deployedseed>470507885</deployedseed>
+    <deployedseed>719387673</deployedseed>
+    <deployedseed>644070903</deployedseed>
+    <deployedseed>956129129</deployedseed>
+    <deployedseed>1161241743</deployedseed>
+    <deployedseed>1263330346</deployedseed>
+    <deployedseed>302932469</deployedseed>
+    <deployedseed>16792855</deployedseed>
+    <deployedseed>406983824</deployedseed>
+    <deployedseed>123873359</deployedseed>
+    <deployedseed>2137707579</deployedseed>
+    <deployedseed>1089246460</deployedseed>
+    <deployedseed>1123122663</deployedseed>
+    <deployedseed>732514605</deployedseed>
+    <deployedseed>1191199542</deployedseed>
+    <deployedseed>1788778986</deployedseed>
+    <deployedseed>802730603</deployedseed>
+    <deployedseed>1128786583</deployedseed>
+    <deployedseed>191866619</deployedseed>
+    <deployedseed>891032818</deployedseed>
+    <deployedseed>315799618</deployedseed>
+    <deployedseed>1846603462</deployedseed>
+    <deployedseed>2096307374</deployedseed>
+    <deployedseed>258284291</deployedseed>
+    <deployedseed>1790107583</deployedseed>
+    <deployedseed>878459105</deployedseed>
+    <deployedseed>574192321</deployedseed>
+    <deployedseed>673521610</deployedseed>
+    <deployedseed>1267361290</deployedseed>
+    <deployedseed>415453851</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>A_round</value>
+        <value>A_disp</value>
       </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>( prt1-1-T ]</expectedanswernote>
       </expected>
     </qtest>
   </question>

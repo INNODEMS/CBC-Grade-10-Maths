@@ -2,7 +2,7 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Finding Sines and Cosines of Complementary Angles</text>
+      <text>Solving Equations using Complementary Angles</text>
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
@@ -10,45 +10,37 @@ Find the acute angles \(\alpha\) and \(\beta\) that satisfy each of the followin
 </p>
 
 <ol type="a">
-  <li><p>\(\cos\, 45^\circ = \sin \alpha\)</p>
+  <li><p>\(\cos\, {@theta_1@}^\circ = \sin \alpha\)</p>
   <p>\(\alpha=\)[[input:ans1]]\(^\circ\)[[validation:ans1]][[feedback:prt1]]</p>
     </li>
-  <li><p>\(\cos\, \beta = \sin 5\beta\)</p>
+  <li><p>\(\cos\, \beta = \sin {@num_1@}\beta\)</p>
    <p>\(\beta =\)[[input:ans2]]\(^\circ\)[[validation:ans2]][[feedback:prt2]]</p>
      </li>
-  <li><p>\(\sin\,2\alpha = \cos 30^\circ\)</p>
+  <li><p>\(\sin\,2\alpha = \cos {@theta_2@}^\circ\)</p>
        <p>\(\alpha=\)[[input:ans3]]\(^\circ\)[[validation:ans3]][[feedback:prt3]]</p>
    </li>
-</ol>
-
-<p>]]></text>
+</ol>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<p>
 <ol type='a'>
 <li>
-<p>\(\cos\, 45^\circ = \sin \alpha\)</p>
+<p>\(\cos\, {@theta_1@}^\circ = \sin \alpha\)</p>
 <p>Implies that,<br>
 \(
 \begin{align}
 {@theta_1@}^\circ + \alpha &=90^\circ \\
 \alpha &= 90^\circ-{@theta_1@}^\circ \\
 &={@sol1@}^\circ
-
-
 \end{align}
-
 \) <br>
 Therefore, <br>
 The acute angle \(\alpha = {@sol1@}^\circ\)
-
 </p>
-
-
 </li>
 
 <li>
-<p>\(\cos\, \beta = \sin 5\beta\)</p>
+<p>\(\cos\, \beta = \sin {@num_1@}\beta\)</p>
 <p>Implies that,<br>
 \(
 \begin{align}
@@ -56,20 +48,15 @@ The acute angle \(\alpha = {@sol1@}^\circ\)
 {@sol@}\beta &= 90^\circ \\
 \beta &= \frac{90^\circ}{{@sol@}}\\
 &={@sol2@}^\circ
-
-
 \end{align}
-
 \) <br>
 Therefore, <br>
 The acute angle \(\beta = {@sol2@}^\circ\)
-
 </p>
-
-
 </li>
+
 <li>
-<p>\(\sin\,2\alpha = \cos 30^\circ\)</p>
+<p>\(\sin\,2\alpha = \cos {@theta_2@}^\circ\)</p>
 <p>Implies that,<br>
 \(
 \begin{align}
@@ -77,53 +64,39 @@ The acute angle \(\beta = {@sol2@}^\circ\)
 2 \alpha &= 90^\circ - {@theta_2@}^\circ\\
 \alpha &= \frac{{@sol_2@}^\circ}{2}\\
 &={@sol3@}^\circ
-
-
 \end{align}
-
 \) <br>
 Therefore, <br>
-The acute angle \(\beta = {@sol3@}^\circ\)
-
+The acute angle \(\alpha = {@sol3@}^\circ\)
 </p>
-
-
 </li>
-
-
-
 </ol>
-
-
-
-
 </p>]]></text>
     </generalfeedback>
-    <defaultgrade>15</defaultgrade>
+    <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
-      <text>theta_1:rand_with_step(10,90,5); /*Randomizing degrees of part a*/
-theta_2:rand_with_step(10,90,10);/*Randomizing degrees of part c*/
-num_1:rand_with_step(2,20,2);
-/*Solution*/
-/* (a) Solution */
-sol1: 90-theta_1;
+      <text>theta_1: rand_with_step(10,80,5); 
+theta_2: rand_with_step(10,80,10);
 
+/* Pick specific numbers so that (num_1 + 1) divides perfectly into 90 */
+num_1: rand([2, 4, 5, 8, 9, 14, 17, 29]);
+
+/* (a) Solution */
+sol1: 90 - theta_1;
 
 /* (b) Solution */
-sol:num_1+1;
-sol2:90/(num_1+1);
-
+sol: num_1 + 1;
+sol2: 90 / sol;
 
 /* (c) Solution */
-sol_2:90-theta_2;
-sol3:(90-theta_2)/2;
-</text>
+sol_2: 90 - theta_2;
+sol3: sol_2 / 2;</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -329,6 +302,26 @@ sol3:(90-theta_2)/2;
     <deployedseed>1037945741</deployedseed>
     <deployedseed>524532633</deployedseed>
     <deployedseed>1067551243</deployedseed>
+    <deployedseed>313508624</deployedseed>
+    <deployedseed>1940102047</deployedseed>
+    <deployedseed>2034165892</deployedseed>
+    <deployedseed>820610435</deployedseed>
+    <deployedseed>1110493041</deployedseed>
+    <deployedseed>1977265086</deployedseed>
+    <deployedseed>1007492933</deployedseed>
+    <deployedseed>1580491615</deployedseed>
+    <deployedseed>798939765</deployedseed>
+    <deployedseed>982134847</deployedseed>
+    <deployedseed>222788176</deployedseed>
+    <deployedseed>464860423</deployedseed>
+    <deployedseed>872780359</deployedseed>
+    <deployedseed>38288152</deployedseed>
+    <deployedseed>1636230117</deployedseed>
+    <deployedseed>1625589920</deployedseed>
+    <deployedseed>509136695</deployedseed>
+    <deployedseed>255518200</deployedseed>
+    <deployedseed>2071151798</deployedseed>
+    <deployedseed>1017067299</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>

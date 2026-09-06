@@ -5,69 +5,80 @@
       <text>Finding the area of a trapezium</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>A trapezium has parallel sides of lengths {@a@} cm and {@b@} cm. The non-parallel sides are each {@slant@} cm.</p>
+      <text><![CDATA[<p>A trapezium has parallel sides of lengths <b>{@a@} cm</b> and <b>{@b@} cm</b>. The non-parallel sides are each <b>{@slant@} cm</b>.</p>
+
 [[jsxgraph]]
-var board = JXG.JSXGraph.initBoard(divid, {
-    boundingbox: [-2, 20, 30, -8],
-    axis: false,
-    showCopyright: false
-});
-
-// Inject STACK variables
-var a = {#a#};
-var b = {#b#};
-var h = {#h#};
-var slant = {#slant#};
-
-// Geometry
-var x_offset = 2;
-var diff = (a - b) / 2;
-
-// Points
-var p1 = board.create('point', [x_offset, 0], {name: '', visible: false});
-var p2 = board.create('point', [x_offset + a, 0], {name: '', visible: false});
-var p3 = board.create('point', [x_offset + a - diff, h], {name: '', visible: false});
-var p4 = board.create('point', [x_offset + diff, h], {name: '', visible: false});
-
-// Polygon
-board.create('polygon', [p1, p2, p3, p4], {
-    fillColor: '#f0f0f0',
-    borders: {strokeColor: 'black', strokeWidth: 2}
-});
-
-// Labels
-board.create('text', [x_offset + a/2, -0.5, a + " cm"]);
-board.create('text', [x_offset + a/2, h + 0.5, b + " cm"]);
-board.create('text', [x_offset + diff/2 - 1.5, h/2, slant + " cm"]);
-board.create('text', [x_offset + a - diff/2 + 0.5, h/2, slant + " cm"]);
-
-// Height line
-board.create('segment', [p4, [x_offset + diff, 0]], {
-    dash: 2,
-    strokeColor: 'gray'
-});
-board.create('text', [x_offset + diff + 0.2, h/2, "h"]);
+    var a = {#a#};
+    var b = {#b#};
+    var h = {#h#};
+    var slant = {#slant#};
+    
+    var x_offset = 2;
+    var diff = (a - b) / 2;
+    
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [-1, h + 3, a + x_offset + 3, -2],
+        keepAspectRatio: true,
+        showNavigation: false,
+        showCopyright: false,
+        pan: {enabled: false},
+        zoom: {enabled: false}
+    });
+    
+    // Points locked in place
+    var p1 = board.create('point', [x_offset, 0], {name: '', visible: false, fixed: true});
+    var p2 = board.create('point', [x_offset + a, 0], {name: '', visible: false, fixed: true});
+    var p3 = board.create('point', [x_offset + a - diff, h], {name: '', visible: false, fixed: true});
+    var p4 = board.create('point', [x_offset + diff, h], {name: '', visible: false, fixed: true});
+    
+    // Polygon
+    board.create('polygon', [p1, p2, p3, p4], {
+        fillColor: '#f0f0f0', fillOpacity: 0.8, fixed: true, highlight: false,
+        borders: {strokeColor: 'black', strokeWidth: 2, fixed: true, highlight: false}
+    });
+    
+    // Labels
+    board.create('text', [x_offset + a/2, -0.6, a + " cm"], {anchorX: 'middle', anchorY: 'top', fontSize: 14, fixed: true});
+    board.create('text', [x_offset + a/2, h + 0.6, b + " cm"], {anchorX: 'middle', anchorY: 'bottom', fontSize: 14, fixed: true});
+    board.create('text', [x_offset + diff/2 - 0.5, h/2, slant + " cm"], {anchorX: 'right', anchorY: 'middle', fontSize: 14, fixed: true});
+    board.create('text', [x_offset + a - diff/2 + 0.5, h/2, slant + " cm"], {anchorX: 'left', anchorY: 'middle', fontSize: 14, fixed: true});
+    
+    // Height line and Right Angle
+    var h_base = board.create('point', [x_offset + diff, 0], {visible: false, fixed: true});
+    board.create('segment', [p4, h_base], {
+        dash: 2, strokeColor: 'gray', strokeWidth: 2, fixed: true
+    });
+    board.create('angle', [p2, h_base, p4], {radius: Math.min(1, a*0.1), type: 'square', strokeColor: 'gray', fixed: true, name: ''});
+    board.create('text', [x_offset + diff + 0.3, h/2, "h"], {anchorX: 'left', anchorY: 'middle', fontSize: 14, fixed: true});
 [[/jsxgraph]]
 
 <p>Calculate the area of the trapezium.</p>
 
-<p>Area = [[input:ans1]] cm \(^2\) [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
+<p>Area = [[input:ans1]] <b>\(\text{cm}^2\)</b> [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
-<p><b>Step 1: Find the base of the side triangle.</b><br>
+<p><strong>Step 1: Find the base of the side triangle.</strong><br>
 Because the trapezium is isosceles, the difference between the parallel sides is shared equally:</p>
-\[ \text{Side base} = \frac{{@a@} - {@b@}}{2} = {@diff_single@} \text{ cm} \]
+<p>
+\[ \text{Side base} = \frac{{@a@} - {@b@}}{2} = \frac{{@a-b@}}{2} = {@diff_single@} \text{ cm} \]
+</p>
 
-<p><b>Step 2: Calculate height (\(h\)) using Pythagoras.</b></p>
+<p><strong>Step 2: Calculate height (\(h\)) using Pythagoras.</strong></p>
+<p>
 \[ h^2 + {@diff_single@}^2 = {@slant@}^2 \]
-\[ h^2 + {@diff_single^2@} = {@slant^2@} \]
+\[ h^2 + {@diff_single_sq@} = {@slant_sq@} \]
+\[ h^2 = {@slant_sq@} - {@diff_single_sq@} \]
 \[ h^2 = {@h_sq@} \implies h = {@h@} \text{ cm} \]
+</p>
 
-<p><b>Step 3: Calculate the Area.</b></p>
-\[ \text{Area} = \frac{1}{2}(a + b)h \]
+<p><strong>Step 3: Calculate the Area.</strong></p>
+<p>
+\[ \text{Area} = \frac{1}{2}(a + b) \times h \]
 \[ \text{Area} = \frac{1}{2}({@a@} + {@b@}) \times {@h@} \]
-\[ \text{Area} = {@ta1@} \text{ cm}^2 \]]]></text>
+\[ \text{Area} = \frac{1}{2}({@sum_ab@}) \times {@h@} \]
+\[ \text{Area} = {@ta1@} \text{ cm}^2 \]
+</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -77,26 +88,37 @@ Because the trapezium is isosceles, the difference between the parallel sides is
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Geometry logic */
-k : rand([1, 2, 3]);
-base_diff : 2 * k;
-h : 4 * k;
-slant : 5 * k;
-b : rand_with_step(4, 10, 1);
-a : b + (2 * base_diff);
-/* 3. Pre-calculate values for the worked solution */
-diff_single : (a - b) / 2;
-h_sq : slant^2 - diff_single^2;
+      <text>/* Valid Pythagorean triples [base, height, hypotenuse(slant)] */
+triples : [[3,4,5], [4,3,5], [6,8,10], [8,6,10], [5,12,13], [9,12,15], [12,9,15]];
+triple : rand(triples);
+
+/* Assign strictly valid geometry variables */
+diff_single : triple[1];
+h : triple[2];
+slant : triple[3];
+
+b : rand(8) + 6; /* Top base */
+a : b + (2 * diff_single); /* Bottom base */
+
+/* Pre-calculated steps for the worked solution */
+diff_single_sq : diff_single^2;
+slant_sq : slant^2;
+h_sq : h^2;
 sum_ab : a + b;
 
-/* Answer */
-ta1 : (1/2) * (a + b) * h;</text>
+/* Area (Will always be a clean integer due to standard triples) */
+ta1 : (1/2) * sum_ab * h;
+
+/* Mistakes */
+m1 : sum_ab * h; /* Forgot 1/2 */
+m2 : (1/2) * sum_ab * slant; /* Used slant instead of height */
+m3 : (1/2) * (a + b + 2*slant) * h; /* Perimeter confusion */</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta1@}</text>
+      <text><![CDATA[<p>a: {@a@}, b: {@b@}, h: {@h@}, slant: {@slant@}, Area: {@ta1@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -134,7 +156,7 @@ ta1 : (1/2) * (a + b) * h;</text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
@@ -168,27 +190,143 @@ ta1 : (1/2) * (a + b) * h;</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
+      <node>
+        <name>1</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You forgot to multiply by the factor \(\frac{1}{2}\). Check the formula in the worked solution.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You used the slanted side instead of the perpendicular height (\(h\)) to find the area. You must use Pythagoras' theorem to find \(h\) first.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description/>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You incorrectly added all four sides. Remember, only the parallel sides are used in the trapezium area formula.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
     </prt>
-    <deployedseed>1638636112</deployedseed>
-    <deployedseed>2062139254</deployedseed>
-    <deployedseed>1979672541</deployedseed>
-    <deployedseed>1999375373</deployedseed>
-    <deployedseed>1665724912</deployedseed>
-    <deployedseed>1456236159</deployedseed>
-    <deployedseed>1050987421</deployedseed>
-    <deployedseed>204408378</deployedseed>
-    <deployedseed>1185300262</deployedseed>
-    <deployedseed>1225331879</deployedseed>
-    <deployedseed>2099981059</deployedseed>
-    <deployedseed>1024168345</deployedseed>
-    <deployedseed>1814785684</deployedseed>
-    <deployedseed>1226237958</deployedseed>
-    <deployedseed>1896745709</deployedseed>
+    <deployedseed>1342563040</deployedseed>
+    <deployedseed>1617818900</deployedseed>
+    <deployedseed>1588754646</deployedseed>
+    <deployedseed>425867734</deployedseed>
+    <deployedseed>1655933194</deployedseed>
+    <deployedseed>997371129</deployedseed>
+    <deployedseed>116526240</deployedseed>
+    <deployedseed>336131327</deployedseed>
+    <deployedseed>1319447542</deployedseed>
+    <deployedseed>745721398</deployedseed>
+    <deployedseed>2140799509</deployedseed>
+    <deployedseed>630708659</deployedseed>
+    <deployedseed>899996244</deployedseed>
+    <deployedseed>1429339348</deployedseed>
+    <deployedseed>529694784</deployedseed>
+    <deployedseed>706515236</deployedseed>
+    <deployedseed>1875438312</deployedseed>
+    <deployedseed>1050091769</deployedseed>
+    <deployedseed>916564564</deployedseed>
+    <deployedseed>796412456</deployedseed>
+    <deployedseed>568728469</deployedseed>
+    <deployedseed>1104403533</deployedseed>
+    <deployedseed>856272939</deployedseed>
+    <deployedseed>1464891116</deployedseed>
+    <deployedseed>711988301</deployedseed>
+    <deployedseed>693818578</deployedseed>
+    <deployedseed>1340847306</deployedseed>
+    <deployedseed>1392928923</deployedseed>
+    <deployedseed>1336141639</deployedseed>
+    <deployedseed>1910475748</deployedseed>
+    <deployedseed>173590817</deployedseed>
+    <deployedseed>851568097</deployedseed>
+    <deployedseed>1701945327</deployedseed>
+    <deployedseed>1107531960</deployedseed>
+    <deployedseed>276058042</deployedseed>
+    <deployedseed>962551020</deployedseed>
+    <deployedseed>428926180</deployedseed>
+    <deployedseed>1077490335</deployedseed>
+    <deployedseed>2008550998</deployedseed>
+    <deployedseed>1812250794</deployedseed>
+    <deployedseed>1962509582</deployedseed>
+    <deployedseed>149403189</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>ta1</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>[ prt1-1-T ]</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>

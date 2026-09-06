@@ -5,60 +5,63 @@
       <text>Finding the area of a farmer's trapezium-shaped field</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>A farmer is designing a trapezium-shaped field. The two parallel sides measure {@a@} m and {@b@} m. The sloping sides are equal in length.</p>
+      <text><![CDATA[<p>A farmer is designing a trapezium-shaped field. The two parallel sides measure <b>{@a@} m</b> and <b>{@b@} m</b>. The sloping sides are equal in length.</p>
 
 <p>
 To calculate how much land is available for planting, the farmer needs to determine the area of the field.
 </p>
 
 [[jsxgraph]]
-var board = JXG.JSXGraph.initBoard(divid, {
-    boundingbox: [-2, 12, 20, -2],
-    axis: false,
-    showCopyright: false
-});
-
-// STACK variables
-var a = {#a#};
-var b = {#b#};
-var h = {#h#};
-var slant = {#slant#};
-
-var x_offset = 2;
-var diff = (a - b) / 2;
-
-// Points
-var p1 = board.create('point', [x_offset, 0], {visible: false});
-var p2 = board.create('point', [x_offset + a, 0], {visible: false});
-var p3 = board.create('point', [x_offset + a - diff, h], {visible: false});
-var p4 = board.create('point', [x_offset + diff, h], {visible: false});
-
-// Polygon
-board.create('polygon', [p1, p2, p3, p4], {
-    fillColor: '#e6f2ff',
-    borders: {strokeColor: 'black', strokeWidth: 2}
-});
-
-// Labels
-board.create('text', [x_offset + a/2, -0.7, a + " m"]);
-board.create('text', [x_offset + a/2, h + 0.7, b + " m"]);
-board.create('text', [x_offset + diff/2 - 1.5, h/2, slant.toFixed(1) + " m"]);
-board.create('text', [x_offset + a - diff/2 + 0.5, h/2, slant.toFixed(1) + " m"]);
-
-// Height line
-board.create('segment', [p4, [x_offset + diff, 0]], {
-    dash: 2,
-    strokeColor: 'gray'
-});
-board.create('text', [x_offset + diff + 0.2, h/2, "h"]);
+    var a = {#a#};
+    var b = {#b#};
+    var h = {#h#};
+    var slant = {#slant#};
+    var diff = (a - b) / 2;
+    
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [-2, h + 3, a + 4, -2],
+        keepAspectRatio: true,
+        showNavigation: false,
+        showCopyright: false,
+        pan: {enabled: false},
+        zoom: {enabled: false}
+    });
+    
+    // Points
+    var p1 = board.create('point', [0, 0], {visible: false, fixed: true});
+    var p2 = board.create('point', [a, 0], {visible: false, fixed: true});
+    var p3 = board.create('point', [a - diff, h], {visible: false, fixed: true});
+    var p4 = board.create('point', [diff, h], {visible: false, fixed: true});
+    
+    // Polygon
+    board.create('polygon', [p1, p2, p3, p4], {
+        fillColor: '#e6f2ff', fillOpacity: 0.8, fixed: true, highlight: false,
+        borders: {strokeColor: 'black', strokeWidth: 2, fixed: true, highlight: false}
+    });
+    
+    // Height line
+    var h_base = board.create('point', [diff, 0], {visible: false, fixed: true});
+    board.create('segment', [p4, h_base], {
+        dash: 2, strokeColor: 'gray', strokeWidth: 2, fixed: true
+    });
+    
+    // Right angle marker for height
+    board.create('angle', [p2, h_base, p4], {radius: 1, type: 'square', strokeColor: 'gray', fixed: true, name: ''});
+    
+    // Labels
+    board.create('text', [a/2, -0.7, a + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 14, fixed: true});
+    board.create('text', [a/2, h + 0.7, b + " m"], {anchorX: 'middle', anchorY: 'bottom', fontSize: 14, fixed: true});
+    board.create('text', [diff/2 - 0.5, h/2, slant.toFixed(1) + " m"], {anchorX: 'right', anchorY: 'middle', fontSize: 14, fixed: true});
+    board.create('text', [a - diff/2 + 0.5, h/2, slant.toFixed(1) + " m"], {anchorX: 'left', anchorY: 'middle', fontSize: 14, fixed: true});
+    board.create('text', [diff + 0.3, h/2, "h = " + h + " m"], {anchorX: 'left', anchorY: 'middle', fontSize: 14, fixed: true});
 [[/jsxgraph]]
 
 <p>
-Calculate the area of the field.
+Give your answer correct to <b>2 decimal places</b>.
 </p>
 
 <p>
-Area = [[input:ans1]] m² [[validation:ans1]] [[feedback:prt1]]
+Area = [[input:ans1]] <b>\(\text{m}^2\)</b> [[validation:ans1]] [[feedback:prt1]]
 </p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
@@ -79,13 +82,13 @@ where:
 <p>
 From the diagram:
 <ul>
-<li>Bottom base: \(a = {@a@}\)</li>
-<li>Top base: \(b = {@b@}\)</li>
-<li>Height: \(h = {@h@}\)</li>
+<li>Bottom base: \(a = {@a@}\) m</li>
+<li>Top base: \(b = {@b@}\) m</li>
+<li>Height: \(h = {@h@}\) m</li>
 </ul>
 </p>
 
-<p>Substitute into the formula</strong></p>
+<p><strong>Substitute into the formula:</strong></p>
 <p>
 \[
 \text{Area} = \frac{1}{2}({@a@} + {@b@}) \times {@h@}
@@ -94,7 +97,17 @@ From the diagram:
 
 <p>
 \[
-\text{Area} = {@ta1@} \text{ m}^2
+\text{Area} \approx {@Area_disp@} \text{ m}^2
+\]
+</p>
+
+<p>
+Therefore, the area of the field is:
+</p>
+
+<p>
+\[
+\boxed{{@Area_disp@}\text{ m}^2}
 \]
 </p>]]></text>
     </generalfeedback>
@@ -106,11 +119,9 @@ From the diagram:
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[/* Parallel sides */
+      <text>/* Parallel sides */
 a : rand(6) + 10;
 b : rand(5) + 4;
-
-if b >= a then (tmp:a, a:b+2, b:tmp-2);
 
 /* Height */
 h : rand(5) + 4;
@@ -119,25 +130,25 @@ h : rand(5) + 4;
 diff : (a - b)/2;
 slant : float(sqrt(h^2 + diff^2));
 
-/* Area */
-ta1 : (1/2)*(a + b)*h;
+/* Area evaluated natively as float */
+Area_float : float(0.5*(a + b)*h);
+Area_disp : dispdp(Area_float, 2);
 
-/* --- Common mistakes --- */
-
+/* --- Common mistakes evaluated as floats --- */
 /* 1. Missing 1/2 factor */
-mistake1 : (a + b)*h;
+mistake1 : float((a + b)*h);
 
 /* 2. Using slanted side instead of height */
-mistake2 : (1/2)*(a + b)*slant;
+mistake2 : float(0.5*(a + b)*slant);
 
 /* 3. Adding all four sides (treating like perimeter idea) */
-mistake3 : (1/2)*(a + b + 2*slant)*h;]]></text>
+mistake3 : float(0.5*(a + b + 2*slant)*h);</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta1@}</text>
+      <text><![CDATA[<p>a: {@a@}, b: {@b@}, h: {@h@}, Area: {@Area_disp@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -167,15 +178,15 @@ mistake3 : (1/2)*(a + b + 2*slant)*h;]]></text>
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>ta1</tans>
-      <boxsize>6</boxsize>
+      <tans>Area_disp</tans>
+      <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
@@ -193,10 +204,10 @@ mistake3 : (1/2)*(a + b + 2*slant)*h;]]></text>
       <node>
         <name>0</name>
         <description/>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
-        <tans>ta1</tans>
-        <testoptions/>
+        <tans>Area_float</tans>
+        <testoptions>2</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -218,10 +229,10 @@ mistake3 : (1/2)*(a + b + 2*slant)*h;]]></text>
       <node>
         <name>1</name>
         <description/>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>mistake1</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -229,7 +240,7 @@ mistake3 : (1/2)*(a + b + 2*slant)*h;]]></text>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text><![CDATA[<p>You seem to have forgotten to multiply the product of base and height by the factor 1/2. Kindly check at the step by step worked solution.</p>]]></text>
+          <text><![CDATA[<p>You seem to have forgotten to multiply the product of the base sums and height by the factor \(\frac{1}{2}\). Kindly check the step-by-step worked solution.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -243,10 +254,10 @@ mistake3 : (1/2)*(a + b + 2*slant)*h;]]></text>
       <node>
         <name>2</name>
         <description/>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>mistake2</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -254,7 +265,7 @@ mistake3 : (1/2)*(a + b + 2*slant)*h;]]></text>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-3-T</trueanswernote>
         <truefeedback format="html">
-          <text><![CDATA[<p>You have used the slanted side instead of the perpendicular height to find the area. Please look at the worked solution below.</p>]]></text>
+          <text><![CDATA[<p>You have used the slanted side instead of the perpendicular height (\(h\)) to find the area. Please look at the worked solution below.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -268,10 +279,10 @@ mistake3 : (1/2)*(a + b + 2*slant)*h;]]></text>
       <node>
         <name>3</name>
         <description/>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>mistake3</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -279,7 +290,7 @@ mistake3 : (1/2)*(a + b + 2*slant)*h;]]></text>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-4-T</trueanswernote>
         <truefeedback format="html">
-          <text><![CDATA[<p>You have incorrectly used all four sides. Remember only the parallel sides are used to find the area as by the formula. Check on the worked solution below.</p>]]></text>
+          <text><![CDATA[<p>You have incorrectly used all four sides. Remember, only the parallel sides are used in the formula to find the area. Check the worked solution below.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -291,31 +302,93 @@ mistake3 : (1/2)*(a + b + 2*slant)*h;]]></text>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>595980039</deployedseed>
-    <deployedseed>1280638758</deployedseed>
-    <deployedseed>1034010481</deployedseed>
-    <deployedseed>1029743426</deployedseed>
-    <deployedseed>99590559</deployedseed>
-    <deployedseed>2070594798</deployedseed>
-    <deployedseed>2029004031</deployedseed>
-    <deployedseed>1945324297</deployedseed>
-    <deployedseed>6860950</deployedseed>
-    <deployedseed>1439883486</deployedseed>
-    <deployedseed>168352162</deployedseed>
-    <deployedseed>2072715401</deployedseed>
-    <deployedseed>1420469363</deployedseed>
-    <deployedseed>1802718925</deployedseed>
-    <deployedseed>2057960336</deployedseed>
-    <deployedseed>1795377839</deployedseed>
-    <deployedseed>698509993</deployedseed>
-    <deployedseed>361953432</deployedseed>
-    <deployedseed>554637946</deployedseed>
-    <deployedseed>1968582307</deployedseed>
-    <deployedseed>1291603022</deployedseed>
-    <deployedseed>1972864690</deployedseed>
-    <deployedseed>320227623</deployedseed>
-    <deployedseed>57447607</deployedseed>
-    <deployedseed>1055123211</deployedseed>
-    <deployedseed>1078800958</deployedseed>
+    <deployedseed>370274150</deployedseed>
+    <deployedseed>813448076</deployedseed>
+    <deployedseed>1160264344</deployedseed>
+    <deployedseed>1217290343</deployedseed>
+    <deployedseed>1353853806</deployedseed>
+    <deployedseed>789710838</deployedseed>
+    <deployedseed>446452184</deployedseed>
+    <deployedseed>1727739254</deployedseed>
+    <deployedseed>1676186475</deployedseed>
+    <deployedseed>500470621</deployedseed>
+    <deployedseed>494494756</deployedseed>
+    <deployedseed>851227890</deployedseed>
+    <deployedseed>184357055</deployedseed>
+    <deployedseed>1859146993</deployedseed>
+    <deployedseed>569212681</deployedseed>
+    <deployedseed>1285822200</deployedseed>
+    <deployedseed>1211029241</deployedseed>
+    <deployedseed>1620378927</deployedseed>
+    <deployedseed>1334460838</deployedseed>
+    <deployedseed>78160054</deployedseed>
+    <deployedseed>441841901</deployedseed>
+    <deployedseed>1213630383</deployedseed>
+    <deployedseed>491561868</deployedseed>
+    <deployedseed>268844887</deployedseed>
+    <deployedseed>1031605268</deployedseed>
+    <deployedseed>2099039315</deployedseed>
+    <deployedseed>799306742</deployedseed>
+    <deployedseed>56069321</deployedseed>
+    <deployedseed>280613737</deployedseed>
+    <deployedseed>1007481031</deployedseed>
+    <deployedseed>1032015966</deployedseed>
+    <deployedseed>1824924962</deployedseed>
+    <deployedseed>1570970000</deployedseed>
+    <deployedseed>1377017198</deployedseed>
+    <deployedseed>1813253849</deployedseed>
+    <deployedseed>1878273229</deployedseed>
+    <deployedseed>1326406690</deployedseed>
+    <deployedseed>1707346004</deployedseed>
+    <deployedseed>438583632</deployedseed>
+    <deployedseed>511996840</deployedseed>
+    <deployedseed>1559667079</deployedseed>
+    <deployedseed>412920299</deployedseed>
+    <deployedseed>1467938140</deployedseed>
+    <deployedseed>942126779</deployedseed>
+    <deployedseed>2100572702</deployedseed>
+    <deployedseed>1525940984</deployedseed>
+    <deployedseed>1867644209</deployedseed>
+    <deployedseed>1553284856</deployedseed>
+    <deployedseed>1406370617</deployedseed>
+    <deployedseed>1788494962</deployedseed>
+    <deployedseed>1325210153</deployedseed>
+    <deployedseed>685179429</deployedseed>
+    <deployedseed>12733665</deployedseed>
+    <deployedseed>48909808</deployedseed>
+    <deployedseed>462650146</deployedseed>
+    <deployedseed>1997460686</deployedseed>
+    <deployedseed>514832787</deployedseed>
+    <deployedseed>175575623</deployedseed>
+    <deployedseed>1209777092</deployedseed>
+    <deployedseed>1955059341</deployedseed>
+    <deployedseed>911950879</deployedseed>
+    <deployedseed>1096815537</deployedseed>
+    <deployedseed>7564859</deployedseed>
+    <deployedseed>342590378</deployedseed>
+    <deployedseed>58525608</deployedseed>
+    <deployedseed>633079306</deployedseed>
+    <deployedseed>1573629576</deployedseed>
+    <deployedseed>76252361</deployedseed>
+    <deployedseed>969424300</deployedseed>
+    <deployedseed>1993226381</deployedseed>
+    <deployedseed>248783559</deployedseed>
+    <deployedseed>1170472460</deployedseed>
+    <deployedseed>707783702</deployedseed>
+    <deployedseed>544280213</deployedseed>
+    <qtest>
+      <testcase>1</testcase>
+      <description>Test case assuming the teacher's input gets full marks.</description>
+      <testinput>
+        <name>ans1</name>
+        <value>Area_disp</value>
+      </testinput>
+      <expected>
+        <name>prt1</name>
+        <expectedscore>1.0000000</expectedscore>
+        <expectedpenalty>0.0000000</expectedpenalty>
+        <expectedanswernote>( prt1-1-T ]</expectedanswernote>
+      </expected>
+    </qtest>
   </question>
 </quiz>

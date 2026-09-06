@@ -18,11 +18,6 @@
 <p> </p>
 <li>{@n5@}: \(\,\,\) [[input:ans5]] [[validation:ans5]] [[feedback:prt5]]</li>
 <p> </p>
-<li>{@n6@}: \(\,\,\) [[input:ans6]] [[validation:ans6]] [[feedback:prt6]]</li>
-<p> </p>
-<li>{@n7@}: \(\,\,\) [[input:ans7]] [[validation:ans7]] [[feedback:prt7]]</li>
-<p> </p>
-<li>{@n8@}:  \(\,\,\)[[input:ans8]] [[validation:ans8]] [[feedback:prt8]]</li>
 </ol>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
@@ -83,29 +78,6 @@
     <td><strong>{@t_ans5@}</strong></td>
   </tr>
 
-  <tr>
-    <td>{@n6@}</td>
-    <td>{@if n6 < 2 then "The number is less than 2"
-        else if is_prime(n6) then "It has no divisors other than 1 and itself"
-        else "It has divisors other than 1 and itself"@}</td>
-    <td><strong>{@t_ans6@}</strong></td>
-  </tr>
-
-  <tr>
-    <td>{@n7@}</td>
-    <td>{@if n7 < 2 then "The number is less than 2"
-        else if is_prime(n7) then "It has no divisors other than 1 and itself"
-        else "It has divisors other than 1 and itself"@}</td>
-    <td><strong>{@t_ans7@}</strong></td>
-  </tr>
-
-  <tr>
-    <td>{@n8@}</td>
-    <td>{@if n8 < 2 then "The number is less than 2"
-        else if is_prime(n8) then "It has no divisors other than 1 and itself"
-        else "It has divisors other than 1 and itself"@}</td>
-    <td><strong>{@t_ans8@}</strong></td>
-  </tr>
 </table>
 
 <p><strong>Helpful checks:</strong></p>
@@ -121,7 +93,7 @@
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2026010500</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text><![CDATA[/* Function to generate random prime (2-50) */
@@ -182,9 +154,10 @@ n2: shuffled[2][1];  t_ans2: shuffled[2][2];
 n3: shuffled[3][1];  t_ans3: shuffled[3][2];
 n4: shuffled[4][1];  t_ans4: shuffled[4][2];
 n5: shuffled[5][1];  t_ans5: shuffled[5][2];
-n6: shuffled[6][1];  t_ans6: shuffled[6][2];
+/* n6: shuffled[6][1];  t_ans6: shuffled[6][2];
 n7: shuffled[7][1];  t_ans7: shuffled[7][2];
 n8: shuffled[8][1];  t_ans8: shuffled[8][2];
+ */
 
 /* Model answers - same as teacher answers */
 model_ans1: t_ans1;
@@ -192,9 +165,9 @@ model_ans2: t_ans2;
 model_ans3: t_ans3;
 model_ans4: t_ans4;
 model_ans5: t_ans5;
-model_ans6: t_ans6;
+/* model_ans6: t_ans6;
 model_ans7: t_ans7;
-model_ans8: t_ans8;
+model_ans8: t_ans8; */
 
 /* Dropdown matrices - EXACT PATTERN from logic question */
 m_ans1: [["Prime", is(t_ans1 = "Prime")], ["Composite", is(t_ans1 = "Composite")], ["Neither", is(t_ans1 = "Neither")]];
@@ -202,9 +175,10 @@ m_ans2: [["Prime", is(t_ans2 = "Prime")], ["Composite", is(t_ans2 = "Composite")
 m_ans3: [["Prime", is(t_ans3 = "Prime")], ["Composite", is(t_ans3 = "Composite")], ["Neither", is(t_ans3 = "Neither")]];
 m_ans4: [["Prime", is(t_ans4 = "Prime")], ["Composite", is(t_ans4 = "Composite")], ["Neither", is(t_ans4 = "Neither")]];
 m_ans5: [["Prime", is(t_ans5 = "Prime")], ["Composite", is(t_ans5 = "Composite")], ["Neither", is(t_ans5 = "Neither")]];
-m_ans6: [["Prime", is(t_ans6 = "Prime")], ["Composite", is(t_ans6 = "Composite")], ["Neither", is(t_ans6 = "Neither")]];
+/* m_ans6: [["Prime", is(t_ans6 = "Prime")], ["Composite", is(t_ans6 = "Composite")], ["Neither", is(t_ans6 = "Neither")]];
 m_ans7: [["Prime", is(t_ans7 = "Prime")], ["Composite", is(t_ans7 = "Composite")], ["Neither", is(t_ans7 = "Neither")]];
 m_ans8: [["Prime", is(t_ans8 = "Prime")], ["Composite", is(t_ans8 = "Composite")], ["Neither", is(t_ans8 = "Neither")]];
+ */
 
 /* Simple feedback */
 fb_wrong1: sconcat("You have failed to classify ", n1, " correctly. It is ", t_ans1, ".");
@@ -212,9 +186,10 @@ fb_wrong2: sconcat("You have failed to classify ", n2, " correctly. It is ", t_a
 fb_wrong3: sconcat("You have failed to classify ", n3, " correctly. It is ", t_ans3, ".");
 fb_wrong4: sconcat("You have failed to classify ", n4, " correctly. It is ", t_ans4, ".");
 fb_wrong5: sconcat("You have failed to classify ", n5, " correctly. It is ", t_ans5, ".");
-fb_wrong6: sconcat("You have failed to classify ", n6, " correctly. It is ", t_ans6, ".");
+/* fb_wrong6: sconcat("You have failed to classify ", n6, " correctly. It is ", t_ans6, ".");
 fb_wrong7: sconcat("You have failed to classify ", n7, " correctly. It is ", t_ans7, ".");
 fb_wrong8: sconcat("You have failed to classify ", n8, " correctly. It is ", t_ans8, ".");
+ */
 ]]></text>
     </questionvariables>
     <specificfeedback format="html">
@@ -325,60 +300,6 @@ fb_wrong8: sconcat("You have failed to classify ", n8, " correctly. It is ", t_a
       <name>ans5</name>
       <type>dropdown</type>
       <tans>m_ans5</tans>
-      <boxsize>15</boxsize>
-      <strictsyntax>1</strictsyntax>
-      <insertstars>0</insertstars>
-      <syntaxhint/>
-      <syntaxattribute>0</syntaxattribute>
-      <forbidwords/>
-      <allowwords/>
-      <forbidfloat>1</forbidfloat>
-      <requirelowestterms>0</requirelowestterms>
-      <checkanswertype>0</checkanswertype>
-      <mustverify>0</mustverify>
-      <showvalidation>0</showvalidation>
-      <options/>
-    </input>
-    <input>
-      <name>ans6</name>
-      <type>dropdown</type>
-      <tans>m_ans6</tans>
-      <boxsize>15</boxsize>
-      <strictsyntax>1</strictsyntax>
-      <insertstars>0</insertstars>
-      <syntaxhint/>
-      <syntaxattribute>0</syntaxattribute>
-      <forbidwords/>
-      <allowwords/>
-      <forbidfloat>1</forbidfloat>
-      <requirelowestterms>0</requirelowestterms>
-      <checkanswertype>0</checkanswertype>
-      <mustverify>0</mustverify>
-      <showvalidation>0</showvalidation>
-      <options/>
-    </input>
-    <input>
-      <name>ans7</name>
-      <type>dropdown</type>
-      <tans>m_ans7</tans>
-      <boxsize>15</boxsize>
-      <strictsyntax>1</strictsyntax>
-      <insertstars>0</insertstars>
-      <syntaxhint/>
-      <syntaxattribute>0</syntaxattribute>
-      <forbidwords/>
-      <allowwords/>
-      <forbidfloat>1</forbidfloat>
-      <requirelowestterms>0</requirelowestterms>
-      <checkanswertype>0</checkanswertype>
-      <mustverify>0</mustverify>
-      <showvalidation>0</showvalidation>
-      <options/>
-    </input>
-    <input>
-      <name>ans8</name>
-      <type>dropdown</type>
-      <tans>m_ans8</tans>
       <boxsize>15</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -563,108 +484,6 @@ fb_wrong8: sconcat("You have failed to classify ", n8, " correctly. It is ", t_a
         </falsefeedback>
       </node>
     </prt>
-    <prt>
-      <name>prt6</name>
-      <value>1.0000000</value>
-      <autosimplify>1</autosimplify>
-      <feedbackstyle>1</feedbackstyle>
-      <feedbackvariables>
-        <text/>
-      </feedbackvariables>
-      <node>
-        <name>0</name>
-        <description/>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans6</sans>
-        <tans>t_ans6</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
-        <truepenalty/>
-        <truenextnode>-1</truenextnode>
-        <trueanswernote>prt6-1-T</trueanswernote>
-        <truefeedback format="html">
-          <text/>
-        </truefeedback>
-        <falsescoremode>=</falsescoremode>
-        <falsescore>0</falsescore>
-        <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt6-1-F</falseanswernote>
-        <falsefeedback format="html">
-          <text>{@fb_wrong6@}</text>
-        </falsefeedback>
-      </node>
-    </prt>
-    <prt>
-      <name>prt7</name>
-      <value>1.0000000</value>
-      <autosimplify>1</autosimplify>
-      <feedbackstyle>1</feedbackstyle>
-      <feedbackvariables>
-        <text/>
-      </feedbackvariables>
-      <node>
-        <name>0</name>
-        <description/>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans7</sans>
-        <tans>t_ans7</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
-        <truepenalty/>
-        <truenextnode>-1</truenextnode>
-        <trueanswernote>prt7-1-T</trueanswernote>
-        <truefeedback format="html">
-          <text/>
-        </truefeedback>
-        <falsescoremode>=</falsescoremode>
-        <falsescore>0</falsescore>
-        <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt7-1-F</falseanswernote>
-        <falsefeedback format="html">
-          <text>{@fb_wrong7@}</text>
-        </falsefeedback>
-      </node>
-    </prt>
-    <prt>
-      <name>prt8</name>
-      <value>1.0000000</value>
-      <autosimplify>1</autosimplify>
-      <feedbackstyle>1</feedbackstyle>
-      <feedbackvariables>
-        <text/>
-      </feedbackvariables>
-      <node>
-        <name>0</name>
-        <description/>
-        <answertest>AlgEquiv</answertest>
-        <sans>ans8</sans>
-        <tans>t_ans8</tans>
-        <testoptions/>
-        <quiet>0</quiet>
-        <truescoremode>=</truescoremode>
-        <truescore>1</truescore>
-        <truepenalty/>
-        <truenextnode>-1</truenextnode>
-        <trueanswernote>prt8-1-T</trueanswernote>
-        <truefeedback format="html">
-          <text/>
-        </truefeedback>
-        <falsescoremode>=</falsescoremode>
-        <falsescore>0</falsescore>
-        <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt8-1-F</falseanswernote>
-        <falsefeedback format="html">
-          <text>{@fb_wrong8@}</text>
-        </falsefeedback>
-      </node>
-    </prt>
     <deployedseed>790907851</deployedseed>
     <deployedseed>472590155</deployedseed>
     <deployedseed>1852757535</deployedseed>
@@ -732,18 +551,6 @@ fb_wrong8: sconcat("You have failed to classify ", n8, " correctly. It is ", t_a
         <name>ans5</name>
         <value>first(mcq_correct(m_ans5))</value>
       </testinput>
-      <testinput>
-        <name>ans6</name>
-        <value>first(mcq_correct(m_ans6))</value>
-      </testinput>
-      <testinput>
-        <name>ans7</name>
-        <value>first(mcq_correct(m_ans7))</value>
-      </testinput>
-      <testinput>
-        <name>ans8</name>
-        <value>first(mcq_correct(m_ans8))</value>
-      </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
@@ -773,24 +580,6 @@ fb_wrong8: sconcat("You have failed to classify ", n8, " correctly. It is ", t_a
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
         <expectedanswernote>prt5-1-T</expectedanswernote>
-      </expected>
-      <expected>
-        <name>prt6</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt6-1-T</expectedanswernote>
-      </expected>
-      <expected>
-        <name>prt7</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt7-1-T</expectedanswernote>
-      </expected>
-      <expected>
-        <name>prt8</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt8-1-T</expectedanswernote>
       </expected>
     </qtest>
   </question>

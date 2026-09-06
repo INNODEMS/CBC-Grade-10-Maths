@@ -6,49 +6,112 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
-A student stands {@d@} m away from a building. The angle of elevation of the top of the building is {@theta@}\(^{\circ}\). Find the height of the building.
+A student stands <b>{@d@} m</b> away from a building. The angle of elevation from the ground to the top of the building is <b>{@theta@}&deg;</b>. 
 </p>
+
+<p>
+Use the diagram below to find the height of the building.
+</p>
+
+[[jsxgraph]]
+    var d = {#d#};
+    var theta = {#theta#};
+    var h = {#h#};
+    
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [-4, h + 6, d + 8, -4],
+        keepAspectRatio: true,
+        showNavigation: false,
+        showCopyright: false
+    });
+    
+    // Points
+    var student = board.create('point', [0, 0], {name: 'Student', size: 3, color: 'black', label: {offset: [-25, -15]}});
+    var bldg_base = board.create('point', [d, 0], {visible: false});
+    var bldg_top = board.create('point', [d, h], {visible: false});
+    
+    // Lines and Shapes
+    board.create('segment', [[-3, 0], [d+6, 0]], {strokeColor: 'black', strokeWidth: 2}); // Ground
+    board.create('segment', [student, bldg_top], {strokeColor: 'black', strokeWidth: 1.5}); // Line of sight
+    
+    // Building Representation
+    board.create('polygon', [
+        bldg_base, 
+        board.create('point', [d+4, 0], {visible: false}), 
+        board.create('point', [d+4, h], {visible: false}), 
+        bldg_top
+    ], {fillColor: '#cfd8dc', borders: {strokeColor: 'black', strokeWidth: 2}});
+    
+    // Angles
+    board.create('angle', [board.create('point', [d-1, 0], {visible: false}), bldg_base, bldg_top], {radius: d*0.1, type: 'square', strokeColor: 'black'});
+    board.create('angle', [bldg_base, student, bldg_top], {radius: d*0.25, strokeColor: 'black', name: theta + "°"});
+    
+    // Adjusted Labels
+    board.create('text', [d/2, -1.5, d + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 14});
+    board.create('text', [d-0.3, h/2, "height = ?"], {anchorX: 'right', anchorY: 'middle', fontSize: 14});
+    board.create('text', [d+2, h/2, "Building"], {anchorX: 'middle', anchorY: 'middle', fontSize: 14});
+[[/jsxgraph]]
 
 <p>
 Give your answer correct to <b>2 decimal places</b>.
 </p>
 
 <p>
-Height = [[input:ans1]] m [[validation:ans1]] [[feedback:prt1]]
+Height = [[input:ans1]] <b>m</b> [[validation:ans1]] [[feedback:prt1]]
 </p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
 
 <p>
-Step 1: Use the tangent ratio:
+Step 1: Identify the sides relative to the angle.
+</p>
+
+<p>
+The angle of elevation is {@theta@}&deg;. <br>
+The horizontal distance to the building is the <b>adjacent</b> side ({@d@} m). <br>
+The height of the building is the <b>opposite</b> side.
+</p>
+
+<p>
+Step 2: Use the tangent ratio.
 </p>
 
 <p>
 \[
-\tan \theta = \frac{\text{height}}{\text{distance}}
+\tan(\theta) = \frac{\text{opposite}}{\text{adjacent}}
 \]
 </p>
 
 <p>
 \[
-\tan {@theta@} = \frac{h}{@d@}
+\tan({@theta@}^\circ) = \frac{h}{{@d@}}
 \]
 </p>
 
 <p>
-Step 2: Solve for height:
+Step 3: Solve for the height (\(h\)).
 </p>
 
 <p>
 \[
-h = {@d@} \times \tan {@theta@}
+h = {@d@} \times \tan({@theta@}^\circ)
 \]
 </p>
 
 <p>
 \[
-h = {@h_round@} m
+h \approx {@h_disp@}
+\]
+</p>
+
+<p>
+Therefore, the height of the building is:
+</p>
+
+<p>
+\[
+\boxed{@h_disp@} \text{ m}
 \]
 </p>]]></text>
     </generalfeedback>
@@ -57,38 +120,35 @@ h = {@h_round@} m
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2026010500</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text>/* Distance from object */
 d: rand(10) + 10;
 
-/* Angle (choose standard angles for clean values) */
-angles: [30,45,60];
-theta: angles[rand(3)];
+/* Angle */
+theta: rand([30, 35, 40, 45, 50, 55, 60]);
 
-/* Height calculation */
-h: if theta=30 then d/sqrt(3)
-   elseif theta=45 then d
-   else d*sqrt(3);
+/* Height calculation evaluated natively as a float */
+h: float(d * tan(theta * %pi / 180));
 
-/* Rounded */
-h_round: float(round(h*100)/100);
+/* Display variable formatted to exactly 2 decimal places */
+h_disp: dispdp(h, 2);
 
-/* mistakes */
-m1: d*tan(theta);   /* incorrect use */
-m2: d*cos(theta);
-m3: d*sin(theta);</text>
+/* Mistakes */
+m1: float(d / tan(theta * %pi / 180)); /* Inverted tangent */
+m2: float(d * sin(theta * %pi / 180)); /* Used sine */
+m3: float(d * cos(theta * %pi / 180)); /* Used cosine */</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@h_round@}</text>
+      <text><![CDATA[<p>d: {@d@}, theta: {@theta@}, height: {@h_disp@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
-<p id="concept">Trigonometry in real-life</p>
+<p id="concept">Angles of elevation</p>
 <p id="reviewer"></p>
 <p id="reviewer"></p>
 
@@ -121,7 +181,7 @@ The question requires the learner to determine the height of a building using an
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>h_round</tans>
+      <tans>h_disp</tans>
       <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -147,10 +207,10 @@ The question requires the learner to determine the height of a building using an
       <node>
         <name>0</name>
         <description>checks for the correct answer</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
-        <tans>h_round</tans>
-        <testoptions/>
+        <tans>h</tans>
+        <testoptions>2</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -171,11 +231,11 @@ The question requires the learner to determine the height of a building using an
       </node>
       <node>
         <name>1</name>
-        <description>mistake1</description>
-        <answertest>AlgEquiv</answertest>
+        <description>mistake 1 - inverted ratio</description>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
-        <tans>m2</tans>
-        <testoptions/>
+        <tans>m1</tans>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -183,55 +243,115 @@ The question requires the learner to determine the height of a building using an
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text>Use tangent: 
-tan 𝜃 = \frac {height}{distance}</text>
+          <text><![CDATA[<p>You inverted the tangent ratio. Remember, \(\tan(\theta) = \frac{\text{opposite}}{\text{adjacent}}\). Because you want to find the opposite side (height), you should multiply the distance by the tangent of the angle.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>mistake 2 - used sine</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions>0.05</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You used sine instead of tangent. The adjacent side is known, and the opposite side is unknown. Use \(\tan(\theta)\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>mistake 3 - used cosine</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions>0.05</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You used cosine instead of tangent. The adjacent side is known, and the opposite side is unknown. Use \(\tan(\theta)\).</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
         <falsenextnode>-1</falsenextnode>
-        <falseanswernote>prt1-2-F</falseanswernote>
+        <falseanswernote>prt1-4-F</falseanswernote>
         <falsefeedback format="html">
-          <text>Use: tan θ = \frac {d}{h}</text>
+          <text/>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>694510577</deployedseed>
-    <deployedseed>1036570820</deployedseed>
-    <deployedseed>644137346</deployedseed>
-    <deployedseed>178913173</deployedseed>
-    <deployedseed>1653499507</deployedseed>
-    <deployedseed>728611637</deployedseed>
-    <deployedseed>1034472301</deployedseed>
-    <deployedseed>1542308450</deployedseed>
-    <deployedseed>1813291236</deployedseed>
-    <deployedseed>519959698</deployedseed>
-    <deployedseed>1724844656</deployedseed>
-    <deployedseed>484043352</deployedseed>
-    <deployedseed>940361341</deployedseed>
-    <deployedseed>1143423595</deployedseed>
-    <deployedseed>919992326</deployedseed>
-    <deployedseed>524823649</deployedseed>
-    <deployedseed>1452857397</deployedseed>
-    <deployedseed>708585427</deployedseed>
-    <deployedseed>973367153</deployedseed>
-    <deployedseed>2061025975</deployedseed>
-    <deployedseed>1352680960</deployedseed>
-    <deployedseed>855932687</deployedseed>
-    <deployedseed>180773563</deployedseed>
-    <deployedseed>2122735753</deployedseed>
+    <deployedseed>1915197225</deployedseed>
+    <deployedseed>150206404</deployedseed>
+    <deployedseed>377226346</deployedseed>
+    <deployedseed>788961301</deployedseed>
+    <deployedseed>343218966</deployedseed>
+    <deployedseed>341426863</deployedseed>
+    <deployedseed>912379701</deployedseed>
+    <deployedseed>1197127631</deployedseed>
+    <deployedseed>871755499</deployedseed>
+    <deployedseed>1318344059</deployedseed>
+    <deployedseed>1997384458</deployedseed>
+    <deployedseed>345915095</deployedseed>
+    <deployedseed>603183917</deployedseed>
+    <deployedseed>609796159</deployedseed>
+    <deployedseed>1813660302</deployedseed>
+    <deployedseed>1826899015</deployedseed>
+    <deployedseed>1127418023</deployedseed>
+    <deployedseed>128538150</deployedseed>
+    <deployedseed>2073340704</deployedseed>
+    <deployedseed>1778921246</deployedseed>
+    <deployedseed>1651636079</deployedseed>
+    <deployedseed>1534537287</deployedseed>
+    <deployedseed>972110656</deployedseed>
+    <deployedseed>2076159027</deployedseed>
+    <deployedseed>774389412</deployedseed>
+    <deployedseed>1803828749</deployedseed>
+    <deployedseed>362976876</deployedseed>
+    <deployedseed>619699989</deployedseed>
+    <deployedseed>707290157</deployedseed>
+    <deployedseed>1481584257</deployedseed>
+    <deployedseed>2081870749</deployedseed>
+    <deployedseed>1184483246</deployedseed>
+    <deployedseed>905493036</deployedseed>
+    <deployedseed>453598280</deployedseed>
+    <deployedseed>1479031466</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>h_round</value>
+        <value>h_disp</value>
       </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>( prt1-1-T ]</expectedanswernote>
       </expected>
     </qtest>
   </question>

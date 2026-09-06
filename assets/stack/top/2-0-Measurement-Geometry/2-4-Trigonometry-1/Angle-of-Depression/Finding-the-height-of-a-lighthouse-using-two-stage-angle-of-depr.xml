@@ -2,68 +2,75 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Finding the height of a lighthouse using two-stage angle-of-depression reasoning</text>
+      <text>Finding the the height of a deck using angle of depression</text>
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
-A student stands on a deck near the top of a {@structure@} at the coast of {@coast@}. The student's eyes are <b>{@eye@} m</b> above the deck floor shown in the diagram. The student looks down at a {@item@} floating on the sea. The angle of depression to the {@item@} is <b>{@theta@}&deg;</b>. The horizontal distance from the base of the {@structure@} to the {@item@} is <b>{@d@} m</b>.
+A student stands on a deck near the top of a <b>{@structure@}</b> at the coast of {@coast@}. The student's eyes are <b>{@eye@} m</b> above the deck floor shown in the diagram. The student looks down at a {@item@} floating on the sea. The angle of depression to the {@item@} is <b>{@theta@}&deg;</b>. The horizontal distance from the base of the {@structure@} to the {@item@} is <b>{@d@} m</b>.
 </p>
 
 <p>
 Find the total height of the {@structure@} above sea level.
 </p>
 
-<div style="margin:10px 0;">
-<svg width="520" height="300" xmlns="http://www.w3.org/2000/svg">
-
-  <!-- Sea level / ground -->
-  <line x1="55" y1="225" x2="405" y2="225" stroke="black" stroke-width="2"/>
-
-  <!-- Viewing platform vertical -->
-  <line x1="95" y1="225" x2="95" y2="75" stroke="black" stroke-width="2"/>
-
-  <!-- Deck floor -->
-  <line x1="95" y1="140" x2="145" y2="140" stroke="black" stroke-width="2"/>
-
-  <!-- Eye-above-deck segment -->
-  <line x1="145" y1="140" x2="145" y2="115" stroke="black" stroke-width="1.5"/>
-
-  <!-- Eye point -->
-  <circle cx="145" cy="115" r="3" fill="black"/>
-
-  <!-- Horizontal through eye -->
-  <line x1="145" y1="115" x2="280" y2="115" stroke="black" stroke-width="1.5" stroke-dasharray="6,4"/>
-
-  <!-- Line of sight -->
-  <line x1="145" y1="115" x2="330" y2="225" stroke="black" stroke-width="2"/>
-
-  <!-- Right angle marker -->
-  <path d="M95 210 L108 210 L108 225" fill="none" stroke="black" stroke-width="1.5"/>
-
-  <!-- Angle arc -->
-  <path d="M165 115 A22 22 0 0 1 158 131" fill="none" stroke="black" stroke-width="1.5"/>
-
-  <!-- Labels near the top -->
-  <text x="150" y="110" font-size="14">eye</text>
-  <text x="118" y="128" font-size="15">{@eye@} m</text>
-  <text x="170" y="129" font-size="15">{@theta@}°</text>
-
-  <!-- Left-side label -->
-  <text x="18" y="155" font-size="15">height = ?</text>
-
-  <!-- Deck label -->
-  <text x="120" y="156" font-size="13">deck</text>
-
-  <!-- Bottom labels -->
-  <text x="210" y="245" font-size="15">{@d@} m</text>
-  <text x="316" y="244" font-size="14">{@item@}</text>
-  <text x="336" y="214" font-size="13">sea level</text>
-
-</svg>
-</div>
+[[jsxgraph]]
+    var d = {#d#};
+    var extra = {#extra#};
+    var eye = {#eye#};
+    var theta = {#theta#};
+    var h_total = extra + eye;
+    
+    // Dynamic bounding box scales to fit the randomized math
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [-6, h_total + 8, d + 8, -6],
+        keepAspectRatio: true,
+        showNavigation: false,
+        showCopyright: false
+    });
+    
+    // Points 
+    var base = board.create('point', [0, 0], {visible: false});
+    var item_pt = board.create('point', [d, 0], {visible: false});
+    var eye_pt = board.create('point', [0, h_total], {name: '', size: 1, color: 'black'});
+    var sight_end = board.create('point', [d+5, h_total], {visible: false});
+    var deck_left = board.create('point', [0, extra], {visible: false});
+    var deck_right = board.create('point', [4, extra], {visible: false});
+    
+    // Base Lines
+    board.create('segment', [[-3, 0], [d+5, 0]], {strokeColor: 'black', strokeWidth: 2}); 
+    board.create('segment', [[0,0], deck_left], {strokeColor: 'black', strokeWidth: 2}); 
+    board.create('segment', [deck_left, deck_right], {strokeColor: 'black', strokeWidth: 2}); 
+    board.create('segment', [eye_pt, sight_end], {strokeColor: 'black', strokeWidth: 1.5, dash: 2}); 
+    board.create('segment', [eye_pt, item_pt], {strokeColor: 'black', strokeWidth: 2}); 
+    
+    // --- The Observer Stick Figure ---
+    board.create('circle', [eye_pt, eye*0.15], {strokeColor: 'black', strokeWidth: 2, fillColor: 'white'});
+    var neckY = h_total - eye*0.15;
+    var waistY = extra + eye*0.45;
+    board.create('segment', [[0, neckY], [0, waistY]], {strokeColor: 'black', strokeWidth: 2}); // Spine
+    board.create('segment', [[0, waistY], [-0.4, extra]], {strokeColor: 'black', strokeWidth: 2}); // Left Leg
+    board.create('segment', [[0, waistY], [0.4, extra]], {strokeColor: 'black', strokeWidth: 2}); // Right Leg
+    board.create('segment', [[0, neckY - eye*0.05], [-0.5, neckY - eye*0.25]], {strokeColor: 'black', strokeWidth: 2}); // Left Arm
+    board.create('segment', [[0, neckY - eye*0.05], [0.5, neckY - eye*0.25]], {strokeColor: 'black', strokeWidth: 2}); // Right Arm
+    
+    // Right angle at base
+    board.create('angle', [board.create('point', [3, 0], {visible: false}), base, board.create('point', [0, 3], {visible: false})], {radius: d*0.1, type: 'square', strokeColor: 'black', name: ""});
+    
+    // Angle of depression
+    board.create('angle', [item_pt, eye_pt, sight_end], {radius: d*0.25, strokeColor: 'black', name: theta + "°"});
+    
+    // Text Labels
+    board.create('text', [d/2, -1.5, d + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 14}); 
+    board.create('text', [d, 1.5, "{@item@}"], {anchorX: 'middle', anchorY: 'bottom', fontSize: 14}); 
+    board.create('text', [d+1, -1.5, "sea level"], {anchorX: 'left', anchorY: 'top', fontSize: 14}); 
+    board.create('text', [-2, h_total/2, "height = ?"], {anchorX: 'right', anchorY: 'middle', fontSize: 14}); 
+    board.create('text', [-0.8, extra + eye/2, eye + " m"], {anchorX: 'right', anchorY: 'middle', fontSize: 14}); 
+    board.create('text', [0, h_total + 1.5 + (eye*0.15), "eye"], {anchorX: 'middle', anchorY: 'bottom', fontSize: 14});
+    board.create('text', [4.5, extra, "deck"], {anchorX: 'left', anchorY: 'middle', fontSize: 14});
+[[/jsxgraph]]
 
 <p>
-Distance = [[input:ans1]] <b>m</b> [[validation:ans1]] [[feedback:prt1]]
+Height = [[input:ans1]] <b>m</b> [[validation:ans1]] [[feedback:prt1]]
 </p>
 
 <p>
@@ -83,6 +90,44 @@ The horizontal distance is {@d@} m.
 The unknown vertical drop from the eye to the sea is the opposite side.
 </p>
 
+[[jsxgraph]]
+    var d = {#d#};
+    var extra = {#extra#};
+    var theta = {#theta#};
+    
+    var board2 = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [-4, extra + 4, d + 4, -4],
+        keepAspectRatio: true,
+        showNavigation: false,
+        showCopyright: false
+    });
+    
+    var top_left = board2.create('point', [0, extra], {visible: false});
+    var bottom_right = board2.create('point', [d, 0], {visible: false});
+    var bottom_left = board2.create('point', [0, 0], {visible: false});
+    var sight_line = board2.create('point', [d+2, extra], {visible: false});
+
+    // Solid geometric triangle
+    board2.create('polygon', [top_left, bottom_right, bottom_left], {
+        fillColor: '#e3f2fd', 
+        fillOpacity: 0.8, 
+        borders: {strokeColor: '#333333', strokeWidth: 2.5}
+    });
+    board2.create('segment', [top_left, sight_line], {strokeColor: '#333333', strokeWidth: 2, dash: 2});
+
+    // Emphasized angles
+    board2.create('angle', [bottom_right, top_left, sight_line], {
+        radius: d*0.25, strokeColor: '#333333', strokeWidth: 2, fillColor: '#90caf9', fillOpacity: 0.5, name: theta + "°"
+    });
+    board2.create('angle', [bottom_right, bottom_left, top_left], {
+        radius: d*0.1, type: 'square', strokeColor: '#333333', strokeWidth: 2, fillColor: '#90caf9', fillOpacity: 0.5, name: ""
+    });
+
+    // Clearer labels
+    board2.create('text', [d/2, -1.5, d + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 16});
+    board2.create('text', [-1, extra/2, "x"], {anchorX: 'right', anchorY: 'middle', fontSize: 18});
+[[/jsxgraph]]
+
 <p>
 Step 2: Use tangent.
 </p>
@@ -94,16 +139,15 @@ Step 2: Use tangent.
 </p>
 
 <p>
-Let the vertical drop be \(x\).
-Then
+Let the vertical drop be \(x\). Then:
 \[
-x={@d@}\tan({@theta@}^\circ)
+x = {@d@} \times \tan({@theta@}^\circ)
 \]
 </p>
 
 <p>
 \[
-x \approx {@m1r@}
+x \approx {@disp_extra@}
 \]
 </p>
 
@@ -123,7 +167,7 @@ The total height of the {@structure@} is:
 
 <p>
 \[
-\text{height} \approx {@m1r@} + {@eye@} = {@height1@}
+\text{height} \approx {@disp_extra@} + {@eye@} = {@disp_height@}
 \]
 </p>
 
@@ -133,7 +177,7 @@ Therefore, the total height of the {@structure@} above sea level is:
 
 <p>
 \[
-\boxed{@height1@} \text{ m}
+\boxed{@disp_height@} \text{ m}
 \]
 </p>]]></text>
     </generalfeedback>
@@ -142,7 +186,7 @@ Therefore, the total height of the {@structure@} above sea level is:
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2026010500</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text><![CDATA[/* Core variables */
@@ -150,28 +194,29 @@ d: rand(5)*2+12;          /* 14,16,18,20,22 m */
 theta: rand(4)*5+30;      /* 35,40,45,50 */
 eye: rand(3)+2;           /* observer eye level above deck: 3 to 5 m */
 
-extra: d*tan(theta*%pi/180);   /* vertical drop from eye level to object */
-height_total: eye + extra;     /* total height above sea level */
-height1: float(round(height_total*10)/10);
+/* Evaluate mathematics to floating-point decimals natively */
+extra: float(d*tan(theta*%pi/180));   /* vertical drop from eye level to object */
+height_total: float(eye + extra);     /* total height above sea level */
+
+/* Display variables formatted to exactly 1 decimal place */
+disp_extra: dispdp(extra, 1);
+disp_height: dispdp(height_total, 1);
 
 /* Context */
-structure: rand(["lighthouse","watch tower","harbour post","viewing platform"]);
-item: rand(["boat","fishing canoe","buoy","small raft"]);
+structure: rand(["lighthouse","watch tower","harbour post"]);
+item: rand(["boat","boy","small raft"]);
 coast: rand(["Mombasa","Kilifi","Lamu","Malindi"]);
 
-/* Distractors */
-m1: extra;                         /* forgot to add eye level */
-m2: d/sin(theta*%pi/180);          /* used wrong trig ratio */
-m3: d*cos(theta*%pi/180)+eye;      /* wrong trig usage */
-m1r: float(round(m1*10)/10);
-m2r: float(round(m2*10)/10);
-m3r: float(round(m3*10)/10);]]></text>
+/*------Mistakes (Calculated as explicit floats)--------*/
+m1: float(extra);                         /* forgot to add eye level */
+m2: float((d/sin(theta*%pi/180)) + eye);  /* used sine instead of tangent */
+m3: float((d/tan(theta*%pi/180)) + eye);  /* inverted tangent ratio */]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@height1@}</text>
+      <text><![CDATA[<p>Height: {@disp_height@}, d: {@d@}, theta: {@theta@}, eye: {@eye@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
@@ -208,8 +253,8 @@ The question requires the learner to interpret a diagram involving an angle of d
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>height1</tans>
-      <boxsize>15</boxsize>
+      <tans>disp_height</tans>
+      <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -234,10 +279,10 @@ The question requires the learner to interpret a diagram involving an angle of d
       <node>
         <name>0</name>
         <description>checks for the correct answer</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
-        <tans>height1</tans>
-        <testoptions/>
+        <tans>height_total</tans>
+        <testoptions>1</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -250,55 +295,104 @@ The question requires the learner to interpret a diagram involving an angle of d
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
+      <node>
+        <name>1</name>
+        <description>mistake 1 - forgot to add eye height</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions>0.1</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You calculated the vertical drop correctly, but you forgot to add the student's eye height to find the <strong>total</strong> height above sea level.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>mistake 2 - used sine</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions>0.1</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You used the wrong trigonometric ratio. The horizontal distance is adjacent to the angle, and the vertical drop is opposite. You should use tangent.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
     </prt>
-    <deployedseed>437833503</deployedseed>
-    <deployedseed>1628130676</deployedseed>
-    <deployedseed>2118279710</deployedseed>
-    <deployedseed>414840799</deployedseed>
-    <deployedseed>870931264</deployedseed>
-    <deployedseed>283332879</deployedseed>
-    <deployedseed>925168717</deployedseed>
-    <deployedseed>612765916</deployedseed>
-    <deployedseed>392529148</deployedseed>
-    <deployedseed>1608217044</deployedseed>
-    <deployedseed>1220648543</deployedseed>
-    <deployedseed>627230587</deployedseed>
-    <deployedseed>1863833878</deployedseed>
-    <deployedseed>1608000847</deployedseed>
-    <deployedseed>506424403</deployedseed>
-    <deployedseed>239204194</deployedseed>
-    <deployedseed>343483079</deployedseed>
-    <deployedseed>322641757</deployedseed>
-    <deployedseed>1463891247</deployedseed>
-    <deployedseed>1010800237</deployedseed>
-    <deployedseed>530275822</deployedseed>
-    <deployedseed>1577514403</deployedseed>
-    <deployedseed>781039037</deployedseed>
-    <deployedseed>1664861974</deployedseed>
-    <deployedseed>1410085946</deployedseed>
-    <deployedseed>799014538</deployedseed>
-    <deployedseed>996282193</deployedseed>
-    <deployedseed>1890937952</deployedseed>
-    <deployedseed>2142639444</deployedseed>
-    <deployedseed>1078152700</deployedseed>
+    <deployedseed>1166794907</deployedseed>
+    <deployedseed>865202819</deployedseed>
+    <deployedseed>1556450676</deployedseed>
+    <deployedseed>1179192874</deployedseed>
+    <deployedseed>1556001873</deployedseed>
+    <deployedseed>375465076</deployedseed>
+    <deployedseed>976364748</deployedseed>
+    <deployedseed>825034240</deployedseed>
+    <deployedseed>1846906949</deployedseed>
+    <deployedseed>937787102</deployedseed>
+    <deployedseed>355439858</deployedseed>
+    <deployedseed>426507119</deployedseed>
+    <deployedseed>1047275517</deployedseed>
+    <deployedseed>1221771099</deployedseed>
+    <deployedseed>1845090787</deployedseed>
+    <deployedseed>48414328</deployedseed>
+    <deployedseed>614513604</deployedseed>
+    <deployedseed>2018617845</deployedseed>
+    <deployedseed>1324754851</deployedseed>
+    <deployedseed>2131315419</deployedseed>
+    <deployedseed>465754836</deployedseed>
+    <deployedseed>67831859</deployedseed>
+    <deployedseed>1783642493</deployedseed>
+    <deployedseed>378310799</deployedseed>
+    <deployedseed>308649487</deployedseed>
+    <deployedseed>1193339772</deployedseed>
+    <deployedseed>2057385151</deployedseed>
+    <deployedseed>1963024767</deployedseed>
+    <deployedseed>176101249</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>height1</value>
+        <value>disp_height</value>
       </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>( prt1-1-T ]</expectedanswernote>
       </expected>
     </qtest>
   </question>

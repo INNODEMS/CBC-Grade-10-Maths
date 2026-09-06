@@ -2,53 +2,66 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Calculating the area of a given 8 sided figure</text>
+      <text>Calculating the area of a given 8-sided figure</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>A regular octagon has center <b>O</b>. If the distance from the center to a vertex is <b>OA = {#r#} cm</b>, find the total area of the octagon.</p>
-<p>Give your answer correct to 2 decimal places.</p>
+      <text><![CDATA[<p>A regular octagon has center <b>O</b>. If the distance from the center to a vertex is <b>OA = {@r@} cm</b>, find the total area of the octagon.</p>
+<p><i>Give your answer correct to 2 decimal places.</i></p>
 
 [[jsxgraph width="400px" height="400px"]]
-var board = JXG.JSXGraph.initBoard(divid, {
-    boundingbox: [-10, 10, 10, -10],
-    axis: false,
-    showNavigation: false,
-    showCopyright: false
-});
+    var R_val = {#r#};
+    var n = 8;
+    
+    // Proportional scaling for a 1:1 canvas
+    var spanX = R_val * 2.5;
+    var spanY = spanX; 
+    
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [-spanX/2, spanY/2, spanX/2, -spanY/2],
+        maxboundingbox: [-spanX*1.5, spanY*1.5, spanX*1.5, -spanY*1.5],
+        axis: false,
+        showNavigation: false,
+        showCopyright: false,
+        keepAspectRatio: true
+    });
 
-var n = 8;
-var R = 7; // Visual radius
+    /* Create Vertices */
+    var points = [];
+    for (var i = 0; i < n; i++) {
+        var angle = (2 * Math.PI * i / n);
+        points.push(board.create('point', [R_val * Math.cos(angle), R_val * Math.sin(angle)], {visible: false}));
+    }
 
-/* Create Vertices */
-var points = [];
-for (var i = 0; i < n; i++) {
-    var angle = (2 * Math.PI * i / n);
-    points.push(board.create('point', [R * Math.cos(angle), R * Math.sin(angle)], {visible: false}));
-}
+    /* Create Octagon */
+    board.create('polygon', points, {
+        fillColor: '#f5f5f5',
+        borders: {strokeWidth: 2, strokeColor: '#424242'}
+    });
 
-/* Create Octagon */
-board.create('polygon', points, {
-    fillColor: '#f0f0f0',
-    borders: {strokeWidth: 2, strokeColor: 'black'}
-});
+    var O = board.create('point', [0, 0], {name: 'O', color: '#212121', size: 3, label:{offset:[-15,-10]}});
+    var A = points[0];
+    var B = points[1];
 
-var O = board.create('point', [0, 0], {name: 'O', color: 'black', size: 3});
-var A = points[0];
-var B = points[1];
+    /* Show the triangle slice */
+    board.create('segment', [O, A], {dash: 2, strokeColor: '#1976d2'});
+    board.create('segment', [O, B], {dash: 2, strokeColor: '#1976d2'});
 
-/* Show the triangle slice from the example */
-board.create('segment', [O, A], {dash: 2, strokeColor: 'gray'});
-board.create('segment', [O, B], {dash: 2, strokeColor: 'gray'});
+    /* Dynamic Midpoints for Labels */
+    var midA = board.create('midpoint', [O, A], {visible: false});
+    var midB = board.create('midpoint', [O, B], {visible: false});
+    
+    var gapY = spanY * 0.03;
 
-/* Labels */
-board.create('text', [3.5, 0.5, "{#r#} cm"], {fontSize: 14});
-board.create('text', [2.5, 3.5, "{#r#} cm"], {fontSize: 14});
+    /* Securely Anchored Labels */
+    board.create('text', [midA.X(), midA.Y() - gapY, R_val + " cm"], {anchorX: 'middle', anchorY: 'top', fontSize: 14});
+    board.create('text', [midB.X() - gapY, midB.Y() + gapY, R_val + " cm"], {anchorX: 'right', anchorY: 'bottom', fontSize: 14});
 
-/* Angle Arc */
-board.create('angle', [A, O, B], {radius: 1.5, name: "45°"});
+    /* Angle Arc */
+    var arc_rad = R_val * 0.25;
+    board.create('angle', [A, O, B], {radius: arc_rad, name: "45°", strokeColor: '#1976d2', fillColor: '#bbdefb'});
 [[/jsxgraph]]
 
-<p>Area = [[input:ans1]] cm<sup>2</sup> [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+<p>Area = [[input:ans1]] <b>\(\text{cm}^2\)</b> [[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
@@ -62,51 +75,57 @@ board.create('angle', [A, O, B], {radius: 1.5, name: "45°"});
 </ul>
 
 <p><b>Step 2: Calculate the area of one triangle</b></p>
-<p>Using the Sine Rule for Area, \(\text{Area} = \frac{1}{2}ab\sin C\):</p>
-
-\[ \text{Area of } \triangle AOB = \frac{1}{2} \times {@r@} \times {@r@} \times \sin(45^\circ) \]
-\[ \text{Area of } \triangle AOB = \frac{1}{2} \times {@r^2@} \times 0.7071 \]
-\[ \text{Area of } \triangle AOB \approx {@round(area_tri*10000)/10000@}\text{ cm}^2 \]
+<p>Using the sine rule for the area of a triangle (\(\text{Area} = \frac{1}{2}ab\sin C\)):</p>
+<p>
+\[ \begin{aligned}
+\text{Area of } \triangle AOB &= \frac{1}{2} \times {@r@} \times {@r@} \times \sin(45^\circ) \\
+&= \frac{1}{2} \times {@r^2@} \times \frac{\sqrt{2}}{2} \\
+&\approx {@disp_tri@} \text{ cm}^2
+\end{aligned} \]
+</p>
 
 <p><b>Step 3: Calculate the total area of the octagon</b></p>
 <p>Since there are 8 such triangles in the octagon:</p>
-
-\[ \text{Total Area} = 8 \times \text{Area of } \triangle AOB \]
-\[ \text{Total Area} = 8 \times {@round(area_tri*10000)/10000@} \]
-\[ \text{Total Area} = {@ta@}\text{ cm}^2 \]]]></text>
+<p>
+\[ \begin{aligned}
+\text{Total Area} &= 8 \times \text{Area of } \triangle AOB \\
+&= 8 \times {@disp_tri@} \\
+&= {@disp_ta@} \text{ cm}^2
+\end{aligned} \]
+</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2026010500</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
-      <text>/* 1. Randomize the radius OA (between 5 and 15) */
+      <text>/* 1. Randomize the radius OA */
 r: 5 + rand(11);
 
-/* 2. Constants for an Octagon */
-n: 8;
-central_angle: 360/n;
-rad_angle: float((central_angle * %pi) / 180);
+/* 2. Exact Mathematical Calculations */
+area_tri_exact: (1/2) * r^2 * sin(%pi/4);
+ta_exact: 8 * area_tri_exact;
 
-/* 3. Calculate Area of one triangle: 1/2 * r * r * sin(45) */
-area_tri_exact: (1/2) * r^2 * sin(rad_angle);
-area_tri: float(area_tri_exact);
+/* 3. Floating Point Evaluation for PRT */
+ta_float: float(ta_exact);
 
-/* 4. Total Area of Octagon */
-ta_exact: n * area_tri_exact;
-ta_1: float(ta_exact);
-ta:decimalplaces(ta_1,2)
+/* 4. Display Variables using dispdp to guarantee clean 2-decimal output without fractions */
+disp_tri: dispdp(float(area_tri_exact), 4);
+disp_ta: dispdp(ta_float, 2);
 
-</text>
+/* Common Mistakes for PRT */
+m1: float(8 * r^2 * sin(%pi/4));      /* Forgot 1/2 */
+m2: float(area_tri_exact);            /* Forgot x8 */
+m3: float(8 * (1/2) * r * r);         /* Forgot sin(45) */</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta@}</text>
+      <text><![CDATA[<p>Radius: {@r@}, Area: {@disp_ta@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -136,7 +155,7 @@ ta:decimalplaces(ta_1,2)
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>ta</tans>
+      <tans>disp_ta</tans>
       <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -161,11 +180,11 @@ ta:decimalplaces(ta_1,2)
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
-        <answertest>AlgEquiv</answertest>
+        <description>Float-safe evaluation with 0.05 tolerance</description>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
-        <tans>ta</tans>
-        <testoptions/>
+        <tans>ta_float</tans>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -178,27 +197,104 @@ ta:decimalplaces(ta_1,2)
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
+      <node>
+        <name>1</name>
+        <description>Caught missing 1/2 factor</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions>0.05</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You forgot the \(\frac{1}{2}\) factor. The area of a triangle using the sine rule is \(\frac{1}{2}ab\sin C\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Caught missing x8 multiplier</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions>0.05</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.2</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Almost there! You successfully calculated the area of exactly <b>one</b> of the inner triangles. Because it is a regular octagon, you must multiply this area by 8.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Caught missing sin(45)</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions>0.05</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You multiplied the two sides together, but you forgot to include the sine of the angle between them. The formula is \(\frac{1}{2}ab\sin C\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
     </prt>
-    <deployedseed>440720895</deployedseed>
-    <deployedseed>353001401</deployedseed>
-    <deployedseed>2047623150</deployedseed>
-    <deployedseed>1182815431</deployedseed>
-    <deployedseed>1730250268</deployedseed>
-    <deployedseed>1747869386</deployedseed>
-    <deployedseed>119929694</deployedseed>
-    <deployedseed>2111480428</deployedseed>
+    <deployedseed>2041870401</deployedseed>
+    <deployedseed>1318995</deployedseed>
+    <deployedseed>1631349378</deployedseed>
+    <deployedseed>721940036</deployedseed>
+    <deployedseed>2017477717</deployedseed>
+    <deployedseed>1408514785</deployedseed>
+    <deployedseed>139395794</deployedseed>
+    <deployedseed>971228873</deployedseed>
+    <deployedseed>1280258527</deployedseed>
+    <deployedseed>580698989</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>ta</value>
+        <value>disp_ta</value>
       </testinput>
       <expected>
         <name>prt1</name>
