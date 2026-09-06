@@ -27,7 +27,6 @@ We use the power law of logarithms:
 <p>
 Applying this to the expression:
 </p>
-
 <p>
 \[
 \log({@base@}^{@exp@}) = {@exp@}\log {@base@}
@@ -49,21 +48,43 @@ So the correct answer is:
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2026010500</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
-      <text>/* Random base and exponent */
-base: rand([2,3,5,7,10]);
-exp: rand([2,3,4,5]);
+      <text><![CDATA[/* Random base and exponent */
+/* base: rand([2,3,5,7,10]);*/
 
-/* Correct answer using power law of logarithms */
-correct: exp * log(base);
+ /* Correct answer using power law of logarithms */
+
+/*base: rand([2,3,5,7,10])*/
+/*exp: rand([2,3,4,5]);*/
+/*correct: exp * log(base);*/
 
 /* Common student mistakes */
-m1: log(base) + log(exp);     /* adds logs incorrectly */
-m2: log(base)^exp;            /* raises log to a power */
-m3: log(base);                /* ignores the exponent */
-</text>
+/*m1: log(base) + log(exp); */      /* adds logs incorrectly */
+/*m2: log(base)^exp; */    /* raises log to a power */
+/*m3: log(base);*/       /* ignores the exponent */
+
+
+
+
+/* Lists of possible values */
+base_list: [2,3,5,7,10];
+expo_list: [2,3,4,5];
+
+/* Randomly pick one value from each list */
+base: base_list[rand(length(base_list)) + 1];
+exp: expo_list[rand(length(expo_list)) + 1];
+
+/* Express base^expo in terms of log(base), avoiding early evaluation */
+logexpand: true;
+expr: log(x^exp);
+expanded: ev(expr, logexpand);
+result: subst(x = base, expanded);
+
+/* Build answer as a string in the form "3log(2)" (no asterisk) */
+correct: subst(x = base, expanded);
+]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>

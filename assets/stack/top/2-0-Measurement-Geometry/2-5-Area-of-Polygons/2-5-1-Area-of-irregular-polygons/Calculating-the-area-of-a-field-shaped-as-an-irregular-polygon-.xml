@@ -5,70 +5,129 @@
       <text>Calculating the area of a field shaped as an irregular polygon.</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>The diagram below represents a field in the shape of an irregular polygon. A baseline <b>AD</b> is drawn, and offsets are taken to vertices <b>E</b> and <b>F</b>.</p>
+      <text><![CDATA[<p>The diagram below represents a field in the shape of an irregular polygon. A baseline <b>AD</b> is drawn, and perpendicular offsets are taken to vertices <b>E</b> and <b>F</b>.</p>
 
 <ul>
-    <li>Segments along baseline: AB = <b>{#d1#} m</b>, BC = <b>{#d2#} m</b>, CD = <b>{#d3#} m</b></li>
-    <li>Perpendicular offsets: BE = <b>{#h1#} m</b>, CF = <b>{#h2#} m</b></li>
+    <li>Segments along baseline: AB = <b>{@d1@} m</b>, BC = <b>{@d2@} m</b>, CD = <b>{@d3@} m</b></li>
+    <li>Perpendicular offsets: BE = <b>{@h1@} m</b>, CF = <b>{@h2@} m</b></li>
 </ul>
 
-[[jsxgraph width="500px" height="300px"]]
-var board = JXG.JSXGraph.initBoard(divid, {boundingbox: [-2, 20, 30, -8], axis: false, showCopyright: false});
+[[jsxgraph width="600px" height="300px"]]
+    var d1 = {#d1#};
+    var d2 = {#d2#};
+    var d3 = {#d3#};
+    var h1 = {#h1#};
+    var h2 = {#h2#};
 
-// Points on Baseline
-var A = board.create('point', [0, 0], {name: 'A', fixed: true, color: 'black'});
-var B = board.create('point', [{#d1#}, 0], {name: 'B', fixed: true, color: 'black'});
-var C = board.create('point', [{#d1+d2#}, 0], {name: 'C', fixed: true, color: 'black'});
-var D = board.create('point', [{#d1+d2+d3#}, 0], {name: 'D', fixed: true, color: 'black'});
+    // Calculate absolute coordinates
+    var xA = 0;
+    var xB = d1;
+    var xC = d1 + d2;
+    var xD = d1 + d2 + d3;
 
-// Offsets
-var E = board.create('point', [{#d1#}, {#h1#}], {name: 'E', fixed: true, color: 'blue'});
-var F = board.create('point', [{#d1+d2#}, {#h2#}], {name: 'F', fixed: true, color: 'blue'});
+    // Dynamic proportional scaling
+    var totalW = xD;
+    var maxH = Math.max(h1, h2);
+    var ratio = 600 / 300;
+    
+    var spanX = totalW * 1.2;
+    var spanY = spanX / ratio;
+    
+    // Ensure height fits gracefully
+    if (spanY < maxH * 1.4) {
+        spanY = maxH * 1.4;
+        spanX = spanY * ratio;
+    }
 
-// Draw Polygon Boundary
-board.create('polygon', [A, E, F, D], {fillColor: '#ffffd1', borders: {strokeWidth: 2, strokeColor: 'black'}});
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [-spanX*0.1, spanY*0.8, spanX*0.9, -spanY*0.2], 
+        axis: false, 
+        showCopyright: false,
+        keepAspectRatio: true,
+        showNavigation: false
+    });
 
-// Draw Internal Construction Lines
-board.create('segment', [A, D], {dash: 1, strokeColor: 'gray'});
-board.create('segment', [B, E], {dash: 2, strokeColor: 'red'});
-board.create('segment', [C, F], {dash: 2, strokeColor: 'red'});
+    // Points
+    var A = board.create('point', [xA, 0], {name: 'A', fixed: true, color: 'black'});
+    var B = board.create('point', [xB, 0], {name: 'B', fixed: true, color: 'black'});
+    var C = board.create('point', [xC, 0], {name: 'C', fixed: true, color: 'black'});
+    var D = board.create('point', [xD, 0], {name: 'D', fixed: true, color: 'black'});
 
-// Add labels for segments
-board.create('text', [{#d1/2#}, -0.5, "{#d1#}m"], {anchorX: 'middle'});
-board.create('text', [{#d1 + d2/2#}, -0.5, "{#d2#}m"], {anchorX: 'middle'});
-board.create('text', [{#d1 + d2 + d3/2#}, -0.5, "{#d3#}m"], {anchorX: 'middle'});
+    var E = board.create('point', [xB, h1], {name: 'E', fixed: true, color: '#1565c0'});
+    var F = board.create('point', [xC, h2], {name: 'F', fixed: true, color: '#1565c0'});
+
+    // Polygon Boundary
+    board.create('polygon', [A, E, F, D], {fillColor: '#fff9c4', borders: {strokeWidth: 2, strokeColor: '#212121'}});
+
+    // Internal Construction Lines
+    board.create('segment', [A, D], {dash: 1, strokeColor: '#757575'});
+    board.create('segment', [B, E], {dash: 2, strokeColor: '#d32f2f'});
+    board.create('segment', [C, F], {dash: 2, strokeColor: '#d32f2f'});
+
+    // Right angle markers for offsets
+    var rad = totalW * 0.03;
+    board.create('angle', [E, B, A], {type: 'square', radius: rad, strokeColor: '#d32f2f', name: ''});
+    board.create('angle', [F, C, B], {type: 'square', radius: rad, strokeColor: '#d32f2f', name: ''});
+
+    // Clean Pixel-Gap Labels
+    var gapY = spanY * 0.04;
+    var gapX = spanX * 0.02;
+
+    // Baseline labels
+    board.create('text', [xB - d1/2, -gapY, d1 + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 14});
+    board.create('text', [xC - d2/2, -gapY, d2 + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 14});
+    board.create('text', [xD - d3/2, -gapY, d3 + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 14});
+
+    // Offset labels
+    board.create('text', [xB - gapX, h1/2, h1 + " m"], {anchorX: 'right', anchorY: 'middle', fontSize: 14, strokeColor: '#c62828'});
+    board.create('text', [xC + gapX, h2/2, h2 + " m"], {anchorX: 'left', anchorY: 'middle', fontSize: 14, strokeColor: '#c62828'});
 [[/jsxgraph]]
 
 <p>Calculate the total area of the field <b>AEFD</b>.</p>
 
-<p>Area = [[input:ans1]] m<sup>2</sup> [[validation:ans1]][[feedback:prt1]]</p>]]></text>
+<p>Area = [[input:ans1]] <b>\(\text{m}^2\)</b> [[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
 
-<p>To find the total area, we divide the irregular polygon into simpler geometric shapes: two triangles and one trapezium.</p>
+<p>To find the total area, we divide the irregular polygon into three simpler geometric shapes: two right-angled triangles and one trapezium.</p>
 
-<ol>
-    <li>Area of Triangle ABE:
-        \[ \text{Area} = \frac{1}{2} \times \text{base} \times \text{height}\]
-       \[ = \frac{1}{2} \times {@d1@} \times {@h1@} \]
-      \[ = {@area1@} \text{ m}^2 \]
-    </li>
-    <li>Area of Trapezium BCFE:</b>
-        \[ \text{Area} = \frac{1}{2}(a+b)h \]
-         \[= \frac{1}{2} \times ({@h1@} + {@h2@}) \times {@d2@}\]
-         \[ = {@area2@} \text{ m}^2 \]
-    </li>
-    <li>Area of Triangle CFD:
-        \[ \text{Area} = \frac{1}{2} \times \text{base} \times \text{height} \]
-         \[ = \frac{1}{2} \times {@d3@} \times {@h2@} \]
-         \[= {@area3@} \text{ m}^2 \]
-    </li>
-</ol>
+<p><b>1. Area of Triangle ABE (Left)</b></p>
+<p>
+\[ \begin{aligned}
+\text{Area} &= \frac{1}{2} \times \text{base} \times \text{height} \\
+&= \frac{1}{2} \times {@d1@} \times {@h1@} \\
+&= {@area1@} \text{ m}^2
+\end{aligned} \]
+</p>
 
-<p>Total Area:</p>
-\[ \text{Total Area} = {@area1@} + {@area2@} + {@area3@}\]
-\[ = {@ta@} \text{ m}^2 \]]]></text>
+<p><b>2. Area of Trapezium BCFE (Middle)</b></p>
+<p>The parallel sides are the offsets \(BE\) and \(CF\), and the perpendicular height between them is the baseline segment \(BC\).</p>
+<p>
+\[ \begin{aligned}
+\text{Area} &= \frac{1}{2}(a+b)h \\
+&= \frac{1}{2}({@h1@} + {@h2@}) \times {@d2@} \\
+&= {@area2@} \text{ m}^2
+\end{aligned} \]
+</p>
+
+<p><b>3. Area of Triangle CFD (Right)</b></p>
+<p>
+\[ \begin{aligned}
+\text{Area} &= \frac{1}{2} \times \text{base} \times \text{height} \\
+&= \frac{1}{2} \times {@d3@} \times {@h2@} \\
+&= {@area3@} \text{ m}^2
+\end{aligned} \]
+</p>
+
+<p><b>Total Area</b></p>
+<p>Add the three areas together:</p>
+<p>
+\[ \begin{aligned}
+\text{Total Area} &= {@area1@} + {@area2@} + {@area3@} \\
+&= {@ta@} \text{ m}^2
+\end{aligned} \]
+</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
@@ -79,38 +138,37 @@ board.create('text', [{#d1 + d2 + d3/2#}, -0.5, "{#d3#}m"], {anchorX: 'middle'})
     </stackversion>
     <questionvariables>
       <text>/* 1. Define segments along the baseline AD */
-/* AB = d1, BC = d2, CD = d3 */
 d1: 4 + rand(4);
 d2: 5 + rand(5);
 d3: 4 + rand(4);
 
 /* 2. Define perpendicular offsets (heights) */
-h1: 3 + rand(4); /* Offset at point B to vertex E */
-h2: 5 + rand(4); /* Offset at point C to vertex F */
+/* Force h1 and h2 into distinct ranges to guarantee a jagged, irregular shape */
+h_short: 3 + rand(3); /* 3 to 5 */
+h_tall: 8 + rand(5);  /* 8 to 12 */
+
+/* Randomly swap them so the field can slope up or slope down */
+swap: rand(2);
+h1: if swap = 1 then h_short else h_tall;
+h2: if swap = 1 then h_tall else h_short;
 
 /* 3. Calculate areas of individual shapes */
-/* Triangle 1 (Left): 1/2 * d1 * h1 */
-area1: 1/2 * d1 * h1;
-
-/* Trapezium (Middle): 1/2 * (h1 + h2) * d2 */
-area2: 1/2 * (h1 + h2) * d2;
-
-/* Triangle 2 (Right): 1/2 * d3 * h2 */
-area3: 1/2 * d3 * h2;
+area1: float((1/2) * d1 * h1);
+area2: float((1/2) * (h1 + h2) * d2);
+area3: float((1/2) * d3 * h2);
 
 /* 4. Total Area */
-ta: area1 + area2 + area3;</text>
+ta: float(area1 + area2 + area3);
+
+/* Common Mistakes for PRT */
+m1: float((d1 * h1) + ((h1 + h2) * d2) + (d3 * h2));      /* Forgot the 1/2 factor entirely */
+m2: float((1/2) * (h1 + h2) * (d1 + d2 + d3));            /* Treated the whole shape as one giant trapezium */</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>{@ta@}</p>
-<p>{@d1@}</p>
-<p>{@d2@}</p>
-<p>{@d3@}</p>
-<p>{@h1@}</p>
-<p>{@h2@}</p>]]></text>
+      <text><![CDATA[<p>d: {@d1@}, {@d2@}, {@d3@} | h: {@h1@}, {@h2@} | Total Area: {@ta@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -141,7 +199,7 @@ ta: area1 + area2 + area3;</text>
       <name>ans1</name>
       <type>algebraic</type>
       <tans>ta</tans>
-      <boxsize>6</boxsize>
+      <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
       <syntaxhint/>
@@ -165,11 +223,11 @@ ta: area1 + area2 + area3;</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
-        <answertest>AlgEquiv</answertest>
+        <description>Float safe grading</description>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>ta</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -182,53 +240,123 @@ ta: area1 + area2 + area3;</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
+      <node>
+        <name>1</name>
+        <description>Caught missing 1/2 factor</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions>0.05</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You forgot the \(\frac{1}{2}\) factor. Both the triangle formula and the trapezium formula require you to multiply by \(\frac{1}{2}\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Caught giant trapezium mistake</description>
+        <answertest>NumAbsolute</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions>0.05</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You treated the entire field as a single large trapezium. You must calculate the area of the two triangles and the central trapezium separately, then add them together.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
     </prt>
-    <deployedseed>896576377</deployedseed>
-    <deployedseed>1962427968</deployedseed>
-    <deployedseed>1852368762</deployedseed>
-    <deployedseed>1685670138</deployedseed>
-    <deployedseed>2087332171</deployedseed>
-    <deployedseed>916968295</deployedseed>
-    <deployedseed>88465709</deployedseed>
-    <deployedseed>765080077</deployedseed>
-    <deployedseed>1979937919</deployedseed>
-    <deployedseed>1498160018</deployedseed>
-    <deployedseed>244014447</deployedseed>
-    <deployedseed>890091514</deployedseed>
-    <deployedseed>503678906</deployedseed>
-    <deployedseed>463911896</deployedseed>
-    <deployedseed>1980976402</deployedseed>
-    <deployedseed>338199295</deployedseed>
-    <deployedseed>1455905774</deployedseed>
-    <deployedseed>1294351197</deployedseed>
-    <deployedseed>995271648</deployedseed>
-    <deployedseed>683072441</deployedseed>
-    <deployedseed>972536704</deployedseed>
-    <deployedseed>848731989</deployedseed>
-    <deployedseed>1496668203</deployedseed>
-    <deployedseed>1602148821</deployedseed>
-    <deployedseed>1828945218</deployedseed>
-    <deployedseed>2139461533</deployedseed>
-    <deployedseed>50602549</deployedseed>
-    <deployedseed>1629304880</deployedseed>
-    <deployedseed>1131703511</deployedseed>
-    <deployedseed>908260170</deployedseed>
-    <deployedseed>389319786</deployedseed>
-    <deployedseed>623736832</deployedseed>
-    <deployedseed>187975533</deployedseed>
-    <deployedseed>366875496</deployedseed>
-    <deployedseed>678312098</deployedseed>
-    <deployedseed>1856392945</deployedseed>
-    <deployedseed>1016730634</deployedseed>
-    <deployedseed>845999927</deployedseed>
-    <deployedseed>618920609</deployedseed>
-    <deployedseed>1290086011</deployedseed>
+    <deployedseed>1714544582</deployedseed>
+    <deployedseed>1151866836</deployedseed>
+    <deployedseed>673057434</deployedseed>
+    <deployedseed>1401670</deployedseed>
+    <deployedseed>1058112763</deployedseed>
+    <deployedseed>479944092</deployedseed>
+    <deployedseed>1226148977</deployedseed>
+    <deployedseed>675751841</deployedseed>
+    <deployedseed>853373816</deployedseed>
+    <deployedseed>604741345</deployedseed>
+    <deployedseed>1278317924</deployedseed>
+    <deployedseed>1987886588</deployedseed>
+    <deployedseed>109930360</deployedseed>
+    <deployedseed>1149849892</deployedseed>
+    <deployedseed>189933144</deployedseed>
+    <deployedseed>771428340</deployedseed>
+    <deployedseed>233401724</deployedseed>
+    <deployedseed>2095036809</deployedseed>
+    <deployedseed>610879287</deployedseed>
+    <deployedseed>1689604440</deployedseed>
+    <deployedseed>1176257319</deployedseed>
+    <deployedseed>1873966753</deployedseed>
+    <deployedseed>1219693509</deployedseed>
+    <deployedseed>1973569750</deployedseed>
+    <deployedseed>834721718</deployedseed>
+    <deployedseed>579119870</deployedseed>
+    <deployedseed>1484525116</deployedseed>
+    <deployedseed>1144850503</deployedseed>
+    <deployedseed>894959502</deployedseed>
+    <deployedseed>1447559017</deployedseed>
+    <deployedseed>466818983</deployedseed>
+    <deployedseed>1807619255</deployedseed>
+    <deployedseed>961288052</deployedseed>
+    <deployedseed>914143831</deployedseed>
+    <deployedseed>195995264</deployedseed>
+    <deployedseed>1318142464</deployedseed>
+    <deployedseed>1007187427</deployedseed>
+    <deployedseed>1984988726</deployedseed>
+    <deployedseed>2079900694</deployedseed>
+    <deployedseed>841644463</deployedseed>
+    <deployedseed>1905983804</deployedseed>
+    <deployedseed>631529681</deployedseed>
+    <deployedseed>1803627148</deployedseed>
+    <deployedseed>1600731091</deployedseed>
+    <deployedseed>2112097113</deployedseed>
+    <deployedseed>99007189</deployedseed>
+    <deployedseed>780372433</deployedseed>
+    <deployedseed>1325746561</deployedseed>
+    <deployedseed>1526107625</deployedseed>
+    <deployedseed>10372230</deployedseed>
+    <deployedseed>1840223163</deployedseed>
+    <deployedseed>331575378</deployedseed>
+    <deployedseed>1596235667</deployedseed>
+    <deployedseed>280443758</deployedseed>
+    <deployedseed>801959735</deployedseed>
+    <deployedseed>841088490</deployedseed>
+    <deployedseed>1542362649</deployedseed>
+    <deployedseed>1839848489</deployedseed>
+    <deployedseed>1295428573</deployedseed>
+    <deployedseed>1706217220</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>

@@ -32,11 +32,11 @@ Use the diagram below to find the horizontal distance from the foot of the {@pla
   <path d="M80 185 L95 185 L95 200" fill="none" stroke="black" stroke-width="1.5"/>
 
   <!-- Angle arc -->
-  <path d="M110 60 A30 30 0 0 1 100 85" fill="none" stroke="black" stroke-width="1.5"/>
+  <path d="M110 60 A25 25 0 0 1 102 74" fill="none" stroke="black" stroke-width="1.5"/>
 
   <!-- Labels -->
-  <text x="50" y="135" font-size="15">17 m</text>
-  <text x="115" y="80" font-size="15">30°</text>
+  <text x="45" y="135" font-size="15">17 m</text>
+  <text x="115" y="80" font-size="15">30°</text> 
 
   <text x="150" y="220" font-size="15">distance = ? m</text>
 
@@ -125,38 +125,34 @@ Therefore, the horizontal distance is:
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2026010500</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text><![CDATA[/* Core variables */
 h: rand(6)+12;          /* height: 13 to 18 m */
 theta: rand(4)*5+25;    /* angle: 30,35,40,45 */
-dist: h/tan(theta*%pi/180);
 
-/* Rounded answer for display in note if needed */
-dist1: float(round(dist*10)/10);
+/* Evaluate distances to floating-point decimals natively */
+dist: float(h/tan(theta*%pi/180));
+
+/* Display variable formatted to exactly 1 decimal place */
+dist1: dispdp(dist, 1);
 
 /* Context */
 place: rand(["watch tower","cliff","building","platform"]);
 objectname: rand(["goat","tree stump","rock","water drum"]);
 area: rand(["Kajiado","Narok","Machakos","Laikipia","Kitui"]);
 
-/* Diagram control */
-xbase: 40;
-ytop: 30;
-xright: 220;
-yground: 170;
-
-/*------Mistakes--------*/
-m1: h*tan(theta*%pi/180)
-m2: h/sin(theta*%pi/180)
-m3: h/cos(theta*%pi/180)]]></text>
+/*------Mistakes (Calculated as explicit floats)--------*/
+m1: float(h*tan(theta*%pi/180));
+m2: float(h/sin(theta*%pi/180));
+m3: float(h/cos(theta*%pi/180));]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@dist1@}</text>
+      <text><![CDATA[<p>Height: {@h@}, Angle: {@theta@}, Dist: {@dist1@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
@@ -219,10 +215,10 @@ The question requires the learner to read a diagram, identify the angle of depre
       <node>
         <name>0</name>
         <description>checks for the correct answer</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
-        <tans>dist1</tans>
-        <testoptions/>
+        <tans>dist</tans>
+        <testoptions>1</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -244,10 +240,10 @@ The question requires the learner to read a diagram, identify the angle of depre
       <node>
         <name>1</name>
         <description>mistake1</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m1</tans>
-        <testoptions/>
+        <testoptions>0.1</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -255,9 +251,7 @@ The question requires the learner to read a diagram, identify the angle of depre
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text>ou used tangent in the wrong way. Here, height is opposite and distance is adjacent, so use
-
-tan (𝜃) = \frac {height}{distance}</text>
+          <text>You used tangent in the wrong way. Here, height is opposite and distance is adjacent, so use \(\tan(\theta) = \frac{\text{height}}{\text{distance}}\).</text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -271,10 +265,10 @@ tan (𝜃) = \frac {height}{distance}</text>
       <node>
         <name>2</name>
         <description>mistake2</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m2</tans>
-        <testoptions/>
+        <testoptions>0.1</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -296,10 +290,10 @@ tan (𝜃) = \frac {height}{distance}</text>
       <node>
         <name>3</name>
         <description>mistake3</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m3</tans>
-        <testoptions/>
+        <testoptions>0.1</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -315,7 +309,7 @@ tan (𝜃) = \frac {height}{distance}</text>
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-4-F</falseanswernote>
         <falsefeedback format="html">
-          <text>Use tan (𝜃) = frac {opposite}{adjacent} = \frac {ℎ}{𝑑}. Then make 𝑑 the subject.</text>
+          <text>Use \(\tan(\theta) = \frac{\text{opposite}}{\text{adjacent}} = \frac{{@h@}}{d}\). Then make \(d\) the subject.</text>
         </falsefeedback>
       </node>
     </prt>

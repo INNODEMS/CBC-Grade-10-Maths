@@ -6,35 +6,108 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>The angle formed by the arms of an upright pair of dividers and the horizontal is \({@theta@}^\circ\). The vertical distance from the horizontal to the vertex is \({@d@}\,\text{cm}\). Find the length of one arm of the divider without using a calculator or trigonometric tables.</p>
-<p>\(\text{The Length of a divider arm from vertical height}=\)[[input:ans1]]\(\,\text{cm}\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
+
+[[jsxgraph]]
+/* Fetch the randomized variables from STACK */
+var theta_deg = {#theta#};
+var height_val = {#d#};
+
+/* Convert angle to radians for JavaScript math */
+var theta_rad = theta_deg * Math.PI / 180;
+
+/* Lock the visual height and calculate the base width */
+var h = 5; 
+var w = h / Math.tan(theta_rad); 
+
+var board = JXG.JSXGraph.initBoard(divid, {
+    boundingbox: [-(w + 1.5), h + 1.5, w + 1.5, -1.0],
+    axis: false,
+    keepaspectratio: true,
+    showNavigation: false,
+    showCopyright: false
+});
+
+/* Define the key points */
+var O = board.create('point', [0, 0], {name: '', visible: false, fixed: true});
+var L = board.create('point', [-w, 0], {name: '', visible: false, fixed: true}); /* Left needle tip */
+var R = board.create('point', [w, 0], {name: '', visible: false, fixed: true}); /* Right needle tip */
+
+/* Calculate where the thick arms should end and the thin needles should begin (15% from the bottom) */
+var L_arm_end = board.create('point', [-w * 0.85, h * 0.15], {visible: false, fixed: true});
+var R_arm_end = board.create('point', [w * 0.85, h * 0.15], {visible: false, fixed: true});
+
+/* The Hinge (Vertex) - Drawn as a visible circular joint */
+var V = board.create('point', [0, h], {
+    name: '', 
+    visible: true, 
+    size: 6, 
+    face: 'circle', 
+    fillColor: '#b0b5b9', 
+    strokeColor: '#333333', 
+    strokeWidth: 2,
+    fixed: true
+}); 
+
+/* Draw the horizontal surface line */
+board.create('segment', [[-(w + 1.5), 0], [w + 1.5, 0]], {strokeColor: 'black', strokeWidth: 1.5, fixed: true});
+
+/* Draw the thick metallic divider arms */
+board.create('segment', [V, L_arm_end], {strokeColor: '#88929E', strokeWidth: 9, lineCap: 'round', fixed: true});
+board.create('segment', [V, R_arm_end], {strokeColor: '#88929E', strokeWidth: 9, lineCap: 'round', fixed: true});
+
+/* Draw the sharp needles at the ends */
+board.create('segment', [L_arm_end, L], {strokeColor: '#333333', strokeWidth: 2, fixed: true});
+board.create('segment', [R_arm_end, R], {strokeColor: '#333333', strokeWidth: 2, fixed: true});
+
+/* Draw the vertical height (dashed) */
+board.create('segment', [V, O], {strokeColor: '#e74c3c', dash: 2, strokeWidth: 1.5, fixed: true});
+
+/* Add the right-angle mark at the origin */
+board.create('angle', [R, O, V], {radius: 0.4, type: 'square', name: ''});
+
+/* Add the angle theta at the right foot (with a slight yellow fill to match your original) */
+board.create('angle', [V, R, O], {
+    radius: 1.0, 
+    name: theta_deg + '&deg;', 
+    fontSize: 14, 
+    fillColor: '#f1c40f', 
+    fillOpacity: 0.3
+});
+
+/* Label the vertical height */
+board.create('text', [0.2, h / 2, height_val + ' cm'], {anchorX: 'left', anchorY: 'middle', fixed: true, fontSize: 14});
+[[/jsxgraph]]
+
+<p>\(\text{Length of the divider arm }=\)[[input:ans1]]\(\,\text{cm}\)[[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<p><strong>Worked Solution:</strong></p>
 
 <p>We are asked to find the length of one arm of the divider given:</p>
 <ul>
-    <li>Angle with horizontal: {@theta@}°</li>
-    <li>Vertical distance from horizontal to vertex: \({@d@}\, \text{cm}\)</li>
+    <li>Angle with the horizontal: \({@theta@}^\circ\)</li>
+    <li>Vertical distance from the horizontal to the vertex: \({@d@} \text{ cm}\)</li>
 </ul>
 
-<p>From trigonometry, for an upright divider forming an angle \(\theta\) with the horizontal, the relationship between the vertical height and the arm length is:</p>
+<p>From trigonometry, the vertical height acts as the <strong>opposite side</strong>, and the arm acts as the <strong>hypotenuse</strong>. Therefore, the relationship is:</p>
 
 <p>
 \(\begin{align}
 \text{Arm length} &= \frac{\text{Vertical distance}}{\sin \theta} \\
-&= \frac{@d@}{\sin({@theta@}^\circ)} \\
+&= \frac{{@d@}}{\sin({@theta@}^\circ)} \\
+&= \frac{{@d@}}{{@sin(theta*pi/180)@}} \\
 &= {@arm_length@} \text{ cm}
 \end{align}\)
 </p>
 
-<p>Hence, the length of one arm of the divider is {@arm_length@} cm.</p>]]></text>
+<p>Hence, the exact length of one arm of the divider is \({@arm_length@} \text{ cm}\).</p>]]></text>
     </generalfeedback>
-    <defaultgrade>15</defaultgrade>
+    <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text>/* Randomize the vertical distance from 5 to 25 cm in steps of 1 */
@@ -53,9 +126,9 @@ arm_length: d / sin(theta_rad);</text>
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>\(\text{The angle made by the pair of divider is} ={@theta@}^\circ\)</p>
-<p>\(\text{The distance}={@d@}\,\text{cm}\)</p>
-<p>\(\text{The Length of a divider arm from vertical height}={@arm_length@}\,\text{cm}\)</p>]]></text>
+      <text><![CDATA[<p>\(\text{The angle made by the pair of dividers is } {@theta@}^\circ\)</p>
+<p>\(\text{The vertical distance is } {@d@}\,\text{cm}\)</p>
+<p>\(\text{The length of a divider arm is } {@arm_length@}\,\text{cm}\)</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -143,6 +216,10 @@ arm_length: d / sin(theta_rad);</text>
     <deployedseed>1703353731</deployedseed>
     <deployedseed>1427792288</deployedseed>
     <deployedseed>2098633323</deployedseed>
+    <deployedseed>223356483</deployedseed>
+    <deployedseed>1475717446</deployedseed>
+    <deployedseed>880767125</deployedseed>
+    <deployedseed>910695063</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>

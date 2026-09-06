@@ -5,17 +5,17 @@
       <text>Finding the Trigonometry Ratios in a 30°, 60° and 90° Triangle</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[Using the triangle below, find:
-<p><ol type="a">
-    <p>Find the length BC</p>
-    <li> \( \sin 30^\circ \)</li>
-    <li> \( \cos 60^\circ\)</li>
-    <li>\( \tan 30^\circ \)</li>
+      <text><![CDATA[<p>Using the triangle below, find:</p>
+<ol type="a">
+    <li>The length of \(BC\)</li>
+    <li>\(\sin(30^\circ)\)</li>
+    <li>\(\cos(60^\circ)\)</li>
+    <li>\(\tan(30^\circ)\)</li>
 </ol>
-</p>
+
 [[jsxgraph]]
- var board = JXG.JSXGraph.initBoard(divid, {
-        boundingbox: [-1, 3, 3, -1],
+    var board = JXG.JSXGraph.initBoard(divid, {
+        boundingbox: [-1, 4.2, 3, -1],
         axis: false,
         showNavigation: false,
         showCopyright: false
@@ -28,7 +28,7 @@
     var B = board.create('point', [2, 0], { 
         name: 'B', visible: true, fixed: true, label: {offset: [15, -10]} 
     });
-    var C = board.create('point', [2, 2.5], { 
+    var C = board.create('point', [2, 3.464], { // 3.464 is approx 2*sqrt(3) to make the visual scale accurate
         name: 'C', visible: true, fixed: true, label: {offset: [15, 5]} 
     });
 
@@ -37,20 +37,22 @@
     board.create('segment', [B, C]);
     board.create('segment', [A, C]);
 
-    // Angles
-    board.create('angle', [B, A, C], {radius: 0.5, name: '30°'});
-    board.create('angle', [A, C, B], {radius: 0.5, name: '60°'});
+    // Angles (Swapped to be mathematically correct)
+    board.create('angle', [B, A, C], {radius: 0.6, name: '60&deg;'});
+    board.create('angle', [A, C, B], {radius: 0.7, name: '30&deg;'});
+    
+    // Right-angle marker at B
+    board.create('angle', [A, B, C], {radius: 0.3, type: 'square', name: ''});
 
     // Side length labels
-    board.create('text', [1, -0.1, '1']);   // AB
-    board.create('text', [0.7, 1.3, '2']);    // AC
-
+    board.create('text', [1, -0.2, '1']);   // AB
+    board.create('text', [0.8, 1.8, '2']);  // AC
 [[/jsxgraph]]
 
-<p>a. \(\text{The length BC}=\)[[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p>
-<p>b. \(\sin\,30^\circ=\)[[input:ans2]] [[validation:ans2]][[feedback:prt2]]</p>
-<p>c. \(\cos\,60^\circ=\)[[input:ans3]] [[validation:ans3]][[feedback:prt3]]</p>
-<p>d. \(\tan\,30^\circ=\)[[input:ans4]] [[validation:ans4]][[feedback:prt4]]</p>]]></text>
+<p>a. \(\text{The length } BC =\)[[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p>
+<p>b. \(\sin(30^\circ) =\)[[input:ans2]] [[validation:ans2]][[feedback:prt2]]</p>
+<p>c. \(\cos(60^\circ) =\)[[input:ans3]] [[validation:ans3]][[feedback:prt3]]</p>
+<p>d. \(\tan(30^\circ) =\)[[input:ans4]] [[validation:ans4]][[feedback:prt4]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<ol type="a">
@@ -63,42 +65,46 @@
         BC^2 &= AC^2 - AB^2 \\
         &= {@AC@}^2 - {@AB@}^2 \\
         &= {@AC*AC - AB*AB@} \\
-        \therefore BC &= \sqrt{@AC*AC - AB*AB@} = {@BC@}
+        \therefore BC &= \sqrt{{@AC*AC - AB*AB@}} \\
+        &= {@BC@}
         \end{align}
         \)
         </p>
     </li>
     <li>
-        <p><strong>\(\sin {@angle_30@}^\circ\)</strong></p>
+        <p><strong>\(\sin({@angle_30@}^\circ)\)</strong></p>
         <p>
         \(
         \begin{align}
-        \sin {@angle_30@}^\circ &= \frac{\text{opposite}}{\text{hypotenuse}} \\
-        &= \frac{@AB@}{@AC@} \\
+        \sin({@angle_30@}^\circ) &= \frac{\text{Opposite}}{\text{Hypotenuse}} \\
+        &= \frac{AB}{AC} \\
+        &= \frac{{@AB@}}{{@AC@}} \\
         &= {@ta_sin30@}
         \end{align}
         \)
         </p>
     </li>
     <li>
-        <p><strong>\(\cos {@angle_60@}^\circ\)</strong></p>
+        <p><strong>\(\cos({@angle_60@}^\circ)\)</strong></p>
         <p>
         \(
         \begin{align}
-        \cos {@angle_60@}^\circ &= \frac{\text{adjacent}}{\text{hypotenuse}} \\
-        &= \frac{@AB@}{@AC@} \\
+        \cos({@angle_60@}^\circ) &= \frac{\text{Adjacent}}{\text{Hypotenuse}} \\
+        &= \frac{AB}{AC} \\
+        &= \frac{{@AB@}}{{@AC@}} \\
         &= {@ta_cos60@}
         \end{align}
         \)
         </p>
     </li>
     <li>
-        <p><strong>\(\tan {@angle_30@}^\circ\)</strong></p>
+        <p><strong>\(\tan({@angle_30@}^\circ)\)</strong></p>
         <p>
         \(
         \begin{align}
-        \tan {@angle_30@}^\circ &= \frac{\text{opposite}}{\text{adjacent}} \\
-        &= \frac{@AB@}{@BC@} \\
+        \tan({@angle_30@}^\circ) &= \frac{\text{Opposite}}{\text{Adjacent}} \\
+        &= \frac{AB}{BC} \\
+        &= \frac{{@AB@}}{{@BC@}} \\
         &= {@ta_tan30@}
         \end{align}
         \)
@@ -106,18 +112,18 @@
     </li>
 </ol>]]></text>
     </generalfeedback>
-    <defaultgrade>15</defaultgrade>
+    <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
-      <text>/* Randomize sides of the triangle */
-AB : 1;  /* base AB: random value between 1 and 26 */
-AC : 2;  /* height AC: random value between 1 and 26 */
-BC:sqrt(2^2-1^2); /*The height of the Triangle*/
+      <text>/* Sides of the triangle */
+AB : 1;  /* base AB */
+AC : 2;  /* hypotenuse AC */
+BC : sqrt(2^2 - 1^2); /* The height of the Triangle */
 
 /* Fixed angles */
 angle_30 : 30;  

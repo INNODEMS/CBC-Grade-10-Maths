@@ -5,99 +5,98 @@
       <text>Calculating the area of an heptagon</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>A school is designing a flower garden in the shape of a regular heptagon. Each side has length <b>{#s#} m</b>, and the apothem is <b>{#a#} m</b>.</p>
+      <text><![CDATA[<p>A school is designing a flower garden in the shape of a regular heptagon. Each side has length <b>{@s@} m</b>, and the apothem is <b>{@a@} m</b>.</p>
 
-[[jsxgraph width="400px" height="400px"]]
-var board = JXG.JSXGraph.initBoard(divid, {
-    boundingbox: [-8, 8, 8, -8],
-    axis: false,
-    showNavigation: false,
-    showCopyright: false
-});
+[[jsxgraph width="500px" height="300px"]]
+    var s_val = {#s#};
+    var a_val = {#a#};
+    var n = 7;
+    
+    var angle = Math.PI / n;
+    
+    // Calculate true geometric radius to maintain perfect shape
+    var R = a_val / Math.cos(angle); 
+    
+    // Proportional scaling
+    var ratio = 500 / 300;
+    var spanY = R * 2.5;
+    var spanX = spanY * ratio;
+    
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [-spanX/2, spanY/2, spanX/2, -spanY/2], 
+        maxboundingbox: [-spanX*1.5, spanY*1.5, spanX*1.5, -spanY*1.5],
+        axis: false, 
+        showCopyright: false,
+        keepAspectRatio: true,
+        showNavigation: false 
+    });
 
-var n = 7;
-var R = 5;
-
-/* 1. Create Vertices */
-var points = [];
-for (var i = 0; i < n; i++) {
-    /* Rotating slightly to ensure a side is clearly angled for the label */
-    var angle = (2 * Math.PI * i / n) + (Math.PI / 2); 
-    points.push(board.create('point', [R * Math.cos(angle), R * Math.sin(angle)], {visible: false}));
-}
-
-/* 2. Create Polygon */
-var poly = board.create('polygon', points, {
-    withLines: true,
-    fillColor: '#dfefff',
-    borders: {strokeWidth: 2, strokeColor: '#0072b2'}
-});
-
-/* 3. Center Point */
-var O = board.create('point', [0, 0], {visible: false});
-
-/* 4. Apothem Label (Rotated along the dashed line) */
-var M_apo = board.create('midpoint', [points[0], points[1]], {visible: false});
-board.create('segment', [O, M_apo], {dash: 2, strokeWidth: 2, strokeColor: '#0072b2'});
-
-board.create('text', [
-    (O.X() + M_apo.X()) / 2, 
-    (O.Y() + M_apo.Y()) / 2 - 0.4, 
-    "{#a#} m"
-], {
-    fontSize: 14,
-    anchorX: 'middle',
-    rotate: function() {
-        /* Calculate angle of the apothem segment */
-        return Math.atan2(M_apo.Y() - O.Y(), M_apo.X() - O.X()) * 180 / Math.PI;
+    // Vertices - starting rotation to ensure a flat base at the bottom
+    var points = [];
+    for (var i = 0; i < n; i++) {
+        var theta = -Math.PI/2 - Math.PI/n + (2 * Math.PI * i / n); 
+        points.push(board.create('point', [R * Math.cos(theta), R * Math.sin(theta)], {visible: false}));
     }
-});
 
-/* 5. Side Length Label (Rotated along the boundary line) */
-var pA = points[1];
-var pB = points[2];
-var M_side = board.create('midpoint', [pA, pB], {visible: false});
+    board.create('polygon', points, {
+        fillColor: '#e3f2fd', 
+        strokeColor: '#1565c0', 
+        strokeWidth: 2
+    });
+    
+    var center = board.create('point', [0, 0], {name: '', visible: false});
+    
+    // Connect center to bottom flat side
+    var pA = points[0];
+    var pB = points[1];
+    var mid = board.create('midpoint', [pA, pB], {visible: false});
+    
+    // Central triangle lines
+    board.create('segment', [center, pA], {strokeColor: '#90caf9', dash: 1});
+    board.create('segment', [center, pB], {strokeColor: '#90caf9', dash: 1});
+    
+    // Apothem line
+    board.create('segment', [center, mid], {dash: 2, strokeColor: '#c62828'});
+    
+    // Right angle marker
+    var rad = R * 0.15;
+    board.create('angle', [pB, mid, center], {type: 'square', radius: rad, strokeColor: '#c62828', name: ''});
 
-board.create('text', [
-    M_side.X() - 0.5, 
-    M_side.Y() + 0.5, 
-    "{#s#} m"
-], {
-    fontSize: 14,
-    anchorX: 'middle',
-    rotate: function() {
-        /* Calculate angle of the side segment */
-        var ang = Math.atan2(pB.Y() - pA.Y(), pB.X() - pA.X()) * 180 / Math.PI;
-        /* Flip text if it's upside down (between 90 and 270 degrees) */
-        return (ang > 90 || ang < -90) ? ang + 180 : ang;
-    }
-});
+    // Clean horizontal pixel-gap labels
+    var gapY = spanY * 0.04; 
+    var gapX = spanX * 0.02; 
+
+    board.create('text', [0, mid.Y() - gapY, s_val + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 16});
+    board.create('text', [gapX, mid.Y()/2, a_val + " m"], {anchorX: 'left', anchorY: 'middle', fontSize: 16, strokeColor: '#c62828'});
 [[/jsxgraph]]
-<p>Calculate the area of the heptagon.</p>
 
-<p style="text-align: center;">
-Area = [[input:ans1]] m<sup>2</sup> [[validation:ans1]] [[feedback:prt1]]
-</p>]]></text>
+<p>Calculate the area of the heptagon.</p>
+<p>\(\text{Area} =\) [[input:ans1]] <b>\(\text{m}^2\)</b> [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
-<p><strong>Step 1: Perimeter</strong></p>
+<p><b>Step 1: Find the area of one central triangle</b></p>
+<p>A regular heptagon can be divided into 7 identical triangles from its center. For one of these triangles:</p>
+<ul>
+  <li>\(\text{Base} = \text{side length} = {@s@}\text{ m}\)</li>
+  <li>\(\text{Height (apothem)} = {@a@}\text{ m}\)</li>
+</ul>
 <p>
-A regular heptagon has 7 equal sides:
-</p>
-<p>
-The area of a regular polygon is:
-</p>
-<p>
-\( A = \frac{7}{2} \times \text{side length} \times \text{apothem} \)
+\[ \begin{aligned}
+\text{Area of one triangle} &= \frac{1}{2} \times \text{base} \times \text{height} \\
+&= \frac{1}{2} \times {@s@} \times {@a@} \\
+&= {@m3@} \text{ m}^2
+\end{aligned} \]
 </p>
 
+<p><b>Step 2: Find the total area of the heptagon</b></p>
+<p>Since the heptagon is made of 7 equal triangles, multiply the area of one triangle by 7:</p>
 <p>
-\( A = \frac{7}{2} \times {@s@} \times {@a@} \)
-</p>
-
-<p>
-\( A = {@ta1@} \text{ m}^2 \)
+\[ \begin{aligned}
+\text{Total Area} &= 7 \times \text{area of one triangle} \\
+&= 7 \times {@m3@} \\
+&= {@ta1@} \text{ m}^2
+\end{aligned} \]
 </p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -108,22 +107,25 @@ The area of a regular polygon is:
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* Side length (m) */
-s : rand(4)+6;   /* 6–9 */
+      <text>/* Force side length to be an EVEN number (6, 8, 10, 12) to guarantee a clean integer area */
+s : rand_with_step(6, 12, 2); 
 
 /* Apothem (m) */
-a : rand(3)+4;   /* 4–6 */
+a : rand(4) + 4;   
 
-/* Area */
-ta1 : (7/2)*s*a;
+/* Calculations */
+ta1 : 7 * (s/2) * a;
 
-</text>
+/* Common Mistakes for PRT */
+m1 : 7 * s;          /* Calculated Perimeter instead */
+m2 : 7 * s * a;      /* Forgot the 1/2 factor */
+m3 : (1/2) * s * a;  /* Forgot to multiply by 7 (area of one triangle) */</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta1@}</text>
+      <text><![CDATA[<p>Side: {@s@}, Apothem: {@a@}, Area: {@ta1@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -178,7 +180,7 @@ ta1 : (7/2)*s*a;
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Checks for correct area</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>ta1</tans>
@@ -195,24 +197,104 @@ ta1 : (7/2)*s*a;
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
+      <node>
+        <name>1</name>
+        <description>Caught Perimeter mistake</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You calculated the perimeter of the heptagon (\(7 \times \text{side}\)). To find the area, you must also use the apothem.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Caught missing 1/2 factor</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You forgot the \(\frac{1}{2}\) factor. The area of one of the inner triangles is \(\frac{1}{2} \times \text{base} \times \text{height}\).</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Caught missing x7 multiplier</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.2</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Almost there! You found the area of exactly <b>one</b> of the central triangles. Remember, a heptagon is made of 7 equal triangles. Multiply your answer by 7.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
     </prt>
-    <deployedseed>1926318901</deployedseed>
-    <deployedseed>58158914</deployedseed>
-    <deployedseed>2085164398</deployedseed>
-    <deployedseed>1364358825</deployedseed>
-    <deployedseed>76627291</deployedseed>
-    <deployedseed>999995501</deployedseed>
-    <deployedseed>1374004260</deployedseed>
-    <deployedseed>1439211178</deployedseed>
-    <deployedseed>121764709</deployedseed>
-    <deployedseed>167314452</deployedseed>
-    <deployedseed>1393084378</deployedseed>
+    <deployedseed>1097986394</deployedseed>
+    <deployedseed>1054785866</deployedseed>
+    <deployedseed>1558364895</deployedseed>
+    <deployedseed>938333285</deployedseed>
+    <deployedseed>975908302</deployedseed>
+    <deployedseed>187941839</deployedseed>
+    <deployedseed>179984301</deployedseed>
+    <deployedseed>1690792813</deployedseed>
+    <deployedseed>1783655088</deployedseed>
+    <deployedseed>708888421</deployedseed>
+    <deployedseed>1925969786</deployedseed>
+    <deployedseed>291944300</deployedseed>
+    <deployedseed>1248743704</deployedseed>
+    <deployedseed>1876695617</deployedseed>
+    <deployedseed>1510943356</deployedseed>
+    <deployedseed>1023678498</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>

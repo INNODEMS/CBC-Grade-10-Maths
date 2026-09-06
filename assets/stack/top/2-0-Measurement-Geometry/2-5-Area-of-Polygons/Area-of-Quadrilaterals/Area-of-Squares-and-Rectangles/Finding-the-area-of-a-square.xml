@@ -6,11 +6,46 @@
     </name>
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>
-A square has side length {@s@} cm. Find the area of the square.
+A square has a side length of <b>{@s@} cm</b>. Find the area of the square.
 </p>
 
+[[jsxgraph]]
+    var s = {#s#};
+    
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [-2, s + 3, s + 3, -2],
+        keepAspectRatio: true,
+        showNavigation: false,
+        showCopyright: false,
+        pan: {enabled: false},
+        zoom: {enabled: false}
+    });
+    
+    // Vertices locked in place
+    var p1 = board.create('point', [0, 0], {visible: false, fixed: true});
+    var p2 = board.create('point', [s, 0], {visible: false, fixed: true});
+    var p3 = board.create('point', [s, s], {visible: false, fixed: true});
+    var p4 = board.create('point', [0, s], {visible: false, fixed: true});
+    
+    // Square Polygon locked in place
+    var poly = board.create('polygon', [p1, p2, p3, p4], {
+        fillColor: '#e8eaf6', fillOpacity: 0.8, fixed: true, highlight: false,
+        borders: {strokeColor: '#3949ab', strokeWidth: 2.5, fixed: true, highlight: false}
+    });
+    
+    // Right angle markers in all 4 corners (names explicitly cleared to remove the alpha)
+    var rad = Math.min(s*0.15, 2);
+    board.create('angle', [p2, p1, p4], {radius: rad, type: 'square', strokeColor: 'black', fixed: true, name: ''});
+    board.create('angle', [p3, p2, p1], {radius: rad, type: 'square', strokeColor: 'black', fixed: true, name: ''});
+    board.create('angle', [p4, p3, p2], {radius: rad, type: 'square', strokeColor: 'black', fixed: true, name: ''});
+    board.create('angle', [p1, p4, p3], {radius: rad, type: 'square', strokeColor: 'black', fixed: true, name: ''});
+    
+    // Labels
+    board.create('text', [-0.5, s/2, s + " cm"], {anchorX: 'right', anchorY: 'middle', fontSize: 14, fixed: true});
+[[/jsxgraph]]
+
 <p>
-Area = [[input:ans1]] \(\text {cm}^2\) [[validation:ans1]] [[feedback:prt1]]
+Area = [[input:ans1]] <b>\(\text{cm}^2\)</b> [[validation:ans1]] [[feedback:prt1]]
 </p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
@@ -68,7 +103,7 @@ Therefore, the area of the square is:
 
 <p>
 \[
-Area = {{@A@}\text{ cm}^2}
+\boxed{{@A@}\text{ cm}^2}
 \]
 </p>]]></text>
     </generalfeedback>
@@ -77,7 +112,7 @@ Area = {{@A@}\text{ cm}^2}
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2026010500</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
       <text>/* Side length of the square */
@@ -95,7 +130,7 @@ m3: s+s;        /* repeated addition confusion */</text>
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@A@}</text>
+      <text><![CDATA[<p>s: {@s@}, Area: {@A@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
@@ -194,7 +229,7 @@ The question requires the learner to calculate the area of a square by applying 
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text>You found the perimeter. For area of a square, multiply the side by itself.</text>
+          <text><![CDATA[<p>You found the perimeter. For the area of a square, multiply the side by itself (\(s^2\)).</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -209,7 +244,7 @@ The question requires the learner to calculate the area of a square by applying 
         <name>2</name>
         <description>doubling the sides</description>
         <answertest>AlgEquiv</answertest>
-        <sans>ans2</sans>
+        <sans>ans1</sans>
         <tans>m2</tans>
         <testoptions/>
         <quiet>0</quiet>
@@ -219,7 +254,7 @@ The question requires the learner to calculate the area of a square by applying 
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-3-T</trueanswernote>
         <truefeedback format="html">
-          <text>Area is not found by doubling the side. Use side × side.</text>
+          <text><![CDATA[<p>Area is not found by doubling the side. Use side &times; side.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -244,7 +279,7 @@ The question requires the learner to calculate the area of a square by applying 
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-4-T</trueanswernote>
         <truefeedback format="html">
-          <text>Area of a square is found by multiplying the side by itself, not by adding sides.</text>
+          <text><![CDATA[<p>The area of a square is found by multiplying the side by itself, not by adding the sides together.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -252,36 +287,30 @@ The question requires the learner to calculate the area of a square by applying 
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-4-F</falseanswernote>
         <falsefeedback format="html">
-          <text>Use the formula 𝐴 = \(\text {S}^2\)
-.</text>
+          <text/>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>723560820</deployedseed>
-    <deployedseed>1589889056</deployedseed>
-    <deployedseed>1088853299</deployedseed>
-    <deployedseed>2140855707</deployedseed>
-    <deployedseed>1618535339</deployedseed>
-    <deployedseed>1523912502</deployedseed>
-    <deployedseed>337810541</deployedseed>
-    <deployedseed>391842986</deployedseed>
-    <deployedseed>1979786945</deployedseed>
-    <deployedseed>1854059674</deployedseed>
-    <deployedseed>26951001</deployedseed>
-    <deployedseed>1529383577</deployedseed>
-    <deployedseed>1522760553</deployedseed>
-    <deployedseed>320112946</deployedseed>
-    <deployedseed>404473631</deployedseed>
-    <deployedseed>533443578</deployedseed>
-    <deployedseed>1940137819</deployedseed>
-    <deployedseed>732590464</deployedseed>
-    <deployedseed>404124945</deployedseed>
-    <deployedseed>1285850777</deployedseed>
-    <deployedseed>952539936</deployedseed>
-    <deployedseed>245291858</deployedseed>
-    <deployedseed>795819962</deployedseed>
-    <deployedseed>1459427883</deployedseed>
-    <deployedseed>1875158111</deployedseed>
+    <deployedseed>1608528124</deployedseed>
+    <deployedseed>247696548</deployedseed>
+    <deployedseed>1847533907</deployedseed>
+    <deployedseed>1644553511</deployedseed>
+    <deployedseed>765900417</deployedseed>
+    <deployedseed>1186568348</deployedseed>
+    <deployedseed>542942347</deployedseed>
+    <deployedseed>1187946555</deployedseed>
+    <deployedseed>975563647</deployedseed>
+    <deployedseed>599361331</deployedseed>
+    <deployedseed>1742718192</deployedseed>
+    <deployedseed>2017546093</deployedseed>
+    <deployedseed>464319046</deployedseed>
+    <deployedseed>1889345483</deployedseed>
+    <deployedseed>1075674304</deployedseed>
+    <deployedseed>967859772</deployedseed>
+    <deployedseed>1425515208</deployedseed>
+    <deployedseed>628245635</deployedseed>
+    <deployedseed>719913301</deployedseed>
+    <deployedseed>1937375162</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
@@ -293,7 +322,7 @@ The question requires the learner to calculate the area of a square by applying 
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>[ prt1-1-T ]</expectedanswernote>
       </expected>
     </qtest>
   </question>

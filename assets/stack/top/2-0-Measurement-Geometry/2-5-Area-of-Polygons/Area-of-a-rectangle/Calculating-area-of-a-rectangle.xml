@@ -5,85 +5,103 @@
       <text>Calculating area of a rectangle</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Calculate the area of the rectangle below. [[input:ans1]] \(\text{m}^2\) [[validation:ans1]][[feedback:prt1]]</p>
-[[jsxgraph]]
-        var board = JXG.JSXGraph.initBoard('jxgbox', {
-            boundingbox: [-5, 30, 30, -10], 
-            axis: false, 
-            showCopyright: false,
-            keepAspectRatio:true
-        });
+      <text><![CDATA[<p>Calculate the area of the rectangle below.</p>
 
-       
-        var A = board.create('point', [0, 0], {name: 'A', visible: false});
-        var B = board.create('point', [30, 0], {name: 'B', visible: false});
-        var C = board.create('point', [30, 15], {name: 'C', visible: false});
-        var D = board.create('point', [0,15], {name: 'D', visible: false});
+[[jsxgraph width="500px" height="300px"]]
+    var l = {#l#};
+    var w = {#w#};
+    
+    // Mathematically center the rectangle and force a 5:3 bounding box ratio
+    // This prevents keepAspectRatio from fighting the canvas limits or crushing the shape
+    var centerX = l / 2;
+    var centerY = w / 2;
+    var ratio = 500 / 300;
+    
+    // Ensure both dimensions fit with a 30% visual buffer
+    var spanX = Math.max(l * 1.3, w * 1.3 * ratio);
+    var spanY = spanX / ratio;
+    
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [centerX - spanX/2, centerY + spanY/2, centerX + spanX/2, centerY - spanY/2], 
+        // Generous invisible walls scaled exactly to the aspect ratio
+        maxboundingbox: [centerX - spanX*1.5, centerY + spanY*1.5, centerX + spanX*1.5, centerY - spanY*1.5],
+        axis: false, 
+        showCopyright: false,
+        keepAspectRatio: true,
+        showNavigation: true 
+    });
 
-        
-        board.create('polygon', [A, B,C,D],{fillColor: 'none',strokeColor:'red'});
+    // Dynamic vertices linked to the STACK variables
+    var A = board.create('point', [0, 0], {name: '', visible: false});
+    var B = board.create('point', [l, 0], {name: '', visible: false});
+    var C = board.create('point', [l, w], {name: '', visible: false});
+    var D = board.create('point', [0, w], {name: '', visible: false});
 
-        
-        board.create('text', [15, -2, "{#length#} m"], {fontSize: 12});  
-        board.create('text', [31, 7.5, "{#width#} m"], {fontSize: 12}); 
+    // Rectangle
+    board.create('polygon', [A, B, C, D], {
+        fillColor: 'none', 
+        strokeColor: '#1976d2', 
+        strokeWidth: 2
+    });
 
-       
-        board.create('angle', [B, A, D], {
-            type: 'square',
-            radius: 1,
-            strokeColor:'skyblue',
-            fillColor: 'none',  
-            label: {visible: false}
-        });
-        board.create('angle', [A, B, C], {
-            type: 'square',
-            radius: 1,
-            strokeColor:'skyblue',
-            fillColor: 'none',  
-            label: {visible: false} 
-        });
-        board.create('angle', [B, C, D], {
-            type: 'square',
-            radius: 1,
-            strokeColor:'skyblue',
-            fillColor: 'none',  
-             label: {visible: false} 
-        });
-        board.create('angle', [C, D, A], {
-            type: 'square',
-            radius: 1,
-            strokeColor:'skyblue',
-            fillColor: 'none', 
-            label: {visible: false}
-        });
-[[/jsxgraph]]]]></text>
+    // Right-angle markers with cleaned names to suppress alpha labels
+    var rad = Math.min(l, w) * 0.15;
+    board.create('angle', [B, A, D], {type: 'square', radius: rad, strokeColor: '#90caf9', name: ''});
+    board.create('angle', [C, B, A], {type: 'square', radius: rad, strokeColor: '#90caf9', name: ''});
+    board.create('angle', [D, C, B], {type: 'square', radius: rad, strokeColor: '#90caf9', name: ''});
+    board.create('angle', [A, D, C], {type: 'square', radius: rad, strokeColor: '#90caf9', name: ''});
+
+    // Calculate exact visual pixel gaps (~15px) based on the canvas spans
+    var gapY = spanY * 0.05; 
+    var gapX = spanX * 0.03; 
+
+    // Dynamic labels securely anchored with mathematically locked offsets
+    board.create('text', [l/2, -gapY, l + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 16});
+    board.create('text', [l + gapX, w/2, w + " m"], {anchorX: 'left', anchorY: 'middle', fontSize: 16});
+[[/jsxgraph]]
+
+<p>Area = [[input:ans1]] <b>\(\text{m}^2\)</b> [[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text><![CDATA[<h3>Worked solution</h3>
-<p>The area of a rectangle is calculated by multiplying its length and width. </p>
-<p>Given a rectangle with a length of \({@length@}\) meters and a width of \({@width@}\) meters, the area is found by multiplying \({@length@}\)  meters by \({@width@}\)  meters, resulting in an area of \({@area@}\)  square meters.
-</p>Therefore area = \({@length@}\)  \(\times\) \({@width@}\) = \({@area@}\) \(\text{m}^2\) </p>]]></text>
+      <text><![CDATA[<h3>Worked Solution</h3>
+<p>The area of a rectangle is calculated by multiplying its length and width.</p>
+<p>
+\[ \text{Area} = l \times w \]
+</p>
+<p>Given a rectangle with a length of \(l = {@l@}\text{ m}\) and a width of \(w = {@w@}\text{ m}\):</p>
+<p>
+\[ \text{Area} = {@l@} \times {@w@} \]
+</p>
+<p>
+\[ \text{Area} = {@ta@} \text{ m}^2 \]
+</p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2026010500</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
-      <text>units:rand([m]);/*units*/
-square_unit:(units)^2;/*square units*/
-length:rand_with_step(55,100,2);/*length of the rectangle*/
-width:rand_with_step(6,49,2);/*width of the rectangle*/
-area:length*width;/*area of the rectangle*/
-ta:area;/*teacher's answer*/</text>
+      <text>/* Length and width */
+l: rand_with_step(55,100,2);
+w: rand_with_step(6,49,2);
+
+/* Area */
+ta: l * w;
+
+/* Common Mistakes for PRT */
+m1: 2 * (l + w); /* Perimeter */
+m2: l + w;       /* Added dimensions */
+m3: l^2;         /* Squared the length */
+m4: w^2;         /* Squared the width */</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>ta</p>]]></text>
+      <text><![CDATA[<p>L: {@l@}, W: {@w@}, Area: {@ta@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -138,7 +156,7 @@ ta:area;/*teacher's answer*/</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description>This question is about calculating the area of a rectangle</description>
+        <description>checks for the correct answer</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>ta</tans>
@@ -155,14 +173,173 @@ ta:area;/*teacher's answer*/</text>
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
+      <node>
+        <name>1</name>
+        <description>Perimeter mistake</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You calculated the perimeter. To find the area, you must multiply the length by the width.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Addition mistake</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>You added the dimensions. The area is found by multiplying the length and the width.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Squares length</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>This is a rectangle, not a square. You squared the length. Use length &times; width.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>4</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>4</name>
+        <description>Squares width</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m4</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-5-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>This is a rectangle, not a square. You squared the width. Use length &times; width.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-5-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
     </prt>
-    <deployedseed>294122194</deployedseed>
+    <deployedseed>174815328</deployedseed>
+    <deployedseed>1553524092</deployedseed>
+    <deployedseed>1271477154</deployedseed>
+    <deployedseed>1162010070</deployedseed>
+    <deployedseed>114522171</deployedseed>
+    <deployedseed>617703910</deployedseed>
+    <deployedseed>369916060</deployedseed>
+    <deployedseed>822711586</deployedseed>
+    <deployedseed>1612964302</deployedseed>
+    <deployedseed>35309494</deployedseed>
+    <deployedseed>2053286443</deployedseed>
+    <deployedseed>591753871</deployedseed>
+    <deployedseed>731400384</deployedseed>
+    <deployedseed>566968164</deployedseed>
+    <deployedseed>260236702</deployedseed>
+    <deployedseed>162054605</deployedseed>
+    <deployedseed>137999130</deployedseed>
+    <deployedseed>1397317036</deployedseed>
+    <deployedseed>1086172999</deployedseed>
+    <deployedseed>414723665</deployedseed>
+    <deployedseed>1015900100</deployedseed>
+    <deployedseed>2035426454</deployedseed>
+    <deployedseed>306701015</deployedseed>
+    <deployedseed>1393159508</deployedseed>
+    <deployedseed>1566909508</deployedseed>
+    <deployedseed>843281766</deployedseed>
+    <deployedseed>1193414291</deployedseed>
+    <deployedseed>1664587445</deployedseed>
+    <deployedseed>398924098</deployedseed>
+    <deployedseed>2073716756</deployedseed>
+    <deployedseed>7124840</deployedseed>
+    <deployedseed>1386129284</deployedseed>
+    <deployedseed>1510553252</deployedseed>
+    <deployedseed>607505549</deployedseed>
+    <deployedseed>444920563</deployedseed>
+    <deployedseed>343100974</deployedseed>
+    <deployedseed>1772587431</deployedseed>
+    <deployedseed>1640558380</deployedseed>
+    <deployedseed>624357508</deployedseed>
+    <deployedseed>1933712448</deployedseed>
+    <deployedseed>657534314</deployedseed>
+    <deployedseed>1064477924</deployedseed>
+    <deployedseed>1887012938</deployedseed>
+    <deployedseed>1939591875</deployedseed>
+    <deployedseed>1871969763</deployedseed>
+    <deployedseed>341361448</deployedseed>
+    <deployedseed>1100227421</deployedseed>
+    <deployedseed>833613841</deployedseed>
+    <deployedseed>2091759266</deployedseed>
+    <deployedseed>1638619345</deployedseed>
+    <deployedseed>948273947</deployedseed>
+    <deployedseed>1852182293</deployedseed>
+    <deployedseed>1677299798</deployedseed>
+    <deployedseed>299422277</deployedseed>
+    <deployedseed>1872228221</deployedseed>
+    <deployedseed>1628068818</deployedseed>
+    <deployedseed>334393569</deployedseed>
+    <deployedseed>2111995468</deployedseed>
+    <deployedseed>519432481</deployedseed>
+    <deployedseed>1683475228</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>

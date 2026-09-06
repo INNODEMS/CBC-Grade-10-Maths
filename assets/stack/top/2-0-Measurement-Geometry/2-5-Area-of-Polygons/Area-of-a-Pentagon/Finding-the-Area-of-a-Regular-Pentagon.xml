@@ -7,142 +7,97 @@
     <questiontext format="moodle_auto_format">
       <text><![CDATA[<p>Find the area of the figure below, centered at \(O\).</p>
 
-[[jsxgraph]]
-var board = JXG.JSXGraph.initBoard(divid, {
-    boundingbox: [-40, 40, 40, -40],
-    axis: false,
-    showCopyright: false
-});
+[[jsxgraph width="500px" height="300px"]]
+    var b = {#base_length#};
+    var s = {#slant#};
+    
+    // Abstract geometric scaling for a clean visual representation
+    var R = 20; 
+    var angle = Math.PI / 5; // 36 degrees
+    
+    // Generous bounding box to prevent clipping the top vertex or base label
+    // 500x300 canvas ratio requires a wider X span to keep Aspect Ratio true
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [-40, 25, 40, -25], 
+        maxboundingbox: [-60, 40, 60, -40],
+        axis: false, 
+        showCopyright: false,
+        keepAspectRatio: true,
+        showNavigation: false 
+    });
 
-/* Centre point O */
-var O = board.create('point', [0, 0], {
-    name: 'O',
-    fixed: true,
-    visible: false
-});
+    // Pentagon Vertices
+    var p0 = board.create('point', [0, R], {visible: false});
+    var p1 = board.create('point', [-R * Math.sin(2*angle), R * Math.cos(2*angle)], {visible: false});
+    var p2 = board.create('point', [-R * Math.sin(angle), -R * Math.cos(angle)], {visible: false});
+    var p3 = board.create('point', [R * Math.sin(angle), -R * Math.cos(angle)], {visible: false});
+    var p4 = board.create('point', [R * Math.sin(2*angle), R * Math.cos(2*angle)], {visible: false});
+    var center = board.create('point', [0, 0], {name: 'O', visible: true, label:{offset:[-5,15]}});
 
-/* Pentagon vertices (numerical, fixed shape) */
-var A = board.create('point', [0, 25.5], {visible: false});
-var B = board.create('point', [24.2, 7.9], {visible: false});
-var C = board.create('point', [14.8, -20.6], {visible: false});
-var D = board.create('point', [-14.8, -20.6], {visible: false});
-var E = board.create('point', [-24.2, 7.9], {visible: false});
+    board.create('polygon', [p0, p1, p2, p3, p4], {
+        fillColor: '#fafafa', 
+        strokeColor: '#212121', 
+        strokeWidth: 2
+    });
 
-/* Pentagon */
-board.create('polygon', [A, B, C, D, E], {
-    borders: {strokeColor: 'black'},
-    fillColor: 'none'
-});
+    // Slanted lines (radii)
+    board.create('segment', [center, p3], {strokeColor: '#1976d2'});
+    board.create('segment', [center, p2], {strokeColor: '#1976d2'});
 
-/* Radius lines */
-board.create('segment', [O, C], {
-    strokeColor: 'black',
-    straightFirst: false,
-    straightLast: false
-});
+    // Perpendicular height (apothem)
+    var mid = board.create('midpoint', [p2, p3], {visible: false});
+    board.create('segment', [center, mid], {dash: 2, strokeColor: '#d32f2f'});
 
-board.create('segment', [O, B], {
-    strokeColor: 'black',
-    straightFirst: false,
-    straightLast: false
-});
+    // Right angle marker
+    var rad = R * 0.15;
+    board.create('angle', [p3, mid, center], {type: 'square', radius: rad, strokeColor: '#d32f2f', name: ''});
 
-/* Labels */
-board.create('text', [-1, -10, "{#slant#} cm"], {
-    fontSize: 12,
-    fixed: true
-});
-
-board.create('text', [-0.2, 2, "O"], {
-    fontSize: 12,
-    fixed: true
-});
-
-/* Base BC */
-board.create('segment', [B, C], {
-    strokeColor: 'black'
-});
-
-board.create('text', [
-    function(){ return B.X(); },
-    function(){ return B.Y() - 15; },
-    "{#base_length#} cm"
-], {
-    fontSize: 12,
-    fixed: true
-});
-
-/* Perpendicular height from O to BC */
-var midpoint = board.create('midpoint', [B, C], {visible: false});
-
-board.create('segment', [O, midpoint], {
-    strokeColor: 'black',
-    dash: 1
-});
-
-/* Right angle marker */
-board.create('nonreflexangle', [B, midpoint, O], {
-    radius: 3,
-    type: 'square',
-    name: '',
-    fixed: true
-});
+    // Dynamic Labels securely anchored
+    board.create('text', [0, -R * Math.cos(angle) - 2.5, b + " cm"], {anchorX: 'middle', anchorY: 'top', fontSize: 14});
+    board.create('text', [R * Math.sin(angle)/2 + 2, -R * Math.cos(angle)/2, s + " cm"], {anchorX: 'left', anchorY: 'middle', fontSize: 14, strokeColor: '#1976d2'});
 [[/jsxgraph]]
 
-<p>
-\(\text{Area} =\) [[input:ans1]] \(\text{cm}^2\)
-[[feedback:prt1]]
-</p>
-
-<p style="display:none;">
-[[validation:ans1]]
-</p>]]></text>
+<p>\(\text{Area} =\) [[input:ans1]] <b>\(\text{cm}^2\)</b> [[validation:ans1]] [[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked solution</h3>
-<p> To calculate the area of the pentagon, divide the shape into five identical isosceles triangles by joining each vertex to
-the centre \(O\).
-<p>
-Each triangle has:
+<p>To calculate the area of the pentagon, divide the shape into five identical isosceles triangles by joining each vertex to the centre \(O\).</p>
+<p>Each triangle has:</p>
 <ul>
-  <li>base length \( {@base_length@} \) cm</li>
-  <li>two equal sides of length \( {@slant@} \) cm</li>
+  <li>base length \(= {@base_length@}\text{ cm}\)</li>
+  <li>two equal slanted sides of \(= {@slant@}\text{ cm}\)</li>
 </ul>
+
+<p>To find the perpendicular height (\(h\)) of one triangle, we split it into two right-angled triangles. The hypotenuse is the slanted side, and the base of this smaller triangle is exactly half of the total base:</p>
+<p>
+\[ \text{Half base} = \frac{{@base_length@}}{2} = {@half_base@}\text{ cm} \]
 </p>
 
+<p>Using Pythagoras’ theorem (\(a^2 + b^2 = c^2\)):</p>
 <p>
-To find the perpendicular height of one triangle, we split it into two right-angled triangles.
-The hypotenuse is the slanted side, and half the base is
-\[
-\frac{{@base_length@}}{2}.
-\]
+\[ \begin{aligned}
+h^2 + ({@half_base@})^2 &= ({@slant@})^2 \\
+h^2 &= {@slant^2@} - {@half_base^2@} \\
+h &= \sqrt{{@slant^2 - half_base^2@}} \\
+h &= {@height@}\text{ cm}
+\end{aligned} \]
 </p>
 
+<p>The area of one full isosceles triangle is therefore:</p>
 <p>
-Using Pythagoras’ theorem:
-\[
-h = \sqrt{({@slant@})^2 - \left(\frac{{@base_length@}}{2}\right)^2}.
-\]
+\[ \begin{aligned}
+\text{Area of one triangle} &= \frac{1}{2} \times \text{base} \times h \\
+&= \frac{1}{2} \times {@base_length@} \times {@height@} \\
+&= {@area_triangle@}\text{ cm}^2
+\end{aligned} \]
 </p>
 
+<p>Since the pentagon consists of five identical triangles, its total area is:</p>
 <p>
-The area of one triangle is therefore
-\[
-\frac{1}{2} \times {@base_length@} \times h.
-\]
-</p>
-
-<p>
-Since the pentagon consists of five identical triangles, its total area is
-\[
-5 \times \frac{1}{2} \times {@base_length@} \times h = {@ta@}.
-\]
-</p>
-
-<p>
-\[
-\boxed{\text{Area} = {@ta@}\text{ cm}^2}
-\]
+\[ \begin{aligned}
+\text{Total Area} &= 5 \times {@area_triangle@} \\
+\text{Total Area} &= {@ta@}\text{ cm}^2
+\end{aligned} \]
 </p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -153,74 +108,42 @@ Since the pentagon consists of five identical triangles, its total area is
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text><![CDATA[/* Title: Random Pentagon Area Calculator with Expanded Range (NO conditionals) */
+      <text>/* Generate Pythagorean triples to ensure height and area are perfectly clean integers */
+m : rand(4) + 2; 
+n : rand(m-1) + 1;
+k : rand(4) + 2; 
 
-/* Base length: divisible by 10, between 20 and 260 */
-base_length : 10 * (rand(25) + 2);
+/* Assign dimensions */
+half_base : k * (m^2 - n^2);
+height : k * (2*m*n);
 
-/* Half base */
-half_base : base_length / 2;
-
-/* Maximum slant height: always safely greater than half_base */
-max_slant : max(base_length - 5, half_base + 5);
-
-/* Slant height: divisible by 5, strictly between half_base and max_slant */
-slant : 5 * (
-  floor(half_base/5)
-  + rand(floor((max_slant - half_base)/5))
-  + 1
+/* Randomly swap half_base and height for variety */
+if rand(2) = 1 then (
+    temp : half_base,
+    half_base : height,
+    height : temp
 );
 
-/* Height using Pythagoras */
-height : sqrt(slant^2 - half_base^2);
-height_d : decimalplaces(float(height), 1);
+slant : k * (m^2 + n^2);
+base_length : 2 * half_base;
 
-/* Area of one triangle */
-area_triangle : (1/2) * base_length * height_d;
-area_triangle_d : decimalplaces(area_triangle, 1);
+/* Calculations */
+area_triangle : (1/2) * base_length * height;
+ta : 5 * area_triangle;
 
-/* Area of pentagon */
-area_pentagon : 5 * area_triangle;
-ta_exact : decimalplaces(area_pentagon, 1);
-ta1: round(area_pentagon);
-
-/* ---------- Randomised mistake generation (NO conditionals) ---------- */
-
-/* Mistake selector */
-mistake_number : rand(4) + 1;
-
-/* List of mistake answers */
-mistake_answers : [
-  round((1/2) * base_length * slant),      /* using slant as height */
-  round((1/2) * base_length * half_base),  /* using half base as height */
-  round(area_triangle),                    /* forgetting ×5 */
-  round((base_length * slant) / 2)         /* base × slant / 2 */
-];
-
-/* Corresponding feedback messages */
-mistake_feedback : [
-  "Great effort! Remember, the slant height is not the perpendicular height. Use Pythagoras to find the correct height.",
-  "Nice try. Half the base helps form the right triangle, but it is not the perpendicular height.",
-  "Almost there! You found the area of one triangle. Remember to multiply by 5.",
-  "Good attempt! The slant height is not perpendicular to the base. Use the perpendicular height in the area formula."
-];
-
-/* Selected mistake answer and feedback */
-mistake_answer : mistake_answers[mistake_number];
-feedback : mistake_feedback[mistake_number];
-]]></text>
+/* Specific Mistakes for PRT */
+m1 : 5 * (1/2) * base_length * slant;     /* Used slant as height */
+m2 : 5 * (1/2) * base_length * half_base; /* Used half-base as height */
+m3 : area_triangle;                       /* Forgot to multiply by 5 */</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@ta1@}</text>
+      <text><![CDATA[<p>Base: {@base_length@}, Slant: {@slant@}, Height: {@height@}, Area: {@ta@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
-      <text><![CDATA[<p id="author">Monica Sherily</p>
-<p id="reviewer"></p>
-<p id="reviewer"></p>
-<p id="description">This question is on finding the area of a regular pentagon. The learner is required to observe the diagram and identify the various dimensions then calculate the area of the pentagon. Guide them to first find the area of one triangle formed by drawing lines from the center to each vertex, and then multiply it by five to get the total area of the pentagon.</p>]]></text>
+      <text/>
     </questiondescription>
     <questionsimplify>1</questionsimplify>
     <assumepositive>0</assumepositive>
@@ -247,7 +170,7 @@ feedback : mistake_feedback[mistake_number];
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>ta1</tans>
+      <tans>ta</tans>
       <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -255,7 +178,7 @@ feedback : mistake_feedback[mistake_number];
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
@@ -272,7 +195,7 @@ feedback : mistake_feedback[mistake_number];
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description/>
+        <description>Checks for correct total area</description>
         <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>ta</tans>
@@ -289,69 +212,138 @@ feedback : mistake_feedback[mistake_number];
         <falsescoremode>=</falsescoremode>
         <falsescore>0</falsescore>
         <falsepenalty/>
-        <falsenextnode>-1</falsenextnode>
+        <falsenextnode>1</falsenextnode>
         <falseanswernote>prt1-1-F</falseanswernote>
         <falsefeedback format="html">
           <text/>
         </falsefeedback>
       </node>
+      <node>
+        <name>1</name>
+        <description>Mistake: Used slant as height</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m1</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Great effort! However, the slant is not the perpendicular height. You must use Pythagoras' theorem to find the correct height first.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description>Mistake: Used half base as height</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m2</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Nice try. Half the base helps form the right triangle, but it is not the perpendicular height. Use Pythagoras' theorem.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>Mistake: Forgot to multiply by 5</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>m3</tans>
+        <testoptions/>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.2</truescore>
+        <truepenalty/>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>Almost there! You successfully found the area of <b>one</b> triangle. Remember a pentagon is made of 5 identical triangles, so you must multiply your answer by 5.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty/>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text/>
+        </falsefeedback>
+      </node>
     </prt>
-    <deployedseed>404107258</deployedseed>
-    <deployedseed>1208046095</deployedseed>
-    <deployedseed>1852468895</deployedseed>
-    <deployedseed>936331563</deployedseed>
-    <deployedseed>346189755</deployedseed>
-    <deployedseed>1835566648</deployedseed>
-    <deployedseed>764251822</deployedseed>
-    <deployedseed>664016470</deployedseed>
-    <deployedseed>1480651678</deployedseed>
-    <deployedseed>411788114</deployedseed>
-    <deployedseed>403306236</deployedseed>
-    <deployedseed>869316976</deployedseed>
-    <deployedseed>584605846</deployedseed>
-    <deployedseed>2017442244</deployedseed>
-    <deployedseed>495128563</deployedseed>
-    <deployedseed>1619283471</deployedseed>
-    <deployedseed>1522795602</deployedseed>
-    <deployedseed>1825102366</deployedseed>
-    <deployedseed>847770146</deployedseed>
-    <deployedseed>2033574599</deployedseed>
-    <deployedseed>156356757</deployedseed>
-    <deployedseed>80755900</deployedseed>
-    <deployedseed>1727800016</deployedseed>
-    <deployedseed>1784772340</deployedseed>
-    <deployedseed>1728945908</deployedseed>
-    <deployedseed>996935779</deployedseed>
-    <deployedseed>2035715110</deployedseed>
-    <deployedseed>1996445353</deployedseed>
-    <deployedseed>1361983137</deployedseed>
-    <deployedseed>492746565</deployedseed>
-    <deployedseed>833061516</deployedseed>
-    <deployedseed>1027625165</deployedseed>
-    <deployedseed>1302030072</deployedseed>
-    <deployedseed>523245577</deployedseed>
-    <deployedseed>1453999703</deployedseed>
-    <deployedseed>1832362477</deployedseed>
-    <deployedseed>1994607854</deployedseed>
-    <deployedseed>1344438466</deployedseed>
-    <deployedseed>1252482131</deployedseed>
-    <deployedseed>1863638755</deployedseed>
-    <deployedseed>2118616108</deployedseed>
-    <deployedseed>1633665723</deployedseed>
-    <deployedseed>2100004262</deployedseed>
-    <deployedseed>1323253132</deployedseed>
-    <deployedseed>924467589</deployedseed>
-    <deployedseed>241372917</deployedseed>
-    <deployedseed>1607815998</deployedseed>
-    <deployedseed>1531409858</deployedseed>
-    <deployedseed>146774169</deployedseed>
-    <deployedseed>799075935</deployedseed>
-    <deployedseed>1915410360</deployedseed>
-    <deployedseed>1522736089</deployedseed>
-    <deployedseed>1764458293</deployedseed>
-    <deployedseed>2089082964</deployedseed>
-    <deployedseed>1287238881</deployedseed>
-    <deployedseed>1186616084</deployedseed>
+    <deployedseed>1839088632</deployedseed>
+    <deployedseed>1740798787</deployedseed>
+    <deployedseed>1723749193</deployedseed>
+    <deployedseed>958903117</deployedseed>
+    <deployedseed>425017788</deployedseed>
+    <deployedseed>815537197</deployedseed>
+    <deployedseed>1564918769</deployedseed>
+    <deployedseed>1319437888</deployedseed>
+    <deployedseed>1297143349</deployedseed>
+    <deployedseed>216100797</deployedseed>
+    <deployedseed>870939523</deployedseed>
+    <deployedseed>1307675360</deployedseed>
+    <deployedseed>1138086982</deployedseed>
+    <deployedseed>1947039655</deployedseed>
+    <deployedseed>1465110896</deployedseed>
+    <deployedseed>24966155</deployedseed>
+    <deployedseed>1873621106</deployedseed>
+    <deployedseed>716650257</deployedseed>
+    <deployedseed>1476547840</deployedseed>
+    <deployedseed>2090645631</deployedseed>
+    <deployedseed>526863890</deployedseed>
+    <deployedseed>951334633</deployedseed>
+    <deployedseed>518248963</deployedseed>
+    <deployedseed>380369547</deployedseed>
+    <deployedseed>602955583</deployedseed>
+    <deployedseed>1928377984</deployedseed>
+    <deployedseed>1193396904</deployedseed>
+    <deployedseed>372847929</deployedseed>
+    <deployedseed>2016151772</deployedseed>
+    <deployedseed>272741209</deployedseed>
+    <deployedseed>488592621</deployedseed>
+    <deployedseed>1397530667</deployedseed>
+    <deployedseed>1864258694</deployedseed>
+    <deployedseed>2101835481</deployedseed>
+    <deployedseed>1503702049</deployedseed>
+    <deployedseed>1215849670</deployedseed>
+    <deployedseed>1747370019</deployedseed>
+    <deployedseed>1110688177</deployedseed>
+    <deployedseed>2017240293</deployedseed>
+    <deployedseed>1724625416</deployedseed>
+    <deployedseed>1056689518</deployedseed>
+    <deployedseed>2016029064</deployedseed>
+    <deployedseed>414261965</deployedseed>
+    <deployedseed>816732193</deployedseed>
+    <deployedseed>299996436</deployedseed>
+    <deployedseed>184759994</deployedseed>
+    <deployedseed>2000189506</deployedseed>
+    <deployedseed>1975698117</deployedseed>
+    <deployedseed>193427669</deployedseed>
+    <deployedseed>1857207083</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>

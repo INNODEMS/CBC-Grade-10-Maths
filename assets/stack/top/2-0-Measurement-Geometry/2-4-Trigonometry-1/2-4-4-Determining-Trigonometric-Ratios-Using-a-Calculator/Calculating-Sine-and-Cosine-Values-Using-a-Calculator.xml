@@ -5,45 +5,71 @@
       <text>Calculating Sine and Cosine Values Using a Calculator</text>
     </name>
     <questiontext format="html">
-      <text><![CDATA[<p>Use a calculator to compute the following sines and cosines.</p>
+      <text><![CDATA[<p>Use a calculator to compute the following sines and cosines. Give your answers correct to <strong>4 decimal places</strong>.</p>
 
 <ol type="a">
   <li>
     <p>\(\sin({@a1@}^{\circ})=\) [[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>
   </li>
-
   <li>
     <p>\(\sin({@a2@}^{\circ})=\) [[input:ans2]] [[validation:ans2]] [[feedback:prt2]]</p>
   </li>
-
   <li>
     <p>\(\cos({@a3@}^{\circ})=\) [[input:ans3]] [[validation:ans3]] [[feedback:prt3]]</p>
   </li>
-
   <li>
     <p>\(\cos({@a4@}^{\circ})=\) [[input:ans4]] [[validation:ans4]] [[feedback:prt4]]</p>
   </li>
 </ol>]]></text>
     </questiontext>
     <generalfeedback format="html">
-      <text><![CDATA[<p>In this case using the sin or cosine button on a calculator should give the correct evaluation.</p>]]></text>
+      <text><![CDATA[<p><strong>Worked Solution:</strong></p>
+
+<p>Using a calculator, we evaluate the trigonometric functions and round each result to exactly 4 decimal places:</p>
+
+<ol type="a">
+  <li>
+    <p>\(\sin({@a1@}^\circ) = {@disp_1@}\)</p>
+  </li>
+  <li>
+    <p>\(\sin({@a2@}^\circ) = {@disp_2@}\)</p>
+  </li>
+  <li>
+    <p>\(\cos({@a3@}^\circ) = {@disp_3@}\)</p>
+  </li>
+  <li>
+    <p>\(\cos({@a4@}^\circ) = {@disp_4@}\)</p>
+  </li>
+</ol>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2025073100</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
-      <text>a1: 30*(1+rand(5));
-a2: 30*(1+rand(5));
-a3: 30*(1+rand(5));
-a4: 30*(1+rand(5));
-ta1: sin(a1*pi/180);
-ta2: sin(a2*pi/180);
-ta3: cos(a3*pi/180);
-ta4: cos(a4*pi/180);</text>
+      <text>/* Create a pool of angles from 10 to 170 degrees and pick 4 distinct ones */
+pool: makelist(i, i, 10, 170);
+angles: rand_selection(pool, 4);
+
+a1: angles[1];
+a2: angles[2];
+a3: angles[3];
+a4: angles[4];
+
+/* Evaluate to floating-point decimals natively using float() */
+ans_1: float(sin(a1*pi/180));
+ans_2: float(sin(a2*pi/180));
+ans_3: float(cos(a3*pi/180));
+ans_4: float(cos(a4*pi/180));
+
+/* Display variables formatted to exactly 4 decimal places for your feedback block */
+disp_1: dispdp(ans_1, 4);
+disp_2: dispdp(ans_2, 4);
+disp_3: dispdp(ans_3, 4);
+disp_4: dispdp(ans_4, 4);</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -79,7 +105,7 @@ ta4: cos(a4*pi/180);</text>
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>ta1</tans>
+      <tans>disp_1</tans>
       <boxsize>10</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -87,7 +113,7 @@ ta4: cos(a4*pi/180);</text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
@@ -97,7 +123,7 @@ ta4: cos(a4*pi/180);</text>
     <input>
       <name>ans2</name>
       <type>algebraic</type>
-      <tans>ta2</tans>
+      <tans>disp_2</tans>
       <boxsize>10</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -105,7 +131,7 @@ ta4: cos(a4*pi/180);</text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
@@ -115,7 +141,7 @@ ta4: cos(a4*pi/180);</text>
     <input>
       <name>ans3</name>
       <type>algebraic</type>
-      <tans>ta3</tans>
+      <tans>disp_3</tans>
       <boxsize>10</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -123,7 +149,7 @@ ta4: cos(a4*pi/180);</text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
@@ -133,7 +159,7 @@ ta4: cos(a4*pi/180);</text>
     <input>
       <name>ans4</name>
       <type>algebraic</type>
-      <tans>ta4</tans>
+      <tans>disp_4</tans>
       <boxsize>10</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -141,7 +167,7 @@ ta4: cos(a4*pi/180);</text>
       <syntaxattribute>0</syntaxattribute>
       <forbidwords/>
       <allowwords/>
-      <forbidfloat>1</forbidfloat>
+      <forbidfloat>0</forbidfloat>
       <requirelowestterms>0</requirelowestterms>
       <checkanswertype>0</checkanswertype>
       <mustverify>1</mustverify>
@@ -159,10 +185,10 @@ ta4: cos(a4*pi/180);</text>
       <node>
         <name>0</name>
         <description/>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
-        <tans>ta1</tans>
-        <testoptions/>
+        <tans>ans_1</tans>
+        <testoptions>4</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -193,10 +219,10 @@ ta4: cos(a4*pi/180);</text>
       <node>
         <name>0</name>
         <description/>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans2</sans>
-        <tans>ta2</tans>
-        <testoptions/>
+        <tans>ans_2</tans>
+        <testoptions>4</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -227,10 +253,10 @@ ta4: cos(a4*pi/180);</text>
       <node>
         <name>0</name>
         <description/>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans3</sans>
-        <tans>ta3</tans>
-        <testoptions/>
+        <tans>ans_3</tans>
+        <testoptions>4</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -261,10 +287,10 @@ ta4: cos(a4*pi/180);</text>
       <node>
         <name>0</name>
         <description/>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans4</sans>
-        <tans>ta4</tans>
-        <testoptions/>
+        <tans>ans_4</tans>
+        <testoptions>4</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -309,48 +335,123 @@ ta4: cos(a4*pi/180);</text>
     <deployedseed>105269528</deployedseed>
     <deployedseed>378067587</deployedseed>
     <deployedseed>1884911429</deployedseed>
+    <deployedseed>1375908603</deployedseed>
+    <deployedseed>1740274747</deployedseed>
+    <deployedseed>1868679789</deployedseed>
+    <deployedseed>1837505102</deployedseed>
+    <deployedseed>1353899604</deployedseed>
+    <deployedseed>1485460969</deployedseed>
+    <deployedseed>299769696</deployedseed>
+    <deployedseed>842058052</deployedseed>
+    <deployedseed>1136856572</deployedseed>
+    <deployedseed>338588597</deployedseed>
+    <deployedseed>1265263990</deployedseed>
+    <deployedseed>521358919</deployedseed>
+    <deployedseed>2106290418</deployedseed>
+    <deployedseed>899116746</deployedseed>
+    <deployedseed>1846022443</deployedseed>
+    <deployedseed>215564985</deployedseed>
+    <deployedseed>1192184486</deployedseed>
+    <deployedseed>1753209104</deployedseed>
+    <deployedseed>1950352043</deployedseed>
+    <deployedseed>1912410888</deployedseed>
+    <deployedseed>1889429829</deployedseed>
+    <deployedseed>1667193505</deployedseed>
+    <deployedseed>715922020</deployedseed>
+    <deployedseed>1639630937</deployedseed>
+    <deployedseed>356079273</deployedseed>
+    <deployedseed>1277518647</deployedseed>
+    <deployedseed>2054868021</deployedseed>
+    <deployedseed>1365705132</deployedseed>
+    <deployedseed>1983184306</deployedseed>
+    <deployedseed>1130536109</deployedseed>
+    <deployedseed>418433358</deployedseed>
+    <deployedseed>523040780</deployedseed>
+    <deployedseed>1135983671</deployedseed>
+    <deployedseed>426531075</deployedseed>
+    <deployedseed>345784093</deployedseed>
+    <deployedseed>1266035778</deployedseed>
+    <deployedseed>1932455128</deployedseed>
+    <deployedseed>2086375165</deployedseed>
+    <deployedseed>214272504</deployedseed>
+    <deployedseed>1315428030</deployedseed>
+    <deployedseed>389055191</deployedseed>
+    <deployedseed>1749697878</deployedseed>
+    <deployedseed>1413307961</deployedseed>
+    <deployedseed>841170298</deployedseed>
+    <deployedseed>2050430766</deployedseed>
+    <deployedseed>515957206</deployedseed>
+    <deployedseed>1417794721</deployedseed>
+    <deployedseed>938978955</deployedseed>
+    <deployedseed>573129272</deployedseed>
+    <deployedseed>1996412498</deployedseed>
+    <deployedseed>1572743823</deployedseed>
+    <deployedseed>2096588375</deployedseed>
+    <deployedseed>926222143</deployedseed>
+    <deployedseed>142673978</deployedseed>
+    <deployedseed>557556586</deployedseed>
+    <deployedseed>1514994120</deployedseed>
+    <deployedseed>730439284</deployedseed>
+    <deployedseed>1919619522</deployedseed>
+    <deployedseed>1739993334</deployedseed>
+    <deployedseed>201985746</deployedseed>
+    <deployedseed>1231685725</deployedseed>
+    <deployedseed>215905469</deployedseed>
+    <deployedseed>2374396</deployedseed>
+    <deployedseed>1327474146</deployedseed>
+    <deployedseed>630053661</deployedseed>
+    <deployedseed>1353852353</deployedseed>
+    <deployedseed>1836261420</deployedseed>
+    <deployedseed>1172235866</deployedseed>
+    <deployedseed>566047281</deployedseed>
+    <deployedseed>1298178328</deployedseed>
+    <deployedseed>1600089160</deployedseed>
+    <deployedseed>308770646</deployedseed>
+    <deployedseed>1538431487</deployedseed>
+    <deployedseed>1981818810</deployedseed>
+    <deployedseed>1379235380</deployedseed>
     <qtest>
       <testcase>1</testcase>
-      <description/>
+      <description>Test case assuming the teacher's input gets full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>ta1</value>
+        <value>disp_1</value>
       </testinput>
       <testinput>
         <name>ans2</name>
-        <value>ta2</value>
+        <value>disp_2</value>
       </testinput>
       <testinput>
         <name>ans3</name>
-        <value>ta3</value>
+        <value>disp_3</value>
       </testinput>
       <testinput>
         <name>ans4</name>
-        <value>ta4</value>
+        <value>disp_4</value>
       </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>( prt1-1-T ]</expectedanswernote>
       </expected>
       <expected>
         <name>prt2</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt2-1-T</expectedanswernote>
+        <expectedanswernote>( prt2-1-T ]</expectedanswernote>
       </expected>
       <expected>
         <name>prt3</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt3-1-T</expectedanswernote>
+        <expectedanswernote>( prt3-1-T ]</expectedanswernote>
       </expected>
       <expected>
         <name>prt4</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt4-1-T</expectedanswernote>
+        <expectedanswernote>( prt4-1-T ]</expectedanswernote>
       </expected>
     </qtest>
   </question>

@@ -9,38 +9,56 @@
 The sides of a triangle measure <b>a</b> = {@a@} cm, <b>b</b> = {@b@} cm, and <b>c</b> = {@c@} cm. Find the area of the triangle using Heron’s formula.
 </p>
 
-<div style="text-align:center; margin:10px 0;">
-<svg width="320" height="220" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
-  <polygon points="60,180 260,180 140,40" fill="none" stroke="black" stroke-width="2"/>
-  <text x="145" y="195" font-size="16">c</text>
-  <text x="88" y="108" font-size="16">b</text>
-  <text x="205" y="108" font-size="16">a</text>
-  <circle cx="60" cy="180" r="3" fill="black"/>
-  <circle cx="260" cy="180" r="3" fill="black"/>
-  <circle cx="140" cy="40" r="3" fill="black"/>
-  <text x="45" y="198" font-size="14">A</text>
-  <text x="265" y="198" font-size="14">B</text>
-  <text x="145" y="32" font-size="14">C</text>
-</svg>
-</div>
+[[jsxgraph]]
+    var a = {#a#};
+    var b = {#b#};
+    var c = {#c#};
+    
+    // Calculate the coordinates of the third vertex using the Law of Cosines
+    var x = (b*b + c*c - a*a) / (2*c);
+    var y = Math.sqrt(b*b - x*x);
+    
+    var board = JXG.JSXGraph.initBoard(BOARDID, {
+        boundingbox: [-1.5, y + 2, c + 1.5, -2],
+        keepAspectRatio: true,
+        showNavigation: false,
+        showCopyright: false
+    });
+    
+    // Vertices
+    var pA = board.create('point', [0, 0], {name: 'A', size: 3, color: 'black', label: {offset: [-15, -15]}});
+    var pB = board.create('point', [c, 0], {name: 'B', size: 3, color: 'black', label: {offset: [5, -15]}});
+    var pC = board.create('point', [x, y], {name: 'C', size: 3, color: 'black', label: {offset: [0, 15]}});
+    
+    // Triangle
+    var poly = board.create('polygon', [pA, pB, pC], {
+        fillColor: '#fff8e1', fillOpacity: 0.8, 
+        borders: {strokeColor: '#ff8f00', strokeWidth: 2.5}
+    });
+    
+    // Clean dynamic text labels
+    board.create('text', [c/2, -0.5, "c = " + c + " cm"], {anchorX: 'middle', anchorY: 'top', fontSize: 14});
+    board.create('text', [x/2 - 0.5, y/2, "b = " + b + " cm"], {anchorX: 'right', anchorY: 'middle', fontSize: 14});
+    board.create('text', [(x+c)/2 + 0.5, y/2, "a = " + a + " cm"], {anchorX: 'left', anchorY: 'middle', fontSize: 14});
+[[/jsxgraph]]
 
 <p>
 Give your answer correct to <b>2 decimal places</b>.
 </p>
 
 <p>
-Area = [[input:ans1]] \(\text{cm}^2\) [[validation:ans1]] [[feedback:prt1]]
+Area = [[input:ans1]] <b>\(\text{cm}^2\)</b> [[validation:ans1]] [[feedback:prt1]]
 </p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
 
 <p>
-The sides of the triangle are {@a@} cm, {@b@} cm and {@c@} cm.
+The sides of the triangle are \(a = {@a@}\) cm, \(b = {@b@}\) cm and \(c = {@c@}\) cm.
 </p>
 
 <p>
-Step 1: Find the semi-perimeter.
+<strong>Step 1: Find the semi-perimeter (\(s\)).</strong>
 </p>
 
 <p>
@@ -62,7 +80,7 @@ s = {@s@}
 </p>
 
 <p>
-Step 2: Write Heron’s formula.
+<strong>Step 2: Write Heron’s formula.</strong>
 </p>
 
 <p>
@@ -72,7 +90,7 @@ A=\sqrt{s(s-a)(s-b)(s-c)}
 </p>
 
 <p>
-Step 3: Substitute the values.
+<strong>Step 3: Substitute the values.</strong>
 </p>
 
 <p>
@@ -82,22 +100,22 @@ A=\sqrt{{@s@}({@s@}-{@a@})({@s@}-{@b@})({@s@}-{@c@})}
 </p>
 
 <p>
-Step 4: Simplify the brackets.
+<strong>Step 4: Simplify the terms in the brackets.</strong>
 </p>
 
 <p>
 \[
-A=\sqrt{{@s@}\times {@s-a@}\times {@s-b@}\times {@s-c@}}
+A=\sqrt{{@s@} \times {@s-a@} \times {@s-b@} \times {@s-c@}}
 \]
 </p>
 
 <p>
-Step 5: Evaluate the square root.
+<strong>Step 5: Evaluate the square root.</strong>
 </p>
 
 <p>
 \[
-A \approx {@A_round@}\text{ cm}^2
+A \approx {@A_disp@}\text{ cm}^2
 \]
 </p>
 
@@ -107,7 +125,7 @@ Therefore, the area of the triangle is:
 
 <p>
 \[
-Area =  {@A_round@}\text{ cm}^2
+\boxed{{@A_disp@} \text{ cm}^2}
 \]
 </p>]]></text>
     </generalfeedback>
@@ -124,32 +142,32 @@ a: rand(6) + 4;
 b: rand(6) + 5;
 c: rand(6) + 6;
 
-/* Ensure triangle inequality */
+/* Ensure strict triangle inequality */
 while a + b <= c or a + c <= b or b + c <= a do (
   a: rand(6) + 4,
   b: rand(6) + 5,
   c: rand(6) + 6
 );
 
-/* Semi-perimeter */
+/* Semi-perimeter (kept exact for standard algebraic display in feedback) */
 s: (a + b + c)/2;
 
-/* Area */
-A: sqrt(s*(s-a)*(s-b)*(s-c));
+/* Area calculated natively as float */
+A_float: float(sqrt(s*(s-a)*(s-b)*(s-c)));
 
-/* Rounded */
-A_round: float(round(A*100)/100);
+/* Display variable formatted to exactly 2 decimal places */
+A_disp: dispdp(A_float, 2);
 
-/* Mistakes */
-m1: s*(s-a)*(s-b)*(s-c);
-m2: (a+b+c)/3;
-m3: sqrt(a*b*c);]]></text>
+/* Mistakes evaluated as floats for PRT grading */
+m1: float(s*(s-a)*(s-b)*(s-c)); /* Missing square root */
+m2: float((a+b+c)/3);           /* Calculated average instead of semi-perimeter */
+m3: float(sqrt(a*b*c));         /* Wrong formula */]]></text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text>{@A_round@}</text>
+      <text><![CDATA[<p>a: {@a@}, b: {@b@}, c: {@c@}, Area: {@A_disp@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text><![CDATA[<p id="author">Michael Onyimbo</p>
@@ -186,7 +204,7 @@ The question requires the learner to find the area of a triangle from its three 
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>A_round</tans>
+      <tans>A_disp</tans>
       <boxsize>8</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -212,10 +230,10 @@ The question requires the learner to find the area of a triangle from its three 
       <node>
         <name>0</name>
         <description>checks for the correct answer</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
-        <tans>A_round</tans>
-        <testoptions/>
+        <tans>A_float</tans>
+        <testoptions>2</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -237,10 +255,10 @@ The question requires the learner to find the area of a triangle from its three 
       <node>
         <name>1</name>
         <description>Missing square root</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m1</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -248,7 +266,7 @@ The question requires the learner to find the area of a triangle from its three 
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text>Remember to take the square root at the final step.</text>
+          <text><![CDATA[<p>You calculated the product inside the formula perfectly, but remember to take the <strong>square root</strong> at the final step.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -262,10 +280,10 @@ The question requires the learner to find the area of a triangle from its three 
       <node>
         <name>2</name>
         <description>wrong semi-perimeter</description>
-        <answertest>AlgEquiv</answertest>
+        <answertest>NumAbsolute</answertest>
         <sans>ans1</sans>
         <tans>m2</tans>
-        <testoptions/>
+        <testoptions>0.05</testoptions>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -273,7 +291,7 @@ The question requires the learner to find the area of a triangle from its three 
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-3-T</trueanswernote>
         <truefeedback format="html">
-          <text>Semi-perimeter is half the perimeter, not one-third.</text>
+          <text><![CDATA[<p>The semi-perimeter (\(s\)) is exactly <strong>half</strong> the perimeter, not the average of the three sides. Ensure you are dividing by 2, not 3.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -281,63 +299,82 @@ The question requires the learner to find the area of a triangle from its three 
         <falsenextnode>-1</falsenextnode>
         <falseanswernote>prt1-3-F</falseanswernote>
         <falsefeedback format="html">
-          <text>Use \(s = \frac {a+b+c}{2}\) then apply Heron’s formula.</text>
+          <text/>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>2134446128</deployedseed>
-    <deployedseed>1543944270</deployedseed>
-    <deployedseed>230348320</deployedseed>
-    <deployedseed>1006628543</deployedseed>
-    <deployedseed>457613133</deployedseed>
-    <deployedseed>1889508662</deployedseed>
-    <deployedseed>119112692</deployedseed>
-    <deployedseed>1478236209</deployedseed>
-    <deployedseed>1949637159</deployedseed>
-    <deployedseed>2053412572</deployedseed>
-    <deployedseed>1271997242</deployedseed>
-    <deployedseed>829057507</deployedseed>
-    <deployedseed>282224834</deployedseed>
-    <deployedseed>2138264888</deployedseed>
-    <deployedseed>1969472850</deployedseed>
-    <deployedseed>1845949518</deployedseed>
-    <deployedseed>562977532</deployedseed>
-    <deployedseed>1883976018</deployedseed>
-    <deployedseed>495405051</deployedseed>
-    <deployedseed>1668416808</deployedseed>
-    <deployedseed>424059734</deployedseed>
-    <deployedseed>798928074</deployedseed>
-    <deployedseed>1232740694</deployedseed>
-    <deployedseed>1649214470</deployedseed>
-    <deployedseed>1154870832</deployedseed>
-    <deployedseed>1870330078</deployedseed>
-    <deployedseed>1827253651</deployedseed>
-    <deployedseed>2056997166</deployedseed>
-    <deployedseed>1437197684</deployedseed>
-    <deployedseed>806434262</deployedseed>
-    <deployedseed>1846016670</deployedseed>
-    <deployedseed>820547331</deployedseed>
-    <deployedseed>1211931833</deployedseed>
-    <deployedseed>472907766</deployedseed>
-    <deployedseed>1336823729</deployedseed>
-    <deployedseed>2046355881</deployedseed>
-    <deployedseed>2080592477</deployedseed>
-    <deployedseed>1384953290</deployedseed>
-    <deployedseed>245987172</deployedseed>
-    <deployedseed>1613761530</deployedseed>
-    <deployedseed>331534042</deployedseed>
+    <deployedseed>292959087</deployedseed>
+    <deployedseed>1604042663</deployedseed>
+    <deployedseed>959978202</deployedseed>
+    <deployedseed>1738546462</deployedseed>
+    <deployedseed>146926383</deployedseed>
+    <deployedseed>733333160</deployedseed>
+    <deployedseed>1784636726</deployedseed>
+    <deployedseed>1579235447</deployedseed>
+    <deployedseed>559872600</deployedseed>
+    <deployedseed>2037991164</deployedseed>
+    <deployedseed>1430680303</deployedseed>
+    <deployedseed>745386406</deployedseed>
+    <deployedseed>2100473957</deployedseed>
+    <deployedseed>1640370723</deployedseed>
+    <deployedseed>920767870</deployedseed>
+    <deployedseed>911718319</deployedseed>
+    <deployedseed>787836760</deployedseed>
+    <deployedseed>2029875748</deployedseed>
+    <deployedseed>1343094378</deployedseed>
+    <deployedseed>176458070</deployedseed>
+    <deployedseed>612533071</deployedseed>
+    <deployedseed>930129059</deployedseed>
+    <deployedseed>1094328764</deployedseed>
+    <deployedseed>1565566461</deployedseed>
+    <deployedseed>1234704419</deployedseed>
+    <deployedseed>1230374712</deployedseed>
+    <deployedseed>527715615</deployedseed>
+    <deployedseed>914586540</deployedseed>
+    <deployedseed>1517796028</deployedseed>
+    <deployedseed>665868205</deployedseed>
+    <deployedseed>1993737909</deployedseed>
+    <deployedseed>587959705</deployedseed>
+    <deployedseed>1603712172</deployedseed>
+    <deployedseed>940796283</deployedseed>
+    <deployedseed>1223463832</deployedseed>
+    <deployedseed>1227406627</deployedseed>
+    <deployedseed>596506697</deployedseed>
+    <deployedseed>32453885</deployedseed>
+    <deployedseed>380128885</deployedseed>
+    <deployedseed>1757568556</deployedseed>
+    <deployedseed>1120143646</deployedseed>
+    <deployedseed>1651294029</deployedseed>
+    <deployedseed>1728704396</deployedseed>
+    <deployedseed>1962912674</deployedseed>
+    <deployedseed>412774387</deployedseed>
+    <deployedseed>1573551247</deployedseed>
+    <deployedseed>646248789</deployedseed>
+    <deployedseed>919775676</deployedseed>
+    <deployedseed>1161934182</deployedseed>
+    <deployedseed>317388820</deployedseed>
+    <deployedseed>1514303209</deployedseed>
+    <deployedseed>1276544975</deployedseed>
+    <deployedseed>2140940416</deployedseed>
+    <deployedseed>953980589</deployedseed>
+    <deployedseed>790891243</deployedseed>
+    <deployedseed>501842175</deployedseed>
+    <deployedseed>519250282</deployedseed>
+    <deployedseed>1194343085</deployedseed>
+    <deployedseed>1576168117</deployedseed>
+    <deployedseed>1684098404</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>A_round</value>
+        <value>A_disp</value>
       </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>( prt1-1-T ]</expectedanswernote>
       </expected>
     </qtest>
   </question>

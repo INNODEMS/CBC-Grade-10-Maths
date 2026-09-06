@@ -2,94 +2,86 @@
 <quiz>
   <question type="stack">
     <name>
-      <text>Finding area of heptagon given side length and apothem</text>
+      <text>Finding the missing width of a rectangular bed</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>A school garden is in the shape of a regular heptagon. The side length is <b>{@s@} m</b> and the apothem (the distance from the center to the midpoint of a side) is <b>{@a@} m</b>.</p>
+      <text><![CDATA[<p>A community agricultural project is building a rectangular raised farming bed for botanical pest control plants. The total area of the raised bed must be exactly <b>{@A@} m²</b>.</p>
+
+<p>If the length of the plot measures <b>{@l@} m</b>, calculate the required width (\(w\)) of the rectangle.</p>
 
 [[jsxgraph width="500px" height="300px"]]
-    var s_val = {#s#};
-    var a_val = {#a#};
-    var n = 7;
+    var l = {#l#};
+    var w = {#w#};
+    var A = {#A#};
     
-    var angle = Math.PI / n;
-    
-    // Calculate true geometric radius to maintain perfect shape
-    var R = a_val / Math.cos(angle); 
-    
-    // Proportional scaling
+    // Mathematically center the rectangle and force a 5:3 bounding box ratio
+    var centerX = l / 2;
+    var centerY = w / 2;
     var ratio = 500 / 300;
-    var spanY = R * 2.5;
-    var spanX = spanY * ratio;
+    
+    // Ensure both dimensions fit with a 30% visual buffer
+    var spanX = Math.max(l * 1.3, w * 1.3 * ratio);
+    var spanY = spanX / ratio;
     
     var board = JXG.JSXGraph.initBoard(BOARDID, {
-        boundingbox: [-spanX/2, spanY/2, spanX/2, -spanY/2], 
-        maxboundingbox: [-spanX*1.5, spanY*1.5, spanX*1.5, -spanY*1.5],
+        boundingbox: [centerX - spanX/2, centerY + spanY/2, centerX + spanX/2, centerY - spanY/2], 
+        maxboundingbox: [centerX - spanX*1.5, centerY + spanY*1.5, centerX + spanX*1.5, centerY - spanY*1.5],
         axis: false, 
         showCopyright: false,
         keepAspectRatio: true,
-        showNavigation: false 
+        showNavigation: true 
     });
 
-    // Vertices - starting rotation to ensure a flat base at the bottom
-    var points = [];
-    for (var i = 0; i < n; i++) {
-        var theta = -Math.PI/2 - Math.PI/n + (2 * Math.PI * i / n); 
-        points.push(board.create('point', [R * Math.cos(theta), R * Math.sin(theta)], {visible: false}));
-    }
+    // Dynamic vertices linked to the STACK variables
+    var p1 = board.create('point', [0, 0], {name: '', visible: false});
+    var p2 = board.create('point', [l, 0], {name: '', visible: false});
+    var p3 = board.create('point', [l, w], {name: '', visible: false});
+    var p4 = board.create('point', [0, w], {name: '', visible: false});
 
-    board.create('polygon', points, {
-        fillColor: '#e3f2fd', 
-        strokeColor: '#1565c0', 
+    // Rectangle Plot
+    board.create('polygon', [p1, p2, p3, p4], {
+        fillColor: '#efebe9', 
+        strokeColor: '#5d4037', 
         strokeWidth: 2
     });
-    
-    var center = board.create('point', [0, 0], {name: '', visible: false});
-    
-    // Connect center to bottom flat side
-    var pA = points[0];
-    var pB = points[1];
-    var mid = board.create('midpoint', [pA, pB], {visible: false});
-    
-    // Central triangle lines
-    board.create('segment', [center, pA], {strokeColor: '#90caf9', dash: 1});
-    board.create('segment', [center, pB], {strokeColor: '#90caf9', dash: 1});
-    
-    // Apothem line
-    board.create('segment', [center, mid], {dash: 2, strokeColor: '#c62828'});
-    
-    // Right angle marker
-    var rad = R * 0.15;
-    board.create('angle', [pB, mid, center], {type: 'square', radius: rad, strokeColor: '#c62828', name: ''});
 
-    // Clean horizontal pixel-gap labels
-    var gapY = spanY * 0.04; 
-    var gapX = spanX * 0.02; 
+    // Right-angle markers with cleaned names to suppress alpha labels
+    var rad = Math.min(l, w) * 0.15;
+    board.create('angle', [p2, p1, p4], {type: 'square', radius: rad, strokeColor: '#8d6e63', name: ''});
+    board.create('angle', [p3, p2, p1], {type: 'square', radius: rad, strokeColor: '#8d6e63', name: ''});
+    board.create('angle', [p4, p3, p2], {type: 'square', radius: rad, strokeColor: '#8d6e63', name: ''});
+    board.create('angle', [p1, p4, p3], {type: 'square', radius: rad, strokeColor: '#8d6e63', name: ''});
 
-    board.create('text', [0, mid.Y() - gapY, s_val + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 16});
-    board.create('text', [gapX, mid.Y()/2, a_val + " m"], {anchorX: 'left', anchorY: 'middle', fontSize: 16, strokeColor: '#c62828'});
+    // Calculate exact visual pixel gaps based on the canvas spans
+    var gapY = spanY * 0.05; 
+    var gapX = spanX * 0.03; 
+
+    // Dynamic labels securely anchored
+    board.create('text', [l/2, -gapY, l + " m"], {anchorX: 'middle', anchorY: 'top', fontSize: 16});
+    board.create('text', [l + gapX, w/2, "w = ?"], {anchorX: 'left', anchorY: 'middle', fontSize: 16, strokeColor: '#c62828'});
+    
+    // Area label inside the shape
+    board.create('text', [l/2, w/2, "Area = " + A + " m²"], {anchorX: 'middle', anchorY: 'middle', fontSize: 16, strokeColor: '#5d4037'});
 [[/jsxgraph]]
 
-<p>Calculate the area of the heptagon garden.</p>
-
-<p>Area = [[input:ans1]] <b>\(\text{m}^2\)</b> [[validation:ans1]][[feedback:prt1]]</p>
-<p><i>(Leave your answer to 2 decimal places)</i></p>]]></text>
+<p>Width (\(w\)) = [[input:ans1]] <b>m</b> [[validation:ans1]][[feedback:prt1]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
       <text><![CDATA[<h3>Worked Solution</h3>
-<p>The area (\(A\)) of a regular polygon with \(n\) sides, side length \(s\), and apothem \(a\) is given by the formula:</p>
+<p>The formula for the area of a rectangle is:</p>
 <p>
-\[ A = \frac{n}{2} \times s \times a \]
+\[ \text{Area} = \text{length} \times \text{width} \]
 </p>
-
-<p>For a heptagon (\(n = 7\)):</p>
+<p>We are given the Area (\(A = {@A@}\text{ m}^2\)) and the length (\(l = {@l@}\text{ m}\)). Substitute these into the formula:</p>
 <p>
-\[ \begin{aligned} 
-A &= \frac{7}{2} \times s \times a \\
-A &= \frac{7}{2} \times {@s@} \times {@a@} \\
-A &= 3.5 \times {@ta_step@} \\
-A &= {@ta@} \text{ m}^2 
-\end{aligned} \]
+\[ {@A@} = {@l@} \times w \]
+</p>
+<p>To isolate the width (\(w\)), divide both sides by the length (\({@l@}\)):</p>
+<p>
+\[ w = \frac{{@A@}}{{@l@}} \]
+</p>
+<p>
+\[ w = {@ta@} \text{ m} \]
 </p>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -100,27 +92,26 @@ A &= {@ta@} \text{ m}^2
       <text>2026010500</text>
     </stackversion>
     <questionvariables>
-      <text>/* 1. Randomize side length s */
-s: 6 + rand(10); 
+      <text>/* Base and Width */
+l: rand_with_step(15, 40, 1);
+w: rand_with_step(4, 12, 1);
 
-/* 2. Calculate a realistic apothem a */
-a_exact: float(s / (2 * tan(%pi/7)));
-a: decimalplaces(a_exact,2);
+/* Calculate Area */
+A: l * w;
 
-/* 3. Calculations */
-ta_step: s * a;
-ta: decimalplaces((7/2) * s * a, 2);
+/* Teacher Answer */
+ta: w;
 
-/* Common Mistakes for PRT */
-m1: decimalplaces(7 * s * a, 2);     /* Forgot 1/2 */
-m2: decimalplaces((1/2) * s * a, 2); /* Forgot 7 */
-m3: 7 * s;                           /* Perimeter */</text>
+/* Common Algebraic Mistakes for PRT */
+m1: A * l;          /* Multiplied Area and length instead of dividing */
+m2: (A - 2*l) / 2;  /* Confused area formula with perimeter formula */
+m3: A - l;          /* Subtracted instead of dividing */</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
     </specificfeedback>
     <questionnote format="html">
-      <text><![CDATA[<p>Side: {@s@}, Apothem: {@a@}, Area: {@ta@}</p>]]></text>
+      <text><![CDATA[<p>Length: {@l@}, Area: {@A@}, Width: {@ta@}</p>]]></text>
     </questionnote>
     <questiondescription format="html">
       <text/>
@@ -175,11 +166,11 @@ m3: 7 * s;                           /* Perimeter */</text>
       </feedbackvariables>
       <node>
         <name>0</name>
-        <description>Float-safe grading for correct area</description>
-        <answertest>NumAbsolute</answertest>
+        <description>checks for the correct answer</description>
+        <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>ta</tans>
-        <testoptions>0.02</testoptions>
+        <testoptions/>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -200,11 +191,11 @@ m3: 7 * s;                           /* Perimeter */</text>
       </node>
       <node>
         <name>1</name>
-        <description>Caught missing 1/2 factor</description>
-        <answertest>NumAbsolute</answertest>
+        <description>Multiplication mistake</description>
+        <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>m1</tans>
-        <testoptions>0.02</testoptions>
+        <testoptions/>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -212,7 +203,7 @@ m3: 7 * s;                           /* Perimeter */</text>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-2-T</trueanswernote>
         <truefeedback format="html">
-          <text><![CDATA[<p>You multiplied the 7 sides by the base and apothem, but you forgot the \(\frac{1}{2}\) factor for the triangle area.</p>]]></text>
+          <text><![CDATA[<p>You multiplied the Area and the length. To find the missing width, you must divide the Area by the length.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -225,19 +216,19 @@ m3: 7 * s;                           /* Perimeter */</text>
       </node>
       <node>
         <name>2</name>
-        <description>Caught missing x7 multiplier</description>
-        <answertest>NumAbsolute</answertest>
+        <description>Perimeter confusion</description>
+        <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>m2</tans>
-        <testoptions>0.02</testoptions>
+        <testoptions/>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
-        <truescore>0.2</truescore>
+        <truescore>0</truescore>
         <truepenalty/>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-3-T</trueanswernote>
         <truefeedback format="html">
-          <text><![CDATA[<p>Almost there! You found the area of exactly <b>one</b> of the central triangles. A heptagon is made of 7 equal triangles, so multiply your answer by 7.</p>]]></text>
+          <text><![CDATA[<p>You attempted to use the perimeter formula. Remember, Area is simply length &times; width. Divide the Area by the length to find the missing side.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -250,11 +241,11 @@ m3: 7 * s;                           /* Perimeter */</text>
       </node>
       <node>
         <name>3</name>
-        <description>Caught Perimeter mistake</description>
-        <answertest>NumAbsolute</answertest>
+        <description>Subtraction mistake</description>
+        <answertest>AlgEquiv</answertest>
         <sans>ans1</sans>
         <tans>m3</tans>
-        <testoptions>0.02</testoptions>
+        <testoptions/>
         <quiet>0</quiet>
         <truescoremode>+</truescoremode>
         <truescore>0</truescore>
@@ -262,7 +253,7 @@ m3: 7 * s;                           /* Perimeter */</text>
         <truenextnode>-1</truenextnode>
         <trueanswernote>prt1-4-T</trueanswernote>
         <truefeedback format="html">
-          <text><![CDATA[<p>You calculated the perimeter of the heptagon (\(7 \times \text{side}\)). To find the area, you must multiply the perimeter by half of the apothem.</p>]]></text>
+          <text><![CDATA[<p>You subtracted the length from the Area. Because the area formula uses multiplication, you must isolate the width using division.</p>]]></text>
         </truefeedback>
         <falsescoremode>-</falsescoremode>
         <falsescore>0</falsescore>
@@ -274,29 +265,5 @@ m3: 7 * s;                           /* Perimeter */</text>
         </falsefeedback>
       </node>
     </prt>
-    <deployedseed>1015144370</deployedseed>
-    <deployedseed>932572459</deployedseed>
-    <deployedseed>419138556</deployedseed>
-    <deployedseed>1599211519</deployedseed>
-    <deployedseed>926416800</deployedseed>
-    <deployedseed>200470647</deployedseed>
-    <deployedseed>2035934607</deployedseed>
-    <deployedseed>1247444050</deployedseed>
-    <deployedseed>843553953</deployedseed>
-    <deployedseed>1446257351</deployedseed>
-    <qtest>
-      <testcase>1</testcase>
-      <description>Test case assuming the teacher's input gets full marks.</description>
-      <testinput>
-        <name>ans1</name>
-        <value>ta</value>
-      </testinput>
-      <expected>
-        <name>prt1</name>
-        <expectedscore>1.0000000</expectedscore>
-        <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
-      </expected>
-    </qtest>
   </question>
 </quiz>

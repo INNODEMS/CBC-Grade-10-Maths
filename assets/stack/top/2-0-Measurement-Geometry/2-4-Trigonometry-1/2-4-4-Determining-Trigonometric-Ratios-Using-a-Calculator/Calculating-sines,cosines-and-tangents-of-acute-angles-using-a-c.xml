@@ -5,39 +5,43 @@
       <text>Calculating sines,cosines and tangents of acute angles using a calculator</text>
     </name>
     <questiontext format="moodle_auto_format">
-      <text><![CDATA[<p>Using a calculator, calculate the sine, cosine, and tangent of {@angle@}°, giving your answers correct to 4 decimal places.</p>
-<p>(i). sin \({@angle@}°=\)[[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p>
-<p>(ii). cos \({@angle@}°=\)[[input:ans2]] [[validation:ans2]][[feedback:prt2]]</p>
-<p>(iii). tan \({@angle@}°=\)[[input:ans3]] [[validation:ans3]][[feedback:prt3]]</p>]]></text>
+      <text><![CDATA[<p>Using a calculator, calculate the sine, cosine, and tangent of \({@angle@}^\circ\), giving your answers correct to exactly 4 decimal places.</p>
+
+<p>i. \(\sin({@angle@}^\circ) =\) [[input:ans1]] [[validation:ans1]][[feedback:prt1]]</p>
+<p>ii. \(\cos({@angle@}^\circ) =\) [[input:ans2]] [[validation:ans2]][[feedback:prt2]]</p>
+<p>iii. \(\tan({@angle@}^\circ) =\) [[input:ans3]] [[validation:ans3]][[feedback:prt3]]</p>]]></text>
     </questiontext>
     <generalfeedback format="moodle_auto_format">
-      <text/>
+      <text><![CDATA[<p><strong>Worked Solution:</strong></p>
+
+<p>Using a calculator, we evaluate the trigonometric functions for \({@angle@}^\circ\) and round each result to exactly 4 decimal places:</p>
+
+<ul>
+    <li>\(\sin({@angle@}^\circ) = {@disp_1@}\)</li>
+    <li>\(\cos({@angle@}^\circ) = {@disp_2@}\)</li>
+    <li>\(\tan({@angle@}^\circ) = {@disp_3@}\)</li>
+</ul>]]></text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
     <penalty>0.1</penalty>
     <hidden>0</hidden>
     <idnumber/>
     <stackversion>
-      <text>2026010500</text>
+      <text>2026063000</text>
     </stackversion>
     <questionvariables>
-      <text>/* Random angle between 5 and 90 with step 0.003 */
+      <text>/* Random angle between 5 and 90 with step 0.02 */
 angle : 5 + 0.02 * rand(floor((90-5)/0.02) + 1);
 
-/* Sine value */
-sine_value : sin(angle * %pi/180);
-sine_value_decimal : float(sine_value);
-ta:decimalplaces(sine_value_decimal ,4);
+/* Evaluate to floating-point decimals natively */
+ans_1 : float(sin(angle * %pi/180));
+ans_2 : float(cos(angle * %pi/180));
+ans_3 : float(tan(angle * %pi/180));
 
-/* Cosine value */
-cosine_value : cos(angle * %pi/180);
-cosine_value_decimal : float(cosine_value);
-ta_2:ta_1:decimalplaces(cosine_value_decimal,4);
-
-/* Tangent value */
-tangent_value : tan(angle * %pi/180);
-tangent_value_decimal : float(tangent_value);
-ta_3:ta_1:decimalplaces(tangent_value_decimal,4);</text>
+/* Display variables formatted to exactly 4 decimal places */
+disp_1 : dispdp(ans_1, 4);
+disp_2 : dispdp(ans_2, 4);
+disp_3 : dispdp(ans_3, 4);</text>
     </questionvariables>
     <specificfeedback format="html">
       <text/>
@@ -73,7 +77,7 @@ ta_3:ta_1:decimalplaces(tangent_value_decimal,4);</text>
     <input>
       <name>ans1</name>
       <type>algebraic</type>
-      <tans>ta</tans>
+      <tans>disp_1</tans>
       <boxsize>5</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -91,7 +95,7 @@ ta_3:ta_1:decimalplaces(tangent_value_decimal,4);</text>
     <input>
       <name>ans2</name>
       <type>algebraic</type>
-      <tans>ta_2</tans>
+      <tans>disp_2</tans>
       <boxsize>5</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -109,7 +113,7 @@ ta_3:ta_1:decimalplaces(tangent_value_decimal,4);</text>
     <input>
       <name>ans3</name>
       <type>algebraic</type>
-      <tans>ta_3</tans>
+      <tans>disp_3</tans>
       <boxsize>5</boxsize>
       <strictsyntax>1</strictsyntax>
       <insertstars>0</insertstars>
@@ -135,10 +139,10 @@ ta_3:ta_1:decimalplaces(tangent_value_decimal,4);</text>
       <node>
         <name>0</name>
         <description/>
-        <answertest>NumAbsolute</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans1</sans>
-        <tans>ta</tans>
-        <testoptions>0.0001</testoptions>
+        <tans>ans_1</tans>
+        <testoptions>4</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -160,7 +164,7 @@ ta_3:ta_1:decimalplaces(tangent_value_decimal,4);</text>
     </prt>
     <prt>
       <name>prt2</name>
-      <value>2.0000000</value>
+      <value>1.0000000</value>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
@@ -169,10 +173,10 @@ ta_3:ta_1:decimalplaces(tangent_value_decimal,4);</text>
       <node>
         <name>0</name>
         <description/>
-        <answertest>NumAbsolute</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans2</sans>
-        <tans>ta_2</tans>
-        <testoptions>0.0001</testoptions>
+        <tans>ans_2</tans>
+        <testoptions>4</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -194,7 +198,7 @@ ta_3:ta_1:decimalplaces(tangent_value_decimal,4);</text>
     </prt>
     <prt>
       <name>prt3</name>
-      <value>3.0000000</value>
+      <value>1.0000000</value>
       <autosimplify>1</autosimplify>
       <feedbackstyle>1</feedbackstyle>
       <feedbackvariables>
@@ -203,10 +207,10 @@ ta_3:ta_1:decimalplaces(tangent_value_decimal,4);</text>
       <node>
         <name>0</name>
         <description/>
-        <answertest>NumAbsolute</answertest>
+        <answertest>NumDecPlaces</answertest>
         <sans>ans3</sans>
-        <tans>ta_3</tans>
-        <testoptions>0.0001</testoptions>
+        <tans>ans_3</tans>
+        <testoptions>4</testoptions>
         <quiet>0</quiet>
         <truescoremode>=</truescoremode>
         <truescore>1</truescore>
@@ -276,38 +280,88 @@ ta_3:ta_1:decimalplaces(tangent_value_decimal,4);</text>
     <deployedseed>1417818247</deployedseed>
     <deployedseed>69131106</deployedseed>
     <deployedseed>1703185419</deployedseed>
+    <deployedseed>1725374102</deployedseed>
+    <deployedseed>1878507318</deployedseed>
+    <deployedseed>1657613792</deployedseed>
+    <deployedseed>1655790074</deployedseed>
+    <deployedseed>1692740068</deployedseed>
+    <deployedseed>1113199002</deployedseed>
+    <deployedseed>2012649597</deployedseed>
+    <deployedseed>99248585</deployedseed>
+    <deployedseed>122729168</deployedseed>
+    <deployedseed>603920935</deployedseed>
+    <deployedseed>2075939184</deployedseed>
+    <deployedseed>225432171</deployedseed>
+    <deployedseed>505891651</deployedseed>
+    <deployedseed>1845874731</deployedseed>
+    <deployedseed>1799373218</deployedseed>
+    <deployedseed>550302014</deployedseed>
+    <deployedseed>45563217</deployedseed>
+    <deployedseed>569701851</deployedseed>
+    <deployedseed>1370074051</deployedseed>
+    <deployedseed>1012892464</deployedseed>
+    <deployedseed>122398208</deployedseed>
+    <deployedseed>166875566</deployedseed>
+    <deployedseed>388159076</deployedseed>
+    <deployedseed>145919132</deployedseed>
+    <deployedseed>1573526374</deployedseed>
+    <deployedseed>1107152156</deployedseed>
+    <deployedseed>1924337979</deployedseed>
+    <deployedseed>1431532403</deployedseed>
+    <deployedseed>1610933130</deployedseed>
+    <deployedseed>1566514245</deployedseed>
+    <deployedseed>1946403970</deployedseed>
+    <deployedseed>1445645006</deployedseed>
+    <deployedseed>813118727</deployedseed>
+    <deployedseed>2134374387</deployedseed>
+    <deployedseed>1585825946</deployedseed>
+    <deployedseed>739282570</deployedseed>
+    <deployedseed>1727807632</deployedseed>
+    <deployedseed>526037165</deployedseed>
+    <deployedseed>118026036</deployedseed>
+    <deployedseed>2082790991</deployedseed>
+    <deployedseed>17010554</deployedseed>
+    <deployedseed>2059873236</deployedseed>
+    <deployedseed>1063324493</deployedseed>
+    <deployedseed>1956056814</deployedseed>
+    <deployedseed>72268241</deployedseed>
+    <deployedseed>974614094</deployedseed>
+    <deployedseed>1039192855</deployedseed>
+    <deployedseed>1127662377</deployedseed>
+    <deployedseed>1291847995</deployedseed>
+    <deployedseed>2110552900</deployedseed>
     <qtest>
       <testcase>1</testcase>
       <description>Test case assuming the teacher's input gets full marks.</description>
       <testinput>
         <name>ans1</name>
-        <value>ta</value>
+        <value>disp_1</value>
       </testinput>
       <testinput>
         <name>ans2</name>
-        <value>ta_2</value>
+        <value>disp_2</value>
       </testinput>
       <testinput>
         <name>ans3</name>
-        <value>ta_3</value>
+        <value>disp_3</value>
       </testinput>
       <expected>
         <name>prt1</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt1-1-T</expectedanswernote>
+        <expectedanswernote>( prt1-1-T ]</expectedanswernote>
       </expected>
       <expected>
         <name>prt2</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt2-1-T</expectedanswernote>
+        <expectedanswernote>( prt2-1-T ]</expectedanswernote>
       </expected>
       <expected>
         <name>prt3</name>
         <expectedscore>1.0000000</expectedscore>
         <expectedpenalty>0.0000000</expectedpenalty>
-        <expectedanswernote>prt3-1-T</expectedanswernote>
+        <expectedanswernote>( prt3-1-T ]</expectedanswernote>
       </expected>
     </qtest>
   </question>
